@@ -112,9 +112,34 @@
     font-size:0.75rem;
     color:#7a8780;
   }
+
+  .download-btn {
+    position: fixed;
+    top: 120px;
+    right: 28px;
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    z-index: 1000;
+    text-decoration: none;
+  }
+  .download-btn:hover { background: #2e5548; }
+  @media print {
+    .back, .download-btn { display: none !important; }
+  }
 </style>
 </head>
 <body>
+  <button class="download-btn" onclick="window.print()">&#8681; Download PDF</button>
+
 <header>
   <div class="wrap">
     <p class="kicker">Foundations II · Pharmacology</p>
