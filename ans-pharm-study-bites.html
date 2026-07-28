@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konrad's ANS Pharm Study Bites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b2b26;
+    --paper:#f7f5ef;
+    --panel:#ffffff;
+    --line:#dcd6c6;
+    --accent:#3a6b5c;
+    --accent-dim:#e7efe9;
+    --mono:'IBM Plex Mono', monospace;
+    --serif:'Source Serif 4', serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    line-height:1.5;
+    padding:0 0 4rem;
+  }
+  header{
+    padding:2.5rem 1.5rem 1.75rem;
+    border-bottom:1px solid var(--line);
+    background:var(--panel);
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 1.25rem;}
+  .kicker{
+    font-family:var(--mono);
+    font-size:0.75rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 0.5rem;
+  }
+  h1{margin:0 0 0.35rem;font-size:1.9rem;}
+  .sub{margin:0;color:#55635c;font-size:0.95rem;}
+  .back{
+    display:inline-block;
+    margin-top:1.1rem;
+    font-family:var(--mono);
+    font-size:0.8rem;
+    color:var(--accent);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:0.4rem 0.7rem;
+    border-radius:6px;
+    background:var(--accent-dim);
+  }
+  .back:hover{background:var(--line);}
+  main.wrap{margin-top:2rem;}
+  section{margin-bottom:2.5rem;}
+  h2{
+    font-size:1.3rem;
+    border-bottom:2px solid var(--accent);
+    padding-bottom:0.4rem;
+    margin-bottom:1rem;
+  }
+  h3{
+    font-family:var(--mono);
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+    color:var(--accent);
+    text-transform:none;
+    margin:1.4rem 0 0.6rem;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--panel);
+    border:1px solid var(--line);
+    margin-bottom:1rem;
+    font-size:0.92rem;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:0.5rem 0.65rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--accent-dim);
+    font-family:var(--mono);
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--accent);
+  }
+  tr:nth-child(even) td{background:#fbfaf6;}
+  ul.logic-list{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:1rem 1.25rem 1rem 2rem;
+    margin:0;
+  }
+  ul.logic-list li{margin-bottom:0.55rem;}
+  ul.logic-list li:last-child{margin-bottom:0;}
+  p.note{font-size:0.92rem;color:#55635c;}
+  footer{
+    max-width:900px;
+    margin:0 auto;
+    padding:0 1.25rem;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:#7a8780;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">Foundations II · Pharmacology</p>
+    <h1>Konrad's ANS Pharm Study Bites</h1>
+    <p class="sub">Cholinergic &amp; Adrenergic Agonists/Antagonists — Waller Lecture Series</p>
+    <a class="back" href="index.html">&larr; Back to Study Guides</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <h2>1. Cholinergic Agonists (Parasympathomimetics)</h2>
+
+  <h3>Direct-Acting — Choline Esters (charged, poor CNS penetration)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Receptor</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Acetylcholine</td><td>M1, M2, M3 (nonselective)</td><td>Endogenous; vasodilation via endothelial M3/NO</td></tr>
+      <tr><td>Bethanechol</td><td>Muscarinic (nonselective)</td><td>Resistant to AChE; &uarr; bladder/GI motility; urinary retention</td></tr>
+      <tr><td>Carbachol</td><td>Muscarinic + some nicotinic</td><td>Glaucoma (miosis)</td></tr>
+      <tr><td>Methacholine</td><td>Muscarinic (nonselective)</td><td>Bronchial challenge test (asthma dx)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Direct-Acting — Alkaloids/Other (uncharged, tertiary — CNS penetration)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Receptor</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Muscarine</td><td>Muscarinic</td><td>Prototype; mushroom toxicity</td></tr>
+      <tr><td>Pilocarpine</td><td>Muscarinic</td><td>Glaucoma (miosis), Sj&ouml;gren's (dry mouth/eyes)</td></tr>
+      <tr><td>Cevimeline</td><td>M3-selective</td><td>Sj&ouml;gren's syndrome</td></tr>
+      <tr><td>Nicotine</td><td>Nicotinic (nonselective)</td><td>Causes desensitizing blockade w/ chronic use</td></tr>
+      <tr><td>Varenicline</td><td>Nicotinic partial agonist</td><td>Smoking cessation</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Acetylcholinesterase (AChE) Inhibitors — Reversible/Carbamate (charged = no BBB)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Neostigmine</td><td>Reverses neuromuscular blockade, myasthenia gravis, postop ileus/urinary retention</td></tr>
+      <tr><td>Pyridostigmine</td><td>Myasthenia gravis (longer acting)</td></tr>
+      <tr><td>Edrophonium</td><td>Historic dx test for myasthenia gravis (short-acting)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>AChE Inhibitors — Reversible, Uncharged (crosses BBB)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Physostigmine</td><td>Crosses BBB; antidote for anticholinergic toxicity</td></tr>
+      <tr><td>Donepezil, Rivastigmine</td><td>Alzheimer's disease (&uarr; CNS ACh)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>AChE Inhibitors — Irreversible (organophosphates)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Echothiophate</td><td>Glaucoma (rarely used — irreversible)</td></tr>
+      <tr><td>Malathion / Parathion / "nerve agents"</td><td>Insecticides/toxins; cause cholinergic toxidrome (DUMBBELSS); must give pralidoxime before "aging" + atropine + benzodiazepine</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>2. Cholinergic Antagonists (Parasympatholytics/Antimuscarinics)</h2>
+
+  <h3>Nonselective Antimuscarinics — Tertiary Amine (crosses BBB, CNS effects)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Primary Use</th></tr></thead>
+    <tbody>
+      <tr><td>Atropine</td><td>Prototype; bradycardia, antidote for cholinergic toxicity/organophosphates</td></tr>
+      <tr><td>Scopolamine</td><td>Motion sickness</td></tr>
+      <tr><td>Benztropine, Trihexyphenidyl, Procyclidine</td><td>Parkinson disease (&darr; tremor via M1 block)</td></tr>
+      <tr><td>Cyclopentolate, Homatropine, Tropicamide</td><td>Ophthalmic mydriasis/cycloplegia</td></tr>
+      <tr><td>Dicyclomine, Hyoscyamine</td><td>GI antispasmodic (IBS)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Nonselective/M3-Selective Antimuscarinics — Quaternary Amine (no BBB, no CNS effects)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Primary Use</th></tr></thead>
+    <tbody>
+      <tr><td>Glycopyrrolate</td><td>&darr; secretions (perioperative)</td></tr>
+      <tr><td>Ipratropium, Tiotropium</td><td>COPD/asthma (bronchodilation)</td></tr>
+      <tr><td>Oxybutynin, Tolterodine, Trospium</td><td>Overactive bladder (nonselective)</td></tr>
+      <tr><td>Darifenacin, Solifenacin</td><td>Overactive bladder (M3-selective)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Ganglionic (Nicotinic N<sub>N</sub>) Blockers</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Mecamylamine, Hexamethonium, Trimethaphan</td><td>Block both symp. &amp; parasymp. ganglia; obsolete HTN drugs; effect depends on resting tone of the tissue; abolish baroreceptor reflex</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Other Neurotransmission Blockers</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Botulinum toxin</td><td>Blocks ACh vesicle exocytosis</td></tr>
+      <tr><td>Diphenoxylate, Loperamide</td><td>Opioid &mu;-agonists used as antidiarrheals (minimal CNS entry)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>3. Adrenergic Agonists (Sympathomimetics)</h2>
+
+  <h3>Direct-Acting, by Selectivity</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Receptor Selectivity</th><th>Key Use</th></tr></thead>
+    <tbody>
+      <tr><td>Phenylephrine</td><td>&alpha;1</td><td>Nasal decongestant, pressor, mydriasis (no cycloplegia)</td></tr>
+      <tr><td>Clonidine</td><td>&alpha;2 (central)</td><td>Hypertension; rebound HTN if stopped abruptly</td></tr>
+      <tr><td>Dobutamine</td><td>&beta;1 &gt;&gt; &beta;2 &gt; &alpha;1</td><td>Cardiogenic shock/acute HF (inotrope)</td></tr>
+      <tr><td>Albuterol, Terbutaline</td><td>&beta;2</td><td>Bronchodilation (albuterol); tocolysis (terbutaline)</td></tr>
+      <tr><td>Isoproterenol</td><td>&beta;1 = &beta;2 (nonselective &beta;)</td><td>&uarr;&uarr; HR, vasodilation, &darr; MAP</td></tr>
+      <tr><td>Epinephrine</td><td>&beta;1 = &beta;2 &gt; &alpha;1 = &alpha;2</td><td>Anaphylaxis, cardiac arrest; dose-dependent BP effects; epinephrine reversal with &alpha;-blockers</td></tr>
+      <tr><td>Norepinephrine</td><td>&alpha;1 = &alpha;2, &beta;1 &gt;&gt; &beta;2</td><td>Septic shock (pressor); cannot rescue anaphylaxis (weak &beta;2)</td></tr>
+      <tr><td>Fenoldopam</td><td>D1</td><td>Hypertensive emergency; &uarr; IOP (avoid in glaucoma)</td></tr>
+      <tr><td>Dopamine</td><td>D1=D2 &gt; &beta;1 &gt; &alpha; (dose-dependent)</td><td>Historically cardiogenic shock (no longer clearly beneficial)</td></tr>
+      <tr><td>Oxymetazoline</td><td>&alpha;1</td><td>Nasal decongestant (rebound congestion if &gt;3 days)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Indirect/Mixed-Acting (require intact nerve terminals)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Mechanism</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Amphetamine, Methamphetamine, Methylphenidate</td><td>Reverse NET &rarr; releases stored NE/DA</td><td>Tachyphylaxis with repeated dosing (depletes stores)</td></tr>
+      <tr><td>Ephedrine, Pseudoephedrine</td><td>Mixed direct + indirect</td><td>Resistant to MAO/COMT &rarr; long acting</td></tr>
+      <tr><td>Tyramine</td><td>Indirect (like amphetamine)</td><td>Doesn't cross BBB; normally metabolized by MAO-A; hypertensive crisis with MAOIs + tyramine-rich foods</td></tr>
+      <tr><td>Cocaine</td><td>Blocks NET (+ Na+ channel block at high dose)</td><td>Local anesthetic; blocks CNS dopamine reuptake (euphoria)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>4. Adrenergic Antagonists (Sympatholytics)</h2>
+
+  <h3>Beta Blockers — Nonselective (&beta;1 = &beta;2 &gt;&gt;&gt; &alpha;)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Notable Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Propranolol</td><td>Prototype; thyroid storm, migraine ppx, tremor, class II antiarrhythmic</td></tr>
+      <tr><td>Nadolol</td><td>Variceal bleeding prophylaxis</td></tr>
+      <tr><td>Timolol</td><td>Glaucoma (eye drop)</td></tr>
+      <tr><td>Carteolol, Penbutolol, Pindolol</td><td>ISA (partial agonist) — less bradycardia at rest</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Beta Blockers — &beta;1-Selective ("cardioselective")</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Notable Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Betaxolol, Bisoprolol, Metoprolol, Atenolol, Nebivolol</td><td>Lower bronchospasm risk; mnemonic "BE A MAN"</td></tr>
+      <tr><td>Esmolol</td><td>Ultra-short acting, IV — acute/intraop arrhythmia</td></tr>
+      <tr><td>Acebutolol</td><td>&beta;1-selective + ISA</td></tr>
+      <tr><td>Nebivolol</td><td>Also stimulates &beta;3 (vasodilation via NO)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Combined &alpha; + &beta; Blockers</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Notable Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Carvedilol</td><td>Nonselective &beta; + &alpha;1 block; survival benefit in HFrEF; orthostatic hypotension</td></tr>
+      <tr><td>Labetalol</td><td>Safe in pregnancy; hypertensive emergency</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Alpha Blockers — Nonselective (&alpha;1 = &alpha;2)</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Reversibility</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Phentolamine</td><td>Reversible (competitive)</td><td>Pheochromocytoma dx/short-term mgmt; cocaine toxicity</td></tr>
+      <tr><td>Phenoxybenzamine</td><td>Irreversible (noncompetitive)</td><td>Pheochromocytoma pre-op (give before &beta;-blocker!)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Alpha Blockers — &alpha;1-Selective ("-osin")</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Notable Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Prazosin, Terazosin, Doxazosin</td><td>HTN (3rd/4th line), BPH; first-dose orthostatic hypotension</td></tr>
+      <tr><td>Tamsulosin</td><td>Higher affinity for &alpha;1A (prostate) — more uroselective</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Alpha Blockers — &alpha;2-Selective</h3>
+  <table>
+    <thead><tr><th>Drug</th><th>Notable Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Yohimbine</td><td>Marketed for ED; little proven efficacy</td></tr>
+      <tr><td>Mirtazapine</td><td>Central &alpha;2 antagonist antidepressant (also 5-HT2/5-HT3/H1 blocker)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Ganglion Blockers (also antagonists — see above)</h3>
+  <p class="note">Mecamylamine, Hexamethonium, Trimethaphan — abolish baroreflex, historic antihypertensives</p>
+</section>
+
+<section>
+  <h2>5. Quick-Reference: Receptor Signaling (G-protein coupling)</h2>
+  <table>
+    <thead><tr><th>Receptor</th><th>G-protein</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td>&alpha;1</td><td>Gq</td><td>&uarr; IP3/DAG/Ca2+ &rarr; contraction (smooth muscle), glycogenolysis (liver)</td></tr>
+      <tr><td>&alpha;2</td><td>Gi</td><td>&darr; cAMP &rarr; &darr; NE release (presynaptic feedback), &darr; insulin</td></tr>
+      <tr><td>&beta;1</td><td>Gs</td><td>&uarr; cAMP &rarr; &uarr; HR/contractility/renin</td></tr>
+      <tr><td>&beta;2</td><td>Gs</td><td>&uarr; cAMP &rarr; relaxation (smooth muscle), &uarr; insulin</td></tr>
+      <tr><td>&beta;3</td><td>Gs</td><td>&uarr; cAMP &rarr; lipolysis, bladder detrusor relaxation</td></tr>
+      <tr><td>D1</td><td>Gs</td><td>Vasodilation (renal/splanchnic/coronary)</td></tr>
+      <tr><td>M1, M3, M5</td><td>Gq</td><td>Excitatory/contraction</td></tr>
+      <tr><td>M2, M4</td><td>Gi</td><td>Inhibitory (&darr; HR, &darr; cAMP)</td></tr>
+      <tr><td>Nicotinic (N<sub>M</sub>, N<sub>N</sub>)</td><td>Ionotropic (ligand-gated cation channel)</td><td>Direct depolarization</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>6. Tracing-Question Logic (high-yield reasoning, not memorization)</h2>
+  <ul class="logic-list">
+    <li>BP &uarr; &rarr; reflex HR &darr; (baroreceptor reflex); BP &darr; &rarr; reflex HR &uarr;</li>
+    <li>Ganglion blockers abolish the reflex HR change entirely</li>
+    <li>If adding an &alpha;-blocker changes the drug's BP/HR effect &rarr; original drug had &alpha;-agonist activity</li>
+    <li>If adding a &beta;-blocker changes the drug's BP/HR effect &rarr; original drug had &beta;-agonist activity</li>
+    <li>If &alpha;-blocker removes the BP rise but HR is still elevated &rarr; drug has intrinsic &beta;1 activity (not just reflex)</li>
+    <li>If &alpha;-blocker removes the BP rise and HR normalizes &rarr; the tachycardia was purely reflex</li>
+    <li>Isolated tissue/organ prep (not in vivo) &rarr; no reflex change possible</li>
+    <li>Epinephrine reversal: &alpha;-blocker pretreatment flips epinephrine's pressor response to a depressor response (unmasked &beta;2 vasodilation)</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>Konrad's ANS Pharm Study Bites &middot; Study Guides</p>
+</footer>
+
+<script data-goatcounter="https://nobledodge.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
