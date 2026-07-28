@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Study Guides</title>
+<style>
+  :root{
+    --ink:#1b2b26;
+    --paper:#f7f5ef;
+    --panel:#ffffff;
+    --line:#dcd6c6;
+    --accent:#3a6b5c;
+    --accent-dim:#e7efe9;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    line-height:1.55;
+    padding:0 0 80px 0;
+  }
+  header{
+    border-bottom:3px solid var(--ink);
+    padding:28px 24px 18px;
+    max-width:900px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  header .kicker{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 6px;
+  }
+  h1{
+    margin:0;
+    font-size:2rem;
+  }
+  #copy-btn{
+    font-family:var(--mono);
+    font-size:0.85rem;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    padding:10px 16px;
+    border-radius:4px;
+    cursor:pointer;
+  }
+  #copy-btn:hover{ opacity:0.9; }
+  #copy-feedback{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    color:var(--accent);
+    margin-left:8px;
+  }
+  main{
+    max-width:900px;
+    margin:32px auto;
+    padding:0 24px;
+  }
+  .guide-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+  }
+  .guide-list li{
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:6px;
+    margin-bottom:14px;
+  }
+  .guide-list a{
+    display:block;
+    padding:18px 20px;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:1.1rem;
+  }
+  .guide-list a:hover{ background:var(--accent-dim); }
+  .guide-list .course-tag{
+    display:block;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:4px;
+  }
+  .placeholder{
+    border:1px dashed var(--line);
+    border-radius:6px;
+    padding:18px 20px;
+    color:#8a8578;
+    font-family:var(--mono);
+    font-size:0.85rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <p class="kicker">Noble's Study Guides</p>
+    <h1>Course Study Guides</h1>
+  </div>
+  <div>
+    <button id="copy-btn">Copy site link</button>
+    <span id="copy-feedback"></span>
+  </div>
+</header>
+<main>
+  <ul class="guide-list">
+    <li>
+      <a href="foundations2-pharm.html">
+        <span class="course-tag">Foundations II</span>
+        Pharmacology Study Guide
+      </a>
+    </li>
+  </ul>
+  <p class="placeholder">More guides will appear here as they're added.</p>
+</main>
+<script>
+  const btn = document.getElementById('copy-btn');
+  const feedback = document.getElementById('copy-feedback');
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      feedback.textContent = 'Copied!';
+      setTimeout(() => { feedback.textContent = ''; }, 2000);
+    });
+  });
+</script>
+</body>
+</html>
