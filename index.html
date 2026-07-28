@@ -68,26 +68,32 @@
     margin:32px auto;
     padding:0 24px;
   }
-  .guide-list{
+  .course-list{
     list-style:none;
     padding:0;
     margin:0;
   }
-  .guide-list li{
+  .course-item{
     border:1px solid var(--line);
     background:var(--panel);
     border-radius:6px;
     margin-bottom:14px;
   }
-  .guide-list a{
-    display:block;
+  .course-toggle{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     padding:18px 20px;
-    text-decoration:none;
-    color:var(--ink);
+    background:none;
+    border:none;
+    font-family:var(--serif);
     font-size:1.1rem;
+    color:var(--ink);
+    cursor:pointer;
+    text-align:left;
   }
-  .guide-list a:hover{ background:var(--accent-dim); }
-  .guide-list .course-tag{
+  .course-toggle .course-tag{
     display:block;
     font-family:var(--mono);
     font-size:0.75rem;
@@ -96,6 +102,39 @@
     color:var(--accent);
     margin-bottom:4px;
   }
+  .course-toggle .chevron{
+    font-family:var(--mono);
+    color:var(--accent);
+    transition:transform 0.2s ease;
+    margin-left:12px;
+  }
+  .course-item:hover .chevron,
+  .course-item:focus-within .chevron{
+    transform:rotate(180deg);
+  }
+  .guide-dropdown{
+    list-style:none;
+    margin:0;
+    padding:0;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.25s ease;
+  }
+  .course-item:hover .guide-dropdown,
+  .course-item:focus-within .guide-dropdown{
+    max-height:400px;
+    border-top:1px solid var(--line);
+  }
+  .guide-dropdown a{
+    display:block;
+    padding:14px 20px 14px 32px;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:1rem;
+    border-bottom:1px solid var(--line);
+  }
+  .guide-dropdown li:last-child a{ border-bottom:none; }
+  .guide-dropdown a:hover{ background:var(--accent-dim); }
   .placeholder{
     border:1px dashed var(--line);
     border-radius:6px;
@@ -118,15 +157,21 @@
   </div>
 </header>
 <main>
-  <ul class="guide-list">
-    <li>
-      <a href="foundations2-pharm.html">
-        <span class="course-tag">Foundations II</span>
-        Pharmacology Study Guide
-      </a>
+  <ul class="course-list">
+    <li class="course-item">
+      <button class="course-toggle" aria-expanded="false">
+        <span>
+          <span class="course-tag">Course</span>
+          Foundations II
+        </span>
+        <span class="chevron">&#9662;</span>
+      </button>
+      <ul class="guide-dropdown">
+        <li><a href="foundations2-pharm.html">Pharmacology Study Guide</a></li>
+      </ul>
     </li>
   </ul>
-  <p class="placeholder">More guides will appear here as they're added.</p>
+  <p class="placeholder">More courses will appear here as they're added. Hover a course name to see its guides.</p>
 </main>
 <script>
   const btn = document.getElementById('copy-btn');
@@ -138,6 +183,6 @@
     });
   });
 </script>
-  <script data-goatcounter="https://nobledodge.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://nobledodge.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
