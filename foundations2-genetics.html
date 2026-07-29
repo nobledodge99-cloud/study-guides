@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Genetics of Disease Study Guide</title>
+<style>
+:root{
+--ink:#1b2b26;
+--paper:#f7f5ef;
+--panel:#ffffff;
+--line:#dcd6c6;
+--accent:#3a6b5c;
+--accent-dim:#e7efe9;
+--wrong:#a63d40;
+--wrong-dim:#f7e6e6;
+--mono: 'IBM Plex Mono', 'Courier New', monospace;
+--serif: 'Source Serif 4', Georgia, serif;
+}
+*{box-sizing:border-box;}
+body{
+margin:0;
+background:var(--paper);
+color:var(--ink);
+font-family:var(--serif);
+line-height:1.55;
+padding:0 0 80px 0;
+}
+header.masthead{
+border-bottom:3px solid var(--ink);
+padding:28px 24px 18px;
+max-width:900px;
+margin:0 auto;
+}
+header.masthead .kicker{
+font-family:var(--mono);
+font-size:12px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--accent);
+}
+header.masthead h1{
+font-size:2.1rem;
+margin:.15em 0 .1em;
+letter-spacing:-.01em;
+}
+header.masthead .sub{
+font-family:var(--mono);
+font-size:12.5px;
+color:#5c5c52;
+}
+nav#toc{
+max-width:900px;
+margin:20px auto 0;
+padding:0 24px;
+}
+nav#toc .toc-label{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#8a8578;
+margin-bottom:6px;
+}
+nav#toc ol{
+margin:0;
+padding-left:1.2em;
+font-family:var(--mono);
+font-size:13.5px;
+}
+nav#toc .toc-link{color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); cursor:pointer;}
+nav#toc .toc-link:hover{color:var(--accent);}
+main{max-width:900px; margin:0 auto; padding:0 24px;}
+section.lecture{
+margin-top:48px;
+padding-top:8px;
+}
+section.lecture > h2{
+font-size:1.5rem;
+border-bottom:2px solid var(--ink);
+padding-bottom:8px;
+margin-bottom:4px;
+}
+section.lecture > .lecture-meta{
+font-family:var(--mono);
+font-size:11.5px;
+color:#8a8578;
+margin-bottom:22px;
+}
+article.topic{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:2px;
+padding:22px 24px 24px;
+margin-bottom:22px;
+position:relative;
+}
+article.topic .topic-num{
+font-family:var(--mono);
+font-size:11px;
+color:var(--accent);
+letter-spacing:.08em;
+}
+article.topic h3{
+margin:2px 0 4px;
+font-size:1.15rem;
+}
+article.topic .flag{
+display:inline-block;
+font-family:var(--mono);
+font-size:10.5px;
+letter-spacing:.06em;
+text-transform:uppercase;
+background:var(--accent-dim);
+color:var(--accent);
+border:1px solid var(--accent);
+border-radius:20px;
+padding:2px 9px;
+margin-bottom:10px;
+}
+article.topic p.body{
+font-size:15.5px;
+margin:8px 0 16px;
+}
+article.topic ul.body-list{
+margin:8px 0 16px;
+padding-left:1.3em;
+font-size:15.5px;
+}
+article.topic ul.body-list li{margin-bottom:4px;}
+article.topic strong.term{color:var(--accent);}
+.formula{
+font-family:var(--mono);
+font-size:15px;
+background:var(--accent-dim);
+border-left:3px solid var(--accent);
+padding:9px 14px;
+margin:10px 0 16px;
+border-radius:0 4px 4px 0;
+color:var(--ink);
+}
+.formula .fx-label{
+color:var(--accent);
+font-weight:700;
+margin-right:6px;
+}
+table.data-table{
+width:100%;
+border-collapse:collapse;
+margin:10px 0 18px;
+font-size:14px;
+}
+table.data-table caption{
+text-align:left;
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:#8a8578;
+margin-bottom:6px;
+}
+table.data-table th, table.data-table td{
+border:1px solid var(--line);
+padding:7px 10px;
+text-align:left;
+vertical-align:top;
+}
+table.data-table th{
+background:var(--accent-dim);
+color:var(--accent);
+font-family:var(--mono);
+font-size:11.5px;
+letter-spacing:.03em;
+text-transform:uppercase;
+}
+table.data-table tr:nth-child(even) td{background:#fbfaf6;}
+.qs-label{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:#8a8578;
+border-top:1px dashed var(--line);
+padding-top:14px;
+margin-top:4px;
+margin-bottom:12px;
+}
+.question{
+margin-bottom:18px;
+}
+.question:last-child{margin-bottom:0;}
+.qtext{
+font-size:15px;
+margin-bottom:8px;
+font-weight:600;
+}
+.options{
+display:flex;
+flex-direction:column;
+gap:7px;
+}
+.opt{
+display:flex;
+align-items:center;
+gap:10px;
+text-align:left;
+background:var(--paper);
+border:1px solid var(--line);
+border-radius:6px;
+padding:9px 12px;
+font-family:var(--serif);
+font-size:14.5px;
+color:var(--ink);
+cursor:pointer;
+transition:background .12s, border-color .12s;
+}
+.opt:hover:not(:disabled){
+border-color:var(--accent);
+}
+.opt .bubble{
+flex:0 0 auto;
+width:16px;
+height:16px;
+border-radius:50%;
+border:1.5px solid #9a9587;
+background:#fff;
+}
+.opt.correct{
+background:var(--accent-dim);
+border-color:var(--accent);
+}
+.opt.correct .bubble{
+background:var(--accent);
+border-color:var(--accent);
+}
+.opt.incorrect{
+background:var(--wrong-dim);
+border-color:var(--wrong);
+}
+.opt.incorrect .bubble{
+background:var(--wrong);
+border-color:var(--wrong);
+}
+.opt:disabled{cursor:default;}
+.feedback{
+font-family:var(--mono);
+font-size:12.5px;
+margin-top:7px;
+min-height:1.2em;
+}
+.feedback.correct{color:var(--accent);}
+.feedback.incorrect{color:var(--wrong);}
+footer.eod{
+max-width:900px;
+margin:56px auto 0;
+padding:18px 24px 0;
+border-top:1px solid var(--line);
+font-family:var(--mono);
+font-size:11.5px;
+color:#8a8578;
+}
+#side-toggle{
+position:fixed;
+top:50%;
+right:0;
+transform:translateY(-50%);
+z-index:20;
+background:var(--ink);
+color:var(--paper);
+border:none;
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+padding:14px 8px;
+writing-mode:vertical-rl;
+text-orientation:mixed;
+cursor:pointer;
+border-radius:6px 0 0 6px;
+}
+#side-toggle:hover{background:var(--accent);}
+#side-nav{
+position:fixed;
+top:0;
+right:0;
+height:100%;
+width:300px;
+background:var(--panel);
+border-left:1px solid var(--line);
+box-shadow:-6px 0 18px rgba(0,0,0,.06);
+transform:translateX(100%);
+transition:transform .22s ease;
+z-index:19;
+overflow-y:auto;
+padding:22px 0 40px;
+}
+#side-nav.open{transform:translateX(0);}
+#side-nav .side-head{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#8a8578;
+padding:0 20px 12px;
+border-bottom:1px solid var(--line);
+margin-bottom:6px;
+}
+#side-nav .side-lecture-label{
+font-family:var(--mono);
+font-size:11.5px;
+font-weight:700;
+color:var(--ink);
+padding:14px 20px 4px;
+}
+#side-nav .side-link{
+display:block;
+padding:6px 20px 6px 28px;
+font-size:13px;
+color:#4a483f;
+text-decoration:none;
+border-left:2px solid transparent;
+cursor:pointer;
+}
+#side-nav .side-link:hover{
+color:var(--accent);
+background:var(--accent-dim);
+}
+#side-nav .side-link.active{
+color:var(--accent);
+border-left-color:var(--accent);
+font-weight:600;
+background:var(--accent-dim);
+}
+#side-scrim{
+position:fixed;
+inset:0;
+background:rgba(27,43,38,.15);
+z-index:18;
+display:none;
+}
+#side-scrim.open{display:block;}
+@media (max-width:640px){
+#side-nav{width:82%;}
+}
+.download-btn {
+position: fixed;
+top: 120px;
+right: 28px;
+background: var(--accent);
+color: #fff;
+padding: 10px 18px;
+border-radius: 8px;
+border: none;
+font-family: var(--mono);
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 0.02em;
+cursor: pointer;
+box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+z-index: 1000;
+text-decoration: none;
+}
+.download-btn:hover { background: #2e5548; }
+@media print {
+.download-btn, a[href="index.html"] { display: none !important; }
+}
+</style>
+</head>
+<body>
+<button class="download-btn" onclick="window.print()">&#8681; Download PDF</button>
+
+<header class="masthead">
+<div class="kicker">Running Course Document</div>
+<h1>Genetics of Disease Study Guide</h1>
+<div class="sub">Dr. Coulton — click an answer choice to check yourself</div>
+<a href="index.html" style="display:inline-block;margin-top:12px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:0.8rem;color:#3a6b5c;text-decoration:none;border:1px solid #dcd6c6;padding:6px 10px;border-radius:4px;background:#e7efe9;">&larr; Back to Study Guides</a>
+</header>
+
+<nav id="toc">
+<div class="toc-label">Contents</div>
+<ol id="toc-list">
+<li><span class="toc-link" data-target="t1">DNA Packaging, Karyotypes & the Concept of Mutation</span></li>
+<li><span class="toc-link" data-target="t2">Types of DNA Sequence Variants</span></li>
+<li><span class="toc-link" data-target="t3">Mosaicism, Chimerism & Timing of De Novo Mutations</span></li>
+<li><span class="toc-link" data-target="t4">Numerical & Structural Chromosomal Abnormalities</span></li>
+<li><span class="toc-link" data-target="t5">Microdeletions & Sex Chromosome Disorders</span></li>
+<li><span class="toc-link" data-target="t6">Single-Gene (Mendelian) Disorders</span></li>
+<li><span class="toc-link" data-target="t7">Point Mutations & Repeat Expansion Disorders</span></li>
+<li><span class="toc-link" data-target="t8">Mitochondrial Genetics, Epigenetics & Imprinting</span></li>
+<li><span class="toc-link" data-target="t9">Integrated Summary of Key Distinctions</span></li>
+</ol>
+</nav>
+
+<main id="lectures">
+<section class="lecture" id="lec1">
+<h2>Genetics of Disease</h2>
+<div class="lecture-meta">Study Guide — Dr. Coulton</div>
+
+
+<article class="topic" id="t1">
+<div class="topic-num">SECTION 1</div>
+<h3>DNA Packaging, Karyotypes, and the Concept of Mutation</h3>
+<p class="body">Genetic disorders arise from the inheritance of defective genes through populations, forming the pathophysiological basis of congenital disease.</p>
+<p class="body">In the nucleus, DNA is complexed with proteins to form chromatin. Double-stranded DNA wraps around histone proteins to form nucleosomes, which are further coiled and condensed, ultimately packaging into the visible metaphase structure known as a chromosome.</p>
+<p class="body">When chromosomes are arrested in metaphase and stained, the resulting ordered display is called a karyotype. A normal human karyotype contains 22 pairs of autosomes (chromosome pairs 1–22) plus one pair of sex chromosomes (XX in females, XY in males).</p>
+<p class="body">G-banding produces characteristic light and dark banding patterns (ideograms); darker bands reflect more condensed, gene-poor chromatin, while lighter regions are more gene-dense. Centromeres divide each chromosome into a short (p) arm and long (q) arm, and are critical for accurate segregation during mitosis and meiosis. Telomeres cap the chromosome ends and are implicated in aging and in disorders of premature aging.</p>
+<div class="formula">Mutation = any heritable change in DNA sequence, transmitted through somatic cell division or germline inheritance</div>
+<p class="body">A change in DNA sequence may have no consequence at all, or it may alter phenotype. Because the word "mutation" carries a negative connotation, geneticists prefer the neutral term <em>variant</em> for a difference from the reference sequence.</p>
+<p class="body">Variants are classified as benign (not associated with disease) or pathogenic (disease-causing). When two or more versions of a DNA sequence exist in a population, each version is called an allele; the frequency of a given allele in a population is the minor allele frequency (MAF). A variant with a MAF of at least 1% is generally termed a polymorphism.</p>
+<p class="body">Mutations arise from intrinsic causes (errors of DNA replication or chromosome/chromatid segregation during cell division, including non-disjunction) or extrinsic causes (mutagens, radiation, or viral infection).</p>
+<p class="body">Mutations are further divided by the cell lineage affected: germline mutations occur in eggs or sperm and can be transmitted to offspring, whereas somatic mutations occur in body cells and are generally not heritable.</p>
+</article>
+
+
+<article class="topic" id="t2">
+<div class="topic-num">SECTION 2</div>
+<h3>Types of DNA Sequence Variants</h3>
+<p class="body">Sequence variants are classified largely by size. Single nucleotide variants (SNVs), also called single nucleotide polymorphisms (SNPs), involve a change of a single base. A base substitution can alter the encoded amino acid, which may in turn change protein structure and function.</p>
+<p class="body">Insertions and deletions of fewer than 1000 base pairs are called indels; the smallest indels are the most numerous in the genome.</p>
+<p class="body">If an indel is not a multiple of three nucleotides, it disrupts the reading frame downstream of the change — a frameshift mutation — which frequently introduces a premature stop codon. If an indel is a multiple of three (e.g., a 3-base deletion), the reading frame is preserved, though the protein may still gain or lose function depending on which amino acids are affected.</p>
+<div class="formula">Structural variants = rearrangements affecting DNA segments greater than 1000 base pairs, including translocations, inversions, large deletions, and copy number variants (CNVs)</div>
+<p class="body">CNVs are genomic segments ranging from 1000 base pairs to millions of base pairs that vary in copy number (0 to several copies) even among healthy individuals.</p>
+<p class="body">Tandem repeats are repetitive sequences arranged head-to-toe in arrays and are divided into minisatellites and microsatellites, which differ in repeat unit length, genomic location, and abundance:</p>
+<table class="data-table">
+<tr><th>Feature</th><th>Minisatellites</th><th>Microsatellites</th></tr>
+<tr><td>Number in human genome</td><td>Approximately 1500</td><td>Approximately 500,000</td></tr>
+<tr><td>Location</td><td>Mostly near chromosome ends (telomeres)</td><td>Scattered throughout all chromosomes</td></tr>
+<tr><td>Unit repeat length</td><td>~10 to &gt;100 bp</td><td>2 to ~6 bp</td></tr>
+<tr><td>Repeat units in array</td><td>Usually ~60 to &gt;1000</td><td>Usually ~6 to ~14</td></tr>
+<tr><td>Used in</td><td>DNA fingerprinting</td><td>DNA profiling, genetic linkage studies</td></tr>
+<tr><td>Also known as</td><td>Variable number tandem repeats (VNTR)</td><td>Short tandem repeats (STR), simple sequence repeats (SSR)</td></tr>
+</table>
+<p class="body">Microsatellites are generally inherited stably with the same repeat number from parent to child, but expansion of certain microsatellites is associated with disease (see Section 7, nucleotide repeat expansion disorders).</p>
+<p class="body">Interspersed repeats (transposons) make up roughly 45% of the human genome.</p>
+<p class="body">Any two unrelated individuals differ at approximately 0.5% of their DNA, most of which is attributable to SNVs and large deletions/duplications rather than single-base substitutions; the total number of functional genes can vary by up to 10% between individuals as a consequence of copy-number variation and loss-of-function alleles.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t2"></div>
+</article>
+
+
+<article class="topic" id="t3">
+<div class="topic-num">SECTION 3</div>
+<h3>Mosaicism, Chimerism, and the Timing of De Novo Mutations</h3>
+<p class="body">Mutations that occur during embryogenesis, after fertilization, give rise to genetic mosaicism: a subset of the individual's cells carries the new variant while other cells do not, because the mutated and normal cell lineages continue dividing side by side from the point of mutation onward.</p>
+<p class="body">The proportion and distribution of affected tissue depends on the developmental timing of the mutation.</p>
+<div class="formula">Earlier mutation timing = larger proportion and wider distribution of affected cells; later timing = smaller, more localized clone</div>
+<p class="body">A mutation confined to the gonads is termed gonadal (germline) mosaicism; because only a subset of gametes carry the new variant, it may be transmitted to less than 50% of offspring, in contrast to a true heterozygous parent who transmits an autosomal dominant variant to 50% of offspring on average.</p>
+<p class="body">A distinct and much rarer phenomenon is chimerism, in which two genetically distinct cell lines coexist within one individual because two separate embryos have fused early in development.</p>
+<p class="body">Unlike mosaicism, each cell line in a chimera can trace back to a different zygote (different genetic constitution), whereas in mosaicism all lineages trace back to one zygote.</p>
+<p class="body">Chimerism may only be discovered incidentally, for example through apparent non-maternity/non-paternity on genetic testing when one cell line predominates in the gonads and a different line predominates in blood. Fusion of male and female embryos can produce an individual with characteristics of both sexes; this is reported in roughly 13% of clinical hermaphroditism cases.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t3"></div>
+</article>
+
+
+<article class="topic" id="t4">
+<div class="topic-num">SECTION 4</div>
+<h3>Numerical and Structural Chromosomal Abnormalities</h3>
+<p class="body">Almost every human cell is diploid, carrying 22 homologous autosomal pairs plus a pair of sex chromosomes (46 total), with exceptions being anucleate cells (e.g., erythrocytes) and haploid germ cells (sperm/egg, 23 chromosomes).</p>
+<p class="body">Errors in chromosome segregation produce either numerical abnormalities (too many or too few chromosomes) or structural abnormalities (rearranged chromosome architecture).</p>
+<p class="body">Polyploidy describes a cell with more than two complete haploid sets; triploidy (3n) occurs in 1–3% of pregnancies, typically from fertilization of one egg by two sperm (dispermy) or fertilization involving a diploid gamete, and is usually incompatible with survival to term (early spontaneous abortion). Tetraploidy (4n) is even rarer and not compatible with life.</p>
+<div class="formula">Aneuploidy arises from non-disjunction: replicated chromosomes (or sister chromatids) fail to separate properly during meiosis I or meiosis II</div>
+<p class="body">Normal meiosis produces four haploid products. Non-disjunction at meiosis I produces two daughter cells lacking a chromosome and two with an extra copy (disomy for that chromosome); non-disjunction at meiosis II produces one gamete with an extra chromosome, one lacking that chromosome, and two normal gametes.</p>
+<p class="body">Fertilization of a nullisomic gamete by a normal gamete produces a monosomic zygote; fertilization of a disomic gamete produces a trisomic zygote. Non-disjunction risk increases with maternal age.</p>
+<p class="subhead">Autosomal Aneuploidies Compatible with Live Birth</p>
+<table class="data-table">
+<tr><th>Aneuploidy</th><th>Common name</th><th>Est. incidence (live births)</th><th>Symptoms can include</th></tr>
+<tr><td>Trisomy 13</td><td>Patau syndrome</td><td>~1:16000</td><td>Severe intellectual disability, heart defects, brain/spinal cord abnormalities, small/poorly developed eyes, extra fingers/toes, cleft lip and palate, weak muscle tone</td></tr>
+<tr><td>Trisomy 18</td><td>Edwards syndrome</td><td>~1:5000</td><td>IUGR, low birth weight, heart/organ defects, small abnormally shaped head, small jaw and mouth, clenched fists, severe intellectual disability</td></tr>
+<tr><td>Trisomy 21</td><td>Down syndrome</td><td>~1:800</td><td>Mild to moderate intellectual disability, characteristic facial appearance, weak muscle tone, heart defects, digestive abnormalities, hypothyroidism, hearing/vision problems, leukaemia, Alzheimer's disease</td></tr>
+<tr><td>Trisomy X (47,XXX)</td><td>Triple X syndrome</td><td>~1:1000</td><td>Increased height, learning disabilities, delayed speech/language/motor skills, weak muscle tone, behavioural/emotional difficulties, seizures, kidney abnormalities</td></tr>
+</table>
+<p class="body">Fetuses with trisomy 13 or 18 typically survive only briefly, whereas individuals with trisomy 21 can survive beyond age 40.</p>
+<p class="body">Structural rearrangements arise when DNA damage (radiation, mutagens) causes chromosome breaks that are repaired incorrectly, or when errors occur during recombination between mispaired homologs. A single chromosome that sustains a break may lose material (a deletion) or form a circular ring chromosome. Abnormal chromosomes can be stably propagated through cell division as long as they retain a single functional centromere.</p>
+<p class="body">When breaks occur in two separate chromosomes, incorrect rejoining produces a translocation. In a balanced reciprocal translocation, genetic material is exchanged between two chromosomes with no net loss, producing two derivative (hybrid) chromosomes, each carrying one centromere; carriers are generally phenotypically normal because no material is lost, though their gametes may carry unbalanced combinations.</p>
+<p class="body">A Robertsonian translocation involves fusion of two acrocentric chromosomes (those with the centromere near one end) at the centromere, with loss of both short (p) arms; because the short arms of acrocentric chromosomes carry redundant nucleolar organizer region (NOR) ribosomal genes, this loss is generally tolerated. Gamete formation after a Robertsonian translocation can lead to zygotes with monosomy or trisomy of the involved chromosomes, producing offspring with chromosomal imbalance.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t4"></div>
+</article>
+
+
+<article class="topic" id="t5">
+<div class="topic-num">SECTION 5</div>
+<h3>Microdeletion/Microduplication Syndromes and Sex Chromosome Disorders</h3>
+<p class="body">Patients with symptoms unexplained by standard cytogenetics often carry submicroscopic microdeletions, microduplications, or other copy-number variants affecting contiguous genes. Identifying the smallest shared deleted/duplicated region across patients with similar phenotypes helps researchers pinpoint the gene(s) responsible for specific features.</p>
+<p class="body">In some regions, both a microdeletion and the reciprocal microduplication of the same interval have been identified as distinct syndromes (e.g., the 3.6 Mb region at 17p11.2 causes Smith-Magenis syndrome when deleted, but Potocki-Lupski syndrome when duplicated).</p>
+<table class="data-table">
+<tr><th>Syndrome</th><th>Location / genes</th><th>Typical size</th><th>Est. incidence</th><th>Typical features</th></tr>
+<tr><td>DiGeorge / 22q11.2 deletion</td><td>22q11.2; TBX1, COMT</td><td>3 Mb deletion (90%)</td><td>1/4000</td><td>Congenital heart defects, cleft palate, developmental delay, learning difficulty, mental illness risk, recurrent infections</td></tr>
+<tr><td>Williams / Williams-Beuren</td><td>7q11.3; CLIP2, ELN, GTF2I, GTF2IRD1, LIMK1</td><td>1.5–1.8 Mb deletion</td><td>1/7500–1/10000</td><td>Supravalvular aortic stenosis, joint problems/loose skin, mild-moderate intellectual disability, 'elfin' facies</td></tr>
+<tr><td>Smith-Magenis</td><td>17p11.2; RAI1</td><td>~3.6 Mb deletion</td><td>1/15000–1/25000</td><td>Mild-moderate intellectual disability, disturbed sleep, aggression/self-harm</td></tr>
+<tr><td>Cri-du-chat</td><td>5p15.2; CTNND2</td><td>~5–40 Mb deletion</td><td>1/15000–1/50000</td><td>Cat-like cry, microcephaly, severe psychomotor problems/intellectual disability</td></tr>
+<tr><td>Wolf-Hirschhorn</td><td>4p16.3; NSD2, LETM1, MSX1</td><td>~5–18 Mb deletion</td><td>1/50000</td><td>'Greek warrior helmet' facies, delayed growth/development, mild-severe intellectual disability</td></tr>
+<tr><td>Potocki-Lupski</td><td>17p11.2; RAI1</td><td>~3.6 Mb duplication</td><td>1/25000</td><td>Developmental delay, mild-moderate learning disability, behavioural problems</td></tr>
+<tr><td>Cat eye / Schmid-Fraccaro</td><td>22q11</td><td>2–5 Mb dup/triplication</td><td>1/50000–1/150000</td><td>Preauricular tags/pits, ocular coloboma, anal atresia with fistula, heart/renal malformations</td></tr>
+</table>
+<p class="body">DiGeorge syndrome has the highest estimated incidence among live births of the syndromes listed and follows autosomal dominant inheritance from a deletion on chromosome 22.</p>
+<div class="formula">Primary sex determination in mammals is chromosomal: 46,XX develops ovaries; 46,XY develops testes</div>
+<p class="body">Each maternal egg carries a single X chromosome, while sperm carry either an X or a Y, so paternal sperm determines offspring sex. The Y chromosome is small (~57 Mb, ~171 genes, about one-third protein-coding); the X chromosome is much larger (~156 Mb, ~1500 genes, over half protein-coding).</p>
+<p class="body">To correct the resulting imbalance in X-linked gene dosage between XX females and XY males, one X chromosome in every female cell is transcriptionally inactivated early in development (X-inactivation), forming a Barr body; the inactive X is designated Xi and the active X, Xa.</p>
+<p class="body">Because X-inactivation equalizes expression, having an abnormal number of sex chromosomes generally produces milder consequences than an equivalent abnormal number of autosomes.</p>
+<p class="subhead">Sex Chromosome Aneuploidies</p>
+<table class="data-table">
+<tr><th>Aneuploidy</th><th>Common name</th><th>Est. incidence</th><th>Symptoms can include</th></tr>
+<tr><td>47,XXX</td><td>—</td><td>1:1000</td><td>Taller than average, normal fertility, few other physical changes</td></tr>
+<tr><td>47,XYY</td><td>—</td><td>~1:1000</td><td>Increased height, learning disabilities, delayed speech/language/motor development, weak muscle tone, hand tremors, seizures, asthma, scoliosis, behavioural/emotional difficulties</td></tr>
+<tr><td>47,XXY</td><td>Klinefelter syndrome</td><td>1:500–1:1000</td><td>Small testes, low testosterone, delayed/incomplete puberty, breast enlargement, reduced facial/body hair, infertility, increased height, breast cancer risk, learning disabilities, delayed speech/language</td></tr>
+<tr><td>48,XXXY</td><td>—</td><td>~1:18000–1:40000</td><td>Small testes, low testosterone, delayed/incomplete puberty, breast enlargement, infertility, increased height, tremors, dental problems, vascular disease, DVT, asthma, T2DM, seizures, heart defects, delayed speech/learning disabilities</td></tr>
+<tr><td>45,X</td><td>Turner syndrome</td><td>~1:2500</td><td>Short stature, early loss of ovarian function, infertility, absence of puberty, webbed neck, skeletal abnormalities, kidney problems, heart defects</td></tr>
+</table>
+<p class="body">In 47,XXX, X-inactivation silences the extra X in most cells, so most X-linked genes are expressed at near-normal levels, explaining the relatively mild phenotype. In 47,XYY, the extra Y cannot be inactivated, so genes that escape X-inactivation and have a Y homolog are expressed at double dosage, contributing to the syndrome's features, including increased risk of behavioral, emotional, and social difficulties.</p>
+<p class="body">Because the X chromosome is larger and carries more genes than the Y, some X-linked genes are dosage-sensitive and give rise to X-linked disorders. Well-known X-linked conditions include Duchenne muscular dystrophy, X-linked cleft palate, Lesch-Nyhan syndrome, both types of hemophilia, and red-green color blindness.</p>
+<div class="formula">X-linked recessive: phenotype always expressed in hemizygous males; females need two altered copies to be affected (heterozygous females are carriers)</div>
+<p class="body">In X-linked recessive inheritance, an affected father cannot transmit the disorder to his sons (sons receive his Y, not his X), but all of his daughters become carriers. A carrier mother transmits the variant to 50% of sons (who are affected) and 50% of daughters (who become carriers).</p>
+<p class="body">X-linked dominant conditions, in contrast, affect heterozygous females as well as hemizygous males; affected fathers transmit the disorder to all daughters but no sons, while affected (heterozygous) mothers transmit it to 50% of children of either sex. Some X-linked dominant conditions are embryonic lethal in males, making them appear to occur only in females.</p>
+<p class="body">Hemophilia A illustrates X-linked recessive inheritance and X-inactivation mosaicism: it results from deficiency of clotting factor VIII, encoded by F8 on Xq28. Because F8 is subject to X-inactivation, carrier females are genetic mosaics — some cells express the wild-type allele and some express the pathogenic allele — so most female carriers produce intermediate factor VIII levels (roughly 30–70% of normal) and appear largely unaffected, though severity varies with the degree of skewed X-inactivation. About 30% of hemophilia A cases arise from de novo mutations.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t5"></div>
+</article>
+
+
+<article class="topic" id="t6">
+<div class="topic-num">SECTION 6</div>
+<h3>Single-Gene (Mendelian) Disorders</h3>
+<p class="body">Many conditions depend on the genotype at a single locus and follow Mendel's laws of segregation, independent assortment, and dominance — hence the term Mendelian disease. Not all inherited disorders are Mendelian: triplet-repeat diseases and imprinting disorders are notable exceptions (see Sections 7 and 8).</p>
+<p class="body">Single-gene disorders can be inherited as autosomal dominant, autosomal recessive, X-linked recessive, or X-linked dominant.</p>
+<p class="body">In autosomal dominant inheritance, an affected individual usually has at least one similarly affected parent, and on average 50% of their children inherit the disorder.</p>
+<p class="body">In autosomal recessive inheritance, disease-causing variants are loss-of-function and only manifest when both gene copies carry a pathogenic variant (homozygous or compound heterozygous); such individuals typically have two clinically unaffected, heterozygous carrier parents, whose children each have a 25% chance of being affected, a 50% chance of being an unaffected carrier, and a 25% chance of inheriting neither variant. Children of an affected individual are obligate carriers.</p>
+<table class="data-table">
+<tr><th>Inheritance</th><th>Disease</th><th>Gene/region</th><th>Nature of variants</th><th>Est. frequency</th></tr>
+<tr><td>Autosomal dominant</td><td>Glut1 deficiency (De Vivo disease)</td><td>SLC2A1</td><td>Mutations reduce/eliminate function</td><td>Rare, ~1/90000</td></tr>
+<tr><td>Autosomal dominant</td><td>Osteogenesis imperfecta</td><td>COL1A1/COL1A2 (90%), also CRTAP or P3H1</td><td>Usually missense, altered collagen structure</td><td>6–7/100000</td></tr>
+<tr><td>Autosomal dominant</td><td>Achondroplasia</td><td>FGFR3</td><td>Activating point mutations</td><td>1/15000–1/40000</td></tr>
+<tr><td>Autosomal recessive</td><td>Phenylketonuria</td><td>PAH</td><td>Many mutation types (missense, nonsense, splicing)</td><td>1/10000–1/15000</td></tr>
+<tr><td>Autosomal recessive</td><td>Cystic fibrosis</td><td>CFTR</td><td>Over 2000 variants known</td><td>1/2500–1/3500 (Caucasians), less common in other groups</td></tr>
+<tr><td>X-linked recessive</td><td>Haemophilia A</td><td>F8</td><td>Missense and nonsense mutations</td><td>1/4000–1/5000 males</td></tr>
+<tr><td>X-linked recessive</td><td>Duchenne muscular dystrophy</td><td>DMD</td><td>Usually deletions or duplications</td><td>1/3500–1/5000 (Duchenne + Becker)</td></tr>
+<tr><td>X-linked dominant</td><td>Fragile X syndrome</td><td>FMR1</td><td>CGG trinucleotide repeat expansion</td><td>1/4000 males, 1/8000 females</td></tr>
+<tr><td>X-linked dominant</td><td>Rett syndrome</td><td>MECP2</td><td>Missense mutations, abnormal epigenetic regulation</td><td>1/8500 females</td></tr>
+<tr><td>X-linked dominant</td><td>X-linked hypophosphatemic rickets</td><td>PHEX</td><td>Deletions, insertions, missense, nonsense, splicing</td><td>1/20000</td></tr>
+</table>
+<p class="body">Glut1 deficiency affects glucose transport, osteogenesis imperfecta affects collagen synthesis, phenylketonuria affects amino acid metabolism, and cystic fibrosis affects chloride ion transport across epithelial membranes.</p>
+<p class="body">Duchenne muscular dystrophy results from loss of the DMD gene product dystrophin, which normally provides structural support to sarcomeres and is essential for normal skeletal muscle structure.</p>
+<div class="formula">Pedigree analysis reveals mode of inheritance (autosomal vs. X-linked) and dominant vs. recessive transmission</div>
+<p class="body">Because Mendelian disease is caused by pathogenic variants at a single locus, it is useful to consider what kinds of DNA changes cause them; this is addressed at the molecular level in Section 7.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t6"></div>
+</article>
+
+
+<article class="topic" id="t7">
+<div class="topic-num">SECTION 7</div>
+<h3>Molecular Mechanisms of Point Mutations and Repeat Expansion Disorders</h3>
+<p class="body">A point mutation changes a single base pair by substitution, deletion, or addition. Substitution mutations within a coding region can have several outcomes depending on the resulting codon change.</p>
+<p class="body">A silent (synonymous) mutation exchanges one codon for a different codon that encodes the same amino acid (for example, codons AUU, AUC, and AUA all encode isoleucine), so the protein sequence is unchanged and function is not expected to be altered.</p>
+<p class="body">A missense mutation changes a codon so that it encodes a different amino acid; sickle cell disease is a classic example, where a single A-to-T substitution changes a glutamic acid codon (GAG) to a valine codon (GTG) in the beta-globin gene.</p>
+<p class="body">Because glutamic acid is negatively charged and valine is hydrophobic, this substitution alters the folding of the beta-globin chain, causing hemoglobin molecules to polymerize under low-oxygen conditions and distort erythrocytes into a sickle shape. Downstream vaso-occlusive effects fall into three broad categories: breakdown (hemolysis) of red blood cells, clumping of cells that occludes small blood vessels, and abnormal accumulation of sickle cells in the spleen.</p>
+<p class="body">A nonsense mutation changes a codon for an amino acid into one of the three stop codons, causing translation to terminate prematurely and producing a truncated protein, which is often (but not always) non-functional.</p>
+<div class="formula">Frameshift = insertion or deletion of a number of nucleotides not divisible by three, shifting the downstream reading frame and typically introducing a premature stop codon</div>
+<p class="body">Deletion of three nucleotides (or a multiple of three) from a coding sequence removes one or more whole codons/amino acids without shifting the frame, and the resulting shortened protein may still be functional.</p>
+<p class="body">However, deletion or insertion of a number of nucleotides not divisible by three shifts the reading frame downstream of the change; every subsequent codon differs from the wild type, producing a markedly altered amino acid sequence and frequently a premature stop codon, truncating the protein.</p>
+<div class="formula">Nucleotide repeat expansion disorders are a special class of insertion mutation, typically involving trinucleotide (triplet) repeats such as (CAG)n or (CTG)n</div>
+<p class="body">These repeats become unstable and can expand in copy number from one generation to the next, a phenomenon called anticipation, in which the age of onset decreases and/or disease severity increases in successive generations. Repeat number can also vary between tissues within one individual (somatic mosaicism of repeat length).</p>
+<table class="data-table">
+<tr><th>Disease</th><th>Gene</th><th>Repeat</th><th>Normal range</th><th>Pathogenic range</th><th>Features</th><th>Est. incidence</th></tr>
+<tr><td>Huntington disease</td><td>HTT</td><td>CAG (glutamine)</td><td>9–35</td><td>36–39 possibly pathogenic; &gt;39 pathogenic</td><td>Uncontrolled movements, emotional problems, loss of cognitive ability</td><td>3–7/100000</td></tr>
+<tr><td>Myotonic dystrophy type 1</td><td>DMPK</td><td>CTG (3'-UTR)</td><td>5–37</td><td>50–150 mild; 100–1000 classic; &gt;2000 congenital</td><td>Progressive muscle wasting/weakness, muscle contractions, cataracts, cardiac abnormalities</td><td>&gt;1/8000</td></tr>
+<tr><td>FXTAS</td><td>FMR1</td><td>CGG (5'-UTR)</td><td>5–40</td><td>55–200 (pre-mutation)</td><td>Ataxia, tremors, cognitive decline, learning disabilities, blood pressure problems</td><td>1/4000 males, 1/8000 females (milder)</td></tr>
+</table>
+<p class="body">Huntington disease illustrates this class of disorder in detail: the expanded CAG repeat lies within the coding region of HTT on chromosome 4 and is translated into an expanded polyglutamine tract in the huntingtin protein, whose normal function is unclear but is essential for development. Inheritance is autosomal dominant via a gain-of-function mechanism.</p>
+<p class="body">Unaffected individuals typically carry 9–35 CAG repeats; 36–39 repeats produce reduced (incomplete) penetrance with milder, later-onset symptoms; and full penetrance with progressively earlier onset and more severe disease occurs once the repeat number exceeds 39, with reported cases of 250 or more repeats.</p>
+<p class="body">Repeats below about 30 are transmitted stably, while larger repeat numbers show instability in both somatic tissue and the germline, with a tendency to expand further in the next generation — the molecular basis of anticipation. There is a direct correlation between repeat number and disease severity, and an inverse correlation between repeat number and age of onset; expansion size is also influenced by the sex of the transmitting parent, with larger expansions more often occurring through paternal transmission.</p>
+<p class="body">Pathologically, Huntington disease causes progressive neuronal loss and atrophy, with enlargement of the lateral ventricles, deterioration of the cerebral cortex, and degeneration of basal ganglia structures.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t7"></div>
+</article>
+
+
+<article class="topic" id="t8">
+<div class="topic-num">SECTION 8</div>
+<h3>Mitochondrial Genetics, Epigenetics, and Imprinting Disorders</h3>
+<p class="body">Mitochondria are membrane-bound organelles thought to have originated from a symbiotic relationship between a primitive bacterial cell and a precursor eukaryotic cell. They generate cellular energy (ATP) via oxidative phosphorylation and also regulate programmed cell death (apoptosis).</p>
+<p class="body">Each mitochondrion has an outer and inner membrane; the inner membrane folds inward to form cristae, which increase surface area and house the electron transport chain complexes and ATP synthase.</p>
+<div class="formula">The mitochondrial genome is a circular, double-stranded DNA molecule of approximately 16,500 base pairs, encoding 37 genes</div>
+<p class="body">Thirteen of these 37 genes encode subunits of the four respiratory chain complexes involved in oxidative phosphorylation (e.g., cytochrome oxidase/complex IV, NADH dehydrogenase/complex I, ATP synthase/complex V). Each cell contains thousands of mitochondria, and each mitochondrion contains multiple copies of the mitochondrial genome.</p>
+<p class="body">The mitochondrial genome differs from the nuclear genome in several important ways: about 93% of mitochondrial DNA is coding sequence (a much higher coding density than nuclear DNA); mitochondrial DNA lacks introns, histones, and epigenetic marks; and its mutation rate is roughly 100 times higher than that of nuclear DNA, because mitochondrial DNA repair systems are less robust and the organelle's internal environment contains reactive oxygen species (ROS) generated as by-products of the electron transport chain.</p>
+<div class="formula">Mitochondrial DNA is inherited exclusively through the maternal line</div>
+<p class="body">An affected mother transmits her mitochondrial condition to all of her children, but an affected father transmits it to none of his children (since sperm mitochondria are not passed to the embryo). Mitochondrial inheritance therefore affects males and females equally in terms of phenotype, but is always inherited from the mother, producing a distinctive pedigree pattern in which all offspring of an affected female are affected, but no offspring of an affected male are affected.</p>
+<p class="body">Heteroplasmy is a key feature of mitochondrial genetics: because each cell carries many copies of mitochondrial DNA, a pathogenic variant may be present in only some of these copies (heteroplasmy) or in all of them (homoplasmy).</p>
+<p class="body">Heteroplasmic variants commonly arise from de novo mutation in the germline or soma. During oogenesis, a primordial germ cell's mitochondrial population is partitioned unevenly into individual egg cells (the mitochondrial 'bottleneck'), so that offspring eggs may end up with a high, intermediate, or low ratio of mutant to normal mitochondria.</p>
+<p class="body">A primary oocyte with a high mutant load, if fertilized, tends to produce a severe phenotype; one with a low mutant load tends to produce a mild or unaffected phenotype; and an intermediate mutant load produces intermediate severity. This variability explains why severity of mitochondrial disease can differ substantially even among siblings.</p>
+<p class="body">A wide range of conditions have been linked to mitochondrial dysfunction, including age-related hearing loss and specific forms of epilepsy and diabetes; phenotypes vary widely and often preferentially affect tissues with high energy demands (e.g., brain, muscle, retina). There is considerable phenotypic overlap between conditions caused by different mitochondrial mutations.</p>
+<p class="subhead">LHON vs. Leigh Syndrome</p>
+<p class="body">LHON is a mitochondrially inherited cause of vision loss with reported incidence in the range of roughly 1 in 25,000–50,000 in European populations; symptoms typically appear in the teens or 20s, with the central visual field most severely affected, progressing from blurring/cloudy vision to loss of visual acuity and color vision.</p>
+<p class="body">Pathogenesis involves point mutations in mitochondrial genes (predominantly affecting complex I of the electron transport chain), leading to cell death of retinal ganglion cells and subsequent degeneration of the optic nerve. Although many different mitochondrial mutations have been linked to LHON, one of three specific missense mutations accounts for about 90% of affected families; notably, approximately 85% of individuals harboring these mutations never develop symptoms, reflecting incomplete penetrance. Additional features can include cardiac conduction abnormalities and mild neurological problems.</p>
+<p class="body">Leigh syndrome, in contrast to LHON, is a severe, progressive neurological condition with progressive loss of both mental and motor skills; affected children usually die within 2–3 years, often from respiratory failure. It has an overall frequency similar to LHON, though it is found at higher frequency in certain populations.</p>
+<p class="body">MRI reveals characteristic lesions in the basal ganglia, cerebellum, and brainstem. Both nuclear and mitochondrial DNA mutations have been observed to cause Leigh syndrome, affecting complexes II, III, and IV of the electron transport chain as well as ATP synthase (complex V); most of the causative mutations (both nuclear and mitochondrial) converge on complex I.</p>
+<div class="formula">Epigenetics = heritable changes in gene expression that occur without any change in DNA sequence</div>
+<p class="body">Epigenetic information takes the form of chemical modifications, such as methyl groups added directly to DNA or to the histone proteins around which DNA is wrapped, and this information can be transmitted between cell generations.</p>
+<p class="body">In humans and other mammals, cytosines within CpG dinucleotides (a cytosine followed by a guanine, connected by a phosphate linkage) are frequent sites of DNA methylation; clusters of CpG dinucleotides are called CpG islands. Methylated cytosines are recognized by specific proteins that bind the modified DNA and recruit further protein complexes, which alter chromatin structure and thereby gene activity — largely by modifying histones.</p>
+<p class="body">Histone octamers (two copies each of H2A, H2B, H3, and H4) form the disc-shaped nucleosome core, and histone tails undergo post-translational modifications including acetylation, methylation, phosphorylation, and ubiquitination.</p>
+<p class="body">Acetylation of lysine residues on histone tails loosens chromatin packing and facilitates transcription; acetyl groups are added by histone acetyltransferases (HATs) and removed by histone deacetylases (HDACs). DNA methylation, by contrast, promotes tighter nucleosome packing that restricts transcription-factor access and inhibits transcription.</p>
+<p class="body">DNA methylation and histone modification interact and reinforce one another (e.g., methyl-CpG-binding proteins recruit HDACs to the same sites), and different regions of the genome are subject to different combinations of these modifications at different times, allowing the same genome to produce different patterns of gene expression across cell types.</p>
+<div class="formula">Genomic imprinting = an epigenetic mechanism causing a gene to be expressed differently depending on whether it was inherited from the mother or the father</div>
+<p class="body">Roughly 100 human genes are subject to imprinting: for some, only the paternally inherited copy is active while the maternal copy is epigenetically silenced throughout life; for others, only the maternally inherited copy is active while the paternal copy is silenced.</p>
+<p class="body">This parent-of-origin-specific silencing is established during gametogenesis: prior imprints are erased and new imprints are established according to the sex of the individual (female imprints during oogenesis, male imprints during spermatogenesis), so that each embryo receives a complementary set of maternal and paternal imprints.</p>
+<p class="body">Because only one parental copy of an imprinted gene is ever active, a mutation or deletion affecting the active copy behaves functionally like a recessive disorder — there is no 'backup' from the silenced allele.</p>
+<p class="body">One of the best-characterized imprinted regions lies near the centromere on the long arm of chromosome 15 and includes SNRPN, two clusters of snoRNA genes, and UBE3A. In this region, SNRPN and the snoRNA clusters are expressed only from the paternal chromosome 15 (maternal copy silenced), whereas UBE3A is expressed only from the maternal chromosome 15 (paternal copy silenced).</p>
+<p class="body">Loss of the paternally expressed genes causes Prader-Willi syndrome; loss of the maternally expressed UBE3A causes Angelman syndrome.</p>
+<table class="data-table">
+<tr><th></th><th>Angelman syndrome</th><th>Prader-Willi syndrome</th></tr>
+<tr><td>Key features</td><td>Moderate-severe intellectual disability (IQ 25–54), jerky puppet-like movements, happy/sociable disposition, seizures</td><td>Mild-moderate intellectual disability (IQ 60–70), insatiable appetite → morbid obesity, behaviour problems</td></tr>
+<tr><td>Frequency</td><td>~1 per 20000</td><td>~1 per 15000</td></tr>
+<tr><td>Underlying abnormality</td><td>Maternal 15q11.2 deletion (~70%), paternal UPD (~4%), imprinting defect (~8%), UBE3A pathogenic variant (~6%)</td><td>Paternal 15q11.2 deletion (~70%), maternal UPD (~20%), imprinting defect (~5%)</td></tr>
+<tr><td>Key genes</td><td>UBE3A (ubiquitin ligase)</td><td>SNORD116 cluster (snoRNAs); other genes in region may contribute</td></tr>
+</table>
+<p class="body">While most Prader-Willi and Angelman syndrome cases result from deletion of the relevant region, other mechanisms include uniparental disomy (UPD), a rare phenomenon in which both homologs of a chromosome pair are inherited from the same parent, with no contribution from the other parent.</p>
+<p class="body">If both copies of chromosome 15 are maternal in origin (maternal UPD), the child lacks any paternally expressed SNRPN/snoRNA product and develops Prader-Willi syndrome; if both copies are paternal in origin (paternal UPD), the child lacks maternally expressed UBE3A and develops Angelman syndrome.</p>
+<p class="body">Three mechanisms can generate uniparental disomy: (1) Trisomy rescue — a sporadic event in which a trisomic conceptus loses one of the three homologous chromosomes, restoring a disomic (but potentially uniparental) chromosome complement in one-third of cases. (2) Monosomy rescue via duplication of the single remaining homolog, which always results in isodisomy (two identical copies of one parental homolog). (3) Gamete complementation, in which independent meiotic errors in both parents happen to combine, though this is statistically unlikely.</p>
+<p class="body">Uniparental disomy of most chromosomes has no phenotypic consequence, but for chromosomes bearing imprinted genes (including chromosomes 6, 7, 11, 14, 15, and others), UPD causes the corresponding imprinting disorder.</p>
+<p class="body">UPD can be heterodisomic (two different homologs from one parent, retaining heterozygosity) or isodisomic (two identical copies of a single homolog, so any recessive variant on that homolog becomes homozygous, potentially unmasking an unrelated autosomal recessive disorder).</p>
+<p class="body">Although most imprinting disorders arise as sporadic (de novo) mutations, some are transmitted through families in a distinctive pattern reflecting the sex-specific timing of imprint establishment. For example, if a UBE3A mutation is inherited on a paternal chromosome, it remains silent (because the paternal UBE3A copy is normally silenced) and the carrier is unaffected; if that carrier is male, he can transmit the same silent mutation to his own children without consequence to them; however, if the carrier is female, when she transmits the mutation it becomes the maternal (active) copy in her offspring, and her children would be affected with Angelman syndrome.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t8"></div>
+</article>
+
+
+<article class="topic" id="t9">
+<div class="topic-num">SECTION 9</div>
+<h3>Integrated Summary of Key Distinctions</h3>
+<p class="body">This section pulls together the highest-yield pairwise distinctions from the lecture — the comparisons most likely to be tested directly against each other.</p>
+<table class="data-table">
+<tr><th>Concept</th><th>Key distinguishing feature</th></tr>
+<tr><td>Mosaicism vs. chimerism</td><td>Mosaicism = one zygote, post-zygotic mutation; chimerism = fusion of two zygotes</td></tr>
+<tr><td>Aneuploidy vs. polyploidy</td><td>Aneuploidy = extra/missing single chromosome(s); polyploidy = extra whole haploid set(s)</td></tr>
+<tr><td>Reciprocal vs. Robertsonian translocation</td><td>Reciprocal = exchange between any two chromosomes, no material lost; Robertsonian = fusion of two acrocentric chromosomes with loss of both short arms</td></tr>
+<tr><td>Autosomal vs. X-linked recessive</td><td>Autosomal recessive affects both sexes equally; X-linked recessive predominantly affects hemizygous males</td></tr>
+<tr><td>Frameshift vs. in-frame indel</td><td>Frameshift = indel not divisible by 3, shifts downstream codons; in-frame = indel divisible by 3, preserves frame</td></tr>
+<tr><td>Mitochondrial vs. Mendelian inheritance</td><td>Mitochondrial = maternal transmission to all offspring; Mendelian = follows autosomal/X-linked dominant/recessive rules</td></tr>
+<tr><td>Prader-Willi vs. Angelman syndrome</td><td>PWS = loss of paternally-expressed genes (paternal deletion or maternal UPD); AS = loss of maternally-expressed UBE3A (maternal deletion or paternal UPD)</td></tr>
+</table>
+</article>
+
+</section>
+</main>
+
+<footer class="eod">Genetics of Disease — single-lecture study guide.</footer>
+
+<button id="side-toggle" aria-label="Toggle section navigation">Sections</button>
+<div id="side-scrim"></div>
+<nav id="side-nav">
+<div class="side-head">Jump to a section</div>
+<div id="side-nav-body">
+<div class="side-lecture-label">Genetics of Disease</div>
+<span class="side-link" data-target="t1">DNA Packaging, Karyotypes & the Concept of Mutation</span>
+<span class="side-link" data-target="t2">Types of DNA Sequence Variants</span>
+<span class="side-link" data-target="t3">Mosaicism, Chimerism & Timing of De Novo Mutations</span>
+<span class="side-link" data-target="t4">Numerical & Structural Chromosomal Abnormalities</span>
+<span class="side-link" data-target="t5">Microdeletions & Sex Chromosome Disorders</span>
+<span class="side-link" data-target="t6">Single-Gene (Mendelian) Disorders</span>
+<span class="side-link" data-target="t7">Point Mutations & Repeat Expansion Disorders</span>
+<span class="side-link" data-target="t8">Mitochondrial Genetics, Epigenetics & Imprinting</span>
+<span class="side-link" data-target="t9">Integrated Summary of Key Distinctions</span>
+</div>
+</nav>
+
+<script>
+const questionData = {"t2":[{"q":"A geneticist identifies a 3-base-pair deletion within the coding region of a gene. What is the most likely immediate consequence?","options":["Frameshift and premature termination","Loss of a single amino acid without a frameshift","Silencing of the entire gene","Formation of a ring chromosome","Activation of a distant enhancer"],"correct":1,"explain":"A deletion of 3 nucleotides (a multiple of 3) removes exactly one codon and preserves the reading frame."},{"q":"Which class of sequence variant is defined as affecting a genomic segment greater than 1000 base pairs?","options":["Single nucleotide variant","Indel","Structural variant","Point mutation","Silent variant"],"correct":2,"explain":"Structural variants, by definition, cover translocations, inversions, large deletions, and CNVs."},{"q":"A repeat element with a unit length of 4 base pairs, scattered throughout all chromosomes, and present in roughly 500,000 copies genome-wide is best classified as:","options":["A minisatellite","A microsatellite","An interspersed transposon","A telomeric repeat only","A structural variant"],"correct":1,"explain":"Based on its short unit length, dispersed chromosomal location, and high copy number."},{"q":"The minor allele frequency (MAF) threshold generally used to classify a variant as a polymorphism rather than a rare variant is:","options":["0.01%","1%","10%","25%","50%"],"correct":1,"explain":"1% is the conventional MAF cutoff for polymorphism designation."},{"q":"Two unrelated individuals are found to differ at approximately 0.5% of their DNA. Which mechanism most contributes to this variation?","options":["Trisomy","SNVs and large deletions","Robertsonian translocation","X-inactivation","Genomic imprinting"],"correct":1,"explain":"SNVs and large deletions account for most inter-individual genomic variation."}],"t3":[{"q":"A patient is found to have patchy skin pigmentation with two genetically distinct populations of skin cells, both traceable to a single fertilized egg. This is best described as:","options":["Chimerism","Mosaicism","Aneuploidy","Uniparental disomy","Anticipation"],"correct":1,"explain":"All cell lines derive from a single zygote with a post-zygotic mutation."},{"q":"A woman is discovered to have two genetically distinct cell populations after paternity-style testing reveals inconsistency between her blood and her ovarian tissue. This most likely reflects:","options":["Somatic mosaicism from an early mutation","Gonadal mosaicism only","Chimerism from fusion of two embryos","X-inactivation skewing","A Robertsonian translocation"],"correct":2,"explain":"Chimerism from fusion of two embryos produces two genetically distinct lineages within one individual."},{"q":"A father who is phenotypically unaffected has two children, from different pregnancies, with the same rare autosomal dominant disorder, despite normal karyotype and no variant detectable in his blood leukocytes. This is most consistent with:","options":["Anticipation","Gonadal (germline) mosaicism","Genomic imprinting","Heteroplasmy","X-linked recessive inheritance"],"correct":1,"explain":"The causative variant is confined to a subset of gametes and not detectable in somatic blood cells."},{"q":"If a post-zygotic mutation occurs very early in embryogenesis rather than later, the expected result is:","options":["A smaller, more localized patch of affected cells","A larger proportion and broader distribution of affected cells","Complete absence of the variant in all tissues","Obligate transmission to all offspring","Mitochondrial-pattern inheritance"],"correct":1,"explain":"More descendant cells arise from the early mutant clone."}],"t4":[{"q":"A 38-year-old pregnant woman undergoes prenatal testing; the fetus is found to have 47 chromosomes with an extra chromosome 21. The most likely underlying mechanism is:","options":["Robertsonian translocation","Non-disjunction during meiosis","Ring chromosome formation","Uniparental disomy","Balanced reciprocal translocation"],"correct":1,"explain":"Non-disjunction during meiosis is the most common cause of trisomy 21 and increases in frequency with maternal age."},{"q":"A phenotypically normal father carries a balanced reciprocal translocation. His risk of having offspring with a clinical phenotype relates primarily to:","options":["Loss of nucleolar organizer regions","Unbalanced gametes formed during his meiosis","X-inactivation skewing","Mitochondrial heteroplasmy","Anticipation"],"correct":1,"explain":"Balanced carriers are typically unaffected themselves, but their gametes may be unbalanced."},{"q":"Which structural rearrangement specifically involves fusion of two acrocentric chromosomes at the centromere with loss of both short arms?","options":["Reciprocal translocation","Robertsonian translocation","Pericentric inversion","Ring chromosome","Isochromosome formation"],"correct":1,"explain":"This is the definition of a Robertsonian translocation."},{"q":"A fetus with trisomy 18 (Edwards syndrome) has a markedly different prognosis compared to trisomy 21. This is best explained by:","options":["Trisomy 18 involves a larger, more gene-dense chromosome, producing more severe multi-organ effects","Trisomy 18 is always due to a Robertsonian translocation","Trisomy 21 is always mosaic","Trisomy 18 is X-linked","Trisomy 21 involves total loss of chromosome 21"],"correct":0,"explain":"The larger, more gene-dense chromosome 18 produces more severe multi-organ effects and lower survival than trisomy 21."},{"q":"Non-disjunction occurring specifically during meiosis II would be expected to produce which combination of gametes?","options":["All four gametes abnormal","Two normal gametes, one disomic, and one nullisomic gamete","Four disomic gametes","Two disomic and two nullisomic gametes only, with no normal gametes","A single tetraploid gamete"],"correct":1,"explain":"Meiosis I already resolved normally; only sister chromatids fail to separate in meiosis II."}],"t5":[{"q":"A neonate presents with a conotruncal heart defect, cleft palate, and recurrent infections. Chromosomal microarray reveals a 3 Mb deletion at 22q11.2. This is most consistent with:","options":["Williams syndrome","DiGeorge syndrome","Cri-du-chat syndrome","Smith-Magenis syndrome","Cat eye syndrome"],"correct":1,"explain":"DiGeorge syndrome (22q11.2 deletion) has the highest estimated live-birth incidence among the microdeletion syndromes listed."},{"q":"The same 17p11.2 region can produce two distinct syndromes depending on whether it is deleted or duplicated. The duplication produces:","options":["Smith-Magenis syndrome","Potocki-Lupski syndrome","DiGeorge syndrome","Cat eye syndrome","Williams syndrome"],"correct":1,"explain":"Potocki-Lupski syndrome is the reciprocal duplication syndrome of Smith-Magenis syndrome."},{"q":"A phenotypic female with short stature, webbed neck, and primary amenorrhea is found to have a 45,X karyotype. This is:","options":["Klinefelter syndrome","Turner syndrome","Triple X syndrome","47,XYY syndrome","48,XXXY syndrome"],"correct":1,"explain":"This is the classic presentation of Turner syndrome (45,X)."},{"q":"A carrier mother of an X-linked recessive disorder has factor VIII activity of approximately 45% of normal. This intermediate level is best explained by:","options":["Complete silencing of both X chromosomes","Random X-inactivation producing a mosaic mixture of wild-type- and mutant-expressing cells","A second independent autosomal mutation","Anticipation","Uniparental disomy"],"correct":1,"explain":"Random X-inactivation underlies variable carrier phenotypes in X-linked recessive disease."},{"q":"Which karyotype is associated with the mildest phenotype among sex chromosome aneuploidies discussed, largely due to effective X-inactivation of the additional X material?","options":["47,XXX","47,XYY","45,X","48,XXXY","None of these show milder phenotypes than autosomal aneuploidies"],"correct":0,"explain":"X-inactivation silences the supernumerary X in most cells, producing a comparatively mild phenotype in 47,XXX."}],"t6":[{"q":"Two unaffected parents have a child with cystic fibrosis. Both parents are found to carry one CFTR pathogenic variant. What is the recurrence risk for future pregnancies?","options":["0%","25%","50%","75%","100%"],"correct":1,"explain":"25% is the expected recurrence risk for autosomal recessive inheritance when both parents are heterozygous carriers."},{"q":"A child presents with short-limb dwarfism due to a de novo activating point mutation in FGFR3. This condition is:","options":["Osteogenesis imperfecta","Achondroplasia","Phenylketonuria","Cystic fibrosis","Glut1 deficiency syndrome"],"correct":1,"explain":"Achondroplasia is caused by activating FGFR3 point mutations and is inherited in an autosomal dominant manner (frequently de novo)."},{"q":"A boy is diagnosed with Duchenne muscular dystrophy due to a deletion in the DMD gene. His mother is found to be a carrier. What proportion of her sons are expected to be affected, on average?","options":["0%","25%","50%","75%","100%"],"correct":2,"explain":"50% is consistent with X-linked recessive inheritance from a carrier mother."},{"q":"Which of the following disorders is caused by a trinucleotide repeat expansion rather than a conventional point mutation, insertion, or deletion?","options":["Cystic fibrosis","Osteogenesis imperfecta","Fragile X syndrome","Phenylketonuria","Haemophilia A"],"correct":2,"explain":"Fragile X syndrome is caused by CGG trinucleotide repeat expansion in FMR1."},{"q":"A patient with recurrent pulmonary infections and pancreatic insufficiency is found to carry two different CFTR pathogenic variants (compound heterozygote). This inheritance pattern is:","options":["Autosomal dominant","Autosomal recessive","X-linked recessive","X-linked dominant","Mitochondrial"],"correct":1,"explain":"Disease requires pathogenic variants on both alleles, whether identical or different — autosomal recessive."}],"t7":[{"q":"A single nucleotide substitution changes a codon from one that specifies leucine to a different codon that also specifies leucine. This is best classified as:","options":["Missense mutation","Nonsense mutation","Silent (synonymous) mutation","Frameshift mutation","Trinucleotide repeat expansion"],"correct":2,"explain":"The encoded amino acid does not change, so this is a silent (synonymous) mutation."},{"q":"In sickle cell disease, the pathogenic GAG-to-GTG substitution results in which amino acid change in beta-globin?","options":["Valine to glutamic acid","Glutamic acid to valine","Glutamine to glutamic acid","Lysine to asparagine","Glycine to alanine"],"correct":1,"explain":"Glutamic acid to valine alters hemoglobin folding and promotes polymerization under hypoxia."},{"q":"A 2-base-pair deletion occurs within a coding exon. What is the most likely downstream consequence?","options":["No effect on protein sequence","Loss of a single amino acid only","A frameshift altering all downstream codons, often with a premature stop","A silent mutation","A trinucleotide repeat expansion"],"correct":2,"explain":"A 2-bp deletion is not divisible by three, so it causes a frameshift."},{"q":"A patient with progressive chorea, personality changes, and cognitive decline is found to have 45 CAG repeats in HTT. Compared to a relative with 41 repeats, this patient would be expected to show:","options":["Later onset and milder disease","Earlier onset and more severe disease","No penetrance at all","X-linked recessive inheritance","Mitochondrial inheritance"],"correct":1,"explain":"This is consistent with the inverse correlation between repeat number and age of onset in Huntington disease."},{"q":"The phenomenon whereby a trinucleotide repeat disorder shows earlier onset and/or greater severity in successive generations is termed:","options":["Mosaicism","Anticipation","Heteroplasmy","Imprinting","Non-disjunction"],"correct":1,"explain":"This phenomenon is called anticipation."}],"t8":[{"q":"An affected mother with a mitochondrial DNA point mutation has three children. What proportion of her children are expected to inherit the mitochondrial disorder?","options":["0%","25%","50%","100%","Only sons"],"correct":3,"explain":"Mitochondrial DNA is transmitted exclusively through the maternal line to all offspring."},{"q":"A patient develops painless, progressive central vision loss in his early 20s. Genetic testing identifies a mitochondrial point mutation affecting complex I. This presentation is most consistent with:","options":["Leigh syndrome","Leber hereditary optic neuropathy (LHON)","Huntington disease","Angelman syndrome","Turner syndrome"],"correct":1,"explain":"This is the classic presentation of LHON."},{"q":"A child inherits both copies of chromosome 15 from her father, with no maternal chromosome 15 contribution (paternal uniparental disomy). This would be expected to cause:","options":["Angelman syndrome","Prader-Willi syndrome","Turner syndrome","DiGeorge syndrome","Down syndrome"],"correct":0,"explain":"With paternal UPD 15, there is no maternal chromosome present to supply the active, maternally-expressed UBE3A gene, causing Angelman syndrome."},{"q":"Histone acetylation and DNA methylation have which respective general effects on transcription?","options":["Both promote transcription","Both inhibit transcription","Acetylation promotes transcription; methylation of CpG islands inhibits transcription","Acetylation inhibits transcription; methylation promotes transcription","Neither has any effect on transcription"],"correct":2,"explain":"Acetylation loosens chromatin and promotes transcription; CpG methylation tightens chromatin and inhibits transcription."},{"q":"A child with Prader-Willi syndrome is found to have a normal chromosome 15 microarray with no deletion, but molecular testing reveals both copies of chromosome 15 are maternally derived. This mechanism is:","options":["Maternal uniparental disomy","Paternal uniparental disomy","A balanced translocation","A CAG repeat expansion","Mitochondrial heteroplasmy"],"correct":0,"explain":"Maternal UPD deprives the child of any paternally-expressed SNRPN/snoRNA gene product, producing Prader-Willi syndrome."}]};
+
+function buildMCQ(container, q, idx) {
+  const wrap = document.createElement("div");
+  wrap.className = "question";
+  const qtext = document.createElement("div");
+  qtext.className = "qtext";
+  qtext.textContent = (idx + 1) + ". " + q.q;
+  wrap.appendChild(qtext);
+  const optsWrap = document.createElement("div");
+  optsWrap.className = "options";
+  wrap.appendChild(optsWrap);
+  const feedback = document.createElement("div");
+  feedback.className = "feedback";
+  wrap.appendChild(feedback);
+  q.options.forEach(function(optText, optIdx) {
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    btn.innerHTML = "<span class=\"bubble\"></span><span></span>";
+    btn.querySelector("span:last-child").textContent = optText;
+    btn.addEventListener("click", function() {
+      if (optsWrap.dataset.answered) return;
+      optsWrap.dataset.answered = "true";
+      const allBtns = optsWrap.querySelectorAll(".opt");
+      allBtns.forEach(function(b, i2) {
+        b.disabled = true;
+        if (i2 === q.correct) b.classList.add("correct");
+      });
+      if (optIdx === q.correct) {
+        feedback.classList.add("correct");
+        feedback.textContent = "Correct. " + q.explain;
+      } else {
+        btn.classList.add("incorrect");
+        feedback.classList.add("incorrect");
+        feedback.textContent = "Not quite. " + q.explain;
+      }
+    });
+    optsWrap.appendChild(btn);
+  });
+  container.appendChild(wrap);
+}
+
+Object.keys(questionData).forEach(function(sectionId) {
+  const container = document.getElementById("q-" + sectionId);
+  if (!container) return;
+  questionData[sectionId].forEach(function(q, i) { buildMCQ(container, q, i); });
+});
+
+function goToSection(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const sideNav = document.getElementById("side-nav");
+const sideToggle = document.getElementById("side-toggle");
+const sideScrim = document.getElementById("side-scrim");
+
+function openSideNav(){ sideNav.classList.add("open"); sideScrim.classList.add("open"); }
+function closeSideNav(){ sideNav.classList.remove("open"); sideScrim.classList.remove("open"); }
+sideToggle.addEventListener("click", function(){
+  sideNav.classList.contains("open") ? closeSideNav() : openSideNav();
+});
+sideScrim.addEventListener("click", closeSideNav);
+
+document.querySelectorAll(".toc-link").forEach(function(el){
+  el.addEventListener("click", function(){ goToSection(el.dataset.target); });
+});
+const sideLinkEls = Array.from(document.querySelectorAll(".side-link"));
+sideLinkEls.forEach(function(el){
+  el.addEventListener("click", function(){ closeSideNav(); goToSection(el.dataset.target); });
+});
+
+const observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if (entry.isIntersecting) {
+      sideLinkEls.forEach(function(l){ l.classList.remove("active"); });
+      const match = sideLinkEls.find(function(l){ return l.dataset.target === entry.target.id; });
+      if (match) match.classList.add("active");
+    }
+  });
+}, { rootMargin: "-15% 0px -70% 0px" });
+document.querySelectorAll("article.topic").forEach(function(el){ observer.observe(el); });
+</script>
+</body>
+</html>
