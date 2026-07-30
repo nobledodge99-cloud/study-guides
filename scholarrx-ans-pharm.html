@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ScholarRx ANS Pharm</title>
+<style>
+  :root {
+    --cream: #f4f1ea;
+    --ink: #1f2320;
+    --muted: #767b70;
+    --green: #3d6b5c;
+    --green-dark: #2a4c41;
+    --sage-bg: #e3ede6;
+    --sage-border: #b9d0c2;
+    --thead-bg: #d9e6de;
+    --row-alt: #ebe8df;
+    --border: #d8d4c8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  a { color: var(--green); }
+
+  /* ---------- Sidebar ---------- */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 280px;
+    background: var(--cream);
+    border-right: 2px solid var(--ink);
+    overflow-y: auto;
+    padding: 20px 0 40px 0;
+    transition: transform 0.25s ease;
+    z-index: 20;
+  }
+  #sidebar.collapsed { transform: translateX(-280px); }
+  #sidebar .sb-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 0 22px 10px 22px;
+    text-transform: uppercase;
+  }
+  .sb-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.83rem;
+    padding: 8px 22px;
+    cursor: pointer;
+    line-height: 1.35;
+  }
+  .sb-link:hover { background: var(--sage-bg); }
+  .sb-link.active {
+    background: var(--sage-bg);
+    border-left: 3px solid var(--green);
+    color: var(--green-dark);
+    font-weight: bold;
+  }
+  .sb-num { display:inline-block; width: 22px; color: var(--muted); }
+
+  #sb-toggle {
+    position: fixed;
+    top: 18px;
+    left: 292px;
+    z-index: 30;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: left 0.25s ease;
+  }
+  #sb-toggle.collapsed { left: 18px; }
+
+  /* ---------- Main ---------- */
+  #main {
+    margin-left: 280px;
+    padding: 60px 60px 100px 60px;
+    max-width: 900px;
+    transition: margin-left 0.25s ease;
+  }
+  #main.expanded { margin-left: 0; }
+
+  h1.doc-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    margin: 0 0 10px 0;
+    color: var(--ink);
+  }
+  .doc-subtitle {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 22px;
+  }
+  .divider {
+    border: none;
+    border-top: 3px solid var(--ink);
+    margin: 24px 0 30px 0;
+  }
+  .toc-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  ol.toc { padding-left: 22px; margin-bottom: 50px; }
+  ol.toc li { margin-bottom: 8px; }
+  ol.toc a {
+    color: var(--green-dark);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--green-dark);
+  }
+  ol.toc a:hover { color: var(--green); }
+
+  section.topic {
+    margin-bottom: 56px;
+    padding-top: 10px;
+    scroll-margin-top: 20px;
+  }
+  section.topic h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  .fa-ref {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+  }
+  section.topic p { margin: 0 0 14px 0; }
+
+  .summary {
+    background: var(--sage-bg);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    margin: 14px 0 20px 0;
+    font-size: 0.9rem;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0 22px 0;
+    font-size: 0.83rem;
+  }
+  caption {
+    text-align: left;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    caption-side: top;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--thead-bg);
+    color: var(--green-dark);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: var(--row-alt); }
+  td.group-header {
+    background: var(--sage-bg);
+    font-weight: bold;
+    color: var(--green-dark);
+  }
+  .drug { color: var(--green-dark); font-weight: bold; }
+
+  ul.plain { margin: 6px 0 14px 0; padding-left: 20px; }
+  ul.plain li { margin-bottom: 4px; }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-280px); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; padding: 60px 24px 80px 24px; }
+    #sb-toggle { left: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<button id="sb-toggle" onclick="toggleSidebar()">&#9776; Sections</button>
+
+<nav id="sidebar">
+  <div class="sb-label">Sections</div>
+  <button class="sb-link" data-target="t1"><span class="sb-num">1</span>Autonomic Receptors</button>
+  <button class="sb-link" data-target="t2"><span class="sb-num">2</span>Acetylcholine Receptors</button>
+  <button class="sb-link" data-target="t3"><span class="sb-num">3</span>Micturition Control</button>
+  <button class="sb-link" data-target="t4"><span class="sb-num">4</span>Tissue Distribution of Adrenergic Receptors</button>
+  <button class="sb-link" data-target="t5"><span class="sb-num">5</span>G-Protein-Linked Second Messengers</button>
+  <button class="sb-link" data-target="t6"><span class="sb-num">6</span>Autonomic Drugs (Synapse Mechanisms)</button>
+  <button class="sb-link" data-target="t7"><span class="sb-num">7</span>Cholinomimetic Agents</button>
+  <button class="sb-link" data-target="t8"><span class="sb-num">8</span>Anticholinesterase Poisoning</button>
+  <button class="sb-link" data-target="t9"><span class="sb-num">9</span>Muscarinic Antagonists</button>
+  <button class="sb-link" data-target="t10"><span class="sb-num">10</span>Atropine</button>
+  <button class="sb-link" data-target="t11"><span class="sb-num">11</span>Sympathomimetics</button>
+  <button class="sb-link" data-target="t12"><span class="sb-num">12</span>Physiologic Effects of Sympathomimetics</button>
+  <button class="sb-link" data-target="t13"><span class="sb-num">13</span>Sympatholytics (&alpha;2-Agonists)</button>
+  <button class="sb-link" data-target="t14"><span class="sb-num">14</span>&alpha;-Blockers</button>
+  <button class="sb-link" data-target="t15"><span class="sb-num">15</span>&szlig;-Blockers</button>
+  <button class="sb-link" data-target="t16"><span class="sb-num">16</span>Phosphodiesterase Inhibitors</button>
+</nav>
+
+<main id="main">
+
+<h1 class="doc-title">ScholarRx ANS Pharm</h1>
+<div class="doc-subtitle">Autonomic nervous system pharmacology &mdash; 16 topics, receptor physiology through drug classes</div>
+
+<hr class="divider">
+
+<div class="toc-label">CONTENTS</div>
+<ol class="toc">
+  <li><a href="#t1">Autonomic Receptors</a></li>
+  <li><a href="#t2">Acetylcholine Receptors</a></li>
+  <li><a href="#t3">Micturition Control</a></li>
+  <li><a href="#t4">Tissue Distribution of Adrenergic Receptors</a></li>
+  <li><a href="#t5">G-Protein-Linked Second Messengers</a></li>
+  <li><a href="#t6">Autonomic Drugs (Synapse Mechanisms)</a></li>
+  <li><a href="#t7">Cholinomimetic Agents</a></li>
+  <li><a href="#t8">Anticholinesterase Poisoning</a></li>
+  <li><a href="#t9">Muscarinic Antagonists</a></li>
+  <li><a href="#t10">Atropine</a></li>
+  <li><a href="#t11">Sympathomimetics</a></li>
+  <li><a href="#t12">Physiologic Effects of Sympathomimetics</a></li>
+  <li><a href="#t13">Sympatholytics (&alpha;2-Agonists)</a></li>
+  <li><a href="#t14">&alpha;-Blockers</a></li>
+  <li><a href="#t15">&szlig;-Blockers</a></li>
+  <li><a href="#t16">Phosphodiesterase Inhibitors</a></li>
+</ol>
+
+<!-- 1 -->
+<section class="topic" id="t1">
+<h2>1. Autonomic Receptors</h2>
+<p>The parasympathetic, sympathetic, and somatic divisions each wire up differently between the central nervous system and their target tissue, and the receptor at each stop along the way differs by division.</p>
+
+<table>
+<caption>Autonomic &amp; Somatic Efferent Pathways</caption>
+<tr><th>Division</th><th>Preganglionic fiber</th><th>Ganglionic synapse</th><th>Postganglionic fiber / transmission</th><th>Target tissue</th><th>Receptor(s) at target</th></tr>
+<tr><td>Parasympathetic</td><td>Long fiber, from brainstem or sacral cord</td><td>ACh &rarr; nicotinic (N<sub>N</sub>) receptor</td><td>Short fiber, releases ACh</td><td>Smooth muscle, gland cells, nerve</td><td>M<sub>1</sub>, M<sub>2</sub>, M<sub>3</sub></td></tr>
+<tr><td>Sympathetic &mdash; standard</td><td>Short fiber, from spinal cord</td><td>ACh &rarr; nicotinic (N<sub>N</sub>) receptor at sympathetic chain ganglion</td><td>Long fiber, releases norepinephrine (or ACh onto sweat glands)</td><td>Sweat glands / smooth muscle, gland cells, nerve / renal vasculature smooth muscle</td><td>Sweat glands: M<sub>3</sub>; other smooth muscle: &alpha;<sub>1</sub>, &alpha;<sub>2</sub>, &beta;<sub>1</sub>, &beta;<sub>2</sub>; renal vasculature: &alpha;<sub>1</sub>, &alpha;<sub>2</sub>, &beta;<sub>1</sub>, D<sub>1</sub></td></tr>
+<tr><td>Sympathetic &mdash; adrenal medulla</td><td>Long fiber, direct from spinal cord (no ganglionic relay)</td><td>ACh &rarr; nicotinic (N<sub>N</sub>) receptor on chromaffin cells</td><td>Adrenal medulla releases norepinephrine/epinephrine directly into the blood (catecholamine transmission)</td><td>Cardiac muscle, vessels</td><td>&alpha;<sub>1</sub>, &alpha;<sub>2</sub>, &beta;<sub>1</sub>, &beta;<sub>2</sub></td></tr>
+<tr><td>Somatic</td><td>Voluntary motor nerve, direct from spinal cord</td><td>&mdash;</td><td>ACh released at the neuromuscular junction</td><td>Skeletal muscle</td><td>N<sub>M</sub></td></tr>
+</table>
+
+<div class="summary">Both parasympathetic and standard sympathetic pathways relay through a ganglion using ACh acting on nicotinic receptors; the difference lies in the postganglionic transmitter (ACh for parasympathetic, mostly norepinephrine for sympathetic) and in the receptors expressed on the target tissue. The adrenal medulla is functionally a modified sympathetic ganglion that secretes catecholamines into the bloodstream rather than releasing them at a synapse. The somatic pathway to skeletal muscle has no ganglion at all.</div>
+</section>
+
+<!-- 2 -->
+<section class="topic" id="t2">
+<h2>2. Acetylcholine Receptors</h2>
+<p>Acetylcholine acts on two structurally and functionally distinct receptor families: nicotinic receptors, which are ligand-gated ion channels, and muscarinic receptors, which are G-protein-coupled receptors.</p>
+
+<table>
+<caption>ACh Receptor Families</caption>
+<tr><th>Receptor</th><th>Structure / signaling</th><th>Subtypes &amp; locations</th></tr>
+<tr><td><span class="drug">Nicotinic</span></td><td>Ligand-gated ion channel; opening allows K<sup>+</sup> efflux and Na<sup>+</sup> influx, and in some cases Ca<sup>2+</sup> influx</td><td>N<sub>N</sub>: autonomic ganglia and adrenal medulla&nbsp;&nbsp;|&nbsp;&nbsp;N<sub>M</sub>: neuromuscular junction of skeletal muscle</td></tr>
+<tr><td><span class="drug">Muscarinic</span></td><td>G-protein-coupled receptor; signals through second-messenger cascades</td><td>Five subtypes, M<sub>1</sub>&ndash;M<sub>5</sub>, found in heart, smooth muscle, brain, exocrine glands, and on sweat glands (sympathetic cholinergic innervation)</td></tr>
+</table>
+
+<div class="summary">The nicotinic/muscarinic split maps onto ion channel versus GPCR signaling: nicotinic receptors produce fast, direct depolarization, while muscarinic receptors act more slowly through second messengers and account for the broad tissue distribution of parasympathetic and sympathetic-cholinergic effects.</div>
+</section>
+
+<!-- 3 -->
+<section class="topic" id="t3">
+<h2>3. Micturition Control</h2>
+<p>The micturition center in the pons coordinates bladder filling and emptying by balancing sympathetic and parasympathetic input, plus somatic control of the external sphincter.</p>
+
+<ul class="plain">
+<li>Parasympathetic input (pelvic nerve) acts on M<sub>3</sub> receptors on the detrusor muscle &rarr; contraction &rarr; promotes voiding.</li>
+<li>Sympathetic input (hypogastric nerve) acts on &beta;<sub>3</sub> receptors on the detrusor (relaxation) and &alpha;<sub>1</sub> receptors on the internal urethral sphincter (contraction) &rarr; promotes storage/retention.</li>
+<li>Somatic input (pudendal nerve) acts on nicotinic receptors at the external urethral sphincter for voluntary control.</li>
+</ul>
+<p>In short: sympathetic activity favors urinary retention, and parasympathetic activity favors voiding. A number of autonomic drugs act directly on these bladder receptors to treat urinary dysfunction.</p>
+
+<table>
+<caption>Drug Class Acting on Bladder Receptors</caption>
+<tr><th>Drug class</th><th>Mechanism</th><th>Applications</th></tr>
+<tr><td>Muscarinic agonists (e.g., bethanechol)</td><td>M<sub>3</sub> receptor activation &rarr; detrusor smooth muscle contraction &rarr; increased bladder emptying</td><td>Urinary retention</td></tr>
+</table>
+
+<div class="summary">The bladder is a good example of reciprocal autonomic control: the same organ receives opposing sympathetic and parasympathetic input, with the pons acting as the switchboard that decides whether the bladder stores or empties.</div>
+</section>
+
+<!-- 4 -->
+<section class="topic" id="t4">
+<h2>4. Tissue Distribution of Adrenergic Receptors</h2>
+<p>Adrenergic receptor subtypes are distributed unevenly across tissues, and each subtype produces a different, tissue-specific effect when activated.</p>
+
+<table>
+<caption>Adrenergic Receptor Distribution &amp; Effects</caption>
+<tr><th>Receptor</th><th>Tissue</th><th>Effect(s)</th></tr>
+<tr><td>&alpha;<sub>1</sub></td><td>Vascular smooth muscle<br>Visceral smooth muscle</td><td>Vasoconstriction<br>Smooth muscle contraction</td></tr>
+<tr><td>&alpha;<sub>2</sub></td><td>Pancreas<br>Presynaptic terminals<br>Salivary glands</td><td>Inhibition of insulin secretion<br>Inhibition of neurotransmitter release<br>Inhibition of salivary secretion</td></tr>
+<tr><td>&beta;<sub>1</sub></td><td>Heart<br>Kidney</td><td>Increased heart rate, contractility<br>Increased renin secretion</td></tr>
+<tr><td>&beta;<sub>2</sub></td><td>Bronchioles<br>Cardiac muscle<br>Liver<br>Arterial smooth muscle<br>Pancreas</td><td>Bronchodilation<br>Increased heart rate, contractility<br>Glycogenolysis, glucose release<br>Vasodilation<br>Stimulation of insulin secretion</td></tr>
+<tr><td>&beta;<sub>3</sub></td><td>Adipose tissue</td><td>Increased lipolysis</td></tr>
+</table>
+
+<div class="summary">Note the apparent overlap: both &beta;<sub>1</sub> and &beta;<sub>2</sub> increase heart rate and contractility in cardiac tissue, and both &alpha;<sub>2</sub> and &beta;<sub>2</sub> touch insulin secretion &mdash; but in opposite directions (inhibition vs. stimulation). Tissue context, not just receptor identity, determines the net physiologic effect.</div>
+</section>
+
+<!-- 5 -->
+<section class="topic" id="t5">
+<h2>5. G-Protein-Linked Second Messengers</h2>
+<p>Every adrenergic, cholinergic, and dopamine receptor subtype couples to one of three G-protein classes (G<sub>q</sub>, G<sub>i</sub>, or G<sub>s</sub>), which determines its downstream signaling and, ultimately, its physiologic effect.</p>
+
+<table>
+<caption>Receptor &rarr; G-Protein &rarr; Function</caption>
+<tr><td class="group-header" colspan="3">Adrenergic</td></tr>
+<tr><th>Receptor</th><th>G-protein class</th><th>Major functions</th></tr>
+<tr><td>&alpha;<sub>1</sub></td><td>q</td><td>Increased vascular smooth muscle contraction, increased pupillary dilator muscle contraction (mydriasis), increased intestinal and bladder sphincter muscle contraction</td></tr>
+<tr><td>&alpha;<sub>2</sub></td><td>i</td><td>Decreased sympathetic outflow, decreased insulin release, decreased lipolysis, increased platelet aggregation, decreased aqueous humor production</td></tr>
+<tr><td>&beta;<sub>1</sub></td><td>s</td><td>Increased heart rate, increased contractility (one heart&nbsp;&mdash; one &beta;<sub>1</sub>), increased renin release, increased lipolysis</td></tr>
+<tr><td>&beta;<sub>2</sub></td><td>s</td><td>Vasodilation, bronchodilation (two lungs&nbsp;&mdash; two &beta;<sub>2</sub>), increased insulin release, increased glycogenolysis, decreased uterine tone (tocolysis), increased aqueous humor production, increased cellular K<sup>+</sup> uptake</td></tr>
+<tr><td>&beta;<sub>3</sub></td><td>s</td><td>Increased lipolysis, increased thermogenesis in skeletal muscle, increased bladder relaxation</td></tr>
+<tr><td class="group-header" colspan="3">Cholinergic</td></tr>
+<tr><th>Receptor</th><th>G-protein class</th><th>Major functions</th></tr>
+<tr><td>M<sub>1</sub></td><td>q</td><td>Mediates higher cognitive functions, stimulates the enteric nervous system</td></tr>
+<tr><td>M<sub>2</sub></td><td>i</td><td>Decreased heart rate and contractility of the atria</td></tr>
+<tr><td>M<sub>3</sub></td><td>q</td><td>Increased exocrine gland secretions, gut peristalsis, bladder contraction, bronchoconstriction, vasodilation, increased pupillary sphincter muscle contraction (miosis), ciliary muscle contraction (accommodation)</td></tr>
+<tr><td class="group-header" colspan="3">Dopamine</td></tr>
+<tr><th>Receptor</th><th>G-protein class</th><th>Major functions</th></tr>
+<tr><td>D<sub>1</sub></td><td>s</td><td>Relaxes renal vascular smooth muscle, activates the direct pathway of the striatum</td></tr>
+<tr><td>D<sub>2</sub></td><td>i</td><td>Modulates transmitter release, especially in the brain; inhibits the indirect pathway of the striatum</td></tr>
+</table>
+
+<div class="summary">The mnemonic shorthand many students use ("q hugs i in the middle, i inhibits, s stimulates") reflects a real pattern here: G<sub>q</sub> receptors drive contraction/secretion, G<sub>i</sub> receptors are broadly inhibitory, and G<sub>s</sub> receptors activate adenylyl cyclase to raise cAMP. Notice &beta;<sub>1</sub> and &beta;<sub>2</sub> are both G<sub>s</sub>-coupled &mdash; their differing effects come from which tissue expresses which subtype, not from different signaling machinery.</div>
+</section>
+
+<!-- 6 -->
+<section class="topic" id="t6">
+<h2>6. Autonomic Drugs (Synapse Mechanisms)</h2>
+<p>Cholinergic and noradrenergic synapses each have a dedicated synthesis, storage, release, and reuptake machinery, and this machinery is where many autonomic drugs (and drugs of abuse) act.</p>
+
+<p class="fa-ref">Cholinergic synapse</p>
+<p>Choline and acetyl-CoA are combined by choline acetyltransferase (ChAT) to form acetylcholine, which is packaged into synaptic vesicles. Depolarization triggers Ca<sup>2+</sup> influx, which drives vesicle fusion and ACh release into the synaptic cleft. Botulinum toxin blocks this Ca<sup>2+</sup>-dependent vesicle fusion step, preventing ACh release.</p>
+
+<p class="fa-ref">Noradrenergic synapse</p>
+<p>Tyrosine is converted stepwise to DOPA, then dopamine, then norepinephrine within the presynaptic terminal. The vesicular monoamine transporter (VMAT) packages dopamine/norepinephrine into secretory vesicles; tetrabenazine blocks VMAT. Release of norepinephrine is modulated by presynaptic &alpha;<sub>2</sub>-autoreceptors, which provide negative feedback on further release. After release, norepinephrine is cleared from the synaptic cleft primarily by reuptake through the norepinephrine transporter (NET).</p>
+
+<p class="fa-ref">Amphetamines</p>
+<p>Amphetamines enter the presynaptic terminal through the norepinephrine transporter (NET) and are then taken up into the secretory vesicles by VMAT, displacing stored norepinephrine into the cytoplasm. Once cytoplasmic norepinephrine concentration rises high enough, the direction of NET transport reverses, expelling norepinephrine into the synaptic cleft rather than clearing it &mdash; this reverse-transport mechanism accounts for the elevated synaptic norepinephrine seen with amphetamine use.</p>
+
+<div class="summary">Several major drug targets sit directly in this pathway: ChAT and vesicular ACh packaging (cholinergic side), and tyrosine hydroxylase, VMAT, presynaptic &alpha;<sub>2</sub>-autoreceptors, and NET (noradrenergic side). Recognizing which step a drug acts on (synthesis, packaging, release, reuptake, or autoreceptor feedback) is the fastest way to predict its net effect on synaptic transmitter levels.</div>
+</section>
+
+<!-- 7 -->
+<section class="topic" id="t7">
+<h2>7. Cholinomimetic Agents</h2>
+<p>Cholinomimetics either act directly on cholinergic receptors or indirectly by inhibiting acetylcholinesterase (AChE) to raise synaptic ACh levels. As a class, they warrant caution in patients with COPD, asthma, or peptic ulcer disease, since increased cholinergic tone can worsen bronchoconstriction and acid secretion.</p>
+
+<table>
+<caption>Cholinomimetic Agents</caption>
+<tr><td class="group-header" colspan="3">Direct agonists</td></tr>
+<tr><th>Drug</th><th>Action</th><th>Applications</th></tr>
+<tr><td class="drug">Bethanechol</td><td>Activates bladder smooth muscle; resistant to AChE breakdown; acts on muscarinic receptors with no nicotinic activity</td><td>Urinary retention</td></tr>
+<tr><td class="drug">Carbachol</td><td>Structural analog of ACh that is resistant to AChE breakdown</td><td>Constricts the pupil; used for intraoperative miosis induction</td></tr>
+<tr><td class="drug">Methacholine</td><td>Stimulates muscarinic receptors in the airway when inhaled</td><td>Bronchoprovocation challenge test for diagnosing asthma</td></tr>
+<tr><td class="drug">Pilocarpine</td><td>Contracts the ciliary muscle of the eye (used in open-angle glaucoma) and the pupillary sphincter (used in closed-angle glaucoma); resistant to AChE and able to cross the blood-brain barrier</td><td>Potent stimulator of sweat, tears, and saliva; open-angle and closed-angle glaucoma; xerostomia (e.g., in Sj&ouml;gren syndrome)</td></tr>
+<tr><td class="group-header" colspan="3">Indirect agonists (acetylcholinesterase inhibitors)</td></tr>
+<tr><th>Drug</th><th>Action</th><th>Applications</th></tr>
+<tr><td class="drug">Donepezil, rivastigmine, galantamine</td><td>Increase synaptic ACh by inhibiting AChE</td><td>First-line treatment for Alzheimer disease</td></tr>
+</table>
+
+<div class="summary">Direct agonists are chosen for their receptor selectivity and resistance to breakdown (bladder, eye, airway-challenge, and secretory applications), while the indirect AChE inhibitors listed here are grouped together for a single major indication: symptomatic treatment of Alzheimer disease by boosting central cholinergic tone.</div>
+</section>
+
+<!-- 8 -->
+<section class="topic" id="t8">
+<h2>8. Anticholinesterase Poisoning</h2>
+<p>Anticholinesterase poisoning most often results from organophosphate exposure (e.g., fenthion, parathion, malathion), compounds that irreversibly inhibit acetylcholinesterase. Organophosphates are common insecticide ingredients, so this poisoning is classically seen in agricultural workers.</p>
+
+<table>
+<caption>Clinical Effects &amp; Reversal</caption>
+<tr><th>Category</th><th>Findings / mechanism</th><th>Management</th></tr>
+<tr><td>Muscarinic effects</td><td>Diarrhea, urination, miosis, bronchospasm/bronchorrhea, bradycardia, emesis, lacrimation, sweating, salivation &mdash; the classic muscarinic excess picture</td><td>Reversed by atropine, a competitive muscarinic antagonist; atropine crosses the blood-brain barrier and also relieves CNS symptoms</td></tr>
+<tr><td>Nicotinic effects</td><td>Neuromuscular blockade, mechanistically similar to that seen with succinylcholine</td><td>Reversed by pralidoxime, which regenerates AChE via dephosphorylation if given early; must be co-administered with atropine, since pralidoxime alone can transiently worsen muscarinic symptoms; pralidoxime does not readily cross the blood-brain barrier</td></tr>
+<tr><td>CNS effects</td><td>Respiratory depression, lethargy, seizures, coma</td><td>Addressed by the combination of atropine (crosses BBB) and supportive care; pralidoxime has minimal CNS effect</td></tr>
+</table>
+
+<div class="summary">The two antidotes have complementary jobs: atropine blocks the muscarinic (and CNS) consequences of excess ACh, while pralidoxime attacks the underlying enzyme problem to relieve nicotinic neuromuscular blockade &mdash; which is why both are given together rather than either alone.</div>
+</section>
+
+<!-- 9 -->
+<section class="topic" id="t9">
+<h2>9. Muscarinic Antagonists</h2>
+<p>Muscarinic antagonists are grouped here by the organ system they target, since most of these drugs are used specifically for their site-selective effects rather than as systemic anticholinergics.</p>
+
+<table>
+<caption>Muscarinic Antagonists by Organ System</caption>
+<tr><th>Drug(s)</th><th>Organ system</th><th>Applications</th></tr>
+<tr><td class="drug">Atropine, homatropine, tropicamide</td><td>Eye</td><td>Produce mydriasis and cycloplegia</td></tr>
+<tr><td class="drug">Benztropine, trihexyphenidyl</td><td>CNS</td><td>Parkinson disease; acute dystonia</td></tr>
+<tr><td class="drug">Glycopyrrolate</td><td>GI, respiratory</td><td>Parenteral: preoperative use to reduce airway secretions. Oral: reduces drooling; peptic ulcer disease</td></tr>
+<tr><td class="drug">Hyoscyamine, dicyclomine</td><td>GI</td><td>Antispasmodics for irritable bowel syndrome</td></tr>
+<tr><td class="drug">Ipratropium, tiotropium</td><td>Respiratory</td><td>COPD, asthma (duration of action: tiotropium &gt; ipratropium)</td></tr>
+<tr><td class="drug">Solifenacin, oxybutynin, flavoxate, tolterodine</td><td>Genitourinary</td><td>Reduce bladder spasms and urge urinary incontinence (overactive bladder)</td></tr>
+<tr><td class="drug">Scopolamine</td><td>CNS</td><td>Motion sickness</td></tr>
+</table>
+
+<div class="summary">Nearly every organ with parasympathetic tone has a dedicated antimuscarinic: eye (mydriatics), CNS (movement-disorder agents), airway (bronchodilators/secretion-reducers), gut (antispasmodics), and bladder (antispasmodics for overactive bladder). Grouping by organ system, rather than by drug name, is usually the faster way to recall which agent fits which clinical scenario.</div>
+</section>
+
+<!-- 10 -->
+<section class="topic" id="t10">
+<h2>10. Atropine</h2>
+<p>Atropine is a prototypical muscarinic antagonist, used clinically to treat bradycardia and for various ophthalmic indications, and its adverse-effect profile follows directly from blocking muscarinic tone throughout the body.</p>
+
+<table>
+<caption>Atropine: Organ Effects</caption>
+<tr><th>Organ system</th><th>Action</th><th>Notes</th></tr>
+<tr><td>Eye</td><td>Increased pupil dilation, cycloplegia</td><td rowspan="6">Blocks the muscarinic effects of anticholinesterase poisoning, but not the nicotinic effects</td></tr>
+<tr><td>Airway</td><td>Bronchodilation, decreased secretions</td></tr>
+<tr><td>Heart</td><td>Increased heart rate</td></tr>
+<tr><td>Stomach</td><td>Decreased acid secretion</td></tr>
+<tr><td>Gut</td><td>Decreased motility</td></tr>
+<tr><td>Bladder</td><td>Decreased urgency in cystitis</td></tr>
+</table>
+
+<p class="fa-ref">Adverse effects</p>
+<ul class="plain">
+<li>Increased body temperature (due to decreased sweating), increased heart rate, dry mouth, dry and flushed skin, cycloplegia, constipation, disorientation</li>
+<li>Can precipitate acute angle-closure glaucoma in older adults (due to mydriasis), urinary retention in men with prostatic hyperplasia, and hyperthermia in infants</li>
+<li>Jimson weed (<em>Datura</em>) ingestion produces marked mydriasis, sometimes called a "gardener's pupil"</li>
+</ul>
+
+<div class="summary">Atropine's adverse effects are simply an extension of its mechanism: block muscarinic receptors everywhere, and you get dry secretions, tachycardia, urinary retention, constipation, mydriasis, and impaired sweating with resulting hyperthermia &mdash; particularly dangerous at the extremes of age.</div>
+</section>
+
+<!-- 11 -->
+<section class="topic" id="t11">
+<h2>11. Sympathomimetics</h2>
+<p>Direct sympathomimetics act on adrenergic and/or dopamine receptors with varying selectivity, and that selectivity profile predicts both their hemodynamic effects and their clinical use.</p>
+
+<table>
+<caption>Direct Sympathomimetics</caption>
+<tr><th>Drug</th><th>Receptor site</th><th>Hemodynamic changes</th><th>Applications</th></tr>
+<tr><td class="drug">Albuterol, salmeterol, terbutaline</td><td>&beta;<sub>2</sub> &gt; &beta;<sub>1</sub></td><td>Increased heart rate (minimal effect)</td><td>Albuterol for acute asthma/COPD; salmeterol for long-term (chronic) asthma/COPD control; terbutaline for acute bronchospasm in asthma and for tocolysis</td></tr>
+<tr><td class="drug">Dobutamine</td><td>&beta;<sub>1</sub> &gt; &beta;<sub>2</sub>, &alpha;</td><td>Minimal blood pressure change, increased heart rate, increased cardiac output</td><td>Cardiac stress testing; acute decompensated heart failure with cardiogenic shock (inotropic support)</td></tr>
+<tr><td class="drug">Dopamine</td><td>D<sub>1</sub> = D<sub>2</sub> &gt; &beta; &gt; &alpha;</td><td>Increased blood pressure (high dose), increased heart rate, increased cardiac output</td><td>Unstable bradycardia, shock; inotropic and chronotropic effects at lower doses via &beta; receptors, vasoconstriction at higher doses via &alpha; receptors</td></tr>
+<tr><td class="drug">Epinephrine</td><td>&beta; &gt; &alpha;</td><td>Increased blood pressure (high dose), increased heart rate, increased cardiac output</td><td>Anaphylaxis, asthma, shock, open-angle glaucoma; &alpha; effects predominate at high doses; produces a stronger &beta;<sub>2</sub> effect than norepinephrine</td></tr>
+<tr><td class="drug">Fenoldopam</td><td>D<sub>1</sub></td><td>Decreased blood pressure (vasodilation), increased heart rate, increased cardiac output</td><td>Postoperative hypertension, hypertensive crisis; vasodilator of coronary, peripheral, renal, and splanchnic beds; promotes natriuresis; can cause hypotension, tachycardia, flushing, headache</td></tr>
+<tr><td class="drug">Isoproterenol</td><td>&beta;<sub>1</sub> = &beta;<sub>2</sub></td><td>Decreased blood pressure (vasodilation), increased heart rate</td><td>Electrophysiologic evaluation of tachyarrhythmias</td></tr>
+</table>
+
+<div class="summary">Receptor selectivity is the organizing principle: predominantly &beta;<sub>2</sub> agents relax airway and uterine smooth muscle; predominantly &beta;<sub>1</sub> agents boost cardiac output for shock and stress testing; dopamine's effect shifts from D<sub>1</sub>/D<sub>2</sub> at low dose toward &alpha;-mediated vasoconstriction at high dose; and epinephrine's mixed &alpha;/&beta; profile makes it the default choice in anaphylaxis, where both bronchodilation and vasoconstriction are needed.</div>
+</section>
+
+<!-- 12 -->
+<section class="topic" id="t12">
+<h2>12. Physiologic Effects of Sympathomimetics</h2>
+<p>The net hemodynamic effect of a sympathomimetic depends on its relative &alpha; versus &beta; activity, and reflex autonomic responses can partially offset the drug's direct effect.</p>
+
+<p>Norepinephrine (&alpha; &gt; &beta;) raises both systolic and diastolic blood pressure through &alpha;<sub>1</sub>-mediated vasoconstriction. The resulting rise in mean arterial pressure triggers a baroreceptor-mediated reflex bradycardia. Isoproterenol, in contrast, has little &alpha; activity but produces &beta;<sub>2</sub>-mediated vasodilation; this lowers mean arterial pressure and produces a reflex (and direct &beta;<sub>1</sub>) increase in heart rate.</p>
+
+<table>
+<caption>Comparative Hemodynamic Profile</caption>
+<tr><th>Drug</th><th>Blood pressure pattern</th><th>Heart rate pattern</th><th>Peripheral (vascular) resistance</th></tr>
+<tr><td>Norepinephrine (&alpha; &gt; &beta;)</td><td>Increased systolic and diastolic pressure; widened pulse pressure from unopposed &alpha;<sub>1</sub> vasoconstriction</td><td>Reflex bradycardia (baroreceptor response to elevated pressure)</td><td>Increased (unopposed &alpha;<sub>1</sub> vasoconstriction)</td></tr>
+<tr><td>Epinephrine (&beta; &gt; &alpha;)</td><td>Increased systolic pressure; diastolic pressure changes little or falls slightly, since &beta;<sub>2</sub> vasodilation partially offsets &alpha;<sub>1</sub> effects</td><td>Increased (direct &beta;<sub>1</sub> stimulation)</td><td>Initially decreased at &beta;<sub>2</sub>-predominant doses; increased at high, &alpha;<sub>1</sub>-predominant doses</td></tr>
+<tr><td>Isoproterenol (&beta;<sub>1</sub> &asymp; &beta;<sub>2</sub>)</td><td>Decreased blood pressure overall (vasodilation predominates, negligible &alpha; activity)</td><td>Increased (direct &beta;<sub>1</sub> effect plus reflex tachycardia)</td><td>Decreased (unopposed &beta;<sub>2</sub> vasodilation)</td></tr>
+</table>
+
+<div class="summary">This is a good test of whether you actually understand receptor selectivity rather than just memorizing drug names: predict the direction of the blood-pressure and heart-rate change from the &alpha;:&beta; ratio alone, then check whether a reflex response (bradycardia if pressure rises, tachycardia if pressure falls) would blunt or exaggerate the direct effect.</div>
+</section>
+
+<!-- 13 -->
+<section class="topic" id="t13">
+<h2>13. Sympatholytics (&alpha;2-Agonists)</h2>
+<p>Centrally acting &alpha;<sub>2</sub>-agonists reduce sympathetic outflow from the CNS, which explains both their blood-pressure-lowering effect and their sedating/CNS-depressant side-effect profile.</p>
+
+<table>
+<caption>&alpha;2-Agonist Sympatholytics</caption>
+<tr><th>Drug</th><th>Applications</th><th>Adverse effects</th></tr>
+<tr><td class="drug">Clonidine, guanfacine</td><td>Hypertensive urgency (limited situations), ADHD, Tourette syndrome, symptom control during opioid withdrawal</td><td>CNS depression, bradycardia, hypotension, respiratory depression, miosis, rebound hypertension with abrupt discontinuation</td></tr>
+<tr><td class="drug">&alpha;-Methyldopa</td><td>Hypertension in pregnancy</td><td>Direct Coombs-positive hemolysis, drug-induced lupus, hyperprolactinemia</td></tr>
+<tr><td class="drug">Tizanidine</td><td>Relief of spasticity</td><td>Hypotension, weakness, xerostomia</td></tr>
+</table>
+
+<div class="summary">These three agents share a mechanism (central &alpha;<sub>2</sub> agonism &rarr; decreased sympathetic outflow) but have quite different niche indications &mdash; opioid withdrawal and behavioral disorders for clonidine/guanfacine, pregnancy-safe antihypertension for methyldopa, and spasticity for tizanidine &mdash; and abrupt clonidine discontinuation is a classic cause of rebound hypertension.</div>
+</section>
+
+<!-- 14 -->
+<section class="topic" id="t14">
+<h2>14. &alpha;-Blockers</h2>
+<p>Alpha-blockers are organized by selectivity: nonselective agents block both &alpha;<sub>1</sub> and &alpha;<sub>2</sub>, while selective agents target just one subtype, and this selectivity shapes both their use and their adverse-effect profile.</p>
+
+<table>
+<caption>&alpha;-Blockers by Selectivity</caption>
+<tr><td class="group-header" colspan="3">Nonselective</td></tr>
+<tr><th>Drug</th><th>Applications</th><th>Adverse effects</th></tr>
+<tr><td class="drug">Phenoxybenzamine</td><td>Irreversible antagonist; used preoperatively in pheochromocytoma to prevent catecholamine (hypertensive) crisis</td><td rowspan="2">Orthostatic hypotension, reflex tachycardia</td></tr>
+<tr><td class="drug">Phentolamine</td><td>Reversible antagonist; given to patients on MAO inhibitors who have ingested tyramine-containing foods, and as second-line treatment for severe cocaine-induced hypertension; also used to treat norepinephrine extravasation</td></tr>
+<tr><td class="group-header" colspan="3">&alpha;1-selective (&ldquo;-osin&rdquo; ending)</td></tr>
+<tr><th>Drug</th><th>Applications</th><th>Adverse effects</th></tr>
+<tr><td class="drug">Prazosin, terazosin, doxazosin, tamsulosin</td><td>Urinary symptoms of BPH; PTSD (prazosin specifically); hypertension (all except tamsulosin)</td><td>First-dose orthostatic hypotension, dizziness, headache</td></tr>
+<tr><td class="group-header" colspan="3">&alpha;2-selective</td></tr>
+<tr><th>Drug</th><th>Applications</th><th>Adverse effects</th></tr>
+<tr><td class="drug">Mirtazapine</td><td>Depression</td><td>Sedation, increased serum cholesterol, increased appetite</td></tr>
+</table>
+
+<div class="summary">Nonselective &alpha;-blockade unmasks reflex tachycardia because presynaptic &alpha;<sub>2</sub> autoreceptor blockade increases norepinephrine release, which is why phenoxybenzamine and phentolamine both cause it; the &alpha;<sub>1</sub>-selective "-osin" drugs spare that autoreceptor, so they're better tolerated for chronic BPH/hypertension use; and mirtazapine is really an antidepressant whose &alpha;<sub>2</sub>-blocking action explains its distinctive side-effect pattern rather than its primary indication.</div>
+</section>
+
+<!-- 15 -->
+<section class="topic" id="t15">
+<h2>15. &szlig;-Blockers</h2>
+<p>Beta-blockers (atenolol, betaxolol, bisoprolol, carvedilol, esmolol, labetalol, metoprolol, nadolol, nebivolol, propranolol, timolol) share a core mechanism &mdash; blunting &beta;-adrenergic drive &mdash; that gets applied across a strikingly wide range of clinical problems.</p>
+
+<table>
+<caption>&szlig;-Blocker Applications</caption>
+<tr><th>Application</th><th>Actions</th><th>Notes / examples</th></tr>
+<tr><td>Angina pectoris</td><td>Decreased heart rate and contractility &rarr; decreased myocardial O<sub>2</sub> consumption</td><td></td></tr>
+<tr><td>Glaucoma</td><td>Decreased production of aqueous humor</td><td>Timolol</td></tr>
+<tr><td>Heart failure</td><td>Blockade of neurohormonal (sympathetic) stress on the heart &rarr; prevention of deleterious cardiac remodeling &rarr; decreased mortality</td><td>Bisoprolol, carvedilol, metoprolol are the agents shown to reduce mortality in heart failure</td></tr>
+<tr><td>Hypertension</td><td>Decreased cardiac output, decreased renin secretion (via &beta;<sub>1</sub>-receptor blockade on juxtaglomerular cells)</td><td></td></tr>
+<tr><td>Hyperthyroidism / thyroid storm</td><td>Symptom control &mdash; decreased heart rate, decreased tremor</td><td>Propranolol</td></tr>
+<tr><td>Hypertrophic cardiomyopathy</td><td>Decreased heart rate &rarr; increased diastolic filling time, relieving outflow obstruction</td><td></td></tr>
+<tr><td>Migraine</td><td>Decreased nitric oxide production</td><td>Effective for prophylaxis</td></tr>
+<tr><td>Myocardial infarction</td><td>Decreased O<sub>2</sub> demand (short-term benefit), decreased mortality (long-term benefit)</td><td></td></tr>
+<tr><td>Supraventricular tachycardia</td><td>Decreased AV nodal conduction velocity (Class II antiarrhythmic effect)</td><td>Metoprolol, esmolol</td></tr>
+<tr><td>Variceal bleeding</td><td>Decreased hepatic venous pressure gradient and portal pressure, reducing rebleeding risk</td><td>Nadolol, propranolol, carvedilol used for prevention in portal hypertension</td></tr>
+</table>
+
+<div class="summary">Beta-blockade is a single mechanism with strikingly broad reach: the same blunting of sympathetic drive that helps angina and hypertension also lowers portal pressure in cirrhosis, reduces tremor in thyroid storm, and even helps prevent migraines &mdash; a good reminder that a receptor's tissue distribution (heart, kidney, liver vasculature, ciliary body) is what turns one mechanism into many indications.</div>
+</section>
+
+<!-- 16 -->
+<section class="topic" id="t16">
+<h2>16. Phosphodiesterase Inhibitors</h2>
+<p>Phosphodiesterase (PDE) enzymes normally break down cAMP and/or cGMP; inhibiting a given PDE isoform raises the corresponding second messenger in the tissues where that isoform predominates, and different inhibitors are selective for different isoforms.</p>
+
+<table>
+<caption>PDE Inhibitors by Isoform Selectivity</caption>
+<tr><th>Type of inhibitor</th><th>Mechanism of action</th><th>Clinical uses</th><th>Adverse effects</th></tr>
+<tr><td>Nonspecific PDE inhibitor<br><span class="drug">Theophylline</span></td><td>Decreased cAMP hydrolysis &rarr; increased cAMP &rarr; bronchial smooth muscle relaxation &rarr; bronchodilation</td><td>COPD/asthma (rarely used today)</td><td>Cardiotoxicity (e.g., tachycardia, arrhythmia), neurotoxicity (e.g., seizures, headache), abdominal pain</td></tr>
+<tr><td>PDE-5 inhibitors<br><span class="drug">Sildenafil, vardenafil, tadalafil, avanafil</span></td><td>Decreased hydrolysis of cGMP &rarr; increased cGMP &rarr; smooth muscle relaxation via enhanced nitric oxide activity &rarr; pulmonary vasodilation and increased blood flow into the corpus cavernosum</td><td>Erectile dysfunction, pulmonary hypertension, benign prostatic hyperplasia (tadalafil specifically)</td><td>Facial flushing, headache, dyspepsia, hypotension in patients also taking nitrates; sildenafil specifically can cause blue-tinted vision (cyanopsia) via inhibition of retinal PDE-6</td></tr>
+<tr><td>PDE-4 inhibitor<br><span class="drug">Roflumilast</span></td><td>Increased cAMP in neutrophils, granulocytes, and bronchial epithelium</td><td>Severe COPD</td><td>Abdominal pain, weight loss, depression, anxiety, insomnia</td></tr>
+<tr><td>PDE-3 inhibitor<br><span class="drug">Milrinone</span></td><td>In cardiomyocytes: increased cAMP &rarr; increased Ca<sup>2+</sup> influx &rarr; increased inotropy and chronotropy</td><td>Acute decompensated heart failure with cardiogenic shock (inotropic support)</td><td>Tachycardia, ventricular arrhythmias, hypotension</td></tr>
+</table>
+
+<div class="summary">Each PDE isoform's tissue distribution explains its inhibitor's use: PDE-5 is enriched in vascular and corpus cavernosum smooth muscle (erectile dysfunction, pulmonary hypertension), PDE-3 is prominent in cardiac myocytes (inotropic support in heart failure), PDE-4 predominates in inflammatory and airway cells (COPD), and nonspecific inhibition (theophylline) hits bronchial smooth muscle but comes with the broadest, least tolerable side-effect profile.</div>
+</section>
+
+</main>
+
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('main').classList.toggle('expanded');
+  document.getElementById('sb-toggle').classList.toggle('collapsed');
+}
+
+const links = document.querySelectorAll('.sb-link');
+const sections = document.querySelectorAll('section.topic');
+
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById(link.dataset.target).scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector('.sb-link[data-target="' + entry.target.id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
