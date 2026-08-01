@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Biostats Study Material</title>
+<style>
+  :root {
+    --cream: #f4f1ea;
+    --ink: #1f2320;
+    --muted: #767b70;
+    --green: #3d6b5c;
+    --green-dark: #2a4c41;
+    --sage-bg: #e3ede6;
+    --sage-border: #b9d0c2;
+    --thead-bg: #d9e6de;
+    --row-alt: #ebe8df;
+    --border: #d8d4c8;
+    --wrong: #b3432b;
+    --wrong-bg: #fbeae5;
+    --right-bg: #e6f2ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Georgia, 'Iowan Old Style', serif;
+    font-size: 0.95rem;
+    line-height: 1.62;
+  }
+  a { color: var(--green); }
+
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 290px;
+    background: var(--cream);
+    border-right: 2px solid var(--ink);
+    overflow-y: auto;
+    padding: 20px 0 40px 0;
+    transition: transform 0.25s ease;
+    z-index: 20;
+  }
+  #sidebar.collapsed { transform: translateX(-290px); }
+  #sidebar .sb-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 0 22px 10px 22px;
+    text-transform: uppercase;
+  }
+  .sb-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    color: var(--ink);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 9px 22px;
+    cursor: pointer;
+    line-height: 1.35;
+  }
+  .sb-link:hover { background: var(--sage-bg); }
+  .sb-link.active {
+    background: var(--sage-bg);
+    border-left: 3px solid var(--green);
+    color: var(--green-dark);
+    font-weight: bold;
+  }
+  .sb-num { display:inline-block; width: 22px; color: var(--muted); }
+
+  #sb-toggle {
+    position: fixed;
+    top: 18px;
+    left: 302px;
+    z-index: 30;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: left 0.25s ease;
+  }
+  #sb-toggle.collapsed { left: 18px; }
+
+  #back-btn {
+    position: fixed;
+    top: 18px;
+    left: 430px;
+    z-index: 30;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: left 0.25s ease;
+  }
+  #back-btn.collapsed { left: 145px; }
+  #back-btn:hover { background: var(--sage-border); }
+
+  #pdf-btn {
+    position: fixed;
+    top: 18px;
+    right: 24px;
+    z-index: 30;
+    background: var(--green-dark);
+    border: none;
+    border-radius: 4px;
+    color: #fdfcf9;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 9px 16px;
+    cursor: pointer;
+  }
+  #pdf-btn:hover { background: var(--green); }
+
+  #main {
+    margin-left: 290px;
+    padding: 60px 60px 100px 60px;
+    max-width: 900px;
+    transition: margin-left 0.25s ease;
+  }
+  #main.expanded { margin-left: 0; }
+
+  h1.doc-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+  }
+  .doc-subtitle { color: var(--muted); font-size: 0.88rem; margin-bottom: 22px; }
+  .divider { border: none; border-top: 3px solid var(--ink); margin: 24px 0 30px 0; }
+  .toc-label { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+  ol.toc { padding-left: 22px; margin-bottom: 50px; }
+  ol.toc li { margin-bottom: 8px; }
+  ol.toc a { color: var(--green-dark); text-decoration: none; border-bottom: 1px dotted var(--green-dark); }
+  ol.toc a:hover { color: var(--green); }
+
+  section.topic { margin-bottom: 56px; padding-top: 10px; scroll-margin-top: 20px; }
+  section.topic h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.45rem;
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  section.topic p { margin: 0 0 14px 0; }
+
+  .keypoint {
+    background: var(--sage-bg);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  .disclaimer {
+    background: var(--row-alt);
+    border-left: 4px solid var(--muted);
+    padding: 12px 16px;
+    margin: 0 0 20px 0;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .formula-line {
+    display: block;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin: 14px 0;
+    font-size: 0.92rem;
+  }
+  .worked-example {
+    background: #fff;
+    border: 1px solid var(--sage-border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  .worked-example .we-label {
+    font-weight: bold;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 22px 0; font-size: 0.83rem; }
+  caption { text-align:left; font-size:0.75rem; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; caption-side: top; }
+  th, td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--thead-bg); color: var(--green-dark); font-weight: bold; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.04em; }
+  tr:nth-child(even) td { background: var(--row-alt); }
+
+  ul.plain { margin: 6px 0 14px 0; padding-left: 20px; }
+  ul.plain li { margin-bottom: 4px; }
+
+  .pq-block { margin-top: 30px; border-top: 1px solid var(--border); padding-top: 18px; }
+  .pq-block > .pq-title { font-weight: bold; color: var(--green-dark); margin-bottom: 14px; font-size: 0.95rem; }
+  .mcq { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-bottom: 14px; }
+  .mcq .stem { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.5; }
+  .mcq .choice {
+    display: block; width: 100%; text-align: left; background: #f7f6f2;
+    border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; margin-bottom: 6px;
+    font-family: inherit; font-size: 0.84rem; cursor: pointer; color: var(--ink);
+  }
+  .mcq .choice:hover { background: #ececE5; }
+  .mcq .choice.correct { background: var(--right-bg); border-color: var(--green); font-weight: bold; }
+  .mcq .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .mcq .choice.disabled { cursor: default; }
+  .mcq .feedback { font-size: 0.83rem; margin-top: 10px; padding: 10px 12px; border-radius: 4px; display: none; line-height: 1.45; }
+  .mcq .feedback.show { display: block; }
+  .mcq .feedback.right { background: var(--right-bg); color: #1c3a2e; }
+  .mcq .feedback.wrong { background: var(--wrong-bg); color: #6b2416; }
+
+  @media print {
+    #sidebar, #sb-toggle, #pdf-btn, #back-btn { display: none; }
+    #main { margin-left: 0; padding: 20px; max-width: 100%; }
+    section.topic { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-290px); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; padding: 60px 24px 80px 24px; }
+    #sb-toggle { left: 18px; }
+    #back-btn { left: 145px; }
+    #pdf-btn { right: 18px; top: 68px; }
+  }
+</style>
+</head>
+<body>
+
+<button id="sb-toggle" onclick="toggleSidebar()">&#9776; Sections</button>
+<a id="back-btn" href="index.html">&larr; Back to Study Guides</a>
+<button id="pdf-btn" onclick="window.print()">&#8681; Download PDF</button>
+
+<nav id="sidebar">
+  <div class="sb-label">Sections</div>
+  <button class="sb-link" data-target="t1"><span class="sb-num">1</span>Population, Sample &amp; Parameter Estimates</button>
+  <button class="sb-link" data-target="t2"><span class="sb-num">2</span>Incidence &amp; Prevalence</button>
+  <button class="sb-link" data-target="t3"><span class="sb-num">3</span>Probability &amp; Distributions</button>
+  <button class="sb-link" data-target="t4"><span class="sb-num">4</span>Error, Power &amp; Margin of Error</button>
+  <button class="sb-link" data-target="t5"><span class="sb-num">5</span>Sensitivity &amp; Specificity</button>
+  <button class="sb-link" data-target="t6"><span class="sb-num">6</span>Bias, Confounding, Randomization &amp; Blinding</button>
+  <button class="sb-link" data-target="t7"><span class="sb-num">7</span>Study Designs</button>
+  <button class="sb-link" data-target="t8"><span class="sb-num">8</span>Types of Variables</button>
+  <button class="sb-link" data-target="t9"><span class="sb-num">9</span>Hypothesis Testing, P-Values &amp; Confidence Intervals</button>
+  <button class="sb-link" data-target="t10"><span class="sb-num">10</span>Contingency Tables: Risk, OR &amp; RR</button>
+  <button class="sb-link" data-target="t11"><span class="sb-num">11</span>Chi-Square, Causality &amp; Significance</button>
+</nav>
+
+<main id="main">
+
+<h1 class="doc-title">Biostats Study Material</h1>
+<div class="doc-subtitle">Built from Dr. Isain Zapata's "Statistics in Medicine" Session 1 lecture (RVU, July 28, 2026) &mdash; OMS2 exam review</div>
+
+<div class="disclaimer">This material was Claude generated and answered based on the learning objectives given but not on the actual lecture.</div>
+
+<hr class="divider">
+
+<div class="toc-label">CONTENTS</div>
+<ol class="toc">
+  <li><a href="#t1">Population, Sample &amp; Parameter Estimates</a></li>
+  <li><a href="#t2">Incidence &amp; Prevalence</a></li>
+  <li><a href="#t3">Probability &amp; Distributions</a></li>
+  <li><a href="#t4">Error, Power &amp; Margin of Error</a></li>
+  <li><a href="#t5">Sensitivity &amp; Specificity</a></li>
+  <li><a href="#t6">Bias, Confounding, Randomization &amp; Blinding</a></li>
+  <li><a href="#t7">Study Designs</a></li>
+  <li><a href="#t8">Types of Variables</a></li>
+  <li><a href="#t9">Hypothesis Testing, P-Values &amp; Confidence Intervals</a></li>
+  <li><a href="#t10">Contingency Tables: Risk, OR &amp; RR</a></li>
+  <li><a href="#t11">Chi-Square, Causality &amp; Significance</a></li>
+</ol>
+
+<!-- 1 -->
+<section class="topic" id="t1">
+<h2>1. Population, Sample &amp; Parameter Estimates</h2>
+<p>A <strong>population</strong> is "the whole" &mdash; the complete group you actually care about. A <strong>sample</strong> is a part of that population. A <strong>parameter</strong> is a numerical characteristic of the population itself, while a value calculated from a sample is a <strong>parameter estimate</strong> &mdash; an approximation of the true parameter.</p>
+
+<div class="keypoint">We very rarely have population-wide data, so we rely on samples and use them to calculate parameter estimates that approximate the true (usually unknown) population parameters.</div>
+
+<p>Subpopulations may exist within a population. A <strong>representative sample</strong> reflects the subpopulation proportions observed in the general population &mdash; if it doesn't, conclusions drawn from it may not generalize back to the population.</p>
+
+<table>
+<caption>Population vs. Sample</caption>
+<tr><th>Population</th><th>Sample</th></tr>
+<tr><td>"The whole"</td><td>A part of "the whole"</td></tr>
+<tr><td>Subpopulations may exist</td><td>A representative sample reflects those subpopulation proportions</td></tr>
+<tr><td>Described by Parameters</td><td>Described by Parameter Estimates</td></tr>
+</table>
+
+<div class="pq-block" id="pq-t1"></div>
+</section>
+
+<!-- 2 -->
+<section class="topic" id="t2">
+<h2>2. Incidence &amp; Prevalence</h2>
+<table>
+<caption>Epidemiological Concepts for Populations</caption>
+<tr><th>Incidence</th><th>Prevalence</th></tr>
+<tr><td>Measures new cases</td><td>Measures all existing cases</td></tr>
+<tr><td>Reflects the risk of developing disease</td><td>Reflects the burden of disease</td></tr>
+<tr><td>Includes only people who become ill during a specified period</td><td>Includes everyone currently living with the disease</td></tr>
+</table>
+
+<div class="worked-example">
+<span class="we-label">Worked example (from lecture)</span>
+Suppose a town with 1,000 people.<br><br>
+At the beginning of the year, 50 people already have diabetes:<br>
+Prevalence = 50 / 1,000 = <strong>5%</strong><br><br>
+During the year, 20 additional people are newly diagnosed. Only the 950 people who were initially disease-free are at risk (you cannot get diabetes two times):<br>
+Incidence = 20 / 950 = <strong>2.1%</strong><br><br>
+At the beginning of the next year, there are 70 people with diabetes (50 original + 20 new):<br>
+Prevalence = 70 / 1,000 = <strong>7%</strong>
+</div>
+
+<div class="keypoint">Notice the denominator difference: prevalence is measured against the <em>total</em> population, while incidence is measured only against the population still <em>at risk</em> (i.e., excluding existing cases who can't become "new" cases again).</div>
+
+<div class="pq-block" id="pq-t2"></div>
+</section>
+
+<!-- 3 -->
+<section class="topic" id="t3">
+<h2>3. Probability &amp; Distributions</h2>
+<p><strong>Probability</strong> is the likelihood that an event will occur &mdash; in other words, how likely some event is to happen based on previous experience. Probability incorporates error.</p>
+
+<p>A population's parameters have variability, and that variability follows a <strong>probability distribution</strong>. The Normal distribution is the most popular, but others exist depending on the type of data:</p>
+<ul class="plain">
+<li><strong>Binomial</strong> &mdash; e.g., a coin toss</li>
+<li><strong>Multinomial</strong> &mdash; e.g., a dice toss</li>
+<li><strong>Poisson</strong> &mdash; e.g., counts</li>
+</ul>
+
+<div class="keypoint">Important points about probability, per lecture: we can modify the conditions that change the likelihood of an event, but once those conditions are set, the event itself is out of our control. There is no good luck or bad luck, karma does not exist, and wishing hard does not change the likelihood of an event. Humans also tend to be poor at weighing the conditions that determine an event's likelihood based on experience alone.</div>
+
+<div class="pq-block" id="pq-t3"></div>
+</section>
+
+<!-- 4 -->
+<section class="topic" id="t4">
+<h2>4. Error, Power &amp; Margin of Error</h2>
+<p><strong>Error</strong>, in statistics, is the difference between the value we estimated and the true value. We very rarely know the true value. Sample estimates carry error &mdash; specifically <strong>sampling error</strong> &mdash; and the <strong>margin of error</strong> shrinks gradually as sample size increases (the estimate becomes closer to the true population value).</p>
+
+<p>Sampling error and measurement error are related but distinct: sampling error occurs because a sample is missing some part of the population, while measurement error occurs because our measuring methods themselves have error.</p>
+
+<table>
+<caption>Types of Error (Hypothesis Testing)</caption>
+<tr><th></th><th>H<sub>0</sub> True</th><th>H<sub>0</sub> False</th></tr>
+<tr><td>Reject H<sub>0</sub></td><td>Type I Error (false positive) &mdash; probability = &alpha;</td><td>Correct decision (true positive)</td></tr>
+<tr><td>Fail to reject H<sub>0</sub></td><td>Correct decision (true negative)</td><td>Type II Error (false negative) &mdash; probability = &beta;</td></tr>
+</table>
+
+<div class="keypoint">Consequences of each error type: what is worse, a false positive or a false negative? In the real world, it all depends on what is at stake and what your liability is &mdash; there is no universally "worse" error, only context-dependent tradeoffs.</div>
+
+<p>Estimating the margin of error for a future study is called a <strong>power calculation</strong>. Note the lecture's specific labeling convention: power (the probability of avoiding a Type II error / correctly detecting a true effect) is denoted "&beta;" in this framework, tied directly to the margin of error shrinking as sample size grows.</p>
+
+<div class="formula-line">To perform a power calculation, you need to know: significance level (&alpha;), sample size, effect size, and the distribution being used.</div>
+
+<div class="pq-block" id="pq-t4"></div>
+</section>
+
+<!-- 5 -->
+<section class="topic" id="t5">
+<h2>5. Sensitivity &amp; Specificity</h2>
+<p><strong>Sensitivity</strong>: how good is the test at finding people who have the disease? <strong>Specificity</strong>: how good is the test at ruling out people who do not have the disease?</p>
+
+<table>
+<caption>General 2&times;2 Table</caption>
+<tr><th></th><th>Disease +</th><th>Disease &minus;</th><th>Total</th></tr>
+<tr><td>Test +</td><td>TP</td><td>FP</td><td>TP + FP</td></tr>
+<tr><td>Test &minus;</td><td>FN</td><td>TN</td><td>FN + TN</td></tr>
+<tr><td>Total</td><td>TP + FN</td><td>FP + TN</td><td>N</td></tr>
+</table>
+
+<span class="formula-line">Sensitivity = TP / (TP + FN)</span>
+<span class="formula-line">Specificity = TN / (TN + FP)</span>
+
+<div class="worked-example">
+<span class="we-label">Worked example (from lecture)</span>
+<table style="margin:8px 0;">
+<tr><th></th><th>Has Disease</th><th>No Disease</th><th>Total</th></tr>
+<tr><td>Positive test</td><td>90</td><td>20</td><td>110</td></tr>
+<tr><td>Negative test</td><td>10</td><td>80</td><td>90</td></tr>
+<tr><td>Total</td><td>100</td><td>100</td><td>200</td></tr>
+</table>
+Sensitivity = 90 / (90 + 10) = 90 / 100 = <strong>90%</strong> &mdash; the test correctly identifies 90% of diseased patients.<br>
+Specificity = 80 / (80 + 20) = 80 / 100 = <strong>80%</strong> &mdash; the test correctly identifies 80% of non-diseased patients.
+</div>
+
+<div class="pq-block" id="pq-t5"></div>
+</section>
+
+<!-- 6 -->
+<section class="topic" id="t6">
+<h2>6. Bias, Confounding, Randomization &amp; Blinding</h2>
+<p><strong>Reliability</strong> and <strong>validity</strong> relate to measurement error: reliability is how stable or consistent a measurement is, while validity is how well a measurement reflects what it is purported to measure.</p>
+
+<p><strong>Bias</strong> is a disproportionate weight in favor of or against an idea. There are many types of bias:</p>
+<ul class="plain">
+<li>Bad sampling can lead to bias</li>
+<li>Estimation methods can introduce mathematical bias</li>
+<li>Conflict of interest can lead to corruption &mdash; and therefore must always be disclosed</li>
+</ul>
+
+<p><strong>Sampling randomization</strong> is the process of selecting a sample through a random process (e.g., a computer program, or pieces of paper in a hat), and it helps prevent bias. Note: haphazardness is not the same as randomization &mdash; picking "whoever's around" is not a random process.</p>
+
+<div class="keypoint"><strong>Confounding</strong> happens when there is an additional variable that is related to the variable we're interested in, which also independently contributes to the outcome. Confounders are often unconsidered, and in practice it can be very difficult to separate a true effect from a confounder's effect.</div>
+
+<p><strong>Concealment allocation and blinding</strong> means hiding the method of sorting participants or treatments to prevent bias from affecting the outcome:</p>
+<ul class="plain">
+<li>Single-blind</li>
+<li>Double-blind</li>
+<li>Triple-blind</li>
+</ul>
+<p>Blinding is not always possible (e.g., a surgical vs. non-surgical intervention is hard to blind to the surgeon or often the patient).</p>
+
+<div class="pq-block" id="pq-t6"></div>
+</section>
+
+<!-- 7 -->
+<section class="topic" id="t7">
+<h2>7. Study Designs</h2>
+<p>Appropriate study design defines what can be found and helps reduce bias. Identifying the design first is often the fastest way into a vignette question &mdash; once you know the design, the typically-used measure follows.</p>
+
+<table>
+<caption>Study Designs (per lecture)</caption>
+<tr><th>Design</th><th>Question answered</th><th>Time direction</th><th>Measure commonly used</th></tr>
+<tr><td>Cross-sectional</td><td>What is happening now?</td><td>Single point in time</td><td>Prevalence, Odds Ratio</td></tr>
+<tr><td>Longitudinal</td><td>What is the trend?</td><td>Several points in time</td><td>Regression, Survival curves</td></tr>
+<tr><td>Case-control</td><td>What exposures are associated with disease?</td><td>Look backward</td><td>Odds Ratio</td></tr>
+<tr><td>Prospective study</td><td>What is the risk of developing disease?</td><td>Forward</td><td>Incidence, Relative Risk, Hazard Ratio</td></tr>
+<tr><td>Retrospective cohort</td><td>What happened to exposed vs. unexposed groups?</td><td>Historical records</td><td>Relative Risk, Hazard Ratio</td></tr>
+<tr><td>Randomized Control Trial</td><td>Does the intervention cause a better outcome?</td><td>Forward</td><td>Risk Ratio, Risk Difference, NNT</td></tr>
+</table>
+
+<div class="keypoint">Note this lecture's framing pairs cross-sectional studies with <em>both</em> prevalence and odds ratio as commonly-used measures &mdash; a slightly broader pairing than the simple "case-control = OR, cohort = RR" heuristic, since case-control is listed separately with OR as its own row, and cross-sectional gets its own distinct row above it.</div>
+
+<div class="pq-block" id="pq-t7"></div>
+</section>
+
+<!-- 8 -->
+<section class="topic" id="t8">
+<h2>8. Types of Variables</h2>
+<table>
+<caption>Variable Classification (per lecture)</caption>
+<tr><th>Category</th><th>Subtype</th><th>Description</th></tr>
+<tr><td rowspan="2">Continuous (quantitative)</td><td>Numbers</td><td>Can be measured along a scale</td></tr>
+<tr><td>Discrete</td><td>Countable values</td></tr>
+<tr><td rowspan="2">Categorical (qualitative)</td><td>Nominal</td><td>Categories with no inherent order</td></tr>
+<tr><td>Ordinal</td><td>Categories with a meaningful order</td></tr>
+<tr><td colspan="2">Hard to classify</td><td>Lists &mdash; also hard to analyze objectively</td></tr>
+</table>
+
+<p>A simple test the lecture uses: for a continuous variable, ask "can you measure it or count it?" For a categorical variable, ask "can you sort it into categories?"</p>
+
+<div class="keypoint">Variables can be <strong>converted</strong> to other types, to simplify interpretation or analysis, and to help put data in context.</div>
+
+<table>
+<caption>Examples of Variable Conversion</caption>
+<tr><th>Direction</th><th>Purpose</th><th>Example</th></tr>
+<tr><td>Continuous &rarr; Categorical</td><td>Mostly to help interpretation</td><td>BMI (continuous) &rarr; Underweight, Normal, Overweight, Obese (ordinal)<br>Blood pressure (continuous) &rarr; Normal, Prehypertension, Hypertension (ordinal)</td></tr>
+<tr><td>Categorical &rarr; Continuous</td><td>Mostly to facilitate analysis/coding</td><td>Sex (nominal) &rarr; 0 or 1 (to measure deviation from a baseline)<br>Political party (nominal) &rarr; used as a proxy for a conservative&ndash;liberal scale (ordinal)</td></tr>
+</table>
+
+<p>Variables can also be <strong>transformed</strong> mathematically to other scales &mdash; using the logarithm is the most popular transformation, though exponentials, roots, and inverses are also used.</p>
+
+<div class="pq-block" id="pq-t8"></div>
+</section>
+
+<!-- 9 -->
+<section class="topic" id="t9">
+<h2>9. Hypothesis Testing, P-Values &amp; Confidence Intervals</h2>
+<p>A <strong>p-value</strong> is the probability of occurrence of a given event based on the assumed distribution &mdash; in other words, the random chance of a specific event outcome happening. We use p-values to test hypotheses, and the significance level is called "&alpha;."</p>
+
+<table>
+<caption>Types of Hypothesis</caption>
+<tr><th>Null Hypothesis (H<sub>0</sub>)</th><th>Alternate Hypothesis (H<sub>a</sub>)</th></tr>
+<tr><td>There is no difference</td><td>There is a difference</td></tr>
+<tr><td>There is no association</td><td>There is an association</td></tr>
+<tr><td>There is no relationship</td><td>There is a relationship</td></tr>
+</table>
+
+<p>In the simplest scenario, statistical hypothesis testing asks: do two samples belong to the same population (H<sub>0</sub>), or not (H<sub>a</sub>)? In other words &mdash; do we have one population represented by two samples, or two populations each represented by one sample?</p>
+
+<div class="worked-example">
+<span class="we-label">One-tailed significance example (from lecture)</span>
+H<sub>a</sub> = observed value &gt; true value under H<sub>0</sub>.<br>
+If the observed p-value is above the established significance threshold, it is declared statistically significant.
+</div>
+
+<p>A <strong>confidence interval</strong> is an estimated range where we can expect our parameter estimate to land; it is bound to the significance level chosen for the analysis.</p>
+
+<div class="pq-block" id="pq-t9"></div>
+</section>
+
+<!-- 10 -->
+<section class="topic" id="t10">
+<h2>10. Contingency Tables: Risk, Odds Ratio &amp; Relative Risk</h2>
+<p>A <strong>regression</strong> uses numerical data and an equation that tests whether the slope (&beta;) differs from zero:</p>
+<span class="formula-line">Y = &alpha; + &beta;X + e &nbsp;&nbsp;(Y = dependent variable, X = independent variable, &alpha; = intercept, &beta; = slope, e = error)</span>
+
+<div class="worked-example">
+<span class="we-label">Contingency table (from lecture)</span>
+<table style="margin:8px 0;">
+<tr><th></th><th>Lung Disease</th><th>No Lung Disease</th><th>Total</th></tr>
+<tr><td>Smokers</td><td>40</td><td>60</td><td>100</td></tr>
+<tr><td>Non-Smokers</td><td>10</td><td>90</td><td>100</td></tr>
+<tr><td>Total</td><td>50</td><td>150</td><td>200</td></tr>
+</table>
+
+<strong>Risk (relative risk approach):</strong><br>
+Risk among smokers = 40 / 100 = 0.40<br>
+Risk among non-smokers = 10 / 100 = 0.10<br>
+Relative risk = 0.40 / 0.10 = <strong>4.0</strong><br><br>
+
+<strong>Odds (odds ratio approach):</strong><br>
+Odds among smokers = 40 / 60 = 0.667<br>
+Odds among non-smokers = 10 / 90 = 0.111<br>
+Odds ratio = 0.667 / 0.111 = <strong>6.0</strong>
+</div>
+
+<div class="keypoint">Same underlying 2&times;2 table, two different questions: relative risk compares the <em>risk</em> (probability) of disease between groups, while the odds ratio compares the <em>odds</em> of disease between groups. Because odds and risk diverge more as the outcome becomes more common, the OR (6.0) here is noticeably larger than the RR (4.0) &mdash; lung disease in this table is not rare.</div>
+
+<div class="pq-block" id="pq-t10"></div>
+</section>
+
+<!-- 11 -->
+<section class="topic" id="t11">
+<h2>11. Chi-Square, Causality &amp; Significance</h2>
+<p><strong>Chi-square (&chi;&sup2;)</strong> compares the proportion of observed vs. expected counts:</p>
+<ul class="plain">
+<li><strong>Small &chi;&sup2;</strong> &mdash; observed counts are close to expected counts; data are consistent with chance.</li>
+<li><strong>Large &chi;&sup2;</strong> &mdash; observed counts differ greatly from expected counts; evidence of an association.</li>
+</ul>
+
+<div class="keypoint"><strong>Causality:</strong> when a relationship, association, or correlation is detected, we need to pay attention to define the cause. Statistical significance does not imply cause. A confounding variable is an unconsidered variable that affects the variables we are considering.</div>
+
+<div class="worked-example">
+<span class="we-label">Multiple testing burden (from lecture)</span>
+This is the cumulative probability risk of making an erroneous estimate. Traditionally, significance is declared if p &le; 0.05. So, if 20 independent tests are performed at the 0.05 level, then at least 1 is erroneous by definition.
+</div>
+
+<div class="keypoint"><strong>Statistical significance vs. clinical (biological) significance:</strong> statistics evaluates the numbers, but the relevance of those numbers must be put in context. In other words &mdash; does that statistical significance actually matter?</div>
+
+<p>As the lecture closes: these concepts are all inter-related, and while the material may look complicated, understanding the basic concepts helps since they repeat across other concepts. The difficulty of biostatistics is not in the calculations &mdash; it is in understanding and accounting for context. In medicine, black-and-white answers are rare; most decisions lie in the gray area.</p>
+
+<div class="pq-block" id="pq-t11"></div>
+</section>
+
+</main>
+
+<script>
+const questionData = {
+  "pq-t1": [
+    {stem: "1. A researcher cannot survey every person in a country, so she surveys 2,000 randomly selected residents instead. The 2,000 residents represent the:", choices: ["Population","Sample","Parameter","Confidence interval"], correct: 1, explain: "The sample is a part of the population; here, the 2,000 surveyed residents are the sample drawn from the full population."},
+    {stem: "2. The true average blood glucose level of every diabetic patient in a country (if it could somehow be measured for all of them) would be called a:", choices: ["Parameter estimate","Sample statistic","Parameter","Margin of error"], correct: 2, explain: "A parameter is a numerical characteristic of the population itself, as opposed to a value calculated from a sample (a parameter estimate)."},
+    {stem: "3. Why do researchers use samples instead of measuring entire populations?", choices: ["Samples are always more accurate than population data","We very rarely have population-wide data, so samples let us calculate parameter estimates that approximate true parameters","Population data doesn't have subpopulations","Samples eliminate all error"], correct: 1, explain: "As the lecture states, we very rarely have population-wide data, so we use samples to estimate the parameters we can't measure directly."},
+    {stem: "4. A study samples mostly from one subgroup of a population, ignoring smaller subpopulations that exist. This sample would be described as:", choices: ["A representative sample","A non-representative sample","A parameter","An incidence estimate"], correct: 1, explain: "A representative sample reflects the subpopulation proportions observed in the general population; failing to do so makes the sample non-representative."}
+  ],
+  "pq-t2": [
+    {stem: "1. A town of 1,000 people has 50 existing cases of diabetes at the start of the year. What is the prevalence?", choices: ["2%","5%","10%","50%"], correct: 1, explain: "Prevalence = 50 / 1,000 = 5%, matching the lecture's worked example."},
+    {stem: "2. Using the same town, 20 new diabetes cases are diagnosed during the year among the 950 people who did not already have diabetes. What is the incidence for the year?", choices: ["2.0%","2.1%","5.0%","7.0%"], correct: 1, explain: "Incidence = 20 / 950 = 2.1%. The denominator is the population still at risk (950), not the full 1,000, since the 50 existing cases can't become new cases."},
+    {stem: "3. Why is the incidence denominator 950 rather than 1,000 in the diabetes example?", choices: ["Because 50 people moved away","Because you cannot get diabetes twice, so the 50 existing cases are excluded from the at-risk population","Because prevalence and incidence always use the same denominator","Because incidence is always calculated per 100,000"], correct: 1, explain: "Incidence only counts the population still at risk of becoming a new case — the 50 people who already have diabetes are excluded since they can't be newly diagnosed again."},
+    {stem: "4. At the start of the following year, the town has 70 people with diabetes out of 1,000. What is the new prevalence?", choices: ["2.1%","5%","7%","20%"], correct: 2, explain: "Prevalence = 70 / 1,000 = 7%, reflecting all existing cases (the original 50 plus the 20 newly diagnosed) against the total population."},
+    {stem: "5. Which measure reflects the burden of disease in a population, including everyone currently living with it?", choices: ["Incidence","Prevalence","Relative risk","Sensitivity"], correct: 1, explain: "Prevalence measures all existing cases and reflects overall disease burden, as opposed to incidence, which reflects the risk of developing new disease."}
+  ],
+  "pq-t3": [
+    {stem: "1. Which probability distribution is most associated with a coin-toss type scenario?", choices: ["Poisson","Normal","Binomial","Multinomial"], correct: 2, explain: "The binomial distribution is the lecture's example for a coin-toss type scenario (two possible outcomes)."},
+    {stem: "2. Which distribution is best suited to modeling counts (e.g., number of events in a period)?", choices: ["Binomial","Poisson","Multinomial","Normal"], correct: 1, explain: "The Poisson distribution is specifically noted in the lecture as suited to counts."},
+    {stem: "3. According to the lecture's 'important points about probability,' which statement is correct?", choices: ["Wishing hard can shift the likelihood of an event once conditions are set", "We can modify the conditions that affect an event's likelihood, but once set, the event's outcome is out of our control", "Karma meaningfully affects probability", "Humans are generally excellent at weighing the conditions that determine an event's likelihood"], correct: 1, explain: "Per the lecture: we can change the conditions beforehand, but once set, the event is out of our control — and there is no karma or luck involved, and humans tend to be poor at weighing these conditions from experience."},
+    {stem: "4. Probability is best defined, per the lecture, as:", choices: ["A value calculated only from population-wide data", "The likelihood that an event will occur, based on previous experience, and it incorporates error", "The same thing as a p-value", "A measure that only applies to continuous variables"], correct: 1, explain: "The lecture defines probability as the likelihood of an event based on previous experience, and notes that probability incorporates error."}
+  ],
+  "pq-t4": [
+    {stem: "1. A study concludes there is a real difference between two treatments when, in truth, no difference exists. This is an example of:", choices: ["Type II error","Type I error","Measurement error","Confounding"], correct: 1, explain: "Rejecting a true null hypothesis (a false positive) is a Type I error, with probability denoted alpha."},
+    {stem: "2. A study fails to detect a real difference between two treatments that truly does exist. This is an example of:", choices: ["Type I error","Type II error","Sampling error only","Recall bias"], correct: 1, explain: "Failing to reject a false null hypothesis (a false negative) is a Type II error, with probability denoted beta in this lecture's framework."},
+    {stem: "3. As sample size increases, what happens to the margin of error?", choices: ["It increases","It stays exactly the same","It shrinks, bringing the estimate closer to the population value","It becomes impossible to calculate"], correct: 2, explain: "Per the lecture, the margin of error shrinks gradually as sample size gets larger, bringing the estimate closer to the true population value."},
+    {stem: "4. Which of the following is NOT listed in the lecture as something you need to know to perform a power calculation?", choices: ["Significance level (alpha)","Sample size","Effect size","The patient's insurance status"], correct: 3, explain: "The lecture lists significance level, sample size, effect size, and distribution as the precedents needed for a power calculation — insurance status is not part of this."},
+    {stem: "5. Regarding which error type is 'worse' (false positive vs. false negative), the lecture states:", choices: ["False positives are always worse", "False negatives are always worse", "It depends entirely on what is at stake and what your liability is in the real-world context", "Neither error type has real-world consequences"], correct: 2, explain: "Per the lecture, which error is worse depends on context — what is at stake and what your liability is — not a fixed rule."}
+  ],
+  "pq-t5": [
+    {stem: "1. In the lecture's worked example (90 true positives, 10 false negatives, 20 false positives, 80 true negatives), what is the sensitivity?", choices: ["80%","82%","90%","95%"], correct: 2, explain: "Sensitivity = TP / (TP + FN) = 90 / (90 + 10) = 90%."},
+    {stem: "2. Using the same worked example, what is the specificity?", choices: ["90%","85%","80%","75%"], correct: 2, explain: "Specificity = TN / (TN + FP) = 80 / (80 + 20) = 80%."},
+    {stem: "3. Sensitivity is best described as:", choices: ["How good a test is at ruling out people who do not have the disease","How good a test is at finding people who have the disease","The proportion of the population with existing disease","The probability of a Type I error"], correct: 1, explain: "Per the lecture, sensitivity describes how good the test is at finding people who truly have the disease."},
+    {stem: "4. Specificity is best described as:", choices: ["How good a test is at finding people who have the disease","How good a test is at ruling out people who do not have the disease","The margin of error for a given sample size","The odds ratio for a given exposure"], correct: 1, explain: "Per the lecture, specificity describes how good the test is at ruling out people who do not have the disease."}
+  ],
+  "pq-t6": [
+    {stem: "1. A measurement instrument gives very consistent readings each time it is used on the same subject, but those readings don't actually reflect the true underlying quantity. This instrument has:", choices: ["High reliability, low validity","High validity, low reliability","High reliability and high validity","Low reliability and low validity"], correct: 0, explain: "Reliability is about consistency/stability of measurement; validity is about whether the measurement reflects what it's supposed to measure. Consistent-but-wrong readings describe high reliability with low validity."},
+    {stem: "2. Selecting study participants using a haphazard method (e.g., whoever happens to walk by) is best described as:", choices: ["True randomization","Not randomization, since haphazardness is not the same as a random process","A form of blinding","A power calculation"], correct: 1, explain: "The lecture explicitly notes that haphazardness is not randomization — true randomization requires an actual random process, such as a computer program."},
+    {stem: "3. An additional variable that is related to the exposure of interest and also independently affects the outcome, often unconsidered by the researcher, describes:", choices: ["Blinding","Confounding","Sensitivity","A parameter estimate"], correct: 1, explain: "This is the lecture's definition of confounding — a related, often-unconsidered variable that independently contributes to the outcome."},
+    {stem: "4. A trial in which neither the patients nor the researchers assessing outcomes know which treatment was assigned is best described as:", choices: ["Single-blind","Double-blind","Unblinded","Cross-sectional"], correct: 1, explain: "Double-blind means both participants and assessors/investigators are unaware of group assignment."},
+    {stem: "5. Why must conflicts of interest always be disclosed, per the lecture?", choices: ["They have no real effect on research","They can lead to corruption, making disclosure necessary","They only matter in cross-sectional studies","They automatically invalidate a study"], correct: 1, explain: "The lecture notes that conflicts of interest can lead to corruption, and therefore need to always be disclosed."}
+  ],
+  "pq-t7": [
+    {stem: "1. A researcher wants to know what exposures are associated with a disease by looking backward at exposure history in diseased vs. non-diseased individuals. Per the lecture's table, this is a:", choices: ["Cross-sectional study","Case-control study","Prospective study","Longitudinal study"], correct: 1, explain: "Per the lecture's table, case-control studies look backward and answer 'what exposures are associated with disease?'"},
+    {stem: "2. Which study design, per the lecture's table, is specifically designed to answer 'does the intervention cause a better outcome?'", choices: ["Retrospective cohort","Cross-sectional","Randomized Control Trial","Case-control"], correct: 2, explain: "The RCT row in the lecture's table specifically answers whether the intervention causes a better outcome, using forward time direction."},
+    {stem: "3. A study measuring both exposure and outcome at a single point in time, commonly reporting prevalence and odds ratio, is a:", choices: ["Cross-sectional study","Prospective study","Retrospective cohort","Randomized Control Trial"], correct: 0, explain: "Per the lecture's table, cross-sectional studies are single point in time and commonly use prevalence and odds ratio as measures."},
+    {stem: "4. Which design uses historical records and looks at what happened to exposed vs. unexposed groups?", choices: ["Case-control","Retrospective cohort","Cross-sectional","Randomized Control Trial"], correct: 1, explain: "Per the lecture's table, retrospective cohort studies use historical records to compare exposed vs. unexposed groups."},
+    {stem: "5. A study following participants forward in time to determine the risk of developing disease commonly uses which measures, per the lecture?", choices: ["Prevalence, Odds Ratio","Incidence, Relative Risk, Hazard Ratio","Regression, Survival curves","Risk Ratio, Risk Difference, NNT"], correct: 1, explain: "The lecture's table lists incidence, relative risk, and hazard ratio as the measures commonly used in a prospective study."}
+  ],
+  "pq-t8": [
+    {stem: "1. A patient's cholesterol level, measured in mg/dL, is best classified as:", choices: ["Categorical - nominal","Categorical - ordinal","Continuous","Hard to classify"], correct: 2, explain: "Cholesterol level can be measured along a numeric scale, making it a continuous (quantitative) variable."},
+    {stem: "2. Blood type (A, B, AB, O) is best classified as:", choices: ["Continuous","Categorical - nominal","Categorical - ordinal","Hard to classify"], correct: 1, explain: "Blood type has categories with no inherent order, making it nominal categorical data."},
+    {stem: "3. A survey response recorded as a free-text list of a patient's symptoms is best described, per the lecture, as:", choices: ["Continuous","Nominal categorical","Hard to classify (a list) — also hard to analyze objectively","Ordinal categorical"], correct: 2, explain: "The lecture specifically notes that lists are 'hard to classify' and also hard to analyze objectively."},
+    {stem: "4. Converting BMI (a continuous variable) into the categories Underweight/Normal/Overweight/Obese is an example of:", choices: ["Categorical to continuous conversion, to facilitate analysis", "Continuous to categorical conversion, mostly to help interpretation", "A mathematical transformation using logarithms", "Converting a nominal variable to ordinal"], correct: 1, explain: "This is the lecture's own example of continuous-to-categorical conversion, done mostly to help interpretation of the data."},
+    {stem: "5. Coding sex (nominal) as 0 or 1 for a regression analysis is an example of:", choices: ["Continuous to categorical conversion", "Categorical to continuous conversion, mostly to facilitate analysis/coding", "A logarithmic transformation", "Converting the variable to an ordinal scale"], correct: 1, explain: "This is the lecture's own example of categorical-to-continuous conversion, done to facilitate analysis by measuring deviation from a baseline."}
+  ],
+  "pq-t9": [
+    {stem: "1. The null hypothesis (H0) in a study comparing two treatments states:", choices: ["There is a difference between the treatments","There is no difference between the treatments","The treatments were tested on different populations","The p-value must be below 0.05"], correct: 1, explain: "Per the lecture, the null hypothesis states there is no difference/association/relationship."},
+    {stem: "2. A p-value is best defined as:", choices: ["The probability that the null hypothesis is true","The probability of occurrence of a given event, based on the assumed distribution — i.e., the random chance of a specific outcome happening","The same thing as the significance level, alpha","The margin of error for a given sample"], correct: 1, explain: "This is the lecture's own definition of a p-value."},
+    {stem: "3. In the simplest hypothesis-testing scenario described in the lecture, what question is being asked?", choices: ["Whether one population is represented by two samples, or two populations are each represented by one sample", "Whether the sample size is large enough for a power calculation", "Whether the variable is continuous or categorical", "Whether a confounder exists"], correct: 0, explain: "The lecture frames the simplest hypothesis test as asking whether two samples come from the same population (H0) or represent two distinct populations (Ha)."},
+    {stem: "4. A confidence interval is best described as:", choices: ["A fixed number with no relationship to significance level","An estimated range where we can expect our parameter estimate to land, bound to the significance level","The same thing as a p-value","A measure only used in case-control studies"], correct: 1, explain: "Per the lecture, a confidence interval is an estimated range for the parameter estimate, tied to the chosen significance level."},
+    {stem: "5. In the lecture's one-tailed significance example (Ha = observed value > true value under H0), a result is declared statistically significant when:", choices: ["The observed p-value is above the established significance threshold", "The observed p-value is below the established significance threshold", "The sample size is below 30", "The confidence interval contains zero"], correct: 0, explain: "As stated in the lecture's one-tailed example, if the observed p-value is above the established significance threshold, it is declared statistically significant (per the specific framing used in that slide)."}
+  ],
+  "pq-t10": [
+    {stem: "1. Using the lecture's smoking/lung disease table (40 smokers with disease out of 100 smokers; 10 non-smokers with disease out of 100 non-smokers), what is the relative risk?", choices: ["2.0","4.0","6.0","0.4"], correct: 1, explain: "Risk among smokers = 40/100 = 0.40; risk among non-smokers = 10/100 = 0.10; RR = 0.40/0.10 = 4.0, matching the lecture's worked example."},
+    {stem: "2. Using the same table, what is the odds ratio?", choices: ["4.0","5.0","6.0","0.667"], correct: 2, explain: "Odds among smokers = 40/60 = 0.667; odds among non-smokers = 10/90 = 0.111; OR = 0.667/0.111 = 6.0, matching the lecture's worked example."},
+    {stem: "3. Why is the odds ratio (6.0) larger than the relative risk (4.0) in this specific example?", choices: ["Because the calculations were done incorrectly", "Because odds and risk diverge more as the outcome becomes more common, and lung disease is not rare in this table (50/200, or 25%)", "Because odds ratio is always larger than relative risk in every scenario", "Because the sample size was too small"], correct: 1, explain: "OR and RR converge only when the outcome is rare; here the outcome (lung disease) occurs in 25% of the total sample, so OR and RR diverge noticeably."},
+    {stem: "4. In the regression equation Y = alpha + betaX + e, what does beta represent?", choices: ["The dependent variable","The intercept","The slope","The error term"], correct: 2, explain: "Per the lecture, beta is the slope in the regression equation, and the test asks whether this slope differs from zero."},
+    {stem: "5. A regression analysis primarily uses which type of data, per the lecture?", choices: ["Categorical data only","Numerical data","Ordinal data only","Nominal data only"], correct: 1, explain: "The lecture specifies that regression uses numerical data."}
+  ],
+  "pq-t11": [
+    {stem: "1. A chi-square test produces a small chi-square value. This suggests:", choices: ["Strong evidence of an association","Observed counts are close to expected counts, consistent with chance","The study has a Type I error","The sample size is too large"], correct: 1, explain: "Per the lecture, a small chi-square value means observed counts are close to expected counts, and the data are consistent with chance."},
+    {stem: "2. A chi-square test produces a large chi-square value. This suggests:", choices: ["Observed and expected counts are nearly identical", "Observed counts differ greatly from expected counts, providing evidence of an association", "The result must be due to confounding", "The study used a case-control design"], correct: 1, explain: "Per the lecture, a large chi-square value means observed counts differ greatly from expected, providing evidence of an association."},
+    {stem: "3. If 20 independent statistical tests are each performed at the 0.05 significance level, the lecture notes that:", choices: ["None of the tests can possibly be wrong", "At least one test is erroneous by definition, due to the cumulative probability of error across multiple tests", "All 20 tests must be significant", "This scenario is impossible in practice"], correct: 1, explain: "This is the lecture's specific statement about the multiple testing burden: performing 20 independent tests at p ≤ 0.05 means at least one is expected to be erroneous by definition."},
+    {stem: "4. A study finds a statistically significant association between a new supplement and a very small, clinically meaningless change in lab values. This scenario illustrates the distinction between:", choices: ["Type I and Type II error", "Statistical significance and clinical (biological) significance", "Incidence and prevalence", "Sensitivity and specificity"], correct: 1, explain: "Per the lecture, statistics evaluates the numbers, but the relevance of those numbers must be put in context — a statistically significant result may not be clinically meaningful."},
+    {stem: "5. Per the lecture, statistical significance:", choices: ["Always implies a causal relationship", "Does not imply cause — a confounding variable may still be responsible for the observed association", "Is the same thing as clinical significance", "Eliminates the need to consider confounding"], correct: 1, explain: "The lecture explicitly states that statistical significance does not imply cause, and a confounding variable may still explain the observed relationship."}
+  ]
+};
+
+function buildMCQ(container, q) {
+  const wrap = document.createElement('div');
+  wrap.className = 'mcq';
+  const stem = document.createElement('div');
+  stem.className = 'stem';
+  stem.textContent = q.stem;
+  wrap.appendChild(stem);
+
+  const letters = ['A','B','C','D','E'];
+  q.choices.forEach((choiceText, ci) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = letters[ci] + ') ' + choiceText;
+    btn.addEventListener('click', () => {
+      if (wrap.dataset.answered) return;
+      wrap.dataset.answered = 'true';
+      const allChoices = wrap.querySelectorAll('.choice');
+      allChoices.forEach((c, i2) => {
+        c.classList.add('disabled');
+        if (i2 === q.correct) c.classList.add('correct');
+      });
+      const feedback = wrap.querySelector('.feedback');
+      if (ci === q.correct) {
+        feedback.classList.add('show', 'right');
+        feedback.textContent = 'Correct. ' + q.explain;
+      } else {
+        btn.classList.add('incorrect');
+        feedback.classList.add('show', 'wrong');
+        feedback.textContent = 'Not quite. ' + q.explain;
+      }
+    });
+    wrap.appendChild(btn);
+  });
+
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback';
+  wrap.appendChild(feedback);
+
+  container.appendChild(wrap);
+}
+
+Object.keys(questionData).forEach(sectionId => {
+  const container = document.getElementById(sectionId);
+  if (!container) return;
+  const title = document.createElement('div');
+  title.className = 'pq-title';
+  title.textContent = 'Practice Questions';
+  container.appendChild(title);
+  questionData[sectionId].forEach(q => buildMCQ(container, q));
+});
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('main').classList.toggle('expanded');
+  document.getElementById('sb-toggle').classList.toggle('collapsed');
+  document.getElementById('back-btn').classList.toggle('collapsed');
+}
+
+const links = document.querySelectorAll('.sb-link');
+const sections = document.querySelectorAll('section.topic');
+
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById(link.dataset.target).scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector('.sb-link[data-target="' + entry.target.id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
