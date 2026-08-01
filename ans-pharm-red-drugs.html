@@ -104,6 +104,24 @@
     transition: left 0.25s ease;
   }
   #sb-toggle.collapsed { left: 18px; }
+  #back-btn {
+    position: fixed;
+    top: 18px;
+    left: 420px;
+    z-index: 30;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: left 0.25s ease;
+  }
+  #back-btn.collapsed { left: 145px; }
+  #back-btn:hover { background: var(--sage-border); }
 
   #pdf-btn {
     position: fixed;
@@ -241,8 +259,8 @@
     border-collapse: collapse;
     width: 100%;
     margin: 12px 0 24px 0;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.8rem;
+    font-family: Georgia, 'Iowan Old Style', serif;
+    font-size: 0.95rem;
   }
   caption {
     text-align: left;
@@ -275,7 +293,7 @@
   ul.plain li { margin-bottom: 4px; }
 
   @media print {
-    #sidebar, #sb-toggle, #pdf-btn { display: none; }
+    #sidebar, #sb-toggle, #pdf-btn, #back-btn { display: none; }
     #main { margin-left: 0; padding: 20px; max-width: 100%; }
     section.topic { page-break-inside: avoid; }
   }
@@ -285,17 +303,18 @@
     #sidebar.open { transform: translateX(0); }
     #main { margin-left: 0; padding: 70px 24px 80px 24px; }
     #sb-toggle { left: 18px; }
+                    #back-btn { left: 145px; }
     #pdf-btn { right: 18px; top: 68px; }
   }
 </style>
 </head>
 <body>
 
+<a id="back-btn" href="index.html">&larr; Back to Study Guides</a>
 <button id="sb-toggle" onclick="toggleSidebar()">&#9776; Sections</button>
 <button id="pdf-btn" onclick="window.print()">&#8681; Download PDF</button>
 
 <nav id="sidebar">
-  <a class="sb-back" href="index.html">&larr; Back to Study Guides</a>
   <div class="sb-label">Sections</div>
   <button class="sb-link" data-target="t1"><span class="sb-num">1</span>Cholinergic Agonists</button>
   <button class="sb-link" data-target="t2"><span class="sb-num">2</span>Cholinergic Antagonists</button>
@@ -628,6 +647,7 @@ function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('main').classList.toggle('expanded');
   document.getElementById('sb-toggle').classList.toggle('collapsed');
+  document.getElementById('back-btn').classList.toggle('collapsed');
 }
 
 const links = document.querySelectorAll('.sb-link');
