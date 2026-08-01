@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ANS Pharm - Just the Red Drugs</title>
+<style>
+  :root {
+    --cream: #f4f1ea;
+    --ink: #1f2320;
+    --muted: #767b70;
+    --green: #3d6b5c;
+    --green-dark: #2a4c41;
+    --sage-bg: #e3ede6;
+    --sage-border: #b9d0c2;
+    --thead-bg: #d9e6de;
+    --row-alt: #ebe8df;
+    --border: #d8d4c8;
+    --mnemonic-bg: #f7ecdf;
+    --mnemonic-border: #c99a52;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Georgia, 'Iowan Old Style', serif;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  a { color: var(--green); }
+  .mono { font-family: 'Courier New', Courier, monospace; }
+
+  /* ---------- Sidebar ---------- */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 280px;
+    background: var(--cream);
+    border-right: 2px solid var(--ink);
+    overflow-y: auto;
+    padding: 20px 0 40px 0;
+    transition: transform 0.25s ease;
+    z-index: 20;
+  }
+  #sidebar.collapsed { transform: translateX(-280px); }
+  #sidebar .sb-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 0 22px 10px 22px;
+    text-transform: uppercase;
+  }
+  .sb-back {
+    display: block;
+    margin: 0 22px 16px 22px;
+    padding: 8px 12px;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    text-align: center;
+  }
+  .sb-back:hover { background: var(--sage-border); }
+  .sb-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    color: var(--ink);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.83rem;
+    padding: 9px 22px;
+    cursor: pointer;
+    line-height: 1.35;
+  }
+  .sb-link:hover { background: var(--sage-bg); }
+  .sb-link.active {
+    background: var(--sage-bg);
+    border-left: 3px solid var(--green);
+    color: var(--green-dark);
+    font-weight: bold;
+  }
+  .sb-num { display:inline-block; width: 22px; color: var(--muted); }
+
+  #sb-toggle {
+    position: fixed;
+    top: 18px;
+    left: 292px;
+    z-index: 30;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: left 0.25s ease;
+  }
+  #sb-toggle.collapsed { left: 18px; }
+
+  #pdf-btn {
+    position: fixed;
+    top: 18px;
+    right: 24px;
+    z-index: 30;
+    background: var(--green-dark);
+    border: none;
+    border-radius: 4px;
+    color: #fdfcf9;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 9px 16px;
+    cursor: pointer;
+  }
+  #pdf-btn:hover { background: var(--green); }
+
+  /* ---------- Main ---------- */
+  #main {
+    margin-left: 280px;
+    padding: 70px 60px 100px 60px;
+    max-width: 920px;
+    transition: margin-left 0.25s ease;
+  }
+  #main.expanded { margin-left: 0; }
+
+  h1.doc-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    color: var(--ink);
+  }
+  .doc-subtitle {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 22px;
+  }
+  .divider {
+    border: none;
+    border-top: 3px solid var(--ink);
+    margin: 24px 0 30px 0;
+  }
+  .toc-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  ol.toc { padding-left: 22px; margin-bottom: 50px; font-family: 'Courier New', Courier, monospace; font-size: 0.92rem; }
+  ol.toc li { margin-bottom: 8px; }
+  ol.toc a {
+    color: var(--green-dark);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--green-dark);
+  }
+  ol.toc a:hover { color: var(--green); }
+
+  section.topic {
+    margin-bottom: 60px;
+    padding-top: 10px;
+    scroll-margin-top: 20px;
+  }
+  section.topic h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.55rem;
+    color: var(--ink);
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  section.topic .lede {
+    color: var(--muted);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+  section.topic p { margin: 0 0 14px 0; }
+
+  .summary {
+    background: var(--sage-bg);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    margin: 14px 0 20px 0;
+    font-size: 0.95rem;
+  }
+
+  .mnemonic {
+    background: var(--mnemonic-bg);
+    border-left: 4px solid var(--mnemonic-border);
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.88rem;
+  }
+  .mnemonic .mn-label {
+    font-weight: bold;
+    color: #8a5a20;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .pearl {
+    background: #fbeae5;
+    border-left: 4px solid #b3432b;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  .pearl .pearl-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #8a3320;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  h3.drug-name {
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    color: var(--green-dark);
+    margin: 26px 0 6px 0;
+  }
+  .drug-block { margin-bottom: 4px; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0 24px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+  }
+  caption {
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    caption-side: top;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--thead-bg);
+    color: var(--green-dark);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: var(--row-alt); }
+  .drug-red { color: #b3432b; font-weight: bold; }
+
+  ul.plain { margin: 6px 0 14px 0; padding-left: 20px; }
+  ul.plain li { margin-bottom: 4px; }
+
+  @media print {
+    #sidebar, #sb-toggle, #pdf-btn { display: none; }
+    #main { margin-left: 0; padding: 20px; max-width: 100%; }
+    section.topic { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-280px); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; padding: 70px 24px 80px 24px; }
+    #sb-toggle { left: 18px; }
+    #pdf-btn { right: 18px; top: 68px; }
+  }
+</style>
+</head>
+<body>
+
+<button id="sb-toggle" onclick="toggleSidebar()">&#9776; Sections</button>
+<button id="pdf-btn" onclick="window.print()">&#8681; Download PDF</button>
+
+<nav id="sidebar">
+  <a class="sb-back" href="index.html">&larr; Back to Study Guides</a>
+  <div class="sb-label">Sections</div>
+  <button class="sb-link" data-target="t1"><span class="sb-num">1</span>Cholinergic Agonists</button>
+  <button class="sb-link" data-target="t2"><span class="sb-num">2</span>Cholinergic Antagonists</button>
+  <button class="sb-link" data-target="t3"><span class="sb-num">3</span>Cholinesterase Inhibitors &amp; Regenerator</button>
+  <button class="sb-link" data-target="t4"><span class="sb-num">4</span>Adrenergic Agonists</button>
+  <button class="sb-link" data-target="t5"><span class="sb-num">5</span>Adrenergic Antagonists</button>
+</nav>
+
+<main id="main">
+
+<h1 class="doc-title">ANS Pharm &mdash; Just the Red Drugs</h1>
+<div class="doc-subtitle">Autonomic pharmacology, high-yield cut &mdash; only the agents highlighted in red font across the SDL decks (Cholinergic Agonists &amp; Antagonists, Adrenergic Agonists, Adrenergic Antagonists, Tracing Questions). No drugs from Intro to ANS Pharmacology &mdash; that deck was pure physiology review with nothing flagged in red.</div>
+
+<hr class="divider">
+
+<div class="toc-label">CONTENTS</div>
+<ol class="toc">
+  <li><a href="#t1">Cholinergic Agonists (Direct-Acting)</a></li>
+  <li><a href="#t2">Cholinergic Antagonists (Direct-Acting, Muscarinic + Ganglionic)</a></li>
+  <li><a href="#t3">Cholinesterase Inhibitors &amp; Regenerator (Indirect-Acting)</a></li>
+  <li><a href="#t4">Adrenergic Agonists (Direct + Indirect-Acting)</a></li>
+  <li><a href="#t5">Adrenergic Antagonists (Beta-Blockers + Alpha-Blockers)</a></li>
+</ol>
+
+<!-- SECTION 1 -->
+<section class="topic" id="t1">
+<h2>1. Cholinergic Agonists (Direct-Acting)</h2>
+<div class="lede">Direct muscarinic and nicotinic agonists &mdash; act straight on the receptor rather than by boosting synaptic ACh.</div>
+
+<table>
+<caption>Quick Reference</caption>
+<tr><th>Drug</th><th>Class / selectivity</th><th>Key use</th></tr>
+<tr><td class="drug-red">Acetylcholine</td><td>Non-selective mAChR/nAChR agonist</td><td>Local ophthalmic use (other agents usually preferred)</td></tr>
+<tr><td class="drug-red">Bethanechol</td><td>mAChR-selective</td><td>Neurogenic bladder, urinary retention</td></tr>
+<tr><td class="drug-red">Methacholine</td><td>Selective, potent mAChR agonist</td><td>Methacholine challenge test (bronchial hyperreactivity)</td></tr>
+<tr><td class="drug-red">Pilocarpine</td><td>Pure mAChR agonist</td><td>Xerostomia, ophthalmic miosis, glaucoma</td></tr>
+<tr><td class="drug-red">Cevimeline</td><td>Synthetic, M<sub>3</sub>-selective</td><td>Xerostomia (Sj&ouml;gren's, radiation damage)</td></tr>
+<tr><td class="drug-red">Varenicline</td><td>Partial agonist, &alpha;4&beta;2 nicotinic (N<sub>N</sub>) selective</td><td>Smoking cessation (Chantix)</td></tr>
+</table>
+
+<h3 class="drug-name">Acetylcholine</h3>
+<p>Non-selective agonist at both muscarinic and nicotinic receptors. Approved for local ophthalmic use, but other agents are generally preferred clinically. Rapidly hydrolyzed by cholinesterase, so it is not clinically durable.</p>
+
+<h3 class="drug-name">Bethanechol</h3>
+<p>mAChR-selective agonist acting primarily on the urinary and GI tract. Used for neurogenic bladder and urinary retention. Resistant to cholinesterase breakdown.</p>
+
+<h3 class="drug-name">Methacholine</h3>
+<p>Selective, potent mAChR agonist used diagnostically for bronchial airway hyperreactivity &mdash; the basis of the methacholine challenge test.</p>
+
+<h3 class="drug-name">Pilocarpine</h3>
+<p>Pure mAChR agonist. Used for xerostomia, for inducing miosis during ophthalmic procedures, and for glaucoma, where it reduces intraocular pressure.</p>
+
+<h3 class="drug-name">Cevimeline</h3>
+<p>Synthetic, M<sub>3</sub>-selective muscarinic agonist given as an oral tablet for xerostomia in Sj&ouml;gren's syndrome or in patients with radiation-damaged salivary glands. ADRs: excessive sweating, nausea, blurred vision.</p>
+
+<h3 class="drug-name">Varenicline</h3>
+<p>Partial agonist with high affinity and selectivity for &alpha;4&beta;2 nicotinic receptors (N<sub>N</sub>). Stimulates and moderately sustains mesolimbic dopamine release, which reduces craving and withdrawal. FDA approved for smoking cessation (brand Chantix). ADRs: nausea, insomnia, headache.</p>
+
+</section>
+
+<!-- SECTION 2 -->
+<section class="topic" id="t2">
+<h2>2. Cholinergic Antagonists (Direct-Acting, Muscarinic + Ganglionic)</h2>
+<div class="lede">Muscarinic blockers plus one ganglionic blocker &mdash; note how their CNS penetration and charge (quaternary vs. tertiary amine) predict their side-effect profile.</div>
+
+<table>
+<caption>Quick Reference</caption>
+<tr><th>Drug</th><th>Class / selectivity</th><th>Key use</th></tr>
+<tr><td class="drug-red">Atropine</td><td>Prototype non-selective competitive muscarinic antagonist</td><td>GI hypermotility, ophthalmology, anesthesia, organophosphate/cholinergic antidote</td></tr>
+<tr><td class="drug-red">Scopolamine</td><td>Competitive muscarinic antagonist</td><td>Motion sickness</td></tr>
+<tr><td class="drug-red">Benztropine</td><td>Tertiary amine muscarinic antagonist</td><td>Parkinson disease / movement disorders (adjunct)</td></tr>
+<tr><td class="drug-red">Glycopyrrolate</td><td>Muscarinic antagonist</td><td>Reducing GI secretions; paired with neostigmine for NMB reversal</td></tr>
+<tr><td class="drug-red">Ipratropium</td><td>Inhaled quaternary ammonium muscarinic antagonist</td><td>Asthma, COPD</td></tr>
+<tr><td class="drug-red">Tiotropium</td><td>Inhaled muscarinic antagonist (long-acting)</td><td>Asthma, COPD (once daily &mdash; brand Spiriva)</td></tr>
+<tr><td class="drug-red">Oxybutynin</td><td>M<sub>3</sub>-selective muscarinic antagonist</td><td>Overactive bladder</td></tr>
+<tr><td class="drug-red">Darifenacin</td><td>M<sub>3</sub>-selective muscarinic antagonist</td><td>Overactive bladder</td></tr>
+<tr><td class="drug-red">Tropicamide</td><td>Short-acting mydriatic muscarinic antagonist</td><td>Ophthalmologic exams</td></tr>
+<tr><td class="drug-red">Mecamylamine</td><td>Non-selective ganglionic (N<sub>N</sub>) blocker</td><td>Historic HTN agent &mdash; little clinical use today</td></tr>
+</table>
+
+<h3 class="drug-name">Atropine</h3>
+<p>The prototype non-selective competitive muscarinic antagonist; blocks parasympathetic discharge broadly. Clinical uses span several systems:</p>
+<ul class="plain">
+<li>GI hypermotility / traveler's diarrhea &mdash; atropine is a component of Lomotil (paired with diphenoxylate), added specifically to discourage abuse, since misuse causes dizziness, constipation, dry mouth, and blurred vision.</li>
+<li>Ophthalmology &mdash; long-acting mydriasis and cycloplegia (duration roughly 6 hours to 12 days); atropine is widely distributed and carries a CNS toxicity risk, especially in children.</li>
+<li>Anesthesia &mdash; blocks vagal reflexes triggered by visceral manipulation.</li>
+<li>Antidote for cholinergic/organophosphate poisoning, paired with pralidoxime; atropine is a first-line antidote alongside pralidoxime and a benzodiazepine for organophosphate exposure.</li>
+</ul>
+
+<div class="mnemonic">
+<span class="mn-label">Anticholinergic toxidrome mnemonic</span>
+"Mad as a hatter (confusion), red as a beet (flushing), hot as a hare (hyperthermia), blind as a bat (mydriasis/blurred vision), dry as a bone (dry skin/mouth), bladder loses its tone (urinary retention), and the heart runs alone (tachycardia)."
+</div>
+
+<h3 class="drug-name">Scopolamine</h3>
+<p>Competitive muscarinic antagonist used for motion sickness. Distributes more into the CNS than atropine and carries more CNS-related ADRs: drowsiness, dizziness, agitation, confusion.</p>
+
+<h3 class="drug-name">Benztropine</h3>
+<p>Tertiary amine muscarinic antagonist used for Parkinson disease and movement disorders to reduce tremor &mdash; usually as an adjunct to dopaminergic therapy, since it's less effective alone.</p>
+
+<h3 class="drug-name">Glycopyrrolate</h3>
+<p>Muscarinic antagonist used to reduce GI secretions and paired with neostigmine during reversal of neuromuscular blockade, where it blocks the unwanted parasympathetic/cholinergic effects of neostigmine.</p>
+
+<h3 class="drug-name">Ipratropium</h3>
+<p>Inhaled quaternary ammonium muscarinic antagonist &mdash; charged, so it has minimal CNS effects. Used for asthma and COPD.</p>
+
+<h3 class="drug-name">Tiotropium</h3>
+<p>Inhaled muscarinic antagonist (brand Spiriva), same class as ipratropium but with slower metabolism and longer duration, allowing once-daily dosing. Used for asthma and COPD.</p>
+
+<h3 class="drug-name">Oxybutynin</h3>
+<p>M<sub>3</sub>-selective muscarinic antagonist for overactive bladder. ADRs: dry mouth/eyes, dizziness, constipation, blurred vision, and UTI risk from a large post-void residual.</p>
+<div class="pearl">
+<span class="pearl-label">Caution</span>
+Bladder antimuscarinics (oxybutynin, darifenacin) are linked to an increased risk of dementia.
+</div>
+
+<h3 class="drug-name">Darifenacin</h3>
+<p>M<sub>3</sub>-selective muscarinic antagonist for overactive bladder, with the same ADR and caution profile as oxybutynin.</p>
+
+<h3 class="drug-name">Tropicamide</h3>
+<p>Short-acting mydriatic muscarinic antagonist for ophthalmologic exams. Onset 15&ndash;60 minutes, duration 6&ndash;24 hours &mdash; in contrast with atropine's much longer duration.</p>
+
+<h3 class="drug-name">Mecamylamine</h3>
+<p>Non-selective ganglionic (nicotinic, N<sub>N</sub>) blocker; competitively blocks ACh at both parasympathetic and sympathetic ganglia, effectively blocking all autonomic outflow. Its net effect on any given tissue depends on that tissue's resting autonomic tone. It was one of the first effective hypertension therapies but has little clinical use today, since it affects both divisions non-selectively and produces intolerable ADRs.</p>
+
+</section>
+
+<!-- SECTION 3 -->
+<section class="topic" id="t3">
+<h2>3. Cholinesterase Inhibitors &amp; Regenerator (Indirect-Acting)</h2>
+<div class="lede">These raise synaptic ACh indirectly by blocking its breakdown &mdash; therapeutic in small doses, dangerous to deadly in excess.</div>
+
+<div class="summary">
+<strong>General mechanism:</strong> these agents bind acetylcholinesterase (and butyrylcholinesterase) and block its enzymatic activity, raising ACh concentration and stimulating both nicotinic and muscarinic receptors. The consequences can be therapeutic at low dose or deadly at high dose/organophosphate poisoning.
+</div>
+
+<table>
+<caption>Quick Reference</caption>
+<tr><th>Drug</th><th>Class / duration</th><th>Key use</th></tr>
+<tr><td class="drug-red">Neostigmine</td><td>Reversible AChE inhibitor (carbamate, charged, short&ndash;moderate duration)</td><td>Myasthenia gravis, reversal of neuromuscular blockade</td></tr>
+<tr><td class="drug-red">Pyridostigmine</td><td>Reversible AChE inhibitor (carbamate, charged, ~4&ndash;6h duration)</td><td>Myasthenia gravis, NMB reversal, military nerve-gas pretreatment</td></tr>
+<tr><td class="drug-red">Edrophonium</td><td>Reversible AChE inhibitor, very short-acting (5&ndash;15 min)</td><td>Diagnostic test for myasthenia gravis</td></tr>
+<tr><td class="drug-red">Physostigmine</td><td>Reversible AChE inhibitor (carbamate, uncharged, crosses BBB)</td><td>Antidote for anticholinergic poisoning</td></tr>
+<tr><td class="drug-red">Donepezil</td><td>Reversible AChE inhibitor</td><td>Alzheimer disease dementia</td></tr>
+<tr><td class="drug-red">Pralidoxime (PAM)</td><td>Cholinesterase regenerator (not an inhibitor)</td><td>Organophosphate poisoning antidote</td></tr>
+</table>
+
+<h3 class="drug-name">Neostigmine</h3>
+<p>Reversible AChE inhibitor &mdash; a carbamate, charged with low lipid solubility, giving it a short-to-moderate duration of action. Used for myasthenia gravis and for reversal of neuromuscular blockade during anesthesia, typically paired with glycopyrrolate or atropine.</p>
+
+<h3 class="drug-name">Pyridostigmine</h3>
+<p>Reversible AChE inhibitor &mdash; also a charged carbamate, but with a longer duration of roughly 4&ndash;6 hours. Used for myasthenia gravis, reversal of neuromuscular blockade, and as military pretreatment for anticipated nerve gas exposure.</p>
+
+<h3 class="drug-name">Edrophonium</h3>
+<p>Reversible AChE inhibitor, very short-acting (5&ndash;15 minutes). Used as a diagnostic test for myasthenia gravis.</p>
+
+<h3 class="drug-name">Physostigmine</h3>
+<p>Reversible AChE inhibitor &mdash; a carbamate that, unlike neostigmine/pyridostigmine, is uncharged and lipid-soluble, so it crosses the blood-brain barrier. Used as the antidote for anticholinergic poisoning, reversing the "mad as a hatter" toxidrome.</p>
+
+<h3 class="drug-name">Donepezil</h3>
+<p>Reversible AChE inhibitor used for dementia associated with Alzheimer disease.</p>
+
+<h3 class="drug-name">Pralidoxime (PAM)</h3>
+<p>A cholinesterase regenerator, not an inhibitor. Mechanism: reactivates AChE by removing the organophosphate from the enzyme's active site &mdash; it must be given before "aging" occurs, or it becomes ineffective. It is a quaternary ammonium compound (permanently charged), so it does not cross into the CNS and is ineffective against CNS toxicity.</p>
+<div class="pearl">
+<span class="pearl-label">Standard antidote sequence</span>
+Current standard antidote for organophosphate poisoning: (1) parenteral atropine, (2) pralidoxime, (3) a benzodiazepine for seizures.
+</div>
+
+<div class="mnemonic">
+<span class="mn-label">Cholinergic crisis mnemonic</span>
+Acute cholinesterase-inhibitor poisoning (e.g., from organophosphate pesticides like malathion, or nerve agents like sarin) causes a cholinergic crisis remembered by "SLUDGE and the Killer B's": Salivation, Lacrimation, Urination, Defecation, GI upset, Emesis &mdash; plus Bradycardia, Bronchorrhea, Bronchospasm. It also causes neuromuscular junction effects: muscle fasciculations followed by paralysis.
+</div>
+
+</section>
+
+<!-- SECTION 4 -->
+<section class="topic" id="t4">
+<h2>4. Adrenergic Agonists (Direct + Indirect-Acting)</h2>
+<div class="lede">Catecholamines, selective agonists, and the indirect-acting agents (amphetamine, ephedrine, tyramine, cocaine) that work through the presynaptic terminal rather than the receptor itself.</div>
+
+<table>
+<caption>Quick Reference</caption>
+<tr><th>Drug</th><th>Class / selectivity</th><th>Key use</th></tr>
+<tr><td class="drug-red">Norepinephrine</td><td>&alpha;1=&alpha;2, &beta;1&gt;&gt;&beta;2</td><td>Pressor agent for hypotension</td></tr>
+<tr><td class="drug-red">Epinephrine</td><td>&beta;1=&beta;2&gt;&alpha;1=&alpha;2</td><td>Anaphylaxis, cardiac arrest, asthma/COPD rescue</td></tr>
+<tr><td class="drug-red">Phenylephrine</td><td>Pure &alpha;1-selective</td><td>Pressor support, nasal decongestant, mydriasis</td></tr>
+<tr><td class="drug-red">Clonidine</td><td>&alpha;2-selective</td><td>Hypertension, withdrawal sedative</td></tr>
+<tr><td class="drug-red">Dobutamine</td><td>&beta;1-selective</td><td>MI, heart failure, cardiogenic shock</td></tr>
+<tr><td class="drug-red">Albuterol</td><td>&beta;2-selective</td><td>Bronchospasm in asthma</td></tr>
+<tr><td class="drug-red">Isoproterenol</td><td>Non-selective &beta;1=&beta;2, minimal &alpha;</td><td>Heart block/bradycardia (rarely used today)</td></tr>
+<tr><td class="drug-red">Fenoldopam</td><td>Selective D<sub>1</sub> agonist</td><td>Hypertensive crisis/emergency</td></tr>
+<tr><td class="drug-red">Dopamine</td><td>D<sub>1</sub>=D<sub>2</sub>&gt;&beta;1&gt;&alpha;, dose-dependent</td><td>Cardiogenic shock</td></tr>
+<tr><td class="drug-red">Amphetamine</td><td>Indirect-acting (NET reversal)</td><td>ADHD (dextroamphetamine)</td></tr>
+<tr><td class="drug-red">Ephedrine</td><td>Mixed direct + indirect agonist</td><td>Decongestant, BP support during spinal anesthesia</td></tr>
+<tr><td class="drug-red">Tyramine</td><td>Indirect-acting (NET reversal, no CNS entry)</td><td>Dietary source; dangerous with MAOIs</td></tr>
+<tr><td class="drug-red">Cocaine</td><td>NET/DAT reuptake inhibitor; Na<sup>+</sup> channel blocker at high dose</td><td>Local anesthetic; heavily abused recreationally</td></tr>
+</table>
+
+<h3 class="drug-name">Norepinephrine</h3>
+<p>&alpha;1 = &alpha;2, &beta;1 &gt;&gt; &beta;2. The natural sympathetic/CNS neurotransmitter; a weak &beta;2 agonist, so it cannot rescue anaphylaxis. Heart: direct positive inotropy/chronotropy via &beta;1, but this is offset by indirect reflex bradycardia (blocked by atropine) &mdash; the net effect is increased force with decreased or unchanged rate. Vessels: &alpha;1-mediated vasoconstriction raises blood pressure. Therapeutic use: pressor agent for hypotension.</p>
+
+<h3 class="drug-name">Epinephrine</h3>
+<p>&beta;1 = &beta;2 &gt; &alpha;1 = &alpha;2. Heart (&beta;1): increased rate, force, work, and O<sub>2</sub> consumption. Lungs (&beta;2): bronchodilation. Metabolic effects: hyperglycemia (&beta;2/&alpha;2 &mdash; increases glycogenolysis, gluconeogenesis, and glucagon release; diabetic patients may need more insulin) and lipolysis (&beta;1/&beta;3). The vascular effect is dose-dependent: at low/therapeutic doses, &beta;2 vasodilation in skeletal muscle can dominate; at high doses, &alpha;1 vasoconstriction dominates.</p>
+<div class="pearl">
+<span class="pearl-label">Epinephrine reversal</span>
+A nonselective alpha-blocker such as phentolamine can flip epinephrine's pressor response into a depressor response by unmasking &beta;2 vasodilation.
+</div>
+<p>Therapeutic uses: anaphylaxis, asthma/COPD rescue, hypotension/shock, cardiac arrest, adjunct to local anesthetics (prolongs action, reduces systemic absorption/bleeding), and intraocular surgery (mydriasis). ADRs: anxiety, tremor, headache, pulmonary edema, hyperglycemia.</p>
+
+<h3 class="drug-name">Phenylephrine</h3>
+<p>Pure &alpha;1-selective agonist; a pressor agent. Vasoconstriction raises both systolic and diastolic blood pressure, which triggers reflex bradycardia (blocked by atropine). Therapeutic uses: short-term BP support during anesthesia, OTC nasal decongestant, and inducing mydriasis.</p>
+
+<h3 class="drug-name">Clonidine</h3>
+<p>&alpha;2-selective agonist that stimulates presynaptic &alpha;2 receptors in the CNS to decrease sympathetic outflow. IV dosing can transiently raise blood pressure (via peripheral &alpha;2B) before lowering it (via central &alpha;2A); oral dosing lowers blood pressure through decreased cardiac output/preload. Therapeutic uses: hypertension, and as a sedative for benzodiazepine/opioid/alcohol withdrawal. ADRs: postural hypotension, dry mouth, sedation, depression.</p>
+<div class="pearl">
+<span class="pearl-label">Rebound risk</span>
+Abrupt discontinuation causes rebound/hypertensive crisis, from &alpha;1 receptor upregulation during chronic use.
+</div>
+
+<h3 class="drug-name">Dobutamine</h3>
+<p>&beta;1-selective agonist. Increases rate and force of contraction and cardiac output without raising O<sub>2</sub> demand as much as other sympathomimetics; minimal vascular effects. Therapeutic uses: MI, heart failure, cardiogenic shock. ADRs: may increase infarct size, arrhythmias.</p>
+
+<h3 class="drug-name">Albuterol</h3>
+<p>&beta;2-selective agonist, roughly 10-fold more potent at &beta;2 than &beta;1, giving lung-over-heart selectivity. Therapeutic use: bronchospasm in asthma; aerosol delivery limits systemic absorption and ADRs. ADRs: muscle tremor, tachycardia (&beta;1 and reflex), rarely arrhythmia, anxiety, restlessness, headache, hyperglycemia, hypokalemia.</p>
+
+<h3 class="drug-name">Isoproterenol</h3>
+<p>Non-selective &beta;1 = &beta;2 agonist with essentially no &alpha; activity; a synthetic catecholamine. Heart: increased rate/force (&beta;1). Vessels: &beta;2 vasodilation (increases systolic BP, decreases diastolic BP, little/no change in mean BP). Lungs: &beta;2 bronchodilation. Therapeutic use: heart block/bradycardia (rarely used today). ADRs: flushing, angina, tachycardia, arrhythmia.</p>
+
+<h3 class="drug-name">Fenoldopam</h3>
+<p>Selective D<sub>1</sub> agonist causing peripheral arterial dilation and natriuresis. Short half-life (~10 minutes), given as a continuous IV infusion. Therapeutic use: hypertensive crisis/emergency. ADRs: reflex tachycardia, flushing, headache, increased intraocular pressure (contraindicated in glaucoma).</p>
+
+<h3 class="drug-name">Dopamine</h3>
+<p>D<sub>1</sub> = D<sub>2</sub> &gt; &beta;1 &gt; &alpha;, strictly dose-dependent:</p>
+<ul class="plain">
+<li><strong>Low dose:</strong> vasodilation (D<sub>1</sub> stimulation &rarr; cAMP-mediated relaxation of mesenteric/renal vasculature; presynaptic D<sub>2</sub> stimulation inhibits further NE release)</li>
+<li><strong>Intermediate dose:</strong> increased cardiac contractility (direct &beta;1 stimulation)</li>
+<li><strong>High dose:</strong> vasoconstriction (&alpha; receptor activation)</li>
+</ul>
+<p>Therapeutic use: cardiogenic shock, per the older ACCF/AHA 2013 guideline &mdash; though more recent evidence suggests no benefit or possible harm.</p>
+
+<h3 class="drug-name">Amphetamine</h3>
+<p>Indirect-acting. Mechanism: taken up into the presynaptic neuron via NET, transported into the vesicle by VMAT, displaces NE into the cytosol, then reverses NET to release NE into the synapse. Enters the CNS, causing CNS stimulation. Repeated dosing in a short period causes tachyphylaxis (vesicular NE depletion). Dextroamphetamine is used for ADHD; methamphetamine is a heavily abused related drug.</p>
+
+<h3 class="drug-name">Ephedrine</h3>
+<p>From the ephedra plant (ma huang). A mixed direct and indirect adrenergic agonist: reverses NET (indirect) and is also a weak direct agonist at &alpha;1 = &alpha;2 = &beta;1 = &beta;2. Long duration of action because it resists MAO/COMT breakdown, and it enters the CNS. Therapeutic uses: nasal decongestant, and maintaining blood pressure during spinal anesthesia (its long duration is useful here). Pseudoephedrine, an enantiomer, is the behind-the-counter OTC decongestant; ephedra-containing dietary supplements are FDA-banned.</p>
+
+<h3 class="drug-name">Tyramine</h3>
+<p>A normal byproduct of tyrosine metabolism, found in high amounts in fermented foods (aged cheese, cured meats, tap beer). Shares the same indirect mechanism as amphetamine (reverses NET) but does not enter the CNS. Normally metabolized in the gut/liver by MAO-A.</p>
+<div class="pearl">
+<span class="pearl-label">MAOI interaction</span>
+Dangerous in patients taking MAO inhibitors &mdash; too much tyramine gets absorbed intact and can precipitate a hypertensive crisis (the classic "cheese reaction").
+</div>
+
+<h3 class="drug-name">Cocaine</h3>
+<p>Mechanism: inhibits NET (blocking reuptake of NE/DA), and at high doses blocks Na<sup>+</sup> channels. Therapeutic use: local anesthetic (injected locally, blocks sodium channels). Recreational abuse: enters the CNS and inhibits dopamine reuptake in the limbic "pleasure center" pathway; can be smoked, snorted, or injected for rapid onset and is highly abused. Toxicity symptoms include hypertension, MI, stroke, and the sensation of "bugs crawling on the skin" (formication).</p>
+
+</section>
+
+<!-- SECTION 5 -->
+<section class="topic" id="t5">
+<h2>5. Adrenergic Antagonists (Beta-Blockers + Alpha-Blockers)</h2>
+<div class="lede">Beta-blockers share a class-wide effect/ADR profile with individual agents distinguished mainly by selectivity; alpha-blockers split into non-selective (competitive vs. noncompetitive) and &alpha;1-/&alpha;2-selective agents.</div>
+
+<div class="summary">
+<strong>Beta-blocker class effects (background &mdash; applies to all three below):</strong> decreases HR, cardiac output, exercise tolerance, cardiac O<sub>2</sub> demand, and AV conduction (caution: can cause AV block); blocks &beta;2-mediated bronchodilation (precaution/contraindicated in asthma/COPD); reduces aqueous humor secretion (used for glaucoma); reduces glycogenolysis/glucagon secretion (caution in diabetics &mdash; can mask/prolong hypoglycemia). Therapeutic uses across the class include hypertension, angina, arrhythmia, post-MI (improves survival), migraine prophylaxis, essential tremor, and hyperthyroidism. Contraindicated in asthma, vasospastic angina/peripheral vascular disease, decompensated heart failure, and significant bradycardia. ADRs include bronchospasm, hypotension, fatigue/weakness, sexual dysfunction; abrupt discontinuation can cause rebound tachycardia/arrhythmia &mdash; never stop a beta-blocker suddenly.
+</div>
+
+<table>
+<caption>Quick Reference</caption>
+<tr><th>Drug</th><th>Class / selectivity</th><th>Key use</th></tr>
+<tr><td class="drug-red">Propranolol</td><td>Prototype non-selective &beta;-blocker (&beta;1=&beta;2&gt;&gt;&gt;&alpha;)</td><td>Full class of beta-blocker uses; full bronchospasm risk</td></tr>
+<tr><td class="drug-red">Metoprolol</td><td>&beta;1-selective ("cardioselective")</td><td>Angina, MI, heart failure, hypertension</td></tr>
+<tr><td class="drug-red">Carvedilol</td><td>Non-selective &beta;-blocker + &alpha;1-blocker</td><td>Stable congestive heart failure</td></tr>
+<tr><td class="drug-red">Phentolamine</td><td>Non-selective &alpha;1=&alpha;2, competitive (reversible)</td><td>Pheochromocytoma diagnosis/short-term management</td></tr>
+<tr><td class="drug-red">Phenoxybenzamine</td><td>Non-selective &alpha;1=&alpha;2, noncompetitive (irreversible)</td><td>Preoperative pheochromocytoma management</td></tr>
+<tr><td class="drug-red">Prazosin</td><td>&alpha;1-selective</td><td>Refractory hypertension, hypertension + BPH</td></tr>
+<tr><td class="drug-red">Doxazosin</td><td>&alpha;1-selective</td><td>Same class/profile as prazosin</td></tr>
+<tr><td class="drug-red">Tamsulosin</td><td>&alpha;1-selective (&alpha;1A-preferring)</td><td>Benign prostatic hyperplasia</td></tr>
+<tr><td class="drug-red">Yohimbine</td><td>&alpha;2-selective</td><td>Marketed supplement for ED (efficacy questionable)</td></tr>
+</table>
+
+<h3 class="drug-name">Propranolol</h3>
+<p>The prototype non-selective beta-blocker (&beta;1 = &beta;2 &gt;&gt;&gt; &alpha;). Carries the full class risk of bronchospasm, since it blocks &beta;2 as well as &beta;1.</p>
+
+<h3 class="drug-name">Metoprolol</h3>
+<p>&beta;1-selective ("cardioselective") beta-blocker.</p>
+<div class="mnemonic">
+<span class="mn-label">&beta;1-Selective class mnemonic</span>
+"BE A MAN" = Betaxolol, Esmolol, Atenolol, Metoprolol, Acebutolol, Nebivolol.
+</div>
+<p>Lower risk of bronchospasm than non-selective agents, and doesn't usually prolong hypoglycemia. Same therapeutic uses as the class (angina, MI, heart failure, hypertension &mdash; though no longer first-line for hypertension). ADRs also include CNS effects (dizziness, depression, fatigue, memory loss, vivid dreams) and arrhythmia risk, especially if stopped suddenly.</p>
+
+<h3 class="drug-name">Carvedilol</h3>
+<p>A non-selective beta-blocker plus an &alpha;1-blocker. Causes vasodilation and reduced heart rate, lowering blood pressure. Showed very dramatic improvement in clinical trials for stable congestive heart failure. Unique ADRs beyond typical beta-blocker effects: orthostatic hypotension and dizziness, from the added alpha blockade.</p>
+
+<h3 class="drug-name">Phentolamine</h3>
+<p>Prototype non-selective &alpha;1 = &alpha;2 competitive (reversible) antagonist. Used for diagnosis and short-term management of pheochromocytoma.</p>
+
+<h3 class="drug-name">Phenoxybenzamine</h3>
+<p>Non-selective &alpha;1 = &alpha;2 noncompetitive (irreversible) antagonist. Used preoperatively in pheochromocytoma to reduce sweating and hypertension before surgery.</p>
+<div class="pearl">
+<span class="pearl-label">Clinical pearl</span>
+Always give the alpha-blocker (phenoxybenzamine) before a beta-blocker in pheochromocytoma management &mdash; never beta-block first, or you risk unopposed alpha-mediated hypertensive crisis. Sequence: alpha-blocker &rarr; beta-blocker &rarr; surgery.
+</div>
+
+<h3 class="drug-name">Prazosin</h3>
+<p>&alpha;1-selective blocker. Mechanism: prevents vasoconstriction of arteries and veins, decreasing systemic vascular resistance, venous return, and preload. Usually does not increase heart rate/cardiac output, since there's no &alpha;2 blockade and thus no increased NE release. Also relaxes prostate smooth muscle. Therapeutic uses: third/fourth-line hypertension agent (add-on in refractory cases), and for concurrent hypertension plus benign prostatic hyperplasia. ADRs: dizziness, low energy, nasal congestion, headache, drowsiness, orthostatic hypotension.</p>
+<div class="pearl">
+<span class="pearl-label">First-dose effect</span>
+Notable "first-dose effect" of postural hypotension/syncope &mdash; usually dosed at bedtime to minimize this.
+</div>
+
+<h3 class="drug-name">Doxazosin</h3>
+<p>&alpha;1-selective blocker, same class and profile as prazosin.</p>
+
+<h3 class="drug-name">Tamsulosin</h3>
+<p>&alpha;1-selective blocker with higher affinity for the &alpha;1A receptor subtype, making it more prostate-selective with less blood pressure effect. Used specifically for benign prostatic hyperplasia.</p>
+
+<h3 class="drug-name">Yohimbine</h3>
+<p>&alpha;2-selective blocker with relatively little legitimate clinical usefulness. Extracted from yohimbine tree bark and marketed as a dietary/health supplement for erectile dysfunction, though efficacy is questionable.</p>
+
+</section>
+
+</main>
+
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('main').classList.toggle('expanded');
+  document.getElementById('sb-toggle').classList.toggle('collapsed');
+}
+
+const links = document.querySelectorAll('.sb-link');
+const sections = document.querySelectorAll('section.topic');
+
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById(link.dataset.target).scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector('.sb-link[data-target="' + entry.target.id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
