@@ -129,10 +129,15 @@
   #main {
     margin-left: 300px;
     padding: 60px 60px 100px 60px;
-    max-width: 920px;
     transition: margin-left 0.25s ease;
+    display: flex;
+    justify-content: center;
   }
   #main.expanded { margin-left: 0; }
+  #main > .content-wrap {
+    width: 100%;
+    max-width: 920px;
+  }
 
   h1.doc-title {
     font-family: Georgia, 'Times New Roman', serif;
@@ -272,6 +277,7 @@
 </nav>
 
 <main id="main">
+<div class="content-wrap">
 
 <h1 class="doc-title">Intro to Pediatrics Study Guide</h1>
 <div class="doc-subtitle">Built from all 5 lecture sources: Intro to Pediatrics overview (Dr. Stephens), Parts 1&ndash;3 (Dr. Wilde: Newborn Care, Preventative Care, Physical Exam &amp; Adolescent Care), and the Pediatrics Review Question bank</div>
@@ -780,6 +786,7 @@
 <div class="pq-block" id="pq-t13"></div>
 </section>
 
+</div>
 </main>
 
 <script>
