@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Intro to Pediatrics Study Guide</title>
+<style>
+  :root {
+    --cream: #f4f1ea;
+    --ink: #1f2320;
+    --muted: #767b70;
+    --green: #3d6b5c;
+    --green-dark: #2a4c41;
+    --sage-bg: #e3ede6;
+    --sage-border: #b9d0c2;
+    --thead-bg: #d9e6de;
+    --row-alt: #ebe8df;
+    --border: #d8d4c8;
+    --wrong: #b3432b;
+    --wrong-bg: #fbeae5;
+    --right-bg: #e6f2ec;
+    --mnemonic-bg: #f7ecdf;
+    --mnemonic-border: #c99a52;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Georgia, 'Iowan Old Style', serif;
+    font-size: 0.95rem;
+    line-height: 1.62;
+  }
+  a { color: var(--green); }
+
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 300px;
+    background: var(--cream);
+    border-right: 2px solid var(--ink);
+    overflow-y: auto;
+    padding: 20px 0 40px 0;
+    transition: transform 0.25s ease;
+    z-index: 20;
+  }
+  #sidebar.collapsed { transform: translateX(-300px); }
+  #sidebar .sb-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 0 22px 10px 22px;
+    text-transform: uppercase;
+  }
+  .sb-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.78rem;
+    padding: 8px 22px;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+  .sb-link:hover { background: var(--sage-bg); }
+  .sb-link.active {
+    background: var(--sage-bg);
+    border-left: 3px solid var(--green);
+    color: var(--green-dark);
+    font-weight: bold;
+  }
+  .sb-num { display:inline-block; width: 22px; color: var(--muted); }
+
+  #sb-toggle {
+    position: fixed;
+    top: 18px;
+    left: 312px;
+    z-index: 30;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: left 0.25s ease;
+  }
+  #sb-toggle.collapsed { left: 18px; }
+
+  #back-btn {
+    position: fixed;
+    top: 18px;
+    left: 440px;
+    z-index: 30;
+    background: var(--sage-bg);
+    border: 1px solid var(--sage-border);
+    border-radius: 4px;
+    color: var(--green-dark);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: left 0.25s ease;
+  }
+  #back-btn.collapsed { left: 145px; }
+  #back-btn:hover { background: var(--sage-border); }
+
+  #pdf-btn {
+    position: fixed;
+    top: 18px;
+    right: 24px;
+    z-index: 30;
+    background: var(--green-dark);
+    border: none;
+    border-radius: 4px;
+    color: #fdfcf9;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    padding: 9px 16px;
+    cursor: pointer;
+  }
+  #pdf-btn:hover { background: var(--green); }
+
+  #main {
+    margin-left: 300px;
+    padding: 60px 60px 100px 60px;
+    max-width: 920px;
+    transition: margin-left 0.25s ease;
+  }
+  #main.expanded { margin-left: 0; }
+
+  h1.doc-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin: 0 0 10px 0;
+  }
+  .doc-subtitle { color: var(--muted); font-size: 0.86rem; margin-bottom: 22px; }
+  .divider { border: none; border-top: 3px solid var(--ink); margin: 24px 0 30px 0; }
+  .toc-label { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+  ol.toc { padding-left: 22px; margin-bottom: 50px; column-count: 1; }
+  ol.toc li { margin-bottom: 8px; }
+  ol.toc a { color: var(--green-dark); text-decoration: none; border-bottom: 1px dotted var(--green-dark); }
+  ol.toc a:hover { color: var(--green); }
+
+  section.topic { margin-bottom: 56px; padding-top: 10px; scroll-margin-top: 20px; }
+  section.topic h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  section.topic h3.sub {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    color: var(--green-dark);
+    margin: 22px 0 8px 0;
+  }
+  section.topic p { margin: 0 0 14px 0; }
+
+  .keypoint {
+    background: var(--sage-bg);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  .mnemonic {
+    background: var(--mnemonic-bg);
+    border-left: 4px solid var(--mnemonic-border);
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  .mnemonic .mn-label {
+    font-weight: bold;
+    color: #8a5a20;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .objectives-box {
+    background: #fff;
+    border: 1px solid var(--sage-border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 0 20px 0;
+    font-size: 0.88rem;
+  }
+  .objectives-box .ob-label {
+    font-weight: bold;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 22px 0; font-size: 0.8rem; }
+  caption { text-align:left; font-size:0.72rem; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; caption-side: top; }
+  th, td { border: 1px solid var(--border); padding: 6px 9px; text-align: left; vertical-align: top; }
+  th { background: var(--thead-bg); color: var(--green-dark); font-weight: bold; text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.03em; }
+  tr:nth-child(even) td { background: var(--row-alt); }
+
+  ul.plain { margin: 6px 0 14px 0; padding-left: 20px; }
+  ul.plain li { margin-bottom: 4px; }
+
+  .pq-block { margin-top: 30px; border-top: 1px solid var(--border); padding-top: 18px; }
+  .pq-block > .pq-title { font-weight: bold; color: var(--green-dark); margin-bottom: 14px; font-size: 0.95rem; }
+  .mcq { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-bottom: 14px; }
+  .mcq .stem { font-size: 0.88rem; margin-bottom: 10px; line-height: 1.5; }
+  .mcq .choice {
+    display: block; width: 100%; text-align: left; background: #f7f6f2;
+    border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; margin-bottom: 6px;
+    font-family: inherit; font-size: 0.82rem; cursor: pointer; color: var(--ink);
+  }
+  .mcq .choice:hover { background: #ececE5; }
+  .mcq .choice.correct { background: var(--right-bg); border-color: var(--green); font-weight: bold; }
+  .mcq .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .mcq .choice.disabled { cursor: default; }
+  .mcq .feedback { font-size: 0.81rem; margin-top: 10px; padding: 10px 12px; border-radius: 4px; display: none; line-height: 1.45; }
+  .mcq .feedback.show { display: block; }
+  .mcq .feedback.right { background: var(--right-bg); color: #1c3a2e; }
+  .mcq .feedback.wrong { background: var(--wrong-bg); color: #6b2416; }
+
+  @media print {
+    #sidebar, #sb-toggle, #pdf-btn, #back-btn { display: none; }
+    #main { margin-left: 0; padding: 20px; max-width: 100%; }
+    section.topic { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-300px); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; padding: 60px 24px 80px 24px; }
+    #sb-toggle { left: 18px; }
+    #back-btn { left: 145px; }
+    #pdf-btn { right: 18px; top: 68px; }
+  }
+</style>
+</head>
+<body>
+
+<button id="sb-toggle" onclick="toggleSidebar()">&#9776; Sections</button>
+<a id="back-btn" href="index.html">&larr; Back to Study Guides</a>
+<button id="pdf-btn" onclick="window.print()">&#8681; Download PDF</button>
+
+<nav id="sidebar">
+  <div class="sb-label">Sections</div>
+  <button class="sb-link" data-target="t1"><span class="sb-num">1</span>Pediatric History &amp; Exam Approach</button>
+  <button class="sb-link" data-target="t2"><span class="sb-num">2</span>Delivery &amp; APGAR Scoring</button>
+  <button class="sb-link" data-target="t3"><span class="sb-num">3</span>Gestational Age &amp; Growth Classification</button>
+  <button class="sb-link" data-target="t4"><span class="sb-num">4</span>Neonatal Intake, Output &amp; Weight Pattern</button>
+  <button class="sb-link" data-target="t5"><span class="sb-num">5</span>Neonatal Jaundice</button>
+  <button class="sb-link" data-target="t6"><span class="sb-num">6</span>Circumcision &amp; Hospital Discharge</button>
+  <button class="sb-link" data-target="t7"><span class="sb-num">7</span>Well-Child Visits &amp; Developmental Screening</button>
+  <button class="sb-link" data-target="t8"><span class="sb-num">8</span>Developmental Milestones by Age</button>
+  <button class="sb-link" data-target="t9"><span class="sb-num">9</span>Common Infant Issues &amp; Anticipatory Guidance</button>
+  <button class="sb-link" data-target="t10"><span class="sb-num">10</span>Physical Exam Findings (HEENT, Cardiac, Hip, Skin)</button>
+  <button class="sb-link" data-target="t11"><span class="sb-num">11</span>Primitive Reflexes</button>
+  <button class="sb-link" data-target="t12"><span class="sb-num">12</span>Immunizations</button>
+  <button class="sb-link" data-target="t13"><span class="sb-num">13</span>Adolescent Development, Tanner Staging &amp; HEEADSSS</button>
+</nav>
+
+<main id="main">
+
+<h1 class="doc-title">Intro to Pediatrics Study Guide</h1>
+<div class="doc-subtitle">Built from all 5 lecture sources: Intro to Pediatrics overview (Dr. Stephens), Parts 1&ndash;3 (Dr. Wilde: Newborn Care, Preventative Care, Physical Exam &amp; Adolescent Care), and the Pediatrics Review Question bank</div>
+
+<hr class="divider">
+
+<div class="toc-label">CONTENTS</div>
+<ol class="toc">
+  <li><a href="#t1">Pediatric History &amp; Exam Approach</a></li>
+  <li><a href="#t2">Delivery &amp; APGAR Scoring</a></li>
+  <li><a href="#t3">Gestational Age &amp; Growth Classification</a></li>
+  <li><a href="#t4">Neonatal Intake, Output &amp; Weight Pattern</a></li>
+  <li><a href="#t5">Neonatal Jaundice</a></li>
+  <li><a href="#t6">Circumcision &amp; Hospital Discharge</a></li>
+  <li><a href="#t7">Well-Child Visits &amp; Developmental Screening</a></li>
+  <li><a href="#t8">Developmental Milestones by Age</a></li>
+  <li><a href="#t9">Common Infant Issues &amp; Anticipatory Guidance</a></li>
+  <li><a href="#t10">Physical Exam Findings (HEENT, Cardiac, Hip, Skin)</a></li>
+  <li><a href="#t11">Primitive Reflexes</a></li>
+  <li><a href="#t12">Immunizations</a></li>
+  <li><a href="#t13">Adolescent Development, Tanner Staging &amp; HEEADSSS</a></li>
+</ol>
+
+<!-- 1 -->
+<section class="topic" id="t1">
+<h2>1. Pediatric History &amp; Exam Approach</h2>
+<p>No single approach to the history applies to all pediatric patients. In younger children, parents/caregivers are the primary historians; as soon as a child can communicate, involve them directly. By around <strong>age 7</strong>, children may be considered reasonably reliable historians about their own health. By adolescence, much of the history is taken with the patient alone.</p>
+
+<div class="keypoint">Pediatric family history should include not just adult-onset conditions but items specifically relevant to children: genetic disease, congenital abnormalities, miscarriages, and unexpected/early deaths in the family. For a newborn specifically, family history of genetic disease is the single most important item to elicit. For any pediatric patient, an unexplained sudden cardiac death in a young relative is highly relevant (possible inherited arrhythmia/cardiomyopathy risk).</p>
+
+<p>A pediatric history should always include nutrition, elimination, and sleep, in addition to the standard adult-style history components (PMHx, birth history, meds, allergies, FMHx, social history including family structure, pets, daycare, smokers in the home).</p>
+
+<table>
+<caption>Nutrition &amp; Elimination Norms</caption>
+<tr><th>Topic</th><th>Key fact</th></tr>
+<tr><td>Breastfeeding recommendation</td><td>AAP recommends <strong>exclusive breastfeeding for the first 6 months of life</strong>; solids generally introduced between 4&ndash;6 months</td></tr>
+<tr><td>First stool</td><td>Meconium &mdash; black, sticky/tarry</td></tr>
+<tr><td>Breastfed stool</td><td>Seedy, mustard-yellow</td></tr>
+<tr><td>Formula-fed stool</td><td>Soft, light-brown (sometimes green-yellow)</td></tr>
+<tr><td>Potty training</td><td>Generally achieved between <strong>2&ndash;3 years</strong> of age</td></tr>
+</table>
+
+<h3 class="sub">General exam approach principles</h3>
+<ul class="plain">
+<li>Growth (height/weight, plotted on a standardized growth curve) should be measured and recorded <strong>at every visit</strong> &mdash; it can reveal failure to thrive or metabolic/endocrine disease.</li>
+<li>Be flexible with exam sequence &mdash; do less-tolerated portions later, and examine the area of a specific complaint last.</li>
+<li>Infants &lt;9 months: exam on the table (with safety precautions against rolling off). &gt;9 months: exam on parent's lap (stranger anxiety develops around this age).</li>
+<li>Toddlers: undress to diaper, exam on parent's lap, use toys/distraction, let the child touch equipment first.</li>
+<li>School-age children (4&ndash;10 yrs): can generally use head-to-toe order; explain each step; respect modesty.</li>
+<li>Adolescents: gowned, on table; offer to have parent step out for part of the history/exam; always use a chaperone for breast/GU exams.</li>
+</ul>
+
+<div class="pq-block" id="pq-t1"></div>
+</section>
+
+<!-- 2 -->
+<section class="topic" id="t2">
+<h2>2. Delivery &amp; APGAR Scoring</h2>
+<p>A pediatrician's job starts at delivery &mdash; roughly 1 in 500 newborns need some form of support in the first few minutes of life. For low-risk deliveries, the newborn is typically evaluated within 24 hours in the newborn nursery (NBN) rather than at the delivery itself; high-risk deliveries are attended directly.</p>
+
+<div class="mnemonic">
+<span class="mn-label">APGAR mnemonic</span>
+<strong>A</strong>ppearance (color) &middot; <strong>P</strong>ulse &middot; <strong>G</strong>rimace (reflex irritability) &middot; <strong>A</strong>ctivity (muscle tone) &middot; <strong>R</strong>espiratory effort
+</div>
+
+<table>
+<caption>APGAR Scoring (0&ndash;2 points per component)</caption>
+<tr><th>Clinical sign</th><th>0 points</th><th>1 point</th><th>2 points</th></tr>
+<tr><td>Appearance</td><td>Blue, pale</td><td>Pink body, blue extremities</td><td>Pink all over</td></tr>
+<tr><td>Pulse</td><td>Absent</td><td>&lt;100</td><td>&gt;100</td></tr>
+<tr><td>Reflex irritability (Grimace)</td><td>No response</td><td>Grimace</td><td>Crying vigorously, sneeze or cough</td></tr>
+<tr><td>Activity</td><td>Flaccid</td><td>Some flexion of arms/legs</td><td>Active movement</td></tr>
+<tr><td>Respiratory effort</td><td>Absent</td><td>Slow &amp; irregular</td><td>Good, strong</td></tr>
+</table>
+
+<div class="keypoint">Scores are assigned at <strong>1 minute and 5 minutes</strong> (a third score at 10 minutes if needed). A common, expected score is 8&ndash;9 (a point is often lost on Appearance due to acrocyanosis of the extremities). Scores &lt;8 at the 5-minute mark are a concern, especially &lt;7 &mdash; if it hasn't improved by 5 minutes, further evaluation/intervention is warranted.</div>
+
+<p>Shortly after delivery, nursing staff routinely provide: <strong>erythromycin ointment</strong> in the eyes (infection prevention), a <strong>vitamin K injection</strong> (bleeding prevention), and a full bath (typically delayed to encourage skin-to-skin contact with the mother first).</p>
+
+<div class="pq-block" id="pq-t2"></div>
+</section>
+
+<!-- 3 -->
+<section class="topic" id="t3">
+<h2>3. Gestational Age &amp; Growth Classification</h2>
+<p>Gestational age and birth weight together help predict medical problems and morbidity. Gestational age is estimated from neuromuscular signs and physical characteristics using the <strong>Ballard scoring system</strong> when precise dating/prenatal records are unavailable.</p>
+
+<table>
+<caption>Classification by Growth Percentile for Gestational Age</caption>
+<tr><th>Classification</th><th>Abbreviation</th><th>Percentile</th></tr>
+<tr><td>Small for gestational age</td><td>SGA</td><td>&lt;10th</td></tr>
+<tr><td>Appropriate for gestational age</td><td>AGA</td><td>10th&ndash;90th</td></tr>
+<tr><td>Large for gestational age</td><td>LGA</td><td>&gt;90th</td></tr>
+</table>
+
+<table>
+<caption>Classification by Gestational Age</caption>
+<tr><th>Classification</th><th>Gestational age</th></tr>
+<tr><td>Preterm</td><td>&lt; 34 weeks</td></tr>
+<tr><td>Late preterm</td><td>34&ndash;36 weeks</td></tr>
+<tr><td>Term</td><td>37&ndash;42 weeks</td></tr>
+<tr><td>Post term</td><td>&gt; 42 weeks</td></tr>
+</table>
+
+<table>
+<caption>Classification by Birth Weight</caption>
+<tr><th>Classification</th><th>Weight</th></tr>
+<tr><td>Extremely low birth weight</td><td>&lt; 1,000 g</td></tr>
+<tr><td>Very low birth weight</td><td>&lt; 1,500 g</td></tr>
+<tr><td>Low birth weight</td><td>&lt; 2,500 g</td></tr>
+<tr><td>Normal birth weight</td><td>&ge; 2,500 g</td></tr>
+</table>
+
+<h3 class="sub">Ballard Scoring System</h3>
+<p>Scores from two categories are added together, and the total correlates to a maturity rating (estimated gestational age):</p>
+<ul class="plain">
+<li><strong>Neuromuscular maturity:</strong> posture, square window (degree of wrist flexion), arm recoil, popliteal angle, scarf sign (ability to move the arm across the body), heel-to-ear</li>
+<li><strong>Physical maturity:</strong> skin, lanugo (fine body hair), plantar surface creases, breast, eye/ear (ear recoil), genitals</li>
+</ul>
+
+<h3 class="sub">Growth tracking (beyond the newborn period)</h3>
+<ul class="plain">
+<li>Growth in the neonatal/infant period is faster than any other age: <strong>birth weight triples by 1 year</strong>, and height increases by ~50%.</li>
+<li>Infant/toddler growth charts plot: length, head circumference (until 24&ndash;36 months), weight, and BMI after age 2.</li>
+<li>School-age/adolescent growth rate slows until puberty; charts plot height, weight, and BMI.</li>
+<li>Always plot measurements on a growth chart and review it <em>before</em> examining the patient.</li>
+</ul>
+
+<div class="pq-block" id="pq-t3"></div>
+</section>
+
+<!-- 4 -->
+<section class="topic" id="t4">
+<h2>4. Neonatal Intake, Output &amp; Weight Pattern</h2>
+<table>
+<caption>Feeding</caption>
+<tr><th>Topic</th><th>Detail</th></tr>
+<tr><td>Frequency</td><td>Every 2&ndash;3 hours</td></tr>
+<tr><td>Breastfeeding</td><td>The ideal; initially small volumes of colostrum, with milk "coming in" after 2&ndash;3 days and larger volumes taken in; roughly 10&ndash;15 minutes per side</td></tr>
+<tr><td>Formula</td><td>15&ndash;30 mL (0.5&ndash;1 oz) per feed</td></tr>
+</table>
+
+<table>
+<caption>Output</caption>
+<tr><th>Topic</th><th>Detail</th></tr>
+<tr><td>Voiding</td><td>Most void within the first 24 hours; 3&ndash;4 voids/24h in the first 1&ndash;3 days, increasing to 6&ndash;8 voids/24h by day 4&ndash;5</td></tr>
+<tr><td>First stool</td><td>Meconium (dark, black, tarry); should occur within the first 24 hours of life</td></tr>
+<tr><td>Stool by day 4&ndash;5</td><td>Breastfed &mdash; yellow, seedy. Formula-fed &mdash; sometimes green-yellow</td></tr>
+</table>
+
+<div class="keypoint">It is <strong>normal for a newborn to lose 7&ndash;10% of birth weight</strong> in the first few days of life. The infant should be <strong>back to birth weight by 10&ndash;14 days</strong>, with expected weight gain thereafter of roughly <strong>1 ounce per day</strong>. This pattern (loss, then steady regain by ~2 weeks) is checked specifically at the 2-week visit.</div>
+
+<div class="pq-block" id="pq-t4"></div>
+</section>
+
+<!-- 5 -->
+<section class="topic" id="t5">
+<h2>5. Neonatal Jaundice</h2>
+<p>The major concern with untreated severe jaundice is <strong>kernicterus</strong> &mdash; bilirubin-induced neurologic damage, particularly of concern once unconjugated bilirubin exceeds roughly 25 mg/dL.</p>
+
+<table>
+<caption>Causes of Neonatal Jaundice</caption>
+<tr><th>Category</th><th>Examples</th></tr>
+<tr><td>Decreased conjugation of bilirubin</td><td>Breastmilk jaundice, cholestasis, CMV</td></tr>
+<tr><td>Increased red blood cell turnover</td><td>Bruising, ABO incompatibility, Rh incompatibility</td></tr>
+<tr><td>Physiologic ("normal") jaundice</td><td>Occurs in about half of all newborns</td></tr>
+<tr><td>Pathologic jaundice (other causes)</td><td>Breastfeeding jaundice, cephalohematoma, infection, hemoglobinopathies (e.g., thalassemia), enzyme deficiencies (e.g., G6PD)</td></tr>
+</table>
+
+<div class="keypoint"><strong>Physiologic jaundice</strong> appears on day 2&ndash;3, peaks around day 5, and usually resolves within a week. <strong>Any jaundice appearing within the first 24 hours of life is, by definition, pathologic</strong> and warrants prompt evaluation.</div>
+
+<p><strong>Evaluation:</strong> transcutaneous bilimeter, serum direct/indirect bilirubin levels; additional labs as indicated: neonatal blood type, direct antibody titer (Coombs test), complete blood count and smear.</p>
+
+<p><strong>Interpretation &amp; treatment:</strong> compare the bilirubin level to a nomogram (risk-based on age in hours) and treat accordingly; repeat levels if concerning. Phototherapy is used for high levels or a rapid rate of rise (&gt;5 mg/dL per day); exchange transfusion is reserved for severe cases.</p>
+
+<div class="pq-block" id="pq-t5"></div>
+</section>
+
+<!-- 6 -->
+<section class="topic" id="t6">
+<h2>6. Circumcision &amp; Hospital Discharge</h2>
+<h3 class="sub">Circumcision</h3>
+<table>
+<caption>Circumcision: Benefits, Complications &amp; Contraindications</caption>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Benefits</td><td>Reduced risk of UTI in the first year of life; reduced heterosexual acquisition of HIV and transmission of other STIs</td></tr>
+<tr><td>Complications</td><td>Generally infrequent/minor; lower complication rate if performed in the newborn period vs. later in life</td></tr>
+<tr><td>AAP policy</td><td>Health benefits are not considered great enough to recommend <em>routine</em> circumcision for all male newborns</td></tr>
+<tr><td>Contraindications</td><td>Hypospadias or other penile anomalies; prematurity; bleeding disorders (relative contraindication)</td></tr>
+</table>
+
+<h3 class="sub">Hospital discharge</h3>
+<table>
+<caption>Discharge Timing &amp; Requirements</caption>
+<tr><th>Item</th><th>Detail</th></tr>
+<tr><td>Vaginal delivery discharge</td><td>2 days after birth</td></tr>
+<tr><td>Cesarean section discharge</td><td>3 days after birth</td></tr>
+<tr><td>Prior to discharge</td><td>Hepatitis B immunization, hearing screen, 1st newborn screening blood test, circumcision (if elected), discharge instructions (feeding/output goals, cord care, safety/car seat/SIDS prevention, call precautions)</td></tr>
+<tr><td>Follow-up</td><td>PCP follow-up within 24&ndash;48 hours post-discharge (monitor weight loss/dehydration and hyperbilirubinemia; premature infants are higher risk)</td></tr>
+<tr><td>2-week check</td><td>Should be back to birth weight by 10&ndash;14 days; 2nd newborn screen performed</td></tr>
+</table>
+
+<div class="pq-block" id="pq-t6"></div>
+</section>
+
+<!-- 7 -->
+<section class="topic" id="t7">
+<h2>7. Well-Child Visits &amp; Developmental Screening</h2>
+<p>Screening at well-child visits engages parents in the child's development, sets expectations, and gives the provider a structured way to listen to parental concerns.</p>
+
+<table>
+<caption>Routine Well-Child Visit Schedule</caption>
+<tr><th>Period</th><th>Visit timing</th></tr>
+<tr><td>Newborn</td><td>2&ndash;3 days, then 2 weeks, then 1 month</td></tr>
+<tr><td>Infant</td><td>2, 4, 6, 9, 12, 15, 18, 24 months</td></tr>
+<tr><td>Beyond age 2</td><td>Annually through middle childhood and adolescence into adulthood</td></tr>
+</table>
+
+<div class="keypoint"><strong>Developmental surveillance vs. developmental screening</strong> &mdash; a frequently tested distinction: <strong>Surveillance</strong> is the ongoing use of parents' concerns, the provider's own observations, and prior knowledge of the child to judge developmental risk at every visit. <strong>Screening</strong> is the use of a structured, standardized tool (e.g., Denver II [direct provider observation], Ages &amp; Stages Questionnaires/ASQ [parent-completed]) specifically to identify children at risk. Formal screening should occur at the <strong>9-, 18-, and 30-month</strong> visits, and additionally at <em>any</em> visit where surveillance raises a concern &mdash; even if it isn't one of those three standard screening ages.</div>
+
+<p>Developmental delay is common: up to <strong>15% of children aged 3&ndash;17</strong> have delayed development in at least one area. Risk factors include low socioeconomic status, poor nutrition, low parental education, and inadequate/unstable housing. Because delay is common and consequences of missing it can be significant, any concern should prompt referral to early intervention services for evaluation.</p>
+
+<h3 class="sub">Autism screening red flags (M-CHAT-R)</h3>
+<div class="keypoint">Key M-CHAT-R type questions: Is your child interested in other children? Does your child respond when called by name? Does your child smile back when you smile at them?</div>
+<table>
+<caption>Autism Red Flags by Age</caption>
+<tr><th>Age</th><th>Red flag(s)</th></tr>
+<tr><td>~6 months</td><td>Avoiding eye contact (an early red flag to watch for)</td></tr>
+<tr><td>~18 months</td><td>No single words; persistent rocking, hand flapping, head banging, or toe walking; <em>any loss</em> of previously acquired language or social skills; not playing interactively with other children</td></tr>
+</table>
+<p>Note: pointing to indicate interest in objects is a typical (not concerning) behavior at 18 months &mdash; it's the <em>absence</em> of shared-interest behaviors, and the presence of repetitive/self-stimulating movements or skill loss, that are red flags.</p>
+
+<div class="pq-block" id="pq-t7"></div>
+</section>
+
+<!-- 8 -->
+<section class="topic" id="t8">
+<h2>8. Developmental Milestones by Age</h2>
+<table>
+<caption>Definitions of Pediatric Age Periods</caption>
+<tr><th>Period</th><th>Age range</th></tr>
+<tr><td>Newborn</td><td>0&ndash;28 days</td></tr>
+<tr><td>Infancy</td><td>0&ndash;12 months</td></tr>
+<tr><td>Toddler/Early childhood</td><td>1&ndash;4 years</td></tr>
+<tr><td>School-aged/Middle childhood</td><td>5&ndash;10 years</td></tr>
+<tr><td>Adolescence</td><td>11&ndash;20 years (early, middle, late)</td></tr>
+</table>
+
+<h3 class="sub">Neonate/Infant milestones</h3>
+<ul class="plain">
+<li><strong>Language:</strong> 2 months &mdash; social smile; 6 months &mdash; babbling (consonant sounds); 1 year &mdash; 1&ndash;3 words</li>
+<li><strong>Cognitive:</strong> 6 months &mdash; recognizes strangers; 9 months &mdash; stranger anxiety begins, seeks comfort from parent, learns cause/effect, develops object permanence and tool use</li>
+<li><strong>Social:</strong> bonding, attachment to caregivers; temperament varies widely between children; predictable schedules and consistent discipline help children feel secure</li>
+</ul>
+
+<h3 class="sub">Toddler milestones</h3>
+<ul class="plain">
+<li><strong>Physical/motor:</strong> growth rate slows to about half the infant rate; after age 2, gains ~2&ndash;3 kg and 5 cm per year; gross motor &mdash; walk, jump, hop, skip; fine motor &mdash; draw lines, make circles</li>
+<li><strong>Cognitive/language:</strong> sensorimotor learning, simple problem-solving, imitative play; progresses from 2&ndash;3 word phrases to full sentences</li>
+<li><strong>Social/emotional:</strong> progression from imitative to imaginative play; drive for independence; temper tantrums common</li>
+</ul>
+
+<div class="mnemonic">
+<span class="mn-label">Speech development mnemonics</span>
+<strong>Sentence length:</strong> 2-year-old &rarr; 2-word sentences; 3-year-old &rarr; 3-word sentences.<br>
+<strong>Intelligibility to a stranger:</strong> 2-year-old &rarr; ~50%; 3-year-old &rarr; ~75%; 4-year-old &rarr; ~100%.
+</div>
+
+<h3 class="sub">School-aged child (5&ndash;10 yrs) milestones</h3>
+<ul class="plain">
+<li><strong>Physical/motor:</strong> steady but slow growth; strength and coordination improve</li>
+<li><strong>Cognitive/language:</strong> concrete operational thinking (limited logic, applied mainly to physical objects), developing self-efficacy</li>
+<li><strong>Social/emotional:</strong> progressively more independent, developing self-esteem (heavily shaped by family and environment), evolving self-identity</li>
+</ul>
+
+<div class="pq-block" id="pq-t8"></div>
+</section>
+
+<!-- 9 -->
+<section class="topic" id="t9">
+<h2>9. Common Infant Issues &amp; Anticipatory Guidance</h2>
+<div class="mnemonic">
+<span class="mn-label">The "3 C's" of early infancy</span>
+<strong>C</strong>ongestion &middot; <strong>C</strong>onstipation (often perceived rather than true) &middot; <strong>C</strong>olic
+</div>
+
+<table>
+<caption>Managing the 3 C's</caption>
+<tr><th>Issue</th><th>Management</th></tr>
+<tr><td>Congestion</td><td>Saline rinse, suction; no effective medications for this</td></tr>
+<tr><td>Constipation</td><td>Monitoring; pear juice, karo syrup, or Miralax as needed</td></tr>
+<tr><td>Colic</td><td>Swaddling, white noise, car rides; discuss keeping the infant safe when a parent is frustrated (take a break, leave infant safely in the crib, accept help)</td></tr>
+</table>
+
+<div class="keypoint"><strong>Colic definition (paroxysms of fussiness/crying):</strong> 3 or more hours a day, 3 or more days a week, usually in the evenings, not explained by an underlying medical condition. Peaks around 6 weeks and resolves by 3&ndash;4 months.</div>
+
+<div class="mnemonic">
+<span class="mn-label">Colic counseling mnemonic</span>
+"Don't shake. Take a break." &mdash; change the diaper, feed, burp, swaddle, and examine the child for a physical cause before assuming it's simply colic.
+</div>
+
+<h3 class="sub">Fever in the neonate</h3>
+<div class="keypoint">Fever in a neonate (within roughly the first 30 days) is a <strong>medical emergency</strong> &mdash; a full sepsis workup is indicated and the infant is considered septic until proven otherwise. Remember that neonatal sepsis can also present with <em>hypothermia</em> or temperature instability rather than fever.</div>
+
+<h3 class="sub">Safety &amp; anticipatory guidance highlights</h3>
+<ul class="plain">
+<li>Back to sleep; never shake a baby; no walkers.</li>
+<li>Infants begin rolling around 3&ndash;4 months &mdash; discuss fall prevention at the 2-month visit.</li>
+<li>Keep small objects/plastic bags away &mdash; discuss around 4&ndash;6 months.</li>
+<li>Water safety &mdash; infants can drown in an inch of water; set the hot water heater to 120&deg;F.</li>
+<li>Rear-facing car seat until age 2, placed in the back seat.</li>
+<li>Vitamin D supplementation for exclusively breastfed infants.</li>
+<li>No honey for the first year of life (botulism risk).</li>
+<li>Screen time: limit to about 1 hour/day for ages 2&ndash;5.</li>
+<li>Booster car seat recommended until the child reaches 4'9".</li>
+<li>60 minutes of physical activity per day for school-aged children.</li>
+</ul>
+
+<div class="pq-block" id="pq-t9"></div>
+</section>
+
+<!-- 10 -->
+<section class="topic" id="t10">
+<h2>10. Physical Exam Findings (HEENT, Cardiac, Hip, Skin)</h2>
+
+<h3 class="sub">Head &amp; fontanelles</h3>
+<div class="keypoint"><strong>Caput succedaneum crosses suture lines; cephalohematoma does not</strong> (it's confined by the periosteum of a single skull bone) &mdash; both are possible findings after a vaginal delivery.</div>
+<table>
+<caption>Fontanelle Closure</caption>
+<tr><th>Fontanelle</th><th>Closure timing</th></tr>
+<tr><td>Anterior fontanelle</td><td>Larger, closes later (roughly 4&ndash;26 months, commonly cited as 18 months&ndash;2 years)</td></tr>
+<tr><td>Posterior fontanelle</td><td>Smaller, closes earlier (by about 1&ndash;2 months of age)</td></tr>
+</table>
+<p>Both fontanelles should be flat and soft ("AFS/F" or "PFS/F" in documentation shorthand); sunken or bulging is abnormal. <strong>Plagiocephaly</strong> is a positional skull deformity; <strong>craniosynostosis</strong> is early fusion of the cranial sutures.</p>
+
+<h3 class="sub">Eyes, ears, mouth</h3>
+<ul class="plain">
+<li><strong>Red reflex</strong> should be symmetric; an abnormal red reflex may indicate cataracts, glaucoma, retinoblastoma, or other eye pathology.</li>
+<li>Cover/uncover testing is done between 9 months&ndash;3 years; formal visual acuity testing starts around age 3.</li>
+<li>Infant ear canals point downward &mdash; pull the auricle <em>down</em> (not up, as in adults) to visualize the tympanic membrane.</li>
+<li>Children have wider, shorter Eustachian tubes than adults, predisposing them to otitis media.</li>
+<li>Preauricular <em>pit</em>: congenital, rarely associated with hearing loss, not strongly linked to genetic syndromes. Preauricular <em>tag</em>: congenital, increased risk of hearing loss and genetic syndrome association.</li>
+<li>Epstein's pearls: benign mucus cysts on the hard palate. Ankyloglossia = tongue-tied.</li>
+</ul>
+
+<h3 class="sub">Cardiovascular</h3>
+<table>
+<caption>Normal Neonatal Vital Signs</caption>
+<tr><th>Parameter</th><th>Normal range</th></tr>
+<tr><td>Respiratory rate</td><td>40&ndash;60 breaths/min</td></tr>
+<tr><td>Heart rate</td><td>120&ndash;160 beats/min</td></tr>
+</table>
+<p>Blood pressure is not routinely measured in children &lt;3 years old. Compare brachial and femoral pulses bilaterally (weak femoral pulses can suggest coarctation of the aorta).</p>
+<table>
+<caption>Benign (Innocent) Childhood Murmurs</caption>
+<tr><th>Murmur</th><th>Timing / description</th></tr>
+<tr><td>Closing ductus murmur</td><td>First 2&ndash;3 days of life</td></tr>
+<tr><td>Pulmonary flow murmur</td><td>First 2&ndash;3 days of life</td></tr>
+<tr><td>Still's murmur</td><td>Older children; Grade II/VI, musical, vibratory, midsystolic</td></tr>
+<tr><td>Venous hum</td><td>Soft, continuous, louder in diastole</td></tr>
+<tr><td>Carotid bruit</td><td>Midsystolic, usually louder on the left, eliminated by carotid compression</td></tr>
+</table>
+<p>Murmurs detected &lt;6 hours of life are more likely valvular (e.g., tricuspid/mitral regurgitation, aortic/pulmonic stenosis); murmurs detected &gt;6 hours of life are more likely shunt lesions (e.g., septal defects, PDA).</p>
+
+<h3 class="sub">Abdomen &amp; genitourinary</h3>
+<ul class="plain">
+<li>Liver edge palpable ~1&ndash;2 cm below the costal margin is normal; the spleen should <em>not</em> be palpable.</li>
+<li>Umbilical hernias usually resolve as the umbilical ring closes; surgery isn't typically recommended (especially &lt;4 years) unless there's concern for incarceration/strangulation.</li>
+<li>Do <strong>not</strong> forcibly retract the foreskin in uncircumcised infants.</li>
+<li>A sacral dimple with hair tufts can suggest an underlying neural tube defect (e.g., spina bifida) &mdash; though isolated sacral dimples are typically benign.</li>
+</ul>
+
+<h3 class="sub">Hip exam: Ortolani vs. Barlow</h3>
+<table>
+<caption>Ortolani vs. Barlow Maneuver</caption>
+<tr><th>Maneuver</th><th>Tests for</th></tr>
+<tr><td>Ortolani test</td><td>A posteriorly <em>dislocated</em> hip that can be reduced (a hip already out, being put back in)</td></tr>
+<tr><td>Barlow test</td><td>The ability to <em>sublux or dislocate</em> an intact but unstable hip (a hip that's in, being pushed out)</td></tr>
+</table>
+<p>Both maneuvers become less reliable after about 3 months, once the hip capsule begins to tighten. The <strong>Galeazzi sign</strong> (a difference in knee height with hips/knees flexed) is another sign of developmental hip dysplasia to look for.</p>
+
+<h3 class="sub">Musculoskeletal &amp; skin</h3>
+<ul class="plain">
+<li>Toddlers normally show increased lumbar concavity, decreased thoracic convexity, and a protuberant abdomen; bowlegged appearance is normal ages 1&ndash;3, knock-kneed appearance normal ages 3&ndash;5.</li>
+<li>Flexible deformities generally reflect in-utero positioning and resolve; rigid deformities usually require intervention.</li>
+<li>Common benign skin findings: Mongolian spots, nevi, hemangiomas; cradle cap (infant seborrheic dermatitis) is treated with infant shampoo and gentle combing.</li>
+<li>Impetigo: honey-crusted lesions, commonly staphylococcal; treated with topical (or oral, for larger areas) antibiotics.</li>
+<li>Tinea corporis (ringworm): elevated red rings with central clearing.</li>
+</ul>
+
+<div class="pq-block" id="pq-t10"></div>
+</section>
+
+<!-- 11 -->
+<section class="topic" id="t11">
+<h2>11. Primitive Reflexes</h2>
+<p>Primitive reflexes are assessed as part of the neurologic exam in young infants. Their <em>persistence</em> beyond the expected age, or their <em>absence</em> when expected, can both be signs of underlying neurologic pathology.</p>
+
+<table>
+<caption>Primitive Reflexes</caption>
+<tr><th>Reflex</th><th>Maneuver</th><th>Expected ages</th></tr>
+<tr><td>Palmar grasp</td><td>Place a finger in the infant's hand, press against the palmar surface</td><td>Birth to 4 months</td></tr>
+<tr><td>Plantar grasp</td><td>Touch the sole at the base of the toes</td><td>Birth to 9 months</td></tr>
+<tr><td>Moro (startle)</td><td>Hold supine supporting head/back/legs, abruptly lower</td><td>Birth to 4 months</td></tr>
+<tr><td>Asymmetric tonic neck</td><td>Supine, turn head to one side</td><td>Birth to 4 months</td></tr>
+<tr><td>Positive support</td><td>Hold around trunk, lower until feet touch surface</td><td>Birth (or 2 months) to 6 months</td></tr>
+<tr><td>Rooting</td><td>Stroke perioral skin at corner of mouth</td><td>Birth to 3&ndash;4 months</td></tr>
+<tr><td>Trunk incurvation (Galant's)</td><td>Prone, stroke one side of back near midline</td><td>Birth to 3 months</td></tr>
+<tr><td>Placing/stepping</td><td>Hold upright, sole touches table edge</td><td>Birth (best after day 4) to variable</td></tr>
+<tr><td>Landau</td><td>Suspend prone, head lifts</td><td>Birth to 6 months</td></tr>
+<tr><td>Parachute</td><td>Suspend prone, slowly lower head toward surface</td><td>Emerges 4&ndash;6 months, does <em>not</em> disappear</td></tr>
+</table>
+
+<div class="keypoint">The <strong>parachute reflex</strong> is the outlier in this table &mdash; unlike the others, it emerges later (4&ndash;6 months) and is protective, persisting for life rather than disappearing.</div>
+
+<div class="pq-block" id="pq-t11"></div>
+</section>
+
+<!-- 12 -->
+<section class="topic" id="t12">
+<h2>12. Immunizations</h2>
+<p>Most childhood vaccines are administered within the first 6 months of life. An infant is protected against chicken pox by maternal antibodies for about the first year of life.</p>
+
+<table>
+<caption>Vaccine Target: Viral vs. Bacterial</caption>
+<tr><th>Vaccine</th><th>Protects against</th></tr>
+<tr><td>MMR</td><td><strong>Viral</strong> &mdash; measles, mumps, rubella viruses</td></tr>
+<tr><td>Hib vaccine</td><td>Bacterial &mdash; <em>Haemophilus influenzae</em></td></tr>
+<tr><td>DTaP</td><td>Bacterial &mdash; <em>Corynebacterium diphtheriae</em>, <em>Clostridium tetani</em>, <em>Bordetella pertussis</em></td></tr>
+<tr><td>Pneumococcal vaccine</td><td>Bacterial &mdash; <em>Streptococcus pneumoniae</em></td></tr>
+</table>
+
+<table>
+<caption>Key Vaccine Facts</caption>
+<tr><th>Vaccine</th><th>Key facts</th></tr>
+<tr><td>DTaP</td><td>First childhood series against diphtheria/tetanus/pertussis; 5-dose series starting at <strong>2 months</strong>: 2, 4, 6, 15&ndash;18 months, and 4&ndash;6 years</td></tr>
+<tr><td>Tdap</td><td>Booster shot for diphtheria/tetanus/pertussis; given at <strong>age 11&ndash;12</strong> (reduced diphtheria/pertussis toxoid concentration compared to DTaP)</td></tr>
+<tr><td>HPV</td><td>3-dose series started at age 11&ndash;12 (as early as age 9) for <strong>both males and females</strong>; HPV types <strong>16 and 18</strong> cause the majority of cervical (and other) cancers; types 6 and 11 cause genital warts</td></tr>
+<tr><td>Meningococcal</td><td>Given at age 11&ndash;12 with a booster at age 16; may be given as young as 9 months if high-risk</td></tr>
+<tr><td>Influenza</td><td>Annual; a key complication of influenza infection is <strong>pneumonia</strong> (direct viral or secondary bacterial)</td></tr>
+</table>
+
+<div class="keypoint"><strong>Required for school entry in most states:</strong> DTaP, Hepatitis B, MMR, and Poliovirus vaccine. <strong>NOT required by state law in any state</strong> (though AAP-recommended): Influenza, HPV, and Rotavirus vaccines.</div>
+
+<div class="pq-block" id="pq-t12"></div>
+</section>
+
+<!-- 13 -->
+<section class="topic" id="t13">
+<h2>13. Adolescent Development, Tanner Staging &amp; HEEADSSS</h2>
+
+<h3 class="sub">Puberty sequence</h3>
+<table>
+<caption>Pubertal Sequence by Sex</caption>
+<tr><th>Sex</th><th>Sequence</th><th>Duration</th></tr>
+<tr><td>Female</td><td>Breast buds &rarr; pubic hair &rarr; growth spurt peak (~age 12) &rarr; menarche</td><td>Complete in 1.5&ndash;8 years (avg. 4 years)</td></tr>
+<tr><td>Male</td><td>Testicular growth &rarr; pubic hair &rarr; penile enlargement &rarr; growth spurt peak (~age 14)</td><td>Complete in 2&ndash;5 years (avg. 3 years)</td></tr>
+</table>
+
+<h3 class="sub">Tanner staging (sexual maturity rating)</h3>
+<p>Five stages: Stage 1 = prepubertal; Stage 5 = adult development. Limitations: it's invasive, it's a screen (not diagnostic on its own), and modern grooming practices (e.g., pubic hair removal) can make visual staging less reliable.</p>
+
+<table>
+<caption>Female Tanner Stages (Breast)</caption>
+<tr><th>Stage</th><th>Finding</th></tr>
+<tr><td>1</td><td>Preadolescent; elevation of nipple only</td></tr>
+<tr><td>2</td><td>Breast bud &mdash; elevation of breast/nipple as a small mound</td></tr>
+<tr><td>3</td><td>Further enlargement of breast/areola, no separation of contour</td></tr>
+<tr><td>4</td><td>Areola/nipple project to form a secondary mound above the breast</td></tr>
+<tr><td>5</td><td>Mature stage &mdash; projection of nipple only (areola recesses to breast contour)</td></tr>
+</table>
+
+<table>
+<caption>Male Tanner Stages (Genitalia/Pubic Hair)</caption>
+<tr><th>Stage</th><th>Pubic hair</th><th>Penis</th><th>Testes/scrotum</th></tr>
+<tr><td>1</td><td>None (fine body hair only)</td><td>Same size as childhood</td><td>Same size as childhood</td></tr>
+<tr><td>2</td><td>Sparse, slightly pigmented, straight</td><td>Slight or no enlargement</td><td>Larger, slightly reddened</td></tr>
+<tr><td>3</td><td>Darker, coarser, curlier, sparse over pubic symphysis</td><td>Larger in length</td><td>Further enlarged</td></tr>
+<tr><td>4</td><td>Coarse/curly, not yet adult, not on thighs</td><td>Further enlarged in length/breadth, glans develops</td><td>Further enlarged, scrotal skin darkens</td></tr>
+<tr><td>5</td><td>Adult quantity/quality, spreads to medial thighs</td><td>Adult size and shape</td><td>Adult size and shape</td></tr>
+</table>
+
+<h3 class="sub">Stages of adolescence</h3>
+<table>
+<caption>Early vs. Middle vs. Late Adolescence</caption>
+<tr><th>Domain</th><th>Early (10&ndash;14 yrs)</th><th>Middle (15&ndash;16/17 yrs)</th><th>Late (17&ndash;20 yrs)</th></tr>
+<tr><td>Physical</td><td>Puberty begins</td><td>Physical growth nearly complete; body reshapes to adult form</td><td>Adult appearance</td></tr>
+<tr><td>Cognitive</td><td>Concrete operational</td><td>Transitional/formal operational emerging; aware of long-term consequences but these don't yet factor into decisions</td><td>Formal operational; insight, reflects on others' feelings/thoughts</td></tr>
+<tr><td>Social</td><td>"Am I normal?"; peers increasingly important; focus on the present; ambivalence about independence</td><td>Conformity to peers is paramount; increased self-focus/attractiveness; dating and sexual activity common; may question sexual orientation; desires independence, conflict with parents may arise</td><td>Identity consolidated; focus shifts to role with others, sexuality, and the future; true separation/independence from family</td></tr>
+</table>
+
+<div class="keypoint">High-yield distinction: <strong>middle adolescence</strong> is specifically the stage where teens can intellectually recognize long-term consequences of their actions but those consequences don't yet meaningfully factor into real-time decision-making &mdash; and it's the stage where conforming to peers matters most.</div>
+
+<h3 class="sub">HEADSS / HEEADSSS assessment</h3>
+<p>A structured tool for the adolescent social history, asked <em>privately</em> (without parents/guardians in the room), moving from least to most personal topics, using open-ended, non-judgmental questions:</p>
+<div class="mnemonic">
+<span class="mn-label">HEADSS / HEEADSSS mnemonic</span>
+<strong>H</strong>ome &middot; <strong>E</strong>ducation/Employment &middot; (<strong>E</strong>ating) &middot; <strong>A</strong>ctivities &middot; <strong>D</strong>rugs &middot; <strong>S</strong>exuality &middot; <strong>S</strong>uicide/depression &middot; (<strong>S</strong>afety)
+</div>
+<p>Example opening for the Drugs section (non-judgmental, indirect): "What kinds of drugs have you seen around school or at parties?"</p>
+
+<h3 class="sub">Adolescent consent &amp; confidentiality</h3>
+<div class="keypoint">In most states, adolescents may independently <strong>consent to and receive confidential care</strong> for: contraception, pregnancy-related care, sexually transmitted infection testing/treatment, substance abuse treatment, and mental health care. (Laws vary by state.)</div>
+<p>Conversations with an adolescent patient may remain confidential <strong>unless there is a serious/immediate safety concern</strong> &mdash; e.g., suicidal ideation, homicidal ideation, or concern for physical abuse. If confidentiality must be broken for safety, inform the adolescent in advance whenever possible. Note: declining school performance, risky sexual behavior, and substance use disclosures can generally remain confidential on their own; it's specifically imminent harm to self or others that overrides confidentiality.</p>
+
+<div class="pq-block" id="pq-t13"></div>
+</section>
+
+</main>
+
+<script>
+const questionData = {
+  "pq-t1": [
+    {stem: "1. At approximately what age are children generally considered reasonably reliable historians about their own health?", choices: ["3 years old","5 years old","7 years old","11 years old"], correct: 2, explain: "By around age 7, children may be considered reasonably reliable historians regarding their own health, per the lecture material."},
+    {stem: "2. A 3-year-old's family history includes a maternal uncle who died suddenly at age 19. How should this be weighed?", choices: ["It's irrelevant since it's not a first-degree relative", "It is highly relevant — sudden cardiac death in a young relative raises concern for an inherited arrhythmia/cardiomyopathy", "Only paternal family history matters in pediatrics", "Only cancers occurring before age 50 are relevant in a pediatric family history"], correct: 1, explain: "Sudden unexplained death at a young age in a family member is one of the most important pediatric family history findings to elicit, regardless of which side of the family."},
+    {stem: "3. According to current AAP recommendations, exclusive breastfeeding is recommended for the first:", choices: ["3 months of life","6 months of life","12 months of life","18 months of life"], correct: 1, explain: "The AAP recommends exclusive breastfeeding for the first 6 months of life, with solids generally introduced between 4-6 months."},
+    {stem: "4. At approximately what age are most children in the U.S. considered \"potty-trained\"?", choices: ["12-18 months","18-24 months","2-3 years","3-4 years"], correct: 2, explain: "Children are generally potty-trained between 2 and 3 years of age."},
+    {stem: "5. Why should growth (height/weight) be plotted on a standardized growth curve at every pediatric visit rather than just occasionally?", choices: ["It has no real medical importance, it just reassures parents", "Tracking growth over time can identify problems like failure to thrive or metabolic/endocrine disorders", "Growth curves are only useful after age 5", "There is no standardized way to track pediatric growth"], correct: 1, explain: "Serial growth tracking is an important vital sign in pediatrics and can reveal failure to thrive or underlying metabolic/endocrine disease."}
+  ],
+  "pq-t2": [
+    {stem: "1. What does the APGAR mnemonic stand for?", choices: ["Airway, Pulse, Grimace, Activity, Reflexes", "Appearance, Pulse, Grimace, Activity, Respiratory effort", "Appearance, Perfusion, Gestation, Activity, Respiration", "Apnea, Pulse, Glucose, Activity, Reflex"], correct: 1, explain: "APGAR = Appearance, Pulse, Grimace, Activity, Respiratory effort."},
+    {stem: "2. A newborn has a heart rate of 130, is pink all over, cries vigorously when stimulated, has active movement, and strong respiratory effort. What is the APGAR score?", choices: ["8","9","10","7"], correct: 2, explain: "Each of the 5 categories gets the maximum 2 points here (pulse >100, pink all over, vigorous cry, active movement, strong respirations) — a perfect score of 10, though this is uncommon in practice."},
+    {stem: "3. APGAR scores are standardly assessed at which two time points?", choices: ["Immediately at birth and at 10 minutes","1 minute and 5 minutes","5 minutes and 10 minutes","Only once, at 5 minutes"], correct: 1, explain: "APGAR scores are standardly assigned at the 1-minute and 5-minute marks, with a third score at 10 minutes if needed."},
+    {stem: "4. Which of the following is a routine intervention given shortly after delivery to prevent bleeding?", choices: ["Erythromycin ointment","Vitamin K injection","Full bath immediately","Hepatitis B immunization"], correct: 1, explain: "A vitamin K injection is given to prevent bleeding; erythromycin ointment is for eye infection prevention, and the full bath is typically delayed for skin-to-skin contact."},
+    {stem: "5. An APGAR score of 6 at the 5-minute mark should be interpreted as:", choices: ["Normal and expected — no action needed", "Concerning, especially since it's below 7, warranting further evaluation/intervention", "Only concerning if it persists to 10 minutes", "A score that cannot be assigned at 5 minutes"], correct: 1, explain: "Scores less than 8 at 5 minutes are a concern, and scores less than 7 are especially concerning, warranting further evaluation."}
+  ],
+  "pq-t3": [
+    {stem: "1. A newborn's birth weight falls at the 5th percentile for gestational age. This infant is classified as:", choices: ["AGA","LGA","SGA","Cannot be determined from this information"], correct: 2, explain: "Small for gestational age (SGA) is defined as birth weight below the 10th percentile for gestational age."},
+    {stem: "2. An infant is born at 35 weeks gestation. This is classified as:", choices: ["Preterm","Late preterm","Term","Post term"], correct: 1, explain: "34-36 weeks is classified as late preterm; less than 34 weeks would be preterm."},
+    {stem: "3. A newborn weighs 900 grams at birth. This is classified as:", choices: ["Low birth weight","Very low birth weight","Extremely low birth weight","Normal birth weight"], correct: 2, explain: "Extremely low birth weight is defined as less than 1,000 grams."},
+    {stem: "4. The Ballard scoring system is used primarily to:", choices: ["Assess APGAR-equivalent neurologic recovery from birth", "Estimate gestational age based on neuromuscular and physical maturity findings, especially when prenatal records are unavailable", "Classify jaundice severity", "Screen for developmental delay in toddlers"], correct: 1, explain: "The Ballard scoring system estimates gestational age using neuromuscular maturity (e.g., scarf sign, square window) and physical maturity (e.g., skin, lanugo) findings."},
+    {stem: "5. By approximately what age does a healthy infant's birth weight triple?", choices: ["6 months","1 year","18 months","2 years"], correct: 1, explain: "Birth weight triples by 1 year of age — growth in the neonatal/infant period is faster than at any other age."}
+  ],
+  "pq-t4": [
+    {stem: "1. What percentage of birth weight loss is considered normal for a newborn in the first few days of life?", choices: ["1-3%","7-10%","15-20%","25-30%"], correct: 1, explain: "A 7-10% weight loss in the first few days of life is normal and expected for newborns."},
+    {stem: "2. By what age should a newborn be back to birth weight?", choices: ["5-7 days","10-14 days","3 weeks","6 weeks"], correct: 1, explain: "Infants should be back to birth weight by 10-14 days, which is specifically checked at the 2-week visit."},
+    {stem: "3. A newborn has not yet passed meconium by 30 hours of life. This is:", choices: ["Normal — meconium can be passed up to 48 hours", "A concern — meconium should pass within the first 24 hours of life", "Only concerning in formula-fed infants", "Only concerning if the infant is also jaundiced"], correct: 1, explain: "The first stool (meconium) should occur within the first 24 hours of life; delayed passage warrants evaluation (e.g., for Hirschsprung disease)."},
+    {stem: "4. By day 4-5 of life, a newborn should have approximately how many voids per 24-hour period?", choices: ["1-2","3-4","6-8","10-12"], correct: 2, explain: "By day 4-5, voiding frequency increases to about 6-8 times per 24-hour period, up from 3-4 times per day in the first 1-3 days."},
+    {stem: "5. Expected weight gain for a healthy newborn after regaining birth weight is approximately:", choices: ["1 ounce per day","1 ounce per week","1 pound per day","1 pound per week"], correct: 0, explain: "Expected weight gain after the initial loss/regain period is approximately 1 ounce per day."}
+  ],
+  "pq-t5": [
+    {stem: "1. A newborn develops jaundice at 12 hours of age. How should this be classified?", choices: ["Normal physiologic jaundice", "Pathologic — any jaundice within the first 24 hours of life is pathologic", "Cannot be determined without a bilirubin level", "Expected, since jaundice typically appears on day 1"], correct: 1, explain: "Any jaundice appearing within the first 24 hours of life is, by definition, pathologic and requires prompt evaluation."},
+    {stem: "2. Physiologic jaundice typically appears and peaks on which days of life?", choices: ["Appears day 1, peaks day 2", "Appears day 2-3, peaks around day 5", "Appears day 7, peaks day 10", "Appears at birth, peaks at 24 hours"], correct: 1, explain: "Physiologic jaundice appears on day 2-3 and peaks around day 5, usually resolving within a week."},
+    {stem: "3. Which of the following is a cause of jaundice from increased red blood cell turnover, rather than decreased bilirubin conjugation?", choices: ["Breastmilk jaundice","Cholestasis","ABO incompatibility","CMV infection"], correct: 2, explain: "ABO (and Rh) incompatibility, along with bruising, causes jaundice via increased RBC turnover/hemolysis, distinct from the decreased-conjugation causes (breastmilk jaundice, cholestasis, CMV)."},
+    {stem: "4. Kernicterus is a particular concern once unconjugated bilirubin exceeds approximately:", choices: ["5 mg/dL","10 mg/dL","25 mg/dL","50 mg/dL"], correct: 2, explain: "Kernicterus (bilirubin-induced neurologic damage) is a particular concern once unconjugated bilirubin exceeds roughly 25 mg/dL."},
+    {stem: "5. Phototherapy for neonatal jaundice is indicated for a high bilirubin level or for a rate of rise exceeding:", choices: ["1 mg/dL per day","5 mg/dL per day","10 mg/dL per day","15 mg/dL per day"], correct: 1, explain: "A rapid rate of rise greater than 5 mg/dL per day is an indication for phototherapy, along with an elevated absolute level per the nomogram."}
+  ],
+  "pq-t6": [
+    {stem: "1. According to AAP policy, routine circumcision of all male newborns is:", choices: ["Strongly recommended for all newborns", "Not recommended routinely — health benefits are not considered great enough to recommend it for all male newborns", "Contraindicated in all cases", "Required for hospital discharge"], correct: 1, explain: "Per AAP policy, while there are benefits, they are not great enough to recommend routine circumcision for all male newborns — it remains a parental choice."},
+    {stem: "2. Which of the following is a contraindication to newborn circumcision?", choices: ["Formula feeding","Hypospadias","Vaginal delivery","Jaundice"], correct: 1, explain: "Hypospadias (or other penile anomalies) is a contraindication to circumcision, since the foreskin may be needed for later surgical repair."},
+    {stem: "3. Following an uncomplicated vaginal delivery, hospital discharge typically occurs:", choices: ["Same day as birth","1 day after birth","2 days after birth","5 days after birth"], correct: 2, explain: "Discharge after vaginal delivery is typically 2 days after birth (vs. 3 days after a cesarean section)."},
+    {stem: "4. Which of the following is NOT typically completed prior to newborn hospital discharge?", choices: ["Hepatitis B immunization","Hearing screen","1st newborn screening blood test","MMR vaccine"], correct: 3, explain: "MMR is not given in the newborn period. Hepatitis B immunization, hearing screen, and the first newborn screening blood test are all completed prior to discharge."},
+    {stem: "5. At the 2-week newborn check, which of the following should be assessed?", choices: ["Return to birth weight by 10-14 days, and the 2nd newborn screen", "Tanner staging", "HEEADSSS assessment", "MMR vaccine administration"], correct: 0, explain: "The 2-week visit specifically checks that the infant has returned to birth weight (expected by 10-14 days) and includes the 2nd newborn screen."}
+  ],
+  "pq-t7": [
+    {stem: "1. What is the key distinction between developmental surveillance and developmental screening?", choices: ["They are the same thing", "Surveillance uses ongoing observation/parental concern at every visit; screening uses a structured, standardized tool at specific visits or when concerns arise", "Screening is done by parents at home only, surveillance is done only by physicians", "Surveillance is only used for children under 12 months"], correct: 1, explain: "Surveillance is the ongoing, informal process of using observations and parental concerns; screening is the use of a standardized tool (e.g., ASQ, Denver II) to formally assess risk."},
+    {stem: "2. At which well-child visits should formal developmental screening routinely occur?", choices: ["Every single visit","9, 18, and 30 months","Only at the 1-month visit","Only if the parents specifically request it"], correct: 1, explain: "Formal developmental screening should occur at the 9-, 18-, and 30-month visits, and additionally whenever surveillance raises a concern."},
+    {stem: "3. An 18-month-old meets all developmental milestones and neither the parents nor the physician have any concerns. What should happen regarding screening at this visit?", choices: ["No screening needed, since there are no concerns", "Screening should still be performed, because of the child's age (18 months is a standard screening visit)", "Only surveillance is needed going forward", "Screening should be delayed until the next visit"], correct: 1, explain: "Even without concerns, formal screening should still occur at the standard screening ages (9, 18, 30 months) because delay can be present without being clinically obvious."},
+    {stem: "4. Approximately what percentage of children aged 3-17 have delayed development in at least one area?", choices: ["1-2%","up to 15%","up to 40%","up to 60%"], correct: 1, explain: "Developmental delay is relatively common — up to 15% of children aged 3-17 will have delayed development in one or more areas."},
+    {stem: "5. Which of the following is an important autism red flag at 18 months of age?", choices: ["Using pointing to indicate interest in objects", "Saying single words", "Persistent rocking, hand flapping, or loss of previously acquired skills", "Playing near (but not necessarily with) other children"], correct: 2, explain: "Persistent repetitive movements (rocking, hand flapping, head banging, toe walking) and any loss of previously acquired language/social skills are red flags for autism at 18 months."}
+  ],
+  "pq-t8": [
+    {stem: "1. A parent reports their child speaks in 3-word sentences and is understood by strangers about 75% of the time. This is most consistent with a child of approximately what age?", choices: ["18 months","2 years","3 years","4 years"], correct: 2, explain: "3-word sentences and ~75% stranger intelligibility are both consistent with a 3-year-old, per the lecture's speech mnemonics."},
+    {stem: "2. Stranger anxiety and object permanence typically develop around what age?", choices: ["2 months","6 months","9 months","18 months"], correct: 2, explain: "Stranger anxiety begins and object permanence develops around 9 months of age."},
+    {stem: "3. A toddler's development is described as sensorimotor learning, imitative play, and progressing from 2-3 word phrases toward full sentences. This best describes which age period?", choices: ["Infancy","Toddler/early childhood","School-aged/middle childhood","Adolescence"], correct: 1, explain: "This cognitive/language pattern (sensorimotor learning, imitative play, expanding sentence length) is characteristic of the toddler/early childhood period."},
+    {stem: "4. Concrete operational thinking, developing self-efficacy, and increasing independence with an evolving self-identity are characteristic of which age group?", choices: ["Toddler","School-aged child (5-10 years)","Early adolescence","Late adolescence"], correct: 1, explain: "This is the description given for the school-aged/middle childhood period (5-10 years) in the lecture."},
+    {stem: "5. At 2 months of age, which developmental milestone is expected?", choices: ["Social smile","Babbling","1-3 words","Object permanence"], correct: 0, explain: "The social smile is the expected language/social milestone at 2 months, per the lecture."}
+  ],
+  "pq-t9": [
+    {stem: "1. Which of the following best fits the definition of colic?", choices: ["Fussiness lasting 1 hour a day, 1 day a week, resolving by 6 weeks", "Paroxysms of crying for 3+ hours a day, 3+ days a week, peaking at 6 weeks and resolving by 3-4 months", "Constant crying that continues throughout the first year of life", "Crying specifically during feeding only"], correct: 1, explain: "Colic is defined as paroxysms of fussiness/crying for 3 or more hours a day, 3 or more days a week, peaking around 6 weeks and resolving by 3-4 months, not explained by an underlying medical condition."},
+    {stem: "2. A frustrated new parent asks what to do when their colicky infant won't stop crying. Per the lecture's counseling mnemonic, what is the safest advice?", choices: ["\"Shake gently to soothe the baby\"", "\"Don't shake — take a break. It's okay to place the baby safely in the crib and step away.\"", "\"Give the baby honey to calm them down\"", "\"Ignore the crying entirely until it stops\""], correct: 1, explain: "The lecture's specific mnemonic is 'Don't shake. Take a break' — emphasizing it's safe and appropriate to place the infant safely in the crib and step away if the caregiver becomes overwhelmed."},
+    {stem: "3. A 20-day-old infant presents with a temperature of 100.6°F. What is the appropriate next step?", choices: ["Reassure the parents and send them home, since fever is common in infants", "Treat with acetaminophen and recheck in 24 hours", "Full sepsis workup — fever in a neonate is a medical emergency", "No workup needed unless the infant also has other symptoms"], correct: 2, explain: "Fever in a neonate (roughly within the first 30 days) is a medical emergency requiring a full sepsis workup; the infant is considered septic until proven otherwise."},
+    {stem: "4. Which of the following is true regarding neonatal sepsis presentation?", choices: ["It always presents with fever, never hypothermia", "It can present with hypothermia or temperature instability rather than fever", "It is ruled out if the infant does not have a fever", "Temperature is not a reliable sign of sepsis in neonates or older infants"], correct: 1, explain: "Neonatal sepsis can present with hypothermia or temperature instability, not just fever — this is an important exception to keep in mind."},
+    {stem: "5. At what age should a rear-facing car seat, placed in the back seat, be used until?", choices: ["6 months","1 year","2 years","4 years"], correct: 2, explain: "Rear-facing car seats in the back seat are recommended until age 2."}
+  ],
+  "pq-t10": [
+    {stem: "1. A newborn has a soft, boggy scalp swelling that crosses suture lines. This finding is most consistent with:", choices: ["Cephalohematoma","Caput succedaneum","Craniosynostosis","Plagiocephaly"], correct: 1, explain: "Caput succedaneum crosses suture lines (it's diffuse scalp edema), while cephalohematoma is confined by a single bone's periosteum and does not cross suture lines."},
+    {stem: "2. Which maneuver tests for the ability to sublux or dislocate an intact but unstable hip?", choices: ["Ortolani test","Barlow test","Galeazzi sign","Trendelenburg test"], correct: 1, explain: "The Barlow test specifically tests for subluxation/dislocation of an intact but unstable hip, whereas the Ortolani test tests for reduction of an already-dislocated hip."},
+    {stem: "3. A murmur is auscultated in a newborn at 3 hours of life. Based on timing alone, this is more likely to represent:", choices: ["A shunt lesion such as a VSD or PDA", "A valvular issue such as tricuspid/mitral regurgitation or aortic/pulmonic stenosis", "An innocent Still's murmur", "A venous hum"], correct: 1, explain: "Murmurs detected before 6 hours of life are more likely to represent a valvular problem; murmurs detected after 6 hours are more likely shunt lesions."},
+    {stem: "4. What is the normal heart rate range for a neonate?", choices: ["60-100 bpm","80-120 bpm","120-160 bpm","160-200 bpm"], correct: 2, explain: "Normal neonatal heart rate is 120-160 beats per minute."},
+    {stem: "5. A preauricular finding is noted on a newborn exam. Which finding carries a higher associated risk of hearing loss and genetic syndrome association?", choices: ["Preauricular pit","Preauricular tag","Both carry identical risk","Neither carries any risk"], correct: 1, explain: "A preauricular tag carries an increased risk of hearing loss and genetic syndrome association, whereas a preauricular pit is more often an isolated, benign congenital finding."}
+  ],
+  "pq-t11": [
+    {stem: "1. Which primitive reflex is unique in that it emerges around 4-6 months of age and does NOT disappear (it persists for life)?", choices: ["Moro reflex","Rooting reflex","Parachute reflex","Palmar grasp"], correct: 2, explain: "The parachute reflex emerges at 4-6 months and, unlike the other primitive reflexes, persists throughout life rather than disappearing."},
+    {stem: "2. Stroking the sole of an infant's foot at the base of the toes, causing the toes to curl, describes which reflex, and until what age is it expected?", choices: ["Palmar grasp, until 4 months","Plantar grasp, until 9 months","Rooting reflex, until 3-4 months","Galant's reflex, until 3 months"], correct: 1, explain: "This describes the plantar grasp reflex, expected from birth until approximately 9 months of age."},
+    {stem: "3. Abruptly lowering a supine infant (while supporting the head, back, and legs) causes the arms to abduct/extend and the legs to flex, sometimes with crying. This describes:", choices: ["The Landau reflex","The Moro (startle) reflex","The positive support reflex","The asymmetric tonic neck reflex"], correct: 1, explain: "This is the classic description of the Moro (startle) reflex, expected from birth to about 4 months."},
+    {stem: "4. Stroking one side of an infant's back near the midline while prone, causing the spine to curve toward the stimulated side, describes which reflex?", choices: ["Rooting reflex","Landau reflex","Trunk incurvation (Galant's) reflex","Positive support reflex"], correct: 2, explain: "This describes the trunk incurvation, or Galant's, reflex, expected from birth to about 3 months."}
+  ],
+  "pq-t12": [
+    {stem: "1. Which of the following vaccines protects against a virus (rather than bacteria)?", choices: ["DTaP","Hib vaccine","MMR","Pneumococcal vaccine"], correct: 2, explain: "MMR protects against measles, mumps, and rubella — all viruses. DTaP, Hib, and pneumococcal vaccines all target bacteria."},
+    {stem: "2. HPV types 16 and 18 are most strongly associated with:", choices: ["Genital warts","The majority of cervical (and other HPV-related) cancers","Common colds","Meningitis"], correct: 1, explain: "HPV types 16 and 18 cause the majority of HPV-related cancers, while types 6 and 11 cause most genital warts."},
+    {stem: "3. The DTaP vaccine series begins at what age?", choices: ["Birth","2 months","6 months","11-12 years"], correct: 1, explain: "The DTaP series begins at 2 months of age, as the first childhood vaccine against diphtheria, tetanus, and pertussis, with doses at 2, 4, 6, 15-18 months, and 4-6 years."},
+    {stem: "4. Which of the following vaccines is NOT required by law in any U.S. state for school entry, despite being AAP-recommended?", choices: ["MMR","DTaP","Influenza","Hepatitis B"], correct: 2, explain: "Influenza is not required by state law in any state for school entry, unlike MMR, DTaP, Hepatitis B, and poliovirus vaccines, which generally are."},
+    {stem: "5. At what age is the HPV vaccine series recommended to begin, for both males and females?", choices: ["Birth","Age 2","Age 11-12 (as early as age 9)","Only after the patient becomes sexually active"], correct: 2, explain: "The HPV vaccine is recommended starting at age 11-12 (can start as early as age 9) for both males and females, regardless of sexual activity status."}
+  ],
+  "pq-t13": [
+    {stem: "1. A 16-year-old is noted to be intellectually aware that risky behavior carries long-term consequences, but this awareness doesn't yet factor meaningfully into her decision-making, and fitting in with peers is her top priority. This best describes which stage of adolescence?", choices: ["Early adolescence","Middle adolescence","Late adolescence","This does not correspond to a specific stage"], correct: 1, explain: "Middle adolescence (roughly 15-17 years) is specifically characterized by awareness of long-term consequences without yet factoring them into decisions, alongside peak importance of peer conformity."},
+    {stem: "2. What is the correct order of pubertal changes in females, per the standard sequence?", choices: ["Menarche, breast buds, pubic hair, growth spurt", "Breast buds, pubic hair, growth spurt peak, menarche", "Growth spurt, menarche, breast buds, pubic hair", "Pubic hair, menarche, breast buds, growth spurt"], correct: 1, explain: "The standard female pubertal sequence is breast buds, then pubic hair, then growth spurt peak (around age 12), then menarche."},
+    {stem: "3. What does the HEEADSSS assessment structure, and how should questions be ordered?", choices: ["A physical exam checklist, most invasive first", "The adolescent social history, moving from least to most personal topics", "A developmental delay screening tool for toddlers", "A tool used only during the newborn hospital stay"], correct: 1, explain: "HEEADSSS structures the adolescent social history interview, deliberately moving from less personal topics (Home, Education) to more personal ones (Drugs, Sexuality, Suicide)."},
+    {stem: "4. A 17-year-old discloses to her physician that she is sexually active and wants STI testing without her parents' knowledge. What is true about confidentiality here?", choices: ["She cannot be seen without a parent present, given her age", "This conversation may remain confidential, since there is no safety concern present", "The physician must inform her parents about everything discussed", "Only contraception counseling can be kept confidential, not STI testing"], correct: 1, explain: "Adolescents can generally consent to and receive confidential care for STI testing/treatment, and confidentiality is maintained unless there's a safety concern (e.g., suicidal ideation, abuse)."},
+    {stem: "5. During a HEEADSSS interview, a 16-year-old discloses suicidal ideation with a specific plan. What is true about confidentiality in this situation?", choices: ["This must remain confidential like everything else discussed", "This is one of the specific exceptions where confidentiality may need to be broken due to a safety concern", "Only homicidal ideation, not suicidal ideation, breaks confidentiality", "Confidentiality rules do not apply to any part of the HEEADSSS interview"], correct: 1, explain: "Suicidal ideation (along with homicidal ideation or concern for abuse) is a safety exception where confidentiality may need to be broken, ideally after informing the adolescent first."}
+  ]
+};
+
+function buildMCQ(container, q) {
+  const wrap = document.createElement('div');
+  wrap.className = 'mcq';
+  const stem = document.createElement('div');
+  stem.className = 'stem';
+  stem.textContent = q.stem;
+  wrap.appendChild(stem);
+
+  const letters = ['A','B','C','D','E'];
+  q.choices.forEach((choiceText, ci) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = letters[ci] + ') ' + choiceText;
+    btn.addEventListener('click', () => {
+      if (wrap.dataset.answered) return;
+      wrap.dataset.answered = 'true';
+      const allChoices = wrap.querySelectorAll('.choice');
+      allChoices.forEach((c, i2) => {
+        c.classList.add('disabled');
+        if (i2 === q.correct) c.classList.add('correct');
+      });
+      const feedback = wrap.querySelector('.feedback');
+      if (ci === q.correct) {
+        feedback.classList.add('show', 'right');
+        feedback.textContent = 'Correct. ' + q.explain;
+      } else {
+        btn.classList.add('incorrect');
+        feedback.classList.add('show', 'wrong');
+        feedback.textContent = 'Not quite. ' + q.explain;
+      }
+    });
+    wrap.appendChild(btn);
+  });
+
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback';
+  wrap.appendChild(feedback);
+
+  container.appendChild(wrap);
+}
+
+Object.keys(questionData).forEach(sectionId => {
+  const container = document.getElementById(sectionId);
+  if (!container) return;
+  const title = document.createElement('div');
+  title.className = 'pq-title';
+  title.textContent = 'Practice Questions';
+  container.appendChild(title);
+  questionData[sectionId].forEach(q => buildMCQ(container, q));
+});
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('main').classList.toggle('expanded');
+  document.getElementById('sb-toggle').classList.toggle('collapsed');
+  document.getElementById('back-btn').classList.toggle('collapsed');
+}
+
+const links = document.querySelectorAll('.sb-link');
+const sections = document.querySelectorAll('section.topic');
+
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById(link.dataset.target).scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector('.sb-link[data-target="' + entry.target.id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
