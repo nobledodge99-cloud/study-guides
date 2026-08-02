@@ -159,6 +159,10 @@
     cursor: pointer;
   }
 
+  .read-clickable { cursor: pointer; }
+  .read-clickable:hover { background: var(--sage-bg); border-radius: 4px; }
+  .read-active-block { background: var(--sage-bg); border-radius: 4px; }
+
   #main {
     margin-left: 300px;
     padding: 60px 60px 100px 60px;
@@ -290,7 +294,7 @@
 <button id="sb-toggle" onclick="toggleSidebar()">&#9776; Sections</button>
 <a id="back-btn" href="index.html">&larr; Back to Study Guides</a>
 <button id="pdf-btn" onclick="window.print()">&#8681; Download PDF</button>
-<div id="read-controls">
+<div id="read-controls" title="Tip: click any paragraph or heading to start reading from that point">
   <button id="read-btn" onclick="toggleReadAloud()">&#9654; Read Aloud</button>
   <select id="read-speed" onchange="setReadRate(this.value)">
     <option value="0.75">0.75x</option>
@@ -1011,39 +1015,50 @@ sections.forEach(s => observer.observe(s));
 (function(){
   var synth = window.speechSynthesis;
   var chunks = [];
+  var chunkOwners = [];
   var chunkIndex = 0;
   var isPlaying = false;
   var isPaused = false;
   var rate = 1;
+  var lastOwner = null;
+  var BLOCK_SELECTOR = 'h1,h2,h3,h4,h5,h6,p,li,td,th,blockquote,dt,dd,caption,figcaption';
 
   function buildChunks(){
     var wrap = document.querySelector('#main .content-wrap');
     if(!wrap) return [];
-    var walker = document.createTreeWalker(wrap, NodeFilter.SHOW_TEXT, {
-      acceptNode: function(node){
-        if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
-        var p = node.parentElement;
-        if(p && (p.tagName === 'SCRIPT' || p.tagName === 'STYLE')) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
-      }
-    });
-    var fullText = '';
-    var n;
-    while((n = walker.nextNode())){
-      fullText += n.textContent.trim() + '. ';
-    }
-    var raw = fullText.split(/(?<=[.!?])\s+/);
+    chunkOwners = [];
     var result = [];
-    var buf = '';
-    raw.forEach(function(s){
-      if((buf + ' ' + s).length > 220){
-        if(buf) result.push(buf);
-        buf = s;
-      } else {
-        buf = buf ? (buf + ' ' + s) : s;
+    var els = wrap.querySelectorAll(BLOCK_SELECTOR);
+    els.forEach(function(el){
+      if(el.closest('script,style')) return;
+      var clone = el.cloneNode(true);
+      var nested = clone.querySelectorAll(BLOCK_SELECTOR);
+      nested.forEach(function(n){ if(n.parentNode) n.parentNode.removeChild(n); });
+      var text = (clone.textContent || '').replace(/\s+/g, ' ').trim();
+      if(!text) return;
+      var startIdx = result.length;
+      var raw = text.split(/(?<=[.!?])\s+/);
+      var buf = '';
+      raw.forEach(function(s){
+        if((buf + ' ' + s).length > 220){
+          if(buf){ result.push(buf); chunkOwners.push(el); }
+          buf = s;
+        } else {
+          buf = buf ? (buf + ' ' + s) : s;
+        }
+      });
+      if(buf){ result.push(buf); chunkOwners.push(el); }
+      el.setAttribute('data-read-start', startIdx);
+      if(!el.classList.contains('read-clickable')){
+        el.classList.add('read-clickable');
+        el.addEventListener('click', function(e){
+          var t = e.target;
+          if(t.closest('a,button,input,select,textarea')) return;
+          var s2 = parseInt(el.getAttribute('data-read-start'), 10);
+          jumpToChunk(s2);
+        });
       }
     });
-    if(buf) result.push(buf);
     return result;
   }
 
@@ -1062,12 +1077,24 @@ sections.forEach(s => observer.observe(s));
     }
   }
 
+  function highlightOwner(idx){
+    var el = chunkOwners[idx];
+    if(lastOwner && lastOwner !== el) lastOwner.classList.remove('read-active-block');
+    if(el) el.classList.add('read-active-block');
+    lastOwner = el;
+  }
+
+  function clearHighlight(){
+    if(lastOwner){ lastOwner.classList.remove('read-active-block'); lastOwner = null; }
+  }
+
   function speakFrom(idx){
     if(idx >= chunks.length){
       stopReading();
       return;
     }
     chunkIndex = idx;
+    highlightOwner(idx);
     var u = new SpeechSynthesisUtterance(chunks[idx]);
     u.rate = rate;
     u.onend = function(){
@@ -1077,13 +1104,23 @@ sections.forEach(s => observer.observe(s));
   }
 
   function startReading(){
-    chunks = buildChunks();
+    if(!chunks.length) chunks = buildChunks();
     if(!chunks.length) return;
     synth.cancel();
     isPlaying = true;
     isPaused = false;
     updateBtn();
     speakFrom(0);
+  }
+
+  function jumpToChunk(idx){
+    if(!chunks.length) chunks = buildChunks();
+    if(idx == null || isNaN(idx) || idx < 0 || idx >= chunks.length) return;
+    synth.cancel();
+    isPlaying = true;
+    isPaused = false;
+    updateBtn();
+    speakFrom(idx);
   }
 
   function pauseReading(){
@@ -1103,6 +1140,7 @@ sections.forEach(s => observer.observe(s));
     isPlaying = false;
     isPaused = false;
     chunkIndex = 0;
+    clearHighlight();
     updateBtn();
   }
 
@@ -1125,6 +1163,12 @@ sections.forEach(s => observer.observe(s));
   };
 
   window.addEventListener('beforeunload', function(){ synth.cancel(); });
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ chunks = buildChunks(); });
+  } else {
+    chunks = buildChunks();
+  }
 })();
 </script>
 
