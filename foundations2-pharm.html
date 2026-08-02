@@ -375,13 +375,57 @@
     text-decoration: none;
   }
   .download-btn:hover { background: #2e5548; }
+#read-controls {
+position: fixed;
+top: 120px;
+right: 210px;
+z-index: 1000;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+#read-btn {
+background: var(--accent);
+border: none;
+border-radius: 8px;
+color: #fff;
+font-family: var(--mono);
+font-size: 13px;
+font-weight: 600;
+padding: 9px 14px;
+cursor: pointer;
+white-space: nowrap;
+}
+#read-btn:hover { background: #2e5548; }
+#read-btn.playing { background: #2e5548; }
+#read-speed {
+background: var(--accent-dim);
+border: 1px solid var(--line);
+border-radius: 8px;
+color: var(--accent);
+font-family: var(--mono);
+font-size: 12px;
+padding: 8px 4px;
+cursor: pointer;
+}
   @media print {
-    .download-btn, a[href="index.html"] { display: none !important; }
+    .download-btn, a[href="index.html"], #read-controls { display: none !important; }
   }
 </style>
 </head>
 <body>
   <button class="download-btn" onclick="window.print()">&#8681; Download PDF</button>
+<div id="read-controls">
+  <button id="read-btn" onclick="toggleReadAloud()">&#9654; Read Aloud</button>
+  <select id="read-speed" onchange="setReadRate(this.value)">
+    <option value="0.75">0.75x</option>
+    <option value="1" selected>1x</option>
+    <option value="1.25">1.25x</option>
+    <option value="1.5">1.5x</option>
+    <option value="1.75">1.75x</option>
+    <option value="2">2x</option>
+  </select>
+</div>
 
 
 <header class="masthead">
@@ -6281,5 +6325,127 @@ sideLinks.forEach(l => {
 });
 </script>
   <script data-goatcounter="https://nobledodge.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var chunks = [];
+  var chunkIndex = 0;
+  var isPlaying = false;
+  var isPaused = false;
+  var rate = 1;
+
+  function buildChunks(){
+    var wrap = document.getElementById('lectures');
+    if(!wrap) return [];
+    var walker = document.createTreeWalker(wrap, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node){
+        if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
+        var p = node.parentElement;
+        if(p && (p.tagName === 'SCRIPT' || p.tagName === 'STYLE')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var fullText = '';
+    var n;
+    while((n = walker.nextNode())){
+      fullText += n.textContent.trim() + '. ';
+    }
+    var raw = fullText.split(/(?<=[.!?])\s+/);
+    var result = [];
+    var buf = '';
+    raw.forEach(function(s){
+      if((buf + ' ' + s).length > 220){
+        if(buf) result.push(buf);
+        buf = s;
+      } else {
+        buf = buf ? (buf + ' ' + s) : s;
+      }
+    });
+    if(buf) result.push(buf);
+    return result;
+  }
+
+  function updateBtn(){
+    var btn = document.getElementById('read-btn');
+    if(!btn) return;
+    if(isPlaying && !isPaused){
+      btn.innerHTML = '&#10073;&#10073; Pause';
+      btn.classList.add('playing');
+    } else if(isPlaying && isPaused){
+      btn.innerHTML = '&#9654; Resume';
+      btn.classList.remove('playing');
+    } else {
+      btn.innerHTML = '&#9654; Read Aloud';
+      btn.classList.remove('playing');
+    }
+  }
+
+  function speakFrom(idx){
+    if(idx >= chunks.length){
+      stopReading();
+      return;
+    }
+    chunkIndex = idx;
+    var u = new SpeechSynthesisUtterance(chunks[idx]);
+    u.rate = rate;
+    u.onend = function(){
+      if(isPlaying) speakFrom(chunkIndex + 1);
+    };
+    synth.speak(u);
+  }
+
+  function startReading(){
+    chunks = buildChunks();
+    if(!chunks.length) return;
+    synth.cancel();
+    isPlaying = true;
+    isPaused = false;
+    updateBtn();
+    speakFrom(0);
+  }
+
+  function pauseReading(){
+    synth.pause();
+    isPaused = true;
+    updateBtn();
+  }
+
+  function resumeReading(){
+    synth.resume();
+    isPaused = false;
+    updateBtn();
+  }
+
+  function stopReading(){
+    synth.cancel();
+    isPlaying = false;
+    isPaused = false;
+    chunkIndex = 0;
+    updateBtn();
+  }
+
+  window.toggleReadAloud = function(){
+    if(!isPlaying){
+      startReading();
+    } else if(isPaused){
+      resumeReading();
+    } else {
+      pauseReading();
+    }
+  };
+
+  window.setReadRate = function(val){
+    rate = parseFloat(val);
+    if(isPlaying && !isPaused){
+      synth.cancel();
+      speakFrom(chunkIndex);
+    }
+  };
+
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+
 </body>
 </html>
