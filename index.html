@@ -147,68 +147,68 @@ font-size:0.85rem;
 </head>
 <body>
 <header>
-  <div>
-    <p class="kicker">Noble's Study Guides</p>
-    <h1>OMSII Study Tools</h1>
-  </div>
-  <div>
-    <button id="copy-btn">Copy site link</button>
-    <span id="copy-feedback"></span>
-  </div>
+<div>
+<p class="kicker">Noble's Study Guides</p>
+<h1>OMSII Study Tools</h1>
+</div>
+<div>
+<button id="copy-btn">Copy site link</button>
+<span id="copy-feedback"></span>
+</div>
 </header>
 <main>
-  <ul class="course-list">
-    <li class="course-item">
-      <button class="course-toggle" aria-expanded="false">
-        <span>
-          Foundations II
-        </span>
-        <span class="chevron">&#9662;</span>
-      </button>
-      <ul class="guide-dropdown">
-        <li><a href="foundations2-pharm.html">Pharmacology Study Guide</a></li>
-        <li><a href="ans-pharm-study-bites.html">Konrad's ANS Pharm Study Bites</a></li>
-        <li><a href="foundations2-genetics.html">Genetics of Disease Study Guide</a></li>
-        <li><a href="scholarrx-ans-pharm.html">ScholarRx ANS Pharm Study Guide</a></li>
-            <li><a href="ans-pharm-red-drugs.html">ANS Pharm - Just the Red Drugs</a></li>
-            <li><a href="biostats-study-material.html">Biostats Study Material</a></li>
-            <li><a href="pediatrics-study-guide.html">Pediatrics Study Guide</a></li>
-      </ul>
-    </li>
-    <li class="course-item">
-      <button class="course-toggle" aria-expanded="false">
-        <span>
-          MSK
-        </span>
-        <span class="chevron">&#9662;</span>
-      </button>
-      <ul class="guide-dropdown">
-        <li><span class="empty-note">No guides yet</span></li>
-      </ul>
-    </li>
-    <li class="course-item">
-      <button class="course-toggle" aria-expanded="false">
-        <span>
-          CV/Resp
-        </span>
-        <span class="chevron">&#9662;</span>
-      </button>
-      <ul class="guide-dropdown">
-        <li><span class="empty-note">No guides yet</span></li>
-      </ul>
-    </li>
-  </ul>
-  <p class="placeholder">More courses will appear here as they're added. Hover a course name to see its guides.</p>
+<ul class="course-list">
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span>
+Foundations II
+</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li><a href="foundations2-pharm.html">Pharmacology Study Guide</a></li>
+<li><a href="ans-pharm-study-bites.html">Konrad's ANS Pharm Study Bites</a></li>
+<li><a href="foundations2-genetics.html">Genetics of Disease Study Guide</a></li>
+<li><a href="scholarrx-ans-pharm.html">ScholarRx ANS Pharm Study Guide</a></li>
+<li><a href="ans-pharm-red-drugs.html">ANS Pharm - Just the Red Drugs</a></li>
+<li><a href="biostats-study-material.html">Biostats Study Material</a></li>
+<li><a href="pediatrics-study-guide.html">Pediatrics Study Guide</a></li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span>
+MSK II
+</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li><a href="msk2-joint-soft-tissue.html">Joint & Soft Tissue Pathology Study Guide</a></li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span>
+CV/Resp
+</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li><span class="empty-note">No guides yet</span></li>
+</ul>
+</li>
+</ul>
+<p class="placeholder">More courses will appear here as they're added. Hover a course name to see its guides.</p>
 </main>
 <script>
-  const btn = document.getElementById('copy-btn');
-  const feedback = document.getElementById('copy-feedback');
-  btn.addEventListener('click', () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      feedback.textContent = 'Copied!';
-      setTimeout(() => { feedback.textContent = ''; }, 2000);
-    });
-  });
+const btn = document.getElementById('copy-btn');
+const feedback = document.getElementById('copy-feedback');
+btn.addEventListener('click', () => {
+navigator.clipboard.writeText(window.location.href).then(() => {
+feedback.textContent = 'Copied!';
+setTimeout(() => { feedback.textContent = ''; }, 2000);
+});
+});
 </script>
 <script data-goatcounter="https://nobledodge.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
