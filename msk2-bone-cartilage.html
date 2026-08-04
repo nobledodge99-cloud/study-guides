@@ -2,760 +2,877 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bone and Cartilage Pathology — Study Guide</title>
+<title>Bone and Cartilage Pathology Study Guide</title>
 <style>
-  :root{
-    --cream:#f6f1e4;
-    --tan:#e9dfc3;
-    --tan-dark:#dccfa8;
-    --green:#4a6741;
-    --green-dark:#37502f;
-    --green-light:#e7efe0;
-    --ink:#2b2a22;
-    --ink-soft:#5c5946;
-    --accent:#8a5a3b;
-    --serif: Georgia, 'Times New Roman', Times, serif;
-    --mono: 'Courier New', Courier, monospace;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--cream);
-    color:var(--ink);
-    font-family:var(--serif);
-    line-height:1.65;
-  }
-
-  /* ---------- Fixed chrome ---------- */
-  .top-back{
-    position:fixed; top:14px; left:14px; z-index:1000;
-    font-family:var(--mono); font-size:13px; text-decoration:none;
-    background:var(--green); color:var(--cream);
-    padding:8px 14px; border-radius:5px; border:1px solid var(--green-dark);
-    box-shadow:0 2px 5px rgba(0,0,0,.2);
-  }
-  .top-back:hover{background:var(--green-dark);}
-
-  .top-download{
-    position:fixed; top:14px; right:14px; z-index:1000;
-    font-family:var(--mono); font-size:13px;
-    background:var(--accent); color:var(--cream);
-    padding:8px 14px; border-radius:5px; border:1px solid #6c4429;
-    cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,.2);
-  }
-  .top-download:hover{background:#6c4429;}
-
-  .sb-toggle{
-    position:fixed; top:14px; left:170px; z-index:1000;
-    font-family:var(--mono); font-size:13px;
-    background:var(--tan-dark); color:var(--ink);
-    padding:8px 12px; border-radius:5px; border:1px solid var(--green);
-    cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,.15);
-  }
-
-  /* ---------- Sidebar ---------- */
-  nav#sidebar{
-    position:fixed; top:60px; left:14px; bottom:14px; width:270px;
-    background:var(--green-light); border:1px solid var(--tan-dark);
-    border-radius:8px; overflow-y:auto; padding:14px 10px;
-    transition:transform .25s ease;
-    z-index:900;
-  }
-  nav#sidebar.collapsed{ transform:translateX(-320px); }
-  nav#sidebar h3{
-    font-family:var(--mono); font-size:12px; letter-spacing:.05em;
-    text-transform:uppercase; color:var(--green-dark); margin:4px 6px 10px;
-  }
-  .sb-link{
-    display:block; font-family:var(--mono); font-size:12.5px;
-    color:var(--ink); text-decoration:none; padding:7px 8px;
-    border-radius:5px; cursor:pointer; margin-bottom:2px;
-  }
-  .sb-link:hover{ background:var(--tan); }
-  .sb-link.active{ background:var(--green); color:var(--cream); }
-
-  /* ---------- Main ---------- */
-  main{
-    max-width:800px; margin:0 auto; padding:90px 28px 100px;
-    transition:margin-left .25s ease;
-  }
-  main.shifted{ margin-left:300px; margin-right:auto; }
-
-  header.masthead{
-    text-align:center; border-bottom:3px double var(--green);
-    padding-bottom:18px; margin-bottom:34px;
-  }
-  header.masthead h1{
-    font-size:2.1em; margin:0 0 6px; color:var(--green-dark);
-  }
-  header.masthead p{
-    font-family:var(--mono); font-size:12.5px; color:var(--ink-soft);
-    letter-spacing:.03em; margin:0;
-  }
-
-  section.topic{
-    margin-bottom:46px; padding-top:14px; border-top:1px solid var(--tan-dark);
-  }
-  section.topic:first-of-type{ border-top:none; }
-  section.topic h2{
-    color:var(--green-dark); font-size:1.5em; margin-bottom:4px;
-    border-bottom:2px solid var(--tan-dark); padding-bottom:6px;
-  }
-  section.topic h3{
-    color:var(--accent); font-size:1.1em; margin-top:22px;
-  }
-  section.topic p{ margin:10px 0; }
-  section.topic ul, section.topic ol{ margin:10px 0; padding-left:24px; }
-  section.topic li{ margin-bottom:5px; }
-
-  .keypoints{
-    background:var(--green-light); border-left:4px solid var(--green);
-    border-radius:0 6px 6px 0; padding:12px 16px; margin:16px 0;
-  }
-  .keypoints .label{
-    font-family:var(--mono); font-size:11px; text-transform:uppercase;
-    letter-spacing:.06em; color:var(--green-dark); font-weight:bold; margin-bottom:6px; display:block;
-  }
-  .keypoints ul{ margin:4px 0 0; padding-left:20px; }
-
-  .pearl{
-    background:#f5e9db; border-left:4px solid var(--accent);
-    border-radius:0 6px 6px 0; padding:12px 16px; margin:16px 0;
-  }
-  .pearl .label{
-    font-family:var(--mono); font-size:11px; text-transform:uppercase;
-    letter-spacing:.06em; color:var(--accent); font-weight:bold; margin-bottom:6px; display:block;
-  }
-
-  table{
-    width:100%; border-collapse:collapse; margin:16px 0;
-    font-size:.94em; background:var(--cream);
-  }
-  table caption{
-    font-family:var(--mono); font-size:11.5px; text-align:left;
-    color:var(--ink-soft); margin-bottom:6px;
-  }
-  th{
-    background:var(--green); color:var(--cream); text-align:left;
-    padding:8px 10px; font-family:var(--mono); font-size:12px;
-    letter-spacing:.02em;
-  }
-  td{ padding:8px 10px; border-bottom:1px solid var(--tan-dark); vertical-align:top; }
-  tr:nth-child(even) td{ background:var(--tan); }
-
-  /* ---------- Practice questions ---------- */
-  .qbox{
-    background:#fffdf7; border:1px solid var(--tan-dark); border-radius:8px;
-    padding:16px 18px; margin:18px 0;
-  }
-  .qbox .qlabel{
-    font-family:var(--mono); font-size:11px; text-transform:uppercase;
-    letter-spacing:.06em; color:var(--green-dark); font-weight:bold;
-  }
-  .qbox p.stem{ margin:8px 0 12px; }
-  .qopt{
-    display:block; width:100%; text-align:left; font-family:var(--serif);
-    font-size:.98em; background:var(--cream); border:1px solid var(--tan-dark);
-    border-radius:6px; padding:9px 12px; margin-bottom:8px; cursor:pointer;
-  }
-  .qopt:hover{ background:var(--tan); }
-  .qopt.correct{ background:#dcecd4; border-color:var(--green); font-weight:bold; }
-  .qopt.incorrect{ background:#f3d9d4; border-color:#a34a3d; }
-  .qexplain{
-    display:none; font-family:var(--serif); font-size:.92em;
-    background:var(--green-light); border-left:3px solid var(--green);
-    padding:10px 14px; margin-top:8px; border-radius:0 6px 6px 0;
-  }
-
-  footer{
-    text-align:center; font-family:var(--mono); font-size:11.5px;
-    color:var(--ink-soft); margin-top:60px; padding-top:18px;
-    border-top:1px solid var(--tan-dark);
-  }
-
-  /* ---------- Print ---------- */
-  @media print{
-    .top-back, .top-download, .sb-toggle, nav#sidebar{ display:none !important; }
-    main{ margin-left:0 !important; max-width:100% !important; padding:0 24px; }
-    body{ background:#fff; }
-    section.topic{ page-break-inside:avoid; }
-    .qopt{ break-inside:avoid; }
-  }
-
-  @media (max-width:860px){
-    main.shifted{ margin-left:0; }
-    nav#sidebar{ width:82%; }
-  }
+:root{
+--ink:#1b2b26;
+--paper:#f7f5ef;
+--panel:#ffffff;
+--line:#dcd6c6;
+--accent:#3a6b5c;
+--accent-dim:#e7efe9;
+--wrong:#a63d40;
+--wrong-dim:#f7e6e6;
+--mono: 'IBM Plex Mono', 'Courier New', monospace;
+--serif: 'Source Serif 4', Georgia, serif;
+}
+*{box-sizing:border-box;}
+body{
+margin:0;
+background:var(--paper);
+color:var(--ink);
+font-family:var(--serif);
+line-height:1.55;
+padding:0 0 80px 0;
+}
+header.masthead{
+border-bottom:3px solid var(--ink);
+padding:28px 24px 18px;
+max-width:900px;
+margin:0 auto;
+}
+header.masthead .kicker{
+font-family:var(--mono);
+font-size:12px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--accent);
+}
+header.masthead h1{
+font-size:2.1rem;
+margin:.15em 0 .1em;
+letter-spacing:-.01em;
+}
+header.masthead .sub{
+font-family:var(--mono);
+font-size:12.5px;
+color:#5c5c52;
+}
+.back-link{
+position:fixed;top:18px;left:18px;z-index:1000;
+font-family:var(--mono);font-size:0.8rem;color:var(--accent);
+text-decoration:none;border:1px solid var(--line);padding:8px 12px;
+border-radius:4px;background:var(--accent-dim);
+box-shadow:0 4px 14px rgba(0,0,0,0.12);
+}
+nav#toc{
+max-width:900px;
+margin:20px auto 0;
+padding:0 24px;
+}
+nav#toc .toc-label{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#8a8578;
+margin-bottom:6px;
+}
+nav#toc ol{
+margin:0;
+padding-left:1.2em;
+font-family:var(--mono);
+font-size:13.5px;
+}
+nav#toc .toc-link{color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); cursor:pointer;}
+nav#toc .toc-link:hover{color:var(--accent);}
+main{max-width:900px; margin:0 auto; padding:0 24px;}
+section.lecture{
+margin-top:48px;
+padding-top:8px;
+}
+section.lecture > h2{
+font-size:1.5rem;
+border-bottom:2px solid var(--ink);
+padding-bottom:8px;
+margin-bottom:4px;
+}
+section.lecture > .lecture-meta{
+font-family:var(--mono);
+font-size:11.5px;
+color:#8a8578;
+margin-bottom:22px;
+}
+article.topic{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:2px;
+padding:22px 24px 24px;
+margin-bottom:22px;
+position:relative;
+}
+article.topic .topic-num{
+font-family:var(--mono);
+font-size:11px;
+color:var(--accent);
+letter-spacing:.08em;
+}
+article.topic h3{
+margin:2px 0 4px;
+font-size:1.15rem;
+}
+article.topic p.subhead{
+font-family:var(--mono);
+font-size:12px;
+letter-spacing:.06em;
+text-transform:uppercase;
+color:var(--accent);
+font-weight:700;
+margin:20px 0 6px;
+}
+article.topic .flag{
+display:inline-block;
+font-family:var(--mono);
+font-size:10.5px;
+letter-spacing:.06em;
+text-transform:uppercase;
+background:var(--accent-dim);
+color:var(--accent);
+border:1px solid var(--accent);
+border-radius:20px;
+padding:2px 9px;
+margin-bottom:10px;
+}
+article.topic p.body{
+font-size:15.5px;
+margin:8px 0 16px;
+}
+article.topic ul.body-list, article.topic ol.body-list{
+margin:8px 0 16px;
+padding-left:1.3em;
+font-size:15.5px;
+}
+article.topic ul.body-list li, article.topic ol.body-list li{margin-bottom:4px;}
+article.topic ul.body-list ul, article.topic ul.body-list ol{margin:4px 0;}
+article.topic strong.term{color:var(--accent);}
+.formula{
+font-family:var(--serif);
+font-size:15px;
+background:var(--accent-dim);
+border-left:3px solid var(--accent);
+padding:9px 14px;
+margin:10px 0 16px;
+border-radius:0 4px 4px 0;
+color:var(--ink);
+}
+.formula ul, .formula ol{margin:8px 0 2px; padding-left:1.2em;}
+.formula li{margin-bottom:4px;}
+.formula .fx-label{
+font-family:var(--mono);
+color:var(--accent);
+font-weight:700;
+margin-right:6px;
+display:inline-block;
+}
+table.data-table{
+width:100%;
+border-collapse:collapse;
+margin:10px 0 18px;
+font-size:14px;
+}
+table.data-table caption{
+text-align:left;
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:#8a8578;
+margin-bottom:6px;
+}
+table.data-table th, table.data-table td{
+border:1px solid var(--line);
+padding:7px 10px;
+text-align:left;
+vertical-align:top;
+}
+table.data-table th{
+background:var(--accent-dim);
+color:var(--accent);
+font-family:var(--mono);
+font-size:11.5px;
+letter-spacing:.03em;
+text-transform:uppercase;
+}
+table.data-table tr:nth-child(even) td{background:#fbfaf6;}
+.qs-label{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:#8a8578;
+border-top:1px dashed var(--line);
+padding-top:14px;
+margin-top:4px;
+margin-bottom:12px;
+}
+.question{
+margin-bottom:18px;
+}
+.question:last-child{margin-bottom:0;}
+.qtext{
+font-size:15px;
+margin-bottom:8px;
+font-weight:600;
+}
+.options{
+display:flex;
+flex-direction:column;
+gap:7px;
+}
+.opt{
+display:flex;
+align-items:center;
+gap:10px;
+text-align:left;
+background:var(--paper);
+border:1px solid var(--line);
+border-radius:6px;
+padding:9px 12px;
+font-family:var(--serif);
+font-size:14.5px;
+color:var(--ink);
+cursor:pointer;
+transition:background .12s, border-color .12s;
+}
+.opt:hover:not(:disabled){
+border-color:var(--accent);
+}
+.opt .bubble{
+flex:0 0 auto;
+width:16px;
+height:16px;
+border-radius:50%;
+border:1.5px solid #9a9587;
+background:#fff;
+}
+.opt.correct{
+background:var(--accent-dim);
+border-color:var(--accent);
+}
+.opt.correct .bubble{
+background:var(--accent);
+border-color:var(--accent);
+}
+.opt.incorrect{
+background:var(--wrong-dim);
+border-color:var(--wrong);
+}
+.opt.incorrect .bubble{
+background:var(--wrong);
+border-color:var(--wrong);
+}
+.opt:disabled{cursor:default;}
+.feedback{
+font-family:var(--mono);
+font-size:12.5px;
+margin-top:7px;
+min-height:1.2em;
+}
+.feedback.correct{color:var(--accent);}
+.feedback.incorrect{color:var(--wrong);}
+footer.eod{
+max-width:900px;
+margin:56px auto 0;
+padding:18px 24px 0;
+border-top:1px solid var(--line);
+font-family:var(--mono);
+font-size:11.5px;
+color:#8a8578;
+}
+#side-toggle{
+position:fixed;
+top:50%;
+right:0;
+transform:translateY(-50%);
+z-index:20;
+background:var(--ink);
+color:var(--paper);
+border:none;
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+padding:14px 8px;
+writing-mode:vertical-rl;
+text-orientation:mixed;
+cursor:pointer;
+border-radius:6px 0 0 6px;
+}
+#side-toggle:hover{background:var(--accent);}
+#side-nav{
+position:fixed;
+top:0;
+right:0;
+height:100%;
+width:300px;
+background:var(--panel);
+border-left:1px solid var(--line);
+box-shadow:-6px 0 18px rgba(0,0,0,.06);
+transform:translateX(100%);
+transition:transform .22s ease;
+z-index:19;
+overflow-y:auto;
+padding:22px 0 40px;
+}
+#side-nav.open{transform:translateX(0);}
+#side-nav .side-head{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#8a8578;
+padding:0 20px 12px;
+border-bottom:1px solid var(--line);
+margin-bottom:6px;
+}
+#side-nav .side-lecture-label{
+font-family:var(--mono);
+font-size:11.5px;
+font-weight:700;
+color:var(--ink);
+padding:14px 20px 4px;
+}
+#side-nav .side-link{
+display:block;
+padding:6px 20px 6px 28px;
+font-size:13px;
+color:#4a483f;
+text-decoration:none;
+border-left:2px solid transparent;
+cursor:pointer;
+}
+#side-nav .side-link:hover{
+color:var(--accent);
+background:var(--accent-dim);
+}
+#side-nav .side-link.active{
+color:var(--accent);
+border-left-color:var(--accent);
+font-weight:600;
+background:var(--accent-dim);
+}
+#side-scrim{
+position:fixed;
+inset:0;
+background:rgba(27,43,38,.15);
+z-index:18;
+display:none;
+}
+#side-scrim.open{display:block;}
+@media (max-width:640px){
+#side-nav{width:82%;}
+}
+.download-btn {
+position: fixed;
+top: 120px;
+right: 28px;
+background: var(--accent);
+color: #fff;
+padding: 10px 18px;
+border-radius: 8px;
+border: none;
+font-family: var(--mono);
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 0.02em;
+cursor: pointer;
+box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+z-index: 1000;
+text-decoration: none;
+}
+.download-btn:hover { background: #2e5548; }
+@media print {
+.download-btn, .back-link, #side-toggle { display: none !important; }
+}
 </style>
 </head>
 <body>
+<button class="download-btn" onclick="window.print()">&#8681; Download PDF</button>
+<a class="back-link" href="index.html">&larr; Back to Study Guides</a>
 
-<a class="top-back" href="index.html">&larr; Back to Study Guides</a>
-<button class="sb-toggle" id="sbToggle">&#9776; Sections</button>
-<button class="top-download" onclick="window.print()">Download PDF</button>
-
-<nav id="sidebar">
-  <h3>Sections</h3>
-  <span class="sb-link" data-target="s1">1. Bone Composition &amp; Remodeling</span>
-  <span class="sb-link" data-target="s2">2. Vitamin D &amp; Ca/Phos Homeostasis</span>
-  <span class="sb-link" data-target="s3">3. PTH &amp; the RANK/RANKL/OPG Axis</span>
-  <span class="sb-link" data-target="s4">4. Congenital Bone Disorders: Overview</span>
-  <span class="sb-link" data-target="s5">5. Osteogenesis Imperfecta</span>
-  <span class="sb-link" data-target="s6">6. Achondroplasia &amp; Thanatophoric Dysplasia</span>
-  <span class="sb-link" data-target="s7">7. Cleidocranial Dysplasia</span>
-  <span class="sb-link" data-target="s8">8. Osteopetrosis</span>
-  <span class="sb-link" data-target="s9">9. Osteoporosis</span>
-  <span class="sb-link" data-target="s10">10. Paget Disease of Bone</span>
-  <span class="sb-link" data-target="s11">11. Rickets &amp; Osteomalacia</span>
-  <span class="sb-link" data-target="s12">12. Hyperparathyroidism, Brown Tumor &amp; Renal Osteodystrophy</span>
-  <span class="sb-link" data-target="s13">13. Fracture Classification &amp; Terminology</span>
-  <span class="sb-link" data-target="s14">14. Bone Biomechanics &amp; Fracture Patterns</span>
-  <span class="sb-link" data-target="s15">15. Fracture Healing, Complications &amp; Forensic Pearls</span>
-  <span class="sb-link" data-target="s16">16. Osteonecrosis (Avascular Necrosis)</span>
-  <span class="sb-link" data-target="s17">17. Osteomyelitis</span>
-  <span class="sb-link" data-target="s18">18. Syphilitic Bone Disease</span>
-</nav>
-
-<main id="mainContent">
 <header class="masthead">
-  <h1>Bone and Cartilage Pathology</h1>
-  <p>Dr. Kemp &middot; Parts 1&ndash;4 &middot; Built from lecture narration</p>
+<div class="kicker">Running Course Document</div>
+<h1>Bone and Cartilage Pathology Study Guide</h1>
+<div class="sub">Dr. Kemp &middot; Parts 1&ndash;4 &middot; click an answer choice to check yourself</div>
 </header>
 
-<!-- ================= SECTION 1 ================= -->
-<section class="topic" id="s1">
-<h2>1. Bone Composition &amp; Remodeling Basics</h2>
-<p>Bone is a dynamic, living tissue, not a static structure &mdash; it is constantly being resorbed and re-formed throughout life. Three cell types drive this: <strong>osteoblasts</strong> (form bone, lay down osteoid), <strong>osteocytes</strong> (maintain bone), and <strong>osteoclasts</strong> (resorb bone).</p>
-<p>Bone is composed of an organic matrix (<strong>osteoid</strong>, mostly type I collagen, laid down by osteoblasts) and an inorganic mineral phase (<strong>calcium hydroxyapatite</strong>). Bone stores about 99% of the body's calcium, 85% of its phosphorus, and 65% of its sodium.</p>
-<h3>Woven vs. Lamellar Bone</h3>
-<p><strong>Normal (lamellar) bone</strong> shows an organized, layered architecture. <strong>Woven bone</strong> is disorganized and irregular, without visible layering &mdash; this is the type of bone seen in a healing fracture callus and in several pathologic states (e.g., Paget disease) where bone is laid down quickly and haphazardly.</p>
-<h3>Three Features of Bone Remodeling</h3>
-<div class="keypoints">
-<span class="label">Key concepts &mdash; remodeling is described by three parameters</span>
-<ul>
-<li><strong>Turnover</strong> &mdash; the balance of resorption rate vs. formation rate (ratio of osteoclast to osteoblast activity)</li>
-<li><strong>Mineralization</strong> &mdash; how well osteoid becomes calcified; depends on vitamin D status and is impaired by acidosis</li>
-<li><strong>Volume</strong> &mdash; affected by age, sex, genetics, and nutrition</li>
-</ul>
-</div>
-<p>Bone also adapts its structure to mechanical stress over time (e.g., cranial muscle-marking changes with age/activity level). Acidic environments leach mineral from bone (a principle used at autopsy to decalcify bone for sectioning).</p>
+<nav id="toc">
+<div class="toc-label">Contents</div>
+<ol id="toc-list">
+<li><span class="toc-link" data-target="s1">Bone Composition & Remodeling Basics</span></li>
+<li><span class="toc-link" data-target="s2">Vitamin D & Calcium-Phosphate Homeostasis</span></li>
+<li><span class="toc-link" data-target="s3">PTH & the RANK/RANKL/OPG Axis</span></li>
+<li><span class="toc-link" data-target="s4">Congenital Bone Disorders: Overview & Terminology</span></li>
+<li><span class="toc-link" data-target="s5">Osteogenesis Imperfecta</span></li>
+<li><span class="toc-link" data-target="s6">Achondroplasia & Thanatophoric Dysplasia</span></li>
+<li><span class="toc-link" data-target="s7">Cleidocranial Dysostosis (Cleidocranial Dysplasia)</span></li>
+<li><span class="toc-link" data-target="s8">Osteopetrosis</span></li>
+<li><span class="toc-link" data-target="s9">Osteoporosis</span></li>
+<li><span class="toc-link" data-target="s10">Paget Disease of Bone (Osteitis Deformans)</span></li>
+<li><span class="toc-link" data-target="s11">Rickets & Osteomalacia (Vitamin D Deficiency)</span></li>
+<li><span class="toc-link" data-target="s12">Hyperparathyroidism, Brown Tumor & Renal Osteodystrophy</span></li>
+<li><span class="toc-link" data-target="s13">Fracture Classification & Terminology</span></li>
+<li><span class="toc-link" data-target="s14">Bone Biomechanics & Fracture Patterns</span></li>
+<li><span class="toc-link" data-target="s15">Fracture Healing, Complications & Forensic Pearls</span></li>
+<li><span class="toc-link" data-target="s16">Osteonecrosis (Avascular Necrosis)</span></li>
+<li><span class="toc-link" data-target="s17">Osteomyelitis</span></li>
+<li><span class="toc-link" data-target="s18">Syphilitic Bone Disease</span></li>
+</ol>
+</nav>
 
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">Which of the following best distinguishes woven bone from normal lamellar bone on histology?</p>
-<div class="qopt" data-correct="false">Woven bone contains no osteoid, only mineral</div>
-<div class="qopt" data-correct="true">Woven bone is disorganized, lacking the layered architecture of lamellar bone</div>
-<div class="qopt" data-correct="false">Woven bone is found only in the epiphysis of long bones</div>
-<div class="qopt" data-correct="false">Woven bone contains no osteoclasts or osteoblasts</div>
-<div class="qexplain">Woven bone is mineralized but architecturally disorganized (no lamellar layering) &mdash; it is the bone type seen in fracture callus and rapid bone turnover states like Paget disease.</div>
-</div>
-</section>
+<main id="lectures">
+<section class="lecture" id="lec1">
+<h2>Bone and Cartilage Pathology</h2>
+<div class="lecture-meta">Study Guide &mdash; Dr. Kemp, Parts 1&ndash;4</div>
 
-<!-- ================= SECTION 2 ================= -->
-<section class="topic" id="s2">
-<h2>2. Vitamin D &amp; Calcium-Phosphate Homeostasis</h2>
-<p>A useful framework: <strong>vitamin D's job is to mineralize bone</strong>, so it raises both calcium <em>and</em> phosphate. <strong>PTH's job is to protect plasma calcium</strong>, so it raises calcium but lowers phosphate. The two hormones work synergistically on calcium but oppositely on phosphate.</p>
-<h3>Vitamin D Synthesis Pathway</h3>
-<table>
+<article class="topic" id="s1">
+<div class="topic-num">SECTION 1</div>
+<h3>Bone Composition & Remodeling Basics</h3>
+<p class="body">Bone is a dynamic, living tissue, not a static structure — it is constantly being resorbed and re-formed throughout life.</p><p class="subhead">Components of Bone</p><table class="data-table">
+<tr><th>Organic</th><th>Inorganic</th></tr>
+<tr><td>Osteoblasts, osteocytes, osteoclasts; osteoid (protein matrix)</td><td>Calcium hydroxyapatite</td></tr>
+</table><p class="body">Bone stores <strong>99%</strong> of the body's calcium, <strong>85%</strong> of its phosphorus, <strong>65%</strong> of its sodium, and <strong>65%</strong> of its magnesium.</p><div class="formula"><span class="fx-label">Framework for the whole unit</span>Vitamin D's function is to promote <strong>mineralization</strong> of new bone; PTH's function is to maintain the <strong>plasma concentration of calcium</strong>.</div><p class="subhead">Woven vs. Lamellar Bone</p><p class="body"><strong>Normal (lamellar) bone</strong> shows an organized, layered architecture. <strong>Woven bone</strong> is disorganized and irregular, without visible layering — this is the type of bone seen in a healing fracture callus and in several pathologic states (e.g., Paget disease) where bone is laid down quickly and haphazardly.</p><p class="subhead">Three Features of Bone Remodeling</p><div class="formula"><span class="fx-label">Key concepts — remodeling is described by three parameters</span><ul>
+<li><strong>Turnover</strong> — determined by resorption rate vs. formation rate; affected by osteoclast/osteoblast activity, hormones, and mechanical stimuli</li>
+<li><strong>Mineralization</strong> — how well collagen becomes ossified; affected by vitamin D concentration, mineral deficiency, acidosis, and aluminum toxicity</li>
+<li><strong>Volume</strong> — affected by age, sex, genetic factors, and nutrition</li>
+</ul></div><p class="body">Bone also adapts its structure to mechanical stress over time. An incidental autopsy finding illustrating this kind of structural change is <strong>hyperostosis frontalis</strong> — a benign, wrinkly overgrowth of bone on the inner surface of the frontal bone, most often seen in middle-aged and older women.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s1"></div>
+</article>
+
+<article class="topic" id="s2">
+<div class="topic-num">SECTION 2</div>
+<h3>Vitamin D & Calcium-Phosphate Homeostasis</h3>
+<p class="subhead">Vitamin D Synthesis Pathway</p><table class="data-table">
 <caption>Steps in active vitamin D production</caption>
 <tr><th>Step</th><th>Process</th></tr>
-<tr><td>1</td><td>7-dehydrocholesterol &rarr; cholecalciferol (vitamin D3) via UV light in skin (~90%) or absorbed from diet (~10%)</td></tr>
-<tr><td>2</td><td>Cholecalciferol &rarr; 25-hydroxyvitamin D via 25-hydroxylase in the <strong>liver</strong></td></tr>
-<tr><td>3</td><td>25-hydroxyvitamin D &rarr; 1,25-dihydroxyvitamin D (active form) via 1&alpha;-hydroxylase in the <strong>kidney</strong></td></tr>
-</table>
-<p>Hypercalcemia stimulates 1&alpha;-hydroxylase (via calcitonin); hypophosphatemia also activates 1&alpha;-hydroxylase, since active vitamin D is needed to reclaim phosphate.</p>
-<h3>Functions of Active Vitamin D</h3>
-<ul>
+<tr><td>1</td><td>7-dehydrocholesterol → cholecalciferol (vitamin D3) via UV light in skin (~90%) or absorbed from diet (~10%)</td></tr>
+<tr><td>2</td><td>Cholecalciferol → 25-hydroxyvitamin D (25-OH-D) via 25-hydroxylase in the <strong>liver</strong></td></tr>
+<tr><td>3</td><td>25-OH-D → 1,25-dihydroxyvitamin D (active form) via α1-hydroxylase in the <strong>kidney</strong></td></tr>
+</table><p class="body">Hypocalcemia stimulates PTH, and PTH stimulates α1-hydroxylase; hypophosphatemia also directly activates α1-hydroxylase. (Note: α1-hydroxylase and 1α-hydroxylase are used interchangeably in the literature for the same enzyme.)</p><p class="subhead">Functions of Active Vitamin D</p><ul class="body-list">
 <li>Stimulates intestinal absorption of calcium</li>
-<li>Stimulates renal distal tubule reabsorption of calcium and phosphate</li>
-<li>In hypocalcemia, increases bone resorption; in normocalcemia, promotes calcium deposition into bone</li>
-<li>Enhances mineralization by stimulating osteoblasts to produce <strong>osteocalcin</strong>, a calcium-binding protein</li>
-</ul>
-<div class="pearl"><span class="label">Best lab test</span>25-hydroxyvitamin D is the most accurate/stable marker of overall vitamin D supply (measured clinically rather than the active 1,25-dihydroxy form, which has a much shorter half-life).</div>
-</section>
+<li>Stimulates calcium and phosphorus resorption in the renal distal tubules</li>
+<li>Works together with PTH: if hypocalcemic, increases resorption from bone; if normocalcemic, promotes calcium deposition in bone</li>
+<li>Enhances mineralization of bone by stimulating osteoblasts to produce the calcium-binding protein <strong>osteocalcin</strong>, causing calcium deposition</li>
+</ul><div class="formula"><span class="fx-label">Overall flow (diet/skin → bone)</span><ul>
+<li>7-dehydrocholesterol (skin) + diet → cholecalciferol (vitamin D) → liver → 25-hydroxycholecalciferol → kidney (via α1-hydroxylase) → 1,25-hydroxycholecalciferol</li>
+<li>Active vitamin D acts on the <strong>intestine</strong> (↑ absorption of calcium and phosphate) and the <strong>kidney</strong> (↑ reabsorption of calcium and phosphate)</li>
+<li>↓ calcium, ↓ phosphate, and ↑ PTH all drive this pathway forward</li>
+<li>At the level of bone, this axis promotes osteoclast activity as part of turning "old bone to new bone"</li>
+</ul></div><div class="formula"><span class="fx-label">Best lab test</span>Testing for 25-hydroxyvitamin D most accurately reflects the body's overall vitamin D supply (rather than the active 1,25-dihydroxy form, which has a much shorter half-life).</div><div class="qs-label">Practice Questions</div><div class="questions" id="q-s2"></div>
+</article>
 
-<!-- ================= SECTION 3 ================= -->
-<section class="topic" id="s3">
-<h2>3. PTH &amp; the RANK/RANKL/OPG Axis</h2>
-<p>PTH is released in response to hypocalcemia. Its net effect is to raise serum calcium at the expense of phosphate:</p>
-<ul>
-<li>Activates renal 1&alpha;-hydroxylase &rarr; increases active vitamin D</li>
-<li>Mobilizes calcium from bone (via osteoclast activation, indirectly through osteoblasts)</li>
-<li>Decreases renal calcium excretion, but <strong>increases</strong> renal phosphate excretion</li>
-</ul>
-<h3>RANK / RANK-Ligand / Osteoprotegerin (OPG)</h3>
-<div class="keypoints">
-<span class="label">The core resorption pathway</span>
-<ul>
-<li><strong>RANK</strong> (Receptor Activator of Nuclear factor Kappa-B) sits on osteoclasts (and precursors)</li>
-<li><strong>RANK-ligand (RANKL)</strong> is expressed on osteoblasts; binding RANK activates osteoclasts &rarr; bone resorption</li>
-<li><strong>Osteoprotegerin (OPG)</strong> is produced by osteoblasts and acts as a decoy/competitive inhibitor of RANKL &mdash; it blocks the RANK&ndash;RANKL interaction and thereby suppresses resorption</li>
-</ul>
-</div>
-<p>This axis explains postmenopausal bone loss: falling estrogen levels reduce OPG production, removing the competitive brake on RANK&ndash;RANKL binding, so osteoclast activation (and bone resorption) proceeds unopposed.</p>
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">A researcher develops an antibody that binds to and <em>promotes</em> the function of osteoprotegerin. Long-term administration to a patient would most likely produce a clinical picture resembling which disease?</p>
-<div class="qopt" data-correct="false">Paget disease of bone</div>
-<div class="qopt" data-correct="true">Osteopetrosis</div>
-<div class="qopt" data-correct="false">Osteomalacia</div>
-<div class="qopt" data-correct="false">Hyperparathyroidism</div>
-<div class="qexplain">Boosting OPG function would more strongly inhibit RANK-RANKL binding, suppressing osteoclast activation. Reduced bone resorption with continued formation mimics osteopetrosis (dense, "marble" bone from defective osteoclast-mediated resorption).</div>
-</div>
-</section>
+<article class="topic" id="s3">
+<div class="topic-num">SECTION 3</div>
+<h3>PTH & the RANK/RANKL/OPG Axis</h3>
+<p class="subhead">PTH Hormone</p><p class="body">Production is stimulated by <strong>hypocalcemia</strong>. Functions:</p><ul class="body-list">
+<li>Activates α1-hydroxylase, increasing the amount of active vitamin D</li>
+<li>Mobilizes calcium from bone</li>
+<li>Decreases renal calcium excretion</li>
+<li>Increases renal excretion of phosphate</li>
+</ul><p class="body">Under normal conditions, increased blood calcium inhibits PTH secretion (negative feedback).</p><p class="subhead">RANK / RANK-Ligand / Osteoprotegerin (OPG)</p><div class="formula"><span class="fx-label">The core resorption pathway</span><ul>
+<li><strong>RANK</strong> (Receptor Activator of Nuclear factor Kappa-B) — on the cell membrane of osteoclasts and osteoclast precursors; leads to stimulation of osteoclast formation, function, differentiation, and survival</li>
+<li><strong>RANKL (RANK-ligand)</strong> — on the cell membrane of osteoblasts and marrow stromal cells; binds RANK, activating NF-κβ and the genes for osteoclast differentiation, function, and survival</li>
+<li><strong>OPG (osteoprotegerin)</strong> — produced by osteoblasts/stromal cells and other cells; binds RANK and competitively inhibits RANKL, blocking it from binding and thereby suppressing osteoclast activation</li>
+</ul></div><p class="body">This axis explains postmenopausal bone loss: falling estrogen levels increase IL-1, IL-6, and TNF, which stimulate RANK–RANKL signaling and suppress OPG — promoting bone breakdown.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s3"></div>
+</article>
 
-<!-- ================= SECTION 4 ================= -->
-<section class="topic" id="s4">
-<h2>4. Congenital Bone Disorders: Overview &amp; Terminology</h2>
-<p>Congenital bone disease arises from abnormal migration/condensation of cells (dysostosis) affecting one bone or a localized group, or from defects intrinsic to bone/cartilage growth and maintenance (dysplasia, affecting the skeletal system more broadly).</p>
-<div class="keypoints">
-<span class="label">Vocabulary</span>
+<article class="topic" id="s4">
+<div class="topic-num">SECTION 4</div>
+<h3>Congenital Bone Disorders: Overview & Terminology</h3>
+<div class="formula"><span class="fx-label">Two broad categories</span><ul>
+<li><strong>Abnormal migration</strong>
 <ul>
-<li><strong>Dysostosis</strong> &mdash; localized abnormality from abnormal cell migration/condensation (affects one bone or a regional group)</li>
-<li><strong>Aplasia</strong> &mdash; absence of bone</li>
-<li><strong>Dysplasia</strong> &mdash; a mutation that interferes with bone or cartilage growth/maintenance; <em>osteodysplasia</em> if bone, <em>chondrodysplasia</em> if cartilage</li>
+<li><strong>Dysostoses (condensations)</strong> — affect one bone or a group of bones</li>
+<li><strong>Aplasia</strong> — absence of bone</li>
+<li>Extra bones</li>
+<li>Abnormal fusions</li>
 </ul>
-</div>
-<div class="pearl"><span class="label">Important distinction from other organ systems</span>In adults, "dysplasia" (e.g., cervical dysplasia, GI dysplasia) usually implies a pre-neoplastic process. Skeletal dysplasias in children are <strong>not</strong> pre-neoplastic &mdash; the term simply describes abnormal formation.</div>
-</section>
+</li>
+<li><strong>Mutations interfering with bone or cartilage growth/maintenance</strong>
+<ul>
+<li><strong>Osteodysplasia</strong> (bone) / <strong>chondrodysplasia</strong> (cartilage)</li>
+</ul>
+</li>
+</ul></div><div class="formula"><span class="fx-label">Important distinction from other organ systems</span>This is <strong>not</strong> like dysplasia of the cervix or colon. In adults, "dysplasia" in those settings usually implies a pre-neoplastic process. Skeletal dysplasias are <strong>not</strong> pre-neoplastic — the term simply describes abnormal formation.</div><p class="body">Two illustrative dysostosis examples from autopsy material: a <strong>bifid rib</strong> (abnormal division of a single rib) and <strong>aplasia of a single transverse process</strong> of a vertebra — both localized findings affecting only one bone, without a broader systemic pattern.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s4"></div>
+</article>
 
-<!-- ================= SECTION 5 ================= -->
-<section class="topic" id="s5">
-<h2>5. Osteogenesis Imperfecta</h2>
-<p>Also called <strong>brittle bone disease</strong>. Caused by a defect in the synthesis of <strong>type I collagen</strong>, resulting in too little (and structurally poor) bone formation. Most forms behave as a <strong>dominant-negative mutation</strong> &mdash; a defect in one portion of the collagen chain disrupts the entire triple helix. Overall incidence is about 1 in 20,000.</p>
-<table>
-<caption>Osteogenesis imperfecta subtypes</caption>
+<article class="topic" id="s5">
+<div class="topic-num">SECTION 5</div>
+<h3>Osteogenesis Imperfecta</h3>
+<p class="body">Also called <strong>brittle bone disease</strong>. Defect in the synthesis of <strong>type I collagen</strong> — results in too little amount of bone. This is a <strong>dominant-negative mutation</strong>: a defect in a portion of the collagen chain affects the entire chain. Overall incidence is <strong>1/20,000</strong>; <strong>Type I is the most common.</strong></p><table class="data-table">
+<caption>Osteogenesis imperfecta — four types</caption>
 <tr><th>Type</th><th>Inheritance</th><th>Key features</th></tr>
-<tr><td>Type I (classic, most common)</td><td>Autosomal dominant</td><td>Fractures after birth; <strong>blue sclera</strong> (type I collagen is a normal scleral component); progressive hearing loss (fragile ossicles)</td></tr>
-<tr><td>Type II</td><td>Autosomal recessive</td><td>Neonatal fractures at birth; frequently stillborn</td></tr>
-<tr><td>Type III</td><td>AD or AR</td><td>Progressive/deforming; ~2/3 of newborns have fractures; can be stillborn</td></tr>
-<tr><td>Type IV</td><td>Autosomal dominant</td><td>Sclera and teeth can be normal or abnormal; can be mistaken for child abuse (lacks the classic blue sclera)</td></tr>
-</table>
-<p>Microscopically, cartilage and a fracture line with fibrin and disorganized (undermineralized) calcification can be seen &mdash; the cartilage model is present, but mineralization is inadequate.</p>
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">A 15-year-old competitive athlete has a history of multiple fractures (tibia, radius, humerus). Exam notes blue sclera and hearing below normal for age. Which is the most likely diagnosis?</p>
-<div class="qopt" data-correct="false">Osteogenesis imperfecta type II</div>
-<div class="qopt" data-correct="true">Osteogenesis imperfecta type I</div>
-<div class="qopt" data-correct="false">Osteopetrosis</div>
-<div class="qopt" data-correct="false">Cleidocranial dysplasia</div>
-<div class="qexplain">Recurrent fractures with blue sclera and hearing loss in an otherwise ambulatory patient is the classic presentation of OI type I. Types II and III typically present perinatally with numerous fractures and are often lethal.</div>
-</div>
-</section>
+<tr><td>Type I</td><td>Autosomal dominant</td><td>Fractures, blue sclerae, presenile deafness</td></tr>
+<tr><td>Type II</td><td>Autosomal recessive</td><td>Newborns present with neonatal fractures</td></tr>
+<tr><td>Type III</td><td>AD or AR</td><td>Two-thirds of newborns have fractures</td></tr>
+<tr><td>Type IV</td><td>Autosomal dominant</td><td>Can have either normal teeth or dentinogenesis imperfecta; <strong>normal sclerae</strong>; can be confused for child abuse</td></tr>
+</table><p class="body">Microscopically, a fracture site shows cartilage with calcification present but disorganized/inadequate mineralization — the cartilage model is present, but mineralization is inadequate.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s5"></div>
+</article>
 
-<!-- ================= SECTION 6 ================= -->
-<section class="topic" id="s6">
-<h2>6. Achondroplasia &amp; Thanatophoric Dysplasia</h2>
-<p>Both result from <strong>activating mutations in fibroblast growth factor receptor 3 (FGFR3)</strong>. FGFR3 normally inhibits growth-plate chondrocytes; an activating mutation over-suppresses growth plate cartilage proliferation, impairing <strong>endochondral</strong> (long bone) growth, while <strong>membranous ossification</strong> (e.g., the cranial vault) is largely unaffected.</p>
-<h3>Achondroplasia</h3>
-<ul>
-<li>The most common form of dwarfism; usually autosomal dominant, frequently a spontaneous (new) mutation</li>
-<li>Short stature from shortened proximal (rhizomelic) extremities; normal-length trunk</li>
-<li>Frontal bossing with normal parietal bossing (forehead prominent because cranium forms relatively normally via membranous ossification)</li>
-<li>Normal intelligence and normal life expectancy in most cases</li>
-</ul>
-<h3>Thanatophoric Dysplasia</h3>
-<ul>
-<li>Same gene (FGFR3) &mdash; <strong>lethal</strong> form</li>
-<li>Extreme shortening of the limbs, severe frontal bossing, "cloverleaf" skull</li>
-<li>Very small thorax &rarr; fatal respiratory failure</li>
-</ul>
-</section>
+<article class="topic" id="s6">
+<div class="topic-num">SECTION 6</div>
+<h3>Achondroplasia & Thanatophoric Dysplasia</h3>
+<p class="body">Both result from mutations in <strong>fibroblast growth factor receptor 3 (FGFR3)</strong>, which normally inhibits growth-plate chondrocytes.</p><p class="subhead">Achondroplasia</p><ul class="body-list">
+<li>Basic description: <strong>no growth of cartilage</strong>; the most common form of dwarfism</li>
+<li><strong>Activating mutation in FGFR3</strong> — FGFR3 normally inhibits growth plate chondrocytes, so growth of the epiphyseal plates is suppressed and the length of long bones is decreased</li>
+<li>Autosomal dominant; many cases are spontaneous mutations</li>
+<li>Affects bones formed by <strong>endochondral ossification</strong> (mostly long bones; not cranial bones)</li>
+<li>Features: short stature; shortening of proximal extremities; frontal bossing (reflects the disproportion between normally-formed membranous cranium and the underdeveloped endochondral skull base/midface); midfacial hypoplasia</li>
+</ul><p class="subhead">Thanatophoric Dysplasia</p><ul class="body-list">
+<li>A variant of dwarfism — mutation in the <strong>extracellular domain of FGFR3</strong></li>
+<li>Features: extreme shortening of the limbs; frontal bossing of the cranium (described as a "cloverleaf" skull shape); very small thorax — causes fatal respiratory failure</li>
+</ul><div class="qs-label">Practice Questions</div><div class="questions" id="q-s6"></div>
+</article>
 
-<!-- ================= SECTION 7 ================= -->
-<section class="topic" id="s7">
-<h2>7. Cleidocranial Dysplasia</h2>
-<p>"Cleido" = Greek for clavicle. Often sporadic, autosomal dominant.</p>
-<ul>
-<li>Small thorax with <strong>partial or complete aplasia of the clavicles</strong> (can sometimes fold the shoulders together in the midline)</li>
-<li>Late eruption of permanent teeth with numerous supernumerary (extra) teeth</li>
-<li>Open fontanelles, <strong>wormian bones</strong> (extra small ossicles within cranial sutures)</li>
+<article class="topic" id="s7">
+<div class="topic-num">SECTION 7</div>
+<h3>Cleidocranial Dysostosis (Cleidocranial Dysplasia)</h3>
+<p class="body">"Cleido-" is Greek for clavicle. Often sporadic; <strong>autosomal dominant</strong>; localized to <strong>chromosome 6p21</strong>.</p><ul class="body-list">
+<li>Small thorax can cause respiratory difficulties in infancy, but survival into adulthood is typical</li>
+<li>Short stature</li>
+<li><strong>Partial to complete aplasia of the clavicles</strong></li>
+<li>Late eruption of permanent teeth; <strong>supernumerary (extra) teeth</strong>; unerupted teeth and malformed roots</li>
+<li><strong>Brachycephaly</strong> (flattening of the posterior head) with bossing of the frontal, parietal, and occipital bones</li>
+</ul><div class="formula"><span class="fx-label">Additional radiographic findings</span><ul>
+<li>Open anterior fontanelle and presence of <strong>wormian bones</strong> (extra ossicles within cranial sutures)</li>
+<li>Delayed ossification of the pubic bone</li>
+<li>Broad femoral head with short femoral neck</li>
 <li>Long second metacarpal</li>
-</ul>
-<div class="pearl"><span class="label">Test-taking pearl</span>Recognizing clavicle involvement alone is usually enough to identify this diagnosis on an exam &mdash; the disorder's name itself flags the two systems involved (clavicle + cranium).</div>
-</section>
+</ul></div><div class="formula"><span class="fx-label">Test-taking pearl</span>Recognizing clavicle involvement alone is usually enough to identify this diagnosis on an exam — the disorder's name itself flags the two systems involved (clavicle + cranium).</div><div class="qs-label">Practice Questions</div><div class="questions" id="q-s7"></div>
+</article>
 
-<!-- ================= SECTION 8 ================= -->
-<section class="topic" id="s8">
-<h2>8. Osteopetrosis</h2>
-<p>"Marble bone disease" &mdash; defective bone resorption by osteoclasts, either from impaired ability to create the acidic resorption pit or from a lack of functional osteoclasts. Despite having <em>more</em> bone than normal, the bone is not properly remodeled and is therefore paradoxically <strong>weak and brittle</strong> ("breaks like chalk").</p>
-<ul>
-<li><strong>Autosomal recessive</strong> forms tend to be more severe; <strong>autosomal dominant</strong> forms (Albers-Sch&ouml;nberg disease) tend to be milder</li>
-<li>Fractures despite increased bone density</li>
-<li>Overgrowth of bone can impinge on cranial nerve foramina &rarr; cranial nerve deficits</li>
-<li>Bone overgrowth can obliterate the medullary cavity &rarr; marrow failure, increasing risk of infection, anemia, and bleeding</li>
-</ul>
-<div class="keypoints">
-<span class="label">Molecular mechanisms</span>
-<ul>
-<li>Mutations in <strong>carbonic anhydrase II</strong> (generates protons from CO<sub>2</sub> + H<sub>2</sub>O needed for the acidic resorption environment)</li>
-<li>Mutations in <strong>CLC-7</strong> (a chloride/proton pump on the osteoclast surface needed to acidify the resorption pit)</li>
-</ul>
-</div>
-</section>
+<article class="topic" id="s8">
+<div class="topic-num">SECTION 8</div>
+<h3>Osteopetrosis</h3>
+<p class="body">Basic description: <strong>defective resorption of bone by osteoclasts</strong> — either a defect in function (inability to maintain an acidic pH) or a defect in osteoclast formation. Other names: <strong>marble bone disease</strong>, <strong>Albers-Schönberg disease</strong>. The bone becomes weak and can break like chalk.</p><table class="data-table">
+<tr><th>Form</th><th>Inheritance</th><th>Severity</th></tr>
+<tr><td>Adult form</td><td>Autosomal dominant</td><td>Mild</td></tr>
+<tr><td>Infant form</td><td>Autosomal recessive</td><td>Severe</td></tr>
+</table><p class="subhead">Features</p><ul class="body-list">
+<li><strong>Fractures</strong> — bones are brittle</li>
+<li><strong>Cranial nerve palsies</strong> — from thickening of bone at the cranial nerve foramina</li>
+<li><strong>Infections</strong> (decreased bone marrow) — loss of the medullary cavity</li>
+</ul><div class="formula"><span class="fx-label">Molecular mechanisms</span><ul>
+<li>General: impaired acidification of the resorption pit</li>
+<li>Mutations in <strong>carbonic anhydrase 2 (CA2)</strong> — generates protons from carbon dioxide and water</li>
+<li>Mutations in <strong>CLCN7</strong> — encodes a proton pump on the surface of osteoclasts</li>
+</ul></div><div class="qs-label">Practice Questions</div><div class="questions" id="q-s8"></div>
+</article>
 
-<!-- ================= SECTION 9 ================= -->
-<section class="topic" id="s9">
-<h2>9. Osteoporosis</h2>
-<p>An <strong>acquired</strong> reduction in bone mass; the bone that is present is <strong>qualitatively normal</strong> (normal mineralization, normal microscopic appearance) &mdash; there is simply not enough of it. Can be localized (e.g., disuse osteoporosis from prolonged immobilization) or generalized.</p>
-<div class="keypoints">
-<span class="label">Osteopenia vs. osteoporosis</span>
-Both terms describe decreased bone mass. <strong>Osteoporosis</strong> specifically means the decrease is severe enough to significantly increase fracture risk; a patient can have osteopenia without yet meeting that threshold.
-</div>
-<h3>Primary vs. Secondary Causes</h3>
-<p><strong>Primary:</strong> postmenopausal/age-related (by far the most common).</p>
-<p><strong>Secondary causes</strong> (know the categories, not an exhaustive list): endocrine disorders (hyperparathyroidism, hyperthyroidism, pituitary tumors, diabetes mellitus, Addison disease, Cushing syndrome), vitamin C/D deficiency, malnutrition/malabsorption, corticosteroids, chemotherapy, alcohol use, immobilization, anemia, paralysis, and neoplasia.</p>
-<h3>Peak Bone Mass &amp; Aging</h3>
-<p>Peak bone mass is determined by genetics, physical activity, and nutrition during growth &mdash; the higher the peak, the longer the delay before osteoporosis develops. With aging: decreased replication of osteoprogenitor cells, decreased osteoblast synthetic activity, decreased matrix growth factors, decreased physical activity (less mechanical stress signaling for remodeling), and (in women) decreased estrogen &rarr; decreased OPG &rarr; unopposed RANK-RANKL signaling.</p>
-<h3>Diagnosis &amp; Complications</h3>
-<ul>
-<li>Plain radiographs require <strong>30&ndash;40% bone loss</strong> before osteoporosis becomes visible &mdash; the diagnostic standard is <strong>dual-energy x-ray absorptiometry (DEXA)</strong></li>
-<li><strong>Vertebral compression fractures</strong> &rarr; kyphoscoliosis, lumbar lordosis</li>
-<li>Hip fractures; rib fractures (painful breathing &rarr; poor inspiration &rarr; pneumonia risk); reduced mobility &rarr; DVT risk</li>
-</ul>
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">A 67-year-old woman is admitted for cough, fever, and dyspnea and diagnosed with pneumonia. Chest x-ray incidentally shows healing callus on six right-sided ribs and two thoracic vertebral compression fractures. She has no family history of fracture and an adequate diet; her only past medical history is hypertension. What is the most likely underlying diagnosis?</p>
-<div class="qopt" data-correct="false">Osteogenesis imperfecta type IV</div>
-<div class="qopt" data-correct="true">Primary (postmenopausal/age-related) osteoporosis</div>
-<div class="qopt" data-correct="false">Paget disease of bone</div>
-<div class="qopt" data-correct="false">Osteomalacia</div>
-<div class="qexplain">Older postmenopausal age, no family history, and adequate nutrition point to primary osteoporosis. The rib and vertebral compression fractures are classic complications, and the rib fractures explain the subsequent pneumonia (splinted, shallow breathing).</div>
-</div>
-</section>
+<article class="topic" id="s9">
+<div class="topic-num">SECTION 9</div>
+<h3>Osteoporosis</h3>
+<p class="body">An <strong>acquired</strong> disease characterized by reduction in bone mass; can be localized or diffuse (generalized). The bone that is present is <strong>qualitatively normal</strong> — there is simply not enough of it.</p><div class="formula"><span class="fx-label">Osteopenia vs. osteoporosis</span><strong>Osteopenia</strong> = decreased bone mass. <strong>Osteoporosis</strong> = osteopenia significant enough to represent an increased risk for fracture.
+</div><p class="subhead">Primary vs. Secondary Causes</p><p class="body"><strong>Primary:</strong> postmenopausal; senile (age-related).</p><table class="data-table">
+<caption>Secondary causes of osteoporosis</caption>
+<tr><th>Category</th><th>Examples</th></tr>
+<tr><td>Endocrine</td><td>Hyperparathyroidism; thyroid dysfunction (hyper- or hypo-); pituitary tumors; diabetes mellitus; Addison disease; Cushing disease/syndrome</td></tr>
+<tr><td>GI</td><td>Malnutrition, malabsorption, vitamin C and D deficiencies</td></tr>
+<tr><td>Drugs</td><td>Alcohol, corticosteroids, chemotherapy</td></tr>
+<tr><td>Miscellaneous</td><td>Immobilization, anemia, pulmonary disease, neoplasia</td></tr>
+</table><p class="subhead">Development of Osteoporosis</p><p class="body"><strong>Peak bone mass</strong> is determined by genetic factors, physical activity, and nutrition. The greater the peak bone mass reached in young adulthood, the longer the delay until osteoporosis develops.</p><div class="formula"><span class="fx-label">Factors affecting development</span><ul>
+<li><strong>Menopause</strong> — decreased estrogen exacerbates bone loss: decreased serum estrogen causes increased IL-1, IL-6, and TNF, which stimulate RANK-RANKL and suppress OPG, promoting bone breakdown</li>
+<li><strong>Aging</strong> — decreased replication of osteoprogenitor cells; decreased osteoblast synthesis; decreased matrix growth factors; decreased physical activity</li>
+</ul></div><p class="subhead">Pathology, Diagnosis & Complications</p><p class="body">The gross and microscopic appearance of the bone itself is normal — there is just not enough of it (widely spaced trabeculae on gross specimens).</p><ul class="body-list">
+<li><strong>Complications:</strong> fracture; compression fractures of vertebrae (leading to kyphoscoliosis or lumbar lordosis); secondary to fractures — pneumonia, pulmonary embolism</li>
+<li><strong>Diagnosis:</strong> 30–40% of bone must be absent before the condition is identifiable on plain x-ray; the standard for measuring bone mineral density is <strong>dual-energy x-ray absorptiometry (DEXA)</strong></li>
+</ul><div class="qs-label">Practice Questions</div><div class="questions" id="q-s9"></div>
+</article>
 
-<!-- ================= SECTION 10 ================= -->
-<section class="topic" id="s10">
-<h2>10. Paget Disease of Bone</h2>
-<p>Also called <strong>osteitis deformans</strong>. A possible (theorized) paramyxovirus-related etiology has been proposed, suggesting a component of chronic inflammation. Characterized by excessive, disorganized bone production &mdash; bone is thicker but structurally unsound and prone to fracture.</p>
-<h3>Phases</h3>
-<ol>
-<li><strong>Osteolytic</strong> phase &mdash; osteoclastic bone resorption predominates</li>
-<li><strong>Mixed</strong> phase &mdash; combined osteoclastic resorption and osteoblastic formation</li>
-<li><strong>Osteosclerotic</strong> phase &mdash; net bone formation predominates, with elevated <strong>alkaline phosphatase</strong></li>
-</ol>
-<div class="keypoints">
-<span class="label">Classic histology</span>
-A <strong>mosaic ("jigsaw puzzle") pattern</strong> &mdash; thickened bony trabeculae laid down in a disorganized fashion, packed tightly against one another. This is one of the most recognizable histologic patterns in bone pathology.
-</div>
-<p>Occurs typically in middle-to-late adulthood; affects roughly 2.5% of the US population but is rare in Scandinavian, Chinese, and Japanese populations (suggesting a genetic component). Can be monostotic or polyostotic; the skull, pelvis, and femur are commonly involved.</p>
-<h3>Complications</h3>
-<ul>
-<li>High-output cardiac failure (from increased arteriovenous shunting through abnormal bone vasculature)</li>
-<li>Cranial nerve impingement (bone overgrowth around foramina)</li>
-<li>Back pain from vertebral column overgrowth</li>
-<li><strong>Secondary osteosarcoma</strong> &mdash; an important, testable association</li>
-</ul>
-</section>
+<article class="topic" id="s10">
+<div class="topic-num">SECTION 10</div>
+<h3>Paget Disease of Bone (Osteitis Deformans)</h3>
+<p class="body">A disease characterized by <strong>increased production of bone that is structurally weak.</strong> There is an <strong>osteolytic stage</strong>, followed by a <strong>mixed osteoclastic-osteoblastic stage</strong>, followed by an <strong>osteosclerotic stage</strong>. Bone growth is tracked by <strong>alkaline phosphatase</strong>.</p><p class="body">There is a net gain in bone mass, but the increased bone is not well-organized and is therefore weak and prone to fracture.</p><div class="formula"><span class="fx-label">Classic histology</span>
+A <strong>mosaic pattern</strong> of bone — thickened bony trabeculae laid down in a disorganized, jigsaw-puzzle-like fashion. One of the most recognizable histologic patterns in bone pathology.
+</div><div class="formula"><span class="fx-label">Proposed etiology</span>Possibly induced by paramyxovirus infection (unconfirmed) — can induce IL-1 and IL-6, which are found at high levels in diseased bone. About <strong>10% of cases carry an SQSTM1 mutation</strong>, which increases osteoclastogenesis through activation of RANK.</div><p class="body">A disease of mid-to-late adulthood, affecting <strong>2.5% of the US population</strong> (rare in Scandinavia, China, and Japan — suggesting a genetic component).</p><ul class="body-list">
+<li><strong>Monostotic (15%)</strong> — tibia, ilium, femur, vertebra, skull, humerus; femur and axial skeleton most common</li>
+<li><strong>Polyostotic (85%)</strong></li>
+</ul><p class="subhead">Complications</p><p class="body">Many patients have none. When present: <strong>high-output cardiac failure</strong>, nerve impingement, back pain, and <strong>secondary osteosarcoma</strong> (an important, testable association).</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s10"></div>
+</article>
 
-<!-- ================= SECTION 11 ================= -->
-<section class="topic" id="s11">
-<h2>11. Rickets &amp; Osteomalacia (Vitamin D Deficiency)</h2>
-<p>Both result from vitamin D deficiency and failure to mineralize osteoid ("malacia" = bad/soft). <strong>Rickets</strong> occurs in children (before growth plate closure); <strong>osteomalacia</strong> occurs in adults (after growth plate closure).</p>
-<p>Causes: reduced UV light exposure, and/or dietary calcium or vitamin D deficiency. Since hypocalcemia stimulates vitamin D production and both hormones promote calcium retention (but have opposing effects on phosphate), deficiency of either substrate impairs mineralization. <strong>25-hydroxyvitamin D level</strong> is the best test for vitamin D supply.</p>
-<h3>Gross Findings in Rickets</h3>
-<table>
-<caption>Skeletal manifestations reconstructed from lecture</caption>
+<article class="topic" id="s11">
+<div class="topic-num">SECTION 11</div>
+<h3>Rickets & Osteomalacia (Vitamin D Deficiency)</h3>
+<p class="body">Vitamin D deficiency causes <strong>rickets</strong> in children (epiphyses still open) and <strong>osteomalacia</strong> in adults (epiphyses closed) — both reflect impaired bone mineralization.</p><p class="subhead">Causes</p><ul class="body-list">
+<li>Decreased exposure to sun</li>
+<li>Dietary deficiency of calcium and vitamin D</li>
+</ul><div class="formula"><span class="fx-label">Mechanism</span>
+Hypocalcemia stimulates PTH; PTH stimulates production of vitamin D. Both PTH and vitamin D promote calcium retention and mobilization — but PTH also promotes <strong>loss</strong> of phosphate. The net effect is that bone cannot be properly mineralized.
+</div><p class="body"><strong>Diagnosis:</strong> testing for 25-hydroxyvitamin D most accurately reflects the body's vitamin D supply.</p><p class="subhead">Rickets: Gross Findings</p><table class="data-table">
+<caption>Skeletal manifestations of rickets</caption>
 <tr><th>Finding</th><th>Description</th></tr>
-<tr><td>Craniotabes</td><td>Parietal bones buckle inward with gentle pressure and spring back (soft, undermineralized skull)</td></tr>
-<tr><td>Frontal bossing</td><td>Excess unmineralized osteoid accumulates at membranous ossification sites</td></tr>
-<tr><td>Rachitic rosary</td><td>Overgrowth of cartilage/osteoid at the costochondral junctions</td></tr>
+<tr><td>Craniotabes</td><td>Parietal bones buckle inward with pressure and snap back into place</td></tr>
+<tr><td>Frontal bossing</td><td>From excess (unmineralized) osteoid</td></tr>
+<tr><td>Rachitic rosary</td><td>Overgrowth of cartilage or osteoid at the costochondral junction</td></tr>
 <tr><td>Pigeon breast</td><td>Ribs bend inward</td></tr>
-<tr><td>Harrison groove</td><td>Inward indentation where the diaphragm inserts on the rib cage</td></tr>
-<tr><td>Bowing of the legs</td><td>Genu varum from weight-bearing on undermineralized long bones</td></tr>
-</table>
-</section>
+<tr><td>Harrison groove</td><td>From the inward pull of the diaphragm</td></tr>
+<tr><td>Lumbar lordosis, bowing of the legs</td><td>From weight-bearing on undermineralized long bones</td></tr>
+</table><p class="body"><strong>Microscopic:</strong> poorly mineralized bone.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s11"></div>
+</article>
 
-<!-- ================= SECTION 12 ================= -->
-<section class="topic" id="s12">
-<h2>12. Hyperparathyroidism, Brown Tumor &amp; Renal Osteodystrophy</h2>
-<h3>Skeletal Effects of Excess PTH</h3>
-<ul>
-<li>Increases <strong>RANKL</strong> expression on osteoblasts &rarr; osteoclast activation &rarr; bone resorption</li>
-<li>Increases renal calcium reabsorption; increases urinary phosphate excretion</li>
-<li>Increases active vitamin D production</li>
-</ul>
-<div class="keypoints">
-<span class="label">Primary, secondary, tertiary</span>
-<ul>
-<li><strong>Primary:</strong> parathyroid adenoma (most common single-gland cause) or hyperplasia</li>
-<li><strong>Secondary:</strong> a chronic stimulus drives PTH up &mdash; most commonly <strong>chronic renal failure</strong>, where impaired renal calcium handling and active vitamin D production drive compensatory PTH release</li>
-<li><strong>Tertiary:</strong> after prolonged secondary stimulation, parathyroid tissue becomes autonomous and continues excess PTH secretion even after the original stimulus is corrected</li>
-</ul>
-</div>
-<h3>Brown Tumor</h3>
-<p>A collection of osteoclasts (grossly brown from hemorrhage) that forms where excess PTH has driven focal bone resorption; can be cystic. The overall skeletal picture of cystic, resorptive lesions with fibrous replacement is called <strong>osteitis fibrosa cystica</strong>. Microscopically: increased osteoclast numbers with decreased overall bone.</p>
-<h3>Renal Osteodystrophy</h3>
-<p>The umbrella term for the alteration of bone morphology seen in chronic kidney disease. It is classified along three axes (the same three parameters from bone remodeling basics):</p>
-<ul>
-<li><strong>Turnover</strong> &mdash; low, normal, or high</li>
-<li><strong>Mineralization</strong> &mdash; normal or abnormal</li>
-<li><strong>Volume</strong> &mdash; low, normal, or high</li>
-</ul>
-<p>The underlying concept: chronic kidney disease disrupts calcium/phosphate/vitamin D handling and secondarily drives PTH abnormalities, producing a spectrum of bone findings rather than one single pattern.</p>
-</section>
+<article class="topic" id="s12">
+<div class="topic-num">SECTION 12</div>
+<h3>Hyperparathyroidism, Brown Tumor & Renal Osteodystrophy</h3>
+<p class="subhead">PTH Functions (Skeletal)</p><ul class="body-list">
+<li>Increases <strong>RANKL</strong> expression on osteoblasts</li>
+<li>Increases calcium resorption from kidney tubules</li>
+<li>Increases urinary excretion of phosphates</li>
+<li>Increases active vitamin D</li>
+</ul><p class="body">Under normal conditions, increased blood calcium inhibits PTH secretion.</p><div class="formula"><span class="fx-label">Primary, secondary, tertiary</span><ul>
+<li><strong>Primary:</strong> associated with parathyroid gland adenomas or hyperplasia</li>
+<li><strong>Secondary:</strong> a stimulus on the parathyroid glands from disease in another system leading to hypocalcemia — most commonly <strong>renal failure</strong></li>
+<li><strong>Tertiary:</strong> autonomous functioning of an overly stimulated parathyroid gland</li>
+</ul></div><p class="subhead">Pathology</p><ul class="body-list">
+<li><strong>Microscopic:</strong> increased osteoclasts; amount of bone is decreased (replaced with connective tissue)</li>
+<li><strong>Gross — Brown tumor:</strong> a collection of osteoclasts, reactive giant cells, and hemorrhage; can be cystic, in which case the process is called <strong>osteitis fibrosa cystica</strong></li>
+</ul><p class="subhead">Renal Osteodystrophy</p><p class="body">The alteration of bone morphology seen in patients with chronic kidney disease. Classified along three axes (the same three parameters from bone remodeling basics):</p><ul class="body-list">
+<li><strong>Turnover</strong> — low, normal, or high</li>
+<li><strong>Mineralization</strong> — normal or abnormal</li>
+<li><strong>Volume</strong> — low, normal, or high</li>
+</ul><p class="body">Chronic kidney disease disrupts calcium/phosphate/vitamin D handling and secondarily drives PTH abnormalities, producing a broad spectrum of bone findings (decreased bone formation, marrow fibrosis, altered resorption) rather than one single pattern.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s12"></div>
+</article>
 
-<!-- ================= SECTION 13 ================= -->
-<section class="topic" id="s13">
-<h2>13. Fracture Classification &amp; Terminology</h2>
-<p>Fractures are one of the most common pathologic conditions of bone, with over 100 named terms in use (many eponymous). A useful general framework describes any fracture with five descriptors:</p>
-<table>
+<article class="topic" id="s13">
+<div class="topic-num">SECTION 13</div>
+<h3>Fracture Classification & Terminology</h3>
+<p class="body"><em>Robbins</em> notes that "fractures rank among the most common pathologic conditions of bone," yet lists only a minimal four-part classification scheme (complete/incomplete, closed, comminuted, displaced). Fracture terminology is actually far richer than that.</p><div class="formula"><span class="fx-label">Over 100 fracture terms are in use</span><ul>
+<li><strong>18 eponyms</strong> (e.g., Shepherd fracture — the external tubercle of the talus)</li>
+<li><strong>25 non-eponyms</strong> that describe specific fracture locations (e.g., boxer's fracture — the 5th metacarpal, or sometimes described as the 4th)</li>
+<li><strong>16 terms synonymous</strong> with other terms (simple = closed; compound = open, though "simple/compound" is no longer preferred usage)</li>
+<li><strong>7 fractures named after scenarios</strong> (e.g., birth fractures)</li>
+<li><strong>4 fractures named after clinical results</strong> (stable vs. unstable fractures)</li>
+</ul></div><p class="subhead">General Classification Framework</p><table class="data-table">
 <caption>Five-part fracture description framework</caption>
 <tr><th>Descriptor</th><th>Categories</th></tr>
-<tr><td><strong>Extent</strong></td><td>Complete (through the entire thickness/width of the bone) vs. incomplete</td></tr>
-<tr><td><strong>Integrity of overlying skin</strong></td><td><strong>Closed</strong> (skin intact; formerly "simple") vs. <strong>open</strong> (skin breached; formerly "compound")</td></tr>
-<tr><td><strong>Direction</strong></td><td>Transverse (straight across), oblique (angled), spiral (spirals around the shaft)</td></tr>
-<tr><td><strong>Location</strong></td><td>Named by the specific bone/segment involved (e.g., diaphyseal, metaphyseal)</td></tr>
-<tr><td><strong>Alignment</strong></td><td>Displaced vs. non-displaced fracture ends</td></tr>
-</table>
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">A rock climber falls and fractures the left radius; the skin is intact. X-ray shows a single spiral fracture line traversing the entire width of the bone, with no fragmentation and the fracture ends in alignment. How is this fracture best characterized?</p>
-<div class="qopt" data-correct="false">Closed, incomplete, spiral, non-displaced</div>
-<div class="qopt" data-correct="true">Closed, complete, spiral, non-displaced</div>
-<div class="qopt" data-correct="false">Open, complete, oblique, displaced</div>
-<div class="qopt" data-correct="false">Closed, complete, comminuted, non-displaced</div>
-<div class="qexplain">Skin intact = closed; traversing the entire width of the bone = complete (not incomplete); the description states a spiral orientation with no fragmentation (rules out comminuted) and ends in alignment (non-displaced).</div>
-</div>
-</section>
+<tr><td><strong>Extent</strong></td><td>Complete or incomplete (through, or not through, the full diameter of the bone)</td></tr>
+<tr><td><strong>Integrity of overlying skin</strong></td><td><strong>Closed</strong> or <strong>open</strong> (the older terms "simple"/"compound" are not preferred)</td></tr>
+<tr><td><strong>Direction</strong></td><td>Transverse, oblique, spiral</td></tr>
+<tr><td><strong>Location</strong></td><td>Epiphyseal, metaphyseal, diaphyseal</td></tr>
+<tr><td><strong>Alignment</strong></td><td>Displaced or non-displaced fracture ends</td></tr>
+</table><div class="qs-label">Practice Questions</div><div class="questions" id="q-s13"></div>
+</article>
 
-<!-- ================= SECTION 14 ================= -->
-<section class="topic" id="s14">
-<h2>14. Bone Biomechanics &amp; Fracture Patterns</h2>
-<h3>Forces on Bone</h3>
-<ul>
+<article class="topic" id="s14">
+<div class="topic-num">SECTION 14</div>
+<h3>Bone Biomechanics & Fracture Patterns</h3>
+<p class="subhead">Forces on Bone</p><ul class="body-list">
 <li><strong>Compression</strong> (pushing), <strong>tension</strong> (stretching), <strong>shear</strong> (forces moving in opposite directions), and combinations (bending, rotation)</li>
-<li>When a long bone is struck from one side, that side is placed under compression while the <strong>opposite side experiences tension first</strong> &mdash; fractures often begin at the site of trauma or an adjacent location under the greatest tensile stress, not necessarily directly at the point of impact</li>
-</ul>
-<h3>Elastic vs. Plastic Deformation</h3>
-<p>Bone is viscoelastic &mdash; part glass-like (brittle) and part rubber-like (pliable). It can bend roughly 13% and spring back (<strong>elastic deformation</strong>), or bend further without fracturing and <strong>not</strong> return to its original shape (<strong>plastic deformation</strong>). Which behavior dominates depends on how quickly the force is applied: slowly applied force allows bending/plastic deformation; rapidly applied high-energy force (e.g., gunshot) causes brittle, glass-like fracture without bending.</p>
-<h3>Specific Fracture Types</h3>
-<table>
+<li>When a long bone is struck from one side (bending), that side is placed under <strong>compression</strong> while the <strong>opposite side experiences tension</strong> — fractures often begin at the site of trauma or an adjacent location under the greatest tensile stress, not necessarily directly at the point of impact</li>
+<li><strong>Direct trauma</strong> — fracture occurs at the location of the trauma. <strong>Indirect trauma</strong> — fracture occurs at a site removed from the point of trauma (force is transmitted through the bone)</li>
+</ul><p class="subhead">Elastic vs. Plastic Deformation</p><p class="body">Bone is viscoelastic — part glass-like (brittle) and part rubber-like (malleable). Plotting <strong>stress</strong> (force/area) against <strong>strain</strong> (new length/original length) produces a curve with a <strong>yield point</strong>: below it, bone springs back to its original shape (<strong>elastic deformation</strong>); past it, bone can bend further without breaking but does <strong>not</strong> return to its original shape (<strong>plastic deformation</strong>), and eventually fracture occurs. A brittle substance like glass has a steep, nearly straight stress/strain line with little give before failure; a malleable substance like rubber has a long, shallow curve. Bone's curve falls in between and <strong>depends on how quickly the force is delivered</strong>: slowly applied force allows more plastic deformation before failure, while rapidly applied high-energy force causes brittle, glass-like fracture with little to no bending.</p><div class="formula"><span class="fx-label">Forensic correlate</span>A skull that was beaten (force delivered relatively slowly, over multiple blows) shows plastic deformation — the fragments do <strong>not</strong> re-approximate cleanly. A skull struck by a rifle round (very high-speed, high-energy force) shatters in a brittle, glass-like fashion, and the fragments <strong>can</strong> often be re-approximated, since there was little plastic bending before failure.</div><p class="subhead">Specific Fracture Types</p><table class="data-table">
 <caption>Incomplete fracture patterns</caption>
 <tr><th>Type</th><th>Description</th></tr>
-<tr><td>Greenstick</td><td>Fails on the tension side only; common in children, whose more pliable bone bends before breaking through completely</td></tr>
-<tr><td>Torus (buckle)</td><td>Cortex buckles outward on the compression side without a discrete fracture line through it; typically in long bones</td></tr>
-<tr><td>Bone bruise</td><td>Microfracture of trabecular bone from a depressive force, without a visible cortical fracture</td></tr>
+<tr><td>Greenstick</td><td>Compression on one side, failure at the tension side only — an incomplete transverse fracture with perpendicular deviation; common in children, whose more pliable bone bends before breaking through completely</td></tr>
+<tr><td>Torus (buckle)</td><td>Rounded expanse of cortex buckling outward from <strong>longitudinal (end-to-end) compression</strong>, without a discrete fracture line through it; typically in long bones</td></tr>
+<tr><td>Bone bruise</td><td>Microfracture of trabecular bone from a compressive force, without a visible cortical fracture</td></tr>
 <tr><td>Depressed (skull)</td><td>The outer table is pushed into the inner table/diploe without breaching the full thickness</td></tr>
-</table>
-<table>
+</table><table class="data-table">
 <caption>Complete fracture patterns</caption>
 <tr><th>Type</th><th>Description</th></tr>
 <tr><td>Transverse</td><td>Fracture line perpendicular to the long axis of the bone</td></tr>
 <tr><td>Oblique</td><td>Fracture line at an angle</td></tr>
 <tr><td>Spiral</td><td>Fracture line spirals around the shaft</td></tr>
-<tr><td>Comminuted</td><td>Bone broken into multiple fragments; implies a large amount of force</td></tr>
-<tr><td>Segmental</td><td>Two separate fracture lines isolate a whole segment of the shaft; typically high-energy trauma (e.g., motor vehicle collisions)</td></tr>
+<tr><td>Comminuted</td><td>Bone broken into multiple fragments; implies a large amount of force (e.g., a <strong>butterfly fracture</strong>, where a wedge-shaped fragment forms opposite the point of tension)</td></tr>
+<tr><td>Segmental</td><td>Two separate fracture lines isolate a whole segment of the shaft; typically high-energy trauma (e.g., a pedestrian struck by a motor vehicle)</td></tr>
 <tr><td>Longitudinal</td><td>Runs along the long axis of the bone; often seen postmortem</td></tr>
 <tr><td>Diastatic</td><td>A fracture through (or separating) a cranial suture</td></tr>
-</table>
-<div class="pearl"><span class="label">Forensic pearl</span>Not all spiral fractures in children indicate abuse &mdash; many "pathognomonic" abuse indicators from older literature have turned out not to be specific. Context of the reported mechanism matters as much as the fracture pattern itself.</div>
-<h3>Pathologic Fracture</h3>
-<p>A fracture occurring at the site of a pre-existing disease process (tumor, Paget disease, a brown tumor from hyperparathyroidism, etc.). Interestingly, fractures purely attributable to primary (age-related) osteoporosis are conventionally <strong>not</strong> labeled "pathologic fractures" in most usage, likely because osteoporosis is treated as an expected consequence of aging rather than a distinct disease process.</p>
-<h3>Named / Forensic Fracture Patterns</h3>
-<table>
+</table><div class="formula"><span class="fx-label">Forensic pearl</span>Not all spiral fractures in children indicate abuse — many "pathognomonic" abuse indicators from older literature have turned out not to be specific. Context of the reported mechanism matters as much as the fracture pattern itself.</div><p class="subhead">Pathologic Fracture</p><p class="body">A fracture occurring at the site of a pre-existing disease process (a bone tumor, a metastatic tumor, Paget disease, a brown tumor from hyperparathyroidism, etc.). Fractures occurring purely in a bone with osteoporosis are conventionally <strong>not</strong> termed "pathologic fractures."</p><p class="subhead">Named / Forensic Fracture Patterns</p><table class="data-table">
 <tr><th>Named fracture</th><th>Mechanism</th></tr>
 <tr><td>Colles fracture</td><td>Distal radius fracture from a fall on an outstretched hand (FOOSH)</td></tr>
-<tr><td>Ring fracture</td><td>Fracture encircling the foramen magnum; from an axial force (e.g., impact through the feet or vertex) driving the vertebral column into the skull base</td></tr>
-<tr><td>Nightstick (parry) fracture</td><td>Isolated ulna fracture, classically from raising the forearm defensively to block a blow</td></tr>
+<tr><td>Ring fracture</td><td>Fracture encircling the foramen magnum; from an axial force (e.g., impact through the feet or the vertex of the skull) driving the vertebral column into the skull base</td></tr>
+<tr><td>Nightstick (parrying) fracture</td><td>Isolated ulna (or radius) fracture, classically from raising the forearm defensively to block a blow</td></tr>
 <tr><td>Hyoid fracture</td><td>Classically associated with strangulation, though blunt trauma or falls onto the neck can also cause it</td></tr>
-</table>
-</section>
+</table><div class="qs-label">Practice Questions</div><div class="questions" id="q-s14"></div>
+</article>
 
-<!-- ================= SECTION 15 ================= -->
-<section class="topic" id="s15">
-<h2>15. Fracture Healing, Complications &amp; Forensic Pearls</h2>
-<h3>Steps of Fracture Repair</h3>
-<ol>
+<article class="topic" id="s15">
+<div class="topic-num">SECTION 15</div>
+<h3>Fracture Healing, Complications & Forensic Pearls</h3>
+<p class="subhead">Steps of Fracture Repair</p><ol class="body-list">
 <li>Hemorrhage and fibrin deposition at the fracture site, triggering inflammation</li>
-<li><strong>Soft callus</strong> &mdash; a cartilage model is laid down (similar to endochondral ossification)</li>
-<li><strong>Hard callus</strong> &mdash; the cartilage model mineralizes and is bridged by woven bone</li>
-<li><strong>Remodeling</strong> &mdash; woven bone is gradually reorganized into normal lamellar bone</li>
-</ol>
-<p>Radiologic and pathologic appearance can give a rough time course of a fracture, but overlapping/re-injured fractures make this imprecise &mdash; interpret cautiously.</p>
-<h3>Factors That Impair Healing</h3>
-<ul>
+<li><strong>Soft callus</strong> — a cartilage model is laid down (similar to endochondral ossification)</li>
+<li><strong>Hard callus</strong> — the cartilage model mineralizes and is bridged by woven bone</li>
+<li><strong>Remodeling</strong> — woven bone is gradually reorganized into normal lamellar bone</li>
+</ol><p class="body">Radiologic and pathologic appearance can give a rough time course of a fracture, but overlapping/re-injured fractures make this imprecise — interpret cautiously.</p><p class="subhead">Factors That Impair Healing</p><ul class="body-list">
 <li>Displaced or comminuted fractures (fragments not end-to-end, requiring more remodeling)</li>
-<li>Inadequate immobilization &mdash; continued motion/strain can prevent proper union and produce a <strong>pseudoarthrosis</strong> ("false joint" forming at the non-union site)</li>
+<li>Inadequate immobilization — continued motion/strain can prevent proper union and produce a <strong>pseudoarthrosis</strong> ("false joint" forming at the non-union site)</li>
 <li>Infection, particularly with open or comminuted fractures</li>
 <li>Nutritional deficiencies (calcium, phosphate, vitamins C and D)</li>
-<li>Diabetes and vascular disease (e.g., atherosclerosis) &mdash; impaired blood flow to the fracture site</li>
-</ul>
-<div class="pearl"><span class="label">Interesting exception</span>Pseudoarthrosis is uncommonly seen in rib fractures despite ribs constantly moving with respiration &mdash; possibly because chest wall musculature helps keep the fracture ends relatively aligned.</div>
-<h3>Forensic Pathology Pearl: Manner of Death</h3>
-<p>If a person falls and fractures a hip, and subsequently dies (even from a downstream complication such as pneumonia or inability to wean from a ventilator), the <strong>manner of death is accident</strong>, not natural &mdash; because the fall/fracture set the fatal chain of events in motion, even though the immediate cause of death may be something else (e.g., bronchopneumonia). These cases should be reported to the coroner/medical examiner and are commonly under-referred.</p>
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">A 73-year-old woman with hypertension, diabetes, and osteoporosis falls down stairs and fractures her femoral neck. Hip repair is uncomplicated, but she cannot be weaned from the ventilator and dies of bronchopneumonia. What is the correct manner of death?</p>
-<div class="qopt" data-correct="false">Natural</div>
-<div class="qopt" data-correct="true">Accident</div>
-<div class="qopt" data-correct="false">Could not be determined</div>
-<div class="qopt" data-correct="false">Therapeutic complication</div>
-<div class="qexplain">The fall and resulting fracture initiated the sequence of events leading to death, even though the immediate cause of death (bronchopneumonia) occurred later. This makes the manner of death accident, not natural.</div>
-</div>
-</section>
+<li>Diabetes and vascular disease (e.g., atherosclerosis) — impaired blood flow to the fracture site</li>
+</ul><div class="formula"><span class="fx-label">Interesting exception</span>Pseudoarthrosis is uncommonly seen in rib fractures despite ribs constantly moving with respiration — possibly because chest wall musculature helps keep the fracture ends relatively aligned.</div><p class="subhead">Forensic Pathology Pearl: Manner of Death</p><p class="body">If a person falls and fractures a hip, and subsequently dies (even from a downstream complication such as pneumonia or inability to wean from a ventilator), the <strong>manner of death is accident</strong>, not natural — because the fall/fracture set the fatal chain of events in motion, even though the immediate cause of death may be something else (e.g., bronchopneumonia). These cases should be reported to the coroner/medical examiner and are commonly under-referred.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s15"></div>
+</article>
 
-<!-- ================= SECTION 16 ================= -->
-<section class="topic" id="s16">
-<h2>16. Osteonecrosis (Avascular Necrosis)</h2>
-<p>Ischemic death of bone, also called <strong>aseptic</strong> or <strong>avascular necrosis</strong>. Distinct from the focal necrosis that can accompany other bone diseases (e.g., localized necrosis in osteomyelitis) &mdash; osteonecrosis is its own specific disease process, most classically affecting the femoral head.</p>
-<h3>Mechanisms (Usually Acting Together)</h3>
-<ul>
-<li>Obstruction of the vascular lumen (fat emboli, sickled red cells, gas bubbles in decompression/Caisson disease)</li>
+<article class="topic" id="s16">
+<div class="topic-num">SECTION 16</div>
+<h3>Osteonecrosis (Avascular Necrosis)</h3>
+<p class="body">Ischemic death of bone, also called <strong>aseptic</strong> or <strong>avascular necrosis</strong>. In osteonecrosis, necrosis is the <strong>dominant</strong> change in the bone itself — this distinguishes it from the focal/incidental necrosis that can accompany other bone diseases (e.g., necrotic bone within osteomyelitis is not, by itself, called "osteonecrosis"). Technically the term reflects <strong>systemic</strong> factors, though necrosis of bone can also occur purely <strong>locally</strong> (e.g., from local ischemia after trauma).</p><p class="subhead">Mechanisms (Usually Acting Together)</p><ul class="body-list">
+<li>Obstruction of the vascular lumen (fat, thrombi, gas bubbles)</li>
 <li>Increased intramedullary/bone marrow pressure</li>
 <li>Direct blood vessel damage (trauma)</li>
-</ul>
-<p>Whether ischemia is reversible or irreversible depends on its duration.</p>
-<h3>Subchondral vs. Medullary Infarcts</h3>
-<table>
+</ul><p class="body">These converge on <strong>ischemia</strong>, which may be <strong>reversible</strong> or <strong>irreversible</strong> depending on its duration. Important modifying factors include genetics, vulnerable anatomic areas (e.g., the epiphysis), and load placed on the bone.</p><p class="subhead">Subchondral vs. Medullary Infarcts</p><table class="data-table">
 <tr><th>Location</th><th>Presentation</th></tr>
 <tr><td>Subchondral</td><td>Usually <strong>painful</strong> (periosteum is involved) and can lead to collapse of the articular surface, since the cortex here is thinner/subarticular</td></tr>
-<tr><td>Medullary</td><td>Usually <strong>silent</strong>; bone remains relatively stable because the load-bearing outer cortex is spared even if the marrow cavity infarcts</td></tr>
-</table>
-<h3>Risk Factors</h3>
-<p>Corticosteroid use, idiopathic, systemic lupus erythematosus/antiphospholipid antibody syndrome, sickle cell disease, Caisson (decompression) disease, trauma, and fat embolism (e.g., following long bone fracture).</p>
-<h3>Named Forms</h3>
-<ul>
-<li><strong>Legg-Calv&eacute;-Perthes disease</strong> &mdash; avascular necrosis of the femoral head in children</li>
+<tr><td>Medullary</td><td>Usually <strong>silent</strong> unless large; bone remains relatively stable because the load-bearing outer cortex is spared even if the marrow cavity infarcts</td></tr>
+</table><p class="subhead">Risk Factors</p><p class="body">Glucocorticoid administration (e.g., in organ transplant recipients or SLE), sickle cell disease, Caisson (decompression) disease, fat emboli, alcohol use, idiopathic causes, antiphospholipid antibodies, <strong>Gaucher disease</strong>, and trauma.</p><p class="subhead">Named Forms</p><ul class="body-list">
+<li><strong>Legg-Calvé-Perthes disease</strong> — avascular necrosis of the femoral head in children</li>
 <li><strong>Bisphosphonate-related osteonecrosis of the jaw</strong></li>
-</ul>
-<h3>Osteonecrosis of the Femoral Head</h3>
-<p>Roughly 20,000&ndash;30,000 cases per year in the US, accounting for about 10% of hip replacements &mdash; a surprisingly large share given it typically affects young, active patients (commonly in their 20s&ndash;40s) rather than the typical osteoarthritis population.</p>
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">Six days after a closed, non-displaced femur fracture from a skiing accident, a 44-year-old woman develops confusion, a petechial rash, and dyspnea. What long-term musculoskeletal complication is she now at increased risk for?</p>
-<div class="qopt" data-correct="false">Osteomyelitis of the fracture site</div>
-<div class="qopt" data-correct="true">Avascular necrosis of the femoral head</div>
-<div class="qopt" data-correct="false">Paget disease of bone</div>
-<div class="qopt" data-correct="false">Pseudoarthrosis</div>
-<div class="qexplain">The delayed confusion, petechial rash, and dyspnea after a long bone fracture describe fat embolism syndrome. Fat emboli can obstruct the microvasculature of bone, predisposing to avascular necrosis, classically of the femoral head.</div>
-</div>
-</section>
+<li><strong>Osteonecrosis of the medial femoral condyle</strong></li>
+<li>Other bones affected: humeral head, scaphoid, lunate, talus</li>
+</ul><p class="subhead">Osteonecrosis of the Femoral Head</p><p class="body">Basic description: decreased blood flow to the femoral head, leading to cell death, fracture, and eventual collapse of the articular surface. Roughly <strong>20,000–30,000 cases per year</strong> in the US, accounting for about <strong>10% of hip replacements</strong> — a surprisingly large share given it typically affects young, active patients (commonly <strong>20–40 years of age</strong>) rather than the typical osteoarthritis population.</p><div class="qs-label">Practice Questions</div><div class="questions" id="q-s16"></div>
+</article>
 
-<!-- ================= SECTION 17 ================= -->
-<section class="topic" id="s17">
-<h2>17. Osteomyelitis</h2>
-<p>Inflammation of bone ("osteo") and marrow ("myelo"), most commonly infectious. Bacteria reach bone by three routes: <strong>exogenous</strong> (open fracture, trauma, surgery), <strong>hematogenous</strong> spread (from bacteremia), or <strong>contiguous</strong> spread (from an adjacent infected joint or soft tissue).</p>
-<h3>Acute vs. Chronic</h3>
-<div class="keypoints">
-<span class="label">Defining feature: presence of dead bone</span>
-<ul>
+<article class="topic" id="s17">
+<div class="topic-num">SECTION 17</div>
+<h3>Osteomyelitis</h3>
+<p class="body">Inflammation of bone ("osteo") and marrow ("myelo"), most commonly infectious. Bacteria reach bone by three routes: <strong>exogenous</strong> (open fracture, trauma, surgery), <strong>hematogenous</strong> spread (from bacteremia), or <strong>contiguous</strong> spread (from an adjacent infected joint or soft tissue).</p><p class="subhead">Acute vs. Chronic</p><div class="formula"><span class="fx-label">Defining feature: presence of dead bone</span><ul>
 <li><strong>Acute:</strong> neutrophilic infiltrate; typically follows hematogenous seeding (especially in children); usually presents suddenly and does not necessarily progress to chronic disease</li>
 <li><strong>Chronic:</strong> defined pathologically by the presence of dead (necrotic) bone; usually results from open/comminuted fractures or continuous local spread (e.g., non-healing diabetic foot ulcers); tends to be an insidious, low-level process rather than a sudden presentation</li>
-</ul>
-</div>
-<h3>Children vs. Adults</h3>
-<table>
+</ul></div><p class="subhead">Children vs. Adults</p><table class="data-table">
 <tr><th></th><th>Children</th><th>Adults</th></tr>
 <tr><td>Typical course</td><td>Acute, hematogenous</td><td>Chronic more common; hematogenous spread is rare because growth plates are closed</td></tr>
-<tr><td>Typical site</td><td><strong>Metaphysis</strong> (highly vascular, near the growth plate) &mdash; femur, tibia, fibula most common</td><td>Vertebrae (when acute/hematogenous); otherwise wherever contiguous spread or vascular disease occurs</td></tr>
+<tr><td>Typical site</td><td><strong>Metaphysis</strong> (highly vascular, near the growth plate) — femur, tibia, fibula most common</td><td>Vertebrae (when acute/hematogenous); otherwise wherever contiguous spread or vascular disease occurs</td></tr>
 <tr><td>Presentation</td><td>Pain, limp, fever, swelling, erythema (classic acute inflammatory picture)</td><td>Chronic pain, sinus tract, poor wound healing, may have fever/elevated CRP if acute</td></tr>
 <tr><td>Most common organism</td><td><strong>Staphylococcus aureus</strong></td><td><em>S. aureus</em> most common overall; <em>S. epidermidis</em> with contiguous spread from skin; Pseudomonas/E. coli in specific settings; consider fungal/mycobacterial if immunocompromised</td></tr>
-</table>
-<div class="pearl"><span class="label">Classic association</span><strong>Salmonella</strong> osteomyelitis is strongly associated with <strong>sickle cell disease</strong>.</div>
-<h3>Risk Factors</h3>
-<p>Lymphedema, venous stasis/insufficiency, impaired circulation (small vessel disease from hypertension, diabetes, neuropathy), malnutrition, renal or liver failure, immune compromise, neoplasia, and substance abuse &mdash; essentially, anything that impairs local blood flow, drainage, or host defense.</p>
-<h3>Pathologic Findings</h3>
-<ul>
-<li><strong>Sequestrum</strong> &mdash; a fragment of necrotic bone that becomes "sequestered" away from viable tissue</li>
-<li><strong>Involucrum</strong> &mdash; a shell of new bone growth that forms around the sequestrum</li>
-<li><strong>Sinus tract</strong> &mdash; a chronic draining connection between the site of bone inflammation and the skin surface</li>
-</ul>
-<h3>Complications</h3>
-<p>Pathologic fracture, amyloidosis (chronic inflammatory state), endocarditis (from seeding bacteremia), sepsis, and (rarely) squamous cell carcinoma arising within a chronic sinus tract or secondary osteosarcoma at the infection site.</p>
-<h3>Specific Forms</h3>
-<ul>
-<li><strong>Tuberculous osteomyelitis</strong> &mdash; about 1&ndash;3% of TB cases; favors long bones and vertebrae; vertebral TB is called <strong>Pott disease</strong></li>
-</ul>
-<div class="qbox">
-<span class="qlabel">Practice Question</span>
-<p class="stem">A 12-year-old girl develops progressive left leg pain and a limp over three days, with fever (101&deg;F), and swelling/erythema over the affected area on exam. What is the most likely diagnosis?</p>
-<div class="qopt" data-correct="false">Chronic osteomyelitis with sequestrum formation</div>
-<div class="qopt" data-correct="true">Acute (hematogenous) osteomyelitis</div>
-<div class="qopt" data-correct="false">Legg-Calv&eacute;-Perthes disease</div>
-<div class="qopt" data-correct="false">Ewing sarcoma</div>
-<div class="qexplain">Rapid onset of fever, limp, localized swelling, and erythema in a child is classic for acute hematogenous osteomyelitis, typically seeding the highly vascular metaphysis. Sequestrum formation is a feature of chronic, not acute, disease.</div>
-</div>
-</section>
+</table><div class="formula"><span class="fx-label">Classic association</span><strong>Salmonella</strong> osteomyelitis is strongly associated with <strong>sickle cell disease</strong>.</div><p class="subhead">Risk Factors</p><p class="body">Lymphedema, venous stasis/insufficiency, impaired circulation (small vessel disease from hypertension, diabetes, neuropathy), malnutrition, renal or liver failure, immune compromise, neoplasia, and substance abuse — essentially, anything that impairs local blood flow, drainage, or host defense.</p><p class="subhead">Pathologic Findings</p><ul class="body-list">
+<li><strong>Sequestrum</strong> — a fragment of necrotic bone that becomes "sequestered" away from viable tissue</li>
+<li><strong>Involucrum</strong> — a shell of new bone growth that forms around the sequestrum</li>
+<li><strong>Sinus tract</strong> — a chronic draining connection between the site of bone inflammation and the skin surface</li>
+</ul><p class="subhead">Complications</p><p class="body">Pathologic fracture, amyloidosis (chronic inflammatory state), endocarditis (from seeding bacteremia), sepsis, and (rarely) squamous cell carcinoma arising within a chronic sinus tract or secondary osteosarcoma at the infection site.</p><p class="subhead">Specific Forms</p><ul class="body-list">
+<li><strong>Tuberculous osteomyelitis</strong> — about 1–3% of TB cases; spreads hematogenously and favors long bones and vertebrae; classically affects the synovium, which has relatively higher oxygen tension favorable to <em>Mycobacterium tuberculosis</em>; vertebral TB is called <strong>Pott disease</strong></li>
+</ul><div class="qs-label">Practice Questions</div><div class="questions" id="q-s17"></div>
+</article>
 
-<!-- ================= SECTION 18 ================= -->
-<section class="topic" id="s18">
-<h2>18. Syphilitic Bone Disease</h2>
-<p>Syphilis can involve bone directly, producing a layer of new periosteal bone on top of existing cortex (periostitis). This is now uncommonly seen clinically because most cases are treated, but classic findings remain testable.</p>
-<h3>Congenital Syphilis: Characteristic Features</h3>
-<ul>
-<li><strong>Hutchinson teeth</strong> &mdash; notched central incisors</li>
-<li><strong>Mulberry molars</strong> &mdash; molars with a berry-like, malformed cusp pattern</li>
-<li><strong>Saddle nose deformity</strong> &mdash; from destructive nasal cartilage/bone inflammation</li>
-<li><strong>Saber shins</strong> &mdash; anterior bowing of the tibia</li>
-</ul>
-<h3>Tertiary Syphilis</h3>
-<ul>
-<li><strong>Periostitis</strong> can affect the skull, shoulder, and long bones, causing bone pain</li>
-<li><strong>Gumma</strong> &mdash; a focus of central necrosis surrounded by a lymphocytic and epithelioid cell infiltrate; can occur in bone as part of tertiary disease</li>
-</ul>
-</section>
+<article class="topic" id="s18">
+<div class="topic-num">SECTION 18</div>
+<h3>Syphilitic Bone Disease</h3>
+<p class="body">Syphilis can involve bone directly, producing a layer of new periosteal bone on top of existing cortex (periostitis). This is now uncommonly seen clinically because most cases are treated, but classic findings remain testable.</p><p class="subhead">Congenital Syphilis: Characteristic Features</p><ul class="body-list">
+<li><strong>Hutchinson teeth</strong> — notched central incisors</li>
+<li><strong>Mulberry molars</strong> — molars with a berry-like, malformed cusp pattern</li>
+<li><strong>Saddle nose deformity</strong> — from destructive nasal cartilage/bone inflammation (due to gummas)</li>
+<li><strong>Saber shins</strong> — anterior bowing of the tibia</li>
+<li><strong>Metaphyseal lucencies</strong> and periostitis on imaging</li>
+</ul><p class="subhead">Adult (Acquired) Syphilis</p><ul class="body-list">
+<li>Bone involvement is rare in secondary syphilis; it is <strong>most frequent in tertiary syphilis</strong></li>
+<li><strong>Periostitis</strong> most commonly affects the skull, shoulder, and long bones, causing bone pain</li>
+<li><strong>Gumma</strong> — a focus of central necrosis surrounded by a lymphoplasmacytic and epithelioid cell infiltrate; can occur in bone as part of tertiary disease</li>
+</ul><div class="qs-label">Practice Questions</div><div class="questions" id="q-s18"></div>
+</article>
 
-<footer>Built from Dr. Kemp's Bone and Cartilage Pathology lecture narration, Parts 1&ndash;4 &middot; For personal study use</footer>
+</section>
 </main>
 
+<footer class="eod">Bone and Cartilage Pathology &mdash; built from Dr. Kemp's lecture narration and slides, Parts 1&ndash;4.</footer>
+
+<button id="side-toggle" aria-label="Toggle section navigation">Sections</button>
+<div id="side-scrim"></div>
+<nav id="side-nav">
+<div class="side-head">Jump to a section</div>
+<div id="side-nav-body">
+<div class="side-lecture-label">Bone and Cartilage Pathology</div>
+<span class="side-link" data-target="s1">Bone Composition & Remodeling Basics</span>
+<span class="side-link" data-target="s2">Vitamin D & Calcium-Phosphate Homeostasis</span>
+<span class="side-link" data-target="s3">PTH & the RANK/RANKL/OPG Axis</span>
+<span class="side-link" data-target="s4">Congenital Bone Disorders: Overview & Terminology</span>
+<span class="side-link" data-target="s5">Osteogenesis Imperfecta</span>
+<span class="side-link" data-target="s6">Achondroplasia & Thanatophoric Dysplasia</span>
+<span class="side-link" data-target="s7">Cleidocranial Dysostosis (Cleidocranial Dysplasia)</span>
+<span class="side-link" data-target="s8">Osteopetrosis</span>
+<span class="side-link" data-target="s9">Osteoporosis</span>
+<span class="side-link" data-target="s10">Paget Disease of Bone (Osteitis Deformans)</span>
+<span class="side-link" data-target="s11">Rickets & Osteomalacia (Vitamin D Deficiency)</span>
+<span class="side-link" data-target="s12">Hyperparathyroidism, Brown Tumor & Renal Osteodystrophy</span>
+<span class="side-link" data-target="s13">Fracture Classification & Terminology</span>
+<span class="side-link" data-target="s14">Bone Biomechanics & Fracture Patterns</span>
+<span class="side-link" data-target="s15">Fracture Healing, Complications & Forensic Pearls</span>
+<span class="side-link" data-target="s16">Osteonecrosis (Avascular Necrosis)</span>
+<span class="side-link" data-target="s17">Osteomyelitis</span>
+<span class="side-link" data-target="s18">Syphilitic Bone Disease</span>
+</div>
+</nav>
+
 <script>
-  const sidebar = document.getElementById('sidebar');
-  const main = document.getElementById('mainContent');
-  const toggleBtn = document.getElementById('sbToggle');
+const questionData = {"s1": [{"q": "Which of the following best distinguishes woven bone from normal lamellar bone on histology?", "options": ["Woven bone contains no osteoid, only mineral", "Woven bone is disorganized, lacking the layered architecture of lamellar bone", "Woven bone is found only in the epiphysis of long bones", "Woven bone contains no osteoclasts or osteoblasts"], "correct": 1, "explain": "Woven bone is mineralized but architecturally disorganized (no lamellar layering) — it is the bone type seen in fracture callus and rapid bone turnover states like Paget disease."}, {"q": "Approximately what percentage of the body's total calcium is stored in bone?", "options": ["65%", "85%", "99%", "50%"], "correct": 2, "explain": "Bone stores 99% of the body's calcium (along with 85% of phosphorus and 65% each of sodium and magnesium)."}, {"q": "At autopsy, an incidental finding of a benign, wrinkly overgrowth of bone along the inner surface of the frontal bone is noted in a 68-year-old woman. This finding most directly illustrates which general property of bone?", "options": ["Bone is metabolically inert once formed", "Bone remodels and adapts its structure over time", "Bone mineralization requires no vitamin D", "Bone volume is determined solely by mechanical load"], "correct": 1, "explain": "This describes hyperostosis frontalis, a benign incidental finding that reflects bone's capacity to structurally remodel over a lifetime rather than remain a static, inert tissue."}], "s2": [{"q": "The final activation step of vitamin D, converting 25-hydroxyvitamin D to 1,25-dihydroxyvitamin D, occurs primarily in which organ?", "options": ["Liver", "Skin", "Kidney", "Small intestine"], "correct": 2, "explain": "25-OH-D is converted to the active 1,25-dihydroxyvitamin D form by α1-hydroxylase in the kidney; the prior hydroxylation step (to 25-OH-D) occurs in the liver."}, {"q": "Why is 25-hydroxyvitamin D, rather than 1,25-dihydroxyvitamin D, the preferred lab test for assessing a patient's overall vitamin D status?", "options": ["1,25-dihydroxyvitamin D is not produced in the kidney", "25-hydroxyvitamin D has a longer half-life and better reflects total body stores", "25-hydroxyvitamin D is the only form that binds the vitamin D receptor", "1,25-dihydroxyvitamin D levels do not change with PTH"], "correct": 1, "explain": "25-OH-D has a much longer half-life than the active 1,25-dihydroxy form, making it a more stable and accurate reflection of the body's overall vitamin D supply."}, {"q": "A patient with chronic kidney disease has markedly reduced α1-hydroxylase activity. Which downstream effect would be most expected?", "options": ["Increased intestinal calcium absorption", "Decreased active vitamin D, contributing to hypocalcemia", "Increased osteocalcin-mediated bone mineralization", "Suppressed PTH secretion"], "correct": 1, "explain": "α1-hydroxylase in the kidney converts 25-OH-D to the active 1,25-dihydroxy form; losing this activity (as in chronic kidney disease) reduces active vitamin D, impairing intestinal calcium absorption and contributing to hypocalcemia (which in turn drives secondary hyperparathyroidism)."}], "s3": [{"q": "A researcher develops an antibody that binds to and promotes the function of osteoprotegerin. Long-term administration to a patient would most likely produce a clinical picture resembling which disease?", "options": ["Thanatophoric dysplasia", "Osteopetrosis", "A dysostosis", "Osteogenesis imperfecta"], "correct": 1, "explain": "Boosting OPG function would more strongly inhibit RANK-RANKL binding, suppressing osteoclast activation. Reduced bone resorption with continued formation mimics osteopetrosis (dense, \"marble\" bone from defective osteoclast-mediated resorption)."}, {"q": "RANKL is expressed on the surface of which cell type?", "options": ["Osteoclasts", "Osteoblasts and marrow stromal cells", "Chondrocytes", "Osteocytes only"], "correct": 1, "explain": "RANKL is expressed on osteoblasts and marrow stromal cells; it binds RANK on osteoclasts and osteoclast precursors to promote osteoclast differentiation, function, and survival."}, {"q": "A 55-year-old woman two years post-menopause is found to have decreased bone density. Which cytokine-driven mechanism best explains her accelerated bone loss?", "options": ["Estrogen directly binds RANK on osteoclasts to activate them", "Falling estrogen raises IL-1, IL-6, and TNF, which stimulate RANK-RANKL signaling and suppress OPG", "Estrogen loss directly increases α1-hydroxylase activity in the kidney", "Estrogen loss causes a primary defect in type I collagen synthesis"], "correct": 1, "explain": "Postmenopausal estrogen decline raises IL-1, IL-6, and TNF, which stimulate the RANK-RANKL axis while suppressing OPG — net effect: increased osteoclast activity and bone resorption."}], "s4": [{"q": "A localized skeletal abnormality affecting a single bone or a small group of bones (e.g., a bifid rib) is best classified as which type of congenital bone disorder?", "options": ["Chondrodysplasia", "Osteodysplasia", "A dysostosis", "Aplasia"], "correct": 2, "explain": "Dysostoses (condensations) are localized abnormalities affecting one bone or a small group of bones, in contrast to osteodysplasia/chondrodysplasia, which reflect mutations broadly interfering with bone or cartilage growth/maintenance."}, {"q": "A pathology resident, reviewing a bone biopsy report that uses the term \"dysplasia,\" assumes — based on experience with cervical and colonic pathology — that this indicates a pre-neoplastic process. Why is this assumption incorrect in the context of skeletal disorders?", "options": ["Skeletal dysplasias are always malignant rather than pre-malignant", "Skeletal dysplasias simply describe abnormal bone/cartilage formation and are not pre-neoplastic", "The term \"dysplasia\" is never used in skeletal pathology", "Skeletal dysplasias only occur in cartilage, never in bone"], "correct": 1, "explain": "Unlike cervical or colonic dysplasia (which implies a pre-neoplastic process in adults), skeletal dysplasias simply describe abnormal bone or cartilage formation and carry no pre-neoplastic implication."}, {"q": "Which term describes the complete absence of a bone as a category of congenital abnormal bone migration?", "options": ["Aplasia", "Dysostosis", "Chondrodysplasia", "Osteodysplasia"], "correct": 0, "explain": "Aplasia refers to the absence of bone, one of the categories under \"abnormal migration\" (alongside dysostoses, extra bones, and abnormal fusions)."}], "s5": [{"q": "A 15-year-old competitive athlete has a history of multiple fractures (tibia, radius, humerus). Exam notes blue sclerae and hearing below normal for age. Which is the most likely diagnosis?", "options": ["Undiagnosed child abuse", "Osteogenesis imperfecta type I", "Osteogenesis imperfecta type IV", "Thanatophoric dysplasia"], "correct": 1, "explain": "Recurrent fractures with blue sclerae and hearing loss in an otherwise ambulatory teenager is the classic presentation of OI type I. Type IV has normal sclerae and can mimic abuse, but lacks the blue sclerae/hearing loss combination described here."}, {"q": "Osteogenesis imperfecta results from a defect in the synthesis of which protein?", "options": ["Osteocalcin", "Fibroblast growth factor receptor 3", "Type I collagen", "RANKL"], "correct": 2, "explain": "OI is caused by a defect in type I collagen synthesis; because of the dominant-negative nature of the mutation, a defect in one part of the collagen chain disrupts the entire chain."}, {"q": "A newborn presents with multiple fractures noted at birth, and genetic testing confirms an autosomal recessive collagen defect. Which type of osteogenesis imperfecta does this most likely represent?", "options": ["Type II", "Type I", "Type IV", "None — OI is always autosomal dominant"], "correct": 0, "explain": "Type II OI is autosomal recessive and presents with neonatal fractures at birth, distinguishing it from the autosomal dominant Types I and IV."}], "s6": [{"q": "Achondroplasia and thanatophoric dysplasia both result from mutations in which gene?", "options": ["Type I collagen (COL1A1)", "FGFR3", "CLCN7", "SQSTM1"], "correct": 1, "explain": "Both disorders arise from mutations in FGFR3, which normally inhibits growth plate chondrocytes; achondroplasia involves an activating mutation, while thanatophoric dysplasia involves a mutation in the receptor's extracellular domain."}, {"q": "A newborn with thanatophoric dysplasia most commonly dies shortly after birth due to which complication?", "options": ["Cardiac failure from a large septal defect", "Respiratory failure from an extremely small thorax", "Sepsis from an open neural tube defect", "Hemorrhage from a cranial vault fracture"], "correct": 1, "explain": "Thanatophoric dysplasia causes an extremely small thorax, leading to fatal respiratory failure — the defining and most testable feature of the condition."}, {"q": "Why does achondroplasia produce disproportionate frontal bossing and midfacial hypoplasia rather than uniformly small facial bones?", "options": ["Because FGFR3 mutations affect only the mandible", "Because the membranous cranial vault forms normally while the endochondral skull base/midface growth is suppressed", "Because achondroplasia does not affect the skull at all", "Because thanatophoric dysplasia, not achondroplasia, affects the face"], "correct": 1, "explain": "Achondroplasia impairs endochondral ossification (which forms the skull base and midface), while the cranial vault forms via membranous ossification and is spared — the mismatch produces the classic frontal bossing/midfacial hypoplasia appearance."}], "s7": [{"q": "A child with cleidocranial dysplasia is noted to be able to touch his shoulders together in front of his chest. This finding is best explained by which feature of the disease?", "options": ["Joint hypermobility from a connective tissue defect", "Partial to complete aplasia of the clavicles", "Delayed ossification of the pubic bone", "Brachycephaly with frontal bossing"], "correct": 1, "explain": "Partial to complete clavicular aplasia allows unusual shoulder mobility, a classic bedside finding in cleidocranial dysplasia."}, {"q": "Cleidocranial dysplasia is inherited in which pattern, and localized to which chromosome?", "options": ["Autosomal recessive; chromosome 4p16", "Autosomal dominant; chromosome 6p21", "X-linked recessive; chromosome Xq28", "Autosomal dominant; chromosome 17q21"], "correct": 1, "explain": "Cleidocranial dysplasia is autosomal dominant (though often sporadic) and localizes to chromosome 6p21."}, {"q": "Which dental finding is characteristic of cleidocranial dysplasia?", "options": ["Hutchinson teeth", "Dentinogenesis imperfecta", "Supernumerary (extra) teeth with late eruption", "Mulberry molars"], "correct": 2, "explain": "Cleidocranial dysplasia features late eruption of permanent teeth along with supernumerary teeth and malformed roots — distinct from the dental findings of osteogenesis imperfecta (dentinogenesis imperfecta) or congenital syphilis (Hutchinson teeth, mulberry molars)."}], "s8": [{"q": "Osteopetrosis results from a defect in which cellular process?", "options": ["Osteoblast-mediated matrix synthesis", "Osteoclast-mediated bone resorption", "Chondrocyte proliferation at the growth plate", "Renal 1α-hydroxylase activity"], "correct": 1, "explain": "Osteopetrosis (marble bone disease) results from defective osteoclast-mediated resorption, either from impaired acidification of the resorption pit or defective osteoclast formation, leaving bone dense but structurally weak."}, {"q": "An infant with the severe, autosomal recessive form of osteopetrosis develops recurrent infections. What is the most likely explanation?", "options": ["Immunosuppression from chronic corticosteroid use", "Loss of the medullary cavity, reducing functional bone marrow", "Concurrent congenital asplenia", "Vitamin D deficiency impairing neutrophil function"], "correct": 1, "explain": "In osteopetrosis, overgrowth of dense bone obliterates the medullary cavity, decreasing functional bone marrow and predisposing to infection — alongside fractures (brittle bone) and cranial nerve palsies (from bony overgrowth at cranial nerve foramina)."}, {"q": "Which enzyme, when mutated, causes osteopetrosis via failure to generate protons from carbon dioxide and water for osteoclast-mediated resorption?", "options": ["α1-hydroxylase", "Carbonic anhydrase 2", "25-hydroxylase", "Alkaline phosphatase"], "correct": 1, "explain": "Carbonic anhydrase 2 (CA2) generates protons from CO2 and water, acidifying the resorption pit; mutations impair this acidification and contribute to osteopetrosis, alongside mutations in the CLCN7 proton pump."}], "s9": [{"q": "A 67-year-old woman is admitted for cough, fever, and dyspnea and diagnosed with pneumonia. Chest x-ray incidentally shows healing callus on six right-sided ribs and two thoracic vertebral compression fractures. She has no family history of fracture and an adequate diet; her only past medical history is hypertension. What is the most likely underlying diagnosis?", "options": ["Paget disease", "Primary osteoporosis", "Secondary osteoporosis", "Osteogenesis imperfecta type II"], "correct": 1, "explain": "Older age, no family history, and an adequate diet argue against a secondary cause or OI, pointing to primary (postmenopausal/senile) osteoporosis. The rib and vertebral compression fractures are classic complications, and the rib fractures explain the subsequent pneumonia (splinted, shallow breathing)."}, {"q": "What is the imaging gold standard for measuring bone mineral density?", "options": ["Plain film x-ray", "Dual-energy x-ray absorptiometry (DEXA)", "Non-contrast CT", "Technetium-99m bone scan"], "correct": 1, "explain": "DEXA is the standard for measuring bone mineral density; plain x-ray is comparatively insensitive, since 30–40% of bone must already be lost before osteoporosis becomes visible on it."}, {"q": "A patient on chronic corticosteroid therapy for rheumatoid arthritis is found to have decreased bone density. This would be classified as which category of osteoporosis?", "options": ["Primary, postmenopausal", "Primary, senile", "Secondary, drug-induced", "Not osteoporosis, since bone quality is qualitatively abnormal"], "correct": 2, "explain": "Corticosteroids are a recognized drug-related secondary cause of osteoporosis. Osteoporotic bone, regardless of cause, remains qualitatively normal — there is simply too little of it."}], "s10": [{"q": "Which laboratory marker is used to track disease activity/bone turnover in Paget disease?", "options": ["Serum calcium", "Alkaline phosphatase", "25-hydroxyvitamin D", "Parathyroid hormone"], "correct": 1, "explain": "Alkaline phosphatase is used to track bone growth/turnover activity in Paget disease, reflecting the markedly increased (though disorganized) bone formation."}, {"q": "The classic \"mosaic pattern\" seen on histology in Paget disease refers to which finding?", "options": ["Alternating zones of necrotic and viable marrow", "Thickened bony trabeculae laid down in a disorganized, jigsaw-puzzle-like arrangement", "Granulomas admixed with lamellar bone", "Sheets of osteoclasts without any bone formation"], "correct": 1, "explain": "The mosaic pattern describes thickened, disorganized trabecular bone laid down in a jigsaw-puzzle-like fashion — one of the most recognizable patterns in bone pathology, reflecting rapid but structurally weak bone formation."}, {"q": "A 70-year-old man with long-standing Paget disease of the femur develops new, severe localized bone pain and swelling out of proportion to his prior baseline symptoms. Which complication should be most strongly suspected?", "options": ["Osteomalacia", "Renal osteodystrophy", "Secondary osteosarcoma", "Osteopetrosis"], "correct": 2, "explain": "Secondary osteosarcoma is a well-recognized, important complication of long-standing Paget disease, and new severe pain in an affected bone should raise concern for this transformation."}, {"q": "Which of the following best reflects the current understanding of the etiology of Paget disease?", "options": ["It is caused exclusively by a confirmed paramyxovirus infection", "A proposed viral trigger is unconfirmed, while roughly 10% of cases carry an SQSTM1 mutation that activates RANK-driven osteoclastogenesis", "It is caused by a dominant-negative mutation in type I collagen", "It results from a mutation in FGFR3"], "correct": 1, "explain": "A paramyxovirus trigger has been proposed but remains unconfirmed. About 10% of cases carry an SQSTM1 mutation that increases osteoclastogenesis via RANK activation — this is distinct from the collagen defect of OI or the FGFR3 mutations of achondroplasia/thanatophoric dysplasia."}], "s11": [{"q": "What is the key distinction between rickets and osteomalacia?", "options": ["Rickets is due to calcium deficiency; osteomalacia is due to vitamin D deficiency", "Rickets occurs in children with open epiphyses; osteomalacia occurs in adults with closed epiphyses", "Rickets affects only the skull; osteomalacia affects only long bones", "Rickets is reversible; osteomalacia is not"], "correct": 1, "explain": "Both reflect vitamin D deficiency and impaired mineralization; the distinction is simply whether the growth plates are still open (rickets, in children) or closed (osteomalacia, in adults)."}, {"q": "A row of prominent, overgrown cartilage/osteoid at the costochondral junctions in a child with vitamin D deficiency is termed:", "options": ["Harrison groove", "Rachitic rosary", "Pigeon breast", "Craniotabes"], "correct": 1, "explain": "Rachitic rosary describes the beaded overgrowth of cartilage/osteoid at the costochondral junctions, one of the classic gross findings of rickets."}, {"q": "In vitamin D deficiency, PTH rises secondary to hypocalcemia. Why does this secondary hyperparathyroidism worsen, rather than fully correct, the underlying mineralization defect?", "options": ["PTH has no effect on renal phosphate handling", "PTH promotes renal phosphate loss even as it mobilizes calcium, so phosphate remains too low for adequate mineralization", "PTH directly inhibits α1-hydroxylase in the kidney", "PTH suppresses osteoclast activity, worsening calcium delivery to serum"], "correct": 1, "explain": "While PTH helps mobilize and retain calcium, it also promotes renal phosphate excretion; the resulting low phosphate, combined with inadequate vitamin D, means bone still cannot be properly mineralized."}], "s12": [{"q": "A cystic lesion composed of osteoclasts, reactive giant cells, and hemorrhage, occurring in the setting of hyperparathyroidism, is called:", "options": ["A gumma", "A brown tumor (osteitis fibrosa cystica when cystic)", "An involucrum", "A Paget mosaic lesion"], "correct": 1, "explain": "A brown tumor is a collection of osteoclasts, reactive giant cells, and hemorrhage from hyperparathyroidism; when cystic, it is termed osteitis fibrosa cystica."}, {"q": "A patient with end-stage renal disease develops hyperparathyroidism due to chronically low calcium from renal disease. This is classified as which type of hyperparathyroidism?", "options": ["Primary", "Secondary", "Tertiary", "Iatrogenic"], "correct": 1, "explain": "Secondary hyperparathyroidism arises from a stimulus (most commonly renal failure) causing hypocalcemia that drives PTH production, as opposed to primary disease (a parathyroid adenoma/hyperplasia) or tertiary disease (autonomous gland function after prolonged secondary stimulation)."}, {"q": "A patient with longstanding secondary hyperparathyroidism from renal failure undergoes a successful kidney transplant, but her PTH and calcium levels remain elevated afterward despite normalized renal function. This is best explained by which mechanism?", "options": ["Recurrence of the original renal failure", "Tertiary hyperparathyroidism — autonomous parathyroid function after prolonged secondary stimulation", "A new parathyroid adenoma unrelated to her renal history", "Persistently low vitamin D despite normal renal function"], "correct": 1, "explain": "Prolonged secondary hyperparathyroidism can cause the parathyroid glands to become autonomously overactive (tertiary hyperparathyroidism), so PTH/calcium can remain elevated even after the original renal stimulus (or transplant) resolves."}], "s13": [{"q": "A rock climber falls and fractures the left radius; the skin is intact. X-ray shows a single spiral fracture line traversing the entire width of the bone, with no fragmentation and the fracture ends in alignment. How is this fracture best characterized?", "options": ["Both open and closed", "Comminuted, displaced", "Diastatic, open", "Closed, complete"], "correct": 3, "explain": "Skin intact = closed; a fracture line traversing the entire width of the bone = complete. The line cannot be \"both open and closed,\" there's no fragmentation described (rules out comminuted), the ends are in alignment (non-displaced), and diastatic refers to a cranial suture fracture, not a long bone."}, {"q": "The older terms \"simple\" and \"compound\" fracture are synonymous with which currently preferred pair of terms?", "options": ["Complete and incomplete", "Closed and open", "Displaced and non-displaced", "Stable and unstable"], "correct": 1, "explain": "\"Simple\" = closed and \"compound\" = open are the older synonyms; current terminology prefers closed/open."}, {"q": "A fracture line located near the growth plate, between the epiphysis and diaphysis, would be described using which location descriptor?", "options": ["Diaphyseal", "Epiphyseal", "Metaphyseal", "Diastatic"], "correct": 2, "explain": "The metaphysis is the region between the epiphysis and diaphysis, adjacent to the growth plate — one of the three standard location descriptors (epiphyseal, metaphyseal, diaphyseal) used in fracture classification."}], "s14": [{"q": "A fracture that occurs at a site removed from where a blunt force was actually applied — the force having been transmitted through the bone to a distant point of failure — is best described as which of the following?", "options": ["A direct fracture", "An indirect fracture", "A pathologic fracture", "A segmental fracture"], "correct": 1, "explain": "Direct trauma produces a fracture at the site of impact; indirect trauma transmits force through the bone to fail at a different site."}, {"q": "Which best explains why a slowly applied bending force is more likely to produce a greenstick fracture in a child than a comparable force applied rapidly?", "options": ["Children's bones have thicker cortices that resist all compressive force", "Slow force delivery allows more plastic deformation before failure, and pediatric bone is especially pliable", "Rapidly applied force always produces incomplete rather than complete fractures", "Pediatric bone lacks a tension side, so it cannot fail incompletely"], "correct": 1, "explain": "Bone's stress/strain curve depends on how quickly force is delivered; slower delivery permits more bending (plastic deformation) before outright failure, and children's more pliable bone exaggerates this, producing an incomplete (greenstick) failure on the tension side."}, {"q": "A forensic examiner compares two skull fracture cases: one from a series of blows with a blunt object, and one from a high-velocity rifle wound. Which finding would be expected in the blunt-force case but not the rifle case?", "options": ["Presence of a diastatic fracture", "Fragments that cannot be re-approximated to their original position", "A completely comminuted fracture pattern", "Involvement of more than one cranial bone"], "correct": 1, "explain": "Slower-delivered blunt force allows more plastic deformation, permanently distorting the fragments so they no longer fit back together. The rapid, high-energy rifle wound instead produces brittle, glass-like shattering, and because there was little plastic bending, the resulting fragments can often be re-approximated."}, {"q": "A pedestrian struck by a car sustains a tibial fracture with two distinct, separate fracture lines that isolate a free-floating segment of the diaphysis between them. This pattern is best classified as which type of fracture?", "options": ["Torus", "Greenstick", "Segmental", "Diastatic"], "correct": 2, "explain": "A segmental fracture has two separate fracture lines isolating a whole shaft segment between them, and it classically results from high-energy trauma such as a pedestrian-vehicle collision."}], "s15": [{"q": "A 73-year-old woman with hypertension, diabetes, and osteoporosis falls down stairs and fractures her femoral neck. Hip repair is uncomplicated, but she cannot be weaned from the ventilator and dies of bronchopneumonia. What is the correct manner of death?", "options": ["Natural", "Accident", "Could not be determined", "Therapeutic complication"], "correct": 1, "explain": "The fall and resulting fracture initiated the sequence of events leading to death, even though the immediate cause of death (bronchopneumonia) occurred later. This makes the manner of death accident, not natural."}, {"q": "Place the following in the correct order of fracture healing: (1) hard callus, (2) hemorrhage/fibrin deposition, (3) remodeling to lamellar bone, (4) soft (cartilaginous) callus.", "options": ["1, 2, 4, 3", "2, 4, 1, 3", "2, 1, 4, 3", "4, 2, 1, 3"], "correct": 1, "explain": "Healing proceeds: hemorrhage and fibrin deposition → soft (cartilaginous) callus → hard (mineralized, woven-bone) callus → remodeling into lamellar bone."}, {"q": "A \"false joint\" forming at a fracture non-union site, most often due to inadequate immobilization, is called what?", "options": ["Sequestrum", "Involucrum", "Pseudoarthrosis", "Osteitis fibrosa cystica"], "correct": 2, "explain": "Pseudoarthrosis is the false-joint formation seen at a fracture site that fails to unite, classically from too much residual motion/inadequate immobilization."}, {"q": "A poorly controlled diabetic with peripheral vascular disease sustains an open tibial fracture that fails to unite after eight months, with persistent local swelling. Which of the following most plausibly contributed to this impaired healing?", "options": ["The fracture was transverse rather than oblique", "Impaired blood flow to the fracture site from vascular disease", "The patient's fracture was incomplete rather than complete", "The fracture occurred in the diaphysis rather than the metaphysis"], "correct": 1, "explain": "Diabetes and vascular disease impair blood flow to the fracture site, one of the recognized factors (along with displacement/comminution, inadequate immobilization, infection, and nutritional deficiency) that delays or prevents fracture healing."}], "s16": [{"q": "Six days after a closed, non-displaced femur fracture from a skiing accident, a 44-year-old woman develops confusion, a petechial rash, and dyspnea. What long-term musculoskeletal complication is she now at increased risk for?", "options": ["Osteomyelitis of the fracture site", "Avascular necrosis of the femoral head", "Paget disease of bone", "Pseudoarthrosis"], "correct": 1, "explain": "The delayed confusion, petechial rash, and dyspnea after a long bone fracture describe fat embolism syndrome. Fat emboli can obstruct the microvasculature of bone, predisposing to avascular necrosis, classically of the femoral head."}, {"q": "What term specifically describes avascular necrosis of the femoral head occurring in a child?", "options": ["Pott disease", "Osteitis fibrosa cystica", "Legg-Calvé-Perthes disease", "Albers-Schönberg disease"], "correct": 2, "explain": "Legg-Calvé-Perthes disease is the named form of femoral head avascular necrosis occurring in children."}, {"q": "Why is a subchondral infarct more likely than a medullary infarct to become clinically apparent and lead to joint collapse?", "options": ["Subchondral bone has no blood supply under normal conditions", "The thinner subarticular cortex and periosteal involvement make it painful and prone to collapse of the articular surface", "Medullary infarcts always resolve completely without any tissue death", "Subchondral bone is composed entirely of woven bone"], "correct": 1, "explain": "Subchondral infarcts involve the periosteum (hence pain) and sit beneath a thin cortex supporting the joint surface, so they are prone to collapse; medullary infarcts are usually silent because the load-bearing outer cortex is spared."}, {"q": "A 34-year-old man with Gaucher disease on chronic corticosteroid therapy for a separate autoimmune condition develops progressive hip pain. Imaging shows a subchondral lucency in the femoral head. Which of the following best characterizes the underlying process?", "options": ["Hematogenous osteomyelitis from an occult bacteremia", "A brown tumor secondary to hyperparathyroidism", "Osteonecrosis, with both Gaucher disease and corticosteroid use serving as independent risk factors", "Renal osteodystrophy from undiagnosed chronic kidney disease"], "correct": 2, "explain": "Both Gaucher disease and glucocorticoid use are recognized risk factors for osteonecrosis, and their combination in this patient with a classic subchondral femoral head lesion points to osteonecrosis rather than an infectious or metabolic bone process."}], "s17": [{"q": "A 12-year-old girl develops progressive left leg pain and a limp over three days, with fever (101°F), and swelling/erythema over the affected area on exam. What is the most likely diagnosis?", "options": ["Chronic osteomyelitis with sequestrum formation", "Acute (hematogenous) osteomyelitis", "Legg-Calvé-Perthes disease", "Ewing sarcoma"], "correct": 1, "explain": "Rapid onset of fever, limp, localized swelling, and erythema in a child is classic for acute hematogenous osteomyelitis, typically seeding the highly vascular metaphysis. Sequestrum formation is a feature of chronic, not acute, disease."}, {"q": "A shell of new bone growth that forms around a fragment of necrotic (sequestered) bone in chronic osteomyelitis is called the:", "options": ["Sequestrum", "Involucrum", "Callus", "Gumma"], "correct": 1, "explain": "The involucrum is the shell of new (reactive) bone that envelops the necrotic sequestrum in chronic osteomyelitis."}, {"q": "Which organism is classically associated with osteomyelitis in patients with sickle cell disease?", "options": ["Staphylococcus aureus", "Salmonella", "Pseudomonas aeruginosa", "Mycobacterium tuberculosis"], "correct": 1, "explain": "Salmonella osteomyelitis is classically and strongly associated with sickle cell disease, even though S. aureus remains the single most common cause of osteomyelitis overall (including in sickle cell patients in some series)."}, {"q": "A 60-year-old man with poorly controlled diabetes and a chronic, non-healing foot ulcer develops a draining sinus tract and poor wound healing over several months, without an acute febrile illness. Bone biopsy would most likely show which finding?", "options": ["A pure neutrophilic infiltrate with no bone necrosis", "Necrotic (dead) bone, consistent with chronic osteomyelitis", "Granulomatous inflammation with caseating necrosis", "A mosaic pattern of thickened, disorganized trabeculae"], "correct": 1, "explain": "Chronic osteomyelitis is pathologically defined by the presence of dead (necrotic) bone, and it commonly arises from contiguous spread in settings like a non-healing diabetic foot ulcer, presenting insidiously rather than with sudden fever."}], "s18": [{"q": "Anterior bowing of the tibia seen in congenital syphilis is referred to by which term?", "options": ["Harrison groove", "Craniotabes", "Saber shin", "Rachitic rosary"], "correct": 2, "explain": "Saber shin describes the anterior bowing of the tibia classically seen in congenital syphilis. (Harrison groove, craniotabes, and rachitic rosary are all rickets findings, not syphilis findings.)"}, {"q": "During which stage of acquired (adult) syphilis is skeletal involvement most frequently seen?", "options": ["Primary", "Secondary", "Tertiary", "Latent, prior to any active stage"], "correct": 2, "explain": "Bone involvement is rare in secondary syphilis and is most frequently seen in tertiary syphilis, where periostitis and gummas can develop."}, {"q": "A bone biopsy from a patient with longstanding untreated syphilis shows a focus of central necrosis rimmed by lymphocytes, plasma cells, and epithelioid cells. This lesion is best termed a:", "options": ["Sequestrum", "Brown tumor", "Gumma", "Involucrum"], "correct": 2, "explain": "A gumma is the classic tertiary syphilis lesion: central necrosis surrounded by a lymphoplasmacytic and epithelioid cell infiltrate, and it can occur in bone as well as other tissues (e.g., the nasal septum, producing saddle nose deformity)."}]};
 
-  function setShifted(shifted){
-    if(shifted){ sidebar.classList.remove('collapsed'); main.classList.add('shifted'); }
-    else { sidebar.classList.add('collapsed'); main.classList.remove('shifted'); }
-  }
-  // start expanded on wide screens, collapsed on narrow
-  setShifted(window.innerWidth > 860);
-
-  toggleBtn.addEventListener('click', function(){
-    setShifted(sidebar.classList.contains('collapsed'));
-  });
-
-  document.querySelectorAll('.sb-link').forEach(function(link){
-    link.addEventListener('click', function(){
-      const target = document.getElementById(link.dataset.target);
-      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
-      if(window.innerWidth <= 860){ setShifted(false); }
-    });
-  });
-
-  // Active-section highlighting on scroll
-  const sections = Array.from(document.querySelectorAll('section.topic'));
-  const links = Array.from(document.querySelectorAll('.sb-link'));
-  const observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        const id = entry.target.id;
-        links.forEach(function(l){
-          l.classList.toggle('active', l.dataset.target === id);
-        });
+function buildMCQ(container, q, idx) {
+  const wrap = document.createElement("div");
+  wrap.className = "question";
+  const qtext = document.createElement("div");
+  qtext.className = "qtext";
+  qtext.textContent = (idx + 1) + ". " + q.q;
+  wrap.appendChild(qtext);
+  const optsWrap = document.createElement("div");
+  optsWrap.className = "options";
+  wrap.appendChild(optsWrap);
+  const feedback = document.createElement("div");
+  feedback.className = "feedback";
+  wrap.appendChild(feedback);
+  q.options.forEach(function(optText, optIdx) {
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    btn.innerHTML = "<span class=\"bubble\"></span><span></span>";
+    btn.querySelector("span:last-child").textContent = optText;
+    btn.addEventListener("click", function() {
+      if (optsWrap.dataset.answered) return;
+      optsWrap.dataset.answered = "true";
+      const allBtns = optsWrap.querySelectorAll(".opt");
+      allBtns.forEach(function(b, i2) {
+        b.disabled = true;
+        if (i2 === q.correct) b.classList.add("correct");
+      });
+      if (optIdx === q.correct) {
+        feedback.classList.add("correct");
+        feedback.textContent = "Correct. " + q.explain;
+      } else {
+        btn.classList.add("incorrect");
+        feedback.classList.add("incorrect");
+        feedback.textContent = "Not quite. " + q.explain;
       }
     });
-  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
-  sections.forEach(function(s){ observer.observe(s); });
-
-  // Click-to-check practice questions
-  document.querySelectorAll('.qbox').forEach(function(box){
-    const opts = box.querySelectorAll('.qopt');
-    const explain = box.querySelector('.qexplain');
-    opts.forEach(function(opt){
-      opt.addEventListener('click', function(){
-        if(box.dataset.answered === 'true') return;
-        box.dataset.answered = 'true';
-        opts.forEach(function(o){
-          if(o.dataset.correct === 'true'){ o.classList.add('correct'); }
-          else if(o === opt){ o.classList.add('incorrect'); }
-        });
-        if(explain){ explain.style.display = 'block'; }
-      });
-    });
+    optsWrap.appendChild(btn);
   });
+  container.appendChild(wrap);
+}
+
+Object.keys(questionData).forEach(function(sectionId) {
+  const container = document.getElementById("q-" + sectionId);
+  if (!container) return;
+  questionData[sectionId].forEach(function(q, i) { buildMCQ(container, q, i); });
+});
+
+function goToSection(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const sideNav = document.getElementById("side-nav");
+const sideToggle = document.getElementById("side-toggle");
+const sideScrim = document.getElementById("side-scrim");
+
+function openSideNav(){ sideNav.classList.add("open"); sideScrim.classList.add("open"); }
+function closeSideNav(){ sideNav.classList.remove("open"); sideScrim.classList.remove("open"); }
+sideToggle.addEventListener("click", function(){
+  sideNav.classList.contains("open") ? closeSideNav() : openSideNav();
+});
+sideScrim.addEventListener("click", closeSideNav);
+
+document.querySelectorAll(".toc-link").forEach(function(el){
+  el.addEventListener("click", function(){ goToSection(el.dataset.target); });
+});
+const sideLinkEls = Array.from(document.querySelectorAll(".side-link"));
+sideLinkEls.forEach(function(el){
+  el.addEventListener("click", function(){ closeSideNav(); goToSection(el.dataset.target); });
+});
+
+const observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if (entry.isIntersecting) {
+      sideLinkEls.forEach(function(l){ l.classList.remove("active"); });
+      const match = sideLinkEls.find(function(l){ return l.dataset.target === entry.target.id; });
+      if (match) match.classList.add("active");
+    }
+  });
+}, { rootMargin: "-15% 0px -70% 0px" });
+document.querySelectorAll("article.topic").forEach(function(el){ observer.observe(el); });
 </script>
 
 </body>
