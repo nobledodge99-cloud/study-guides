@@ -4,1433 +4,1204 @@
 <meta charset="UTF-8">
 <title>MSK II Study Guide — Joint & Soft Tissue Pathology</title>
 <style>
-  :root{
-    --cream:#faf7ee;
-    --cream-2:#f2eddc;
-    --ink:#2c2b26;
-    --green:#4c6b4f;
-    --green-dark:#33482f;
-    --green-light:#dfe8d8;
-    --gold:#b08d3e;
-    --red:#a34a3f;
-    --line:#d9d2bd;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family: 'Georgia', 'Iowan Old Style', serif;
-    background:var(--cream);
-    color:var(--ink);
-    display:flex;
-    min-height:100vh;
-  }
-  nav{
-    width:260px;
-    flex-shrink:0;
-    background:var(--green-dark);
-    color:var(--cream);
-    padding:24px 0;
-    position:sticky;
-    top:0;
-    height:100vh;
-    overflow-y:auto;
-    font-family:'Courier New', Courier, monospace;
-    transition:width 0.25s ease, padding 0.25s ease;
-  }
-  nav.collapsed{
-    width:0;
-    padding:0;
-    overflow:hidden;
-    border-right:none;
-  }
-
-  /* ---------- Back link + toggle + PDF button (site-standard chrome) ---------- */
-  .sb-back{
-    display:block;
-    margin:0 20px 18px 20px;
-    padding:8px 12px;
-    background:rgba(250,247,238,0.08);
-    border:1px solid rgba(250,247,238,0.25);
-    border-radius:4px;
-    color:var(--cream);
-    font-family:'Courier New', Courier, monospace;
-    font-size:0.78rem;
-    text-decoration:none;
-    text-align:center;
-  }
-  .sb-back:hover{ background:rgba(250,247,238,0.16); }
-
-  #sb-toggle{
-    position:fixed;
-    top:18px;
-    left:278px;
-    z-index:40;
-    background:var(--green-light);
-    border:1px solid var(--green);
-    border-radius:4px;
-    color:var(--green-dark);
-    font-family:'Courier New', Courier, monospace;
-    font-size:0.8rem;
-    padding:8px 12px;
-    cursor:pointer;
-    transition:left 0.25s ease;
-  }
-  #sb-toggle.collapsed{ left:18px; }
-
-  #pdf-btn{
-    position:fixed;
-    top:18px;
-    right:24px;
-    z-index:40;
-    background:var(--green-dark);
-    border:none;
-    border-radius:4px;
-    color:var(--cream);
-    font-family:'Courier New', Courier, monospace;
-    font-size:0.8rem;
-    padding:9px 16px;
-    cursor:pointer;
-  }
-  #pdf-btn:hover{ background:var(--green); }
-  nav h1{
-    font-size:17px;
-    letter-spacing:0.03em;
-    padding:0 20px 16px 20px;
-    margin:0 0 10px 0;
-    border-bottom:1px solid rgba(250,247,238,0.25);
-    font-weight:600;
-  }
-  nav .subtitle{
-    font-size:11px;
-    opacity:0.65;
-    padding:0 20px;
-    margin-top:-8px;
-    margin-bottom:14px;
-    font-style:italic;
-  }
-  nav button{
-    display:block;
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    color:var(--cream);
-    font-family:inherit;
-    font-size:13.5px;
-    padding:9px 20px;
-    cursor:pointer;
-    opacity:0.78;
-    border-left:3px solid transparent;
-    transition:all .15s ease;
-    line-height:1.3;
-  }
-  nav button:hover{ opacity:1; background:rgba(250,247,238,0.06); }
-  nav button.active{
-    opacity:1;
-    border-left:3px solid var(--gold);
-    background:rgba(250,247,238,0.08);
-    font-weight:600;
-  }
-  nav .navgroup-label{
-    font-size:10.5px;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    opacity:0.5;
-    padding:16px 20px 4px 20px;
-  }
-  main{
-    flex:1;
-    max-width:840px;
-    margin:0 auto;
-    padding:70px 56px 100px 56px;
-    transition:margin-left 0.25s ease;
-  }
-  .section{ display:none; }
-  .section.active{ display:block; animation:fadein .25s ease; }
-  @keyframes fadein{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
-  .eyebrow{
-    font-size:12.5px;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    color:var(--green);
-    font-weight:700;
-    margin-bottom:6px;
-  }
-  h2.title{
-    font-size:30px;
-    margin:0 0 6px 0;
-    color:var(--green-dark);
-    border-bottom:2px solid var(--green-light);
-    padding-bottom:14px;
-  }
-  h3{ font-size:19px; color:var(--green-dark); margin:28px 0 10px 0; }
-  h4{ font-size:15.5px; color:var(--green); margin:18px 0 6px 0; }
-  p{ font-size:15.5px; line-height:1.65; margin:0 0 12px 0; }
-  ul, ol{ font-size:15.5px; line-height:1.6; padding-left:22px; margin:0 0 14px 0;}
-  li{ margin-bottom:5px; }
-  strong{ color:var(--green-dark); }
-  .callout{
-    background:var(--green-light);
-    border-left:4px solid var(--green);
-    padding:14px 18px;
-    border-radius:2px;
-    margin:16px 0;
-    font-size:14.5px;
-  }
-  .callout .label{
-    font-weight:700; color:var(--green-dark); text-transform:uppercase;
-    font-size:11.5px; letter-spacing:0.06em; margin-bottom:4px; display:block;
-  }
-  .clinical-pearl{
-    background:#f7ede1;
-    border-left:4px solid var(--gold);
-    padding:14px 18px;
-    border-radius:2px;
-    margin:16px 0;
-    font-size:14.5px;
-  }
-  .clinical-pearl .label{
-    font-weight:700; color:var(--gold); text-transform:uppercase;
-    font-size:11.5px; letter-spacing:0.06em; margin-bottom:4px; display:block;
-  }
-  .kemp-story{
-    background:#fbfaf4;
-    border:1px dashed var(--line);
-    padding:12px 16px;
-    margin:14px 0;
-    font-size:14px;
-    font-style:italic;
-    color:#5a5848;
-  }
-  .kemp-story .label{
-    font-style:normal;
-    font-weight:700;
-    color:var(--green);
-    text-transform:uppercase;
-    font-size:10.5px;
-    letter-spacing:0.06em;
-    margin-bottom:4px;
-    display:block;
-  }
-  table{ width:100%; border-collapse:collapse; margin:14px 0 20px 0; font-size:13.8px; }
-  th, td{ border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
-  th{ background:var(--green-light); color:var(--green-dark); font-weight:700; }
-  tr:nth-child(even) td{ background:var(--cream-2); }
-  .quiz{
-    margin-top:26px;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:6px;
-    padding:18px 20px;
-  }
-  .quiz .qlabel{
-    font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em;
-    color:var(--gold); font-weight:700; margin-bottom:6px;
-  }
-  .quiz .qtext{ font-size:15px; margin-bottom:12px; line-height:1.55; }
-  .quiz .options{ display:flex; flex-direction:column; gap:7px; }
-  .quiz .opt{
-    text-align:left; background:var(--cream); border:1px solid var(--line);
-    border-radius:4px; padding:9px 12px; font-family:inherit; font-size:14.5px;
-    cursor:pointer; color:var(--ink);
-  }
-  .quiz .opt:hover{ background:var(--green-light); }
-  .quiz .opt.correct{ background:#dcecd9; border-color:var(--green); font-weight:600; }
-  .quiz .opt.incorrect{ background:#f3dbd7; border-color:var(--red); }
-  .quiz .feedback{ margin-top:10px; font-size:14px; padding:10px 12px; border-radius:4px; display:none; }
-  .quiz .feedback.show{ display:block; }
-  .quiz .feedback.right{ background:#dcecd9; color:var(--green-dark); }
-  .quiz .feedback.wrong{ background:#f3dbd7; color:var(--red); }
-  .navfoot{
-    display:flex; justify-content:space-between; margin-top:40px;
-    padding-top:16px; border-top:1px solid var(--line);
-  }
-  .navfoot button{
-    background:var(--green); color:var(--cream); border:none; padding:10px 18px;
-    font-family:inherit; font-size:13.5px; border-radius:4px; cursor:pointer;
-  }
-  .navfoot button:hover{ background:var(--green-dark); }
-  .navfoot button:disabled{ opacity:0.3; cursor:default; }
-  .navfoot button{ font-family:'Courier New', Courier, monospace; }
-
-  @media print{
-    nav, #sb-toggle, #pdf-btn, .navfoot{ display:none !important; }
-    body{ display:block; }
-    main{
-      margin:0;
-      max-width:100%;
-      padding:20px;
-    }
-    .section{ display:block !important; page-break-inside:avoid; margin-bottom:36px; }
-  }
-
-  @media (max-width:900px){
-    nav{ position:fixed; left:0; top:0; z-index:35; }
-    nav.collapsed{ width:0; }
-    #sb-toggle{ left:18px; }
-    #sb-toggle.collapsed{ left:18px; }
-    main{ padding:70px 24px 90px 24px; }
-  }
+:root{
+--ink:#1b2b26;
+--paper:#f7f5ef;
+--panel:#ffffff;
+--line:#dcd6c6;
+--accent:#3a6b5c;
+--accent-dim:#e7efe9;
+--wrong:#a63d40;
+--wrong-dim:#f7e6e6;
+--mono: 'IBM Plex Mono', 'Courier New', monospace;
+--serif: 'Source Serif 4', Georgia, serif;
+}
+*{box-sizing:border-box;}
+body{
+margin:0;
+background:var(--paper);
+color:var(--ink);
+font-family:var(--serif);
+line-height:1.55;
+padding:0 0 80px 0;
+}
+header.masthead{
+border-bottom:3px solid var(--ink);
+padding:28px 24px 18px;
+max-width:900px;
+margin:0 auto;
+}
+header.masthead .kicker{
+font-family:var(--mono);
+font-size:12px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--accent);
+}
+header.masthead h1{
+font-size:2.1rem;
+margin:.15em 0 .1em;
+letter-spacing:-.01em;
+}
+header.masthead .sub{
+font-family:var(--mono);
+font-size:12.5px;
+color:#5c5c52;
+}
+nav#toc{
+max-width:900px;
+margin:20px auto 0;
+padding:0 24px;
+}
+nav#toc .toc-label{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#8a8578;
+margin-bottom:6px;
+}
+nav#toc ol{
+margin:0;
+padding-left:1.2em;
+font-family:var(--mono);
+font-size:13.5px;
+}
+nav#toc ol ol{
+margin:4px 0 10px;
+}
+nav#toc .toc-group{
+font-weight:700;
+color:var(--ink);
+margin-top:10px;
+display:block;
+}
+nav#toc .toc-link{color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); cursor:pointer;}
+nav#toc .toc-link:hover{color:var(--accent);}
+main{max-width:900px; margin:0 auto; padding:0 24px;}
+section.lecture{
+margin-top:48px;
+padding-top:8px;
+}
+section.lecture > h2{
+font-size:1.5rem;
+border-bottom:2px solid var(--ink);
+padding-bottom:8px;
+margin-bottom:4px;
+}
+section.lecture > .lecture-meta{
+font-family:var(--mono);
+font-size:11.5px;
+color:#8a8578;
+margin-bottom:22px;
+}
+article.topic{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:2px;
+padding:22px 24px 24px;
+margin-bottom:22px;
+position:relative;
+}
+article.topic .topic-num{
+font-family:var(--mono);
+font-size:11px;
+color:var(--accent);
+letter-spacing:.08em;
+}
+article.topic h3{
+margin:2px 0 4px;
+font-size:1.15rem;
+}
+article.topic .flag{
+display:inline-block;
+font-family:var(--mono);
+font-size:10.5px;
+letter-spacing:.06em;
+text-transform:uppercase;
+background:var(--accent-dim);
+color:var(--accent);
+border:1px solid var(--accent);
+border-radius:20px;
+padding:2px 9px;
+margin-bottom:10px;
+}
+article.topic p.body{
+font-size:15.5px;
+margin:8px 0 16px;
+}
+article.topic .subhead{
+font-family:var(--mono);
+font-size:12.5px;
+letter-spacing:.04em;
+text-transform:uppercase;
+color:var(--accent);
+margin:18px 0 6px;
+font-weight:700;
+}
+article.topic ul.body-list{
+margin:8px 0 16px;
+padding-left:1.3em;
+font-size:15.5px;
+}
+article.topic ul.body-list li{margin-bottom:4px;}
+article.topic strong.term{color:var(--accent);}
+.formula{
+font-family:var(--mono);
+font-size:15px;
+background:var(--accent-dim);
+border-left:3px solid var(--accent);
+padding:9px 14px;
+margin:10px 0 16px;
+border-radius:0 4px 4px 0;
+color:var(--ink);
+}
+.formula .fx-label{
+color:var(--accent);
+font-weight:700;
+margin-right:6px;
+}
+table.data-table{
+width:100%;
+border-collapse:collapse;
+margin:10px 0 18px;
+font-size:14px;
+}
+table.data-table caption{
+text-align:left;
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:#8a8578;
+margin-bottom:6px;
+}
+table.data-table th, table.data-table td{
+border:1px solid var(--line);
+padding:7px 10px;
+text-align:left;
+vertical-align:top;
+}
+table.data-table th{
+background:var(--accent-dim);
+color:var(--accent);
+font-family:var(--mono);
+font-size:11.5px;
+letter-spacing:.03em;
+text-transform:uppercase;
+}
+table.data-table tr:nth-child(even) td{background:#fbfaf6;}
+.qs-label{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:#8a8578;
+border-top:1px dashed var(--line);
+padding-top:14px;
+margin-top:4px;
+margin-bottom:12px;
+}
+.question{
+margin-bottom:18px;
+}
+.question:last-child{margin-bottom:0;}
+.qtext{
+font-size:15px;
+margin-bottom:8px;
+font-weight:600;
+}
+.options{
+display:flex;
+flex-direction:column;
+gap:7px;
+}
+.opt{
+display:flex;
+align-items:center;
+gap:10px;
+text-align:left;
+background:var(--paper);
+border:1px solid var(--line);
+border-radius:6px;
+padding:9px 12px;
+font-family:var(--serif);
+font-size:14.5px;
+color:var(--ink);
+cursor:pointer;
+transition:background .12s, border-color .12s;
+}
+.opt:hover:not(:disabled){
+border-color:var(--accent);
+}
+.opt .bubble{
+flex:0 0 auto;
+width:16px;
+height:16px;
+border-radius:50%;
+border:1.5px solid #9a9587;
+background:#fff;
+}
+.opt.correct{
+background:var(--accent-dim);
+border-color:var(--accent);
+}
+.opt.correct .bubble{
+background:var(--accent);
+border-color:var(--accent);
+}
+.opt.incorrect{
+background:var(--wrong-dim);
+border-color:var(--wrong);
+}
+.opt.incorrect .bubble{
+background:var(--wrong);
+border-color:var(--wrong);
+}
+.opt:disabled{cursor:default;}
+.feedback{
+font-family:var(--mono);
+font-size:12.5px;
+margin-top:7px;
+min-height:1.2em;
+}
+.feedback.correct{color:var(--accent);}
+.feedback.incorrect{color:var(--wrong);}
+footer.eod{
+max-width:900px;
+margin:56px auto 0;
+padding:18px 24px 0;
+border-top:1px solid var(--line);
+font-family:var(--mono);
+font-size:11.5px;
+color:#8a8578;
+}
+#side-toggle{
+position:fixed;
+top:50%;
+right:0;
+transform:translateY(-50%);
+z-index:20;
+background:var(--ink);
+color:var(--paper);
+border:none;
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+padding:14px 8px;
+writing-mode:vertical-rl;
+text-orientation:mixed;
+cursor:pointer;
+border-radius:6px 0 0 6px;
+}
+#side-toggle:hover{background:var(--accent);}
+#side-nav{
+position:fixed;
+top:0;
+right:0;
+height:100%;
+width:300px;
+background:var(--panel);
+border-left:1px solid var(--line);
+box-shadow:-6px 0 18px rgba(0,0,0,.06);
+transform:translateX(100%);
+transition:transform .22s ease;
+z-index:19;
+overflow-y:auto;
+padding:22px 0 40px;
+}
+#side-nav.open{transform:translateX(0);}
+#side-nav .side-head{
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#8a8578;
+padding:0 20px 12px;
+border-bottom:1px solid var(--line);
+margin-bottom:6px;
+}
+#side-nav .side-lecture-label{
+font-family:var(--mono);
+font-size:11.5px;
+font-weight:700;
+color:var(--ink);
+padding:14px 20px 4px;
+}
+#side-nav .side-link{
+display:block;
+padding:6px 20px 6px 28px;
+font-size:13px;
+color:#4a483f;
+text-decoration:none;
+border-left:2px solid transparent;
+cursor:pointer;
+}
+#side-nav .side-link:hover{
+color:var(--accent);
+background:var(--accent-dim);
+}
+#side-nav .side-link.active{
+color:var(--accent);
+border-left-color:var(--accent);
+font-weight:600;
+background:var(--accent-dim);
+}
+#side-scrim{
+position:fixed;
+inset:0;
+background:rgba(27,43,38,.15);
+z-index:18;
+display:none;
+}
+#side-scrim.open{display:block;}
+@media (max-width:640px){
+#side-nav{width:82%;}
+}
+.download-btn {
+position: fixed;
+top: 120px;
+right: 28px;
+background: var(--accent);
+color: #fff;
+padding: 10px 18px;
+border-radius: 8px;
+border: none;
+font-family: var(--mono);
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 0.02em;
+cursor: pointer;
+box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+z-index: 1000;
+text-decoration: none;
+}
+.download-btn:hover { background: #2e5548; }
+@media print {
+.download-btn, a[href="index.html"], #side-toggle, #side-nav, #side-scrim { display: none !important; }
+}
 </style>
 </head>
 <body>
+<button class="download-btn" onclick="window.print()">&#8681; Download PDF</button>
 
-<button id="sb-toggle" onclick="toggleSidebar()">&#9776; Sections</button>
-<button id="pdf-btn" onclick="window.print()">&#8681; Download PDF</button>
+<header class="masthead">
+<div class="kicker">Running Course Document</div>
+<h1>MSK II Study Guide — Joint & Soft Tissue Pathology</h1>
+<div class="sub">Dr. Kemp — click an answer choice to check yourself</div>
+<a href="index.html" style="position:fixed;top:18px;left:18px;z-index:1000;font-family:'IBM Plex Mono','Courier New',monospace;font-size:0.8rem;color:#3a6b5c;text-decoration:none;border:1px solid #dcd6c6;padding:8px 12px;border-radius:4px;background:#e7efe9;box-shadow:0 4px 14px rgba(0,0,0,0.12);">&larr; Back to Study Guides</a>
+</header>
 
-<nav>
-  <a class="sb-back" href="index.html">&larr; Back to Study Guides</a>
-  <h1>MSK II Study Guide</h1>
-  <div class="subtitle">Joint & Soft Tissue Pathology — Dr. Kemp</div>
-  <div class="navgroup-label">Pt. 1 — Arthropathies</div>
-  <button class="navbtn active" data-target="s0">Arthritis: Overview</button>
-  <button class="navbtn" data-target="s1">Osteoarthritis</button>
-  <button class="navbtn" data-target="s2">Rheumatoid Arthritis</button>
-  <button class="navbtn" data-target="s3">RA vs. Juvenile RA</button>
-  <button class="navbtn" data-target="s4">Seronegative Spondyloarthropathies</button>
-  <button class="navbtn" data-target="s5">Infectious Arthritis</button>
-  <button class="navbtn" data-target="s6">Gout</button>
-  <div class="navgroup-label">Pt. 2 — Crystal Arthropathy & Soft Tissue</div>
-  <button class="navbtn" data-target="s7">Pseudogout</button>
-  <button class="navbtn" data-target="s8">Ganglion/Synovial Cysts & TGCT</button>
-  <button class="navbtn" data-target="s9">Lipoma & Liposarcoma</button>
-  <button class="navbtn" data-target="s10">Nodular Fasciitis</button>
-  <div class="navgroup-label">Pt. 3 — Muscle/Fibrous Tumors & Bone Basics</div>
-  <button class="navbtn" data-target="s11">Fibromatosis</button>
-  <button class="navbtn" data-target="s12">Rhabdomyosarcoma</button>
-  <button class="navbtn" data-target="s13">Leiomyoma & Leiomyosarcoma</button>
-  <button class="navbtn" data-target="s14">Synovial Sarcoma</button>
-  <button class="navbtn" data-target="s15">Undifferentiated Pleomorphic Sarcoma</button>
-  <button class="navbtn" data-target="s16">Bone Tumors: Overview & Osteogenic Tumors</button>
-  <div class="navgroup-label">Pt. 4 — Cartilage, Marrow & Other Bone Tumors</div>
-  <button class="navbtn" data-target="s17">Osteochondroma & Chondroma</button>
-  <button class="navbtn" data-target="s18">Chondrosarcoma</button>
-  <button class="navbtn" data-target="s19">Giant Cell Tumor & Aneurysmal Bone Cyst</button>
-  <button class="navbtn" data-target="s20">Ewing Sarcoma Family Tumors</button>
-  <button class="navbtn" data-target="s21">Plasmacytoma, Myeloma & Metastatic Tumors</button>
-  <button class="navbtn" data-target="s22">Fibrous Cortical Defect & Fibrous Dysplasia</button>
+<nav id="toc">
+<div class="toc-label">Contents</div>
+<ol id="toc-list">
+<li><span class="toc-group">Pt. 1 — Arthropathies</span>
+<ol>
+<li><span class="toc-link" data-target="t1">Arthritis: Overview</span></li>
+<li><span class="toc-link" data-target="t2">Osteoarthritis</span></li>
+<li><span class="toc-link" data-target="t3">Rheumatoid Arthritis</span></li>
+<li><span class="toc-link" data-target="t4">RA vs. Juvenile RA</span></li>
+<li><span class="toc-link" data-target="t5">Seronegative Spondyloarthropathies</span></li>
+<li><span class="toc-link" data-target="t6">Infectious Arthritis</span></li>
+<li><span class="toc-link" data-target="t7">Gout</span></li>
+</ol>
+</li>
+<li><span class="toc-group">Pt. 2 — Crystal Arthropathy & Soft Tissue</span>
+<ol>
+<li><span class="toc-link" data-target="t8">Pseudogout (CPPD)</span></li>
+<li><span class="toc-link" data-target="t9">Ganglion/Synovial Cysts & TGCT</span></li>
+<li><span class="toc-link" data-target="t10">Lipoma & Liposarcoma</span></li>
+<li><span class="toc-link" data-target="t11">Nodular Fasciitis</span></li>
+</ol>
+</li>
+<li><span class="toc-group">Pt. 3 — Muscle/Fibrous Tumors & Bone Basics</span>
+<ol>
+<li><span class="toc-link" data-target="t12">Fibromatosis</span></li>
+<li><span class="toc-link" data-target="t13">Rhabdomyosarcoma</span></li>
+<li><span class="toc-link" data-target="t14">Leiomyoma & Leiomyosarcoma</span></li>
+<li><span class="toc-link" data-target="t15">Synovial Sarcoma</span></li>
+<li><span class="toc-link" data-target="t16">Undifferentiated Pleomorphic Sarcoma</span></li>
+<li><span class="toc-link" data-target="t17">Bone Tumors: Overview & Osteogenic Tumors</span></li>
+</ol>
+</li>
+<li><span class="toc-group">Pt. 4 — Cartilage, Marrow & Other Bone Tumors</span>
+<ol>
+<li><span class="toc-link" data-target="t18">Osteochondroma & Chondroma</span></li>
+<li><span class="toc-link" data-target="t19">Chondrosarcoma</span></li>
+<li><span class="toc-link" data-target="t20">Giant Cell Tumor & Aneurysmal Bone Cyst</span></li>
+<li><span class="toc-link" data-target="t21">Ewing Sarcoma Family Tumors</span></li>
+<li><span class="toc-link" data-target="t22">Plasmacytoma, Myeloma & Metastatic Tumors</span></li>
+<li><span class="toc-link" data-target="t23">Fibrous Cortical Defect & Fibrous Dysplasia</span></li>
+</ol>
+</li>
+</ol>
 </nav>
 
-<main>
+<main id="lectures">
 
-<!-- SECTION 0 -->
-<section class="section active" id="s0">
-  <div class="eyebrow">Objectives — Pt. 1</div>
-  <h2 class="title">Arthritis: Overview</h2>
-  <p><strong>Arthritis</strong> = inflammation of a joint. Dr. Kemp frames the whole first lecture around five general forms:</p>
-  <ul>
-    <li><strong>Osteoarthritis</strong> — degenerative, wear-and-tear</li>
-    <li><strong>Rheumatoid arthritis / juvenile RA</strong> — autoimmune</li>
-    <li><strong>Seronegative spondyloarthropathies</strong> — HLA-B27–associated group, no rheumatoid factor</li>
-    <li><strong>Infectious arthritis</strong> — suppurative (bacterial) or Lyme-related</li>
-    <li><strong>Crystal-induced arthritis</strong> — gout (urate) and pseudogout (calcium pyrophosphate)</li>
-  </ul>
-  <div class="callout">
-    <span class="label">Big-picture framing</span>
-    Osteoarthritis is a mechanical/degenerative disease of weight-bearing joints. Rheumatoid arthritis is an autoimmune disease of small joints. That single contrast resolves most of the "which one is it" questions in this material.
-  </div>
+<section class="lecture" id="lec1">
+<h2>Pt. 1 — Arthropathies</h2>
+<div class="lecture-meta">Joint & Soft Tissue Pathology — Dr. Kemp</div>
 
-  <div class="quiz" data-answer="0">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">Which form of arthritis is classically associated with HLA-B27 and absence of rheumatoid factor?</div>
-    <div class="options">
-      <button class="opt">Seronegative spondyloarthropathy</button>
-      <button class="opt">Rheumatoid arthritis</button>
-      <button class="opt">Gout arthritis</button>
-      <button class="opt">Suppurative arthritis</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
+<article class="topic" id="t1">
+<div class="topic-num">SECTION 1</div>
+<h3>Arthritis: Overview</h3>
+<p class="body"><strong class="term">Arthritis</strong> means inflammation of a joint. Dr. Kemp frames the whole first lecture around five general forms of arthritis.</p>
+<ul class="body-list">
+<li><strong class="term">Osteoarthritis</strong> — degenerative, wear-and-tear</li>
+<li><strong class="term">Rheumatoid arthritis / juvenile RA</strong> — autoimmune</li>
+<li><strong class="term">Seronegative spondyloarthropathies</strong> — HLA-B27–associated group, no rheumatoid factor</li>
+<li><strong class="term">Infectious arthritis</strong> — suppurative (bacterial) or Lyme-related</li>
+<li><strong class="term">Crystal-induced arthritis</strong> — gout (urate) and pseudogout (calcium pyrophosphate)</li>
+</ul>
+<div class="formula"><span class="fx-label">BIG-PICTURE FRAMING:</span> Osteoarthritis is a mechanical/degenerative disease of weight-bearing joints. Rheumatoid arthritis is an autoimmune disease of small joints. That single contrast resolves most of the "which one is it" questions in this material.</div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t1"></div>
+</article>
 
-  <div class="navfoot"><button disabled>← Previous</button><button class="nextbtn">Next →</button></div>
+<article class="topic" id="t2">
+<div class="topic-num">SECTION 2</div>
+<h3>Osteoarthritis</h3>
+<p class="subhead">General Features</p>
+<p class="body">Also called <strong class="term">degenerative joint disease (DJD)</strong> — a disease of the joints from degeneration of cartilage with subsequent ineffective repair.</p>
+<ul class="body-list">
+<li><strong class="term">Demographics:</strong> older patients, 50s–70s (<strong class="term">primary</strong> OA, age-related); younger patients, 20s–40s (<strong class="term">secondary</strong> OA — joint deformity, trauma, systemic disease)</li>
+</ul>
+<p class="subhead">Pathogenesis</p>
+<p class="body">Chondrocytes secrete the extracellular matrix that forms cartilage, but degeneration of the cartilage can exceed production. Chondrocytes also secrete <strong class="term">matrix metalloproteinases</strong>, which degrade type II collagen and damage the cartilage. Low-level chronic inflammation contributes too — even ordinary age-related wear elicits some inflammatory response to injury.</p>
+<p class="subhead">Morphology</p>
+<ul class="body-list">
+<li><strong class="term">Gross:</strong> granular cartilage surface from fissures/clefts (cartilage is normally smooth); loose cartilage fragments (<strong class="term">joint mice</strong>); polished, shiny exposed bone once cartilage is worn away (<strong class="term">eburnation</strong>); <strong class="term">osteophytes</strong> at the joint margins; classically no joint fusion — see the pearl below</li>
+<li><strong class="term">Microscopic:</strong> fissures/clefts in the cartilage surface (cartilage also looks pale rather than the normal bluish hyaline tint); cysts from synovial fluid pressed into the clefts</li>
+<li><strong class="term">Radiology:</strong> narrowing of the joint space from cartilage loss — can progress to bone-on-bone</li>
+</ul>
+<div class="formula"><span class="fx-label">FROM LECTURE:</span> <em>Dr. Kemp described seeing a bone specimen with severe eburnation during his PhD work at the University of Montana — the exposed bone was "absolutely shiny," polished from years of bone-on-bone wear.</em></div>
+<div class="formula"><span class="fx-label">POINT TO PONDER:</span> OA doesn't fuse the joint itself the way RA does — there's no synovial inflammation or fibrosis in OA. But osteophytes growing out from adjacent vertebral bodies can connect and fuse to each other, producing what looks like joint fusion without the joint proper ever being involved. So "OA never causes fusion" isn't quite complete.</div>
+<p class="subhead">Symptoms</p>
+<ul class="body-list">
+<li>Typically presents in the 50s; pain characteristically <strong class="term">worsens with use across the day</strong> and rests overnight (opposite pattern from RA)</li>
+<li>Morning stiffness, crepitus, limited range of motion (from pain and from osteophytes mechanically limiting movement); osteophytes can impinge nerves → radicular pain</li>
+<li><strong class="term">Joints involved:</strong> weight-bearing joints — hips, knees, lower lumbar vertebrae — plus the PIP, DIP, and 1st carpometacarpal joints (wear-and-tear isn't only from big joints; repetitive use of the hands, e.g. typing, counts too)</li>
+<li><strong class="term">Heberden nodes</strong> — osteophytes at the DIP joints; <strong class="term">Bouchard nodes</strong> — osteophytes at the PIP joints</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t2"></div>
+</article>
+
+<article class="topic" id="t3">
+<div class="topic-num">SECTION 3</div>
+<h3>Rheumatoid Arthritis</h3>
+<p class="subhead">General Features</p>
+<p class="body">Autoimmune disease of the joints producing a <strong class="term">non-suppurative, proliferative, and inflammatory synovitis</strong>. The inflammation damages articular cartilage and can cause fusion (<strong class="term">ankylosis</strong>) of the joints — think of it as fibrosis spanning the joint space, like scarring across it.</p>
+<ul class="body-list">
+<li>~1% of the population; <strong class="term">F &gt; M</strong> (as with most autoimmune disorders); presents in the <strong class="term">3rd–5th decades</strong> of life</li>
+</ul>
+<p class="subhead">Pathogenesis</p>
+<p class="body">Driven by TH1 and TH17 T cells and antibodies:</p>
+<ul class="body-list">
+<li><strong class="term">TH1 cells</strong> secrete IFN-γ → activates macrophages and synovial cells</li>
+<li><strong class="term">TH17 cells</strong> secrete IL-17 → activates neutrophils and monocytes</li>
+<li><strong class="term">TNF and IL-1</strong> from macrophages stimulate synovial cells to secrete proteases → tissue damage</li>
+<li>Plasma cells associated with the inflammation produce antibodies</li>
+<li><strong class="term">RANKL</strong> stimulates osteoclasts → bone breakdown</li>
+</ul>
+<p class="subhead">Laboratory Diagnosis</p>
+<ul class="body-list">
+<li><strong class="term">Autoantibodies for citrullinated peptides</strong> (citrullinated fibrinogen along with type II collagen, alpha-enolase, and vimentin deposit in the joint) — in ~70% of patients</li>
+<li><strong class="term">Rheumatoid factor</strong> — serum IgM or IgA autoantibodies against the Fc portion of IgG — in ~80% (not specific, though)</li>
+<li><strong class="term">Radiography:</strong> narrowing of the joint space and loss of articular cartilage (both OA and RA can show joint-space narrowing — the underlying pathology is very different)</li>
+</ul>
+<p class="subhead">Risk Factors</p>
+<ul class="body-list">
+<li><strong class="term">Vinculin</strong> — an epitope on the citrullinated protein — mimics an epitope on microbes; if presented by HLA-DQ alleles, this promotes antibody formation against citrullinated peptides</li>
+<li><strong class="term">PTPN22</strong> — a tyrosine phosphatase that normally inhibits T-cell activation</li>
+<li><strong class="term">Infection and smoking</strong> may drive citrullination</li>
+</ul>
+<p class="subhead">Morphology</p>
+<ul class="body-list">
+<li><strong class="term">Pannus:</strong> edematous, thickened, hyperplastic synovium with inflammatory cell infiltrate, fibroblasts producing collagen/fibrosis, and granulation tissue as an intermediate stage — this is what lays down across the joint space and lets the two sides fuse</li>
+<li><strong class="term">Microscopic:</strong> synovial hyperplasia and dense inflammatory infiltrates; angiogenesis, fibrin, fibrosis, inflammatory cells</li>
+<li><strong class="term">Rheumatoid nodules:</strong> occur at the forearm, elbows, occiput, and lumbosacral region; look like necrotizing granulomas — central area of necrosis rimmed by giant cells</li>
+</ul>
+<div class="formula"><span class="fx-label">FROM LECTURE:</span> <em>Because a rheumatoid nodule looks like a necrotizing granuloma on histology, Dr. Kemp noted that in practice you'd stain it for acid-fast bacilli and do a silver stain for fungus to rule out an infectious cause before calling it a rheumatoid nodule.</em></div>
+<p class="subhead">Symptoms</p>
+<ul class="body-list">
+<li>Can start with <strong class="term">systemic symptoms</strong> — fatigue, malaise, musculoskeletal pain — before progressing to localized joint pain</li>
+<li><strong class="term">Symmetric, small-joint predominant:</strong> hands, feet, wrists, ankles, elbows, and knees; metacarpophalangeal and proximal interphalangeal joints especially — tendons, ligaments, and muscles can also be involved, producing <strong class="term">ulnar deviation</strong> of the fingers and swan-neck or boutonniere deformities</li>
+<li>Swollen, warm, painful joints (consistent with inflammation)</li>
+<li><strong class="term">Morning stiffness</strong> that improves with movement (opposite of OA's "worse with use" pattern)</li>
+<li>Waxing and waning course</li>
+</ul>
+<div class="formula"><span class="fx-label">OA AND RA CAN COEXIST:</span> Slides describe a patient with both osteoarthritis (PIP/hip involvement) and rheumatoid arthritis (metacarpal involvement) at the same time — the two are not mutually exclusive, and chronic RA-related joint stress may even predispose to secondary OA changes.</div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t3"></div>
+</article>
+
+<article class="topic" id="t4">
+<div class="topic-num">SECTION 4</div>
+<h3>Rheumatoid Arthritis vs. Juvenile Rheumatoid Arthritis</h3>
+<p class="body">Full comparison table, as given on the slides:</p>
+<table class="data-table">
+<caption>RA vs. JRA</caption>
+<tr><th></th><th>Rheumatoid Arthritis</th><th>Juvenile Rheumatoid Arthritis</th></tr>
+<tr><td><strong>Age</strong></td><td>Presents 20s to 40s</td><td>Presents &lt;16 years of age</td></tr>
+<tr><td><strong>Involvement of joints</strong></td><td>Polyarthritis</td><td>Oligoarthritis</td></tr>
+<tr><td><strong>Systemic disease</strong></td><td>Less frequent systemic disease</td><td>More frequent systemic disease</td></tr>
+<tr><td><strong>Location</strong></td><td>Affects small joints more than large joints</td><td>Affects large joints more than small joints</td></tr>
+<tr><td><strong>Microscopic findings</strong></td><td>Rheumatoid nodules and RF often present</td><td>Rheumatoid nodules and RF absent</td></tr>
+<tr><td><strong>ANA antibodies</strong></td><td>Often anti-nuclear antibody (ANA) positive</td><td>—</td></tr>
+<tr><td><strong>Risk factors</strong></td><td>HLA and PTPN22 variants — risk factor</td><td>HLA and PTPN22 variants — risk factor</td></tr>
+<tr><td><strong>Pathogenesis</strong></td><td>TH1 and TH17 cells mediate disease</td><td>TH1 and TH17 cells mediate disease</td></tr>
+</table>
+<div class="formula"><span class="fx-label">PATTERN TO REMEMBER:</span> Adult RA = polyarticular, small joints, nodules and RF often present. Juvenile RA = oligoarticular, large joints, more systemic disease, but nodules/RF typically absent. Risk factors and T-cell pathogenesis are shared between the two.</div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t4"></div>
+</article>
+
+<article class="topic" id="t5">
+<div class="topic-num">SECTION 5</div>
+<h3>Seronegative Spondyloarthropathies</h3>
+<p class="subhead">General Features</p>
+<ul class="body-list">
+<li><strong class="term">Absence of rheumatoid factor</strong> — hence "seronegative"</li>
+<li>Pathologic changes are in the <strong class="term">ligaments</strong>, not the synovium (unlike RA)</li>
+<li>Involve the <strong class="term">sacroiliac joints</strong></li>
+<li>Associated with <strong class="term">HLA-B27</strong></li>
+<li>Bony proliferation leads to <strong class="term">ankylosis</strong> (joint fusion) — hence "ankylosing" spondylitis</li>
+</ul>
+<p class="subhead">Ankylosing Spondylitis</p>
+<p class="body">The prototype/classic form — the one to know if you only know one. Affects the sacroiliac joints, but also peripheral joints: hips, knees, and shoulders.</p>
+<p class="subhead">Reactive Arthritis</p>
+<p class="body">Classic triad: <strong class="term">arthritis, nongonococcal urethritis or cervicitis, and conjunctivitis</strong>.</p>
+<ul class="body-list">
+<li><strong class="term">M &gt; F</strong> — unusual for an autoimmune-type reaction, but this is the pattern seen; typically 20s–30s; about 80% HLA-B27 positive</li>
+<li><strong class="term">Etiology:</strong> an autoimmune reaction to a preceding infection — <em>Chlamydia, Shigella, Salmonella, Yersinia,</em> or <em>Campylobacter</em></li>
+<li>Affects the sacroiliac joint (as with ankylosing spondylitis), plus knees, ankles, and feet</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t5"></div>
+</article>
+
+<article class="topic" id="t6">
+<div class="topic-num">SECTION 6</div>
+<h3>Infectious Arthritis</h3>
+<p class="subhead">Mechanisms of Formation</p>
+<ul class="body-list">
+<li>Hematogenous dissemination</li>
+<li>Direct inoculation (e.g., trauma penetrating the joint)</li>
+<li>Contiguous spread from soft tissue or from osteomyelitis</li>
+</ul>
+<div class="formula"><span class="fx-label">NOTE:</span> Joint infection (arthritis) and bone infection (osteomyelitis) are distinct entities — a joint infection doesn't necessarily mean the bone is involved, and vice versa, even though one can spread contiguously into the other.</div>
+<p class="subhead">Suppurative (Bacterial) Arthritis — Organisms by Age</p>
+<ul class="body-list">
+<li><strong class="term">H. influenzae</strong> — children &lt;2 years of age, from epiphyseal osteomyelitis</li>
+<li><strong class="term">Staphylococcus aureus</strong> — older children and adults (the same organism that's the most common cause of osteomyelitis in this age group)</li>
+<li><strong class="term">Gonococcal</strong> — late adolescence/early adulthood (risk factors: sexually active; deficiencies of complement C5–C7 and C9)</li>
+<li><strong class="term">Salmonella</strong> — patients with sickle cell disease (the same pairing seen with osteomyelitis)</li>
+</ul>
+<p class="body"><strong class="term">Symptoms:</strong> painful, warm, swollen joint (features of acute inflammation) — usually involves only one joint (though hematogenous spread could occasionally involve more than one).</p>
+<p class="subhead">Lyme Arthritis</p>
+<ul class="body-list">
+<li><strong class="term">Early localized:</strong> skin lesion</li>
+<li><strong class="term">Early disseminated:</strong> skin, cranial nerve involvement, heart, meninges (a viral-type meningitis); arthritis, especially of the knee — this arthritis is <strong class="term">migratory</strong>, moving from joint to joint, and lasts weeks to months</li>
+<li><strong class="term">Late disseminated:</strong> chronic arthritis, plus nonspecific symptoms — fatigue, cognitive complaints (which can be quite challenging for patients)</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t6"></div>
+</article>
+
+<article class="topic" id="t7">
+<div class="topic-num">SECTION 7</div>
+<h3>Gout</h3>
+<p class="subhead">Basic Features</p>
+<p class="body">Arthritis due to deposition of <strong class="term">uric acid (urate) crystals</strong>.</p>
+<p class="subhead">Mechanism of Hyperuricemia</p>
+<ul class="body-list">
+<li><strong class="term">Under-excretion (main mechanism in primary gout):</strong> urate is normally filtered by the glomerulus and reabsorbed by the proximal convoluted tubule, with only a small amount excreted — if too little is excreted, urate accumulates</li>
+<li><strong class="term">Overproduction (less common mechanism):</strong> from synthesis of purine nucleotides, with uric acid as an end product; also seen with partial or complete deficiency of <strong class="term">HGPRT</strong> (hypoxanthine-guanine phosphoribosyltransferase), which interrupts the purine salvage pathway</li>
+<li><strong class="term">Secondary gout:</strong> tumor lysis in leukemias/lymphomas — high cell turnover means a lot of DNA/purine breakdown, producing a lot of uric acid</li>
+</ul>
+<p class="subhead">Pathogenesis</p>
+<p class="body">Hyperuricemia (plasma urate &gt; 6.8 mg/dL) → urate deposits trigger inflammation. Macrophages and neutrophils engulf the crystals and activate the <strong class="term">inflammasome</strong>; crystals can also directly damage lysosomes, causing leakage of their contents and further joint damage. Repeated attacks lead to <strong class="term">tophi</strong> — aggregates of crystals surrounded by inflammatory tissue.</p>
+<div class="formula"><span class="fx-label">IMPORTANT POINT:</span> Only about 10% of people with hyperuricemia actually develop gout — hyperuricemia alone is not sufficient. Age, genetic predisposition, alcohol consumption, obesity, and certain drugs also contribute.</div>
+<p class="subhead">Morphology</p>
+<ul class="body-list">
+<li><strong class="term">Acute arthritis:</strong> urate crystals — needle-shaped and <strong class="term">negatively birefringent</strong> — plus an inflammatory infiltrate</li>
+<li><strong class="term">Chronic tophaceous arthritis:</strong> chalky deposits on the synovium; hyperplastic, fibrotic, inflamed synovium (a pannus-like response, similar in concept to RA)</li>
+<li><strong class="term">Tophi:</strong> uric acid crystals surrounded by a foreign body giant cell reaction</li>
+<li><strong class="term">Gout can also affect the kidney:</strong> uric acid is one of the types of kidney stones, and gout can also lead to pyelonephritis</li>
+</ul>
+<div class="formula"><span class="fx-label">FROM LECTURE:</span> <em>Dr. Kemp described sectioning into a bump on a patient's toe expecting an abscess ("my first thought was actually pus") — it turned out to be a gouty tophus instead.</em></div>
+<p class="subhead">Symptoms</p>
+<ul class="body-list">
+<li>More common in males; typically presents after age 30</li>
+<li>Sudden-onset joint pain associated with hyperemia and warmth; usually <strong class="term">monoarticular</strong>, and about 50% involve the first metatarsophalangeal joint (the great toe)</li>
+<li>If untreated, attacks recur and the disease becomes polyarticular</li>
+<li>Chronic tophaceous gout develops about 12 years after the first acute attack</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t7"></div>
+</article>
+
 </section>
 
-<!-- SECTION 1: OSTEOARTHRITIS -->
-<section class="section" id="s1">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Osteoarthritis</h2>
+<section class="lecture" id="lec2">
+<h2>Pt. 2 — Crystal Arthropathy & Soft Tissue</h2>
+<div class="lecture-meta">Joint & Soft Tissue Pathology — Dr. Kemp</div>
 
-  <h3>General Features</h3>
-  <p>Also called <strong>degenerative joint disease (DJD)</strong> — a disease of the joints from degeneration of cartilage with subsequent ineffective repair.</p>
-  <ul>
-    <li><strong>Demographics:</strong> older patients, 50s–70s (<strong>primary</strong> OA, age-related); younger patients, 20s–40s (<strong>secondary</strong> OA — joint deformity, trauma, systemic disease)</li>
-  </ul>
-  <h4>Pathogenesis</h4>
-  <p>Chondrocytes secrete the extracellular matrix that forms cartilage, but degeneration of the cartilage can exceed production. Chondrocytes also secrete <strong>matrix metalloproteinases</strong>, which degrade type II collagen and damage the cartilage. Low-level chronic inflammation contributes too — even ordinary age-related wear elicits some inflammatory response to injury.</p>
+<article class="topic" id="t8">
+<div class="topic-num">SECTION 8</div>
+<h3>Pseudogout (CPPD)</h3>
+<p class="body"><strong class="term">Calcium pyrophosphate crystal deposition disease</strong> — the second major crystal arthropathy.</p>
+<p class="subhead">General Features</p>
+<ul class="body-list">
+<li>&gt;50 years of age; <strong class="term">M = F</strong> (unlike gout, which favors males)</li>
+<li><strong class="term">Forms:</strong> sporadic; hereditary (autosomal dominant mutation in a pyrophosphate transport channel); secondary (joint damage, hyperparathyroidism, hemochromatosis, diabetes mellitus)</li>
+<li><strong class="term">Pathogenesis:</strong> basically similar to gout — activation of the inflammasome</li>
+</ul>
+<div class="formula"><span class="fx-label">DEMOGRAPHICS ARE A GUIDE, NOT A RULE:</span> Dr. Kemp emphasized that demographic patterns (e.g., roughly equal M:F in pseudogout) are useful guides, but every patient is an individual — a classic presentation in an atypical demographic doesn't rule out the disease.</div>
+<p class="subhead">Morphology</p>
+<ul class="body-list">
+<li>Crystals develop near/in the articular cartilage, menisci, and intervertebral discs; they can rupture and seed the joint space</li>
+<li>Chalky white and friable deposits</li>
+<li>Crystals are <strong class="term">rhomboid</strong> and <strong class="term">positively birefringent</strong> (contrast with gout's negative birefringence)</li>
+</ul>
+<p class="subhead">Symptoms</p>
+<p class="body">Often asymptomatic, but can produce an acute, subacute, or chronic arthritis lasting days to weeks; can be monoarticular or polyarticular. Affects the <strong class="term">knees, wrists, elbows, shoulders, and ankles</strong> — peripheral joints, not the major weight-bearing hips.</p>
+<p class="subhead">Gout vs. Pseudogout</p>
+<table class="data-table">
+<caption>Crystal arthropathies compared</caption>
+<tr><th></th><th>Gout</th><th>Pseudogout</th></tr>
+<tr><td><strong>Crystal</strong></td><td>Monosodium urate</td><td>Calcium pyrophosphate</td></tr>
+<tr><td><strong>Shape / birefringence</strong></td><td>Needle-shaped, negatively birefringent</td><td>Rhomboid, positively birefringent</td></tr>
+<tr><td><strong>Demographics</strong></td><td>M &gt; F; typically &gt;30 years old</td><td>M = F; typically &gt;50 years old</td></tr>
+<tr><td><strong>Classic distribution</strong></td><td>Often monoarticular at onset — 1st MTP (great toe) in ~50%</td><td>Knees, wrists, elbows, shoulders, ankles</td></tr>
+</table>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t8"></div>
+</article>
 
-  <h3>Morphology</h3>
-  <ul>
-    <li><strong>Gross:</strong> granular cartilage surface from fissures/clefts (cartilage is normally smooth); loose cartilage fragments (<strong>joint mice</strong>); polished, shiny exposed bone once cartilage is worn away (<strong>eburnation</strong>); <strong>osteophytes</strong> at the joint margins; classically <em>no joint fusion</em> — see the pearl below</li>
-    <li><strong>Microscopic:</strong> fissures/clefts in the cartilage surface (cartilage also looks pale rather than the normal bluish hyaline tint); cysts from synovial fluid pressed into the clefts</li>
-    <li><strong>Radiology:</strong> narrowing of the joint space from cartilage loss — can progress to bone-on-bone</li>
-  </ul>
+<article class="topic" id="t9">
+<div class="topic-num">SECTION 9</div>
+<h3>Ganglion & Synovial Cysts; Tenosynovial Giant Cell Tumor</h3>
+<p class="subhead">Ganglion Cyst</p>
+<ul class="body-list">
+<li><strong class="term">Location:</strong> commonly around the wrist</li>
+<li>Firm, fluctuant, pea-sized, translucent nodule</li>
+<li><strong class="term">Mechanism:</strong> cystic or myxoid degeneration of connective tissue — there is no true cell lining, so it's technically a pseudocyst even though it's called a "cyst"</li>
+</ul>
+<div class="formula"><span class="fx-label">FROM LECTURE:</span> <em>Ganglion cysts used to be called "Bible cysts" because an old-school treatment was to smash the wrist with a large book (a Bible) to rupture the cyst and let the body resolve it — Dr. Kemp noted the old treatment may have worked about as well as some newer ones.</em></div>
+<p class="subhead">Synovial Cyst</p>
+<ul class="body-list">
+<li><strong class="term">Mechanism:</strong> herniation of the synovium through the joint capsule, or enlargement of a bursa</li>
+<li>Classic example: <strong class="term">Baker cyst</strong>, in the popliteal space</li>
+</ul>
+<p class="subhead">Tenosynovial Giant Cell Tumor</p>
+<p class="body">Two forms — <strong class="term">localized</strong> and <strong class="term">diffuse</strong>. The diffuse form is called <strong class="term">pigmented villonodular synovitis</strong> because it's inflammation of the synovium that appears dark/pigmented and clustered, like a bunch of grapes.</p>
+<ul class="body-list">
+<li><strong class="term">Location:</strong> localized → hand; diffuse → large joints</li>
+<li><strong class="term">Molecular:</strong> t(1;2) — fuses the type VI collagen α-3 promoter to the <strong class="term">M-CSF (colony stimulating factor for macrophages) gene</strong>, driving macrophage proliferation</li>
+<li><strong class="term">Morphology:</strong> localized = a nodule attached to a tendon sheath; diffuse = red-brown, folded, fingerlike projections/nodules of synovium</li>
+<li>Abundant macrophages, some containing hemosiderin and lipid (foamy) from associated blood breakdown products; macrophages can fuse into multinucleated giant cells</li>
+</ul>
+<div class="formula"><span class="fx-label">FROM LECTURE:</span> <em>Dr. Kemp recalled a case from residency — a "giant cell tumor of tendon sheath" from the hand — where a colleague identified the diagnosis purely from knowing it came from the hand, without even needing to look through the microscope.</em></div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t9"></div>
+</article>
 
-  <div class="kemp-story">
-    <span class="label">From lecture</span>
-    Dr. Kemp described seeing a bone specimen with severe eburnation during his PhD work at the University of Montana — the exposed bone was "absolutely shiny," polished from years of bone-on-bone wear.
-  </div>
+<article class="topic" id="t10">
+<div class="topic-num">SECTION 10</div>
+<h3>Lipoma & Liposarcoma</h3>
+<p class="subhead">Soft Tissue Tumors — General</p>
+<p class="body">Except for skeletal-muscle-derived neoplasms (usually malignant — e.g., rhabdomyosarcoma), <strong class="term">benign soft tissue tumors outnumber malignant ones roughly 100:1</strong>. Even so, soft tissue tumors cause a disproportionate share of deaths: less than 1% of cancers, but about 2% of all cancer deaths. Most are sporadic; some occur as part of a syndrome (NF1, Gardner syndrome, Li-Fraumeni), and some are secondary to radiation, burns, or toxins.</p>
+<p class="subhead">Lipoma</p>
+<p class="body">Benign tumor of fat. Grossly, a well-encapsulated mass of mature adipose tissue, most often subcutaneous — trunk or extremities. Extremely common; on surgical pathology these are a routine, high-volume specimen.</p>
+<div class="formula"><span class="fx-label">CLINICAL PEARL:</span> Subcutaneous lipomas are common and behave benignly. But when a fatty mass arises inside a body cavity (retroperitoneum, mesentery, chest wall, etc.), it is rarely a true lipoma — it should be treated as at least an atypical lipoma, if not a well-differentiated liposarcoma.</div>
+<div class="formula"><span class="fx-label">FROM LECTURE:</span> <em>Dr. Kemp described a case with a roughly 2–3 kg fatty mesenteric mass that grossly resembled adipose tissue but had areas of fibrosis and necrosis — sectioning revealed it was a well-differentiated liposarcoma, illustrating why location changes the default assumption.</em></div>
+<p class="subhead">Liposarcoma — the Malignant Fat Tumor</p>
+<ul class="body-list">
+<li><strong class="term">Well-differentiated:</strong> adipocytes with scattered atypical spindle cells in the interstitium</li>
+<li><strong class="term">Myxoid liposarcoma:</strong> basophilic extracellular matrix, branching capillaries, and primitive adipocytes that resemble fetal fat</li>
+<li><strong class="term">Dedifferentiated liposarcoma:</strong> a low-grade (well-differentiated) component admixed with a higher-grade, spindle-cell component</li>
+<li><strong class="term">Pleomorphic liposarcoma:</strong> anaplastic cells, bizarre nuclei, mitotic figures — the most aggressive variant</li>
+</ul>
+<p class="body">Sarcomas characteristically spread <strong class="term">hematogenously</strong> rather than via lymphatics (unlike carcinomas, which spread via lymph nodes) — so a patient can have widespread metastatic liposarcoma (e.g., to the lungs) with negative lymph nodes.</p>
+<p class="subhead">Molecular Associations</p>
+<ul class="body-list">
+<li><strong class="term">Well-differentiated liposarcoma:</strong> amplification of 12q13–q15 (the <strong class="term">MDM2 gene</strong>), which normally inhibits p53</li>
+<li><strong class="term">Myxoid liposarcoma:</strong> t(12;16), which arrests adipose tissue differentiation (this is why the tumor resembles primitive/fetal fat rather than mature adipocytes)</li>
+<li><strong class="term">Pleomorphic liposarcoma:</strong> complex, nonspecific karyotypes</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t10"></div>
+</article>
 
-  <div class="clinical-pearl">
-    <span class="label">Point to ponder</span>
-    OA doesn't fuse the joint itself the way RA does — there's no synovial inflammation or fibrosis in OA. But <strong>osteophytes growing out from adjacent vertebral bodies can connect and fuse to each other</strong>, producing what looks like joint fusion without the joint proper ever being involved. So "OA never causes fusion" isn't quite complete.
-  </div>
+<article class="topic" id="t11">
+<div class="topic-num">SECTION 11</div>
+<h3>Nodular Fasciitis</h3>
+<p class="body">A proliferation of fibroblasts and myofibroblasts that is <strong class="term">benign but can easily be mistaken for a sarcoma</strong> — it has historically been misdiagnosed as a malignant neoplasm, and there's some debate over whether it's truly a neoplasm at all versus a pronounced reactive process.</p>
+<ul class="body-list">
+<li><strong class="term">Demographics:</strong> young adults</li>
+<li><strong class="term">1/4 to 1/2 of cases have a preceding history of trauma</strong>, with rapid growth over the following weeks to months — consistent with an exuberant reactive process</li>
+<li><strong class="term">Molecular:</strong> t(17;22) — clonal, but self-limited (so despite being clonal — which leans toward "neoplasm" — it behaves more like a reactive process)</li>
+</ul>
+<p class="subhead">Morphology</p>
+<ul class="body-list">
+<li><strong class="term">Gross:</strong> usually &lt;5 cm, well circumscribed</li>
+<li><strong class="term">Microscopic:</strong> very cellular, resembling cultured fibroblasts; shows a gradient from cellular/loose/myxoid to fibrous</li>
+<li>Can show a degree of pleomorphism and <strong class="term">prominent mitotic figures</strong> — this is exactly what makes it mimic a sarcoma histologically; margins can also appear infiltrative</li>
+<li><strong class="term">Location:</strong> often upper extremities</li>
+</ul>
+<div class="formula"><span class="fx-label">WHY IT MATTERS:</span> Nodular fasciitis has a real history of being misdiagnosed as a malignant sarcoma because of its cellularity, mitotic activity, and sometimes infiltrative-appearing margins. Recognizing the clinical context — young adult, rapid growth after trauma, small size, upper extremity — helps avoid that trap.</div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t11"></div>
+</article>
 
-  <h3>Symptoms</h3>
-  <ul>
-    <li>Typically presents in the 50s; pain characteristically <strong>worsens with use across the day</strong> and rests overnight (opposite pattern from RA)</li>
-    <li>Morning stiffness, crepitus, limited range of motion (from pain and from osteophytes mechanically limiting movement); osteophytes can impinge nerves → radicular pain</li>
-    <li><strong>Joints involved:</strong> weight-bearing joints — hips, knees, lower lumbar vertebrae — plus the PIP, DIP, and 1st carpometacarpal joints (wear-and-tear isn't only from big joints; repetitive use of the hands, e.g. typing, counts too)</li>
-    <li><strong>Heberden nodes</strong> — osteophytes at the DIP joints; <strong>Bouchard nodes</strong> — osteophytes at the PIP joints</li>
-  </ul>
-
-  <div class="quiz" data-answer="1">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A patient has bony nodules at the distal interphalangeal joints. What are these called, and what are they made of?</div>
-    <div class="options">
-      <button class="opt">Bouchard nodes; urate crystals</button>
-      <button class="opt">Heberden nodes; osteophytes</button>
-      <button class="opt">Rheumatoid nodules; granulomas</button>
-      <button class="opt">Gouty tophi; CPPD crystals</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
 </section>
 
-<!-- SECTION 2: RA -->
-<section class="section" id="s2">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Rheumatoid Arthritis</h2>
+<section class="lecture" id="lec3">
+<h2>Pt. 3 — Muscle/Fibrous Tumors & Bone Basics</h2>
+<div class="lecture-meta">Joint & Soft Tissue Pathology — Dr. Kemp</div>
 
-  <h3>General Features</h3>
-  <p>Autoimmune disease of the joints producing a <strong>non-suppurative, proliferative, and inflammatory synovitis</strong>. The inflammation damages articular cartilage and can cause fusion (<strong>ankylosis</strong>) of the joints — think of it as fibrosis spanning the joint space, like scarring across it.</p>
-  <ul>
-    <li>~1% of the population; <strong>F > M</strong> (as with most autoimmune disorders); presents in the <strong>3rd–5th decades</strong> of life</li>
-  </ul>
+<article class="topic" id="t12">
+<div class="topic-num">SECTION 12</div>
+<h3>Fibromatosis</h3>
+<p class="body">Fibromatoses are masses formed essentially by fibrous tissue — think of them as an overgrowth of scar-like tissue. There are two forms: <strong class="term">superficial</strong> and <strong class="term">deep</strong>.</p>
+<p class="subhead">Superficial Fibromatosis</p>
+<ul class="body-list">
+<li>Examples: <strong class="term">palmar fibromatosis</strong> (causes Dupuytren contractures) and <strong class="term">penile fibromatosis</strong> (Peyronie disease)</li>
+<li>An ill-defined mass caused essentially by scarring</li>
+<li><strong class="term">M &gt; F</strong> — likely reflecting the contribution of Peyronie disease to that skew</li>
+<li><strong class="term">Morphology:</strong> fascicles of fibroblasts with associated collagen</li>
+</ul>
+<p class="subhead">Deep Fibromatosis (Desmoid Tumors)</p>
+<ul class="body-list">
+<li><strong class="term">F &gt; M</strong> (opposite sex predominance from the superficial form)</li>
+<li><strong class="term">Infiltrate but do not metastasize</strong> — however, infiltration into surrounding tissue can still make them difficult to resect and cause real problems for the patient, even without metastatic potential</li>
+<li><strong class="term">Molecular:</strong> mutations in <strong class="term">CTNNB1 (beta-catenin)</strong> or <strong class="term">APC</strong> — the same genes discussed in the GI tract (APC/beta-catenin/Wnt pathway)</li>
+<li><strong class="term">Morphology:</strong> interlocking spindle cells with relatively bland nuclei and collagen</li>
+</ul>
+<div class="formula"><span class="fx-label">DIAGNOSTIC REALITY CHECK:</span> Dr. Kemp was candid that many soft tissue spindle cell tumors look very similar to each other under the microscope — pathologists lean heavily on clinical history and immunohistochemistry to sort them out, not gestalt alone.</div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t12"></div>
+</article>
 
-  <h4>Pathogenesis</h4>
-  <p>Driven by TH1 and TH17 T cells and antibodies:</p>
-  <ul>
-    <li><strong>TH1 cells</strong> secrete IFN-γ → activates macrophages and synovial cells</li>
-    <li><strong>TH17 cells</strong> secrete IL-17 → activates neutrophils and monocytes</li>
-    <li><strong>TNF and IL-1</strong> from macrophages stimulate synovial cells to secrete proteases → tissue damage</li>
-    <li>Plasma cells associated with the inflammation produce antibodies</li>
-    <li><strong>RANKL</strong> stimulates osteoclasts → bone breakdown</li>
-  </ul>
+<article class="topic" id="t13">
+<div class="topic-num">SECTION 13</div>
+<h3>Rhabdomyosarcoma</h3>
+<p class="body">A malignant tumor of skeletal muscle — three main forms: <strong class="term">embryonal (including botryoid)</strong>, <strong class="term">alveolar</strong>, and <strong class="term">pleomorphic</strong>.</p>
+<table class="data-table">
+<caption>Rhabdomyosarcoma subtypes</caption>
+<tr><th></th><th>Embryonal / Botryoid</th><th>Alveolar</th><th>Pleomorphic</th></tr>
+<tr><td><strong>Typical age</strong></td><td>Young children (~1–5 yrs)</td><td>Older children/teens (~5–15 yrs)</td><td>Adults</td></tr>
+<tr><td><strong>Molecular</strong></td><td>No characteristic translocation emphasized</td><td>Fusion of PAX3 (or PAX7) with FOXO1; t(2;13) or t(1;13)</td><td>Genetically heterogeneous — no single defining alteration</td></tr>
+<tr><td><strong>Morphology</strong></td><td>Botryoid form: grape-like clusters protruding from the vagina (or bladder) in an infant</td><td>Cells arranged in nests divided by septa, resembling pulmonary alveoli</td><td>Variable cell size/shape; can be multinucleate, eosinophilic cells that don't resemble skeletal muscle grossly</td></tr>
+</table>
+<div class="formula"><span class="fx-label">WHY THE MOLECULAR FINDING MATTERS:</span> PAX3 normally helps initiate skeletal muscle differentiation. The alveolar rhabdomyosarcoma fusion disrupts PAX3 function and interferes with that differentiation — which is exactly why alveolar rhabdomyosarcoma looks almost nothing like skeletal muscle under the microscope.</div>
+<p class="body">Rhabdomyosarcoma can show <strong class="term">cross striations</strong> (from actin-myosin interaction) — a classic, though not universally present, finding, most associated with the embryonal form. Because pleomorphic rhabdomyosarcoma can look like essentially any undifferentiated malignant tumor, <strong class="term">desmin and myogenin</strong> immunohistochemistry are used to confirm a skeletal muscle origin.</p>
+<div class="formula"><span class="fx-label">FROM LECTURE:</span> <em>Dr. Kemp recalled an OB/GYN colleague's line about sarcoma botryoides: "this is a tumor you will have to learn for every single test you ever take, and you'll never in your entire life see" — rare, but very characteristic when it does show up.</em></div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t13"></div>
+</article>
 
-  <h3>Laboratory Diagnosis</h3>
-  <ul>
-    <li><strong>Autoantibodies for citrullinated peptides</strong> (citrullinated fibrinogen along with type II collagen, alpha-enolase, and vimentin deposit in the joint) — in <strong>~70%</strong> of patients</li>
-    <li><strong>Rheumatoid factor</strong> — serum IgM or IgA autoantibodies against the Fc portion of IgG — in <strong>~80%</strong> (not specific, though)</li>
-    <li><strong>Radiography:</strong> narrowing of the joint space and loss of articular cartilage (both OA and RA can show joint-space narrowing — the underlying pathology is very different)</li>
-  </ul>
+<article class="topic" id="t14">
+<div class="topic-num">SECTION 14</div>
+<h3>Leiomyoma & Leiomyosarcoma</h3>
+<p class="subhead">Leiomyoma</p>
+<p class="body">A benign tumor of smooth muscle. By far the most common location is the <strong class="term">uterus</strong> — the familiar "uterine fibroid." When not uterine, a soft tissue leiomyoma is most often found in the <strong class="term">extremities</strong>.</p>
+<ul class="body-list">
+<li><strong class="term">Gross:</strong> a well-circumscribed nodule, tan-white to white-tan, firm to palpation</li>
+<li><strong class="term">Microscopic:</strong> interlocking, intersecting fascicles of spindle cells; bland nuclei, minimal to no pleomorphism, few mitotic figures (consistent with a benign process)</li>
+<li><strong class="term">Molecular:</strong> loss of function of <strong class="term">fumarate hydratase (FH)</strong> — an enzyme in the Krebs cycle</li>
+</ul>
+<p class="subhead">Leiomyosarcoma</p>
+<p class="body">The malignant smooth muscle tumor.</p>
+<ul class="body-list">
+<li><strong class="term">Gross:</strong> infiltrative, unlike the well-circumscribed leiomyoma</li>
+<li><strong class="term">Microscopic:</strong> similar interlocking fascicle pattern to leiomyoma, but with <strong class="term">pleomorphism and mitotic activity</strong> — the expected malignant-versus-benign distinction</li>
+<li><strong class="term">Demographics/location:</strong> older patients (roughly 40s–60s); common sites include <strong class="term">retroperitoneum</strong> and <strong class="term">thigh</strong>, in addition to the uterus</li>
+<li><strong class="term">Immunohistochemistry:</strong> <strong class="term">actin, desmin, and caldesmon</strong> are good markers of smooth muscle origin</li>
+</ul>
+<div class="formula"><span class="fx-label">COMPARE ON HISTOLOGY:</span> Leiomyosarcoma is markedly more cellular than leiomyoma, with hyperchromatic, enlarged nuclei, a higher nuclear-to-cytoplasmic ratio, pleomorphism, and identifiable mitotic figures — leiomyoma should show essentially none of this.</div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t14"></div>
+</article>
 
-  <h3>Risk Factors</h3>
-  <ul>
-    <li><strong>Vinculin</strong> — an epitope on the citrullinated protein — mimics an epitope on microbes; if presented by HLA-DQ alleles, this promotes antibody formation against citrullinated peptides</li>
-    <li><strong>PTPN22</strong> — a tyrosine phosphatase that normally inhibits T-cell activation</li>
-    <li><strong>Infection and smoking</strong> may drive citrullination</li>
-  </ul>
+<article class="topic" id="t15">
+<div class="topic-num">SECTION 15</div>
+<h3>Synovial Sarcoma</h3>
+<p class="body">The name is actually a <strong class="term">misnomer</strong> — it is not derived from synovium. It accounts for roughly <strong class="term">10% of soft tissue sarcomas</strong>, making it one of the more common sarcoma subtypes, and typically presents at <strong class="term">age 20–40</strong>.</p>
+<ul class="body-list">
+<li><strong class="term">Location:</strong> usually the <strong class="term">lower extremity</strong></li>
+<li><strong class="term">Molecular:</strong> characteristic <strong class="term">t(X;18)</strong> — fusion of the <strong class="term">SS18 (SYT) gene</strong> with one of the SSX genes, leading to loss of normal cell-cycle control</li>
+</ul>
+<p class="subhead">Morphology</p>
+<ul class="body-list">
+<li><strong class="term">Biphasic (more common):</strong> gland-like structures within a spindle-cell neoplasm — the glandular component can resemble epithelium within a stromal background</li>
+<li><strong class="term">Monophasic:</strong> just spindle cells in fascicles, which makes it harder to diagnose and increases the importance of molecular/IHC testing</li>
+<li>The glandular cells stain positive for <strong class="term">keratin</strong> and other epithelial antigens, supporting the biphasic pattern</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t15"></div>
+</article>
 
-  <h3>Morphology</h3>
-  <ul>
-    <li><strong>Pannus:</strong> edematous, thickened, hyperplastic synovium with inflammatory cell infiltrate, fibroblasts producing collagen/fibrosis, and granulation tissue as an intermediate stage — this is what lays down across the joint space and lets the two sides fuse</li>
-    <li><strong>Microscopic:</strong> synovial hyperplasia and dense inflammatory infiltrates; angiogenesis (new blood vessel formation), fibrin, fibrosis, inflammatory cells</li>
-    <li><strong>Rheumatoid nodules:</strong> occur at the forearm, elbows, occiput, and lumbosacral region; look like necrotizing granulomas — central area of necrosis rimmed by giant cells</li>
-  </ul>
-  <div class="kemp-story">
-    <span class="label">From lecture</span>
-    Because a rheumatoid nodule looks like a necrotizing granuloma on histology, Dr. Kemp noted that in practice you'd stain it for acid-fast bacilli and do a silver stain for fungus to rule out an infectious cause before calling it a rheumatoid nodule.
-  </div>
+<article class="topic" id="t16">
+<div class="topic-num">SECTION 16</div>
+<h3>Undifferentiated Pleomorphic Sarcoma</h3>
+<p class="body">Formerly called <strong class="term">malignant fibrous histiocytoma</strong> — essentially a "wastebasket" diagnosis for a sarcoma that can't be classified as anything else. The older name was misleading, since "histiocytoma" implies a macrophage/histiocyte origin, whereas this tumor doesn't actually have that origin — hence the renaming to "undifferentiated pleomorphic sarcoma."</p>
+<p class="body">On immunohistochemistry, it stains <strong class="term">negative</strong> for smooth muscle, neural, and skeletal muscle markers — it doesn't fit any specific lineage, which is exactly why it's called "undifferentiated."</p>
+<ul class="body-list">
+<li><strong class="term">Demographics:</strong> most common in the 40s–70s</li>
+<li><strong class="term">Location:</strong> deep soft tissue, most often the <strong class="term">thigh</strong> (a common theme — when guessing an extremity location for a soft tissue sarcoma, the thigh is a good default)</li>
+</ul>
+<p class="subhead">Morphology</p>
+<p class="body">The name tells you most of what you need to know: <strong class="term">pleomorphic</strong> cells (variable in size and shape), mitotic figures, and possible necrosis, arising in deep soft tissue and derived from mesenchymal tissue (a <strong class="term">sarcoma</strong>) without a specific cell-type origin identifiable (<strong class="term">undifferentiated</strong>).</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t16"></div>
+</article>
 
-  <h3>Symptoms</h3>
-  <ul>
-    <li>Can start with <strong>systemic symptoms</strong> — fatigue, malaise, musculoskeletal pain — before progressing to localized joint pain</li>
-    <li><strong>Symmetric, small-joint predominant:</strong> hands, feet, wrists, ankles, elbows, and knees; metacarpophalangeal and proximal interphalangeal joints especially — tendons, ligaments, and muscles can also be involved, producing <strong>ulnar deviation</strong> of the fingers and swan-neck or boutonniere deformities</li>
-    <li>Swollen, warm, painful joints (consistent with inflammation)</li>
-    <li><strong>Morning stiffness</strong> that improves with movement — overnight, inflammation can progress unimpeded, but moving the joints in the morning disrupts that process (opposite of OA's "worse with use" pattern)</li>
-    <li>Waxing and waning course</li>
-  </ul>
+<article class="topic" id="t17">
+<div class="topic-num">SECTION 17</div>
+<h3>Bone Tumors: Overview & Osteogenic Tumors</h3>
+<p class="subhead">General Categories</p>
+<ul class="body-list">
+<li><strong class="term">Hematopoietic:</strong> myeloma and lymphoma — and notably, <strong class="term">multiple myeloma is the single most common bone tumor overall</strong> (excluding metastases)</li>
+<li><strong class="term">Chondrogenic:</strong> derived from cartilage</li>
+<li><strong class="term">Osteogenic:</strong> derived from bone</li>
+<li><strong class="term">Unknown origin</strong></li>
+<li><strong class="term">Notochordal</strong> (occasionally)</li>
+</ul>
+<div class="formula"><span class="fx-label">LOCATION, LOCATION, LOCATION:</span> As with many bone lesions, where a tumor sits in the bone — epiphysis, diaphysis, or metaphysis — is a major diagnostic clue, alongside patient age. That said, these are guides, not absolutes: exceptions exist (e.g., Ewing sarcoma is usually seen in children but can occasionally occur in adults) — always treat the patient as an individual, even while using demographic patterns for test purposes.</div>
+<p class="subhead">Clinical Presentation</p>
+<p class="body">Bone tumors can be <strong class="term">asymptomatic</strong> (never diagnosed, especially if small or slow-growing), can present with a <strong class="term">pathologic fracture</strong>, or can cause pain from <strong class="term">nerve impingement</strong>.</p>
+<p class="subhead">Osteogenic Tumors</p>
+<p class="body">Two benign forms — <strong class="term">osteoid osteoma</strong> and <strong class="term">osteoblastoma</strong> — and one malignant form, <strong class="term">osteosarcoma</strong>.</p>
+<table class="data-table">
+<caption>Osteoid osteoma vs. osteoblastoma</caption>
+<tr><th></th><th>Osteoid Osteoma</th><th>Osteoblastoma</th></tr>
+<tr><td><strong>Size</strong></td><td>&lt; 2 cm</td><td>&gt; 2 cm</td></tr>
+<tr><td><strong>Reactive cortical bone collar</strong></td><td>Present</td><td>Typically absent</td></tr>
+<tr><td><strong>Symptoms</strong></td><td>Nocturnal pain, relieved by aspirin</td><td>Pain, but not aspirin-responsive</td></tr>
+<tr><td><strong>Location</strong></td><td>Appendicular skeleton (e.g., femur, tibia)</td><td>Axial skeleton, commonly the spine</td></tr>
+</table>
+<p class="body">Interestingly, the two tumors look fairly similar histologically despite these differences — the size cutoff doesn't fully explain why the symptom pattern differs, but it's a well-established distinction worth remembering as-is.</p>
+<p class="subhead">Osteosarcoma</p>
+<ul class="body-list">
+<li>Accounts for ~20% of primary bone tumors and is the <strong class="term">most common malignant tumor of bone</strong></li>
+<li>Most occur in patients <strong class="term">under age 20</strong>; about 25% occur in older adults</li>
+<li><strong class="term">Primary osteosarcoma:</strong> arises without an identifiable underlying disease (aside from possible genetic predisposition)</li>
+<li><strong class="term">Secondary osteosarcoma:</strong> arises in the setting of another process — Paget disease, bone infarct, prior radiation — and tends to occur in older patients</li>
+<li><strong class="term">Location:</strong> metaphysis of long bones — about 50% around the knee (distal femur or proximal tibia)</li>
+</ul>
+<p class="body">Osteosarcoma is characteristically both <strong class="term">lytic and blastic</strong> — it forms bone (blastic) while also infiltrating and eroding (lytic). A hallmark radiographic finding is <strong class="term">Codman triangle</strong>: the tumor grows beneath the periosteum and lifts it away from the bone at an angle, producing a triangular radiographic shadow.</p>
+<p class="body">Subtypes are classified by location (intramedullary, intracortical, or surface), grade (low vs. high), whether primary or secondary, and histologic pattern — osteoblastic, chondroblastic, fibroblastic, telangiectatic, small cell, or giant cell. Regardless of subtype, the diagnostic hallmark is that the tumor <strong class="term">lays down osteoid</strong> (bone matrix) — seen as lacy, pink, eosinophilic material between malignant cells. If a cartilaginous component is present alongside osteoid formation, it's still called a <strong class="term">chondroblastic osteosarcoma</strong>, not a chondrosarcoma.</p>
+<p class="subhead">Molecular</p>
+<ul class="body-list">
+<li><strong class="term">RB (retinoblastoma) mutation:</strong> RB normally negatively regulates the cell cycle</li>
+<li><strong class="term">TP53 mutation:</strong> p53 is the "guardian of the genome," normally promoting DNA repair and apoptosis of irreparable cells</li>
+<li><strong class="term">CDKN2A inactivation:</strong> this locus encodes both p16 (negatively regulates cyclin-dependent kinases) and p14 (supports p53) — losing both knocks out two separate cell-cycle brakes</li>
+<li><strong class="term">MDM2 and CDK4 overexpression:</strong> these normally inhibit p53 and RB, respectively — overexpression excessively suppresses both tumor suppressors</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t17"></div>
+</article>
 
-  <div class="callout">
-    <span class="label">OA and RA can coexist</span>
-    Slides describe a patient with both osteoarthritis (PIP/hip involvement) and rheumatoid arthritis (metacarpal involvement) at the same time — the two are not mutually exclusive, and chronic RA-related joint stress may even predispose to secondary OA changes.
-  </div>
-
-  <div class="quiz" data-answer="0">
-    <div class="qlabel">Board-Style Vignette</div>
-    <div class="qtext">A 43-year-old female presents for a routine appointment. For several years she has had pain in her hands, worse in the morning and improving during the day. Exam reveals swelling of the metacarpophalangeal joints with deviation of the fingers toward the medial (ulnar) surface of the forearm. Serologic testing is most likely to reveal antibodies against which substance?</div>
-    <div class="options">
-      <button class="opt">Citrullinated peptides</button>
-      <button class="opt">dsDNA</button>
-      <button class="opt">Cardiolipin</button>
-      <button class="opt">SSA</button>
-      <button class="opt">Mitochondria</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
 </section>
 
-<!-- SECTION 3: RA vs JRA -->
-<section class="section" id="s3">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Rheumatoid Arthritis vs. Juvenile Rheumatoid Arthritis</h2>
-  <p>Full comparison table, as given on the slides:</p>
+<section class="lecture" id="lec4">
+<h2>Pt. 4 — Cartilage, Marrow & Other Bone Tumors</h2>
+<div class="lecture-meta">Joint & Soft Tissue Pathology — Dr. Kemp</div>
+
+<article class="topic" id="t18">
+<div class="topic-num">SECTION 18</div>
+<h3>Osteochondroma & Chondroma</h3>
+<p class="body">Cartilage-forming neoplasms can be benign or malignant. Benign forms: <strong class="term">osteochondroma, chondroma, chondroblastoma,</strong> and <strong class="term">chondromyxoid fibroma</strong>. The malignant form is <strong class="term">chondrosarcoma</strong>.</p>
+<p class="subhead">Osteochondroma (Exostosis)</p>
+<p class="body">Essentially, bone that grows and branches off at an angle, then stops — a growth of bone <strong class="term">capped by cartilage</strong>, where the cartilage cap defines it as a cartilaginous tumor even though the underlying structure is bone. The <strong class="term">medullary cavity of the lesion is continuous with the medullary cavity of the underlying bone</strong> — a distinctive feature.</p>
+<ul class="body-list">
+<li>Usually solitary, though multiple lesions occur in certain syndromes</li>
+<li>Many are asymptomatic and never diagnosed</li>
+<li><strong class="term">Location:</strong> metaphysis of long bones, near the knee (same neighborhood as osteosarcoma); occasionally pelvis, scapula, or ribs</li>
+<li><strong class="term">Gross:</strong> looks like a polyp/outgrowth of bone with a disorganized hyaline cartilage cap on top</li>
+</ul>
+<div class="formula"><span class="fx-label">MALIGNANT POTENTIAL:</span> The disorganized hyaline cartilage cap of an osteochondroma can potentially give rise to a chondrosarcoma.</div>
+<p class="body">Multiple hereditary exostosis syndrome is autosomal dominant, associated with <strong class="term">EXT1 or EXT2</strong> mutations, and can also be seen in sporadic (more common) osteochondromas. These genes normally synthesize heparan sulfate proteoglycans; the resulting abnormal glycosaminoglycans are thought to prevent normal diffusion of hedgehog signaling, which regulates cartilage growth.</p>
+<p class="subhead">Chondroma</p>
+<p class="body">Commonly found in the <strong class="term">hands and feet</strong>. Can be within the medullary cavity (<strong class="term">enchondroma</strong>) or on the bone surface (<strong class="term">juxtacortical chondroma</strong>). Typically presents at age 20–59.</p>
+<div class="formula"><span class="fx-label">LOCATION IS THE KEY DIFFERENTIATOR FROM CHONDROSARCOMA:</span> Chondrosarcomas are usually found in the axial skeleton (hip, shoulder); chondromas are in the hand. A cartilaginous tumor found in the hand is essentially always a chondroma — a chondrosarcoma there would be rare enough to require a specialized bone pathologist to confirm.</div>
+<p class="body">Grossly resembles hyaline cartilage — blue-gray-white, semi-translucent. Microscopically, multiple nodules of hyaline cartilage.</p>
+<p class="body"><strong class="term">Ollier disease and Maffucci syndrome</strong> are non-hereditary syndromes featuring multiple chondromas, with increased cellularity that can make them mimic chondrosarcoma histologically (making diagnosis more challenging — again, a case for an expert bone pathologist). Both are associated with <strong class="term">IDH1/IDH2 mutations</strong> (the same mutations seen in astrocytoma and oligodendroglioma) — these interfere with DNA methylation regulation via 2-hydroxyglutarate accumulation.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t18"></div>
+</article>
+
+<article class="topic" id="t19">
+<div class="topic-num">SECTION 19</div>
+<h3>Chondrosarcoma</h3>
+<p class="body">The <strong class="term">second most common primary bone neoplasm</strong>. Affects males and females roughly equally.</p>
+<p class="subhead">Forms</p>
+<ul class="body-list">
+<li><strong class="term">Conventional (well-differentiated):</strong> can be central (intramedullary) or peripheral (juxtacortical); typically in patients over age 40</li>
+<li><strong class="term">Clear cell:</strong> found in the epiphysis; can occur in younger patients (teens–20s)</li>
+<li><strong class="term">Dedifferentiated:</strong> a low-grade (hyaline cartilage-like) component juxtaposed with a high-grade, fibrous-appearing malignant component</li>
+<li><strong class="term">Mesenchymal:</strong> hyaline cartilage surrounded by sheets of small round cells</li>
+</ul>
+<p class="body"><strong class="term">Location:</strong> usually the axial skeleton — pelvis, shoulder, occasionally ribs — and rarely the distal extremities (a cartilaginous tumor of the hand is a chondroma, not a chondrosarcoma).</p>
+<p class="subhead">Morphology</p>
+<ul class="body-list">
+<li><strong class="term">Conventional:</strong> grossly resembles abnormal, amorphous, gray-blue, semi-translucent cartilage; microscopically resembles hyaline cartilage but with increased cellularity and possible mitotic figures — <strong class="term">more than one chondrocyte per lacuna is a useful clue favoring chondrosarcoma over chondroma</strong></li>
+<li><strong class="term">Dedifferentiated:</strong> low-grade hyaline cartilage-appearing tissue directly adjacent to a high-grade, fibrous/spindle-cell malignant component</li>
+<li><strong class="term">Clear cell:</strong> tumor cells with clear cytoplasm</li>
+<li><strong class="term">Mesenchymal:</strong> hyaline cartilage plus sheets of small round cells</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t19"></div>
+</article>
+
+<article class="topic" id="t20">
+<div class="topic-num">SECTION 20</div>
+<h3>Giant Cell Tumor & Aneurysmal Bone Cyst</h3>
+<p class="body">These are the benign bone tumors of <strong class="term">unknown origin</strong> (the malignant ones of unknown origin are Ewing sarcoma and adamantinoma).</p>
+<p class="subhead">Giant Cell Tumor</p>
+<ul class="body-list">
+<li><strong class="term">Location:</strong> distinctive among bone tumors for being found in the <strong class="term">epiphysis</strong> (most bone tumors are metaphyseal) — most often around the knee, though other locations occur</li>
+<li><strong class="term">Gross:</strong> often destroys the cortex, leaving a thin shell of reactive bone</li>
+</ul>
+<p class="body">Two cell populations: <strong class="term">uniform mononuclear cells</strong>, which are the actual neoplastic cells (derived from osteoblasts/osteoblast lineage precursors), and <strong class="term">multinucleated giant cells</strong>, which are reactive osteoclasts rather than the neoplastic population — notably, the tumor's name describes the reactive component, not the neoplastic one.</p>
+<div class="formula"><span class="fx-label">IMPORTANT POINT:</span> Although classified as benign, giant cell tumor of bone can metastasize to the lungs — a reminder that "benign" doesn't always mean "cannot spread."</div>
+<p class="body">The neoplastic mononuclear cells express <strong class="term">RANKL</strong>, which binds RANK on osteoclast precursors and drives the recruitment/activation of the reactive giant cells (osteoclasts).</p>
+<p class="subhead">Aneurysmal Bone Cyst</p>
+<ul class="body-list">
+<li>Common in the first two decades of life</li>
+<li><strong class="term">Location:</strong> metaphysis (epiphyseal involvement is uncommon, as with most bone tumors)</li>
+<li><strong class="term">Complications:</strong> pain from expansion pushing on the periosteum; can cause partial nerve compression depending on location (particularly relevant in the vertebral column, where it can readily pinch a nerve)</li>
+</ul>
+<p class="body">As the name suggests — a large, dilated, blood-filled cystic space within the bone. Microscopically shows reactive changes: woven bone, fibroblasts and septa, and sometimes "blue bone" (densely calcified matrix).</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t20"></div>
+</article>
+
+<article class="topic" id="t21">
+<div class="topic-num">SECTION 21</div>
+<h3>Ewing Sarcoma Family Tumors</h3>
+<p class="body">This category now combines what used to be called <strong class="term">Ewing sarcoma</strong> and <strong class="term">primitive neuroectodermal tumor (PNET)</strong>, now grouped together as "Ewing sarcoma family tumors."</p>
+<ul class="body-list">
+<li><strong class="term">~80% occur in patients under age 20</strong> — mostly a tumor of children and teens</li>
+<li><strong class="term">Race:</strong> most commonly affects White patients; rare in Black or Asian patients</li>
+<li><strong class="term">Location:</strong> notably found in the <strong class="term">diaphysis</strong> of long bones (e.g., femur), unlike most bone tumors which favor the metaphysis; also occurs in flat bones such as the pelvis</li>
+<li><strong class="term">Presentation:</strong> painful, enlarging mass — since these are small round cells that must divide rapidly to remain a large mass, they tend to expand against bone and cause pain relatively quickly</li>
+</ul>
+<p class="subhead">Morphology</p>
+<p class="body">A <strong class="term">small, round, blue cell tumor</strong> — can show <strong class="term">Homer Wright rosettes</strong> (a circle of cells around central fibrillary material, similar to what's seen in some CNS tumors), mitotic figures, and geographic necrosis.</p>
+<p class="subhead">Molecular</p>
+<p class="body">Characteristic <strong class="term">t(11;22)</strong> translocation, fusing the <strong class="term">EWSR1</strong> gene to the <strong class="term">FLI1</strong> gene.</p>
+<div class="formula"><span class="fx-label">LOCATION AS A DIAGNOSTIC CLUE:</span> Ewing sarcoma is one of the few tumors classically associated with the diaphysis — most bone tumors favor the metaphysis or epiphysis, so diaphyseal location plus a young patient should raise this on the differential.</div>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t21"></div>
+</article>
+
+<article class="topic" id="t22">
+<div class="topic-num">SECTION 22</div>
+<h3>Plasmacytoma, Multiple Myeloma & Metastatic Bone Tumors</h3>
+<p class="subhead">Plasmacytoma vs. Multiple Myeloma</p>
+<p class="body">Both are derived from <strong class="term">plasma cells</strong>. <strong class="term">Multiple myeloma</strong> behaves more like a leukemic process — malignant plasma cells are found throughout the bone marrow, with resulting <strong class="term">osteolytic lesions</strong>. A <strong class="term">plasmacytoma</strong> is a solitary mass composed of plasma cells rather than a marrow-wide process.</p>
+<div class="formula"><span class="fx-label">HIGH-YIELD FACT:</span> Multiple myeloma is the single most common bone tumor, excluding metastatic disease.</div>
+<p class="body">On histology, an individual malignant plasma cell looks the same whether it's from a plasmacytoma or multiple myeloma — clinical context (solitary mass vs. diffuse marrow involvement) is what distinguishes them, not the cell morphology itself: eccentric nucleus, clock-face chromatin, and a perinuclear eosinophilic zone (the Golgi "hof").</p>
+<p class="subhead">Metastatic Tumors to Bone</p>
+<p class="body">In adults, the most common primary sources are <strong class="term">prostate, breast, kidney, and lung</strong> — together accounting for about 75% of bony metastases. (Notably, colon cancer is not on this high-yield list.)</p>
+<p class="body">In children, common sources include <strong class="term">neuroblastoma, Wilms tumor, osteosarcoma, Ewing sarcoma, and rhabdomyosarcoma</strong>.</p>
+<ul class="body-list">
+<li>Metastases are most often found in the <strong class="term">axial skeleton</strong></li>
+<li>Can be <strong class="term">osteoblastic</strong> or <strong class="term">osteolytic</strong> — <strong class="term">prostate</strong> is classically associated with osteoblastic metastases; kidney, lung, and GI primaries are more typically osteolytic</li>
+<li>Osteoblastic metastases work by tumor cells secreting substances that upregulate <strong class="term">RANKL</strong>, which stimulates osteoblast activity</li>
+<li><strong class="term">Complication:</strong> pathologic fracture at the site of metastatic bone disease</li>
+</ul>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t22"></div>
+</article>
+
+<article class="topic" id="t23">
+<div class="topic-num">SECTION 23</div>
+<h3>Fibrous Cortical Defect / NOF & Fibrous Dysplasia</h3>
+<p class="subhead">Fibrous Cortical Defect and Non-Ossifying Fibroma</p>
+<ul class="body-list">
+<li>Most common in children — found in roughly 30% of children age 2 and older</li>
+<li>Often small (around 0.5 cm), so easily missed incidentally</li>
+<li><strong class="term">Distinction between the two is based on size:</strong> smaller lesions are called <strong class="term">fibrous cortical defect</strong>; larger lesions are called <strong class="term">non-ossifying fibroma (NOF)</strong></li>
+<li><strong class="term">Microscopic:</strong> fibroblasts with associated macrophages — the same appearance in both</li>
+</ul>
+<p class="subhead">Fibrous Dysplasia</p>
+<p class="body">Best understood as a <strong class="term">focal failure of normal bone development</strong> rather than a true tumor — all the components of bone are present, but they're disorganized and immature. The bone is essentially "trying" to form normally but can't complete the process correctly.</p>
+<ul class="body-list">
+<li><strong class="term">Demographics:</strong> roughly M = F; early adolescence</li>
+<li>Can be <strong class="term">monostotic</strong> (one bone) or <strong class="term">polyostotic</strong> (multiple bones)</li>
+</ul>
+<div class="formula"><span class="fx-label">DON'T MEMORIZE THE EXHAUSTIVE LOCATION LIST:</span> Dr. Kemp explicitly said not to memorize a long list of possible locations for fibrous dysplasia — knowing the overall concept and the associated syndromes below matters more than the location list.</div>
+<p class="subhead">Associated Syndromes</p>
+<ul class="body-list">
+<li><strong class="term">Mazabraud syndrome:</strong> fibrous dysplasia plus myxomas (myxomas appear myxoid/bluish on histology)</li>
+<li><strong class="term">McCune-Albright syndrome:</strong> polyostotic fibrous dysplasia plus café-au-lait skin spots and endocrine abnormalities — most commonly <strong class="term">precocious puberty</strong></li>
+</ul>
+<p class="body">A <strong class="term">gain-of-function mutation in GNAS1</strong> produces a constitutively active G protein that promotes cellular proliferation and disrupts normal osteoblast differentiation — consistent with the idea that all the components to make bone are present, but differentiation/maturation is disrupted.</p>
+<div class="formula"><span class="fx-label">TIMING DETERMINES DISTRIBUTION:</span> If the GNAS1 mutation occurs during embryogenesis (before the mutant cells have a chance to become restricted to one area), the result is the polyostotic form. If it occurs after the skeletal system has already formed, the mutation is confined to a single site, producing the monostotic form.</div>
+<p class="subhead">Morphology</p>
+<p class="body"><strong class="term">Gross:</strong> intramedullary location, described as "gritty." <strong class="term">Microscopic:</strong> curvilinear trabeculae of woven bone (with cells embedded, but lacking the organized lamellar pattern of mature bone) and minimal osteoblastic rimming — normally you'd expect osteoblasts lining newly formed woven bone, but here there's little to no rimming. The trabeculae are classically described as resembling <strong class="term">Chinese characters</strong>. Cartilage nodules, cystic change, and hemorrhage can also be seen.</p>
+<p class="subhead">Symptoms</p>
+<p class="body">The monostotic form is often asymptomatic. Depending on location, fibrous dysplasia can cause nerve impingement or pain, and — like any bone lesion — the affected bone is weaker and more prone to <strong class="term">fracture</strong>. The polyostotic form more commonly causes fractures and deformities, and can rarely undergo <strong class="term">malignant transformation into a sarcoma</strong>.</p>
+<div class="qs-label">Practice Questions</div>
+<div class="questions" id="q-t23"></div>
+</article>
 
-  <table>
-    <tr><th></th><th>Rheumatoid Arthritis</th><th>Juvenile Rheumatoid Arthritis</th></tr>
-    <tr><td><strong>Age</strong></td><td>Presents 20s to 40s</td><td>Presents &lt;16 years of age</td></tr>
-    <tr><td><strong>Involvement of joints</strong></td><td>Polyarthritis</td><td>Oligoarthritis</td></tr>
-    <tr><td><strong>Systemic disease</strong></td><td>Less frequent systemic disease</td><td>More frequent systemic disease</td></tr>
-    <tr><td><strong>Location</strong></td><td>Affects small joints more than large joints</td><td>Affects large joints more than small joints</td></tr>
-    <tr><td><strong>Microscopic findings</strong></td><td>Rheumatoid nodules and RF often present</td><td>Rheumatoid nodules and RF absent</td></tr>
-    <tr><td><strong>ANA antibodies</strong></td><td>Often anti-nuclear antibody (ANA) positive</td><td>—</td></tr>
-    <tr><td><strong>Risk factors</strong></td><td>HLA and PTPN22 variants—risk factor</td><td>HLA and PTPN22 variants—risk factor</td></tr>
-    <tr><td><strong>Pathogenesis</strong></td><td>TH1 and TH17 cells mediate disease</td><td>TH1 and TH17 cells mediate disease</td></tr>
-  </table>
-
-  <div class="callout">
-    <span class="label">Pattern to remember</span>
-    Adult RA = polyarticular, small joints, nodules and RF often present. Juvenile RA = oligoarticular, large joints, more systemic disease, but nodules/RF typically absent. Risk factors and T-cell pathogenesis are shared between the two.
-  </div>
-
-  <div class="quiz" data-answer="2">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">Which feature favors juvenile RA over adult-onset rheumatoid arthritis?</div>
-    <div class="options">
-      <button class="opt">High rheumatoid factor titer</button>
-      <button class="opt">Symmetric small-joint polyarthritis</button>
-      <button class="opt">Fewer joints, more systemic disease</button>
-      <button class="opt">Presence of rheumatoid nodules</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 4: SERONEGATIVE SPONDYLOARTHROPATHIES -->
-<section class="section" id="s4">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Seronegative Spondyloarthropathies</h2>
-
-  <h3>General Features</h3>
-  <ul>
-    <li><strong>Absence of rheumatoid factor</strong> — hence "seronegative"</li>
-    <li>Pathologic changes are in the <strong>ligaments</strong>, not the synovium (unlike RA)</li>
-    <li>Involve the <strong>sacroiliac joints</strong></li>
-    <li>Associated with <strong>HLA-B27</strong></li>
-    <li>Bony proliferation leads to <strong>ankylosis</strong> (joint fusion) — hence "ankylosing" spondylitis</li>
-  </ul>
-
-  <h3>Ankylosing Spondylitis</h3>
-  <p>The prototype/classic form — the one to know if you only know one. Affects the sacroiliac joints, but also peripheral joints: hips, knees, and shoulders.</p>
-
-  <h3>Reactive Arthritis</h3>
-  <p>Classic triad: <strong>arthritis, nongonococcal urethritis or cervicitis, and conjunctivitis</strong>.</p>
-  <ul>
-    <li><strong>M > F</strong> — unusual for an autoimmune-type reaction, but this is the pattern seen; typically 20s–30s; about <strong>80% HLA-B27 positive</strong></li>
-    <li><strong>Etiology:</strong> an autoimmune reaction to a preceding infection — <em>Chlamydia, Shigella, Salmonella, Yersinia,</em> or <em>Campylobacter</em></li>
-    <li>Affects the sacroiliac joint (as with ankylosing spondylitis), plus knees, ankles, and feet</li>
-  </ul>
-
-  <div class="quiz" data-answer="1">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A 26-year-old male develops arthritis, urethritis, and conjunctivitis weeks after a GI infection, and is HLA-B27 positive. Which organism is a classic trigger for this presentation?</div>
-    <div class="options">
-      <button class="opt">Staphylococcus aureus</button>
-      <button class="opt">Shigella</button>
-      <button class="opt">Borrelia burgdorferi</button>
-      <button class="opt">Haemophilus influenzae</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 5: INFECTIOUS ARTHRITIS -->
-<section class="section" id="s5">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Infectious Arthritis</h2>
-
-  <h3>Mechanisms of Formation</h3>
-  <ul>
-    <li>Hematogenous dissemination</li>
-    <li>Direct inoculation (e.g., trauma penetrating the joint)</li>
-    <li>Contiguous spread from soft tissue or from osteomyelitis</li>
-  </ul>
-  <div class="callout">
-    <span class="label">Note</span>
-    Joint infection (arthritis) and bone infection (osteomyelitis) are distinct entities — a joint infection doesn't necessarily mean the bone is involved, and vice versa, even though one can spread contiguously into the other.
-  </div>
-
-  <h3>Suppurative (Bacterial) Arthritis — Organisms by Age</h3>
-  <ul>
-    <li><strong>H. influenzae</strong> — children &lt;2 years of age, from epiphyseal osteomyelitis</li>
-    <li><strong>Staphylococcus aureus</strong> — older children and adults (the same organism that's the most common cause of osteomyelitis in this age group)</li>
-    <li><strong>Gonococcal</strong> — late adolescence/early adulthood (risk factors: sexually active; deficiencies of complement C5–C7 and C9)</li>
-    <li><strong>Salmonella</strong> — patients with sickle cell disease (the same pairing seen with osteomyelitis)</li>
-  </ul>
-  <p><strong>Symptoms:</strong> painful, warm, swollen joint (features of acute inflammation) — usually involves <strong>only one joint</strong> (though hematogenous spread could occasionally involve more than one).</p>
-
-  <h3>Lyme Arthritis</h3>
-  <ul>
-    <li><strong>Early localized:</strong> skin lesion</li>
-    <li><strong>Early disseminated:</strong> skin, cranial nerve involvement, heart, meninges (a viral-type meningitis); arthritis, especially of the knee — this arthritis is <strong>migratory</strong>, moving from joint to joint, and lasts weeks to months</li>
-    <li><strong>Late disseminated:</strong> chronic arthritis, plus nonspecific symptoms — fatigue, cognitive complaints (which can be quite challenging for patients)</li>
-  </ul>
-
-  <div class="quiz" data-answer="2">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A patient with sickle cell disease develops a swollen, painful knee, and blood cultures grow a Gram-negative rod. Which organism is classically associated with this pairing?</div>
-    <div class="options">
-      <button class="opt">Staphylococcus aureus</button>
-      <button class="opt">Neisseria gonorrhoeae</button>
-      <button class="opt">Salmonella species</button>
-      <button class="opt">Haemophilus influenzae</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 6: GOUT -->
-<section class="section" id="s6">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Gout</h2>
-
-  <h3>Basic Features</h3>
-  <p>Arthritis due to deposition of <strong>uric acid (urate) crystals</strong>.</p>
-  <h4>Mechanism of Hyperuricemia</h4>
-  <ul>
-    <li><strong>Under-excretion (main mechanism in primary gout):</strong> urate is normally filtered by the glomerulus and reabsorbed by the proximal convoluted tubule, with only a small amount excreted — if too little is excreted, urate accumulates</li>
-    <li><strong>Overproduction (less common mechanism):</strong> from synthesis of purine nucleotides, with uric acid as an end product; also seen with partial or complete deficiency of <strong>HGPRT</strong> (hypoxanthine-guanine phosphoribosyltransferase), which interrupts the purine salvage pathway</li>
-    <li><strong>Secondary gout:</strong> tumor lysis in leukemias/lymphomas — high cell turnover means a lot of DNA/purine breakdown, producing a lot of uric acid</li>
-  </ul>
-
-  <h3>Pathogenesis</h3>
-  <p>Hyperuricemia (plasma urate &gt; 6.8 mg/dL) → urate deposits trigger inflammation. Macrophages and neutrophils engulf the crystals and activate the <strong>inflammasome</strong>; crystals can also directly damage lysosomes, causing leakage of their contents and further joint damage. Repeated attacks lead to <strong>tophi</strong> — aggregates of crystals surrounded by inflammatory tissue.</p>
-  <div class="clinical-pearl">
-    <span class="label">Important point</span>
-    Only about <strong>10% of people with hyperuricemia actually develop gout</strong> — hyperuricemia alone is not sufficient. Age, genetic predisposition, alcohol consumption, obesity, and certain drugs also contribute.
-  </div>
-
-  <h3>Morphology</h3>
-  <ul>
-    <li><strong>Acute arthritis:</strong> urate crystals — needle-shaped and <strong>negatively birefringent</strong> — plus an inflammatory infiltrate</li>
-    <li><strong>Chronic tophaceous arthritis:</strong> chalky deposits on the synovium; hyperplastic, fibrotic, inflamed synovium (a pannus-like response, similar in concept to RA)</li>
-    <li><strong>Tophi:</strong> uric acid crystals surrounded by a foreign body giant cell reaction</li>
-    <li><strong>Gout can also affect the kidney:</strong> uric acid is one of the types of kidney stones, and gout can also lead to pyelonephritis</li>
-  </ul>
-  <div class="kemp-story">
-    <span class="label">From lecture</span>
-    Dr. Kemp described sectioning into a bump on a patient's toe expecting an abscess ("my first thought was actually pus") — it turned out to be a gouty tophus instead.
-  </div>
-
-  <h3>Symptoms</h3>
-  <ul>
-    <li>More common in males; typically presents after age 30</li>
-    <li>Sudden-onset joint pain associated with hyperemia and warmth; usually <strong>monoarticular</strong>, and about <strong>50% involve the first metatarsophalangeal joint</strong> (the great toe)</li>
-    <li>If untreated, attacks recur and the disease becomes polyarticular</li>
-    <li>Chronic tophaceous gout develops about <strong>12 years after</strong> the first acute attack</li>
-  </ul>
-
-  <div class="quiz" data-answer="1">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">Joint fluid aspirate shows needle-shaped, negatively birefringent crystals. What is the diagnosis?</div>
-    <div class="options">
-      <button class="opt">Pseudogout</button>
-      <button class="opt">Gout</button>
-      <button class="opt">Septic arthritis</button>
-      <button class="opt">Ankylosing spondylitis</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 7: PSEUDOGOUT -->
-<section class="section" id="s7">
-  <div class="eyebrow">Objectives — Pt. 2</div>
-  <h2 class="title">Pseudogout (CPPD)</h2>
-  <p><strong>Calcium pyrophosphate crystal deposition disease</strong> — the second major crystal arthropathy.</p>
-
-  <h3>General Features</h3>
-  <ul>
-    <li>&gt;50 years of age; <strong>M = F</strong> (unlike gout, which favors males)</li>
-    <li><strong>Forms:</strong> sporadic; hereditary (autosomal dominant mutation in a pyrophosphate transport channel); secondary (joint damage, hyperparathyroidism, hemochromatosis, diabetes mellitus)</li>
-    <li><strong>Pathogenesis:</strong> basically similar to gout — activation of the inflammasome</li>
-  </ul>
-  <div class="callout">
-    <span class="label">Demographics are a guide, not a rule</span>
-    Dr. Kemp emphasized that demographic patterns (e.g., roughly equal M:F in pseudogout) are useful guides, but every patient is an individual — a classic presentation in an atypical demographic doesn't rule out the disease.
-  </div>
-
-  <h3>Morphology</h3>
-  <ul>
-    <li>Crystals develop near/in the articular cartilage, menisci, and intervertebral discs; they can rupture and seed the joint space</li>
-    <li>Chalky white and friable deposits</li>
-    <li>Crystals are <strong>rhomboid</strong> and <strong>positively birefringent</strong> (contrast with gout's negative birefringence)</li>
-  </ul>
-
-  <h3>Symptoms</h3>
-  <p>Often asymptomatic, but can produce an acute, subacute, or chronic arthritis lasting days to weeks; can be monoarticular or polyarticular. Affects the <strong>knees, wrists, elbows, shoulders, and ankles</strong> — peripheral joints, not the major weight-bearing hips (similar distribution pattern to gout once it becomes polyarticular).</p>
-
-  <h3>Gout vs. Pseudogout</h3>
-  <table>
-    <tr><th></th><th>Gout</th><th>Pseudogout</th></tr>
-    <tr><td><strong>Crystal</strong></td><td>Monosodium urate</td><td>Calcium pyrophosphate</td></tr>
-    <tr><td><strong>Shape / birefringence</strong></td><td>Needle-shaped, negatively birefringent</td><td>Rhomboid, positively birefringent</td></tr>
-    <tr><td><strong>Demographics</strong></td><td>M &gt; F; typically &gt;30 years old</td><td>M = F; typically &gt;50 years old</td></tr>
-    <tr><td><strong>Classic distribution</strong></td><td>Often monoarticular at onset — 1st MTP (great toe) in ~50%</td><td>Knees, wrists, elbows, shoulders, ankles</td></tr>
-  </table>
-
-  <div class="quiz" data-answer="3">
-    <div class="qlabel">Board-Style Vignette</div>
-    <div class="qtext">A 52-year-old male presents to an acute care clinic with pain in his right wrist and elbow that began one week ago. The articular cartilage shows positively birefringent crystals. What is the most likely diagnosis?</div>
-    <div class="options">
-      <button class="opt">Septic arthritis</button>
-      <button class="opt">Lyme disease</button>
-      <button class="opt">Gout</button>
-      <button class="opt">Pseudo-gout</button>
-      <button class="opt">Seronegative spondyloarthropathy</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 8: JOINT MASSES -->
-<section class="section" id="s8">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Ganglion & Synovial Cysts; Tenosynovial Giant Cell Tumor</h2>
-
-  <h3>Ganglion Cyst</h3>
-  <ul>
-    <li><strong>Location:</strong> commonly around the wrist</li>
-    <li>Firm, fluctuant, pea-sized, translucent nodule</li>
-    <li><strong>Mechanism:</strong> cystic or myxoid degeneration of connective tissue — there is <strong>no true cell lining</strong>, so it's technically a pseudocyst even though it's called a "cyst"</li>
-  </ul>
-  <div class="kemp-story">
-    <span class="label">From lecture</span>
-    Ganglion cysts used to be called "Bible cysts" because an old-school treatment was to smash the wrist with a large book (a Bible) to rupture the cyst and let the body resolve it — Dr. Kemp noted the old treatment may have worked about as well as some newer ones.
-  </div>
-
-  <h3>Synovial Cyst</h3>
-  <ul>
-    <li><strong>Mechanism:</strong> herniation of the synovium through the joint capsule, or enlargement of a bursa</li>
-    <li>Classic example: <strong>Baker cyst</strong>, in the popliteal space</li>
-  </ul>
-
-  <h3>Tenosynovial Giant Cell Tumor</h3>
-  <p>Two forms — <strong>localized</strong> and <strong>diffuse</strong>. The diffuse form is called <strong>pigmented villonodular synovitis</strong> because it's inflammation of the synovium that appears dark/pigmented and clustered, like a bunch of grapes.</p>
-  <ul>
-    <li><strong>Location:</strong> localized → hand; diffuse → large joints</li>
-    <li><strong>Molecular:</strong> t(1;2) — fuses the type VI collagen α-3 promoter to the <strong>M-CSF (colony stimulating factor for macrophages) gene</strong>, driving macrophage proliferation</li>
-    <li><strong>Morphology:</strong> localized = a nodule attached to a tendon sheath; diffuse = red-brown, folded, fingerlike projections/nodules of synovium</li>
-    <li>Abundant macrophages, some containing hemosiderin and lipid (foamy) from associated blood breakdown products; macrophages can fuse into multinucleated giant cells</li>
-  </ul>
-  <div class="kemp-story">
-    <span class="label">From lecture</span>
-    Dr. Kemp recalled a case from residency — a "giant cell tumor of tendon sheath" from the hand — where a colleague identified the diagnosis purely from knowing it came from the hand, without even needing to look through the microscope.
-  </div>
-
-  <div class="quiz" data-answer="0">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A translocation fusing a collagen promoter to the M-CSF gene, driving macrophage proliferation, is characteristic of which entity?</div>
-    <div class="options">
-      <button class="opt">Tenosynovial giant cell tumor</button>
-      <button class="opt">Ganglion cyst</button>
-      <button class="opt">Nodular fasciitis</button>
-      <button class="opt">Baker cyst</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 9: LIPOMA & LIPOSARCOMA -->
-<section class="section" id="s9">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Lipoma & Liposarcoma</h2>
-
-  <h3>Soft Tissue Tumors — General</h3>
-  <p>Except for skeletal-muscle-derived neoplasms (usually malignant — e.g., rhabdomyosarcoma), <strong>benign soft tissue tumors outnumber malignant ones roughly 100:1</strong>. Even so, soft tissue tumors cause a disproportionate share of deaths: less than 1% of cancers, but about 2% of all cancer deaths. Most are sporadic; some occur as part of a syndrome (NF1, Gardner syndrome, Li-Fraumeni), and some are secondary to radiation, burns, or toxins.</p>
-
-  <h3>Lipoma</h3>
-  <p>Benign tumor of fat. Grossly, a well-encapsulated mass of mature adipose tissue, most often subcutaneous — trunk or extremities. Extremely common; on surgical pathology these are a routine, high-volume specimen.</p>
-  <div class="clinical-pearl">
-    <span class="label">Clinical pearl</span>
-    Subcutaneous lipomas are common and behave benignly. But when a fatty mass arises <strong>inside a body cavity</strong> (retroperitoneum, mesentery, chest wall, etc.), it is <strong>rarely a true lipoma</strong> — it should be treated as at least an atypical lipoma, if not a well-differentiated liposarcoma.
-  </div>
-  <div class="kemp-story">
-    <span class="label">From lecture</span>
-    Dr. Kemp described a case with a roughly 2–3 kg fatty mesenteric mass that grossly resembled adipose tissue but had areas of fibrosis and necrosis — sectioning revealed it was a well-differentiated liposarcoma, illustrating why location changes the default assumption.
-  </div>
-
-  <h3>Liposarcoma — the Malignant Fat Tumor</h3>
-  <ul>
-    <li><strong>Well-differentiated:</strong> adipocytes with scattered atypical spindle cells in the interstitium</li>
-    <li><strong>Myxoid liposarcoma:</strong> basophilic extracellular matrix, branching capillaries, and primitive adipocytes that resemble fetal fat</li>
-    <li><strong>Dedifferentiated liposarcoma:</strong> a low-grade (well-differentiated), relatively low-grade component admixed with a higher-grade, spindle-cell component</li>
-    <li><strong>Pleomorphic liposarcoma:</strong> anaplastic cells, bizarre nuclei, mitotic figures — the most aggressive variant</li>
-  </ul>
-  <p>Sarcomas characteristically spread <strong>hematogenously</strong> rather than via lymphatics (unlike carcinomas, which spread via lymph nodes) — so a patient can have widespread metastatic liposarcoma (e.g., to the lungs) with negative lymph nodes.</p>
-
-  <h4>Molecular Associations</h4>
-  <ul>
-    <li><strong>Well-differentiated liposarcoma:</strong> amplification of 12q13–q15 (the <strong>MDM2 gene</strong>), which normally inhibits p53</li>
-    <li><strong>Myxoid liposarcoma:</strong> t(12;16), which arrests adipose tissue differentiation (this is why the tumor resembles primitive/fetal fat rather than mature adipocytes)</li>
-    <li><strong>Pleomorphic liposarcoma:</strong> complex, nonspecific karyotypes</li>
-  </ul>
-
-  <div class="quiz" data-answer="2">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A large fatty mass is found in the retroperitoneum. Which statement is most accurate?</div>
-    <div class="options">
-      <button class="opt">It is almost certainly a benign lipoma</button>
-      <button class="opt">It cannot be classified without molecular testing</button>
-      <button class="opt">It is presumed atypical or a liposarcoma</button>
-      <button class="opt">It is diagnostic of pleomorphic liposarcoma type</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 10: NODULAR FASCIITIS -->
-<section class="section" id="s10">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Nodular Fasciitis</h2>
-  <p>A proliferation of fibroblasts and myofibroblasts that is <strong>benign but can easily be mistaken for a sarcoma</strong> — it has historically been misdiagnosed as a malignant neoplasm, and there's some debate over whether it's truly a neoplasm at all versus a pronounced reactive process.</p>
-
-  <ul>
-    <li><strong>Demographics:</strong> young adults</li>
-    <li><strong>1/4 to 1/2 of cases have a preceding history of trauma</strong>, with rapid growth over the following weeks to months — consistent with an exuberant reactive process</li>
-    <li><strong>Molecular:</strong> t(17;22) — clonal, but self-limited (so despite being clonal — which leans toward "neoplasm" — it behaves more like a reactive process)</li>
-  </ul>
-
-  <h3>Morphology</h3>
-  <ul>
-    <li><strong>Gross:</strong> usually &lt;5 cm, well circumscribed</li>
-    <li><strong>Microscopic:</strong> very cellular, resembling cultured fibroblasts; shows a gradient from cellular/loose/myxoid to fibrous</li>
-    <li>Can show a degree of pleomorphism and <strong>prominent mitotic figures</strong> — this is exactly what makes it mimic a sarcoma histologically; margins can also appear infiltrative</li>
-    <li><strong>Location:</strong> often upper extremities</li>
-  </ul>
-
-  <div class="callout">
-    <span class="label">Why it matters</span>
-    Nodular fasciitis has a real history of being misdiagnosed as a malignant sarcoma because of its cellularity, mitotic activity, and sometimes infiltrative-appearing margins. Recognizing the clinical context — young adult, rapid growth after trauma, small size, upper extremity — helps avoid that trap.
-  </div>
-
-  <div class="quiz" data-answer="1">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A young adult develops a rapidly growing, &lt;5 cm nodule on the forearm several weeks after minor trauma. Biopsy shows a very cellular fibroblastic proliferation with scattered mitotic figures. What is the most likely diagnosis?</div>
-    <div class="options">
-      <button class="opt">Well-differentiated liposarcoma</button>
-      <button class="opt">Nodular fasciitis</button>
-      <button class="opt">Tenosynovial giant cell tumor</button>
-      <button class="opt">Pleomorphic liposarcoma</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 11: FIBROMATOSIS -->
-<section class="section" id="s11">
-  <div class="eyebrow">Objectives — Pt. 3</div>
-  <h2 class="title">Fibromatosis</h2>
-  <p>Fibromatoses are masses formed essentially by fibrous tissue — think of them as an overgrowth of scar-like tissue. There are two forms: <strong>superficial</strong> and <strong>deep</strong>.</p>
-
-  <h3>Superficial Fibromatosis</h3>
-  <ul>
-    <li>Examples: <strong>palmar fibromatosis</strong> (causes Dupuytren contractures) and <strong>penile fibromatosis</strong> (Peyronie disease)</li>
-    <li>An ill-defined mass caused essentially by scarring</li>
-    <li><strong>M > F</strong> — likely reflecting the contribution of Peyronie disease to that skew</li>
-    <li><strong>Morphology:</strong> fascicles of fibroblasts with associated collagen</li>
-  </ul>
-
-  <h3>Deep Fibromatosis (Desmoid Tumors)</h3>
-  <ul>
-    <li><strong>F > M</strong> (opposite sex predominance from the superficial form)</li>
-    <li><strong>Infiltrate but do not metastasize</strong> — however, infiltration into surrounding tissue can still make them difficult to resect and cause real problems for the patient, even without metastatic potential</li>
-    <li><strong>Molecular:</strong> mutations in <strong>CTNNB1 (beta-catenin)</strong> or <strong>APC</strong> — the same genes discussed in the GI tract (APC/beta-catenin/Wnt pathway)</li>
-    <li><strong>Morphology:</strong> interlocking spindle cells with relatively bland nuclei and collagen</li>
-  </ul>
-
-  <div class="clinical-pearl">
-    <span class="label">Diagnostic reality check</span>
-    Dr. Kemp was candid that many soft tissue spindle cell tumors look very similar to each other under the microscope — pathologists lean heavily on clinical history and immunohistochemistry to sort them out, not gestalt alone.
-  </div>
-
-  <div class="quiz" data-answer="1">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A deep fibromatosis (desmoid tumor) is notable for which behavior?</div>
-    <div class="options">
-      <button class="opt">Metastasizes early via lymphatics</button>
-      <button class="opt">Infiltrates locally but does not metastasize</button>
-      <button class="opt">Remains encapsulated and non-invasive</button>
-      <button class="opt">Spreads hematogenously to the lungs</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 12: RHABDOMYOSARCOMA -->
-<section class="section" id="s12">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Rhabdomyosarcoma</h2>
-  <p>A malignant tumor of skeletal muscle — three main forms: <strong>embryonal (including botryoid)</strong>, <strong>alveolar</strong>, and <strong>pleomorphic</strong>.</p>
-
-  <table>
-    <tr><th></th><th>Embryonal / Botryoid</th><th>Alveolar</th><th>Pleomorphic</th></tr>
-    <tr><td><strong>Typical age</strong></td><td>Young children (roughly 1–5 years)</td><td>Older children/teens (roughly 5–15 years)</td><td>Adults</td></tr>
-    <tr><td><strong>Molecular</strong></td><td>No characteristic translocation emphasized</td><td>Fusion of <strong>PAX3</strong> (or PAX7) with <strong>FOXO1</strong>; t(2;13) or t(1;13)</td><td>Genetically heterogeneous — no single defining alteration</td></tr>
-    <tr><td><strong>Morphology</strong></td><td>Botryoid form: grape-like clusters protruding from the vagina (or bladder) in an infant</td><td>Cells arranged in nests divided by septa, resembling pulmonary alveoli</td><td>Variable cell size/shape; can be multinucleate, eosinophilic cells that don't resemble skeletal muscle grossly</td></tr>
-  </table>
-
-  <div class="callout">
-    <span class="label">Why the molecular finding matters</span>
-    <strong>PAX3</strong> normally helps initiate skeletal muscle differentiation. The alveolar rhabdomyosarcoma fusion disrupts PAX3 function and interferes with that differentiation — which is exactly why alveolar rhabdomyosarcoma looks almost nothing like skeletal muscle under the microscope.
-  </div>
-
-  <p>Rhabdomyosarcoma can show <strong>cross striations</strong> (from actin-myosin interaction) — a classic, though not universally present, finding, most associated with the embryonal form. Because pleomorphic rhabdomyosarcoma can look like essentially any undifferentiated malignant tumor, <strong>desmin and myogenin</strong> immunohistochemistry are used to confirm a skeletal muscle origin.</p>
-
-  <div class="kemp-story">
-    <span class="label">From lecture</span>
-    Dr. Kemp recalled an OB/GYN colleague's line about sarcoma botryoides: "this is a tumor you will have to learn for every single test you ever take, and you'll never in your entire life see" — it's rare, but very characteristic when it does show up.
-  </div>
-
-  <div class="quiz" data-answer="0">
-    <div class="qlabel">Board-Style Vignette</div>
-    <div class="qtext">A 2-year-old girl is brought to the emergency department after her mother discovered a grape-like mass protruding from the vagina while bathing her. What is the most likely diagnosis?</div>
-    <div class="options">
-      <button class="opt">Embryonal (botryoid) rhabdomyosarcoma</button>
-      <button class="opt">Alveolar rhabdomyosarcoma</button>
-      <button class="opt">Pleomorphic rhabdomyosarcoma</button>
-      <button class="opt">Synovial sarcoma</button>
-      <button class="opt">Granulation tissue from vaginal infection</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 13: LEIOMYOMA & LEIOMYOSARCOMA -->
-<section class="section" id="s13">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Leiomyoma & Leiomyosarcoma</h2>
-
-  <h3>Leiomyoma</h3>
-  <p>A benign tumor of smooth muscle. By far the most common location is the <strong>uterus</strong> — the familiar "uterine fibroid." When not uterine, a soft tissue leiomyoma is most often found in the <strong>extremities</strong>.</p>
-  <ul>
-    <li><strong>Gross:</strong> a well-circumscribed nodule, tan-white to white-tan, firm to palpation</li>
-    <li><strong>Microscopic:</strong> interlocking, intersecting fascicles of spindle cells; bland nuclei, minimal to no pleomorphism, few mitotic figures (consistent with a benign process)</li>
-    <li><strong>Molecular:</strong> loss of function of <strong>fumarate hydratase (FH)</strong> — an enzyme in the Krebs cycle</li>
-  </ul>
-
-  <h3>Leiomyosarcoma</h3>
-  <p>The malignant smooth muscle tumor.</p>
-  <ul>
-    <li><strong>Gross:</strong> infiltrative, unlike the well-circumscribed leiomyoma</li>
-    <li><strong>Microscopic:</strong> similar interlocking fascicle pattern to leiomyoma, but with <strong>pleomorphism and mitotic activity</strong> — the expected malignant-versus-benign distinction</li>
-    <li><strong>Demographics/location:</strong> older patients (roughly 40s–60s); common sites include <strong>retroperitoneum</strong> and <strong>thigh</strong>, in addition to the uterus</li>
-    <li><strong>Immunohistochemistry:</strong> <strong>actin, desmin, and caldesmon</strong> are good markers of smooth muscle origin</li>
-  </ul>
-
-  <div class="callout">
-    <span class="label">Compare on histology</span>
-    Leiomyosarcoma is markedly more cellular than leiomyoma, with hyperchromatic, enlarged nuclei, a higher nuclear-to-cytoplasmic ratio, pleomorphism, and identifiable mitotic figures — leiomyoma should show essentially none of this.
-  </div>
-
-  <div class="quiz" data-answer="2">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">Which feature would favor leiomyosarcoma over leiomyoma on biopsy?</div>
-    <div class="options">
-      <button class="opt">Well-circumscribed border</button>
-      <button class="opt">Bland, uniform nuclei</button>
-      <button class="opt">Pleomorphism and mitotic activity</button>
-      <button class="opt">Location in the uterus</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 14: SYNOVIAL SARCOMA -->
-<section class="section" id="s14">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Synovial Sarcoma</h2>
-  <p>The name is actually a <strong>misnomer</strong> — it is not derived from synovium. It accounts for roughly <strong>10% of soft tissue sarcomas</strong>, making it one of the more common sarcoma subtypes, and typically presents at <strong>age 20–40</strong>.</p>
-  <ul>
-    <li><strong>Location:</strong> usually the <strong>lower extremity</strong></li>
-    <li><strong>Molecular:</strong> characteristic <strong>t(X;18)</strong> — fusion of the <strong>SS18 (SYT) gene</strong> with one of the SSX genes, leading to loss of normal cell-cycle control</li>
-  </ul>
-
-  <h3>Morphology</h3>
-  <ul>
-    <li><strong>Biphasic (more common):</strong> gland-like structures within a spindle-cell neoplasm — the glandular component can resemble epithelium within a stromal background</li>
-    <li><strong>Monophasic:</strong> just spindle cells in fascicles, which makes it harder to diagnose and increases the importance of molecular/IHC testing</li>
-    <li>The glandular cells stain positive for <strong>keratin</strong> and other epithelial antigens, supporting the biphasic pattern</li>
-  </ul>
-
-  <div class="quiz" data-answer="1">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A 28-year-old presents with a lower extremity soft tissue mass. Biopsy shows a biphasic tumor with gland-like structures within spindle cells, and t(X;18) is identified. What is the diagnosis?</div>
-    <div class="options">
-      <button class="opt">Leiomyosarcoma</button>
-      <button class="opt">Synovial sarcoma</button>
-      <button class="opt">Undifferentiated pleomorphic sarcoma</button>
-      <button class="opt">Alveolar rhabdomyosarcoma</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 15: UNDIFFERENTIATED PLEOMORPHIC SARCOMA -->
-<section class="section" id="s15">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Undifferentiated Pleomorphic Sarcoma</h2>
-  <p>Formerly called <strong>malignant fibrous histiocytoma</strong> — essentially a "wastebasket" diagnosis for a sarcoma that can't be classified as anything else. The older name was misleading, since "histiocytoma" implies a macrophage/histiocyte origin, whereas this tumor doesn't actually have that origin — hence the renaming to "undifferentiated pleomorphic sarcoma."</p>
-
-  <p>On immunohistochemistry, it stains <strong>negative</strong> for smooth muscle, neural, and skeletal muscle markers — it doesn't fit any specific lineage, which is exactly why it's called "undifferentiated."</p>
-
-  <ul>
-    <li><strong>Demographics:</strong> most common in the <strong>40s–70s</strong></li>
-    <li><strong>Location:</strong> deep soft tissue, most often the <strong>thigh</strong> (a common theme — when guessing an extremity location for a soft tissue sarcoma, the thigh is a good default)</li>
-  </ul>
-
-  <h3>Morphology</h3>
-  <p>The name tells you most of what you need to know: <strong>pleomorphic</strong> cells (variable in size and shape), mitotic figures, and possible necrosis, arising in deep soft tissue and derived from mesenchymal tissue (a <strong>sarcoma</strong>) without a specific cell-type origin identifiable (<strong>undifferentiated</strong>).</p>
-
-  <div class="quiz" data-answer="3">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A deep thigh mass in a 60-year-old shows markedly pleomorphic cells with numerous mitotic figures. IHC is negative for smooth muscle, neural, and skeletal muscle markers. What is the most likely diagnosis?</div>
-    <div class="options">
-      <button class="opt">Leiomyosarcoma</button>
-      <button class="opt">Rhabdomyosarcoma</button>
-      <button class="opt">Synovial sarcoma</button>
-      <button class="opt">Undifferentiated pleomorphic sarcoma</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 16: BONE TUMORS OVERVIEW + OSTEOGENIC -->
-<section class="section" id="s16">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Bone Tumors: Overview & Osteogenic Tumors</h2>
-
-  <h3>General Categories</h3>
-  <ul>
-    <li><strong>Hematopoietic:</strong> myeloma and lymphoma — and notably, <strong>multiple myeloma is the single most common bone tumor overall</strong> (excluding metastases)</li>
-    <li><strong>Chondrogenic:</strong> derived from cartilage</li>
-    <li><strong>Osteogenic:</strong> derived from bone</li>
-    <li><strong>Unknown origin</strong></li>
-    <li><strong>Notochordal</strong> (occasionally)</li>
-  </ul>
-
-  <div class="callout">
-    <span class="label">Location, location, location</span>
-    As with many bone lesions, <strong>where</strong> a tumor sits in the bone — epiphysis, diaphysis, or metaphysis — is a major diagnostic clue, alongside patient age. That said, these are guides, not absolutes: exceptions exist (e.g., Ewing sarcoma is usually seen in children but can occasionally occur in adults) — always treat the patient as an individual, even while using demographic patterns for test purposes.
-  </div>
-
-  <h3>Clinical Presentation</h3>
-  <p>Bone tumors can be <strong>asymptomatic</strong> (never diagnosed, especially if small or slow-growing), can present with a <strong>pathologic fracture</strong>, or can cause pain from <strong>nerve impingement</strong>.</p>
-
-  <h3>Osteogenic Tumors</h3>
-  <p>Two benign forms — <strong>osteoid osteoma</strong> and <strong>osteoblastoma</strong> — and one malignant form, <strong>osteosarcoma</strong>.</p>
-
-  <h4>Osteoid Osteoma vs. Osteoblastoma</h4>
-  <table>
-    <tr><th></th><th>Osteoid Osteoma</th><th>Osteoblastoma</th></tr>
-    <tr><td><strong>Size</strong></td><td>&lt; 2 cm</td><td>&gt; 2 cm</td></tr>
-    <tr><td><strong>Reactive cortical bone collar</strong></td><td>Present</td><td>Typically absent</td></tr>
-    <tr><td><strong>Symptoms</strong></td><td>Nocturnal pain, relieved by aspirin</td><td>Pain, but not aspirin-responsive</td></tr>
-    <tr><td><strong>Location</strong></td><td>Appendicular skeleton (e.g., femur, tibia)</td><td>Axial skeleton, commonly the spine</td></tr>
-  </table>
-  <p>Interestingly, the two tumors look fairly similar histologically despite these differences — the size cutoff doesn't fully explain why the symptom pattern differs, but it's a well-established distinction worth remembering as-is.</p>
-
-  <h4>Osteosarcoma</h4>
-  <ul>
-    <li>Accounts for <strong>~20% of primary bone tumors</strong> and is the <strong>most common malignant tumor of bone</strong></li>
-    <li>Most occur in patients <strong>under age 20</strong>; about <strong>25% occur in older adults</strong></li>
-    <li><strong>Primary osteosarcoma:</strong> arises without an identifiable underlying disease (aside from possible genetic predisposition)</li>
-    <li><strong>Secondary osteosarcoma:</strong> arises in the setting of another process — Paget disease, bone infarct, prior radiation — and tends to occur in older patients</li>
-    <li><strong>Location:</strong> metaphysis of long bones — about <strong>50% around the knee</strong> (distal femur or proximal tibia)</li>
-  </ul>
-
-  <h5>Morphology</h5>
-  <p>Osteosarcoma is characteristically both <strong>lytic and blastic</strong> — it forms bone (blastic) while also infiltrating and eroding (lytic). A hallmark radiographic finding is <strong>Codman triangle</strong>: the tumor grows beneath the periosteum and lifts it away from the bone at an angle, producing a triangular radiographic shadow.</p>
-  <p>Subtypes are classified by location (intramedullary, intracortical, or surface), grade (low vs. high), whether primary or secondary, and histologic pattern — osteoblastic, chondroblastic, fibroblastic, telangiectatic, small cell, or giant cell. Regardless of subtype, the diagnostic hallmark is that the tumor <strong>lays down osteoid</strong> (bone matrix) — seen as lacy, pink, eosinophilic material between malignant cells. If a cartilaginous component is present alongside osteoid formation, it's still called a <strong>chondroblastic osteosarcoma</strong>, not a chondrosarcoma.</p>
-
-  <h5>Molecular</h5>
-  <ul>
-    <li><strong>RB (retinoblastoma) mutation:</strong> RB normally negatively regulates the cell cycle</li>
-    <li><strong>TP53 mutation:</strong> p53 is the "guardian of the genome," normally promoting DNA repair and apoptosis of irreparable cells</li>
-    <li><strong>CDKN2A inactivation:</strong> this locus encodes both <strong>p16</strong> (negatively regulates cyclin-dependent kinases) and <strong>p14</strong> (supports p53) — losing both knocks out two separate cell-cycle brakes</li>
-    <li><strong>MDM2 and CDK4 overexpression:</strong> these normally inhibit p53 and RB, respectively — overexpression excessively suppresses both tumor suppressors</li>
-  </ul>
-
-  <div class="quiz" data-answer="0">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A bone lesion less than 2 cm with a reactive cortical bone collar causes nocturnal pain that resolves with aspirin. What is the diagnosis?</div>
-    <div class="options">
-      <button class="opt">Osteoid osteoma</button>
-      <button class="opt">Osteoblastoma</button>
-      <button class="opt">Osteosarcoma</button>
-      <button class="opt">Osteochondroma</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 17: OSTEOCHONDROMA & CHONDROMA -->
-<section class="section" id="s17">
-  <div class="eyebrow">Objectives — Pt. 4</div>
-  <h2 class="title">Osteochondroma & Chondroma</h2>
-  <p>Cartilage-forming neoplasms can be benign or malignant. Benign forms: <strong>osteochondroma, chondroma, chondroblastoma,</strong> and <strong>chondromyxoid fibroma</strong>. The malignant form is <strong>chondrosarcoma</strong>.</p>
-
-  <h3>Osteochondroma (Exostosis)</h3>
-  <p>Essentially, bone that grows and branches off at an angle, then stops — a growth of bone <strong>capped by cartilage</strong>, where the cartilage cap defines it as a cartilaginous tumor even though the underlying structure is bone. The <strong>medullary cavity of the lesion is continuous with the medullary cavity of the underlying bone</strong> — a distinctive feature.</p>
-  <ul>
-    <li>Usually solitary, though multiple lesions occur in certain syndromes</li>
-    <li>Many are asymptomatic and never diagnosed</li>
-    <li><strong>Location:</strong> metaphysis of long bones, near the knee (same neighborhood as osteosarcoma); occasionally pelvis, scapula, or ribs</li>
-    <li><strong>Gross:</strong> looks like a polyp/outgrowth of bone with a disorganized hyaline cartilage cap on top</li>
-  </ul>
-  <div class="clinical-pearl">
-    <span class="label">Malignant potential</span>
-    The disorganized hyaline cartilage cap of an osteochondroma can potentially give rise to a <strong>chondrosarcoma</strong>.
-  </div>
-  <h4>Molecular</h4>
-  <p>Multiple hereditary exostosis syndrome is autosomal dominant, associated with <strong>EXT1 or EXT2</strong> mutations, and can also be seen in sporadic (more common) osteochondromas. These genes normally synthesize heparan sulfate proteoglycans; the resulting abnormal glycosaminoglycans are thought to <strong>prevent normal diffusion of hedgehog signaling</strong>, which regulates cartilage growth.</p>
-
-  <h3>Chondroma</h3>
-  <p>Commonly found in the <strong>hands and feet</strong>. Can be within the medullary cavity (<strong>enchondroma</strong>) or on the bone surface (<strong>juxtacortical chondroma</strong>). Typically presents at <strong>age 20–59</strong>.</p>
-  <div class="callout">
-    <span class="label">Location is the key differentiator from chondrosarcoma</span>
-    Chondrosarcomas are usually found in the axial skeleton (hip, shoulder); chondromas are in the hand. A cartilaginous tumor found in the hand is essentially always a chondroma — a chondrosarcoma there would be rare enough to require a specialized bone pathologist to confirm.
-  </div>
-  <h4>Morphology</h4>
-  <p>Grossly resembles hyaline cartilage — blue-gray-white, semi-translucent. Microscopically, multiple nodules of hyaline cartilage.</p>
-  <h4>Ollier Disease and Maffucci Syndrome</h4>
-  <p>Non-hereditary syndromes featuring <strong>multiple chondromas</strong>, with increased cellularity that can make them mimic chondrosarcoma histologically (making diagnosis more challenging — again, a case for an expert bone pathologist). Both are associated with <strong>IDH1/IDH2 mutations</strong> (the same mutations seen in astrocytoma and oligodendroglioma, not in these lesions specifically until now) — these interfere with DNA methylation regulation via 2-hydroxyglutarate accumulation.</p>
-
-  <div class="quiz" data-answer="2">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A cartilaginous tumor is found in the medullary cavity of a finger bone in a 35-year-old. What is the most likely diagnosis?</div>
-    <div class="options">
-      <button class="opt">Chondrosarcoma</button>
-      <button class="opt">Osteochondroma</button>
-      <button class="opt">Chondroma (enchondroma)</button>
-      <button class="opt">Osteosarcoma</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 18: CHONDROSARCOMA -->
-<section class="section" id="s18">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Chondrosarcoma</h2>
-  <p>The <strong>second most common primary bone neoplasm</strong>. Affects males and females roughly equally.</p>
-
-  <h3>Forms</h3>
-  <ul>
-    <li><strong>Conventional (well-differentiated):</strong> can be central (intramedullary) or peripheral (juxtacortical); typically in patients <strong>over age 40</strong></li>
-    <li><strong>Clear cell:</strong> found in the <strong>epiphysis</strong>; can occur in younger patients (teens–20s)</li>
-    <li><strong>Dedifferentiated:</strong> a low-grade (hyaline cartilage-like) component juxtaposed with a high-grade, fibrous-appearing malignant component</li>
-    <li><strong>Mesenchymal:</strong> hyaline cartilage surrounded by sheets of small round cells</li>
-  </ul>
-  <p><strong>Location:</strong> usually the <strong>axial skeleton</strong> — pelvis, shoulder, occasionally ribs — and rarely the distal extremities (a cartilaginous tumor of the hand is a chondroma, not a chondrosarcoma).</p>
-
-  <h3>Morphology</h3>
-  <ul>
-    <li><strong>Conventional:</strong> grossly resembles abnormal, amorphous, gray-blue, semi-translucent cartilage; microscopically resembles hyaline cartilage but with increased cellularity and possible mitotic figures — <strong>more than one chondrocyte per lacuna is a useful clue favoring chondrosarcoma over chondroma</strong></li>
-    <li><strong>Dedifferentiated:</strong> low-grade hyaline cartilage-appearing tissue directly adjacent to a high-grade, fibrous/spindle-cell malignant component</li>
-    <li><strong>Clear cell:</strong> tumor cells with clear cytoplasm</li>
-    <li><strong>Mesenchymal:</strong> hyaline cartilage plus sheets of small round cells</li>
-  </ul>
-
-  <div class="quiz" data-answer="3">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A pelvic cartilaginous tumor in a 55-year-old shows increased cellularity with multiple chondrocytes per lacuna. What is the most likely diagnosis?</div>
-    <div class="options">
-      <button class="opt">Osteochondroma</button>
-      <button class="opt">Chondroma</button>
-      <button class="opt">Osteosarcoma</button>
-      <button class="opt">Chondrosarcoma</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 19: GIANT CELL TUMOR & ANEURYSMAL BONE CYST -->
-<section class="section" id="s19">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Giant Cell Tumor & Aneurysmal Bone Cyst</h2>
-  <p>These are the benign bone tumors of <strong>unknown origin</strong> (the malignant ones of unknown origin are Ewing sarcoma and adamantinoma).</p>
-
-  <h3>Giant Cell Tumor</h3>
-  <ul>
-    <li><strong>Location:</strong> distinctive among bone tumors for being found in the <strong>epiphysis</strong> (most bone tumors are metaphyseal) — most often around the knee, though other locations occur</li>
-    <li><strong>Gross:</strong> often destroys the cortex, leaving a thin shell of reactive bone</li>
-  </ul>
-  <h4>Morphology</h4>
-  <p>Two cell populations: <strong>uniform mononuclear cells</strong>, which are the actual neoplastic cells (derived from osteoblasts/osteoblast lineage precursors), and <strong>multinucleated giant cells</strong>, which are <em>reactive osteoclasts</em> rather than the neoplastic population — notably, the tumor's name describes the reactive component, not the neoplastic one.</p>
-  <div class="clinical-pearl">
-    <span class="label">Important point</span>
-    Although classified as benign, giant cell tumor of bone <strong>can metastasize to the lungs</strong> — a reminder that "benign" doesn't always mean "cannot spread."
-  </div>
-  <p>The neoplastic mononuclear cells express <strong>RANKL</strong>, which binds RANK on osteoclast precursors and drives the recruitment/activation of the reactive giant cells (osteoclasts).</p>
-
-  <h3>Aneurysmal Bone Cyst</h3>
-  <ul>
-    <li>Common in the <strong>first two decades</strong> of life</li>
-    <li><strong>Location:</strong> metaphysis (epiphyseal involvement is uncommon, as with most bone tumors)</li>
-    <li><strong>Complications:</strong> pain from expansion pushing on the periosteum; can cause partial nerve compression depending on location (particularly relevant in the vertebral column, where it can readily pinch a nerve)</li>
-  </ul>
-  <h4>Morphology</h4>
-  <p>As the name suggests — a large, dilated, blood-filled cystic space within the bone. Microscopically shows reactive changes: woven bone, fibroblasts and septa, and sometimes "blue bone" (densely calcified matrix).</p>
-
-  <div class="quiz" data-answer="1">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A bone tumor arising in the epiphysis around the knee shows uniform mononuclear cells admixed with multinucleated giant cells. What are the multinucleated giant cells derived from?</div>
-    <div class="options">
-      <button class="opt">The neoplastic osteoblast-lineage cells</button>
-      <button class="opt">Reactive osteoclasts</button>
-      <button class="opt">Reactive chondrocytes</button>
-      <button class="opt">Neoplastic fibroblasts</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 20: EWING SARCOMA FAMILY TUMORS -->
-<section class="section" id="s20">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Ewing Sarcoma Family Tumors</h2>
-  <p>This category now combines what used to be called <strong>Ewing sarcoma</strong> and <strong>primitive neuroectodermal tumor (PNET)</strong>, now grouped together as "Ewing sarcoma family tumors."</p>
-
-  <ul>
-    <li><strong>~80% occur in patients under age 20</strong> — mostly a tumor of children and teens</li>
-    <li><strong>Race:</strong> most commonly affects White patients; rare in Black or Asian patients</li>
-    <li><strong>Location:</strong> notably found in the <strong>diaphysis</strong> of long bones (e.g., femur), unlike most bone tumors which favor the metaphysis; also occurs in flat bones such as the pelvis</li>
-    <li><strong>Presentation:</strong> painful, enlarging mass — since these are small round cells that must divide rapidly to remain a large mass, they tend to expand against bone and cause pain relatively quickly</li>
-  </ul>
-
-  <h3>Morphology</h3>
-  <p>A <strong>small, round, blue cell tumor</strong> — can show <strong>Homer Wright rosettes</strong> (a circle of cells around central fibrillary material, similar to what's seen in some CNS tumors), mitotic figures, and geographic necrosis.</p>
-
-  <h3>Molecular</h3>
-  <p>Characteristic <strong>t(11;22)</strong> translocation, fusing the <strong>EWSR1</strong> gene to the <strong>FLI1</strong> gene.</p>
-
-  <div class="callout">
-    <span class="label">Location as a diagnostic clue</span>
-    Ewing sarcoma is one of the few tumors classically associated with the <strong>diaphysis</strong> — most bone tumors favor the metaphysis or epiphysis, so diaphyseal location plus a young patient should raise this on the differential.
-  </div>
-
-  <div class="quiz" data-answer="0">
-    <div class="qlabel">Board-Style Vignette</div>
-    <div class="qtext">A 13-year-old female has had pain in her right lower extremity that she hid from her parents so it wouldn't interfere with soccer. During a game she collides with another player and falls with sudden severe pain; radiograph shows a fracture through the shaft (diaphysis) of the right femur. What is the most likely underlying diagnosis?</div>
-    <div class="options">
-      <button class="opt">Ewing sarcoma family tumor</button>
-      <button class="opt">Alveolar rhabdomyosarcoma</button>
-      <button class="opt">Osteosarcoma</button>
-      <button class="opt">Giant cell tumor of bone</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 21: PLASMACYTOMA, MYELOMA, METASTATIC TUMORS -->
-<section class="section" id="s21">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Plasmacytoma, Multiple Myeloma & Metastatic Bone Tumors</h2>
-
-  <h3>Plasmacytoma vs. Multiple Myeloma</h3>
-  <p>Both are derived from <strong>plasma cells</strong>. <strong>Multiple myeloma</strong> behaves more like a leukemic process — malignant plasma cells are found throughout the bone marrow, with resulting <strong>osteolytic lesions</strong>. A <strong>plasmacytoma</strong> is a solitary mass composed of plasma cells rather than a marrow-wide process.</p>
-  <div class="clinical-pearl">
-    <span class="label">High-yield fact</span>
-    <strong>Multiple myeloma is the single most common bone tumor</strong>, excluding metastatic disease.
-  </div>
-  <p>On histology, an individual malignant plasma cell looks the same whether it's from a plasmacytoma or multiple myeloma — <strong>clinical context</strong> (solitary mass vs. diffuse marrow involvement) is what distinguishes them, not the cell morphology itself: eccentric nucleus, clock-face chromatin, and a perinuclear eosinophilic zone (the Golgi "hof").</p>
-
-  <h3>Metastatic Tumors to Bone</h3>
-  <p><strong>In adults</strong>, the most common primary sources are <strong>prostate, breast, kidney, and lung</strong> — together accounting for about <strong>75%</strong> of bony metastases. (Notably, colon cancer is not on this high-yield list.)</p>
-  <p><strong>In children</strong>, common sources include <strong>neuroblastoma, Wilms tumor, osteosarcoma, Ewing sarcoma, and rhabdomyosarcoma</strong>.</p>
-  <ul>
-    <li>Metastases are most often found in the <strong>axial skeleton</strong></li>
-    <li>Can be <strong>osteoblastic</strong> or <strong>osteolytic</strong> — <strong>prostate</strong> is classically associated with osteoblastic metastases; kidney, lung, and GI primaries are more typically osteolytic</li>
-    <li>Osteoblastic metastases work by tumor cells secreting substances that upregulate <strong>RANKL</strong>, which stimulates osteoblast activity</li>
-    <li><strong>Complication:</strong> pathologic fracture at the site of metastatic bone disease</li>
-  </ul>
-
-  <div class="quiz" data-answer="2">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A 68-year-old male with a known malignancy is found to have osteoblastic bone lesions on imaging. Which primary tumor is most classically associated with osteoblastic bone metastases?</div>
-    <div class="options">
-      <button class="opt">Renal cell carcinoma</button>
-      <button class="opt">Lung carcinoma</button>
-      <button class="opt">Prostate carcinoma</button>
-      <button class="opt">Colon carcinoma</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button class="nextbtn">Next →</button></div>
-</section>
-
-<!-- SECTION 22: FIBROUS CORTICAL DEFECT & FIBROUS DYSPLASIA -->
-<section class="section" id="s22">
-  <div class="eyebrow">Objective</div>
-  <h2 class="title">Fibrous Cortical Defect / NOF & Fibrous Dysplasia</h2>
-
-  <h3>Fibrous Cortical Defect and Non-Ossifying Fibroma</h3>
-  <ul>
-    <li>Most common in <strong>children</strong> — found in roughly 30% of children age 2 and older</li>
-    <li>Often small (around 0.5 cm), so easily missed incidentally</li>
-    <li><strong>Distinction between the two is based on size:</strong> smaller lesions are called <strong>fibrous cortical defect</strong>; larger lesions are called <strong>non-ossifying fibroma (NOF)</strong></li>
-    <li><strong>Microscopic:</strong> fibroblasts with associated macrophages — the same appearance in both</li>
-  </ul>
-
-  <h3>Fibrous Dysplasia</h3>
-  <p>Best understood as a <strong>focal failure of normal bone development</strong> rather than a true tumor — all the components of bone are present, but they're disorganized and immature. The bone is essentially "trying" to form normally but can't complete the process correctly.</p>
-  <ul>
-    <li><strong>Demographics:</strong> roughly M = F; early adolescence</li>
-    <li>Can be <strong>monostotic</strong> (one bone) or <strong>polyostotic</strong> (multiple bones)</li>
-  </ul>
-
-  <div class="callout">
-    <span class="label">Don't memorize the exhaustive location list</span>
-    Dr. Kemp explicitly said not to memorize a long list of possible locations for fibrous dysplasia — knowing the overall concept and the associated syndromes below matters more than the location list.
-  </div>
-
-  <h4>Associated Syndromes</h4>
-  <ul>
-    <li><strong>Mazabraud syndrome:</strong> fibrous dysplasia plus myxomas (myxomas appear myxoid/bluish on histology)</li>
-    <li><strong>McCune-Albright syndrome:</strong> polyostotic fibrous dysplasia plus café-au-lait skin spots and endocrine abnormalities — most commonly <strong>precocious puberty</strong></li>
-  </ul>
-
-  <h4>Molecular</h4>
-  <p>A <strong>gain-of-function mutation in GNAS1</strong>, producing a constitutively active G protein that promotes cellular proliferation and disrupts normal osteoblast differentiation — consistent with the idea that all the components to make bone are present, but differentiation/maturation is disrupted.</p>
-  <div class="clinical-pearl">
-    <span class="label">Timing determines distribution</span>
-    If the GNAS1 mutation occurs <strong>during embryogenesis</strong> (before the mutant cells have a chance to become restricted to one area), the result is the <strong>polyostotic</strong> form. If it occurs <strong>after the skeletal system has already formed</strong>, the mutation is confined to a single site, producing the <strong>monostotic</strong> form.
-  </div>
-
-  <h4>Morphology</h4>
-  <p><strong>Gross:</strong> intramedullary location, described as "gritty." <strong>Microscopic:</strong> curvilinear trabeculae of woven bone (with cells embedded, but lacking the organized lamellar pattern of mature bone) and minimal osteoblastic rimming — normally you'd expect osteoblasts lining newly formed woven bone, but here there's little to no rimming. The trabeculae are classically described as resembling <strong>Chinese characters</strong>. Cartilage nodules, cystic change, and hemorrhage can also be seen.</p>
-
-  <h4>Symptoms</h4>
-  <p>The monostotic form is often asymptomatic. Depending on location, fibrous dysplasia can cause nerve impingement or pain, and — like any bone lesion — the affected bone is weaker and more prone to <strong>fracture</strong>. The polyostotic form more commonly causes fractures and deformities, and can rarely undergo <strong>malignant transformation into a sarcoma</strong>.</p>
-
-  <div class="quiz" data-answer="2">
-    <div class="qlabel">Quick Check</div>
-    <div class="qtext">A child with polyostotic fibrous dysplasia, café-au-lait spots, and precocious puberty most likely has which condition?</div>
-    <div class="options">
-      <button class="opt">Ollier disease</button>
-      <button class="opt">Mazabraud syndrome</button>
-      <button class="opt">McCune-Albright syndrome</button>
-      <button class="opt">Multiple hereditary exostosis</button>
-    </div>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="navfoot"><button class="prevbtn">← Previous</button><button disabled>Next →</button></div>
 </section>
 
 </main>
 
+<footer class="eod">MSK II — Joint & Soft Tissue Pathology study guide.</footer>
+
+<button id="side-toggle" aria-label="Toggle section navigation">Sections</button>
+<div id="side-scrim"></div>
+<nav id="side-nav">
+<div class="side-head">Jump to a section</div>
+<div id="side-nav-body">
+<div class="side-lecture-label">Pt. 1 — Arthropathies</div>
+<span class="side-link" data-target="t1">Arthritis: Overview</span>
+<span class="side-link" data-target="t2">Osteoarthritis</span>
+<span class="side-link" data-target="t3">Rheumatoid Arthritis</span>
+<span class="side-link" data-target="t4">RA vs. Juvenile RA</span>
+<span class="side-link" data-target="t5">Seronegative Spondyloarthropathies</span>
+<span class="side-link" data-target="t6">Infectious Arthritis</span>
+<span class="side-link" data-target="t7">Gout</span>
+<div class="side-lecture-label">Pt. 2 — Crystal Arthropathy & Soft Tissue</div>
+<span class="side-link" data-target="t8">Pseudogout (CPPD)</span>
+<span class="side-link" data-target="t9">Ganglion/Synovial Cysts & TGCT</span>
+<span class="side-link" data-target="t10">Lipoma & Liposarcoma</span>
+<span class="side-link" data-target="t11">Nodular Fasciitis</span>
+<div class="side-lecture-label">Pt. 3 — Muscle/Fibrous Tumors & Bone Basics</div>
+<span class="side-link" data-target="t12">Fibromatosis</span>
+<span class="side-link" data-target="t13">Rhabdomyosarcoma</span>
+<span class="side-link" data-target="t14">Leiomyoma & Leiomyosarcoma</span>
+<span class="side-link" data-target="t15">Synovial Sarcoma</span>
+<span class="side-link" data-target="t16">Undifferentiated Pleomorphic Sarcoma</span>
+<span class="side-link" data-target="t17">Bone Tumors: Overview & Osteogenic Tumors</span>
+<div class="side-lecture-label">Pt. 4 — Cartilage, Marrow & Other Bone Tumors</div>
+<span class="side-link" data-target="t18">Osteochondroma & Chondroma</span>
+<span class="side-link" data-target="t19">Chondrosarcoma</span>
+<span class="side-link" data-target="t20">Giant Cell Tumor & Aneurysmal Bone Cyst</span>
+<span class="side-link" data-target="t21">Ewing Sarcoma Family Tumors</span>
+<span class="side-link" data-target="t22">Plasmacytoma, Myeloma & Metastatic Tumors</span>
+<span class="side-link" data-target="t23">Fibrous Cortical Defect & Fibrous Dysplasia</span>
+</div>
+</nav>
+
 <script>
-  function toggleSidebar(){
-    document.querySelector('nav').classList.toggle('collapsed');
-    document.getElementById('sb-toggle').classList.toggle('collapsed');
-  }
+const questionData = {
+"t1":[{"q":"Which form of arthritis is classically associated with HLA-B27 and absence of rheumatoid factor?","options":["Seronegative spondyloarthropathy","Rheumatoid arthritis","Gout arthritis","Suppurative arthritis"],"correct":0,"explain":"Seronegative spondyloarthropathies are defined by HLA-B27 association and absent rheumatoid factor."}],
+"t2":[{"q":"A patient has bony nodules at the distal interphalangeal joints. What are these called, and what are they made of?","options":["Bouchard nodes; urate crystals","Heberden nodes; osteophytes","Rheumatoid nodules; granulomas","Gouty tophi; CPPD crystals"],"correct":1,"explain":"Heberden nodes are osteophytes at the DIP joints (Bouchard nodes are the PIP-joint equivalent)."}],
+"t3":[{"q":"A 43-year-old female has hand pain worse in the morning and improving through the day, with MCP swelling and ulnar deviation of the fingers. Serologic testing is most likely to reveal antibodies against which substance?","options":["Citrullinated peptides","dsDNA","Cardiolipin","SSA","Mitochondria"],"correct":0,"explain":"This presentation is classic rheumatoid arthritis; anti-citrullinated peptide antibodies are found in ~70% of patients."}],
+"t4":[{"q":"Which feature favors juvenile RA over adult-onset rheumatoid arthritis?","options":["High rheumatoid factor titer","Symmetric small-joint polyarthritis","Fewer joints, more systemic disease","Presence of rheumatoid nodules"],"correct":2,"explain":"Juvenile RA is oligoarticular but more often systemic, unlike adult RA's polyarticular, small-joint, nodule/RF-positive pattern."}],
+"t5":[{"q":"A 26-year-old male develops arthritis, urethritis, and conjunctivitis weeks after a GI infection, and is HLA-B27 positive. Which organism is a classic trigger for this presentation?","options":["Staphylococcus aureus","Shigella","Borrelia burgdorferi","Haemophilus influenzae"],"correct":1,"explain":"Shigella (along with Salmonella, Yersinia, Campylobacter, and Chlamydia) is a classic trigger for reactive arthritis."}],
+"t6":[{"q":"A patient with sickle cell disease develops a swollen, painful knee, and blood cultures grow a Gram-negative rod. Which organism is classically associated with this pairing?","options":["Staphylococcus aureus","Neisseria gonorrhoeae","Salmonella species","Haemophilus influenzae"],"correct":2,"explain":"Salmonella septic arthritis/osteomyelitis is classically linked to sickle cell disease."}],
+"t7":[{"q":"Joint fluid aspirate shows needle-shaped, negatively birefringent crystals. What is the diagnosis?","options":["Pseudogout","Gout","Septic arthritis","Ankylosing spondylitis"],"correct":1,"explain":"Needle-shaped, negatively birefringent crystals are monosodium urate — diagnostic of gout."}],
+"t8":[{"q":"A 52-year-old male presents with pain in his right wrist and elbow that began one week ago. The articular cartilage shows positively birefringent crystals. What is the most likely diagnosis?","options":["Septic arthritis","Lyme disease","Gout","Pseudo-gout","Seronegative spondyloarthropathy"],"correct":3,"explain":"Rhomboid, positively birefringent crystals in a peripheral joint (wrist/elbow) in a patient >50 is classic pseudogout (CPPD)."}],
+"t9":[{"q":"A translocation fusing a collagen promoter to the M-CSF gene, driving macrophage proliferation, is characteristic of which entity?","options":["Tenosynovial giant cell tumor","Ganglion cyst","Nodular fasciitis","Baker cyst"],"correct":0,"explain":"t(1;2) fusing the collagen VI α-3 promoter to M-CSF is characteristic of tenosynovial giant cell tumor."}],
+"t10":[{"q":"A large fatty mass is found in the retroperitoneum. Which statement is most accurate?","options":["It is almost certainly a benign lipoma","It cannot be classified without molecular testing","It is presumed atypical or a liposarcoma","It is diagnostic of pleomorphic liposarcoma type"],"correct":2,"explain":"Fatty masses inside a body cavity are rarely true lipomas and should be treated as at least atypical lipoma/well-differentiated liposarcoma."}],
+"t11":[{"q":"A young adult develops a rapidly growing, &lt;5 cm nodule on the forearm several weeks after minor trauma. Biopsy shows a very cellular fibroblastic proliferation with scattered mitotic figures. What is the most likely diagnosis?","options":["Well-differentiated liposarcoma","Nodular fasciitis","Tenosynovial giant cell tumor","Pleomorphic liposarcoma"],"correct":1,"explain":"Young adult, small size, rapid growth after trauma, upper extremity, and mitotically active fibroblasts is the classic nodular fasciitis picture."}],
+"t12":[{"q":"A deep fibromatosis (desmoid tumor) is notable for which behavior?","options":["Metastasizes early via lymphatics","Infiltrates locally but does not metastasize","Remains encapsulated and non-invasive","Spreads hematogenously to the lungs"],"correct":1,"explain":"Desmoid tumors infiltrate locally, causing real clinical problems, but do not metastasize."}],
+"t13":[{"q":"A 2-year-old girl is brought to the emergency department after her mother discovered a grape-like mass protruding from the vagina while bathing her. What is the most likely diagnosis?","options":["Embryonal (botryoid) rhabdomyosarcoma","Alveolar rhabdomyosarcoma","Pleomorphic rhabdomyosarcoma","Synovial sarcoma","Granulation tissue from vaginal infection"],"correct":0,"explain":"Grape-like clusters protruding from the vagina in a young child is the classic botryoid variant of embryonal rhabdomyosarcoma."}],
+"t14":[{"q":"Which feature would favor leiomyosarcoma over leiomyoma on biopsy?","options":["Well-circumscribed border","Bland, uniform nuclei","Pleomorphism and mitotic activity","Location in the uterus"],"correct":2,"explain":"Pleomorphism and mitotic activity distinguish the malignant leiomyosarcoma from the bland, low-mitotic leiomyoma."}],
+"t15":[{"q":"A 28-year-old presents with a lower extremity soft tissue mass. Biopsy shows a biphasic tumor with gland-like structures within spindle cells, and t(X;18) is identified. What is the diagnosis?","options":["Leiomyosarcoma","Synovial sarcoma","Undifferentiated pleomorphic sarcoma","Alveolar rhabdomyosarcoma"],"correct":1,"explain":"Biphasic gland-like plus spindle-cell morphology with t(X;18) (SS18-SSX fusion) is diagnostic of synovial sarcoma."}],
+"t16":[{"q":"A deep thigh mass in a 60-year-old shows markedly pleomorphic cells with numerous mitotic figures. IHC is negative for smooth muscle, neural, and skeletal muscle markers. What is the most likely diagnosis?","options":["Leiomyosarcoma","Rhabdomyosarcoma","Synovial sarcoma","Undifferentiated pleomorphic sarcoma"],"correct":3,"explain":"A pleomorphic deep soft tissue sarcoma with no identifiable lineage on IHC is undifferentiated pleomorphic sarcoma by definition."}],
+"t17":[{"q":"A bone lesion less than 2 cm with a reactive cortical bone collar causes nocturnal pain that resolves with aspirin. What is the diagnosis?","options":["Osteoid osteoma","Osteoblastoma","Osteosarcoma","Osteochondroma"],"correct":0,"explain":"Size &lt;2cm, reactive cortical bone collar, and aspirin-responsive nocturnal pain are classic for osteoid osteoma."}],
+"t18":[{"q":"A cartilaginous tumor is found in the medullary cavity of a finger bone in a 35-year-old. What is the most likely diagnosis?","options":["Chondrosarcoma","Osteochondroma","Chondroma (enchondroma)","Osteosarcoma"],"correct":2,"explain":"A cartilaginous tumor of the hand is essentially always a chondroma (enchondroma if intramedullary)."}],
+"t19":[{"q":"A pelvic cartilaginous tumor in a 55-year-old shows increased cellularity with multiple chondrocytes per lacuna. What is the most likely diagnosis?","options":["Osteochondroma","Chondroma","Osteosarcoma","Chondrosarcoma"],"correct":3,"explain":"Axial skeleton location plus increased cellularity with multiple chondrocytes per lacuna favors chondrosarcoma over chondroma."}],
+"t20":[{"q":"A bone tumor arising in the epiphysis around the knee shows uniform mononuclear cells admixed with multinucleated giant cells. What are the multinucleated giant cells derived from?","options":["The neoplastic osteoblast-lineage cells","Reactive osteoclasts","Reactive chondrocytes","Neoplastic fibroblasts"],"correct":1,"explain":"The giant cells in giant cell tumor of bone are reactive osteoclasts; the mononuclear cells are the true neoplastic population."}],
+"t21":[{"q":"A 13-year-old female has had leg pain, then sustains a fracture through the shaft (diaphysis) of the femur after a collision. What is the most likely underlying diagnosis?","options":["Ewing sarcoma family tumor","Alveolar rhabdomyosarcoma","Osteosarcoma","Giant cell tumor of bone"],"correct":0,"explain":"A painful diaphyseal lesion in a teenager, with pathologic fracture, is classic for Ewing sarcoma family tumors."}],
+"t22":[{"q":"A 68-year-old male with a known malignancy is found to have osteoblastic bone lesions on imaging. Which primary tumor is most classically associated with osteoblastic bone metastases?","options":["Renal cell carcinoma","Lung carcinoma","Prostate carcinoma","Colon carcinoma"],"correct":2,"explain":"Prostate carcinoma is the classic cause of osteoblastic (rather than osteolytic) bone metastases."}],
+"t23":[{"q":"A child with polyostotic fibrous dysplasia, café-au-lait spots, and precocious puberty most likely has which condition?","options":["Ollier disease","Mazabraud syndrome","McCune-Albright syndrome","Multiple hereditary exostosis"],"correct":2,"explain":"McCune-Albright syndrome is defined by polyostotic fibrous dysplasia, café-au-lait spots, and endocrine abnormalities such as precocious puberty."}]
+};
 
-  const sections = ['s0','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s20','s21','s22'];
-  const navButtons = document.querySelectorAll('.navbtn');
-
-  function showSection(id){
-    sections.forEach(s => {
-      document.getElementById(s).classList.toggle('active', s === id);
-    });
-    navButtons.forEach(b => {
-      b.classList.toggle('active', b.dataset.target === id);
-    });
-    document.querySelector('main').scrollTo({top:0, behavior:'instant'});
-    window.scrollTo({top:0, behavior:'instant'});
-  }
-
-  navButtons.forEach(btn => {
-    btn.addEventListener('click', () => showSection(btn.dataset.target));
-  });
-
-  document.querySelectorAll('.nextbtn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const current = sections.findIndex(s => document.getElementById(s).classList.contains('active'));
-      if(current < sections.length - 1) showSection(sections[current+1]);
-    });
-  });
-  document.querySelectorAll('.prevbtn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const current = sections.findIndex(s => document.getElementById(s).classList.contains('active'));
-      if(current > 0) showSection(sections[current-1]);
-    });
-  });
-
-  document.querySelectorAll('.quiz').forEach(quiz => {
-    const correctIdx = parseInt(quiz.dataset.answer, 10);
-    const opts = quiz.querySelectorAll('.opt');
-    const feedback = quiz.querySelector('.feedback');
-    let answered = false;
-    opts.forEach((opt, idx) => {
-      opt.addEventListener('click', () => {
-        if(answered) return;
-        answered = true;
-        if(idx === correctIdx){
-          opt.classList.add('correct');
-          feedback.textContent = "Correct — " + opt.textContent + " is right.";
-          feedback.className = 'feedback show right';
-        } else {
-          opt.classList.add('incorrect');
-          opts[correctIdx].classList.add('correct');
-          feedback.textContent = "Not quite — the correct answer is " + opts[correctIdx].textContent + ".";
-          feedback.className = 'feedback show wrong';
-        }
+function buildMCQ(container, q, idx) {
+  const wrap = document.createElement("div");
+  wrap.className = "question";
+  const qtext = document.createElement("div");
+  qtext.className = "qtext";
+  qtext.textContent = (idx + 1) + ". " + q.q;
+  wrap.appendChild(qtext);
+  const optsWrap = document.createElement("div");
+  optsWrap.className = "options";
+  wrap.appendChild(optsWrap);
+  const feedback = document.createElement("div");
+  feedback.className = "feedback";
+  wrap.appendChild(feedback);
+  q.options.forEach(function(optText, optIdx) {
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    btn.innerHTML = "<span class=\"bubble\"></span><span></span>";
+    btn.querySelector("span:last-child").textContent = optText;
+    btn.addEventListener("click", function() {
+      if (optsWrap.dataset.answered) return;
+      optsWrap.dataset.answered = "true";
+      const allBtns = optsWrap.querySelectorAll(".opt");
+      allBtns.forEach(function(b, i2) {
+        b.disabled = true;
+        if (i2 === q.correct) b.classList.add("correct");
       });
+      if (optIdx === q.correct) {
+        feedback.classList.add("correct");
+        feedback.textContent = "Correct. " + q.explain;
+      } else {
+        btn.classList.add("incorrect");
+        feedback.classList.add("incorrect");
+        feedback.textContent = "Not quite. " + q.explain;
+      }
     });
+    optsWrap.appendChild(btn);
   });
+  container.appendChild(wrap);
+}
+
+Object.keys(questionData).forEach(function(sectionId) {
+  const container = document.getElementById("q-" + sectionId);
+  if (!container) return;
+  questionData[sectionId].forEach(function(q, i) { buildMCQ(container, q, i); });
+});
+
+function goToSection(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const sideNav = document.getElementById("side-nav");
+const sideToggle = document.getElementById("side-toggle");
+const sideScrim = document.getElementById("side-scrim");
+
+function openSideNav(){ sideNav.classList.add("open"); sideScrim.classList.add("open"); }
+function closeSideNav(){ sideNav.classList.remove("open"); sideScrim.classList.remove("open"); }
+sideToggle.addEventListener("click", function(){
+  sideNav.classList.contains("open") ? closeSideNav() : openSideNav();
+});
+sideScrim.addEventListener("click", closeSideNav);
+
+document.querySelectorAll(".toc-link").forEach(function(el){
+  el.addEventListener("click", function(){ goToSection(el.dataset.target); });
+});
+const sideLinkEls = Array.from(document.querySelectorAll(".side-link"));
+sideLinkEls.forEach(function(el){
+  el.addEventListener("click", function(){ closeSideNav(); goToSection(el.dataset.target); });
+});
+
+const observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if (entry.isIntersecting) {
+      sideLinkEls.forEach(function(l){ l.classList.remove("active"); });
+      const match = sideLinkEls.find(function(l){ return l.dataset.target === entry.target.id; });
+      if (match) match.classList.add("active");
+    }
+  });
+}, { rootMargin: "-15% 0px -70% 0px" });
+document.querySelectorAll("article.topic").forEach(function(el){ observer.observe(el); });
 </script>
 
 </body>
