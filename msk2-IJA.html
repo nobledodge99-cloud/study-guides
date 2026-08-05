@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Juvenile Idiopathic Arthritis — Study Guide</title>
+<style>
+:root{
+  --cream:#faf6ee;
+  --cream-2:#f2ecdd;
+  --green-1:#2f5d4f;
+  --green-2:#3f7a63;
+  --green-3:#6fa287;
+  --green-light:#e6efe8;
+  --gold:#c9a24b;
+  --ink:#2b2a25;
+  --ink-soft:#5c584f;
+  --red:#a4453b;
+  --shadow:0 4px 14px rgba(43,42,37,0.08);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:"Iowan Old Style","Palatino Linotype",Georgia,"Times New Roman",serif;
+  line-height:1.55;
+}
+.wrap{max-width:880px;margin:0 auto;padding:90px 26px 100px;}
+header.top{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:linear-gradient(180deg,var(--cream) 85%, rgba(250,246,238,0));
+  padding:14px 22px 26px;
+  display:flex;justify-content:space-between;align-items:center;
+  pointer-events:none;
+}
+header.top .btn{pointer-events:auto;}
+.btn{
+  font-family:inherit;
+  background:var(--green-1);
+  color:var(--cream);
+  border:none;
+  padding:9px 16px;
+  border-radius:7px;
+  font-size:0.82rem;
+  letter-spacing:.03em;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+}
+.btn:hover{background:var(--green-2);}
+.btn.ghost{
+  background:transparent;color:var(--green-1);border:1.5px solid var(--green-1);
+}
+h1.title{
+  font-size:2.1rem;color:var(--green-1);margin:0 0 4px;font-weight:600;
+  border-bottom:3px solid var(--gold);padding-bottom:14px;
+}
+.subtitle{color:var(--ink-soft);font-size:0.95rem;margin-bottom:34px;font-style:italic;}
+h2.section-head{
+  color:var(--green-1);
+  font-size:1.4rem;
+  margin:52px 0 16px;
+  padding-bottom:6px;
+  border-bottom:2px solid var(--green-3);
+  scroll-margin-top:90px;
+}
+h3.sub-head{color:var(--green-2);font-size:1.1rem;margin:26px 0 10px;}
+p{margin:0 0 12px;}
+ul,ol{margin:0 0 14px;padding-left:22px;}
+li{margin-bottom:5px;}
+.topic{
+  background:#fff;
+  border:1px solid var(--cream-2);
+  border-left:5px solid var(--green-2);
+  border-radius:8px;
+  padding:18px 22px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+.pearl{
+  background:var(--green-light);
+  border-left:5px solid var(--gold);
+  border-radius:6px;
+  padding:14px 18px;
+  margin:14px 0;
+  font-size:0.95rem;
+}
+.pearl b{color:var(--green-1);}
+.pearl::before{
+  content:"⚕ HIGH-YIELD PEARL";
+  display:block;font-size:0.68rem;letter-spacing:.08em;color:var(--gold);
+  font-weight:700;margin-bottom:5px;font-family:Georgia,serif;
+}
+.warn{
+  background:#fbeceb;border-left:5px solid var(--red);border-radius:6px;
+  padding:14px 18px;margin:14px 0;font-size:0.95rem;
+}
+.warn::before{
+  content:"⚠ WATCH OUT";display:block;font-size:0.68rem;letter-spacing:.08em;
+  color:var(--red);font-weight:700;margin-bottom:5px;
+}
+table.data-table{
+  width:100%;border-collapse:collapse;margin:16px 0 20px;font-size:0.88rem;
+  background:#fff;box-shadow:var(--shadow);border-radius:6px;overflow:hidden;
+}
+table.data-table th{
+  background:var(--green-1);color:var(--cream);text-align:left;
+  padding:9px 10px;font-weight:600;font-size:0.78rem;letter-spacing:.03em;
+}
+table.data-table td{
+  padding:9px 10px;border-bottom:1px solid var(--cream-2);vertical-align:top;
+}
+table.data-table tr:nth-child(even) td{background:var(--cream);}
+table.data-table tr:last-child td{border-bottom:none;}
+.hi{background:#fff6dd;padding:0 3px;border-radius:3px;}
+.case-box{
+  background:#fff;border:2px dashed var(--green-3);border-radius:8px;
+  padding:18px 22px;margin:16px 0;
+}
+.case-box h4{margin:0 0 8px;color:var(--green-1);font-size:1rem;}
+.reveal{
+  margin-top:10px;padding:12px 16px;border-radius:6px;
+  background:var(--green-light);border-left:4px solid var(--green-2);
+  display:none;font-size:0.92rem;
+}
+.reveal.show{display:block;}
+.reveal-btn{
+  background:var(--green-2);color:#fff;border:none;padding:7px 14px;
+  border-radius:6px;font-size:0.8rem;cursor:pointer;font-family:inherit;margin-top:8px;
+}
+.reveal-btn:hover{background:var(--green-1);}
+/* quiz */
+.quiz{background:#fff;border:1px solid var(--cream-2);border-radius:8px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow);}
+.quiz p.stem{font-weight:600;margin-bottom:10px;}
+.choices{list-style:none;padding:0;margin:0;}
+.choices li{
+  padding:9px 12px;margin-bottom:7px;border:1px solid var(--cream-2);
+  border-radius:6px;cursor:pointer;font-size:0.92rem;transition:background .15s;
+}
+.choices li:hover{background:var(--cream);}
+.choices li.correct{background:#dff2e6;border-color:var(--green-2);font-weight:600;}
+.choices li.incorrect{background:#fbeceb;border-color:var(--red);}
+.feedback{
+  margin-top:10px;padding:10px 14px;border-radius:6px;font-size:0.88rem;display:none;
+}
+.feedback.show{display:block;}
+.feedback.right{background:#dff2e6;color:#1f4a35;}
+.feedback.wrong{background:#fbeceb;color:#7a2f27;}
+/* side nav */
+#navToggle{
+  position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:60;
+  background:var(--green-1);color:var(--cream);border:none;
+  padding:16px 8px;border-radius:8px 0 0 8px;cursor:pointer;font-size:0.72rem;
+  letter-spacing:.15em;writing-mode:vertical-rl;box-shadow:var(--shadow);
+}
+#sideNav{
+  position:fixed;top:0;right:-280px;width:260px;height:100%;
+  background:var(--green-1);color:var(--cream);z-index:59;
+  padding:70px 22px 22px;transition:right .28s ease;overflow-y:auto;
+  box-shadow:-6px 0 20px rgba(0,0,0,0.15);
+}
+#sideNav.open{right:0;}
+#sideNav h4{color:var(--gold);font-size:0.75rem;letter-spacing:.1em;margin:0 0 14px;}
+#sideNav a{
+  display:block;color:var(--cream);text-decoration:none;font-size:0.9rem;
+  padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.12);
+}
+#sideNav a:hover{color:var(--gold);}
+#overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.25);z-index:55;display:none;
+}
+#overlay.show{display:block;}
+footer{text-align:center;color:var(--ink-soft);font-size:0.8rem;margin-top:60px;font-style:italic;}
+@media (max-width:600px){
+  .wrap{padding:80px 16px 80px;}
+  h1.title{font-size:1.6rem;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <button class="btn ghost" onclick="window.history.back()">← Back</button>
+  <button class="btn" id="downloadBtn">⬇ Download</button>
+</header>
+
+<button id="navToggle" onclick="toggleNav()">SECTIONS</button>
+<div id="overlay" onclick="toggleNav()"></div>
+<nav id="sideNav">
+  <h4>JUMP TO</h4>
+  <a href="#objectives" onclick="toggleNav()">Learning Objectives</a>
+  <a href="#basics" onclick="toggleNav()">JIA Basics</a>
+  <a href="#classification" onclick="toggleNav()">Classification Rules</a>
+  <a href="#types" onclick="toggleNav()">The 7 Types</a>
+  <a href="#comparison" onclick="toggleNav()">Comparison Table</a>
+  <a href="#case" onclick="toggleNav()">Case Walkthrough</a>
+  <a href="#treatment" onclick="toggleNav()">Treatment</a>
+  <a href="#complications" onclick="toggleNav()">Complications</a>
+  <a href="#keypoints" onclick="toggleNav()">Key Points</a>
+  <a href="#clinical" onclick="toggleNav()">Clinical Pearls</a>
+  <a href="#quiz" onclick="toggleNav()">Practice Questions</a>
+</nav>
+
+<div class="wrap">
+  <h1 class="title">Juvenile Idiopathic Arthritis</h1>
+  <p class="subtitle">MSK II — Clinical Lecture · Dr. Scott Stephens, DO</p>
+
+  <h2 class="section-head" id="objectives">Learning Objectives</h2>
+  <div class="topic">
+    <ul>
+      <li>Learn the common forms of Juvenile Idiopathic Arthritis (JIA)</li>
+      <li>Understand the presenting features and diagnosis of JIA</li>
+      <li>Be familiar with the treatment of JIA</li>
+      <li>Recognize the long-term morbidity associated with JIA</li>
+    </ul>
+  </div>
+
+  <h2 class="section-head" id="basics">JIA Basics</h2>
+  <div class="topic">
+    <p>JIA was formerly called <b>juvenile rheumatoid arthritis</b> — a name that stuck for over 100 years before being changed because JIA is a distinct disease process from adult rheumatoid arthritis.</p>
+    <ul>
+      <li>Autoimmune disease of <b>unknown origin</b> — some infections/stressors are thought to trigger flares, but no single cause has been identified</li>
+      <li>Most subtypes lack a strong genetic signal; a few have a minor HLA association</li>
+      <li>It is a <b>clinical diagnosis</b> — no single confirmatory test or imaging finding. Diagnosis requires working through other possibilities first (infection, malignancy, trauma) before landing on JIA</li>
+    </ul>
+    <div class="pearl">There is no single lab test or imaging study that rules JIA in. It is a diagnosis of exclusion built on pattern recognition — joint findings, timing, and supporting labs.</div>
+  </div>
+
+  <h2 class="section-head" id="classification">Classification Rules</h2>
+  <div class="topic">
+    <ul>
+      <li><span class="hi">7 recognized types</span> of JIA (some texts lump or split differently, but 7 is the standard teaching set)</li>
+      <li>Unequal distribution among types and between sexes — except systemic JIA, which is the one type with a roughly equal male:female ratio</li>
+      <li>Symptoms must be present for <span class="hi">at least 6 weeks</span> before a JIA diagnosis can be made</li>
+      <li>Final subtype should not be locked in until the <span class="hi">6-month point</span>, since early symptoms can evolve into a more severe or milder pattern</li>
+      <li>Onset must occur <b>before age 16</b> — symptoms starting after 16 are not classified as JIA</li>
+    </ul>
+  </div>
+
+  <h2 class="section-head" id="types">The 7 Types of JIA</h2>
+
+  <h3 class="sub-head">1. Systemic JIA</h3>
+  <div class="topic">
+    <ul>
+      <li><b>&lt;10%</b> of cases — peak onset any time throughout childhood</li>
+      <li><b>Only subtype with a 1:1 male:female ratio</b></li>
+      <li>Whole-body disease: joint involvement <i>plus</i> splenomegaly, lymphadenopathy, high fevers</li>
+      <li>~50% develop a <b>salmon-pink rash</b> spanning the whole body — classic testable buzzword</li>
+      <li><b>Low</b> risk of uveitis</li>
+    </ul>
+    <div class="pearl">Systemic JIA behaves a lot like <b>lupus</b> clinically — fevers, rash, multi-organ involvement — and the two are often distinguished only by serologic testing.</div>
+  </div>
+
+  <h3 class="sub-head">2. Oligoarthritis</h3>
+  <div class="topic">
+    <ul>
+      <li><b>~50% of all JIA cases</b> — the most common subtype</li>
+      <li>Peak onset <b>2–4 years</b>; female:male ratio <b>4:1</b></li>
+      <li>Defining feature: swelling in <span class="hi">fewer than 6 joints</span>, often <b>without pain</b></li>
+      <li>Joints may be swollen and warm — this painless-swelling pattern helps differentiate it from septic arthritis, which is painful</li>
+      <li><b>Highest uveitis risk of any subtype</b> — 30% overall, over 50% if ANA-positive and female</li>
+    </ul>
+    <div class="warn">Uveitis in oligoarticular JIA is frequently <b>painless</b>. Kids can be silently losing vision, which is why they need repeat ophthalmology follow-up regardless of how the joints are doing — a single "all clear" exam is not enough.</div>
+  </div>
+
+  <h3 class="sub-head">3 & 4. Polyarticular JIA (RF-negative and RF-positive)</h3>
+  <div class="topic">
+    <p>Both are defined by swelling in <span class="hi">more than 6 joints</span>, including large joints (hips, shoulders) and axial joints (spine).</p>
+    <p><b>RF-negative (~25% of cases):</b> two peak ages — 2–4 years and 9–11 years; female:male ratio ~3:1.</p>
+    <p><b>RF-positive (~5% of cases):</b> peak onset 12–16 years; much higher female:male ratio (~9:1); tends to be <b>more aggressive</b> with more joint destruction than RF-negative disease; <b>low</b> uveitis risk.</p>
+    <div class="pearl">Rheumatoid-factor status is the key differentiator between the two polyarticular types — and RF-positive disease is the one that most closely resembles adult RA in its aggressive joint destruction.</div>
+  </div>
+
+  <h3 class="sub-head">5. Psoriatic JIA</h3>
+  <div class="topic">
+    <ul>
+      <li>&lt;10% of cases — two peak windows, 2–4 years and 9–11 years; female:male ratio ~2:1</li>
+      <li>~50% develop a <b>scaly rash</b> (vs. the salmon-pink rash of systemic JIA)</li>
+      <li>Uveitis risk ~10–20%</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-head">6. Enthesitis-related JIA</h3>
+  <div class="topic">
+    <ul>
+      <li>~10% of cases — peak onset <b>after age 11</b></li>
+      <li><b>Only subtype with a male predominance</b> (male:female higher than other types)</li>
+      <li>Defining feature: inflammation at <b>tendon insertion sites</b> (entheses), in addition to joint swelling — this is what separates it from the other subtypes</li>
+      <li>Uveitis risk ~10–20%</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-head">7. Undifferentiated JIA</h3>
+  <div class="topic">
+    <p>A catch-all category — disease that doesn't fit the criteria of any other type, or that is too early in its course to classify.</p>
+  </div>
+
+  <h2 class="section-head" id="comparison">Comparison Table — All 7 Types</h2>
+  <table class="data-table">
+    <tr><th>Type</th><th>% of Cases</th><th>Peak Onset</th><th>F:M Ratio</th><th>Distinguishing Pattern</th><th>Uveitis Risk</th></tr>
+    <tr><td>Systemic</td><td>&lt;10%</td><td>Any age in childhood</td><td>1:1</td><td>Whole-body: fevers, salmon-pink rash, splenomegaly/lymphadenopathy + joints</td><td>Low</td></tr>
+    <tr><td>Oligoarthritis</td><td>~50%</td><td>2–4 y</td><td>4:1</td><td>&lt;6 joints, often painless swelling</td><td><b>Highest</b> (30%, &gt;50% if ANA+/female)</td></tr>
+    <tr><td>Polyarticular, RF−</td><td>~25%</td><td>2–4 y and 9–11 y</td><td>~3:1</td><td>&gt;6 joints incl. large/axial joints</td><td>Moderate</td></tr>
+    <tr><td>Polyarticular, RF+</td><td>~5%</td><td>12–16 y</td><td>~9:1</td><td>&gt;6 joints, most aggressive/destructive</td><td>Low</td></tr>
+    <tr><td>Psoriatic</td><td>&lt;10%</td><td>2–4 y and 9–11 y</td><td>2:1</td><td>Joints + scaly rash (~50%)</td><td>10–20%</td></tr>
+    <tr><td>Enthesitis-related</td><td>~10%</td><td>&gt;11 y</td><td>Male predominant</td><td>Joints + tendon-insertion inflammation</td><td>10–20%</td></tr>
+    <tr><td>Undifferentiated</td><td>—</td><td>—</td><td>—</td><td>Doesn't fit other categories / too early to classify</td><td>—</td></tr>
+  </table>
+  <div class="pearl">Three subtypes make up the vast majority of JIA: <b>oligoarthritis, polyarticular, and systemic</b>. If you only memorize three deeply, memorize these.</div>
+
+  <h2 class="section-head" id="case">Case Walkthrough</h2>
+  <div class="case-box">
+    <h4>The Case</h4>
+    <p>A <b>4-year-old female</b> presents with a <b>6-week history</b> of a swollen right knee. Seen previously by a partner and an urgent care; X-ray was negative. Started on <b>cephalosporin (cephalexin)</b> for presumed soft-tissue infection — no improvement.</p>
+    <p>On further history: mother has also noticed <b>bilateral ankle swelling</b> that comes and goes, warm to the touch. The child has <b>little pain</b> and <b>no fevers</b>.</p>
+    <p><b>Labs:</b> ANA <span class="hi">positive</span>, rheumatoid factor <span class="hi">negative</span>, CRP <span class="hi">elevated</span>, WBC <span class="hi">normal</span>.</p>
+    <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Work through the diagnosis</button>
+    <div class="reveal">
+      <p><b>Number of joints:</b> mother describes up to 3 joints → fewer than 6, consistent with <b>oligoarthritis</b>.</p>
+      <p><b>Duration:</b> right at 6 weeks — the minimum needed to make an initial JIA diagnosis.</p>
+      <p><b>Pain vs. swelling:</b> minimal pain despite visible swelling — classic for JIA (kids more often report morning stiffness that improves with activity, rather than pain).</p>
+      <p><b>Labs:</b> ANA-positive is common in oligoarticular JIA (and flags <i>higher</i> uveitis risk); a normal WBC with elevated CRP helps distinguish this from a septic joint or acute osteomyelitis.</p>
+      <p><b>Diagnosis: Oligoarticular JIA</b> — and given ANA-positive + female, this child needs close, recurring ophthalmology follow-up for silent uveitis.</p>
+    </div>
+  </div>
+
+  <h2 class="section-head" id="treatment">Treatment</h2>
+  <div class="topic">
+    <ul>
+      <li><b>NSAIDs</b> — first line; often sufficient alone for milder disease</li>
+      <li><b>Steroids</b> — used short-term, including intra-articular injections; <b>first-line in systemic JIA</b> to control the acute presentation</li>
+      <li><b>Methotrexate</b> — for more chronic or aggressive disease</li>
+      <li><b>Biologics</b> — IL-1 inhibitors (e.g., anakinra) and IL-6 inhibitors (e.g., tocilizumab); IL-1 inhibition is the most commonly used biologic class and is started earlier than steroids/methotrexate in more aggressive forms</li>
+    </ul>
+    <div class="pearl">With early recognition and modern biologic therapy, many children achieve <b>complete remission</b> with no further disease activity.</div>
+  </div>
+
+  <h2 class="section-head" id="complications">Complications of Untreated / Undertreated JIA</h2>
+  <div class="topic">
+    <ul>
+      <li><b>Uveitis</b> — the most common complication overall, often <i>painless</i></li>
+      <li>Leg-length discrepancy</li>
+      <li>Chronic short stature</li>
+      <li>Joint destruction</li>
+      <li>In severe/aggressive cases: osteopenia and osteoporosis, TMJ involvement (can cause a "lock jaw" presentation), and a lupus-like systemic illness with multi-organ involvement</li>
+    </ul>
+  </div>
+
+  <h2 class="section-head" id="keypoints">Key Points</h2>
+  <div class="topic">
+    <ul>
+      <li>JIA is an autoimmune process diagnosed clinically, with supporting labs — not a single confirmatory test</li>
+      <li>Of the 7 types, <b>oligoarthritis, polyarticular, and systemic</b> make up the vast majority of cases</li>
+      <li><b>Uveitis</b> is the most common complication seen across JIA subtypes</li>
+      <li>Treatment to prevent long-term joint damage: NSAIDs → steroids/IL-inhibitor biologics → methotrexate, tailored by subtype and severity</li>
+    </ul>
+  </div>
+
+  <h2 class="section-head" id="clinical">Clinical Pearls (Attending's Perspective)</h2>
+  <div class="topic">
+    <p>Dr. Stephens notes JIA is uncommon in practice (only a handful of cases over 15 years), so kids often cycle through multiple diagnoses, antibiotics, joint taps, and MRIs before JIA is finally considered — partly because of the mandatory 6-week symptom window.</p>
+    <div class="pearl"><b>Keep JIA in the back of your mind</b> whenever a child presents with joint swelling, no history of trauma, and little-to-no pain. That triad should trigger the question: "could this be JIA?"</div>
+    <p>Pediatric rheumatology is a rare subspecialty concentrated at large academic centers — patients are typically co-managed between the specialist and primary care rather than treated exclusively by the rheumatologist.</p>
+  </div>
+
+  <h2 class="section-head" id="quiz">Practice Questions</h2>
+
+  <div class="quiz">
+    <p class="stem">1. A 3-year-old girl has painless swelling of her left knee for 7 weeks. Labs show a positive ANA and a negative RF. Which subtype is most likely, and what is the key associated risk to counsel the family on?</p>
+    <ul class="choices" data-answer="0">
+      <li data-fb="Correct — oligoarthritis is the most common subtype (~50% of cases), classically presents with painless swelling in fewer than 6 joints in a young child, and ANA-positivity plus female sex puts her at over 50% lifetime risk of uveitis, which is often painless and requires recurring ophthalmology screening.">Oligoarthritis — high risk of (often painless) uveitis requiring recurring eye exams</li>
+      <li data-fb="Not quite — systemic JIA presents with fevers, rash, and organomegaly, not an isolated painless knee.">Systemic JIA — risk of macrophage activation syndrome</li>
+      <li data-fb="Not quite — RF-positive polyarticular disease peaks at 12–16 years and involves more than 6 joints, not a single knee in a preschooler.">Polyarticular RF-positive — risk of aggressive joint destruction</li>
+      <li data-fb="Not quite — enthesitis-related JIA peaks after age 11 and is male-predominant, with enthesitis rather than isolated painless knee swelling in a toddler.">Enthesitis-related JIA — risk of TMJ lock-jaw</li>
+    </ul>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz">
+    <p class="stem">2. Which JIA subtype is the only one with an equal male-to-female ratio, and what rash is classically associated with it?</p>
+    <ul class="choices" data-answer="2">
+      <li data-fb="Not quite — psoriatic JIA has a female predominance (~2:1) and a scaly rash.">Psoriatic JIA — scaly rash</li>
+      <li data-fb="Not quite — oligoarthritis is female-predominant (4:1) and isn't classically associated with a rash.">Oligoarthritis — no characteristic rash</li>
+      <li data-fb="Correct — systemic JIA is the one subtype with a 1:1 male:female ratio, and about 50% of patients develop a salmon-pink rash over the whole body, alongside high fevers and organomegaly.">Systemic JIA — salmon-pink rash</li>
+      <li data-fb="Not quite — enthesitis-related JIA is male-predominant, not equal, and isn't defined by a rash.">Enthesitis-related JIA — no characteristic rash</li>
+    </ul>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz">
+    <p class="stem">3. A 14-year-old girl presents with swelling in more than 6 joints, including the hips and spine, with rapid progressive joint damage. Rheumatoid factor is positive. What is true about this presentation?</p>
+    <ul class="choices" data-answer="1">
+      <li data-fb="Not quite — RF-positive polyarticular JIA actually carries a low, not high, uveitis risk.">This subtype carries a high risk of uveitis</li>
+      <li data-fb="Correct — RF-positive polyarticular JIA peaks at 12–16 years, is markedly female-predominant, and is the most aggressive/destructive subtype, but carries a comparatively low uveitis risk.">This is RF-positive polyarticular JIA — the most aggressive subtype, but with low uveitis risk</li>
+      <li data-fb="Not quite — that description fits oligoarthritis (fewer than 6 joints), not this case.">This is oligoarthritis with secondary joint involvement</li>
+      <li data-fb="Not quite — first-line treatment for aggressive polyarticular disease is not NSAID monotherapy; methotrexate and/or biologics are typically needed given the destructive course.">First-line treatment should be NSAID monotherapy</li>
+    </ul>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz">
+    <p class="stem">4. What is the minimum symptom duration required before a JIA diagnosis can be made, and when should the final subtype be assigned?</p>
+    <ul class="choices" data-answer="1">
+      <li data-fb="Not quite — 6 weeks is the minimum for diagnosis, but typing isn't finalized that early.">2 weeks to diagnose; type at 3 months</li>
+      <li data-fb="Correct — symptoms must be present for at least 6 weeks to diagnose JIA, and the final subtype shouldn't be locked in until the 6-month point, since the pattern can evolve.">6 weeks to diagnose; final typing not until 6 months</li>
+      <li data-fb="Not quite — this overstates both windows.">3 months to diagnose; type at 1 year</li>
+      <li data-fb="Not quite — there is a defined minimum window, not an immediate diagnosis.">No minimum duration; diagnosis can be made immediately with a positive ANA</li>
+    </ul>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz">
+    <p class="stem">5. Which subtype is distinguished by inflammation at tendon insertion sites in addition to joint swelling?</p>
+    <ul class="choices" data-answer="3">
+      <li data-fb="Not quite — psoriatic JIA is distinguished by a scaly rash, not enthesitis.">Psoriatic JIA</li>
+      <li data-fb="Not quite — systemic JIA is distinguished by fevers, rash, and organomegaly.">Systemic JIA</li>
+      <li data-fb="Not quite — RF-positive polyarticular JIA is distinguished by aggressive joint destruction in >6 joints.">Polyarticular RF-positive JIA</li>
+      <li data-fb="Correct — enthesitis-related JIA is defined by inflammation at tendon insertion sites (entheses) in addition to joint swelling, peaks after age 11, and is the one subtype with a male predominance.">Enthesitis-related JIA</li>
+    </ul>
+    <div class="feedback"></div>
+  </div>
+
+  <footer>Built from Dr. Scott Stephens' MSK II JIA lecture (slides + Panopto transcript) · Study guide for review use</footer>
+</div>
+
+<script>
+function toggleNav(){
+  document.getElementById('sideNav').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+document.querySelectorAll('.quiz').forEach(function(quiz){
+  var choices = quiz.querySelectorAll('.choices li');
+  var fb = quiz.querySelector('.feedback');
+  var answered = false;
+  choices.forEach(function(li, idx){
+    li.addEventListener('click', function(){
+      if(answered) return;
+      answered = true;
+      var correctIdx = parseInt(quiz.querySelector('.choices').dataset.answer, 10);
+      choices.forEach(function(c, i){
+        if(i === correctIdx) c.classList.add('correct');
+        else if(c === li) c.classList.add('incorrect');
+      });
+      fb.textContent = li.dataset.fb;
+      fb.classList.add('show');
+      fb.classList.add(idx === correctIdx ? 'right' : 'wrong');
+    });
+  });
+});
+document.getElementById('downloadBtn').addEventListener('click', function(){
+  var blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'JIA_Study_Guide.html';
+  a.click();
+});
+</script>
+</body>
+</html>
