@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Joint, Muscle, and Skin Autoimmunity — Study Guide</title>
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-2:#f3ecd9;
+  --green-dark:#2f5233;
+  --green:#3f7d52;
+  --green-light:#e7f0e5;
+  --ink:#2b2b26;
+  --ink-soft:#5b5a4f;
+  --line:#d9d0b8;
+  --gold:#b8944f;
+  --wrong:#a5453a;
+  --right:#2f7d4f;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+a{color:var(--green-dark);}
+
+/* fixed chrome */
+#backBtn{
+  position:fixed; top:18px; left:18px; z-index:700;
+  background:var(--cream); border:1px solid var(--green-dark);
+  color:var(--green-dark); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  text-decoration:none; cursor:pointer;
+}
+#backBtn:hover{background:var(--green-dark); color:var(--cream);}
+#downloadBtn{
+  position:fixed; top:18px; right:18px; z-index:700;
+  background:var(--green-dark); border:1px solid var(--green-dark);
+  color:var(--cream); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  cursor:pointer;
+}
+#downloadBtn:hover{background:var(--green);}
+
+/* sliding sections panel */
+#sectionsTab{
+  position:fixed; top:50%; right:0; transform:translateY(-50%);
+  z-index:600; background:var(--green-dark); color:var(--cream);
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  padding:14px 8px; writing-mode:vertical-rl; text-orientation:mixed;
+  border-radius:8px 0 0 8px; cursor:pointer; box-shadow:-2px 0 10px rgba(0,0,0,.12);
+}
+#sideNavScrim{
+  position:fixed; inset:0; background:rgba(30,30,20,.25);
+  z-index:590; display:none;
+}
+#sideNav{
+  position:fixed; top:0; right:0; height:100%;
+  width:min(300px, calc(100vw - 96px));
+  background:var(--cream-2); border-left:1px solid var(--line);
+  z-index:595; transform:translateX(100%); transition:transform .25s ease;
+  overflow-y:auto; padding:70px 20px 40px;
+}
+#sideNav.open{transform:translateX(0);}
+#sideNav h3{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  color:var(--green-dark); text-transform:uppercase; margin:0 0 14px;
+}
+#sideNav .navItem{
+  display:block; padding:8px 6px; border-bottom:1px solid var(--line);
+  color:var(--ink); text-decoration:none; font-size:14px; cursor:pointer;
+}
+#sideNav .navItem:hover{color:var(--green-dark);}
+#sideNav .navNum{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:8px; font-size:12px;}
+
+main{max-width:900px; margin:0 auto; padding:90px 28px 100px;}
+
+header.hero{text-align:center; margin-bottom:38px;}
+header.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green);
+}
+header.hero h1{
+  font-size:2.3rem; margin:10px 0 6px; color:var(--green-dark); line-height:1.2;
+}
+header.hero .sub{color:var(--ink-soft); font-size:15px;}
+
+.contents{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:10px;
+  padding:22px 26px; margin:30px 0 40px;
+}
+.contents h2{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green-dark); margin:0 0 12px;
+}
+.contents ol{margin:0; padding-left:0; list-style:none; columns:2; column-gap:28px;}
+.contents li{margin-bottom:7px; break-inside:avoid;}
+.contents a{text-decoration:none; font-size:14.5px;}
+.contents a:hover{text-decoration:underline;}
+.contents .num{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:6px; font-size:12.5px;}
+
+section.part{margin-bottom:20px;}
+section.part > h2.partTitle{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green); border-bottom:1px solid var(--line);
+  padding-bottom:6px; margin:48px 0 18px;
+}
+
+article.topic{
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:26px 28px; margin-bottom:26px; scroll-margin-top:80px;
+}
+article.topic h3{
+  color:var(--green-dark); font-size:1.35rem; margin:0 0 4px;
+}
+article.topic .tagline{color:var(--ink-soft); font-style:italic; font-size:14.5px; margin-bottom:14px;}
+article.topic h4{color:var(--green-dark); font-size:1rem; margin:18px 0 8px;}
+article.topic p{margin:0 0 12px;}
+article.topic ul, article.topic ol{margin:0 0 12px; padding-left:22px;}
+article.topic li{margin-bottom:5px;}
+article.topic strong{color:var(--green-dark);}
+
+.pearl{
+  background:var(--green-light); border-left:4px solid var(--green);
+  border-radius:6px; padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.pearl .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--green-dark); display:block; margin-bottom:4px;}
+
+.formula{
+  background:#fbf3e3; border:1px dashed var(--gold); border-radius:6px;
+  padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.formula .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:#8a6a2e; display:block; margin-bottom:4px;}
+
+table.data-table{
+  width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px;
+}
+table.data-table caption{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--green-dark); text-align:left; margin-bottom:6px;
+}
+table.data-table th{
+  background:var(--green-dark); color:var(--cream); padding:8px 10px; text-align:left;
+  font-size:12.5px;
+}
+table.data-table td{padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:#fbf8ef;}
+
+.quiz{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:8px;
+  padding:16px 18px; margin-top:16px;
+}
+.quiz .qhead{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--green-dark); text-transform:uppercase; margin-bottom:6px;}
+.quiz .qtext{font-size:14.5px; margin-bottom:10px;}
+.quiz .choice{
+  display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line);
+  border-radius:6px; padding:9px 12px; margin-bottom:7px; cursor:pointer; font-size:14px;
+  font-family:Georgia,serif; color:var(--ink);
+}
+.quiz .choice:hover{border-color:var(--green);}
+.quiz .choice.correct{background:#e7f3ea; border-color:var(--right); color:var(--right);}
+.quiz .choice.wrong{background:#f7e9e7; border-color:var(--wrong); color:var(--wrong);}
+.quiz .explain{
+  display:none; margin-top:10px; padding:10px 12px; background:#fff;
+  border-left:4px solid var(--green); font-size:13.5px; border-radius:4px;
+}
+.quiz .explain.show{display:block;}
+
+footer{
+  text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:60px;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+@media print{
+  #backBtn,#downloadBtn,#sectionsTab,#sideNav,#sideNavScrim{display:none !important;}
+  main{padding-top:20px;}
+}
+@media (max-width:640px){
+  main{padding:80px 16px 80px;}
+  .contents ol{columns:1;}
+}
+</style>
+</head>
+<body>
+
+<button id="backBtn" onclick="window.close()">&larr; Back to Study Guides</button>
+<button id="downloadBtn" onclick="window.print()">Download PDF</button>
+<div id="sectionsTab" onclick="toggleNav()">SECTIONS</div>
+<div id="sideNavScrim" onclick="toggleNav()"></div>
+<nav id="sideNav">
+  <h3>Sections</h3>
+  <span class="navItem" onclick="jump('sec0')"><span class="navNum">00</span>Intro &amp; Objectives</span>
+  <span class="navItem" onclick="jump('sec1')"><span class="navNum">01</span>Autoimmunity Fundamentals</span>
+  <span class="navItem" onclick="jump('sec2')"><span class="navNum">02</span>Rheumatoid Arthritis</span>
+  <span class="navItem" onclick="jump('sec3')"><span class="navNum">03</span>Ankylosing Spondylitis &amp; Psoriatic Arthritis</span>
+  <span class="navItem" onclick="jump('sec4')"><span class="navNum">04</span>Polymyalgia Rheumatica &amp; GCA</span>
+  <span class="navItem" onclick="jump('sec5')"><span class="navNum">05</span>Polymyositis</span>
+  <span class="navItem" onclick="jump('sec6')"><span class="navNum">06</span>Autoimmune Myositis (Ab-Mediated)</span>
+  <span class="navItem" onclick="jump('sec7')"><span class="navNum">07</span>Sjögren's Syndrome &amp; Psoriasis</span>
+  <span class="navItem" onclick="jump('sec8')"><span class="navNum">08</span>Vitiligo, Lichen Planus &amp; Alopecia Areata</span>
+  <span class="navItem" onclick="jump('sec9')"><span class="navNum">09</span>Bullous Pemphigoid &amp; Pemphigus Vulgaris</span>
+  <span class="navItem" onclick="jump('sec10')"><span class="navNum">10</span>Scleroderma &amp; Epidermolysis Bullosa Acquisita</span>
+  <span class="navItem" onclick="jump('sec11')"><span class="navNum">11</span>Secondary Autoimmune Effects</span>
+  <span class="navItem" onclick="jump('sec12')"><span class="navNum">12</span>Therapeutic Targets &amp; Board Review</span>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">MSK II · Immunology · Dr. Paul Nash</div>
+  <h1>Joint, Muscle, and Skin Autoimmunity</h1>
+  <div class="sub">Built from lecture slides + narrated transcript (Panopto notes)</div>
+</header>
+
+<div class="contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><span class="num">00</span><a href="#sec0">Intro, Objectives &amp; Terms to Know</a></li>
+    <li><span class="num">01</span><a href="#sec1">Autoimmunity Fundamentals</a></li>
+    <li><span class="num">02</span><a href="#sec2">Rheumatoid Arthritis</a></li>
+    <li><span class="num">03</span><a href="#sec3">Ankylosing Spondylitis &amp; Psoriatic Arthritis</a></li>
+    <li><span class="num">04</span><a href="#sec4">Polymyalgia Rheumatica &amp; Giant Cell Arteritis</a></li>
+    <li><span class="num">05</span><a href="#sec5">Polymyositis</a></li>
+    <li><span class="num">06</span><a href="#sec6">Autoimmune Myositis (Antibody-Mediated)</a></li>
+    <li><span class="num">07</span><a href="#sec7">Sjögren's Syndrome &amp; Psoriasis</a></li>
+    <li><span class="num">08</span><a href="#sec8">Vitiligo, Lichen Planus &amp; Alopecia Areata</a></li>
+    <li><span class="num">09</span><a href="#sec9">Bullous Pemphigoid &amp; Pemphigus Vulgaris</a></li>
+    <li><span class="num">10</span><a href="#sec10">Scleroderma &amp; Epidermolysis Bullosa Acquisita</a></li>
+    <li><span class="num">11</span><a href="#sec11">Secondary Autoimmune Effects</a></li>
+    <li><span class="num">12</span><a href="#sec12">Therapeutic Targets &amp; Board Review</a></li>
+  </ol>
+</div>
+
+<!-- ============ SECTION 0 ============ -->
+<section class="part" id="sec0">
+<h2 class="partTitle">00 · Intro, Objectives &amp; Terms to Know</h2>
+<article class="topic">
+<h3>Learning Objectives</h3>
+<ul>
+<li>Explain the immunological mechanisms and components underlying joint, muscle, and skin autoimmunity, including T-cell– and antibody-mediated responses.</li>
+<li>Describe the role of genetic and environmental factors in the initiation and progression of autoimmune disease.</li>
+<li>Differentiate between the autoimmune diseases affecting the MSK and skin systems (RA, ankylosing spondylitis, autoimmune myositis, pemphigoid, vitiligo, alopecia areata, psoriasis, etc).</li>
+<li>Evaluate the diagnostic markers and pathological features associated with these diseases, including rheumatoid factor, anti-CCP, and citrullination.</li>
+</ul>
+<div class="pearl"><span class="lbl">Framing</span>This lecture is deliberately not comprehensive — Dr. Nash focuses on the <strong>immune mechanism</strong> of pathogenesis, damage, and diagnosis for each disease. Detailed clinical diagnosis/pathology is covered elsewhere in the curriculum, so when you see a disease here, ask "which hypersensitivity type, which cell, which antigen?" rather than memorizing full clinical pictures.</div>
+<h4>Lecture Roadmap</h4>
+<table class="data-table">
+<tr><th>Region</th><th>Mechanism</th><th>Diseases</th></tr>
+<tr><td rowspan="1"><strong>Joint &amp; Bone</strong></td><td>T-cell mediated</td><td>Rheumatoid arthritis, ankylosing spondylitis, psoriatic arthritis</td></tr>
+<tr><td rowspan="2"><strong>Muscle</strong></td><td>CD4+ T-cell mediated</td><td>Polymyalgia rheumatica</td></tr>
+<tr><td>CD8+ T-cell mediated / Antibody mediated</td><td>Polymyositis / Autoimmune myositis</td></tr>
+<tr><td rowspan="3"><strong>Skin</strong></td><td>CD4+ T-cell mediated</td><td>Sjögren's syndrome, psoriasis</td></tr>
+<tr><td>CD8+ T-cell mediated</td><td>Vitiligo, lichen planus, alopecia areata</td></tr>
+<tr><td>Antibody mediated</td><td>Bullous pemphigoid, scleroderma, pemphigus vulgaris, epidermolysis bullosa acquisita</td></tr>
+<tr><td><strong>Secondary effects</strong></td><td>—</td><td>Dermatitis herpetiformis, multiple sclerosis, SLE</td></tr>
+</table>
+<h4>Key Terms to Know</h4>
+<p>Alopecia areata · Ankylosing spondylitis · Anti-CCP (ACPA) · Antigen cross-reactivity · Antigenic mimicry · Autoantibody · Autoimmune myositis · B-cell antigen presentation · Bullous pemphigoid · CD4+ T-cell-mediated autoimmunity · CD40/CD40L · Citrullination · Complement activation · CTL function/CTL-mediated autoimmunity · Damage/response antigen cycle · Dermatitis herpetiformis · Eosinophil · Epidermolysis bullosa acquisita · Genetic contributions to autoimmunity · Hypersensitivity types II, III, IV · IgG/IgG1/IgG4/IgM · IL-17 · Immune complex-mediated autoimmunity · Immune tolerance · Inflammatory cytokines · Langerhans cell · Lichen planus · Mast cells · Melanocyte destruction · MHC (HLA) association · Naïve T-cell activation · NK cell triggering · Osteoclast activation · Pemphigoid · Pemphigus vulgaris · Plasmacytoid dendritic cell (IPC) · Polymyalgia rheumatica · Polymyositis · Psoriasis · Psoriatic arthritis · Rheumatoid arthritis · Rheumatoid factor · Scleroderma · Sjögren's syndrome · SLE · Targets for autoimmune intervention · T-cell help · Th1/Th17 · Vitiligo</p>
+</article>
+</section>
+
+<!-- ============ SECTION 1 ============ -->
+<section class="part" id="sec1">
+<h2 class="partTitle">01 · Autoimmunity Fundamentals</h2>
+
+<article class="topic">
+<h3>Hypersensitivity Framework &amp; Disease Prevalence</h3>
+<p class="tagline">Autoimmunities are not rare — and most fit cleanly into the classic hypersensitivity scheme.</p>
+<table class="data-table">
+<caption>Prevalence of Selected Autoimmune Diseases</caption>
+<tr><th>Disease</th><th>Mechanism</th><th>Consequence</th><th>Prevalence</th></tr>
+<tr><td>Psoriasis</td><td>Autoreactive T cells vs. skin antigens</td><td>Scaly plaques</td><td>1 in 50</td></tr>
+<tr><td>Rheumatoid arthritis</td><td>Autoreactive T cells + autoantibodies (synovium) + RF</td><td>Joint inflammation/destruction</td><td>1 in 100</td></tr>
+<tr><td>Graves' disease</td><td>Autoantibodies vs. TSH receptor</td><td>Hyperthyroidism</td><td>1 in 100</td></tr>
+<tr><td>Hashimoto's thyroiditis</td><td>Autoantibodies + T cells vs. thyroid</td><td>Hypothyroidism</td><td>1 in 200</td></tr>
+<tr><td>SLE</td><td>Antibodies/T cells vs. DNA, chromatin, RNP</td><td>Glomerulonephritis, vasculitis, rash</td><td>1 in 200</td></tr>
+<tr><td>Sjögren's syndrome</td><td>Antibodies + T cells vs. RNP antigens</td><td>Exocrine gland infiltration → dry eyes/mouth</td><td>1 in 300</td></tr>
+<tr><td>Crohn's disease</td><td>Autoreactive T cells vs. intestinal flora</td><td>Intestinal inflammation/scarring</td><td>1 in 500</td></tr>
+<tr><td>Multiple sclerosis</td><td>Autoreactive T cells vs. brain/cord antigens</td><td>Demyelination → weakness, ataxia</td><td>1 in 700</td></tr>
+<tr><td>Type 1 diabetes</td><td>Autoreactive T cells vs. islet antigens</td><td>β-cell destruction</td><td>1 in 800</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Pearl</span>Of this list, <strong>psoriasis, rheumatoid arthritis, and Sjögren's syndrome</strong> fit directly in MSK; MS is mentioned again later because its downstream effect is on muscle.</div>
+
+<h4>Classified by Immunopathogenic Mechanism</h4>
+<table class="data-table">
+<caption>T Cell–Mediated Disease (Type IV)</caption>
+<tr><th>Syndrome</th><th>Autoantigen</th><th>Consequence</th></tr>
+<tr><td>Type 1 diabetes</td><td>Pancreatic β-cell antigen</td><td>β-cell destruction</td></tr>
+<tr><td>Rheumatoid arthritis</td><td>Unknown synovial joint antigen</td><td>Joint inflammation and destruction</td></tr>
+<tr><td>Multiple sclerosis</td><td>MBP, PLP, MOG</td><td>CD4 T-cell CNS invasion → weakness, neuro symptoms</td></tr>
+<tr><td>Crohn's disease</td><td>Intestinal microbiota antigens</td><td>Regional inflammation, scarring</td></tr>
+<tr><td>Psoriasis</td><td>Unknown skin antigens</td><td>Inflammation, plaques</td></tr>
+</table>
+<table class="data-table">
+<caption>Immune-Complex Disease (Type III)</caption>
+<tr><th>Syndrome</th><th>Autoantigen</th><th>Consequence</th></tr>
+<tr><td>Mixed essential cryoglobulinemia</td><td>RF-IgG complexes (± hepatitis C antigen)</td><td>Systemic vasculitis</td></tr>
+<tr><td>Rheumatoid arthritis</td><td>RF-IgG complexes</td><td>Arthritis</td></tr>
+</table>
+<table class="data-table">
+<caption>Antibody Against Cell-Surface/Matrix Antigens (Type II)</caption>
+<tr><th>Syndrome</th><th>Autoantigen</th><th>Consequence</th></tr>
+<tr><td>Autoimmune hemolytic anemia</td><td>Rh, I antigens</td><td>RBC destruction (complement + FcR⁺ phagocytes), anemia</td></tr>
+<tr><td>Autoimmune thrombocytopenic purpura</td><td>Platelet integrin GpIIb:IIIa</td><td>Abnormal bleeding</td></tr>
+<tr><td>Goodpasture's syndrome</td><td>Noncollagenous domain, collagen IV (basement membrane)</td><td>Glomerulonephritis, pulmonary hemorrhage</td></tr>
+<tr><td>Pemphigus vulgaris</td><td>Epidermal cadherin (desmoglein)</td><td>Skin blistering</td></tr>
+<tr><td>Acute rheumatic fever</td><td>Strep cell-wall Ag cross-reacting with cardiac muscle</td><td>Arthritis, myocarditis, valve scarring</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Pearl</span><strong>RA has both T-cell (type IV) and immune-complex (type III) components</strong> — many autoimmunities span more than one hypersensitivity category, some directly and some secondary to the primary cause.</div>
+</article>
+
+<article class="topic">
+<h3>Breakdown of Immune Tolerance</h3>
+<p class="tagline">Autoimmunity "shouldn't happen" — multiple redundant tolerance layers must all fail.</p>
+<table class="data-table">
+<caption>Layers of Self-Tolerance</caption>
+<tr><th>Type of Tolerance</th><th>Mechanism</th><th>Site of Action</th></tr>
+<tr><td>Central tolerance</td><td>Deletion, editing</td><td>Thymus (T cells), bone marrow (B cells)</td></tr>
+<tr><td>Antigen segregation</td><td>Physical barrier to self-antigen access</td><td>Peripheral organs (thyroid, pancreas)</td></tr>
+<tr><td>Peripheral anergy</td><td>Inactivation by weak signal, no co-stimulus</td><td>Secondary lymphoid tissue</td></tr>
+<tr><td>Regulatory T cells</td><td>Suppression by cytokines, cell contact</td><td>Secondary lymphoid tissue, sites of inflammation</td></tr>
+<tr><td>Functional deviation</td><td>Regulatory T cells that limit inflammatory cytokines</td><td>Secondary lymphoid tissue, sites of inflammation</td></tr>
+<tr><td>Activation-induced cell death</td><td>Apoptosis</td><td>Secondary lymphoid tissue, sites of inflammation</td></tr>
+<tr><td>Immunological ignorance</td><td>Low-affinity interaction, no co-activation</td><td>Peripheral organs</td></tr>
+<tr><td>Immunologically privileged sites</td><td>TGF-β, Fas</td><td>Brain, eye, testis, uterus (fetus)</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Pearl</span>If autoimmunity is present, <strong>none</strong> of these layers were sufficient. Why it develops is still unclear, but a few mechanisms are logical candidates.</div>
+
+<h4>Generation of New Epitopes: Citrullination</h4>
+<p><strong>Peptidylarginine deaminase (PAD)</strong> converts positively-charged arginine residues in proteins to neutral <strong>citrulline</strong>. Loss of surface charge makes the protein more susceptible to proteolytic degradation. The resulting citrullinated peptides are presented by HLA class II to CD4 T cells — because citrullinated protein is not identical to the native protein, tolerance never developed against it, so it is now recognized as "foreign."</p>
+
+<h4>Possible Initiators of Autoimmunity</h4>
+<table class="data-table">
+<tr><th>Mechanism</th><th>Disruption of Barrier</th><th>Molecular Mimicry</th></tr>
+<tr><td><strong>Effect</strong></td><td>Release of sequestered self antigen; activation of non-tolerized cells</td><td>Cross-reactive antibodies or T cells against self, triggered by a pathogen epitope</td></tr>
+<tr><td><strong>Example</strong></td><td>Sympathetic ophthalmia</td><td>Rheumatic fever, reactive arthritis, Lyme arthritis</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Pearl</span>Many self antigens will not trigger a response even after exposure without a <strong>danger signal</strong>. Molecular mimicry requires a pathogen epitope similar enough to a self antigen — and different enough from anything tolerance developed against — to break tolerance.</div>
+
+<h4>Genetic Contributions (selected, non-exhaustive)</h4>
+<p>Genetics affects tolerance mechanisms and helps explain familial clustering of autoimmunity. The lecture's own framing: certain gene knockouts increase antigen persistence, lymphocyte activity duration, or reduce apoptosis — all pushing toward autoimmunity.</p>
+<table class="data-table">
+<tr><th>Proposed Mechanism</th><th>Example Gene/Defect</th><th>Effect / Phenotype</th></tr>
+<tr><td>Antigen clearance &amp; presentation</td><td>C1q, C4, mannose-binding lectin knockout/deficiency; <em>AIRE</em> knockout</td><td>Complement deficiency → ↑ antigen persistence, lupus-like disease; AIRE loss → multi-organ autoimmunity (APECED)</td></tr>
+<tr><td>Signaling</td><td>CD22 knockout (B cells), FcγRIIB knockout</td><td>↓ regulation of lymphocyte activation → lupus-like/lupus phenotype</td></tr>
+<tr><td>Co-stimulatory molecules</td><td>CTLA-4 knockout, PD-1 knockout</td><td>Loss of inhibitory signal → lymphocyte infiltration into organs, lupus-like disease</td></tr>
+<tr><td>Apoptosis</td><td>Fas / FasL mutation (human: ALPS)</td><td>Cells persist longer, less clearance → lupus-like disease with lymphocyte infiltrates</td></tr>
+<tr><td>T-reg development</td><td><em>FOXP3</em> knockout (human: IPEX)</td><td>Multi-organ autoimmunity</td></tr>
+</table>
+<div class="pearl"><span class="lbl">High-Yield Framing</span>Three families to remember: <strong>lack of complement</strong> (↓ antigen clearance), <strong>lack of CD22/CTLA-4</strong> (↑ duration of lymphocyte activity), and <strong>lack of Fas/FasL</strong> (↓ apoptosis → more necrosis → more danger-signal release).</div>
+
+<h4>Murine Model: CTL-Mediated Autoimmunity via Molecular Mimicry</h4>
+<p>A hybrid gene (rat insulin promoter + LCMV nucleoprotein) is expressed transgenically only in pancreatic β cells. By itself, NP expression in β cells provokes <strong>no</strong> T-cell response (no danger signal). When the mouse is then infected with LCMV, NP-specific CD8 T cells are activated by the actual infection, infiltrate the islets, and kill the NP-expressing β cells — producing diabetes. This models how a real infection could trigger autoimmune killing of cells that happen to (coincidentally or by mimicry) express a pathogen-like antigen.</p>
+
+<h4>Th1/Th17 Activation &amp; Disease Associations</h4>
+<p>Dendritic cells receiving the correct maturation signals (e.g., β-glucan via dectin-1 → CARD9 → NF-κB) drive Th0 differentiation toward <strong>Th1</strong> (IL-12/IL-12R/STAT4 → IFN-γ) or <strong>Th17</strong> (IL-23/STAT3 → IL-17, IL-22) depending on cytokine milieu.</p>
+<div class="formula"><span class="lbl">Disease Associations</span>Diseases linked to this IL-12/IL-23–STAT axis (as annotated in lecture): ankylosing spondylitis, inflammatory bowel disease, psoriasis, multiple sclerosis, type 1 diabetes, rheumatoid arthritis, SLE, ulcerative colitis.</div>
+
+<h4>Cognate B-cell/T-cell Help</h4>
+<p>T-cell–dependent B-cell activation, isotype switching, and somatic hypermutation all require <strong>CD40L (T cell) binding CD40 (B cell)</strong>. For the T cell to deliver this signal, it must recognize <strong>antigen + class II MHC</strong> on that B cell. For the B cell to display antigen, it must have <strong>endocytosed</strong> it via BCR binding.</p>
+<div class="pearl"><span class="lbl">Key Point</span>A B cell that internalizes a macromolecular complex (e.g., nucleosome with multiple linked proteins) can present <strong>any</strong> epitope from that complex — not just the one its BCR recognized. This lets a T cell specific for one component "help" a B cell specific for a different, linked component — a mechanism by which complexes can lead to help for self-reactive B cells.</div>
+
+<h4>HLA Association with Autoimmune Disease</h4>
+<table class="data-table">
+<tr><th>Disease</th><th>HLA Allele</th><th>Relative Risk</th><th>Sex Ratio (F:M)</th></tr>
+<tr><td><strong>Ankylosing spondylitis</strong></td><td>B27 (class I)</td><td>87.4</td><td>0.3 (male predominant)</td></tr>
+<tr><td>Type 1 diabetes</td><td>DQ2 and DQ8</td><td>~25</td><td>~1</td></tr>
+<tr><td>Goodpasture's syndrome</td><td>DR2</td><td>15.9</td><td>~1</td></tr>
+<tr><td><strong>Pemphigus vulgaris</strong></td><td>DR4</td><td>14.4</td><td>~1</td></tr>
+<tr><td>Autoimmune uveitis</td><td>B27</td><td>10</td><td>&lt;0.5</td></tr>
+<tr><td><strong>Psoriasis vulgaris</strong></td><td>Cw6</td><td>7</td><td>~1</td></tr>
+<tr><td>SLE</td><td>DR3</td><td>5.8</td><td>10–20</td></tr>
+<tr><td>Multiple sclerosis</td><td>DR2</td><td>4.8</td><td>10</td></tr>
+<tr><td><strong>Rheumatoid arthritis</strong></td><td>DR4</td><td>4.2</td><td>3</td></tr>
+<tr><td>Type 1 diabetes (protective)</td><td>DQ6</td><td>0.02</td><td>~1</td></tr>
+</table>
+<div class="pearl"><span class="lbl">High-Yield Pearl</span>Class II MHC associations are the more common pattern overall — even for many CD8-mediated diseases (CD4 help is still required to prime a robust CD8 response) — but <strong>ankylosing spondylitis (HLA-B27)</strong> is the classic <strong>class I</strong> association, consistent with its CD8/CTL-driven pathogenesis.</div>
+
+<h4>Amplification Cycle of Autoimmune Damage</h4>
+<p>Damage from an autoimmune response releases <strong>more self antigen</strong>, which stimulates more of the response, which causes more damage — a self-reinforcing cycle. Example (B-cell activation cycle): a circulating autoreactive B cell binds self-antigen released from an injured cell → is activated by a self-peptide–specific T cell via class II MHC → differentiates into plasma cells secreting self-specific antibody → antibody triggers more inflammation and cell injury → more antigen is released → more B cells are recruited.</p>
+</article>
+
+<div class="quiz" id="q1a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A researcher knocks out the gene for Fas ligand in a mouse strain. Which downstream consequence would you expect?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q1b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Which enzyme converts arginine residues to citrulline, generating new epitopes implicated in RA?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</section>
+
+<!-- ============ SECTION 2 ============ -->
+<section class="part" id="sec2">
+<h2 class="partTitle">02 · Rheumatoid Arthritis</h2>
+<article class="topic">
+<h3>Rheumatoid Arthritis</h3>
+<p class="tagline">A progressive, T-cell–predominant (with secondary antibody/immune-complex) arthritis of the small joints.</p>
+<ul>
+<li>Progressive disease, mediated by type III and/or type IV hypersensitivity responses; most evident in the hands, but many joints can be affected.</li>
+<li><strong>T cells are usually the primary mediator</strong>, with antibodies playing a secondary role — but this relationship is not absolute.</li>
+<li>Eventually, bones in the affected joint can actually <strong>fuse</strong>.</li>
+</ul>
+<h4>Pathogenesis</h4>
+<p>An unknown trigger sets up an initial focus of inflammation in the <strong>synovial membrane</strong>, attracting leukocytes into the tissue. Autoreactive CD4+ T cells activate macrophages, producing pro-inflammatory cytokines (<strong>IL-1, IL-6, IL-17, TNF-α</strong>) and sustaining inflammation. These cytokines induce fibroblasts to produce <strong>matrix metalloproteinases (MMPs)</strong> (tissue destruction) and <strong>RANK ligand</strong>. RANKL activates <strong>osteoclasts</strong>, driving bone destruction. <strong>Th1, Th17, and antibodies</strong> all contribute, with a reinforcing cycle keeping the reaction going.</p>
+<div class="pearl"><span class="lbl">RANK</span>RANK is a receptor (related to TNF) for RANK ligand; RANKL stimulates osteoclasts and drives bone degradation in RA.</div>
+
+<h4>Rheumatoid Factor (RF)</h4>
+<p>RF is an antibody — usually <strong>IgM</strong> — that reacts against self <strong>IgG</strong> as the antigen (antibody against antibody). RF-IgG complexes accumulate in the joints and contribute to <strong>type III hypersensitivity</strong> by activating complement and damaging joint tissue.</p>
+
+<h4>Anti-Citrullinated Protein Antibodies (ACPA / Anti-CCP)</h4>
+<p>Citrullination (arginine → citrulline via peptidylarginine deaminase) creates new epitopes on a variety of self proteins. Antibodies against these new epitopes are <strong>anti-citrullinated protein antibodies</strong> (anti-CCP/ACPA), and the new epitopes can be recognized by <strong>both T cells and B cells</strong>. Anti-CCP contributes to damage via: (1) immune-complex formation/deposition, (2) direct <strong>type II</strong>-style binding to cells with opsonization and complement activation. Damage releases more antigen for further immune stimulation.</p>
+<div class="pearl"><span class="lbl">Extra-Articular Finding</span>Antigen-antibody complexes can also form under the skin (not just in joints), producing a rheumatoid <strong>rash</strong> — common in RA patients.</div>
+
+<div class="quiz" id="q2a">
+<div class="qhead">Practice Question · Board-Style Vignette</div>
+<div class="qtext">A 42-year-old woman presents with 6 months of bilateral hand pain and morning stiffness lasting over 1 hour, with swelling and tenderness of the finger joints bilaterally. Autoantibodies are detected. Which process generates the antigen targeted by these antibodies?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q2b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">In RA, which cytokine signal from fibroblasts is directly responsible for activating osteoclasts and driving bone destruction?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 3 ============ -->
+<section class="part" id="sec3">
+<h2 class="partTitle">03 · Ankylosing Spondylitis &amp; Psoriatic Arthritis</h2>
+<article class="topic">
+<h3>Ankylosing Spondylitis</h3>
+<p class="tagline">A CD8/CTL-predominant spondyloarthropathy with the strongest HLA association in this lecture.</p>
+<ul>
+<li>Primarily T-cell caused; mostly affects the <strong>spine</strong>, and (as in RA) bones can fuse.</li>
+<li><strong>Strong association with HLA-B27</strong> (class I MHC) — more prevalent in Caucasians, tracking with AS prevalence in that population.</li>
+<li><strong>Main pathogenic mediator: CD8+ T cells (CTL)</strong>. Th17, NK cells, and γδ T cells also contribute to a lesser degree.</li>
+</ul>
+<div class="pearl"><span class="lbl">Logic Chain</span>HLA-B27 is <strong>class I</strong> → predicts <strong>CD8+/CTL</strong>-predominant pathogenesis, distinguishing AS from the more CD4-driven RA. CD4 cells are still needed to support robust CD8 responses.</div>
+</article>
+<article class="topic">
+<h3>Psoriatic Arthritis</h3>
+<ul>
+<li>Occurs in a subset of psoriasis patients.</li>
+<li>Mediated by <strong>CD4+ and CD8+ T cells, as well as B cells/antibodies</strong> — a multi-mediator disease, unlike the single-mechanism dominance in AS.</li>
+</ul>
+</article>
+
+<div class="quiz" id="q3a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with a strong HLA-B27 association develops progressive spinal fusion. Which cell type is the primary pathogenic mediator?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</section>
+
+<!-- ============ SECTION 4 ============ -->
+<section class="part" id="sec4">
+<h2 class="partTitle">04 · Polymyalgia Rheumatica &amp; Giant Cell Arteritis</h2>
+<article class="topic">
+<h3>Polymyalgia Rheumatica (PMR)</h3>
+<p class="tagline">CD4+ T-cell–mediated regional muscle pain, classically in older women.</p>
+<ul>
+<li>Results in <strong>regional muscle pain</strong>; most common in <strong>older women</strong>.</li>
+<li><strong>Th1 and Th17</strong> cells cause muscle inflammation → pain. <strong>Increased vascularization</strong> also occurs and likely exacerbates the process.</li>
+<li>As with many inflammatory diseases, <strong>CRP is elevated</strong> — IL-6 signals the liver to produce this acute-phase protein, so circulating CRP indicates sufficient systemic inflammation.</li>
+</ul>
+<div class="pearl"><span class="lbl">Association</span><strong>Giant cell arteritis (GCA)</strong> frequently co-occurs with PMR. Look for <strong>thickened temporal arteries</strong>, plus headache, tenderness, visual impairment, weight loss, and night sweats.</div>
+</article>
+
+<div class="quiz" id="q4a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An elevated CRP in a patient with polymyalgia rheumatica is best explained by which cytokine's action on the liver?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</section>
+
+<!-- ============ SECTION 5 ============ -->
+<section class="part" id="sec5">
+<h2 class="partTitle">05 · Polymyositis</h2>
+<article class="topic">
+<h3>Polymyositis</h3>
+<p class="tagline">CD8+/CTL-mediated destruction of myocytes, driven by aberrant MHC class I expression.</p>
+<ul>
+<li>Main symptom: <strong>muscle weakness</strong> (not primarily pain) — basic tasks like lifting the arms, combing hair, or climbing stairs become impaired.</li>
+<li>Symptoms last <strong>weeks to months</strong>. Skin is <strong>not</strong> involved (that distinction defines dermatomyositis instead).</li>
+<li>A variety of muscle groups can be affected, usually <strong>symmetrically</strong>.</li>
+</ul>
+<h4>Pathogenesis</h4>
+<p>Skeletal muscle normally expresses very little MHC class I. In polymyositis, myocytes <strong>abnormally upregulate class I MHC</strong>, allowing CTL to recognize self antigens on the cell surface and kill the myocyte. CTL activation also produces <strong>IFN-γ</strong>, which maintains the high MHC expression — a self-sustaining cycle of destruction and regeneration that produces progressive weakness.</p>
+<div class="pearl"><span class="lbl">Antisynthetase Syndrome</span>A subset with <strong>anti-Jo-1 antibodies</strong> presents with the triad of myositis + <strong>interstitial lung disease</strong> + arthritis. Antibodies can be present even though CD8+ T cells are the primary driver — this defines disease subsets.</div>
+
+<div class="quiz" id="q5a">
+<div class="qhead">Practice Question · Board-Style Vignette</div>
+<div class="qtext">A 48-year-old woman presents with 3 months of progressive proximal muscle weakness, difficulty climbing stairs and combing her hair. Serum CK is markedly elevated. Which mechanism best explains her muscle injury?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q5b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why does polymyositis specifically target skeletal myocytes for CTL-mediated killing when it usually would not?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 6 ============ -->
+<section class="part" id="sec6">
+<h2 class="partTitle">06 · Autoimmune Myositis (Antibody-Mediated)</h2>
+<article class="topic">
+<h3>Autoimmune Myositis — Overview</h3>
+<p class="tagline">Not a single disease — a category of muscle-inflammation disorders, split into inflammatory and necrotizing forms.</p>
+<ul>
+<li>Two main categories: <strong>inflammatory</strong> (includes polymyositis, dermatomyositis) and <strong>necrotizing</strong>.</li>
+<li><strong>Creatine kinase (CK)</strong> is elevated in both, but <strong>higher in necrotizing</strong> forms (more cell death).</li>
+<li>Common symptoms: muscle weakness and pain.</li>
+<li>Cell death releases nuclear contents → can stimulate production of <strong>ANA</strong>.</li>
+<li><strong>Statin use</strong> increases the risk of some forms of autoimmune myositis.</li>
+</ul>
+<h4>Dermatomyositis vs. Other Forms</h4>
+<p><strong>Dermatomyositis</strong> affects both skin and muscle (unlike polymyositis). Polymyositis and inclusion-body myositis are differentiated from each other by histological examination.</p>
+<h4>Antibodies in Myositis</h4>
+<p>A wide range of antibodies occur across the myositis spectrum:</p>
+<ul>
+<li><strong>Myositis-specific antibodies</strong> — found only in myositis; diagnostic.</li>
+<li><strong>Myositis-associated antibodies</strong> — also seen in other diseases; not diagnostic alone.</li>
+</ul>
+<div class="pearl"><span class="lbl">Pearl</span>Antibody presence may be a <strong>mediator</strong> of disease, a <strong>result</strong> of disease, or both — don't assume every associated antibody is causal.</div>
+<h4>Autoimmune vs. Infectious Myositis</h4>
+<p>Myositis can also be caused by infection, not just autoimmunity. Key differential clue: <strong>infectious myositis is usually asymmetric</strong>, while <strong>autoimmune myositis is usually symmetric</strong>.</p>
+
+<div class="quiz" id="q6a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with elevated CK and myositis is found to have a markedly higher CK than typical inflammatory myositis patients. This pattern is more consistent with which category?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q6b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient presents with asymmetric muscle inflammation and no skin findings. This distribution should raise suspicion for which broad category of myositis rather than autoimmune myositis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 7 ============ -->
+<section class="part" id="sec7">
+<h2 class="partTitle">07 · Sjögren's Syndrome &amp; Psoriasis</h2>
+<article class="topic">
+<h3>Sjögren's Syndrome</h3>
+<p class="tagline">CD4+ T-cell–mediated exocrine gland destruction — "dryness" is the unifying theme.</p>
+<ul>
+<li>Actually an autoimmunity of <strong>exocrine glands</strong>, but effects extend to the skin; muscle pain can also occur.</li>
+<li>Inhibited secretions → dry eyes, dry nose, dry skin, dry mouth/throat, dry vagina; digestion can also be affected.</li>
+<li>Caused by <strong>Th1 and Th17</strong> cells damaging epithelial cells of the exocrine system.</li>
+</ul>
+<div class="pearl"><span class="lbl">Pattern Recognition</span>Chronic inflammation is perpetuated by ongoing damage in the same amplification cycle seen with other CD4+-driven autoimmunities — same cell types (Th1/Th17), different target tissue/antigen.</div>
+</article>
+
+<article class="topic">
+<h3>Psoriasis</h3>
+<p class="tagline">Th17-driven epithelial hyperproliferation, with a notable type I interferon component.</p>
+<ul>
+<li>A group of autoimmunities affecting the skin; rashes can be extensive and severe.</li>
+<li><strong>Main pathogenic agent: Th17 cells</strong>. The Th17 response to autoantigens causes <strong>hyperproliferation of epithelial cells</strong>.</li>
+</ul>
+<h4>Koebnerization &amp; Type I Interferon</h4>
+<p>In psoriasis patients, physical trauma to <strong>unaffected</strong> skin can initiate psoriasis symptoms there — a phenomenon called <strong>koebnerization</strong>. There is also potential involvement of <strong>IFN-α/β</strong>: <strong>plasmacytoid dendritic cells (pDCs / interferon-producing cells)</strong> make large amounts of type I interferon. Though best known for antiviral defense, these cytokines here stimulate classical dendritic cells (→ more T-cell activation) and alter cell-surface molecule expression (→ increased sensitivity to NK killing and cytokine signaling).</p>
+
+<div class="quiz" id="q7a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A psoriasis patient develops new plaques at a site of recent skin trauma that was previously unaffected. What is this phenomenon called?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q7b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Dry eyes, dry mouth, and muscle pain in a patient are most consistent with autoimmune damage to which structures, mediated by which T-helper subsets?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 8 ============ -->
+<section class="part" id="sec8">
+<h2 class="partTitle">08 · Vitiligo, Lichen Planus &amp; Alopecia Areata</h2>
+<article class="topic">
+<h3>Vitiligo</h3>
+<p class="tagline">CTL-mediated melanocyte destruction — the most "purely CTL" disease in this lecture.</p>
+<ul>
+<li>Characterized by <strong>lack of pigment</strong> in patches of skin.</li>
+<li><strong>CTL kill melanocytes</strong>, destroying the source of pigment. Regeneration of melanocytes can occur if treatment blocks the killing.</li>
+</ul>
+<h4>Predisposing Genetic Factors</h4>
+<table class="data-table">
+<tr><th>Factor</th><th>Effect</th></tr>
+<tr><td>MHC allele association</td><td>Increased susceptibility (as with many autoimmunities)</td></tr>
+<tr><td>CTLA-4 deficiency</td><td>Increased T-cell activity (loss of inhibitory checkpoint)</td></tr>
+<tr><td>IL-4 deficiency</td><td>More robust Th1 cytokine levels and CTL activation</td></tr>
+<tr><td>IL-10 deficiency</td><td>Limits immune regulation</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Beyond CTL</span>In addition to the primary CTL response, <strong>Th17 cells and antibodies</strong> may also contribute to melanocyte damage.</div>
+</article>
+
+<article class="topic">
+<h3>Lichen Planus</h3>
+<p class="tagline">CTL targeting basement-membrane keratinocytes — can involve skin, mucosa, nails, and hair.</p>
+<ul>
+<li>Primarily <strong>CTL-mediated</strong>; can affect skin, mucosal epithelium, nails, and hair.</li>
+<li>CTL target the <strong>keratinocytes of the basement membrane</strong>; their killing leads to visible symptoms and — like other autoimmunities here — sets up a cycle of antigen release and further stimulation.</li>
+<li>CTL responses require helper T cells, which in turn require <strong>dendritic cell antigen presentation</strong> (<strong>Langerhans cells</strong> are the resident dendritic cells of skin).</li>
+<li>Keratinocyte destruction leads to <strong>separation of skin layers</strong>.</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Alopecia Areata</h3>
+<p class="tagline">CTL destruction of hair follicles — with both antigen-dependent and antigen-independent killing.</p>
+<ul>
+<li>Symptom: extensive (often patchy) <strong>hair loss</strong> from CTL destruction of hair follicles.</li>
+</ul>
+<h4>Pathogenesis Sequence</h4>
+<p>Dendritic cells pick up antigen from the hair follicle, but must first recognize a <strong>danger signal</strong> (e.g., a local infection, or cell contents released by extrinsic damage). The dendritic cell migrates to a lymph node (or equivalent tissue) to activate both CTL and helper T cells via antigen presentation. Activated CTL then migrate to the follicle and destroy antigen-bearing cells.</p>
+<div class="pearl"><span class="lbl">Antigen-Independent Killing</span>CTL and NK cells can also kill via <strong>positive signal ligands</strong> on target cells, independent of specific antigen recognition (a phenomenon also seen in celiac disease) — antigen-dependent and antigen-independent killing can occur together in the same lesion.</div>
+
+<div class="quiz" id="q8a">
+<div class="qhead">Practice Question · Board-Style Vignette</div>
+<div class="qtext">A 50-year-old woman presents with flat, itchy, violaceous papules. Biopsy shows a dense lymphocytic infiltrate at the dermal-epidermal junction. What is the likely effector component?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q8b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with patchy hair loss and no other skin findings most likely has destruction of hair follicles by which effector cell?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 9 ============ -->
+<section class="part" id="sec9">
+<h2 class="partTitle">09 · Bullous Pemphigoid &amp; Pemphigus Vulgaris</h2>
+<article class="topic">
+<h3>Bullous Pemphigoid</h3>
+<p class="tagline">A rare multi-isotype antibody disease (IgG1, IgG4, and even IgE) plus Th17 — subepidermal blistering.</p>
+<ul>
+<li>Distinctive rash, often with <strong>blistering</strong>. Both T cells and antibodies contribute.</li>
+<li>Blistering results from damage to <strong>underlying tissues</strong>.</li>
+</ul>
+<h4>Three Antibody Isotypes + Th17</h4>
+<table class="data-table">
+<tr><th>Mediator</th><th>Mechanism</th></tr>
+<tr><td><strong>IgG4</strong></td><td>Does <strong>not</strong> fix complement, but interferes with cell/matrix function (binds collagen, promotes phagocytic internalization/depletion of collagen)</td></tr>
+<tr><td><strong>IgG1</strong></td><td>Activates complement → inflammation, lysis, phagocyte activation</td></tr>
+<tr><td><strong>IgE</strong> (rare in autoimmunity)</td><td>Causes mast cell degranulation, signaling inflammation</td></tr>
+<tr><td><strong>Th17 + eosinophils</strong></td><td>Recruited/activated; initiate the blood clotting cascade, further exacerbating inflammation and damage</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Antigen</span>The primary autoantigen is <strong>collagen</strong> (BP180, type XVII collagen). IgG4 and IgG1 antibodies against it cause internalization/depletion of collagen, weakening the skin. This is one of the few autoimmune diseases with a partial <strong>type I hypersensitivity</strong> (IgE) component.</div>
+</article>
+
+<article class="topic">
+<h3>Pemphigus Vulgaris</h3>
+<p class="tagline">Type II hypersensitivity — antibodies against desmoglein cause intraepidermal blistering.</p>
+<ul>
+<li><strong>Type II hypersensitivity</strong> form of autoimmunity — antigens are cell-surface. "Pemphigus" = autoimmunities causing skin blisters; "vulgaris" = common, i.e., the most common form of pemphigus.</li>
+<li>Caused by autoantibodies specific for <strong>desmoglein</strong>, the adhesion molecule in desmosomes that holds keratinocytes together.</li>
+<li>Epitope recognition <strong>progresses over time</strong>. Antibodies inhibit desmoglein adhesion, causing the outer skin/mucosal layers to separate → blisters.</li>
+<li>Both <strong>skin and mucous membranes</strong> can be affected; the disease can be <strong>life-threatening</strong>.</li>
+</ul>
+<div class="pearl"><span class="lbl">Location of Split (High-Yield)</span><strong>Pemphigus vulgaris</strong> loosens cell-cell junctions <strong>within</strong> the epidermis (intraepidermal, desmoglein). <strong>Bullous pemphigoid</strong> loosens the junction <strong>between</strong> epidermis and basement membrane (subepidermal, hemidesmosome/collagen XVII). Pemphigoid blisters are typically tenser/less fragile than pemphigus blisters, given the deeper split.</div>
+
+<div class="quiz" id="q9a">
+<div class="qhead">Practice Question · Board-Style Vignette</div>
+<div class="qtext">A 52-year-old woman has painful oral ulcers followed by flaccid blisters on her chest and back that rupture easily, leaving erosions. Skin biopsy shows intraepidermal blister formation with intercellular IgG deposition in a "fishnet" pattern on DIF. Which autoantibody is responsible?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q9b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Which isotype in bullous pemphigoid does not fix complement, but still contributes to blistering by promoting collagen depletion?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 10 ============ -->
+<section class="part" id="sec10">
+<h2 class="partTitle">10 · Scleroderma &amp; Epidermolysis Bullosa Acquisita</h2>
+<article class="topic">
+<h3>Scleroderma</h3>
+<p class="tagline">Antibody-mediated damage to endothelial cells/fibroblasts, plus stimulated collagen production, producing a leathery skin texture.</p>
+<ul>
+<li>Hardening of the skin → leathery texture.</li>
+<li>Contributing factors: <strong>calcium deposition</strong> in affected skin; amplified cold/stress response with digits turning <strong>blue or white</strong>; <strong>acid reflux</strong> is a commonly associated symptom (esophagus affected); fingers/toes tighten and thicken, with more visible blood vessels.</li>
+</ul>
+<h4>Pathogenesis</h4>
+<p>Various antigens can be targeted — the specific pattern of antigens helps determine which form of scleroderma is present. Antigens are mostly <strong>intracellular</strong>, with a few on <strong>endothelial cells and fibroblasts</strong> (contributing to vascular/connective-tissue dysfunction — <strong>type II</strong> hypersensitivity). Cell damage releases contents that form antigen-antibody complexes, causing inflammation and more damage (<strong>type III</strong> hypersensitivity). The process also stimulates <strong>collagen production</strong>, contributing to skin hardening.</p>
+<div class="pearl"><span class="lbl">Mast Cells</span>Chronically <strong>degranulated</strong> mast cells (visible on stained sections as cells present but empty of granules) suggest ongoing stimulation to release granules as fast as they form — mast cell contents likely also contribute to pathogenicity.</div>
+</article>
+
+<article class="topic">
+<h3>Epidermolysis Bullosa Acquisita</h3>
+<p class="tagline">Anti-collagen antibody disease that mimics bullous pemphigoid's location, but with a different antigen.</p>
+<ul>
+<li>Can appear at various skin/mucosal locations.</li>
+<li>Like pemphigoid, there is <strong>separation of the epidermis from the basement membrane</strong>.</li>
+<li>The autoantigen is <strong>collagen</strong> (type VII). Antibody binding to collagen activates complement → inflammation → junction damage → blistering.</li>
+</ul>
+<div class="pearl"><span class="lbl">Distinguish from Bullous Pemphigoid</span>Both target collagen and cause subepidermal splitting, but EBA targets <strong>type VII collagen</strong> (anchoring fibrils) vs. bullous pemphigoid's <strong>type XVII collagen/BP180</strong> (hemidesmosome). Complement-fixing antibody (implying IgG1, not the IgG4/IgE profile of pemphigoid) drives EBA's inflammatory damage.</div>
+
+<div class="quiz" id="q10a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with limited scleroderma has Raynaud phenomenon, calcinosis, and GI reflux. Which hypersensitivity mechanisms combine to damage endothelial cells and drive collagen deposition?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 11 ============ -->
+<section class="part" id="sec11">
+<h2 class="partTitle">11 · Secondary Autoimmune Effects</h2>
+<article class="topic">
+<h3>Dermatitis Herpetiformis</h3>
+<p class="tagline">A side-effect antibody response in celiac disease that happens to cross-react with skin transglutaminase.</p>
+<ul>
+<li>A potential side effect of <strong>celiac disease</strong>, producing a spread-out rash.</li>
+<li>Celiac disease is primarily <strong>T-cell mediated</strong>, but antibody (usually <strong>IgA</strong>) against <strong>transglutaminase</strong> can also form.</li>
+<li>Anti-transglutaminase IgA binds transglutaminase <strong>in the skin</strong> (not just the gut) and activates complement via the <strong>lectin pathway</strong>, interacting with neutrophils (which have Fc-α receptors) to cause inflammation.</li>
+</ul>
+</article>
+<article class="topic">
+<h3>Multiple Sclerosis &amp; Guillain-Barré Syndrome</h3>
+<ul>
+<li>Primarily <strong>neurologic</strong> autoimmunities (damage to the myelin sheath), but their manifestation is <strong>musculoskeletal</strong> — impaired nerve signaling means impaired muscle contraction.</li>
+</ul>
+</article>
+<article class="topic">
+<h3>Systemic Lupus Erythematosus (SLE)</h3>
+<ul>
+<li>Involves <strong>antigen-antibody complexes</strong> with broad, systemic effects.</li>
+<li>MSK-relevant effects: <strong>joint pain</strong> from immune-complex deposition/inflammation, and — as with other autoimmunities — osteoclast activation can lead to osteoporosis/bone damage. Also produces <strong>rash</strong>.</li>
+</ul>
+
+<div class="quiz" id="q11a">
+<div class="qhead">Practice Question · Board-Style Vignette</div>
+<div class="qtext">A 24-year-old woman presents with fatigue, photosensitivity, and a malar rash. Labs show positive ANA and anti-dsDNA. Skin biopsy shows immune complex deposition at the dermal-epidermal junction. What hypersensitivity type is this?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q11b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A celiac disease patient develops a spread-out, itchy skin rash. Which antibody isotype is classically responsible, and what is its target in the skin?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<!-- ============ SECTION 12 ============ -->
+<section class="part" id="sec12">
+<h2 class="partTitle">12 · Therapeutic Targets &amp; Board Review</h2>
+<article class="topic">
+<h3>Therapeutic Targets in Autoimmunity</h3>
+<p class="tagline">Detailed drug pharmacology is covered elsewhere — this is the conceptual map of "what could be blocked."</p>
+<ul>
+<li><strong>Co-stimulation blockade:</strong> naïve (and possibly memory) T-cell activation requires CD28 binding B7. Introducing <strong>CTLA-4</strong> (which also binds B7) competitively blocks CD28 engagement, preventing full activation.</li>
+<li><strong>Cytokine/receptor blockade:</strong> blocking IL-2 binding its receptor halts proliferation of CTL, Th1, and Th17 cells (all require IL-2 for division). Blocking receptors for IL-17, IFN-γ, or other inflammatory cytokines inhibits their specific downstream effects.</li>
+<li><strong>Shared subunit blockade:</strong> IL-12 and IL-23 share the <strong>p40</strong> subunit. Blocking p40 restricts production of both cytokines, interrupting the positive feedback loop between T cells/NK cells and macrophages.</li>
+<li><strong>Adhesion molecule blockade:</strong> effector cells require cell-cell binding to function. <strong>LFA-1</strong> is necessary both for extravasation and for CTL killing — blocking it can prevent both steps.</li>
+<li><strong>IL-1 blockade:</strong> blocking IL-1 binding its receptor stops IL-1's inflammatory signaling.</li>
+</ul>
+<div class="pearl"><span class="lbl">Big Picture</span>Every target category carries the same tradeoff: blocking a pathway needed for autoimmune damage also blunts immunity where it's actually needed.</div>
+</article>
+
+<article class="topic">
+<h3>High-Yield Summary Table</h3>
+<table class="data-table">
+<tr><th>Disease</th><th>Primary Mediator</th><th>Key Antigen / Marker</th><th>Notable Association</th></tr>
+<tr><td>Rheumatoid arthritis</td><td>CD4+ T cells (Th1/Th17) ± antibody</td><td>RF (anti-IgG); anti-CCP (citrullinated proteins)</td><td>HLA-DR4</td></tr>
+<tr><td>Ankylosing spondylitis</td><td>CD8+ T cells (CTL)</td><td>Unknown; class I–restricted</td><td>HLA-B27 (RR ~87)</td></tr>
+<tr><td>Psoriatic arthritis</td><td>CD4+, CD8+ T cells, B cells</td><td>—</td><td>Occurs with psoriasis</td></tr>
+<tr><td>Polymyalgia rheumatica</td><td>CD4+ (Th1/Th17)</td><td>↑CRP (IL-6 driven)</td><td>Giant cell arteritis, older women</td></tr>
+<tr><td>Polymyositis</td><td>CD8+ T cells (CTL)</td><td>↑CK; anti-Jo-1 (antisynthetase syndrome)</td><td>Symmetric weakness, no skin findings</td></tr>
+<tr><td>Sjögren's syndrome</td><td>CD4+ (Th1/Th17)</td><td>Anti-Ro/La (not detailed in lecture)</td><td>Exocrine gland destruction</td></tr>
+<tr><td>Psoriasis</td><td>Th17</td><td>—</td><td>Koebnerization; type I IFN via pDCs; HLA-Cw6</td></tr>
+<tr><td>Vitiligo</td><td>CTL</td><td>Melanocyte antigen</td><td>CTLA-4/IL-4/IL-10 deficiency ↑ risk</td></tr>
+<tr><td>Lichen planus</td><td>CTL</td><td>Basement-membrane keratinocyte antigen</td><td>Skin, mucosa, nails, hair</td></tr>
+<tr><td>Alopecia areata</td><td>CTL (± NK, antigen-independent)</td><td>Hair follicle antigen</td><td>—</td></tr>
+<tr><td>Bullous pemphigoid</td><td>IgG1, IgG4, IgE, Th17</td><td>Collagen XVII / BP180</td><td>Subepidermal split; rare IgE/type I component</td></tr>
+<tr><td>Pemphigus vulgaris</td><td>Antibody (type II)</td><td>Desmoglein</td><td>Intraepidermal split; HLA-DR4; life-threatening</td></tr>
+<tr><td>Scleroderma</td><td>Antibody (type II/III)</td><td>Mostly intracellular antigens; some endothelial/fibroblast</td><td>Calcinosis, Raynaud, reflux</td></tr>
+<tr><td>Epidermolysis bullosa acquisita</td><td>Antibody (complement-fixing)</td><td>Collagen VII</td><td>Subepidermal split, like pemphigoid</td></tr>
+<tr><td>Dermatitis herpetiformis</td><td>IgA</td><td>Transglutaminase</td><td>Secondary to celiac disease; lectin complement pathway</td></tr>
+<tr><td>SLE</td><td>Antibody/immune complex (type III)</td><td>dsDNA, chromatin, RNP</td><td>Malar rash, joint pain, HLA-DR3</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Official Lecture Board Questions</h3>
+<p class="tagline">The five instructor-provided vignettes, distributed above by topic, are consolidated here for a final timed run-through.</p>
+<div class="quiz" id="qFinalA">
+<div class="qhead">Question A</div>
+<div class="qtext">A 50-year-old female presents with papules; biopsy shows dense lymphocytic infiltrate at the dermal-epidermal junction. What is the likely effector component?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinalB">
+<div class="qhead">Question B</div>
+<div class="qtext">A 48-year-old woman has 3 months of progressive proximal muscle weakness, difficulty climbing stairs/combing hair, and markedly elevated CK. What mechanism best explains the muscle injury?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinalC">
+<div class="qhead">Question C</div>
+<div class="qtext">A 52-year-old woman has painful oral ulcers followed by flaccid, easily-ruptured blisters on chest/back, with intraepidermal blister formation and "fishnet" intercellular IgG on DIF. Which autoantibody is responsible?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinalD">
+<div class="qhead">Question D</div>
+<div class="qtext">A 24-year-old woman has fatigue, photosensitivity, a malar rash, positive ANA and anti-dsDNA, and immune-complex deposition at the dermal-epidermal junction on biopsy. What hypersensitivity type is this?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinalE">
+<div class="qhead">Question E</div>
+<div class="qtext">A 42-year-old woman has 6 months of bilateral hand pain and &gt;1 hour of morning stiffness, with bilateral finger joint swelling/tenderness and detectable autoantibodies. What process generates the targeted antigen?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<footer>Joint, Muscle, and Skin Autoimmunity · MSK II · Dr. Paul Nash · Built for board review</footer>
+</main>
+
+<script>
+function toggleNav(){
+  document.getElementById('sideNav').classList.toggle('open');
+  var scrim = document.getElementById('sideNavScrim');
+  scrim.style.display = scrim.style.display === 'block' ? 'none' : 'block';
+}
+function jump(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  toggleNav();
+}
+
+const questionData = {
+  q1a: {choices:["Increased apoptosis of activated lymphocytes","Cells persist longer after infection clears, increasing autoimmune risk","Enhanced central tolerance in the thymus","Reduced antigen persistence"], correct:1,
+    explain:"Fas/FasL normally trigger activation-induced cell death (apoptosis) to remove activated lymphocytes after a response. Knocking out FasL removes this control, so cells persist longer and accumulate — a lupus-like phenotype in mice (and ALPS in humans)."},
+  q1b: {choices:["Transglutaminase","Peptidylarginine deaminase (PAD)","Matrix metalloproteinase","Rheumatoid factor"], correct:1,
+    explain:"PAD converts arginine to citrulline, generating new epitopes (citrullinated proteins) that tolerance never developed against — the basis for anti-CCP/ACPA antibodies in RA."},
+  q2a: {choices:["Hydroxylation of lysine residues","Glycosylation of collagen fibers","Citrullination of arginine residues","Cross-reactivity with streptococcal antigen","Phosphorylation of serine residues"], correct:2,
+    explain:"This vignette describes RA. Anti-CCP antibodies recognize citrullinated proteins, generated by PAD-mediated post-translational conversion of arginine to citrulline."},
+  q2b: {choices:["TNF-α directly","IL-6 alone","RANK ligand (RANKL)","IFN-γ"], correct:2,
+    explain:"Cytokine-activated fibroblasts produce RANK ligand, which binds RANK on osteoclast precursors, driving osteoclast activation and bone destruction — the key downstream bone-damaging step in RA."},
+  q3a: {choices:["CD4+ Th2 cells","B cells","CD8+ T cells (CTL)","Eosinophils"], correct:2,
+    explain:"Ankylosing spondylitis's strong HLA-B27 (class I) association predicts CD8+/CTL as the primary pathogenic mediator, though Th17, NK, and γδ T cells contribute to a lesser degree."},
+  q4a: {choices:["IL-6 signaling the liver to produce CRP","TNF-α directly entering the bloodstream","IL-17 acting on bone marrow","IFN-γ acting on the spleen"], correct:0,
+    explain:"IL-6 is the key acute-phase-response cytokine that signals hepatocytes to increase production of CRP, a useful marker of systemic inflammation in PMR."},
+  q5a: {choices:["Antibody-mediated complement deposition in capillaries","CD8+ T-cell–mediated cytotoxicity against myofibers","Immune complex deposition in muscle fascia","Autoantibodies against acetylcholine receptors","Eosinophilic infiltration of perimysium"], correct:1,
+    explain:"This is polymyositis: aberrant MHC class I expression on myocytes allows CD8+ CTL to recognize and kill muscle fibers, producing progressive symmetric weakness with elevated CK."},
+  q5b: {choices:["Myocytes normally overexpress MHC I, and polymyositis further increases it","Myocytes normally express very little MHC I, but abnormally upregulate it in polymyositis, enabling CTL recognition","Myocytes lack MHC entirely under normal conditions","CTL recognize myocytes via MHC class II in polymyositis"], correct:1,
+    explain:"Skeletal muscle fibers normally express minimal class I MHC. In polymyositis they abnormally upregulate it, allowing CTL recognition and killing — with IFN-γ from activated CTL sustaining the high expression."},
+  q6a: {choices:["Inflammatory myositis","Necrotizing myositis","Infectious myositis","Dermatomyositis specifically"], correct:1,
+    explain:"CK is elevated in both inflammatory and necrotizing autoimmune myositis, but is characteristically higher in necrotizing forms given the greater degree of cell death."},
+  q6b: {choices:["Dermatomyositis","Necrotizing myositis","Infectious myositis","Antisynthetase syndrome"], correct:2,
+    explain:"Asymmetric muscle inflammation is the classic clue pointing away from autoimmune myositis (usually symmetric) and toward an infectious cause."},
+  q7a: {choices:["Koebnerization","Molecular mimicry","Epitope spreading","Antigenic drift"], correct:0,
+    explain:"Koebnerization is the phenomenon in which physical trauma to unaffected skin triggers new psoriatic lesions at that site in predisposed patients."},
+  q7b: {choices:["Exocrine glands, via Th1 and Th17 cells","Hair follicles, via CTL","Desmosomes, via IgG antibody","Basement membrane, via IgA"], correct:0,
+    explain:"This is Sjögren's syndrome — Th1 and Th17 cells damage epithelial cells of the exocrine glands, producing dryness (eyes, mouth, skin) plus muscle pain."},
+  q8a: {choices:["CD8+ T-cells","IgE","Immune complex","Anti-transglutaminase antibodies","Anti-collagen antibodies"], correct:0,
+    explain:"This is lichen planus, mediated by CTL against basement-membrane keratinocytes — consistent with a dense lymphocytic infiltrate on biopsy. IgE/immune-complex rashes tend to be smoother/less patchy; anti-transglutaminase (dermatitis herpetiformis) causes small, pink, spread-out lesions; anti-collagen (EBA) can look similar but wouldn't show a lymphocytic infiltrate."},
+  q8b: {choices:["CD8+ CTL","Antibody (IgG1)","Mast cell degranulation (IgE)","Immune complex deposition"], correct:0,
+    explain:"Alopecia areata is caused by CTL destruction of hair follicles, with dendritic cells presenting follicle antigen after picking up a danger signal."},
+  q9a: {choices:["Anti-BP180","Anti-desmoglein","Anti-type VII collagen","Anti-transglutaminase","Anti-centromere"], correct:1,
+    explain:"Pemphigus vulgaris is caused by IgG autoantibodies against desmoglein, a desmosomal adhesion protein. Loss of adhesion causes acantholysis and intraepidermal blistering with the characteristic 'fishnet' DIF pattern. Anti-BP180 = bullous pemphigoid; anti-collagen VII = EBA; anti-transglutaminase = celiac/dermatitis herpetiformis; anti-centromere = limited scleroderma."},
+  q9b: {choices:["IgG1","IgG4","IgM","IgA"], correct:1,
+    explain:"IgG4 is the odd IgG subclass that does not fix complement, but it still interferes with tissue function by promoting internalization/depletion of collagen — contributing to blistering independent of complement activation."},
+  q10a: {choices:["Type I and Type IV", "Type II (antibody vs. surface antigens) and Type III (immune-complex deposition)","Type I (IgE) alone","Type IV (CTL) alone"], correct:1,
+    explain:"Scleroderma combines type II hypersensitivity (antibodies against endothelial cell/fibroblast surface antigens) with type III (immune complexes from released intracellular antigens after cell damage), together driving damage and stimulated collagen production."},
+  q11a: {choices:["Type I","Type II","Type III","Type IV","Type V"], correct:2,
+    explain:"Type III hypersensitivities, including autoimmunities, involve antigen-antibody complex deposition — the mechanism described here (and classic for SLE)."},
+  q11b: {choices:["IgA, targeting transglutaminase in the skin","IgE, targeting gliadin in the skin","IgG1, targeting desmoglein","IgM, targeting collagen VII"], correct:0,
+    explain:"Dermatitis herpetiformis results from anti-transglutaminase IgA (a side effect of celiac disease) binding transglutaminase in the skin and activating complement via the lectin pathway, recruiting neutrophils."},
+  qFinalA: {choices:["CD8+ T-cells","IgE","Immune complex","Anti-transglutaminase antibodies","Anti-collagen antibodies"], correct:0,
+    explain:"Lichen planus — CTL-mediated destruction of basement-membrane keratinocytes produces the dense lymphocytic infiltrate seen on biopsy."},
+  qFinalB: {choices:["Antibody-mediated complement deposition in capillaries","CD8+ T-cell–mediated cytotoxicity against myofibers","Immune complex deposition in muscle fascia","Autoantibodies against acetylcholine receptors","Eosinophilic infiltration of perimysium"], correct:1,
+    explain:"Polymyositis — CTL destruction of myocytes expressing abnormally high MHC class I."},
+  qFinalC: {choices:["Anti-BP180","Anti-desmoglein","Anti-type VII collagen","Anti-transglutaminase","Anti-centromere"], correct:1,
+    explain:"Pemphigus vulgaris — IgG against desmoglein causes intraepidermal acantholysis and the 'fishnet' DIF pattern."},
+  qFinalD: {choices:["Type I","Type II","Type III","Type IV","Type V"], correct:2,
+    explain:"SLE — immune-complex (type III) deposition at the dermal-epidermal junction, consistent with malar rash, ANA, and anti-dsDNA."},
+  qFinalE: {choices:["Hydroxylation of lysine residues","Glycosylation of collagen fibers","Citrullination of arginine residues","Cross-reactivity with streptococcal antigen","Phosphorylation of serine residues"], correct:2,
+    explain:"Rheumatoid arthritis — anti-CCP antibodies target citrullinated proteins generated by PAD-mediated conversion of arginine to citrulline."}
+};
+
+Object.keys(questionData).forEach(function(id){
+  const box = document.getElementById(id);
+  if(!box) return;
+  const data = questionData[id];
+  const choiceWrap = box.querySelector('.choices');
+  const explainBox = box.querySelector('.explain');
+  data.choices.forEach(function(text, idx){
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = String.fromCharCode(65+idx) + '. ' + text;
+    btn.onclick = function(){
+      const already = choiceWrap.querySelectorAll('.choice.correct, .choice.wrong').length > 0;
+      if(already) return;
+      const all = choiceWrap.querySelectorAll('.choice');
+      all.forEach(function(b, i){
+        if(i === data.correct) b.classList.add('correct');
+        else if(b === btn) b.classList.add('wrong');
+      });
+      explainBox.textContent = data.explain;
+      explainBox.classList.add('show');
+    };
+    choiceWrap.appendChild(btn);
+  });
+});
+</script>
+</body>
+</html>
