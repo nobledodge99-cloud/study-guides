@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Diseases — Study Guide</title>
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-2:#f3ecd9;
+  --green-dark:#2f5233;
+  --green:#3f7d52;
+  --green-light:#e7f0e5;
+  --ink:#2b2b26;
+  --ink-soft:#5b5a4f;
+  --line:#d9d0b8;
+  --gold:#b8944f;
+  --wrong:#a5453a;
+  --right:#2f7d4f;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Source Serif 4',Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+a{color:var(--green-dark);}
+
+/* fixed chrome */
+#backBtn{
+  position:fixed; top:18px; left:18px; z-index:700;
+  background:var(--cream); border:1px solid var(--green-dark);
+  color:var(--green-dark); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  text-decoration:none; cursor:pointer;
+}
+#backBtn:hover{background:var(--green-dark); color:var(--cream);}
+#downloadBtn{
+  position:fixed; top:18px; right:18px; z-index:700;
+  background:var(--green-dark); border:1px solid var(--green-dark);
+  color:var(--cream); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  cursor:pointer;
+}
+#downloadBtn:hover{background:var(--green);}
+
+/* sliding sections panel */
+#sectionsTab{
+  position:fixed; top:50%; right:0; transform:translateY(-50%);
+  z-index:600; background:var(--green-dark); color:var(--cream);
+  padding:14px 8px; border-radius:8px 0 0 8px; cursor:pointer;
+  font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.15em;
+  writing-mode:vertical-rl; text-orientation:mixed; user-select:none;
+}
+#sectionsTab:hover{background:var(--green);}
+#sideScrim{
+  position:fixed; inset:0; background:rgba(43,43,38,.35);
+  z-index:550; opacity:0; pointer-events:none; transition:opacity .2s;
+}
+#sideScrim.open{opacity:1; pointer-events:auto;}
+#sideNav{
+  position:fixed; top:0; right:0; height:100%;
+  width:min(300px, calc(100vw - 96px));
+  background:var(--cream-2); border-left:1px solid var(--line);
+  z-index:601; transform:translateX(100%); transition:transform .25s ease;
+  overflow-y:auto; padding:70px 22px 30px;
+}
+#sideNav.open{transform:translateX(0);}
+#sideNav h3{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  color:var(--green-dark); margin:0 0 16px; text-transform:uppercase;
+}
+.side-link{
+  display:block; padding:9px 10px; margin-bottom:3px; border-radius:6px;
+  font-size:14px; color:var(--ink-soft); cursor:pointer; line-height:1.35;
+}
+.side-link:hover{background:var(--green-light); color:var(--green-dark);}
+.side-link.active{background:var(--green-dark); color:var(--cream);}
+
+/* layout */
+main{max-width:900px; margin:0 auto; padding:90px 28px 80px;}
+header.hero{text-align:center; margin-bottom:34px;}
+header.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em;
+  color:var(--green); text-transform:uppercase; margin-bottom:10px;
+}
+header.hero h1{font-size:2.15em; margin:0 0 10px; color:var(--green-dark);}
+header.hero p.subtitle{color:var(--ink-soft); font-size:1.02em; margin:0;}
+
+.contents{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:10px;
+  padding:22px 26px; margin-bottom:44px;
+}
+.contents h2{
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.15em;
+  color:var(--green-dark); text-transform:uppercase; margin:0 0 14px;
+}
+.toc-link{
+  display:block; padding:6px 0; color:var(--ink); cursor:pointer;
+  border-bottom:1px dotted var(--line); font-size:15px;
+}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--green-dark);}
+.toc-link .num{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:8px;}
+
+article.topic{margin-bottom:52px; scroll-margin-top:80px;}
+article.topic h2{
+  font-size:1.5em; color:var(--green-dark); border-bottom:2px solid var(--green-dark);
+  padding-bottom:8px; margin:0 0 18px; display:flex; gap:10px; align-items:baseline;
+}
+article.topic h2 .sec-num{
+  font-family:'IBM Plex Mono',monospace; font-size:.62em; color:var(--gold);
+}
+article.topic h3{font-size:1.12em; color:var(--green); margin:24px 0 10px;}
+article.topic p{margin:0 0 14px;}
+article.topic ul, article.topic ol{margin:0 0 14px; padding-left:22px;}
+article.topic li{margin-bottom:5px;}
+
+.pearl{
+  background:var(--green-light); border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0; padding:14px 18px; margin:18px 0; font-size:.97em;
+}
+.pearl strong{color:var(--green-dark);}
+.formula{
+  background:var(--cream-2); border:1px solid var(--gold); border-radius:8px;
+  padding:14px 18px; margin:18px 0; font-size:.97em;
+}
+.formula strong{color:var(--green-dark);}
+.case-box{
+  background:#fff; border:1px solid var(--line); border-left:4px solid var(--gold);
+  border-radius:0 8px 8px 0; padding:16px 20px; margin:18px 0;
+}
+.case-box .case-label{
+  font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.1em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:8px;
+}
+
+table.data-table{
+  width:100%; border-collapse:collapse; margin:18px 0; font-size:.93em;
+}
+table.data-table th{
+  background:var(--green-dark); color:var(--cream); text-align:left;
+  padding:9px 12px; font-weight:600; font-family:'IBM Plex Mono',monospace; font-size:.85em;
+}
+table.data-table td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:var(--cream-2);}
+
+.quiz{
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:18px 20px; margin:16px 0;
+}
+.quiz .qtext{font-weight:600; margin-bottom:12px;}
+.quiz .opt{
+  display:block; width:100%; text-align:left; background:var(--cream);
+  border:1px solid var(--line); border-radius:6px; padding:10px 14px;
+  margin-bottom:8px; cursor:pointer; font-family:inherit; font-size:.96em; color:var(--ink);
+}
+.quiz .opt:hover{background:var(--green-light);}
+.quiz .opt.correct{background:#dcefdf; border-color:var(--right); color:var(--right);}
+.quiz .opt.incorrect{background:#f5dedb; border-color:var(--wrong); color:var(--wrong);}
+.quiz .feedback{
+  margin-top:10px; padding:10px 14px; border-radius:6px; font-size:.92em; display:none;
+}
+.quiz .feedback.show{display:block;}
+.quiz .feedback.correct{background:#dcefdf; color:var(--right);}
+.quiz .feedback.incorrect{background:#f5dedb; color:var(--wrong);}
+
+footer{
+  text-align:center; padding:30px 20px; color:var(--ink-soft);
+  font-family:'IBM Plex Mono',monospace; font-size:11.5px; border-top:1px solid var(--line);
+  margin-top:40px;
+}
+
+@media(max-width:640px){
+  main{padding:80px 18px 60px;}
+  header.hero h1{font-size:1.6em;}
+}
+@media print{
+  #backBtn,#downloadBtn,#sectionsTab,#sideNav,#sideScrim{display:none !important;}
+  main{padding-top:20px;}
+}
+</style>
+</head>
+<body>
+
+<div id="backBtn" onclick="history.back()">← Back to Study Guides</div>
+<div id="downloadBtn" onclick="window.print()">Download PDF</div>
+<div id="sectionsTab" onclick="openSideNav()">SECTIONS</div>
+<div id="sideScrim" onclick="closeSideNav()"></div>
+<nav id="sideNav">
+  <h3>Sections</h3>
+  <span class="side-link" data-target="s1">1 — Overview &amp; Birefringence Fundamentals</span>
+  <span class="side-link" data-target="s2">2 — Hyperuricemia &amp; Gout Pathophysiology</span>
+  <span class="side-link" data-target="s3">3 — Clinical Features &amp; Course of Gout</span>
+  <span class="side-link" data-target="s4">4 — Evaluation of Gout</span>
+  <span class="side-link" data-target="s5">5 — Treatment of Gout</span>
+  <span class="side-link" data-target="s6">6 — Pseudogout (CPPD)</span>
+  <span class="side-link" data-target="s7">7 — Other Crystal Diseases</span>
+  <span class="side-link" data-target="s8">8 — Clinical Pearls &amp; Case Review</span>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">MSK II · Clinical Sciences</div>
+  <h1>Crystal Diseases</h1>
+  <p class="subtitle">Dr. Dennis Kinder, MD, FACP — built from lecture slides + narration transcript</p>
+</header>
+
+<div class="contents">
+  <h2>Contents</h2>
+  <span class="toc-link" data-target="s1"><span class="num">01</span>Overview &amp; Birefringence Fundamentals</span>
+  <span class="toc-link" data-target="s2"><span class="num">02</span>Hyperuricemia &amp; Gout Pathophysiology</span>
+  <span class="toc-link" data-target="s3"><span class="num">03</span>Clinical Features &amp; Course of Gout</span>
+  <span class="toc-link" data-target="s4"><span class="num">04</span>Evaluation of Gout</span>
+  <span class="toc-link" data-target="s5"><span class="num">05</span>Treatment of Gout</span>
+  <span class="toc-link" data-target="s6"><span class="num">06</span>Pseudogout (CPPD)</span>
+  <span class="toc-link" data-target="s7"><span class="num">07</span>Other Crystal Diseases</span>
+  <span class="toc-link" data-target="s8"><span class="num">08</span>Clinical Pearls &amp; Case Review</span>
+</div>
+
+<!-- SECTION 1 -->
+<article class="topic" id="s1">
+  <h2><span class="sec-num">01</span>Overview &amp; Birefringence Fundamentals</h2>
+  <p>Crystal deposition diseases present as <strong>episodic or intermittent joint attacks</strong> — that pattern alone should raise a crystal disease on the differential. The five crystals covered in this lecture, where they deposit, and what disease each causes:</p>
+  <table class="data-table">
+    <tr><th>Crystal</th><th>Disease</th><th>Location</th></tr>
+    <tr><td>Monosodium urate (MSU)</td><td>Gout</td><td>Joint fluid, plasma</td></tr>
+    <tr><td>Calcium pyrophosphate dihydrate (CPPD)</td><td>Pseudogout</td><td>Joint fluid, plasma</td></tr>
+    <tr><td>Basic calcium phosphate (BCP / hydroxyapatite)</td><td>Milwaukee shoulder</td><td>Peri-articular tissue and bursa (not the joint itself)</td></tr>
+    <tr><td>Calcium oxalate</td><td>Oxalate arthropathy</td><td>Kidney, terminal tufts of digits, retina</td></tr>
+    <tr><td>Cholesterol crystals</td><td>—</td><td>Joint fluid of chronically inflamed/infected joints</td></tr>
+  </table>
+
+  <h3>Polarized Light Microscopy — the key discriminator</h3>
+  <p>Birefringence describes how a crystal bends and colors polarized light depending on its orientation relative to the axis of the polarizing filter (the "compensator," shown as an arrow on slide images).</p>
+  <table class="data-table">
+    <tr><th></th><th>MSU (Gout)</th><th>CPPD (Pseudogout)</th></tr>
+    <tr><td>Shape</td><td>Needle-shaped</td><td>Rhomboid</td></tr>
+    <tr><td>Birefringence</td><td><strong>Negative</strong></td><td><strong>Positive (weak)</strong></td></tr>
+    <tr><td>Parallel to light (compensator axis)</td><td>Yellow</td><td>Blue</td></tr>
+    <tr><td>Perpendicular to light</td><td>Blue</td><td>Pink</td></tr>
+    <tr><td>Ease of detection</td><td>Easy to find</td><td>Not as easy to find</td></tr>
+  </table>
+  <div class="pearl">
+    <strong>High-yield mnemonic:</strong> MSU is <strong>N</strong>eedle-shaped and <strong>N</strong>egatively birefringent (yellow when parallel). CPPD is <strong>R</strong>homboid and gives a weak <strong>P</strong>ositive birefringence (blue when parallel). BCP crystals do <strong>not</strong> react to polarized light at all — that's a key distinguishing negative finding.
+  </div>
+
+  <div class="quiz" id="q-s1-1"></div>
+  <div class="quiz" id="q-s1-2"></div>
+</article>
+
+<!-- SECTION 2 -->
+<article class="topic" id="s2">
+  <h2><span class="sec-num">02</span>Hyperuricemia &amp; Gout Pathophysiology</h2>
+  <h3>Epidemiology</h3>
+  <ul>
+    <li>Risk increases with age, body mass, and the degree/duration of hyperuricemia</li>
+    <li>Classically a disease of middle-aged males — 2–3% of the adult male population</li>
+    <li>Incidence in females approaches that of males <strong>after menopause</strong> (loss of the uricosuric effect of estrogen)</li>
+  </ul>
+  <div class="pearl">Not everyone with high uric acid develops gout — some patients with very high levels never have an attack. Hyperuricemia is necessary but not sufficient.</div>
+
+  <h3>Pathogenesis of hyperuricemia</h3>
+  <p>Uric acid is normally excreted about two-thirds renally and one-third through the GI tract. The uric acid pool size depends on the balance of production versus renal filtration/excretion.</p>
+  <table class="data-table">
+    <tr><th>Decreased renal excretion (~90% of cases)</th><th>Increased urate production (~10% of cases)</th></tr>
+    <tr><td>Impaired renal function, dehydration, acidosis</td><td>Ethanol, myeloproliferative disorders</td></tr>
+    <tr><td>Low-dose salicylates, diuretics, pyrazinamide</td><td>Ineffective erythropoiesis, widespread psoriasis</td></tr>
+    <tr><td>Cyclosporine, levodopa, ethambutol, nicotinic acid</td><td>Cytotoxic drugs, glycogen storage disease</td></tr>
+    <tr><td>Hypothyroidism</td><td>G6PD deficiency, HGPRTase deficiency, ↑ PRPP synthetase activity</td></tr>
+  </table>
+
+  <h3>Why the joint becomes inflamed</h3>
+  <p>Inflammation is driven by how the crystals are "coated":</p>
+  <ul>
+    <li><strong>Hot, red, acute attack:</strong> uric acid crystals coated with <strong>IgG</strong> antibody stimulate white cells, which bring in chemotactic factors, lysosomal enzymes, prostaglandins, interleukins, oxygen radicals, and collagenases — producing the acute inflammatory response</li>
+    <li><strong>Tophi (chronic disease):</strong> white, pasty/cheesy deposits of uric acid crystals coated with <strong>Apo-E</strong> rather than IgG</li>
+  </ul>
+
+  <div class="formula">
+    <strong>Hyperuricemia as a cardiovascular marker:</strong> Hyperuricemia/gout should alert the clinician to an overall increased cardiovascular disease risk — especially in patients with other CV risk factors. Always screen for CVD risk in these patients.
+  </div>
+
+  <div class="quiz" id="q-s2-1"></div>
+  <div class="quiz" id="q-s2-2"></div>
+</article>
+
+<!-- SECTION 3 -->
+<article class="topic" id="s3">
+  <h2><span class="sec-num">03</span>Clinical Features &amp; Course of Gout</h2>
+  <h3>Presentation</h3>
+  <ul>
+    <li>Most common presentation: <strong>sudden, intense pain</strong>, classically with no preceding trauma</li>
+    <li>Classic site: first MTP joint ("<strong>podagra</strong>") — the great toe is erythematous, swollen, and hot to the touch</li>
+    <li>Other common sites: ankle, foot, knee — but it can occur anywhere</li>
+    <li>Pain is severe enough that patients often can't tolerate bedsheets touching the foot, or putting on socks/shoes</li>
+  </ul>
+
+  <h3>Acute gouty arthritis</h3>
+  <ul>
+    <li>Abrupt onset, classically <strong>mono-articular</strong></li>
+    <li>Episodic disease — attacks can be separated by weeks, months, or years</li>
+    <li>Attacks become poly-articular over time</li>
+    <li>Tophi indicate chronic, long-standing urate overload</li>
+  </ul>
+
+  <h3>Physical exam patterns</h3>
+  <table class="data-table">
+    <tr><th>Pattern</th><th>Definition</th></tr>
+    <tr><td>Monoarthritis</td><td>One hot, red, swollen, tender joint</td></tr>
+    <tr><td>Oligoarthritis</td><td>More than one joint, but fewer than 4 joints</td></tr>
+    <tr><td>Polyarthritis</td><td>Many joints affected (seen with chronic tophaceous disease)</td></tr>
+  </table>
+
+  <h3>The three clinical stages of gout</h3>
+  <p>Not every patient progresses through all three stages.</p>
+  <table class="data-table">
+    <tr><th>Stage</th><th>Name</th><th>Features</th></tr>
+    <tr><td>I</td><td>Asymptomatic hyperuricemia</td><td>No arthritis; possible independent risk for atherogenesis</td></tr>
+    <tr><td>II</td><td>Acute intermittent arthritis</td><td>Attacks last 3–10 days with pain, swelling, stiffness, redness, fatigue, ± fever; intervals of 1–2 weeks up to 2–10 years; initially 1–2 joints, may progress to 4–5 joints over time</td></tr>
+    <tr><td>III</td><td>Chronic arthritis with acute exacerbations</td><td>Tophi develop in bone and cartilage; continuous arthritis with acute attacks superimposed on the chronic picture</td></tr>
+  </table>
+  <div class="pearl"><strong>Tophi</strong> mark the transition into advanced disease — they represent hardened uric acid deposits that erode bone and cartilage and cause joint deformity.</div>
+
+  <div class="quiz" id="q-s3-1"></div>
+  <div class="quiz" id="q-s3-2"></div>
+</article>
+
+<!-- SECTION 4 -->
+<article class="topic" id="s4">
+  <h2><span class="sec-num">04</span>Evaluation of Gout</h2>
+  <div class="formula"><strong>Gold standard:</strong> Synovial fluid analysis with polarized light microscopy, showing needle-shaped, negatively birefringent MSU crystals.</div>
+  <ul>
+    <li><strong>Uric acid level:</strong> may be elevated <em>or normal/low during an acute attack</em> — it is not diagnostic on its own</li>
+    <li>Consider inflammatory markers/other rheumatologic tests when the picture is unclear: ESR, CRP, ANA, rheumatoid factor, anti-CCP</li>
+    <li>Consider Lyme disease serology in endemic areas</li>
+    <li>Always assess cardiovascular disease risk</li>
+  </ul>
+
+  <div class="quiz" id="q-s4-1"></div>
+</article>
+
+<!-- SECTION 5 -->
+<article class="topic" id="s5">
+  <h2><span class="sec-num">05</span>Treatment of Gout</h2>
+  <p>Gout treatment splits into two categories: <strong>prophylactic</strong> (urate-lowering, long-term) and <strong>acute</strong> (anti-inflammatory, symptom control).</p>
+
+  <h3>Indications for prophylactic treatment</h3>
+  <ul>
+    <li>Recurrent attacks (2–3 per year)</li>
+    <li>Tophaceous gout</li>
+    <li>Radiographic changes showing joint destruction</li>
+    <li>Uric acid kidney stones</li>
+    <li>Patient with debilitating polyarticular attacks</li>
+    <li>Risk of acute tumor lysis syndrome (e.g., before chemotherapy)</li>
+  </ul>
+  <div class="pearl">Traditional teaching says <strong>not</strong> to start allopurinol, probenecid, or febuxostat during an acute attack — but if a patient is already on them, do <strong>not</strong> stop during an acute flare. (Emerging evidence questions how strict this rule needs to be.)</div>
+
+  <h3>Prophylactic agents</h3>
+  <table class="data-table">
+    <tr><th>Class</th><th>Agents</th></tr>
+    <tr><td>Xanthine oxidase inhibitors</td><td>Allopurinol, febuxostat</td></tr>
+    <tr><td>Uricosurics</td><td>Probenecid, fenofibrate, losartan</td></tr>
+    <tr><td>Uricase</td><td>Pegloticase</td></tr>
+  </table>
+
+  <h3>Acute treatment — goal is to control inflammation and pain</h3>
+  <table class="data-table">
+    <tr><th>Agent</th><th>Notes</th></tr>
+    <tr><td>NSAIDs / COX-2 inhibitors</td><td>First-line for most patients</td></tr>
+    <tr><td>Corticosteroids</td><td>Good choice for patients with poor renal function; also available as an injectable for joint aspiration + injection</td></tr>
+    <tr><td>Colchicine</td><td>1.2 mg PO ×1, followed by 0.6 mg in one hour; main side effect is <strong>diarrhea</strong></td></tr>
+    <tr><td>Joint aspiration + steroid injection</td><td>Directly targets the affected joint</td></tr>
+  </table>
+
+  <h3>Quick-reference guide</h3>
+  <table class="data-table">
+    <tr><th>Clinical stage</th><th>Management</th></tr>
+    <tr><td>Asymptomatic hyperuricemia</td><td>No treatment needed — check for diuretics/other meds raising uric acid; assess CV risk</td></tr>
+    <tr><td>Acute attack</td><td>NSAIDs, COX-2 inhibitors, corticosteroids (esp. poor renal function), colchicine</td></tr>
+    <tr><td>Long-term urate lowering</td><td>Allopurinol, febuxostat, probenecid</td></tr>
+  </table>
+
+  <h3>Diet and alcohol</h3>
+  <div class="pearl">Even the strictest purine-free diet only lowers uric acid by about <strong>1 mg%</strong> — medication is far more effective than dietary restriction. Alcohol consumption can trigger gout flares and should be addressed in counseling.</div>
+
+  <div class="quiz" id="q-s5-1"></div>
+  <div class="quiz" id="q-s5-2"></div>
+</article>
+
+<!-- SECTION 6 -->
+<article class="topic" id="s6">
+  <h2><span class="sec-num">06</span>Pseudogout (CPPD)</h2>
+  <h3>Key clinical features</h3>
+  <ul>
+    <li>Inflammatory arthritis whose incidence increases with age</li>
+    <li>Rhomboid, <strong>weakly positively birefringent</strong> CPPD crystals, seen in the plane of polarized light</li>
+    <li>Associated with <strong>chondrocalcinosis</strong> (cartilage calcification)</li>
+    <li>Most commonly affects the <strong>knee</strong></li>
+  </ul>
+
+  <h3>Associated medical conditions</h3>
+  <ul>
+    <li>Hyperparathyroidism</li>
+    <li>Hypothyroidism</li>
+    <li>Hemochromatosis</li>
+    <li>Wilson's disease</li>
+    <li>Osteoarthritis</li>
+  </ul>
+
+  <h3>Evaluation</h3>
+  <p>Work-up is initially similar to gout (synovial fluid analysis, uric acid, tests for other joint disease), but should also screen for the associated conditions above: parathyroid disease, thyroid disease, liver disease, hemochromatosis.</p>
+  <div class="formula">Imaging hallmark: <strong>calcification of the articular cartilage</strong>, seen well on plain knee X-ray and on ultrasound.</div>
+
+  <h3>Treatment</h3>
+  <p>Similar to acute gout: colchicine, NSAIDs, intra-articular steroid injections.</p>
+
+  <div class="quiz" id="q-s6-1"></div>
+  <div class="quiz" id="q-s6-2"></div>
+</article>
+
+<!-- SECTION 7 -->
+<article class="topic" id="s7">
+  <h2><span class="sec-num">07</span>Other Crystal Diseases</h2>
+  <table class="data-table">
+    <tr><th>Crystal</th><th>Clinical association</th><th>Polarized light</th></tr>
+    <tr><td>Basic calcium phosphate (BCP / hydroxyapatite)</td><td>Deposits in bursa/peri-articular tissue, not the joint itself — classic example is <strong>Milwaukee shoulder</strong></td><td>Does <strong>not</strong> react to polarized light</td></tr>
+    <tr><td>Calcium oxalate</td><td>Nephrolithiasis (makes up ~¾ of kidney stones), retinal deposits, terminal tuft deposits of the digits</td><td>Reacts to polarized light</td></tr>
+    <tr><td>Cholesterol crystals</td><td>Found in joint fluid of chronically inflamed or infected joints</td><td>Visible under polarized light</td></tr>
+  </table>
+  <div class="pearl">Milwaukee shoulder is caused by BCP crystal deposition in the bursa, not the joint space — and BCP's failure to polarize is itself a useful clue when a chronically swollen joint doesn't fit the gout/pseudogout pattern.</div>
+</article>
+
+<!-- SECTION 8 -->
+<article class="topic" id="s8">
+  <h2><span class="sec-num">08</span>Clinical Pearls &amp; Case Review</h2>
+
+  <div class="formula">
+    <strong>Clinical pearl:</strong> A presumptive diagnosis of acute osteoarthritis — especially in large joints — that isn't responding to adequate treatment could actually be pseudogout (CPPD). Try colchicine: if it works, CPPD is the most likely cause.
+  </div>
+  <div class="formula">
+    <strong>Clinical pearl:</strong> Intra-articular corticosteroid injections work well for both CPPD and OA, but they will <strong>mask</strong> the presence of CPPD if it's present. Try colchicine first if CPPD is suspected, before injecting steroids.
+  </div>
+
+  <div class="case-box">
+    <div class="case-label">Case 1</div>
+    <p>A 76-year-old male has one week of worsening right index finger pain. He recently doubled his furosemide dose (for mild CHF) to 80 mg/day due to swelling, and recalls hitting the same finger with a hammer two months ago that had since improved — now it's worse again. Aspiration yields yellow fluid with white, thick material; exam shows apparent tophi with joint space narrowing on X-ray. Polarized microscopy shows needle-shaped crystals that are blue when perpendicular to the light and yellow when parallel.</p>
+    <p><strong>Diagnosis:</strong> Negative birefringence + needle-shaped crystals = <strong>gout (MSU)</strong>. Note the diuretic dose increase as a precipitant — diuretics reduce renal urate excretion.</p>
+    <p><strong>Drug of choice for this acute flare:</strong> NSAIDs, colchicine, or corticosteroids.</p>
+  </div>
+
+  <div class="case-box">
+    <div class="case-label">Case 2</div>
+    <p>A 68-year-old rancher with OA since age 50 presents with a painful, swollen right knee unrelieved by acetaminophen/codeine. A neighbor's colchicine gave him diarrhea but improved the knee temporarily. Uric acid is normal. Aspiration yields 60 cc of amber fluid. Ultrasound of the anterior knee (transverse view) shows calcification of the femoral hyaline cartilage; X-ray shows CPPD deposition in the same location. Polarized microscopy shows rhomboid crystals with positive birefringence.</p>
+    <p><strong>Diagnosis:</strong> <strong>Pseudogout (CPPD)</strong> — normal uric acid plus a positive response to colchicine (which is not gout-specific) both fit, and the cartilage calcification confirms it.</p>
+  </div>
+
+  <div class="case-box">
+    <div class="case-label">Case 3</div>
+    <p>A 60-year-old female who cleans condos at a ski resort has chronic swelling of the right shoulder and knee over 6 months. History is notable only for OA and HTN (treated with an ARB + diuretic). CBC/BMP are unremarkable except an elevated monocyte count and ESR of 70 mm/hr. Uric acid, calcium, and phosphorus are all normal. Exam shows a markedly swollen, fluctuant shoulder with X-ray showing widespread calcification around the humeral head. Aspiration yields 20 cc of opaque serosanguinous fluid.</p>
+    <p><strong>Diagnosis:</strong> <strong>Basic calcium phosphate (hydroxyapatite) deposition — Milwaukee shoulder.</strong> Note that uric acid, calcium, and phosphorus are all normal — BCP disease doesn't show up on standard metabolic screening, and the crystals themselves won't polarize.</p>
+  </div>
+
+  <div class="quiz" id="q-s8-1"></div>
+  <div class="quiz" id="q-s8-2"></div>
+</article>
+
+<footer>
+  Source: Crystal Diseases — Dr. Dennis Kinder, MSK II Clinical Sciences. Built from lecture slides + narration transcript.
+</footer>
+</main>
+
+<script>
+const questionData = {
+  "q-s1-1": {
+    q: "A synovial fluid aspirate shows needle-shaped crystals that appear yellow when aligned parallel to the polarized light source. What is this finding called, and what disease does it indicate?",
+    options: ["Positive birefringence — pseudogout", "Negative birefringence — gout", "Negative birefringence — pseudogout", "Positive birefringence — gout"],
+    correct: 1,
+    feedback: "Needle-shaped crystals that turn yellow when parallel to the light (and blue when perpendicular) show negative birefringence — the classic pattern of monosodium urate crystals in gout."
+  },
+  "q-s1-2": {
+    q: "Rhomboid-shaped crystals that appear blue when parallel to the polarized light axis and pink when perpendicular are most consistent with which crystal?",
+    options: ["Monosodium urate", "Calcium pyrophosphate dihydrate (CPPD)", "Basic calcium phosphate", "Calcium oxalate"],
+    correct: 1,
+    feedback: "This is the positive (weak) birefringence pattern of CPPD crystals — rhomboid shaped, blue when parallel to the light, pink when perpendicular. This is the pseudogout crystal."
+  },
+  "q-s2-1": {
+    q: "A hospitalized patient develops new hyperuricemia. Which of the following is the MOST common underlying mechanism?",
+    options: ["Increased urate production from a myeloproliferative disorder", "Decreased renal excretion", "G6PD deficiency", "HGPRTase deficiency"],
+    correct: 1,
+    feedback: "About 90% of hyperuricemia cases are due to decreased renal excretion (impaired renal function, dehydration, acidosis, certain medications like diuretics). Only ~10% are from increased production."
+  },
+  "q-s2-2": {
+    q: "Tophi are described as white, pasty or cheesy deposits. What coats the uric acid crystals in tophi, as opposed to the coating seen during an acute hot, red attack?",
+    options: ["IgG in tophi; Apo-E in acute attacks", "Apo-E in tophi; IgG in acute attacks", "Complement in both", "No coating is present in either"],
+    correct: 1,
+    feedback: "Acute, hot, red attacks are driven by IgG-coated crystals stimulating white cells. Chronic tophi are coated with Apo-E instead, producing the characteristic white, pasty/cheesy appearance."
+  },
+  "q-s3-1": {
+    q: "A patient has his first-ever attack of sudden, severe pain and swelling isolated to the first MTP joint, with no preceding trauma. What is the classic term for this presentation?",
+    options: ["Chondrocalcinosis", "Podagra", "Oligoarthritis", "Tophaceous flare"],
+    correct: 1,
+    feedback: "Podagra refers classically to acute gouty arthritis of the first MTP joint — the most classic initial presentation of gout, typically abrupt-onset and mono-articular."
+  },
+  "q-s3-2": {
+    q: "A patient with long-standing elevated uric acid now has continuous arthritis with acute flares superimposed, and tophi have developed in bone and cartilage. Which stage of gout is this?",
+    options: ["Stage I — asymptomatic hyperuricemia", "Stage II — acute intermittent arthritis", "Stage III — chronic arthritis with acute exacerbations", "This is not a recognized stage of gout"],
+    correct: 2,
+    feedback: "Stage III is chronic arthritis with acute exacerbations — this is when tophi develop in bone and cartilage, and the patient has continuous arthritis with acute attacks layered on top."
+  },
+  "q-s4-1": {
+    q: "During an acute gout flare, a patient's serum uric acid level comes back normal. How should this be interpreted?",
+    options: ["Gout is ruled out", "This is expected — uric acid may be normal or even low during an acute attack and is not diagnostic", "The diagnosis must be pseudogout instead", "The lab result is an error and should be repeated immediately"],
+    correct: 1,
+    feedback: "Serum uric acid is not diagnostic during an acute attack — levels may be elevated, normal, or even low. Synovial fluid analysis with polarized microscopy remains the gold standard for diagnosis."
+  },
+  "q-s5-1": {
+    q: "A patient with gout and chronic kidney disease needs treatment for an acute flare. Which class is a particularly good choice given his renal impairment?",
+    options: ["High-dose NSAIDs", "Corticosteroids", "Probenecid", "Pegloticase"],
+    correct: 1,
+    feedback: "Corticosteroids are a good option in patients with poor renal function during an acute attack, and can also be given as an intra-articular injection after joint aspiration. NSAIDs should generally be avoided or used cautiously in CKD."
+  },
+  "q-s5-2": {
+    q: "A patient asks whether switching to a strict purine-free diet will control his gout. What is the most accurate response?",
+    options: ["A strict purine-free diet will normalize uric acid levels without medication", "The strictest purine-free diet only lowers uric acid by about 1 mg% — medication is far more effective", "Diet has no effect whatsoever on uric acid levels", "Diet only matters if he also stops alcohol"],
+    correct: 1,
+    feedback: "Even the strictest purine-free diet only decreases uric acid levels by about 1 mg%. Medication is the more effective approach, though alcohol counseling is still worthwhile since alcohol can trigger flares."
+  },
+  "q-s6-1": {
+    q: "A 72-year-old with new chondrocalcinosis on knee X-ray and rhomboid, weakly positively birefringent crystals on aspiration should be screened for which of the following associated conditions?",
+    options: ["Hemochromatosis and hypothyroidism", "Iron deficiency anemia", "Osteoporosis only", "Type 1 diabetes"],
+    correct: 0,
+    feedback: "Pseudogout (CPPD) is associated with hyperparathyroidism, hypothyroidism, hemochromatosis, Wilson's disease, and osteoarthritis — hemochromatosis and hypothyroidism should be screened for as part of the work-up."
+  },
+  "q-s6-2": {
+    q: "What is the imaging hallmark of pseudogout on plain X-ray?",
+    options: ["Erosive changes at the first MTP joint", "Calcification of the articular cartilage (chondrocalcinosis)", "Periarticular osteopenia", "Bamboo spine"],
+    correct: 1,
+    feedback: "The hallmark imaging finding in pseudogout is calcification of the articular cartilage — chondrocalcinosis — visible on plain X-ray and confirmable with ultrasound."
+  },
+  "q-s8-1": {
+    q: "A patient with presumed acute osteoarthritis in a large joint is not responding to adequate NSAID dosing. A trial of colchicine improves his symptoms. What does this suggest?",
+    options: ["Confirms osteoarthritis and rules out any crystal disease", "Suggests the underlying cause is actually pseudogout (CPPD)", "Suggests the underlying cause is gout", "Colchicine response is nonspecific and tells you nothing"], 
+    correct: 1,
+    feedback: "Osteoarthritis that isn't responding to adequate NSAID treatment, especially in large joints, could actually be pseudogout — a positive response to a colchicine trial supports CPPD as the underlying cause."
+  },
+  "q-s8-2": {
+    q: "A 60-year-old woman with chronic shoulder swelling has a normal uric acid level and crystals that fail to polarize under microscopy. What is the most likely diagnosis?",
+    options: ["Gout", "Pseudogout (CPPD)", "Basic calcium phosphate deposition (Milwaukee shoulder)", "Septic arthritis"],
+    correct: 2,
+    feedback: "BCP (hydroxyapatite) crystals do not react to polarized light, and BCP disease classically presents with normal serum uric acid, calcium, and phosphorus. Deposition in the shoulder bursa produces the classic 'Milwaukee shoulder' picture."
+  }
+};
+
+function buildMCQ(id, data){
+  const container = document.getElementById(id);
+  if(!container) return;
+  const wrap = document.createElement('div');
+  const qtext = document.createElement('div');
+  qtext.className = 'qtext';
+  qtext.textContent = data.q;
+  wrap.appendChild(qtext);
+  const optsWrap = document.createElement('div');
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback';
+  data.options.forEach(function(opt, i){
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = opt;
+    btn.addEventListener('click', function(){
+      const already = optsWrap.querySelectorAll('.opt.correct, .opt.incorrect').length > 0;
+      if(already) return;
+      const allBtns = optsWrap.querySelectorAll('.opt');
+      allBtns.forEach(function(b, bi){
+        if(bi === data.correct) b.classList.add('correct');
+      });
+      feedback.classList.add('show');
+      if(i === data.correct){
+        btn.classList.add('correct');
+        feedback.classList.add('correct');
+        feedback.textContent = 'Correct. ' + data.feedback;
+      } else {
+        btn.classList.add('incorrect');
+        feedback.classList.add('incorrect');
+        feedback.textContent = 'Not quite. ' + data.feedback;
+      }
+    });
+    optsWrap.appendChild(btn);
+  });
+  wrap.appendChild(optsWrap);
+  wrap.appendChild(feedback);
+  container.appendChild(wrap);
+}
+Object.keys(questionData).forEach(function(id){ buildMCQ(id, questionData[id]); });
+
+function goToSection(id){
+  const target = document.getElementById(id);
+  if(!target) return;
+  target.scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.toc-link').forEach(function(el){
+  el.addEventListener('click', function(){ goToSection(el.dataset.target); });
+});
+
+const sideNav = document.getElementById('sideNav');
+const sideScrim = document.getElementById('sideScrim');
+function openSideNav(){ sideNav.classList.add('open'); sideScrim.classList.add('open'); }
+function closeSideNav(){ sideNav.classList.remove('open'); sideScrim.classList.remove('open'); }
+const sideLinkEls = Array.from(document.querySelectorAll('.side-link'));
+sideLinkEls.forEach(function(el){
+  el.addEventListener('click', function(){ closeSideNav(); goToSection(el.dataset.target); });
+});
+
+const observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      sideLinkEls.forEach(function(l){ l.classList.remove('active'); });
+      const match = sideLinkEls.find(function(l){ return l.dataset.target === entry.target.id; });
+      if(match) match.classList.add('active');
+    }
+  });
+}, {rootMargin: '-15% 0px -70% 0px'});
+document.querySelectorAll('article.topic').forEach(function(el){ observer.observe(el); });
+</script>
+</body>
+</html>
