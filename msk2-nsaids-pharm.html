@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NSAIDs Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ec;
+    --cream-dark:#f0ead9;
+    --sage:#3f7d52;
+    --sage-dark:#2f5233;
+    --sage-light:#dbe8de;
+    --sage-pale:#eaf1ec;
+    --ink:#3a3a30;
+    --border:#c3d6c8;
+    --red:#a13e3e;
+    --red-pale:#f6e6e6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:Georgia,'Times New Roman',serif;
+    color:var(--sage-dark);
+  }
+  a{color:var(--sage-dark); text-decoration: underline dotted; text-underline-offset:3px;}
+
+  /* Layout */
+  main{
+    max-width:900px; margin:0 auto;
+    padding:90px 42px 40px 42px;
+  }
+
+  /* Fixed nav buttons — exact site-standard shared style */
+  #backBtn, #downloadBtn, #sectionsTab{
+    position:fixed; z-index:500;
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem;
+    letter-spacing:0.04em; text-transform:uppercase; text-decoration:none;
+    border:1px solid var(--border); background:#fff; color:var(--sage-dark);
+    padding:8px 12px; border-radius:6px;
+    box-shadow:0 2px 10px rgba(43,42,37,0.08); cursor:pointer;
+  }
+  #backBtn:hover, #downloadBtn:hover, #sectionsTab:hover{background:var(--sage-light);}
+
+  #backBtn{top:16px; left:16px; z-index:700;}
+  #downloadBtn{top:16px; right:16px;}
+  #sectionsTab{top:64px; right:16px;}
+
+  #sideNav{
+    position:fixed; top:0; right:-280px; width:280px; height:100%;
+    background:#fff; border-left:1px solid var(--border);
+    box-shadow:-4px 0 16px rgba(0,0,0,0.1); z-index:600;
+    transition:right 0.25s ease; overflow-y:auto; padding:70px 20px 20px;
+  }
+  #sideNav.open{right:0;}
+  #sideNav h3{margin:0 0 10px 0; font-size:16px; border-bottom:2px solid var(--sage-dark); padding-bottom:6px;}
+  #sideNav ul{list-style:none; padding-left:0; margin:0;}
+  #sideNav li{margin:2px 0;}
+  #sideNav a{display:block; padding:6px 8px; font-size:12.5px; border-radius:6px; text-decoration:none; color:var(--ink);}
+  #sideNav a:hover{background:var(--sage); color:#fff;}
+  #sideNav .subitem{padding-left:18px; font-size:11.5px;}
+
+  #navClose{
+    position:absolute; top:16px; right:16px;
+    background:none; border:none; font-size:1.2rem; cursor:pointer;
+    color:var(--sage-dark);
+  }
+  #navClose:hover{color:var(--red);}
+
+  .titleblock{border-bottom:4px double var(--sage-dark); margin-bottom:24px; padding-bottom:14px;}
+  .titleblock h1{font-size:34px; margin:0;}
+  .titleblock p{margin:4px 0 0 0; font-size:14px; color:var(--sage-dark);}
+
+  section{margin-bottom:46px; scroll-margin-top:20px;}
+  section h2{
+    font-size:22px; border-bottom:2px solid var(--sage);
+    padding-bottom:6px; margin-top:0;
+  }
+  section h3{font-size:17px; color:var(--sage-dark); margin-bottom:6px;}
+  section h4{font-size:14.5px; color:var(--ink); margin-bottom:4px; text-decoration:underline;}
+
+  p{font-size:14px;}
+  ul,ol{font-size:14px; padding-left:22px;}
+  li{margin-bottom:4px;}
+
+  .callout{
+    background:var(--sage-pale);
+    border-left:5px solid var(--sage);
+    padding:10px 14px; margin:14px 0; border-radius:4px; font-size:13.5px;
+  }
+  .callout.pearl{border-left-color:var(--sage-dark); background:var(--sage-light);}
+  .callout b{color:var(--sage-dark);}
+
+  .keyconcept{
+    background:#fff; border:1.5px dashed var(--sage-dark);
+    padding:10px 14px; margin:14px 0; border-radius:4px; font-size:13.5px;
+  }
+
+  table{border-collapse:collapse; width:100%; margin:14px 0; font-size:13px; background:#fff;}
+  th,td{border:1px solid var(--border); padding:7px 10px; text-align:left; vertical-align:top;}
+  th{background:var(--sage); color:#fff; font-family:Georgia,serif;}
+  tr:nth-child(even){background:var(--sage-pale);}
+
+  .core{background:var(--sage-light) !important;}
+  .badge{
+    display:inline-block; font-size:10.5px; padding:2px 7px; border-radius:10px;
+    background:var(--sage-dark); color:#fff; margin-left:6px; vertical-align:middle;
+  }
+  .badge.class-level{background:#8a8a8a;}
+
+  .drugcard{
+    border:1.5px solid var(--border); border-radius:8px; padding:12px 16px;
+    margin:14px 0; background:#fff;
+  }
+  .drugcard h4{margin-top:0; font-size:15px; color:var(--sage-dark); text-decoration:none; border-bottom:1px solid var(--sage); padding-bottom:4px;}
+
+  /* Quiz */
+  .quiz{
+    background:var(--cream-dark); border:2px solid var(--sage); border-radius:8px;
+    padding:14px 18px; margin:18px 0;
+  }
+  .quiz h4{margin-top:0; color:var(--sage-dark); text-decoration:none;}
+  .q{margin-bottom:16px;}
+  .q p.stem{font-weight:bold; margin-bottom:6px; font-size:13.5px;}
+  .choices button{
+    display:block; width:100%; text-align:left; margin:4px 0;
+    padding:7px 10px; background:#fff; border:1px solid var(--border);
+    border-radius:5px; cursor:pointer; font-family:Georgia, 'Iowan Old Style', serif; font-size:13px;
+  }
+  .choices button:hover{background:var(--sage-pale);}
+  .choices button.correct{background:#d7e8c9; border-color:var(--sage-dark);}
+  .choices button.incorrect{background:var(--red-pale); border-color:var(--red);}
+  .feedback{font-size:12.5px; margin-top:6px; padding:6px 10px; border-radius:5px; display:none;}
+  .feedback.show{display:block;}
+  .feedback.correct-fb{background:#d7e8c9; color:#2e4a1f;}
+  .feedback.incorrect-fb{background:var(--red-pale); color:var(--red);}
+
+  .toc{background:#fff; border:1px solid var(--border); border-radius:8px; padding:14px 20px; margin-bottom:30px;}
+  .toc h3{margin-top:0;}
+  .toc a{display:inline-block; font-size:12.5px; margin:2px 10px 2px 0;}
+
+  footer{margin-top:40px; padding-top:14px; border-top:1px solid var(--border); font-size:11.5px; color:#777;}
+
+  @media(max-width:900px){
+    main{padding:190px 18px 30px 18px;}
+    #backBtn{top:14px; left:14px; padding:8px 12px; font-size:12px;}
+    #downloadBtn{top:14px; right:14px; padding:8px 12px; font-size:12px;}
+    #sectionsTab{top:60px; right:14px; padding:8px 12px; font-size:12px;}
+    #sideNav{width:82%;}
+  }
+
+  @media print{
+    #backBtn, #downloadBtn, #sectionsTab, #sideNav{display:none !important;}
+    main{padding:0; max-width:100%;}
+    body{background:#fff;}
+    section{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<a id="backBtn" href="index.html">&larr; Back to Study Guides</a>
+<button id="downloadBtn" onclick="window.print()">Download PDF</button>
+<button id="sectionsTab" onclick="document.getElementById('sideNav').classList.add('open')">Sections</button>
+
+<div id="sideNav">
+  <button id="navClose" onclick="document.getElementById('sideNav').classList.remove('open')">&times;</button>
+  <h3>Sections</h3>
+  <ul>
+    <li><a href="#overview">Overview &amp; Drug List</a></li>
+    <li><a href="#mechanism">1. Mechanism of Action</a>
+      <ul>
+        <li class="subitem"><a href="#aa-pathway">Arachidonic Acid Pathway</a></li>
+        <li class="subitem"><a href="#cox1v2">COX-1 vs COX-2</a></li>
+        <li class="subitem"><a href="#effects">Therapeutic Effects</a></li>
+      </ul>
+    </li>
+    <li><a href="#aspirin-cv">2. Aspirin, Platelets &amp; CV Use</a></li>
+    <li><a href="#lo3-compare">3. Nonselective vs Celecoxib vs APAP</a></li>
+    <li><a href="#toxicity">4. Major Toxicities</a>
+      <ul>
+        <li class="subitem"><a href="#gi-tox">GI</a></li>
+        <li class="subitem"><a href="#renal-tox">Renal</a></li>
+        <li class="subitem"><a href="#cv-tox">Cardiovascular / Platelet</a></li>
+        <li class="subitem"><a href="#hypersens">Hypersensitivity</a></li>
+        <li class="subitem"><a href="#pregnancy">Pregnancy</a></li>
+        <li class="subitem"><a href="#other-tox">Other Effects</a></li>
+      </ul>
+    </li>
+    <li><a href="#interactions">Drug Interactions</a></li>
+    <li><a href="#individual">Individual NSAIDs (Core)</a></li>
+    <li><a href="#additional">Additional NSAIDs (Class-Level)</a></li>
+    <li><a href="#apap">Acetaminophen</a></li>
+    <li><a href="#hy-table">High-Yield Comparison Table</a></li>
+    <li><a href="#selection">5. Clinical Selection</a></li>
+    <li><a href="#summary">Key Takeaways</a></li>
+    <li><a href="#quiz-final">Final Practice Set</a></li>
+  </ul>
+</div>
+
+<main>
+  <div class="titleblock">
+    <h1>NSAIDs</h1>
+    <p>Natalie Waterfall, PharmD &nbsp;|&nbsp; MSK II &nbsp;|&nbsp; Core Topics Study Guide + Lecture Slides</p>
+  </div>
+
+  <div class="toc" id="overview">
+    <h3>Learning Objectives</h3>
+    <ol>
+      <li>Explain how NSAIDs produce analgesic, antipyretic, and anti-inflammatory effects through cyclooxygenase inhibition.</li>
+      <li>Distinguish aspirin from other NSAIDs with respect to platelet inhibition and cardiovascular use.</li>
+      <li>Differentiate nonselective NSAIDs, celecoxib, and acetaminophen based on mechanism, pharmacologic effects, and therapeutic uses.</li>
+      <li>Predict the major adverse effects, contraindications, and clinically important drug interactions of NSAIDs and acetaminophen.</li>
+      <li>Select an appropriate analgesic or anti-inflammatory agent for common clinical scenarios based on patient-specific risks and therapeutic goals.</li>
+    </ol>
+    <p><b>Supplementary Materials:</b> NSAIDs section, Ch. 36 Katzung's Basic &amp; Clinical Pharmacology &middot; ScholarRx Brick: Nonopioid Analgesics</p>
+  </div>
+
+  <div class="callout pearl" style="margin-bottom:30px;">
+    <b>Depth-of-study guide (from the lecture slides):</b> Drugs are split into <b>Core Agents</b> — know mechanism, clinical role, major adverse effects, and key monitoring/safety concerns — and <b>Class-Level Agents</b> — know only the class/target, drug names, and class-level adverse effects; detailed drug-by-drug comparison is <i>not</i> expected. This guide follows that same weighting throughout (Core agents get full drug cards; Class-level agents are grouped in one summary table).
+  </div>
+
+  <table style="margin-bottom:10px;">
+    <tr><th>Core Agents (know in depth)</th><th>Class-Level Agents (know as a group)</th></tr>
+    <tr>
+      <td>
+        <b>Non-Selective NSAIDs:</b> Aspirin, Ibuprofen (Advil, Motrin), Naproxen (Aleve, Naprosyn), Diclofenac, Indomethacin (Indocin), Ketorolac (Toradol)<br>
+        <b>Selective COX-2 inhibitor:</b> Celecoxib (Celebrex)<br>
+        <b>Preferential COX-2 inhibitor:</b> Meloxicam<br>
+        <b>Non-NSAID analgesic/antipyretic:</b> Acetaminophen (Tylenol, paracetamol)
+      </td>
+      <td><b>Additional NSAIDs:</b> Etodolac, Fenoprofen, Flurbiprofen, Nabumetone, Oxaprozin, Piroxicam, Sulindac</td>
+    </tr>
+  </table>
+  <p style="font-size:12px; color:#777;">Generic names are the primary names to learn; brand names are for clinical recognition only and will not be the focus of assessment.</p>
+
+  <!-- ============================================================ -->
+  <section id="mechanism">
+    <h2>1. Mechanism of Action &amp; Therapeutic Effects</h2>
+    <p>Inflammation is a protective response to tissue injury and infection, but it can contribute to pain, swelling, and impaired function when excessive or persistent. NSAIDs are one of four major anti-inflammatory drug classes (alongside glucocorticoids, DMARDs, and gout therapies), and are the focus of this guide along with acetaminophen (APAP).</p>
+
+    <h3 id="aa-pathway">Arachidonic Acid Pathway</h3>
+    <ul>
+      <li><b>Primary mechanism:</b> NSAIDs inhibit cyclooxygenase (COX) enzymes, decreasing conversion of arachidonic acid into prostaglandins and thromboxanes.</li>
+      <li>NSAIDs inhibit <b>both COX-1 and COX-2</b> (except celecoxib, which is COX-2 selective).</li>
+      <li>Net effect: <b>&darr; prostaglandins, &darr; prostacyclin (PGI&#8322;), &darr; thromboxane (TXA&#8322;)</b></li>
+      <li>Glucocorticoids act upstream by inhibiting phospholipase A&#8322;, which is why they block the whole cascade (leukotrienes included), whereas NSAIDs only block the COX branch.</li>
+    </ul>
+
+    <h3 id="cox1v2">COX-1 vs. COX-2</h3>
+    <table>
+      <tr><th></th><th>COX-1</th><th>COX-2</th></tr>
+      <tr><td><b>Expression</b></td><td>Constitutive — active under normal conditions in many tissues</td><td>Inducible — increased during inflammation</td></tr>
+      <tr><td><b>Key protective roles</b></td><td>Gastric mucosal protection, platelet thromboxane production, renal blood flow support</td><td>Active in kidneys and vascular tissue</td></tr>
+      <tr><td><b>Role in disease</b></td><td>Loss of these functions &rarr; GI/renal/bleeding toxicity</td><td>Major source of prostaglandins driving pain, fever, and inflammation</td></tr>
+    </table>
+
+    <div class="keyconcept">
+      <b>Selectivity spectrum:</b> Nonselective (ibuprofen, naproxen, diclofenac, indomethacin, ketorolac) &rarr; Preferential COX-2 (meloxicam, more COX-1 inhibition as dose rises) &rarr; Selective COX-2 (celecoxib).<br>
+      <b>Reversibility:</b> Most NSAIDs bind COX <i>reversibly</i>. <b>Aspirin is the exception</b> — it binds <i>irreversibly</i>, producing a prolonged effect on platelet function that lasts the lifespan of the platelet.
+    </div>
+
+    <h3 id="effects">Therapeutic Effects of COX Inhibition</h3>
+    <table>
+      <tr><th>Effect</th><th>Mechanism</th><th>Clinical Implication</th></tr>
+      <tr><td><b>Analgesic</b></td><td>&darr; Prostaglandin-mediated sensitization of peripheral nociceptors</td><td>Most effective for pain with an inflammatory component</td></tr>
+      <tr><td><b>Antipyretic</b></td><td>&darr; Hypothalamic PGE&#8322; signaling &rarr; returns elevated set point toward normal</td><td>Reduces fever but does not normally drop temperature below the normal set point</td></tr>
+      <tr><td><b>Anti-inflammatory</b></td><td>&darr; Vasodilation, vascular permeability, swelling, and pain sensitization</td><td>Generally requires higher/more sustained dosing than the analgesic effect</td></tr>
+      <tr><td><b>Platelet effect</b></td><td>&darr; Platelet thromboxane &rarr; &darr; platelet aggregation</td><td>Most NSAIDs: temporary (reversible). Aspirin: prolonged (irreversible)</td></tr>
+    </table>
+
+    <table>
+      <tr><th>Therapeutic Effect</th><th>NSAIDs</th><th>Acetaminophen</th></tr>
+      <tr><td>Analgesic (&darr; pain)</td><td>&#10003;</td><td>&#10003;</td></tr>
+      <tr><td>Antipyretic (&darr; fever)</td><td>&#10003;</td><td>&#10003;</td></tr>
+      <tr><td>Anti-inflammatory</td><td>&#10003;</td><td>Minimal</td></tr>
+    </table>
+
+    <h4>Common Clinical Uses of NSAIDs</h4>
+    <ul>
+      <li><b>Tissue injury/inflammation pain:</b> musculoskeletal injury, arthritis, dental pain, postoperative pain</li>
+      <li><b>Prostaglandin-mediated conditions:</b> primary dysmenorrhea, acute gout, tension-type headache, mild-to-moderate migraine</li>
+      <li>Generally <b>limited benefit</b> for neuropathic pain</li>
+    </ul>
+
+    <div class="quiz">
+      <h4>Quick Check — Mechanism &amp; Effects</h4>
+      <div class="q" data-answer="1">
+        <p class="stem">1. A patient takes ibuprofen for a fever but the drug fails to lower their temperature below the normal set point. This is best explained by which mechanism?</p>
+        <div class="choices">
+          <button>A. Ibuprofen selectively spares COX-1 in the hypothalamus</button>
+          <button>B. NSAIDs return an elevated thermoregulatory set point toward normal, not below it</button>
+          <button>C. Ibuprofen is undergoing first-pass hepatic metabolism</button>
+          <button>D. Fever is prostaglandin-independent</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="2">
+        <p class="stem">2. Which statement about the anti-inflammatory effect of NSAIDs is correct?</p>
+        <div class="choices">
+          <button>A. It occurs at lower doses than the analgesic effect</button>
+          <button>B. It is mediated by leukotriene inhibition</button>
+          <button>C. It generally requires higher or more sustained dosing than the analgesic effect</button>
+          <button>D. It is unique to celecoxib</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="aspirin-cv">
+    <h2>2. Aspirin, Platelets &amp; Cardiovascular Use</h2>
+    <ul>
+      <li><b>Irreversible COX-1 inhibition:</b> aspirin permanently acetylates platelet COX-1, blocking thromboxane A&#8322; synthesis for the <b>lifespan of the platelet</b> (~7-10 days) — platelet function only recovers as new platelets are produced.</li>
+      <li><b>Other NSAIDs</b> inhibit platelet COX-1 <i>reversibly</i> — platelet function recovers as the drug is eliminated, so they do <b>not</b> provide the sustained antiplatelet effect needed for cardioprotection.</li>
+    </ul>
+
+    <h4>Cardiovascular Use of Low-Dose Aspirin</h4>
+    <ul>
+      <li><b>Secondary prevention:</b> primary role — patients with established atherosclerotic CV disease (prior MI, ischemic stroke, certain revascularization procedures)</li>
+      <li><b>Primary prevention:</b> not routinely recommended for most patients without established CV disease — bleeding risk must be weighed against ischemic-event reduction</li>
+    </ul>
+
+    <div class="callout">
+      <b>Ibuprofen–aspirin interaction:</b> Ibuprofen can physically block aspirin's access to the platelet COX-1 binding site, interfering with aspirin's irreversible antiplatelet/cardioprotective effect.
+      <br><b>Timing fix:</b> for immediate-release aspirin, take ibuprofen <b>&ge; 8 hours before</b> or <b>&ge; 30 minutes after</b> aspirin. Repeated ibuprofen dosing can still make reliable separation difficult.
+    </div>
+
+    <h4>Aspirin — Additional Safety Concerns</h4>
+    <ul>
+      <li>&uarr; Bleeding risk</li>
+      <li><b>Reye syndrome</b> &rarr; avoid in children/adolescents with a viral illness</li>
+      <li>Salicylate toxicity (tinnitus can be an early sign)</li>
+    </ul>
+
+    <div class="quiz">
+      <h4>Quick Check — Aspirin</h4>
+      <div class="q" data-answer="0">
+        <p class="stem">3. Why is aspirin used for cardioprotection when other NSAIDs are not?</p>
+        <div class="choices">
+          <button>A. Its irreversible COX-1 inhibition produces a sustained antiplatelet effect lasting the life of the platelet</button>
+          <button>B. It is COX-2 selective</button>
+          <button>C. It has no gastrointestinal toxicity</button>
+          <button>D. It has a longer half-life than ibuprofen</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="1">
+        <p class="stem">4. A patient on daily low-dose aspirin for secondary MI prevention starts taking ibuprofen every morning for knee pain, right before her aspirin dose. What is the main concern?</p>
+        <div class="choices">
+          <button>A. Increased salicylate toxicity</button>
+          <button>B. Ibuprofen may block aspirin's access to platelet COX-1, reducing its cardioprotective effect</button>
+          <button>C. Ibuprofen will potentiate aspirin's antiplatelet effect, causing bleeding</button>
+          <button>D. No interaction — timing does not matter</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="lo3-compare">
+    <h2>3. Nonselective NSAIDs vs. Celecoxib vs. Acetaminophen</h2>
+    <table>
+      <tr><th></th><th>Nonselective NSAIDs</th><th>Celecoxib</th><th>Acetaminophen</th></tr>
+      <tr><td><b>Mechanism</b></td><td>Reversibly inhibit COX-1 <i>and</i> COX-2</td><td>Selectively inhibits COX-2, spares COX-1 (gastric protection, platelet thromboxane)</td><td>Mechanism not fully defined; effects predominantly CNS; limited peripheral prostaglandin suppression</td></tr>
+      <tr><td><b>Effects</b></td><td>Analgesic, antipyretic, anti-inflammatory</td><td>Analgesic, antipyretic, anti-inflammatory; less platelet inhibition, lower GI ulcer risk</td><td>Analgesic, antipyretic; <b>no clinically meaningful anti-inflammatory effect</b></td></tr>
+      <tr><td><b>Uses</b></td><td>Pain, fever, inflammatory conditions (OA, RA, musculoskeletal pain)</td><td>Pain/inflammation when reduced GI toxicity is an important consideration</td><td>Pain/fever when anti-inflammatory activity not required, or NSAID GI/renal/bleeding/hypersensitivity risk is a concern</td></tr>
+      <tr><td><b>Key limitation</b></td><td>GI, renal, CV, platelet, hypersensitivity risks</td><td>Renal and CV risks remain despite lower GI risk</td><td>No platelet inhibition, less GI/renal toxicity, but <b>dose-related hepatotoxicity</b></td></tr>
+    </table>
+
+    <div class="quiz">
+      <h4>Quick Check — Comparison</h4>
+      <div class="q" data-answer="2">
+        <p class="stem">5. Which agent would be the best choice for a patient who needs an anti-inflammatory effect but has a history of peptic ulcer disease?</p>
+        <div class="choices">
+          <button>A. Ibuprofen</button>
+          <button>B. Naproxen</button>
+          <button>C. Celecoxib</button>
+          <button>D. Ketorolac</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="toxicity">
+    <h2>4. Major Toxicities of NSAIDs</h2>
+    <p>The same reduction in prostanoid production that produces therapeutic effects can also disrupt protective physiologic functions. <b>Key concept:</b> NSAID toxicities are largely predictable from the normal functions of prostaglandins, prostacyclin, and thromboxane. Major systems affected: GI tract, kidneys, platelets, cardiovascular system, respiratory tract, pregnancy.</p>
+
+    <h3 id="gi-tox">Gastrointestinal Injury &amp; Bleeding</h3>
+    <ul>
+      <li><b>Normal protective role of prostaglandins:</b> &uarr; mucus/bicarbonate secretion, maintain mucosal blood flow, support epithelial repair</li>
+      <li><b>Effects of NSAID use:</b> dyspepsia and erosions &rarr; peptic ulceration &rarr; GI bleeding</li>
+      <li><b>Higher-risk patients:</b> older adults, prior ulcer/GI bleed, higher doses or multiple NSAIDs, concurrent bleeding-risk medications</li>
+      <li>COX-2–selective inhibitors <b>reduce</b> GI risk — they do <b>not eliminate</b> it</li>
+    </ul>
+
+    <h3 id="renal-tox">Renal Effects &amp; Fluid Retention</h3>
+    <ul>
+      <li><b>Normal role of prostaglandins:</b> maintain renal blood flow (especially important when perfusion is reduced), promote sodium excretion</li>
+      <li><b>Effects of NSAID use:</b> &darr; renal blood flow/GFR &rarr; acute kidney injury; &darr; sodium excretion &rarr; sodium/water retention &rarr; peripheral edema, &uarr; BP, worsening heart failure</li>
+      <li><b>Higher-risk:</b> dehydration, CKD, heart failure, cirrhosis</li>
+      <li class="callout" style="display:block;">These renal effects occur with <b>both</b> nonselective <i>and</i> COX-2–selective NSAIDs.</li>
+    </ul>
+
+    <h3 id="cv-tox">Cardiovascular &amp; Platelet Effects</h3>
+    <ul>
+      <li><b>Thrombotic risk:</b> &darr; prostacyclin + preserved platelet thromboxane &rarr; shift toward vasoconstriction/thrombosis &rarr; &uarr; MI and stroke risk; fluid retention/&uarr;BP further raise CV risk</li>
+      <li><b>Platelet function/bleeding:</b> COX-1 inhibition &rarr; &darr; thromboxane &rarr; impaired platelet aggregation &rarr; &uarr; bleeding risk (temporary with most NSAIDs); risk compounds with anticoagulants/antiplatelets</li>
+      <li><b>Celecoxib:</b> little direct effect on platelet aggregation, but GI and CV risks remain</li>
+    </ul>
+    <div class="callout pearl"><b>Clinical principle:</b> use the lowest effective dose for the shortest appropriate duration.</div>
+
+    <h3 id="hypersens">Hypersensitivity Reactions</h3>
+    <ul>
+      <li><b>Selective allergic reactions:</b> immune-mediated, to an individual NSAID</li>
+      <li><b>Cross-reactive COX-1-mediated reactions:</b> occur with multiple, unrelated COX-1-inhibiting NSAIDs; may cause cutaneous or respiratory symptoms</li>
+      <li><b>NSAID-exacerbated respiratory disease (N-ERD):</b> classic cross-reactive respiratory reaction; associated with asthma, chronic rhinosinusitis, nasal polyps; COX-1 inhibition &uarr; leukotriene signaling &rarr; bronchospasm</li>
+    </ul>
+
+    <h3 id="pregnancy">Pregnancy &amp; Fetal Toxicity</h3>
+    <table>
+      <tr><th>Gestational Age</th><th>Concern</th><th>Guidance</th></tr>
+      <tr><td>&asymp; 20 weeks and later</td><td>Fetal renal dysfunction, oligohydramnios</td><td>Use only when necessary; lowest effective dose, shortest duration</td></tr>
+      <tr><td>&asymp; 30 weeks and later</td><td>Premature closure of the ductus arteriosus</td><td>Avoid NSAIDs</td></tr>
+      <tr><td>Important exception</td><td>Preeclampsia prevention</td><td>Low-dose aspirin, initiated after 12 weeks, under obstetric supervision, in patients at increased risk</td></tr>
+    </table>
+
+    <h3 id="other-tox">Other Effects (recognize, don't drive routine selection)</h3>
+    <ul>
+      <li><b>CNS:</b> headache, dizziness; tinnitus can be an early sign of salicylate toxicity</li>
+      <li><b>Hepatic:</b> liver enzyme elevations may occur; significant hepatotoxicity uncommon (contrast with acetaminophen)</li>
+      <li><b>Chronic analgesic nephropathy:</b> prolonged/excessive analgesic use &rarr; slowly progressive chronic kidney injury</li>
+    </ul>
+
+    <h4>Patient Risk Assessment Summary</h4>
+    <table>
+      <tr><th>Risk Category</th><th>Risk Factors</th></tr>
+      <tr><td><b>&uarr; GI risk</b></td><td>Older age, prior peptic ulcer disease or GI bleeding</td></tr>
+      <tr><td><b>&uarr; Renal risk</b></td><td>CKD, dehydration/volume depletion</td></tr>
+      <tr><td><b>&uarr; CV risk</b></td><td>Hypertension, heart failure, established CV disease</td></tr>
+      <tr><td><b>Pregnancy</b></td><td>Caution beginning ~20 wks; avoid beginning ~30 wks (except indicated low-dose aspirin)</td></tr>
+    </table>
+
+    <div class="quiz">
+      <h4>Quick Check — Toxicities</h4>
+      <div class="q" data-answer="1">
+        <p class="stem">6. A patient with heart failure and CKD is prescribed a COX-2–selective NSAID under the assumption it is "kidney-safe." Is this correct?</p>
+        <div class="choices">
+          <button>A. Yes — COX-2 selective agents spare renal prostaglandin function entirely</button>
+          <button>B. No — renal toxicity occurs with both nonselective and COX-2–selective NSAIDs</button>
+          <button>C. Yes — only COX-1 is involved in renal blood flow</button>
+          <button>D. No — but only because of GI risk, not renal risk</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="2">
+        <p class="stem">7. At approximately what gestational age should NSAIDs generally be avoided due to risk of premature ductus arteriosus closure?</p>
+        <div class="choices">
+          <button>A. 10 weeks</button>
+          <button>B. 20 weeks</button>
+          <button>C. 30 weeks</button>
+          <button>D. 40 weeks</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="interactions">
+    <h2>Clinically Important Drug Interactions</h2>
+    <table>
+      <tr><th>Drug / Drug Class</th><th>Major Concern</th></tr>
+      <tr><td><b>Anticoagulants / Antiplatelets</b></td><td>&uarr; Bleeding risk</td></tr>
+      <tr><td><b>ACE inhibitor or ARB + Diuretic</b></td><td>&uarr; Acute kidney injury — the <b>"Triple Whammy"</b></td></tr>
+      <tr><td><b>Lithium</b></td><td>NSAIDs &darr; lithium clearance &rarr; &uarr; lithium concentration/toxicity</td></tr>
+      <tr><td><b>Methotrexate</b></td><td>NSAIDs &darr; methotrexate elimination &rarr; &uarr; toxicity risk</td></tr>
+      <tr><td><b>Low-dose aspirin + ibuprofen</b></td><td>&darr; Aspirin's irreversible antiplatelet effect</td></tr>
+      <tr><td><b>Corticosteroids</b></td><td>&uarr; GI ulceration/bleeding risk</td></tr>
+      <tr><td><b>SSRIs</b></td><td>&uarr; GI bleeding risk</td></tr>
+    </table>
+    <div class="callout pearl"><b>"Triple Whammy":</b> NSAID + ACE inhibitor/ARB + Diuretic = a classic, testable combination for acute kidney injury.</div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="individual">
+    <h2>Individual NSAIDs — Core Agents <span class="badge">know in depth</span></h2>
+    <p>All NSAIDs inhibit COX enzymes and share many therapeutic effects, toxicities, and drug interactions. Individual agents differ in COX selectivity, reversibility, potency/duration, dosage forms, therapeutic uses, and adverse-effect profile.</p>
+
+    <div class="drugcard">
+      <h4>Aspirin</h4>
+      <p><b>Unique features:</b> irreversible COX inhibition; persistent platelet inhibition.</p>
+      <p><b>Major clinical role:</b> low-dose antiplatelet therapy; secondary prevention of MI/ischemic stroke; primary prevention only in limited, individualized cases.</p>
+      <p><b>Major safety concerns:</b> &uarr; bleeding risk, Reye syndrome (avoid in children/teens with viral illness), salicylate toxicity.</p>
+      <p><b>Key point:</b> irreversible platelet inhibition distinguishes aspirin from every other NSAID.</p>
+    </div>
+
+    <div class="drugcard">
+      <h4>Ibuprofen (Advil, Motrin)</h4>
+      <p><b>Common uses:</b> pain, fever, dysmenorrhea, musculoskeletal pain, arthritis.</p>
+      <p><b>High-yield distinctions:</b> OTC doses are primarily analgesic/antipyretic; higher scheduled doses give a greater anti-inflammatory effect. <b>Shorter acting</b> than naproxen.</p>
+      <p><b>Important:</b> may reduce low-dose aspirin's antiplatelet effect (see timing rule above).</p>
+    </div>
+
+    <div class="drugcard">
+      <h4>Naproxen (Aleve, Naprosyn)</h4>
+      <p><b>Common uses:</b> same as ibuprofen.</p>
+      <p><b>High-yield distinctions:</b> <b>longer acting</b> than ibuprofen &rarr; less frequent dosing.</p>
+      <p><b>Important:</b> relatively <i>favorable</i> cardiovascular profile among NSAIDs — but this does <b>not</b> mean it is cardiovascularly safe; class CV risk still applies.</p>
+    </div>
+
+    <div class="drugcard">
+      <h4>Diclofenac</h4>
+      <p><b>Dosage forms:</b> oral <i>and</i> topical.</p>
+      <p><b>Common uses:</b> inflammatory pain, musculoskeletal pain, localized OA pain (topical).</p>
+      <p><b>High-yield distinctions:</b> <b>notable &uarr; cardiovascular risk</b>; rare hepatotoxicity &rarr; monitor LFTs with prolonged systemic therapy. Topical formulation &darr; systemic exposure.</p>
+    </div>
+
+    <div class="drugcard">
+      <h4>Indomethacin (Indocin)</h4>
+      <p><b>Major clinical role:</b> acute gout; closure of patent ductus arteriosus.</p>
+      <p><b>High-yield distinctions:</b> relatively high GI toxicity; more CNS adverse effects (headache, dizziness, confusion).</p>
+      <p><b>Pharm pearl:</b> often reserved for selected short-term indications rather than routine use.</p>
+    </div>
+
+    <div class="drugcard">
+      <h4>Ketorolac (Toradol)</h4>
+      <p><b>Major clinical role:</b> moderate-to-severe <i>acute</i> pain; IV/IM administration; opioid-sparing analgesia.</p>
+      <p><b>High-yield distinctions:</b> <b>maximum total duration = 5 days</b>; oral therapy only as a step-down after parenteral therapy.</p>
+      <p><b>Major safety concerns:</b> high GI toxicity, renal toxicity. <b>Not</b> for chronic or minor pain.</p>
+    </div>
+
+    <div class="drugcard">
+      <h4>Celecoxib (Celebrex) — Selective COX-2 Inhibitor</h4>
+      <p><b>Selectivity:</b> selective COX-2 inhibition.</p>
+      <p><b>Major distinctions:</b> &darr; GI ulcer risk vs. nonselective NSAIDs; little effect on platelet aggregation.</p>
+      <p><b>Common uses:</b> OA, RA, ankylosing spondylitis, acute pain, dysmenorrhea; suitable for chronic NSAID therapy.</p>
+      <p><b>Major safety concerns:</b> renal and cardiovascular risks remain; GI ulceration/bleeding still possible.</p>
+      <p><b>Pharm pearl:</b> often preferred when GI risk &gt; cardiovascular risk.</p>
+    </div>
+
+    <div class="drugcard">
+      <h4>Meloxicam — Preferential COX-2 Inhibitor</h4>
+      <p><b>Selectivity:</b> preferential (<i>not</i> selective) COX-2 inhibition; more COX-1 inhibition as dose increases.</p>
+      <p><b>Major distinctions:</b> less GI toxicity vs. nonselective NSAIDs; possible modest GI advantage at lower doses.</p>
+      <p><b>Common uses:</b> OA and RA; common option for chronic symptom control.</p>
+      <p><b>Major safety concerns:</b> renal and cardiovascular risks remain; GI toxicity still possible. <b>Not equivalent to celecoxib.</b></p>
+    </div>
+
+    <div class="quiz">
+      <h4>Quick Check — Individual Agents</h4>
+      <div class="q" data-answer="0">
+        <p class="stem">8. Which NSAID has a hard 5-day maximum total duration of therapy due to its high GI and renal toxicity?</p>
+        <div class="choices">
+          <button>A. Ketorolac</button>
+          <button>B. Naproxen</button>
+          <button>C. Meloxicam</button>
+          <button>D. Celecoxib</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="3">
+        <p class="stem">9. Which core NSAID is specifically used to pharmacologically close a patent ductus arteriosus?</p>
+        <div class="choices">
+          <button>A. Naproxen</button>
+          <button>B. Diclofenac</button>
+          <button>C. Celecoxib</button>
+          <button>D. Indomethacin</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="additional">
+    <h2>Additional NSAIDs <span class="badge class-level">class-level only</span></h2>
+    <p>Recognize by name; know at the <b>class</b> level only. These share the same major class principles (mechanism, therapeutic effects, toxicities, contraindications, interactions) as the nonselective core agents above. <b>Detailed drug-by-drug distinctions are not expected.</b></p>
+    <table>
+      <tr><th>Drug</th><th>Class</th></tr>
+      <tr><td>Etodolac</td><td rowspan="7">Nonselective NSAID — same class-level mechanism, effects, and toxicities as ibuprofen/naproxen/diclofenac/indomethacin/ketorolac</td></tr>
+      <tr><td>Fenoprofen</td></tr>
+      <tr><td>Flurbiprofen</td></tr>
+      <tr><td>Nabumetone</td></tr>
+      <tr><td>Oxaprozin</td></tr>
+      <tr><td>Piroxicam</td></tr>
+      <tr><td>Sulindac</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="apap">
+    <h2>Acetaminophen (APAP / Paracetamol)</h2>
+    <h3>Therapeutic Profile</h3>
+    <ul>
+      <li><b>Effects:</b> analgesic, antipyretic</li>
+      <li><b>Key differences from NSAIDs:</b> no meaningful anti-inflammatory activity; little effect on platelet function; minimal GI toxicity</li>
+      <li><b>Common uses:</b> mild-to-moderate pain, fever; useful when anti-inflammatory effect is not required; alternative when NSAIDs are undesirable due to GI/bleeding risk, CV risk, or NSAID hypersensitivity; often combined with opioids</li>
+    </ul>
+
+    <h3>Metabolism &amp; Overdose</h3>
+    <ul>
+      <li><b>Major toxicity:</b> dose-related liver injury</li>
+      <li><b>Normal metabolism:</b> a small amount is converted to the toxic metabolite <b>NAPQI</b>; glutathione detoxifies NAPQI under normal conditions</li>
+      <li><b>Overdose:</b> primary conjugation pathways become saturated &rarr; &uarr; NAPQI formation &rarr; glutathione depletion &rarr; NAPQI binds hepatocellular proteins &rarr; hepatic necrosis</li>
+    </ul>
+
+    <h4>Recognizing Overdose</h4>
+    <ul>
+      <li>Early symptoms may be mild or absent</li>
+      <li>Later: &uarr; aminotransferases, RUQ pain, coagulopathy, jaundice, acute liver failure in severe cases</li>
+    </ul>
+
+    <h4>Treatment</h4>
+    <ul>
+      <li><b>N-acetylcysteine (NAC)</b> replenishes glutathione; most effective when given early, but may still help after liver injury begins</li>
+    </ul>
+
+    <h4>Major Risk Factors for Toxicity</h4>
+    <ul>
+      <li>Multiple acetaminophen-containing products taken together (unintentional cumulative overdose)</li>
+      <li>Excessive or repeated supratherapeutic dosing</li>
+      <li>Fasting or malnutrition</li>
+      <li>Chronic heavy alcohol use</li>
+      <li>Preexisting liver disease</li>
+    </ul>
+
+    <div class="quiz">
+      <h4>Quick Check — Acetaminophen</h4>
+      <div class="q" data-answer="2">
+        <p class="stem">10. What is the mechanism of acetaminophen-induced hepatotoxicity in overdose?</p>
+        <div class="choices">
+          <button>A. Direct COX-1 inhibition in hepatocytes</button>
+          <button>B. Irreversible platelet inhibition causing hepatic microbleeds</button>
+          <button>C. Saturation of normal conjugation pathways &rarr; &uarr; NAPQI &rarr; glutathione depletion &rarr; hepatocellular protein binding &rarr; necrosis</button>
+          <button>D. Renal prostaglandin depletion causing hepatorenal syndrome</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="1">
+        <p class="stem">11. What is the antidote for acetaminophen overdose, and how does it work?</p>
+        <div class="choices">
+          <button>A. Naloxone — opioid receptor antagonism</button>
+          <button>B. N-acetylcysteine — replenishes glutathione</button>
+          <button>C. Vitamin K — restores clotting factors</button>
+          <button>D. Flumazenil — benzodiazepine receptor antagonism</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="hy-table">
+    <h2>High-Yield Comparison Table</h2>
+    <table>
+      <tr><th>Agent</th><th>Major Clinical Role / Distinction</th><th>Safety / Recognition Points</th></tr>
+      <tr class="core"><td><b>Aspirin</b></td><td>Irreversible COX inhibition; prolonged antiplatelet effect; secondary CV prevention</td><td>Bleeding; Reye syndrome; salicylate toxicity</td></tr>
+      <tr><td><b>Ibuprofen</b></td><td>Common, shorter-acting OTC NSAID for pain, fever, inflammation</td><td>May reduce low-dose aspirin's antiplatelet effect</td></tr>
+      <tr><td><b>Naproxen</b></td><td>Longer acting than ibuprofen; less frequent dosing</td><td>Relatively lower CV risk vs. some NSAIDs, but class CV risk remains</td></tr>
+      <tr><td><b>Diclofenac</b></td><td>Oral and topical options; topical for localized MSK/OA pain</td><td>Notable CV risk; LFT elevations, rare hepatotoxicity</td></tr>
+      <tr><td><b>Indomethacin</b></td><td>Acute gout and PDA closure</td><td>Relatively high GI and CNS adverse-effect burden</td></tr>
+      <tr><td><b>Ketorolac</b></td><td>Short-term moderate-severe acute pain; IV/IM &rarr; oral step-down</td><td>Total therapy &le;5 days; high GI and renal toxicity</td></tr>
+      <tr><td><b>Celecoxib</b></td><td>Selective COX-2 inhibitor; lower GI ulcer risk</td><td>Little direct platelet effect; renal/CV risk remain</td></tr>
+      <tr><td><b>Meloxicam</b></td><td>Preferential COX-2 inhibitor; once-daily OA/RA treatment</td><td>Class GI/renal/CV risk remain; not equivalent to celecoxib</td></tr>
+      <tr><td><b>Acetaminophen</b></td><td>Analgesic/antipyretic; not an NSAID; minimal anti-inflammatory or platelet effect</td><td>Dose-related hepatotoxicity; NAC for overdose</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="selection">
+    <h2>5. Clinical Selection</h2>
+    <h3>Before Selecting Therapy, Consider:</h3>
+    <ul>
+      <li>Expected duration of treatment</li>
+      <li>Comorbidities and concurrent medications</li>
+      <li>Overall toxicity risk</li>
+    </ul>
+
+    <h3>General NSAID Principles</h3>
+    <ul>
+      <li>Lowest effective dose</li>
+      <li>Shortest appropriate duration</li>
+      <li>Reassess if therapy continues</li>
+      <li>Monitor renal function, blood pressure, GI bleeding, and selected liver enzymes</li>
+    </ul>
+
+    <table>
+      <tr><th>Clinical Scenario</th><th>Preferred Approach</th></tr>
+      <tr><td>Anti-inflammatory effect required</td><td>Nonselective NSAID or celecoxib</td></tr>
+      <tr><td>Pain/fever without substantial inflammation</td><td>Acetaminophen</td></tr>
+      <tr><td>&uarr; GI ulcer/bleeding risk</td><td>Acetaminophen, topical NSAID, celecoxib, or gastroprotection (PPI) if systemic NSAID is necessary</td></tr>
+      <tr><td>&uarr; Renal risk</td><td>Avoid systemic NSAIDs when possible; consider acetaminophen or topical NSAID</td></tr>
+      <tr><td>Established cardiovascular disease</td><td>Avoid NSAIDs when possible; if needed, lowest dose/shortest duration — naproxen may be preferred (relatively favorable CV profile)</td></tr>
+      <tr><td>Pregnancy</td><td>Avoid NSAIDs &ge;20 wks, avoid entirely &ge;30 wks (except limited obstetric use); acetaminophen generally preferred</td></tr>
+    </table>
+
+    <div class="callout pearl"><b>Central principle:</b> match the medication to the patient's risk profile.</div>
+
+    <div class="quiz">
+      <h4>Quick Check — Clinical Selection</h4>
+      <div class="q" data-answer="1">
+        <p class="stem">12. A 68-year-old with a history of MI and hypertension needs analgesia for a musculoskeletal strain. What is the best first-line approach?</p>
+        <div class="choices">
+          <button>A. Ketorolac IM for 5 days</button>
+          <button>B. Acetaminophen, avoiding systemic NSAIDs when possible</button>
+          <button>C. High-dose indomethacin</button>
+          <button>D. Celecoxib at maximum dose</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="0">
+        <p class="stem">13. A pregnant patient at 32 weeks gestation reports musculoskeletal pain. Which analgesic is generally preferred?</p>
+        <div class="choices">
+          <button>A. Acetaminophen</button>
+          <button>B. Ibuprofen</button>
+          <button>C. Indomethacin</button>
+          <button>D. Ketorolac</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="summary">
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li><b>Mechanism:</b> Inhibit COX enzymes &rarr; &darr; prostaglandin synthesis</li>
+      <li><b>Therapeutic effects:</b> Analgesic, antipyretic, and anti-inflammatory</li>
+      <li><b>Most effective for:</b> Inflammatory or prostaglandin-mediated conditions</li>
+      <li><b>Major toxicities:</b> Gastrointestinal, renal, cardiovascular, platelet, hypersensitivity, and pregnancy</li>
+      <li><b>Before prescribing:</b> Assess patient risk factors and review concomitant medications</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="quiz-final">
+    <h2>Final Practice Set</h2>
+    <div class="quiz">
+      <div class="q" data-answer="2">
+        <p class="stem">14. A patient with chronic rhinosinusitis, nasal polyps, and asthma develops bronchospasm after taking a nonselective NSAID. What is the underlying mechanism?</p>
+        <div class="choices">
+          <button>A. IgE-mediated anaphylaxis to the specific drug</button>
+          <button>B. COX-2 inhibition reducing prostacyclin</button>
+          <button>C. COX-1 inhibition shunting arachidonic acid toward increased leukotriene production (N-ERD)</button>
+          <button>D. Direct bronchial smooth muscle toxicity</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="3">
+        <p class="stem">15. A patient on lisinopril and furosemide is started on ibuprofen for chronic knee pain. What is the major concern?</p>
+        <div class="choices">
+          <button>A. Serotonin syndrome</button>
+          <button>B. QT prolongation</button>
+          <button>C. Reye syndrome</button>
+          <button>D. "Triple whammy" acute kidney injury (NSAID + ACE inhibitor + diuretic)</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="0">
+        <p class="stem">16. Which of the following best explains why COX-2–selective inhibitors like celecoxib still carry cardiovascular risk?</p>
+        <div class="choices">
+          <button>A. COX-2 inhibition &darr; prostacyclin (vasodilation/antiplatelet) while thromboxane production is preserved, shifting toward thrombosis</button>
+          <button>B. Celecoxib irreversibly inhibits platelet COX-1</button>
+          <button>C. Celecoxib causes hepatotoxicity that impairs clotting factor synthesis</button>
+          <button>D. Celecoxib has no effect on cardiovascular prostanoids</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-answer="1">
+        <p class="stem">17. Why is acetaminophen often preferred over NSAIDs in a patient with a bleeding disorder?</p>
+        <div class="choices">
+          <button>A. Acetaminophen has a stronger anti-inflammatory effect</button>
+          <button>B. Acetaminophen does not inhibit platelet function</button>
+          <button>C. Acetaminophen has no hepatotoxicity risk</button>
+          <button>D. Acetaminophen is a COX-2 selective inhibitor</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Built from: MSK II — NSAIDs lecture slides (Natalie Waterfall, PharmD) &amp; Core Topics Study Guide - NSAIDs (with answers). Sources cited in original lecture: Katzung's Basic &amp; Clinical Pharmacology 16th ed.; Goodman &amp; Gilman's 14th ed.; Brody's Human Pharmacology 7th ed.; First Aid for the USMLE Step 1 2024; Lippincott Illustrated Reviews: Pharmacology 8th ed.
+  </footer>
+</main>
+
+<script>
+document.querySelectorAll('.q').forEach(q=>{
+  const correctIdx = parseInt(q.dataset.answer, 10);
+  const buttons = q.querySelectorAll('.choices button');
+  const fb = q.querySelector('.feedback');
+  buttons.forEach((btn, idx)=>{
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('locked')) return;
+      buttons.forEach(b=>b.classList.add('locked'));
+      if(idx===correctIdx){
+        btn.classList.add('correct');
+        fb.textContent = "Correct — " + buttons[correctIdx].textContent;
+        fb.className = 'feedback show correct-fb';
+      } else {
+        btn.classList.add('incorrect');
+        buttons[correctIdx].classList.add('correct');
+        fb.textContent = "Incorrect. Correct answer: " + buttons[correctIdx].textContent;
+        fb.className = 'feedback show incorrect-fb';
+      }
+    });
+  });
+});
+
+// close sections panel when a link is clicked
+document.querySelectorAll('#sideNav a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    document.getElementById('sideNav').classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
