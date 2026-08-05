@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agents That Act on the NMJ — Study Guide</title>
+<style>
+  :root{
+    --cream:#faf6ec;
+    --dark:#2f5233;
+    --accent:#3f7d52;
+    --accent-light:#e7f0e6;
+    --border:#cfe0cd;
+    --text:#33301f;
+    --red:#a03024;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--cream);
+    color:var(--text);
+    font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+    margin:0;
+    padding:0 0 80px 0;
+    line-height:1.6;
+  }
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:52px;
+    background:var(--cream);
+    border-bottom:1px solid var(--border);
+    z-index:200;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 18px;
+  }
+  .back-link{
+    color:var(--dark); text-decoration:none; font-weight:bold; font-size:0.95em;
+  }
+  .back-link:hover{text-decoration:underline;}
+  .pdf-btn{
+    background:var(--accent); color:#fff; border:none; padding:8px 16px;
+    border-radius:5px; font-family:inherit; font-size:0.9em; cursor:pointer;
+  }
+  .pdf-btn:hover{background:var(--dark);}
+  .wrap{
+    max-width:860px; margin:0 auto; padding:80px 28px 40px 28px;
+  }
+  h1.title{
+    color:var(--dark); font-size:2em; margin-bottom:0.1em; border-bottom:3px solid var(--accent); padding-bottom:14px;
+  }
+  .subtitle{color:var(--accent); font-style:italic; margin-top:0; margin-bottom:1.8em;}
+  h2{
+    color:var(--dark);
+    border-left:6px solid var(--accent);
+    padding:6px 12px;
+    background:var(--accent-light);
+    border-radius:0 6px 6px 0;
+    margin-top:2.4em;
+    cursor:pointer;
+    user-select:none;
+  }
+  h2::after{content:"▾"; float:right; color:var(--accent);}
+  h2.collapsed::after{content:"▸";}
+  .section-body{overflow:hidden;}
+  .section-body.collapsed{display:none;}
+  h3{color:var(--dark); margin-top:1.6em; border-bottom:1px solid var(--border); padding-bottom:4px;}
+  h4{color:var(--accent); margin-bottom:0.3em;}
+  p{margin:0.6em 0;}
+  ul,ol{margin:0.5em 0; padding-left:1.4em;}
+  li{margin:0.25em 0;}
+  strong{color:var(--dark);}
+  em{color:var(--accent);}
+  table{
+    width:100%; border-collapse:collapse; margin:1em 0; font-size:0.95em;
+    background:#fff;
+  }
+  th{
+    background:var(--dark); color:#fff; text-align:left; padding:8px 10px;
+  }
+  td{
+    padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:top;
+  }
+  tr:nth-child(even) td{background:var(--accent-light);}
+  .callout{
+    background:var(--accent-light); border:1px solid var(--border); border-left:5px solid var(--accent);
+    padding:10px 14px; border-radius:0 6px 6px 0; margin:1em 0;
+  }
+  .callout.danger{border-left-color:var(--red); background:#f7ece9;}
+  .callout.danger strong{color:var(--red);}
+  .pill{
+    display:inline-block; background:var(--dark); color:#fff; font-size:0.78em;
+    padding:2px 9px; border-radius:12px; margin-right:6px;
+  }
+  code{background:var(--accent-light); padding:1px 5px; border-radius:3px; font-size:0.92em;}
+  hr{border:none; border-top:1px solid var(--border); margin:2em 0;}
+
+  /* Side nav */
+  .nav-tab{
+    position:fixed; top:50%; right:0; transform:translateY(-50%) rotate(180deg);
+    writing-mode:vertical-rl;
+    background:var(--dark); color:#fff; padding:14px 8px;
+    border-radius:8px 0 0 8px; cursor:pointer; z-index:210;
+    font-size:0.85em; letter-spacing:2px;
+  }
+  .side-panel{
+    position:fixed; top:0; right:-300px; width:280px; height:100%;
+    background:#fff; border-left:1px solid var(--border);
+    box-shadow:-4px 0 14px rgba(0,0,0,0.12);
+    z-index:220; transition:right 0.3s ease; padding:60px 18px 18px 18px; overflow-y:auto;
+  }
+  .side-panel.open{right:0;}
+  .side-panel h4{margin-top:0; color:var(--dark);}
+  .side-panel a{
+    display:block; color:var(--text); text-decoration:none; padding:6px 4px;
+    border-bottom:1px solid var(--border); font-size:0.92em;
+  }
+  .side-panel a:hover{color:var(--accent); background:var(--accent-light);}
+  .close-panel{
+    position:absolute; top:16px; right:16px; cursor:pointer; font-weight:bold; color:var(--dark);
+    font-size:1.1em;
+  }
+
+  /* Quiz */
+  .quiz{
+    background:#fff; border:1px solid var(--border); border-radius:8px;
+    padding:14px 16px; margin:1em 0;
+  }
+  .quiz p.q{font-weight:bold; color:var(--dark); margin-top:0;}
+  .quiz .opt{
+    display:block; width:100%; text-align:left; background:var(--accent-light);
+    border:1px solid var(--border); border-radius:5px; padding:8px 12px; margin:6px 0;
+    cursor:pointer; font-family:inherit; font-size:0.95em; color:var(--text);
+  }
+  .quiz .opt:hover{background:#dfeadd;}
+  .quiz .opt.correct{background:#cfead0; border-color:var(--accent); font-weight:bold;}
+  .quiz .opt.incorrect{background:#f3d6d1; border-color:var(--red);}
+  .quiz .feedback{margin-top:8px; font-style:italic; font-size:0.92em;}
+
+  @media print{
+    .topbar,.nav-tab,.side-panel{display:none !important;}
+    .section-body{display:block !important;}
+    h2::after{content:"";}
+    body{padding:0;}
+    .wrap{padding:0 10px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back-link" href="index.html">&larr; Back to Study Guides</a>
+  <button class="pdf-btn" onclick="window.print()">Download PDF</button>
+</div>
+
+<div class="nav-tab" onclick="document.getElementById('sidePanel').classList.add('open')">SECTIONS</div>
+<div class="side-panel" id="sidePanel">
+  <span class="close-panel" onclick="document.getElementById('sidePanel').classList.remove('open')">✕</span>
+  <h4>Jump to Section</h4>
+  <a href="#s1">1. NMJ Physiology &amp; Drug Sites</a>
+  <a href="#s2">2. Neuromuscular Blocking Agents</a>
+  <a href="#s3">3. NMBA Adverse Effects &amp; Risks</a>
+  <a href="#s4">4. Choosing an NMBA</a>
+  <a href="#s5">5. Reversal of Blockade</a>
+  <a href="#s6">6. Dantrolene &amp; Botulinum Toxin</a>
+  <a href="#s7">7. Acetylcholinesterase Inhibitors</a>
+  <a href="#s8">8. Clinical Uses of AChE Inhibitors</a>
+  <a href="#s9">9. Cholinergic Toxicity</a>
+  <a href="#s10">10. Organophosphate Poisoning</a>
+  <a href="#s11">11. High-Yield Summary Table</a>
+  <a href="#s12">12. Practice Questions</a>
+</div>
+
+<div class="wrap">
+  <h1 class="title">Agents That Act on the NMJ</h1>
+  <p class="subtitle">MSK II &middot; Natalie Waterfall, PharmD &middot; Built from lecture slides + Core Topics Study Guide with answers</p>
+
+  <div class="callout">
+    <strong>Learning Objectives</strong>
+    <ol>
+      <li>Compare depolarizing and nondepolarizing neuromuscular blockers with respect to mechanism, clinical use, duration, metabolism, and reversal.</li>
+      <li>Explain major adverse effects and risks of NMBAs, including succinylcholine-associated hyperkalemia, malignant hyperthermia, prolonged paralysis, and drug interactions.</li>
+      <li>Describe pharmacologic reversal of neuromuscular blockade, including AChE inhibitors and sugammadex.</li>
+      <li>Explain the mechanisms and clinical uses of botulinum toxin and dantrolene.</li>
+      <li>Describe the mechanism of AChE inhibitors and predict effects at muscarinic, nicotinic, and CNS sites.</li>
+      <li>Distinguish therapeutic uses of AChE inhibitors from cholinergic toxicity.</li>
+      <li>Explain the pharmacologic management of organophosphate poisoning, including atropine and pralidoxime.</li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1 -->
+  <h2 id="s1">1. NMJ Physiology &amp; Sites of Drug Action</h2>
+  <div class="section-body">
+    <h3>Normal NMJ Signaling</h3>
+    <ol>
+      <li>ACh is synthesized in the motor nerve terminal.</li>
+      <li>ACh is stored in synaptic vesicles.</li>
+      <li>ACh is released into the synaptic cleft.</li>
+      <li>ACh binds <strong>nicotinic receptors</strong> on skeletal muscle &rarr; end-plate depolarization &rarr; muscle contraction.</li>
+      <li><strong>Acetylcholinesterase (AChE)</strong> rapidly breaks down ACh into acetate + choline.</li>
+      <li>Choline is recycled back into the nerve terminal.</li>
+    </ol>
+    <p>Because AChE degrades ACh so quickly, normal signaling stays <em>brief and controlled</em>. Every drug in this unit works by disrupting one of these steps.</p>
+
+    <h3>Where Skeletal Muscle Relaxants Act</h3>
+    <table>
+      <tr><th>Site of Action</th><th>Drug / Group</th><th>Main Effect</th></tr>
+      <tr><td>Presynaptic ACh release</td><td>Botulinum toxin</td><td>&darr; ACh release</td></tr>
+      <tr><td>Postsynaptic nicotinic receptor</td><td>NMBAs</td><td>Paralysis</td></tr>
+      <tr><td>Skeletal muscle Ca&sup2;&#8314; release</td><td>Dantrolene</td><td>&darr; contraction</td></tr>
+      <tr><td>CNS / spinal cord</td><td>Baclofen, tizanidine, cyclobenzaprine</td><td>&darr; spasticity/spasm</td></tr>
+    </table>
+
+    <div class="callout">
+      <strong>Big picture:</strong> Two major drug classes act directly at the NMJ &mdash; <strong>neuromuscular blockers</strong> (&darr; skeletal muscle activation) and <strong>AChE inhibitors</strong> (&uarr; ACh signaling). Everything downstream in this guide is a variation on one of these two ideas.
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <h2 id="s2">2. Neuromuscular Blocking Agents (NMBAs)</h2>
+  <div class="section-body">
+    <h3>Nondepolarizing NMBAs</h3>
+    <p><span class="pill">Rocuronium</span><span class="pill">Vecuronium</span><span class="pill">Pancuronium</span><span class="pill">Atracurium</span><span class="pill">Cisatracurium</span></p>
+    <ul>
+      <li><strong>Mechanism:</strong> Competitive antagonists at nicotinic ACh receptors &mdash; they occupy the receptor without activating it.</li>
+      <li>As more receptors are blocked, the end-plate potential shrinks and may no longer reach threshold.</li>
+      <li><strong>Muscle response:</strong> Flaccid paralysis <em>without</em> initial fasciculations.</li>
+      <li><strong>Reversible</strong> with AChE inhibitors <em>if</em> partial spontaneous recovery has occurred.</li>
+    </ul>
+
+    <h3>Depolarizing NMBA: Succinylcholine</h3>
+    <ul>
+      <li><strong>Mechanism:</strong> Nicotinic receptor <em>agonist</em> &mdash; causes persistent depolarization of the motor end plate.</li>
+      <li>Sustained depolarization prevents voltage-gated Na&#8314; channels from resetting &rarr; no further muscle action potentials.</li>
+      <li><strong>Phase I block:</strong> brief fasciculations &rarr; flaccid paralysis.</li>
+      <li><strong>Not reversed</strong> by AChE inhibitors (may worsen/prolong the block).</li>
+      <li><strong>Phase II block</strong> can develop with repeated dosing or prolonged exposure, starting to resemble a nondepolarizing block.</li>
+    </ul>
+
+    <h3>Mechanism Comparison</h3>
+    <table>
+      <tr><th>Feature</th><th>Nondepolarizing NMBAs</th><th>Succinylcholine</th></tr>
+      <tr><td>Receptor action</td><td>Competitive antagonist</td><td>Nicotinic agonist</td></tr>
+      <tr><td>Main block</td><td>Prevents depolarization</td><td>Persistent depolarization</td></tr>
+      <tr><td>Paralysis</td><td>Flaccid, no fasciculations</td><td>Flaccid, after fasciculations</td></tr>
+      <tr><td>Initial effect</td><td>No fasciculations</td><td>Fasciculations</td></tr>
+      <tr><td>AChE inhibitor reversal</td><td>Yes, if partial recovery present</td><td>No (does not reverse Phase I)</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 3 -->
+  <h2 id="s3">3. NMBA Adverse Effects &amp; Risks</h2>
+  <div class="section-body">
+    <h3>Class-Level Dangers</h3>
+    <div class="callout danger">
+      <strong>Paralysis &ne; sedation, analgesia, or amnesia.</strong> A patient can be fully conscious and in pain while completely unable to move or breathe.
+    </div>
+    <ul>
+      <li>Respiratory muscles are paralyzed &mdash; airway and ventilatory support are mandatory.</li>
+      <li><strong>Residual blockade</strong> after incomplete recovery &rarr; impaired breathing, poor airway protection, aspiration risk.</li>
+      <li><strong>Train-of-four monitoring</strong> assesses depth of block and guides reversal.</li>
+      <li>Safe use requires: sedation/analgesia + airway/ventilatory support + monitoring + a reversal plan.</li>
+    </ul>
+
+    <h3>Succinylcholine-Specific Risks</h3>
+    <ul>
+      <li><strong>Hyperkalemia:</strong> Nicotinic activation lets K&#8314; leave skeletal muscle. Usually a small rise, but in <strong>burns, major muscle injury/trauma, denervation, spinal cord injury, stroke, prolonged immobility, or neuromuscular disease</strong>, muscle upregulates (including extrajunctional) nicotinic receptors &rarr; massive K&#8314; efflux &rarr; severe hyperkalemia, dysrhythmia, or cardiac arrest.</li>
+      <li><strong>Malignant hyperthermia:</strong> Triggered by succinylcholine + volatile anesthetics in genetically susceptible patients (abnormal ryanodine receptor). Uncontrolled Ca&sup2;&#8314; release &rarr; sustained contraction &rarr; hypermetabolic state (&uarr; end-tidal CO&#8322;, tachycardia, rigidity, acidosis, hyperkalemia, rhabdomyolysis, hyperthermia). <strong>Treated with dantrolene.</strong></li>
+      <li><strong>Bradycardia</strong> &mdash; more likely with repeat dosing or in pediatric patients.</li>
+      <li>Fasciculations/myalgia; &uarr; intraocular/intracranial pressure.</li>
+      <li><strong>Prolonged paralysis</strong> with reduced/atypical butyrylcholinesterase activity, or Phase II block from repeated dosing &rarr; manage with ventilatory support until recovery.</li>
+    </ul>
+
+    <h3>Agent-Specific Adverse Effects (Nondepolarizing)</h3>
+    <table>
+      <tr><th>Agent</th><th>Key Adverse Effect(s)</th></tr>
+      <tr><td>Atracurium</td><td>Histamine release &rarr; flushing, hypotension, bronchospasm; laudanosine metabolite &rarr; seizure risk</td></tr>
+      <tr><td>Cisatracurium</td><td>Less histamine release; substantially less laudanosine</td></tr>
+      <tr><td>Pancuronium</td><td>Tachycardia (vagolytic); renal elimination &rarr; accumulation risk</td></tr>
+      <tr><td>Rocuronium / Vecuronium</td><td>No major agent-defining toxicities</td></tr>
+    </table>
+
+    <h3>Drug &amp; Disease Interactions That Intensify Blockade</h3>
+    <ul>
+      <li><strong>Magnesium:</strong> &darr; ACh release from the nerve terminal, &darr; muscle excitability.</li>
+      <li><strong>Aminoglycosides:</strong> impair ACh release.</li>
+      <li><strong>Volatile anesthetics:</strong> enhance nondepolarizing block.</li>
+      <li><strong>Neuromuscular disease:</strong> reduces NMJ reserve &rarr; increased sensitivity to blockade.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 4 -->
+  <h2 id="s4">4. Choosing an NMBA</h2>
+  <div class="section-body">
+    <p>Selection depends on: onset needed, duration needed, elimination pathway, patient-specific safety risks, and reversal options.</p>
+
+    <h3>Onset &amp; Duration</h3>
+    <table>
+      <tr><th>Agent</th><th>Approx. Onset</th><th>Approx. Duration</th><th>Pattern</th></tr>
+      <tr><td>Succinylcholine</td><td>~0.5&ndash;1 min</td><td>~5&ndash;10 min</td><td>Fastest / very short</td></tr>
+      <tr><td>Rocuronium</td><td>~1&ndash;3 min</td><td>~30&ndash;70 min</td><td>Rapid / intermediate</td></tr>
+      <tr><td>Vecuronium</td><td>~3&ndash;5 min</td><td>~25&ndash;50 min</td><td>Slower / intermediate</td></tr>
+      <tr><td>Atracurium</td><td>~3&ndash;5 min</td><td>~30&ndash;45 min</td><td>Intermediate</td></tr>
+      <tr><td>Cisatracurium</td><td>~2&ndash;7 min</td><td>~35&ndash;60 min</td><td>Intermediate</td></tr>
+      <tr><td>Pancuronium</td><td>~3&ndash;5 min</td><td>~60&ndash;100 min</td><td>Slower / long</td></tr>
+    </table>
+    <p><em>Rocuronium</em> is the fastest nondepolarizing option and a common alternative when succinylcholine should be avoided.</p>
+
+    <h3>Elimination</h3>
+    <ul>
+      <li><strong>Succinylcholine:</strong> plasma butyrylcholinesterase &mdash; deficiency &rarr; prolonged paralysis.</li>
+      <li><strong>Rocuronium:</strong> primarily hepatobiliary &mdash; hepatic dysfunction &rarr; prolonged blockade.</li>
+      <li><strong>Vecuronium:</strong> hepatic metabolism + biliary/renal elimination &mdash; active metabolite can accumulate in renal impairment.</li>
+      <li><strong>Pancuronium:</strong> renal elimination &mdash; renal impairment &rarr; prolonged blockade.</li>
+      <li><strong>Atracurium &amp; Cisatracurium:</strong> <strong>Hofmann elimination</strong> &mdash; organ-independent, nonenzymatic breakdown.</li>
+    </ul>
+
+    <h3>Patient-Specific Selection</h3>
+    <table>
+      <tr><th>Clinical Situation</th><th>Preferred Approach</th></tr>
+      <tr><td>Hyperkalemia / malignant hyperthermia risk</td><td>Avoid succinylcholine; consider rocuronium for rapid paralysis</td></tr>
+      <tr><td>Significant renal/hepatic impairment</td><td>Consider cisatracurium (organ-independent elimination)</td></tr>
+      <tr><td>Need for rapid reversal</td><td>Rocuronium or vecuronium (reversible with sugammadex)</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 5 -->
+  <h2 id="s5">5. Reversal of Neuromuscular Blockade</h2>
+  <div class="section-body">
+    <h3>Nondepolarizing NMBAs &mdash; Neostigmine</h3>
+    <ul>
+      <li><strong>Mechanism:</strong> Inhibits AChE &rarr; &uarr; ACh at the NMJ &rarr; ACh competes with the NMBA for nicotinic receptors.</li>
+      <li><strong>Requires partial spontaneous recovery</strong> &mdash; less effective for deep blockade.</li>
+      <li><strong>Must be co-administered</strong> with an antimuscarinic (glycopyrrolate or atropine) to limit muscarinic effects (bradycardia, bronchoconstriction, secretions, GI activity).
+        <ul>
+          <li>Glycopyrrolate: limited CNS penetration; commonly paired with neostigmine.</li>
+          <li>Atropine: faster/stronger heart-rate effect; more CNS penetration.</li>
+        </ul>
+      </li>
+      <li>Does <strong>not</strong> reverse Phase I succinylcholine block.</li>
+    </ul>
+
+    <h3>Rocuronium / Vecuronium &mdash; Sugammadex</h3>
+    <ul>
+      <li><strong>Mechanism:</strong> Selectively encapsulates free rocuronium/vecuronium in plasma, reducing the amount available to bind nicotinic receptors. Does <strong>not</strong> depend on increasing ACh.</li>
+      <li><strong>Reverses:</strong> rocuronium, vecuronium.</li>
+      <li><strong>Does not reverse:</strong> succinylcholine, cisatracurium, atracurium, pancuronium.</li>
+      <li>No antimuscarinic coadministration needed.</li>
+      <li><strong>Cautions:</strong> hypersensitivity reactions, bradycardia, reduced hormonal contraceptive effectiveness, use limited by renal function.</li>
+    </ul>
+
+    <h3>Succinylcholine Reversal</h3>
+    <ul>
+      <li><strong>No direct pharmacologic reversal agent.</strong></li>
+      <li>Normal butyrylcholinesterase activity &rarr; short duration, allowed to wear off spontaneously.</li>
+      <li>AChE inhibitors do <strong>not</strong> reverse Phase I block and may worsen/prolong depolarization.</li>
+      <li>Unexpected prolonged paralysis &rarr; impaired/atypical butyrylcholinesterase activity or Phase II block &rarr; manage with ventilatory support and monitoring until recovery.</li>
+    </ul>
+
+    <h3>Reversal Takeaways</h3>
+    <table>
+      <tr><th>Agent Class</th><th>Reversal Strategy</th><th>Key Point</th></tr>
+      <tr><td>Nondepolarizing NMBAs</td><td>Neostigmine (+ glycopyrrolate/atropine)</td><td>Needs partial recovery</td></tr>
+      <tr><td>Rocuronium / Vecuronium</td><td>Sugammadex</td><td>No antimuscarinic needed; rapid</td></tr>
+      <tr><td>Succinylcholine</td><td>None &mdash; spontaneous recovery</td><td>Support ventilation if prolonged</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 6 -->
+  <h2 id="s6">6. Dantrolene &amp; Botulinum Toxin</h2>
+  <div class="section-body">
+    <h3>Dantrolene</h3>
+    <ul>
+      <li><strong>Direct skeletal muscle relaxant</strong> &mdash; acts on muscle itself, not the nerve or NMJ.</li>
+      <li><strong>Mechanism:</strong> Inhibits RyR1-mediated Ca&sup2;&#8314; release from the sarcoplasmic reticulum &rarr; &darr; muscle contraction.</li>
+      <li><strong>Key use: Malignant hyperthermia</strong> &mdash; stops sustained contraction and hypermetabolism.</li>
+      <li><strong>Adverse effects:</strong> muscle weakness, hepatotoxicity (more prominent with ongoing oral use).</li>
+    </ul>
+
+    <h3>Botulinum Toxin</h3>
+    <ul>
+      <li>Acts <strong>presynaptically</strong> at cholinergic nerve terminals.</li>
+      <li><strong>Mechanism:</strong> Cleaves SNARE proteins &rarr; prevents ACh release &rarr; nicotinic receptors are not activated.</li>
+      <li>Produces <strong>focal chemodenervation</strong> concentrated near the injection site.</li>
+      <li><strong>Uses:</strong> dystonia, blepharospasm, spasticity, other localized indications.</li>
+      <li>Onset is not instantaneous; effect can last <strong>weeks to months</strong> until nerve terminals remodel.</li>
+      <li><strong>Risk:</strong> spread beyond the injection site &rarr; unwanted weakness, dysphagia, dysphonia, or breathing difficulty in severe cases.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 7 -->
+  <h2 id="s7">7. Acetylcholinesterase Inhibitors</h2>
+  <div class="section-body">
+    <div class="callout">
+      AChE inhibitors <strong>increase ACh signaling</strong>. Their effects &mdash; and whether those effects are therapeutic or toxic &mdash; depend entirely on <em>where</em> ACh increases: muscarinic receptors, nicotinic receptors at the NMJ, or the CNS.
+    </div>
+
+    <h3>Mechanism</h3>
+    <ul>
+      <li><strong>Normal:</strong> AChE rapidly hydrolyzes ACh &rarr; acetate + choline &rarr; signal stays brief and controlled.</li>
+      <li><strong>With inhibition:</strong> ACh remains available longer &rarr; cholinergic receptor activation increases &rarr; normal signaling becomes stronger and longer-lasting.</li>
+    </ul>
+
+    <h3>Effects Depend on Location</h3>
+    <table>
+      <tr><th>Site</th><th>Effect of Increased ACh</th><th>Clinical Connection</th></tr>
+      <tr><td>Muscarinic receptors</td><td>Parasympathetic effects</td><td>Bradycardia, bronchoconstriction, secretions, GI/GU activity, miosis</td></tr>
+      <tr><td>Nicotinic receptors at NMJ</td><td>&uarr; skeletal muscle activation</td><td>Myasthenia gravis, NMBA reversal; excess ACh &rarr; weakness/paralysis</td></tr>
+      <tr><td>Central nervous system</td><td>Cognition, arousal, behavior</td><td>Alzheimer disease; toxicity &rarr; confusion, seizures, coma</td></tr>
+    </table>
+
+    <h3>Central vs. Peripheral AChE Inhibitors</h3>
+    <table>
+      <tr><th>Group</th><th>BBB Penetration</th><th>Key Examples</th><th>Main Clinical Association</th></tr>
+      <tr><td>Quaternary agents</td><td>Poor CNS penetration</td><td>Neostigmine, pyridostigmine</td><td>NMBA reversal; myasthenia gravis</td></tr>
+      <tr><td>Tertiary agents</td><td>Cross BBB</td><td>Donepezil, rivastigmine, galantamine, physostigmine</td><td>Alzheimer disease; anticholinergic toxicity</td></tr>
+      <tr><td>Organophosphates</td><td>Variable; can cause systemic/CNS toxicity</td><td>Pesticides, nerve agents</td><td>Cholinergic crisis</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 8 -->
+  <h2 id="s8">8. Clinical Uses of AChE Inhibitors</h2>
+  <div class="section-body">
+    <p>Clinical use depends on <strong>where</strong> ACh is increased and <strong>what therapeutic goal</strong> is intended.</p>
+
+    <h3>NMBA Reversal &mdash; Neostigmine</h3>
+    <p>See Section 5. Increases ACh at the NMJ so it can outcompete a nondepolarizing NMBA. Requires partial recovery; paired with glycopyrrolate/atropine.</p>
+
+    <h3>Myasthenia Gravis</h3>
+    <ul>
+      <li><strong>Disease:</strong> Autoimmune disorder &mdash; antibodies reduce functional nicotinic ACh receptors &rarr; weakened end-plate depolarization &rarr; normal ACh release may not reliably trigger contraction.</li>
+      <li><strong>Clinical pattern:</strong> Fatigable weakness (worse with use, improves with rest); ptosis, diplopia, facial/bulbar weakness; severe cases &rarr; respiratory weakness (myasthenic crisis).</li>
+      <li><strong>Treatment &mdash; Pyridostigmine:</strong> quaternary AChE inhibitor (mainly peripheral) &rarr; &uarr; ACh at NMJ &rarr; more ACh can bind remaining functional receptors.</li>
+      <li><strong>Symptomatic only</strong> &mdash; does not treat the autoimmune cause. <strong>Ceiling effect:</strong> more ACh cannot replace lost receptors.</li>
+      <li><strong>Excess ACh</strong> &rarr; cholinergic effects: muscarinic (salivation, diarrhea, bradycardia, bronchoconstriction) and nicotinic (cramps, fasciculations, weakness).</li>
+      <li><strong class="pill" style="background:var(--red)">High yield</strong> Worsening weakness in an MG patient can reflect <em>either</em> under-treatment/disease progression <em>or</em> excess cholinergic stimulation &mdash; the clinical picture must distinguish which.</li>
+    </ul>
+
+    <h3>Alzheimer Disease</h3>
+    <ul>
+      <li><strong>Pathophysiology:</strong> Progressive loss of cholinergic neurons &rarr; &darr; ACh signaling in cortex/hippocampus &rarr; impaired attention, learning, memory.</li>
+      <li><strong>Core agents:</strong> Donepezil, rivastigmine, galantamine &mdash; centrally acting (cross BBB) &rarr; &uarr; ACh in remaining functional pathways.</li>
+      <li><strong>Clinical role:</strong> Symptomatic benefit only &mdash; <strong>not disease-modifying.</strong></li>
+      <li><strong>Adverse effects:</strong> GI (nausea, vomiting, diarrhea, &darr; appetite, weight loss); cardiac (bradycardia, dizziness, syncope/falls); CNS (insomnia, vivid dreams, dizziness/headache).</li>
+    </ul>
+
+    <h3>Severe Anticholinergic Toxicity &mdash; Physostigmine</h3>
+    <ul>
+      <li><strong>Common anticholinergic causes:</strong> diphenhydramine, atropine/scopolamine, TCAs, antipsychotics with antimuscarinic activity, cyclobenzaprine.</li>
+      <li><strong>Anticholinergic toxidrome:</strong> dry skin/mucosa, &darr; sweating, hyperthermia; mydriasis, blurred vision; urinary retention, &darr; bowel motility; tachycardia; agitation, hallucinations, delirium.</li>
+      <li><strong>Physostigmine mechanism:</strong> tertiary amine &rarr; crosses BBB &rarr; inhibits AChE &rarr; &uarr; ACh competes at blocked muscarinic receptors.</li>
+      <li>Used selectively for <strong>severe</strong> toxicity with delirium, hallucinations, or severe agitation.</li>
+      <li><strong>Risk:</strong> can shift toward cholinergic toxicity (bradycardia, bronchospasm, secretions, vomiting, diarrhea, sweating, seizures, respiratory compromise).</li>
+      <li><strong class="pill" style="background:var(--red)">Avoid in:</strong> suspected TCA overdose, QRS widening/conduction abnormalities, significant bradycardia or heart block.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 9 -->
+  <h2 id="s9">9. Cholinergic Toxicity</h2>
+  <div class="section-body">
+    <div class="callout">
+      AChE inhibitors are therapeutic at appropriate levels and toxic once cholinergic signaling becomes excessive. Severity depends on the drug, the dose/exposure, and how much CNS penetration it has.
+    </div>
+
+    <h3>Muscarinic Effects (Excess Parasympathetic Activity)</h3>
+    <ul>
+      <li>Salivation, lacrimation, sweating.</li>
+      <li>Abdominal cramping, nausea, vomiting, diarrhea.</li>
+      <li>Urinary urgency/incontinence.</li>
+      <li>Miosis, blurred vision.</li>
+      <li>Bradycardia, slowed AV conduction.</li>
+      <li>Bronchoconstriction &amp; bronchorrhea &rarr; narrowed airways + &uarr; airway secretions &rarr; impaired breathing.</li>
+    </ul>
+
+    <h3>Nicotinic Effects</h3>
+    <ul>
+      <li><strong>Therapeutic levels:</strong> &uarr; NMJ transmission &mdash; useful in myasthenia gravis, helps reverse selected nondepolarizing blockade.</li>
+      <li><strong>Excess ACh:</strong> muscle twitching, fasciculations, cramping.</li>
+      <li><strong>Severe toxicity:</strong> weakness &rarr; paralysis; respiratory muscle involvement can impair breathing.</li>
+    </ul>
+
+    <h3>CNS Effects</h3>
+    <p>Seen with <strong>centrally acting</strong> AChE inhibitors or severe toxic exposure. Progression:</p>
+    <p><strong>Anxiety, restlessness &rarr; confusion, agitation &rarr; seizures &rarr; decreased consciousness &rarr; coma.</strong></p>
+    <p>Clinically dangerous because of disrupted central respiratory drive, impaired airway protection, and reduced ventilation.</p>
+
+    <h3>Clinical Synthesis: Respiratory Failure Has Three Routes</h3>
+    <table>
+      <tr><th>Mechanism</th><th>How It Impairs Breathing</th></tr>
+      <tr><td>Muscarinic</td><td>Bronchoconstriction + airway secretions</td></tr>
+      <tr><td>Nicotinic</td><td>Diaphragm/respiratory muscle weakness</td></tr>
+      <tr><td>CNS</td><td>&darr; consciousness, seizures, impaired respiratory drive</td></tr>
+    </table>
+    <p><em>Recognize the pattern:</em> wet secretions/smooth muscle effects &rarr; fasciculations progressing to weakness &rarr; neurologic symptoms once the CNS is involved.</p>
+  </div>
+
+  <!-- SECTION 10 -->
+  <h2 id="s10">10. Organophosphate Poisoning</h2>
+  <div class="section-body">
+    <h3>Mechanism</h3>
+    <ul>
+      <li><strong>Sources:</strong> pesticides or nerve agents &mdash; ingestion, inhalation, or skin/mucosal absorption.</li>
+      <li>Organophosphates <strong>phosphorylate AChE</strong> &rarr; AChE can no longer break down ACh &rarr; ACh accumulates at muscarinic, nicotinic, and CNS sites simultaneously.</li>
+      <li><strong>Major danger:</strong> respiratory failure from the combined muscarinic + nicotinic + CNS effects described above.</li>
+    </ul>
+
+    <h3>Treatment Strategy</h3>
+    <p>Requires <strong>atropine + pralidoxime + supportive care</strong>, addressing both the immediate excess-ACh effects and the underlying enzyme inhibition.</p>
+
+    <h4>Atropine</h4>
+    <ul>
+      <li><strong>Mechanism:</strong> competitive muscarinic receptor antagonist &mdash; blocks the effects of excess ACh at muscarinic receptors.</li>
+      <li><strong>Goals:</strong> dry excessive secretions, relieve bronchoconstriction, improve oxygenation/ventilation, correct significant bradycardia.</li>
+      <li><strong>Limitation:</strong> does <strong>not</strong> reverse nicotinic weakness or paralysis.</li>
+      <li><strong>Excess atropine:</strong> tachycardia, dry mouth, urinary retention, mydriasis, agitation/delirium.</li>
+    </ul>
+
+    <h4>Pralidoxime</h4>
+    <ul>
+      <li><strong>Mechanism:</strong> reactivates AChE by removing the organophosphate group from the inhibited enzyme.</li>
+      <li><strong>Target:</strong> fasciculations, muscle weakness, respiratory muscle paralysis (the nicotinic side atropine can't touch).</li>
+      <li><strong>Timing matters:</strong> most effective <em>before aging</em> &mdash; once the organophosphate-AChE bond "ages," it becomes resistant to reactivation. Give early.</li>
+      <li><strong>Adverse effects:</strong> nausea, dizziness, blurred/double vision, tachycardia, hypertension.</li>
+    </ul>
+
+    <h4>Supportive Care</h4>
+    <ul>
+      <li>Airway management, suction secretions, oxygen/mechanical ventilation as needed.</li>
+      <li>Benzodiazepines for seizures or severe agitation.</li>
+      <li>Manage hyperthermia, hypoxemia, and cardiovascular instability as needed.</li>
+    </ul>
+
+    <div class="callout danger">
+      <strong>Organophosphate Poisoning Takeaway:</strong> Excess ACh at three sites &mdash; muscarinic (secretions, bronchoconstriction, bradycardia), nicotinic (fasciculations, weakness, paralysis), CNS (agitation, seizures, coma). Atropine blocks muscarinic effects; pralidoxime reactivates AChE before aging; supportive care protects breathing and treats seizures.
+    </div>
+  </div>
+
+  <!-- SECTION 11 -->
+  <h2 id="s11">11. High-Yield Summary Table</h2>
+  <div class="section-body">
+    <h3>Skeletal Muscle Agents</h3>
+    <table>
+      <tr><th>Class/Group</th><th>Agent</th><th>Main Site/Action</th><th>Key Clinical Association</th><th>High-Yield Safety/Reversal Point</th></tr>
+      <tr><td>Depolarizing NMBA</td><td>Succinylcholine</td><td>Activates nicotinic receptors &rarr; persistent depolarization</td><td>Rapid sequence intubation when safe</td><td>Hyperkalemia, malignant hyperthermia, bradycardia, prolonged paralysis with butyrylcholinesterase deficiency; no direct reversal</td></tr>
+      <tr><td rowspan="5">Nondepolarizing NMBA</td><td>Rocuronium</td><td>Competitive nicotinic antagonist</td><td>Rapid nondepolarizing alternative to succinylcholine</td><td>Reversible with sugammadex or AChE inhibitor if partial recovery</td></tr>
+      <tr><td>Vecuronium</td><td>Competitive nicotinic antagonist</td><td>Surgical relaxation or selected ICU use</td><td>Reversible with sugammadex or AChE inhibitor if partial recovery</td></tr>
+      <tr><td>Pancuronium</td><td>Competitive nicotinic antagonist</td><td>Long-acting comparison agent</td><td>Tachycardia; renal elimination; prolonged blockade risk</td></tr>
+      <tr><td>Cisatracurium</td><td>Competitive nicotinic antagonist</td><td>Useful when organ-independent elimination matters</td><td>AChE inhibitor reversal if partial recovery</td></tr>
+      <tr><td>Atracurium</td><td>Competitive nicotinic antagonist</td><td>Less favored comparison agent</td><td>Histamine release; laudanosine; AChE inhibitor reversal if partial recovery</td></tr>
+      <tr><td>AChE inhibitor for reversal</td><td>Neostigmine</td><td>&uarr; ACh at NMJ</td><td>Reversal of nondepolarizing blockade</td><td>Requires partial recovery; give with glycopyrrolate/atropine</td></tr>
+      <tr><td>Selective NMBA binder</td><td>Sugammadex</td><td>Encapsulates rocuronium/vecuronium</td><td>Rapid reversal of rocuronium/vecuronium</td><td>Does not reverse succinylcholine, cisatracurium, or atracurium</td></tr>
+      <tr><td>Direct skeletal muscle relaxant</td><td>Dantrolene</td><td>Inhibits RyR1-mediated Ca&sup2;&#8314; release from skeletal muscle SR</td><td>Malignant hyperthermia</td><td>Muscle weakness; hepatotoxicity with ongoing oral use</td></tr>
+      <tr><td>Presynaptic chemodenervation</td><td>Botulinum toxin</td><td>Cleaves SNARE proteins &rarr; prevents ACh release</td><td>Focal chemodenervation</td><td>Spread beyond injection site &rarr; unwanted weakness/dysphagia</td></tr>
+    </table>
+
+    <h3>AChE Inhibitors &amp; Toxicology</h3>
+    <table>
+      <tr><th>Category</th><th>Agent/Group</th><th>Distribution</th><th>Main Clinical Use</th><th>Key Clinical Logic</th><th>High-Yield Safety Point</th></tr>
+      <tr><td>Myasthenia gravis</td><td>Pyridostigmine</td><td>Mainly peripheral</td><td>Symptomatic MG treatment</td><td>&uarr; ACh at NMJ &rarr; improves activation of remaining receptors</td><td>Symptomatic only; excess can cause cholinergic toxicity</td></tr>
+      <tr><td>Alzheimer disease</td><td>Donepezil, rivastigmine, galantamine</td><td>CNS + peripheral</td><td>Symptomatic treatment</td><td>&uarr; central cholinergic signaling in remaining pathways</td><td>GI effects, bradycardia, dizziness/syncope; not disease-modifying</td></tr>
+      <tr><td>Anticholinergic toxicity</td><td>Physostigmine</td><td>CNS + peripheral</td><td>Selected severe toxicity, esp. central delirium</td><td>&uarr; ACh centrally &amp; peripherally &rarr; competes at blocked muscarinic receptors</td><td>Avoid with suspected TCA overdose or cardiac conduction abnormalities</td></tr>
+      <tr><td>Toxicologic exposure</td><td>Organophosphates</td><td>Systemic; many affect CNS</td><td>Cause cholinergic crisis</td><td>Phosphorylate AChE &rarr; profound ACh accumulation</td><td>Muscarinic + nicotinic + CNS toxicity; respiratory failure is major danger</td></tr>
+      <tr><td rowspan="2">Organophosphate treatment</td><td>Atropine</td><td>CNS + peripheral</td><td>Treat severe muscarinic toxicity</td><td>Blocks muscarinic effects of excess ACh</td><td>Does not reverse nicotinic weakness/paralysis</td></tr>
+      <tr><td>Pralidoxime</td><td>Mainly peripheral</td><td>Reactivate inhibited AChE</td><td>Restores AChE activity before aging</td><td>Give early; especially important for neuromuscular weakness/paralysis</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 12 -->
+  <h2 id="s12">12. Practice Questions</h2>
+  <div class="section-body">
+    <div id="quizzes"></div>
+  </div>
+
+  <hr>
+  <p style="font-size:0.85em; color:#777;">Source: Introduction to Agents That Act on the NMJ (Waterfall, MSK II) &mdash; slides + Core Topics Study Guide with answers.</p>
+</div>
+
+<script>
+// Collapsible sections
+document.querySelectorAll('h2').forEach(function(h){
+  h.addEventListener('click', function(){
+    h.classList.toggle('collapsed');
+    var body = h.nextElementSibling;
+    if(body && body.classList.contains('section-body')){
+      body.classList.toggle('collapsed');
+    }
+  });
+});
+
+// Side panel close on link click
+document.querySelectorAll('.side-panel a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.getElementById('sidePanel').classList.remove('open');
+  });
+});
+
+// Quiz data
+var quizData = [
+  {
+    q: "A patient receiving rocuronium shows only partial spontaneous recovery on train-of-four monitoring. Which reversal strategy requires this partial recovery to work?",
+    options: ["Sugammadex", "Neostigmine", "Dantrolene", "Pralidoxime"],
+    correct: 1,
+    feedback: "Neostigmine works by increasing ACh so it can outcompete the NMBA at nicotinic receptors — it needs some spontaneous recovery already underway. Sugammadex directly encapsulates the drug and doesn't depend on this."
+  },
+  {
+    q: "Which agent produces flaccid paralysis WITHOUT preceding fasciculations?",
+    options: ["Succinylcholine", "Rocuronium", "Both produce fasciculations", "Neither produces paralysis"],
+    correct: 1,
+    feedback: "Nondepolarizing NMBAs like rocuronium are competitive antagonists — they block the receptor without activating it, so there are no fasciculations. Succinylcholine is an agonist, so it causes fasciculations before paralysis."
+  },
+  {
+    q: "A burn patient 5 days post-injury requires intubation. Why should succinylcholine be avoided?",
+    options: [
+      "It causes malignant hypotension",
+      "Upregulated (including extrajunctional) nicotinic receptors can cause severe hyperkalemia",
+      "It has no effect in burn patients",
+      "It requires renal dosing adjustment"
+    ],
+    correct: 1,
+    feedback: "Burns, denervation injury, and prolonged immobility upregulate nicotinic receptors on muscle. Succinylcholine activating this larger receptor population can cause a massive potassium efflux and severe/lethal hyperkalemia."
+  },
+  {
+    q: "Which drug directly reverses rocuronium and vecuronium by encapsulating the free drug, without depending on increased ACh?",
+    options: ["Neostigmine", "Physostigmine", "Sugammadex", "Pyridostigmine"],
+    correct: 2,
+    feedback: "Sugammadex binds free rocuronium/vecuronium directly in the plasma. It does not reverse succinylcholine, cisatracurium, or atracurium, and doesn't require an antimuscarinic co-agent."
+  },
+  {
+    q: "A patient develops rigidity, rising end-tidal CO2, tachycardia, and hyperthermia shortly after receiving succinylcholine and a volatile anesthetic. What is the treatment?",
+    options: ["Sugammadex", "Neostigmine", "Dantrolene", "Atropine"],
+    correct: 2,
+    feedback: "This is malignant hyperthermia — uncontrolled RyR1-mediated calcium release from the sarcoplasmic reticulum. Dantrolene inhibits this calcium release and is the key pharmacologic treatment, along with stopping triggers and supportive care."
+  },
+  {
+    q: "Why is neostigmine given together with glycopyrrolate or atropine when reversing an NMBA?",
+    options: [
+      "To speed up hepatic metabolism of neostigmine",
+      "To limit unwanted muscarinic effects like bradycardia and secretions from increased ACh",
+      "To reverse succinylcholine specifically",
+      "To prevent malignant hyperthermia"
+    ],
+    correct: 1,
+    feedback: "Neostigmine increases ACh everywhere, not just at the NMJ. Muscarinic activation causes bradycardia, bronchoconstriction, and secretions — an antimuscarinic limits these unwanted effects while the nicotinic reversal proceeds."
+  },
+  {
+    q: "A patient with myasthenia gravis on pyridostigmine develops worsening weakness, excess salivation, and cramping. What should this raise concern for?",
+    options: [
+      "Definite disease progression only",
+      "Possible cholinergic toxicity from excess AChE inhibition, which can look like worsening MG",
+      "Malignant hyperthermia",
+      "Sugammadex toxicity"
+    ],
+    correct: 1,
+    feedback: "Worsening weakness in MG is ambiguous — it could reflect disease progression/undertreatment OR excess cholinergic stimulation from too much AChE inhibitor. Accompanying muscarinic symptoms (salivation, cramping) point toward cholinergic toxicity."
+  },
+  {
+    q: "Which AChE inhibitor is preferred for treating SEVERE central anticholinergic toxicity (e.g., delirium from diphenhydramine overdose)?",
+    options: ["Neostigmine", "Pyridostigmine", "Physostigmine", "Sugammadex"],
+    correct: 2,
+    feedback: "Physostigmine is a tertiary amine that crosses the blood-brain barrier, allowing it to reverse central anticholinergic effects like delirium. Neostigmine and pyridostigmine are quaternary and stay peripheral."
+  },
+  {
+    q: "Physostigmine should be AVOIDED in which clinical situation?",
+    options: [
+      "Isolated peripheral anticholinergic effects",
+      "Suspected tricyclic antidepressant (TCA) overdose with QRS widening",
+      "Mild anxiety",
+      "Normal sinus rhythm"
+    ],
+    correct: 1,
+    feedback: "Physostigmine is avoided in suspected TCA overdose or with conduction abnormalities (e.g., QRS widening) and significant bradycardia/heart block, due to the risk of worsening cardiac toxicity."
+  },
+  {
+    q: "A farm worker presents with excessive salivation, muscle fasciculations progressing to weakness, and confusion after pesticide exposure. What is the underlying mechanism?",
+    options: [
+      "Competitive nicotinic receptor antagonism",
+      "Phosphorylation and inhibition of AChE, causing ACh accumulation at muscarinic, nicotinic, and CNS sites",
+      "Direct muscarinic receptor blockade",
+      "Selective CNS dopamine depletion"
+    ],
+    correct: 1,
+    feedback: "Organophosphates phosphorylate and inhibit AChE. This causes ACh to accumulate simultaneously at muscarinic, nicotinic, and CNS sites — producing the classic combined toxidrome described."
+  },
+  {
+    q: "In organophosphate poisoning, which drug should be given early because it becomes ineffective once the enzyme-organophosphate complex 'ages'?",
+    options: ["Atropine", "Pralidoxime", "Dantrolene", "Sugammadex"],
+    correct: 1,
+    feedback: "Pralidoxime reactivates AChE by removing the organophosphate group, but only before 'aging' occurs — after aging, the bond becomes resistant to reactivation, so early administration is critical."
+  },
+  {
+    q: "Atropine treats organophosphate poisoning by blocking muscarinic effects. What does it FAIL to reverse?",
+    options: [
+      "Bronchorrhea",
+      "Bradycardia",
+      "Nicotinic weakness/paralysis at the neuromuscular junction",
+      "Excess secretions"
+    ],
+    correct: 2,
+    feedback: "Atropine is a muscarinic antagonist only — it has no effect on nicotinic receptors at the NMJ. Fasciculations, weakness, and paralysis from nicotinic overstimulation require pralidoxime instead."
+  },
+  {
+    q: "Which nondepolarizing NMBA undergoes Hofmann elimination, making it useful in significant renal or hepatic impairment?",
+    options: ["Pancuronium", "Vecuronium", "Cisatracurium", "Rocuronium"],
+    correct: 2,
+    feedback: "Cisatracurium (and atracurium, to a lesser favored extent due to more histamine/laudanosine) undergoes Hofmann elimination — a nonenzymatic, organ-independent breakdown process."
+  },
+  {
+    q: "Botulinum toxin causes focal weakness by which mechanism?",
+    options: [
+      "Blocking postsynaptic nicotinic receptors",
+      "Cleaving SNARE proteins to prevent presynaptic ACh vesicle release",
+      "Inhibiting acetylcholinesterase",
+      "Blocking calcium release from the sarcoplasmic reticulum"
+    ],
+    correct: 1,
+    feedback: "Botulinum toxin acts presynaptically, cleaving SNARE proteins needed for vesicle fusion — this prevents ACh release into the synaptic cleft, producing focal chemodenervation."
+  },
+  {
+    q: "Which best describes why AChE inhibitor effects can be either therapeutic or toxic?",
+    options: [
+      "All AChE inhibitors are toxic at any dose",
+      "Effects depend on where (muscarinic, nicotinic, CNS) and how much ACh is increased",
+      "AChE inhibitors have no clinical uses",
+      "Toxicity only occurs with quaternary agents"
+    ],
+    correct: 1,
+    feedback: "The central theme of this unit: AChE inhibitors simply increase ACh. Whether that's helpful (MG, Alzheimer's, NMBA reversal) or harmful (cholinergic toxicity) depends entirely on location and degree of increase."
+  }
+];
+
+var container = document.getElementById('quizzes');
+quizData.forEach(function(item, idx){
+  var box = document.createElement('div');
+  box.className = 'quiz';
+  var qEl = document.createElement('p');
+  qEl.className = 'q';
+  qEl.textContent = (idx+1) + ". " + item.q;
+  box.appendChild(qEl);
+
+  var fb = document.createElement('div');
+  fb.className = 'feedback';
+
+  item.options.forEach(function(optText, optIdx){
+    var btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = optText;
+    btn.addEventListener('click', function(){
+      var allBtns = box.querySelectorAll('.opt');
+      allBtns.forEach(function(b){ b.disabled = true; });
+      if(optIdx === item.correct){
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('incorrect');
+        allBtns[item.correct].classList.add('correct');
+      }
+      fb.textContent = item.feedback;
+      box.appendChild(fb);
+    });
+    box.appendChild(btn);
+  });
+
+  container.appendChild(box);
+});
+</script>
+
+</body>
+</html>
