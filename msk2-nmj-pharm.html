@@ -67,13 +67,7 @@
   li{margin:0.25em 0;}
   strong{color:var(--dark);}
   em{color:var(--accent);}
-  table{
-    width:100%; border-collapse:collapse; margin:1em 0; font-size:0.95em;
-    background:#fff;
-  }
-  th{
-    background:var(--dark); color:#fff; text-align:left; padding:8px 10px;
-  }
+  table{ width:100%; border-collapse:collapse; margin:1em 0; font-size:0.95em; background:#fff; } .table-wide{ width:calc(100% + 200px); margin-left:-100px; margin-right:-100px; } @media (max-width:960px){ .table-wide{width:100%; margin-left:0; margin-right:0;} } th{ background:var(--dark); color:#fff; text-align:left; padding:8px 10px; }
   td{
     padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:top;
   }
@@ -530,19 +524,14 @@
     </table>
  
     <h3>AChE Inhibitors &amp; Toxicology</h3>
-    <table>
-      <tr><th>Category</th><th>Agent/Group</th><th>Distribution</th><th>Main Clinical Use</th><th>Key Clinical Logic</th><th>High-Yield Safety Point</th></tr>
+    <div class="table-wide"><table> <tr><th>Category</th><th>Agent/Group</th><th>Distribution</th><th>Main Clinical Use</th><th>Key Clinical Logic</th><th>High-Yield Safety Point</th></tr>
       <tr><td>Myasthenia gravis</td><td>Pyridostigmine</td><td>Mainly peripheral</td><td>Symptomatic MG treatment</td><td>&uarr; ACh at NMJ &rarr; improves activation of remaining receptors</td><td>Symptomatic only; excess can cause cholinergic toxicity</td></tr>
       <tr><td>Alzheimer disease</td><td>Donepezil, rivastigmine, galantamine</td><td>CNS + peripheral</td><td>Symptomatic treatment</td><td>&uarr; central cholinergic signaling in remaining pathways</td><td>GI effects, bradycardia, dizziness/syncope; not disease-modifying</td></tr>
       <tr><td>Anticholinergic toxicity</td><td>Physostigmine</td><td>CNS + peripheral</td><td>Selected severe toxicity, esp. central delirium</td><td>&uarr; ACh centrally &amp; peripherally &rarr; competes at blocked muscarinic receptors</td><td>Avoid with suspected TCA overdose or cardiac conduction abnormalities</td></tr>
       <tr><td>Toxicologic exposure</td><td>Organophosphates</td><td>Systemic; many affect CNS</td><td>Cause cholinergic crisis</td><td>Phosphorylate AChE &rarr; profound ACh accumulation</td><td>Muscarinic + nicotinic + CNS toxicity; respiratory failure is major danger</td></tr>
       <tr><td rowspan="2">Organophosphate treatment</td><td>Atropine</td><td>CNS + peripheral</td><td>Treat severe muscarinic toxicity</td><td>Blocks muscarinic effects of excess ACh</td><td>Does not reverse nicotinic weakness/paralysis</td></tr>
       <tr><td>Pralidoxime</td><td>Mainly peripheral</td><td>Reactivate inhibited AChE</td><td>Restores AChE activity before aging</td><td>Give early; especially important for neuromuscular weakness/paralysis</td></tr>
-    </table>
-  </div>
- 
-  <hr>
-  <p style="font-size:0.85em; color:#777;">Source: Introduction to Agents That Act on the NMJ (Waterfall, MSK II) &mdash; slides + Core Topics Study Guide with answers.</p>
+    </table></div> </div> <hr> <p style="font-size:0.85em; color:#777;">Source: Introduction to Agents That Act on the NMJ (Waterfall, MSK II) &mdash; slides + Core Topics Study Guide with answers.</p>
 </div>
  
 <script>
