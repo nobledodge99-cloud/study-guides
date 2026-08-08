@@ -29,61 +29,10 @@
   .nav-mono{
     font-family:'Courier New', 'Menlo', monospace; letter-spacing:0.5px; text-transform:uppercase;
   }
-  #backBtn{
-    position:fixed; top:18px; left:18px; z-index:60;
-    background:#fff; color:var(--green-dark); border:1px solid var(--border);
-    border-radius:8px; padding:9px 14px; font-size:0.72rem; text-decoration:none;
-    box-shadow:var(--shadow); display:inline-flex; align-items:center; gap:6px;
-  }
-  #backBtn:hover{background:var(--green-light); border-color:var(--green-mid);}
+  .back-link{position:fixed;top:18px;left:18px;z-index:1000;font-family:'Courier New',Menlo,monospace;font-size:0.8rem;color:var(--green);text-decoration:none;border:1px solid var(--border);padding:8px 12px;border-radius:4px;background:var(--green-light);box-shadow:0 4px 14px rgba(0,0,0,0.12);} .download-btn{position:fixed;top:120px;right:28px;background:var(--green);color:#fff;padding:10px 18px;border-radius:8px;border:none;font-family:'Courier New',Menlo,monospace;font-size:13px;font-weight:600;letter-spacing:0.02em;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.18);z-index:1000;text-decoration:none;} .download-btn:hover{background:var(--green-dark);}
 
-  #downloadBtn{
-    position:fixed; top:18px; right:18px; z-index:60;
-    background:#fff; color:var(--green-dark); border:1px solid var(--border);
-    border-radius:8px; padding:9px 14px; font-size:0.72rem; cursor:pointer;
-    box-shadow:var(--shadow); font-family:inherit;
-  }
-  #downloadBtn:hover{background:var(--green-light); border-color:var(--green-mid);}
-
-  #sectionsTab{
-    position:fixed; top:64px; right:18px; z-index:60;
-    background:#fff; color:var(--green-dark); border:1px solid var(--border);
-    border-radius:8px; padding:9px 14px; font-size:0.72rem; cursor:pointer;
-    box-shadow:var(--shadow); font-family:inherit;
-  }
-  #sectionsTab:hover{background:var(--green-light); border-color:var(--green-mid);}
-
-  #sideNav{
-    position:fixed; top:0; right:-300px; width:280px; height:100vh; z-index:70;
-    background:#fff; border-left:1px solid var(--border); box-shadow:-4px 0 16px rgba(63,45,10,0.14);
-    padding:22px 0 40px; overflow-y:auto; transition:right 0.25s ease;
-  }
-  #sideNav.open{right:0;}
-  #sideNav .sidenav-head{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:0 18px 14px; margin:0 0 10px; border-bottom:1px solid var(--border);
-  }
-  #sideNav .sidenav-head span{font-size:0.95rem; color:var(--green-dark); font-weight:bold;}
-  #sideNav .sidenav-close{
-    background:none; border:none; font-size:1.1rem; cursor:pointer; color:var(--green-dark);
-    line-height:1; padding:2px 6px;
-  }
-  #sideNav .sidenav-close:hover{color:var(--red);}
-  #sideNav .grp-label{
-    font-size:0.68rem; text-transform:uppercase; letter-spacing:1px; color:var(--green-mid);
-    padding:14px 18px 4px; font-weight:bold;
-  }
-  #sideNav a{
-    display:block; color:var(--ink); text-decoration:none; padding:6px 18px 6px 22px;
-    font-size:0.86rem; border-left:3px solid transparent;
-  }
-  #sideNav a:hover, #sideNav a.active{
-    background:var(--green-light); border-left:3px solid var(--green); color:var(--green-dark);
-  }
-  #navOverlay{
-    display:none; position:fixed; inset:0; background:rgba(43,38,32,0.25); z-index:65;
-  }
-  #navOverlay.open{display:block;}
+  #side-toggle{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:20;background:var(--green-dark);color:var(--cream);border:none;font-family:'Courier New',Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:14px 8px;writing-mode:vertical-rl;text-orientation:mixed;cursor:pointer;border-radius:6px 0 0 6px;} #side-toggle:hover{background:var(--green);} #side-nav{position:fixed;top:0;right:0;height:100%;width:300px;background:#fff;border-left:1px solid var(--border);box-shadow:-6px 0 18px rgba(0,0,0,.06);transform:translateX(100%);transition:transform .22s ease;z-index:19;overflow-y:auto;padding:22px 0 40px;} #side-nav.open{transform:translateX(0);} #side-nav .side-head{font-family:'Courier New',Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a8578;padding:0 20px 12px;border-bottom:1px solid var(--border);margin-bottom:6px;} #side-nav .side-lecture-label{font-family:'Courier New',Menlo,monospace;font-size:11.5px;font-weight:700;color:var(--ink);padding:14px 20px 4px;} #side-nav .side-link{display:block;padding:6px 20px 6px 28px;font-size:13px;color:#4a483f;text-decoration:none;border-left:2px solid transparent;cursor:pointer;} #side-nav .side-link:hover{color:var(--green);background:var(--green-light);} #side-nav .side-link.active{color:var(--green);border-left-color:var(--green);font-weight:600;background:var(--green-light);} #side-scrim{position:fixed;inset:0;background:rgba(27,43,38,.15);z-index:18;display:none;} #side-scrim.open{display:block;}
+  
   .badge{
     display:inline-block; font-size:0.68rem; text-transform:uppercase; letter-spacing:.6px;
     padding:2px 9px; border-radius:20px; font-weight:bold; margin-left:8px; vertical-align:middle;
@@ -169,39 +118,13 @@
     main{padding:24px 18px;}
   }
   @media print{
-    #backBtn, #downloadBtn, #sectionsTab, #sideNav, #navOverlay{display:none !important;}
+    .back-link, .download-btn, #side-toggle, #side-nav{display:none !important;}
   }
 </style>
 </head>
 <body>
 
-<a href="index.html" id="backBtn" class="nav-mono">&larr; Back to Study Guides</a>
-<button id="downloadBtn" class="nav-mono" onclick="window.print()">&#8681; Download PDF</button>
-<button id="sectionsTab" class="nav-mono" onclick="toggleNav()">&#9776; Sections</button>
-<div id="navOverlay" onclick="closeNav()"></div>
-
-<nav id="sideNav">
-  <div class="sidenav-head">
-    <span>Sections</span>
-    <button class="sidenav-close" onclick="closeNav()">&times;</button>
-  </div>
-
-  <div class="grp-label">Rheumatoid Arthritis</div>
-  <a href="#ra-overview">RA Overview</a>
-  <a href="#dmard-categories">DMARD Categories</a>
-  <a href="#anti-inflam">NSAIDs &amp; Glucocorticoids</a>
-  <a href="#csdmards">csDMARDs</a>
-  <a href="#biologics">Biologic DMARDs</a>
-  <a href="#tsdmards">tsDMARDs / JAK Inhibitors</a>
-  <a href="#ra-summary">RA Summary Table</a>
-
-  <div class="grp-label">Gout</div>
-  <a href="#gout-overview">Gout Overview</a>
-  <a href="#gout-strategy">Gout Treatment Strategy</a>
-  <a href="#gout-acute">Acute Flare Drugs</a>
-  <a href="#gout-ult">Urate-Lowering Therapy</a>
-  <a href="#gout-summary">Gout Summary Table</a>
-</nav>
+<a class="back-link" href="index.html">&larr; Back to Study Guides</a><button class="download-btn" onclick="window.print()">&#8681; Download PDF</button><button id="side-toggle" aria-label="Toggle section navigation">Sections</button><div id="side-scrim"></div><nav id="side-nav"><div class="side-head">Jump to a section</div><div id="side-nav-body"><div class="side-lecture-label">Drugs for Rheumatic Diseases</div><div class="side-lecture-label" style="padding-top:10px;font-size:10px;color:#8a8578;">Rheumatoid Arthritis</div><span class="side-link" data-target="ra-overview">RA Overview</span><span class="side-link" data-target="dmard-categories">DMARD Categories</span><span class="side-link" data-target="anti-inflam">NSAIDs &amp; Glucocorticoids</span><span class="side-link" data-target="csdmards">csDMARDs</span><span class="side-link" data-target="biologics">Biologic DMARDs</span><span class="side-link" data-target="tsdmards">tsDMARDs / JAK Inhibitors</span><span class="side-link" data-target="ra-summary">RA Summary Table</span><div class="side-lecture-label" style="padding-top:10px;font-size:10px;color:#8a8578;">Gout</div><span class="side-link" data-target="gout-overview">Gout Overview</span><span class="side-link" data-target="gout-strategy">Gout Treatment Strategy</span><span class="side-link" data-target="gout-acute">Acute Flare Drugs</span><span class="side-link" data-target="gout-ult">Urate-Lowering Therapy</span><span class="side-link" data-target="gout-summary">Gout Summary Table</span></div></nav>
 
 <main>
   <div class="top-banner">
@@ -717,32 +640,6 @@ function ans(btn, isCorrect, explainId){
   document.getElementById(explainId).classList.add('show');
 }
 
-// slide-out sections panel
-function toggleNav(){
-  document.getElementById('sideNav').classList.toggle('open');
-  document.getElementById('navOverlay').classList.toggle('open');
-}
-function closeNav(){
-  document.getElementById('sideNav').classList.remove('open');
-  document.getElementById('navOverlay').classList.remove('open');
-}
-document.querySelectorAll('#sideNav a').forEach(a => {
-  a.addEventListener('click', closeNav);
-});
-
-// active nav highlight on scroll
-const sections = document.querySelectorAll('h2.section-title[id]');
-const navLinks = document.querySelectorAll('#sideNav a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(sec => {
-    const rect = sec.getBoundingClientRect();
-    if(rect.top <= 120) current = sec.id;
-  });
-  navLinks.forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-  });
-});
-</script>
+const sideNav=document.getElementById("side-nav");const sideToggle=document.getElementById("side-toggle");const sideScrim=document.getElementById("side-scrim");function openSideNav(){sideNav.classList.add("open");sideScrim.classList.add("open");}function closeSideNav(){sideNav.classList.remove("open");sideScrim.classList.remove("open");}sideToggle.addEventListener("click",function(){sideNav.classList.contains("open")?closeSideNav():openSideNav();});sideScrim.addEventListener("click",closeSideNav);const sideLinkEls=Array.from(document.querySelectorAll(".side-link"));sideLinkEls.forEach(function(el){el.addEventListener("click",function(){closeSideNav();document.getElementById(el.dataset.target).scrollIntoView({behavior:"smooth",block:"start"});});});const sideObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){sideLinkEls.forEach(function(l){l.classList.remove("active");});const match=sideLinkEls.find(function(l){return l.dataset.target===entry.target.id;});if(match)match.classList.add("active");}});},{rootMargin:"-15% 0px -70% 0px"});document.querySelectorAll("h2.section-title[id]").forEach(function(el){sideObserver.observe(el);});</script>
 </body>
 </html>
