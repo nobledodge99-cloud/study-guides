@@ -34,28 +34,7 @@
 
   .mono { font-family: 'IBM Plex Mono', monospace; }
 
-  #backBtn, #downloadBtn, #sectionsTab {
-    position: fixed;
-    z-index: 500;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    background: var(--paper);
-    color: var(--green-dark);
-    padding: 8px 12px;
-    border-radius: 6px;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: background 0.15s, transform 0.15s;
-  }
-  #backBtn:hover, #downloadBtn:hover, #sectionsTab:hover { background: var(--green-light); }
-
-  #backBtn { top: 16px; left: 16px; z-index: 700; }
-  #downloadBtn { top: 16px; right: 16px; }
-  #sectionsTab { top: 64px; right: 16px; }
+  .back-link{position:fixed;top:18px;left:18px;z-index:1000;font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--green);text-decoration:none;border:1px solid var(--border);padding:8px 12px;border-radius:4px;background:var(--green-light);box-shadow:0 4px 14px rgba(0,0,0,0.12);} .download-btn{position:fixed;top:120px;right:28px;background:var(--green);color:#fff;padding:10px 18px;border-radius:8px;border:none;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.02em;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.18);z-index:1000;text-decoration:none;} .download-btn:hover{background:var(--green-dark);}
 
   header.masthead {
     padding: 100px 24px 30px;
@@ -242,41 +221,7 @@
   }
   .explain.show { display: block; }
 
-  #sideNav {
-    position: fixed;
-    top: 0; right: -280px;
-    width: 280px; height: 100%;
-    background: var(--paper);
-    border-left: 1px solid var(--border);
-    box-shadow: -4px 0 16px rgba(0,0,0,0.1);
-    z-index: 600;
-    transition: right 0.25s ease;
-    overflow-y: auto;
-    padding: 70px 20px 20px;
-  }
-  #sideNav.open { right: 0; }
-  #sideNav h3 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin: 0 0 12px;
-  }
-  #sideNav a {
-    display: block;
-    padding: 7px 0;
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 0.9rem;
-    border-bottom: 1px solid var(--cream-2);
-  }
-  #sideNav a:hover { color: var(--green-dark); }
-  #navClose {
-    position: absolute; top: 16px; right: 16px;
-    background: none; border: none; font-size: 1.2rem;
-    cursor: pointer; color: var(--ink-soft);
-  }
+  #side-toggle{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:20;background:var(--green-dark);color:var(--paper);border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:14px 8px;writing-mode:vertical-rl;text-orientation:mixed;cursor:pointer;border-radius:6px 0 0 6px;} #side-toggle:hover{background:var(--green);} #side-nav{position:fixed;top:0;right:0;height:100%;width:300px;background:var(--paper);border-left:1px solid var(--border);box-shadow:-6px 0 18px rgba(0,0,0,.06);transform:translateX(100%);transition:transform .22s ease;z-index:19;overflow-y:auto;padding:22px 0 40px;} #side-nav.open{transform:translateX(0);} #side-nav .side-head{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a8578;padding:0 20px 12px;border-bottom:1px solid var(--border);margin-bottom:6px;} #side-nav .side-lecture-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;color:var(--ink);padding:14px 20px 4px;} #side-nav .side-link{display:block;padding:6px 20px 6px 28px;font-size:13px;color:#4a483f;text-decoration:none;border-left:2px solid transparent;cursor:pointer;} #side-nav .side-link:hover{color:var(--green);background:var(--green-light);} #side-nav .side-link.active{color:var(--green);border-left-color:var(--green);font-weight:600;background:var(--green-light);} #side-scrim{position:fixed;inset:0;background:rgba(27,43,38,.15);z-index:18;display:none;} #side-scrim.open{display:block;}
 
   footer {
     text-align: center;
@@ -287,7 +232,7 @@
   }
 
   @media print {
-    #backBtn, #downloadBtn, #sectionsTab, #sideNav { display: none !important; }
+    .back-link, .download-btn, #side-toggle, #side-nav { display: none !important; }
     article.topic { break-inside: avoid; box-shadow: none; }
     body { background: #fff; }
   }
@@ -295,39 +240,13 @@
   @media (max-width: 640px) {
     .contents ol { columns: 1; }
     header.masthead { padding-top: 120px; }
-    #sideNav { width: min(280px, calc(100vw - 96px)); }
+    #side-nav { width: min(280px, calc(100vw - 96px)); }
   }
 </style>
 </head>
 <body>
 
-<a id="backBtn" href="index.html">&larr; Back to Study Guides</a>
-<button id="downloadBtn" onclick="window.print()">Download PDF</button>
-<button id="sectionsTab" onclick="document.getElementById('sideNav').classList.add('open')">Sections</button>
-
-<div id="sideNav">
-  <button id="navClose" onclick="document.getElementById('sideNav').classList.remove('open')">&times;</button>
-  <h3>Sections</h3>
-  <a href="#s1">1. NMJ Overview</a>
-  <a href="#s2">2. Myasthenia Gravis</a>
-  <a href="#s3">3. Lambert-Eaton Syndrome</a>
-  <a href="#s4">4. Congenital Myasthenic Syndrome & NMJ Infections</a>
-  <a href="#s5">5. Skeletal Muscle Atrophy</a>
-  <a href="#s6">6. Peripheral Neuropathy</a>
-  <a href="#s7">7. Rhabdomyolysis</a>
-  <a href="#s8">8. Dermatomyositis</a>
-  <a href="#s9">9. Polymyositis & Inclusion Body Myositis</a>
-  <a href="#s10">10. Toxic Myopathies</a>
-  <a href="#s11">11. Glycogen/Lipid Metabolism Myopathies</a>
-  <a href="#s12">12. Ion Channel Myopathies</a>
-  <a href="#s13">13. Mitochondrial Myopathies</a>
-  <a href="#s14">14. Muscular Dystrophy: Duchenne &amp; Becker</a>
-  <a href="#s15">15. Other Muscular Dystrophies</a>
-  <a href="#s16">16. Congenital Muscular Dystrophies &amp; Hypotonic Infant</a>
-  <a href="#s17">17. Congenital Myopathies &amp; Spinal Muscular Atrophy</a>
-  <a href="#s18">18. Rhabdomyosarcoma</a>
-  <a href="#s19">19. High-Yield Buzzword Table</a>
-</div>
+<a class="back-link" href="index.html">&larr; Back to Study Guides</a><button class="download-btn" onclick="window.print()">&#8681; Download PDF</button><button id="side-toggle" aria-label="Toggle section navigation">Sections</button><div id="side-scrim"></div><nav id="side-nav"><div class="side-head">Jump to a section</div><div id="side-nav-body"><div class="side-lecture-label">Disease of Skeletal Muscle &amp; Peripheral Nerve</div><span class="side-link" data-target="s1">NMJ Overview</span><span class="side-link" data-target="s2">Myasthenia Gravis</span><span class="side-link" data-target="s3">Lambert-Eaton Myasthenic Syndrome</span><span class="side-link" data-target="s4">Congenital Myasthenic Syndrome &amp; NMJ Infections</span><span class="side-link" data-target="s5">Skeletal Muscle Atrophy</span><span class="side-link" data-target="s6">Peripheral Neuropathy</span><span class="side-link" data-target="s7">Rhabdomyolysis</span><span class="side-link" data-target="s8">Dermatomyositis</span><span class="side-link" data-target="s9">Polymyositis &amp; Inclusion Body Myositis</span><span class="side-link" data-target="s10">Toxic Myopathies</span><span class="side-link" data-target="s11">Glycogen/Lipid Metabolism Myopathies</span><span class="side-link" data-target="s12">Ion Channel Myopathies</span><span class="side-link" data-target="s13">Mitochondrial Myopathies</span><span class="side-link" data-target="s14">Muscular Dystrophy: Duchenne &amp; Becker</span><span class="side-link" data-target="s15">Other Muscular Dystrophies</span><span class="side-link" data-target="s16">Congenital Muscular Dystrophies &amp; Hypotonic Infant</span><span class="side-link" data-target="s17">Congenital Myopathies &amp; Spinal Muscular Atrophy</span><span class="side-link" data-target="s18">Rhabdomyosarcoma</span><span class="side-link" data-target="s19">High-Yield Buzzword Table</span></div></nav>
 
 <header class="masthead">
   <div class="eyebrow">MSK II &middot; Pathology &middot; Dr. Walter Kemp</div>
@@ -1406,7 +1325,7 @@
 <footer>MSK II &middot; Disease of Skeletal Muscle &amp; Peripheral Nerve &middot; Source: Dr. Walter L. Kemp lecture slides &amp; transcripts, Pt. 1, 2 &amp; 3</footer>
 
 <script>
-document.querySelectorAll('.question').forEach(function(q) {
+const sideNav=document.getElementById("side-nav");const sideToggle=document.getElementById("side-toggle");const sideScrim=document.getElementById("side-scrim");function openSideNav(){sideNav.classList.add("open");sideScrim.classList.add("open");}function closeSideNav(){sideNav.classList.remove("open");sideScrim.classList.remove("open");}sideToggle.addEventListener("click",function(){sideNav.classList.contains("open")?closeSideNav():openSideNav();});sideScrim.addEventListener("click",closeSideNav);const sideLinkEls=Array.from(document.querySelectorAll(".side-link"));sideLinkEls.forEach(function(el){el.addEventListener("click",function(){closeSideNav();document.getElementById(el.dataset.target).scrollIntoView({behavior:"smooth",block:"start"});});});const sideObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){sideLinkEls.forEach(function(l){l.classList.remove("active");});const match=sideLinkEls.find(function(l){return l.dataset.target===entry.target.id;});if(match)match.classList.add("active");}});},{rootMargin:"-15% 0px -70% 0px"});document.querySelectorAll("article.topic").forEach(function(el){sideObserver.observe(el);});document.querySelectorAll('.question').forEach(function(q) {
   var correctIdx = parseInt(q.getAttribute('data-answer'), 10);
   var choices = q.querySelectorAll('.choice');
   var explain = q.querySelector('.explain');
