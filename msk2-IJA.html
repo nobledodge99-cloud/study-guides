@@ -26,30 +26,7 @@ body{
   line-height:1.55;
 }
 .wrap{max-width:880px;margin:0 auto;padding:90px 26px 100px;}
-header.top{
-  position:fixed;top:0;left:0;right:0;z-index:50;
-  background:linear-gradient(180deg,var(--cream) 85%, rgba(250,246,238,0));
-  padding:14px 22px 26px;
-  display:flex;justify-content:space-between;align-items:center;
-  pointer-events:none;
-}
-header.top .btn{pointer-events:auto;}
-.btn{
-  font-family:inherit;
-  background:var(--green-1);
-  color:var(--cream);
-  border:none;
-  padding:9px 16px;
-  border-radius:7px;
-  font-size:0.82rem;
-  letter-spacing:.03em;
-  cursor:pointer;
-  box-shadow:var(--shadow);
-}
-.btn:hover{background:var(--green-2);}
-.btn.ghost{
-  background:transparent;color:var(--green-1);border:1.5px solid var(--green-1);
-}
+.back-link{position:fixed;top:18px;left:18px;z-index:1000;font-family:ui-monospace,Menlo,Monaco,"Courier New",monospace;font-size:0.8rem;color:var(--green-2);text-decoration:none;border:1px solid var(--cream-2);padding:8px 12px;border-radius:4px;background:var(--green-light);box-shadow:0 4px 14px rgba(0,0,0,0.12);} .download-btn{position:fixed;top:120px;right:28px;background:var(--green-2);color:#fff;padding:10px 18px;border-radius:8px;border:none;font-family:ui-monospace,Menlo,Monaco,"Courier New",monospace;font-size:13px;font-weight:600;letter-spacing:0.02em;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.18);z-index:1000;text-decoration:none;} .download-btn:hover{background:var(--green-1);}
 h1.title{
   font-size:2.1rem;color:var(--green-1);margin:0 0 4px;font-weight:600;
   border-bottom:3px solid var(--gold);padding-bottom:14px;
@@ -146,29 +123,7 @@ table.data-table tr:last-child td{border-bottom:none;}
 .feedback.right{background:#dff2e6;color:#1f4a35;}
 .feedback.wrong{background:#fbeceb;color:#7a2f27;}
 /* side nav */
-#navToggle{
-  position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:60;
-  background:var(--green-1);color:var(--cream);border:none;
-  padding:16px 8px;border-radius:8px 0 0 8px;cursor:pointer;font-size:0.72rem;
-  letter-spacing:.15em;writing-mode:vertical-rl;box-shadow:var(--shadow);
-}
-#sideNav{
-  position:fixed;top:0;right:-280px;width:260px;height:100%;
-  background:var(--green-1);color:var(--cream);z-index:59;
-  padding:70px 22px 22px;transition:right .28s ease;overflow-y:auto;
-  box-shadow:-6px 0 20px rgba(0,0,0,0.15);
-}
-#sideNav.open{right:0;}
-#sideNav h4{color:var(--gold);font-size:0.75rem;letter-spacing:.1em;margin:0 0 14px;}
-#sideNav a{
-  display:block;color:var(--cream);text-decoration:none;font-size:0.9rem;
-  padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.12);
-}
-#sideNav a:hover{color:var(--gold);}
-#overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,0.25);z-index:55;display:none;
-}
-#overlay.show{display:block;}
+#side-toggle{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:20;background:var(--green-1);color:var(--cream);border:none;font-family:ui-monospace,Menlo,Monaco,"Courier New",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:14px 8px;writing-mode:vertical-rl;text-orientation:mixed;cursor:pointer;border-radius:6px 0 0 6px;} #side-toggle:hover{background:var(--green-2);} #side-nav{position:fixed;top:0;right:0;height:100%;width:300px;background:#fff;border-left:1px solid var(--cream-2);box-shadow:-6px 0 18px rgba(0,0,0,.06);transform:translateX(100%);transition:transform .22s ease;z-index:19;overflow-y:auto;padding:22px 0 40px;} #side-nav.open{transform:translateX(0);} #side-nav .side-head{font-family:ui-monospace,Menlo,Monaco,"Courier New",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a8578;padding:0 20px 12px;border-bottom:1px solid var(--cream-2);margin-bottom:6px;} #side-nav .side-lecture-label{font-family:ui-monospace,Menlo,Monaco,"Courier New",monospace;font-size:11.5px;font-weight:700;color:var(--ink);padding:14px 20px 4px;} #side-nav .side-link{display:block;padding:6px 20px 6px 28px;font-size:13px;color:#4a483f;text-decoration:none;border-left:2px solid transparent;cursor:pointer;} #side-nav .side-link:hover{color:var(--green-2);background:var(--green-light);} #side-nav .side-link.active{color:var(--green-2);border-left-color:var(--green-2);font-weight:600;background:var(--green-light);} #side-scrim{position:fixed;inset:0;background:rgba(27,43,38,.15);z-index:18;display:none;} #side-scrim.open{display:block;} @media (max-width:640px){#side-nav{width:82%;}} @media print{.download-btn,.back-link,#side-toggle{display:none !important;}}
 footer{text-align:center;color:var(--ink-soft);font-size:0.8rem;margin-top:60px;font-style:italic;}
 @media (max-width:600px){
   .wrap{padding:80px 16px 80px;}
@@ -178,27 +133,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:0.8rem;margin-top:60px;
 </head>
 <body>
 
-<header class="top">
-  <button class="btn ghost" onclick="window.location.href='index.html'">← Back</button>
-  <button class="btn" id="downloadBtn">⬇ Download</button>
-</header>
-
-<button id="navToggle" onclick="toggleNav()">SECTIONS</button>
-<div id="overlay" onclick="toggleNav()"></div>
-<nav id="sideNav">
-  <h4>JUMP TO</h4>
-  <a href="#objectives" onclick="toggleNav()">Learning Objectives</a>
-  <a href="#basics" onclick="toggleNav()">JIA Basics</a>
-  <a href="#classification" onclick="toggleNav()">Classification Rules</a>
-  <a href="#types" onclick="toggleNav()">The 7 Types</a>
-  <a href="#comparison" onclick="toggleNav()">Comparison Table</a>
-  <a href="#case" onclick="toggleNav()">Case Walkthrough</a>
-  <a href="#treatment" onclick="toggleNav()">Treatment</a>
-  <a href="#complications" onclick="toggleNav()">Complications</a>
-  <a href="#keypoints" onclick="toggleNav()">Key Points</a>
-  <a href="#clinical" onclick="toggleNav()">Clinical Pearls</a>
-  <a href="#quiz" onclick="toggleNav()">Practice Questions</a>
-</nav>
+<a class="back-link" href="index.html">&larr; Back to Study Guides</a><button class="download-btn" onclick="window.print()">&#8681; Download PDF</button><button id="side-toggle" aria-label="Toggle section navigation">Sections</button><div id="side-scrim"></div><nav id="side-nav"><div class="side-head">Jump to a section</div><div id="side-nav-body"><div class="side-lecture-label">Juvenile Idiopathic Arthritis</div><span class="side-link" data-target="objectives">Learning Objectives</span><span class="side-link" data-target="basics">JIA Basics</span><span class="side-link" data-target="classification">Classification Rules</span><span class="side-link" data-target="types">The 7 Types</span><span class="side-link" data-target="comparison">Comparison Table</span><span class="side-link" data-target="case">Case Walkthrough</span><span class="side-link" data-target="treatment">Treatment</span><span class="side-link" data-target="complications">Complications</span><span class="side-link" data-target="keypoints">Key Points</span><span class="side-link" data-target="clinical">Clinical Pearls</span><span class="side-link" data-target="quiz">Practice Questions</span></div></nav>
 
 <div class="wrap">
   <h1 class="title">Juvenile Idiopathic Arthritis</h1>
@@ -423,10 +358,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:0.8rem;margin-top:60px;
 </div>
 
 <script>
-function toggleNav(){
-  document.getElementById('sideNav').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('show');
-}
+const sideNav=document.getElementById("side-nav");const sideToggle=document.getElementById("side-toggle");const sideScrim=document.getElementById("side-scrim");function openSideNav(){sideNav.classList.add("open");sideScrim.classList.add("open");}function closeSideNav(){sideNav.classList.remove("open");sideScrim.classList.remove("open");}sideToggle.addEventListener("click",function(){sideNav.classList.contains("open")?closeSideNav():openSideNav();});sideScrim.addEventListener("click",closeSideNav);const sideLinkEls=Array.from(document.querySelectorAll(".side-link"));sideLinkEls.forEach(function(el){el.addEventListener("click",function(){closeSideNav();document.getElementById(el.dataset.target).scrollIntoView({behavior:"smooth",block:"start"});});});const sideObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){sideLinkEls.forEach(function(l){l.classList.remove("active");});const match=sideLinkEls.find(function(l){return l.dataset.target===entry.target.id;});if(match)match.classList.add("active");}});},{rootMargin:"-15% 0px -70% 0px"});document.querySelectorAll("h2.section-head").forEach(function(el){sideObserver.observe(el);});
 document.querySelectorAll('.quiz').forEach(function(quiz){
   var choices = quiz.querySelectorAll('.choices li');
   var fb = quiz.querySelector('.feedback');
@@ -445,13 +377,6 @@ document.querySelectorAll('.quiz').forEach(function(quiz){
       fb.classList.add(idx === correctIdx ? 'right' : 'wrong');
     });
   });
-});
-document.getElementById('downloadBtn').addEventListener('click', function(){
-  var blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'JIA_Study_Guide.html';
-  a.click();
 });
 </script>
 </body>
