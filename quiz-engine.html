@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Engine — Question Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ec;
+    --surface: #fffdf8;
+    --forest-dark: #2f5233;
+    --forest: #3f7d52;
+    --forest-light: #e8f0e6;
+    --border: #ddd5c0;
+    --ink: #2a2a22;
+    --muted: #726f5f;
+    --brick: #b3441e;
+    --brick-light: #f5e6df;
+    --gold: #ab7d2c;
+    --shadow: 0 1px 2px rgba(47,82,51,0.06), 0 2px 8px rgba(47,82,51,0.05);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Lora', Georgia, 'Iowan Old Style', serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    letter-spacing: 0.02em;
+  }
+
+  #app {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px 20px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--forest-dark);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header.top .brand h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--forest-dark);
+    letter-spacing: -0.01em;
+  }
+  header.top .brand .tag {
+    margin-top: 2px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  nav.tabs {
+    display: flex;
+    gap: 6px;
+  }
+  nav.tabs button {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--forest-dark);
+    padding: 7px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  nav.tabs button:hover { border-color: var(--forest); background: var(--forest-light); }
+  nav.tabs button.active { background: var(--forest-dark); border-color: var(--forest-dark); color: var(--surface); }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 1.15rem;
+    color: var(--forest-dark);
+  }
+  .card .sub {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Empty state ---------- */
+  .empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+  }
+  .empty .glyph {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--forest);
+  }
+  .empty h3 { color: var(--forest-dark); margin: 0 0 6px; }
+
+  /* ---------- Topic picker ---------- */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .topic-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    cursor: pointer;
+    background: var(--cream);
+    transition: all 0.12s ease;
+  }
+  .topic-item:hover { border-color: var(--forest); }
+  .topic-item.checked { background: var(--forest-light); border-color: var(--forest); }
+  .topic-item .name { font-size: 0.92rem; }
+  .topic-item .count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1px 7px;
+  }
+  .topic-item .box {
+    width: 15px; height: 15px;
+    border: 1.5px solid var(--forest);
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .topic-item.checked .box { background: var(--forest); }
+  .topic-item.checked .box::after {
+    content: '✓';
+    color: var(--surface);
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .link-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .link-btn {
+    background: none;
+    border: none;
+    color: var(--forest);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .row-split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stepper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .stepper button {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid var(--forest);
+    background: var(--surface);
+    color: var(--forest-dark);
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .stepper button:hover { background: var(--forest-light); }
+  .stepper .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    min-width: 28px;
+    text-align: center;
+  }
+  .stepper .label { font-size: 0.82rem; color: var(--muted); margin-left: 4px; }
+
+  .toggle-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--muted); }
+  .toggle {
+    width: 34px; height: 19px;
+    border-radius: 20px;
+    background: var(--border);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .toggle.on { background: var(--forest); }
+  .toggle .knob {
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    background: var(--surface);
+    position: absolute;
+    top: 2px; left: 2px;
+    transition: left 0.15s ease;
+  }
+  .toggle.on .knob { left: 17px; }
+
+  .btn-primary {
+    background: var(--forest-dark);
+    color: var(--surface);
+    border: none;
+    padding: 12px 22px;
+    border-radius: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--forest); }
+  .btn-primary:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest-dark);
+    padding: 11px 20px;
+    border-radius: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { background: var(--forest-light); }
+
+  .btn-danger {
+    background: var(--surface);
+    color: var(--brick);
+    border: 1.5px solid var(--brick);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .btn-danger:hover { background: var(--brick-light); }
+
+  /* ---------- Quiz screen ---------- */
+  .quiz-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .quiz-meta .progress-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--forest-light);
+    color: var(--forest-dark);
+    border: 1px solid var(--forest);
+    border-radius: 20px;
+    padding: 3px 11px;
+  }
+  .progress-bar {
+    height: 5px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--forest);
+    transition: width 0.25s ease;
+  }
+
+  .vignette {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+    white-space: pre-wrap;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 6px; }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    background: var(--surface);
+  }
+  .option:hover:not(.locked) { border-color: var(--forest); background: var(--forest-light); }
+  .option.selected { border-color: var(--forest); background: var(--forest-light); }
+  .option.locked { cursor: default; }
+  .option.correct-answer { border-color: var(--forest); background: var(--forest-light); }
+  .option.wrong-answer { border-color: var(--brick); background: var(--brick-light); }
+
+  .bubble {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--forest);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--forest-dark);
+    background: var(--surface);
+    transition: all 0.12s ease;
+  }
+  .option.selected .bubble { background: var(--forest); color: var(--surface); }
+  .option.correct-answer .bubble { background: var(--forest); color: var(--surface); border-color: var(--forest); }
+  .option.wrong-answer .bubble { background: var(--brick); color: var(--surface); border-color: var(--brick); }
+  .option .opt-text { padding-top: 3px; line-height: 1.5; }
+
+  .explain-box {
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: var(--forest-light);
+    border-left: 3px solid var(--forest);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .explain-box .head {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--forest-dark);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .quiz-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+  }
+  .quit-link {
+    color: var(--muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    background: none; border: none; font-family: 'Lora', serif;
+  }
+
+  /* ---------- Results ---------- */
+  .score-hero {
+    text-align: center;
+    padding: 20px 0 8px;
+  }
+  .score-hero .big {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--forest-dark);
+    line-height: 1;
+  }
+  .score-hero .pct { color: var(--muted); font-size: 1rem; margin-top: 6px; }
+
+  .topic-breakdown { margin: 22px 0; }
+  .breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .breakdown-row .t-name { flex: 1; }
+  .breakdown-row .bar-track {
+    flex: 2;
+    height: 7px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .breakdown-row .bar-fill { height: 100%; background: var(--forest); }
+  .breakdown-row .t-score { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); width: 52px; text-align: right; }
+
+  .review-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .review-head {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background: var(--cream);
+  }
+  .review-head .snippet { font-size: 0.88rem; color: var(--ink); flex: 1; }
+  .review-head .arrow { color: var(--muted); font-size: 0.75rem; flex-shrink: 0; }
+  .review-body { padding: 16px; border-top: 1px solid var(--border); }
+
+  .actions-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
+  /* ---------- Manage bank ---------- */
+  .stat-strip {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .stat {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .stat .num { font-size: 1.4rem; color: var(--forest-dark); font-weight: 600; }
+  .stat .lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  textarea.importbox {
+    width: 100%;
+    min-height: 130px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    padding: 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    background: var(--cream);
+    color: var(--ink);
+    resize: vertical;
+  }
+  textarea.importbox:focus { outline: none; border-color: var(--forest); }
+
+  .import-status {
+    font-size: 0.82rem;
+    margin-top: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .import-status.ok { color: var(--forest-dark); }
+  .import-status.err { color: var(--brick); }
+
+  details.format-help {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  details.format-help summary { cursor: pointer; color: var(--forest); }
+  details.format-help pre {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    overflow-x: auto;
+    font-size: 0.72rem;
+    margin-top: 8px;
+  }
+
+  .bank-topic-group { margin-bottom: 18px; }
+  .bank-topic-group h3 {
+    font-size: 0.9rem;
+    color: var(--forest-dark);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  .bank-q-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.84rem;
+    border-bottom: 1px dashed var(--border);
+  }
+  .bank-q-row .snippet { flex: 1; color: var(--ink); }
+  .bank-q-row .sub-tag { color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; }
+
+  .danger-zone {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--brick);
+  }
+  .danger-zone .warn { font-size: 0.8rem; color: var(--muted); margin-bottom: 10px; }
+
+  .loading, .toast {
+    text-align: center;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    padding: 20px;
+  }
+
+  @media (max-width: 560px) {
+    header.top { flex-direction: column; align-items: flex-start; }
+    .row-split { flex-direction: column; align-items: stretch; }
+    .actions-row .btn-primary, .actions-row .btn-secondary { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div id="app"><div class="loading">Loading question bank…</div></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const STORAGE_KEY = 'question-bank';
+
+  const SEED_QUESTIONS = [
+    {
+      id: 'nmj-seed-1',
+      topic: 'NMJ Pharm',
+      subtopic: 'Depolarizing NMBAs',
+      vignette: "A 30-year-old man undergoes rapid-sequence intubation with succinylcholine for an emergent appendectomy. Shortly after administration, the anesthesiologist notes generalized muscle fasciculations followed by flaccid paralysis. Thirty minutes later, the patient remains apneic and unresponsive to stimulation, well beyond the expected duration of the drug. Which of the following most likely explains this prolonged paralysis?",
+      options: [
+        'Atypical (deficient) plasma pseudocholinesterase',
+        'Upregulation of postjunctional nicotinic receptors',
+        'Concurrent administration of sugammadex',
+        'Malignant hyperthermia triggered by succinylcholine',
+        'Renal failure impairing succinylcholine excretion'
+      ],
+      correctIndex: 0,
+      explanation: 'Succinylcholine is normally hydrolyzed rapidly by plasma (pseudo)cholinesterase. Patients with a genetic deficiency or atypical variant of this enzyme cannot metabolize the drug efficiently, leading to prolonged neuromuscular blockade and apnea lasting hours instead of minutes. Renal failure is not the primary route of clearance for succinylcholine, and receptor upregulation (seen in denervation/burn injury) would cause an exaggerated hyperkalemic response rather than prolonged paralysis from a pharmacokinetic standpoint.'
+    },
+    {
+      id: 'nmj-seed-2',
+      topic: 'NMJ Pharm',
+      subtopic: 'Cholinergic Toxicity',
+      vignette: "A 52-year-old farmer is brought to the emergency department after being found confused in his field near an open container of pesticide. On exam he has excessive salivation, lacrimation, urinary incontinence, diarrhea, miosis, and diffuse muscle fasciculations. Which of the following is the most appropriate initial pharmacologic step in management?",
+      options: [
+        'Administer atropine to block muscarinic effects',
+        'Administer succinylcholine to control fasciculations',
+        'Administer neostigmine to reverse muscle weakness',
+        'Administer sugammadex to bind the offending agent',
+        'Administer dantrolene to prevent hyperthermia'
+      ],
+      correctIndex: 0,
+      explanation: 'This is classic organophosphate (cholinesterase inhibitor) toxicity, producing a DUMBELS-type muscarinic toxidrome plus nicotinic effects (fasciculations). Atropine is first-line to competitively block excess muscarinic stimulation; pralidoxime is added to regenerate acetylcholinesterase before aging occurs. Neostigmine would worsen toxicity (it is itself a cholinesterase inhibitor), and succinylcholine/dantrolene/sugammadex are unrelated to this mechanism.'
+    },
+    {
+      id: 'nsaid-seed-1',
+      topic: 'NSAIDs',
+      subtopic: 'Mechanism / GI Toxicity',
+      vignette: "A 68-year-old woman with osteoarthritis has taken ibuprofen 600 mg three times daily for several months. She now presents with epigastric pain and a hemoglobin drop, and endoscopy reveals a gastric ulcer. Which of the following best explains the mechanism underlying this adverse effect?",
+      options: [
+        'Nonselective inhibition of COX-1, reducing protective prostaglandin synthesis in the gastric mucosa',
+        'Selective inhibition of COX-2, reducing prostacyclin production in gastric vasculature',
+        'Direct mucosal irritation from renal sodium retention',
+        'Inhibition of lipoxygenase, shunting arachidonic acid toward leukotriene synthesis',
+        'Induction of cytochrome P450 enzymes increasing acid secretion'
+      ],
+      correctIndex: 0,
+      explanation: "Traditional NSAIDs like ibuprofen nonselectively inhibit both COX-1 and COX-2. COX-1 inhibition is the key driver of GI toxicity because COX-1 maintains protective gastric mucus and bicarbonate secretion via prostaglandins (particularly PGE2); losing this protection predisposes to erosions and ulcers. This is the same rationale behind COX-2-selective agents (e.g., celecoxib), which spare COX-1 and reduce GI risk but carry increased cardiovascular risk instead."
+    },
+    {
+      id: 'nsaid-seed-2',
+      topic: 'NSAIDs',
+      subtopic: 'Renal Effects',
+      vignette: "A 74-year-old man with hypertension controlled on lisinopril and hydrochlorothiazide starts taking naproxen daily for knee pain. Two weeks later, his creatinine has risen from 0.9 to 1.8 mg/dL. Which of the following mechanisms best explains this acute decline in renal function?",
+      options: [
+        'Reduced prostaglandin-mediated afferent arteriolar vasodilation, decreasing glomerular perfusion',
+        'Direct tubular necrosis from naproxen crystal deposition',
+        'Immune-mediated interstitial nephritis from lisinopril-naproxen interaction',
+        'Increased angiotensin II production overwhelming ACE inhibition',
+        'Rhabdomyolysis-induced myoglobin cast nephropathy'
+      ],
+      correctIndex: 0,
+      explanation: "In states of reduced renal perfusion (as with ACE inhibitor + diuretic use, which this patient has), the kidney becomes dependent on prostaglandin-mediated afferent arteriolar dilation to maintain glomerular filtration. NSAIDs block this compensatory prostaglandin synthesis, causing afferent vasoconstriction and a sharp drop in GFR — the classic 'triple whammy' of ACE inhibitor/ARB + diuretic + NSAID. This is a hemodynamic effect, not direct tubular toxicity or crystal deposition."
+    }
+  ];
+
+  let bank = [];
+  let view = 'home'; // home | quiz | results | manage
+  let selectedTopics = new Set();
+  let quizCount = 10;
+  let shuffleOn = true;
+
+  let quizQuestions = [];
+  let quizIndex = 0;
+  let quizAnswers = []; // { qId, chosenIndex, correct }
+  let selectedOptionThisQ = null;
+  let locked = false;
+
+  let importText = '';
+  let importStatus = null; // {ok, msg}
+  let expandedTopics = new Set();
+  let expandedReview = new Set();
+
+  const app = document.getElementById('app');
+
+  function uid(prefix) {
+    return prefix + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  }
+
+  function slug(s) {
+    return String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  async function loadBank() {
+    try {
+      const res = await window.storage.get(STORAGE_KEY, false);
+      if (res && res.value) {
+        bank = JSON.parse(res.value);
+      } else {
+        bank = SEED_QUESTIONS.slice();
+        await saveBank();
+      }
+    } catch (e) {
+      // key doesn't exist yet
+      bank = SEED_QUESTIONS.slice();
+      try { await saveBank(); } catch (e2) { /* non-fatal */ }
+    }
+    selectedTopics = new Set(getTopics());
+    render();
+  }
+
+  async function saveBank() {
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(bank), false);
+    } catch (e) {
+      console.error('Storage save failed', e);
+    }
+  }
+
+  function getTopics() {
+    const set = new Set();
+    bank.forEach(q => set.add(q.topic));
+    return Array.from(set).sort();
+  }
+
+  function countForTopic(t) {
+    return bank.filter(q => q.topic === t).length;
+  }
+
+  function shuffleArr(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function esc(s) {
+    const d = document.createElement('div');
+    d.textContent = s == null ? '' : String(s);
+    return d.innerHTML;
+  }
+
+  /* ---------------- Actions ---------------- */
+
+  function toggleTopic(t) {
+    if (selectedTopics.has(t)) selectedTopics.delete(t); else selectedTopics.add(t);
+    render();
+  }
+  function selectAllTopics() { selectedTopics = new Set(getTopics()); render(); }
+  function selectNoneTopics() { selectedTopics = new Set(); render(); }
+
+  function availableCount() {
+    return bank.filter(q => selectedTopics.has(q.topic)).length;
+  }
+
+  function startQuiz() {
+    const pool = bank.filter(q => selectedTopics.has(q.topic));
+    const n = Math.min(quizCount, pool.length);
+    quizQuestions = (shuffleOn ? shuffleArr(pool) : pool).slice(0, n);
+    quizIndex = 0;
+    quizAnswers = [];
+    selectedOptionThisQ = null;
+    locked = false;
+    view = 'quiz';
+    render();
+  }
+
+  function retryMissed() {
+    const missedIds = quizAnswers.filter(a => !a.correct).map(a => a.qId);
+    const pool = bank.filter(q => missedIds.includes(q.id));
+    quizQuestions = shuffleArr(pool);
+    quizIndex = 0;
+    quizAnswers = [];
+    selectedOptionThisQ = null;
+    locked = false;
+    view = 'quiz';
+    render();
+  }
+
+  function pickOption(i) {
+    if (locked) return;
+    selectedOptionThisQ = i;
+    render();
+  }
+
+  function submitAnswer() {
+    if (selectedOptionThisQ === null || locked) return;
+    const q = quizQuestions[quizIndex];
+    const correct = selectedOptionThisQ === q.correctIndex;
+    quizAnswers.push({ qId: q.id, chosenIndex: selectedOptionThisQ, correct });
+    locked = true;
+    render();
+  }
+
+  function nextQuestion() {
+    if (quizIndex + 1 < quizQuestions.length) {
+      quizIndex++;
+      selectedOptionThisQ = null;
+      locked = false;
+      render();
+    } else {
+      view = 'results';
+      render();
+    }
+  }
+
+  function quitQuiz() {
+    if (confirm('End this quiz early? Your progress on this attempt will be lost.')) {
+      view = 'home';
+      render();
+    }
+  }
+
+  function backToHome() {
+    view = 'home';
+    render();
+  }
+
+  function goManage() {
+    view = 'manage';
+    importStatus = null;
+    render();
+  }
+
+  function toggleTopicExpand(t) {
+    if (expandedTopics.has(t)) expandedTopics.delete(t); else expandedTopics.add(t);
+    render();
+  }
+  function toggleReviewExpand(id) {
+    if (expandedReview.has(id)) expandedReview.delete(id); else expandedReview.add(id);
+    render();
+  }
+
+  function validateQuestion(q) {
+    if (!q || typeof q !== 'object') return 'not an object';
+    if (!q.topic || typeof q.topic !== 'string') return 'missing topic';
+    if (!q.vignette || typeof q.vignette !== 'string') return 'missing vignette';
+    if (!Array.isArray(q.options) || q.options.length < 2) return 'options must be an array of 2+ strings';
+    if (typeof q.correctIndex !== 'number' || q.correctIndex < 0 || q.correctIndex >= q.options.length) return 'correctIndex out of range';
+    if (!q.explanation || typeof q.explanation !== 'string') return 'missing explanation';
+    return null;
+  }
+
+  async function doImport() {
+    let parsed;
+    try {
+      parsed = JSON.parse(importText);
+    } catch (e) {
+      importStatus = { ok: false, msg: 'Could not parse JSON: ' + e.message };
+      render();
+      return;
+    }
+
+    let incoming = [];
+    if (Array.isArray(parsed)) {
+      // could be flat array of questions, or array of {topic, questions:[...]}
+      parsed.forEach(item => {
+        if (item && Array.isArray(item.questions)) {
+          item.questions.forEach(q => incoming.push(Object.assign({ topic: item.topic }, q)));
+        } else {
+          incoming.push(item);
+        }
+      });
+    } else if (parsed && Array.isArray(parsed.questions)) {
+      parsed.questions.forEach(q => incoming.push(Object.assign({ topic: parsed.topic }, q)));
+    } else {
+      importStatus = { ok: false, msg: 'Expected a JSON array of question objects (see format below).' };
+      render();
+      return;
+    }
+
+    let added = 0, updated = 0, errors = [];
+    incoming.forEach((q, idx) => {
+      const err = validateQuestion(q);
+      if (err) { errors.push('Item ' + (idx + 1) + ': ' + err); return; }
+      if (!q.id) q.id = uid(slug(q.topic));
+      const existingIdx = bank.findIndex(b => b.id === q.id);
+      if (existingIdx >= 0) { bank[existingIdx] = q; updated++; }
+      else { bank.push(q); added++; }
+    });
+
+    if (added || updated) await saveBank();
+    selectedTopics = new Set(getTopics());
+
+    if (errors.length && !added && !updated) {
+      importStatus = { ok: false, msg: 'No questions imported. ' + errors.slice(0, 3).join('; ') + (errors.length > 3 ? ' …' : '') };
+    } else if (errors.length) {
+      importStatus = { ok: true, msg: `Added ${added}, updated ${updated}. ${errors.length} item(s) skipped (invalid).` };
+      importText = '';
+    } else {
+      importStatus = { ok: true, msg: `Added ${added}, updated ${updated} question(s).` };
+      importText = '';
+    }
+    render();
+  }
+
+  function exportBank() {
+    const dataStr = JSON.stringify(bank, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'question-bank-export.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  async function deleteQuestion(id) {
+    bank = bank.filter(q => q.id !== id);
+    await saveBank();
+    selectedTopics = new Set(getTopics());
+    render();
+  }
+
+  async function clearAllQuestions() {
+    if (!confirm('Delete the ENTIRE question bank? This cannot be undone.')) return;
+    if (!confirm('Really sure? All questions across every topic will be permanently removed.')) return;
+    bank = [];
+    await saveBank();
+    selectedTopics = new Set();
+    render();
+  }
+
+  /* ---------------- Render ---------------- */
+
+  function render() {
+    app.innerHTML = '';
+    app.appendChild(renderHeader());
+    if (view === 'home') app.appendChild(renderHome());
+    else if (view === 'quiz') app.appendChild(renderQuiz());
+    else if (view === 'results') app.appendChild(renderResults());
+    else if (view === 'manage') app.appendChild(renderManage());
+    attachHandlers();
+  }
+
+  function el(html) {
+    const t = document.createElement('template');
+    t.innerHTML = html.trim();
+    return t.content.firstElementChild;
+  }
+
+  function renderHeader() {
+    return el(`
+      <header class="top">
+        <div class="brand">
+          <h1>Quiz Engine</h1>
+          <div class="tag">Vignette-style question bank</div>
+        </div>
+        <nav class="tabs">
+          <button data-nav="home" class="${view === 'home' || view === 'quiz' || view === 'results' ? 'active' : ''}">New Quiz</button>
+          <button data-nav="manage" class="${view === 'manage' ? 'active' : ''}">Manage Bank</button>
+        </nav>
+      </header>
+    `);
+  }
+
+  function renderHome() {
+    const topics = getTopics();
+    if (topics.length === 0) {
+      return el(`
+        <div class="card">
+          <div class="empty">
+            <div class="glyph">◎</div>
+            <h3>No questions yet</h3>
+            <p>Import a question bank to get started.</p>
+            <button class="btn-primary" data-nav="manage">Go to Manage Bank</button>
+          </div>
+        </div>
+      `);
+    }
+
+    const wrap = el(`<div></div>`);
+    const card = el(`
+      <div class="card">
+        <h2>Build a quiz</h2>
+        <div class="sub">Select which topics to pull from, then choose how many questions.</div>
+        <div class="link-row">
+          <button class="link-btn" id="sel-all">Select all</button>
+          <button class="link-btn" id="sel-none">Select none</button>
+        </div>
+        <div class="topic-grid" id="topic-grid"></div>
+        <div class="row-split">
+          <div class="stepper">
+            <button id="step-down">−</button>
+            <span class="n">${quizCount}</span>
+            <button id="step-up">+</button>
+            <span class="label">questions (of ${availableCount()} available)</span>
+          </div>
+          <div class="toggle-row">
+            <span>Shuffle order</span>
+            <div class="toggle ${shuffleOn ? 'on' : ''}" id="shuffle-toggle"><div class="knob"></div></div>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <button class="btn-primary" id="start-quiz" ${availableCount() === 0 ? 'disabled' : ''}>Start Quiz</button>
+        </div>
+      </div>
+    `);
+    const grid = card.querySelector('#topic-grid');
+    topics.forEach(t => {
+      const checked = selectedTopics.has(t);
+      grid.appendChild(el(`
+        <div class="topic-item ${checked ? 'checked' : ''}" data-topic="${esc(t)}">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="box"></span>
+            <span class="name">${esc(t)}</span>
+          </div>
+          <span class="count">${countForTopic(t)}</span>
+        </div>
+      `));
+    });
+    wrap.appendChild(card);
+    return wrap;
+  }
+
+  function renderQuiz() {
+    const q = quizQuestions[quizIndex];
+    const pct = ((quizIndex) / quizQuestions.length) * 100;
+    const wrap = el(`<div></div>`);
+    const card = el(`
+      <div class="card">
+        <div class="quiz-meta">
+          <span class="progress-text">QUESTION ${quizIndex + 1} OF ${quizQuestions.length}</span>
+          <span class="pill">${esc(q.topic)}</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+        <div class="vignette">${esc(q.vignette)}</div>
+        <div class="options" id="options"></div>
+        <div id="explain-slot"></div>
+        <div class="quiz-footer">
+          <button class="quit-link" id="quit-quiz">End quiz</button>
+          <div id="action-slot"></div>
+        </div>
+      </div>
+    `);
+    const optionsWrap = card.querySelector('#options');
+    q.options.forEach((optText, i) => {
+      let cls = 'option';
+      if (!locked && selectedOptionThisQ === i) cls += ' selected';
+      if (locked) {
+        cls += ' locked';
+        if (i === q.correctIndex) cls += ' correct-answer';
+        else if (i === selectedOptionThisQ) cls += ' wrong-answer';
+      }
+      const letter = String.fromCharCode(65 + i);
+      optionsWrap.appendChild(el(`
+        <div class="${cls}" data-opt="${i}">
+          <div class="bubble">${letter}</div>
+          <div class="opt-text">${esc(optText)}</div>
+        </div>
+      `));
+    });
+
+    if (locked) {
+      const wasCorrect = selectedOptionThisQ === q.correctIndex;
+      card.querySelector('#explain-slot').appendChild(el(`
+        <div class="explain-box">
+          <span class="head">${wasCorrect ? 'Correct' : 'Incorrect'} — Explanation</span>
+          ${esc(q.explanation)}
+        </div>
+      `));
+      card.querySelector('#action-slot').appendChild(el(`
+        <button class="btn-primary" id="next-q">${quizIndex + 1 < quizQuestions.length ? 'Next Question' : 'See Results'}</button>
+      `));
+    } else {
+      card.querySelector('#action-slot').appendChild(el(`
+        <button class="btn-primary" id="submit-answer" ${selectedOptionThisQ === null ? 'disabled' : ''}>Submit Answer</button>
+      `));
+    }
+
+    wrap.appendChild(card);
+    return wrap;
+  }
+
+  function renderResults() {
+    const total = quizAnswers.length;
+    const correct = quizAnswers.filter(a => a.correct).length;
+    const pct = total ? Math.round((correct / total) * 100) : 0;
+
+    const byTopic = {};
+    quizQuestions.forEach((q, i) => {
+      const a = quizAnswers[i];
+      if (!byTopic[q.topic]) byTopic[q.topic] = { correct: 0, total: 0 };
+      byTopic[q.topic].total++;
+      if (a && a.correct) byTopic[q.topic].correct++;
+    });
+
+    const wrap = el(`<div></div>`);
+    const card = el(`
+      <div class="card">
+        <div class="score-hero">
+          <div class="big">${correct}/${total}</div>
+          <div class="pct">${pct}% correct</div>
+        </div>
+        <div class="topic-breakdown" id="breakdown"></div>
+        <div class="actions-row">
+          <button class="btn-primary" id="new-quiz">New Quiz</button>
+          ${correct < total ? '<button class="btn-secondary" id="retry-missed">Retry Missed Only</button>' : ''}
+        </div>
+      </div>
+    `);
+    const bd = card.querySelector('#breakdown');
+    Object.keys(byTopic).sort().forEach(t => {
+      const s = byTopic[t];
+      const p = Math.round((s.correct / s.total) * 100);
+      bd.appendChild(el(`
+        <div class="breakdown-row">
+          <span class="t-name">${esc(t)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${p}%"></div></div>
+          <span class="t-score">${s.correct}/${s.total}</span>
+        </div>
+      `));
+    });
+    wrap.appendChild(card);
+
+    if (correct < total) {
+      const reviewCard = el(`<div class="card"><h2>Review missed questions</h2><div class="sub">Tap a question to see the full explanation.</div><div id="review-list"></div></div>`);
+      const list = reviewCard.querySelector('#review-list');
+      quizQuestions.forEach((q, i) => {
+        const a = quizAnswers[i];
+        if (!a || a.correct) return;
+        const reviewKey = q.id + '::' + i;
+        const open = expandedReview.has(reviewKey);
+        const item = el(`
+          <div class="review-item">
+            <div class="review-head" data-review="${reviewKey}">
+              <span class="snippet">${esc(q.topic)} — ${esc(q.vignette.slice(0, 90))}${q.vignette.length > 90 ? '…' : ''}</span>
+              <span class="arrow">${open ? '▲' : '▼'}</span>
+            </div>
+            ${open ? `<div class="review-body">
+              <div class="vignette" style="font-size:0.92rem;">${esc(q.vignette)}</div>
+              <div class="options">
+                ${q.options.map((opt, oi) => {
+                  let cls = 'option locked';
+                  if (oi === q.correctIndex) cls += ' correct-answer';
+                  else if (oi === a.chosenIndex) cls += ' wrong-answer';
+                  return `<div class="${cls}"><div class="bubble">${String.fromCharCode(65 + oi)}</div><div class="opt-text">${esc(opt)}</div></div>`;
+                }).join('')}
+              </div>
+              <div class="explain-box"><span class="head">Explanation</span>${esc(q.explanation)}</div>
+            </div>` : ''}
+          </div>
+        `);
+        list.appendChild(item);
+      });
+      wrap.appendChild(reviewCard);
+    }
+
+    return wrap;
+  }
+
+  function renderManage() {
+    const topics = getTopics();
+    const wrap = el(`<div></div>`);
+
+    const statsCard = el(`
+      <div class="card">
+        <h2>Question bank</h2>
+        <div class="stat-strip" id="stat-strip"></div>
+      </div>
+    `);
+    const strip = statsCard.querySelector('#stat-strip');
+    strip.appendChild(el(`<div class="stat"><div class="num">${bank.length}</div><div class="lbl">Total Questions</div></div>`));
+    strip.appendChild(el(`<div class="stat"><div class="num">${topics.length}</div><div class="lbl">Topics</div></div>`));
+    wrap.appendChild(statsCard);
+
+    const importCard = el(`
+      <div class="card">
+        <h2>Import questions</h2>
+        <div class="sub">Paste a JSON array of question objects. Existing questions with a matching id will be updated; new ones are added.</div>
+        <textarea class="importbox" id="import-text" placeholder="[ { &quot;topic&quot;: &quot;NMJ Pharm&quot;, &quot;vignette&quot;: &quot;...&quot;, &quot;options&quot;: [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;], &quot;correctIndex&quot;: 0, &quot;explanation&quot;: &quot;...&quot; } ]"></textarea>
+        ${importStatus ? `<div class="import-status ${importStatus.ok ? 'ok' : 'err'}">${esc(importStatus.msg)}</div>` : ''}
+        <div style="margin-top:10px; display:flex; gap:10px;">
+          <button class="btn-primary" id="do-import">Import</button>
+          <button class="btn-secondary" id="do-export">Export Bank (JSON)</button>
+        </div>
+        <details class="format-help">
+          <summary>Expected format</summary>
+          <pre>[
+  {
+    "topic": "NMJ Pharm",
+    "subtopic": "Depolarizing NMBAs",   // optional
+    "vignette": "A 30-year-old man presents with...",
+    "options": ["Choice A", "Choice B", "Choice C", "Choice D"],
+    "correctIndex": 2,
+    "explanation": "Because..."
+  }
+]
+
+// You can also group by topic:
+[
+  { "topic": "NSAIDs", "questions": [ { "vignette": "...", "options": [...], "correctIndex": 0, "explanation": "..." } ] }
+]</pre>
+        </details>
+      </div>
+    `);
+    wrap.appendChild(importCard);
+
+    const listCard = el(`<div class="card"><h2>All questions</h2><div id="bank-list"></div></div>`);
+    const list = listCard.querySelector('#bank-list');
+    if (topics.length === 0) {
+      list.appendChild(el(`<div class="empty"><div class="glyph">◎</div><p>No questions yet — import some above.</p></div>`));
+    } else {
+      topics.forEach(t => {
+        const qs = bank.filter(q => q.topic === t);
+        const open = expandedTopics.has(t);
+        const group = el(`
+          <div class="bank-topic-group">
+            <h3 data-expand="${esc(t)}" style="cursor:pointer;">
+              <span>${esc(t)} <span class="mono" style="color:var(--muted); font-size:0.75rem;">(${qs.length})</span></span>
+              <span style="color:var(--muted); font-size:0.75rem;">${open ? '▲' : '▼'}</span>
+            </h3>
+          </div>
+        `);
+        if (open) {
+          const rowsWrap = el(`<div></div>`);
+          qs.forEach(q => {
+            rowsWrap.appendChild(el(`
+              <div class="bank-q-row">
+                <span class="snippet">${esc(q.vignette.slice(0, 100))}${q.vignette.length > 100 ? '…' : ''} ${q.subtopic ? `<span class="sub-tag">· ${esc(q.subtopic)}</span>` : ''}</span>
+                <button class="btn-danger" data-delete="${esc(q.id)}">Delete</button>
+              </div>
+            `));
+          });
+          group.appendChild(rowsWrap);
+        }
+        list.appendChild(group);
+      });
+    }
+    wrap.appendChild(listCard);
+
+    if (bank.length > 0) {
+      const dz = el(`
+        <div class="card">
+          <div class="danger-zone">
+            <div class="warn">Clear the entire bank — irreversible.</div>
+            <button class="btn-danger" id="clear-all">Delete All Questions</button>
+          </div>
+        </div>
+      `);
+      wrap.appendChild(dz);
+    }
+
+    return wrap;
+  }
+
+  /* ---------------- Event delegation ---------------- */
+
+  function attachHandlers() {
+    app.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('click', () => {
+      const target = b.getAttribute('data-nav');
+      if (target === 'manage') goManage();
+      else { view = 'home'; render(); }
+    }));
+
+    const selAll = app.querySelector('#sel-all');
+    if (selAll) selAll.addEventListener('click', selectAllTopics);
+    const selNone = app.querySelector('#sel-none');
+    if (selNone) selNone.addEventListener('click', selectNoneTopics);
+
+    app.querySelectorAll('[data-topic]').forEach(t => t.addEventListener('click', () => toggleTopic(t.getAttribute('data-topic'))));
+
+    const stepDown = app.querySelector('#step-down');
+    if (stepDown) stepDown.addEventListener('click', () => { quizCount = Math.max(1, quizCount - 1); render(); });
+    const stepUp = app.querySelector('#step-up');
+    if (stepUp) stepUp.addEventListener('click', () => { quizCount = Math.min(200, quizCount + 1); render(); });
+
+    const shuffleToggle = app.querySelector('#shuffle-toggle');
+    if (shuffleToggle) shuffleToggle.addEventListener('click', () => { shuffleOn = !shuffleOn; render(); });
+
+    const startBtn = app.querySelector('#start-quiz');
+    if (startBtn) startBtn.addEventListener('click', startQuiz);
+
+    app.querySelectorAll('[data-opt]').forEach(o => o.addEventListener('click', () => pickOption(parseInt(o.getAttribute('data-opt'), 10))));
+
+    const submitBtn = app.querySelector('#submit-answer');
+    if (submitBtn) submitBtn.addEventListener('click', submitAnswer);
+    const nextBtn = app.querySelector('#next-q');
+    if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+    const quitBtn = app.querySelector('#quit-quiz');
+    if (quitBtn) quitBtn.addEventListener('click', quitQuiz);
+
+    const newQuizBtn = app.querySelector('#new-quiz');
+    if (newQuizBtn) newQuizBtn.addEventListener('click', backToHome);
+    const retryBtn = app.querySelector('#retry-missed');
+    if (retryBtn) retryBtn.addEventListener('click', retryMissed);
+
+    app.querySelectorAll('[data-review]').forEach(r => r.addEventListener('click', () => {
+      toggleReviewExpand(r.getAttribute('data-review'));
+    }));
+
+    const importTextEl = app.querySelector('#import-text');
+    if (importTextEl) {
+      importTextEl.value = importText;
+      importTextEl.addEventListener('input', (e) => { importText = e.target.value; });
+    }
+    const doImportBtn = app.querySelector('#do-import');
+    if (doImportBtn) doImportBtn.addEventListener('click', doImport);
+    const doExportBtn = app.querySelector('#do-export');
+    if (doExportBtn) doExportBtn.addEventListener('click', exportBank);
+
+    app.querySelectorAll('[data-expand]').forEach(h => h.addEventListener('click', () => toggleTopicExpand(h.getAttribute('data-expand'))));
+    app.querySelectorAll('[data-delete]').forEach(d => d.addEventListener('click', () => deleteQuestion(d.getAttribute('data-delete'))));
+
+    const clearAllBtn = app.querySelector('#clear-all');
+    if (clearAllBtn) clearAllBtn.addEventListener('click', clearAllQuestions);
+  }
+
+  loadBank();
+})();
+</script>
+</body>
+</html>
