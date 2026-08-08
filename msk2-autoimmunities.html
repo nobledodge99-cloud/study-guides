@@ -30,53 +30,10 @@ body{
 a{color:var(--green-dark);}
 
 /* fixed chrome */
-#backBtn{
-  position:fixed; top:18px; left:18px; z-index:700;
-  background:var(--cream); border:1px solid var(--green-dark);
-  color:var(--green-dark); padding:8px 14px; border-radius:20px;
-  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
-  text-decoration:none; cursor:pointer;
-}
-#backBtn:hover{background:var(--green-dark); color:var(--cream);}
-#downloadBtn{
-  position:fixed; top:18px; right:18px; z-index:700;
-  background:var(--green-dark); border:1px solid var(--green-dark);
-  color:var(--cream); padding:8px 14px; border-radius:20px;
-  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
-  cursor:pointer;
-}
-#downloadBtn:hover{background:var(--green);}
+.back-link{position:fixed;top:18px;left:18px;z-index:1000;font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--green);text-decoration:none;border:1px solid var(--line);padding:8px 12px;border-radius:4px;background:var(--green-light);box-shadow:0 4px 14px rgba(0,0,0,0.12);} .download-btn{position:fixed;top:120px;right:28px;background:var(--green);color:#fff;padding:10px 18px;border-radius:8px;border:none;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.02em;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.18);z-index:1000;text-decoration:none;} .download-btn:hover{background:var(--green-dark);}
 
 /* sliding sections panel */
-#sectionsTab{
-  position:fixed; top:50%; right:0; transform:translateY(-50%);
-  z-index:600; background:var(--green-dark); color:var(--cream);
-  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
-  padding:14px 8px; writing-mode:vertical-rl; text-orientation:mixed;
-  border-radius:8px 0 0 8px; cursor:pointer; box-shadow:-2px 0 10px rgba(0,0,0,.12);
-}
-#sideNavScrim{
-  position:fixed; inset:0; background:rgba(30,30,20,.25);
-  z-index:590; display:none;
-}
-#sideNav{
-  position:fixed; top:0; right:0; height:100%;
-  width:min(300px, calc(100vw - 96px));
-  background:var(--cream-2); border-left:1px solid var(--line);
-  z-index:595; transform:translateX(100%); transition:transform .25s ease;
-  overflow-y:auto; padding:70px 20px 40px;
-}
-#sideNav.open{transform:translateX(0);}
-#sideNav h3{
-  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
-  color:var(--green-dark); text-transform:uppercase; margin:0 0 14px;
-}
-#sideNav .navItem{
-  display:block; padding:8px 6px; border-bottom:1px solid var(--line);
-  color:var(--ink); text-decoration:none; font-size:14px; cursor:pointer;
-}
-#sideNav .navItem:hover{color:var(--green-dark);}
-#sideNav .navNum{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:8px; font-size:12px;}
+#side-toggle{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:20;background:var(--green-dark);color:var(--cream);border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:14px 8px;writing-mode:vertical-rl;text-orientation:mixed;cursor:pointer;border-radius:6px 0 0 6px;} #side-toggle:hover{background:var(--green);} #side-nav{position:fixed;top:0;right:0;height:100%;width:300px;background:#fff;border-left:1px solid var(--line);box-shadow:-6px 0 18px rgba(0,0,0,.06);transform:translateX(100%);transition:transform .22s ease;z-index:19;overflow-y:auto;padding:22px 0 40px;} #side-nav.open{transform:translateX(0);} #side-nav .side-head{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a8578;padding:0 20px 12px;border-bottom:1px solid var(--line);margin-bottom:6px;} #side-nav .side-lecture-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;color:var(--ink);padding:14px 20px 4px;} #side-nav .side-link{display:block;padding:6px 20px 6px 28px;font-size:13px;color:#4a483f;text-decoration:none;border-left:2px solid transparent;cursor:pointer;} #side-nav .side-link:hover{color:var(--green);background:var(--green-light);} #side-nav .side-link.active{color:var(--green);border-left-color:var(--green);font-weight:600;background:var(--green-light);} #side-scrim{position:fixed;inset:0;background:rgba(27,43,38,.15);z-index:18;display:none;} #side-scrim.open{display:block;}
 
 main{max-width:900px; margin:0 auto; padding:90px 28px 100px;}
 
@@ -180,7 +137,7 @@ footer{
 }
 
 @media print{
-  #backBtn,#downloadBtn,#sectionsTab,#sideNav,#sideNavScrim{display:none !important;}
+  .back-link,.download-btn,#side-toggle,#side-nav{display:none !important;}
   main{padding-top:20px;}
 }
 @media (max-width:640px){
@@ -191,26 +148,7 @@ footer{
 </head>
 <body>
 
-<button id="backBtn" onclick="window.location.href='index.html'">&larr; Back to Study Guides</button>
-<button id="downloadBtn" onclick="window.print()">Download PDF</button>
-<div id="sectionsTab" onclick="toggleNav()">SECTIONS</div>
-<div id="sideNavScrim" onclick="toggleNav()"></div>
-<nav id="sideNav">
-  <h3>Sections</h3>
-  <span class="navItem" onclick="jump('sec0')"><span class="navNum">00</span>Intro &amp; Objectives</span>
-  <span class="navItem" onclick="jump('sec1')"><span class="navNum">01</span>Autoimmunity Fundamentals</span>
-  <span class="navItem" onclick="jump('sec2')"><span class="navNum">02</span>Rheumatoid Arthritis</span>
-  <span class="navItem" onclick="jump('sec3')"><span class="navNum">03</span>Ankylosing Spondylitis &amp; Psoriatic Arthritis</span>
-  <span class="navItem" onclick="jump('sec4')"><span class="navNum">04</span>Polymyalgia Rheumatica &amp; GCA</span>
-  <span class="navItem" onclick="jump('sec5')"><span class="navNum">05</span>Polymyositis</span>
-  <span class="navItem" onclick="jump('sec6')"><span class="navNum">06</span>Autoimmune Myositis (Ab-Mediated)</span>
-  <span class="navItem" onclick="jump('sec7')"><span class="navNum">07</span>Sjögren's Syndrome &amp; Psoriasis</span>
-  <span class="navItem" onclick="jump('sec8')"><span class="navNum">08</span>Vitiligo, Lichen Planus &amp; Alopecia Areata</span>
-  <span class="navItem" onclick="jump('sec9')"><span class="navNum">09</span>Bullous Pemphigoid &amp; Pemphigus Vulgaris</span>
-  <span class="navItem" onclick="jump('sec10')"><span class="navNum">10</span>Scleroderma &amp; Epidermolysis Bullosa Acquisita</span>
-  <span class="navItem" onclick="jump('sec11')"><span class="navNum">11</span>Secondary Autoimmune Effects</span>
-  <span class="navItem" onclick="jump('sec12')"><span class="navNum">12</span>Therapeutic Targets &amp; Board Review</span>
-</nav>
+<a class="back-link" href="index.html">&larr; Back to Study Guides</a><button class="download-btn" onclick="window.print()">&#8681; Download PDF</button><button id="side-toggle" aria-label="Toggle section navigation">Sections</button><div id="side-scrim"></div><nav id="side-nav"><div class="side-head">Jump to a section</div><div id="side-nav-body"><div class="side-lecture-label">Joint, Muscle, and Skin Autoimmunity</div><span class="side-link" data-target="sec0">Intro, Objectives &amp; Terms to Know</span><span class="side-link" data-target="sec1">Autoimmunity Fundamentals</span><span class="side-link" data-target="sec2">Rheumatoid Arthritis</span><span class="side-link" data-target="sec3">Ankylosing Spondylitis &amp; Psoriatic Arthritis</span><span class="side-link" data-target="sec4">Polymyalgia Rheumatica &amp; Giant Cell Arteritis</span><span class="side-link" data-target="sec5">Polymyositis</span><span class="side-link" data-target="sec6">Autoimmune Myositis (Antibody-Mediated)</span><span class="side-link" data-target="sec7">Sj&ouml;gren's Syndrome &amp; Psoriasis</span><span class="side-link" data-target="sec8">Vitiligo, Lichen Planus &amp; Alopecia Areata</span><span class="side-link" data-target="sec9">Bullous Pemphigoid &amp; Pemphigus Vulgaris</span><span class="side-link" data-target="sec10">Scleroderma &amp; Epidermolysis Bullosa Acquisita</span><span class="side-link" data-target="sec11">Secondary Autoimmune Effects</span><span class="side-link" data-target="sec12">Therapeutic Targets &amp; Board Review</span></div></nav>
 
 <main>
 <header class="hero">
@@ -855,15 +793,7 @@ footer{
 </main>
 
 <script>
-function toggleNav(){
-  document.getElementById('sideNav').classList.toggle('open');
-  var scrim = document.getElementById('sideNavScrim');
-  scrim.style.display = scrim.style.display === 'block' ? 'none' : 'block';
-}
-function jump(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
-  toggleNav();
-}
+const sideNav=document.getElementById("side-nav");const sideToggle=document.getElementById("side-toggle");const sideScrim=document.getElementById("side-scrim");function openSideNav(){sideNav.classList.add("open");sideScrim.classList.add("open");}function closeSideNav(){sideNav.classList.remove("open");sideScrim.classList.remove("open");}sideToggle.addEventListener("click",function(){sideNav.classList.contains("open")?closeSideNav():openSideNav();});sideScrim.addEventListener("click",closeSideNav);const sideLinkEls=Array.from(document.querySelectorAll(".side-link"));sideLinkEls.forEach(function(el){el.addEventListener("click",function(){closeSideNav();document.getElementById(el.dataset.target).scrollIntoView({behavior:"smooth",block:"start"});});});const sideObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){sideLinkEls.forEach(function(l){l.classList.remove("active");});const match=sideLinkEls.find(function(l){return l.dataset.target===entry.target.id;});if(match)match.classList.add("active");}});},{rootMargin:"-15% 0px -70% 0px"});document.querySelectorAll("section.part").forEach(function(el){sideObserver.observe(el);});
 
 const questionData = {
   q1a: {choices:["Increased apoptosis of activated lymphocytes","Cells persist longer after infection clears, increasing autoimmune risk","Enhanced central tolerance in the thymus","Reduced antigen persistence"], correct:1,
