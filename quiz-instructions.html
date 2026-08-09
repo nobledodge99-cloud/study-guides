@@ -361,7 +361,7 @@
             <div class="step-num">4</div>
             <div class="step-body">
               <h3>Upload the file into the quiz engine</h3>
-              <p>In the quiz engine, go to the <strong>Manage Bank</strong> tab and use the import option to upload the <span class="file-chip">.json</span> file you just downloaded.</p>
+              <p>In the quiz engine, go to the <strong>Manage Bank</strong> tab. Drag the <span class="file-chip">.json</span> file you just downloaded straight onto the drop zone, or click it to open a file picker instead. The file is read directly — no need to open it, copy anything, or paste.</p>
               <p>Once it's imported, every topic in that file becomes available to quiz yourself on — you'll be able to pick specific topics, set how many questions you want, and shuffle the order.</p>
             </div>
           </li>
@@ -402,7 +402,7 @@
         <div class="faq">
           <div class="faq-item">
             <h3>Do I need to unzip or open the JSON file myself?</h3>
-            <p>No. Leave it exactly as downloaded and hand it to the quiz engine's import tool as-is.</p>
+            <p>No. Leave it exactly as downloaded and drag it straight onto the drop zone (or pick it via the file button) — the engine reads it directly from disk.</p>
           </div>
           <div class="faq-item">
             <h3>Will importing a new file erase my old one?</h3>
@@ -410,7 +410,11 @@
           </div>
           <div class="faq-item">
             <h3>Does my progress get saved if I close the tab?</h3>
-            <p>Whatever question bank you've imported stays loaded the next time you open the quiz engine on the same device — you won't need to re-import it every session.</p>
+            <p>Yes — the question bank you've imported is saved in that browser's local storage, so reopening the quiz engine file in the <em>same browser on the same device</em> will have it ready, no need to re-import. It won't carry over to a different browser, a different device, or an incognito/private window, and it can be cleared if you clear that browser's site data.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What if the import doesn't work?</h3>
+            <p>The quiz engine will tell you specifically what went wrong — for example, if the file looks incomplete, or if it can't find valid question data at all. If you see an error, try re-downloading the file (an incognito/private browser window helps if an extension is interfering with your downloads) and dragging it in again. Pasting the file's contents directly into the text box below the drop zone still works too, as a fallback.</p>
           </div>
           <div class="faq-item">
             <h3>What if a topic I expect isn't showing up?</h3>
