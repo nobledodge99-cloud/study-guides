@@ -136,6 +136,74 @@ font-size:0.85rem;
 font-style:italic;
 border-bottom:1px solid var(--line);
 }
+
+/* ---- Nested (second-level) flyout, e.g. MSK II -> Exam 1 -> guides ---- */
+.subcourse-item{
+border-bottom:1px solid var(--line);
+background:var(--accent-dim);
+}
+.guide-dropdown > .subcourse-item:last-child{
+border-bottom:none;
+}
+.subcourse-toggle{
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:13px 20px 13px 32px;
+background:none;
+border:none;
+font-family:var(--serif);
+font-size:1rem;
+color:var(--ink);
+cursor:pointer;
+text-align:left;
+}
+.subcourse-toggle .chevron{
+font-family:var(--mono);
+color:var(--accent);
+transition:transform 0.2s ease;
+margin-left:12px;
+}
+.subcourse-item:hover .chevron,
+.subcourse-item:focus-within .chevron{
+transform:rotate(180deg);
+}
+.sub-dropdown{
+list-style:none;
+margin:0;
+padding:0;
+max-height:0;
+overflow:hidden;
+transition:max-height 0.25s ease;
+background:var(--panel);
+}
+.subcourse-item:hover .sub-dropdown,
+.subcourse-item:focus-within .sub-dropdown{
+max-height:50vh;
+overflow-y:auto;
+border-top:1px solid var(--line);
+}
+.sub-dropdown a{
+display:block;
+padding:12px 20px 12px 46px;
+text-decoration:none;
+color:var(--ink);
+font-size:0.95rem;
+border-bottom:1px solid var(--line);
+}
+.sub-dropdown li:last-child a, .sub-dropdown li:last-child .empty-note{ border-bottom:none; }
+.sub-dropdown a:hover{ background:var(--accent-dim); }
+.sub-dropdown .empty-note{
+display:block;
+padding:12px 20px 12px 46px;
+color:#8a8578;
+font-family:var(--mono);
+font-size:0.8rem;
+font-style:italic;
+border-bottom:1px solid var(--line);
+}
+
 .placeholder{
 border:1px dashed var(--line);
 border-radius:6px;
@@ -178,15 +246,32 @@ MSK II
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="guide-dropdown">
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>Exam 1</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
 <li><a href="msk2-joint-soft-tissue.html">Joint & Soft Tissue Pathology Study Guide</a></li>
 <li><a href="msk2-bone-cartilage.html">Bone & Cartilage Pathology Study Guide</a></li>
-  <li><a href="msk2-skeletal-muscle-nerve.html">Skeletal Muscle & Peripheral Nerve Study Guide</a></li>
-  <li><a href="msk2-rheumatic-pharm.html">Rheumatic Diseases Pharmacology Study Guide</a></li>
-  <li><a href="msk2-nsaids-pharm.html">NSAIDs Pharmacology Study Guide</a></li>
-  <li><a href="msk2-nmj-pharm.html">NMJ Pharmacology Study Guide</a></li> 
-  <li><a href="msk2-autoimmunities.html">Joint, Muscle, and Skin Autoimmunities Study Guide</a></li> 
-  <li><a href="msk2-IJA.html">Juvenile Idiopathic Arthritis Study Guide</a></li>
-  <li><a href="msk2-Crystal-Diseases.html">Crystal Diseases Study Guide</a></li> 
+<li><a href="msk2-skeletal-muscle-nerve.html">Skeletal Muscle & Peripheral Nerve Study Guide</a></li>
+<li><a href="msk2-rheumatic-pharm.html">Rheumatic Diseases Pharmacology Study Guide</a></li>
+<li><a href="msk2-nsaids-pharm.html">NSAIDs Pharmacology Study Guide</a></li>
+<li><a href="msk2-nmj-pharm.html">NMJ Pharmacology Study Guide</a></li>
+<li><a href="msk2-autoimmunities.html">Joint, Muscle, and Skin Autoimmunities Study Guide</a></li>
+<li><a href="msk2-IJA.html">Juvenile Idiopathic Arthritis Study Guide</a></li>
+<li><a href="msk2-Crystal-Diseases.html">Crystal Diseases Study Guide</a></li>
+</ul>
+</li>
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>Exam 2</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
+<li><span class="empty-note">No guides yet</span></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="course-item">
