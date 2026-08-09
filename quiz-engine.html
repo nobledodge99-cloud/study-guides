@@ -21,7 +21,23 @@
     --gold: #ab7d2c;
     --shadow: 0 1px 2px rgba(47,82,51,0.06), 0 2px 8px rgba(47,82,51,0.05);
   }
-
+.back-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 1000;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--forest-dark);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: var(--forest-light);
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: #dcebd9; }
+  
   * { box-sizing: border-box; }
 
   body {
@@ -547,6 +563,7 @@
 </style>
 </head>
 <body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
 <div id="app"><div class="loading">Loading question bank…</div></div>
 
 <script>
