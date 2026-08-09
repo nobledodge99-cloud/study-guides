@@ -708,6 +708,7 @@
   let dragActive = false;
   let expandedTopics = new Set();
   let expandedReview = new Set();
+  let storageAvailable = true; // set by checkStorageAvailability() before first load
 
   const app = document.getElementById('app');
 
@@ -719,7 +720,33 @@
     return String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   }
 
+  // Actually proves localStorage works in this browser/context — writes a
+  // throwaway value, reads it back, and confirms it round-trips, rather than
+  // assuming it works just because the API object exists (some browsers expose
+  // window.localStorage for file:// pages but throw or silently no-op on use).
+  function checkStorageAvailability() {
+    const probeKey = '__quiz_engine_storage_probe__';
+    const probeVal = String(Date.now());
+    try {
+      localStorage.setItem(probeKey, probeVal);
+      const readBack = localStorage.getItem(probeKey);
+      localStorage.removeItem(probeKey);
+      return readBack === probeVal;
+    } catch (e) {
+      return false;
+    }
+  }
+
   async function loadBank() {
+    storageAvailable = checkStorageAvailability();
+
+    if (!storageAvailable) {
+      bank = SEED_QUESTIONS.slice();
+      selectedTopics = new Set(getTopics());
+      render();
+      return;
+    }
+
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
@@ -729,7 +756,7 @@
         await saveBank();
       }
     } catch (e) {
-      // localStorage unavailable (e.g. some private-browsing modes) or corrupted value
+      // Corrupted stored value, or storage failed after all despite the probe passing
       bank = SEED_QUESTIONS.slice();
       try { await saveBank(); } catch (e2) { /* non-fatal */ }
     }
@@ -738,10 +765,19 @@
   }
 
   async function saveBank() {
+    if (!storageAvailable) return; // don't pretend to save when we already know it won't work
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(bank));
+      const payload = JSON.stringify(bank);
+      localStorage.setItem(STORAGE_KEY, payload);
+      // Verify the write actually landed — some browsers accept the call but
+      // silently cap/ignore it (e.g. quota exceeded in certain private modes).
+      const confirmRead = localStorage.getItem(STORAGE_KEY);
+      if (confirmRead !== payload) {
+        storageAvailable = false;
+      }
     } catch (e) {
       console.error('Storage save failed', e);
+      storageAvailable = false;
     }
   }
 
@@ -1070,11 +1106,25 @@
   function render() {
     app.innerHTML = '';
     app.appendChild(renderHeader());
+    if (!storageAvailable) app.appendChild(renderStorageWarning());
     if (view === 'home') app.appendChild(renderHome());
     else if (view === 'quiz') app.appendChild(renderQuiz());
     else if (view === 'results') app.appendChild(renderResults());
     else if (view === 'manage') app.appendChild(renderManage());
     attachHandlers();
+  }
+
+  function renderStorageWarning() {
+    return el(`
+      <div class="card" style="border-color: var(--brick); background: var(--brick-light);">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brick); font-weight: 600; margin-bottom: 6px;">Progress will not be saved</div>
+        <div style="font-size: 0.9rem; color: var(--ink); line-height: 1.5;">
+          This browser isn't letting the quiz engine save data — anything you import now will disappear if you close or reload this tab. This can happen when a file is opened directly from disk (no <span class="mono">http://</span> in the address bar), or in some private-browsing modes.
+          <br><br>
+          <strong>Workaround:</strong> after importing, go to Manage Bank and click <strong>Export Bank (JSON)</strong> to save a backup file. Next time you open this page, import that exported file again — it's the same as re-doing the drag-and-drop, just a bit more often than you'd like.
+        </div>
+      </div>
+    `);
   }
 
   function el(html) {
