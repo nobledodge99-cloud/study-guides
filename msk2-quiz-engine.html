@@ -619,7 +619,7 @@
   ];
 
   let bank = [];
-  let view = 'home'; // home | quiz | results | manage
+  let view = (window.location.hash === '#manage') ? 'manage' : 'home'; // home | quiz | results | manage
   let selectedTopics = new Set();
   let quizCount = 10;
   let shuffleOn = true;
