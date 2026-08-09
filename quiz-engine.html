@@ -481,6 +481,60 @@
   .stat .num { font-size: 1.4rem; color: var(--forest-dark); font-weight: 600; }
   .stat .lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
 
+  .dropzone {
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 26px 18px;
+    text-align: center;
+    background: var(--cream);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-bottom: 14px;
+  }
+  .dropzone:hover, .dropzone.dragover {
+    border-color: var(--forest);
+    background: var(--forest-light);
+  }
+  .dropzone .dz-glyph {
+    font-size: 1.6rem;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+  .dropzone .dz-title {
+    font-size: 0.92rem;
+    color: var(--forest-dark);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .dropzone .dz-sub {
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+  .dropzone .dz-filename {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--forest-dark);
+    margin-top: 6px;
+  }
+
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .or-divider::before, .or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
   textarea.importbox {
     width: 100%;
     min-height: 130px;
@@ -499,6 +553,7 @@
     font-size: 0.82rem;
     margin-top: 8px;
     font-family: 'IBM Plex Mono', monospace;
+    white-space: pre-wrap;
   }
   .import-status.ok { color: var(--forest-dark); }
   .import-status.err { color: var(--brick); }
@@ -649,6 +704,8 @@
 
   let importText = '';
   let importStatus = null; // {ok, msg}
+  let importFileName = null;
+  let dragActive = false;
   let expandedTopics = new Set();
   let expandedReview = new Set();
 
@@ -711,6 +768,112 @@
     const d = document.createElement('div');
     d.textContent = s == null ? '' : String(s);
     return d.innerHTML;
+  }
+
+  /* ---------------- JSON sanitizing / import parsing ----------------
+     Defends against real-world paste/download mangling: BOM characters,
+     leading/trailing whitespace, and stray text appended before or after
+     the actual JSON payload (e.g. from a browser extension, clipboard
+     manager, or "select all" grabbing surrounding page chrome). We find
+     the first opening bracket and the last closing bracket in the text
+     and slice to that span before ever calling JSON.parse.
+  ------------------------------------------------------------------- */
+
+  function sanitizeJsonText(raw) {
+    if (typeof raw !== 'string') return raw;
+    let text = raw.replace(/^\uFEFF/, ''); // strip BOM if present
+    text = text.trim();
+    if (!text) return text;
+
+    const firstBracket = text.search(/[\[{]/);
+    if (firstBracket === -1) return text; // no bracket at all — let JSON.parse report the real error
+
+    let lastBracket = -1;
+    for (let i = text.length - 1; i >= 0; i--) {
+      if (text[i] === ']' || text[i] === '}') { lastBracket = i; break; }
+    }
+    if (lastBracket === -1 || lastBracket < firstBracket) return text;
+
+    return text.slice(firstBracket, lastBracket + 1);
+  }
+
+  function describeParseError(text, err) {
+    // Try to pull a character position out of common JSON.parse error message formats
+    const m = /position (\d+)/i.exec(err.message);
+    if (!m) return 'Could not parse JSON: ' + err.message;
+    const pos = parseInt(m[1], 10);
+    const start = Math.max(0, pos - 30);
+    const end = Math.min(text.length, pos + 30);
+    const context = text.slice(start, end).replace(/\s+/g, ' ');
+    return 'Could not parse JSON: ' + err.message + '\nNear: …' + context + '…';
+  }
+
+  function validateQuestion(q) {
+    if (!q || typeof q !== 'object') return 'not an object';
+    if (!q.topic || typeof q.topic !== 'string') return 'missing topic';
+    if (!q.vignette || typeof q.vignette !== 'string') return 'missing vignette';
+    if (!Array.isArray(q.options) || q.options.length < 2) return 'options must be an array of 2+ strings';
+    if (typeof q.correctIndex !== 'number' || q.correctIndex < 0 || q.correctIndex >= q.options.length) return 'correctIndex out of range';
+    if (!q.explanation || typeof q.explanation !== 'string') return 'missing explanation';
+    return null;
+  }
+
+  // Core import routine — shared by the paste box and the file/drag-drop path.
+  async function importFromText(rawText, sourceLabel) {
+    const cleaned = sanitizeJsonText(rawText);
+
+    let parsed;
+    try {
+      parsed = JSON.parse(cleaned);
+    } catch (e) {
+      importStatus = { ok: false, msg: describeParseError(cleaned, e) };
+      render();
+      return;
+    }
+
+    let incoming = [];
+    if (Array.isArray(parsed)) {
+      // could be flat array of questions, or array of {topic, questions:[...]}
+      parsed.forEach(item => {
+        if (item && Array.isArray(item.questions)) {
+          item.questions.forEach(q => incoming.push(Object.assign({ topic: item.topic }, q)));
+        } else {
+          incoming.push(item);
+        }
+      });
+    } else if (parsed && Array.isArray(parsed.questions)) {
+      parsed.questions.forEach(q => incoming.push(Object.assign({ topic: parsed.topic }, q)));
+    } else {
+      importStatus = { ok: false, msg: 'Expected a JSON array of question objects (see format below).' };
+      render();
+      return;
+    }
+
+    let added = 0, updated = 0, errors = [];
+    incoming.forEach((q, idx) => {
+      const err = validateQuestion(q);
+      if (err) { errors.push('Item ' + (idx + 1) + ': ' + err); return; }
+      if (!q.id) q.id = uid(slug(q.topic));
+      const existingIdx = bank.findIndex(b => b.id === q.id);
+      if (existingIdx >= 0) { bank[existingIdx] = q; updated++; }
+      else { bank.push(q); added++; }
+    });
+
+    if (added || updated) await saveBank();
+    selectedTopics = new Set(getTopics());
+
+    const sourceNote = sourceLabel ? ` (from ${sourceLabel})` : '';
+    if (errors.length && !added && !updated) {
+      importStatus = { ok: false, msg: 'No questions imported' + sourceNote + '. ' + errors.slice(0, 3).join('; ') + (errors.length > 3 ? ' …' : '') };
+    } else if (errors.length) {
+      importStatus = { ok: true, msg: `Added ${added}, updated ${updated}${sourceNote}. ${errors.length} item(s) skipped (invalid).` };
+      importText = '';
+    } else {
+      importStatus = { ok: true, msg: `Added ${added}, updated ${updated} question(s)${sourceNote}.` };
+      importText = '';
+    }
+    importFileName = null;
+    render();
   }
 
   /* ---------------- Actions ---------------- */
@@ -804,67 +967,27 @@
     render();
   }
 
-  function validateQuestion(q) {
-    if (!q || typeof q !== 'object') return 'not an object';
-    if (!q.topic || typeof q.topic !== 'string') return 'missing topic';
-    if (!q.vignette || typeof q.vignette !== 'string') return 'missing vignette';
-    if (!Array.isArray(q.options) || q.options.length < 2) return 'options must be an array of 2+ strings';
-    if (typeof q.correctIndex !== 'number' || q.correctIndex < 0 || q.correctIndex >= q.options.length) return 'correctIndex out of range';
-    if (!q.explanation || typeof q.explanation !== 'string') return 'missing explanation';
-    return null;
+  async function doImport() {
+    await importFromText(importText, null);
   }
 
-  async function doImport() {
-    let parsed;
-    try {
-      parsed = JSON.parse(importText);
-    } catch (e) {
-      importStatus = { ok: false, msg: 'Could not parse JSON: ' + e.message };
+  function handleFile(file) {
+    if (!file) return;
+    if (!/\.json$/i.test(file.name) && file.type !== 'application/json') {
+      importStatus = { ok: false, msg: 'That file doesn\'t look like a .json file (' + file.name + '). Choose a .json question bank file.' };
       render();
       return;
     }
-
-    let incoming = [];
-    if (Array.isArray(parsed)) {
-      // could be flat array of questions, or array of {topic, questions:[...]}
-      parsed.forEach(item => {
-        if (item && Array.isArray(item.questions)) {
-          item.questions.forEach(q => incoming.push(Object.assign({ topic: item.topic }, q)));
-        } else {
-          incoming.push(item);
-        }
-      });
-    } else if (parsed && Array.isArray(parsed.questions)) {
-      parsed.questions.forEach(q => incoming.push(Object.assign({ topic: parsed.topic }, q)));
-    } else {
-      importStatus = { ok: false, msg: 'Expected a JSON array of question objects (see format below).' };
+    importFileName = file.name;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      importFromText(String(e.target.result), file.name);
+    };
+    reader.onerror = () => {
+      importStatus = { ok: false, msg: 'Could not read that file — try again, or use the paste box instead.' };
       render();
-      return;
-    }
-
-    let added = 0, updated = 0, errors = [];
-    incoming.forEach((q, idx) => {
-      const err = validateQuestion(q);
-      if (err) { errors.push('Item ' + (idx + 1) + ': ' + err); return; }
-      if (!q.id) q.id = uid(slug(q.topic));
-      const existingIdx = bank.findIndex(b => b.id === q.id);
-      if (existingIdx >= 0) { bank[existingIdx] = q; updated++; }
-      else { bank.push(q); added++; }
-    });
-
-    if (added || updated) await saveBank();
-    selectedTopics = new Set(getTopics());
-
-    if (errors.length && !added && !updated) {
-      importStatus = { ok: false, msg: 'No questions imported. ' + errors.slice(0, 3).join('; ') + (errors.length > 3 ? ' …' : '') };
-    } else if (errors.length) {
-      importStatus = { ok: true, msg: `Added ${added}, updated ${updated}. ${errors.length} item(s) skipped (invalid).` };
-      importText = '';
-    } else {
-      importStatus = { ok: true, msg: `Added ${added}, updated ${updated} question(s).` };
-      importText = '';
-    }
-    render();
+    };
+    reader.readAsText(file);
   }
 
   function exportBank() {
@@ -1142,11 +1265,22 @@
     const importCard = el(`
       <div class="card">
         <h2>Import questions</h2>
-        <div class="sub">Paste a JSON array of question objects. Existing questions with a matching id will be updated; new ones are added.</div>
+        <div class="sub">Upload a .json question bank file, or paste JSON directly below. Existing questions with a matching id will be updated; new ones are added.</div>
+
+        <div class="dropzone ${dragActive ? 'dragover' : ''}" id="dropzone">
+          <div class="dz-glyph">⇪</div>
+          <div class="dz-title">Choose a file or drag it here</div>
+          <div class="dz-sub">.json question bank file</div>
+          ${importFileName ? `<div class="dz-filename">Selected: ${esc(importFileName)}</div>` : ''}
+        </div>
+        <input type="file" id="file-input" accept=".json,application/json" style="display:none;">
+
+        <div class="or-divider">or paste JSON</div>
+
         <textarea class="importbox" id="import-text" placeholder="[ { &quot;topic&quot;: &quot;NMJ Pharm&quot;, &quot;vignette&quot;: &quot;...&quot;, &quot;options&quot;: [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;], &quot;correctIndex&quot;: 0, &quot;explanation&quot;: &quot;...&quot; } ]"></textarea>
         ${importStatus ? `<div class="import-status ${importStatus.ok ? 'ok' : 'err'}">${esc(importStatus.msg)}</div>` : ''}
         <div style="margin-top:10px; display:flex; gap:10px;">
-          <button class="btn-primary" id="do-import">Import</button>
+          <button class="btn-primary" id="do-import">Import Pasted JSON</button>
           <button class="btn-secondary" id="do-export">Export Bank (JSON)</button>
         </div>
         <details class="format-help">
@@ -1273,6 +1407,33 @@
     if (doImportBtn) doImportBtn.addEventListener('click', doImport);
     const doExportBtn = app.querySelector('#do-export');
     if (doExportBtn) doExportBtn.addEventListener('click', exportBank);
+
+    // File picker / drag-drop
+    const dropzone = app.querySelector('#dropzone');
+    const fileInput = app.querySelector('#file-input');
+    if (dropzone && fileInput) {
+      dropzone.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) handleFile(file);
+        fileInput.value = '';
+      });
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (!dragActive) { dragActive = true; render(); }
+      });
+      dropzone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        if (dragActive) { dragActive = false; render(); }
+      });
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dragActive = false;
+        const file = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (file) handleFile(file);
+        else render();
+      });
+    }
 
     app.querySelectorAll('[data-expand]').forEach(h => h.addEventListener('click', () => toggleTopicExpand(h.getAttribute('data-expand'))));
     app.querySelectorAll('[data-delete]').forEach(d => d.addEventListener('click', () => deleteQuestion(d.getAttribute('data-delete'))));
