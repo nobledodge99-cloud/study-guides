@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sjögren's Syndrome, Rheumatoid Arthritis &amp; Osteoarthritis — Study Guide</title>
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-2:#f3ecd9;
+  --green-dark:#2f5233;
+  --green:#3f7d52;
+  --green-light:#e7f0e5;
+  --ink:#2b2b26;
+  --ink-soft:#5b5a4f;
+  --line:#d9d0b8;
+  --gold:#b8944f;
+  --wrong:#a5453a;
+  --right:#2f7d4f;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+a{color:var(--green-dark);}
+
+#backBtn{
+  position:fixed; top:18px; left:18px; z-index:700;
+  background:var(--cream); border:1px solid var(--green-dark);
+  color:var(--green-dark); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  text-decoration:none; cursor:pointer;
+}
+#backBtn:hover{background:var(--green-dark); color:var(--cream);}
+#downloadBtn{
+  position:fixed; top:18px; right:18px; z-index:700;
+  background:var(--green-dark); border:1px solid var(--green-dark);
+  color:var(--cream); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  cursor:pointer;
+}
+#downloadBtn:hover{background:var(--green);}
+
+#sectionsTab{
+  position:fixed; top:50%; right:0; transform:translateY(-50%);
+  z-index:600; background:var(--green-dark); color:var(--cream);
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  padding:14px 8px; writing-mode:vertical-rl; text-orientation:mixed;
+  border-radius:8px 0 0 8px; cursor:pointer; box-shadow:-2px 0 10px rgba(0,0,0,.12);
+}
+#sideNavScrim{
+  position:fixed; inset:0; background:rgba(30,30,20,.25);
+  z-index:590; display:none;
+}
+#sideNav{
+  position:fixed; top:0; right:0; height:100%;
+  width:min(300px, calc(100vw - 96px));
+  background:var(--cream-2); border-left:1px solid var(--line);
+  z-index:595; transform:translateX(100%); transition:transform .25s ease;
+  overflow-y:auto; padding:70px 20px 40px;
+}
+#sideNav.open{transform:translateX(0);}
+#sideNav h3{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  color:var(--green-dark); text-transform:uppercase; margin:0 0 14px;
+}
+#sideNav .navItem{
+  display:block; padding:8px 6px; border-bottom:1px solid var(--line);
+  color:var(--ink); text-decoration:none; font-size:14px; cursor:pointer;
+}
+#sideNav .navItem:hover{color:var(--green-dark);}
+#sideNav .navNum{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:8px; font-size:12px;}
+
+main{max-width:900px; margin:0 auto; padding:90px 28px 100px;}
+
+header.hero{text-align:center; margin-bottom:38px;}
+header.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green);
+}
+header.hero h1{
+  font-size:2.3rem; margin:10px 0 6px; color:var(--green-dark); line-height:1.2;
+}
+header.hero .sub{color:var(--ink-soft); font-size:15px;}
+
+.contents{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:10px;
+  padding:22px 26px; margin:30px 0 40px;
+}
+.contents h2{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green-dark); margin:0 0 12px;
+}
+.contents a{text-decoration:none; font-size:14.5px;}
+.contents a:hover{text-decoration:underline;}
+.contents .num{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:6px; font-size:12.5px;}
+
+.toc-cols{display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:0 28px;}
+.toc-col{display:flex; flex-direction:column; gap:22px;}
+.part-group{break-inside:avoid;}
+.part-group h3{
+  font-size:15.5px; margin:0 0 8px; color:var(--ink);
+  display:flex; align-items:baseline; gap:8px;
+}
+.part-group h3 .pnum{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); flex-shrink:0;
+}
+.part-group ol{margin:0; padding-left:0; list-style:none; counter-reset:sub;}
+.part-group ol li{
+  counter-increment:sub; margin-bottom:6px; padding-left:26px; position:relative;
+}
+.part-group ol li::before{
+  content:counter(sub) "."; position:absolute; left:2px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
+}
+.part-group ol a{border-bottom:1px dotted var(--line); padding-bottom:1px;}
+.part-group ol a:hover{border-bottom-color:var(--green);}
+
+section.part{margin-bottom:20px;}
+section.part > h2.partTitle{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green); border-bottom:1px solid var(--line);
+  padding-bottom:6px; margin:48px 0 18px;
+}
+
+article.topic{
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:26px 28px; margin-bottom:26px; scroll-margin-top:80px;
+}
+article.topic h3{
+  color:var(--green-dark); font-size:1.35rem; margin:0 0 4px;
+}
+article.topic .tagline{color:var(--ink-soft); font-style:italic; font-size:14.5px; margin-bottom:14px;}
+article.topic h4{color:var(--green-dark); font-size:1rem; margin:18px 0 8px;}
+article.topic p{margin:0 0 12px;}
+article.topic ul, article.topic ol{margin:0 0 12px; padding-left:22px;}
+article.topic li{margin-bottom:5px;}
+article.topic strong{color:var(--green-dark);}
+
+.pearl{
+  background:var(--green-light); border-left:4px solid var(--green);
+  border-radius:6px; padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.pearl .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--green-dark); display:block; margin-bottom:4px;}
+
+.formula{
+  background:#fbf3e3; border:1px dashed var(--gold); border-radius:6px;
+  padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.formula .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:#8a6a2e; display:block; margin-bottom:4px;}
+
+.warn{
+  background:#f7e9e7; border-left:4px solid var(--wrong); border-radius:6px;
+  padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.warn .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--wrong); display:block; margin-bottom:4px;}
+
+table.data-table{
+  width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px;
+}
+table.data-table caption{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--green-dark); text-align:left; margin-bottom:6px;
+}
+table.data-table th{
+  background:var(--green-dark); color:var(--cream); padding:8px 10px; text-align:left;
+  font-size:12.5px;
+}
+table.data-table td{padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:#fbf8ef;}
+
+.quiz{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:8px;
+  padding:16px 18px; margin-top:16px;
+}
+.quiz .qhead{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--green-dark); text-transform:uppercase; margin-bottom:6px;}
+.quiz .qtext{font-size:14.5px; margin-bottom:10px;}
+.quiz .choice{
+  display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line);
+  border-radius:6px; padding:9px 12px; margin-bottom:7px; cursor:pointer; font-size:14px;
+  font-family:Georgia,serif; color:var(--ink);
+}
+.quiz .choice:hover{border-color:var(--green);}
+.quiz .choice.correct{background:#e7f3ea; border-color:var(--right); color:var(--right);}
+.quiz .choice.wrong{background:#f7e9e7; border-color:var(--wrong); color:var(--wrong);}
+.quiz .explain{
+  display:none; margin-top:10px; padding:10px 12px; background:#fff;
+  border-left:4px solid var(--green); font-size:13.5px; border-radius:4px;
+}
+.quiz .explain.show{display:block;}
+
+footer{
+  text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:60px;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+@media print{
+  #backBtn,#downloadBtn,#sectionsTab,#sideNav,#sideNavScrim{display:none !important;}
+  main{padding-top:20px;}
+}
+@media (max-width:900px){
+  .toc-cols{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:640px){
+  main{padding:80px 16px 80px;}
+  .toc-cols{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<button id="backBtn" onclick="goBack()">&larr; Back to Study Guides</button>
+<button id="downloadBtn" onclick="window.print()">Download PDF</button>
+<div id="sectionsTab" onclick="toggleNav()">SECTIONS</div>
+<div id="sideNavScrim" onclick="toggleNav()"></div>
+<nav id="sideNav">
+  <h3>Sections</h3>
+  <span class="navItem" onclick="jump('sec0')"><span class="navNum">00</span>Overview &amp; Objectives</span>
+  <span class="navItem" onclick="jump('sec1')"><span class="navNum">01</span>Sjögren's — Epidemiology &amp; Sicca Symptoms</span>
+  <span class="navItem" onclick="jump('sec2')"><span class="navNum">02</span>Sjögren's — Pathophysiology</span>
+  <span class="navItem" onclick="jump('sec3')"><span class="navNum">03</span>Sjögren's — Diagnosis &amp; Testing</span>
+  <span class="navItem" onclick="jump('sec4')"><span class="navNum">04</span>Sjögren's — Ocular Complications, 1° vs 2°</span>
+  <span class="navItem" onclick="jump('sec5')"><span class="navNum">05</span>Sjögren's — Lab Findings</span>
+  <span class="navItem" onclick="jump('sec6')"><span class="navNum">06</span>Sjögren's — Systemic Manifestations</span>
+  <span class="navItem" onclick="jump('sec7')"><span class="navNum">07</span>Sjögren's — Treatment &amp; Complications</span>
+  <span class="navItem" onclick="jump('sec8')"><span class="navNum">08</span>RA — Overview, Epi, Hand Findings</span>
+  <span class="navItem" onclick="jump('sec9')"><span class="navNum">09</span>RA — Diagnostic Criteria &amp; Pathogenesis</span>
+  <span class="navItem" onclick="jump('sec10')"><span class="navNum">10</span>RA — Physical Exam</span>
+  <span class="navItem" onclick="jump('sec11')"><span class="navNum">11</span>RA — Skin Findings</span>
+  <span class="navItem" onclick="jump('sec12')"><span class="navNum">12</span>RA — Pulmonary Involvement</span>
+  <span class="navItem" onclick="jump('sec13')"><span class="navNum">13</span>RA — Cardiac &amp; Spine Involvement</span>
+  <span class="navItem" onclick="jump('sec14')"><span class="navNum">14</span>RA — Ocular Involvement &amp; Felty's</span>
+  <span class="navItem" onclick="jump('sec15')"><span class="navNum">15</span>RA — Serology &amp; Imaging</span>
+  <span class="navItem" onclick="jump('sec16')"><span class="navNum">16</span>RA — Treatment &amp; Monitoring</span>
+  <span class="navItem" onclick="jump('sec17')"><span class="navNum">17</span>OA — Overview &amp; Primary vs Secondary</span>
+  <span class="navItem" onclick="jump('sec18')"><span class="navNum">18</span>OA — Pathophysiology &amp; Staging</span>
+  <span class="navItem" onclick="jump('sec19')"><span class="navNum">19</span>OA — Joint Patterns &amp; Special Forms</span>
+  <span class="navItem" onclick="jump('sec20')"><span class="navNum">20</span>OA — Spine Involvement &amp; DISH</span>
+  <span class="navItem" onclick="jump('sec21')"><span class="navNum">21</span>OA — Diagnosis &amp; Synovial Fluid</span>
+  <span class="navItem" onclick="jump('sec22')"><span class="navNum">22</span>OA — Treatment</span>
+  <span class="navItem" onclick="jump('sec23')"><span class="navNum">23</span>Master High-Yield Summary</span>
+  <span class="navItem" onclick="jump('sec24')"><span class="navNum">24</span>Final Board Pearls</span>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">MSK II · Dr. Dietrich — Two-Part Lecture</div>
+  <h1>Sjögren's Syndrome, Rheumatoid Arthritis &amp; Osteoarthritis</h1>
+  <div class="sub">Built from full Panopto lecture narration (Parts 1 &amp; 2) — inflammatory arthritis (Sjögren's, RA) vs. degenerative arthritis (OA), closing with a master high-yield summary spanning all three conditions.</div>
+</header>
+
+<div class="contents">
+  <h2>Contents</h2>
+  <div class="toc-cols">
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">1.</span> Sjögren's Syndrome</h3>
+        <ol>
+          <li><a href="#sec0">Overview &amp; Objectives</a></li>
+          <li><a href="#sec1">Epidemiology &amp; Sicca Symptoms</a></li>
+          <li><a href="#sec2">Pathophysiology</a></li>
+          <li><a href="#sec3">Diagnosis &amp; Testing</a></li>
+          <li><a href="#sec4">Ocular Complications, 1° vs 2°</a></li>
+          <li><a href="#sec5">Lab Findings</a></li>
+          <li><a href="#sec6">Systemic Manifestations</a></li>
+          <li><a href="#sec7">Treatment &amp; Complications</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">2.</span> Rheumatoid Arthritis</h3>
+        <ol>
+          <li><a href="#sec8">Overview, Epi, Hand Findings</a></li>
+          <li><a href="#sec9">Diagnostic Criteria &amp; Pathogenesis</a></li>
+          <li><a href="#sec10">Physical Exam</a></li>
+          <li><a href="#sec11">Skin Findings</a></li>
+          <li><a href="#sec12">Pulmonary Involvement</a></li>
+          <li><a href="#sec13">Cardiac &amp; Spine Involvement</a></li>
+          <li><a href="#sec14">Ocular Involvement &amp; Felty's</a></li>
+          <li><a href="#sec15">Serology &amp; Imaging</a></li>
+          <li><a href="#sec16">Treatment &amp; Monitoring</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">3.</span> Osteoarthritis</h3>
+        <ol>
+          <li><a href="#sec17">Overview &amp; Primary vs Secondary</a></li>
+          <li><a href="#sec18">Pathophysiology &amp; Staging</a></li>
+          <li><a href="#sec19">Joint Patterns &amp; Special Forms</a></li>
+          <li><a href="#sec20">Spine Involvement &amp; DISH</a></li>
+          <li><a href="#sec21">Diagnosis &amp; Synovial Fluid</a></li>
+          <li><a href="#sec22">Treatment</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">4.</span> Wrap-Up</h3>
+        <ol>
+          <li><a href="#sec23">Master High-Yield Summary</a></li>
+          <li><a href="#sec24">Final Board Pearls</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="part" id="sec0">
+<h2 class="partTitle">00 · Overview &amp; Objectives</h2>
+<article class="topic">
+<h3>Framing the Lecture</h3>
+<div class="tagline">Three pathologies, same skeleton: pathophysiology → presentation → treatment</div>
+<p>Treatment is kept light in this lecture — pharmacology gets its own dedicated lecture — but boards love testing side effects and indications of the drugs mentioned here.</p>
+<div class="pearl"><span class="lbl">Big framing pearl</span>Sjögren's and RA are mediated by <strong>inflammation</strong> (autoimmune). Osteoarthritis is <strong>wear-and-tear</strong> — non-inflammatory joint destruction. This single distinction resolves most "which arthritis is this" board questions.</div>
+<div class="quiz" id="q00a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Which of the three arthritides discussed is fundamentally driven by mechanical wear rather than immune-mediated inflammation?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec1">
+<h2 class="partTitle">01 · Sjögren's Syndrome — Epidemiology &amp; Sicca Symptoms</h2>
+<article class="topic">
+<h3>Epidemiology</h3>
+<div class="tagline">Middle-aged women, insidious course, frequently co-occurs with other rheumatologic disease</div>
+<ul>
+  <li><strong>Female:male ≈ 9:1</strong> — think women far more than men</li>
+  <li>Onset typically <strong>age 40–60</strong>; rare in pediatrics (only ~1.3% of cases diagnosed under age 18)</li>
+  <li>Affects ~<strong>1% of the general population</strong> — probably an underestimate, since the disease is insidious and underdiagnosed</li>
+  <li><strong>Very commonly co-presents</strong> with other rheumatologic disease (RA, scleroderma, etc.) — always dual-test the antibody panels together in practice</li>
+</ul>
+<h4>Symptom Onset Pattern</h4>
+<p>Symptoms are <strong>slow, progressive, insidious</strong> — not an acute "started 6 weeks ago" story. Patients accumulate dry eyes/dry mouth over <strong>years</strong> before presenting.</p>
+<h4>Core Sicca Symptoms</h4>
+<ul>
+  <li><strong>Dry eyes</strong> (gritty sensation) and <strong>dry mouth</strong> (cottonmouth), ongoing throughout the day, unrelieved by compensation</li>
+  <li>Patients self-treat early on: artificial tears, sucking on lemon drops/hard candies to stimulate salivary flow</li>
+  <li>As disease advances, compensation fails → patients present saying "artificial tears aren't cutting it anymore"</li>
+  <li><strong>Parotitis</strong> (swollen, inflamed parotid gland) can occur, but is a <strong>later</strong> finding, not typical initial presentation</li>
+  <li>Other exocrine mucosal surfaces can dry out too: skin, bronchi, vagina, armpits</li>
+</ul>
+<div class="pearl"><span class="lbl">Definition</span><strong>Sicca syndrome</strong> = dry eyes + dry mouth <em>alone</em>, without other systemic involvement — this is what most Sjögren's patients actually present with.</div>
+<div class="quiz" id="q01a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 52-year-old woman reports gradually worsening dry eyes and dry mouth over several years, now no longer helped by artificial tears. What is the most likely diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q01b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What percentage of Sjögren's cases are diagnosed in patients under age 18?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec2">
+<h2 class="partTitle">02 · Sjögren's Syndrome — Pathophysiology</h2>
+<article class="topic">
+<h3>What Is Sjögren's?</h3>
+<div class="tagline">An autoimmune disorder of the exocrine glands</div>
+<p>Exocrine glands secrete substances <em>out</em> of the body (tears, saliva, mucus, sweat), as opposed to endocrine glands, which secrete hormones internally. The pancreas is technically exocrine too (secretes into the GI lumen) — pancreatic insufficiency from Sjögren's is controversial/not well established in the literature.</p>
+<h4>Mechanism — Step by Step</h4>
+<ol>
+  <li><strong>Lymphocytic infiltration</strong> of exocrine glands — starts with <strong>helper T cells</strong> invading the gland and misrecognizing self-tissue as antigen</li>
+  <li>T cells recruit <strong>B cells</strong> → autoantibody production + IL-2 release</li>
+  <li>Glandular cells express <strong>MHC</strong> as antigen-presenting cells → T cells, B cells, and antibodies attack the MHC molecule as if foreign</li>
+  <li>This triggers <strong>cell apoptosis</strong>, destroying exocrine glandular cells → replaced by <strong>fibrous scar tissue</strong></li>
+  <li><strong>Metalloproteases</strong> are secreted, gumming up the extracellular matrix and further impairing remaining healthy cells</li>
+  <li>Disease is <strong>T-cell dominant early</strong>, shifts to <strong>B-cell dominant</strong> as it progresses</li>
+  <li><strong>Anti-acetylcholine receptor antibodies</strong> form, blocking vagal nerve stimulation of mucin-secreting cells — so remaining glandular cells are also functionally inhibited, not just destroyed</li>
+</ol>
+<h4>Histology</h4>
+<p>CD3 (T cell) and CD20 (B cell) staining show dense lymphocytic infiltration surrounding salivary gland lumens. B-cell infiltration increases as disease progresses.</p>
+<h4>Genetics &amp; Trigger Theory</h4>
+<ul>
+  <li><strong>87% of patients are HLA-DR52 positive</strong> — genetic susceptibility alone is not sufficient (epigenetics)</li>
+  <li>Leading theory: a <strong>viral trigger</strong> — the immune response mounted against a virus cross-reacts with self-antigens (molecular mimicry), especially in genetically susceptible individuals</li>
+</ul>
+<div class="pearl"><span class="lbl">Timeline pearl</span>Early Sjögren's = T-cell mediated. Late/progressive Sjögren's = B-cell dominant. This shift underlies why later-stage disease responds to B-cell-targeted therapy (rituximab).</div>
+<div class="quiz" id="q02a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What is the immunologic shift that occurs as Sjögren's syndrome progresses from early to late disease?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q02b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why do exocrine glands in Sjögren's fail to function even in cells that have not yet been destroyed?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec3">
+<h2 class="partTitle">03 · Sjögren's Syndrome — Diagnosis &amp; Testing</h2>
+<article class="topic">
+<h3>Diagnostic Criteria</h3>
+<div class="tagline">4 of 6, and one of the 4 must be biopsy or antibody positivity</div>
+<ol>
+  <li>Dry eyes</li>
+  <li>Dry mouth</li>
+  <li>Swollen salivary glands</li>
+  <li>Positive Schirmer test</li>
+  <li>Abnormal oral/sialography findings</li>
+  <li>Positive biopsy or antibodies (anti-Ro/SSA, anti-La/SSB)</li>
+</ol>
+<div class="warn"><span class="lbl">Memorize</span>Anti-Ro (SSA) and anti-La (SSB) antibodies — think of them like Chapman's points: on boards, they'll give you a positive antibody and expect you to know the associated disease instantly.</div>
+<h4>Specific Tests</h4>
+<table class="data-table">
+<tr><th>Test</th><th>What It Shows</th></tr>
+<tr><td><strong>Salivary gland biopsy</strong></td><td>T-cell/B-cell lymphocytic infiltration</td></tr>
+<tr><td><strong>Schirmer test</strong></td><td>Tissue paper hung on lower eyelid, patient closes eye for 5 min; normal = tears diffuse ≥10mm down the paper</td></tr>
+<tr><td><strong>Lissamine green (or fluorescein) staining</strong></td><td>Stains areas of corneal/scleral breakdown from chronic dryness</td></tr>
+<tr><td><strong>Sialogram</strong></td><td>Radiology test with contrast dye to visualize salivary gland secretion; abnormal = poor dye flow</td></tr>
+</table>
+<div class="quiz" id="q03a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient has dry eyes, dry mouth, and swollen salivary glands but negative biopsy and negative SSA/SSB antibodies. Does this patient meet diagnostic criteria for Sjögren's syndrome?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q03b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">On Schirmer testing, tears diffuse only 4mm down the paper after 5 minutes. Is this normal or abnormal?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec4">
+<h2 class="partTitle">04 · Sjögren's Syndrome — Ocular Complications, Glands Affected, Primary vs. Secondary</h2>
+<article class="topic">
+<h3>Why Dry Eyes Progress to Real Damage</h3>
+<ol>
+  <li>Glandular destruction → less tear volume, but the same amount of salt still gets secreted → tears become <strong>hyperosmolar</strong></li>
+  <li>Hyperosmolarity triggers an <strong>inflammatory cascade</strong> and immune activation in the conjunctiva</li>
+  <li>This breaks down normal ocular surface architecture and normal flora</li>
+  <li>Result: risk of permanent vision loss <em>and</em> selection for <strong>multidrug-resistant pathogens</strong></li>
+</ol>
+<h4>Glands That Can Be Affected (Beyond Eyes/Mouth)</h4>
+<ul>
+  <li>Vaginal dryness (women) and <strong>urethral/prostatic dryness</strong> (men)</li>
+  <li>GI tract glands (controversial) and <strong>bronchopulmonary glands</strong></li>
+</ul>
+<h4>Primary vs. Secondary Sjögren's</h4>
+<table class="data-table">
+<tr><th>Type</th><th>Definition</th></tr>
+<tr><td><strong>Primary</strong></td><td>Occurs by itself</td></tr>
+<tr><td><strong>Secondary</strong></td><td>Occurs alongside another connective tissue disease — classically RA, SLE, scleroderma. More common than primary; usually the other autoimmune disease is diagnosed first.</td></tr>
+</table>
+<h4>Reasons Sjögren's Is Underdiagnosed</h4>
+<ul>
+  <li>Head and neck irradiation</li>
+  <li><strong>Hepatitis C infection</strong></li>
+  <li>HIV/AIDS</li>
+  <li>Sarcoidosis, graft-versus-host disease, IgG4-related disease</li>
+  <li><strong>Anticholinergic medications</strong> — need to stop the drug and reassess symptoms before diagnosing Sjögren's</li>
+</ul>
+<div class="quiz" id="q04a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why do Sjögren's patients develop drug-resistant eye infections rather than typical conjunctivitis pathogens?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q04b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient is diagnosed with RA, and two years later develops sicca symptoms and is found to have Sjögren's. What is this pattern called, and how common is it?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec5">
+<h2 class="partTitle">05 · Sjögren's Syndrome — Lab Findings</h2>
+<article class="topic">
+<h3>Lab Findings</h3>
+<div class="tagline">Sjögren's alone seems mild — the real morbidity is in the systemic manifestations that follow</div>
+<table class="data-table">
+<tr><th>Finding</th><th>Mechanism/Notes</th></tr>
+<tr><td>Elevated ESR</td><td>Inflammatory disease marker</td></tr>
+<tr><td>Anemia of chronic disease</td><td>Chronic inflammation suppresses bone marrow</td></tr>
+<tr><td>Eosinophilia</td><td>Autoimmune inflammation cells</td></tr>
+<tr><td>Elevated amylase</td><td>Body attempting to stimulate more saliva production</td></tr>
+<tr><td>Hypergammaglobulinemia</td><td>Excess CD3/CD20 cells releasing gamma globulins</td></tr>
+<tr><td>Positive RF and/or ANA</td><td>Non-specific — warrants further evaluation but is not diagnostic of lupus/RA</td></tr>
+<tr><td>Antiphospholipid antibody</td><td>Associated hypercoagulable syndrome</td></tr>
+<tr><td>Cryoglobulinemia</td><td>Can also occur</td></tr>
+</table>
+<div class="quiz" id="q05a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A Sjögren's patient has a positive RF. Does this necessarily mean she also has rheumatoid arthritis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec6">
+<h2 class="partTitle">06 · Sjögren's Syndrome — Systemic Manifestations</h2>
+<article class="topic">
+<h3>Mucous Membrane / GI</h3>
+<ul>
+  <li>Upper respiratory tract dryness → recurrent infection, hoarseness</li>
+  <li>Vaginal/urethral/prostate dryness; anorectal dryness → chronic itching, anal fissures</li>
+  <li><strong>Dysphagia</strong> from esophageal dryness — patients need water to help swallow food</li>
+  <li>Controversial: acute/chronic pancreatitis, delayed gastric emptying</li>
+</ul>
+<h4>Renal</h4>
+<ul>
+  <li><strong>Interstitial nephritis</strong> and <strong>renal tubular acidosis</strong> — up to 10% of patients</li>
+  <li><strong>Glomerulonephritis</strong> from immune complex deposition</li>
+</ul>
+<table class="data-table">
+<caption>Two Types of RTA</caption>
+<tr><th>Type</th><th>Location</th><th>Findings</th></tr>
+<tr><td>Distal RTA</td><td>Distal tubule</td><td>Low K⁺, high urine pH, low serum bicarb → acidosis</td></tr>
+<tr><td>Fanconi syndrome (proximal RTA)</td><td>Proximal tubule</td><td>Amino acids + bicarb wasted in urine, low serum bicarb → acidosis</td></tr>
+</table>
+<p>Can also develop <strong>nephrogenic diabetes insipidus</strong>. Increased risk of <strong>renal calculi</strong> and <strong>interstitial cystitis</strong>.</p>
+<h4>Neurologic</h4>
+<ul>
+  <li>Peripheral neuropathy (immune complex deposition — also causes purpura)</li>
+  <li>Myelitis, cognitive dysfunction, cranial neuropathies, <strong>neuromyelitis optica</strong></li>
+</ul>
+<h4>Pulmonary</h4>
+<ul>
+  <li>Cough, bronchiolitis, <strong>obstructive</strong> pattern on spirometry</li>
+  <li><strong>Interstitial lung disease</strong> → <strong>restrictive</strong> pattern on spirometry</li>
+  <li><strong>Anti-SSA positivity → increased risk of ILD</strong>, independent of Sjögren's diagnosis itself</li>
+</ul>
+<h4>Hepatic</h4>
+<table class="data-table">
+<tr><th>Condition</th><th>Pattern</th><th>Key Antibodies</th></tr>
+<tr><td><strong>Primary biliary cholangitis</strong></td><td>Cholestatic (↑ bilirubin)</td><td><strong>Anti-mitochondrial antibody</strong>, anti-carbonic anhydrase 11</td></tr>
+<tr><td><strong>Autoimmune hepatitis</strong></td><td>Hepatocellular (↑ AST/ALT, normal bilirubin)</td><td>Anti-smooth muscle antibody or ANA, positive IgG, negative hepatitis serologies</td></tr>
+</table>
+<h4>Cardiac</h4>
+<ul>
+  <li>Pericarditis, pulmonary hypertension</li>
+  <li><strong>Autonomic dysfunction</strong> (M3 muscarinic receptor antibody) → orthostatic hypotension</li>
+</ul>
+<h4>Skin</h4>
+<ul>
+  <li><strong>Purpura</strong> — cutaneous vasculitis</li>
+  <li><strong>Raynaud's phenomenon</strong></li>
+  <li>Hair drying/loss → alopecia in severe cases</li>
+  <li>Skin dryness, pruritus</li>
+</ul>
+<h4>Other</h4>
+<ul>
+  <li>Fatigue</li>
+  <li>Arthritis in 42% — <strong>non-erosive</strong>, mild</li>
+</ul>
+<div class="quiz" id="q06a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A Sjögren's patient has elevated bilirubin, a cholestatic LFT pattern, and a positive anti-mitochondrial antibody. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q06b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Which Sjögren's-associated antibody is specifically linked to increased risk of interstitial lung disease, independent of formal Sjögren's diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q06c">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An elderly patient with unexplained orthostatic hypotension is later found to have Sjögren's syndrome. What antibody-mediated mechanism explains this?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec7">
+<h2 class="partTitle">07 · Sjögren's Syndrome — Treatment &amp; Complications</h2>
+<article class="topic">
+<h3>Treating Sicca Symptoms</h3>
+<table class="data-table">
+<tr><th>Target</th><th>Treatment</th></tr>
+<tr><td>General</td><td>Stay well hydrated</td></tr>
+<tr><td>Eyes</td><td>Artificial tears; topical <strong>cyclosporine</strong>; <strong>punctal plugs</strong></td></tr>
+<tr><td>Mouth</td><td>Artificial saliva; <strong>sugar-free</strong> lozenges; <strong>pilocarpine</strong> and <strong>cevimeline</strong></td></tr>
+<tr><td>Arthritis (non-erosive)</td><td>NSAIDs as-needed; topical NSAIDs; DMARDs (hydroxychloroquine, methotrexate); low-dose corticosteroids for acute flares</td></tr>
+<tr><td>Fatigue</td><td>Exercise is the <em>only</em> effective treatment</td></tr>
+</table>
+<div class="warn"><span class="lbl">Do not</span><strong>Do NOT use TNF-alpha inhibitors</strong> to treat sicca symptoms — those target systemic/organ-involvement manifestations, not sicca syndrome itself.</div>
+<h4>Escalation to Biologics</h4>
+<ul>
+  <li>If arthritis fails methotrexate/hydroxychloroquine → <strong>rituximab</strong></li>
+  <li>Rituximab also used for: severe parotid gland swelling, immune complex-mediated disease, pulmonary disease, severe peripheral neuropathy</li>
+</ul>
+<h4>Major Complications</h4>
+<table class="data-table">
+<tr><th>Complication</th><th>Detail</th></tr>
+<tr><td><strong>Lymphoma</strong></td><td><strong>4.3%</strong> of patients — most commonly <strong>MALT lymphoma</strong></td></tr>
+<tr><td>Parotid infections / tumors</td><td>Chronic inflammation → increased risk of tumor formation</td></tr>
+<tr><td>Antiphospholipid antibody syndrome</td><td>Causes first-trimester miscarriages; <strong>neonatal lupus with congenital heart block</strong></td></tr>
+</table>
+<h4>Prognosis</h4>
+<ul>
+  <li>Most patients don't progress much beyond sicca syndrome</li>
+  <li>Overall mortality similar to general population; lymphomas tend to be "friendlier" cancers</li>
+  <li><strong>Poor prognostic indicators</strong>: complement issues, cryoglobulins, severe immune cell dysfunction</li>
+</ul>
+<div class="quiz" id="q07a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What percentage of Sjögren's patients develop lymphoma, and which type is most common?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q07b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A young woman of childbearing age with Sjögren's and positive antiphospholipid antibodies becomes pregnant. What neonatal complication is she at risk of?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q07c">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why should TNF-alpha inhibitors NOT be used to treat a Sjögren's patient's sicca symptoms?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec8">
+<h2 class="partTitle">08 · Rheumatoid Arthritis — Overview, Epidemiology, Hand Findings</h2>
+<article class="topic">
+<h3>Overview</h3>
+<div class="tagline">RA carries far more morbidity than Sjögren's and is much more heavily tested on boards</div>
+<p>Expect picture questions on joint deformities and X-rays.</p>
+<h4>Classic Hand Deformities</h4>
+<ul>
+  <li><strong>Swan neck deformity</strong> of the DIPs</li>
+  <li><strong>Ulnar deviation</strong> — fingers deviate toward the ulnar side while the wrist often stays straight</li>
+  <li>X-ray: classic finding is <strong>joint erosion</strong></li>
+</ul>
+<h4>Definition</h4>
+<p><strong>Symmetric inflammatory polyarthritis</strong>, typically involving MCPs, PIPs, and wrist joints.</p>
+<table class="data-table">
+<caption>Key Distinguishing Feature: Morning Stiffness</caption>
+<tr><th></th><th>RA</th><th>OA</th></tr>
+<tr><td>Duration</td><td><strong>&gt;60 minutes</strong></td><td><strong>&lt;60 minutes</strong>, improves over the day</td></tr>
+</table>
+<h4>Epidemiology</h4>
+<ul>
+  <li>Affects ~<strong>1%</strong> of population</li>
+  <li>Female:male ≈ <strong>2–3:1</strong></li>
+  <li><strong>Men tend to have more severe disease</strong> when affected</li>
+  <li>Peak incidence: age <strong>50–60</strong></li>
+</ul>
+<h4>Distinguishing RA From "Just Joint Pain"</h4>
+<ul>
+  <li><strong>Abrupt onset</strong> (weeks) of joint stiffness/pain/swelling lasting <strong>&gt;6 weeks</strong></li>
+  <li><strong>Symmetric joint swelling</strong> with true joint <strong>effusion</strong></li>
+  <li>Morning stiffness &gt;1 hour, <strong>improves with use</strong></li>
+  <li><strong>&lt;4 weeks</strong> should raise suspicion for a <strong>viral</strong> cause (e.g., <strong>parvovirus B19</strong>)</li>
+</ul>
+<div class="quiz" id="q08a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient reports joint stiffness every morning that lasts about 20 minutes and improves rapidly. Is this more consistent with RA or OA?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q08b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient presents with symmetric swollen, painful MCP and PIP joints that started abruptly 3 weeks ago. What should be high on the differential besides RA?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec9">
+<h2 class="partTitle">09 · Rheumatoid Arthritis — Diagnostic Criteria &amp; Pathogenesis</h2>
+<article class="topic">
+<h3>ACR/EULAR Diagnostic Criteria (2010, Still Used)</h3>
+<ul>
+  <li>Joint involvement (more points for small joints than large joints)</li>
+  <li>Serology (anti-RF or anti-CCP)</li>
+  <li>Symptom duration</li>
+  <li>Elevated acute phase reactants (ESR/CRP)</li>
+</ul>
+<div class="warn"><span class="lbl">Not perfect</span>The criteria underdiagnose early disease — patients with few involved joints and low-positive serologies may not meet the point threshold, but should still be followed closely for RA development.</div>
+<h4>Pathogenesis — Step by Step</h4>
+<ol>
+  <li>External trigger (viral infection theory) → increased inflammation → autoimmune reaction</li>
+  <li>→ <strong>Synovial hypertrophy</strong> in genetically susceptible individuals (<strong>HLA-DRB1</strong>)</li>
+  <li>Antibodies: <strong>rheumatoid factor</strong> and <strong>anti-CCP</strong></li>
+  <li>Risk factors: <strong>smoking</strong> is the biggest one; occupational exposures; <strong>gingivitis</strong> (via Porphyromonas gingivalis toxin)</li>
+</ol>
+<h4>Emerging Marker: Anti-CarP Antibody</h4>
+<p>Can become positive in the <strong>pre-symptomatic</strong> stage and predicts more severe disease.</p>
+<h4>Joint Destruction Mechanism</h4>
+<ol>
+  <li>Synovial cell <strong>hyperplasia</strong> + endothelial cell activation</li>
+  <li>Immune cell infiltration → tissue/cell death, inflammation, joint effusions</li>
+  <li>Cytokine cascade alters osteoclast/osteoblast signaling → <strong>erosive joint disease</strong></li>
+  <li>Synovium proliferates and destroys cartilage, bone, tendons, ligaments, blood vessels</li>
+</ol>
+<h4>Broader Differential for "Hot Swollen Painful Joint"</h4>
+<p>OA, polyarticular gout, psoriatic arthritis, other connective tissue diseases, neoplastic syndromes, and <strong>immune checkpoint inhibitor side effects</strong>.</p>
+<div class="quiz" id="q09a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Which environmental exposure is the single biggest modifiable risk factor for developing RA?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q09b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What oral health condition has been epidemiologically linked to increased RA incidence, and via what organism?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec10">
+<h2 class="partTitle">10 · Rheumatoid Arthritis — Physical Exam</h2>
+<article class="topic">
+<h3>Physical Exam</h3>
+<ul>
+  <li><strong>Multiple swollen, symmetric joints</strong></li>
+  <li>Joints often <strong>not very tender to direct palpation</strong> of the effusion, but ARE tender with <strong>joint articulation</strong></li>
+  <li><strong>Synovitis</strong>: palpable soft, spongy tissue along the joint space</li>
+</ul>
+<div class="pearl"><span class="lbl">Board buzzwords</span>"Synovitis of the joints" or "tissue hypertrophy along the joint space with a soft, spongy feel" both point toward RA.</div>
+<div class="quiz" id="q10a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">On exam, a patient's MCP joints are minimally tender to direct palpation but quite painful with active movement, and you feel a spongy, soft thickening along the joint line. What is this finding called?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec11">
+<h2 class="partTitle">11 · Rheumatoid Arthritis — Skin Findings</h2>
+<article class="topic">
+<h3>Rheumatoid Nodules</h3>
+<ul>
+  <li>Associated with <strong>rheumatoid factor</strong> and immune complex deposition</li>
+  <li><strong>No bone inside</strong> — soft tissue/fibrous tissue</li>
+  <li>More likely with <strong>anti-CCP</strong> positivity and associated vasculitis</li>
+  <li>Classically on hands, but can occur in the <strong>lungs</strong></li>
+</ul>
+<h4>Pyoderma Gangrenosum</h4>
+<ul>
+  <li>Frequently <strong>misdiagnosed</strong> as arterial/venous stasis ulcers</li>
+  <li>Starts as a small pustule, progresses to an ulcerative lesion</li>
+  <li>Not infectious, not truly "gangrenous"</li>
+  <li>Associated with: RA, Crohn's, ulcerative colitis, IgA-mediated multiple myeloma</li>
+  <li><strong>Treatment:</strong> combination <strong>prednisone + cyclosporine</strong> beats either alone (only 40–50% resolution)</li>
+</ul>
+<h4>Vasculitis-Related Skin Findings</h4>
+<table class="data-table">
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td>Livedo reticularis</td><td>Lacy pattern; pathologic/permanent pattern suggests immune complex vasculitis</td></tr>
+<tr><td>RA vasculitis</td><td>Rare (2–5%); small vessel version → circular purpura</td></tr>
+</table>
+<div class="quiz" id="q11a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">How do you differentiate a rheumatoid nodule from an osteoarthritic (Heberden's/Bouchard's) nodule?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q11b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with RA has a leg ulcer treated as a venous stasis ulcer without improvement. What diagnosis should be reconsidered, and what is the most effective treatment?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec12">
+<h2 class="partTitle">12 · Rheumatoid Arthritis — Pulmonary Involvement</h2>
+<article class="topic">
+<h3>Pulmonary Involvement</h3>
+<div class="tagline">Contributes significantly to increased mortality in RA</div>
+<table class="data-table">
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td><strong>Pleuritis</strong></td><td>Often asymptomatic, can cause pleuritic chest pain</td></tr>
+<tr><td><strong>Exudative pleural effusion</strong></td><td>Use thoracentesis + <strong>Light's criteria</strong></td></tr>
+<tr><td>Rheumatoid nodules (lung)</td><td>Usually asymptomatic</td></tr>
+<tr><td><strong>Interstitial lung disease</strong></td><td>Immune complex-mediated; worsened by smoking</td></tr>
+<tr><td>COPD</td><td>Increased prevalence regardless of smoking status</td></tr>
+</table>
+<h4>Caplan Syndrome</h4>
+<p>RA + exposure to <strong>pneumoconiosis</strong> (coal, asbestos, silica) → cough, wheeze, joint pain/swelling. Requires <strong>high index of suspicion</strong>.</p>
+<div class="quiz" id="q12a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A coal miner presents with cough, wheeze, and joint pain/swelling dismissed as osteoarthritis. What diagnosis should be considered?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q12b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What test/criteria differentiates a transudative from exudative pleural effusion?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec13">
+<h2 class="partTitle">13 · Rheumatoid Arthritis — Cardiac &amp; Spine Involvement</h2>
+<article class="topic">
+<h3>Cardiac</h3>
+<table class="data-table">
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td>Congestive heart failure</td><td>Increased mortality</td></tr>
+<tr><td>Increased CV disease / MI risk</td><td>Chronic inflammation and endothelial dysfunction</td></tr>
+<tr><td>Pericarditis</td><td>More common in males; indication for <strong>glucocorticoids, not NSAIDs</strong></td></tr>
+<tr><td>RA-associated cardiomyopathy</td><td>Without classic HF symptoms</td></tr>
+<tr><td>Coronary vasculitis</td><td>Vessel inflammation → eventual MI</td></tr>
+</table>
+<h4>Spine — Atlantoaxial Instability (High-Yield)</h4>
+<ul>
+  <li>RA causes <strong>axial instability and subluxation</strong> at C1-C2</li>
+  <li>Neck flexion → <strong>odontoid process</strong> impinges the spinal cord</li>
+  <li>Major consideration for <strong>intubation</strong> or neck manipulation</li>
+  <li><strong>Cervical spine HVLA (OMT) is contraindicated</strong> in RA patients</li>
+</ul>
+<div class="warn"><span class="lbl">Clinical safety pearl</span>Always screen RA patients for atlantoaxial instability before intubation, neck manipulation, or cervical HVLA/OMT.</div>
+<div class="quiz" id="q13a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why is cervical spine HVLA (OMT) contraindicated in RA patients?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q13b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with known RA develops pericarditis. Should you treat with NSAIDs or glucocorticoids?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec14">
+<h2 class="partTitle">14 · Rheumatoid Arthritis — Ocular Involvement &amp; Felty Syndrome</h2>
+<article class="topic">
+<h3>Ocular</h3>
+<ul>
+  <li>RA can cause sicca-like dry eyes/dry mouth <strong>independent of a co-diagnosis of Sjögren's</strong>, usually milder</li>
+  <li><strong>Scleral malacia</strong> — degenerative thinning of the sclera, very specific to RA</li>
+  <li>Refer to ophthalmology for scleral irritation/redness</li>
+</ul>
+<h4>Felty Syndrome</h4>
+<p>Classic triad: <strong>RA + neutropenia + splenomegaly</strong>. Mnemonic: <strong>SANTA</strong> — splenomegaly, anemia, neutropenia, thrombocytopenia, arthritis.</p>
+<div class="pearl"><span class="lbl">Clinical pearl</span>If an RA patient's screening labs show neutropenia + thrombocytopenia, examine for splenomegaly.</div>
+<div class="quiz" id="q14a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Name the classic triad of Felty syndrome.</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q14b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What ocular finding is specific to RA and due to direct autoimmune degeneration rather than dryness?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec15">
+<h2 class="partTitle">15 · Rheumatoid Arthritis — Serology &amp; Imaging</h2>
+<article class="topic">
+<h3>Rheumatoid Factor (RF)</h3>
+<ul>
+  <li><strong>Not specific to RA</strong> — also seen in Sjögren's, SBE, leprosy, ILD, primary biliary cirrhosis</li>
+  <li>Specificity ~<strong>90% for any rheumatologic condition</strong></li>
+</ul>
+<h4>Anti-CCP</h4>
+<ul>
+  <li><strong>Specificity ~99% for RA</strong></li>
+  <li>Present in <strong>60–70%</strong> of RA patients</li>
+  <li>Positivity predicts <strong>increased risk of major joint damage</strong></li>
+  <li>Can be positive <strong>well before</strong> clinical RA develops</li>
+</ul>
+<h4>Imaging Progression (Hand X-ray)</h4>
+<table class="data-table">
+<tr><th>Stage</th><th>Finding</th></tr>
+<tr><td>Early</td><td>Soft tissue swelling only</td></tr>
+<tr><td>Middle</td><td>Cortical thinning</td></tr>
+<tr><td>Advanced</td><td>Bone erosion — "scalloping"; joint space narrowing</td></tr>
+</table>
+<div class="quiz" id="q15a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Which antibody is more specific for RA — RF or anti-CCP?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q15b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">On joint ultrasound, you see gray tissue in the joint space rather than black fluid. What does this represent?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec16">
+<h2 class="partTitle">16 · Rheumatoid Arthritis — Treatment &amp; Monitoring</h2>
+<article class="topic">
+<h3>Treatment</h3>
+<div class="warn"><span class="lbl">Never</span><strong>Never treat RA with NSAIDs alone</strong> — every RA patient needs a <strong>DMARD</strong>.</div>
+<table class="data-table">
+<tr><th>Drug Class / Agent</th><th>Notes</th></tr>
+<tr><td><strong>Methotrexate</strong></td><td>Mainstay of therapy. <strong>All patients on methotrexate need folic acid supplementation.</strong></td></tr>
+<tr><td>Hydroxychloroquine</td><td>Often used as adjunct therapy</td></tr>
+<tr><td>Sulfasalazine, leflunomide</td><td>Additional DMARD options</td></tr>
+<tr><td>Biologics</td><td>TNF-alpha inhibitors, rituximab, tocilizumab</td></tr>
+</table>
+<h4>Monitoring: DAS28</h4>
+<p>Combines swollen joint count, tender joint count, and inflammatory markers. Baseline, then repeat every <strong>1–6 months</strong>.</p>
+<div class="quiz" id="q16a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why must every patient started on methotrexate also receive folic acid?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q16b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What three data categories feed into a DAS28 score?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec17">
+<h2 class="partTitle">17 · Osteoarthritis — Overview &amp; Primary vs. Secondary</h2>
+<article class="topic">
+<h3>Definition</h3>
+<p>Joint <strong>space destruction</strong> disease — loss of cartilage, bony overgrowth, resulting pain.</p>
+<h4>Epidemiology</h4>
+<ul>
+  <li><strong>Most common type of joint disease</strong> — over <strong>30 million</strong> patients in the US</li>
+  <li><strong>Leading cause of chronic disability</strong> in the US</li>
+  <li>Effusions are <strong>non-inflammatory</strong> and less common than in autoimmune arthritis</li>
+</ul>
+<table class="data-table">
+<caption>Primary vs. Secondary</caption>
+<tr><th>Type</th><th>Cause</th></tr>
+<tr><td><strong>Primary</strong></td><td>Age-related wear, very common in hands</td></tr>
+<tr><td><strong>Secondary</strong></td><td>Due to an underlying disorder that damages the joint</td></tr>
+</table>
+<h4>Causes of Secondary OA</h4>
+<table class="data-table">
+<tr><th>Category</th><th>Examples</th></tr>
+<tr><td>Trauma</td><td>Fracture, dislocation, contact sports</td></tr>
+<tr><td>Genetic joint hypermobility</td><td>Marfan syndrome, Ehlers-Danlos</td></tr>
+<tr><td>Congenital malformation</td><td>Congenital hip dysplasia, SCFE</td></tr>
+<tr><td>Anatomic malalignment</td><td>Varus/valgus deformity</td></tr>
+<tr><td>Metabolic</td><td>Hemochromatosis, rickets</td></tr>
+<tr><td>Endocrine</td><td>Acromegaly</td></tr>
+<tr><td>Crystal arthropathy</td><td>Gout, pseudogout</td></tr>
+<tr><td>Other</td><td>Osteonecrosis, amyloidosis, hemophilia, Charcot joint</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Don't over-memorize</span>Don't memorize every secondary OA cause individually — the unifying concept is: <strong>anything that damages a joint can lead to secondary OA.</strong></div>
+<div class="quiz" id="q17a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 45-year-old former football player develops shoulder osteoarthritis. What type of OA is this most likely to represent?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q17b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Is a joint effusion in osteoarthritis typically inflammatory or non-inflammatory?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec18">
+<h2 class="partTitle">18 · Osteoarthritis — Pathophysiology &amp; Staging</h2>
+<article class="topic">
+<h3>Overall Mechanism</h3>
+<p>Chondrocytes don't function properly → cartilage thins → subchondral bone thickening/sclerosis → bone remodeling with <strong>osteophyte</strong> formation → reactive, mild <strong>synovitis</strong>.</p>
+<table class="data-table">
+<caption>Stages</caption>
+<tr><th>Stage</th><th>Changes</th></tr>
+<tr><td><strong>Stage 1</strong></td><td>Early synovium/cartilage changes; usually asymptomatic</td></tr>
+<tr><td><strong>Stage 2</strong></td><td>Imperfect proteoglycan repair, cartilage swelling, mild synovial hypertrophy</td></tr>
+<tr><td><strong>Stage 3</strong></td><td>Proteoglycans lost — cartilage softens and breaks down (clefts on histology); joint space narrows, osteophytes calcify</td></tr>
+</table>
+<h4>Resulting Findings</h4>
+<ul>
+  <li><strong>Osteoarthritic nodules</strong> — contain <strong>bone</strong></li>
+  <li><strong>Subchondral cysts</strong> — chronic impaction allows synovial fluid into bone</li>
+</ul>
+<div class="quiz" id="q18a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What is the histologic hallmark of Stage 3 osteoarthritis cartilage compared to normal smooth cartilage?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q18b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What is the key difference in composition between an osteoarthritic nodule and a rheumatoid nodule?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec19">
+<h2 class="partTitle">19 · Osteoarthritis — Joint Patterns &amp; Special Forms</h2>
+<article class="topic">
+<h3>Common vs. Uncommon Joints</h3>
+<table class="data-table">
+<tr><th>Joint</th><th>Pattern</th></tr>
+<tr><td>Knee, hip</td><td>Very common (load-bearing) — primary OA</td></tr>
+<tr><td>Elbow, shoulder</td><td>Rare for <strong>primary</strong> OA — think <strong>secondary</strong> OA (overuse, dislocations)</td></tr>
+<tr><td>Ankle</td><td>Rare; when present, typically <strong>severe</strong> and trauma-related</td></tr>
+<tr><td>First MTP (great toe)</td><td>Most common site in the foot</td></tr>
+</table>
+<h4>Patellar Osteoarthritis</h4>
+<ul>
+  <li>Usually history of <strong>patellar trauma</strong></li>
+  <li><strong>Diagnostic maneuver:</strong> hand over patella, extend the leg — crepitus + pain = essentially diagnostic</li>
+</ul>
+<h4>Hand Osteoarthritis</h4>
+<ul>
+  <li><strong>Heberden's nodes</strong> (DIP) and <strong>Bouchard's nodes</strong> (PIP) — more common in <strong>postmenopausal women</strong></li>
+  <li>Also common at the <strong>first CMC joint</strong></li>
+</ul>
+<h4>Erosive Osteoarthritis</h4>
+<ul>
+  <li>Subset of hand OA, up to 5–15% of patients</li>
+  <li><strong>More acute onset pain and increased inflammation</strong> than typical OA</li>
+  <li>X-ray shows true <strong>erosions</strong> (classic <strong>"sawtooth" pattern</strong>)</li>
+  <li><strong>Diagnosis:</strong> negative antibodies (RF, CCP), normal ESR/CRP, OA in ≥2 joints with at least one being a DIP</li>
+</ul>
+<div class="quiz" id="q19a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A postmenopausal woman has Heberden's and Bouchard's nodes, negative RF/anti-CCP, normal ESR/CRP, and X-ray shows a sawtooth erosion pattern in ≥2 joints including a DIP, with acute pain. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q19b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why is OA of the elbow or shoulder more concerning for an underlying secondary cause?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec20">
+<h2 class="partTitle">20 · Osteoarthritis — Spine Involvement &amp; DISH</h2>
+<article class="topic">
+<h3>Spondylosis</h3>
+<p>Age-related spine degeneration — usually <strong>asymptomatic</strong>.</p>
+<h3>Spondylolisthesis</h3>
+<p>Vertebral body <strong>slippage</strong> — most commonly at <strong>L4-L5</strong>.</p>
+<h3>Spinal Stenosis</h3>
+<ul>
+  <li>Common, especially in <strong>elderly women</strong></li>
+  <li><strong>Central canal narrowing</strong> (more severe) vs. <strong>facet joint narrowing</strong></li>
+  <li><strong>Neurogenic claudication</strong>: shooting leg pain relieved by <strong>flexing forward</strong></li>
+  <li>Treatment: epidural steroid injections or neurosurgery</li>
+</ul>
+<h3>DISH (Diffuse Idiopathic Skeletal Hyperostosis / Forestier Disease)</h3>
+<ul>
+  <li>Osteophytes across <strong>≥4 contiguous vertebrae</strong>, ossification of the <strong>anterior longitudinal ligament</strong></li>
+  <li><strong>Joint and disc space preserved</strong></li>
+  <li><strong>No systemic inflammation</strong> — normal CRP, no antibodies</li>
+  <li>Classic imaging: <strong>"flowing candle wax" pattern</strong></li>
+  <li><strong>Male &gt; female</strong> predominance</li>
+  <li>Often asymptomatic; can develop <strong>dysphagia</strong></li>
+  <li><strong>Associations:</strong> type 2 diabetes, hyperinsulinemia, hyperuricemia</li>
+</ul>
+<div class="warn"><span class="lbl">DISH vs. ankylosing spondylitis</span>DISH osteophytes do NOT bridge (paper-slide test positive). AS syndesmophytes bridge and fuse.</div>
+<div class="quiz" id="q20a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What is the classic imaging finding used to distinguish DISH from ankylosing spondylitis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q20b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An elderly man has progressive dysphagia with flowing anterior vertebral osteophytes spanning 5 levels, preserved disc spaces, and normal CRP. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q20c">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An elderly woman has shooting leg pain with standing/walking that improves when she leans forward on her grocery cart. What is this called?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec21">
+<h2 class="partTitle">21 · Osteoarthritis — Diagnosis &amp; Synovial Fluid Analysis</h2>
+<article class="topic">
+<h3>General OA Diagnosis</h3>
+<ul>
+  <li><strong>No specific diagnostic lab test</strong></li>
+  <li>X-ray: cartilage loss, joint space narrowing, osteophytes, subchondral cysts</li>
+</ul>
+<h4>Symptoms of OA (General)</h4>
+<ul>
+  <li><strong>Insidious</strong> onset over years</li>
+  <li>Minimal morning stiffness, <strong>&lt;30 minutes</strong></li>
+  <li><strong>Cold/damp sensitivity</strong></li>
+</ul>
+<h4>OA Exam Findings</h4>
+<ul>
+  <li>Decreased range of motion</li>
+  <li><strong>Crepitus</strong></li>
+  <li>Effusion, if present, is <strong>not warm</strong> to the touch</li>
+</ul>
+<table class="data-table">
+<caption>Synovial Fluid Analysis — The Master Table (High-Yield)</caption>
+<tr><th>Category</th><th>WBC Count</th><th>Cell Type</th><th>Notes</th></tr>
+<tr><td><strong>Non-inflammatory</strong> (OA)</td><td>Low</td><td>Few WBCs</td><td>—</td></tr>
+<tr><td><strong>Inflammatory</strong> (RA, crystal arthropathies)</td><td>Up to 100,000, typically &lt;50,000</td><td>Neutrophil predominance</td><td>Microscopy for negative birefringent (gout) or CPPD (pseudogout) crystals</td></tr>
+<tr><td><strong>Septic</strong></td><td>&gt;80,000</td><td>80–90% PMNs</td><td>Miss this and patients die</td></tr>
+<tr><td><strong>Hemorrhagic</strong></td><td>Lower WBC concentration</td><td>Grossly bloody fluid</td><td>Consider bleeding disorders (hemophilia, Christmas disease)</td></tr>
+</table>
+<div class="quiz" id="q21a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Arthrocentesis on a swollen knee reveals 95,000 WBCs with 88% PMNs. What is the most concerning diagnosis to rule out?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q21b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with OA reports her joints feel worse on cold, damp days. What is the proposed mechanism?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec22">
+<h2 class="partTitle">22 · Osteoarthritis — Treatment</h2>
+<article class="topic">
+<h3>Treatment (2019 ACR Guidelines)</h3>
+<table class="data-table">
+<tr><th>Therapy</th><th>Notes</th></tr>
+<tr><td>Oral NSAIDs</td><td>Effective, but GI/renal side effects</td></tr>
+<tr><td>Acetaminophen</td><td>Less effective per patients, but a <strong>mainstay</strong> therapy; watch liver toxicity</td></tr>
+<tr><td><strong>Topical NSAIDs (diclofenac)</strong></td><td><strong>First-line for isolated joint OA</strong></td></tr>
+<tr><td>Topical capsaicin</td><td>Very effective if tolerated</td></tr>
+<tr><td>Opiates</td><td><strong>Avoid</strong> — dependence cycle risk</td></tr>
+<tr><td>Glucosamine/chondroitin</td><td>No clear benefit over placebo, but reasonable to try</td></tr>
+<tr><td>Surgery</td><td>Hip, knee, shoulder replacement</td></tr>
+<tr><td>Intra-articular steroid injections</td><td>Short-term fix (~3 months)</td></tr>
+<tr><td>Tramadol</td><td>Recommended against</td></tr>
+</table>
+<h4>Topical Capsaicin — Mechanism Deep Dive</h4>
+<p>Binds <strong>TRPV1 receptor</strong>, keeps it open continuously → constant nerve depolarization → nerve becomes numb to that pain pathway. Must be used <strong>continuously</strong>.</p>
+<div class="pearl"><span class="lbl">Big takeaway</span>Think about what you might be hurting your patient with — opiate dependence, NSAID GI bleed — this is why topical therapies and acetaminophen are preferred first-line.</div>
+<div class="quiz" id="q22a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 78-year-old with isolated left knee OA and no significant comorbidities asks about treatment options. What should be first-line?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q22b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What receptor does topical capsaicin act on to relieve osteoarthritis pain?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q22c">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why should opiates generally be avoided in the management of osteoarthritis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec23">
+<h2 class="partTitle">23 · Master High-Yield Summary — All Three Conditions</h2>
+<article class="topic">
+<h3>How to Use This Section</h3>
+<div class="tagline">One table per condition, plus a confusable-pairs table — for final-pass review</div>
+<p>This section distills the highest-yield facts and buzzwords for each condition. Use it as a final-pass review or quick lookup when two entities are being confused — it is <em>not</em> a replacement for the full sections above, which contain the reasoning behind each buzzword.</p>
+</article>
+
+<article class="topic">
+<h3>Sjögren's Syndrome</h3>
+<table class="data-table">
+<tr><th>Category</th><th>Highest-yield buzzword / distinguishing feature</th></tr>
+<tr><td>Epidemiology</td><td>9:1 female, age 40–60, ~1% of population (likely underdiagnosed); frequently secondary to RA/SLE/scleroderma</td></tr>
+<tr><td>Presentation</td><td>Sicca syndrome (dry eyes + dry mouth) — insidious, years-long course; parotitis is a later finding</td></tr>
+<tr><td>Antibodies</td><td>Anti-Ro (SSA) and anti-La (SSB) — memorize cold; 87% HLA-DR52 positive</td></tr>
+<tr><td>Diagnosis</td><td>4 of 6 criteria, must include biopsy or antibody positivity; Schirmer test, lissamine green, sialogram</td></tr>
+<tr><td>Feared complications</td><td>MALT lymphoma (4.3%); antiphospholipid syndrome → neonatal lupus with congenital heart block</td></tr>
+<tr><td>Treatment</td><td>Hydration, artificial tears/saliva, pilocarpine/cevimeline; never TNF-alpha inhibitors for sicca alone; rituximab for refractory/severe disease</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Rheumatoid Arthritis</h3>
+<table class="data-table">
+<tr><th>Category</th><th>Highest-yield buzzword / distinguishing feature</th></tr>
+<tr><td>Epidemiology</td><td>2–3:1 female, peak age 50–60; men have more severe disease when affected</td></tr>
+<tr><td>Presentation</td><td>Symmetric inflammatory polyarthritis; morning stiffness &gt;60 min improving with use; ulnar deviation, swan neck deformity</td></tr>
+<tr><td>Antibodies</td><td>RF (~90% specific for "any rheum. disease," not RA-specific); anti-CCP (~99% specific for RA, predicts joint damage)</td></tr>
+<tr><td>Systemic complications</td><td>Atlantoaxial instability (C1-C2, contraindicates cervical HVLA); Caplan syndrome (RA + pneumoconiosis); Felty syndrome (RA + neutropenia + splenomegaly); scleral malacia; ILD</td></tr>
+<tr><td>Imaging</td><td>Progressive erosion — soft tissue swelling → cortical thinning → scalloped erosions + joint space narrowing</td></tr>
+<tr><td>Treatment</td><td>Never NSAIDs alone — every patient needs a DMARD (methotrexate + folic acid); DAS28 to monitor response</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Osteoarthritis</h3>
+<table class="data-table">
+<tr><th>Category</th><th>Highest-yield buzzword / distinguishing feature</th></tr>
+<tr><td>Epidemiology</td><td>Most common joint disease, &gt;30 million in the US, leading cause of chronic disability</td></tr>
+<tr><td>Primary vs. secondary</td><td>Primary = age-related wear (hands, knees, hips); secondary = anything that damages the joint (trauma, malalignment, crystal disease, endocrine/metabolic)</td></tr>
+<tr><td>Presentation</td><td>Insidious, morning stiffness &lt;30 min improving quickly, crepitus, cold/damp sensitivity, non-inflammatory effusion if present</td></tr>
+<tr><td>Special forms</td><td>Erosive OA (sawtooth erosions, negative serologies); DISH (flowing non-bridging osteophytes ≥4 levels, no inflammation, associated with T2DM); spinal stenosis (neurogenic claudication relieved by flexion)</td></tr>
+<tr><td>Synovial fluid</td><td>Non-inflammatory (low WBC) — contrast with inflammatory (&lt;50–100K, neutrophilic) and septic (&gt;80K, 80–90% PMNs)</td></tr>
+<tr><td>Treatment</td><td>Topical NSAIDs first-line for isolated joints; acetaminophen mainstay; avoid opiates (dependence cycle); capsaicin via TRPV1 desensitization</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>The Classic Confusable Pairs — Quick Differentiation</h3>
+<table class="data-table">
+<caption>Pairs Board Questions Love to Contrast</caption>
+<tr><th>Pair</th><th>How to tell them apart</th></tr>
+<tr><td>Rheumatoid nodule vs. osteoarthritic nodule</td><td>Rheumatoid = soft/fibrous, no bone. OA (Heberden's/Bouchard's) = bony, osteophyte-based.</td></tr>
+<tr><td>RF vs. anti-CCP</td><td>RF = sensitive but nonspecific (~90% specific for "any rheum. disease"). Anti-CCP = 99% specific for RA, better predictor of joint damage.</td></tr>
+<tr><td>Erosive OA vs. RA</td><td>Erosive OA: negative serologies, normal ESR/CRP, DIP-predominant sawtooth erosions. RA: positive serologies, elevated markers, symmetric small-joint polyarthritis with true effusion.</td></tr>
+<tr><td>DISH vs. ankylosing spondylitis</td><td>DISH osteophytes don't bridge (paper-slide test positive), no inflammation, disc space preserved. AS syndesmophytes bridge/fuse, elevated inflammatory markers, HLA-B27 association.</td></tr>
+<tr><td>Primary biliary cholangitis vs. autoimmune hepatitis</td><td>PBC = cholestatic (↑ bilirubin), anti-mitochondrial antibody. AIH = hepatocellular (↑AST/ALT), anti-smooth muscle antibody/ANA.</td></tr>
+<tr><td>Sjögren's sicca arthritis vs. RA</td><td>Sjögren's arthritis (in 42% of patients) is mild and non-erosive; RA is erosive, symmetric, and the dominant joint pathology rather than a secondary feature.</td></tr>
+</table>
+</article>
+</section>
+
+<section class="part" id="sec24">
+<h2 class="partTitle">24 · Final Board Pearls</h2>
+<article class="topic">
+<h3>Lecturer's Own Wrap-Up</h3>
+<ul>
+  <li><strong>Sjögren's</strong> is likely underdiagnosed — most patients only have sicca syndrome. Know anti-Ro/anti-La cold. Remember it can progress to severe systemic disease and increases lymphoma risk.</li>
+  <li><strong>RA</strong> = classic inflammatory polyarthritis. Know <strong>RF vs. anti-CCP</strong> well. The single biggest clinical priority is an <strong>accurate, timely diagnosis</strong> so patients start a DMARD. Every RA patient needs a DMARD like methotrexate, and every methotrexate patient needs folic acid.</li>
+  <li><strong>Osteoarthritis</strong> = primary vs. secondary framework; it's a progressive joint degeneration disease and, because of its sheer prevalence, treatment safety is paramount.</li>
+</ul>
+<div class="pearl"><span class="lbl">Overarching test-taking framework</span>When you see a joint complaint, first sort <strong>inflammatory vs. non-inflammatory</strong> using onset speed, morning stiffness duration, symmetry, and effusion character — then use serology/antibodies to pin down the specific diagnosis.</div>
+</article>
+</section>
+
+<footer>Sjögren's Syndrome, Rheumatoid Arthritis &amp; Osteoarthritis · MSK II · Dr. Dietrich · Built for board review</footer>
+</main>
+
+<script>
+function toggleNav(){
+  document.getElementById('sideNav').classList.toggle('open');
+  var scrim = document.getElementById('sideNavScrim');
+  scrim.style.display = scrim.style.display === 'block' ? 'none' : 'block';
+}
+function jump(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  toggleNav();
+}
+function goBack(){
+  window.location.href = 'index.html';
+}
+
+const questionData = {
+  q00a: {choices:["Sjögren's syndrome","Rheumatoid arthritis","Osteoarthritis","All three are inflammatory"], correct:2,
+    explain:"Osteoarthritis is degenerative/mechanical wear-and-tear. Sjögren's and RA are both autoimmune/inflammatory, though OA does have a secondary cytokine-driven component."},
+  q01a: {choices:["Acute viral sialadenitis","Sjögren's syndrome","Anticholinergic medication effect","Rheumatoid arthritis, sicca subtype"], correct:1,
+    explain:"Sjögren's syndrome — fits the classic demographic (female, 40–60) and the insidious, years-long progression of sicca symptoms rather than an acute onset."},
+  q01b: {choices:["~1.3%","~15%","~30%","~50%"], correct:0,
+    explain:"Only about 1.3% of Sjögren's cases are diagnosed in patients under 18 — it is rare in pediatrics."},
+  q02a: {choices:["B-cell mediated early → T-cell dominant late","T-cell mediated early → B-cell dominant late","Neutrophil mediated early → eosinophil dominant late","No immunologic shift occurs over the disease course"], correct:1,
+    explain:"Early disease is T-cell (helper T cell) mediated; as disease progresses it becomes B-cell dominant, with increasing autoantibody production and B-cell infiltration of glands."},
+  q02b: {choices:["Complement deposition directly lyses secretory cells","Anti-acetylcholine receptor antibodies block vagal stimulation of mucin cells","Elevated cortisol suppresses secretory function","Dehydration alone accounts for reduced secretion"], correct:1,
+    explain:"Anti-acetylcholine receptor antibodies block vagal nerve stimulation of mucin-secreting cells, so surviving cells are functionally inhibited from secreting, in addition to direct cell destruction and extracellular matrix disruption by metalloproteases."},
+  q03a: {choices:["Yes — she meets 3 of 6 criteria and that is sufficient","No — criteria require 4 of 6 AND a positive biopsy or antibody","Yes — swollen salivary glands alone are diagnostic","Cannot be determined without a Schirmer test"], correct:1,
+    explain:"No — diagnostic criteria require 4 of 6 total criteria AND must include either a positive biopsy or positive antibodies."},
+  q03b: {choices:["Abnormal — reduced tear production","Normal — meets the ≥10mm threshold","Abnormal — indicates excess tear production","The Schirmer test does not measure tear diffusion"], correct:0,
+    explain:"Abnormal — normal tear production diffuses at least 10mm down the paper in 5 minutes."},
+  q04a: {choices:["Chronic use of topical antibiotics selects for resistance","Hyperosmolar tears trigger inflammation that destroys normal ocular flora and architecture","Immunosuppressive treatment predisposes to resistant organisms","Anti-Ro antibodies directly bind bacterial cell walls"], correct:1,
+    explain:"Chronic hyperosmolar tears trigger inflammation that destroys the normal ocular surface architecture and normal flora, selecting for multidrug-resistant organisms."},
+  q04b: {choices:["Primary Sjögren's — the less common presentation","Secondary Sjögren's — actually the more common presentation","Primary Sjögren's — the more common presentation","Secondary Sjögren's — a rare presentation"], correct:1,
+    explain:"Secondary Sjögren's — this pattern (diagnosing the other autoimmune disease first, then finding Sjögren's) is actually the more common clinical presentation."},
+  q05a: {choices:["Yes — RF is diagnostic for RA","No — RF is nonspecific and seen across many autoimmune diseases","Yes, but only if ANA is also positive","No — RF is never elevated in Sjögren's"], correct:1,
+    explain:"No — RF (and ANA) are nonspecific autoantibodies found across many autoimmune diseases."},
+  q06a: {choices:["Autoimmune hepatitis","Primary biliary cholangitis","Primary sclerosing cholangitis","Viral hepatitis"], correct:1,
+    explain:"Primary biliary cholangitis — cholestatic LFT pattern with elevated bilirubin, classically associated with anti-mitochondrial antibody."},
+  q06b: {choices:["Anti-CCP","Anti-mitochondrial antibody","Anti-SSA (anti-Ro)","Anti-smooth muscle antibody"], correct:2,
+    explain:"Anti-SSA (anti-Ro) — positivity is associated with increased ILD risk regardless of whether the patient carries a formal Sjögren's diagnosis."},
+  q06c: {choices:["Anti-Ro antibodies damaging the SA node","M3 muscarinic receptor antibodies causing autonomic dysfunction","Anti-phospholipid antibodies causing venous pooling","Anti-mitochondrial antibodies affecting vascular tone"], correct:1,
+    explain:"M3 muscarinic receptor antibodies causing autonomic dysfunction — an often-missed cause of orthostatic hypotension in elderly patients."},
+  q07a: {choices:["15% — diffuse large B-cell lymphoma","4.3% — MALT lymphoma","25% — Hodgkin lymphoma","4.3% — T-cell lymphoma"], correct:1,
+    explain:"4.3% develop lymphoma; MALT lymphoma is most common, because Sjögren's attacks mucus glands."},
+  q07b: {choices:["Neonatal thrombocytopenia","Neonatal lupus with congenital heart block","Congenital sicca syndrome","Neonatal MALT lymphoma"], correct:1,
+    explain:"Neonatal lupus with congenital heart block — this is why antiphospholipid antibody status matters for peripartum screening."},
+  q07c: {choices:["They worsen dry eye symptoms directly","They target systemic/organ-involvement complications, not sicca symptoms","They are contraindicated in all autoimmune disease","They only work in RA, not Sjögren's"], correct:1,
+    explain:"TNF-alpha inhibitors and DMARDs target the systemic/organ-involvement complications, not the sicca symptoms themselves."},
+  q08a: {choices:["RA — stiffness under 30 minutes is classic for RA","OA — stiffness under 60 minutes that improves quickly is classic for OA","Neither — this pattern suggests a septic joint","RA — but only if it's asymmetric"], correct:1,
+    explain:"OA — morning stiffness under 60 minutes that improves quickly with activity is classic for osteoarthritis."},
+  q08b: {choices:["Osteoarthritis","Viral arthritis (e.g., parvovirus B19)","DISH","Primary biliary cholangitis"], correct:1,
+    explain:"A viral arthritis (e.g., parvovirus B19) — symptom duration under 4 weeks favors a viral etiology over RA."},
+  q09a: {choices:["Alcohol use","Smoking","High-sugar diet","Sedentary lifestyle"], correct:1,
+    explain:"Smoking is the biggest modifiable environmental risk factor for RA."},
+  q09b: {choices:["Dental caries via Streptococcus mutans","Gingivitis via Porphyromonas gingivalis","Oral thrush via Candida albicans","Periodontal abscess via Staphylococcus aureus"], correct:1,
+    explain:"Gingivitis, specifically due to Porphyromonas gingivalis and its toxin (\"gingipains\")."},
+  q10a: {choices:["Crepitus","Synovitis","Osteophyte formation","Subchondral sclerosis"], correct:1,
+    explain:"Synovitis — spongy, palpable thickening of the synovium along the joint space, suggestive of a rheumatologic process like RA."},
+  q11a: {choices:["Rheumatoid nodules are bony; osteoarthritic nodules are soft/fibrous","Rheumatoid nodules are soft/fibrous with no bone; osteoarthritic nodules are bony","Both are indistinguishable clinically and radiographically","Rheumatoid nodules only occur on the feet"], correct:1,
+    explain:"Rheumatoid nodules are soft, spongy, fibrous immune-complex deposits with no bone. Osteoarthritic nodules are bony."},
+  q11b: {choices:["Cellulitis — treat with IV antibiotics","Pyoderma gangrenosum — treat with combination prednisone + cyclosporine","Rheumatoid vasculitis — treat with topical steroids alone","Diabetic ulcer — treat with wound debridement alone"], correct:1,
+    explain:"Pyoderma gangrenosum — combination prednisone + cyclosporine has better resolution rates than either agent alone."},
+  q12a: {choices:["Silicosis alone","Caplan syndrome","Hypersensitivity pneumonitis","Sarcoidosis"], correct:1,
+    explain:"Caplan syndrome — RA combined with pneumoconiosis exposure."},
+  q12b: {choices:["Gram stain","Light's criteria","DAS28 score","Schirmer test"], correct:1,
+    explain:"Light's criteria — an exudative effusion should prompt evaluation for causes including RA."},
+  q13a: {choices:["Risk of triggering a pericarditis flare","Atlantoaxial instability risks spinal cord compression","Risk of triggering scleral malacia","It has no specific contraindication in RA"], correct:1,
+    explain:"RA causes atlantoaxial instability/subluxation at C1-C2 — cervical manipulation carries risk of spinal cord injury."},
+  q13b: {choices:["NSAIDs — same as typical viral pericarditis","Glucocorticoids — targets the underlying autoimmune-driven inflammation","Neither — pericarditis in RA resolves spontaneously","Antibiotics — pericarditis in RA is usually infectious"], correct:1,
+    explain:"Glucocorticoids — the pericarditis is driven by autoimmune inflammation from the underlying RA, not a viral process."},
+  q14a: {choices:["RA + thrombocytosis + hepatomegaly","RA + neutropenia + splenomegaly","RA + anemia + lymphadenopathy","RA + eosinophilia + splenomegaly"], correct:1,
+    explain:"Rheumatoid arthritis + neutropenia + splenomegaly."},
+  q14b: {choices:["Keratoconjunctivitis sicca","Scleral malacia","Corneal arcus","Episcleritis nodosa"], correct:1,
+    explain:"Scleral malacia — degenerative thinning of the sclera specific to RA."},
+  q15a: {choices:["RF — 99% specific for RA","Anti-CCP — ~99% specific for RA","Both are equally specific","Neither is specific for RA"], correct:1,
+    explain:"Anti-CCP is ~99% specific for RA, while RF is only ~90% specific for \"any rheumatologic condition.\""},
+  q15b: {choices:["Joint effusion","Synovial hypertrophy (synovitis)","Subchondral cyst","Osteophyte formation"], correct:1,
+    explain:"The gray tissue represents synovial hypertrophy, not effusion. True joint effusion would appear more black (anechoic)."},
+  q16a: {choices:["To increase methotrexate absorption","To prevent severe methotrexate toxicity","To treat concurrent anemia of chronic disease","To reduce GI upset from NSAIDs"], correct:1,
+    explain:"Without folic acid supplementation, patients on methotrexate are at risk of severe toxicity."},
+  q16b: {choices:["Age, sex, and symptom duration","Swollen joint count, tender joint count, and inflammatory markers","RF titer, anti-CCP titer, and ESR","X-ray erosion score, BMI, and CRP"], correct:1,
+    explain:"Number of swollen joints, number of tender joints, and inflammatory markers."},
+  q17a: {choices:["Primary OA","Secondary OA","Erosive OA","Neuropathic (Charcot) joint"], correct:1,
+    explain:"Secondary osteoarthritis — the shoulder is not a classic primary OA joint; repetitive trauma is a recognized cause of secondary OA."},
+  q17b: {choices:["Inflammatory, and common","Non-inflammatory, and less common than in autoimmune arthritis","Hemorrhagic, and common","Septic, and rare"], correct:1,
+    explain:"Non-inflammatory, and significantly less common than effusions seen in autoimmune-mediated arthritis."},
+  q18a: {choices:["Clefts in the cartilage surface from proteoglycan loss","Dense lymphocytic infiltration","Fibrinoid necrosis","Granuloma formation"], correct:0,
+    explain:"Clefts in the cartilage surface, reflecting loss of proteoglycans, softening, and breakdown."},
+  q18b: {choices:["OA nodules contain bone; rheumatoid nodules are soft fibrous tissue","OA nodules are fibrous; rheumatoid nodules contain bone","Both contain bone but differ in location","Neither contains bone"], correct:0,
+    explain:"Osteoarthritic nodules contain bone (osteophyte-based); rheumatoid nodules are soft, spongy, fibrous deposits with no bone."},
+  q19a: {choices:["Rheumatoid arthritis","Erosive osteoarthritis","Psoriatic arthritis","Gout"], correct:1,
+    explain:"Erosive osteoarthritis — acute-onset pain, increased inflammation, sawtooth erosion pattern, despite negative RA serologies."},
+  q19b: {choices:["The elbow and shoulder are classic weight-bearing joints","They are not classic primary OA joints, so OA there suggests a secondary cause","They never develop OA","They are more prone to septic arthritis instead"], correct:1,
+    explain:"The elbow and shoulder are not classic weight-bearing/primary OA joints — OA there is rare unless due to overuse, dislocation, or trauma."},
+  q20a: {choices:["Sacroiliac joint fusion is seen only in DISH","In DISH the osteophytes don't bridge; in AS syndesmophytes bridge and fuse","DISH always shows elevated CRP; AS does not","AS preserves disc space; DISH does not"], correct:1,
+    explain:"In DISH, osteophytes don't connect (paper-slide test); in ankylosing spondylitis, syndesmophytes bridge and fuse."},
+  q20b: {choices:["Ankylosing spondylitis","DISH (diffuse idiopathic skeletal hyperostosis)","Rheumatoid spondylitis","Spondylolisthesis"], correct:1,
+    explain:"DISH — associated with type 2 diabetes, hyperinsulinemia, and hyperuricemia; dysphagia from anterior cervical osteophytes."},
+  q20c: {choices:["Vascular claudication","Neurogenic claudication from spinal stenosis","Restless leg syndrome","Patellar osteoarthritis"], correct:1,
+    explain:"Neurogenic claudication from spinal stenosis — forward flexion offloads the narrowed spinal canal."},
+  q21a: {choices:["Osteoarthritis","Hemarthrosis","Septic arthritis","Erosive osteoarthritis"], correct:2,
+    explain:"Septic arthritis — WBC counts this high with PMN predominance strongly suggest a septic joint; missing this can be fatal."},
+  q21b: {choices:["Cold triggers a systemic inflammatory cytokine surge","Cold and barometric pressure changes thicken synovial fluid consistency","Cold causes vasodilation of the synovium","Cold decreases crystal solubility, precipitating pseudogout"], correct:1,
+    explain:"Cold and barometric pressure changes are thought to thicken synovial fluid consistency, increasing joint stiffness and pain."},
+  q22a: {choices:["Oral NSAIDs","Low-dose opiates","Topical NSAIDs (e.g., diclofenac)","Tramadol"], correct:2,
+    explain:"Topical NSAIDs — first-line for isolated joint OA, avoiding systemic absorption side effects."},
+  q22b: {choices:["Mu-opioid receptor","TRPV1 receptor","NMDA receptor","GABA-B receptor"], correct:1,
+    explain:"Capsaicin binds TRPV1 and holds it open, causing constant depolarization until the nerve can no longer transmit pain signals."},
+  q22c: {choices:["Opiates are ineffective for musculoskeletal pain","OA is progressive/lifelong, and opiate receptor upregulation creates escalating dose needs and dependence","Opiates worsen cartilage breakdown directly","Opiates are contraindicated in all patients over 55"], correct:1,
+    explain:"OA is progressive and often lifelong — opiates lead to receptor upregulation, escalating dose needs, and a self-feeding dependence cycle."}
+};
+
+Object.keys(questionData).forEach(function(id){
+  const box = document.getElementById(id);
+  if(!box) return;
+  const data = questionData[id];
+  const choiceWrap = box.querySelector('.choices');
+  const explainBox = box.querySelector('.explain');
+  data.choices.forEach(function(text, idx){
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = String.fromCharCode(65+idx) + '. ' + text;
+    btn.onclick = function(){
+      const already = choiceWrap.querySelectorAll('.choice.correct, .choice.wrong').length > 0;
+      if(already) return;
+      const all = choiceWrap.querySelectorAll('.choice');
+      all.forEach(function(b, i){
+        if(i === data.correct) b.classList.add('correct');
+        else if(b === btn) b.classList.add('wrong');
+      });
+      explainBox.textContent = data.explain;
+      explainBox.classList.add('show');
+    };
+    choiceWrap.appendChild(btn);
+  });
+});
+</script>
+</body>
+</html>
