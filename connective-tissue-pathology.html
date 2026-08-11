@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Connective Tissue Diseases — Complete Study Guide (Pts. 1–2)</title>
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-2:#f3ecd9;
+  --green-dark:#2f5233;
+  --green:#3f7d52;
+  --green-light:#e7f0e5;
+  --ink:#2b2b26;
+  --ink-soft:#5b5a4f;
+  --line:#d9d0b8;
+  --gold:#b8944f;
+  --wrong:#a5453a;
+  --right:#2f7d4f;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+a{color:var(--green-dark);}
+
+#backBtn{
+  position:fixed; top:18px; left:18px; z-index:700;
+  background:var(--cream); border:1px solid var(--green-dark);
+  color:var(--green-dark); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  text-decoration:none; cursor:pointer;
+}
+#backBtn:hover{background:var(--green-dark); color:var(--cream);}
+#downloadBtn{
+  position:fixed; top:18px; right:18px; z-index:700;
+  background:var(--green-dark); border:1px solid var(--green-dark);
+  color:var(--cream); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  cursor:pointer;
+}
+#downloadBtn:hover{background:var(--green);}
+
+#sectionsTab{
+  position:fixed; top:50%; right:0; transform:translateY(-50%);
+  z-index:600; background:var(--green-dark); color:var(--cream);
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  padding:14px 8px; writing-mode:vertical-rl; text-orientation:mixed;
+  border-radius:8px 0 0 8px; cursor:pointer; box-shadow:-2px 0 10px rgba(0,0,0,.12);
+}
+#sideNavScrim{
+  position:fixed; inset:0; background:rgba(30,30,20,.25);
+  z-index:590; display:none;
+}
+#sideNav{
+  position:fixed; top:0; right:0; height:100%;
+  width:min(300px, calc(100vw - 96px));
+  background:var(--cream-2); border-left:1px solid var(--line);
+  z-index:595; transform:translateX(100%); transition:transform .25s ease;
+  overflow-y:auto; padding:70px 20px 40px;
+}
+#sideNav.open{transform:translateX(0);}
+#sideNav h3{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  color:var(--green-dark); text-transform:uppercase; margin:0 0 14px;
+}
+#sideNav .navItem{
+  display:block; padding:8px 6px; border-bottom:1px solid var(--line);
+  color:var(--ink); text-decoration:none; font-size:14px; cursor:pointer;
+}
+#sideNav .navItem:hover{color:var(--green-dark);}
+#sideNav .navNum{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:8px; font-size:12px;}
+
+main{max-width:900px; margin:0 auto; padding:90px 28px 100px;}
+
+header.hero{text-align:center; margin-bottom:38px;}
+header.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green);
+}
+header.hero h1{
+  font-size:2.3rem; margin:10px 0 6px; color:var(--green-dark); line-height:1.2;
+}
+header.hero .sub{color:var(--ink-soft); font-size:15px;}
+
+.contents{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:10px;
+  padding:22px 26px; margin:30px 0 40px;
+}
+.contents h2{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green-dark); margin:0 0 12px;
+}
+.contents a{text-decoration:none; font-size:14.5px;}
+.contents a:hover{text-decoration:underline;}
+.contents .num{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:6px; font-size:12.5px;}
+
+.toc-cols{display:grid; grid-template-columns:1fr 1fr; gap:0 40px;}
+.toc-col{display:flex; flex-direction:column; gap:22px;}
+.part-group{break-inside:avoid;}
+.part-group h3{
+  font-size:15.5px; margin:0 0 8px; color:var(--ink);
+  display:flex; align-items:baseline; gap:8px;
+}
+.part-group h3 .pnum{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); flex-shrink:0;
+}
+.part-group ol{margin:0; padding-left:0; list-style:none; counter-reset:sub;}
+.part-group ol li{
+  counter-increment:sub; margin-bottom:6px; padding-left:26px; position:relative;
+}
+.part-group ol li::before{
+  content:counter(sub) "."; position:absolute; left:2px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
+}
+.part-group ol a{border-bottom:1px dotted var(--line); padding-bottom:1px;}
+.part-group ol a:hover{border-bottom-color:var(--green);}
+
+section.part{margin-bottom:20px;}
+section.part > h2.partTitle{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green); border-bottom:1px solid var(--line);
+  padding-bottom:6px; margin:48px 0 18px;
+}
+
+article.topic{
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:26px 28px; margin-bottom:26px; scroll-margin-top:80px;
+}
+article.topic h3{
+  color:var(--green-dark); font-size:1.35rem; margin:0 0 4px;
+}
+article.topic .tagline{color:var(--ink-soft); font-style:italic; font-size:14.5px; margin-bottom:14px;}
+article.topic h4{color:var(--green-dark); font-size:1rem; margin:18px 0 8px;}
+article.topic p{margin:0 0 12px;}
+article.topic ul, article.topic ol{margin:0 0 12px; padding-left:22px;}
+article.topic li{margin-bottom:5px;}
+article.topic strong{color:var(--green-dark);}
+
+.pearl{
+  background:var(--green-light); border-left:4px solid var(--green);
+  border-radius:6px; padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.pearl .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--green-dark); display:block; margin-bottom:4px;}
+
+.formula{
+  background:#fbf3e3; border:1px dashed var(--gold); border-radius:6px;
+  padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.formula .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:#8a6a2e; display:block; margin-bottom:4px;}
+
+table.data-table{
+  width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px;
+}
+table.data-table caption{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--green-dark); text-align:left; margin-bottom:6px;
+}
+table.data-table th{
+  background:var(--green-dark); color:var(--cream); padding:8px 10px; text-align:left;
+  font-size:12.5px;
+}
+table.data-table td{padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:#fbf8ef;}
+
+.quiz{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:8px;
+  padding:16px 18px; margin-top:16px;
+}
+.quiz .qhead{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--green-dark); text-transform:uppercase; margin-bottom:6px;}
+.quiz .qtext{font-size:14.5px; margin-bottom:10px;}
+.quiz .choice{
+  display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line);
+  border-radius:6px; padding:9px 12px; margin-bottom:7px; cursor:pointer; font-size:14px;
+  font-family:Georgia,serif; color:var(--ink);
+}
+.quiz .choice:hover{border-color:var(--green);}
+.quiz .choice.correct{background:#e7f3ea; border-color:var(--right); color:var(--right);}
+.quiz .choice.wrong{background:#f7e9e7; border-color:var(--wrong); color:var(--wrong);}
+.quiz .explain{
+  display:none; margin-top:10px; padding:10px 12px; background:#fff;
+  border-left:4px solid var(--green); font-size:13.5px; border-radius:4px;
+}
+.quiz .explain.show{display:block;}
+
+footer{
+  text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:60px;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+@media print{
+  #backBtn,#downloadBtn,#sectionsTab,#sideNav,#sideNavScrim{display:none !important;}
+  main{padding-top:20px;}
+}
+@media (max-width:640px){
+  main{padding:80px 16px 80px;}
+  .toc-cols{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<button id="backBtn" onclick="goBack()">&larr; Back to Study Guides</button>
+<button id="downloadBtn" onclick="window.print()">Download PDF</button>
+<div id="sectionsTab" onclick="toggleNav()">SECTIONS</div>
+<div id="sideNavScrim" onclick="toggleNav()"></div>
+<nav id="sideNav">
+  <h3>Sections</h3>
+  <span class="navItem" onclick="jump('sec0')"><span class="navNum">00</span>Intro, Objectives &amp; CTD Overview</span>
+  <span class="navItem" onclick="jump('sec1')"><span class="navNum">01</span>Ehlers-Danlos Syndrome — Overview</span>
+  <span class="navItem" onclick="jump('sec2')"><span class="navNum">02</span>EDS H&amp;P &amp; Beighton Criteria</span>
+  <span class="navItem" onclick="jump('sec3')"><span class="navNum">03</span>EDS Complications &amp; Treatment</span>
+  <span class="navItem" onclick="jump('sec4')"><span class="navNum">04</span>Marfan Syndrome — Overview &amp; Cardiology</span>
+  <span class="navItem" onclick="jump('sec5')"><span class="navNum">05</span>Marfan — Orthopedics</span>
+  <span class="navItem" onclick="jump('sec6')"><span class="navNum">06</span>Marfan — Ocular/Pulmonary &amp; Ghent Criteria</span>
+  <span class="navItem" onclick="jump('sec7')"><span class="navNum">07</span>Stickler Syndrome — Overview</span>
+  <span class="navItem" onclick="jump('sec8')"><span class="navNum">08</span>Stickler — Complications, Dx &amp; Surveillance</span>
+  <span class="navItem" onclick="jump('sec9')"><span class="navNum">09</span>Osteogenesis Imperfecta — Overview &amp; Types</span>
+  <span class="navItem" onclick="jump('sec10')"><span class="navNum">10</span>OI — Diagnosis &amp; Management</span>
+  <span class="navItem" onclick="jump('sec11')"><span class="navNum">11</span>Other Genetic CTDs</span>
+  <span class="navItem" onclick="jump('sec12')"><span class="navNum">12</span>Board Review — Pt. 1</span>
+  <span class="navItem" onclick="jump('sec13')"><span class="navNum">13</span>Pt. 2 Intro &amp; Disease Overview</span>
+  <span class="navItem" onclick="jump('sec14')"><span class="navNum">14</span>Labs — General Screening &amp; Inflammation</span>
+  <span class="navItem" onclick="jump('sec15')"><span class="navNum">15</span>Labs — Autoantibody Tests</span>
+  <span class="navItem" onclick="jump('sec16')"><span class="navNum">16</span>Labs — Complement, UA, CK &amp; HLA-B27</span>
+  <span class="navItem" onclick="jump('sec17')"><span class="navNum">17</span>Psoriatic Arthritis — Risk Factors &amp; Pathophysiology</span>
+  <span class="navItem" onclick="jump('sec18')"><span class="navNum">18</span>PsA — H&amp;P, Patterns &amp; Imaging</span>
+  <span class="navItem" onclick="jump('sec19')"><span class="navNum">19</span>PsA — Diagnosis (CASPAR) &amp; Treatment</span>
+  <span class="navItem" onclick="jump('sec20')"><span class="navNum">20</span>Ankylosing Spondylitis — Epidemiology &amp; Pathophysiology</span>
+  <span class="navItem" onclick="jump('sec21')"><span class="navNum">21</span>AS — History &amp; Physical</span>
+  <span class="navItem" onclick="jump('sec22')"><span class="navNum">22</span>AS — Imaging</span>
+  <span class="navItem" onclick="jump('sec23')"><span class="navNum">23</span>AS — Treatment &amp; Complications</span>
+  <span class="navItem" onclick="jump('sec24')"><span class="navNum">24</span>IBD-Associated SpA — Epidemiology &amp; Pathogenesis</span>
+  <span class="navItem" onclick="jump('sec25')"><span class="navNum">25</span>IBD-SpA — Clinical Presentation &amp; Diagnosis</span>
+  <span class="navItem" onclick="jump('sec26')"><span class="navNum">26</span>IBD-SpA — Treatment</span>
+  <span class="navItem" onclick="jump('sec27')"><span class="navNum">27</span>SLE — Epidemiology &amp; Pathophysiology</span>
+  <span class="navItem" onclick="jump('sec28')"><span class="navNum">28</span>SLE — Organ Pathology</span>
+  <span class="navItem" onclick="jump('sec29')"><span class="navNum">29</span>SLE — H&amp;P, Rashes &amp; Labs</span>
+  <span class="navItem" onclick="jump('sec30')"><span class="navNum">30</span>SLE — Musculoskeletal Manifestations</span>
+  <span class="navItem" onclick="jump('sec31')"><span class="navNum">31</span>SLE — Treatment &amp; Management</span>
+  <span class="navItem" onclick="jump('sec32')"><span class="navNum">32</span>Septic Arthritis — Epidemiology &amp; Microbiology</span>
+  <span class="navItem" onclick="jump('sec33')"><span class="navNum">33</span>Septic Arthritis — H&amp;P, Labs &amp; Imaging</span>
+  <span class="navItem" onclick="jump('sec34')"><span class="navNum">34</span>Septic Arthritis — Treatment</span>
+  <span class="navItem" onclick="jump('sec35')"><span class="navNum">35</span>Other Autoimmune CTDs — Quick Reference</span>
+  <span class="navItem" onclick="jump('sec36')"><span class="navNum">36</span>Board Review — Pt. 2</span>
+  <span class="navItem" onclick="jump('sec37')"><span class="navNum">37</span>Master High-Yield Summary (All Parts)</span>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Osteopathic Clinical Sciences · Dr. Paul Langevin, DO, DiMM, MPH</div>
+  <h1>Connective Tissue Diseases — Complete Study Guide</h1>
+  <div class="sub">Parts 1–2 (complete) · Genetic/inherited connective tissue disorders (EDS, Marfan, Stickler, OI) and autoimmune connective tissue diseases (labs, PsA, AS, IBD-SpA, SLE, septic arthritis, and the overlap syndromes) — built from all lecture slides + narrated transcript, closing with a master high-yield comparison table spanning both lectures.</div>
+</header>
+
+<div class="contents">
+  <h2>Contents</h2>
+  <div class="toc-cols">
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">1.</span> Pt. 1 — Genetic/Inherited Disorders</h3>
+        <ol>
+          <li><a href="#sec0">Intro, Objectives &amp; CTD Overview</a></li>
+          <li><a href="#sec1">Ehlers-Danlos Syndrome — Overview</a></li>
+          <li><a href="#sec2">EDS H&amp;P &amp; Beighton Criteria</a></li>
+          <li><a href="#sec3">EDS Complications &amp; Treatment</a></li>
+          <li><a href="#sec4">Marfan Syndrome — Overview &amp; Cardiology</a></li>
+          <li><a href="#sec5">Marfan — Orthopedics</a></li>
+          <li><a href="#sec6">Marfan — Ocular/Pulmonary &amp; Ghent Criteria</a></li>
+          <li><a href="#sec7">Stickler Syndrome — Overview</a></li>
+          <li><a href="#sec8">Stickler — Complications, Dx &amp; Surveillance</a></li>
+          <li><a href="#sec9">Osteogenesis Imperfecta — Overview &amp; Types</a></li>
+          <li><a href="#sec10">OI — Diagnosis &amp; Management</a></li>
+          <li><a href="#sec11">Other Genetic CTDs</a></li>
+          <li><a href="#sec12">Board Review — Pt. 1</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">2.</span> Pt. 2 — Autoimmune CTDs (Labs, PsA, AS)</h3>
+        <ol>
+          <li><a href="#sec13">Pt. 2 Intro &amp; Disease Overview</a></li>
+          <li><a href="#sec14">Labs — General Screening &amp; Inflammation</a></li>
+          <li><a href="#sec15">Labs — Autoantibody Tests</a></li>
+          <li><a href="#sec16">Labs — Complement, UA, CK &amp; HLA-B27</a></li>
+          <li><a href="#sec17">Psoriatic Arthritis — Risk Factors &amp; Pathophysiology</a></li>
+          <li><a href="#sec18">PsA — H&amp;P, Patterns &amp; Imaging</a></li>
+          <li><a href="#sec19">PsA — Diagnosis (CASPAR) &amp; Treatment</a></li>
+          <li><a href="#sec20">Ankylosing Spondylitis — Epidemiology &amp; Pathophysiology</a></li>
+          <li><a href="#sec21">AS — History &amp; Physical</a></li>
+          <li><a href="#sec22">AS — Imaging</a></li>
+          <li><a href="#sec23">AS — Treatment &amp; Complications</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">3.</span> Pt. 2 — IBD-SpA &amp; SLE</h3>
+        <ol>
+          <li><a href="#sec24">IBD-Associated SpA — Epidemiology &amp; Pathogenesis</a></li>
+          <li><a href="#sec25">IBD-SpA — Clinical Presentation &amp; Diagnosis</a></li>
+          <li><a href="#sec26">IBD-SpA — Treatment</a></li>
+          <li><a href="#sec27">SLE — Epidemiology &amp; Pathophysiology</a></li>
+          <li><a href="#sec28">SLE — Organ Pathology</a></li>
+          <li><a href="#sec29">SLE — H&amp;P, Rashes &amp; Labs</a></li>
+          <li><a href="#sec30">SLE — Musculoskeletal Manifestations</a></li>
+          <li><a href="#sec31">SLE — Treatment &amp; Management</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">4.</span> Pt. 2 — Septic Arthritis &amp; Overlap Syndromes</h3>
+        <ol>
+          <li><a href="#sec32">Septic Arthritis — Epidemiology &amp; Microbiology</a></li>
+          <li><a href="#sec33">Septic Arthritis — H&amp;P, Labs &amp; Imaging</a></li>
+          <li><a href="#sec34">Septic Arthritis — Treatment</a></li>
+          <li><a href="#sec35">Other Autoimmune CTDs — Quick Reference</a></li>
+          <li><a href="#sec36">Board Review — Pt. 2</a></li>
+          <li><a href="#sec37">Master High-Yield Summary (All Parts)</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="part" id="sec0">
+<h2 class="partTitle">00 · Intro, Objectives &amp; CTD Overview</h2>
+<article class="topic">
+<h3>Lecture Objectives</h3>
+<div class="tagline">Connective Tissue Diseases Pt. 1 — the genetic/inherited group</div>
+<p>For each disorder covered, Dr. Langevin wants you to be able to describe the etiology/causes and pathophysiology, risk factors, signs and symptoms, skin/muscle/end-organ manifestations, diagnostic criteria, laboratory testing, and basic treatment strategies for:</p>
+<ul>
+  <li><strong>Marfan syndrome</strong></li>
+  <li><strong>Ehlers-Danlos syndrome</strong></li>
+  <li><strong>Stickler syndrome</strong></li>
+  <li><strong>Osteogenesis imperfecta</strong></li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Connective Tissue Diseases — The Big Picture</h3>
+<div class="tagline">Over 200 diagnoses, split into two broad groups</div>
+<p>Connective tissue diseases cause inflammation, damage, or structural issues in the tissues that support the body (tendons, ligaments, cartilage, blood vessels, and other structures connecting/supporting organs). They break into two broad categories:</p>
+<table class="data-table">
+<tr><th>Group</th><th>Mechanism</th></tr>
+<tr><td><strong>Autoimmune disorders</strong> (Part 2 of this series)</td><td>The immune system mistakenly attacks its own connective tissues</td></tr>
+<tr><td><strong>Genetic/inherited disorders</strong> (Part 1 — this section)</td><td>Mutations in genes affecting the structure, production, or function of connective tissue</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Framing for this half of the series</span>Part 1 covers four genetic/inherited connective tissue disorders in detail — Ehlers-Danlos syndrome, Marfan syndrome, Stickler syndrome, and osteogenesis imperfecta — plus a quick-reference table of three additional genetic CTDs (Loeys-Dietz, epidermolysis bullosa, pseudoxanthoma elasticum) at the end.</div>
+</article>
+
+<article class="topic">
+<h3>The Four Major Genetic CTDs — Quick Comparison</h3>
+<div class="tagline">All four are collagen (or collagen-adjacent) protein disorders, but each hits a different structural gene</div>
+<table class="data-table">
+<caption>Genetic connective tissue disorders overview</caption>
+<tr><th>Disorder</th><th>Key Features</th><th>Genetic Cause</th><th>Inheritance / Prevalence per 100K</th></tr>
+<tr><td><strong>Ehlers-Danlos Syndromes (EDS)</strong></td><td>13 subtypes; hypermobile joints, fragile/stretchy skin, easy bruising, chronic pain, vascular complications (e.g., arterial rupture in vascular EDS)</td><td>Mutations in collagen-related genes (e.g., COL3A1 for vascular EDS, COL5A1/COL5A2 for classical EDS)</td><td>Mostly autosomal dominant; some recessive. 20/100K</td></tr>
+<tr><td><strong>Marfan Syndrome (MFS)</strong></td><td>Tall stature, long limbs, arachnodactyly, ectopia lentis, aortic aneurysm, pectus deformity, joint hypermobility, stretch marks</td><td>Mutations in FBN1 (fibrillin-1)</td><td>Autosomal dominant. 20/100K</td></tr>
+<tr><td><strong>Stickler Syndrome</strong></td><td>Hearing loss, vision problems (retinal detachment, myopia), cleft palate, joint pain, flat midface</td><td>Mutations in COL2A1, COL11A1, or other collagen genes</td><td>Autosomal dominant or recessive. 13/100K</td></tr>
+<tr><td><strong>Osteogenesis Imperfecta (OI)</strong></td><td>Brittle bones/frequent fractures, short stature, blue sclerae, hearing loss, dentinogenesis imperfecta ("brittle bone disease")</td><td>Mutations in COL1A1 or COL1A2 (type I collagen)</td><td>Autosomal dominant or recessive, depending on type. 8/100K</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Pattern worth noticing</span>Three of the four (EDS, Stickler, OI) are directly named for the collagen gene family they disrupt; Marfan is the outlier — it's a fibrillin-1 (not collagen) defect, which is why its phenotype leans more toward skeletal overgrowth and lens/aortic complications rather than skin fragility.</div>
+</article>
+</section>
+
+<section class="part" id="sec1">
+<h2 class="partTitle">01 · Ehlers-Danlos Syndrome (EDS) — Overview</h2>
+<article class="topic">
+<h3>EDS — Subtypes &amp; Epidemiology</h3>
+<div class="tagline">13 subtypes, but two account for the vast majority of cases</div>
+<ul>
+  <li><strong>13 subtypes</strong> total; common symptoms include hypermobile joints, fragile/stretchy skin, easy bruising, chronic pain, and vascular complications</li>
+  <li><strong>Classic and hypermobile EDS</strong> together account for <strong>over 90%</strong> of all EDS cases</li>
+  <li><strong>¼ of all EDS patients</strong> show aortic aneurysmal disease</li>
+  <li><strong>Vascular EDS (vEDS)</strong> represents <strong>less than 5%</strong> of cases — but is disproportionately responsible for mortality</li>
+  <li>Caused by mutations in genes coding for collagen fibrils, or for proteins involved in <strong>processing</strong> those collagens — mutation in at least <strong>20 different genes</strong> can produce an EDS phenotype</li>
+  <li>Incidence of vascular pathology <strong>increases with age</strong>; most EDS-related deaths are tied to vascular EDS via <strong>arterial rupture</strong></li>
+  <li>Affects all races and ethnicities worldwide</li>
+</ul>
+<div class="pearl"><span class="lbl">Genetics vs. observed epidemiology — a real discrepancy worth understanding</span>Since most EDS subtypes (including hypermobile EDS) are autosomal dominant, a 1:1 male:female ratio would be expected genetically. In practice, diagnosed cases show a strong <strong>female bias</strong> — attributed to factors like hormonal influences (estrogen affecting connective tissue laxity/symptom severity), differences in pain perception and symptom reporting, diagnostic bias, and underdiagnosis in males (who may have milder or different presentations). It's also likely that overall EDS incidence is underestimated, since patients with only minimal joint/skin involvement may never seek care in the first place.</div>
+</article>
+</section>
+
+<section class="part" id="sec2">
+<h2 class="partTitle">02 · EDS History &amp; Physical, and the Beighton Criteria</h2>
+<article class="topic">
+<h3>EDS — History &amp; Physical</h3>
+<div class="tagline">Two findings dominate the presentation, and there is no confirmatory lab test</div>
+<ul>
+  <li><strong>Skin hyperextensibility</strong> and <strong>hyperflexible joints</strong> are the two most common presenting signs of EDS</li>
+  <li>Skin: smooth and velvet-like texture, fragility, delayed wound healing, and thin atrophic scars after healing</li>
+  <li><strong>Shoulder dislocation is usually the initial sign of EDS</strong> — these dislocations are predominantly atraumatic (or minimal-force), often occurring during daily activities or even sleep, and are frequently painless</li>
+  <li><strong>No supportive laboratory test</strong> exists — this is a clinical (and genetic) diagnosis</li>
+  <li>Mental development is generally normal</li>
+  <li>Dental pathologies are commonly observed: hypodontia of permanent teeth (1–6 teeth fail to develop), delayed eruption, and dentin dysplasia; a <strong>lack of attached gingiva</strong> can be a pathognomonic feature</li>
+  <li>A baseline <strong>echocardiogram</strong> is recommended for children diagnosed under age 10</li>
+  <li>If EDS is suspected: <strong>CT, MRI, and echocardiography</strong> can evaluate for cardiovascular concerns (mitral valve prolapse, aortic dilatation); MRI may also show white matter lesions consistent with EDS</li>
+</ul>
+<div class="pearl"><span class="lbl">Skin exam findings, in detail</span>The skin is usually white and soft, with underlying vessels sometimes visible. It has a doughy feel, is easily hyperextensible, and immediately returns to its original state after release. <strong>Molluscoid pseudotumors</strong> — small, spongy outgrowths over scars and pressure points — are commonly found in classic (type I) EDS. Smaller, deep, movable subcutaneous nodules (spherules) are often palpable on the arms and over the tibia and may calcify on radiography. Skin fragility with frequent bruises/lacerations is common, and joint hyperextensibility is variable in degree, most commonly affecting the digital joints.</div>
+<div class="pearl"><span class="lbl">Piezogenic papules — a distinctive EDS foot finding</span>Subcutaneous fat herniating through the plantar fascia produces blanching white nodules on the sides of the feet that appear only while bearing weight — piezogenic papules.</div>
+</article>
+
+<article class="topic">
+<h3>Beighton Criteria</h3>
+<div class="tagline">A quick, low-cost bedside screen for generalized joint hypermobility — not a substitute for genetic testing</div>
+<ul>
+  <li>A <strong>9-point screening tool</strong> that assesses generalized joint hypermobility (GJH) using five movements, suggestive of EDS</li>
+  <li><strong>Genetic testing remains the gold standard</strong> for diagnosis — but documenting the Beighton score is still worthwhile, including to support insurance payment for further work-up</li>
+</ul>
+<div class="pearl"><span class="lbl">What the five maneuvers assess</span>The classic Beighton exam scores (1 point each, bilateral items scored per side, for a maximum of 9): passive dorsiflexion of the pinky finger beyond 90°, passive apposition of the thumb to the flexor forearm, hyperextension of the elbow beyond 10°, hyperextension of the knee beyond 10°, and forward flexion of the trunk with knees straight so palms rest flat on the floor (this last item is scored once, not per side).</div>
+<div class="quiz" id="q02a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 24-year-old woman with hypermobile joints and soft, velvety, hyperextensible skin is being evaluated for EDS. Her Beighton score is 7/9. Which of the following statements about her work-up is most accurate?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q02b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A young woman with suspected EDS reports that her shoulder "just pops out" during ordinary activities, such as reaching overhead or rolling over in her sleep, without significant trauma and often without much pain. What is the significance of this history?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec3">
+<h2 class="partTitle">03 · EDS Complications &amp; Treatment</h2>
+<article class="topic">
+<h3>Complications</h3>
+<div class="tagline">Vascular and organ rupture are the most feared — and can occur without any preceding trauma</div>
+<ul>
+  <li><strong>Vascular and organ rupture</strong> — the two most feared and mortal complications of EDS. Most common in the vascular and kyphoscoliotic subtypes, but reported in more common subtypes too. Vascular rupture can occur anywhere arterially, most often in the thorax and abdomen. Organ rupture most often involves the <strong>gravid uterus, sigmoid colon, spleen, and liver</strong>.</li>
+  <li><strong>Mitral valve prolapse</strong>, with or without regurgitation (severe regurgitation is less common, but can become clinically significant under physiologic stress such as pregnancy, presenting with CHF/pulmonary edema)</li>
+  <li><strong>Pregnancy</strong> complications: increased risk of cervical incompetence, premature/precipitous labor, significant vaginal/perineal lacerations with vaginal birth, premature rupture of membranes, breech presentation, uterine/bladder prolapse, uterine rupture, and great vessel rupture</li>
+  <li><strong>Surgical interventions</strong> carry significant risk from vessel/organ fragility and prolonged healing time, plus increased bleeding risk from capillary fragility</li>
+  <li><strong>Low blood pressure or POTS</strong> (postural orthostatic tachycardia syndrome)</li>
+  <li><strong>Spontaneous pneumothorax</strong></li>
+  <li><strong>Sleep disturbance</strong> and sleep-disordered breathing</li>
+</ul>
+<div class="pearl"><span class="lbl">Key clinical rule</span>Sudden-onset pain in a patient with suspected or known EDS should prompt <strong>emergent medical evaluation regardless of the presence or absence of trauma</strong> — vascular/organ rupture can occur spontaneously.</div>
+</article>
+
+<article class="topic">
+<h3>Treatment / Management</h3>
+<ul>
+  <li><strong>Multidisciplinary approach</strong> focused on preventing disease progression and subsequent complications</li>
+  <li>Thorough, regular/frequent, comprehensive health surveillance</li>
+  <li>Pregnant EDS patients should be followed and managed by a <strong>high-risk OB/GYN</strong></li>
+  <li>Regular cardiovascular screening (echocardiography for aortic root and mitral valve abnormalities) to catch structural issues that may need surgical intervention before rupture or heart failure occurs</li>
+  <li><strong>Hypertension should be managed aggressively</strong> — it adds strain to already-fragile vasculature and increases complication risk over time</li>
+</ul>
+<div class="quiz" id="q03a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 34-year-old woman with known vascular Ehlers-Danlos syndrome presents with sudden-onset severe abdominal pain. She denies any trauma. What is the most appropriate next step?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec4">
+<h2 class="partTitle">04 · Marfan Syndrome (MFS) — Overview &amp; Cardiology</h2>
+<article class="topic">
+<h3>Marfan Syndrome — Overview</h3>
+<div class="tagline">A fibrillin-1 disorder, not a collagen disorder — the outlier of the four genetic CTDs in this lecture</div>
+<ul>
+  <li>Primarily impacts the <strong>heart, blood vessels, eyes, bones, and joints</strong>, and sometimes the lungs and skin</li>
+  <li><strong>Mutations in the FBN1 gene</strong> (chromosome 15), which affects the <strong>fibrillin-1</strong> protein essential for connective tissue elasticity and strength</li>
+  <li>Prevalence: <strong>1 in 3,000 to 5,000</strong> individuals</li>
+  <li><strong>Clinical findings and genetic testing are the only diagnostic determinants</strong></li>
+</ul>
+<div class="pearl"><span class="lbl">Inheritance detail worth remembering</span>MFS is autosomal dominant — a person needs only one copy of the mutated FBN1 gene to develop the condition. However, in about <strong>25% of cases the mutation occurs spontaneously</strong>, with no family history at all.</div>
+<table class="data-table">
+<caption>Marfan syndrome — system-by-system findings</caption>
+<tr><th>Body System</th><th>Common Symptoms</th></tr>
+<tr><td><strong>Skeletal</strong></td><td>Tall/thin stature; disproportionately long arms and legs relative to torso (dolichostenomelia), fingers/toes (arachnodactyly); scoliosis; pectus excavatum or pectus carinatum; flat feet; flexible/unstable joints</td></tr>
+<tr><td><strong>Cardiovascular</strong></td><td>Aortic enlargement/aneurysm; mitral valve prolapse; risk of aortic dissection</td></tr>
+<tr><td><strong>Ocular</strong></td><td>Ectopia lentis (dislocated lens); myopia; retinal detachment; glaucoma</td></tr>
+<tr><td><strong>Other</strong></td><td>Stretch marks unrelated to weight change; spontaneous pneumothorax; dental crowding; long, narrow face</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>MFS and Cardiology</h3>
+<div class="tagline">The aorta drives both morbidity and mortality — and the complication is preventable with timely surgery</div>
+<ul>
+  <li>Echocardiogram recommended <strong>at diagnosis and again at 6 months</strong></li>
+  <li>Aortic root disease (aortic regurgitation, aneurysmal dilatation, dissection) is the <strong>primary cause of morbidity and mortality in MFS</strong>, in up to <strong>60–80%</strong> of patients</li>
+  <li>MFS causes an aortic dissection in <strong>50% of patients under age 40</strong> worldwide</li>
+  <li><strong>Aortic dissection and rupture are preventable</strong> — via prophylactic replacement of the ascending aorta, recommended once the aortic sinus diameter reaches <strong>5.0 cm</strong></li>
+  <li><strong>40–54%</strong> will have mitral valve prolapse (frequency increases with age, more prevalent in women); the tricuspid valve is affected in a small percentage</li>
+</ul>
+<div class="formula"><span class="lbl">Number to know cold</span>Prophylactic ascending aortic root replacement is recommended once the aortic sinus diameter reaches <strong>5.0 cm</strong> — this single threshold is what actually prevents the leading cause of death in MFS.</div>
+<div class="quiz" id="q04a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 28-year-old man with genetically confirmed Marfan syndrome has a routine echocardiogram showing an aortic root diameter at the sinuses of 5.2 cm, with no symptoms. What is the most appropriate next step in management?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec5">
+<h2 class="partTitle">05 · Marfan Syndrome — Orthopedics</h2>
+<article class="topic">
+<h3>MFS — Musculoskeletal Findings</h3>
+<div class="tagline">Overgrowth and laxity dominate — but a few joints are paradoxically stiff</div>
+<ul>
+  <li>Excess linear growth of the long bones and joint laxity — patients are taller than the general population with disproportionately long extremities relative to trunk length</li>
+  <li>Positive <strong>thumb sign</strong> and <strong>wrist sign</strong></li>
+  <li>Pectus carinatum or pectus excavatum</li>
+  <li>Severe hindfoot valgus</li>
+  <li><strong>Scoliosis</strong></li>
+  <li><strong>Acetabular protrusion</strong> (protrusio acetabuli)</li>
+</ul>
+<div class="pearl"><span class="lbl">Counterintuitive point</span>Despite the overall picture of joint laxity, some MFS patients have <strong>reduced</strong> joint mobility, particularly of the elbow and digits — hypermobility in MFS is not uniform across every joint.</div>
+<div class="pearl"><span class="lbl">Scoliosis in MFS — different behavior than idiopathic scoliosis</span>50–63% of MFS patients develop some degree of scoliosis, often early in childhood/adolescence, sometimes with atypical curve patterns (e.g., double major curves) that can progress more rapidly. Only about <strong>one-third</strong> typically require intervention (bracing or surgery). Critically, <strong>MFS scoliosis is less responsive to bracing</strong> — a brace is only used in skeletally immature patients with curves less than 25°. MFS patients also have a significantly <strong>higher rate of surgical complications</strong> than non-MFS scoliosis patients.</div>
+<div class="pearl"><span class="lbl">Acetabular protrusion — the mechanism</span>Protrusio acetabuli is defined as medial protrusion of the acetabulum ≥3 mm beyond the ilioischial (Kohler) line. Hip joint degeneration (osteoarthritis) in MFS is secondary to ligamentous laxity <strong>combined with</strong> this underlying bony abnormality — not laxity alone.</div>
+</article>
+</section>
+
+<section class="part" id="sec6">
+<h2 class="partTitle">06 · Marfan Syndrome — Ocular/Pulmonary Findings &amp; Ghent Criteria</h2>
+<article class="topic">
+<h3>Ocular &amp; Pulmonary Findings</h3>
+<ul>
+  <li><strong>Annual ophthalmologic evaluation</strong> is recommended for all MFS patients, given <strong>ectopia lentis</strong> (dislocated lens) in 50–80% of patients — requires a maximally dilated slit lamp exam</li>
+  <li>Other ocular findings: flat cornea, retinal detachment, glaucoma, early cataract formation</li>
+  <li><strong>Dural ectasia</strong>: abnormal widening/"ballooning" of the dural sac, most commonly in the lumbosacral spine, causing posterior vertebral scalloping — highly prevalent in MFS (63–92% of patients). Presents as low back pain or radicular pain in the buttocks/legs; pain may relate to periosteal pressure, erosion of lumbosacral elements, nerve root traction, or sacral microfractures secondary to osteopenia. (Also seen in vascular EDS.)</li>
+  <li><strong>Emphysematous pulmonary changes</strong>: lung bullae predominantly in the upper lobes, predisposing to <strong>spontaneous pneumothorax</strong></li>
+</ul>
+<div class="quiz" id="q06a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with Marfan syndrome reports chronic low back pain radiating into the buttocks, with imaging showing posterior scalloping of the lumbosacral vertebral bodies. What is the most likely underlying explanation?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+
+<article class="topic">
+<h3>Ghent Criteria</h3>
+<div class="tagline">Informational only, per the lecture — know that it exists and what it's for, not the point-by-point detail</div>
+<p>The Ghent criteria combine major and minor findings across multiple organ systems (skeletal, ocular, cardiovascular, dural, pulmonary, skin, and family/genetic history) to formally establish a diagnosis of Marfan syndrome. Dr. Langevin was explicit that <strong>this is informational only — do not study it in great detail; just be aware of its utility.</strong></p>
+<div class="pearl"><span class="lbl">The actual takeaway</span>MFS diagnosis and management is a team sport: work with clinical geneticists/genetic counselors, cardiology, ophthalmology, orthopedics, and specialized pediatrics. The Ghent criteria are the formal tool that team uses — you don't need to reproduce it from memory.</div>
+</article>
+</section>
+
+<section class="part" id="sec7">
+<h2 class="partTitle">07 · Stickler Syndrome — Overview</h2>
+<article class="topic">
+<h3>Stickler Syndrome — Genetics &amp; Epidemiology</h3>
+<div class="tagline">The third most common inherited connective tissue disorder</div>
+<ul>
+  <li>A group of genetic conditions affecting several genes that encode for collagen</li>
+  <li><strong>80%</strong> have a variant in <strong>COL2A1</strong>; the second most common is <strong>COL11A1</strong></li>
+  <li>Prevalence: <strong>1 in 7,500 to 9,000</strong> newborns — making it the <strong>3rd most common inherited connective tissue disorder</strong></li>
+  <li>Signs and symptoms vary widely between affected individuals, <strong>even within the same family</strong></li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Physical Features</h3>
+<ul>
+  <li><strong>Facial features:</strong> cleft palate, flattened face, small lower jaw (micrognathia), recessed chin</li>
+  <li><strong>Eye problems:</strong> severe myopia, retinal detachment (a leading cause of blindness in this population), cataracts, glaucoma</li>
+  <li><strong>Musculoskeletal:</strong> joint hypermobility, early-onset arthritis, scoliosis in some cases</li>
+  <li><strong>Hearing loss:</strong> conductive or sensorineural — common</li>
+  <li><strong>Pierre Robin sequence:</strong> a combination of cleft palate, small lower jaw, and tongue-based obstruction</li>
+</ul>
+<div class="pearl"><span class="lbl">Pierre Robin sequence — the actual mechanism</span>This is a chain reaction, not three independent findings: a small lower jaw (micrognathia) causes the tongue to sit further back (glossoptosis), which then often prevents the roof of the mouth from closing normally, resulting in a cleft palate. Understanding the sequence (not just the list) is what makes this testable.</div>
+<div class="pearl"><span class="lbl">Timing of diagnosis</span>Stickler syndrome is generally diagnosed during infancy or childhood, often prompted by severe myopia, cleft palate, or Pierre Robin sequence. Individuals with milder symptoms may not be diagnosed until adolescence or adulthood. Cleft palate is itself classified: Class I (soft palate only), Class II (hard and soft palate), Class III (unilateral lip/palate), Class IV (bilateral lip/palate).</div>
+</article>
+</section>
+
+<section class="part" id="sec8">
+<h2 class="partTitle">08 · Stickler Syndrome — Complications, Diagnosis &amp; Surveillance</h2>
+<article class="topic">
+<h3>Complications by System</h3>
+<table class="data-table">
+<caption>Stickler syndrome complications</caption>
+<tr><th>System</th><th>Complications</th></tr>
+<tr><td>Joint &amp; skeletal</td><td>Early-onset arthritis (30s–40s); joint hypermobility that may become stiff; scoliosis/kyphosis with back pain; knock knees; hip issues (Legg-Calve-Perthes disease); abnormal bone ends</td></tr>
+<tr><td>Facial, oral &amp; breathing</td><td>Commonly seen in infants/children, often with Pierre Robin sequence: cleft palate, micrognathia (tongue falls back), feeding/breathing difficulties in infants, dental crowding from small jaws</td></tr>
+<tr><td>Eye &amp; vision</td><td>Retinal detachment (high risk of blindness if untreated); severe myopia (very common); vitreous degeneration; cataracts, glaucoma, astigmatism, strabismus</td></tr>
+<tr><td>Ear &amp; hearing</td><td>Sensorineural hearing loss that can worsen over time; frequent ear infections from abnormal facial structures; deafness possible in extreme cases</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Other potential complications</span>Increased risk of mitral valve prolapse; learning challenges, often secondary to the vision and hearing impairments rather than a primary cognitive issue.</div>
+</article>
+
+<article class="topic">
+<h3>Diagnosis &amp; Surveillance</h3>
+<ul>
+  <li><strong>No single universal test</strong> — diagnosis relies on a combination of methods</li>
+  <li><strong>Clinical criteria:</strong> a constellation of symptoms, often scored with a point-based system assessing eyes, ears, bones/joints, palate, and family history</li>
+  <li><strong>Genetic testing</strong> confirms mutations in collagen genes (COL2A1, COL11A1, COL11A2, COL9A) — helps distinguish types and aids family planning</li>
+  <li><strong>Specialized assessment:</strong> ophthalmologists play a key role, particularly in identifying "ocular-only" variants</li>
+</ul>
+<div class="pearl"><span class="lbl">Surveillance team</span><strong>Ophthalmology (critical):</strong> regular, frequent check-ups with a vitreoretinal specialist to screen for cataracts, glaucoma, and retinal detachment. <strong>Audiology &amp; ENT:</strong> annual hearing evaluations. <strong>Orthopedics/Rheumatology:</strong> monitoring for scoliosis, joint pain, early-onset osteoarthritis. <strong>Cleft/craniofacial team:</strong> managing palate issues, feeding, and breathing.</div>
+<div class="quiz" id="q08a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Of the multidisciplinary team involved in surveillance for a child with Stickler syndrome, which specialty's monitoring is most critical given the risk of irreversible vision loss?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec9">
+<h2 class="partTitle">09 · Osteogenesis Imperfecta (OI) — Overview &amp; Types</h2>
+<article class="topic">
+<h3>OI — Overview</h3>
+<div class="tagline">"Brittle bone disease" — a type I collagen structural defect</div>
+<ul>
+  <li>Occurrence: <strong>1 in 15,000 to 20,000</strong> births</li>
+  <li>Classified into <strong>11 types</strong>, each with subtypes, following varying autosomal patterns and severity — <strong>Types I–V</strong> are the traditional/classic types; VI–XIX are very rare and involve different genes</li>
+  <li>Quantitative and/or qualitative abnormalities in <strong>structurally normal</strong> type I collagen; typical mutations in <strong>COL1A1</strong> and <strong>COL1A2</strong></li>
+  <li>Leads to insufficient osteoid production; <strong>both enchondral and intramembranous ossification</strong> are affected</li>
+  <li>Thin, poorly organized bony trabeculae and collagen matrix, with scanty spongiosa</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>OI Types</h3>
+<table class="data-table">
+<caption>Osteogenesis imperfecta — classic types I–V</caption>
+<tr><th>Type</th><th>Severity</th><th>Key Characteristics</th></tr>
+<tr><td><strong>I</strong></td><td>Mild</td><td>Most common; few fractures, blue sclerae, possible hearing loss; normal or near-normal height</td></tr>
+<tr><td><strong>II</strong></td><td>Severe/Lethal</td><td>Often fatal in infancy; multiple in-utero fractures, severe deformities, respiratory issues</td></tr>
+<tr><td><strong>III</strong></td><td>Severe</td><td>Progressive deformities, short stature, many fractures, scoliosis; wheelchair use common</td></tr>
+<tr><td><strong>IV</strong></td><td>Moderate</td><td>Variable fractures, mild-to-moderate deformities, short stature; may need mobility aids</td></tr>
+<tr><td><strong>V</strong></td><td>Moderate</td><td>Similar to IV, but with unique bone changes such as hyperplastic callus formation</td></tr>
+</table>
+<div class="formula"><span class="lbl">Classic radiographic buzzwords</span><strong>"Saber shin" deformity</strong> — anterior bowing of the tibia. <strong>"Codfish vertebrae"</strong> — biconcave appearance of multiple vertebral bodies from repeated compression deformities over time. Also look for severe long-bone bowing and multiple growth-arrest lines.</div>
+<div class="quiz" id="q09a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A radiograph of a child with suspected osteogenesis imperfecta shows biconcave vertebral bodies from repeated compression deformities, along with anterior bowing of the tibia. What are these two radiographic findings called, respectively?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec10">
+<h2 class="partTitle">10 · Osteogenesis Imperfecta — Diagnosis &amp; Management</h2>
+<article class="topic">
+<h3>Diagnosis</h3>
+<ul>
+  <li>Combination of clinical presentation, family history, lumbar spine bone mineral density assessment, bone biochemistry, and characteristic radiographic findings</li>
+  <li>Prenatal ultrasound may detect severe cases; skin biopsy can assess collagen production</li>
+  <li><strong>4 hallmark features:</strong> decreased bone mass with increased fracture risk, blue sclerae, dentinogenesis imperfecta (normal enamel with abnormal dentin), and hearing loss</li>
+  <li><strong>No single confirmatory lab test</strong></li>
+</ul>
+<div class="pearl"><span class="lbl">Essential safety step</span>In any patient presenting with multiple fractures, it is essential to <strong>exclude non-accidental trauma</strong> as part of the initial evaluation — OI is a genuine mimic of abuse and must be ruled in/out carefully in both directions.</div>
+</article>
+
+<article class="topic">
+<h3>Medical Management</h3>
+<ul>
+  <li><strong>Bisphosphonates</strong> (IV pamidronate, oral alendronate) — reduce osteoclastic bone resorption, decreasing fracture risk; this is the clinically established mainstay</li>
+  <li><strong>Research-only modalities:</strong> stem cell therapy, gene therapy, biologics — gene/cell therapy targeting COL1A1/COL1A2 has shown promise in animal models but isn't widely available; sclerostin antibody (romosozumab) has shown benefit in animal studies without human trials; denosumab has improved bone quality in small studies but isn't approved for routine use; teriparatide increased bone density in a small trial but remains unapproved for this population</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Orthopedic Management</h3>
+<ul>
+  <li>Goals: improve functional status, prevent deformity and disability, correct existing deformities, monitor for complications</li>
+  <li>Orthotic devices, walking aids, and wheelchairs</li>
+  <li>Fracture management and correction of long bone deformities</li>
+  <li><strong>Prophylactic intramedullary rodding</strong> is recommended for children with recurrent long bone fractures — rod selection (telescoping vs. non-telescoping) is based on bone size and skeletal maturity</li>
+</ul>
+<div class="pearl"><span class="lbl">Prognosis</span>Depends heavily on type — mild forms allow a near-normal lifespan with managed risks, while severe types may lead to significant disability or early mortality due to complications like respiratory failure. Treatment advances have meaningfully improved outcomes.</div>
+<div class="quiz" id="q10a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child with osteogenesis imperfecta is started on intravenous pamidronate. What is the mechanism by which bisphosphonates reduce fracture risk in this condition?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec11">
+<h2 class="partTitle">11 · Other Genetic Connective Tissue Disorders</h2>
+<article class="topic">
+<h3>Quick-Reference Table</h3>
+<div class="tagline">Three additional genetic CTDs worth recognizing by name and hallmark feature</div>
+<table class="data-table">
+<caption>Additional genetic connective tissue disorders</caption>
+<tr><th>Disorder</th><th>Key Features</th><th>Genetic Cause</th><th>Inheritance</th></tr>
+<tr><td><strong>Loeys-Dietz Syndrome (LDS)</strong></td><td>Aortic aneurysms, arterial tortuosity, hypertelorism, bifid uvula or cleft palate, joint laxity, skeletal issues — <strong>more aggressive vascular problems than Marfan</strong></td><td>Mutations in TGFBR1, TGFBR2, SMAD3, TGFB2, or TGFB3 (TGF-β signaling)</td><td>Autosomal dominant</td></tr>
+<tr><td><strong>Epidermolysis Bullosa (EB)</strong></td><td>Fragile skin that blisters easily from minor trauma, leading to scarring, nail loss, and sometimes internal (e.g., esophageal) involvement</td><td>Mutations in genes encoding skin structural proteins (e.g., keratin, collagen VII)</td><td>Autosomal dominant or recessive</td></tr>
+<tr><td><strong>Pseudoxanthoma Elasticum (PXE)</strong></td><td>Yellowish skin papules, loose skin, vision loss from retinal changes, cardiovascular issues (early atherosclerosis)</td><td>Mutations in ABCC6, affecting elastic fibers</td><td>Autosomal recessive</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Why Loeys-Dietz is worth distinguishing from Marfan</span>Both are aortic-aneurysm-prone connective tissue disorders that can look similar clinically, but LDS carries a more aggressive vascular course than MFS — this distinction matters for surveillance intensity and surgical thresholds, even though the exact numbers weren't emphasized in lecture.</div>
+</article>
+</section>
+
+<section class="part" id="sec12">
+<h2 class="partTitle">12 · Board Review — Pt. 1</h2>
+<article class="topic">
+<h3>Consolidated Review Questions</h3>
+<div class="tagline">Practice vignettes spanning EDS, Marfan, Stickler, and OI</div>
+<div class="quiz" id="qFinal1A">
+<div class="qhead">Question A</div>
+<div class="qtext">A 16-year-old girl has hyperextensible, velvety skin with thin atrophic scars, hypermobile joints, and a history of several atraumatic shoulder dislocations that occurred during sleep. Which of the following is true regarding her evaluation?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal1B">
+<div class="qhead">Question B</div>
+<div class="qtext">A tall, thin 19-year-old man with arachnodactyly and a positive wrist sign is found to have ectopia lentis on ophthalmologic exam and an aortic root diameter of 4.6 cm. Of the following, what is the most appropriate management at this time?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal1C">
+<div class="qhead">Question C</div>
+<div class="qtext">A newborn has micrognathia, glossoptosis, and a cleft palate. Genetic testing later confirms a COL2A1 mutation. What is the name for the sequence of findings observed at birth?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal1D">
+<div class="qhead">Question D</div>
+<div class="qtext">An infant presents with multiple fractures of varying ages, blue sclerae, and a family history of "brittle bones." Prior to confirming a diagnosis of osteogenesis imperfecta, what must always be excluded first?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<div style="text-align:center; margin:60px 0 10px;">
+  <div style="display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:10px 24px;">Connective Tissue Diseases, Pt. 2 Begins</div>
+</div>
+
+<section class="part" id="sec13">
+<h2 class="partTitle">13 · Pt. 2 Intro &amp; Disease Overview</h2>
+<article class="topic">
+<h3>Lecture Objectives</h3>
+<div class="tagline">Connective Tissue Diseases Pt. 2 — the autoimmune group</div>
+<p>For each disease topic below, describe the etiology/causes and pathophysiology, risk factors, signs and symptoms, skin/muscle/end-organ manifestations, diagnostic criteria, and basic treatment strategies:</p>
+<ul>
+  <li>Ankylosing spondylitis</li>
+  <li>Psoriatic arthritis</li>
+  <li>Inflammatory bowel disease-associated spondyloarthropathy</li>
+  <li>Systemic lupus erythematosus</li>
+  <li>Antiphospholipid antibody syndrome</li>
+  <li>Reactive arthritis</li>
+  <li>Scleroderma</li>
+  <li>Dermatomyositis</li>
+  <li>Polymyositis</li>
+  <li>Mixed connective tissue disease</li>
+  <li>Relapsing polychondritis</li>
+  <li>Septic arthritis</li>
+</ul>
+<div class="pearl"><span class="lbl">Same 200+/2-group framework as Part 1</span>Connective tissue diseases remain the same over-200-diagnosis category split into autoimmune disorders (immune system attacks its own tendons, ligaments, cartilage, blood vessels) and genetic/inherited disorders (Part 1). This lecture covers the autoimmune half in depth.</div>
+</article>
+
+<article class="topic">
+<h3>Disease Overview Table</h3>
+<div class="tagline">The five diseases given full individual coverage in this lecture, side by side</div>
+<table class="data-table">
+<caption>Autoimmune CTD overview</caption>
+<tr><th>Disease</th><th>Key Features</th><th>Clinical Presentation</th><th>Diagnostic Criteria</th></tr>
+<tr><td><strong>Psoriatic Arthritis</strong></td><td>Inflammatory arthritis with psoriasis; enthesitis, dactylitis, nail changes; oligo/poly/distal/mutilans/spondyloarthritis subtypes</td><td>Asymmetric joint pain/swelling (knees, ankles, fingers/toes); sausage digits; back pain; skin/nail psoriasis; fatigue; eye inflammation</td><td><strong>CASPAR criteria</strong>: inflammatory articular disease + ≥3 points from psoriasis (current 2, FHx 1), nail dystrophy (1), negative RF (1), dactylitis (1), juxta-articular new bone (1)</td></tr>
+<tr><td><strong>Ankylosing Spondylitis</strong></td><td>Chronic inflammatory disease of the axial spine; strong HLA-B27 association; leads to spinal fusion (ankylosis)</td><td>Lower back pain/stiffness (worse AM/inactivity); neck/hip pain; fatigue; enthesitis; uveitis; reduced spinal mobility; stooped posture</td><td><strong>ASAS criteria</strong>: back pain ≥3 months, onset &lt;45yo, plus sacroiliitis on imaging + ≥1 SpA feature, OR HLA-B27 + ≥2 SpA features</td></tr>
+<tr><td><strong>IBD-Associated SpA</strong></td><td>Seronegative SpA linked to Crohn's/UC; axial/peripheral joints, enthesitis; HLA-B27+ in many axial cases</td><td>Inflammatory back/buttock pain; asymmetric oligo/polyarthritis (often lower limb); enthesitis; dactylitis; may parallel IBD flares</td><td>No specific criteria — diagnosed as enteropathic SpA via ASAS criteria + Calin criteria (≥4/5: onset &lt;40, &gt;3mo, insidious, AM stiffness, improves with exercise)</td></tr>
+<tr><td><strong>Systemic Lupus Erythematosus</strong></td><td>Multisystem autoimmune disease with autoantibodies (ANA, anti-dsDNA); flares/remissions; affects skin/joints/kidneys; more common in women</td><td>Fatigue, fever, malar rash, photosensitivity, arthritis, oral ulcers, serositis, renal issues, neurologic symptoms, hematologic abnormalities</td><td><strong>2019 EULAR/ACR criteria</strong>: positive ANA (≥1:80) as entry, then weighted additive criteria across 7 clinical + 3 immunologic domains; total ≥10 classifies as SLE</td></tr>
+<tr><td><strong>Septic Arthritis</strong></td><td>Acute joint infection (usually bacterial); risk factors include prosthesis, IV drug use, immunosuppression; rapid progression</td><td>Acute monoarticular pain, swelling, warmth, fever; limited ROM; effusion; systemic signs</td><td>No formal criteria — clinical + synovial fluid: WBC &gt;50,000/mm³ (&gt;90% PMNs), positive culture, low glucose; Kocher criteria in peds</td></tr>
+</table>
+</article>
+</section>
+
+<section class="part" id="sec14">
+<h2 class="partTitle">14 · Labs — General Screening &amp; Inflammation Markers</h2>
+<article class="topic">
+<h3>CBC, ESR, CRP &amp; CMP</h3>
+<div class="tagline">The first-line labs run whenever an autoimmune CTD is suspected</div>
+<table class="data-table">
+<caption>General screening &amp; inflammation labs</caption>
+<tr><th>Test</th><th>Definition</th><th>Role in Diagnosis</th><th>Role in Management</th></tr>
+<tr><td><strong>CBC</strong></td><td>Measures RBCs, WBCs, hemoglobin, hematocrit, platelets</td><td>Detects anemia (common in SLE/RA), leukopenia, thrombocytopenia, or other abnormalities suggesting autoimmune activity</td><td>Monitors for complications like anemia of chronic disease or medication toxicity (e.g., from immunosuppressants)</td></tr>
+<tr><td><strong>ESR</strong></td><td>How quickly RBCs settle in a tube — a proxy for inflammation</td><td>Elevated in active inflammation from CTDs; reflects more <strong>chronic</strong> inflammation</td><td>Tracks disease activity and treatment response; rises during flares</td></tr>
+<tr><td><strong>CRP</strong></td><td>A liver-produced protein released in response to inflammation</td><td>Indicates <strong>acute</strong> inflammation; often elevated in RA or other CTDs</td><td>Monitors flares, infection, or treatment efficacy; more specific for acute changes than ESR</td></tr>
+<tr><td><strong>CMP</strong></td><td>Electrolytes, glucose, kidney function (creatinine), liver enzymes (ALT/AST)</td><td>Evaluates kidney/liver involvement (e.g., SLE nephritis) or establishes a baseline</td><td>Checks for organ damage or drug toxicity (e.g., from methotrexate)</td></tr>
+</table>
+<div class="pearl"><span class="lbl">ESR vs. CRP — the distinction that actually matters clinically</span>ESR reflects more chronic inflammation; CRP is more acute (though it can stay elevated chronically too). If a patient is having flare-ups, CRP is the more useful marker to follow in that acute window. Both are nonspecific — an elevated ESR/CRP could reflect autoimmune disease OR infection, not one or the other.</div>
+<div class="pearl"><span class="lbl">Methotrexate monitoring</span>Methotrexate requires <strong>folic acid supplementation</strong> to mitigate side effects. A serious toxic effect to watch for on the CMP is <strong>liver damage</strong> — this is exactly why a baseline CMP and ongoing monitoring matter whenever a patient starts methotrexate.</div>
+<div class="quiz" id="q14a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with known SLE presents with a new flare of joint pain and skin rash. Which inflammatory marker is most useful for tracking this acute change, as opposed to reflecting more chronic, baseline inflammation?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec15">
+<h2 class="partTitle">15 · Labs — Autoantibody Tests</h2>
+<article class="topic">
+<h3>Sensitivity vs. Specificity — the Concept Underlying This Whole Panel</h3>
+<ul>
+  <li><strong>Sensitivity:</strong> the proportion of actual positive cases (true positives) correctly identified as positive — how well a test <em>detects</em> the condition. A good screening test tolerates some false positives in exchange for catching everyone with the disease (e.g., rapid strep).</li>
+  <li><strong>Specificity:</strong> the proportion of actual negative cases (true negatives) correctly identified as negative — how well a test <em>rules out</em> the condition. What you don't want in a specific test is a false negative — someone with disease whose test comes back negative.</li>
+</ul>
+<div class="pearl"><span class="lbl">Know your lab's assay type</span>The classic sensitivity/specificity numbers for these autoantibody tests are based on older radioimmunoassay (RIA) methods. Newer assays such as ELISA are faster and cheaper but carry a <strong>higher risk of false positives</strong>. Ask your lab which methodology they use, and factor that into the clinical picture — this becomes especially important in rheumatology practice.</div>
+</article>
+
+<article class="topic">
+<h3>The Autoantibody Panel</h3>
+<table class="data-table">
+<caption>Autoantibody tests for autoimmune CTDs</caption>
+<tr><th>Test</th><th>Definition</th><th>Role in Diagnosis</th><th>Role in Management</th></tr>
+<tr><td><strong>ANA</strong></td><td>Immunofluorescence assay for antibodies to nuclear components; reported as titer + pattern (speckled, homogeneous, etc.)</td><td>Primary screening test for CTDs; highly sensitive (~95% of SLE cases positive) but nonspecific — follow a positive with specific autoantibody tests</td><td>Less useful for monitoring — titers don't correlate well with activity; used mainly to confirm persistence</td></tr>
+<tr><td><strong>Anti-dsDNA</strong></td><td>Antibodies to double-stranded DNA</td><td>Highly <strong>specific</strong> for SLE; positive in 60–70% of cases, especially with active disease</td><td>Monitors SLE activity — rising titers may predict flares, especially renal involvement</td></tr>
+<tr><td><strong>Anti-Smith (anti-Sm)</strong></td><td>Antibodies to Sm nuclear proteins</td><td>Highly specific for SLE; present in 20–30% of cases</td><td>Not typically used for monitoring — levels are stable</td></tr>
+<tr><td><strong>Anti-RNP</strong></td><td>Antibodies to ribonucleoproteins</td><td>Key for <strong>MCTD</strong> diagnosis; also seen in SLE or scleroderma</td><td>Helps differentiate overlap syndromes; monitors for complications</td></tr>
+<tr><td><strong>Anti-SSA (Ro) / Anti-SSB (La)</strong></td><td>Antibodies to SSA/Ro and SSB/La proteins</td><td>Associated with Sjögren's syndrome and neonatal lupus; also seen in SLE</td><td>Guides pregnancy management in positive cases due to fetal heart block risk</td></tr>
+<tr><td><strong>Rheumatoid Factor (RF)</strong></td><td>Antibodies (usually IgM) against the Fc portion of IgG</td><td>Positive in ~70% of RA; also seen in other CTDs</td><td>Predicts more aggressive RA; monitors response to therapy. Sensitive, not specific.</td></tr>
+<tr><td><strong>Anti-CCP</strong></td><td>Antibodies to citrullinated proteins</td><td>Highly specific for RA; an early marker with higher specificity than RF</td><td>Predictive of erosive disease; levels may decrease with effective treatment</td></tr>
+</table>
+<div class="quiz" id="q15a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient has a positive ANA at a titer of 1:160. What is the most appropriate interpretation of this result on its own?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q15b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Which of the following autoantibodies is the most helpful for distinguishing SLE from other autoimmune connective tissue diseases, given its high specificity despite being positive in only 20–30% of SLE cases?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec16">
+<h2 class="partTitle">16 · Labs — Complement, Urinalysis, CK &amp; HLA-B27</h2>
+<article class="topic">
+<h3>Additional Labs</h3>
+<table class="data-table">
+<caption>Complement, urinalysis, and creatine kinase</caption>
+<tr><th>Test</th><th>Definition</th><th>Role in Diagnosis</th><th>Role in Management</th></tr>
+<tr><td><strong>Complement (C3, C4)</strong></td><td>Measures proteins of the complement system involved in immune response</td><td>Low levels indicate consumption in active SLE or vasculitis</td><td>Monitors SLE flares; normalization suggests remission</td></tr>
+<tr><td><strong>Urinalysis</strong></td><td>Analysis of urine for protein, blood, cells, etc.</td><td>Detects kidney involvement (e.g., proteinuria in lupus nephritis)</td><td>Regular screening for renal damage or progression</td></tr>
+<tr><td><strong>Creatine Kinase (CK)</strong></td><td>Enzyme released from damaged muscle</td><td>Elevated in polymyositis or dermatomyositis</td><td>Tracks muscle inflammation and treatment response</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>HLA-B27</h3>
+<div class="tagline">A useful clinical tool in the right context — but never a stand-alone diagnostic test</div>
+<ul>
+  <li>A genetic marker, coded on leukocytes, strongly associated with autoimmune diseases that cause chronic inflammation</li>
+  <li>~<strong>8%</strong> of the U.S. population is HLA-B27 positive; only about <strong>1–8%</strong> of positive individuals go on to be diagnosed with an inflammatory condition</li>
+  <li><strong>You do not need this gene to be diagnosed</strong> with an inflammatory condition — a negative result does not rule anything out</li>
+  <li>This should not be tested in a vacuum to see if someone is positive or negative; it is run in a specific clinical context, usually by a specialist</li>
+</ul>
+<table class="data-table">
+<caption>HLA-B27-associated conditions</caption>
+<tr><th>Condition</th><th>% HLA-B27 Positive</th></tr>
+<tr><td>Ankylosing Spondylitis (AS)</td><td>90–95%</td></tr>
+<tr><td>Reactive Arthritis</td><td>30–90% (60–90% in post-infectious cases)</td></tr>
+<tr><td>Psoriatic Arthritis</td><td>20–70%</td></tr>
+<tr><td>Inflammatory Bowel Disease</td><td>50–75%</td></tr>
+<tr><td>Undifferentiated Spondyloarthropathy</td><td>50–80%</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Population variation</span>A 2009 survey reported HLA-B27 prevalence at 7.5% among non-Hispanic Whites, 4.6% among Mexican-Americans, and 1.1% among non-Hispanic Blacks.</div>
+<div class="quiz" id="q16a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 28-year-old man requests HLA-B27 testing after reading online that it is associated with ankylosing spondylitis, even though he has no back pain or other symptoms. What is the most appropriate counseling point?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec17">
+<h2 class="partTitle">17 · Psoriatic Arthritis — Risk Factors &amp; Pathophysiology</h2>
+<article class="topic">
+<h3>Risk Factors &amp; Epidemiology</h3>
+<ul>
+  <li><strong>Risk factors:</strong> psoriasis and family history; obesity, smoking/alcohol, trauma, infections/stress</li>
+  <li>Affects <strong>0.1–1%</strong> of the general population and <strong>~20%</strong> of patients with psoriasis</li>
+  <li><strong>33–50%</strong> have a first-degree relative with PsA</li>
+  <li>Onset in the 30s–40s, with roughly equal male/female distribution</li>
+  <li><strong>More severe psoriasis = more likely to develop PsA</strong>; incidence increases with time (1.7% at 5 years of psoriasis, 3.1% at 10 years, 5.1% at 20 years, 20.5% at 30 years)</li>
+  <li>Skin disease precedes arthritis in <strong>68%</strong> of cases; arthritis and skin disease coincide in 15%; arthritis precedes skin disease in 17%</li>
+</ul>
+<div class="pearl"><span class="lbl">Predictors of PsA in a psoriasis patient</span>A severe psoriasis phenotype, scalp/intergluteal/perianal psoriasis, nail pitting, low level of education, and uveitis all predict future development of PsA. If a psoriasis patient shows these patterns, educate them to report joint pain early rather than dismissing it as normal aches — earlier treatment limits long-term joint damage.</div>
+<div class="pearl"><span class="lbl">Triggers vs. cause</span>Infections and lifestyle factors (obesity, smoking, alcohol) do <strong>not cause</strong> PsA, but in genetically predisposed people they can trigger the chronic inflammatory response that tips PsA into activity.</div>
+</article>
+
+<article class="topic">
+<h3>Pathophysiology</h3>
+<ul>
+  <li><strong>CD4+/CD8+ T cells</strong> produce <strong>IL-17</strong> and <strong>TNF-alpha</strong></li>
+  <li>This process occurs mostly at the <strong>enthesis</strong> — the point where fascia, ligaments, and tendons/joint capsules attach to bone — rather than in the synovium itself, which is the more classic site of inflammation in rheumatoid arthritis</li>
+</ul>
+<div class="formula"><span class="lbl">Enthesitis, in mechanistic terms</span>At the enthesis, collagen fibers normally run in parallel for strength; near the bony attachment, fibers shift to a more perpendicular orientation and calcify into the bone. Proinflammatory cytokines (IL-17, TNF-α) trigger neutrophil recruitment into the synovial fluid, activate synoviocytes, promote local angiogenesis, and simultaneously activate <strong>osteoclasts</strong> (bone destruction) <strong>and</strong> <strong>osteoblasts</strong> (new bone formation) — this dual, simultaneous destructive/reparative process at the enthesis is the pathophysiologic hallmark that distinguishes PsA from RA.</div>
+<div class="quiz" id="q17a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What is the primary anatomic site of inflammation in psoriatic arthritis, and how does this differ from the primary site of inflammation in rheumatoid arthritis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec18">
+<h2 class="partTitle">18 · Psoriatic Arthritis — History &amp; Physical, Patterns &amp; Imaging</h2>
+<article class="topic">
+<h3>History &amp; Physical</h3>
+<ul>
+  <li>Pain, swelling, and stiffness in one or more joints, often worse in the morning or after inactivity; joints may feel warm and tender</li>
+  <li>Can affect any joint, but commonly hands, feet, knees, ankles, and low back</li>
+</ul>
+<table class="data-table">
+<caption>Five PsA patterns (Moll &amp; Wright)</caption>
+<tr><th>Pattern</th><th>Description</th></tr>
+<tr><td>Asymmetric oligoarthritis</td><td>Fewer than 5 joints, often on one side of the body</td></tr>
+<tr><td>Symmetric polyarthritis</td><td>Similar to RA, affecting multiple joints; may involve DIP joints; RF-negative</td></tr>
+<tr><td>Distal arthritis</td><td>Prominent involvement of the distal interphalangeal joints (fingers/toes, near the nails)</td></tr>
+<tr><td>Arthritis mutilans</td><td>Rare, severe destructive joint disease with deformities, especially in the hands/feet</td></tr>
+<tr><td>Spondyloarthritis pattern</td><td>Sacroiliitis and spondylitis, with or without peripheral joint disease — causes back pain</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Physical &amp; Imaging Findings</h3>
+<ul>
+  <li><strong>Dactylitis</strong> ("sausage digit") — diffuse swelling of an entire finger or toe</li>
+  <li>Nail changes: pitting, onycholysis (separation of nail from nail bed, clearing pure white)</li>
+  <li><strong>Pencil-in-cup deformity:</strong> erosion of the proximal bone combined with cupping/doming of the distal bone at the same joint — classic radiographic finding</li>
+  <li><strong>Juxta-articular new bone formation</strong> — distinct from ordinary osteophytes</li>
+  <li><strong>Arthritis mutilans:</strong> profound osteolysis, digital telescoping/shortening, flail joints in severe, long-standing disease</li>
+</ul>
+<div class="pearl"><span class="lbl">Board-level image recognition</span>The pencil-in-cup deformity and juxta-articular new bone formation are the two radiographic findings most likely to be tested by name. Arthritis mutilans represents the destructive end of the same disease spectrum, seen after decades of uncontrolled inflammation at the enthesis.</div>
+<div class="quiz" id="q18a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A radiograph of a patient with long-standing psoriatic arthritis shows erosion of the proximal phalanx combined with cupping of the distal phalanx at the same joint. What is this classic finding called?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec19">
+<h2 class="partTitle">19 · Psoriatic Arthritis — Diagnosis (CASPAR) &amp; Treatment</h2>
+<article class="topic">
+<h3>CASPAR Criteria (2006)</h3>
+<div class="tagline">Inflammatory articular disease + at least 3 points from the list below</div>
+<table class="data-table">
+<caption>CASPAR criteria — points system</caption>
+<tr><th>Feature</th><th>Points</th></tr>
+<tr><td>Skin psoriasis: present</td><td>2</td></tr>
+<tr><td>Skin psoriasis: previously present, OR family history in an unaffected patient</td><td>1</td></tr>
+<tr><td>Nail lesions: onycholysis, pitting, hyperkeratosis</td><td>1</td></tr>
+<tr><td>Dactylitis: present or past, documented by a rheumatologist</td><td>1</td></tr>
+<tr><td>Rheumatoid factor negative (any method except latex)</td><td>1</td></tr>
+<tr><td>Juxta-articular new bone formation, distinct from osteophytes, on X-ray</td><td>1</td></tr>
+</table>
+<div class="formula"><span class="lbl">Performance of CASPAR</span>≥3 points (with inflammatory articular disease present) gives PsA a <strong>specificity of 98.7%</strong> and <strong>sensitivity of 91.4%</strong>.</div>
+<div class="pearl"><span class="lbl">Don't be misled by a positive RF</span>Positive rheumatoid factor is seen in about <strong>2–10%</strong> of PsA patients, and anti-CCP is positive in roughly <strong>5%</strong>. A positive RF does not rule out PsA — always weigh the full clinical picture (is there a skin disease component?) rather than anchoring on one lab value.</div>
+</article>
+
+<article class="topic">
+<h3>Treatment</h3>
+<ul>
+  <li><strong>Nonpharmacologic:</strong> osteopathic manipulation, physical/occupational therapy, exercise programs, smoking cessation</li>
+  <li><strong>DMARDs</strong> — oral small molecule (methotrexate, sulfasalazine, leflunomide, cyclosporine, apremilast) vs. biologic DMARDs for moderate-to-severe cases or axial involvement</li>
+  <li><strong>Labs to follow:</strong> ESR/CRP, ANA, RF, anti-CCP</li>
+</ul>
+<div class="pearl"><span class="lbl">Treatment hierarchy</span>TNF inhibitors are generally preferred over oral small-molecule DMARDs for most PsA — oral small molecules like methotrexate are reserved for patients with mild PsA/psoriasis, based on patient preference, or when a TNF inhibitor is contraindicated. Methotrexate is generally preferred over NSAIDs alone, again reserved for milder disease. Steroids are used for acute flares but chronic steroid use should be avoided.</div>
+<div class="quiz" id="q19a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with inflammatory joint disease has a personal history of psoriasis (currently active), nail pitting, and a negative rheumatoid factor. Using the CASPAR criteria, how many points does this patient have, and does this meet the threshold for psoriatic arthritis (assuming inflammatory articular disease is present)?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec20">
+<h2 class="partTitle">20 · Ankylosing Spondylitis — Epidemiology &amp; Pathophysiology</h2>
+<article class="topic">
+<h3>Epidemiology</h3>
+<ul>
+  <li><strong>0.2–0.5%</strong> of the population</li>
+  <li>Affects men:women at roughly <strong>2:1</strong></li>
+  <li><strong>HLA-B27 positive in 90–95%</strong></li>
+  <li>Presents most commonly before age 40 — <strong>80% experience their first symptom before age 30</strong>; less than 5% are diagnosed after age 45</li>
+  <li>Cause is unknown; increased risk in relatives of affected patients</li>
+  <li>Twice as likely to experience a vertebral fragility fracture — something to treat aggressively and monitor regularly</li>
+</ul>
+<div class="pearl"><span class="lbl">Extra-articular manifestations</span>Inflammatory bowel disease (up to 50% of individuals), acute anterior uveitis (25–35%), and psoriasis (~10%). AS is also linked to increased cardiovascular disease risk (believed to stem from chronic systemic inflammation) and pulmonary complications — diminished chest wall expansion and limited spinal mobility predispose to a restrictive pulmonary pattern.</div>
+</article>
+
+<article class="topic">
+<h3>Pathophysiology</h3>
+<ul>
+  <li>Infiltrating immune cells: CD4+ and CD8+ T lymphocytes and macrophages</li>
+  <li><strong>TNF-α</strong> and <strong>TGF-β</strong> cause inflammation, fibrosis, and ossification at sites affected by enthesitis</li>
+  <li><strong>The enthesis is the major site of inflammation</strong> — the same underlying theme as psoriatic arthritis, just with a different chemical trigger set and a different anatomic distribution (axial spine/SI joints predominating in AS)</li>
+</ul>
+<div class="quiz" id="q20a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 24-year-old man presents with several months of low back pain. His mother has ankylosing spondylitis. Which of the following statements about HLA-B27 testing in this patient is most accurate?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec21">
+<h2 class="partTitle">21 · Ankylosing Spondylitis — History &amp; Physical</h2>
+<article class="topic">
+<h3>History &amp; Physical</h3>
+<ul>
+  <li><strong>Back/buttock/hip pain</strong> is the most common initial and chronic complaint</li>
+  <li>Flattening of the lumbar lordotic curve</li>
+  <li><strong>Labs:</strong> 50–70% of patients with active AS have elevated CRP/ESR — but a normal ESR/CRP does <strong>not</strong> exclude AS</li>
+  <li>Imaging is key to diagnosis and staging</li>
+</ul>
+<div class="formula"><span class="lbl">Inflammatory back pain — 4 of 5 criteria</span>Diagnosed with 4 out of 5 of: (1) symptom onset before age 40, (2) gradual and insidious onset, (3) relief with exercise, (4) lack of improvement with rest, (5) nocturnal pain with improvement upon arising. This pattern — worse with rest, better with movement — is the opposite of typical mechanical back pain.</div>
+<div class="quiz" id="q21a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 27-year-old man reports chronic low back pain that started gradually over months, is worse at night and improves when he gets up and moves around, improves further with exercise, and has not improved with rest. How many of the five features of inflammatory back pain does he have, and what does this suggest?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec22">
+<h2 class="partTitle">22 · Ankylosing Spondylitis — Imaging</h2>
+<article class="topic">
+<h3>Sacroiliitis Grading &amp; Spinal Findings</h3>
+<div class="tagline">Sacroiliitis on imaging is a major inclusion criterion for AS</div>
+<table class="data-table">
+<caption>Sacroiliitis radiographic grading scale</caption>
+<tr><th>Grade</th><th>Findings</th></tr>
+<tr><td>0</td><td>Normal SI joint width, sharp joint margins</td></tr>
+<tr><td>I</td><td>Suspicious changes</td></tr>
+<tr><td>II</td><td>Sclerosis, some erosions</td></tr>
+<tr><td>III</td><td>Severe erosions, pseudo-dilation of the joint space, partial ankylosis</td></tr>
+<tr><td>IV</td><td>Complete ankylosis</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Early vs. late radiographic findings</span><strong>Early stage:</strong> "squaring" of the vertebral bodies (loss of the normal anterior/posterior concavity from inflammation and bone deposition) and <strong>Romanus lesions</strong>, also known as <strong>"shiny corner signs"</strong> — small erosions and reactive sclerosis at the corners of the vertebral bodies. <strong>Late stage:</strong> ankylosis (fusion) of the facet joints, ultimately producing the classic <strong>"bamboo spine"</strong> appearance as the anterior ligament calcifies and the facet/SI joints fuse. MRI may be necessary to detect more subtle abnormalities than plain film can show.</div>
+<div class="quiz" id="q22a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An early lumbar spine radiograph in a young man with suspected ankylosing spondylitis shows small erosions with reactive sclerosis at the corners of several vertebral bodies, along with loss of the normal anterior concavity of the vertebral bodies. What are these two early findings called?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec23">
+<h2 class="partTitle">23 · Ankylosing Spondylitis — Treatment &amp; Complications</h2>
+<article class="topic">
+<h3>Treatment / Management</h3>
+<ul>
+  <li><strong>Nonmedical:</strong> osteopathic manipulation and acupuncture</li>
+  <li><strong>Medications:</strong> NSAIDs for pain/inflammation; biologics (e.g., TNF inhibitors like etanercept) for moderate-severe cases; DMARDs like sulfasalazine for peripheral symptoms</li>
+  <li><strong>Lifestyle:</strong> smoking cessation (worsens progression), good posture, exercise programs (yoga, Pilates, swimming)</li>
+  <li><strong>Surgery:</strong> rare — for severe spinal deformity or hip replacement. Early diagnosis and treatment significantly improve quality of life.</li>
+</ul>
+<div class="pearl"><span class="lbl">OMM and acupuncture aren't just "soft" adjuncts</span>Both have shown to reduce pain and improve mobility, and should be used in conjunction with other modalities. Acupuncture combined with disease-modifying medication has shown reduced inflammatory markers (CRP, TNF, IL-6) compared to medication alone, and patients report significantly improved quality of life when OMM and acupuncture are added to their regimen.</div>
+</article>
+
+<article class="topic">
+<h3>Complications to Surveil</h3>
+<ul>
+  <li>Chronic pain and disability</li>
+  <li><strong>Aortic regurgitation</strong></li>
+  <li><strong>Pulmonary fibrosis</strong></li>
+  <li><strong>Cauda equina syndrome</strong></li>
+  <li><strong>Mood disorders</strong> (depression, anxiety) — patients with AS have a higher incidence of mood disorders related to chronic disease burden; ask about this at every visit if you're following someone regularly</li>
+</ul>
+<div class="quiz" id="q23a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with long-standing ankylosing spondylitis develops new saddle numbness and urinary retention. What serious neurologic complication of AS should be considered?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec24">
+<h2 class="partTitle">24 · IBD-Associated Spondyloarthropathy — Epidemiology &amp; Pathogenesis</h2>
+<article class="topic">
+<h3>Epidemiology</h3>
+<ul>
+  <li><strong>0.2–0.3%</strong> of the general population; <strong>10–20%</strong> of IBD patients will develop SpA</li>
+  <li><strong>Crohn's disease &gt; ulcerative colitis</strong> for developing SpA</li>
+  <li>Peripheral arthritis and axial involvement both occur; <strong>60–70% are female</strong> (notably, IBD itself has a slightly higher male prevalence, ~1.6:1 — the arthritis-associated subgroup skews female)</li>
+  <li><strong>HLA-B27 positive in 50–75%</strong> of cases</li>
+  <li><strong>Diagnostic delay:</strong> women with IBD-SpA generally experience a longer diagnostic delay (sometimes 9–14 years) compared to men</li>
+</ul>
+<div class="pearl"><span class="lbl">ASAS-PerSpA study finding</span>A recent large-scale study found no significant overall clinical differences between CD-associated SpA and UC-associated SpA — both groups showed similar musculoskeletal characteristics. However, psoriasis (15.4%) and uveitis (28.2%) were more common in UC-SpA, while CD patients had a higher prevalence of HLA-B27 positivity (51.9% vs. 39.4%).</div>
+</article>
+
+<article class="topic">
+<h3>Pathogenesis</h3>
+<ul>
+  <li><strong>IL-23/17</strong> along with <strong>TNF-α</strong> drive the process</li>
+  <li>Immunologic abnormality initiated in the intestinal mucosa</li>
+  <li>Altered gut microbiota and increased intestinal permeability</li>
+  <li><strong>CD14+ monocyte-like cells</strong> (the primary source of IL-23, also present in human enthesis tissue) and CD8+ T cells stimulated in the gut travel to and bind enthesis sites, stimulating inflammation there</li>
+</ul>
+<div class="formula"><span class="lbl">The gut-joint axis, in sequence</span>Reduced gut microbiota diversity → increased intestinal permeability → microbial antigens cross into the immune system (recall roughly 80–90% of the immune system resides in the gut) → subclinical gut inflammation triggers CD14+ monocytes and IL-17-producing T cells → these enter the bloodstream → travel to enthesis sites → trigger a cytokine cascade that attacks collagen and recruits neutrophils, producing enthesitis.</div>
+</article>
+</section>
+
+<section class="part" id="sec25">
+<h2 class="partTitle">25 · IBD-SpA — Clinical Presentation &amp; Diagnosis</h2>
+<article class="topic">
+<h3>Clinical Presentation &amp; Screening</h3>
+<ul>
+  <li>Screening all IBD patients for SpA is <strong>controversial</strong> — two screening questionnaires exist, but both have low specificity and limited usefulness</li>
+  <li>IBD patients complaining of inflammatory back pain, dactylitis, or enthesitis symptoms should be worked up for SpA</li>
+</ul>
+<div class="pearl"><span class="lbl">The misdiagnosis trap</span>IBD itself is commonly misdiagnosed as irritable bowel syndrome, and the associated SpA is commonly misdiagnosed as fibromyalgia — this is particularly common in young patients and women, contributing to delayed diagnosis, increased disease burden, and poorer prognosis. Remember: fibromyalgia does <strong>not</strong> cause joint erosion; IBD-SpA does — this distinction should prompt a more aggressive work-up rather than dismissing the pain.</div>
+</article>
+
+<article class="topic">
+<h3>Diagnostic Approach</h3>
+<ul>
+  <li><strong>Rheumatologists</strong> tend to rely on ASAS (Assessment of SpondyloArthritis International Society) criteria</li>
+  <li><strong>Gastroenterologists</strong> often use the Orchard classification instead — <strong>Type 1</strong> (arthritis predominantly affecting large joints, often paralleling IBD activity) vs. <strong>Type 2</strong> (polyarthritis affecting ≥5 peripheral joints, typically unrelated to IBD activity)</li>
+  <li>Since there's a lot of misdiagnosis and late onset, patients often bounce between rheumatology and gastroenterology, and the two specialties use different diagnostic frameworks — worth being aware of as a generalist coordinating care</li>
+  <li><strong>Labs:</strong> ESR/CRP, CMP, CBC (checking for anemia of chronic disease, thrombocytopenia)</li>
+  <li><strong>Imaging:</strong> X-ray and/or MRI; ultrasound is useful for enthesitis, and the <strong>patella</strong> is the most common site rheumatologists check for enthesitis in this context (not the heel, which is more classically checked in other SpA work-ups)</li>
+</ul>
+<div class="quiz" id="q25a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 29-year-old woman with Crohn's disease has had progressively worsening back pain for over a year, previously attributed to fibromyalgia. Why is it important to reconsider this diagnosis and evaluate for IBD-associated spondyloarthropathy?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec26">
+<h2 class="partTitle">26 · IBD-SpA — Treatment</h2>
+<article class="topic">
+<h3>Treatment Approach</h3>
+<ul>
+  <li>Lifestyle/nonpharmacologic: OMM and acupuncture, smoking cessation (very important), exercise and movement — medication is an adjunct, not a substitute, just as with the other spondyloarthropathies</li>
+  <li><strong>No clear treatment consensus</strong> exists — both IBD and the associated SpA require therapy, and rheumatologists typically base treatment on PsA/axial SpA recommendations while gastroenterologists apply CD/UC guidelines; both approaches appear similarly efficacious</li>
+  <li><strong>NSAIDs:</strong> use <strong>COX-2 inhibitors only</strong> — nonselective NSAIDs can worsen IBD (and have been shown to elevate fecal calprotectin, a marker of gut inflammation)</li>
+  <li><strong>DMARDs</strong> (methotrexate, sulfasalazine, azathioprine) may help peripheral arthritis but have <strong>no impact on axial disease</strong></li>
+</ul>
+<div class="pearl"><span class="lbl">The biologic balancing act</span>Choice of biologic agent requires real care here: <strong>IL-17 inhibitors</strong> (effective for SpA/PsA) may <strong>worsen IBD</strong>. Conversely, <strong>α4β7 integrin inhibitors</strong> (effective for IBD) may induce or worsen SpA. <strong>TNF inhibitors and JAK inhibitors</strong> are promising options that can help balance both disease processes at once.</div>
+<div class="quiz" id="q26a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with Crohn's disease-associated spondyloarthropathy is being considered for an IL-17 inhibitor to manage her joint symptoms. What is the key concern with this choice of biologic?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec27">
+<h2 class="partTitle">27 · Systemic Lupus Erythematosus — Epidemiology &amp; Pathophysiology</h2>
+<article class="topic">
+<h3>Epidemiology — A Disease With Striking Demographic Patterns</h3>
+<ul>
+  <li><strong>72.8 per 100,000</strong>; approximately <strong>204,000 U.S. adults</strong> affected; most prevalent in Western societies (North America, Western Europe)</li>
+  <li><strong>Ethnic bias (highest to lowest prevalence):</strong> Black/African American &gt; Native American/Alaska Native &gt; Hispanic/Latino &gt; Asian/Pacific Islander &gt; White</li>
+  <li>Black/African American patients have the highest overall prevalence (up to 230–287 per 100,000); <strong>Black women are 3x more likely</strong> to develop lupus than White women and often experience more severe, earlier-onset disease</li>
+  <li><strong>Black and Hispanic patients have higher SLE-related mortality</strong>; Black patients often die younger, with mortality occurring up to 13 years earlier than White patients</li>
+  <li>Black, Hispanic, Asian, and Native American patients experience higher rates of lupus nephritis, cardiovascular disease, and more rapid progression of organ damage compared to White patients</li>
+  <li><strong>Women of childbearing age: 9:1</strong> female:male ratio</li>
+</ul>
+<div class="pearl"><span class="lbl">The migration clue — points to an unidentified environmental trigger</span>Both Africans and Asians who emigrate to the U.S. or Europe have an <strong>increased incidence</strong> of developing SLE compared to their relatives who remain in their home country. This pattern strongly suggests an environmental trigger that has not yet been elucidated — genetics alone cannot explain a change in disease incidence within the same person's lifetime after migration.</div>
+<div class="pearl"><span class="lbl">Environmental triggers</span>Infections, smoking, silica exposure, and hormonal influences (e.g., estrogen) can initiate or exacerbate disease — this is fundamentally an epigenetics story: genes determine what you're coded for, but environmental exposures determine which genes actually get turned on.</div>
+</article>
+
+<article class="topic">
+<h3>Pathophysiology</h3>
+<div class="formula"><span class="lbl">The cascade</span>Environmental factors + genetically susceptible individual → break in immune tolerance → activation of an autoimmune response → cytokine release, complement activation, and autoantibody production → organ damage. Autoantibodies target <strong>DNA and RNA</strong>, attacking intranuclear structures. Immune complexes form and deposit in tissue (kidney, skin, vessels), activating complement pathways and recruiting inflammatory cells — a <strong>type III hypersensitivity</strong> mechanism that leads to tissue damage and vasculitis.</div>
+<div class="quiz" id="q27a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A researcher notes that first-generation Nigerian immigrants to the United States develop SLE at higher rates than their relatives who remained in Nigeria. What does this observation most strongly suggest about SLE pathogenesis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec28">
+<h2 class="partTitle">28 · SLE — Organ Pathology</h2>
+<article class="topic">
+<h3>The LE Body (Hematoxylin Body) — the Hallmark of SLE Pathology</h3>
+<div class="tagline">A homogeneous globular mass of nuclear material — the classic finding across nearly every affected organ</div>
+<p>The LE body (hematoxylin body) is a homogeneous globular mass of nuclear material that stains bluish-purple with hematoxylin. It can be observed in the lungs, kidneys, spleen, heart, lymph nodes, and serous and synovial membranes. It contains immunoglobulins and DNA, and phagocytic engulfment of the LE body produces the classic <strong>LE cell</strong>.</p>
+</article>
+
+<article class="topic">
+<h3>Organ-by-Organ Manifestations</h3>
+<table class="data-table">
+<caption>SLE organ pathology</caption>
+<tr><th>System</th><th>Findings</th></tr>
+<tr><td><strong>Skin</strong></td><td>Immune complex formation → tissue damage, vascular and perivascular inflammation, chronic mononuclear cell infiltration</td></tr>
+<tr><td><strong>Vasculature</strong></td><td>Vasculitis is common — small and large vessel necrotizing vasculitis, differentiated from other vasculitides by immune complex deposition in the vessel wall; thrombotic microangiopathy can also present</td></tr>
+<tr><td><strong>CNS</strong></td><td>Small intracranial vessel involvement, plus thromboembolism from endocarditis — both causing CNS embolic events</td></tr>
+<tr><td><strong>Cardiovascular</strong></td><td>Endocarditis (<strong>mitral valve most common</strong>), pericarditis, and myocarditis</td></tr>
+<tr><td><strong>Pulmonary</strong></td><td>Lupus pneumonitis in ~10% of all SLE patients — inflammation of the alveolar walls that widens the wall and impairs oxygen exchange (distinct from infectious pneumonia)</td></tr>
+<tr><td><strong>Renal</strong></td><td>Lupus nephritis — immune complex deposits can involve any/all of the four kidney compartments (glomeruli, interstitium, tubules, vessels), ultimately able to progress to sclerosing lupus nephritis</td></tr>
+</table>
+<div class="quiz" id="q28a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A pathologist examining tissue from a patient with SLE identifies a homogeneous, bluish-purple-staining globular mass of nuclear material within the kidney. What is this finding called, and what is its clinical significance?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec29">
+<h2 class="partTitle">29 · SLE — History &amp; Physical, Rashes &amp; Labs</h2>
+<article class="topic">
+<h3>Constitutional &amp; Mucocutaneous Findings</h3>
+<ul>
+  <li>SLE is a multisystem disease with varied presentations — from mild disease with only mucocutaneous involvement, to severe life-threatening multiorgan disease</li>
+  <li><strong>Constitutional symptoms</strong> (seen in &gt;90% of SLE): fatigue, malaise, fever, anorexia, weight loss. More than 40% of SLE patients may have a lupus flare as the cause of fever — but <strong>infection must always be ruled out first</strong>, given these patients' immunocompromised state</li>
+  <li><strong>80% of SLE patients</strong> have mucocutaneous involvement, in three categories:
+    <ol>
+      <li><strong>Acute cutaneous LE (ACLE):</strong> localized, malar, and generalized forms</li>
+      <li><strong>Subacute cutaneous LE (SCLE):</strong> annular and papulosquamous forms</li>
+      <li><strong>Chronic cutaneous LE (CCLE):</strong> classic discoid lupus erythematosus (DLE)</li>
+    </ol>
+  </li>
+</ul>
+<div class="pearl"><span class="lbl">Malar rash — the key distinguishing feature</span>The classic acute malar ("butterfly") rash <strong>spares the nasolabial fold</strong> — this holds true across skin tones (Caucasian, Native American, Black, Hispanic patients all show this same sparing pattern) and is what separates it from its mimics. <strong>Malar rash differential diagnosis:</strong> erysipelas, cellulitis, SLE, rosacea, pellagra, dermatomyositis (rosacea in particular tends to involve the nasolabial fold, unlike SLE). These rashes blanch with pressure; an infectious process typically will not. ACLE lesions usually heal without scarring.</div>
+<div class="pearl"><span class="lbl">Discoid lupus erythematosus (DLE)</span>The most common form of CCLE — disk-shaped erythematous papules/plaques with adherent scaling and central clearing, an active/raised border, and a real risk of scarring alopecia. Sun exposure flares it up and can worsen the central vascular collapse/necrosis. DLE may occur with or without underlying SLE, and can be localized (head/neck only) or generalized.</div>
+</article>
+
+<article class="topic">
+<h3>Diagnostic Labs</h3>
+<ul>
+  <li><strong>ANA</strong> is positive in more than 97% of SLE cases, but a positive ANA does <strong>not confirm</strong> the diagnosis — more than 20% of the healthy general population (especially females or relatives of patients with autoimmune disease) can have a positive ANA. A <strong>negative ANA makes SLE significantly less likely</strong>.</li>
+  <li>If ANA positive, follow with: (ss)DNA, <strong>(ds)DNA</strong> (correlates with disease activity and lupus nephritis development), <strong>anti-Smith</strong> antibodies (less than 30% sensitivity, but 99% specific for SLE), complements C3/C4 (low = consumption, may correlate with activity)</li>
+  <li>Additional labs: CRP/ESR, CMP, CBC, urinalysis/protein-creatinine ratio</li>
+  <li><strong>Renal biopsy is warranted</strong> if lupus nephritis is a concern — this stages the disease and directs care from nephrology</li>
+</ul>
+<div class="quiz" id="q29a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A dermatologist is evaluating a facial rash and trying to distinguish SLE's malar rash from rosacea. Which physical exam finding is most useful for making this distinction?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q29b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 30-year-old woman has a negative ANA. How should this result influence the likelihood of an SLE diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec30">
+<h2 class="partTitle">30 · SLE — Musculoskeletal Manifestations</h2>
+<article class="topic">
+<h3>Joint &amp; Muscle Involvement</h3>
+<ul>
+  <li><strong>80–90%</strong> of SLE patients have MSK involvement, ranging from mild arthralgia to deforming arthritis</li>
+  <li>Any joint may be involved, but the classic pattern is a <strong>non-erosive, symmetrical inflammatory polyarthritis</strong> predominantly affecting the small joints of the hands, knees, and wrists</li>
+  <li><strong>10%</strong> develop avascular necrosis, typically bilateral hip involvement</li>
+  <li><strong>10%</strong> can develop polymyositis</li>
+</ul>
+<div class="pearl"><span class="lbl">Jaccoud arthropathy — deformity without erosion</span>Results from joint capsule and ligament laxity, leading to non-erosive deformities of the hands — including <strong>ulnar deviation</strong> and subluxation of the metacarpophalangeal joints — that can mimic rheumatoid arthritis on exam. The key distinguishing point: on imaging, the joints themselves look essentially normal (no cupping, no erosion) — it's the surrounding soft tissue (ligaments/capsules) that has become so lax that it collapses, not the bone that has been eroded away.</div>
+<div class="pearl"><span class="lbl">Polymyositis in SLE</span>Causes chronic muscle inflammation with progressive, symmetrical weakness, primarily affecting the shoulders, hips, and thighs — this is where CK becomes a useful tracking lab.</div>
+<div class="quiz" id="q30a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with SLE has ulnar deviation of the fingers on exam, but radiographs show no joint erosion. What is this finding called, and what is the underlying mechanism?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec31">
+<h2 class="partTitle">31 · SLE — Treatment &amp; Management</h2>
+<article class="topic">
+<h3>Treatment by Organ System</h3>
+<div class="tagline">Treatment is dictated by which organ system is involved and the severity — from minimal to intensive</div>
+<ul>
+  <li><strong>General:</strong> patient education, physical/lifestyle measures, emotional support — this is a chronic disease, and the aim of treatment is to prevent organ damage and achieve remission</li>
+  <li><strong>Cutaneous:</strong> mild disease → topical corticosteroids or topical calcineurin inhibitors; more significant disease → hydroxychloroquine, methotrexate, systemic steroids</li>
+  <li><strong>Musculoskeletal:</strong> hydroxychloroquine, methotrexate, leflunomide, biologics</li>
+  <li><strong>Hematologic:</strong> severe refractory cytopenias → IV pulse-dose steroids, mycophenolate mofetil, rituximab, cyclophosphamide, plasmapheresis, recombinant G-CSF, or splenectomy</li>
+  <li><strong>Cardiopulmonary:</strong> hydroxychloroquine, methotrexate, oral steroids</li>
+  <li><strong>Renal:</strong> staging with biopsy is key — nephrology-directed care from there</li>
+</ul>
+<div class="pearl"><span class="lbl">Pregnancy planning in SLE</span>Pregnancy should only be attempted once the patient has been in remission for a long stretch (roughly 6–7 months) — a longer remission window is safer. Contraception should be <strong>progesterone-only</strong>, since estrogen-based contraception can trigger a flare. <strong>Hydroxychloroquine is considered safe in pregnancy</strong> and is used prophylactically (continuously), not just reactively for flares.</div>
+<div class="quiz" id="q31a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 29-year-old woman with SLE, currently in remission, asks about starting hormonal contraception and eventually becoming pregnant. What guidance is most appropriate?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec32">
+<h2 class="partTitle">32 · Septic Arthritis — Epidemiology &amp; Microbiology</h2>
+<article class="topic">
+<h3>Epidemiology</h3>
+<div class="tagline">An orthopedic emergency — inflammation of the joint secondary to infectious etiology</div>
+<ul>
+  <li>Usually <strong>monoarticular</strong>; however, polyarticular septic arthritis involving many or smaller joints can also occur (especially with severe sepsis, immune compromise, RA, or multiple comorbidities)</li>
+  <li><strong>2–6 cases per 100,000</strong> people — uncommon, but must stay high on the differential given the stakes</li>
+  <li><strong>Children &gt; adults</strong>; male:female <strong>2:1</strong>; incidence peaks between <strong>ages 2 and 3</strong></li>
+</ul>
+<div class="pearl"><span class="lbl">Route of infection</span><strong>Hematogenous seeding</strong> from a systemic infection is the most common route; next most common is direct trauma (puncture, surgery/procedure).</div>
+</article>
+
+<article class="topic">
+<h3>Microbiology &amp; Risk Groups</h3>
+<table class="data-table">
+<caption>Septic arthritis — organisms and joints by age group</caption>
+<tr><th></th><th>Children</th><th>Adults</th></tr>
+<tr><td>Most common organism overall</td><td><strong>Staph. aureus</strong> (MCC in both groups)</td><td><strong>Staph. aureus</strong></td></tr>
+<tr><td>Most common gram-negative organism</td><td><strong>Kingella kingae</strong></td><td>—</td></tr>
+<tr><td>2nd most common organism</td><td>—</td><td><strong>Strep. pneumoniae</strong></td></tr>
+<tr><td>Most commonly affected joint</td><td><strong>Hip</strong></td><td><strong>Knee</strong></td></tr>
+</table>
+<div class="pearl"><span class="lbl">Special organism notes</span><strong>Neisseria gonorrhoeae</strong> often involves multiple joints — think of this in sexually active adolescents/adults with a polyarticular presentation. High-risk pediatric subgroups: neonates, hemophiliacs (from hemarthroses), and the immunocompromised (sickle cell anemia, HIV, chemotherapy patients). Adult risk factors: age &gt;80, diabetes, RA, recent joint surgery, joint prosthesis, prior intra-articular injection, skin infections/ulcers, HIV, osteoarthritis, sexual activity (gonococcal risk), and other sources of sepsis.</div>
+<div class="quiz" id="q32a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 2-year-old presents with acute hip pain and refusal to bear weight. Synovial fluid culture grows a gram-negative organism. Which organism is most likely, given the patient's age?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec33">
+<h2 class="partTitle">33 · Septic Arthritis — History &amp; Physical, Labs &amp; Imaging</h2>
+<article class="topic">
+<h3>History &amp; Physical</h3>
+<ul>
+  <li>Classically presents with acute onset <strong>monoarticular</strong> joint pain, fever, swelling, and a reluctance or refusal to move the affected joint</li>
+  <li>Pain with <strong>passive</strong> motion of the joint is a key exam finding</li>
+  <li><strong>Fever is present in only 40–60% of cases</strong> — a nonspecific finding that should not be relied upon to rule the diagnosis in or out</li>
+</ul>
+<div class="pearl"><span class="lbl">The classic pediatric pitfall</span>In children, the <strong>hip</strong> is the most common joint involved, and a child with hip septic arthritis may present with only <strong>referred knee pain</strong> or a refusal to weight-bear — not obvious hip pain. Any child under 5 complaining of knee pain and refusing to bear weight should have the hip evaluated (imaged), even though the knee is the stated complaint, precisely so this diagnosis isn't missed.</div>
+</article>
+
+<article class="topic">
+<h3>Labs &amp; Imaging</h3>
+<ul>
+  <li><strong>Synovial fluid:</strong> culture, Gram stain, crystal analysis, WBC count with differential — a WBC count <strong>&gt;50,000/mm³ with &gt;90% neutrophil predominance</strong> suggests a bacterial source</li>
+  <li><strong>Blood work:</strong> CBC, ESR, CRP, and blood cultures — drawn <strong>times 2, both aerobic and anaerobic</strong>, from two different sites</li>
+  <li><strong>Imaging:</strong> X-ray, ultrasound, MRI</li>
+</ul>
+<div class="quiz" id="q33a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 4-year-old is brought in for evaluation of knee pain and a new limp, but has no fever. Why should septic arthritis of the hip remain on the differential despite the absence of fever and despite the complaint being knee pain?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec34">
+<h2 class="partTitle">34 · Septic Arthritis — Treatment</h2>
+<article class="topic">
+<h3>Treatment</h3>
+<ul>
+  <li><strong>Antimicrobial therapy and joint fluid drainage</strong> — Gram stain can help guide initial empiric coverage</li>
+  <li><strong>Empiric coverage:</strong> antistaphylococcal agents (nafcillin, oxacillin, or vancomycin); a third-generation cephalosporin (ceftriaxone, ceftazidime, or cefotaxime) is added for IV drug users</li>
+  <li>Blood and synovial fluid cultures should guide definitive, targeted therapy once available</li>
+  <li><strong>Duration:</strong> total of <strong>4 weeks</strong> — IV for the first half, then compatible orals; extend to <strong>6 weeks for Pseudomonas aeruginosa</strong></li>
+</ul>
+<div class="pearl"><span class="lbl">If the patient isn't improving</span>If no improvement is seen within 5–6 days, the joint should be re-aspirated, and Lyme disease should be ruled out. Also consider fungal infection and reactive arthritis, and use imaging to rule out osteomyelitis. Prosthetic joint infections often require aggressive debridement and/or removal of the prosthesis, with an antibiotic-impregnated cement spacer placed while the infection clears before any re-implantation.</div>
+<div class="quiz" id="q34a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with septic arthritis due to Pseudomonas aeruginosa is being treated with IV antibiotics transitioning to oral therapy. What is the recommended total duration of therapy for this organism, compared to the standard course for typical organisms?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec35">
+<h2 class="partTitle">35 · Other Autoimmune Connective Tissue Diseases — Quick Reference</h2>
+<article class="topic">
+<h3>Overlap &amp; Related Syndromes</h3>
+<div class="tagline">Covered at the objective level in lecture — recognize the name, hallmark antibody, and hallmark clinical feature</div>
+<table class="data-table">
+<caption>Additional autoimmune connective tissue diseases</caption>
+<tr><th>Disease</th><th>Key Features</th><th>Clinical Presentation</th></tr>
+<tr><td><strong>Antiphospholipid Antibody Syndrome</strong></td><td>Autoimmune thrombotic disorder with antiphospholipid antibodies; primary or secondary (e.g., to SLE); causes clots and pregnancy losses</td><td>Thrombosis (DVT, stroke, PE); recurrent miscarriages; livedo reticularis; thrombocytopenia; headaches; cardiac valve issues</td></tr>
+<tr><td><strong>Reactive Arthritis</strong></td><td>Post-infectious spondyloarthropathy (e.g., after GI/GU infection); classic triad of arthritis, urethritis, conjunctivitis; HLA-B27 linked</td><td>Joint pain/swelling (knees, ankles, feet); eye inflammation; urinary symptoms; low back pain; skin/mucosal lesions; enthesitis; dactylitis</td></tr>
+<tr><td><strong>Scleroderma</strong></td><td>Autoimmune fibrosis of skin/connective tissue; limited vs. diffuse forms; vascular involvement (Raynaud's); autoantibodies (e.g., anti-Scl-70)</td><td>Skin thickening/tightness (fingers, face); Raynaud's; sclerodactyly; telangiectasia; GI dysmotility; pulmonary fibrosis; fatigue</td></tr>
+<tr><td><strong>Dermatomyositis</strong></td><td>Inflammatory myopathy with skin involvement; autoantibodies (e.g., anti-Mi-2); associated with malignancy; proximal weakness</td><td>Heliotrope rash; Gottron's papules; proximal muscle weakness; dysphagia; interstitial lung disease; calcinosis (in juveniles)</td></tr>
+<tr><td><strong>Polymyositis</strong></td><td>Inflammatory myopathy without skin rash; autoantibodies (e.g., anti-Jo-1); proximal muscle involvement; overlaps with ILD</td><td>Symmetric proximal muscle weakness (shoulders, hips); dysphagia; fatigue; arthralgias; respiratory issues if ILD present</td></tr>
+<tr><td><strong>Mixed Connective Tissue Disease</strong></td><td>Overlap syndrome with features of SLE, scleroderma, and polymyositis; high anti-U1-RNP antibodies; Raynaud's prominent</td><td>Raynaud's; swollen fingers; arthritis; myositis; pulmonary hypertension; fatigue; skin changes; esophageal dysmotility</td></tr>
+<tr><td><strong>Relapsing Polychondritis</strong></td><td>Rare autoimmune attack on cartilage; episodic flares; associated with other autoimmune diseases; airway involvement critical</td><td>Ear/nose chondritis (redness, pain, sparing the lobe); saddle nose; arthritis; ocular inflammation; airway symptoms (hoarseness, cough); fatigue</td></tr>
+</table>
+<div class="pearl"><span class="lbl">Quick antibody anchors for this table</span>Anti-Scl-70 → scleroderma. Anti-Mi-2 → dermatomyositis. Anti-Jo-1 → polymyositis (and antisynthetase syndrome more broadly). Anti-U1-RNP (high titer) → MCTD. These pair naturally with the anti-RNP entry from the autoantibody lab section — MCTD is the disease that anti-RNP is most specific for.</div>
+<div class="quiz" id="q35a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient has Raynaud's phenomenon, swollen "puffy" fingers, myositis, and arthritis, with a high titer of anti-U1-RNP antibodies but no single pattern fitting cleanly into SLE, scleroderma, or polymyositis alone. What is the most likely diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec36">
+<h2 class="partTitle">36 · Board Review — Pt. 2</h2>
+<article class="topic">
+<h3>Consolidated Review Questions</h3>
+<div class="tagline">Practice vignettes spanning labs, PsA, AS, IBD-SpA, SLE, and septic arthritis</div>
+<div class="quiz" id="qFinal2A">
+<div class="qhead">Question A</div>
+<div class="qtext">A patient with joint pain has a positive rheumatoid factor. Her provider notes she also has a history of psoriasis and nail pitting. Why shouldn't the positive RF be used to exclude psoriatic arthritis in this patient?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal2B">
+<div class="qhead">Question B</div>
+<div class="qtext">A 32-year-old man has inflammatory back pain, uveitis, and a positive HLA-B27. Imaging shows grade III sacroiliitis with severe erosions and partial ankylosis. What underlying pathophysiologic process, common to both this condition and psoriatic arthritis, best explains the site of inflammation?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal2C">
+<div class="qhead">Question C</div>
+<div class="qtext">A 26-year-old Black woman presents with fatigue, a facial rash that spares the nasolabial folds, joint pain, and new onset of proteinuria. Her ANA is positive at 1:320. Which additional autoantibody, though present in a minority of SLE cases, would be most specific for confirming the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal2D">
+<div class="qhead">Question D</div>
+<div class="qtext">A 3-year-old presents with acute refusal to bear weight and irritability, but no fever. Synovial fluid aspiration shows a WBC count of 65,000/mm³ with 92% neutrophils. What is the most appropriate immediate next step in management?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec37">
+<h2 class="partTitle">37 · Master High-Yield Summary — All Parts (1–2)</h2>
+<article class="topic">
+<h3>How to use this section</h3>
+<div class="tagline">The whole series distilled to one comparison table per major disease family — for final-pass review</div>
+<p>This section consolidates the single highest-yield fact, buzzword, or distinguishing feature for every major condition covered across both lectures. Use it as a final-pass review or a quick lookup when two entities are being confused — it is <em>not</em> a replacement for the full sections above, which contain the pathogenesis and reasoning behind each buzzword.</p>
+</article>
+
+<article class="topic">
+<h3>Genetic Connective Tissue Disorders (Pt. 1)</h3>
+<table class="data-table">
+<tr><th>Entity</th><th>Highest-yield buzzword / distinguishing feature</th></tr>
+<tr><td>Ehlers-Danlos Syndrome</td><td>Hyperextensible skin + hypermobile joints; <strong>shoulder dislocation is usually the initial sign</strong>; no supportive lab test; Beighton criteria screen, but <strong>genetic testing is gold standard</strong>; vascular/organ rupture (thorax, abdomen, gravid uterus) is the most feared complication and warrants emergent workup with or without trauma</td></tr>
+<tr><td>Marfan Syndrome</td><td><strong>FBN1</strong> (fibrillin-1), chromosome 15; aortic root disease drives 60–80% of morbidity/mortality; <strong>prophylactic aortic root replacement at 5.0 cm</strong>; ectopia lentis in 50–80%; scoliosis less responsive to bracing than idiopathic scoliosis; Ghent criteria = informational only</td></tr>
+<tr><td>Stickler Syndrome</td><td>80% COL2A1 (2nd MC: COL11A1); 3rd most common inherited CTD; <strong>Pierre Robin sequence</strong> (micrognathia → glossoptosis → cleft palate); retinal detachment is the leading cause of blindness in this population — ophtho surveillance is critical</td></tr>
+<tr><td>Osteogenesis Imperfecta</td><td>COL1A1/COL1A2, structurally normal but insufficient type I collagen; 4 hallmarks = decreased bone mass/fractures, blue sclerae, dentinogenesis imperfecta, hearing loss; <strong>"saber shin"</strong> and <strong>"codfish vertebrae"</strong>; always exclude non-accidental trauma; bisphosphonates reduce osteoclastic resorption</td></tr>
+<tr><td>Loeys-Dietz / EB / PXE</td><td>Loeys-Dietz (TGFBR1/2, SMAD3) = more aggressive vascular disease than Marfan; Epidermolysis Bullosa = fragile blistering skin (keratin/collagen VII genes); PXE (ABCC6) = yellowish skin papules + early atherosclerosis</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Autoimmune CTD Labs &amp; Spondyloarthropathies (Pt. 2)</h3>
+<table class="data-table">
+<tr><th>Entity</th><th>Highest-yield buzzword / distinguishing feature</th></tr>
+<tr><td>ANA</td><td>Screening test, ~95% sensitive for SLE, nonspecific; titers don't track activity — used to confirm persistence, not monitor</td></tr>
+<tr><td>Anti-dsDNA / Anti-Smith</td><td>dsDNA tracks activity + predicts renal flares; Anti-Smith is <strong>99% specific</strong> for SLE despite only 20–30% sensitivity</td></tr>
+<tr><td>RF vs. anti-CCP</td><td>RF = sensitive, not specific (also positive in PsA 2–10%); anti-CCP = highly specific for RA, predicts erosive disease</td></tr>
+<tr><td>HLA-B27</td><td>~8% of population positive; only 1–8% of those go on to disease — never diagnostic alone; AS 90–95%, IBD 50–75%, PsA 20–70%, reactive arthritis 30–90%</td></tr>
+<tr><td>Psoriatic Arthritis</td><td>Enthesitis (not synovium) is the primary lesion; CASPAR criteria (≥3 points); pencil-in-cup deformity; TNF inhibitors preferred over oral DMARDs for most cases</td></tr>
+<tr><td>Ankylosing Spondylitis</td><td>HLA-B27 90–95%; enthesitis of the axial skeleton; inflammatory back pain (4/5 criteria); <strong>shiny corner sign</strong> → <strong>bamboo spine</strong>; watch for cauda equina syndrome and aortic regurgitation</td></tr>
+<tr><td>IBD-Associated SpA</td><td>CD &gt; UC; 60–70% female despite IBD itself being male-predominant; IL-23/17 + TNF-α gut-to-enthesis axis; avoid non-selective NSAIDs; IL-17 inhibitors may worsen IBD, α4β7 integrin inhibitors may worsen SpA</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>SLE &amp; Septic Arthritis (Pt. 2)</h3>
+<table class="data-table">
+<tr><th>Entity</th><th>Highest-yield buzzword / distinguishing feature</th></tr>
+<tr><td>SLE epidemiology</td><td>9:1 female, childbearing age; Black &gt; Native American &gt; Hispanic &gt; Asian &gt; White prevalence; migration raises incidence over native-country relatives (environmental trigger); Black patients die ~13 years earlier on average</td></tr>
+<tr><td>SLE pathophysiology</td><td>Type III hypersensitivity — immune complex deposition + complement activation; <strong>LE (hematoxylin) body</strong> is the pathologic hallmark, found across nearly every affected organ</td></tr>
+<tr><td>SLE rashes</td><td>Malar rash <strong>spares the nasolabial fold</strong> (vs. rosacea, which involves it); discoid lupus = disk-shaped plaques with central clearing + scarring alopecia risk</td></tr>
+<tr><td>SLE MSK</td><td>Non-erosive symmetric polyarthritis; <strong>Jaccoud arthropathy</strong> = ligament laxity causing ulnar deviation <em>without</em> erosion; 10% AVN (bilateral hip); 10% polymyositis</td></tr>
+<tr><td>SLE pregnancy</td><td>Remission required before attempting; progesterone-only contraception (estrogen triggers flares); hydroxychloroquine is safe and used prophylactically</td></tr>
+<tr><td>Septic Arthritis</td><td>Orthopedic emergency; Staph aureus = MCC overall; Kingella kingae = MC gram-negative in kids; hip MC in kids (may present as referred knee pain/refusal to bear weight), knee MC in adults; fever present in only 40–60%; synovial WBC &gt;50,000 with &gt;90% PMNs; 4 weeks total therapy (6 weeks for Pseudomonas)</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>The Classic Confusable Pairs — Quick Differentiation</h3>
+<table class="data-table">
+<caption>Pairs Board Questions Love to Contrast</caption>
+<tr><th>Pair</th><th>How to tell them apart</th></tr>
+<tr><td>PsA vs. RA — site of primary inflammation</td><td>PsA = enthesitis (ligament/tendon-to-bone attachment); RA = synovitis (joint lining) — different anatomic target despite overlapping joint symptoms</td></tr>
+<tr><td>PsA vs. SLE arthritis — erosive potential</td><td>PsA can be frankly erosive (pencil-in-cup, arthritis mutilans); SLE arthritis is classically non-erosive (Jaccoud arthropathy = soft-tissue laxity, not bone destruction)</td></tr>
+<tr><td>SLE malar rash vs. rosacea</td><td>SLE spares the nasolabial fold; rosacea characteristically involves it</td></tr>
+<tr><td>ESR vs. CRP</td><td>ESR = more chronic inflammation marker; CRP = more acute, better for tracking flares in real time</td></tr>
+<tr><td>Marfan vs. Loeys-Dietz</td><td>Both cause aortic aneurysm/dissection risk with skeletal features, but Loeys-Dietz (TGF-β pathway genes) has a <em>more aggressive</em> vascular course than Marfan (FBN1)</td></tr>
+<tr><td>EDS vascular complications vs. Marfan aortic disease</td><td>Vascular EDS = arterial <em>and</em> organ rupture, often without warning/trauma, across many vessel beds; Marfan = aortic <em>root</em> disease specifically, with a defined surgical threshold (5.0 cm) that meaningfully prevents the complication</td></tr>
+<tr><td>AS vs. IBD-SpA imaging</td><td>Both show sacroiliitis with a similar grading scale and can progress to a similar axial picture — differentiate by the GI history, CD/UC association, and lower HLA-B27 positivity in IBD-SpA relative to AS</td></tr>
+<tr><td>Anti-dsDNA vs. anti-Smith vs. anti-RNP</td><td>dsDNA = tracks SLE activity/nephritis; anti-Smith = most specific for SLE (stable, not for monitoring); anti-RNP = the MCTD marker, also seen in SLE/scleroderma overlap</td></tr>
+</table>
+</article>
+</section>
+
+<footer>Connective Tissue Diseases, Pts. 1–2 (complete) · Osteopathic Clinical Sciences · Dr. Paul Langevin, DO, DiMM, MPH · Built for board review</footer>
+</main>
+
+<script>
+function toggleNav(){
+  document.getElementById('sideNav').classList.toggle('open');
+  var scrim = document.getElementById('sideNavScrim');
+  scrim.style.display = scrim.style.display === 'block' ? 'none' : 'block';
+}
+function jump(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  toggleNav();
+}
+function goBack(){
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+const questionData = {
+  q02a: {choices:["A Beighton score of 7/9 is diagnostic on its own — no further testing is needed","A Beighton score is a useful supportive screening tool, but genetic testing remains the gold standard for confirming EDS","Since there is a supportive laboratory test for EDS, that should be ordered next","A high Beighton score rules out EDS and points to a different diagnosis"], correct:1,
+    explain:"The Beighton criteria are a 9-point screening tool for generalized joint hypermobility, suggestive of EDS — but genetic testing remains the gold standard for diagnosis. There is no supportive laboratory test for EDS; documenting the Beighton score is still worthwhile, including to support insurance payment for genetic testing."},
+  q02b: {choices:["It is a nonspecific finding unrelated to EDS","This atraumatic, often painless pattern of shoulder dislocation is classically the initial presenting sign of EDS","This finding suggests a primary psychiatric cause for her symptoms","This is more consistent with osteogenesis imperfecta than EDS"], correct:1,
+    explain:"Shoulder dislocation is usually the initial sign of EDS. These dislocations are predominantly atraumatic or occur with minimal force, often during daily activities or sleep, and are frequently painless — exactly the pattern described here."},
+  q03a: {choices:["Reassurance and outpatient follow-up in 1-2 weeks, since abdominal pain without trauma is unlikely to be serious in EDS","Emergent medical evaluation, regardless of the absence of trauma, given the risk of vascular or organ rupture","NSAIDs and a bowel regimen, since this is most likely constipation","Referral to physical therapy for suspected musculoskeletal strain"], correct:1,
+    explain:"Vascular and organ rupture are the most feared and mortal complications of EDS, most common in vascular and kyphoscoliotic subtypes. Sudden-onset pain in a patient with suspected or known EDS should prompt emergent medical evaluation regardless of the presence or absence of trauma — organ rupture classically involves the gravid uterus, sigmoid colon, spleen, and liver."},
+  q04a: {choices:["Continue routine annual echocardiographic surveillance only","Refer for prophylactic replacement of the ascending aorta, since the diameter has reached the 5.0 cm threshold","Start beta-blockers only, with no surgical referral needed until symptoms develop","Recommend genetic counseling only, with no cardiology follow-up needed"], correct:1,
+    explain:"Prophylactic surgery (replacement of the ascending aorta) is recommended once the aortic diameter at the level of the aortic sinuses reaches 5.0 cm. Aortic dissection and rupture — the primary cause of morbidity and mortality in MFS — are preventable with timely surgery at this threshold, even in an asymptomatic patient."},
+  q06a: {choices:["Dural ectasia — abnormal widening/ballooning of the dural sac, highly prevalent in MFS","A normal finding of aging, unrelated to Marfan syndrome","Lumbar disc herniation unrelated to his underlying connective tissue disorder","Ankylosing spondylitis, which is unrelated to Marfan syndrome"], correct:0,
+    explain:"Dural ectasia — abnormal widening or 'ballooning' of the dural sac, most commonly in the lumbosacral spine — causes posterior vertebral scalloping and is highly prevalent in MFS (63-92% of patients). It presents as low back pain or radicular pain in the buttocks/legs, related to periosteal pressure, erosion of lumbosacral elements, nerve root traction, or sacral microfractures from osteopenia."},
+  q08a: {choices:["Ophthalmology, given the risk of retinal detachment and blindness if not caught early","Audiology, since hearing loss is the most dangerous complication","Orthopedics, since scoliosis is the most urgent complication","Cardiology, since mitral valve prolapse is the leading cause of death"], correct:0,
+    explain:"Ophthalmology surveillance is described as critical in Stickler syndrome — regular, frequent check-ups with a vitreoretinal specialist are required to screen for cataracts, glaucoma, and especially retinal detachment, which is a leading cause of irreversible blindness in this population if not treated promptly."},
+  q09a: {choices:["Saber shin deformity and codfish vertebrae, respectively","Bamboo spine and shiny corner sign, respectively","Pencil-in-cup deformity and Romanus lesion, respectively","Protrusio acetabuli and dural ectasia, respectively"], correct:0,
+    explain:"Anterior bowing of the tibia is called the 'saber shin' deformity, and the biconcave appearance of vertebral bodies from repeated compression deformities is called 'codfish vertebrae' — both classic radiographic findings in osteogenesis imperfecta. (Bamboo spine and shiny corner sign are ankylosing spondylitis findings; pencil-in-cup is a psoriatic arthritis finding.)"},
+  q10a: {choices:["They reduce osteoclastic bone resorption, decreasing fracture risk","They stimulate new collagen type I synthesis directly","They replace defective COL1A1/COL1A2 gene product","They act as an anti-inflammatory to reduce joint swelling"], correct:0,
+    explain:"Bisphosphonates, including IV pamidronate and oral alendronate, have shown clinical utility in OI by reducing osteoclastic bone resorption, which decreases fracture risk. Gene therapy targeting COL1A1/COL1A2 remains investigational and is not yet widely available."},
+  qFinal1A: {choices:["No further evaluation is needed, as this presentation is classic and self-limited","A Beighton score can support the clinical picture, but genetic testing remains the diagnostic gold standard; there is no confirmatory lab test", "A confirmatory blood test for EDS should be ordered", "This presentation is more consistent with Marfan syndrome"], correct:1,
+    explain:"Hyperextensible skin, hypermobile joints, and atraumatic shoulder dislocations during sleep are classic for EDS. There is no supportive laboratory test; the Beighton criteria can support the clinical picture, but genetic testing is the gold standard for diagnosis."},
+  qFinal1B: {choices:["Reassurance and re-check in 5 years","Referral for prophylactic ascending aortic root replacement, since the 5.0 cm threshold has been reached","Observation only, since he is asymptomatic","Aggressive beta-blockade with no surgical referral"], correct:1,
+    explain:"Wait — this vignette gives an aortic root diameter of 4.6 cm, which is below the 5.0 cm surgical threshold for prophylactic ascending aortic replacement in MFS. The most appropriate management at 4.6 cm is continued close surveillance (echocardiography), not immediate surgery — surgery is reserved for when the diameter reaches 5.0 cm at the level of the aortic sinuses."},
+  qFinal1C: {choices:["Pierre Robin sequence", "DiGeorge sequence","Potter sequence","Treacher Collins sequence"], correct:0,
+    explain:"Micrognathia causing glossoptosis (tongue displaced posteriorly), which in turn prevents normal closure of the palate and results in cleft palate, is Pierre Robin sequence — classically associated with Stickler syndrome (COL2A1 mutations)."},
+  qFinal1D: {choices:["Non-accidental trauma (child abuse) must be excluded","A genetic test for EDS must be run first","A bone marrow biopsy must be performed first","No further workup is needed; the diagnosis is already confirmed"], correct:0,
+    explain:"In any patient presenting with multiple fractures, it is essential to exclude non-accidental trauma as part of the initial evaluation — OI can convincingly mimic abuse (and vice versa), so this must be carefully worked through before finalizing the diagnosis."},
+  q14a: {choices:["CRP, since it is more specific for acute inflammatory changes than ESR","ESR, since it is the more acute marker","CMP, since it directly measures inflammation","CBC, since white count is the most acute inflammatory marker"], correct:0,
+    explain:"CRP is a liver-produced protein released in response to inflammation and is more useful than ESR for tracking acute changes such as a new flare, since ESR tends to reflect more chronic inflammation and lags behind real-time changes."},
+  q15a: {choices:["A positive ANA alone confirms a diagnosis of SLE","A positive ANA is a sensitive screening finding, but nonspecific — it should prompt follow-up with more specific autoantibody testing, not stand alone as a diagnosis","A positive ANA means the patient definitely does not have SLE","A positive ANA is only significant if the titer is above 1:640"], correct:1,
+    explain:"ANA is the primary screening test for CTDs — highly sensitive (positive in ~95% of SLE cases) but nonspecific. A positive result should be followed with more specific autoantibody tests (e.g., anti-dsDNA, anti-Smith) rather than used alone to diagnose SLE."},
+  q15b: {choices:["Anti-Smith (anti-Sm)","Rheumatoid factor","ANA","Anti-CCP"], correct:0,
+    explain:"Anti-Smith antibodies are highly specific for SLE, present in only 20-30% of cases but rarely seen in other conditions — making a positive result strongly confirmatory even though it will miss most SLE patients (low sensitivity, high specificity)."},
+  q16a: {choices:["HLA-B27 testing in an asymptomatic patient is not useful — only 1-8% of positive individuals go on to develop an inflammatory condition, and testing is best reserved for a specific clinical context, generally by a specialist","He should be tested immediately, since a positive result would confirm ankylosing spondylitis","HLA-B27 testing is diagnostic on its own and should replace clinical evaluation","A negative result would definitively rule out any future inflammatory arthritis"], correct:0,
+    explain:"About 8% of the general population is HLA-B27 positive, but only 1-8% of positive individuals go on to be diagnosed with an inflammatory condition. This is not a test to run in a vacuum on an asymptomatic person — it should be used in a specific clinical context, typically by a specialist evaluating a patient with suggestive symptoms."},
+  q17a: {choices:["PsA inflammation centers on the enthesis (ligament/tendon-to-bone attachment); RA inflammation centers on the synovium (joint lining)","Both PsA and RA center exclusively on the synovium","PsA centers on the synovium; RA centers on the enthesis","Both PsA and RA center exclusively on the enthesis"], correct:0,
+    explain:"Enthesitis — inflammation where ligaments, tendons, and joint capsules attach to bone — is the prominent pathologic lesion in psoriatic arthritis, compared to synovitis (inflammation of the joint lining) in rheumatoid arthritis. This distinction in primary anatomic target underlies many of the clinical differences between the two diseases."},
+  q18a: {choices:["Pencil-in-cup deformity","Bamboo spine","Shiny corner sign","Codfish vertebrae"], correct:0,
+    explain:"Pencil-in-cup deformity describes erosion of the proximal bone combined with cupping/doming of the distal bone at the same joint — a classic radiographic finding in long-standing psoriatic arthritis."},
+  q19a: {choices:["4 points; this meets the CASPAR threshold for psoriatic arthritis", "2 points; this does not meet the threshold","5 points; this does not meet the threshold","3 points, but RF status is not counted in CASPAR"], correct:0,
+    explain:"Current psoriasis = 2 points, nail lesions (pitting) = 1 point, RF negative = 1 point, for a total of 4 points — this exceeds the ≥3 point threshold required by CASPAR criteria (with inflammatory articular disease present) for a diagnosis of psoriatic arthritis."},
+  q20a: {choices:["A negative HLA-B27 does not rule out AS, and a positive result does not confirm it — it should be interpreted alongside the clinical picture and imaging", "A positive HLA-B27 alone confirms the diagnosis of AS","HLA-B27 testing is not useful in this scenario because he has a family history","A negative HLA-B27 in this patient would definitively exclude AS"], correct:0,
+    explain:"HLA-B27 is positive in 90-95% of AS cases, but a positive result alone does not confirm the diagnosis, and a negative result does not exclude it (you do not need this gene to be diagnosed with an inflammatory condition). ASAS criteria combine imaging findings and clinical SpA features with HLA-B27 status rather than relying on the gene alone."},
+  q21a: {choices:["4 of 5 (missing only the age-of-onset criterion, since it's not stated) — this pattern strongly suggests inflammatory, not mechanical, back pain","0 of 5 — this is a classic presentation of mechanical back pain","5 of 5, and this rules out AS","2 of 5, which is not clinically significant"], correct:0,
+    explain:"The vignette describes gradual/insidious onset, nocturnal pain improving on rising, improvement with exercise, and lack of improvement with rest — 4 of the 5 inflammatory back pain criteria are explicitly described (age of onset before 40 is the 5th criterion, not stated here but implied by his age of 27). Meeting 4 of 5 criteria strongly suggests inflammatory back pain, prompting further work-up for AS/SpA rather than assuming mechanical back pain."},
+  q22a: {choices:["Squaring of the vertebral bodies and Romanus lesions (shiny corner signs)","Bamboo spine and pencil-in-cup deformity","Codfish vertebrae and saber shin deformity","Pseudo-widening and complete ankylosis"], correct:0,
+    explain:"Early-stage AS radiographs show 'squaring' of the vertebral bodies (loss of normal anterior/posterior concavity from inflammation and bone deposition) and Romanus lesions, also known as 'shiny corner signs' — small erosions with reactive sclerosis at the vertebral body corners. Bamboo spine and facet joint ankylosis are late-stage findings."},
+  q23a: {choices:["Cauda equina syndrome","Aortic regurgitation","Pulmonary fibrosis","Mood disorder"], correct:0,
+    explain:"Saddle numbness and urinary/bladder dysfunction are hallmark symptoms of cauda equina syndrome, a serious neurologic complication that can occur in long-standing AS and requires urgent evaluation."},
+  q25a: {choices:["Fibromyalgia does not cause joint erosion, while IBD-associated SpA does — misdiagnosis delays treatment and allows ongoing joint damage", "There is no clinical difference between fibromyalgia and IBD-SpA, so reconsidering the diagnosis is unnecessary","Fibromyalgia is more dangerous than IBD-SpA, so ruling it in is the priority","IBD-SpA cannot occur in women, so this diagnosis should not be reconsidered"], correct:0,
+    explain:"Misdiagnosis of SpA as fibromyalgia is particularly common in young patients and women, contributing to delayed diagnosis, increased disease burden, and poorer prognosis. Unlike fibromyalgia, IBD-associated SpA can cause genuine joint erosion, so an accurate diagnosis changes the urgency and type of treatment needed."},
+  q26a: {choices:["IL-17 inhibitors are effective for the joint symptoms but may worsen her underlying IBD","IL-17 inhibitors have no effect on IBD activity one way or the other","IL-17 inhibitors are the treatment of choice for IBD itself","IL-17 inhibitors should be avoided only because of cost, not any disease interaction"], correct:0,
+    explain:"IL-17 inhibitors (effective for SpA/PsA) may worsen IBD, while conversely, α4β7 integrin inhibitors (effective for IBD) may induce or worsen SpA — biologic choice in IBD-SpA requires a careful, balanced approach; TNF inhibitors and JAK inhibitors are considered more promising for managing both processes together."},
+  q27a: {choices:["An environmental trigger, not yet identified, likely plays a significant role in SLE pathogenesis alongside genetic susceptibility","SLE is purely genetic and environment plays no role","This observation is coincidental and has no bearing on SLE pathogenesis","This suggests SLE is a purely infectious disease"], correct:0,
+    explain:"Both Africans and Asians who emigrate to the U.S. or Europe have an increased incidence of developing SLE compared to relatives who remain in their home country. Since genetics doesn't change with migration, this points strongly toward an environmental trigger (not yet elucidated) interacting with genetic susceptibility."},
+  q28a: {choices:["An LE (hematoxylin) body — the pathologic hallmark of SLE, seen across many affected organs including the kidney", "A Councilman body, indicating viral hepatitis","A Civatte body, indicating lichen planus","A Negri body, indicating rabies infection"], correct:0,
+    explain:"The LE body (hematoxylin body) is a homogeneous globular mass of nuclear material staining bluish-purple with hematoxylin — the hallmark of SLE pathology, observed in the lungs, kidneys, spleen, heart, lymph nodes, and serous/synovial membranes. Phagocytic engulfment of an LE body produces the classic LE cell."},
+  q29a: {choices:["Whether the nasolabial fold is spared (SLE) or involved (rosacea)", "Whether the rash blanches with pressure","Whether the patient has any joint pain","Whether the rash is bilateral"], correct:0,
+    explain:"The SLE malar rash classically spares the nasolabial fold, while rosacea characteristically involves it — this is the key distinguishing physical exam feature between the two, and it holds true across different skin tones."},
+  q29b: {choices:["A negative ANA makes SLE significantly less likely, though it doesn't completely exclude it","A negative ANA has no bearing on the likelihood of SLE","A negative ANA confirms SLE is present","A negative ANA means the patient definitely has another autoimmune disease instead"], correct:0,
+    explain:"ANA is positive in more than 97% of SLE cases, so a negative ANA makes the diagnosis significantly less likely, even though it doesn't completely rule it out. Note the flip side: more than 20% of the healthy general population (especially females or relatives of autoimmune disease patients) can have a positive ANA, so a positive result alone doesn't confirm SLE either."},
+  q30a: {choices:["Jaccoud arthropathy — non-erosive deformity from joint capsule and ligament laxity, not bone destruction","Rheumatoid arthritis — erosive deformity from synovitis","Psoriatic arthritis mutilans — erosive, destructive joint disease","Dysplastic nevus syndrome — unrelated to joint findings"], correct:0,
+    explain:"Jaccoud arthropathy results from joint capsule and ligament laxity, producing non-erosive deformities (including ulnar deviation and MCP subluxation) that can mimic rheumatoid arthritis clinically — but critically, imaging shows no erosion, since the soft tissue (not the bone) has failed."},
+  q31a: {choices:["Use progesterone-only contraception (estrogen can trigger flares), continue hydroxychloroquine (considered safe in pregnancy), and only attempt pregnancy once in a sustained remission", "Estrogen-based contraception is preferred, and hydroxychloroquine should be stopped before conception","Pregnancy can be attempted at any time regardless of disease activity","All immunosuppressive medications, including hydroxychloroquine, must be stopped before considering pregnancy"], correct:0,
+    explain:"Estrogen-based contraception can trigger an SLE flare, so progesterone-only contraception is preferred. Hydroxychloroquine is considered safe in pregnancy and is continued prophylactically. Pregnancy should only be attempted once the disease has been in remission for a sustained period, since active disease at conception carries higher maternal/fetal risk."},
+  q32a: {choices:["Kingella kingae","Staphylococcus aureus","Streptococcus pneumoniae","Neisseria gonorrhoeae"], correct:0,
+    explain:"While Staph aureus is the most common cause of septic arthritis overall in children (as in adults), Kingella kingae is specifically the most common gram-negative organism recovered in pediatric septic arthritis. The hip is also the most commonly affected joint in this age group."},
+  q33a: {choices:["The hip is the most common site of septic arthritis in young children, and hip involvement can present with only referred knee pain or refusal to bear weight — fever is present in only 40-60% of cases and should not be relied upon", "Septic arthritis cannot occur without fever, so it can be safely excluded","Knee pain in a child always indicates a primary knee problem, not a hip problem","Septic arthritis is exceedingly rare in this age group and can be deprioritized"], correct:0,
+    explain:"In young children, hip septic arthritis classically presents with referred knee pain or refusal to bear weight rather than obvious hip pain — this is why any child under 5 with knee pain and a limp should have the hip evaluated. Fever is a nonspecific finding present in only 40-60% of cases, so its absence does not rule out the diagnosis."},
+  q34a: {choices:["6 weeks for Pseudomonas, compared to the standard 4-week total course for typical organisms","2 weeks for Pseudomonas, shorter than the standard course","4 weeks for Pseudomonas, the same as the standard course","12 weeks for Pseudomonas, given as IV therapy the entire time"], correct:0,
+    explain:"The standard total duration of therapy for septic arthritis is 4 weeks (IV for the first half, then compatible oral therapy), but this is extended to 6 weeks specifically for Pseudomonas aeruginosa infections."},
+  q35a: {choices:["Mixed Connective Tissue Disease (MCTD)","Systemic sclerosis (scleroderma) alone","Polymyositis alone","Systemic lupus erythematosus alone"], correct:0,
+    explain:"MCTD is an overlap syndrome with features of SLE, scleroderma, and polymyositis, marked by high titers of anti-U1-RNP antibodies and prominent Raynaud's phenomenon with swollen ('puffy') fingers — exactly the pattern described, which doesn't cleanly fit any single one of the three component diseases."},
+  qFinal2A: {choices:["Positive RF is seen in only 2-10% of PsA patients, so it does not exclude the diagnosis — the overall clinical picture (psoriasis, nail pitting) should guide the work-up", "A positive RF always means the diagnosis is rheumatoid arthritis, not PsA","Positive RF is never seen in PsA, so this patient's presentation must be reconsidered entirely","A positive RF confirms PsA on its own"], correct:0,
+    explain:"Positive rheumatoid factor is seen in about 2-10% of patients diagnosed with psoriatic arthritis — a positive RF does not rule out PsA. The clinical picture, including psoriasis history and nail pitting, should guide the diagnosis (per CASPAR criteria), not the RF result in isolation."},
+  qFinal2B: {choices:["Enthesitis — inflammation at the ligament/tendon-to-bone attachment site is the shared primary pathologic process in both AS and PsA","Synovitis — inflammation of the joint lining is the shared process in both","Osteomyelitis — bone infection is the shared process in both","Vasculitis — blood vessel inflammation is the shared process in both"], correct:0,
+    explain:"Both ankylosing spondylitis and psoriatic arthritis are enthesitis-predominant diseases — inflammation centers on the entheses (where ligaments, tendons, and joint capsules attach to bone) rather than the synovium, which is the more classic target in rheumatoid arthritis."},
+  qFinal2C: {choices:["Anti-Smith (anti-Sm) antibody","Rheumatoid factor","Anti-CCP antibody","HLA-B27"], correct:0,
+    explain:"Anti-Smith antibodies are highly specific (99%) for SLE despite being present in only 20-30% of cases, making a positive result strongly confirmatory in a patient with a presentation already highly suggestive of SLE (malar rash sparing the nasolabial folds, arthritis, proteinuria, positive ANA)."},
+  qFinal2D: {choices:["Urgent orthopedic consultation for joint aspiration/drainage and initiation of empiric antimicrobial therapy", "Reassurance and outpatient follow-up in one week, since there is no fever","NSAIDs alone with no further work-up","Observation with repeat labs in 48 hours before treating"], correct:0,
+    explain:"A synovial WBC count of 65,000/mm³ with 92% neutrophils strongly suggests bacterial septic arthritis — an orthopedic emergency. This requires urgent joint drainage and empiric antimicrobial therapy (e.g., antistaphylococcal coverage) without delay; fever is absent in 40-60% of cases and should not delay treatment."}
+};
+
+Object.keys(questionData).forEach(function(id){
+  const box = document.getElementById(id);
+  if(!box) return;
+  const data = questionData[id];
+  const choiceWrap = box.querySelector('.choices');
+  const explainBox = box.querySelector('.explain');
+  data.choices.forEach(function(text, idx){
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = String.fromCharCode(65+idx) + '. ' + text;
+    btn.onclick = function(){
+      const already = choiceWrap.querySelectorAll('.choice.correct, .choice.wrong').length > 0;
+      if(already) return;
+      const all = choiceWrap.querySelectorAll('.choice');
+      all.forEach(function(b, i){
+        if(i === data.correct) b.classList.add('correct');
+        else if(b === btn) b.classList.add('wrong');
+      });
+      explainBox.textContent = data.explain;
+      explainBox.classList.add('show');
+    };
+    choiceWrap.appendChild(btn);
+  });
+});
+</script>
+</body>
+</html>
