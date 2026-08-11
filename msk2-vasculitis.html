@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vasculitis — Complete Study Guide</title>
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-2:#f3ecd9;
+  --green-dark:#2f5233;
+  --green:#3f7d52;
+  --green-light:#e7f0e5;
+  --ink:#2b2b26;
+  --ink-soft:#5b5a4f;
+  --line:#d9d0b8;
+  --gold:#b8944f;
+  --wrong:#a5453a;
+  --right:#2f7d4f;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+a{color:var(--green-dark);}
+
+#backBtn{
+  position:fixed; top:18px; left:18px; z-index:700;
+  background:var(--cream); border:1px solid var(--green-dark);
+  color:var(--green-dark); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  text-decoration:none; cursor:pointer;
+}
+#backBtn:hover{background:var(--green-dark); color:var(--cream);}
+#downloadBtn{
+  position:fixed; top:18px; right:18px; z-index:700;
+  background:var(--green-dark); border:1px solid var(--green-dark);
+  color:var(--cream); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  cursor:pointer;
+}
+#downloadBtn:hover{background:var(--green);}
+
+#sectionsTab{
+  position:fixed; top:50%; right:0; transform:translateY(-50%);
+  z-index:600; background:var(--green-dark); color:var(--cream);
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  padding:14px 8px; writing-mode:vertical-rl; text-orientation:mixed;
+  border-radius:8px 0 0 8px; cursor:pointer; box-shadow:-2px 0 10px rgba(0,0,0,.12);
+}
+#sideNavScrim{
+  position:fixed; inset:0; background:rgba(30,30,20,.25);
+  z-index:590; display:none;
+}
+#sideNav{
+  position:fixed; top:0; right:0; height:100%;
+  width:min(300px, calc(100vw - 96px));
+  background:var(--cream-2); border-left:1px solid var(--line);
+  z-index:595; transform:translateX(100%); transition:transform .25s ease;
+  overflow-y:auto; padding:70px 20px 40px;
+}
+#sideNav.open{transform:translateX(0);}
+#sideNav h3{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  color:var(--green-dark); text-transform:uppercase; margin:0 0 14px;
+}
+#sideNav .navItem{
+  display:block; padding:8px 6px; border-bottom:1px solid var(--line);
+  color:var(--ink); text-decoration:none; font-size:14px; cursor:pointer;
+}
+#sideNav .navItem:hover{color:var(--green-dark);}
+#sideNav .navNum{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:8px; font-size:12px;}
+
+main{max-width:900px; margin:0 auto; padding:90px 28px 100px;}
+
+header.hero{text-align:center; margin-bottom:38px;}
+header.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green);
+}
+header.hero h1{
+  font-size:2.3rem; margin:10px 0 6px; color:var(--green-dark); line-height:1.2;
+}
+header.hero .sub{color:var(--ink-soft); font-size:15px;}
+
+.contents{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:10px;
+  padding:22px 26px; margin:30px 0 40px;
+}
+.contents h2{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green-dark); margin:0 0 12px;
+}
+.contents a{text-decoration:none; font-size:14.5px;}
+.contents a:hover{text-decoration:underline;}
+.contents .num{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:6px; font-size:12.5px;}
+
+.toc-cols{display:grid; grid-template-columns:1fr 1fr; gap:0 40px;}
+.toc-col{display:flex; flex-direction:column; gap:22px;}
+.part-group{break-inside:avoid;}
+.part-group h3{
+  font-size:15.5px; margin:0 0 8px; color:var(--ink);
+  display:flex; align-items:baseline; gap:8px;
+}
+.part-group h3 .pnum{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); flex-shrink:0;
+}
+.part-group ol{margin:0; padding-left:0; list-style:none; counter-reset:sub;}
+.part-group ol li{
+  counter-increment:sub; margin-bottom:6px; padding-left:26px; position:relative;
+}
+.part-group ol li::before{
+  content:counter(sub) "."; position:absolute; left:2px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
+}
+.part-group ol a{border-bottom:1px dotted var(--line); padding-bottom:1px;}
+.part-group ol a:hover{border-bottom-color:var(--green);}
+
+section.part{margin-bottom:20px;}
+section.part > h2.partTitle{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green); border-bottom:1px solid var(--line);
+  padding-bottom:6px; margin:48px 0 18px;
+}
+
+article.topic{
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:26px 28px; margin-bottom:26px; scroll-margin-top:80px;
+}
+article.topic h3{
+  color:var(--green-dark); font-size:1.35rem; margin:0 0 4px;
+}
+article.topic .tagline{color:var(--ink-soft); font-style:italic; font-size:14.5px; margin-bottom:14px;}
+article.topic h4{color:var(--green-dark); font-size:1rem; margin:18px 0 8px;}
+article.topic p{margin:0 0 12px;}
+article.topic ul, article.topic ol{margin:0 0 12px; padding-left:22px;}
+article.topic li{margin-bottom:5px;}
+article.topic strong{color:var(--green-dark);}
+
+.pearl{
+  background:var(--green-light); border-left:4px solid var(--green);
+  border-radius:6px; padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.pearl .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--green-dark); display:block; margin-bottom:4px;}
+
+.formula{
+  background:#fbf3e3; border:1px dashed var(--gold); border-radius:6px;
+  padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.formula .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:#8a6a2e; display:block; margin-bottom:4px;}
+
+table.data-table{
+  width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px;
+}
+table.data-table caption{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--green-dark); text-align:left; margin-bottom:6px;
+}
+table.data-table th{
+  background:var(--green-dark); color:var(--cream); padding:8px 10px; text-align:left;
+  font-size:12.5px;
+}
+table.data-table td{padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:#fbf8ef;}
+
+.quiz{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:8px;
+  padding:16px 18px; margin-top:16px;
+}
+.quiz .qhead{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--green-dark); text-transform:uppercase; margin-bottom:6px;}
+.quiz .qtext{font-size:14.5px; margin-bottom:10px;}
+.quiz .choice{
+  display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line);
+  border-radius:6px; padding:9px 12px; margin-bottom:7px; cursor:pointer; font-size:14px;
+  font-family:Georgia,serif; color:var(--ink);
+}
+.quiz .choice:hover{border-color:var(--green);}
+.quiz .choice.correct{background:#e7f3ea; border-color:var(--right); color:var(--right);}
+.quiz .choice.wrong{background:#f7e9e7; border-color:var(--wrong); color:var(--wrong);}
+.quiz .explain{
+  display:none; margin-top:10px; padding:10px 12px; background:#fff;
+  border-left:4px solid var(--green); font-size:13.5px; border-radius:4px;
+}
+.quiz .explain.show{display:block;}
+
+footer{
+  text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:60px;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+@media print{
+  #backBtn,#downloadBtn,#sectionsTab,#sideNav,#sideNavScrim{display:none !important;}
+  main{padding-top:20px;}
+}
+@media (max-width:640px){
+  main{padding:80px 16px 80px;}
+  .toc-cols{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<button id="backBtn" onclick="goBack()">&larr; Back to Study Guides</button>
+<button id="downloadBtn" onclick="window.print()">Download PDF</button>
+<div id="sectionsTab" onclick="toggleNav()">SECTIONS</div>
+<div id="sideNavScrim" onclick="toggleNav()"></div>
+<nav id="sideNav">
+  <h3>Sections</h3>
+  <span class="navItem" onclick="jump('sec0')"><span class="navNum">00</span>General Concepts &amp; Classification</span>
+  <span class="navItem" onclick="jump('sec1')"><span class="navNum">01</span>Giant Cell Arteritis</span>
+  <span class="navItem" onclick="jump('sec2')"><span class="navNum">02</span>Takayasu Arteritis</span>
+  <span class="navItem" onclick="jump('sec3')"><span class="navNum">03</span>Granulomatosis with Polyangiitis (GPA)</span>
+  <span class="navItem" onclick="jump('sec4')"><span class="navNum">04</span>Microscopic Polyangiitis (MPA)</span>
+  <span class="navItem" onclick="jump('sec5')"><span class="navNum">05</span>Eosinophilic Granulomatosis with Polyangiitis (EGPA)</span>
+  <span class="navItem" onclick="jump('sec6')"><span class="navNum">06</span>Board Review — Pt. 1</span>
+  <span class="navItem" onclick="jump('sec7')"><span class="navNum">07</span>Polyarteritis Nodosa (PAN)</span>
+  <span class="navItem" onclick="jump('sec8')"><span class="navNum">08</span>Buerger's Disease</span>
+  <span class="navItem" onclick="jump('sec9')"><span class="navNum">09</span>Mixed Cryoglobulinemia</span>
+  <span class="navItem" onclick="jump('sec10')"><span class="navNum">10</span>Cutaneous Small-Vessel Vasculitis</span>
+  <span class="navItem" onclick="jump('sec11')"><span class="navNum">11</span>Behçet's Disease</span>
+  <span class="navItem" onclick="jump('sec12')"><span class="navNum">12</span>IgA Vasculitis (HSP)</span>
+  <span class="navItem" onclick="jump('sec13')"><span class="navNum">13</span>Primary CNS &amp; Infectious Vasculitides</span>
+  <span class="navItem" onclick="jump('sec14')"><span class="navNum">14</span>Clinical Reasoning &amp; Pattern Recognition</span>
+  <span class="navItem" onclick="jump('sec15')"><span class="navNum">15</span>Board Review — Pt. 2</span>
+  <span class="navItem" onclick="jump('sec16')"><span class="navNum">16</span>Master High-Yield Summary</span>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Osteopathic Clinical Sciences &middot; Dr. Dennis Kinder, MD</div>
+  <h1>Vasculitis — Complete Study Guide</h1>
+  <div class="sub">Parts 1&ndash;2 &middot; classification, large/medium-vessel disease, ANCA-associated small-vessel disease (Pt. 1), and the remaining small/variable-vessel and infectious vasculitides (Pt. 2) &middot; built from both narrated lectures, the learning objectives outline, and the clinical reasoning companion, closing with a pattern-recognition section and a master high-yield table.</div>
+</header>
+
+<div class="contents">
+  <h2>Contents</h2>
+  <div class="toc-cols">
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">1.</span> Pt. 1 — Concepts, Large &amp; Medium Vessel, ANCA</h3>
+        <ol>
+          <li><a href="#sec0">General Concepts &amp; Classification</a></li>
+          <li><a href="#sec1">Giant Cell Arteritis</a></li>
+          <li><a href="#sec2">Takayasu Arteritis</a></li>
+          <li><a href="#sec3">Granulomatosis with Polyangiitis (GPA)</a></li>
+          <li><a href="#sec4">Microscopic Polyangiitis (MPA)</a></li>
+          <li><a href="#sec5">Eosinophilic Granulomatosis with Polyangiitis (EGPA)</a></li>
+          <li><a href="#sec6">Board Review — Pt. 1</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">2.</span> Pt. 2 — Medium, Small &amp; Variable Vessel</h3>
+        <ol>
+          <li><a href="#sec7">Polyarteritis Nodosa (PAN)</a></li>
+          <li><a href="#sec8">Buerger's Disease</a></li>
+          <li><a href="#sec9">Mixed Cryoglobulinemia</a></li>
+          <li><a href="#sec10">Cutaneous Small-Vessel Vasculitis</a></li>
+          <li><a href="#sec11">Behçet's Disease</a></li>
+          <li><a href="#sec12">IgA Vasculitis (HSP)</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">3.</span> Infectious &amp; Clinical Reasoning</h3>
+        <ol>
+          <li><a href="#sec13">Primary CNS &amp; Infectious Vasculitides</a></li>
+          <li><a href="#sec14">Clinical Reasoning &amp; Pattern Recognition</a></li>
+          <li><a href="#sec15">Board Review — Pt. 2</a></li>
+          <li><a href="#sec16">Master High-Yield Summary</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="part" id="sec0">
+<h2 class="partTitle">00 &middot; General Concepts &amp; Classification</h2>
+<article class="topic">
+<h3>What Is Vasculitis?</h3>
+<div class="tagline">Inflammation of the blood vessel wall — the size and location of the affected vessel determines the clinical picture</div>
+<ul>
+  <li><strong>Vascul</strong> = blood vessels (arteries and veins); <strong>-itis</strong> = inflammation</li>
+  <li>Arteries = <strong>arteritis</strong> or <strong>angiitis</strong>; veins = <strong>phlebitis</strong></li>
+  <li>Vasculitis is a heterogeneous group of disorders characterized by inflammation of blood vessel walls, most often arteries</li>
+  <li><strong>Characterized primarily by the size of the blood vessel affected</strong> — this is the single most important organizing principle for the entire topic</li>
+</ul>
+<div class="pearl"><span class="lbl">Study strategy</span>Every vasculitis in this guide can be filed first by vessel size (large / medium / small / variable), then by a handful of distinguishing features (organ tropism, serology, epidemiology). Section 14 builds this into a full pattern-recognition framework — use it as your final review tool.</div>
+</article>
+
+<article class="topic">
+<h3>Mechanism of Vessel Damage</h3>
+<ul>
+  <li>Vasculitis is an <strong>autoimmune (immune-mediated) disease</strong> — molecular mimicry causes the body to confuse a part of itself as a foreign invader</li>
+  <li><strong>Direct attack:</strong> immune cells attack the endothelial cells of the vessel directly — generally seen in large and medium vessel vasculitides</li>
+  <li><strong>Indirect damage:</strong> immune cells attack tissue near the endothelial lining, causing secondary damage to the endothelium — generally seen in small vessel vasculitides</li>
+  <li><strong>Exception: IgA vasculitis (HSP)</strong> is a small vessel disease that causes <strong>direct</strong> damage, via IgA antibodies targeting the endothelial cells themselves</li>
+</ul>
+<table class="data-table">
+<caption>Immune mechanisms of vessel damage</caption>
+<tr><th>Mechanism</th><th>Description</th></tr>
+<tr><td><strong>Autoantibodies</strong></td><td>e.g., ANCA (anti-neutrophil cytoplasmic antibodies)</td></tr>
+<tr><td><strong>Cell-mediated</strong></td><td>Monocytes, macrophages, lymphocytes</td></tr>
+<tr><td><strong>Immune complex</strong></td><td>Deposit directly in vessel walls</td></tr>
+</table>
+<div class="formula"><span class="lbl">Downstream consequences of endothelial damage</span>Exposed collagen and tissue factor trigger <strong>increased coagulation</strong> (blood cells clump onto exposed collagen &rarr; blood clots &rarr; limited flow &rarr; ischemia). The vessel wall itself is <strong>weakened</strong> &rarr; aneurysm formation. As the vessel heals, <strong>fibrin deposition</strong> makes it narrower and stiffer.</div>
+<div class="pearl"><span class="lbl">General (systemic) symptoms of the inflammatory response</span>Fever, weight loss, fatigue, night sweats, myalgia/arthralgia — seen across essentially every vasculitis in this guide, on top of whichever organ-specific symptoms come from the vessel(s) actually involved.</div>
+</article>
+
+<article class="topic">
+<h3>Classification by Vessel Size</h3>
+<table class="data-table">
+<caption>Vasculitides overview</caption>
+<tr><th>Disease</th><th>Vessel Size</th><th>Location</th><th>Symptoms/Signs</th></tr>
+<tr><td><strong>Giant Cell Arteritis</strong></td><td>Large</td><td>Temporal branch of carotid artery</td><td>Headache, visual disturbance, jaw claudication</td></tr>
+<tr><td><strong>Takayasu Arteritis</strong></td><td>Large</td><td>Aortic arch and branch points</td><td>Weak/asymmetric pulses, neurological symptoms</td></tr>
+<tr><td><strong>Polyarteritis Nodosa</strong></td><td>Medium</td><td>Can affect almost any organ (spares lungs)</td><td>"String of beads" on angiogram, end-organ ischemic damage</td></tr>
+<tr><td><strong>Kawasaki Disease</strong></td><td>Medium</td><td>Coronary arteries</td><td>4 of 5 CRASH criteria, prolonged high fever</td></tr>
+<tr><td><strong>Buerger's Disease</strong></td><td>Medium</td><td>Hands, legs/feet</td><td>Ulcers, dead tissue in extremities, autoamputation</td></tr>
+<tr><td><strong>Granulomatosis with Polyangiitis</strong></td><td>Small</td><td>Nasopharynx, lungs, kidneys</td><td>Sinusitis, saddle nose, hemoptysis, hematuria/red cell casts</td></tr>
+<tr><td><strong>Microscopic Polyangiitis</strong></td><td>Small</td><td>Lungs and kidneys (no nasopharynx)</td><td>Renal inflammation, skin lesions, weight loss, fever, mononeuritis</td></tr>
+<tr><td><strong>Eosinophilic Granulomatosis with Polyangiitis</strong></td><td>Small</td><td>Lungs, heart, nerves, skin</td><td>Adult-onset asthma, eosinophilia, mononeuritis multiplex</td></tr>
+<tr><td><strong>IgA Vasculitis (HSP)</strong></td><td>Small</td><td>Skin, GI tract, kidneys, joints</td><td>Palpable purpura on buttocks/legs, GI bleeding, hematuria, arthralgia</td></tr>
+<tr><td><strong>Behçet's Syndrome</strong></td><td>All vessels</td><td>All vessels, arterial and venous</td><td>Recurrent oral/genital ulcers, uveitis, skin lesions, CNS/large-vessel involvement</td></tr>
+</table>
+<div class="pearl"><span class="lbl">The rest of the classification (Chapel Hill framework, referenced in lecture)</span><strong>Variable vessel:</strong> Behçet's disease, Cogan syndrome. <strong>Single-organ vasculitis:</strong> cutaneous leukocytoclastic vasculitis, primary CNS vasculitis. <strong>Vasculitis associated with systemic disease:</strong> lupus vasculitis, rheumatoid vasculitis, sarcoid. <strong>Vasculitis with probable etiology:</strong> HCV-associated cryoglobulinemic vasculitis, HBV-associated vasculitis, syphilis-associated aortitis, drug-associated immune complex or ANCA vasculitis, and cancer-associated vascular disease.</div>
+</article>
+
+<article class="topic">
+<h3>Common Presentations &amp; Clinical Manifestations by Vessel Size</h3>
+<ul>
+  <li><strong>Common presentations:</strong> constitutional symptoms, musculoskeletal symptoms, cutaneous findings, pulmonary findings, renal findings, neurologic findings, and lab abnormalities (anemia, elevated ESR, abnormal LFTs, hematuria)</li>
+</ul>
+<table class="data-table">
+<caption>Clinical manifestations by vessel size</caption>
+<tr><th>Vessel Size</th><th>Manifestations</th></tr>
+<tr><td><strong>Large vessel</strong></td><td>Limb claudication, asymmetric blood pressure, absent pulses, bruits, aortic dilation</td></tr>
+<tr><td><strong>Medium vessel</strong></td><td>Cutaneous nodules, ulcers, arthritis, livedo reticularis, digital gangrene, mononeuritis multiplex, microaneurysms</td></tr>
+<tr><td><strong>Small vessel</strong></td><td>Purpura, vesiculobullous lesions, urticaria, glomerulonephritis, alveolar hemorrhage, arthritis, cutaneous extravascular necrotizing granulomas, splinter hemorrhages, uveitis, episcleritis, scleritis</td></tr>
+</table>
+</article>
+</section>
+
+<section class="part" id="sec1">
+<h2 class="partTitle">01 &middot; Giant Cell Arteritis (Temporal Arteritis)</h2>
+<article class="topic">
+<h3>Etiology, Epidemiology &amp; Risk Factors</h3>
+<div class="tagline">The most common systemic vasculitis</div>
+<ul>
+  <li>Mainly large vessels (some medium vessel involvement) — branches of the <strong>carotid artery</strong></li>
+  <li><strong>Temporal branch</strong> of the carotid &rarr; unilateral headache, temporal pain; <strong>ophthalmic artery</strong> &rarr; visual disturbances; <strong>facial artery</strong> &rarr; jaw claudication with chewing</li>
+  <li>Cause unknown — combination of genetic, environmental, and autoimmune factors</li>
+  <li>Risk factors: biologically <strong>female &gt; male</strong>, <strong>Northern European descent</strong>, <strong>age &gt; 50</strong></li>
+  <li><strong>Strong association with polymyalgia rheumatica (PMR)</strong> — ~15% of PMR patients develop GCA; ~50% of GCA patients develop (or have) PMR</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Signs</h3>
+<ul>
+  <li><strong>Headache</strong> — new, severe, localized to the temporal region</li>
+  <li><strong>Amaurosis fugax</strong> — transient unilateral vision loss, often preceded by episodes of blurred vision; visual loss can also be permanent and can occur very abruptly</li>
+  <li><strong>Jaw claudication</strong>, especially with chewing; also scalp tenderness</li>
+  <li>Tender, nodular, or pulseless temporal arteries on exam</li>
+  <li>Decreased pulses or a bruit over the clavicle suggest subclavian/axillary involvement; aortic regurgitation may be present</li>
+  <li>Atypical presentations: fever of unknown origin, cough, mononeuritis multiplex, or other large-vessel symptoms (TIA, stroke, thoracic aortic aneurysm)</li>
+</ul>
+<div class="formula"><span class="lbl">Visual loss — the number to know</span>Visual symptoms occur in <strong>about 1/3</strong> of GCA patients, developing on average <strong>~5 months</strong> after disease onset, secondary to occlusion of the <strong>posterior ciliary artery</strong> (a branch of the ophthalmic artery). Vision loss can be monocular or binocular, transient or permanent, and can occur abruptly.</div>
+</article>
+
+<article class="topic">
+<h3>Polymyalgia Rheumatica (PMR) — the Strongly Associated Syndrome</h3>
+<ul>
+  <li>Affects the shoulders, hips, and neck; associated morning stiffness and muscle pain</li>
+  <li>Patients often describe difficulty getting out of bed, rising, or brushing their hair/teeth</li>
+  <li><strong>No associated swelling, erythema, or heat</strong> — this distinguishes it from a true inflammatory arthritis on exam</li>
+</ul>
+<div class="formula"><span class="lbl">PMR diagnostic criteria</span>Pain persisting <strong>&ge;1 month</strong>, involving 2 of: neck, shoulders, pelvic girdle &middot; morning stiffness <strong>&gt;1 hour</strong> &middot; rapid response to prednisone <strong>20 mg/day or less</strong> &middot; absence of other diseases causing MSK symptoms &middot; age <strong>&gt;50</strong> &middot; ESR <strong>&gt;40 mm/hr</strong>.</div>
+</article>
+
+<article class="topic">
+<h3>Diagnosis</h3>
+<ul>
+  <li><strong>ESR</strong> often <em>very</em> elevated (frequently &gt;40, often &gt;80) — nonspecific; if normal, consider other diagnoses but still pursue biopsy if suspicion remains</li>
+  <li>Mild anemia may be present</li>
+  <li><strong>Temporal artery biopsy is the gold standard</strong> — shows <strong>granulomatous inflammation</strong> with multinucleated giant cells (monocytes packed together, embedded in the internal elastic lamina)</li>
+  <li>Disease has a <strong>segmental nature</strong> — biopsy needs to be a long section, and a false negative can occur if an unaffected segment is sampled</li>
+  <li>Color Doppler ultrasound can aid diagnosis but is operator-dependent; PET, CT, or MRI are other imaging options</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Treatment</h3>
+<div class="tagline">Treat immediately — do not wait for biopsy results</div>
+<ul>
+  <li><strong>High-dose corticosteroids</strong> — 40&ndash;60 mg/day prednisone; IV methylprednisolone 1000 mg/day for 3&ndash;5 days may be used for visual impairment</li>
+  <li>Steroid tapering begins after symptom resolution and normalization of inflammatory markers (per ACR guidelines)</li>
+  <li>Biologic: <strong>tocilizumab</strong> (targets IL-6); methotrexate sometimes used</li>
+</ul>
+<div class="pearl"><span class="lbl">The single most important management point in this whole guide</span>Delaying treatment while awaiting biopsy results can cause <strong>permanent vision loss</strong> — empirical high-dose steroids should be started immediately on clinical suspicion, before biopsy confirmation.</div>
+<div class="quiz" id="q01a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 68-year-old woman presents with a new, severe unilateral headache, scalp tenderness, and pain in her jaw when chewing. Her ESR is 92 mm/hr. What is the most appropriate next step?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q01b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A patient with biopsy-proven giant cell arteritis also reports difficulty rising from a chair and brushing her hair, with pain and stiffness in her shoulders and hips but no joint swelling or warmth on exam. What is the most likely explanation for these additional symptoms?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec2">
+<h2 class="partTitle">02 &middot; Takayasu Arteritis</h2>
+<article class="topic">
+<h3>Etiology, Epidemiology &amp; Pathophysiology</h3>
+<div class="tagline">"Pulseless disease" — segmental, patchy granulomatous vasculitis of the aortic arch and its branches</div>
+<ul>
+  <li>Chronic granulomatous inflammation of the aorta and its major branches — similar to GCA, but affecting the <strong>aortic arch and branching large arteries</strong> rather than the temporal branch of the carotid</li>
+  <li>Causes: unknown; possibly bacterial (spirochetes, M. tuberculosis, strep) or genetic</li>
+  <li>Risk factors: <strong>Asian descent</strong>, biologically <strong>female</strong>, <strong>age &lt; 40</strong></li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Signs</h3>
+<ul>
+  <li>Vascular manifestations: asymmetric blood pressures, bruits, and claudication of the <strong>upper extremities</strong> (subclavian involvement, often unilateral)</li>
+  <li>Systemic symptoms (fever, weight loss, arthralgia) common during the inflammatory phase</li>
+  <li>Carotid/vertebral involvement &rarr; neurologic symptoms (headache, syncope, stroke); ocular vessel involvement &rarr; retinal hemorrhages; coronary involvement &rarr; angina; renal involvement &rarr; hypertension</li>
+  <li>Aortic regurgitation may develop from dilation of the aortic root</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Diagnosis</h3>
+<ul>
+  <li>Labs: elevated ESR and CRP</li>
+  <li><strong>CT angiography (CTA)</strong> or <strong>MRA</strong>: luminal narrowing, vessel wall thickening, aortic valve disease, aneurysms/pseudoaneurysms</li>
+  <li>Ultrasound: homogeneous, circumferential vessel wall thickening (in contrast to atherosclerotic plaque), vascular occlusion, loss of pulsatility</li>
+  <li>Biopsy (sometimes): giant cells in the internal elastic lamina</li>
+</ul>
+<div class="formula"><span class="lbl">ACR classification criteria</span>Onset age <strong>&lt;40</strong> &middot; limb claudication &middot; decreased brachial artery pulse &middot; unequal arm blood pressures (&gt;10 mmHg difference) &middot; subclavian or aortic bruits &middot; angiographic evidence of narrowing/occlusion of the aorta, its primary branches, or large limb arteries. Meeting <strong>3 of 6 criteria is 91% sensitive and 98% specific</strong> for Takayasu arteritis.</div>
+</article>
+
+<article class="topic">
+<h3>Treatment</h3>
+<ul>
+  <li><strong>High-dose corticosteroids</strong> are the mainstay, tapered gradually as inflammation subsides</li>
+  <li>Immunosuppressive agents (methotrexate, azathioprine) often required for steroid-sparing effect</li>
+  <li>Treat hypertension; surgery (angioplasty when no acute inflammation, or bypass if severe) sometimes necessary</li>
+</ul>
+<div class="pearl"><span class="lbl">GCA vs. Takayasu — the side-by-side</span>Both are large-vessel granulomatous vasculitides with giant cells on biopsy and a strong female predominance, but they split cleanly by age and ethnicity: GCA = age &gt;50, Northern European descent, temporal/carotid branches. Takayasu = age &lt;40, Asian descent, aortic arch and its branches ("pulseless disease" from unequal pulses/BPs).</div>
+<div class="quiz" id="q02a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 28-year-old woman of Asian descent presents with arm claudication, a blood pressure discrepancy of 25 mmHg between her arms, and a diminished left brachial pulse. Which imaging study is most appropriate to confirm the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec3">
+<h2 class="partTitle">03 &middot; Granulomatosis with Polyangiitis (GPA)</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">Formerly Wegener's granulomatosis — a small-vessel, C-ANCA-associated, necrotizing granulomatous disease of 3 organ systems</div>
+<ul>
+  <li>Affects small vessels (arterioles, capillaries, venules) — granulomatous disease of the respiratory tract with systemic necrotizing vasculitis</li>
+  <li><strong>C-ANCA</strong>: B cells release antibodies that bind <strong>proteinase 3 (PR3)</strong>, causing neutrophils to release oxygen free radicals &rarr; indirect endothelial damage</li>
+  <li><strong>Non-caseating granulomas</strong></li>
+  <li><strong>3 organ systems classically involved:</strong> upper respiratory tract (nasopharynx), lower respiratory tract, kidneys</li>
+  <li>Typically presents in middle-aged adults; affects men and women equally</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Signs</h3>
+<ul>
+  <li><strong>Upper respiratory (90% of patients):</strong> chronic sinusitis, nasal crusting, epistaxis; cartilaginous inflammation can lead to <strong>septal perforation</strong> and <strong>saddle nose deformity</strong>; oral ulcers and "strawberry gums" (painful)</li>
+  <li><strong>Lower respiratory (80% of patients):</strong> cough, hemoptysis, dyspnea, pleuritic chest pain; cavitary lung nodules on imaging; subglottic stenosis can occur</li>
+  <li><strong>Renal (80% of patients):</strong> oliguria, hypertension, hematuria/red cell casts, rapidly progressive glomerulonephritis</li>
+  <li><strong>Eyes:</strong> scleritis, episcleritis, conjunctivitis, orbital pseudotumors; <strong>ears:</strong> conductive and sensorineural hearing loss</li>
+  <li><strong>Neurologic:</strong> mononeuritis multiplex; <strong>joints:</strong> migratory arthritis</li>
+</ul>
+<div class="pearl"><span class="lbl">Don't confuse with Goodpasture syndrome</span>GPA involves 3 organ systems (upper respiratory, lower respiratory, kidney) and is C-ANCA-positive with granulomas. Goodpasture syndrome involves only the lower respiratory tract and glomerulonephritis, driven by anti-GBM antibodies rather than ANCA.</div>
+</article>
+
+<article class="topic">
+<h3>Diagnosis &amp; Treatment</h3>
+<ul>
+  <li><strong>C-ANCA positive in ~90%</strong>; thrombocytopenia; abnormal urinary sediment/hematuria</li>
+  <li>Chest x-ray: cavitary lung nodules, fixed infiltrates, nodules</li>
+  <li>Diagnosis confirmed by biopsy (lung, kidney, or upper respiratory tract) showing <strong>granulomatous inflammation, vasculitis, and necrosis</strong></li>
+  <li><strong>Treatment:</strong> corticosteroids, cyclophosphamide, rituximab; relapses are common because C-ANCA can persist and continue attacking neutrophils</li>
+</ul>
+<div class="quiz" id="q03a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 52-year-old man presents with chronic sinusitis, hemoptysis, and hematuria with red cell casts. A nasal mucosa biopsy shows granulomatous inflammation with necrosis. Which antibody is most likely to be positive, and what is its target antigen?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec4">
+<h2 class="partTitle">04 &middot; Microscopic Polyangiitis (MPA)</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">GPA's close cousin — same organs, minus the nose, minus the granulomas, plus a different ANCA</div>
+<ul>
+  <li>Necrotizing vasculitis affecting small vessels, <strong>typically without granulomatous inflammation</strong></li>
+  <li><strong>P-ANCA</strong> (perinuclear), reacting to <strong>myeloperoxidase (MPO)</strong> — instead of C-ANCA/PR3 as in GPA</li>
+  <li><strong>No nasopharyngeal involvement</strong> — this is the key differentiator from GPA</li>
+  <li>The <strong>most common cause of pulmonary-renal syndrome</strong> (alveolar hemorrhage + glomerulonephritis)</li>
+  <li>Affects men and women equally, mean age of diagnosis ~60; can be precipitated by medications, especially <strong>penicillin</strong></li>
+  <li>Has a tropism for kidneys and lungs</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Signs</h3>
+<table class="data-table">
+<caption>MPA — frequency of findings</caption>
+<tr><th>Finding</th><th>Approximate Frequency</th></tr>
+<tr><td>Glomerulonephritis</td><td>80%</td></tr>
+<tr><td>Weight loss</td><td>70%</td></tr>
+<tr><td>Cutaneous vasculitis</td><td>60%</td></tr>
+<tr><td>Mononeuritis multiplex</td><td>60%</td></tr>
+<tr><td>Fevers</td><td>55%</td></tr>
+<tr><td>Alveolar hemorrhage</td><td>12%</td></tr>
+</table>
+<ul>
+  <li>Pulmonary: cough, dyspnea, hemoptysis, pleuritic chest pain, alveolar hemorrhage</li>
+  <li>Renal: hematuria, oliguria, red cell casts, proteinuria, rapidly progressive glomerulonephritis</li>
+  <li>Skin: purpura leading to focal necrosis and ulceration</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Diagnosis &amp; Treatment</h3>
+<ul>
+  <li><strong>P-ANCA</strong> positive; elevated ESR/CRP; anemia; increased creatinine; urine protein and red cell casts</li>
+  <li><strong>Pauci-immune glomerulonephritis</strong> — minimal immunofluorescent staining for IgG (distinguishes it from immune-complex-mediated glomerulonephritides)</li>
+  <li><strong>Treatment (same as GPA):</strong> rituximab with glucocorticoids, or cyclophosphamide plus glucocorticoids, or plasma exchange; relapse is common</li>
+</ul>
+<div class="quiz" id="q04a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 62-year-old man presents with hemoptysis and rapidly progressive glomerulonephritis. He has no nasal or sinus symptoms, and biopsy shows necrotizing vasculitis without granulomas. Which of the following distinguishes this diagnosis from GPA?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec5">
+<h2 class="partTitle">05 &middot; Eosinophilic Granulomatosis with Polyangiitis (EGPA)</h2>
+<article class="topic">
+<h3>Etiology &amp; the Three Phases</h3>
+<div class="tagline">Formerly Churg-Strauss syndrome — asthma-associated, eosinophil-driven, small-medium vessel vasculitis</div>
+<ul>
+  <li><strong>P-ANCA positive in only 50%</strong> of patients (unlike MPA, where P-ANCA positivity is much higher)</li>
+</ul>
+<table class="data-table">
+<caption>The three phases of EGPA</caption>
+<tr><th>Phase</th><th>Findings</th></tr>
+<tr><td><strong>Prodrome</strong></td><td>Asthma and allergic rhinitis, often lasting several years</td></tr>
+<tr><td><strong>Eosinophilic tissue infiltration</strong></td><td>Peripheral eosinophilia and tissue infiltration of the heart, lung, GI tract, and other tissues</td></tr>
+<tr><td><strong>Vasculitic phase</strong></td><td>True vasculitis of the heart, lungs, peripheral nerves, and skin</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Signs by System</h3>
+<ul>
+  <li><strong>Lungs (asthma in 90%):</strong> reactive airway disease, transient/migratory pulmonary infiltrates, occasional pulmonary hemorrhage</li>
+  <li><strong>Peripheral nerves (77%):</strong> mononeuritis multiplex, presenting with foot drop or wrist drop</li>
+  <li><strong>Heart:</strong> congestive heart failure — accounts for about half of EGPA deaths</li>
+  <li><strong>Kidneys:</strong> less likely than GPA/MPA to progress to end-stage renal disease</li>
+  <li><strong>Skin:</strong> palpable purpura, papules, ulcers, vesiculobullous lesions, nodular skin lesions, splinter hemorrhages, digital ischemia and gangrene</li>
+  <li>Upper respiratory: allergic rhinitis and nasal polyposis (the "allergic" component that precedes the vasculitis)</li>
+</ul>
+<div class="formula"><span class="lbl">ACR diagnostic criteria (4 of 6 required)</span>Asthma &middot; eosinophilia &middot; mononeuropathy or polyneuropathy &middot; pulmonary infiltrates &middot; paranasal sinus abnormalities &middot; extravascular eosinophilia.</div>
+</article>
+
+<article class="topic">
+<h3>Diagnosis, Treatment &amp; Prognosis</h3>
+<ul>
+  <li>Labs: leukocytosis with <strong>eosinophilia</strong>, normochromic normocytic anemia, elevated serum IgE, elevated ESR/CRP, positive rheumatoid factor or ANA, normal-to-elevated complement, P-ANCA in 50%</li>
+  <li>X-ray: transient patchy alveolar opacities, nodular infiltrates, or diffuse interstitial pattern with bilateral hilar adenopathy</li>
+  <li>Studies: chest CT, sinus or cardiac MRI; bronchoalveolar lavage may show eosinophilia; biopsy of the least invasive affected site (skin, kidney, peripheral nerve, lacrimal gland); PFTs often show an obstructive pattern</li>
+  <li><strong>Treatment:</strong> glucocorticoids, cyclophosphamide, mycophenolate mofetil, methotrexate, or mepolizumab</li>
+</ul>
+<div class="pearl"><span class="lbl">Prognosis</span>5-year survival is <strong>~25% without treatment</strong> versus <strong>~50% with treatment</strong> — a stark illustration of why timely recognition and treatment matter in this disease.</div>
+</article>
+
+<article class="topic">
+<h3>ANCA Target Comparison</h3>
+<table class="data-table">
+<caption>C-ANCA vs. P-ANCA — antigen targets and disease associations</caption>
+<tr><th>ANCA</th><th>Target Antigen</th><th>Primary Association</th></tr>
+<tr><td><strong>C-ANCA</strong> (cytoplasmic)</td><td>Proteinase 3 (PR3)</td><td>Granulomatosis with polyangiitis (GPA)</td></tr>
+<tr><td><strong>P-ANCA</strong> (perinuclear)</td><td>Myeloperoxidase (MPO)</td><td>Eosinophilic granulomatosis with polyangiitis (50%); microscopic polyangiitis</td></tr>
+</table>
+<div class="pearl"><span class="lbl">P-ANCA is not exclusive to the ANCA-associated vasculitides</span>P-ANCA (and focal necrotizing/concentric glomerulonephritis) can also be seen in rheumatoid arthritis, primary sclerosing cholangitis, ulcerative colitis, and polyarteritis nodosa. PAN, notably, is <strong>not</strong> a small-vessel vasculitis despite occasionally being ANCA-positive — don't let a positive ANCA push you to misclassify its vessel size.</div>
+<div class="quiz" id="q05a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 40-year-old woman with a decade-long history of asthma and allergic rhinitis develops new peripheral eosinophilia, palpable purpura, and a foot drop. Which of the following best describes the sequence of this disease's classic clinical phases?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec6">
+<h2 class="partTitle">06 &middot; Board Review — Pt. 1</h2>
+<article class="topic">
+<h3>Consolidated Review Questions</h3>
+<div class="tagline">Practice vignettes spanning GCA, Takayasu, GPA, MPA, and EGPA</div>
+<div class="quiz" id="qFinal1A">
+<div class="qhead">Question A</div>
+<div class="qtext">A 71-year-old man presents with jaw pain while eating, a new headache, and blurred vision in one eye. ESR is 88. Temporal artery biopsy is pending. What is the most appropriate immediate management?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal1B">
+<div class="qhead">Question B</div>
+<div class="qtext">A 33-year-old Japanese woman has absent radial pulses bilaterally, arm claudication, and hypertension. CTA shows circumferential thickening of the aortic arch and its branches. Which classification criteria would best support this diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal1C">
+<div class="qhead">Question C</div>
+<div class="qtext">A patient with saddle-nose deformity, hemoptysis, and glomerulonephritis is found to be C-ANCA positive with anti-PR3 antibodies. Biopsy shows granulomatous necrotizing vasculitis. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal1D">
+<div class="qhead">Question D</div>
+<div class="qtext">Two patients both present with pulmonary-renal syndrome. Patient 1 has chronic sinusitis and granulomas on biopsy; Patient 2 has no sinus disease and no granulomas on biopsy. What ANCA pattern is each patient most likely to have, respectively?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec7">
+<h2 class="partTitle">07 &middot; Polyarteritis Nodosa (PAN)</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">A necrotizing, transmural, medium-vessel vasculitis that famously spares the lungs</div>
+<ul>
+  <li>Necrotizing inflammation of muscular arterioles and medium-sized arteries; <strong>spares the capillaries and veins</strong>; <strong>no granuloma formation</strong></li>
+  <li>Direct attack on endothelium, thought to be triggered by immune complex deposits in the vessel wall that attract <strong>polymorphonuclear leukocytes</strong></li>
+  <li><strong>Transmural inflammation</strong> (intima, media, and adventitia) with <strong>fibrinoid necrosis</strong> — layers die and are replaced by fibrin, weakening the wall and producing aneurysms/microaneurysms</li>
+  <li>Risk factors: biological males, <strong>age &gt;40</strong>, active hepatitis B or hepatitis C, HIV, prescription/illicit drug exposure (e.g., amphetamines) — <strong>~30% of PAN patients are HBsAg-positive</strong></li>
+  <li><strong>Spares the pulmonary arteries</strong> — reason unknown</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Signs</h3>
+<ul>
+  <li>Organ ischemia predominates: <strong>renal arteries</strong> &rarr; hypertension, renal failure, hematuria; <strong>mesenteric arteries</strong> &rarr; postprandial abdominal pain, GI bleeding, mesenteric infarction/aneurysm; <strong>coronary arteries</strong> &rarr; acute MI</li>
+  <li>Skin: livedo reticularis, palpable purpura, lower extremity nodules/ulcerations (a cutaneous-limited variant exists)</li>
+  <li>Peripheral nerve ischemia &rarr; <strong>mononeuritis multiplex</strong>, often presenting with wrist or foot drop</li>
+  <li>Testicular ischemia/pain, myalgias, arthritis</li>
+</ul>
+<div class="formula"><span class="lbl">ACR criteria (10 total; 3 needed)</span>Unexplained weight loss &gt;4 kg &middot; livedo reticularis &middot; testicular pain/tenderness &middot; myalgias/weakness &middot; new-onset diastolic BP &gt;90 &middot; elevated BUN or creatinine &middot; evidence of hepatitis B infection &middot; characteristic arteriographic abnormalities &middot; biopsy evidence of PMN infiltration in medium/small arteries. Meeting <strong>3 of these criteria is 82% sensitive and 87% specific</strong>.</div>
+</article>
+
+<article class="topic">
+<h3>Diagnosis &amp; Treatment</h3>
+<ul>
+  <li>The classic <strong>"string of beads" appearance on angiogram</strong> results from alternating stenosis and aneurysm formation in medium-sized arteries — classically seen in the hepatic artery, superior mesenteric artery, and renal arteries</li>
+  <li>Diagnosis requires angiographic evidence or biopsy of an involved organ (microaneurysms commonly identified in kidneys and GI tract)</li>
+  <li><strong>Treatment:</strong> glucocorticoids and cyclophosphamide, plus antivirals when hepatitis B-associated</li>
+</ul>
+<div class="pearl"><span class="lbl">Clinical differentiation from cutaneous PAN</span>A cutaneous PAN variant exists in which vasculitis is limited to the skin, presenting as nodules that break down into ulcers — subacute onset with constitutional symptoms, lower extremity nodules/ulcerations, mononeuritis multiplex, and intestinal angina are typical of the systemic form.</div>
+<div class="quiz" id="q07a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 45-year-old man with active hepatitis B presents with new hypertension, postprandial abdominal pain, and a new foot drop. Angiography shows alternating aneurysms and stenoses in the renal and mesenteric arteries, with normal pulmonary vasculature. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec8">
+<h2 class="partTitle">08 &middot; Buerger's Disease (Thromboangiitis Obliterans)</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">"Clot" + "vessel" + "inflammation" + "blockage" — a smoking-driven medium-vessel disease of the digits</div>
+<ul>
+  <li>Clots form in vessels supplying the fingers and toes (tibial and radial arteries)</li>
+  <li><strong>Blood vessel wall integrity remains intact</strong>, even though inflammatory cell infiltration is present — the inflammatory process extends to adjacent arteries, veins, and nerves</li>
+  <li>Fibrosis encases these structures together, leading to ulcers, dead tissue, and <strong>autoamputation</strong></li>
+  <li>Risk factors: <strong>men, age 20&ndash;40</strong>; higher incidence in Ashkenazi Jewish populations and in Israel, Japan, and India; <strong>tobacco use</strong> is the trigger — smoking cessation slows (but does not necessarily stop) progression</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms, Diagnosis &amp; Treatment</h3>
+<ul>
+  <li>Claudication and pain in the forefoot; digit-predominant disease with painful digits, gangrene, tissue loss, and autoamputation</li>
+  <li><strong>Raynaud phenomenon</strong> is common but nonspecific (also seen in scleroderma and lupus)</li>
+  <li><strong>~60% of patients have an abnormal Allen test</strong></li>
+  <li>Skin: superficial thrombophlebitis, splinter hemorrhages, gangrene of distal tissue</li>
+  <li>Diagnosis: ankle-brachial index; angiography shows a <strong>"corkscrew" appearance</strong> from segmental thrombus-driven inflammation and abrupt vascular cutoffs to the digits</li>
+  <li><strong>Treatment: smoking cessation</strong> — the only intervention shown to meaningfully alter disease course</li>
+</ul>
+<div class="quiz" id="q08a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 32-year-old man with a 15-pack-year smoking history presents with painful, ischemic-appearing toes and a positive Allen test. Angiography shows corkscrew collaterals and abrupt vascular cutoffs to the digits. What is the single most important treatment intervention?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec9">
+<h2 class="partTitle">09 &middot; Mixed Cryoglobulinemia</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">Small/medium vessel vasculitis driven by abnormal immunoglobulins that precipitate in the cold</div>
+<ul>
+  <li><strong>Cryoglobulins</strong> are abnormal immunoglobulins that stick together at low temperatures</li>
+  <li><strong>Almost always associated with hepatitis C (~90%)</strong>; other associations include lupus, RA, Sjögren's, Lyme disease, mononucleosis, and HIV/AIDS, plus conditions with increased lymphocytes (multiple myeloma, lymphoid leukemia, lymphoma)</li>
+  <li>More common in females (3:1) and most frequently presents at <strong>age &gt;50</strong></li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms, Diagnosis &amp; Treatment</h3>
+<ul>
+  <li>Cryoglobulins deposit in small blood vessels of the skin &rarr; <strong>palpable purpura</strong>, cyanosis of the nose/ears/digits, and <strong>Raynaud phenomenon</strong></li>
+  <li>Kidneys: small arteries supplying the glomerulus are affected &rarr; glomerulonephritis</li>
+  <li>Peripheral nerves: peripheral neuropathy</li>
+  <li>Diagnosis: HCV serology, cryoglobulins, urinalysis; imaging depends on symptoms; biopsy or nerve conduction studies as needed</li>
+  <li><strong>Treatment:</strong> treat the underlying HCV, corticosteroids, immunosuppression if vital organs are affected (azathioprine, cyclophosphamide), and biologics (rituximab) or plasmapheresis if very severe</li>
+</ul>
+<div class="quiz" id="q09a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 58-year-old woman with chronic hepatitis C presents with palpable purpura, Raynaud phenomenon, and new peripheral neuropathy. Which underlying process links these findings?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec10">
+<h2 class="partTitle">10 &middot; Cutaneous Small-Vessel Vasculitis (CSVV)</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">Also called leukocytoclastic, hypersensitivity, or allergic vasculitis — a skin-limited diagnosis of exclusion</div>
+<ul>
+  <li>Typically triggered by medications (penicillin, cephalosporin, phenytoin, allopurinol, NSAIDs, loop and thiazide diuretics) roughly <strong>7&ndash;10 days</strong> after exposure, or by infections (strep pyogenes, hepatitis C, HIV)</li>
+  <li>Any age, generally <strong>&gt;16</strong>; affects all genders equally</li>
+  <li>Usually confined to the skin, but systemic involvement (when present) affects joints, GI tract, and kidneys</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Diagnosis &amp; Treatment</h3>
+<ul>
+  <li>Palpable purpura typically on the <strong>lower extremities and buttocks</strong>, appearing over days to weeks and resolving as the trigger clears; can become relapsing/remitting</li>
+  <li><strong>It is essential to exclude other causes of vasculitis before making this diagnosis</strong> — CBC, electrolytes, LFTs, urinalysis, RF, ANCA, C3/C4, hepatitis serologies, cryoglobulins, and chest x-ray are typically normal</li>
+  <li>Skin biopsy: perivascular inflammation of small vessels, disruption/destruction of the vessel wall, fibrinoid necrosis, extravasation of RBCs, and <strong>leukocytoclasis</strong> (predominance of neutrophils and nuclear debris)</li>
+</ul>
+<div class="formula"><span class="lbl">ACR diagnostic criteria (3 of 5 required)</span>Age at onset &gt;16 &middot; medication at disease onset &middot; palpable purpura &middot; maculopapular rash &middot; biopsy showing granulocytes in a perivascular or extravascular location.</div>
+<div class="pearl"><span class="lbl">Treatment mirrors the "remove the trigger" theme</span>Mild disease: conservative measures (leg elevation, NSAIDs, antihistamines). Persistent disease: colchicine, hydroxychloroquine, or dapsone. Refractory cases: glucocorticoids. Overall, treatment is generally supportive, and the disease usually clears spontaneously once the trigger is addressed.</div>
+<div class="quiz" id="q10a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 24-year-old man develops palpable purpura on his lower legs one week after starting a new antibiotic. Basic labs (CBC, LFTs, UA, ANCA, complement) are all normal, and skin biopsy shows leukocytoclasis. What is the most appropriate first step in management?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec11">
+<h2 class="partTitle">11 &middot; Behçet's Disease</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">The only vasculitis in this guide affecting vessels of all sizes, both arterial and venous</div>
+<ul>
+  <li>Rare; named for Hulusi Behçet, a Turkish pathologist; strong predilection for <strong>Turkish and Mediterranean populations</strong></li>
+  <li>Unique among vasculitides in affecting <strong>blood vessels of all sizes</strong> — both arterial and venous</li>
+  <li>Cause unknown; <strong>HLA-B51</strong> is strongly implicated; may follow HSV or parvovirus infection; involves altered T-helper cell and cytokine levels, with lymphocytes infiltrating vessel walls</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms &amp; Signs</h3>
+<ul>
+  <li>Can affect every organ system; <strong>oral ulcers</strong> (aphthous, painful sores) are the most typical initial symptom — new ulcers can appear before previous ones heal, giving a continuously-present pattern</li>
+  <li><strong>Genital ulcers</strong> — painful, involving the anus, vulva, or scrotum</li>
+  <li><strong>Eyes:</strong> anterior uveitis (painful, with conjunctivitis; <strong>hypopyon</strong> = sterile pus in the anterior chamber) or posterior uveitis (painless, with visual field floaters, sometimes optic nerve involvement)</li>
+  <li><strong>Skin:</strong> erythema nodosum (inflammation of subcutaneous fat)</li>
+  <li>Other: joint stiffness, abdominal pain, meningitis/meningoencephalitis, kidney disease, and the most severe complications — CNS involvement and large-vessel vasculitis</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Diagnosis &amp; Treatment</h3>
+<ul>
+  <li>Primarily a <strong>clinical diagnosis</strong> — no specific laboratory findings for the disease</li>
+  <li><strong>Pathergy test:</strong> a pin-prick fails to heal normally within 1&ndash;2 days, instead causing an ulcer, papule, or pustule</li>
+  <li><strong>Recurrent oral ulcerations</strong> are defined as occurring 3 times over 12 months, plus 2 or more of: recurrent genital ulcerations, uveitis/retinal vasculitis, skin lesions, or a positive pathergy test</li>
+  <li><strong>Treatment:</strong> topical steroids or dapsone for recurrent oral ulcers; high-dose systemic steroids and anti-TNF inhibitors for vision-threatening uveitis or meningoencephalitis; corticosteroids, biologic TNF blockers, and IV immunoglobulins more broadly</li>
+</ul>
+<div class="quiz" id="q11a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A young woman of Turkish descent has had recurrent painful oral ulcers 4 times in the past year, along with two episodes of genital ulceration and one episode of painful anterior uveitis with hypopyon. A pin-prick test produces a pustule within 24 hours. What is the diagnosis, and what test supported it?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec12">
+<h2 class="partTitle">12 &middot; IgA Vasculitis (Henoch-Schönlein Purpura)</h2>
+<article class="topic">
+<h3>Etiology &amp; Pathophysiology</h3>
+<div class="tagline">The most common systemic vasculitis of childhood, and the exception to the "small vessel = indirect damage" rule</div>
+<ul>
+  <li>IgA deposition in small vessel walls, typically following an upper respiratory infection (viral URI or group A strep) by about <strong>10 days</strong> in roughly two-thirds of patients</li>
+  <li><strong>90% of cases occur in children</strong> — the most common systemic vasculitis of childhood</li>
+  <li><strong>No ANCA</strong> — instead, increased IgA antibodies (from mucosal cells exposed to the outside environment) directly target the endothelial cells, likely via molecular mimicry — <strong>direct damage</strong>, unlike most other small-vessel vasculitides</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Symptoms, Diagnosis &amp; Treatment</h3>
+<div class="formula"><span class="lbl">The classic tetrad</span><strong>Palpable purpura</strong> (skin blood vessels of the buttocks and legs; petechiae progressing to palpable purpura from fibrosis) &middot; <strong>arthritis</strong> (migratory arthralgia, periarticular disease of the knees and ankles) &middot; <strong>abdominal pain</strong> (colicky, with GI bleeding in ~33%; hematoma in the intestinal wall can cause intussusception) &middot; <strong>glomerulonephritis</strong> (hematuria; can progress to IgA nephropathy, aka Berger's disease — not to be confused with Buerger's disease).</div>
+<ul>
+  <li>Skin pathology: leukocytoclastic vasculitis of small vessels in the superficial dermis, with necrosis but <strong>no granulomas</strong>; immunofluorescence shows <strong>coarse granular IgA deposition</strong></li>
+  <li>Classic presentation: acute-onset fever, palpable purpura on the lower extremities/buttocks, abdominal pain with GI bleeding, arthritis, and hematuria</li>
+  <li>Diagnosis can be confirmed with direct immunofluorescence and conventional biopsy staining, but in children, treatment is often based on clinical presentation alone</li>
+  <li><strong>Treatment:</strong> largely self-limited, usually resolving within 6&ndash;8 weeks in children; glucocorticoids and immunosuppressive therapy for severe cases</li>
+</ul>
+<div class="pearl"><span class="lbl">Berger's vs. Buerger's — a classic name mix-up</span>IgA nephropathy is also called <strong>Berger's disease</strong> — completely unrelated to <strong>Buerger's disease</strong> (thromboangiitis obliterans, Section 08). Same-sounding names, entirely different pathology; know which spelling goes with which disease.</div>
+<div class="quiz" id="q12a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 6-year-old boy develops palpable purpura on his buttocks and legs, colicky abdominal pain, and hematuria about 10 days after an upper respiratory infection. His ANCA is negative. What is the diagnosis, and what is the expected disease course?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec13">
+<h2 class="partTitle">13 &middot; Primary CNS Vasculitis &amp; Infectious Vasculitides</h2>
+<article class="topic">
+<h3>Primary CNS Vasculitis</h3>
+<div class="tagline">A rare, single-organ vasculitis that requires tissue for diagnosis</div>
+<ul>
+  <li>Primarily presents with headaches and stroke-like symptoms</li>
+  <li><strong>Diagnosis requires brain biopsy</strong> since imaging alone is nonspecific</li>
+  <li>Angiography demonstrates <strong>alternating stenosis and ectasia</strong></li>
+  <li><strong>Treatment:</strong> high-dose corticosteroids</li>
+</ul>
+<div class="pearl"><span class="lbl">Secondary CNS vasculitis — rule these out first</span>Etiologies for secondary vasculitis of the CNS include HIV, herpes zoster, hepatitis C, Behçet's disease, polyarteritis nodosa, cocaine use, and the ANCA-associated vasculitides — primary CNS vasculitis is a diagnosis of exclusion within the broader CNS vasculitis differential.</div>
+</article>
+
+<article class="topic">
+<h3>Infectious Vasculitides</h3>
+<div class="tagline">Several infections can cause vasculitis or a vasculitis-like presentation — the primary management approach is always treating the underlying infection</div>
+<table class="data-table">
+<caption>Infectious causes of vasculitis</caption>
+<tr><th>Organism</th><th>Vessel Size</th><th>Key Features</th></tr>
+<tr><td><strong>Rickettsia rickettsii</strong> (Rocky Mountain spotted fever)</td><td>Small vessel</td><td>Dog/wood tick vector (Dermacentor spp.); petechial rash starting on palms and soles, then spreading to the trunk</td></tr>
+<tr><td><strong>Neisseria meningitidis</strong> (disseminated meningococcemia)</td><td>Small vessel</td><td>Petechiae, purpura, and sometimes hemorrhagic infarction of the adrenal glands (<strong>Waterhouse-Friderichsen syndrome</strong>)</td></tr>
+<tr><td><strong>Treponema pallidum</strong> (syphilis)</td><td>Small vessels (genital); vasa vasorum of the aorta</td><td>Small vessel infarction &rarr; skin chancre; vasa vasorum ischemia &rarr; weakened aortic wall &rarr; aortic aneurysm or regurgitation</td></tr>
+<tr><td><strong>Neisseria gonorrhoeae</strong> (disseminated gonococcal infection)</td><td>Small vessel (embolic)</td><td>&lt;3% of infections disseminate; two clinical spectra — (1) tenosynovitis-dermatitis-polyarthralgia syndrome from bacterial microabscesses (petechial macules progressing to papules/pustules/vesicles/bullae on the dorsal distal extremities near joints), or (2) purulent arthritis without skin lesions</td></tr>
+</table>
+</article>
+</section>
+
+<section class="part" id="sec14">
+<h2 class="partTitle">14 &middot; Clinical Reasoning &amp; Pattern Recognition</h2>
+<article class="topic">
+<h3>Step 1: Start With Vessel Size</h3>
+<div class="tagline">The organizing framework for the entire clinical reasoning process</div>
+<ul>
+  <li><strong>Large vessel &rarr;</strong> Giant Cell Arteritis (GCA), Takayasu</li>
+  <li><strong>Medium vessel &rarr;</strong> Polyarteritis Nodosa (PAN), Buerger Disease</li>
+  <li><strong>Small vessel &rarr;</strong> GPA, MPA, EGPA, IgA Vasculitis, Cryoglobulinemia, CSVV</li>
+  <li><strong>Variable vessel &rarr;</strong> Behçet Disease</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Step 2: Pattern Recognition</h3>
+<table class="data-table">
+<caption>Classic presentation &rarr; diagnosis &rarr; confirmatory test</caption>
+<tr><th>Classic Presentation</th><th>Think&hellip;</th><th>Key Confirmation</th></tr>
+<tr><td>Age &gt;50 + headache + jaw claudication + vision loss</td><td>Giant Cell Arteritis</td><td>ESR + temporal artery biopsy/US</td></tr>
+<tr><td>Young woman + unequal arm BPs + weak pulses</td><td>Takayasu</td><td>CTA/MRA</td></tr>
+<tr><td>Sinusitis + hemoptysis + hematuria + C-ANCA</td><td>GPA</td><td>Biopsy</td></tr>
+<tr><td>Pulmonary-renal syndrome + P-ANCA, no ENT disease</td><td>MPA</td><td>Kidney biopsy</td></tr>
+<tr><td>Adult asthma + eosinophilia + neuropathy</td><td>EGPA</td><td>Eosinophils &plusmn; biopsy</td></tr>
+<tr><td>HBV + abdominal pain + foot drop</td><td>PAN</td><td>Angiography/biopsy</td></tr>
+<tr><td>HCV + palpable purpura + neuropathy</td><td>Cryoglobulinemia</td><td>Cryoglobulins</td></tr>
+<tr><td>URI + palpable purpura + abdominal pain + hematuria</td><td>IgA Vasculitis</td><td>Clinical &plusmn; biopsy</td></tr>
+<tr><td>Oral ulcers + genital ulcers + uveitis</td><td>Behçet Disease</td><td>Clinical criteria</td></tr>
+<tr><td>Young smoker + digital ischemia</td><td>Buerger Disease</td><td>Angiography; smoking history</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Clinical Reasoning Algorithm</h3>
+<div class="formula"><span class="lbl">The sequence</span>Inflammatory symptoms &rarr; determine vessel size &rarr; identify involved organs &rarr; order targeted labs (ESR/CRP, ANCA, UA, hepatitis testing, cryoglobulins as indicated) &rarr; confirm with imaging or biopsy &rarr; start disease-specific treatment.</div>
+</article>
+
+<article class="topic">
+<h3>High-Yield Pearls</h3>
+<ul>
+  <li><strong>GCA:</strong> treat immediately — do NOT delay corticosteroids for biopsy</li>
+  <li><strong>GPA</strong> = ENT + lungs + kidneys + C-ANCA</li>
+  <li><strong>MPA</strong> resembles GPA but has NO upper airway disease and NO granulomas</li>
+  <li><strong>EGPA</strong> = adult-onset asthma + eosinophilia</li>
+  <li><strong>PAN</strong> spares the lungs</li>
+  <li><strong>Cryoglobulinemia</strong> is strongly associated with hepatitis C</li>
+  <li><strong>Buerger disease:</strong> smoking cessation is the cornerstone of treatment</li>
+</ul>
+</article>
+
+<article class="topic">
+<h3>Common Student Mistakes</h3>
+<ul>
+  <li>Memorizing diseases instead of recognizing patterns</li>
+  <li>Forgetting to classify by vessel size first</li>
+  <li>Confusing GPA and MPA</li>
+  <li>Missing GCA as an ophthalmologic emergency</li>
+  <li>Ordering broad testing instead of hypothesis-driven testing</li>
+</ul>
+<div class="pearl"><span class="lbl">Take-home message</span>Think in patterns, not lists. Vessel size, organ involvement, characteristic clinical features, and a few high-yield laboratory findings will lead you to the correct diagnosis in most patients.</div>
+</article>
+</section>
+
+<section class="part" id="sec15">
+<h2 class="partTitle">15 &middot; Board Review — Pt. 2</h2>
+<article class="topic">
+<h3>Consolidated Review Questions</h3>
+<div class="tagline">Practice vignettes spanning PAN, Buerger's, cryoglobulinemia, CSVV, Behçet's, IgA vasculitis, and infectious vasculitis</div>
+<div class="quiz" id="qFinal2A">
+<div class="qhead">Question A</div>
+<div class="qtext">A patient with active hepatitis B develops new hypertension, mesenteric ischemia, and mononeuritis multiplex, with completely normal chest imaging. Angiography shows a "string of beads" pattern. What is the diagnosis, and why is the normal chest imaging an expected finding rather than a clue against the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal2B">
+<div class="qhead">Question B</div>
+<div class="qtext">A young male smoker develops digital ischemia with a corkscrew pattern on angiography and an intact vessel wall on biopsy despite inflammatory infiltrate. What is the single intervention most likely to alter the course of his disease?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal2C">
+<div class="qhead">Question C</div>
+<div class="qtext">A patient with recurrent oral and genital ulcers and painful anterior uveitis with hypopyon undergoes a pathergy test, which produces a pustule at the needle site within 24 hours. What disease does this support, and what population is classically affected?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="qFinal2D">
+<div class="qhead">Question D</div>
+<div class="qtext">A child develops palpable purpura on the buttocks, colicky abdominal pain, and hematuria 10 days after a sore throat. ANCA testing is negative. What confirms that this is an exception to the usual small-vessel-vasculitis damage mechanism, and what is the expected prognosis in children?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec16">
+<h2 class="partTitle">16 &middot; Master High-Yield Summary — All Parts</h2>
+<article class="topic">
+<h3>How to use this section</h3>
+<div class="tagline">The single highest-yield fact for every entity in this guide, organized by vessel size — for final-pass review</div>
+<p>This table distills every vasculitis covered in Parts 1&ndash;2 to its most testable features. It is not a replacement for the full sections above, which contain the pathophysiologic reasoning behind each buzzword — use this as a final review pass or a quick lookup when two entities are being confused.</p>
+</article>
+
+<article class="topic">
+<h3>Large &amp; Medium Vessel Vasculitides</h3>
+<table class="data-table">
+<tr><th>Entity</th><th>Highest-Yield Buzzword / Distinguishing Feature</th></tr>
+<tr><td><strong>Giant Cell Arteritis</strong></td><td>Age &gt;50, female, Northern European; temporal branch of carotid; headache/jaw claudication/amaurosis fugax; strong PMR association; ESR often &gt;80; temporal artery biopsy = gold standard (giant cells, granulomatous, segmental — biopsy long section); <strong>treat immediately, do not wait for biopsy</strong></td></tr>
+<tr><td><strong>Takayasu Arteritis</strong></td><td>Age &lt;40, female, Asian descent; "pulseless disease"; aortic arch + branches; unequal arm BPs/weak pulses; CTA/MRA for diagnosis; ACR criteria 3/6 = 91% sens/98% spec</td></tr>
+<tr><td><strong>Polyarteritis Nodosa</strong></td><td>Males &gt;40; ~30% HBsAg+; transmural fibrinoid necrosis; "string of beads" on angiography; <strong>spares the lungs</strong>; mononeuritis multiplex; no granulomas, no capillary/venule involvement</td></tr>
+<tr><td><strong>Buerger's Disease</strong></td><td>Men 20&ndash;40, heavy smokers; "corkscrew" collaterals; wall integrity intact despite inflammation; autoamputation of digits; <strong>smoking cessation is the only effective treatment</strong></td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>ANCA-Associated Small Vessel Vasculitides</h3>
+<table class="data-table">
+<tr><th>Entity</th><th>Highest-Yield Buzzword / Distinguishing Feature</th></tr>
+<tr><td><strong>GPA</strong></td><td>C-ANCA/PR3; upper resp + lower resp + kidney (3 organ systems); saddle-nose deformity; strawberry gums; granulomatous necrotizing vasculitis; treat with cyclophosphamide/rituximab + steroids; relapses common</td></tr>
+<tr><td><strong>MPA</strong></td><td>P-ANCA/MPO; pulmonary-renal syndrome; <strong>no nasopharyngeal involvement, no granulomas</strong> (key differentiators from GPA); pauci-immune GN; same treatment as GPA</td></tr>
+<tr><td><strong>EGPA</strong></td><td>P-ANCA only 50% positive; adult-onset asthma &rarr; eosinophilia/tissue infiltration &rarr; vasculitic phase; mononeuritis multiplex (foot/wrist drop); cardiac involvement causes ~half of deaths; 5-yr survival 25% untreated vs. 50% treated</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>Other Small &amp; Variable Vessel Vasculitides</h3>
+<table class="data-table">
+<tr><th>Entity</th><th>Highest-Yield Buzzword / Distinguishing Feature</th></tr>
+<tr><td><strong>Mixed Cryoglobulinemia</strong></td><td>~90% associated with hepatitis C; female 3:1, age &gt;50; palpable purpura + Raynaud's + neuropathy; treat underlying HCV</td></tr>
+<tr><td><strong>CSVV (Leukocytoclastic Vasculitis)</strong></td><td>Medication (7&ndash;10 days post-exposure) or infection trigger; skin-limited; diagnosis of exclusion (other vasculitis labs normal); biopsy shows leukocytoclasis; treat the trigger, usually self-resolving</td></tr>
+<tr><td><strong>Behçet's Disease</strong></td><td>Turkish/Mediterranean; HLA-B51; only vasculitis affecting <strong>all vessel sizes</strong>, arterial and venous; recurrent oral + genital ulcers + uveitis (hypopyon); positive pathergy test; clinical diagnosis, no specific labs</td></tr>
+<tr><td><strong>IgA Vasculitis (HSP)</strong></td><td>Most common childhood systemic vasculitis; follows URI by ~10 days; classic tetrad = purpura + arthritis + abdominal pain + GN; <strong>no ANCA</strong>; <strong>direct</strong> IgA-mediated damage (exception to the small-vessel "indirect damage" rule); usually self-limited in children</td></tr>
+<tr><td><strong>Primary CNS Vasculitis</strong></td><td>Headache + stroke-like symptoms; brain biopsy required (imaging alone nonspecific); alternating stenosis/ectasia on angiography; rule out secondary causes first (HIV, HSV zoster, HCV, Behçet's, PAN, cocaine, ANCA vasculitis)</td></tr>
+</table>
+</article>
+
+<article class="topic">
+<h3>The Classic Confusable Pairs — Quick Differentiation</h3>
+<table class="data-table">
+<caption>Pairs Board Questions Love to Contrast</caption>
+<tr><th>Pair</th><th>How to tell them apart</th></tr>
+<tr><td>GCA vs. Takayasu</td><td>GCA = age &gt;50, Northern European, temporal/carotid branches; Takayasu = age &lt;40, Asian descent, aortic arch and its branches</td></tr>
+<tr><td>GPA vs. MPA</td><td>GPA = C-ANCA/PR3, granulomas, nasopharynx + lungs + kidneys; MPA = P-ANCA/MPO, no granulomas, no nasopharynx involvement, lungs + kidneys only</td></tr>
+<tr><td>GPA vs. Goodpasture syndrome</td><td>GPA = 3 organ systems (upper resp + lower resp + kidney), ANCA-driven; Goodpasture = lower resp + kidney only, anti-GBM antibody-driven</td></tr>
+<tr><td>MPA vs. EGPA</td><td>Both can be P-ANCA/MPO positive, but EGPA has adult-onset asthma and eosinophilia as defining prodromal features; MPA does not</td></tr>
+<tr><td>PAN vs. the ANCA-associated vasculitides</td><td>PAN is a medium-vessel disease (occasionally ANCA-positive) with no granulomas, no capillary/venule involvement, and spares the lungs — don't reclassify it as small-vessel just because of a positive ANCA</td></tr>
+<tr><td>Berger's disease vs. Buerger's disease</td><td>Berger's = IgA nephropathy (a complication of IgA vasculitis/HSP); Buerger's = thromboangiitis obliterans (smoking-associated digital ischemia) — same-sounding names, unrelated diseases</td></tr>
+<tr><td>IgA vasculitis vs. other small-vessel vasculitides — damage mechanism</td><td>Most small-vessel vasculitides cause indirect endothelial damage; IgA vasculitis (HSP) is the exception, causing direct IgA-mediated endothelial damage</td></tr>
+<tr><td>Cryoglobulinemia vs. PAN — viral hepatitis association</td><td>Cryoglobulinemia = hepatitis C (~90%); PAN = hepatitis B (~30% HBsAg+)</td></tr>
+</table>
+</article>
+</section>
+
+<footer>Vasculitis, Pts. 1&ndash;2 (complete) &middot; Osteopathic Clinical Sciences &middot; Dr. Dennis Kinder, MD &middot; Built for board review</footer>
+</main>
+
+<script>
+function toggleNav(){
+  document.getElementById('sideNav').classList.toggle('open');
+  var scrim = document.getElementById('sideNavScrim');
+  scrim.style.display = scrim.style.display === 'block' ? 'none' : 'block';
+}
+function jump(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  toggleNav();
+}
+function goBack(){
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+const questionData = {
+  q01a: {choices:["Order a temporal artery biopsy and wait for results before starting steroids","Start high-dose corticosteroids immediately, and pursue biopsy concurrently rather than waiting","Start NSAIDs alone and reassess in one week","Order an MRI of the brain before starting any treatment"], correct:1,
+    explain:"GCA is treated immediately with high-dose corticosteroids given the risk of vision loss — treatment should not be delayed while awaiting biopsy confirmation. Biopsy can still be pursued (and remains useful diagnostically, since the segmental disease can persist on histology for some time after steroids start), but it should never delay treatment."},
+  q01b: {choices:["Coexisting polymyalgia rheumatica, which is strongly associated with GCA", "A separate diagnosis of rheumatoid arthritis","Steroid-induced myopathy from GCA treatment","Fibromyalgia unrelated to her GCA"], correct:0,
+    explain:"Polymyalgia rheumatica is strongly associated with GCA (~50% of GCA patients develop PMR), causing pain/stiffness of the shoulders, hips, and neck with morning stiffness but classically no joint swelling, erythema, or heat on exam — exactly the pattern described."},
+  q02a: {choices:["CT angiography (CTA) or MRA of the aorta and its branches","Temporal artery biopsy","Synovial fluid analysis","Abdominal ultrasound"], correct:0,
+    explain:"This presentation (young Asian woman, asymmetric BPs, weak pulse, claudication) is classic for Takayasu arteritis. CTA (or MRA) is the imaging study of choice to evaluate luminal narrowing, vessel wall thickening, and aneurysms of the aorta and its branches."},
+  q03a: {choices:["C-ANCA, targeting proteinase 3 (PR3)","P-ANCA, targeting myeloperoxidase (MPO)","Anti-dsDNA","Anti-GBM antibody"], correct:0,
+    explain:"This presentation (sinusitis, hemoptysis, glomerulonephritis, granulomatous necrotizing vasculitis on biopsy) is classic for GPA, which is associated with C-ANCA directed against proteinase 3 (PR3) in about 90% of cases."},
+  q04a: {choices:["The absence of nasal/sinus involvement and absence of granulomas on biopsy, consistent with MPA rather than GPA","A positive C-ANCA test, which is unique to this diagnosis","The presence of granulomas on biopsy, which is unique to this diagnosis","Involvement of the nasopharynx, which is unique to this diagnosis"], correct:0,
+    explain:"MPA is distinguished from GPA by the absence of nasopharyngeal involvement and the absence of granulomas on biopsy — MPA is P-ANCA/MPO-associated pauci-immune vasculitis restricted to lungs and kidneys (pulmonary-renal syndrome), without the ENT and granulomatous features of GPA."},
+  q05a: {choices:["Prodrome (asthma/allergic rhinitis) \u2192 eosinophilic tissue infiltration \u2192 vasculitic phase", "Vasculitic phase \u2192 prodrome \u2192 eosinophilic infiltration","Eosinophilic infiltration \u2192 vasculitic phase \u2192 prodrome","All three phases occur simultaneously with no defined sequence"], correct:0,
+    explain:"EGPA classically progresses through three phases in sequence: a prodrome of asthma and allergic rhinitis (often lasting years), followed by peripheral eosinophilia with tissue infiltration, and finally a true vasculitic phase affecting the heart, lungs, peripheral nerves, and skin — matching the mononeuritis multiplex (foot drop) and purpura in this vignette."},
+  qFinal1A: {choices:["Start high-dose corticosteroids now, without waiting for biopsy results","Wait for biopsy confirmation before starting any treatment","Start NSAIDs only until biopsy results return","Refer to ophthalmology and defer treatment until seen"], correct:0,
+    explain:"Given the risk of irreversible vision loss, high-dose corticosteroids should be started immediately in a patient with a presentation this suspicious for GCA (jaw claudication, headache, visual changes, elevated ESR) — treatment should never be delayed for biopsy."},
+  qFinal1B: {choices:["ACR classification criteria for Takayasu arteritis (age &lt;40, limb claudication, decreased brachial pulse, unequal arm BPs, subclavian/aortic bruit, angiographic abnormality)","ACR classification criteria for polyarteritis nodosa","CASPAR criteria","Beighton criteria"], correct:0,
+    explain:"The ACR classification criteria for Takayasu arteritis fit this presentation well — meeting 3 of the 6 criteria (age &lt;40, absent/weak pulses, unequal arm BPs, angiographic evidence of aortic/branch narrowing) gives 91% sensitivity and 98% specificity."},
+  qFinal1C: {choices:["Granulomatosis with polyangiitis (GPA)","Microscopic polyangiitis (MPA)","Eosinophilic granulomatosis with polyangiitis (EGPA)","Polyarteritis nodosa (PAN)"], correct:0,
+    explain:"Saddle-nose deformity, hemoptysis, glomerulonephritis, C-ANCA/anti-PR3 positivity, and granulomatous necrotizing vasculitis on biopsy together are classic for GPA (formerly Wegener's granulomatosis)."},
+  qFinal1D: {choices:["Patient 1: C-ANCA (anti-PR3); Patient 2: P-ANCA (anti-MPO)","Patient 1: P-ANCA; Patient 2: C-ANCA","Both patients most likely have C-ANCA","Both patients most likely have P-ANCA"], correct:0,
+    explain:"Sinusitis and granulomas on biopsy point to GPA, which is associated with C-ANCA (anti-PR3). Absence of sinus disease and absence of granulomas point to MPA, which is associated with P-ANCA (anti-MPO) — both can present with pulmonary-renal syndrome, but these two features cleanly separate them."},
+  q07a: {choices:["Polyarteritis nodosa (PAN)","Granulomatosis with polyangiitis","Microscopic polyangiitis","Takayasu arteritis"], correct:0,
+    explain:"Active hepatitis B, new hypertension, mesenteric ischemia, mononeuritis multiplex (foot drop), and the classic 'string of beads' angiographic appearance with sparing of the pulmonary vasculature are all classic for PAN, a medium-vessel vasculitis associated with HBV in about 30% of cases."},
+  q08a: {choices:["Smoking cessation","High-dose corticosteroids","Cyclophosphamide","Anticoagulation with warfarin"], correct:0,
+    explain:"This presentation (young male smoker, corkscrew collaterals, digital ischemia, abnormal Allen test) is classic for Buerger's disease (thromboangiitis obliterans). Smoking cessation is the only intervention shown to meaningfully alter the disease course."},
+  q09a: {choices:["Cryoglobulins, precipitating in cold temperatures, deposit in small vessels and are strongly linked to hepatitis C","An unrelated autoimmune process with no connection to her hepatitis C","IgA-mediated direct endothelial damage, as in HSP","ANCA-mediated indirect endothelial damage"], correct:0,
+    explain:"Palpable purpura, Raynaud phenomenon, and peripheral neuropathy in the setting of chronic hepatitis C are classic for mixed cryoglobulinemia — abnormal immunoglobulins (cryoglobulins) that precipitate in the cold and deposit in small/medium vessels, almost always (~90%) associated with hepatitis C."},
+  q10a: {choices:["Discontinue the likely offending medication and use conservative/supportive measures", "Start cyclophosphamide immediately","Perform a temporal artery biopsy","Start anticoagulation"], correct:0,
+    explain:"With other vasculitis causes excluded (normal ANCA, complement, LFTs, etc.) and a clear medication trigger, this is cutaneous small-vessel (leukocytoclastic) vasculitis. First-line management is removing the trigger and conservative measures (leg elevation, NSAIDs, antihistamines) — it typically resolves spontaneously."},
+  q11a: {choices:["Behçet's disease, supported by a positive pathergy test","Reactive arthritis, supported by a positive HLA-B27","IgA vasculitis, supported by skin biopsy","Granulomatosis with polyangiitis, supported by C-ANCA"], correct:0,
+    explain:"Recurrent oral ulcers (\u22653 times/year), genital ulcers, uveitis with hypopyon, and a positive pathergy test (pustule formation after a pin-prick) in a patient of Turkish/Mediterranean descent are classic for Behçet's disease, which is a clinical diagnosis supported by pathergy testing rather than specific lab work."},
+  q12a: {choices:["IgA vasculitis (Henoch-Schönlein purpura); usually self-limited, resolving within 6-8 weeks in children","Granulomatosis with polyangiitis; requires long-term immunosuppression","Microscopic polyangiitis; poor prognosis without treatment","Polyarteritis nodosa; associated with hepatitis B"], correct:0,
+    explain:"Palpable purpura on the buttocks/legs, colicky abdominal pain, hematuria, and a preceding URI in a child are the classic tetrad-consistent presentation of IgA vasculitis (HSP) — the most common systemic vasculitis of childhood. It is ANCA-negative (direct IgA-mediated damage) and is typically self-limited, resolving in 6-8 weeks in children."},
+  qFinal2A: {choices:["Polyarteritis nodosa; PAN classically spares the pulmonary arteries, so normal chest imaging is expected and does not argue against the diagnosis","Granulomatosis with polyangiitis; the normal chest imaging argues against this diagnosis","Microscopic polyangiitis; the normal chest imaging is unexpected and should prompt reconsideration","Eosinophilic granulomatosis with polyangiitis; asthma is required for this diagnosis"], correct:0,
+    explain:"PAN is a medium-vessel vasculitis associated with hepatitis B that classically spares the pulmonary arteries (reason unknown) — so normal chest imaging is an expected finding, not a clue against the diagnosis. The string-of-beads angiographic pattern, mesenteric/renal involvement, and mononeuritis multiplex complete the classic picture."},
+  qFinal2B: {choices:["Smoking cessation","Systemic corticosteroids","Cyclophosphamide","Direct oral anticoagulation"], correct:0,
+    explain:"This is Buerger's disease (thromboangiitis obliterans) — corkscrew angiographic pattern, intact vessel wall despite inflammatory infiltrate, digital ischemia, and a smoking history. Smoking cessation is the only intervention shown to meaningfully alter the disease course."},
+  qFinal2C: {choices:["Behçet's disease; classically affects Turkish and Mediterranean populations","Reactive arthritis; classically affects HLA-B27-positive young men","IgA vasculitis; classically affects children after a URI","Granulomatosis with polyangiitis; classically affects middle-aged adults"], correct:0,
+    explain:"Recurrent oral/genital ulcers, uveitis with hypopyon, and a positive pathergy test together support Behçet's disease, which has a strong predilection for Turkish and Mediterranean populations and is associated with HLA-B51."},
+  qFinal2D: {choices:["A negative ANCA (IgA vasculitis causes direct, not ANCA/indirect, endothelial damage); prognosis in children is generally excellent, with self-limited resolution over weeks to months","A positive C-ANCA; prognosis is generally poor without cyclophosphamide","A positive P-ANCA; prognosis mirrors that of microscopic polyangiitis","Elevated cryoglobulins; prognosis depends on treating underlying hepatitis C"], correct:0,
+    explain:"IgA vasculitis (HSP) is the exception among small-vessel vasculitides in causing direct (IgA-mediated) rather than indirect endothelial damage, and it is ANCA-negative. In children, the disease is typically self-limited, resolving within 6-8 weeks without long-term sequelae in most cases."}
+};
+
+Object.keys(questionData).forEach(function(id){
+  const box = document.getElementById(id);
+  if(!box) return;
+  const data = questionData[id];
+  const choiceWrap = box.querySelector('.choices');
+  const explainBox = box.querySelector('.explain');
+  data.choices.forEach(function(text, idx){
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = String.fromCharCode(65+idx) + '. ' + text;
+    btn.onclick = function(){
+      const already = choiceWrap.querySelectorAll('.choice.correct, .choice.wrong').length > 0;
+      if(already) return;
+      const all = choiceWrap.querySelectorAll('.choice');
+      all.forEach(function(b, i){
+        if(i === data.correct) b.classList.add('correct');
+        else if(b === btn) b.classList.add('wrong');
+      });
+      explainBox.textContent = data.explain;
+      explainBox.classList.add('show');
+    };
+    choiceWrap.appendChild(btn);
+  });
+});
+</script>
+</body>
+</html>
