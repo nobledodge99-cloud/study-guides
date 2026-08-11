@@ -78,6 +78,7 @@ border:1px solid var(--line);
 background:var(--panel);
 border-radius:6px;
 margin-bottom:14px;
+overflow:hidden;
 }
 .course-toggle{
 width:100%;
@@ -98,11 +99,16 @@ font-family:var(--mono);
 color:var(--accent);
 transition:transform 0.2s ease;
 margin-left:12px;
+display:inline-block;
 }
-.course-item:hover .chevron,
-.course-item:focus-within .chevron{
+.course-toggle.open .chevron{
 transform:rotate(180deg);
 }
+.course-toggle.open{
+background:var(--accent-dim);
+}
+
+/* Click-driven (not hover-driven) dropdown */
 .guide-dropdown{
 list-style:none;
 margin:0;
@@ -111,10 +117,9 @@ max-height:0;
 overflow:hidden;
 transition:max-height 0.25s ease;
 }
-.course-item:hover .guide-dropdown,
-.course-item:focus-within .guide-dropdown{
-max-height:60vh;
-  overflow-y:auto;
+.guide-dropdown.open{
+max-height:2000px;
+overflow-y:auto;
 border-top:1px solid var(--line);
 }
 .guide-dropdown a{
@@ -137,7 +142,7 @@ font-style:italic;
 border-bottom:1px solid var(--line);
 }
 
-/* ---- Nested (second-level) flyout, e.g. MSK II -> Exam 1 -> guides ---- */
+/* ---- Nested (second-level) menu, e.g. MSK II -> Exam 1 -> guides ---- */
 .subcourse-item{
 border-bottom:1px solid var(--line);
 background:var(--accent-dim);
@@ -164,10 +169,13 @@ font-family:var(--mono);
 color:var(--accent);
 transition:transform 0.2s ease;
 margin-left:12px;
+display:inline-block;
 }
-.subcourse-item:hover .chevron,
-.subcourse-item:focus-within .chevron{
+.subcourse-toggle.open .chevron{
 transform:rotate(180deg);
+}
+.subcourse-toggle.open{
+background:var(--panel);
 }
 .sub-dropdown{
 list-style:none;
@@ -178,9 +186,8 @@ overflow:hidden;
 transition:max-height 0.25s ease;
 background:var(--panel);
 }
-.subcourse-item:hover .sub-dropdown,
-.subcourse-item:focus-within .sub-dropdown{
-max-height:50vh;
+.sub-dropdown.open{
+max-height:1000px;
 overflow-y:auto;
 border-top:1px solid var(--line);
 }
@@ -224,8 +231,20 @@ font-family:var(--mono);
 </div>
 </header>
 <main>
-<ul class="course-list"> <li class="course-item"> <button class="course-toggle" aria-expanded="false"> <span> Self-Testing Engine </span> <span class="chevron">&#9662;</span> </button> <ul class="guide-dropdown"> <li><a href="quiz-instructions.html#manage">JSON file download and Instructions</a></li> <li><a href="quiz-engine.html">Noble's Super Sick Quiz Engine</a></li> </ul> </li> <li class="course-item"> <button class="course-toggle" aria-expanded="false"> <span> Foundations II
-</span>
+<ul class="course-list">
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> Self-Testing Engine </span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li><a href="quiz-instructions.html#manage">JSON file download and Instructions</a></li>
+<li><a href="quiz-engine.html">Noble's Super Sick Quiz Engine</a></li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> Foundations II </span>
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="guide-dropdown">
@@ -240,9 +259,7 @@ font-family:var(--mono);
 </li>
 <li class="course-item">
 <button class="course-toggle" aria-expanded="false">
-<span>
-MSK II
-</span>
+<span> MSK II </span>
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="guide-dropdown">
@@ -272,16 +289,14 @@ MSK II
 <li><a href="msk2-skin-pathology.html">Skin Pathology Parts 1-4 Study Guide</a></li>
 <li><a href="msk2-connective-tissue-pathology.html">Connective Tissue Pathology Parts 1-2 Study Guide</a></li>
 <li><a href="msk2-vasculitis.html">Vasculitis Study Guide</a></li>
-<li><a href="msk2-derm-pharm.html">Derm Pharmacology Study Guide</a></li> 
+<li><a href="msk2-derm-pharm.html">Derm Pharmacology Study Guide</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="course-item">
 <button class="course-toggle" aria-expanded="false">
-<span>
-CV/Resp
-</span>
+<span> CV/Resp </span>
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="guide-dropdown">
@@ -289,7 +304,7 @@ CV/Resp
 </ul>
 </li>
 </ul>
-<p class="placeholder">More courses will appear here as they're added. Hover a course name to see its guides.</p>
+<p class="placeholder">More courses will appear here as they're added. Click a course name to see its guides.</p>
 </main>
 <script>
 const btn = document.getElementById('copy-btn');
@@ -298,6 +313,50 @@ btn.addEventListener('click', () => {
 navigator.clipboard.writeText(window.location.href).then(() => {
 feedback.textContent = 'Copied!';
 setTimeout(() => { feedback.textContent = ''; }, 2000);
+});
+});
+
+// Top-level course accordion (click to open/close, closes sibling courses)
+document.querySelectorAll('.course-toggle').forEach(toggle => {
+const dropdown = toggle.nextElementSibling;
+toggle.addEventListener('click', () => {
+const willOpen = !dropdown.classList.contains('open');
+
+// close any other open top-level dropdowns
+document.querySelectorAll('.guide-dropdown.open').forEach(d => {
+if (d !== dropdown) {
+d.classList.remove('open');
+d.previousElementSibling.classList.remove('open');
+d.previousElementSibling.setAttribute('aria-expanded', 'false');
+}
+});
+
+dropdown.classList.toggle('open', willOpen);
+toggle.classList.toggle('open', willOpen);
+toggle.setAttribute('aria-expanded', String(willOpen));
+});
+});
+
+// Nested sub-course accordion (e.g. Exam 1 / Exam 2 within MSK II)
+document.querySelectorAll('.subcourse-toggle').forEach(toggle => {
+const subDropdown = toggle.nextElementSibling;
+toggle.addEventListener('click', (e) => {
+e.stopPropagation(); // don't let this bubble up and toggle the parent course
+const willOpen = !subDropdown.classList.contains('open');
+
+// close sibling sub-dropdowns within the same parent course
+const parentList = toggle.closest('.guide-dropdown');
+parentList.querySelectorAll(':scope > .subcourse-item > .sub-dropdown.open').forEach(d => {
+if (d !== subDropdown) {
+d.classList.remove('open');
+d.previousElementSibling.classList.remove('open');
+d.previousElementSibling.setAttribute('aria-expanded', 'false');
+}
+});
+
+subDropdown.classList.toggle('open', willOpen);
+toggle.classList.toggle('open', willOpen);
+toggle.setAttribute('aria-expanded', String(willOpen));
 });
 });
 </script>
