@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pediatric Dermatology for Wards and Boards — Study Guide</title>
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-2:#f3ecd9;
+  --green-dark:#2f5233;
+  --green:#3f7d52;
+  --green-light:#e7f0e5;
+  --ink:#2b2b26;
+  --ink-soft:#5b5a4f;
+  --line:#d9d0b8;
+  --gold:#b8944f;
+  --wrong:#a5453a;
+  --right:#2f7d4f;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+a{color:var(--green-dark);}
+
+#backBtn{
+  position:fixed; top:18px; left:18px; z-index:700;
+  background:var(--cream); border:1px solid var(--green-dark);
+  color:var(--green-dark); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  text-decoration:none; cursor:pointer;
+}
+#backBtn:hover{background:var(--green-dark); color:var(--cream);}
+#downloadBtn{
+  position:fixed; top:18px; right:18px; z-index:700;
+  background:var(--green-dark); border:1px solid var(--green-dark);
+  color:var(--cream); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  cursor:pointer;
+}
+#downloadBtn:hover{background:var(--green);}
+
+#sectionsTab{
+  position:fixed; top:50%; right:0; transform:translateY(-50%);
+  z-index:600; background:var(--green-dark); color:var(--cream);
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  padding:14px 8px; writing-mode:vertical-rl; text-orientation:mixed;
+  border-radius:8px 0 0 8px; cursor:pointer; box-shadow:-2px 0 10px rgba(0,0,0,.12);
+}
+#sideNavScrim{
+  position:fixed; inset:0; background:rgba(30,30,20,.25);
+  z-index:590; display:none;
+}
+#sideNav{
+  position:fixed; top:0; right:0; height:100%;
+  width:min(300px, calc(100vw - 96px));
+  background:var(--cream-2); border-left:1px solid var(--line);
+  z-index:595; transform:translateX(100%); transition:transform .25s ease;
+  overflow-y:auto; padding:70px 20px 40px;
+}
+#sideNav.open{transform:translateX(0);}
+#sideNav h3{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  color:var(--green-dark); text-transform:uppercase; margin:0 0 14px;
+}
+#sideNav .navItem{
+  display:block; padding:8px 6px; border-bottom:1px solid var(--line);
+  color:var(--ink); text-decoration:none; font-size:14px; cursor:pointer;
+}
+#sideNav .navItem:hover{color:var(--green-dark);}
+#sideNav .navNum{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:8px; font-size:12px;}
+
+main{max-width:900px; margin:0 auto; padding:90px 28px 100px;}
+
+header.hero{text-align:center; margin-bottom:38px;}
+header.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green);
+}
+header.hero h1{
+  font-size:2.3rem; margin:10px 0 6px; color:var(--green-dark); line-height:1.2;
+}
+header.hero .sub{color:var(--ink-soft); font-size:15px;}
+
+.contents{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:10px;
+  padding:22px 26px; margin:30px 0 40px;
+}
+.contents h2{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green-dark); margin:0 0 12px;
+}
+.contents a{text-decoration:none; font-size:14.5px;}
+.contents a:hover{text-decoration:underline;}
+.contents .num{font-family:'IBM Plex Mono',monospace; color:var(--gold); margin-right:6px; font-size:12.5px;}
+
+.toc-cols{display:grid; grid-template-columns:1fr 1fr; gap:0 40px;}
+.toc-col{display:flex; flex-direction:column; gap:22px;}
+.part-group{break-inside:avoid;}
+.part-group h3{
+  font-size:15.5px; margin:0 0 8px; color:var(--ink);
+  display:flex; align-items:baseline; gap:8px;
+}
+.part-group h3 .pnum{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); flex-shrink:0;
+}
+.part-group ol{margin:0; padding-left:0; list-style:none; counter-reset:sub;}
+.part-group ol li{
+  counter-increment:sub; margin-bottom:6px; padding-left:26px; position:relative;
+}
+.part-group ol li::before{
+  content:counter(sub) "."; position:absolute; left:2px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
+}
+.part-group ol a{border-bottom:1px dotted var(--line); padding-bottom:1px;}
+.part-group ol a:hover{border-bottom-color:var(--green);}
+
+section.part{margin-bottom:20px;}
+section.part > h2.partTitle{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--green); border-bottom:1px solid var(--line);
+  padding-bottom:6px; margin:48px 0 18px;
+}
+
+article.topic{
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:26px 28px; margin-bottom:26px; scroll-margin-top:80px;
+}
+article.topic h3{
+  color:var(--green-dark); font-size:1.35rem; margin:0 0 4px;
+}
+article.topic .tagline{color:var(--ink-soft); font-style:italic; font-size:14.5px; margin-bottom:14px;}
+article.topic h4{color:var(--green-dark); font-size:1rem; margin:18px 0 8px;}
+article.topic p{margin:0 0 12px;}
+article.topic ul, article.topic ol{margin:0 0 12px; padding-left:22px;}
+article.topic li{margin-bottom:5px;}
+article.topic strong{color:var(--green-dark);}
+
+.pearl{
+  background:var(--green-light); border-left:4px solid var(--green);
+  border-radius:6px; padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.pearl .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--green-dark); display:block; margin-bottom:4px;}
+
+.formula{
+  background:#fbf3e3; border:1px dashed var(--gold); border-radius:6px;
+  padding:12px 16px; margin:14px 0; font-size:14.5px;
+}
+.formula .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:#8a6a2e; display:block; margin-bottom:4px;}
+
+table.data-table{
+  width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px;
+}
+table.data-table caption{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--green-dark); text-align:left; margin-bottom:6px;
+}
+table.data-table th{
+  background:var(--green-dark); color:var(--cream); padding:8px 10px; text-align:left;
+  font-size:12.5px;
+}
+table.data-table td{padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:#fbf8ef;}
+
+.quiz{
+  background:var(--cream-2); border:1px solid var(--line); border-radius:8px;
+  padding:16px 18px; margin-top:16px;
+}
+.quiz .qhead{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--green-dark); text-transform:uppercase; margin-bottom:6px;}
+.quiz .qtext{font-size:14.5px; margin-bottom:10px;}
+.quiz .choice{
+  display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line);
+  border-radius:6px; padding:9px 12px; margin-bottom:7px; cursor:pointer; font-size:14px;
+  font-family:Georgia,serif; color:var(--ink);
+}
+.quiz .choice:hover{border-color:var(--green);}
+.quiz .choice.correct{background:#e7f3ea; border-color:var(--right); color:var(--right);}
+.quiz .choice.wrong{background:#f7e9e7; border-color:var(--wrong); color:var(--wrong);}
+.quiz .explain{
+  display:none; margin-top:10px; padding:10px 12px; background:#fff;
+  border-left:4px solid var(--green); font-size:13.5px; border-radius:4px;
+}
+.quiz .explain.show{display:block;}
+
+footer{
+  text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:60px;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+@media print{
+  #backBtn,#downloadBtn,#sectionsTab,#sideNav,#sideNavScrim{display:none !important;}
+  main{padding-top:20px;}
+}
+@media (max-width:640px){
+  main{padding:80px 16px 80px;}
+  .toc-cols{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<button id="backBtn" onclick="goBack()">&larr; Back to Study Guides</button>
+<button id="downloadBtn" onclick="window.print()">Download PDF</button>
+<div id="sectionsTab" onclick="toggleNav()">SECTIONS</div>
+<div id="sideNavScrim" onclick="toggleNav()"></div>
+<nav id="sideNav">
+  <h3>Sections</h3>
+  <span class="navItem" onclick="jump('sec0')"><span class="navNum">00</span>Overview &amp; Approach</span>
+  <span class="navItem" onclick="jump('sec1')"><span class="navNum">01</span>Measles</span>
+  <span class="navItem" onclick="jump('sec2')"><span class="navNum">02</span>Mumps</span>
+  <span class="navItem" onclick="jump('sec3')"><span class="navNum">03</span>Rubella &amp; Congenital Rubella</span>
+  <span class="navItem" onclick="jump('sec4')"><span class="navNum">04</span>Meningococcal Rash</span>
+  <span class="navItem" onclick="jump('sec5')"><span class="navNum">05</span>Varicella Infection (Chicken Pox)</span>
+  <span class="navItem" onclick="jump('sec6')"><span class="navNum">06</span>Erythema Marginatum</span>
+  <span class="navItem" onclick="jump('sec7')"><span class="navNum">07</span>Impetigo</span>
+  <span class="navItem" onclick="jump('sec8')"><span class="navNum">08</span>Scarlet Fever</span>
+  <span class="navItem" onclick="jump('sec9')"><span class="navNum">09</span>Erythema Infectiosum (Fifth Disease / Slap Cheek Disease)</span>
+  <span class="navItem" onclick="jump('sec10')"><span class="navNum">10</span>Hand, Foot, and Mouth Disease</span>
+  <span class="navItem" onclick="jump('sec11')"><span class="navNum">11</span>Roseola Infantum</span>
+  <span class="navItem" onclick="jump('sec12')"><span class="navNum">12</span>Molluscum Contagiosum</span>
+  <span class="navItem" onclick="jump('sec13')"><span class="navNum">13</span>Candida Dermatitis (Candida Diaper Rash)</span>
+  <span class="navItem" onclick="jump('sec14')"><span class="navNum">14</span>Scabies</span>
+  <span class="navItem" onclick="jump('sec15')"><span class="navNum">15</span>Tinea Corporis (Ringworm)</span>
+  <span class="navItem" onclick="jump('sec16')"><span class="navNum">16</span>IgA Vasculitis (Henoch-Schönlein Purpura / HSP)</span>
+  <span class="navItem" onclick="jump('sec17')"><span class="navNum">17</span>Atopic Dermatitis (Eczema)</span>
+  <span class="navItem" onclick="jump('sec18')"><span class="navNum">18</span>Seborrheic Dermatitis (Cradle Cap)</span>
+  <span class="navItem" onclick="jump('sec19')"><span class="navNum">19</span>Congenital Birthmarks: Port-Wine Stain, Infantile Hemangioma &amp; Nevus Simplex</span>
+  <span class="navItem" onclick="jump('sec20')"><span class="navNum">20</span>Master High-Yield Summary Table</span>
+  <span class="navItem" onclick="jump('sec21')"><span class="navNum">21</span>Final Board Pearls</span>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">MSK II Clinical &middot; Dr. Scott Stephens, DO, PD, SFHM, FACOP</div>
+  <h1>Pediatric Dermatology for Wards and Boards</h1>
+  <div class="sub">Dr. Stephens' &ldquo;Top 21 Pediatric Dermatology Findings&rdquo; &mdash; built from lecture slides + full Panopto narration. Covers vaccine-preventable rashes, strep-associated findings, non-vaccine viral exanthems, fungal/infestation conditions, other common pediatric dermatoses, and congenital vascular birthmarks, closing with a master high-yield comparison table.</div>
+</header>
+
+<div class="contents">
+  <h2>Contents</h2>
+  <div class="toc-cols">
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">1.</span> Vaccine-Preventable Rashes</h3>
+        <ol>
+<li><a href="#sec0">Overview &amp; Approach</a></li>
+<li><a href="#sec1">Measles</a></li>
+<li><a href="#sec2">Mumps</a></li>
+<li><a href="#sec3">Rubella &amp; Congenital Rubella</a></li>
+<li><a href="#sec4">Meningococcal Rash</a></li>
+<li><a href="#sec5">Varicella Infection (Chicken Pox)</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">2.</span> Strep &amp; Viral (Non-Vaccine)</h3>
+        <ol>
+<li><a href="#sec6">Erythema Marginatum</a></li>
+<li><a href="#sec7">Impetigo</a></li>
+<li><a href="#sec8">Scarlet Fever</a></li>
+<li><a href="#sec9">Erythema Infectiosum (Fifth Disease / Slap Cheek Disease)</a></li>
+<li><a href="#sec10">Hand, Foot, and Mouth Disease</a></li>
+<li><a href="#sec11">Roseola Infantum</a></li>
+<li><a href="#sec12">Molluscum Contagiosum</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">3.</span> Fungal / Infestation &amp; Other Conditions</h3>
+        <ol>
+<li><a href="#sec13">Candida Dermatitis (Candida Diaper Rash)</a></li>
+<li><a href="#sec14">Scabies</a></li>
+<li><a href="#sec15">Tinea Corporis (Ringworm)</a></li>
+<li><a href="#sec16">IgA Vasculitis (Henoch-Schönlein Purpura / HSP)</a></li>
+<li><a href="#sec17">Atopic Dermatitis (Eczema)</a></li>
+<li><a href="#sec18">Seborrheic Dermatitis (Cradle Cap)</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="toc-col">
+      <div class="part-group">
+        <h3><span class="pnum">4.</span> Congenital Birthmarks &amp; Wrap-Up</h3>
+        <ol>
+<li><a href="#sec19">Congenital Birthmarks: Port-Wine Stain, Infantile Hemangioma &amp; Nevus Simplex</a></li>
+<li><a href="#sec20">Master High-Yield Summary Table</a></li>
+<li><a href="#sec21">Final Board Pearls</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="part" id="sec0">
+<h2 class="partTitle">00 &middot; Overview &amp; Approach</h2>
+<article class="topic">
+<h3>Lecture Objectives</h3>
+<div class="tagline">Dr. Stephens' &ldquo;Top 21 Pediatric Dermatology Findings&rdquo;</div>
+<p>Two learning objectives drive this whole lecture: (1) review the <strong>most common pediatric rashes</strong>, and (2) learn the <strong>keyword descriptions</strong> used in charting and on exams, so you recognize the diagnosis fast when you see or hear those buzzwords.</p><div class="pearl"><span class="lbl">A resident's-eye view of the scope</span>Dr. Stephens' own dermatology atlas from residency had ~800 photos; the newest edition has over 1,000. He's explicit that no medical student is expected to know even half that book &mdash; this lecture picks out only what you're likely to see in practice or on a test.</div><div class="pearl"><span class="lbl">Explicitly excluded</span>Findings associated with non-accidental trauma (child abuse) are not covered here &mdash; that's a separate lecture entirely and outside the scope of this one.</div>
+<div class="quiz" id="q00a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What is explicitly excluded from this lecture's scope?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+<article class="topic">
+<h3>Study Strategy</h3>
+<div class="tagline">Group by category, not as one flat list of 21</div>
+<p>Group findings by category (vaccine-preventable vs. non-vaccine infectious vs. congenital vs. &ldquo;other&rdquo;) rather than memorizing all 21 as a flat list &mdash; the categories themselves are testable and help you narrow a differential fast.</p><div class="pearl"><span class="lbl">Closing advice, applied early</span>As you go through rotations, look at as many real rashes as possible, and specifically try to see how rashes present across <strong>different skin tones</strong> &mdash; most textbook photos underrepresent darker skin, and presentations vary.</div>
+</article>
+</section>
+
+<section class="part" id="sec1">
+<h2 class="partTitle">01 &middot; Measles</h2>
+<article class="topic">
+<h3>Measles</h3>
+<div class="tagline">Vaccine-preventable &mdash; and re-emerging</div>
+<ul><li><strong>Paramyxoviridae virus</strong></li><li><strong>Macular-papular rash</strong> starting <strong>behind the ears</strong> and spreading to the entire body over <strong>3&ndash;4 days</strong></li><li>Becomes <strong>blotchy and peeling</strong> by week 2</li><li><strong>Koplik spots</strong> &mdash; described as <strong>&ldquo;grains of salt&rdquo;</strong> &mdash; found bilaterally on the <strong>buccal mucosa</strong></li><li><strong>Highly contagious</strong>, spreads very quickly</li></ul><div class="pearl"><span class="lbl">Current relevance (2025)</span>Measles is entirely vaccine-preventable, yet the U.S. was experiencing a major outbreak in 2025, with at least one death from this preventable disease that year.</div><div class="pearl"><span class="lbl">From the lecturer's own experience</span>Dr. Stephens saw measles clinically only once, during residency, in an unvaccinated immigrant population &mdash; reinforcing how rare it should be with adequate vaccination coverage.</div>
+<div class="quiz" id="q01a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child has a macular-papular rash that started behind the ears and small white “grains of salt” spots on the bilateral buccal mucosa. What is the diagnosis and what are the buccal spots called?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q01b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">By what timeframe does the measles rash typically become blotchy and start peeling?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec2">
+<h2 class="partTitle">02 &middot; Mumps</h2>
+<article class="topic">
+<h3>Mumps</h3>
+<div class="tagline">Painful parotid swelling is the buzzword</div>
+<ul><li><strong>Painful parotid gland swelling</strong> &mdash; classically unilateral or bilateral facial swelling</li><li><strong>Fever</strong></li><li><strong>Headache</strong></li><li><strong>Loss of appetite</strong></li><li>Can also cause swelling of other glands, including <strong>orchitis</strong> and the <strong>axillary lymph nodes</strong></li></ul><div class="pearl"><span class="lbl">Key buzzword</span>&ldquo;Painful parotid gland swelling with fever&rdquo; &mdash; this phrase alone should trigger mumps on boards.</div>
+<div class="quiz" id="q02a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child presents with fever, headache, poor appetite, and painful unilateral facial swelling over the parotid gland. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q02b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Besides the parotid gland, what other structures can mumps cause swelling in?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec3">
+<h2 class="partTitle">03 &middot; Rubella &amp; Congenital Rubella</h2>
+<article class="topic">
+<h3>Rubella (Postnatal)</h3>
+<div class="tagline">The vaccine-preventable disease Dr. Stephens has never actually seen</div>
+<ul><li><strong>RNA Togavirus</strong></li><li>Classic <strong>pink macular-papular rash</strong></li><li>Starts on the <strong>face</strong>, then spreads to the entire body</li><li><strong>Sub-occipital and post-auricular lymphadenopathy</strong> &mdash; classic associated finding</li></ul><div class="pearl"><span class="lbl">From the lecturer's own experience</span>Dr. Stephens specifically notes he has <strong>never seen a case of postnatal rubella</strong> in clinical practice &mdash; unlike measles and mumps &mdash; reflecting how well vaccination has controlled it.</div>
+<div class="quiz" id="q03a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What lymphadenopathy pattern is classically associated with (postnatal) rubella?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+<article class="topic">
+<h3>Congenital Rubella</h3>
+<div class="tagline">Blueberry muffin baby</div>
+<ul><li>Causes <strong>&ldquo;blueberry muffin baby&rdquo;</strong> &mdash; a skin condition with widespread bluish-purple macules from extramedullary hematopoiesis</li><li>Affected infants also appear notably <strong>yellow (jaundiced)</strong> from the associated systemic illness</li></ul><div class="pearl"><span class="lbl">High-yield pairing</span>&ldquo;Blueberry muffin baby&rdquo; + jaundice = congenital rubella syndrome &mdash; a classic boards image-recognition pairing.</div>
+<div class="quiz" id="q03b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A newborn presents with widespread bluish-purple macules described as a “blueberry muffin” appearance, along with jaundice. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec4">
+<h2 class="partTitle">04 &middot; Meningococcal Rash</h2>
+<article class="topic">
+<h3>Meningococcal Rash</h3>
+<div class="tagline">A true pediatric emergency</div>
+<ul><li><strong>Non-blanching petechiae or purpura</strong></li><li><strong>Widespread hemorrhagic red-brown rash</strong></li><li>Diagnosis via <strong>blood culture or PCR</strong></li></ul><div class="pearl"><span class="lbl">Blanching bedside trick</span>If you're unsure whether a rash is blanching, press a clear glass firmly against the skin &mdash; you can see through it whether the rash disappears (blanches) and returns, or not.</div><div class="pearl"><span class="lbl">Why this is an emergency</span>Meningococcal rash is a very bad finding &mdash; affected children can crash within hours. High clinical suspicion and rapid action are essential.</div><div class="pearl"><span class="lbl">From the lecturer's own experience</span>Dr. Stephens notes that thanks to vaccination, he has never personally seen meningococcal meningitis or the meningococcal rash &mdash; and hopes never to.</div>
+<div class="quiz" id="q04a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A febrile child has a widespread, hemorrhagic, red-brown rash that does not blanch with pressure. What is the most urgent concern?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q04b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What bedside technique can help determine whether a rash is blanching?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec5">
+<h2 class="partTitle">05 &middot; Varicella Infection (Chicken Pox)</h2>
+<article class="topic">
+<h3>Varicella (Chicken Pox)</h3>
+<div class="tagline">“New crops” every 1–2 days</div>
+<ul><li><strong>Small, pruritic, fluid-filled blisters</strong></li><li>Rash lasts <strong>5&ndash;10 days</strong>, with <strong>new blisters (new crops) appearing every 1&ndash;2 days</strong></li><li>Usually <strong>self-limiting</strong> with minimal side effects, but can become systemic &mdash; especially dangerous in younger children, with risk of severe disability and death</li><li>Breaking blisters <strong>can scab and lead to permanent scarring</strong></li></ul><div class="pearl"><span class="lbl">Historical differentiator</span>&ldquo;New crops&rdquo; of blisters (lesions in different stages simultaneously &mdash; macules, papules, vesicles, crusts all at once) is the classic distinguishing feature historically used to tell chicken pox apart from smallpox, which produced lesions all in the same stage.</div><div class="pearl"><span class="lbl">A personal anecdote from the lecturer</span>While working in a school's sheet metal department during a lab remodel, Dr. Stephens' professor opened an old freezer and immediately recognized preserved <strong>smallpox</strong> specimens inside &mdash; smallpox is eradicated in nature but still exists in select labs and has been considered a potential bioweapon. Thankfully, in practice today you'll only ever see chicken pox.</div><div class="pearl"><span class="lbl">Vaccine bonus</span>Varicella vaccination also protects against developing <strong>shingles</strong> (herpes zoster) later in life, since the virus can reactivate from dorsal root ganglia after primary infection.</div>
+<div class="quiz" id="q05a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child has small, itchy, fluid-filled blisters in several different stages of development at once — some fresh, some crusted. What historical diagnostic feature does this “new crops” pattern help distinguish chicken pox from?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q05b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What long-term benefit does the varicella vaccine provide beyond preventing chicken pox itself?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec6">
+<h2 class="partTitle">06 &middot; Erythema Marginatum</h2>
+<article class="topic">
+<h3>Erythema Marginatum</h3>
+<div class="tagline">A Jones major criterion, rarely actually seen</div>
+<ul><li>One of the <strong>Jones criteria</strong> for <strong>rheumatic fever</strong> &mdash; specifically a <strong>major criterion</strong></li><li>Follows <strong>Strep pyogenes infection</strong>, classically <strong>2&ndash;4 weeks</strong> prior, usually <strong>untreated</strong></li><li>Patients often report a preceding sore throat they “didn't think much of&rdquo;</li></ul><div class="pearl"><span class="lbl">From the lecturer's own experience</span>Dr. Stephens notes that in his entire career he has seen only two cases of rheumatic fever, and <strong>neither</strong> had erythema marginatum &mdash; reinforcing that it's fairly rare even when rheumatic fever itself occurs, but it remains one of the major diagnostic criteria tested on boards.</div><div class="pearl"><span class="lbl">Clinical pattern</span>Ask about a recent sore throat in any patient with a new rash plus joint symptoms &mdash; a missed or undertreated strep throat 2&ndash;4 weeks earlier is the setup for rheumatic fever.</div>
+<div class="quiz" id="q06a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Erythema marginatum is a major criterion for which diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q06b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">How long after a Strep pyogenes infection does erythema marginatum classically appear, and what is the typical antecedent history?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec7">
+<h2 class="partTitle">07 &middot; Impetigo</h2>
+<article class="topic">
+<h3>Impetigo</h3>
+<div class="tagline">Honey-colored crusting, and a rash Dr. Stephens sees constantly</div>
+<ul><li>Classically caused by <strong>Staph aureus</strong> or <strong>Strep pyogenes</strong></li><li><strong>Red sores with honey-colored, fluid-filled vesicles</strong> &mdash; the classic description</li><li>Progresses to skin breakdown with <strong>oozing</strong> and sometimes bleeding, especially with scratching</li><li><strong>Topical antibiotics</strong> are first-line treatment &mdash; must be effective against staph</li></ul><div class="pearl"><span class="lbl">Real-world prevalence</span>This is one of the rashes Dr. Stephens says he sees <strong>all the time</strong> in clinical practice &mdash; high real-world prevalence in addition to being board-relevant.</div>
+<div class="quiz" id="q07a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child has red sores on the face with honey-colored, fluid-filled vesicles. What is the diagnosis and first-line treatment?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec8">
+<h2 class="partTitle">08 &middot; Scarlet Fever</h2>
+<article class="topic">
+<h3>Scarlet Fever</h3>
+<div class="tagline">Strawberry tongue and sandpaper skin</div>
+<ul><li>Caused by <strong>Strep pyogenes</strong> infection</li><li><strong>Strawberry tongue</strong></li><li><strong>Fine erythematous rash</strong> with <strong>circumoral pallor</strong> (clearing right around the mouth)</li><li><strong>Sandpaper-textured skin</strong> on palpation</li></ul><div class="pearl"><span class="lbl">Confirmed by touch</span>Dr. Stephens confirms clinically that the skin genuinely does feel like rough sandpaper when you run your hand over it &mdash; a tactile buzzword worth remembering for exam and boards.</div>
+<div class="quiz" id="q08a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child with strep pharyngitis develops a strawberry tongue, a fine rash that feels like sandpaper, and pallor around the mouth. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q08b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What does “circumoral pallor” refer to in scarlet fever?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec9">
+<h2 class="partTitle">09 &middot; Erythema Infectiosum (Fifth Disease / Slap Cheek Disease)</h2>
+<article class="topic">
+<h3>Erythema Infectiosum</h3>
+<div class="tagline">Parvovirus B19 and the “slapped cheek”</div>
+<ul><li>Classic <strong>bilateral red cheeks</strong> &mdash; looks like the child was slapped on both sides</li><li>Rash may then spread to the <strong>arms and extensor surfaces</strong></li><li>Caused by <strong>Parvovirus B19</strong> infection</li><li>Typical prodrome: runny nose, some cough, maybe low-grade fevers, <strong>then</strong> the bilateral cheek rash develops</li></ul><div class="pearl"><span class="lbl">Testable triad</span>&ldquo;Slapped cheek&rdquo; appearance + a preceding mild URI prodrome + parvovirus B19 is the classic testable triad.</div>
+<div class="quiz" id="q09a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child had a mild runny nose and cough last week, and now presents with bright red cheeks bilaterally that look like they were slapped, with rash spreading to the extensor arms. What is the causative organism?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec10">
+<h2 class="partTitle">10 &middot; Hand, Foot, and Mouth Disease</h2>
+<article class="topic">
+<h3>Hand, Foot, and Mouth Disease</h3>
+<div class="tagline">Dehydration, not the rash, is the real admission risk</div>
+<ul><li>Affects the <strong>hands, feet, and mouth</strong> as the name suggests</li><li><strong>Erythematous macules and papules</strong></li><li>One of the few viral exanthems that presents on the <strong>palms of the hands and soles of the feet</strong></li><li><strong>Self-limiting</strong>, usually lasting only <strong>5&ndash;7 days</strong></li></ul><div class="pearl"><span class="lbl">Where kids actually get into trouble</span>The mouth sores can become so severe that children refuse to drink and become dehydrated. Dr. Stephens notes that as a pediatric hospitalist, this &mdash; not the hand/foot findings &mdash; is the actual reason these kids get admitted.</div>
+<div class="quiz" id="q10a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A toddler with hand, foot, and mouth disease is refusing all oral intake due to painful mouth sores. What is the primary clinical concern that would prompt admission?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q10b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What distinguishes the distribution of hand, foot, and mouth disease from most other viral exanthems?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec11">
+<h2 class="partTitle">11 &middot; Roseola Infantum</h2>
+<article class="topic">
+<h3>Roseola Infantum</h3>
+<div class="tagline">The rash appears only after the fever breaks</div>
+<ul><li><strong>High fever for 3&ndash;5 days</strong> &mdash; &ldquo;high&rdquo; meaning <strong>103&ndash;104&deg;F</strong></li><li>Notably <strong>lacking other symptoms</strong> &mdash; no significant runny nose, vomiting, diarrhea, or ear pain</li><li><strong>After the fever breaks</strong>, a body-wide <strong>macular-papular rash</strong> develops, starting on the <strong>chest</strong> and spreading outward</li></ul><div class="pearl"><span class="lbl">Why these kids get worked up</span>Because these children have persistent high fevers with no localizing source, they often undergo a <strong>sepsis workup</strong> (urine/blood cultures, sometimes a full sepsis workup depending on age) before the diagnosis becomes clear once the rash appears.</div><div class="pearl"><span class="lbl">From the lecturer's own experience</span>Dr. Stephens sees this &ldquo;at least a couple times every year.&rdquo; Interestingly, despite looking dramatic, the rash itself doesn't seem to bother the children at all and causes no scarring.</div>
+<div class="quiz" id="q11a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An infant has had a fever of 104°F for 4 days with no other symptoms, and a full sepsis workup was unremarkable. The fever then breaks and a macular-papular rash appears on the trunk, spreading outward. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q11b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why do children with roseola often undergo a sepsis workup before the diagnosis is apparent?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec12">
+<h2 class="partTitle">12 &middot; Molluscum Contagiosum</h2>
+<article class="topic">
+<h3>Molluscum Contagiosum</h3>
+<div class="tagline">Dome-shaped, umbilicated, and spread by scratching</div>
+<ul><li>Classically described as <strong>dome-shaped lesions with central indentation (umbilication)</strong></li><li>Often <strong>flesh-colored</strong>; can become erythematous or break down with scratching</li><li>Common on the <strong>face, neck, axilla, and thighs</strong>, usually as <strong>multiple</strong> lesions</li><li><strong>Self-limiting</strong> &mdash; resolves in a few months &mdash; but <strong>contagious</strong>, and scratching promotes further spread</li></ul><h4>Treatment</h4><ul><li><strong>Blistering agents</strong> can be used to remove lesions</li><li>Generally, <strong>leaving mild/less severe cases alone</strong> is reasonable, especially in sensitive areas like around the eye</li><li>If widely spread or causing issues, referral to dermatology for further treatment</li></ul>
+<div class="quiz" id="q12a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child has multiple flesh-colored, dome-shaped papules on the trunk, each with a central indentation. What is the diagnosis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q12b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why does scratching molluscum lesions tend to worsen the overall clinical picture?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec13">
+<h2 class="partTitle">13 &middot; Candida Dermatitis (Candida Diaper Rash)</h2>
+<article class="topic">
+<h3>Candida Dermatitis</h3>
+<div class="tagline">Satellite lesions are the differentiator</div>
+<ul><li><strong>Erythematous, non-blanching rash</strong></li><li>Found in <strong>skin folds and flexures</strong> &mdash; the diaper area is classic because it's a wet, moist environment</li><li><strong>Satellite lesions</strong> &mdash; smaller separate lesions surrounding a central area of spread &mdash; is the key distinguishing feature</li></ul><div class="pearl"><span class="lbl">Differentiating from plain diaper rash</span>Ordinary diaper rash is contact irritation without satellite lesions. The presence of satellite lesions as candida spreads outward from a central area is what confirms a candidal etiology.</div>
+<div class="quiz" id="q13a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An infant has an erythematous rash in the diaper area with a central patch and smaller separate “satellite” lesions surrounding it. What does this finding indicate?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec14">
+<h2 class="partTitle">14 &middot; Scabies</h2>
+<article class="topic">
+<h3>Scabies</h3>
+<div class="tagline">A burrowing mite, and a household eradication challenge</div>
+<ul><li>Can affect <strong>all ages</strong>, not just children, but common enough in kids to include here</li><li>Caused by a <strong>tiny skin mite that burrows under the skin and lays eggs</strong></li><li><strong>Contagious</strong>, but usually requires <strong>prolonged contact</strong> &mdash; brief casual contact typically won't transmit it, but sharing clothes or close/sexual contact can</li><li>Found commonly in <strong>skin folds</strong> &mdash; classically the <strong>web spaces between fingers and toes</strong> and the <strong>inguinal area</strong></li></ul><div class="pearl"><span class="lbl">Household eradication is difficult</span>To fully eradicate scabies you must starve the mites of all contact &mdash; in a large household this is hard to coordinate, and it commonly results in one child after another coming down with it as it passes around the family.</div>
+<div class="quiz" id="q14a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why is scabies difficult to eradicate in a large household?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q14b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Where are scabies infestations most commonly found on physical exam?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec15">
+<h2 class="partTitle">15 &middot; Tinea Corporis (Ringworm)</h2>
+<article class="topic">
+<h3>Tinea Corporis</h3>
+<div class="tagline">A fungal infection, despite the name</div>
+<ul><li>Classically a <strong>circular, slightly raised, erythematous rash with central clearing</strong></li><li>The central clearing pattern is where the historical (mistaken) idea of a &ldquo;worm&rdquo; causing it came from</li><li>Can affect <strong>any part of the skin</strong>, literally meaning &ldquo;anywhere on the body&rdquo;</li><li><strong>Contagious with contact</strong> &mdash; hand washing is important, and it can spread <strong>human-to-surface-to-human</strong>, not just directly person-to-person</li></ul>
+<div class="quiz" id="q15a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A circular, slightly raised, erythematous plaque with central clearing is found on a child's arm. What historical misconception led to this condition's common name?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec16">
+<h2 class="partTitle">16 &middot; IgA Vasculitis (Henoch-Schönlein Purpura / HSP)</h2>
+<article class="topic">
+<h3>IgA Vasculitis (HSP)</h3>
+<div class="tagline">Abdominal pain and arthritis can precede the rash</div>
+<ul><li><strong>Palpable purpura</strong> with <strong>abdominal pain and arthritis</strong></li><li>The purpura does <strong>not blanch</strong></li><li>Normally <strong>self-limiting</strong>, but can affect the <strong>kidneys</strong> &mdash; kidney function should be monitored</li></ul><div class="pearl"><span class="lbl">From the lecturer's own experience</span>Dr. Stephens has seen this multiple times, including twice in children who had undergone <strong>appendectomies</strong> &mdash; this was before routine CT scanning of every child with suspected appendicitis. Those children underwent surgery, then broke out in the rash post-operatively &mdash; illustrating that the abdominal pain and arthritis of HSP can actually <strong>precede</strong> the rash, leading to diagnostic confusion with a surgical abdomen.</div><div class="pearl"><span class="lbl">Order of symptom onset can vary</span>Abdominal pain and arthritis may show up before the purpuric rash appears, which is a key pitfall &mdash; don't rule out HSP just because there's no rash yet in a child with abdominal pain and joint symptoms.</div>
+<div class="quiz" id="q16a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child develops non-blanching palpable purpura on the lower extremities along with abdominal pain and joint pain. What organ system should be monitored given the risk of involvement?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q16b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">Why might a child with HSP be mistaken for having a surgical abdominal emergency like appendicitis?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec17">
+<h2 class="partTitle">17 &middot; Atopic Dermatitis (Eczema)</h2>
+<article class="topic">
+<h3>Atopic Dermatitis (Eczema)</h3>
+<div class="tagline">Secondary infection changes the treatment</div>
+<ul><li>A <strong>very common</strong> skin disorder in children</li><li>May be <strong>seasonal</strong> or triggered by specific factors like <strong>cold</strong> or certain <strong>detergents</strong></li><li>As children get older, eczema can become <strong>secondarily infected</strong> from scratching</li></ul><div class="pearl"><span class="lbl">Treatment pitfall</span>When eczema becomes secondarily infected, treating with topical steroids alone is <strong>not enough</strong> &mdash; antibiotics are also needed to clear the soft tissue infection.</div><div class="pearl"><span class="lbl">Severity spectrum</span>Most eczema can be managed without serious intervention, but some cases are severe enough to require dermatology referral.</div>
+<div class="quiz" id="q17a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A child with known eczema develops increased redness, warmth, and oozing at a chronically scratched patch. What is the appropriate treatment adjustment?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec18">
+<h2 class="partTitle">18 &middot; Seborrheic Dermatitis (Cradle Cap)</h2>
+<article class="topic">
+<h3>Seborrheic Dermatitis (Cradle Cap)</h3>
+<div class="tagline">The worst case of dandruff you've ever seen</div>
+<ul><li>Often found in <strong>young children</strong> &mdash; hence the common name &ldquo;cradle cap&rdquo;</li><li>Described as an <strong>erythematous rash with yellow, scaly flakes</strong> &mdash; like &ldquo;the worst case of dandruff you've ever seen&rdquo;</li><li>Normally develops within the <strong>first few weeks of life</strong></li><li>Treated <strong>topically</strong>, and typically resolves by the <strong>fourth month</strong></li></ul>
+<div class="quiz" id="q18a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A 3-week-old infant has an erythematous scalp rash with yellow, greasy scaling. When would this condition typically be expected to resolve?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec19">
+<h2 class="partTitle">19 &middot; Congenital Birthmarks: Port-Wine Stain, Infantile Hemangioma &amp; Nevus Simplex</h2>
+<article class="topic">
+<h3>Three Vascular Birthmarks, Compared</h3>
+<div class="tagline">Frequently confused with one another — the differences are the real testable skill</div>
+<p>These three congenital vascular skin findings are grouped together because they're frequently confused with one another &mdash; understanding the differences between them is the real testable skill here.</p><h4>Capillary Malformation (Port-Wine Stain)</h4><ul><li><strong>Dark red or purple, flat birthmark</strong> &mdash; the most severe of the three</li><li>Commonly found on the <strong>face, chest, or back</strong></li><li><strong>Increases in size</strong> during puberty, pregnancy, or menopause</li><li>Some respond to <strong>laser therapy</strong>, but not all</li></ul><div class="pearl"><span class="lbl">Referral trigger</span>Any child born with a <strong>large</strong> port-wine stain should be seen by dermatology.</div><h4>Infantile Hemangioma (Strawberry Mark)</h4><ul><li><strong>Raised</strong> birthmark, can occur <strong>anywhere on the body &mdash; including internally</strong></li><li>Usually <strong>increases in size during the first six months</strong> of life, then <strong>shrinks and disappears by around age 7</strong></li><li>A single hemangioma in a non-critical area is usually just watched &mdash; it will resolve on its own</li><li><strong>Internal hemangiomas</strong> are the real concern &mdash; Dr. Stephens has personally seen them in the <strong>airway</strong> and the <strong>liver</strong>; multiple growing hemangiomas in an airway can become life-threatening</li><li><strong>Initial treatment is with beta blockers</strong>, which reduce the size &mdash; surprising to many students since beta blockers aren't an obvious first thought for a vascular skin lesion; laser treatment is also an option</li></ul><h4>Nevus Simplex (Stork Bite / Angel's Kiss)</h4><ul><li>The <strong>least critical</strong> of the three</li><li><strong>Flat, red mark</strong> commonly on the <strong>forehead, eyelids, or back of the neck</strong></li><li><strong>Most fade by age 1&ndash;2</strong>; they do not worsen or spread and cause no problems</li><li>Management is simple <strong>reassurance</strong> to the parents &mdash; and documenting it in the chart, since it can otherwise be mistaken for an injury</li></ul><div class="pearl"><span class="lbl">Severity ranking, most to least concerning</span>Port-wine stain (needs dermatology referral if large) &gt; infantile hemangioma (mostly benign, but screen for internal/airway involvement) &gt; nevus simplex (reassurance only).</div>
+<div class="quiz" id="q19a">
+<div class="qhead">Practice Question</div>
+<div class="qtext">An infant has a rapidly enlarging hemangioma near the airway. What is the recommended initial treatment to reduce its size?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q19b">
+<div class="qhead">Practice Question</div>
+<div class="qtext">A newborn has a flat red mark on the back of the neck. The parents are worried. What is the most appropriate management?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+<div class="quiz" id="q19c">
+<div class="qhead">Practice Question</div>
+<div class="qtext">What distinguishes a port-wine stain from an infantile hemangioma on physical exam?</div>
+<div class="choices"></div>
+<div class="explain"></div>
+</div>
+</article>
+</section>
+
+<section class="part" id="sec20">
+<h2 class="partTitle">20 &middot; Master High-Yield Summary Table</h2>
+<article class="topic">
+<h3>All 21 Findings at a Glance</h3>
+<table class="data-table"><caption>Pediatric dermatology — master reference</caption><tr><th>Condition</th><th>Category</th><th>Key Buzzword / Finding</th></tr><tr><td><strong>Measles</strong></td><td>Vaccine-preventable</td><td>Rash behind ears &rarr; body; Koplik spots (“grains of salt”) on buccal mucosa</td></tr><tr><td><strong>Mumps</strong></td><td>Vaccine-preventable</td><td>Painful parotid gland swelling + fever</td></tr><tr><td><strong>Rubella</strong></td><td>Vaccine-preventable</td><td>Pink rash face &rarr; body; sub-occipital/post-auricular lymphadenopathy</td></tr><tr><td><strong>Congenital rubella</strong></td><td>Vaccine-preventable</td><td>“Blueberry muffin baby” + jaundice</td></tr><tr><td><strong>Meningococcal rash</strong></td><td>Vaccine-preventable</td><td>Non-blanching hemorrhagic rash — emergency, can crash within hours</td></tr><tr><td><strong>Varicella (chicken pox)</strong></td><td>Vaccine-preventable</td><td>Pruritic blisters, “new crops” every 1–2 days, 5–10 day course</td></tr><tr><td><strong>Erythema marginatum</strong></td><td>Strep-associated</td><td>Jones major criterion for rheumatic fever, 2–4 wks post-strep</td></tr><tr><td><strong>Impetigo</strong></td><td>Strep-associated</td><td>Honey-colored, fluid-filled vesicles; topical antibiotics</td></tr><tr><td><strong>Scarlet fever</strong></td><td>Strep-associated</td><td>Strawberry tongue, sandpaper rash, circumoral pallor</td></tr><tr><td><strong>Erythema infectiosum</strong></td><td>Viral (non-vaccine)</td><td>“Slapped cheek”; Parvovirus B19</td></tr><tr><td><strong>Hand, foot &amp; mouth</strong></td><td>Viral (non-vaccine)</td><td>Palms/soles + mouth ulcers; risk = dehydration, not the rash</td></tr><tr><td><strong>Roseola infantum</strong></td><td>Viral (non-vaccine)</td><td>High fever 3–5 days &rarr; rash appears AFTER fever breaks</td></tr><tr><td><strong>Molluscum contagiosum</strong></td><td>Viral (non-vaccine)</td><td>Dome-shaped papules with central umbilication</td></tr><tr><td><strong>Candida dermatitis</strong></td><td>Fungal/infestation</td><td>Diaper rash + satellite lesions</td></tr><tr><td><strong>Scabies</strong></td><td>Fungal/infestation</td><td>Burrowing mite; finger/toe web spaces, inguinal area</td></tr><tr><td><strong>Tinea corporis</strong></td><td>Fungal/infestation</td><td>Ring-shaped plaque with central clearing</td></tr><tr><td><strong>IgA vasculitis (HSP)</strong></td><td>Other</td><td>Palpable purpura + abdominal pain + arthritis; monitor renal function</td></tr><tr><td><strong>Atopic dermatitis (eczema)</strong></td><td>Other</td><td>Common; can become secondarily infected with scratching</td></tr><tr><td><strong>Seborrheic dermatitis</strong></td><td>Other</td><td>Cradle cap — yellow greasy scale, resolves ~4 months</td></tr><tr><td><strong>Port-wine stain</strong></td><td>Congenital birthmark</td><td>Flat, dark red/purple; refer derm if large</td></tr><tr><td><strong>Infantile hemangioma</strong></td><td>Congenital birthmark</td><td>Raised; grows 6mo then involutes by age 7; beta blockers if critical</td></tr><tr><td><strong>Nevus simplex</strong></td><td>Congenital birthmark</td><td>Flat red mark, forehead/eyelids/neck; fades by age 1–2; reassurance only</td></tr></table>
+</article>
+</section>
+
+<section class="part" id="sec21">
+<h2 class="partTitle">21 &middot; Final Board Pearls</h2>
+<article class="topic">
+<h3>Lecturer's Own Wrap-Up</h3>
+<ul><li>This lecture is intentionally <strong>not exhaustive</strong> &mdash; the goal was recognizing the <strong>keyword/buzzword descriptions</strong> most likely to appear in charting and on exams, not memorizing an entire dermatology atlas.</li><li><strong>Vaccine-preventable diseases</strong> (measles, mumps, rubella, meningococcal disease, varicella) are increasingly relevant again given real-world outbreaks &mdash; know both the classic exam findings and that these are, by definition, preventable.</li><li>Several conditions hinge on a <strong>timing pattern</strong>: erythema marginatum (weeks after strep), roseola (rash after fever breaks), HSP (abdominal pain/arthritis can precede the rash) &mdash; pay attention to sequence, not just appearance.</li><li>Distinguishing <strong>similar-looking entities</strong> is a recurring board theme: candida dermatitis vs. plain diaper rash (satellite lesions), port-wine stain vs. infantile hemangioma vs. nevus simplex (flat vs. raised, severity, natural history).</li><li>Practice looking at rashes across <strong>different skin tones</strong> whenever you get the chance clinically &mdash; most textbook images underrepresent this variation.</li></ul><div class="pearl"><span class="lbl">Overarching test-taking framework</span>For any pediatric rash question, first ask (1) is this vaccine-preventable, (2) what organism/mechanism, and (3) what's the one buzzword phrase tied to it &mdash; most board questions can be answered with that three-step filter.</div>
+</article>
+</section>
+
+<footer>Pediatric Dermatology for Wards and Boards &middot; MSK II Clinical &middot; Dr. Scott Stephens, DO, PD, SFHM, FACOP &middot; Built for board review</footer>
+</main>
+
+<script>
+function toggleNav(){
+  document.getElementById('sideNav').classList.toggle('open');
+  var scrim = document.getElementById('sideNavScrim');
+  scrim.style.display = scrim.style.display === 'block' ? 'none' : 'block';
+}
+function jump(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  toggleNav();
+}
+function goBack(){
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+const questionData = {
+  q00a: {choices:["Vaccine-preventable rashes", "Congenital birthmarks", "Findings associated with non-accidental trauma", "Fungal skin infections"], correct:2,
+    explain:"Non-accidental trauma (child abuse) findings are explicitly excluded &mdash; Dr. Stephens notes this deserves its own dedicated lecture and isn't necessary at this stage of training."},
+  q01a: {choices:["Rubella; Forchheimer spots", "Measles; Koplik spots", "Scarlet fever; strawberry tongue", "Roseola; Nagayama spots"], correct:1,
+    explain:"Measles &mdash; the rash starts behind the ears and spreads, and Koplik spots (“grains of salt”) on the buccal mucosa are the classic pathognomonic finding."},
+  q01b: {choices:["Within 24 hours", "3–4 days", "By week 2", "It never peels"], correct:2,
+    explain:"By week 2, the measles rash becomes blotchy and begins peeling. The initial spread from behind the ears to the whole body happens over 3–4 days."},
+  q02a: {choices:["Bacterial parotitis", "Mumps", "Kawasaki disease", "Cat-scratch disease"], correct:1,
+    explain:"Mumps &mdash; painful parotid gland swelling with fever, headache, and loss of appetite is the classic vaccine-preventable presentation."},
+  q02b: {choices:["Only the thyroid gland", "Testes (orchitis) and axillary lymph nodes", "Only the spleen", "Mumps never causes swelling elsewhere"], correct:1,
+    explain:"Mumps can also cause orchitis (testicular swelling) and axillary lymph node swelling, beyond the classic parotid involvement."},
+  q03a: {choices:["Cervical and inguinal", "Sub-occipital and post-auricular", "Axillary and epitrochlear", "Mediastinal"], correct:1,
+    explain:"Sub-occipital and post-auricular lymphadenopathy is the classic associated finding in rubella, alongside a pink macular-papular rash starting on the face."},
+  q03b: {choices:["Postnatal rubella", "Congenital rubella syndrome", "Neonatal varicella", "Erythema toxicum neonatorum"], correct:1,
+    explain:"Congenital rubella syndrome causes the “blueberry muffin baby” appearance, along with jaundice from the associated systemic illness."},
+  q04a: {choices:["Contact dermatitis — reassure and discharge", "Meningococcal disease — these children can decompensate within hours", "Viral exanthem — supportive care only", "Drug eruption — stop all medications"], correct:1,
+    explain:"Meningococcal disease presents with a non-blanching, widespread hemorrhagic rash and is a true emergency &mdash; affected children can crash within hours."},
+  q04b: {choices:["Shine a penlight through the skin", "Press a clear glass against the skin and observe through it", "Apply ice to the area", "Rub the area vigorously"], correct:1,
+    explain:"Pressing a clear glass against the skin lets you observe through it whether the rash disappears (blanches) with pressure and returns after release."},
+  q05a: {choices:["Measles", "Smallpox", "Hand, foot, and mouth disease", "Impetigo"], correct:1,
+    explain:"“New crops” of lesions appearing every 1–2 days (lesions in multiple stages at once) was classically used to distinguish chicken pox from smallpox, which produced lesions that were all synchronously in the same stage."},
+  q05b: {choices:["It prevents all future viral infections", "It reduces the risk of developing shingles later in life", "It cures eczema", "It has no additional long-term benefit"], correct:1,
+    explain:"The varicella vaccine also reduces the risk of developing shingles (herpes zoster) later in life, since it lowers the likelihood of viral reactivation from dorsal root ganglia."},
+  q06a: {choices:["Kawasaki disease", "Acute rheumatic fever", "Scarlet fever", "IgA vasculitis"], correct:1,
+    explain:"Erythema marginatum is one of the Jones major criteria for acute rheumatic fever, which follows untreated Strep pyogenes infection."},
+  q06b: {choices:["2–3 days later; severe, treated pharyngitis", "2–4 weeks later; a mild, often untreated sore throat", "Immediately, during the acute infection", "6 months later; no antecedent symptoms"], correct:1,
+    explain:"Classically 2–4 weeks after strep pyogenes infection, and patients frequently report a sore throat they didn't think much of and didn't get treated."},
+  q07a: {choices:["Cellulitis; oral antibiotics", "Impetigo; topical antibiotics effective against staph", "Eczema herpeticum; IV acyclovir", "Scabies; permethrin"], correct:1,
+    explain:"Impetigo — the honey-colored, fluid-filled vesicles are the classic description, caused by staph aureus or strep pyogenes, treated first-line with topical antibiotics active against staph."},
+  q08a: {choices:["Kawasaki disease", "Scarlet fever", "Measles", "Erythema infectiosum"], correct:1,
+    explain:"Scarlet fever — strawberry tongue, sandpaper-textured rash, and circumoral pallor are the classic triad, caused by Strep pyogenes."},
+  q08b: {choices:["Blue discoloration of the lips", "A clear, unaffected ring of skin around the mouth while the rest of the face is rashy", "Swelling of the lips", "Peeling skin around the mouth only"], correct:1,
+    explain:"Circumoral pallor is the clearing/pale ring right around the mouth, contrasting with the fine erythematous rash on the rest of the face."},
+  q09a: {choices:["Coxsackievirus", "Parvovirus B19", "Human herpesvirus 6", "Rubella virus"], correct:1,
+    explain:"Parvovirus B19 causes erythema infectiosum (fifth disease), with the classic “slapped cheek” bilateral facial rash following a mild URI-type prodrome."},
+  q10a: {choices:["Spread of the rash to the trunk", "Dehydration from poor oral intake", "Risk of permanent scarring on the hands", "Secondary bacterial superinfection of the feet"], correct:1,
+    explain:"The primary reason children with hand, foot, and mouth disease get admitted is dehydration from painful mouth sores causing poor oral intake — not the cutaneous findings themselves."},
+  q10b: {choices:["It only affects the trunk", "It is one of the few exanthems that involves the palms and soles", "It never involves mucous membranes", "It is always limited to one extremity"], correct:1,
+    explain:"Hand, foot, and mouth disease is notable for being one of the few viral exanthems that presents on the palms of the hands and soles of the feet."},
+  q11a: {choices:["Measles", "Roseola infantum", "Kawasaki disease", "Scarlet fever"], correct:1,
+    explain:"Roseola infantum classically presents with several days of high fever and few other symptoms, followed by a trunk-starting macular-papular rash once the fever breaks."},
+  q11b: {choices:["Because the rash appears before the fever, mimicking meningococcemia", "Because they have persistent high fevers without other localizing symptoms, before any rash appears", "Because roseola is caused by a bacterial pathogen", "Sepsis workups are not typically pursued in roseola"], correct:1,
+    explain:"The rash of roseola only appears after the fever breaks, so during the several days of unexplained high fever with no other symptoms, these children often get evaluated for occult sepsis."},
+  q12a: {choices:["Verruca vulgaris (common warts)", "Molluscum contagiosum", "Milia", "Epidermal inclusion cysts"], correct:1,
+    explain:"Molluscum contagiosum — dome-shaped lesions with central umbilication/indentation, often flesh-colored, is the classic description."},
+  q12b: {choices:["It causes permanent scarring in all cases", "It spreads the contagious virus to new areas of skin", "It converts the lesions into a malignant process", "Scratching has no effect on molluscum"], correct:1,
+    explain:"Molluscum is contagious, so scratching spreads the virus to adjacent or new areas of skin, promoting further lesion development."},
+  q13a: {choices:["Simple contact irritant diaper rash", "Candida dermatitis", "Seborrheic dermatitis", "Atopic dermatitis"], correct:1,
+    explain:"Satellite lesions are the key feature distinguishing candida dermatitis from a simple contact irritant diaper rash."},
+  q14a: {choices:["The mites are resistant to all available treatments", "Full eradication requires starving the mites of all contact, which is hard to coordinate across many household members", "Scabies mites can survive indefinitely without a host", "Scabies is not actually contagious between household members"], correct:1,
+    explain:"Eradicating scabies requires starving the mites of contact with skin, which is logistically difficult in a large household — commonly resulting in sequential transmission among family members."},
+  q14b: {choices:["The scalp only", "Web spaces between fingers/toes and the inguinal area", "The palms and soles exclusively", "The face only"], correct:1,
+    explain:"Scabies is found commonly in skin folds, classically the web spaces between fingers and toes and the inguinal area."},
+  q15a: {choices:["It was thought to be caused by an actual worm burrowing in the skin", "It was named after the physician who discovered it", "The ring-shaped, central-clearing appearance was mistaken for a worm under the skin, giving rise to the name “ringworm”", "It was originally identified in earthworms"], correct:2,
+    explain:"The central clearing pattern of tinea corporis created the historical (incorrect) impression of a worm coiled under the skin, giving rise to the name “ringworm” — it is actually a fungal infection."},
+  q16a: {choices:["Cardiac", "Renal", "Hepatic", "Pulmonary"], correct:1,
+    explain:"IgA vasculitis (HSP) can affect the kidneys, so renal function should be monitored even though the overall condition is normally self-limiting."},
+  q16b: {choices:["HSP always causes bowel perforation", "Abdominal pain and arthritis can precede the purpuric rash, so the rash isn't yet present to suggest the diagnosis", "HSP only ever presents with abdominal pain, never a rash", "HSP is indistinguishable from appendicitis on imaging"], correct:1,
+    explain:"The abdominal pain and arthritis of HSP can precede the characteristic palpable purpura, so children have sometimes undergone appendectomy before the rash appeared and clarified the diagnosis."},
+  q17a: {choices:["Increase the potency of topical steroids only", "Add antibiotics to treat the secondary soft tissue infection, in addition to routine eczema care", "Stop all topical treatments immediately", "Refer directly to surgery"], correct:1,
+    explain:"When eczema becomes secondarily infected from scratching, topical steroids alone aren't sufficient — antibiotics are needed to treat the soft tissue infection."},
+  q18a: {choices:["Within 24 hours", "By 1 week of age", "By around the fourth month of life", "It typically persists into adulthood"], correct:2,
+    explain:"Seborrheic dermatitis (cradle cap) develops in the first few weeks of life and typically resolves by around the fourth month with topical treatment."},
+  q19a: {choices:["Oral corticosteroids only", "Beta blockers", "Surgical excision as first-line", "Topical retinoids"], correct:1,
+    explain:"Initial treatment for problematic infantile hemangiomas, especially in critical areas like the airway, is with beta blockers, which cause a reduction in size. Laser treatment is also an option."},
+  q19b: {choices:["Urgent dermatology referral", "Immediate laser therapy", "Reassurance, and documentation in the chart since it can be mistaken for an injury", "Beta blocker therapy"], correct:2,
+    explain:"A flat red mark on the back of the neck is classic for nevus simplex (stork bite) — the least critical of the three congenital vascular birthmarks. It fades by age 1–2, and management is reassurance plus documentation."},
+  q19c: {choices:["Port-wine stains are raised; hemangiomas are flat", "Port-wine stains are flat, dark red/purple marks; hemangiomas are raised birthmarks", "They are indistinguishable clinically", "Hemangiomas only occur internally, never on skin"], correct:1,
+    explain:"Port-wine stains (capillary malformations) are flat, dark red or purple birthmarks, while infantile hemangiomas (strawberry marks) are raised."}
+};
+
+Object.keys(questionData).forEach(function(id){
+  const box = document.getElementById(id);
+  if(!box) return;
+  const data = questionData[id];
+  const choiceWrap = box.querySelector('.choices');
+  const explainBox = box.querySelector('.explain');
+  data.choices.forEach(function(text, idx){
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = String.fromCharCode(65+idx) + '. ' + text;
+    btn.onclick = function(){
+      const already = choiceWrap.querySelectorAll('.choice.correct, .choice.wrong').length > 0;
+      if(already) return;
+      const all = choiceWrap.querySelectorAll('.choice');
+      all.forEach(function(b, i){
+        if(i === data.correct) b.classList.add('correct');
+        else if(b === btn) b.classList.add('wrong');
+      });
+      explainBox.textContent = data.explain;
+      explainBox.classList.add('show');
+    };
+    choiceWrap.appendChild(btn);
+  });
+});
+</script>
+</body>
+</html>
