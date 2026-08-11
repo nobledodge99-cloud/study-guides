@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Intro to Dermatology Pharmacology — Study Guide</title>
+<style>
+  :root{
+    --bg:#faf6ec;
+    --panel:#f2ecdc;
+    --green-dark:#2f5233;
+    --green-accent:#3f7d52;
+    --text:#2b2b26;
+    --red:#a63838;
+    --red-bg:#fbe9e7;
+    --line:#d9d0b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    line-height:1.55;
+  }
+  header.top{
+    position:fixed; top:0; left:0; right:0; height:52px;
+    background:var(--green-dark); color:#fff; z-index:200;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 18px;
+  }
+  header.top a.back{
+    color:#fff; text-decoration:none; font-size:0.95em; font-weight:bold;
+  }
+  header.top a.back:hover{ text-decoration:underline; }
+  header.top button.pdf{
+    background:var(--green-accent); color:#fff; border:none; border-radius:4px;
+    padding:7px 14px; font-family:inherit; font-size:0.9em; cursor:pointer;
+  }
+  header.top button.pdf:hover{ background:#356643; }
+  .wrap{ max-width:900px; margin:0 auto; padding:80px 24px 60px; }
+  h1.title{ color:var(--green-dark); font-size:2em; margin-bottom:2px; }
+  .subtitle{ color:var(--green-accent); font-style:italic; margin-top:0; margin-bottom:28px; }
+  h2.section{
+    color:#fff; background:var(--green-dark); padding:10px 16px; border-radius:6px;
+    margin-top:48px; font-size:1.35em; scroll-margin-top:64px;
+  }
+  h3{ color:var(--green-dark); border-bottom:2px solid var(--line); padding-bottom:4px; margin-top:30px; scroll-margin-top:64px;}
+  h4{ color:var(--green-accent); margin-bottom:6px; }
+  .core{
+    background:var(--red-bg); border-left:5px solid var(--red); border-radius:4px;
+    padding:12px 16px; margin:16px 0;
+  }
+  .core h4{ color:var(--red); margin-top:0; }
+  .core .tag{
+    display:inline-block; background:var(--red); color:#fff; font-size:0.7em;
+    padding:2px 8px; border-radius:10px; margin-left:8px; vertical-align:middle;
+    font-family:Georgia, serif; letter-spacing:0.03em;
+  }
+  .recognize{
+    background:var(--panel); border-left:5px solid var(--green-accent); border-radius:4px;
+    padding:10px 16px; margin:14px 0;
+  }
+  .recognize h4{ color:var(--green-accent); margin-top:0; }
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:0.94em; }
+  th{ background:var(--green-dark); color:#fff; padding:8px; text-align:left; }
+  td{ padding:8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr:nth-child(even) td{ background:#f4efe0; }
+  .callout{
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:12px 16px; margin:14px 0;
+  }
+  .callout b{ color:var(--green-dark); }
+  ul{ margin-top:4px; }
+  li{ margin-bottom:4px; }
+  .quiz-q{
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px 16px; margin:16px 0;
+  }
+  .qtext{ margin-top:0; }
+  .options{ display:flex; flex-direction:column; gap:6px; }
+  button.opt{
+    text-align:left; background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:8px 10px; font-family:inherit; font-size:0.95em; cursor:pointer; color:var(--text);
+  }
+  button.opt:hover:not(:disabled){ background:#e9e0c5; }
+  button.opt:disabled{ cursor:default; }
+  button.opt.correct{ background:#dcecdc; border-color:var(--green-accent); font-weight:bold; }
+  button.opt.incorrect{ background:#f6dede; border-color:var(--red); }
+  .feedback{ margin-top:10px; padding:8px 10px; border-radius:4px; display:none; font-size:0.92em; }
+  .fb-correct{ background:#dcecdc; color:#1f4a24; display:block; }
+  .fb-incorrect{ background:#f6dede; color:#7a2323; display:block; }
+
+  /* side nav */
+  #navTab{
+    position:fixed; top:50%; right:0; transform:translateY(-50%);
+    background:var(--green-dark); color:#fff; padding:14px 6px; border-radius:6px 0 0 6px;
+    writing-mode:vertical-rl; text-orientation:mixed; cursor:pointer; z-index:250; font-size:0.85em;
+    letter-spacing:0.1em;
+  }
+  #navPanel{
+    position:fixed; top:0; right:-280px; width:280px; height:100%; background:var(--panel);
+    box-shadow:-3px 0 12px rgba(0,0,0,0.15); z-index:260; transition:right 0.25s ease;
+    padding:60px 18px 20px; overflow-y:auto;
+  }
+  #navPanel.open{ right:0; }
+  #navPanel a{
+    display:block; color:var(--green-dark); text-decoration:none; padding:7px 4px;
+    border-bottom:1px solid var(--line); font-size:0.92em;
+  }
+  #navPanel a:hover{ color:var(--red); }
+  #navClose{
+    position:absolute; top:14px; right:14px; background:none; border:none; font-size:1.3em;
+    cursor:pointer; color:var(--green-dark);
+  }
+  @media print{
+    #navTab, #navPanel, header.top{ display:none !important; }
+    .wrap{ padding-top:10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="back" href="index.html">&larr; Back to Study Guides</a>
+  <button class="pdf" onclick="window.print()">Download PDF</button>
+</header>
+
+<div id="navTab" onclick="document.getElementById('navPanel').classList.add('open')">SECTIONS</div>
+<div id="navPanel">
+  <button id="navClose" onclick="document.getElementById('navPanel').classList.remove('open')">&times;</button>
+  <a href="#framework">Framework &amp; Principles</a>
+  <a href="#antiinflam">Anti-inflammatory Therapies</a>
+  <a href="#q1">↳ Practice Qs</a>
+  <a href="#antiinfective">Anti-infective &amp; Antiparasitic</a>
+  <a href="#q2">↳ Practice Qs</a>
+  <a href="#acne">Acne &amp; Rosacea Therapies</a>
+  <a href="#q3">↳ Practice Qs</a>
+  <a href="#psoriasis">Immunomodulatory Psoriasis Rx</a>
+  <a href="#q4">↳ Practice Qs</a>
+  <a href="#abnormal">Abnormal Tissue–Directed Rx</a>
+  <a href="#q5">↳ Practice Qs</a>
+  <a href="#integration">Clinical Integration Framework</a>
+  <a href="#hiyield">High-Yield Organizer Table</a>
+</div>
+
+<div class="wrap">
+
+<h1 class="title">Introduction to Dermatology Pharmacology</h1>
+<p class="subtitle">Dr. Natalie Waterfall, PharmD — MSK II | Katzung Ch. 61</p>
+
+<div class="callout">
+  <b>How this guide is organized:</b> Drugs boxed in red were marked as <b>Core Agents</b> on the lecture slides — these are the highest-yield drugs and get full depth (mechanism, clinical role, dosing/duration notes, and safety). Drugs in the green "Recognize &amp; Associate" boxes just need to be connected to their condition — you're not expected to know deep mechanism/monitoring for these unless noted.
+</div>
+
+<h2 class="section" id="framework">Part 1: Dermatology Pharmacology Principles</h2>
+
+<h3>Why Dermatology Pharmacology Is Different</h3>
+<ul>
+  <li>Many drugs are applied <b>directly at the site of disease</b> — effect depends on drug + vehicle + site + barrier integrity + duration + surface area treated</li>
+  <li><b>Stratum corneum</b> = outermost layer of epidermis, made of non-viable keratinocytes in lipid layers = primary barrier to topical penetration</li>
+  <li>Intact, dry, thick skin → limits absorption. Damaged, inflamed, hydrated, or occluded skin → absorbs more (can increase therapeutic effect <i>or</i> local toxicity/systemic exposure)</li>
+</ul>
+
+<h3>Body Site Affects Absorption &amp; Safety</h3>
+<table>
+<tr><th>Site type</th><th>Examples</th><th>Clinical implication</th></tr>
+<tr><td>Thin skin (high absorption)</td><td>Face, eyelids, skin folds, genitals</td><td>Higher toxicity risk — use lower-potency agents</td></tr>
+<tr><td>Thick skin (low absorption)</td><td>Palms, soles, thick plaques</td><td>May need higher potency, occlusive vehicle, or keratolytic to improve delivery</td></tr>
+</table>
+<ul>
+  <li>Larger treatment area → greater systemic exposure risk</li>
+  <li>Children (especially infants) have a higher surface-area-to-body-mass ratio → greater relative systemic exposure than adults with the same application</li>
+</ul>
+
+<h3>Vehicle Selection — "the vehicle is part of the prescription"</h3>
+<table>
+<tr><th>Vehicle</th><th>Best for</th><th>Main limitation</th></tr>
+<tr><td>Ointment</td><td>Dry, thick, scaly, lichenified lesions (most occlusive → ↑ hydration/penetration)</td><td>Greasy, low cosmetic acceptability, may worsen acne/folliculitis</td></tr>
+<tr><td>Cream</td><td>Versatile — many inflammatory lesions</td><td>Less occlusive than ointment</td></tr>
+<tr><td>Lotion/solution/foam</td><td>Hair-bearing areas (scalp)</td><td>May be less hydrating; can sting</td></tr>
+<tr><td>Gel</td><td>Acne-prone/oily areas</td><td>Drying, irritating</td></tr>
+</table>
+
+<h3>Topical vs. Systemic Decision</h3>
+<div class="callout">
+Localized/superficial disease → usually starts <b>topical</b> (direct delivery, lower systemic exposure). Systemic therapy needed when disease is <b>severe, widespread, refractory, deep, involves nails/hair, or is immune-mediated</b>.
+</div>
+
+<h2 class="section" id="antiinflam">Part 2a: Anti-inflammatory Therapies</h2>
+<p>Used for itch/erythema/edema/barrier-disruption conditions — atopic dermatitis (eczema), contact dermatitis, localized inflammatory rashes.</p>
+
+<div class="core">
+<h4>Topical Corticosteroids <span class="tag">CORE</span></h4>
+<p><b>Role:</b> First-line topical anti-inflammatory — broadly suppress local inflammatory signaling → ↓ erythema, edema, pruritus. Some local vasoconstriction contributes to ↓ redness.</p>
+<p><b>Potency ladder (know this cold):</b></p>
+<table>
+<tr><th>Potency</th><th>Example</th><th>Typical use</th></tr>
+<tr><td>Low</td><td>Hydrocortisone</td><td>Face/folds/genitals, children, mild inflammation</td></tr>
+<tr><td>Medium</td><td>Triamcinolone</td><td>Trunk/extremities, moderate inflammation</td></tr>
+<tr><td>High</td><td>Betamethasone, fluocinonide</td><td>Severe inflammation, thicker skin, short courses</td></tr>
+<tr><td>Super-high</td><td>Clobetasol</td><td>Thick plaques/palms/soles; very short courses/caution</td></tr>
+</table>
+<p><b>Safety — risk ↑ with:</b> higher potency, longer duration, thin skin (face/folds/genitals), large surface area, occlusion, damaged/inflamed skin, younger age.</p>
+<p><b>Major AEs:</b> skin atrophy (most important), striae, telangiectasias, hypopigmentation, bruising/fragility, steroid acne, folliculitis, perioral dermatitis; possible systemic absorption → HPA-axis suppression/Cushingoid effects with high exposure.</p>
+<p><b>Safety principle:</b> lowest effective potency, appropriate site, shortest duration needed.</p>
+</div>
+
+<div class="core">
+<h4>Tacrolimus &amp; Pimecrolimus (Topical Calcineurin Inhibitors) <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Inhibit calcineurin signaling in T cells → ↓ T-cell activation → ↓ inflammatory cytokines (e.g., IL-2). Do <b>not</b> cause skin atrophy.</p>
+<p><b>Role:</b> Steroid-sparing anti-inflammatory, primarily atopic dermatitis; useful for sensitive/thin areas (face, eyelids, neck, folds, genitals) or long-term intermittent control.</p>
+<p><b>AEs:</b> burning/stinging/pruritus/erythema at application site (often improves with continued use).</p>
+<p><b>Boxed warning:</b> possible malignancy risk (lymphoma, skin cancer) — avoid unnecessary UV exposure, use sun protection.</p>
+<p><b>Avoid in:</b> children &lt;2 years, immunocompromised patients, under occlusive dressings; avoid prolonged continuous use.</p>
+</div>
+
+<div class="recognize">
+<h4>Recognize &amp; Associate — Targeted/Advanced Atopic Dermatitis Therapies</h4>
+<table>
+<tr><th>Agent</th><th>Class</th><th>Key point</th></tr>
+<tr><td>Crisaborole</td><td>Topical PDE-4 inhibitor</td><td>Mild–moderate AD; burning/stinging</td></tr>
+<tr><td>Ruxolitinib (topical)</td><td>Topical JAK inhibitor</td><td>Mild–moderate AD; JAK safety warnings still apply</td></tr>
+<tr><td>Upadacitinib, abrocitinib</td><td>Oral JAK inhibitors</td><td>Moderate–severe refractory disease; serious infection, thrombosis, malignancy, MACE, lab abnormalities</td></tr>
+<tr><td>Dupilumab</td><td>Injectable mAb (blocks IL-4/IL-13 via IL-4Rα)</td><td>Moderate–severe AD; injection-site reactions, conjunctivitis/keratitis</td></tr>
+</table>
+</div>
+
+<h3 id="q1">Practice Questions — Principles &amp; Anti-inflammatory</h3>
+
+<div class="quiz-q" data-explain="Thin skin (face, eyelids, folds, genitals) absorbs the most topical medication and carries the highest toxicity risk with potent agents — the opposite of palms/soles, which are thick and absorb less.">
+<p class="qtext"><b>Q1.</b> Which body site combination carries the HIGHEST risk of local toxicity from a potent topical corticosteroid?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Palms and soles</button>
+<button class="opt" onclick="answerQ(this,true)">B. Face and skin folds</button>
+<button class="opt" onclick="answerQ(this,false)">C. Thick plaques on the elbow</button>
+<button class="opt" onclick="answerQ(this,false)">D. Scalp with thick scale</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Tacrolimus/pimecrolimus are steroid-sparing precisely because they do NOT cause corticosteroid-induced skin atrophy — their main downside is local burning/stinging and a boxed malignancy warning.">
+<p class="qtext"><b>Q2.</b> A patient with atopic dermatitis on the eyelids has developed skin thinning from chronic topical corticosteroid use. Which class of agent is steroid-sparing and does NOT cause skin atrophy?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. High-potency topical corticosteroids</button>
+<button class="opt" onclick="answerQ(this,true)">B. Topical calcineurin inhibitors (tacrolimus/pimecrolimus)</button>
+<button class="opt" onclick="answerQ(this,false)">C. Oral prednisone</button>
+<button class="opt" onclick="answerQ(this,false)">D. Topical fluorouracil</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Ointments are the most occlusive vehicle — they trap moisture, hydrate the stratum corneum, and increase drug penetration, making them ideal for dry/thick/scaly lesions, though they are greasy and less cosmetically acceptable.">
+<p class="qtext"><b>Q3.</b> Which vehicle is most occlusive and best suited for dry, thick, lichenified lesions?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Gel</button>
+<button class="opt" onclick="answerQ(this,false)">B. Lotion</button>
+<button class="opt" onclick="answerQ(this,true)">C. Ointment</button>
+<button class="opt" onclick="answerQ(this,false)">D. Foam</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Tacrolimus and pimecrolimus carry a boxed warning for possible malignancy risk (lymphoma, skin cancer), so patients should minimize unnecessary UV exposure and use sun protection.">
+<p class="qtext"><b>Q4.</b> Which safety warning applies specifically to topical calcineurin inhibitors?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Hypothalamic-pituitary-adrenal axis suppression</button>
+<button class="opt" onclick="answerQ(this,true)">B. Boxed warning for possible malignancy risk</button>
+<button class="opt" onclick="answerQ(this,false)">C. QT prolongation</button>
+<button class="opt" onclick="answerQ(this,false)">D. Hepatotoxicity requiring LFT monitoring</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<h2 class="section" id="antiinfective">Part 2b: Anti-infective &amp; Antiparasitic Therapies</h2>
+<p>Framework: (1) identify likely cause (bacterial/fungal/viral/parasitic) → (2) topical vs. systemic (localized/superficial = topical; deep/widespread/recurrent/nail-hair = systemic) → (3) organism-specific issues (MRSA coverage? dermatophyte vs. Candida?).</p>
+
+<h3>Bacterial Skin Infections</h3>
+<p>Usually gram-positive: <i>S. aureus</i>, <i>S. pyogenes</i>.</p>
+<div class="core">
+<h4>Mupirocin <span class="tag">CORE</span></h4>
+<p><b>Role:</b> Core topical agent for localized infections (impetigo); also used for S. aureus/MRSA decolonization. Inhibits bacterial protein synthesis, active mainly vs. gram-positive organisms.</p>
+<p><b>AEs:</b> local irritation. Stewardship: prolonged/unnecessary use → resistance.</p>
+</div>
+<div class="core">
+<h4>Oral Antibiotic Logic <span class="tag">CORE CONCEPT</span></h4>
+<ul>
+  <li><b>Non-purulent cellulitis</b> → strep coverage → <b>cephalexin</b> (β-lactam) is the common outpatient example</li>
+  <li><b>Suspected MRSA</b> (purulence, abscess, prior MRSA, penetrating trauma) → TMP-SMX, doxycycline, or clindamycin</li>
+</ul>
+</div>
+<div class="recognize"><h4>Recognize &amp; Associate</h4><p><b>Bacitracin / polymyxin B / neomycin</b> — OTC topical antibiotics; key concern is allergic contact dermatitis (esp. neomycin/bacitracin); not substitutes for systemic therapy when infection is deeper/spreading.</p></div>
+
+<h3>Fungal Skin &amp; Nail Infections</h3>
+<table>
+<tr><th>Organism</th><th>Pattern</th><th>Examples</th></tr>
+<tr><td>Dermatophytes</td><td>Infect keratinized tissue: skin, hair, nails</td><td>Tinea pedis/corporis/cruris/capitis, onychomycosis</td></tr>
+<tr><td>Candida</td><td>Yeast; moist areas, folds, mucosa</td><td>Intertrigo, diaper dermatitis, thrush, vulvovaginal candidiasis</td></tr>
+</table>
+<div class="core">
+<h4>Azoles (as a class) <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Inhibit fungal ergosterol synthesis. <b>Use:</b> dermatophytes and Candida.</p>
+<p><b>Topical:</b> clotrimazole, miconazole, ketoconazole → local irritation. <b>Systemic:</b> fluconazole, itraconazole → hepatotoxicity, QT prolongation, CYP3A4 interactions.</p>
+</div>
+<div class="core">
+<h4>Terbinafine <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Inhibits squalene epoxidase (different target than azoles). Especially useful for <b>dermatophytes</b>.</p>
+<p><b>Topical:</b> localized tinea. <b>Oral:</b> onychomycosis (nail has to grow out — ~6 wks fingernails, ~12 wks toenails).</p>
+<p><b>Major AE:</b> hepatotoxicity (oral) — avoid in active liver disease; LFT monitoring with prolonged therapy.</p>
+</div>
+<div class="core">
+<h4>Nystatin <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Binds ergosterol, disrupts fungal cell membrane. <b>Use:</b> localized <b>Candida</b> infections only — intertrigo, diaper dermatitis, VVC, oral thrush. Minimal systemic absorption.</p>
+<p><b>Does NOT treat dermatophytes</b> or systemic fungal infections.</p>
+</div>
+<div class="recognize"><h4>Recognize &amp; Associate</h4>
+<table>
+<tr><td>Ciclopirox, efinaconazole, tavaborole</td><td>Topical onychomycosis options — lower cure rates than oral, used when systemic not appropriate</td></tr>
+<tr><td>Griseofulvin</td><td>Older oral option for dermatophytes, esp. tinea capitis; not active against Candida</td></tr>
+</table>
+</div>
+
+<h3>Viral Skin Infections</h3>
+<div class="core">
+<h4>Acyclovir &amp; Valacyclovir <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Nucleoside analogs → inhibit viral DNA replication; require activation by <b>viral thymidine kinase</b> (concentrates activity in infected cells, limits toxicity to uninfected cells).</p>
+<p><b>Use:</b> HSV (oral/genital herpes) and VZV (varicella, herpes zoster). Most effective when <b>started early</b> (prodrome). Do not eradicate latent virus.</p>
+<p><b>Acyclovir:</b> topical/oral/IV — topical has limited benefit (mild herpes labialis only). AEs: GI upset, headache; nephrotoxicity risk with dehydration/high dose/renal impairment.</p>
+<p><b>Valacyclovir:</b> prodrug of acyclovir, better oral bioavailability, less frequent dosing; similar AEs; renal dose adjustment may be needed.</p>
+<p><b>Oral therapy preferred for:</b> genital herpes, recurrent disease, herpes zoster, severe disease, immunocompromised patients.</p>
+</div>
+
+<h3>Ectoparasiticides</h3>
+<div class="core">
+<h4>Permethrin <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Topical neurotoxic agent — disrupts sodium channel function → paralysis/death of parasite.</p>
+<p><b>Use:</b> First-line for <b>scabies</b> (5% cream, applied to body, left on several hours before washing); also used for <b>lice</b> (1% product on hair/scalp).</p>
+<p><b>AEs:</b> local burning/stinging/itching/irritation. Generally preferred in young children and pregnancy vs. many alternatives.</p>
+</div>
+<div class="core">
+<h4>Ivermectin <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Increases chloride influx through parasite channels → paralysis/death.</p>
+<p><b>Topical:</b> head lice. <b>Oral:</b> severe/crusted/refractory/outbreak-associated scabies.</p>
+<p><b>AEs:</b> pruritus, rash, dizziness, headache, GI symptoms. Oral use not established safe in pregnancy/very small children — generally avoided.</p>
+</div>
+<div class="callout"><b>Treatment "failure" pearl:</b> apparent failure often ≠ ineffective drug — think incorrect application, failure to repeat treatment, reinfection from untreated contact, or inadequate environmental measures. Pruritus can persist after parasites are killed.</div>
+<div class="recognize"><h4>Recognize &amp; Associate</h4><p><b>Spinosad</b> (neuronal hyperexcitation, effective without nit combing) and <b>malathion</b> (organophosphate AChE inhibitor, flammable) — both for head lice.</p></div>
+
+<h3>Seborrheic Dermatitis</h3>
+<div class="callout">Malassezia-associated <i>inflammatory</i> condition (not invasive fungal infection). Affects scalp (dandruff), face, eyebrows, nasolabial folds, ears, chest.</div>
+<div class="recognize"><h4>Recognize &amp; Associate</h4>
+<p><b>Ketoconazole</b> (shampoo/cream), <b>selenium sulfide</b> (may discolor light/treated hair), <b>zinc pyrithione</b> — anti-yeast agents; more inflamed flares may add a short course of low-potency topical corticosteroid or calcineurin inhibitor.</p>
+</div>
+
+<h3 id="q2">Practice Questions — Anti-infective &amp; Antiparasitic</h3>
+
+<div class="quiz-q" data-explain="Nystatin binds ergosterol and disrupts the fungal cell membrane but is only useful for localized Candida infections — it does not treat dermatophytes (tinea) and is not used for systemic fungal disease.">
+<p class="qtext"><b>Q5.</b> A patient has diaper dermatitis with satellite lesions consistent with Candida. Which topical agent is appropriate but would NOT work for tinea corporis?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Terbinafine</button>
+<button class="opt" onclick="answerQ(this,true)">B. Nystatin</button>
+<button class="opt" onclick="answerQ(this,false)">C. Griseofulvin</button>
+<button class="opt" onclick="answerQ(this,false)">D. Ciclopirox</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Acyclovir and valacyclovir are nucleoside analogs that require phosphorylation (activation) by viral thymidine kinase, which concentrates the active drug in infected cells and limits toxicity to uninfected host cells.">
+<p class="qtext"><b>Q6.</b> Acyclovir requires activation by which enzyme to selectively concentrate its effect in infected cells?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Host cell DNA polymerase</button>
+<button class="opt" onclick="answerQ(this,true)">B. Viral thymidine kinase</button>
+<button class="opt" onclick="answerQ(this,false)">C. Squalene epoxidase</button>
+<button class="opt" onclick="answerQ(this,false)">D. Cytochrome P450 3A4</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Permethrin 5% cream is first-line for scabies and is generally preferred (over many alternatives) in young children and pregnancy given its favorable safety profile.">
+<p class="qtext"><b>Q7.</b> A pregnant patient is diagnosed with scabies. Which agent is generally preferred?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Oral ivermectin</button>
+<button class="opt" onclick="answerQ(this,true)">B. Topical permethrin</button>
+<button class="opt" onclick="answerQ(this,false)">C. Malathion</button>
+<button class="opt" onclick="answerQ(this,false)">D. Oral griseofulvin</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Non-purulent cellulitis is generally treated with a β-lactam like cephalexin for streptococcal coverage; MRSA coverage (TMP-SMX, doxycycline, clindamycin) is reserved for purulent infection, abscess, prior MRSA history, or penetrating trauma.">
+<p class="qtext"><b>Q8.</b> A patient presents with non-purulent cellulitis and no risk factors for MRSA. What is the most appropriate oral antibiotic choice?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,true)">A. Cephalexin</button>
+<button class="opt" onclick="answerQ(this,false)">B. TMP-SMX</button>
+<button class="opt" onclick="answerQ(this,false)">C. Fluconazole</button>
+<button class="opt" onclick="answerQ(this,false)">D. Valacyclovir</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<h2 class="section" id="acne">Part 3a: Acne &amp; Rosacea Therapies</h2>
+<p>Acne vulgaris driven by: follicular plugging, ↑ sebum, <i>C. acnes</i>, and inflammation → combination therapy targets different parts of the process.</p>
+
+<div class="core">
+<h4>Benzoyl Peroxide <span class="tag">CORE</span></h4>
+<p><b>Role:</b> mild–moderate (esp. inflammatory) acne. Reduces <i>C. acnes</i>, mild anti-inflammatory + mild keratolytic effect. <b>Does not promote antibiotic resistance</b> — often combined with topical antibiotics to reduce resistance development.</p>
+<p><b>AEs:</b> irritation, dryness, redness, peeling, burning; <b>bleaches fabric/hair</b> — counsel patients.</p>
+</div>
+
+<div class="core">
+<h4>Topical Retinoids — tretinoin, adapalene, tazarotene <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Vitamin A derivatives — normalize follicular keratinization, ↓ comedone formation, prevent new lesions ("foundational" for follicular plugging).</p>
+<p><b>AEs:</b> dryness, peeling, erythema, burning/stinging, photosensitivity (worst early in treatment — start gradually, moisturize, apply at night, sunscreen by day).</p>
+<p><b>Pregnancy:</b> generally avoided; <b>tazarotene has the strongest pregnancy-related contraindication.</b></p>
+</div>
+
+<div class="core">
+<h4>Topical Antibiotics — clindamycin, erythromycin <span class="tag">CORE</span></h4>
+<p><b>Role:</b> inflammatory acne — ↓ <i>C. acnes</i> + anti-inflammatory. <b>Never use as monotherapy</b> (resistance risk) — combine with benzoyl peroxide.</p>
+<p><b>AEs:</b> local irritation, dryness, rarely allergic dermatitis.</p>
+</div>
+
+<div class="core">
+<h4>Oral Tetracyclines — doxycycline, minocycline <span class="tag">CORE</span></h4>
+<p><b>Role:</b> moderate/more inflammatory acne when topical alone is insufficient — systemic anti-inflammatory + antibacterial. Used for a <b>limited course</b>, not indefinite therapy; continue topical therapy alongside.</p>
+<p><b>AEs:</b> GI upset, photosensitivity (esp. doxycycline).</p>
+<p><b>Avoid in:</b> pregnancy, young children (teeth/bone effects).</p>
+<p><b>Key interaction:</b> do <b>not</b> combine with isotretinoin → intracranial hypertension risk.</p>
+</div>
+
+<div class="core">
+<h4>Isotretinoin <span class="tag">CORE</span></h4>
+<p><b>Role:</b> severe nodulocystic/scarring acne or acne refractory to other therapy — the most comprehensive agent (hits multiple pathways: ↓ sebum, ↓ follicular plugging, ↓ <i>C. acnes</i>, ↓ inflammation).</p>
+<p><b>AEs:</b> mucocutaneous — dry lips/skin/eyes, epistaxis (most common). More serious: hypertriglyceridemia, hepatotoxicity, musculoskeletal symptoms, mood-related concerns, intracranial hypertension (esp. with tetracyclines).</p>
+<p><b>Most important issue: teratogenicity</b> — severe birth defects; tightly regulated via <b>iPLEDGE</b> program; pregnancy testing/contraception counseling required. Monitor lipids and LFTs.</p>
+</div>
+
+<div class="recognize"><h4>Recognize &amp; Associate — Additional Acne/Rosacea Agents</h4>
+<table>
+<tr><th>Agent</th><th>Use</th><th>Key point</th></tr>
+<tr><td>Azelaic acid</td><td>Mild acne + papulopustular rosacea</td><td>Anti-inflammatory/antibacterial/comedolytic; may help PIH; local burning/stinging</td></tr>
+<tr><td>Topical metronidazole</td><td>Papulopustular rosacea</td><td>Anti-inflammatory — ↓ papules/pustules</td></tr>
+<tr><td>Topical ivermectin</td><td>Papulopustular rosacea</td><td>Anti-inflammatory + anti-Demodex (distinct from its use as an ectoparasiticide)</td></tr>
+<tr><td>Sodium sulfacetamide</td><td>Acne and rosacea</td><td>Antibacterial + anti-inflammatory; avoid with sulfa allergy</td></tr>
+<tr><td>Dapsone (topical)</td><td>Inflammatory acne</td><td>Anti-inflammatory effect > antibacterial; can cause orange-brown discoloration if combined with benzoyl peroxide</td></tr>
+<tr><td>Spironolactone</td><td>Hormonally influenced acne (off-label)</td><td>Blocks androgen receptor; hyperkalemia, menstrual irregularities, breast tenderness; avoid in pregnancy</td></tr>
+<tr><td>Combined oral contraceptives</td><td>Hormonally influenced acne</td><td>↓ ovarian androgen production, ↑ SHBG; slow onset (weeks–months); thromboembolic risk, migraine with aura, smoking &gt;35, CV risk factors</td></tr>
+</table>
+<p><i>Hormonal pattern clues:</i> cyclic flares around menses, adult-persistent acne, jawline/chin/neck distribution.</p>
+</div>
+
+<h3 id="q3">Practice Questions — Acne &amp; Rosacea</h3>
+
+<div class="quiz-q" data-explain="Combining doxycycline (or any tetracycline) with isotretinoin significantly raises the risk of intracranial hypertension (pseudotumor cerebri) — this combination should be avoided.">
+<p class="qtext"><b>Q9.</b> A patient on isotretinoin for severe nodulocystic acne is also prescribed doxycycline for a sinus infection. What is the major concern?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Increased risk of photosensitivity only</button>
+<button class="opt" onclick="answerQ(this,true)">B. Increased risk of intracranial hypertension</button>
+<button class="opt" onclick="answerQ(this,false)">C. Decreased efficacy of isotretinoin</button>
+<button class="opt" onclick="answerQ(this,false)">D. Increased risk of hyperkalemia</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Isotretinoin is highly teratogenic and is tightly regulated through the iPLEDGE program, which requires pregnancy testing and contraception counseling for patients who can become pregnant.">
+<p class="qtext"><b>Q10.</b> Which regulatory program governs the use of isotretinoin due to its teratogenic risk?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. REMS for JAK inhibitors</button>
+<button class="opt" onclick="answerQ(this,true)">B. iPLEDGE</button>
+<button class="opt" onclick="answerQ(this,false)">C. FDA Black Box registry</button>
+<button class="opt" onclick="answerQ(this,false)">D. DEA Schedule II monitoring</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Benzoyl peroxide does not promote antibiotic resistance, which is exactly why it's combined with topical antibiotics like clindamycin — the combination reduces the development of resistant C. acnes.">
+<p class="qtext"><b>Q11.</b> Why is benzoyl peroxide commonly combined with topical clindamycin in acne treatment?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Benzoyl peroxide enhances retinoid absorption</button>
+<button class="opt" onclick="answerQ(this,true)">B. Benzoyl peroxide does not promote resistance and reduces resistance risk when paired with an antibiotic</button>
+<button class="opt" onclick="answerQ(this,false)">C. Benzoyl peroxide treats hormonal acne</button>
+<button class="opt" onclick="answerQ(this,false)">D. Benzoyl peroxide prevents photosensitivity</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Spironolactone is used off-label for hormonally influenced acne by blocking androgen effects at the receptor; key risks include hyperkalemia, menstrual irregularities, breast tenderness, and it should be avoided in pregnancy.">
+<p class="qtext"><b>Q12.</b> A 28-year-old woman has acne along the jawline that worsens cyclically around menses. Which agent works by blocking androgen receptor effects?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Isotretinoin</button>
+<button class="opt" onclick="answerQ(this,false)">B. Doxycycline</button>
+<button class="opt" onclick="answerQ(this,true)">C. Spironolactone</button>
+<button class="opt" onclick="answerQ(this,false)">D. Azelaic acid</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<h2 class="section" id="psoriasis">Part 3b: Immunomodulatory Psoriasis Therapies</h2>
+<p>Chronic, relapsing immune-mediated disease. Treatment escalates: topical → phototherapy → traditional systemic → biologic, based on severity/extent/psoriatic arthritis.</p>
+
+<div class="core">
+<h4>Topical Corticosteroids (Psoriasis) <span class="tag">CORE</span></h4>
+<p>First-line for localized plaque psoriasis — same potency-matching principles as above. Major concern: skin atrophy/systemic absorption with prolonged/high-potency/large-area use.</p>
+</div>
+
+<div class="core">
+<h4>Vitamin D Analogs — calcipotriene, calcitriol <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Regulate keratinocyte proliferation/differentiation (psoriasis = excess keratinocyte turnover). <b>Steroid-sparing</b> — often combined with topical corticosteroids.</p>
+<p><b>AEs:</b> local irritation/burning; hypercalcemia rare, but possible with excessive use over large areas.</p>
+</div>
+
+<div class="core">
+<h4>Methotrexate <span class="tag">CORE</span></h4>
+<p><b>Role:</b> moderate–severe psoriasis, also relevant with <b>psoriatic arthritis</b> (helps skin + joints). Reduces immune/inflammatory activity.</p>
+<p><b>AEs:</b> hepatotoxicity, myelosuppression, mucositis, pulmonary toxicity, teratogenicity.</p>
+<p><b>Monitoring:</b> LFTs, CBC. <b>Folic acid supplementation</b> reduces toxicity.</p>
+</div>
+
+<div class="core">
+<h4>Cyclosporine <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Calcineurin inhibitor → ↓ T-cell activation (systemic — potent immunosuppression).</p>
+<p><b>Role:</b> severe/refractory/rapidly progressive psoriasis — short-term disease control; not preferred for long-term maintenance due to toxicity.</p>
+<p><b>AEs:</b> nephrotoxicity, hypertension, ↑ infection risk, drug interactions.</p>
+</div>
+
+<div class="core">
+<h4>Biologic Classes <span class="tag">CORE</span></h4>
+<table>
+<tr><th>Class</th><th>Target</th><th>Representative agents</th><th>Key safety point</th></tr>
+<tr><td>TNF inhibitors</td><td>TNF-α</td><td>Adalimumab, etanercept, infliximab</td><td>Serious infection risk, latent TB reactivation</td></tr>
+<tr><td>IL-17 inhibitors</td><td>IL-17 (keratinocyte activation, neutrophil recruitment)</td><td>Secukinumab, ixekizumab</td><td>↑ mucocutaneous Candida infections (IL-17 needed for mucosal antifungal defense)</td></tr>
+<tr><td>IL-23 inhibitors</td><td>IL-23 (maintains Th17 cells)</td><td>Guselkumab, risankizumab</td><td>Moderate–severe plaque psoriasis</td></tr>
+<tr><td>IL-12/23 inhibitor</td><td>Shared p40 subunit</td><td>Ustekinumab</td><td>Blocks both IL-12 and IL-23 pathways</td></tr>
+</table>
+<p><b>Universal biologic safety themes:</b> screen for latent infection, monitor for serious infections, avoid live vaccines, select based on severity/comorbidities/prior response.</p>
+</div>
+
+<div class="recognize"><h4>Recognize &amp; Associate — Additional Psoriasis Therapies</h4>
+<table>
+<tr><th>Agent</th><th>Route/class</th><th>Key point</th></tr>
+<tr><td>Tazarotene</td><td>Topical retinoid</td><td>Irritating; avoid in pregnancy</td></tr>
+<tr><td>Acitretin</td><td>Oral retinoid</td><td>Severe forms (pustular psoriasis, erythrodermic psoriasis); highly teratogenic with prolonged pregnancy-avoidance window</td></tr>
+<tr><td>Apremilast</td><td>Oral PDE-4 inhibitor</td><td>Not broadly immunosuppressive; GI upset, weight loss, mood-related concerns</td></tr>
+<tr><td>Roflumilast</td><td>Topical PDE-4 inhibitor</td><td>Steroid-free option, incl. intertriginous areas</td></tr>
+<tr><td>Tapinarof</td><td>Topical aryl hydrocarbon receptor modulator</td><td>Steroid-free; folliculitis, contact dermatitis, local irritation</td></tr>
+<tr><td>PUVA/phototherapy</td><td>Light-based (non-drug)</td><td>Useful for extensive disease; long-term risk: photoaging, cataracts, skin cancer</td></tr>
+</table>
+</div>
+
+<h3 id="q4">Practice Questions — Immunomodulatory Psoriasis</h3>
+
+<div class="quiz-q" data-explain="IL-17 is important for mucosal antifungal defense, so IL-17 inhibitors (secukinumab, ixekizumab) carry a distinctive increased risk of mucocutaneous Candida infections compared with other biologic classes.">
+<p class="qtext"><b>Q13.</b> A patient on secukinumab for plaque psoriasis develops recurrent oral thrush. Which biologic class is most associated with this risk?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. TNF inhibitors</button>
+<button class="opt" onclick="answerQ(this,true)">B. IL-17 inhibitors</button>
+<button class="opt" onclick="answerQ(this,false)">C. IL-23 inhibitors</button>
+<button class="opt" onclick="answerQ(this,false)">D. IL-12/23 inhibitors</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Methotrexate requires monitoring of CBC and liver function tests due to risks of myelosuppression and hepatotoxicity; folic acid supplementation is used to reduce toxicity.">
+<p class="qtext"><b>Q14.</b> Which monitoring labs are most important for a patient starting methotrexate for moderate-to-severe psoriasis?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Lipid panel and TSH</button>
+<button class="opt" onclick="answerQ(this,true)">B. CBC and liver function tests</button>
+<button class="opt" onclick="answerQ(this,false)">C. QT interval on ECG</button>
+<button class="opt" onclick="answerQ(this,false)">D. Serum potassium</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Vitamin D analogs like calcipotriene and calcitriol help regulate keratinocyte proliferation and differentiation, addressing the excessive keratinocyte turnover seen in psoriasis — they are steroid-sparing and often combined with topical corticosteroids.">
+<p class="qtext"><b>Q15.</b> Calcipotriene's main mechanism in treating plaque psoriasis is:</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Blocking TNF-alpha</button>
+<button class="opt" onclick="answerQ(this,false)">B. Inhibiting calcineurin in T cells</button>
+<button class="opt" onclick="answerQ(this,true)">C. Regulating keratinocyte proliferation and differentiation</button>
+<button class="opt" onclick="answerQ(this,false)">D. Inhibiting bacterial protein synthesis</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<h2 class="section" id="abnormal">Part 4: Abnormal Tissue–Directed Therapies</h2>
+<p>Goal here is not anti-inflammatory/anti-infective — it's to <b>soften, remove, destroy, or modify abnormal tissue</b> (hyperkeratotic lesions, warts, actinic keratoses, selected skin-cancer-related conditions). Local irritation/inflammation is often an <i>expected part of treatment</i>, not a sign of failure or allergy.</p>
+
+<div class="core">
+<h4>Salicylic Acid <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Keratolytic — breaks down/softens keratin, promotes shedding of thickened stratum corneum. Effect is concentration-dependent (lower = keratolysis/exfoliation; higher = more destructive to wart tissue).</p>
+<p><b>Use:</b> hyperkeratotic lesions (calluses, corns, scale) and common warts; also in some OTC acne products.</p>
+<p><b>AEs:</b> local irritation, burning, peeling, maceration. <b>Systemic risk:</b> salicylate toxicity with excessive use, large areas, occlusion, damaged skin, or in children.</p>
+</div>
+
+<div class="core">
+<h4>Topical Fluorouracil (5-FU) <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Pyrimidine analog — interferes with DNA/RNA synthesis, greatest effect on rapidly proliferating abnormal cells.</p>
+<p><b>Use:</b> most commonly <b>actinic keratosis</b>; may be used in selected superficial BCC under specialist direction.</p>
+<p><b>Counseling point:</b> visible inflammation (erythema, burning, crusting, erosion, pain, peeling) is <b>expected</b> — not an allergic reaction or worsening disease. Sun protection important during therapy.</p>
+</div>
+
+<div class="core">
+<h4>Imiquimod <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Immune response modifier — stimulates local innate immune signaling (interferon and other cytokines) rather than directly destroying tissue.</p>
+<p><b>Use:</b> external genital warts, actinic keratosis, superficial BCC.</p>
+<p><b>AEs:</b> local inflammatory reactions (erythema, itching, burning, erosion, crusting, flaking — part of the therapeutic effect); systemic flu-like symptoms possible but less common.</p>
+</div>
+
+<div class="core">
+<h4>Podofilox &amp; Podophyllum <span class="tag">CORE</span></h4>
+<p><b>MOA:</b> Antimitotic agents — interfere with microtubule function, inhibit mitosis, cause local tissue necrosis.</p>
+<p><b>Use:</b> anogenital warts. <b>Podofilox</b> = purified, patient-applied formulation. <b>Podophyllum resin</b> = older, less standardized, <b>more toxic</b> systemically.</p>
+<p><b>AEs:</b> local pain, burning, inflammation, erosion, ulceration. <b>Avoid in pregnancy.</b></p>
+</div>
+
+<div class="recognize"><h4>Recognize &amp; Associate — Additional Abnormal Tissue–Directed Agents</h4>
+<table>
+<tr><th>Agent</th><th>Use</th><th>Key point</th></tr>
+<tr><td>Urea</td><td>Very dry skin, calluses, keratosis pilaris, thickened plaques</td><td>Keratolytic + humectant (hydrates while softening keratin)</td></tr>
+<tr><td>Topical diclofenac</td><td>Actinic keratosis</td><td>NSAID; slower, less inflammatory option than 5-FU/imiquimod</td></tr>
+<tr><td>Aminolevulinic acid (ALA) + photodynamic therapy</td><td>Actinic keratosis</td><td>ALA taken up by abnormal cells; light activation generates reactive oxygen species; strict light avoidance needed after (photosensitivity)</td></tr>
+<tr><td>Vismodegib, sonidegib (Hedgehog pathway inhibitors)</td><td>Advanced/metastatic BCC not appropriate for surgery/radiation</td><td>Oral targeted therapy — NOT for routine benign lesions; AEs: muscle spasms, taste changes, alopecia, fatigue, teratogenicity</td></tr>
+</table>
+</div>
+
+<h3 id="q5">Practice Questions — Abnormal Tissue–Directed Therapies</h3>
+
+<div class="quiz-q" data-explain="Visible local inflammation (erythema, burning, crusting, erosion, pain, peeling) is an expected part of topical fluorouracil treatment for actinic keratosis, as the drug targets rapidly proliferating abnormal keratinocytes — it does not indicate allergy or treatment failure.">
+<p class="qtext"><b>Q16.</b> A patient using topical fluorouracil for actinic keratoses calls concerned about redness, crusting, and burning at the treatment site. What should you counsel them?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. This indicates an allergic reaction — stop the medication immediately</button>
+<button class="opt" onclick="answerQ(this,true)">B. This visible inflammation is an expected part of the treatment effect</button>
+<button class="opt" onclick="answerQ(this,false)">C. This means the actinic keratoses are progressing to melanoma</button>
+<button class="opt" onclick="answerQ(this,false)">D. This is unrelated to the medication</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Imiquimod is an immune response modifier that stimulates local innate immune signaling (interferon and other cytokines) rather than directly destroying tissue like a caustic or cytotoxic agent.">
+<p class="qtext"><b>Q17.</b> Unlike salicylic acid or podofilox, imiquimod works primarily by:</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Directly softening keratin</button>
+<button class="opt" onclick="answerQ(this,false)">B. Inhibiting microtubule function and mitosis</button>
+<button class="opt" onclick="answerQ(this,true)">C. Stimulating local innate immune signaling</button>
+<button class="opt" onclick="answerQ(this,false)">D. Interfering with DNA/RNA synthesis</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Podophyllum resin is the older, less standardized formulation with greater systemic toxicity risk compared to the purified, patient-applied podofilox — both are antimitotic agents used for anogenital warts and should be avoided in pregnancy.">
+<p class="qtext"><b>Q18.</b> Which statement correctly distinguishes podofilox from podophyllum resin?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Podofilox is older and more toxic than podophyllum resin</button>
+<button class="opt" onclick="answerQ(this,true)">B. Podophyllum resin is older, less standardized, and has greater systemic toxicity risk than podofilox</button>
+<button class="opt" onclick="answerQ(this,false)">C. Podofilox is safe in pregnancy while podophyllum resin is not</button>
+<button class="opt" onclick="answerQ(this,false)">D. They have completely different mechanisms of action</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Excessive use of salicylic acid — especially over large areas, under occlusion, on damaged skin, or in children — can cause systemic salicylate toxicity, in addition to expected local irritation, burning, and maceration.">
+<p class="qtext"><b>Q19.</b> A parent applies a high-concentration salicylic acid wart remover over a large area of a young child's skin under an occlusive bandage. What systemic risk should you be most concerned about?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Hepatotoxicity</button>
+<button class="opt" onclick="answerQ(this,false)">B. Nephrotoxicity</button>
+<button class="opt" onclick="answerQ(this,true)">C. Salicylate toxicity</button>
+<button class="opt" onclick="answerQ(this,false)">D. Adrenal suppression</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<div class="quiz-q" data-explain="Hedgehog pathway inhibitors (vismodegib, sonidegib) are oral targeted therapies reserved for advanced or metastatic basal cell carcinoma not appropriate for surgery/radiation — not for routine benign lesions. Key AEs: muscle spasms, taste changes, alopecia, teratogenicity.">
+<p class="qtext"><b>Q20.</b> Vismodegib and sonidegib are used for which condition?</p>
+<div class="options">
+<button class="opt" onclick="answerQ(this,false)">A. Routine actinic keratosis</button>
+<button class="opt" onclick="answerQ(this,false)">B. Common warts</button>
+<button class="opt" onclick="answerQ(this,true)">C. Advanced basal cell carcinoma not appropriate for surgery/radiation</button>
+<button class="opt" onclick="answerQ(this,false)">D. Mild-to-moderate atopic dermatitis</button>
+</div>
+<p class="feedback"></p>
+</div>
+
+<h2 class="section" id="integration">Clinical Integration Framework</h2>
+<div class="callout">
+<b>Five questions for every dermatology pharmacology case:</b>
+<ol>
+  <li><b>What is the skin problem?</b> Inflammatory, infectious, acneiform, immune-mediated, or abnormal tissue growth?</li>
+  <li><b>Local or systemic?</b> Localized/superficial → topical first. Severe/widespread/deep/refractory/nail-hair/systemic → may need systemic therapy.</li>
+  <li><b>Where is it applied?</b> Face/folds/genitals vs. thick plaques/palms/soles/scalp — changes absorption &amp; toxicity risk.</li>
+  <li><b>How long is treatment needed?</b> Short flare control vs. prolonged maintenance vs. long-term systemic therapy.</li>
+  <li><b>What safety issue matters most?</b> Irritation, atrophy, pregnancy risk, infection risk, organ toxicity, drug interactions, photosensitivity, monitoring.</li>
+</ol>
+<b>Clinical theme:</b> match the drug to the condition, the route to the severity, and the safety concern to the patient.
+</div>
+
+<h2 class="section" id="hiyield">High-Yield Organizer Table</h2>
+<table>
+<tr><th>Drug (Core = red on slides)</th><th>Class/MOA</th><th>Main use</th><th>#1 thing to remember</th></tr>
+<tr><td>Hydrocortisone → clobetasol</td><td>Topical corticosteroid (low→super-high potency)</td><td>Inflammatory dermatoses, psoriasis flares</td><td>Match potency to site/severity; skin atrophy w/ overuse</td></tr>
+<tr><td>Tacrolimus/pimecrolimus</td><td>Topical calcineurin inhibitor</td><td>Steroid-sparing AD, sensitive areas</td><td>No atrophy, but boxed malignancy warning</td></tr>
+<tr><td>Mupirocin</td><td>Topical antibacterial</td><td>Impetigo, MRSA decolonization</td><td>Gram-positive only; resistance w/ overuse</td></tr>
+<tr><td>Cephalexin / TMP-SMX,doxy,clinda</td><td>Systemic antibiotics</td><td>Non-purulent cellulitis / MRSA coverage</td><td>Purulence/abscess = think MRSA coverage</td></tr>
+<tr><td>Azoles (clotrimazole→fluconazole)</td><td>Inhibit ergosterol synthesis</td><td>Dermatophytes + Candida</td><td>Systemic azoles: hepatotox, QT, CYP interactions</td></tr>
+<tr><td>Terbinafine</td><td>Inhibits squalene epoxidase</td><td>Dermatophytes; oral for onychomycosis</td><td>Oral = hepatotoxicity</td></tr>
+<tr><td>Nystatin</td><td>Binds ergosterol</td><td>Localized Candida only</td><td>NOT for dermatophytes/systemic</td></tr>
+<tr><td>Acyclovir/valacyclovir</td><td>Nucleoside analog (needs viral TK)</td><td>HSV/VZV</td><td>Start early; nephrotoxicity risk</td></tr>
+<tr><td>Permethrin</td><td>Na⁺ channel neurotoxin</td><td>Scabies (1st line), lice</td><td>Preferred in pregnancy/young children</td></tr>
+<tr><td>Ivermectin</td><td>↑ Cl⁻ influx in parasites</td><td>Topical = lice; oral = severe scabies</td><td>Avoid oral in pregnancy/small children</td></tr>
+<tr><td>Benzoyl peroxide</td><td>Antibacterial/keratolytic</td><td>C. acnes + inflammation</td><td>No resistance; bleaches fabric</td></tr>
+<tr><td>Tretinoin/adapalene/tazarotene</td><td>Topical retinoid</td><td>Comedonal acne</td><td>Avoid pregnancy (tazarotene strongest)</td></tr>
+<tr><td>Clindamycin/erythromycin (topical)</td><td>Topical antibiotic</td><td>Inflammatory acne</td><td>Never monotherapy — pair w/ BPO</td></tr>
+<tr><td>Doxycycline/minocycline</td><td>Oral tetracycline</td><td>Moderate inflammatory acne</td><td>Never combine w/ isotretinoin (↑ICP)</td></tr>
+<tr><td>Isotretinoin</td><td>Oral retinoid, multi-pathway</td><td>Severe nodulocystic acne</td><td>Teratogenic → iPLEDGE; monitor lipids/LFTs</td></tr>
+<tr><td>Calcipotriene/calcitriol</td><td>Vitamin D analog</td><td>Steroid-sparing plaque psoriasis</td><td>Regulates keratinocyte turnover</td></tr>
+<tr><td>Methotrexate</td><td>Immunosuppressant</td><td>Moderate–severe psoriasis + PsA</td><td>Hepatotox/myelosuppression; folic acid helps</td></tr>
+<tr><td>Cyclosporine</td><td>Calcineurin inhibitor (systemic)</td><td>Severe/refractory psoriasis, short-term</td><td>Nephrotoxicity, HTN</td></tr>
+<tr><td>TNF/IL-17/IL-23/IL-12-23 inhibitors</td><td>Biologics</td><td>Moderate–severe psoriasis</td><td>IL-17 → Candida risk; screen for latent infection</td></tr>
+<tr><td>Salicylic acid</td><td>Keratolytic</td><td>Warts, hyperkeratotic lesions</td><td>Salicylate toxicity risk if overused</td></tr>
+<tr><td>Topical fluorouracil</td><td>Antiproliferative (pyrimidine analog)</td><td>Actinic keratosis</td><td>Visible inflammation = expected</td></tr>
+<tr><td>Imiquimod</td><td>Immune response modifier</td><td>Genital warts, AK, superficial BCC</td><td>Local inflammation = part of MOA</td></tr>
+<tr><td>Podofilox/podophyllum</td><td>Antimitotic</td><td>Anogenital warts</td><td>Avoid pregnancy; resin more toxic</td></tr>
+</table>
+
+
+</div>
+
+<script>
+function answerQ(btn, correct){
+  var q = btn.closest('.quiz-q');
+  var opts = q.querySelectorAll('.opt');
+  opts.forEach(function(o){ o.disabled = true; });
+  btn.classList.add(correct ? 'correct' : 'incorrect');
+  var fb = q.querySelector('.feedback');
+  fb.textContent = (correct ? '✓ Correct — ' : '✗ Incorrect — ') + q.dataset.explain;
+  fb.className = 'feedback ' + (correct ? 'fb-correct' : 'fb-incorrect');
+}
+</script>
+
+</body>
+</html>
