@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Noble's Little Something Extra — Labs Info</title>
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-2:#f3ecd9;
+  --green-dark:#2f5233;
+  --green:#3f7d52;
+  --green-light:#e7f0e5;
+  --ink:#2b2b26;
+  --ink-soft:#5b5a4f;
+  --line:#d9d0b8;
+  --gold:#b8944f;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+a{color:var(--green-dark);}
+
+#backBtn{
+  position:fixed; top:18px; left:18px; z-index:700;
+  background:var(--cream); border:1px solid var(--green-dark);
+  color:var(--green-dark); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  text-decoration:none; cursor:pointer;
+}
+#backBtn:hover{background:var(--green-dark); color:var(--cream);}
+#downloadBtn{
+  position:fixed; top:18px; right:18px; z-index:700;
+  background:var(--green-dark); border:1px solid var(--green-dark);
+  color:var(--cream); padding:8px 14px; border-radius:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.02em;
+  cursor:pointer;
+}
+#downloadBtn:hover{background:var(--green);}
+
+main{max-width:1080px; margin:0 auto; padding:90px 28px 100px;}
+
+header.hero{text-align:center; margin-bottom:38px;}
+header.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green);
+}
+header.hero h1{
+  font-size:2.2rem; margin:10px 0 6px; color:var(--green-dark); line-height:1.2;
+}
+header.hero .sub{color:var(--ink-soft); font-size:15px;}
+
+section.part{margin-bottom:44px;}
+section.part > h2.partTitle{
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif; font-size:1.7rem; font-weight:700;
+  letter-spacing:.01em; color:var(--green-dark); border-bottom:2px solid var(--line);
+  padding-bottom:10px; margin:0 0 16px; line-height:1.25;
+}
+section.part .tagline{color:var(--ink-soft); font-style:italic; font-size:14.5px; margin:-8px 0 16px;}
+
+.table-wrap{
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:6px; overflow-x:auto;
+}
+table.data-table{
+  width:100%; border-collapse:collapse; font-size:13.5px;
+}
+table.data-table th{
+  background:var(--green-dark); color:var(--cream); padding:10px 12px; text-align:left;
+  font-size:12.5px; position:sticky; top:0;
+}
+table.data-table td{padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:#fbf8ef;}
+table.data-table td strong, table.data-table th strong{color:var(--green-dark);}
+table.data-table td.testname{color:var(--green-dark); font-weight:700; white-space:nowrap;}
+
+.pearl{
+  background:var(--green-light); border-left:4px solid var(--green);
+  border-radius:6px; padding:12px 16px; margin:16px 0 0; font-size:14.5px;
+}
+.pearl .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--green-dark); display:block; margin-bottom:4px;}
+.pearl strong{color:var(--green-dark);}
+
+footer{
+  text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:60px;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+@media print{
+  #backBtn,#downloadBtn{display:none !important;}
+  main{padding-top:20px;}
+}
+@media (max-width:640px){
+  main{padding:80px 16px 80px;}
+}
+</style>
+</head>
+<body>
+
+<button id="backBtn" onclick="goBack()">&larr; Back to Study Guides</button>
+<button id="downloadBtn" onclick="window.print()">Download PDF</button>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">MSK II &middot; Exam 2 &middot; Rocky Vista University College of Osteopathic Medicine</div>
+  <h1>Noble's Little Something Extra — Labs Info</h1>
+  <div class="sub">Every lab test from the MSK II connective tissue disease lectures, condensed into a few reference tables.</div>
+</header>
+
+<section class="part">
+<h2 class="partTitle">Labs Overview</h2>
+<div class="tagline">General inflammatory markers, the autoantibody panel, and organ-specific/muscle labs — all in one table</div>
+<div class="table-wrap">
+<table class="data-table">
+<tr><th>Test</th><th>Definition</th><th>Role in Diagnosis</th><th>Role in Management</th></tr>
+<tr><td class="testname">CBC</td><td>Measures red blood cells, white blood cells, hemoglobin, hematocrit, and platelets</td><td><strong>Detects anemia</strong> (common in SLE or RA), <strong>leukopenia</strong>, <strong>thrombocytopenia</strong>, or other abnormalities suggesting autoimmune activity</td><td>Monitors for disease-related complications like anemia of chronic disease or medication toxicity (e.g., from immunosuppressants)</td></tr>
+<tr><td class="testname">ESR</td><td>Measures how quickly red blood cells settle in a tube, indicating inflammation</td><td>Elevated in active inflammation from CTDs; reflects <strong>more chronic inflammation</strong></td><td>Tracks disease activity and response to treatment; levels may rise during flares</td></tr>
+<tr><td class="testname">CRP</td><td>A protein produced by the liver in response to inflammation</td><td>Indicates <strong>acute inflammation</strong>; often elevated in RA or other CTDs</td><td>Monitors flares, infection, or treatment efficacy; more specific for acute changes than ESR</td></tr>
+<tr><td class="testname">CMP</td><td>Panel including electrolytes, glucose, kidney function (e.g., creatinine), and liver enzymes (e.g., ALT/AST)</td><td>Evaluates kidney/liver involvement (e.g., SLE nephritis) or baseline health</td><td>Checks for organ damage or drug toxicity (e.g., from methotrexate)</td></tr>
+<tr><td class="testname">ANA</td><td>Immunofluorescence assay detecting antibodies to nuclear components; reported as titer and pattern (e.g., speckled, homogeneous)</td><td>Primary <strong>screening</strong> test for CTDs; <strong>highly sensitive</strong> (~95% of SLE) but nonspecific — follow with specific autoantibody tests if positive</td><td>Less useful for monitoring, as titers don't correlate well with activity; confirms persistence</td></tr>
+<tr><td class="testname">Anti-dsDNA</td><td>Antibodies targeting double-stranded DNA</td><td><strong>Highly specific</strong> for SLE; positive in 60&ndash;70% of cases, especially with active disease</td><td><strong>Monitors SLE activity</strong>; rising titers may predict flares, especially renal involvement</td></tr>
+<tr><td class="testname">Anti-Sm</td><td>Antibodies to Sm nuclear proteins</td><td><strong>Highly specific for SLE</strong>; present in 20&ndash;30% of cases</td><td>Not typically used for monitoring, as levels are stable</td></tr>
+<tr><td class="testname">Anti-RNP</td><td>Antibodies to ribonucleoproteins</td><td>Key for <strong>MCTD</strong> diagnosis; also seen in SLE or scleroderma</td><td>Helps differentiate overlaps; monitors for complications</td></tr>
+<tr><td class="testname">Anti-SSA (Ro) / Anti-SSB (La)</td><td>Antibodies to SSA/Ro and SSB/La proteins</td><td>Associated with <strong>Sjögren's syndrome</strong> and neonatal lupus; seen in SLE</td><td>Guides pregnancy management in positive cases due to <strong>heart block risk</strong></td></tr>
+<tr><td class="testname">RF</td><td>Antibodies (usually IgM) against the Fc portion of IgG</td><td>Positive in ~70% of RA; also seen in other CTDs</td><td>Predicts more aggressive RA; monitors response to therapy. <strong>Sensitive, not specific</strong></td></tr>
+<tr><td class="testname">Anti-CCP</td><td>Antibodies to citrullinated proteins</td><td><strong>Highly specific for RA</strong>; early marker, higher specificity than RF</td><td><strong>Predictive of erosive disease</strong>; levels may decrease with effective treatment</td></tr>
+<tr><td class="testname">Complement (C3, C4)</td><td>Measures proteins in the complement system involved in immune response</td><td>Low levels indicate <strong>consumption</strong> in active SLE or vasculitis</td><td>Monitors SLE flares; normalization suggests remission</td></tr>
+<tr><td class="testname">Urinalysis</td><td>Analysis of urine for protein, blood, cells, etc.</td><td>Detects kidney involvement (e.g., proteinuria in <strong>lupus nephritis</strong>)</td><td>Regular screening for renal damage or progression</td></tr>
+<tr><td class="testname">CK</td><td>Enzyme released from damaged muscle</td><td>Elevated in <strong>polymyositis</strong> or <strong>dermatomyositis</strong></td><td>Tracks muscle inflammation and treatment response</td></tr>
+</table>
+</div>
+<div class="pearl"><span class="lbl">Quick contrasts</span><strong>ESR vs. CRP:</strong> ESR = chronic, slow to change; CRP = acute, rises/falls fast. <strong>ANA vs. anti-dsDNA/anti-Sm:</strong> ANA screens (sensitive, rule out); dsDNA/Sm confirm (specific, rule in). <strong>RF vs. anti-CCP:</strong> RF is sensitive but not specific; anti-CCP is specific for RA and predicts erosive disease.</div>
+</section>
+
+<section class="part">
+<h2 class="partTitle">ANA Titer Interpretation</h2>
+<div class="tagline">Result type &rarr; interpretation &rarr; associations (patterns: speckled, homogeneous, mixed, nucleolar, centromere, peripheral)</div>
+<div class="table-wrap">
+<table class="data-table">
+<tr><th>Result Type</th><th>Common Interpretation</th><th>Possible Associations</th></tr>
+<tr><td><strong>Negative</strong></td><td>No ANAs detected</td><td>Low likelihood of autoimmune disease; investigate other causes of symptoms</td></tr>
+<tr><td><strong>Positive (Low Titer, e.g., 1:40&ndash;1:80)</strong></td><td>Mild elevation, often not significant</td><td>Could be normal variation, aging, or minor infections; rarely indicates disease</td></tr>
+<tr><td><strong>Positive (Moderate Titer, e.g., 1:160&ndash;1:320)</strong></td><td>More notable, warrants further evaluation</td><td>Possible autoimmune condition like SLE or Sjögren's; check patterns and symptoms</td></tr>
+<tr><td><strong>Positive (High Titer, e.g., &gt;1:640)</strong></td><td>Strongly suggestive of autoimmunity</td><td>High association with SLE, scleroderma, or other rheumatic diseases; urgent follow-up needed</td></tr>
+</table>
+</div>
+</section>
+
+<section class="part">
+<h2 class="partTitle">When to Use RF and ANA</h2>
+<div class="tagline">Tests help confirm or rule out a suspected condition — interpreted alongside clinical findings, other labs, and imaging</div>
+<div class="table-wrap">
+<table class="data-table">
+<tr><th>Patient Population</th><th>Classic Picture</th></tr>
+<tr><td><strong>RA</strong></td><td>Symmetrical joint pain and swelling (especially small joints like hands, wrists, feet), morning stiffness &gt;1 hour, fatigue, fever, possible subcutaneous nodules</td></tr>
+<tr><td><strong>SLE</strong></td><td>Multisystem involvement including arthralgia/arthritis, malar (butterfly) rash, photosensitivity, oral ulcers, fatigue, fever, hair loss, <strong>Raynaud's phenomenon</strong>, possible renal involvement</td></tr>
+<tr><td><strong>Both tests together</strong></td><td>Often <strong>ordered together</strong> in initial rheumatology evaluations for nonspecific symptoms like chronic fatigue, joint issues, or cytopenias (e.g., anemia, low platelets)</td></tr>
+<tr><td><strong>Caveat</strong></td><td>Part of broader criteria (<strong>ACR/EULAR</strong> for RA, <strong>SLICC</strong> for SLE) — should not be used in isolation, as positive results occur in healthy individuals or other conditions (infections, aging). Refer to rheumatology if symptoms persist</td></tr>
+</table>
+</div>
+</section>
+
+<footer>Noble's Little Something Extra — Labs Info &middot; MSK II, Exam 2 &middot; Rocky Vista University College of Osteopathic Medicine</footer>
+</main>
+
+<script>
+function goBack(){
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+</script>
+</body>
+</html>
