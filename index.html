@@ -46,6 +46,34 @@ h1{
 margin:0;
 font-size:2rem;
 }
+.header-actions{
+display:flex;
+align-items:center;
+gap:8px;
+}
+#search-btn{
+font-family:var(--mono);
+font-size:0.85rem;
+background:var(--panel);
+color:var(--ink);
+border:1px solid var(--line);
+padding:10px 14px;
+border-radius:4px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:8px;
+}
+#search-btn:hover{ background:var(--accent-dim); }
+#search-btn kbd{
+font-family:var(--mono);
+font-size:0.72rem;
+background:var(--accent-dim);
+border:1px solid var(--line);
+border-radius:3px;
+padding:1px 5px;
+color:var(--accent);
+}
 #copy-btn{
 font-family:var(--mono);
 font-size:0.85rem;
@@ -217,6 +245,102 @@ border-radius:6px;
 padding:18px 20px;color:#8a8578;
 font-family:var(--mono);
 }
+
+/* ---- Cross-guide search overlay ---- */
+#search-overlay{
+position:fixed; inset:0; z-index:900;
+background:rgba(27,43,38,0.35);
+display:none;
+align-items:flex-start;
+justify-content:center;
+padding:8vh 20px 20px;
+}
+#search-overlay.open{ display:flex; }
+#search-panel{
+width:100%; max-width:640px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:8px;
+box-shadow:0 12px 40px rgba(0,0,0,0.25);
+overflow:hidden;
+display:flex;
+flex-direction:column;
+max-height:76vh;
+}
+#search-input-row{
+display:flex; align-items:center; gap:10px;
+padding:14px 16px;
+border-bottom:1px solid var(--line);
+}
+#search-input-row .icon{ color:var(--accent); font-family:var(--mono); }
+#search-input{
+flex:1;
+border:none; outline:none;
+font-family:var(--serif);
+font-size:1.05rem;
+background:transparent;
+color:var(--ink);
+}
+#search-close{
+font-family:var(--mono);
+font-size:0.75rem;
+color:#8a8578;
+background:var(--accent-dim);
+border:1px solid var(--line);
+border-radius:4px;
+padding:4px 8px;
+cursor:pointer;
+}
+#search-status{
+font-family:var(--mono);
+font-size:0.78rem;
+color:#8a8578;
+padding:8px 16px;
+border-bottom:1px solid var(--line);
+}
+#search-results{
+overflow-y:auto;
+padding:6px 0;
+}
+.result-item{
+display:block;
+padding:12px 16px;
+text-decoration:none;
+color:var(--ink);
+border-bottom:1px solid var(--line);
+}
+.result-item:last-child{ border-bottom:none; }
+.result-item:hover, .result-item.active{ background:var(--accent-dim); }
+.result-page{
+font-family:var(--mono);
+font-size:0.72rem;
+letter-spacing:0.04em;
+text-transform:uppercase;
+color:var(--accent);
+margin-bottom:3px;
+}
+.result-heading{
+font-size:1rem;
+font-weight:600;
+margin-bottom:3px;
+}
+.result-snippet{
+font-size:0.88rem;
+color:#5c574c;
+}
+.result-snippet mark{
+background:#f4e2a1;
+color:inherit;
+border-radius:2px;
+padding:0 1px;
+}
+.search-empty{
+padding:24px 16px;
+color:#8a8578;
+font-family:var(--mono);
+font-size:0.85rem;
+text-align:center;
+}
 </style>
 </head>
 <body>
@@ -225,7 +349,8 @@ font-family:var(--mono);
 <p class="kicker">Noble's Study Guides</p>
 <h1>OMSII Study Tools</h1>
 </div>
-<div>
+<div class="header-actions">
+<button id="search-btn">Search all guides <kbd>Ctrl/&#8984; F</kbd></button>
 <button id="copy-btn">Copy site link</button>
 <span id="copy-feedback"></span>
 </div>
@@ -309,6 +434,20 @@ font-family:var(--mono);
 </ul>
 <p class="placeholder">More courses will appear here as they're added. Click a course name to see its guides.</p>
 </main>
+
+<!-- Cross-guide search overlay -->
+<div id="search-overlay">
+<div id="search-panel">
+<div id="search-input-row">
+<span class="icon">&#128269;</span>
+<input id="search-input" type="text" placeholder="Search every guide on this site&hellip;" autocomplete="off">
+<button id="search-close">Esc</button>
+</div>
+<div id="search-status"></div>
+<div id="search-results"></div>
+</div>
+</div>
+
 <script>
 const btn = document.getElementById('copy-btn');
 const feedback = document.getElementById('copy-feedback');
@@ -362,6 +501,222 @@ toggle.classList.toggle('open', willOpen);
 toggle.setAttribute('aria-expanded', String(willOpen));
 });
 });
+
+/* =========================================================
+   Cross-guide search
+   - Discovers every guide automatically from the <a href>
+     links already inside .guide-dropdown / .sub-dropdown.
+   - Add a new guide the normal way (a new <li><a>) and it's
+     searchable next time the index runs — nothing else to
+     configure here.
+   ========================================================= */
+(function(){
+  const overlay = document.getElementById('search-overlay');
+  const panel = document.getElementById('search-panel');
+  const input = document.getElementById('search-input');
+  const statusEl = document.getElementById('search-status');
+  const resultsEl = document.getElementById('search-results');
+  const openBtn = document.getElementById('search-btn');
+  const closeBtn = document.getElementById('search-close');
+
+  let entries = null;        // built index, once ready
+  let indexPromise = null;   // in-flight build
+  let activeIndex = -1;
+
+  function discoverLinks(){
+    const anchors = Array.from(document.querySelectorAll('.guide-dropdown a[href], .sub-dropdown a[href]'));
+    const seen = new Set();
+    const links = [];
+    anchors.forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('#')) return;
+      const bareHref = href.split('#')[0];
+      if (seen.has(bareHref)) return;
+      seen.add(bareHref);
+      links.push({ href: bareHref, label: a.textContent.trim() });
+    });
+    return links;
+  }
+
+  function stripText(el){
+    return (el.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  async function buildIndex(){
+    const links = discoverLinks();
+    const cacheKey = 'omsii-search-index-v1:' + links.map(l => l.href).sort().join(',');
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) return JSON.parse(cached);
+    } catch(e) {}
+
+    statusEl.textContent = 'Indexing ' + links.length + ' guides for the first time — this may take a moment&hellip;'.replace('&hellip;','...');
+    const built = [];
+
+    await Promise.all(links.map(async (link) => {
+      try {
+        const res = await fetch(link.href);
+        if (!res.ok) return;
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const pageTitle = (doc.querySelector('title')?.textContent || link.label).trim();
+        const sections = doc.querySelectorAll('section[id], article[id], div[id].topic, [id].part');
+
+        if (sections.length === 0) {
+          const text = stripText(doc.body || doc.documentElement).slice(0, 6000);
+          if (text) built.push({ page: link.href, pageTitle, anchor: '', heading: pageTitle, text });
+        } else {
+          sections.forEach(sec => {
+            const id = sec.id;
+            if (!id) return;
+            const headingEl = sec.querySelector('h1,h2,h3,h4') || sec;
+            let heading = stripText(headingEl).replace(/^[0-9]+\s*[\.\u00b7]?\s*/, '');
+            if (!heading) heading = pageTitle;
+            const text = stripText(sec).slice(0, 3000);
+            if (text.length > 15) built.push({ page: link.href, pageTitle, anchor: id, heading, text });
+          });
+        }
+      } catch(e) {
+        // same-origin fetch failed (e.g. file not deployed yet) — just skip it
+      }
+    }));
+
+    try { sessionStorage.setItem(cacheKey, JSON.stringify(built)); } catch(e) {}
+    return built;
+  }
+
+  function ensureIndex(){
+    if (!indexPromise) {
+      indexPromise = buildIndex().then(built => {
+        entries = built;
+        statusEl.textContent = entries.length
+          ? ('Searching ' + new Set(entries.map(e => e.page)).size + ' guides.')
+          : 'No guides found to search yet.';
+        return built;
+      });
+    }
+    return indexPromise;
+  }
+
+  function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function scoreEntry(entry, terms){
+    const heading = entry.heading.toLowerCase();
+    const pageTitle = entry.pageTitle.toLowerCase();
+    const text = entry.text.toLowerCase();
+    let score = 0;
+    for (const term of terms) {
+      if (!term) continue;
+      if (heading.startsWith(term)) score += 12;
+      else if (heading.includes(term)) score += 9;
+      if (pageTitle.includes(term)) score += 5;
+      if (text.includes(term)) score += 2;
+    }
+    return score;
+  }
+
+  function snippetFor(entry, terms){
+    const lowerText = entry.text.toLowerCase();
+    let idx = -1;
+    for (const term of terms) {
+      if (!term) continue;
+      const found = lowerText.indexOf(term);
+      if (found !== -1 && (idx === -1 || found < idx)) idx = found;
+    }
+    if (idx === -1) idx = 0;
+    const start = Math.max(0, idx - 60);
+    const end = Math.min(entry.text.length, idx + 140);
+    let snippet = (start > 0 ? '…' : '') + entry.text.slice(start, end) + (end < entry.text.length ? '…' : '');
+    terms.filter(Boolean).forEach(term => {
+      const re = new RegExp('(' + escapeRegex(term) + ')', 'ig');
+      snippet = snippet.replace(re, '<mark>$1</mark>');
+    });
+    return snippet;
+  }
+
+  function renderResults(list, terms){
+    resultsEl.innerHTML = '';
+    activeIndex = -1;
+    if (!list.length) {
+      resultsEl.innerHTML = '<div class="search-empty">No matches yet — try a different term.</div>';
+      return;
+    }
+    list.slice(0, 25).forEach((entry) => {
+      const a = document.createElement('a');
+      a.className = 'result-item';
+      a.href = entry.anchor ? (entry.page + '#' + entry.anchor) : entry.page;
+      a.innerHTML =
+        '<div class="result-page">' + entry.pageTitle + '</div>' +
+        '<div class="result-heading">' + entry.heading + '</div>' +
+        '<div class="result-snippet">' + snippetFor(entry, terms) + '</div>';
+      resultsEl.appendChild(a);
+    });
+  }
+
+  let debounceTimer = null;
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(runSearch, 120);
+  });
+
+  function runSearch(){
+    const q = input.value.trim().toLowerCase();
+    if (!entries) return;
+    if (!q) { resultsEl.innerHTML = ''; return; }
+    const terms = q.split(/\s+/).slice(0, 6);
+    const scored = entries
+      .map(e => ({ e, s: scoreEntry(e, terms) }))
+      .filter(x => x.s > 0)
+      .sort((a, b) => b.s - a.s)
+      .map(x => x.e);
+    renderResults(scored, terms);
+  }
+
+  function openSearch(){
+    overlay.classList.add('open');
+    input.value = '';
+    resultsEl.innerHTML = '';
+    statusEl.textContent = 'Loading guide index…';
+    input.focus();
+    ensureIndex().then(() => { if (input.value) runSearch(); });
+  }
+
+  function closeSearch(){
+    overlay.classList.remove('open');
+  }
+
+  openBtn.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSearch(); });
+
+  document.addEventListener('keydown', (e) => {
+    const isFindShortcut = (e.key === 'f' || e.key === 'F') && (e.ctrlKey || e.metaKey);
+    if (isFindShortcut) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? input.focus() : openSearch();
+      return;
+    }
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      closeSearch();
+      return;
+    }
+    if (overlay.classList.contains('open') && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      const items = Array.from(resultsEl.querySelectorAll('.result-item'));
+      if (!items.length) return;
+      e.preventDefault();
+      items[activeIndex]?.classList.remove('active');
+      activeIndex = e.key === 'ArrowDown'
+        ? Math.min(activeIndex + 1, items.length - 1)
+        : Math.max(activeIndex - 1, 0);
+      items[activeIndex].classList.add('active');
+      items[activeIndex].scrollIntoView({ block: 'nearest' });
+    }
+    if (overlay.classList.contains('open') && e.key === 'Enter' && activeIndex >= 0) {
+      const items = Array.from(resultsEl.querySelectorAll('.result-item'));
+      items[activeIndex]?.click();
+    }
+  });
+})();
 </script>
 <script data-goatcounter="https://nobledodge.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
