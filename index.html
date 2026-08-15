@@ -96,6 +96,42 @@ max-width:900px;
 margin:32px auto;
 padding:0 24px;
 }
+
+/* ---- Announcement block ----
+   Sits above the course list. Style rules are here; the actual
+   message content is a separate HTML comment/block further down
+   in the body, marked "EDIT ME". */
+.announcement-block{
+display:flex;
+align-items:flex-start;
+gap:12px;
+background:var(--accent-dim);
+border:1px solid var(--line);
+border-left:4px solid var(--accent);
+border-radius:6px;
+padding:14px 18px;
+margin-bottom:20px;
+font-family:var(--serif);
+font-size:0.95rem;
+}
+.announcement-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--accent);
+margin-top:7px;
+flex-shrink:0;
+box-shadow:0 0 0 4px rgba(58,107,92,0.15);
+}
+.announcement-text strong{
+color:var(--accent);
+font-family:var(--mono);
+font-size:0.8rem;
+text-transform:uppercase;
+letter-spacing:0.04em;
+margin-right:6px;
+}
+
 .course-list{
 list-style:none;
 padding:0;
@@ -356,6 +392,26 @@ text-align:center;
 </div>
 </header>
 <main>
+
+<!--
+  ============================================================
+  EDIT ME — Announcements
+  To change what the green notification block below says,
+  just edit the text inside <div class="announcement-text">.
+  Change the bold word after <strong> for a short label
+  (e.g. "Update:", "Heads up:", "New:"), and put your message
+  after it. Nothing else on this block needs to change.
+  Delete the whole <div class="announcement-block">...</div>
+  if you want it gone for a while.
+  ============================================================
+-->
+<div class="announcement-block">
+<span class="announcement-dot"></span>
+<div class="announcement-text">
+<strong>Update:</strong> Gonna work on possibly getting some extra questions out - if anyone has any recommendations/something useful I could add just text me / email me
+</div>
+</div>
+
 <ul class="course-list">
 <li class="course-item">
 <button class="course-toggle" aria-expanded="false">
