@@ -1,1 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Connective Tissue Disease Vignette Algorithm</title>
+<style>
+  :root{
+    color-scheme: light;
+    --cream:#fdfbf3;
+    --cream-2:#f7f1e0;
+    --ink:#2c2c24;
+    --ink-soft:#5c5a4a;
+    --green-deep:#3b5d43;
+    --green:#5e8461;
+    --green-light:#a9c2a0;
+    --line:#d8cfb4;
+    --genetic:#7a5c3e;
+    --autoimmune:#8a2f2f;
+    --infectious:#c8963f;
+    --overlap:#546a7a;
+    --card-shadow: 0 2px 10px rgba(44,44,36,0.08);
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{background:var(--cream);}
+  html, body{min-height:100%;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 90px;}
+  header{
+    border-bottom:2px solid var(--green-deep);
+    padding-bottom:16px;
+    margin-bottom:22px;
+  }
+  header h1{
+    font-family:var(--serif);
+    font-size:1.85rem;
+    margin:0 0 4px;
+    color:var(--green-deep);
+    letter-spacing:0.2px;
+  }
+  header p{margin:0;color:var(--ink-soft);font-size:0.95rem;}
+  .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+  .tab-btn{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:0.85rem;
+    padding:9px 16px;
+    border-radius:20px;
+    border:1.5px solid var(--green-deep);
+    background:transparent;
+    color:var(--green-deep);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab-btn.active{background:var(--green-deep);color:var(--cream);}
+  .panel{display:none;}
+  .panel.active{display:block;}
 
+  #breadcrumb{
+    display:flex;flex-wrap:wrap;gap:6px;
+    margin-bottom:18px;
+    min-height:26px;
+  }
+  .crumb{
+    font-size:0.78rem;
+    background:var(--cream-2);
+    border:1px solid var(--line);
+    padding:4px 10px;
+    border-radius:14px;
+    color:var(--ink-soft);
+  }
+
+  .q-card{
+    background:#fffdf7;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+    box-shadow:var(--card-shadow);
+  }
+  .q-label{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--green);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .q-text{
+    font-family:var(--serif);
+    font-size:1.3rem;
+    color:var(--ink);
+    margin:0 0 18px;
+  }
+  .opt-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+  .opt-btn{
+    text-align:left;
+    background:var(--cream);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:12px 16px;
+    font-family:var(--sans);
+    font-size:0.95rem;
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .opt-btn:hover{border-color:var(--green);background:var(--green-light);}
+  .opt-hint{display:block;font-size:0.78rem;color:var(--ink-soft);margin-top:2px;}
+
+  .nav-row{display:flex;justify-content:space-between;margin-top:18px;}
+  .ghost-btn{
+    background:none;border:none;color:var(--green-deep);
+    font-size:0.85rem;font-weight:600;cursor:pointer;
+    padding:6px 4px;
+  }
+  .ghost-btn:hover{text-decoration:underline;}
+
+  .result-card{
+    background:#fffdf7;
+    border:2px solid var(--green-deep);
+    border-radius:14px;
+    padding:26px;
+    box-shadow:var(--card-shadow);
+  }
+  .result-tag{
+    display:inline-block;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+    padding:3px 10px;
+    border-radius:12px;
+    margin-bottom:10px;
+  }
+  .tag-genetic{background:#ece3d4;color:var(--genetic);}
+  .tag-autoimmune{background:#f0d9d5;color:var(--autoimmune);}
+  .tag-infectious{background:#f0e2c4;color:var(--infectious);}
+  .tag-overlap{background:#dbe3ec;color:var(--overlap);}
+  .result-dx{font-family:var(--serif);font-size:1.55rem;margin:0 0 14px;color:var(--ink);}
+  .result-section{margin-bottom:14px;}
+  .result-section h4{
+    margin:0 0 4px;font-size:0.78rem;text-transform:uppercase;
+    letter-spacing:0.6px;color:var(--green-deep);
+  }
+  .result-section p, .result-section ul{margin:0;font-size:0.92rem;color:var(--ink);}
+  .result-section ul{padding-left:18px;}
+  .mimics{
+    background:var(--cream-2);border-radius:10px;padding:12px 16px;font-size:0.88rem;
+  }
+  .mimics b{color:var(--green-deep);}
+  .gene-pill{
+    display:inline-block;background:var(--green-light);color:var(--green-deep);
+    font-family:monospace;font-size:0.82rem;font-weight:700;
+    padding:2px 8px;border-radius:6px;margin-right:4px;
+  }
+
+  .ref-search{
+    width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);
+    font-size:0.95rem;margin-bottom:18px;background:#fffdf7;
+  }
+  .ref-group{margin-bottom:26px;}
+  .ref-group h3{
+    font-family:var(--serif);font-size:1.15rem;color:var(--green-deep);
+    border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;
+  }
+  table.ref-table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+  table.ref-table th{
+    text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;
+    color:var(--ink-soft);border-bottom:2px solid var(--green-deep);padding:6px 8px;
+  }
+  table.ref-table td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.ref-table tr:hover td{background:var(--cream-2);}
+  .dx-name{font-weight:700;color:var(--ink);}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:0.78rem;margin-top:40px;}
+
+  .back-btn{
+    position:fixed;
+    top:18px;
+    left:18px;
+    z-index:1000;
+    font-family:var(--sans);
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--green-deep);
+    text-decoration:none;
+    border:1.5px solid var(--green-deep);
+    padding:7px 13px;
+    border-radius:8px;
+    background:var(--cream);
+    box-shadow:var(--card-shadow);
+  }
+  .back-btn:hover{background:var(--green-light);}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+<div class="wrap">
+  <header>
+    <h1>Connective Tissue Disease Vignette Algorithm</h1>
+    <p>Dr. Langevin's Connective Tissue Diseases (Pts. 1-2) — click through the vignette clues (genetic vs. autoimmune, gene/antibody, hallmark sign) to narrow to the diagnosis.</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="tree">Decision Tree</button>
+    <button class="tab-btn" data-tab="ref">Gene / Antibody / Sign Reference</button>
+  </div>
+
+  <div class="panel active" id="panel-tree">
+    <div id="breadcrumb"></div>
+    <div id="tree-mount"></div>
+  </div>
+
+  <div class="panel" id="panel-ref">
+    <input class="ref-search" id="refSearch" placeholder="Search a gene, antibody, sign, or diagnosis (e.g. 'COL1A1', 'anti-Smith', 'saber shin')...">
+    <div id="ref-mount"></div>
+  </div>
+
+  <footer>Built from Dr. Paul Langevin's Connective Tissue Diseases series (Pts. 1-2) &middot; Cross-check against the full Connective Tissue Diseases study guide for full lab panels and treatment detail.</footer>
+</div>
+
+<script>
+const RESULTS = {
+  // ---------- GENETIC CTDs ----------
+  eds: {tag:'genetic',cat:'Genetic — collagen fibril disorder',dx:'Ehlers-Danlos Syndrome',
+    gene:'COL3A1 (vascular EDS) &middot; COL5A1/COL5A2 (classical EDS) &middot; 20+ genes overall',
+    inherit:'Mostly autosomal dominant; some recessive. ~20/100,000',
+    features:['Skin hyperextensibility (smooth, velvety, doughy) + hyperflexible joints — the two dominant presenting signs','Shoulder dislocation is usually the FIRST sign — atraumatic, often painless, occurs during sleep/daily activity','Thin atrophic scars, molluscoid pseudotumors, piezogenic papules (foot)','No confirmatory lab test — clinical + genetic diagnosis; Beighton score (9-pt) screens joint hypermobility but genetic testing is gold standard'],
+    why:'Atraumatic/painless recurrent dislocations + hyperextensible skin with NO supportive lab test is the classic vignette fingerprint.',
+    complication:'Vascular/organ rupture (thorax, abdomen, gravid uterus, sigmoid colon, spleen, liver) is the most feared and mortal complication — can occur WITHOUT trauma. Any sudden-onset pain in a known/suspected EDS patient = emergent workup regardless of trauma history.',
+    mimic:'Marfan syndrome (tall/thin, lens/aortic findings, FBN1 not collagen) · Hypermobility from other causes'},
+  marfan: {tag:'genetic',cat:'Genetic — fibrillin-1 disorder (the collagen outlier)',dx:'Marfan Syndrome',
+    gene:'FBN1 (fibrillin-1), chromosome 15',
+    inherit:'Autosomal dominant; ~25% de novo. 20/100,000',
+    features:['Tall/thin stature, dolichostenomelia, arachnodactyly, positive thumb & wrist signs','Ectopia lentis (dislocated lens) in 50-80% — requires dilated slit lamp exam','Aortic root disease (regurgitation, aneurysm, dissection) drives 60-80% of morbidity/mortality','Pectus deformity, scoliosis (50-63%, poorly brace-responsive), dural ectasia (63-92%, lumbosacral)'],
+    why:'Skeletal overgrowth + lens dislocation + aortic root disease is the classic triad; remember FBN1 is fibrillin, NOT collagen — this is why the phenotype leans skeletal/lens/aortic rather than skin fragility.',
+    complication:'Aortic dissection in up to 50% of patients <40 y/o worldwide. NUMBER TO KNOW COLD: prophylactic ascending aortic root replacement at 5.0 cm aortic sinus diameter is what actually prevents the leading cause of death.',
+    mimic:'Loeys-Dietz syndrome (more aggressive vascular course, TGF-β pathway genes, not FBN1) · Homocystinuria (also tall + lens dislocation, but downward lens dislocation + intellectual disability + thrombosis, vs. Marfan\'s upward lens dislocation)'},
+  stickler: {tag:'genetic',cat:'Genetic — collagen gene family',dx:'Stickler Syndrome',
+    gene:'COL2A1 (80%) &middot; COL11A1 (2nd most common) &middot; COL11A2, COL9A',
+    inherit:'Autosomal dominant or recessive. 13/100,000 — 3rd most common inherited CTD',
+    features:['Facial: cleft palate, flattened face, micrognathia, recessed chin','Ocular: severe myopia, retinal detachment (leading cause of blindness in this population), cataracts, glaucoma','Hearing loss (conductive or sensorineural)','Pierre Robin sequence: micrognathia → glossoptosis (tongue falls back) → cleft palate — a CHAIN REACTION, not 3 independent findings'],
+    why:'A newborn with micrognathia + glossoptosis + cleft palate (Pierre Robin sequence) plus a COL2A1 mutation is the classic testable vignette.',
+    complication:'Retinal detachment — ophthalmology surveillance with a vitreoretinal specialist is the MOST CRITICAL monitoring given risk of irreversible vision loss.',
+    mimic:'Other Pierre Robin sequence causes (isolated, or part of other syndromes) · Marfan (also tall/joint laxity, but Stickler has the facial/ocular/hearing triad instead of aortic disease)'},
+  oi: {tag:'genetic',cat:'Genetic — type I collagen disorder',dx:'Osteogenesis Imperfecta',
+    gene:'COL1A1 / COL1A2 (type I collagen) — structurally normal but insufficient collagen produced',
+    inherit:'Autosomal dominant or recessive depending on type. 8/100,000',
+    features:['4 hallmark features: decreased bone mass with increased fracture risk, blue sclerae, dentinogenesis imperfecta, hearing loss','11 types; Types I-V classic (I = mild/most common, II = often fatal in infancy, III = severe/wheelchair, IV-V = moderate)','"Saber shin" (anterior tibial bowing) and "codfish vertebrae" (biconcave vertebral bodies) are the classic radiographic buzzwords'],
+    why:'Multiple fractures of varying ages + blue sclerae + family history of "brittle bones" in an infant is the classic vignette — but ALWAYS exclude non-accidental trauma first, since OI is a genuine abuse mimic in both directions.',
+    complication:'Fracture risk reduced by bisphosphonates (IV pamidronate, oral alendronate) via decreased osteoclastic bone resorption — the established mainstay of medical management.',
+    mimic:'Non-accidental trauma/child abuse (must always be excluded) · Other causes of blue sclerae'},
+  loeys_dietz: {tag:'genetic',cat:'Genetic — TGF-β pathway',dx:'Loeys-Dietz Syndrome',
+    gene:'TGFBR1, TGFBR2, SMAD3, TGFB2, or TGFB3 (TGF-β signaling)',
+    inherit:'Autosomal dominant',
+    features:['Aortic aneurysms, arterial tortuosity','Hypertelorism, bifid uvula or cleft palate','Joint laxity, skeletal issues'],
+    why:'Looks Marfan-like (aortic aneurysm-prone CTD) but the vascular course is MORE AGGRESSIVE than Marfan — this distinction changes surveillance intensity and surgical thresholds.',
+    complication:'More aggressive vascular disease than MFS — lower thresholds for surgical intervention are generally used.',
+    mimic:'Marfan syndrome (FBN1, less aggressive vascular course) · Vascular EDS (COL3A1, also arterial rupture risk)'},
+  eb_genetic: {tag:'genetic',cat:'Genetic — skin structural protein',dx:'Epidermolysis Bullosa',
+    gene:'Genes encoding skin structural proteins (e.g., keratin, collagen VII)',
+    inherit:'Autosomal dominant or recessive',
+    features:['Fragile skin that blisters easily from minor trauma','Leads to scarring, nail loss','Can involve internal structures (e.g., esophagus) in some subtypes'],
+    why:'Genetic/structural — NOT autoimmune. Trauma-induced blistering starting in INFANCY (vs. acquired immunobullous disease presenting in adults) is the key discriminator.',
+    complication:'Chronic wound/scar burden; esophageal involvement in some subtypes can cause strictures.',
+    mimic:'Acquired immunobullous disease (pemphigus/pemphigoid — autoimmune, adult-onset, not trauma-triggered)'},
+  pxe: {tag:'genetic',cat:'Genetic — elastic fiber disorder',dx:'Pseudoxanthoma Elasticum',
+    gene:'ABCC6',
+    inherit:'Autosomal recessive',
+    features:['Yellowish skin papules, loose/lax skin','Vision loss from retinal changes (angioid streaks)','Cardiovascular issues — early atherosclerosis'],
+    why:'Yellowish papular skin changes + early atherosclerosis + retinal angioid streaks is the classic triad for this elastic-fiber (not collagen) disorder.',
+    complication:'Early/accelerated atherosclerosis from defective elastic fibers in vessel walls.',
+    mimic:'Other causes of premature atherosclerosis · Other elastin/collagen disorders'},
+
+  // ---------- AUTOIMMUNE CTDs ----------
+  psa: {tag:'autoimmune',cat:'Autoimmune — seronegative spondyloarthropathy',dx:'Psoriatic Arthritis',
+    gene:'HLA-B27 positive in 20-70% (not required for diagnosis)',
+    inherit:'CASPAR criteria: inflammatory articular disease + ≥3 points (psoriasis present=2, psoriasis Hx/FHx=1, nail dystrophy=1, RF negative=1, dactylitis=1, juxta-articular new bone=1) — 98.7% specificity, 91.4% sensitivity at ≥3',
+    features:['Enthesitis (NOT synovium) is the PRIMARY site of inflammation — this is what distinguishes PsA from RA mechanistically','CD4+/CD8+ T cells → IL-17 + TNF-α drive simultaneous osteoclast (destruction) AND osteoblast (new bone) activation at the enthesis','Dactylitis ("sausage digit"), nail pitting/onycholysis','5 patterns (Moll & Wright): asymmetric oligoarthritis, symmetric polyarthritis, distal (DIP-predominant), arthritis mutilans, spondyloarthritis pattern'],
+    why:'Pencil-in-cup deformity + juxta-articular new bone formation are the two board-favorite radiographic findings; a positive RF does NOT rule out PsA (seen in 2-10% of cases) — don\'t anchor on that one lab.',
+    complication:'Arthritis mutilans = destructive end-stage (osteolysis, digital telescoping) after decades of uncontrolled enthesitis. TNF inhibitors generally preferred over oral DMARDs for most cases.',
+    mimic:'Rheumatoid arthritis (synovium-based, not enthesis-based) · Osteoarthritis (mechanical, not inflammatory)'},
+  as: {tag:'autoimmune',cat:'Autoimmune — seronegative spondyloarthropathy (axial)',dx:'Ankylosing Spondylitis',
+    gene:'HLA-B27 positive in 90-95%',
+    inherit:'ASAS criteria: back pain ≥3mo, onset <45, PLUS sacroiliitis on imaging + ≥1 SpA feature, OR HLA-B27 + ≥2 SpA features',
+    features:['Inflammatory back pain (4 of 5: onset <40, insidious, improves with exercise, no improvement with rest, nocturnal pain improving on arising) — OPPOSITE of mechanical back pain','Enthesitis of the axial skeleton — same pathophysiologic theme as PsA (TNF-α + TGF-β), different anatomic distribution','Men:women ~2:1; 80% first symptom before age 30','Extra-articular: IBD (up to 50%), acute anterior uveitis (25-35%), psoriasis (~10%)'],
+    why:'Radiographic progression sequence is the testable image ladder: early = squaring of vertebral bodies + Romanus lesions ("shiny corner sign") → late = ankylosis/fusion → "bamboo spine". Sacroiliitis grading scale 0(normal)-IV(complete ankylosis).',
+    complication:'Cauda equina syndrome (saddle numbness, urinary retention), aortic regurgitation, pulmonary fibrosis/restrictive pattern, mood disorders — ask about mood at every visit given chronic disease burden.',
+    mimic:'Mechanical back pain (improves with rest, worsens with activity — opposite pattern) · IBD-associated SpA (also HLA-B27-linked, but with GI history)'},
+  ibd_spa: {tag:'autoimmune',cat:'Autoimmune — seronegative spondyloarthropathy (enteropathic)',dx:'IBD-Associated Spondyloarthropathy',
+    gene:'HLA-B27 positive in 50-75%',
+    inherit:'ASAS criteria (rheum) or Orchard classification (GI): Type 1 = large joints, parallels IBD activity; Type 2 = polyarthritis ≥5 joints, independent of IBD activity',
+    features:['Crohn\'s > UC for developing SpA; 60-70% female (despite IBD itself being slightly male-predominant)','Gut-joint axis: reduced microbiota diversity → increased gut permeability → CD14+ monocytes/IL-17 T cells → travel to enthesis → cytokine cascade → enthesitis','IL-23/17 + TNF-α drive the process, same as PsA/AS'],
+    why:'Commonly MISDIAGNOSED as fibromyalgia (especially in young women) — but fibromyalgia does NOT cause joint erosion while IBD-SpA does. This distinction should trigger aggressive workup, not dismissal.',
+    complication:'Biologic choice is tricky: IL-17 inhibitors (help SpA) may WORSEN IBD; α4β7 integrin inhibitors (help IBD) may WORSEN/induce SpA. TNF inhibitors and JAK inhibitors balance both. Use COX-2-selective NSAIDs only — nonselective NSAIDs worsen IBD.',
+    mimic:'Fibromyalgia (no joint erosion — key discriminator) · Irritable bowel syndrome (IBD itself is commonly misdiagnosed as this)'},
+  sle: {tag:'autoimmune',cat:'Autoimmune — multisystem (type III hypersensitivity)',dx:'Systemic Lupus Erythematosus',
+    gene:'ANA (~97% sensitive, screening) → anti-dsDNA (specific, tracks activity/nephritis) → anti-Smith (99% specific, only 20-30% sensitive, stable/not for monitoring) → anti-RNP (MCTD overlap) → anti-SSA/SSB (Sjögren\'s overlap, neonatal lupus/fetal heart block risk)',
+    inherit:'2019 EULAR/ACR: positive ANA ≥1:80 entry criterion, then weighted additive criteria across 7 clinical + 3 immunologic domains, total ≥10 classifies as SLE',
+    features:['9:1 female, childbearing age; ethnic gradient Black > Native American > Hispanic > Asian > White; Black women 3x risk vs. White women, more severe/earlier onset','Malar ("butterfly") rash SPARES the nasolabial fold — distinguishes from rosacea (which involves it)','LE (hematoxylin) body = pathologic hallmark, homogeneous globular nuclear material seen across nearly every affected organ; type III hypersensitivity mechanism (immune complex deposition + complement activation)','Jaccoud arthropathy: NON-erosive deformity (ulnar deviation) from ligament/capsule laxity — joints look normal on imaging despite clinical deformity, unlike RA'],
+    why:'Migration studies (first-gen immigrants develop SLE at higher rates than relatives who stayed home) point to an unidentified environmental trigger layered on genetic susceptibility — a classic epidemiology reasoning question.',
+    complication:'Lupus nephritis (any of 4 kidney compartments), lupus pneumonitis (~10%), endocarditis (mitral valve most common). Pregnancy: only attempt after ~6-7 months sustained remission; progesterone-only contraception (estrogen triggers flares); hydroxychloroquine is SAFE in pregnancy and used prophylactically.',
+    mimic:'Rosacea (nasolabial fold involved, unlike SLE malar rash) · Rheumatoid arthritis (SLE arthritis is non-erosive/Jaccoud, RA is erosive) · Dermatomyositis (also malar-region rash, but has heliotrope/Gottron\'s + proximal weakness)'},
+  septic_arthritis: {tag:'infectious',cat:'Infectious — orthopedic emergency',dx:'Septic Arthritis',
+    gene:'No genetic association — Staph aureus is MCC overall in both children and adults; Kingella kingae = MC gram-negative organism in children; Neisseria gonorrhoeae often polyarticular in sexually active adults',
+    inherit:'No formal diagnostic criteria — clinical + synovial fluid analysis (WBC >50,000/mm³ with >90% PMNs, positive culture, low glucose); Kocher criteria used in pediatrics',
+    features:['Usually monoarticular; hip most common in children (may present as ONLY referred knee pain/refusal to bear weight), knee most common in adults','Fever present in only 40-60% — a normal temperature does NOT rule this out','Pain with passive motion is a key exam finding','Hematogenous seeding is the most common route of infection; direct trauma/puncture next most common'],
+    why:'A child under 5 with knee pain/refusal to bear weight should have the HIP imaged even though the stated complaint is the knee — this is the classic pediatric pitfall the vignette is testing.',
+    complication:'Treatment = antimicrobial therapy + joint fluid drainage, total 4 weeks (IV then oral), extended to 6 weeks for Pseudomonas. No improvement by day 5-6 → re-aspirate, rule out Lyme disease.',
+    mimic:'Reactive arthritis (post-infectious, not itself infected) · Transient synovitis (self-limited, less toxic-appearing, normal/mildly elevated labs) · Osteomyelitis (image to rule out if not improving)'},
+  reactive_arthritis: {tag:'autoimmune',cat:'Autoimmune — post-infectious spondyloarthropathy',dx:'Reactive Arthritis',
+    gene:'HLA-B27 linked (30-90%, higher 60-90% in post-infectious cases)',
+    inherit:'Clinical diagnosis — classic triad + preceding GI/GU infection history',
+    features:['Classic triad: arthritis, urethritis, conjunctivitis ("can\'t see, can\'t pee, can\'t climb a tree")','Joint pain/swelling (knees, ankles, feet); low back pain; enthesitis; dactylitis','Follows a GI or GU infection (e.g., Chlamydia, Salmonella, Shigella, Campylobacter, Yersinia)'],
+    why:'The key is TEMPORAL — symptoms follow days-to-weeks AFTER a GI/GU infection has resolved; this is a post-infectious immune-mediated process, NOT an active joint infection (unlike septic arthritis).',
+    complication:'Can become chronic/recurrent in a subset of patients; overlaps mechanistically with the other HLA-B27-associated SpAs (enthesitis-centered).',
+    mimic:'Septic arthritis (actively infected joint, not post-infectious reactive process) · Gonococcal arthritis (can also follow GU infection but IS an active joint infection)'},
+  scleroderma: {tag:'autoimmune',cat:'Autoimmune — fibrosing CTD',dx:'Scleroderma (Systemic Sclerosis)',
+    gene:'Anti-Scl-70 (anti-topoisomerase I) — diffuse form; anti-centromere — limited form',
+    inherit:'Limited vs. diffuse cutaneous subtypes based on extent of skin involvement',
+    features:['Skin thickening/tightness (fingers, face); sclerodactyly; telangiectasia','Raynaud\'s phenomenon (often an early/presenting feature)','GI dysmotility (esophageal most common), pulmonary fibrosis, fatigue'],
+    why:'Raynaud\'s + progressive skin tightening starting distally (fingers) is the classic opening vignette; anti-Scl-70 is the antibody anchor to know for the diffuse form.',
+    complication:'Pulmonary fibrosis and scleroderma renal crisis are the most feared visceral complications — pulmonary involvement is a leading cause of death.',
+    mimic:'Mixed connective tissue disease (also has Raynaud\'s + puffy fingers, but with high anti-U1-RNP and overlapping SLE/myositis features) · Raynaud\'s disease alone (primary, no underlying CTD)'},
+  dermatomyositis: {tag:'autoimmune',cat:'Autoimmune — inflammatory myopathy with skin involvement',dx:'Dermatomyositis',
+    gene:'Anti-Mi-2 (classic); also anti-synthetase antibodies possible',
+    inherit:'Clinical diagnosis: rash + proximal weakness + elevated CK ± biopsy/EMG',
+    features:['Heliotrope rash (violaceous, periorbital) and Gottron\'s papules (over MCP/PIP/DIP joints) — the two pathognomonic skin findings','Proximal muscle weakness (shoulders, hips)','Dysphagia, interstitial lung disease; calcinosis in juvenile form'],
+    why:'Heliotrope rash + Gottron\'s papules + proximal weakness is essentially pathognomonic. IMPORTANT: dermatomyositis has a real MALIGNANCY association (ovarian/GI especially in adults) — new-onset disease in an older adult should prompt cancer screening.',
+    complication:'Interstitial lung disease and malignancy screening are the two things that change management most.',
+    mimic:'Polymyositis (same weakness/CK elevation, but NO skin findings) · SLE (also has a photosensitive rash, but different distribution and no Gottron\'s/heliotrope)'},
+  polymyositis: {tag:'autoimmune',cat:'Autoimmune — inflammatory myopathy without skin involvement',dx:'Polymyositis',
+    gene:'Anti-Jo-1 (antisynthetase syndrome)',
+    inherit:'Clinical diagnosis: symmetric proximal weakness + elevated CK ± biopsy/EMG, NO skin rash (this is what separates it from dermatomyositis)',
+    features:['Symmetric proximal muscle weakness (shoulders, hips) — same distribution as dermatomyositis','Dysphagia, fatigue, arthralgias','Respiratory issues if interstitial lung disease present (antisynthetase syndrome)'],
+    why:'Identical muscle-weakness picture to dermatomyositis but the ABSENCE of a skin rash (no heliotrope, no Gottron\'s) is the single distinguishing exam/vignette detail.',
+    complication:'Antisynthetase syndrome (anti-Jo-1 + ILD + myositis + mechanic\'s hands + Raynaud\'s + arthritis) is the overlap pattern worth recognizing.',
+    mimic:'Dermatomyositis (same weakness, HAS the rash) · SLE-associated myositis (occurs in ~10% of SLE, different antibody/context)'},
+  mctd: {tag:'overlap',cat:'Autoimmune — overlap syndrome',dx:'Mixed Connective Tissue Disease',
+    gene:'High titer anti-U1-RNP (the defining antibody)',
+    inherit:'Overlap features of SLE + scleroderma + polymyositis that don\'t cleanly fit any single diagnosis',
+    features:['Raynaud\'s phenomenon (prominent)','"Puffy"/swollen fingers, arthritis, myositis','Pulmonary hypertension, esophageal dysmotility, skin changes'],
+    why:'Raynaud\'s + puffy fingers + myositis + arthritis WITHOUT a clean fit into SLE/scleroderma/PM alone, plus a high anti-U1-RNP titer, nails this diagnosis.',
+    complication:'Pulmonary hypertension is a major cause of morbidity/mortality in MCTD — monitor for it specifically.',
+    mimic:'SLE alone, scleroderma alone, or polymyositis alone — MCTD is defined by NOT fitting cleanly into any single one of these plus the anti-RNP titer'},
+  relapsing_poly: {tag:'autoimmune',cat:'Autoimmune — cartilage-directed',dx:'Relapsing Polychondritis',
+    gene:'No single defining autoantibody emphasized; associated with other autoimmune diseases',
+    inherit:'Rare, episodic autoimmune attack on cartilage',
+    features:['Ear/nose chondritis — redness and pain that classically SPARES the earlobe (lobe has no cartilage)','Saddle nose deformity (from nasal cartilage destruction)','Airway symptoms: hoarseness, cough — potentially life-threatening if laryngotracheal cartilage involved','Ocular inflammation, arthritis, fatigue'],
+    why:'Ear pain/redness that SPARES the lobe is the classic discriminating exam finding (cartilage-only distribution) — think of it as "the cartilage is angry, the fatty lobe is fine."',
+    complication:'Airway/laryngotracheal chondritis is the complication that can become an emergency — always ask about hoarseness/stridor/cough in these patients.',
+    mimic:'Cellulitis of the ear (would NOT spare the lobe, since it\'s a skin/soft tissue infection, not cartilage-specific) · Gout/other causes of auricular changes'},
+  aps: {tag:'autoimmune',cat:'Autoimmune — thrombotic',dx:'Antiphospholipid Antibody Syndrome',
+    gene:'Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-β2-glycoprotein I)',
+    inherit:'Primary, or secondary (e.g., to SLE)',
+    features:['Thrombosis — DVT, stroke, PE (arterial OR venous)','Recurrent miscarriages/pregnancy loss','Livedo reticularis, thrombocytopenia, headaches, cardiac valve issues'],
+    why:'Recurrent miscarriages + a thrombotic event (DVT/stroke) in the same patient is the classic pairing that should trigger antiphospholipid antibody testing — especially if there\'s known or suspected SLE.',
+    complication:'Catastrophic APS (multi-organ thrombosis) is the rare but life-threatening severe form.',
+    mimic:'Other hypercoagulable states (Factor V Leiden, protein C/S deficiency — no autoantibodies, no pregnancy-loss pattern as classically)'},
+};
+
+const TREE = {
+  start: {
+    label:'Start',
+    q:'Is this a GENETIC/inherited connective tissue disorder or an AUTOIMMUNE one — or is it a joint infection?',
+    options:[
+      {text:'Genetic/inherited — structural collagen or connective tissue protein defect, often from birth/childhood', hint:'', to:'genetic1'},
+      {text:'Autoimmune — immune system attacking the body\'s own connective tissue', hint:'', to:'autoimmune1'},
+      {text:'Acute joint infection — bacterial, orthopedic emergency', hint:'', to:'result:septic_arthritis'},
+    ]
+  },
+
+  // ---- GENETIC BRANCH ----
+  genetic1:{
+    label:'Genetic CTD',
+    q:'What is the dominant clinical picture?',
+    options:[
+      {text:'Hyperextensible/velvety skin + hypermobile joints, atraumatic shoulder dislocations', hint:'', to:'result:eds'},
+      {text:'Tall/thin stature, long limbs, lens dislocation, aortic root disease', hint:'', to:'marfan_ld1'},
+      {text:'Cleft palate/micrognathia, severe myopia/retinal detachment, hearing loss (infant/child)', hint:'', to:'result:stickler'},
+      {text:'Multiple fractures of varying ages, blue sclerae, dentinogenesis imperfecta', hint:'', to:'result:oi'},
+      {text:'Fragile skin, blisters with minor trauma, since infancy', hint:'', to:'result:eb_genetic'},
+      {text:'Yellowish skin papules, loose skin, early atherosclerosis, retinal streaks', hint:'', to:'result:pxe'},
+    ]
+  },
+  marfan_ld1:{
+    label:'Aortic-aneurysm-prone CTD',
+    q:'Is the vascular course typical Marfan severity, or unusually aggressive with additional craniofacial findings?',
+    options:[
+      {text:'Classic triad (skeletal + ocular + aortic), FBN1-associated, aortic threshold 5.0cm', hint:'', to:'result:marfan'},
+      {text:'More aggressive/rapidly progressive vascular disease + hypertelorism/bifid uvula/cleft palate', hint:'', to:'result:loeys_dietz'},
+    ]
+  },
+
+  // ---- AUTOIMMUNE BRANCH ----
+  autoimmune1:{
+    label:'Autoimmune CTD',
+    q:'What is the primary organ/tissue system involved?',
+    options:[
+      {text:'Axial spine / SI joints — chronic inflammatory back pain', hint:'', to:'axial1'},
+      {text:'Peripheral joints + psoriasis/nail changes', hint:'', to:'result:psa'},
+      {text:'Peripheral/axial joints + known IBD (Crohn\'s/UC)', hint:'', to:'result:ibd_spa'},
+      {text:'Multisystem — rash, joints, kidneys, autoantibodies (ANA+)', hint:'', to:'result:sle'},
+      {text:'Preceding GI/GU infection, then arthritis + urethritis + conjunctivitis', hint:'', to:'result:reactive_arthritis'},
+      {text:'Skin thickening/tightening + Raynaud\'s', hint:'', to:'skin_thick1'},
+      {text:'Muscle weakness (proximal) ± skin rash', hint:'', to:'myopathy1'},
+      {text:'Ear/nose cartilage inflammation, sparing the earlobe', hint:'', to:'result:relapsing_poly'},
+      {text:'Recurrent clots + recurrent miscarriages', hint:'', to:'result:aps'},
+    ]
+  },
+  axial1:{
+    label:'Axial inflammatory disease',
+    q:'HLA-B27 status and any GI history?',
+    options:[
+      {text:'HLA-B27 90-95% positive, no GI history, classic bamboo spine progression', hint:'', to:'result:as'},
+      {text:'HLA-B27 50-75% positive, known Crohn\'s or UC', hint:'', to:'result:ibd_spa'},
+    ]
+  },
+  skin_thick1:{
+    label:'Sclerosing skin disease',
+    q:'Is this an isolated fibrosing process, or does it overlap with myositis/SLE features and a high anti-RNP titer?',
+    options:[
+      {text:'Isolated — progressive skin tightening, anti-Scl-70, GI dysmotility, pulmonary fibrosis', hint:'', to:'result:scleroderma'},
+      {text:'Overlap — puffy fingers + myositis + arthritis + high anti-U1-RNP, doesn\'t fit cleanly into one diagnosis', hint:'', to:'result:mctd'},
+    ]
+  },
+  myopathy1:{
+    label:'Inflammatory myopathy',
+    q:'Is there an associated skin rash (heliotrope / Gottron\'s papules)?',
+    options:[
+      {text:'Yes — heliotrope rash and/or Gottron\'s papules present', hint:'', to:'result:dermatomyositis'},
+      {text:'No — proximal weakness and elevated CK, no skin findings', hint:'', to:'result:polymyositis'},
+    ]
+  },
+};
+
+let history = [];
+let current = 'start';
+let navStack = [];
+
+function renderCrumbs(){
+  const el = document.getElementById('breadcrumb');
+  el.innerHTML = '';
+  history.forEach((h)=>{
+    const c = document.createElement('span');
+    c.className = 'crumb';
+    c.innerHTML = h;
+    el.appendChild(c);
+  });
+}
+
+function goTo(nodeId, chosenText){
+  if(chosenText){ history.push(chosenText); }
+  current = nodeId;
+  render();
+}
+
+function restart(){
+  history = [];
+  navStack = [];
+  current = 'start';
+  render();
+}
+
+function back(){
+  if(navStack.length===0) return;
+  history.pop();
+  current = navStack.pop();
+  render();
+}
+
+function renderResult(r){
+  const tagClass = {genetic:'tag-genetic',autoimmune:'tag-autoimmune',infectious:'tag-infectious',overlap:'tag-overlap'}[r.tag] || 'tag-genetic';
+  const tagLabel = {genetic:'Genetic / Inherited',autoimmune:'Autoimmune',infectious:'Infectious',overlap:'Overlap Syndrome'}[r.tag];
+  return `<div class="result-card">
+    <span class="result-tag ${tagClass}">${tagLabel} &middot; ${r.cat}</span>
+    <h2 class="result-dx">${r.dx}</h2>
+    <div class="result-section">
+      <h4>Gene / Antibody</h4>
+      <p>${r.gene}</p>
+    </div>
+    <div class="result-section">
+      <h4>Inheritance / Diagnostic Criteria</h4>
+      <p>${r.inherit}</p>
+    </div>
+    <div class="result-section">
+      <h4>Key Features</h4>
+      <ul>${r.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+    </div>
+    <div class="result-section">
+      <h4>Why This Fits</h4>
+      <p>${r.why}</p>
+    </div>
+    <div class="result-section">
+      <h4>Key Complication / Management Pearl</h4>
+      <p>${r.complication}</p>
+    </div>
+    <div class="result-section">
+      <div class="mimics"><b>Watch out for / distinguish from:</b> ${r.mimic}</div>
+    </div>
+    <div class="nav-row">
+      <button class="ghost-btn" id="backBtn2">&larr; Back</button>
+      <button class="ghost-btn" id="restartBtn2">Start a new vignette</button>
+    </div>
+  </div>`;
+}
+
+function render(){
+  renderCrumbs();
+  const mount = document.getElementById('tree-mount');
+
+  if(current.startsWith('result:')){
+    const key = current.replace('result:','');
+    const r = RESULTS[key];
+    mount.innerHTML = renderResult(r);
+    const bb2 = document.getElementById('backBtn2');
+    const rb2 = document.getElementById('restartBtn2');
+    if(bb2) bb2.addEventListener('click', back);
+    if(rb2) rb2.addEventListener('click', restart);
+    return;
+  }
+
+  const node = TREE[current];
+  let html = `<div class="q-card">
+    <div class="q-label">${node.label}</div>
+    <p class="q-text">${node.q}</p>
+    <div class="opt-grid">`;
+  node.options.forEach((opt,idx)=>{
+    html += `<button class="opt-btn" data-idx="${idx}">${opt.text}${opt.hint ? `<span class="opt-hint">${opt.hint}</span>`:''}</button>`;
+  });
+  html += `</div>
+    <div class="nav-row">
+      <button class="ghost-btn" id="backBtn" ${navStack.length===0?'style="visibility:hidden"':''}>&larr; Back</button>
+      <button class="ghost-btn" id="restartBtn">Restart</button>
+    </div>
+  </div>`;
+  mount.innerHTML = html;
+
+  node.options.forEach((opt,idx)=>{
+    mount.querySelector(`[data-idx="${idx}"]`).addEventListener('click', ()=>{
+      navStack.push(current);
+      goTo(opt.to, opt.text);
+    });
+  });
+  const bb = document.getElementById('backBtn');
+  if(bb) bb.addEventListener('click', back);
+  document.getElementById('restartBtn').addEventListener('click', restart);
+}
+
+render();
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+const REF_GROUPS = [
+  {
+    title:'By Gene (Genetic CTDs)',
+    rows:[
+      ['COL3A1','Vascular Ehlers-Danlos Syndrome'],
+      ['COL5A1 / COL5A2','Classical Ehlers-Danlos Syndrome'],
+      ['FBN1 (fibrillin-1, NOT collagen)','Marfan Syndrome'],
+      ['COL2A1 (80%) / COL11A1','Stickler Syndrome'],
+      ['COL1A1 / COL1A2','Osteogenesis Imperfecta'],
+      ['TGFBR1, TGFBR2, SMAD3, TGFB2/3','Loeys-Dietz Syndrome'],
+      ['Keratin / Collagen VII genes','Epidermolysis Bullosa'],
+      ['ABCC6','Pseudoxanthoma Elasticum'],
+    ]
+  },
+  {
+    title:'By Antibody (Autoimmune CTDs)',
+    rows:[
+      ['ANA (screening, ~95% sensitive for SLE)','SLE — nonspecific, follow with specific tests'],
+      ['Anti-dsDNA','SLE — tracks activity, correlates with nephritis'],
+      ['Anti-Smith (anti-Sm)','SLE — 99% specific, only 20-30% sensitive'],
+      ['Anti-RNP (high titer)','Mixed Connective Tissue Disease'],
+      ['Anti-SSA (Ro) / Anti-SSB (La)','Sjögren\'s syndrome; also SLE; neonatal lupus/fetal heart block risk'],
+      ['Rheumatoid Factor (RF)','Sensitive not specific — RA (70%), also seen in PsA (2-10%)'],
+      ['Anti-CCP','Highly specific for RA, predicts erosive disease'],
+      ['Anti-Scl-70 (anti-topoisomerase I)','Scleroderma (diffuse)'],
+      ['Anti-centromere','Scleroderma (limited/CREST)'],
+      ['Anti-Mi-2','Dermatomyositis'],
+      ['Anti-Jo-1','Polymyositis / antisynthetase syndrome'],
+      ['HLA-B27','AS (90-95%), Reactive Arthritis (30-90%), PsA (20-70%), IBD (50-75%) — never diagnostic alone'],
+      ['Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-β2-GPI)','Antiphospholipid Antibody Syndrome'],
+    ]
+  },
+  {
+    title:'By Hallmark Sign / Buzzword',
+    rows:[
+      ['Atraumatic, painless shoulder dislocation (initial sign)','Ehlers-Danlos Syndrome'],
+      ['Positive thumb sign & wrist sign','Marfan Syndrome'],
+      ['Pierre Robin sequence (micrognathia → glossoptosis → cleft palate)','Stickler Syndrome'],
+      ['"Saber shin" + "codfish vertebrae"','Osteogenesis Imperfecta'],
+      ['Malar rash SPARES nasolabial fold','SLE (vs. rosacea, which involves it)'],
+      ['LE (hematoxylin) body','SLE — pathologic hallmark across affected organs'],
+      ['Jaccoud arthropathy (non-erosive deformity)','SLE — ligament laxity, not bone erosion'],
+      ['Pencil-in-cup deformity','Psoriatic Arthritis'],
+      ['"Shiny corner sign" (Romanus lesion) → "bamboo spine"','Ankylosing Spondylitis'],
+      ['Dactylitis ("sausage digit")','Psoriatic Arthritis (also reactive arthritis, IBD-SpA)'],
+      ['Heliotrope rash + Gottron\'s papules','Dermatomyositis'],
+      ['Ear/nose chondritis sparing the earlobe','Relapsing Polychondritis'],
+      ['Saddle nose deformity','Relapsing Polychondritis'],
+      ['"Can\'t see, can\'t pee, can\'t climb a tree" triad','Reactive Arthritis (conjunctivitis, urethritis, arthritis)'],
+      ['Raynaud\'s + puffy/swollen fingers + high anti-RNP','Mixed Connective Tissue Disease'],
+      ['Piezogenic papules (feet, weight-bearing)','Ehlers-Danlos Syndrome'],
+      ['Livedo reticularis + recurrent miscarriage + clots','Antiphospholipid Antibody Syndrome'],
+    ]
+  },
+  {
+    title:'By Mechanism / First Fork',
+    rows:[
+      ['Structural protein defect present from birth/childhood, no true lab test, family history pattern','Genetic/inherited CTD'],
+      ['Immune system attacking self connective tissue, autoantibodies, flares/remissions','Autoimmune CTD'],
+      ['Enthesitis-centered (fascia/ligament/tendon-to-bone attachment)','PsA, AS, IBD-SpA, Reactive Arthritis — the seronegative SpA family'],
+      ['Synovium-centered (joint lining)','Rheumatoid arthritis (for contrast — not covered in this lecture but the classic comparison)'],
+      ['Type III hypersensitivity (immune complex deposition)','SLE'],
+      ['Acute bacterial infection of the joint itself','Septic arthritis (orthopedic emergency, not autoimmune)'],
+      ['Post-infectious immune reaction, joint itself NOT infected','Reactive arthritis'],
+    ]
+  },
+];
+
+function renderRef(filter){
+  const mount = document.getElementById('ref-mount');
+  const f = (filter||'').toLowerCase().trim();
+  let html = '';
+  REF_GROUPS.forEach(g=>{
+    const rows = g.rows.filter(r => !f || r[0].toLowerCase().includes(f) || r[1].toLowerCase().includes(f));
+    if(rows.length===0) return;
+    html += `<div class="ref-group"><h3>${g.title}</h3><table class="ref-table"><tbody>`;
+    rows.forEach(r=>{
+      html += `<tr><td style="width:42%"><span class="dx-name">${r[0]}</span></td><td>${r[1]}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  });
+  if(!html) html = '<p style="color:var(--ink-soft)">No matches — try a different term.</p>';
+  mount.innerHTML = html;
+}
+renderRef('');
+document.getElementById('refSearch').addEventListener('input', (e)=>renderRef(e.target.value));
+</script>
+</body>
+</html>
