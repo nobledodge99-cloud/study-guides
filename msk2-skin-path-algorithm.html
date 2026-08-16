@@ -195,9 +195,28 @@
   .buzz{color:var(--ink-soft);font-style:italic;}
 
   footer{text-align:center;color:var(--ink-soft);font-size:0.78rem;margin-top:40px;}
+
+  .back-btn{
+    position:fixed;
+    top:18px;
+    left:18px;
+    z-index:1000;
+    font-family:var(--sans);
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--green-deep);
+    text-decoration:none;
+    border:1.5px solid var(--green-deep);
+    padding:7px 13px;
+    border-radius:8px;
+    background:var(--cream);
+    box-shadow:var(--card-shadow);
+  }
+  .back-btn:hover{background:var(--green-light);}
 </style>
 </head>
 <body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
 <div class="wrap">
   <header>
     <h1>Skin Path Vignette Algorithm</h1>
