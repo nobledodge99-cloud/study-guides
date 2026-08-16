@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Skin Path Vignette Algorithm</title>
+<style>
+  :root{
+    color-scheme: light;
+    --cream:#fdfbf3;
+    --cream-2:#f7f1e0;
+    --ink:#2c2c24;
+    --ink-soft:#5c5a4a;
+    --green-deep:#3b5d43;
+    --green:#5e8461;
+    --green-light:#a9c2a0;
+    --line:#d8cfb4;
+    --purulent:#c8963f;
+    --erythema:#b34b3c;
+    --edema:#7a93a8;
+    --pigment-lt:#a9855c;
+    --pigment-dk:#5a3d24;
+    --pigment-blue:#546a7a;
+    --malignant:#8a2f2f;
+    --card-shadow: 0 2px 10px rgba(44,44,36,0.08);
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{background:var(--cream);}
+  html, body{
+    min-height:100%;
+  }
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 90px;}
+  header{
+    border-bottom:2px solid var(--green-deep);
+    padding-bottom:16px;
+    margin-bottom:22px;
+  }
+  header h1{
+    font-family:var(--serif);
+    font-size:1.9rem;
+    margin:0 0 4px;
+    color:var(--green-deep);
+    letter-spacing:0.2px;
+  }
+  header p{margin:0;color:var(--ink-soft);font-size:0.95rem;}
+  .tabs{display:flex;gap:8px;margin-bottom:20px;}
+  .tab-btn{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:0.85rem;
+    padding:9px 16px;
+    border-radius:20px;
+    border:1.5px solid var(--green-deep);
+    background:transparent;
+    color:var(--green-deep);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab-btn.active{background:var(--green-deep);color:var(--cream);}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  /* breadcrumb */
+  #breadcrumb{
+    display:flex;flex-wrap:wrap;gap:6px;
+    margin-bottom:18px;
+    min-height:26px;
+  }
+  .crumb{
+    font-size:0.78rem;
+    background:var(--cream-2);
+    border:1px solid var(--line);
+    padding:4px 10px;
+    border-radius:14px;
+    color:var(--ink-soft);
+  }
+  .crumb b{color:var(--green-deep);}
+
+  /* question card */
+  .q-card{
+    background:#fffdf7;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+    box-shadow:var(--card-shadow);
+  }
+  .q-label{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--green);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .q-text{
+    font-family:var(--serif);
+    font-size:1.35rem;
+    color:var(--ink);
+    margin:0 0 18px;
+  }
+  .opt-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+  .opt-btn{
+    text-align:left;
+    background:var(--cream);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:12px 16px;
+    font-family:var(--sans);
+    font-size:0.95rem;
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .opt-btn:hover{border-color:var(--green);background:var(--green-light);}
+  .opt-hint{display:block;font-size:0.78rem;color:var(--ink-soft);margin-top:2px;}
+
+  .nav-row{display:flex;justify-content:space-between;margin-top:18px;}
+  .ghost-btn{
+    background:none;border:none;color:var(--green-deep);
+    font-size:0.85rem;font-weight:600;cursor:pointer;
+    padding:6px 4px;
+  }
+  .ghost-btn:hover{text-decoration:underline;}
+
+  /* result card */
+  .result-card{
+    background:#fffdf7;
+    border:2px solid var(--green-deep);
+    border-radius:14px;
+    padding:26px;
+    box-shadow:var(--card-shadow);
+  }
+  .result-tag{
+    display:inline-block;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+    padding:3px 10px;
+    border-radius:12px;
+    margin-bottom:10px;
+  }
+  .tag-benign{background:var(--green-light);color:var(--green-deep);}
+  .tag-malignant{background:#f0d9d5;color:var(--malignant);}
+  .tag-infectious{background:#f0e2c4;color:var(--purulent);}
+  .tag-immune{background:#dbe3ec;color:var(--edema);}
+  .result-dx{font-family:var(--serif);font-size:1.6rem;margin:0 0 14px;color:var(--ink);}
+  .result-section{margin-bottom:14px;}
+  .result-section h4{
+    margin:0 0 4px;font-size:0.78rem;text-transform:uppercase;
+    letter-spacing:0.6px;color:var(--green-deep);
+  }
+  .result-section p, .result-section ul{margin:0;font-size:0.92rem;color:var(--ink);}
+  .result-section ul{padding-left:18px;}
+  .mimics{
+    background:var(--cream-2);border-radius:10px;padding:12px 16px;font-size:0.88rem;
+  }
+  .mimics b{color:var(--green-deep);}
+
+  /* reference tab */
+  .ref-search{
+    width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);
+    font-size:0.95rem;margin-bottom:18px;background:#fffdf7;
+  }
+  .ref-group{margin-bottom:26px;}
+  .ref-group h3{
+    font-family:var(--serif);font-size:1.15rem;color:var(--green-deep);
+    border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;
+  }
+  .swatch-row{
+    display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px;
+  }
+  .swatch{
+    width:14px;height:14px;border-radius:50%;display:inline-block;margin-right:6px;
+    vertical-align:middle;flex-shrink:0;
+  }
+  table.ref-table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+  table.ref-table th{
+    text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;
+    color:var(--ink-soft);border-bottom:2px solid var(--green-deep);padding:6px 8px;
+  }
+  table.ref-table td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.ref-table tr:hover td{background:var(--cream-2);}
+  .dx-name{font-weight:700;color:var(--ink);}
+  .buzz{color:var(--ink-soft);font-style:italic;}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:0.78rem;margin-top:40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Skin Path Vignette Algorithm</h1>
+    <p>A morphology-first decision tree for MSK II skin pathology — click through what the vignette gives you (color, primary lesion, distribution, signs) to narrow to the diagnosis.</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="tree">Decision Tree</button>
+    <button class="tab-btn" data-tab="ref">Color &amp; Feature Reference</button>
+  </div>
+
+  <!-- TREE PANEL -->
+  <div class="panel active" id="panel-tree">
+    <div id="breadcrumb"></div>
+    <div id="tree-mount"></div>
+  </div>
+
+  <!-- REFERENCE PANEL -->
+  <div class="panel" id="panel-ref">
+    <input class="ref-search" id="refSearch" placeholder="Search a buzzword, color, or diagnosis (e.g. 'Auspitz', 'honey-crust', 'Nikolsky')...">
+    <div id="ref-mount"></div>
+  </div>
+
+  <footer>Built from Dr. Kemp's Skin Pathology series (Pt. 1–4) · Cross-check against the full Skin Pathology study guide for staging detail and full vignettes.</footer>
+</div>
+
+<script>
+/* ============================================================
+   DECISION TREE DATA
+   Each node: { id, label(breadcrumb), q, options:[{text,hint,to}] }
+   Result node: { id, result:{...} }
+   ============================================================ */
+
+const RESULTS = {
+  // ---------- PIGMENTED LESIONS ----------
+  junctional_nevus: {tag:'benign',cat:'Benign melanocytic',dx:'Junctional Nevus',
+    features:['Flat to slightly raised macule','Uniform tan-brown','Nests of melanocytes AT the dermoepidermal junction only','Younger patients'],
+    why:'Symmetric, uniform color, junctional nest location = benign; no dermal component yet.',
+    mimic:'Compound/dermal nevus (has dermal component, more raised) · Melanoma (asymmetric, irregular border/color)'},
+  compound_nevus: {tag:'benign',cat:'Benign melanocytic',dx:'Compound Nevus',
+    features:['Raised, dome-shaped papule','Uniform tan-brown','Nests at junction AND in dermis','Often middle-aged adults'],
+    why:'Maturation pattern (nests get smaller/deeper in the dermis) confirms benignity.',
+    mimic:'Dermal nevus (junctional component has "matured away")'},
+  dermal_nevus: {tag:'benign',cat:'Benign melanocytic',dx:'Dermal (Intradermal) Nevus',
+    features:['Soft, skin-colored to light brown papule/dome','Nests entirely within the dermis','Older lesion — junctional activity has "burned out"'],
+    why:'No junctional activity = fully matured, benign.',
+    mimic:'Neurofibroma (softer, "buttonhole" sign) · Skin tag'},
+  dysplastic_nevus: {tag:'benign',cat:'Atypical melanocytic',dx:'Dysplastic (Atypical) Nevus',
+    features:['"Fried egg" look — flat tan periphery + darker raised center','Irregular but not grossly asymmetric border','Architectural disorder + cytologic atypia on histology, but NO full-thickness atypia'],
+    why:'Marker of increased melanoma risk (especially if multiple / familial — FAMMM syndrome) but is itself benign.',
+    mimic:'Melanoma — biopsy any nevus with true ABCDE change'},
+  blue_nevus: {tag:'benign',cat:'Benign melanocytic (dermal)',dx:'Blue Nevus',
+    features:['Blue-gray to blue-black, well-circumscribed papule','Dendritic melanocytes deep in the dermis','Tyndall effect gives the blue color (deep pigment scatters blue light)'],
+    why:'Deep dermal melanocyte location + Tyndall effect explains the blue color without malignancy.',
+    mimic:'Nodular melanoma (also can be blue-black, but grows, ulcerates, irregular)'},
+  cong_melanocytic_nevus: {tag:'benign',cat:'Congenital melanocytic',dx:'Congenital Melanocytic Nevus',
+    features:['Present at birth','Can be small, medium, or "giant" (>20cm — highest melanoma risk)','Often hairy'],
+    why:'Giant congenital nevi carry a real lifetime melanoma risk — size stratifies risk/monitoring.',
+    mimic:'Café-au-lait macule (flat, no papular component, associated with NF1/McCune-Albright)'},
+  dermal_melanosis: {tag:'benign',cat:'Pigmentary (non-neoplastic)',dx:'Dermal Melanocytosis ("Mongolian Spot")',
+    features:['Blue-gray patch, classically lumbosacral','Present at birth in infants, especially darker skin types','Fades over first few years of life'],
+    why:'Dendritic melanocytes trapped in the dermis during migration (never made it to epidermis) — Tyndall effect gives blue-gray hue.',
+    mimic:'Bruising/child abuse workup (important clinical mimic to know!) · Blue nevus (persists, doesn\'t fade)'},
+  cafe_au_lait: {tag:'benign',cat:'Pigmentary (non-neoplastic)',dx:'Café-au-Lait Macule',
+    features:['Sharply demarcated, uniform light-brown (coffee-with-milk) patch','Flat, no surface change'],
+    why:'Increased melanin in basal keratinocytes, normal melanocyte number — purely pigmentary.',
+    mimic:'≥6 lesions >5mm (prepubertal) or >15mm (postpubertal) → think NF1; multiple + irregular ("coast of Maine") → McCune-Albright'},
+  seb_keratosis: {tag:'benign',cat:'Epidermal proliferation',dx:'Seborrheic Keratosis',
+    features:['"Stuck-on," waxy, warty brown-to-black plaque','Horn cysts on histology','Older adults, trunk/face'],
+    why:'Classic "stuck-on" look distinguishes it from melanocytic and malignant epidermal lesions.',
+    mimic:'Sign of Leser-Trélat = sudden eruption of many SKs → paraneoplastic, screen for GI adenocarcinoma · Melanoma (if pigmented/irregular)'},
+  acanthosis_nigricans: {tag:'benign',cat:'Epidermal reaction pattern',dx:'Acanthosis Nigricans',
+    features:['Velvety, hyperpigmented, thickened plaques','Flexural — axillae, neck, groin'],
+    why:'Epidermal hyperplasia driven by insulin/IGF-1 stimulation of keratinocytes.',
+    mimic:'Benign type = obesity/insulin resistance (young, gradual). Malignant type = sudden, extensive, associated with GI adenocarcinoma (esp. gastric) — paraneoplastic!'},
+  dermatofibroma: {tag:'benign',cat:'Benign dermal/fibrohistiocytic',dx:'Dermatofibroma',
+    features:['Firm dermal papule/nodule, often on the leg','Tan-brown to pink','Positive "dimple/buttonhole" sign — dimples inward with lateral pinch'],
+    why:'Dimple sign + firm/fixed-feeling papule is essentially pathognomonic on boards.',
+    mimic:'DFSP (grows larger, infiltrative, protuberant, S100-negative CD34+, locally aggressive) · Melanoma if darkly pigmented'},
+
+  // ---------- MELANOMA ----------
+  melanoma_ssm: {tag:'malignant',cat:'Malignant melanocytic',dx:'Superficial Spreading Melanoma',
+    features:['Most common subtype','Radial growth phase first (flat, spreading) before vertical invasion','Irregular borders, variegated color'],
+    why:'Classic ABCDE lesion; radial-before-vertical growth gives a window for early detection.',
+    mimic:'Dysplastic nevus (less asymmetric, more uniform)'},
+  melanoma_nodular: {tag:'malignant',cat:'Malignant melanocytic',dx:'Nodular Melanoma',
+    features:['No radial growth phase — vertical (invasive) growth from the start','Rapidly enlarging blue-black to red-black nodule','Worst prognosis of the common subtypes (found later/deeper)'],
+    why:'Skips the "easy to catch" flat phase — this is why it presents late and deep.',
+    mimic:'Blue nevus, pyogenic granuloma (if amelanotic/red)'},
+  melanoma_lentigo: {tag:'malignant',cat:'Malignant melanocytic',dx:'Lentigo Maligna Melanoma',
+    features:['Sun-damaged skin of elderly patients (face)','Long radial growth phase (lentigo maligna) before invasion','Large, slowly enlarging tan-brown-black patch'],
+    why:'Chronic UV damage pattern; long precursor (in-situ) phase = best prognosis if caught as lentigo maligna.',
+    mimic:'Solar lentigo (benign "age spot," no atypia) · Seborrheic keratosis'},
+  melanoma_acral: {tag:'malignant',cat:'Malignant melanocytic',dx:'Acral Lentiginous Melanoma',
+    features:['Palms, soles, subungual (nail bed)','NOT UV-related','Most common subtype in darker-skinned patients'],
+    why:'Location + lack of UV association is the key distinguishing fact — often missed/diagnosed late because it\'s not in a "typical" sun-exposed spot.',
+    mimic:'Subungual hematoma (Hutchinson sign — pigment extending onto proximal nail fold — favors melanoma)'},
+  melanoma_staging: {tag:'malignant',cat:'Melanoma — staging concept',dx:'Breslow Depth vs. Clark Level',
+    features:['Breslow depth (mm of invasion) = the single strongest prognostic factor','Clark level = anatomic layer invaded (historical, less used now)'],
+    why:'If the vignette is testing prognosis/staging rather than subtype, it wants Breslow depth.',
+    mimic:'N/A — staging concept, not a differential'},
+
+  // ---------- EPIDERMAL / KERATINOCYTE MALIGNANCIES ----------
+  actinic_keratosis: {tag:'malignant',cat:'Premalignant epidermal',dx:'Actinic Keratosis',
+    features:['Rough, sandpaper-like, erythematous scaly macule/papule','Sun-exposed skin','"Feels before it looks" — palpable before obviously visible'],
+    why:'Premalignant precursor to SCC — parakeratosis with atypical basal keratinocytes, does NOT cross the basement membrane.',
+    mimic:'SCC in situ (Bowen disease — more clearly demarcated, thicker plaque) · Seborrheic keratosis'},
+  keratoacanthoma: {tag:'malignant',cat:'Low-grade keratinocytic',dx:'Keratoacanthoma',
+    features:['Rapidly growing (weeks), dome-shaped nodule with a central keratin-filled crater','Can spontaneously regress'],
+    why:'Behaves like a well-differentiated SCC variant clinically but often self-resolves — many now classify/treat it as SCC given overlap.',
+    mimic:'SCC (KA regresses, SCC usually does not; often treated the same way regardless)'},
+  scc_skin: {tag:'malignant',cat:'Malignant epidermal',dx:'Squamous Cell Carcinoma',
+    features:['Scaly, crusted, ulcerated plaque/nodule','Can arise from actinic keratosis','Sun-exposed areas, also chronic wounds/scars (Marjolin ulcer)'],
+    why:'Invasive atypical keratinocytes crossing the basement membrane — risk of metastasis (low but real, unlike BCC).',
+    mimic:'Keratoacanthoma · BCC (SCC scalier/crustier, BCC pearlier with telangiectasias)'},
+  bcc_nodular: {tag:'malignant',cat:'Malignant epidermal (locally invasive)',dx:'Basal Cell Carcinoma — Nodular',
+    features:['Pearly, translucent papule with rolled borders','Overlying telangiectasias','Central ulceration ("rodent ulcer") in advanced lesions'],
+    why:'Most common skin cancer overall; locally invasive, essentially never metastasizes.',
+    mimic:'SCC (less pearly, more scaly/keratotic) · Intradermal nevus (no telangiectasias)'},
+  bcc_superficial: {tag:'malignant',cat:'Malignant epidermal (locally invasive)',dx:'Basal Cell Carcinoma — Superficial',
+    features:['Pink-red, scaly, well-demarcated patch/thin plaque','Trunk, often multiple','Can mimic eczema/psoriasis — but stays fixed and doesn\'t respond to steroids'],
+    why:'Least aggressive BCC subtype; superficial "budding" of basaloid cells from the epidermis.',
+    mimic:'Nummular eczema, psoriasis (superficial BCC is persistent and unilateral/solitary-ish)'},
+  bcc_morpheaform: {tag:'malignant',cat:'Malignant epidermal (locally invasive)',dx:'Basal Cell Carcinoma — Morpheaform (Sclerosing)',
+    features:['Ill-defined, waxy, scar-like plaque','Borders are deceptively wider than they appear','Most aggressive/locally destructive BCC subtype'],
+    why:'Infiltrative growth pattern makes margins hard to define clinically — highest recurrence rate, often needs Mohs.',
+    mimic:'A true scar (morpheaform BCC has no antecedent trauma history)'},
+  merkel_cell: {tag:'malignant',cat:'Neuroendocrine malignancy',dx:'Merkel Cell Carcinoma',
+    features:['Rapidly growing, firm, red-violet (AEIOU: Asymptomatic, Expanding rapidly, Immunosuppressed, Older >50, UV-exposed)','Associated with Merkel cell polyomavirus','Very aggressive — high metastatic potential'],
+    why:'Neuroendocrine marker positivity (chromogranin, synaptophysin, CK20 "dot-like" perinuclear pattern) + rapid growth in elderly/immunosuppressed = classic vignette.',
+    mimic:'Cyst, lipoma, or amelanotic melanoma if not considered — key is the AEIOU rapid-growth history'},
+  dfsp: {tag:'malignant',cat:'Low-grade sarcoma',dx:'Dermatofibrosarcoma Protuberans (DFSP)',
+    features:['Slow-growing, firm, protuberant (multi-nodular) plaque/mass','No dimple sign (unlike dermatofibroma)','CD34+, storiform ("cartwheel") pattern; locally aggressive, low metastatic risk'],
+    why:'Distinguishing this from benign dermatofibroma is a classic boards discrimination: DFSP is bigger, grows, no dimple sign, CD34+.',
+    mimic:'Dermatofibroma (dimple sign present, small, stable)'},
+  mycosis_fungoides: {tag:'malignant',cat:'Cutaneous T-cell lymphoma',dx:'Mycosis Fungoides (± Sézary Syndrome)',
+    features:['Patches → plaques → tumors over years (slow progression)','Epidermotropism of atypical T-cells; Pautrier microabscesses on histology','Sézary = leukemic/erythrodermic variant with circulating Sézary cells (cerebriform nuclei)'],
+    why:'The patch-plaque-tumor progression over YEARS, plus Pautrier microabscesses, is the testable pattern.',
+    mimic:'Chronic eczema/psoriasis (biopsy if a "dermatitis" doesn\'t respond to treatment over time)'},
+
+  // ---------- VASCULAR / OTHER BENIGN GROWTHS ----------
+  hemangioma: {tag:'benign',cat:'Vascular proliferation',dx:'(Infantile) Hemangioma',
+    features:['Bright red, raised, lobulated ("strawberry") lesion','Often absent at birth, proliferates over first year, then involutes'],
+    why:'Classic proliferate-then-involute course distinguishes it from vascular malformations (which grow proportionally with the child and don\'t regress).',
+    mimic:'Vascular malformation (present at birth, grows with child, never involutes) · Pyogenic granuloma (friable, bleeds easily, doesn\'t involute)'},
+  cherry_angioma: {tag:'benign',cat:'Vascular proliferation',dx:'Cherry Angioma',
+    features:['Small, bright red-to-purple papule','Very common, increases with age','Trunk-predominant'],
+    why:'Benign capillary proliferation — extremely common incidental finding, essentially universal with aging.',
+    mimic:'None clinically significant — reassurance'},
+  acrochordon: {tag:'benign',cat:'Benign soft tissue',dx:'Acrochordon (Skin Tag)',
+    features:['Soft, pedunculated, skin-colored to tan papule','Neck, axillae, groin — friction areas','Associated with obesity/insulin resistance'],
+    why:'Purely mechanical/friction-driven benign fibroepithelial polyp.',
+    mimic:'Neurofibroma (softer, "buttonhole" invagination sign)'},
+  epidermal_inclusion_cyst: {tag:'benign',cat:'Benign cystic',dx:'Epidermal Inclusion Cyst',
+    features:['Firm, mobile, subcutaneous nodule with a central punctum','Can express cheesy, foul-smelling keratin debris','Can become inflamed/infected (then tender, erythematous)'],
+    why:'Central punctum is the key discriminator from a lipoma.',
+    mimic:'Lipoma (no punctum, softer, more mobile, doesn\'t drain keratin)'},
+  cylindroma: {tag:'benign',cat:'Adnexal tumor',dx:'Cylindroma',
+    features:['Firm, pink-red nodule, classically on the SCALP','Multiple lesions coalescing = "turban tumor" pattern','Can be familial (CYLD gene)'],
+    why:'Scalp location + "turban tumor" appearance with multiple confluent nodules is the testable image.',
+    mimic:'Trichoepithelioma / other adnexal tumors (grouped under similar familial cylindromatosis syndromes)'},
+  mastocytosis: {tag:'benign',cat:'Mast cell disorder',dx:'Mastocytosis (Urticaria Pigmentosa)',
+    features:['Reddish-brown macules/papules that URTICATE (wheal + flare) when rubbed','Positive Darier sign'],
+    why:'Darier sign (stroking a lesion causes localized swelling/erythema from mast cell degranulation) is pathognomonic and a classic boards image/vignette.',
+    mimic:'Café-au-lait macule (does NOT urticate with stroking — this is the discriminator)'},
+
+  // ---------- PAPULOSQUAMOUS ----------
+  psoriasis: {tag:'immune',cat:'Papulosquamous',dx:'Psoriasis',
+    features:['Well-demarcated, erythematous plaques with SILVERY, micaceous scale','Extensor surfaces (elbows, knees), scalp','Auspitz sign (pinpoint bleeding when scale is removed)','Koebner phenomenon (lesions at sites of trauma)'],
+    why:'Auspitz + Koebner + extensor distribution + silvery scale is the classic full package.',
+    mimic:'Seborrheic dermatitis (greasy yellow scale, scalp/face/chest, not extensor-predominant) · Lichen planus (violaceous, flexor, no silvery scale)'},
+  seb_dermatitis: {tag:'immune',cat:'Papulosquamous',dx:'Seborrheic Dermatitis',
+    features:['Greasy, yellow, "dandruff-like" scale on an erythematous base','Scalp, nasolabial folds, eyebrows, chest','Associated with Malassezia yeast; flares in Parkinson\'s disease, HIV'],
+    why:'Sebaceous-gland-rich distribution + greasy yellow (not silvery) scale distinguishes from psoriasis.',
+    mimic:'Psoriasis (silvery scale, extensor surfaces) · Atopic dermatitis'},
+  lichen_planus: {tag:'immune',cat:'Papulosquamous',dx:'Lichen Planus',
+    features:['The 6 P\'s: Pruritic, Purple, Polygonal, Planar, Papules, Plaques','Wickham striae (white lacy pattern on surface)','Flexor wrists/ankles; can involve oral mucosa (Wickham striae) and genitals','Koebner phenomenon also seen here'],
+    why:'The 6 P\'s mnemonic + Wickham striae is the highest-yield combination for this diagnosis.',
+    mimic:'Psoriasis (silvery not violaceous, extensor not flexor) · Lichen simplex chronicus (thickened from chronic rubbing, not primarily violaceous-polygonal)'},
+  lichen_simplex: {tag:'immune',cat:'Reactive/eczematous',dx:'Lichen Simplex Chronicus',
+    features:['Thickened, leathery, hyperpigmented plaque with exaggerated skin markings (lichenification)','Result of chronic rubbing/scratching (itch-scratch cycle)'],
+    why:'This is a SECONDARY reaction pattern to chronic mechanical trauma — always ask "what\'s the underlying itch driving this?"',
+    mimic:'Lichen planus (LSC lacks the violaceous polygonal papules/Wickham striae)'},
+
+  // ---------- IMMUNOBULLOUS ----------
+  pemphigus_vulgaris: {tag:'immune',cat:'Immunobullous — intraepidermal',dx:'Pemphigus Vulgaris',
+    features:['Flaccid bullae that rupture easily → painful erosions','Oral mucosal involvement common (often presents first)','Nikolsky sign POSITIVE','IgG against desmoglein 3 (± 1) — intraepidermal, suprabasal acantholysis'],
+    why:'Nikolsky POSITIVE + flaccid bullae + mucosal involvement = pemphigus. Antibody hits desmosomes → cells separate from EACH OTHER (intraepidermal).',
+    mimic:'Bullous pemphigoid (Nikolsky NEGATIVE, tense bullae, no mucosal predominance, older patients)'},
+  bullous_pemphigoid: {tag:'immune',cat:'Immunobullous — subepidermal',dx:'Bullous Pemphigoid',
+    features:['TENSE bullae on erythematous/urticarial base','Nikolsky sign NEGATIVE','Elderly patients','IgG against hemidesmosomes (BP180/BP230) — subepidermal split'],
+    why:'Nikolsky NEGATIVE + tense bullae in an elderly patient = pemphigoid. Antibody hits the basement membrane → whole epidermis lifts off intact (subepidermal), so bullae are tense/tough.',
+    mimic:'Pemphigus vulgaris (flaccid, Nikolsky+, mucosal, younger)'},
+  dermatitis_herpetiformis: {tag:'immune',cat:'Immunobullous — subepidermal',dx:'Dermatitis Herpetiformis',
+    features:['Intensely pruritic, grouped ("herpetiform") vesicles','Extensor surfaces — elbows, knees, buttocks','Associated with CELIAC DISEASE (gluten sensitivity)','IgA deposits at dermal papillary tips'],
+    why:'The celiac-disease association + grouped/herpetiform pattern on extensors is the giveaway; treat the gluten sensitivity and skin improves.',
+    mimic:'Bullous pemphigoid (not grouped, not associated with celiac, IgG not IgA)'},
+  epidermolysis_bullosa: {tag:'immune',cat:'Mechanobullous (genetic)',dx:'Epidermolysis Bullosa',
+    features:['Blistering/erosions at sites of minor friction or trauma, from birth/infancy','Multiple genetic subtypes affecting different structural proteins (keratin, anchoring fibrils, hemidesmosomes) at different skin layers'],
+    why:'Genetic/structural — NOT autoimmune. Trauma-induced blistering starting in infancy is the tell (vs. acquired immunobullous disease in adults).',
+    mimic:'Immunobullous diseases (those are acquired/autoimmune, EB is congenital/genetic)'},
+  erythema_multiforme: {tag:'immune',cat:'Hypersensitivity reaction',dx:'Erythema Multiforme',
+    features:['Classic TARGETOID lesions (concentric rings of color change)','Most often triggered by HSV infection (also some drugs)','Minimal or no mucosal involvement, <10% BSA'],
+    why:'Targetoid lesions + HSV trigger + limited BSA/mucosal involvement separates this from SJS/TEN, which are more severe and drug-driven.',
+    mimic:'SJS/TEN (more mucosal involvement, more BSA, drug-triggered, can progress along the same spectrum)'},
+  sjs_ten: {tag:'immune',cat:'Severe hypersensitivity reaction',dx:'Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis',
+    features:['Widespread targetoid/dusky erythema with epidermal SLOUGHING (Nikolsky positive)','Significant mucosal involvement (oral, ocular, genital)','Drug-triggered (e.g., sulfa drugs, allopurinol, anticonvulsants)','SJS <10% BSA, TEN >30% BSA (SJS/TEN overlap 10-30%)'],
+    why:'BSA percentage is the key number the vignette is testing: <10% SJS, >30% TEN, 10-30% overlap. Full-thickness epidermal necrosis on histology.',
+    mimic:'Erythema multiforme (much less BSA, HSV-triggered not drug-triggered, less severe)'},
+  urticaria: {tag:'immune',cat:'Type I hypersensitivity',dx:'Urticaria (Hives)',
+    features:['Transient (individual lesions <24h), pruritic, EDEMATOUS wheals','Blanchable, migratory','Dermal edema on histology, no epidermal change'],
+    why:'The "here today, gone by tomorrow, moves around" transience is the key distinguishing history — if a lesion sits >24h in the same spot, reconsider (urticarial vasculitis).',
+    mimic:'Erythema multiforme (fixed lesions, targetoid, lasts >24h) · Urticarial vasculitis (fixed >24h, may bruise/purpura, biopsy shows vasculitis)'},
+  acute_eczematous: {tag:'immune',cat:'Eczematous dermatitis',dx:'Acute Eczematous Dermatitis (Contact/Atopic)',
+    features:['Erythema, edema, vesiculation, weeping/oozing','Intensely pruritic','Spongiosis (intercellular epidermal edema) on histology'],
+    why:'Spongiosis is the histologic hallmark distinguishing eczematous processes from psoriasiform (epidermal hyperplasia without spongiosis) processes.',
+    mimic:'Contact dermatitis (localized to exposure site, sharp margins/geometric shapes) vs. atopic dermatitis (flexural, chronic, atopy history)'},
+  panniculitis: {tag:'immune',cat:'Subcutaneous inflammation',dx:'Panniculitis (e.g., Erythema Nodosum)',
+    features:['Tender, erythematous SUBCUTANEOUS nodules, classically bilateral pretibial','Inflammation centered in the subcutaneous FAT (septal panniculitis for erythema nodosum)','Associated with infections (strep), sarcoidosis, IBD, drugs, pregnancy'],
+    why:'Depth of inflammation (fat, not dermis/epidermis) plus the systemic-association list is what\'s tested.',
+    mimic:'Cellulitis (less nodular/discrete, more diffuse, systemically ill) · Vasculitis (palpable purpura, not just tender nodules)'},
+
+  // ---------- INFECTIOUS / PUSTULAR / PURULENT ----------
+  impetigo: {tag:'infectious',cat:'Bacterial infection',dx:'Impetigo',
+    features:['Honey-colored (golden) CRUSTED erosions','Superficial — S. aureus and/or S. pyogenes','Face (perioral/perinasal), common in children','Bullous variant (staph exotoxin, exfoliative toxin) also exists'],
+    why:'The "honey-crusted" description is essentially pathognomonic on boards.',
+    mimic:'Herpes simplex (grouped vesicles, painful, not honey-crusted) · Eczema herpeticum if disseminated'},
+  verrucae: {tag:'infectious',cat:'Viral infection',dx:'Verrucae (Warts)',
+    features:['Rough, hyperkeratotic papules with black dots (thrombosed capillaries)','Caused by HPV (various serotypes by site — plantar, common, flat)'],
+    why:'Black dots = thrombosed capillaries in dermal papillae, a classic exam-image clue.',
+    mimic:'Callus (no black dots, no interruption of skin lines) · Molluscum (dome-shaped with central umbilication, not hyperkeratotic)'},
+  molluscum: {tag:'infectious',cat:'Viral infection',dx:'Molluscum Contagiosum',
+    features:['Dome-shaped, flesh-colored, waxy papules with CENTRAL UMBILICATION','Poxvirus','Henderson-Paterson bodies (eosinophilic cytoplasmic inclusions) on histology'],
+    why:'Central umbilication is the pathognomonic clinical clue; widespread/large lesions in an adult should prompt an HIV check.',
+    mimic:'Verrucae (rough/hyperkeratotic, not umbilicated) · Basal cell carcinoma if solitary in an adult'},
+  tinea: {tag:'infectious',cat:'Fungal infection',dx:'Tinea (Dermatophyte Infection)',
+    features:['Annular, scaly plaque with CENTRAL CLEARING and an active, scaly, raised border','KOH prep shows branching septate hyphae'],
+    why:'"Central clearing with active border" + positive KOH distinguishes this from other annular rashes.',
+    mimic:'Nummular eczema (no central clearing, no hyphae on KOH) · Granuloma annulare (annular but NOT scaly)'},
+  acne: {tag:'infectious',cat:'Follicular/inflammatory',dx:'Acne Vulgaris',
+    features:['Comedones (open/closed), papules, pustules, nodulocystic lesions','Follicular plugging + Cutibacterium (Propionibacterium) acnes + sebum overproduction','Face/chest/back (sebaceous-gland-dense areas)'],
+    why:'Comedones (blackheads/whiteheads) are the defining lesion that separates acne from rosacea.',
+    mimic:'Rosacea (NO comedones, more centrofacial erythema/telangiectasia/flushing, adult-onset)'},
+  rosacea: {tag:'infectious',cat:'Vascular/inflammatory',dx:'Rosacea',
+    features:['Centrofacial erythema, telangiectasias, flushing, papules/pustules','NO comedones (key discriminator from acne)','Can progress to rhinophyma (thickened, bulbous nose)'],
+    why:'Absence of comedones in an adult with centrofacial flushing/telangiectasia = rosacea, not acne.',
+    mimic:'Acne vulgaris (has comedones) · Seborrheic dermatitis (greasy scale, different distribution)'},
+
+  // ---------- METABOLIC / GENETIC ----------
+  ichthyosis: {tag:'immune',cat:'Genetic keratinization disorder',dx:'Ichthyosis (Vulgaris and variants)',
+    features:['Dry, fish-scale-like skin, worse on extensors, spares flexures','Often lifelong, presents in childhood','Ichthyosis vulgaris = most common, filaggrin mutation, associated with atopy'],
+    why:'Distribution (extensor-predominant, flexural sparing) plus lifelong history distinguishes this from an acquired eczematous process.',
+    mimic:'Xerosis (simple dry skin, less severe/patterned) · Acquired ichthyosis (paraneoplastic, esp. lymphoma — new onset in an adult should raise this flag)'},
+  porphyria: {tag:'immune',cat:'Metabolic/photosensitivity',dx:'Porphyria Cutanea Tarda',
+    features:['Photosensitivity with blistering/erosions and skin FRAGILITY on sun-exposed skin (dorsal hands)','Hyperpigmentation, hypertrichosis','Associated with hepatitis C, alcohol use, estrogen use'],
+    why:'Fragility + blistering on sun-exposed skin + the HCV/alcohol association is the classic clinical package.',
+    mimic:'Pseudoporphyria (drug-induced, e.g., NSAIDs, similar picture without the porphyrin abnormality)'},
+
+  // ---------- PARANEOPLASTIC ----------
+  paraneoplastic_derm: {tag:'malignant',cat:'Paraneoplastic',dx:'Paraneoplastic Dermatoses (overview)',
+    features:['Leser-Trélat (explosive SKs) → GI adenocarcinoma','Malignant Acanthosis Nigricans (sudden, extensive, mucosal) → GI adenocarcinoma (esp. gastric)','Dermatomyositis (heliotrope rash, Gottron\'s papules) → ovarian/GI malignancy in adults','Acquired ichthyosis → lymphoma'],
+    why:'Any of these findings appearing suddenly/explosively or atypically (esp. in an older adult) should trigger a malignancy workup.',
+    mimic:'Each has a "garden-variety" benign counterpart — the tell is abruptness, extent, and patient age/risk factors'},
+};
+
+const TREE = {
+  start: {
+    label:'Start',
+    q:'What is the PRIMARY lesion type in the vignette?',
+    options:[
+      {text:'Pigmented macule / patch / papule', hint:'brown, black, blue, or tan-colored flat-to-raised lesion', to:'pigmented1'},
+      {text:'Plaque with scale', hint:'raised, flat-topped, scaly surface', to:'papulosquamous1'},
+      {text:'Vesicle / bulla', hint:'fluid-filled blister', to:'blister1'},
+      {text:'Pustule / purulent lesion', hint:'pus-filled, or "crusted/draining"', to:'pustular1'},
+      {text:'Firm nodule / tumor / growing mass', hint:'palpable, deeper, enlarging lesion', to:'nodule1'},
+      {text:'Wheal (transient, itchy, edematous)', hint:'comes and goes within hours, migratory', to:'result:urticaria'},
+      {text:'Diffuse erythema / targetoid lesions', hint:'widespread redness, "bulls-eye" pattern, possible mucosal involvement', to:'erythema1'},
+      {text:'Tender subcutaneous nodules', hint:'deep, tender bumps, often on the shins', to:'result:panniculitis'},
+    ]
+  },
+
+  // ---- PIGMENTED BRANCH ----
+  pigmented1:{
+    label:'Pigmented lesion',
+    q:'What color is it, and is it present from birth?',
+    options:[
+      {text:'Present at birth, blue-gray, lumbosacral (infant)', hint:'', to:'result:dermal_melanosis'},
+      {text:'Present at birth, uniform light tan, sharply demarcated', hint:'', to:'result:cafe_au_lait'},
+      {text:'Present at birth, papular/plaque-like, possibly hairy, any size', hint:'', to:'result:cong_melanocytic_nevus'},
+      {text:'Acquired, blue-gray to blue-black, well-circumscribed, deep', hint:'', to:'result:blue_nevus'},
+      {text:'Acquired, uniform tan-brown, symmetric', hint:'proceed to nevus subtype', to:'pigmented_nevus2'},
+      {text:'Acquired, "stuck-on" waxy/warty, tan-black', hint:'older adult', to:'result:seb_keratosis'},
+      {text:'Acquired, irregular border/color, or NEW change in a mole (ABCDE)', hint:'', to:'melanoma1'},
+      {text:'Reddish-brown, urticates when rubbed', hint:'', to:'result:mastocytosis'},
+      {text:'Velvety, hyperpigmented, in a skin fold', hint:'', to:'result:acanthosis_nigricans'},
+    ]
+  },
+  pigmented_nevus2:{
+    label:'Benign nevus',
+    q:'What is its shape / histologic clue?',
+    options:[
+      {text:'Flat macule, junctional nests only (younger patient)', hint:'', to:'result:junctional_nevus'},
+      {text:'Raised dome, nests at junction + dermis', hint:'', to:'result:compound_nevus'},
+      {text:'Soft dome papule, nests entirely dermal (older lesion)', hint:'', to:'result:dermal_nevus'},
+      {text:'"Fried-egg" — flat tan rim + darker raised center, mildly irregular', hint:'', to:'result:dysplastic_nevus'},
+    ]
+  },
+  melanoma1:{
+    label:'Suspected melanoma',
+    q:'What is the growth pattern / location?',
+    options:[
+      {text:'Flat, spreading radially before any vertical growth', hint:'most common subtype', to:'result:melanoma_ssm'},
+      {text:'Rapidly growing nodule, NO flat radial phase', hint:'worse prognosis, presents late', to:'result:melanoma_nodular'},
+      {text:'Elderly, sun-damaged face, slowly enlarging patch, long flat phase', hint:'', to:'result:melanoma_lentigo'},
+      {text:'Palm / sole / subungual, not UV-related', hint:'', to:'result:melanoma_acral'},
+      {text:'I need the staging concept (Breslow vs. Clark), not the subtype', hint:'', to:'result:melanoma_staging'},
+    ]
+  },
+
+  // ---- PAPULOSQUAMOUS BRANCH ----
+  papulosquamous1:{
+    label:'Scaly plaque',
+    q:'What does the scale look like, and where is it?',
+    options:[
+      {text:'Silvery/micaceous scale, extensor surfaces (elbows/knees), + bleeding when scale removed', hint:'Auspitz sign', to:'result:psoriasis'},
+      {text:'Greasy yellow scale, scalp/nasolabial folds/chest', hint:'', to:'result:seb_dermatitis'},
+      {text:'Violaceous, polygonal, flat-topped, flexor wrists ± oral lacy white lines', hint:'the 6 P\'s', to:'result:lichen_planus'},
+      {text:'Thickened, leathery plaque with exaggerated skin lines from chronic rubbing', hint:'', to:'result:lichen_simplex'},
+      {text:'Rough sandpaper macule/papule on sun-exposed skin (feels before it looks)', hint:'', to:'result:actinic_keratosis'},
+      {text:'Annular plaque with central clearing and an active scaly border', hint:'', to:'result:tinea'},
+      {text:'Dry, fish-scale pattern, extensor-predominant, lifelong', hint:'', to:'result:ichthyosis'},
+      {text:'Pink-red, well-demarcated, persistent, not responsive to steroids', hint:'', to:'result:bcc_superficial'},
+    ]
+  },
+
+  // ---- BLISTERING BRANCH ----
+  blister1:{
+    label:'Vesicle / bulla',
+    q:'Nikolsky sign and mucosal involvement?',
+    options:[
+      {text:'Flaccid bullae, Nikolsky POSITIVE, oral mucosa involved early', hint:'', to:'result:pemphigus_vulgaris'},
+      {text:'Tense bullae, Nikolsky NEGATIVE, elderly, minimal mucosal involvement', hint:'', to:'result:bullous_pemphigoid'},
+      {text:'Intensely pruritic, GROUPED vesicles on elbows/knees, celiac history', hint:'', to:'result:dermatitis_herpetiformis'},
+      {text:'Blistering from minor friction/trauma since infancy', hint:'genetic, not autoimmune', to:'result:epidermolysis_bullosa'},
+      {text:'Widespread epidermal sloughing, Nikolsky positive, drug history, mucosal + skin', hint:'get the %BSA', to:'sjs1'},
+      {text:'Targetoid lesions, recent cold sore / HSV history, minimal mucosal disease', hint:'', to:'result:erythema_multiforme'},
+    ]
+  },
+  sjs1:{
+    label:'SJS/TEN spectrum',
+    q:'What % body surface area is involved?',
+    options:[
+      {text:'<10% BSA', to:'result:sjs_ten'},
+      {text:'10–30% BSA (overlap)', to:'result:sjs_ten'},
+      {text:'>30% BSA', to:'result:sjs_ten'},
+    ]
+  },
+
+  // ---- PUSTULAR / PURULENT BRANCH ----
+  pustular1:{
+    label:'Pustular / purulent',
+    q:'What does the crust/pustule look like, and what\'s the setting?',
+    options:[
+      {text:'Honey-colored crusted erosions, child, perioral/perinasal', hint:'', to:'result:impetigo'},
+      {text:'Comedones present, face/chest/back, adolescent', hint:'', to:'result:acne'},
+      {text:'NO comedones, centrofacial erythema/telangiectasia/flushing, adult', hint:'', to:'result:rosacea'},
+      {text:'Dome papule with central umbilication', hint:'', to:'result:molluscum'},
+      {text:'Rough hyperkeratotic papule with black dots', hint:'', to:'result:verrucae'},
+    ]
+  },
+
+  // ---- NODULE / MASS BRANCH ----
+  nodule1:{
+    label:'Nodule / mass',
+    q:'What is the surface and growth character?',
+    options:[
+      {text:'Pearly, telangiectatic, rolled border ± central ulceration', hint:'', to:'result:bcc_nodular'},
+      {text:'Ill-defined, waxy, scar-like, deceptively wide margins', hint:'', to:'result:bcc_morpheaform'},
+      {text:'Scaly/crusted/ulcerated, sun-exposed or chronic wound/scar', hint:'', to:'result:scc_skin'},
+      {text:'Dome nodule with a central KERATIN-FILLED crater, grew over weeks', hint:'may spontaneously regress', to:'result:keratoacanthoma'},
+      {text:'Rapidly growing, firm, red-violet, elderly/immunosuppressed patient', hint:'AEIOU', to:'result:merkel_cell'},
+      {text:'Firm dermal papule, positive dimple/buttonhole sign on pinch', hint:'', to:'result:dermatofibroma'},
+      {text:'Large, protuberant, multi-nodular, slow-growing, NO dimple sign', hint:'', to:'result:dfsp'},
+      {text:'Patch → plaque → tumor progression over YEARS, biopsy-resistant "eczema"', hint:'', to:'result:mycosis_fungoides'},
+      {text:'Bright red, lobulated, infant, proliferated then may involute', hint:'', to:'result:hemangioma'},
+      {text:'Small bright red-purple papule, common with aging', hint:'', to:'result:cherry_angioma'},
+      {text:'Soft pedunculated, friction area (neck/axilla)', hint:'', to:'result:acrochordon'},
+      {text:'Firm mobile subQ nodule with a central punctum, drains keratin', hint:'', to:'result:epidermal_inclusion_cyst'},
+      {text:'Firm pink-red scalp nodule(s), possibly coalescing ("turban")', hint:'', to:'result:cylindroma'},
+      {text:'Sudden explosion of many new pigmented/velvety lesions in an older adult', hint:'think paraneoplastic', to:'result:paraneoplastic_derm'},
+    ]
+  },
+
+  // ---- ERYTHEMA / TARGETOID / EDEMA BRANCH ----
+  erythema1:{
+    label:'Diffuse erythema / edema',
+    q:'Is it transient (hours) or fixed, and is there blistering/sloughing?',
+    options:[
+      {text:'Transient wheals, gone within 24h, migratory', hint:'', to:'result:urticaria'},
+      {text:'Fixed erythema/vesicles/oozing, intensely itchy, spongiosis pattern', hint:'', to:'result:acute_eczematous'},
+      {text:'Targetoid, fixed >24h, recent HSV, minimal mucosal disease', hint:'', to:'result:erythema_multiforme'},
+      {text:'Widespread, epidermal sloughing, Nikolsky+, drug history, mucosal', hint:'', to:'sjs1'},
+      {text:'Photosensitive, blistering + fragile skin on dorsal hands, HCV/EtOH history', hint:'', to:'result:porphyria'},
+    ]
+  },
+};
+
+/* ============================================================
+   TREE ENGINE
+   ============================================================ */
+let history = [];
+let current = 'start';
+
+function renderCrumbs(){
+  const el = document.getElementById('breadcrumb');
+  el.innerHTML = '';
+  history.forEach((h)=>{
+    const c = document.createElement('span');
+    c.className = 'crumb';
+    c.innerHTML = h;
+    el.appendChild(c);
+  });
+}
+
+function goTo(nodeId, chosenText){
+  if(chosenText){
+    history.push(chosenText);
+  }
+  current = nodeId;
+  render();
+}
+
+function restart(){
+  history = [];
+  current = 'start';
+  render();
+}
+
+function back(){
+  if(history.length===0) return;
+  history.pop();
+  // rebuild path by walking TREE isn't trivial with free navigation; simplest: recompute via stack
+  current = navStack.length ? navStack.pop() : 'start';
+  render();
+}
+
+let navStack = [];
+
+function render(){
+  renderCrumbs();
+  const mount = document.getElementById('tree-mount');
+
+  if(current.startsWith('result:')){
+    const key = current.replace('result:','');
+    const r = RESULTS[key];
+    mount.innerHTML = renderResult(r);
+    return;
+  }
+
+  const node = TREE[current];
+  let html = `<div class="q-card">
+    <div class="q-label">${node.label}</div>
+    <p class="q-text">${node.q}</p>
+    <div class="opt-grid">`;
+  node.options.forEach((opt,idx)=>{
+    html += `<button class="opt-btn" data-idx="${idx}">${opt.text}${opt.hint ? `<span class="opt-hint">${opt.hint}</span>`:''}</button>`;
+  });
+  html += `</div>
+    <div class="nav-row">
+      <button class="ghost-btn" id="backBtn" ${history.length===0?'style="visibility:hidden"':''}>&larr; Back</button>
+      <button class="ghost-btn" id="restartBtn">Restart</button>
+    </div>
+  </div>`;
+  mount.innerHTML = html;
+
+  node.options.forEach((opt,idx)=>{
+    mount.querySelector(`[data-idx="${idx}"]`).addEventListener('click', ()=>{
+      navStack.push(current);
+      goTo(opt.to, opt.text);
+    });
+  });
+  const bb = document.getElementById('backBtn');
+  if(bb) bb.addEventListener('click', back);
+  document.getElementById('restartBtn').addEventListener('click', restart);
+}
+
+function renderResult(r){
+  const tagClass = {benign:'tag-benign',malignant:'tag-malignant',infectious:'tag-infectious',immune:'tag-immune'}[r.tag] || 'tag-benign';
+  const tagLabel = {benign:'Benign',malignant:'Malignant / Premalignant',infectious:'Infectious',immune:'Immune-mediated / Inflammatory'}[r.tag];
+  return `<div class="result-card">
+    <span class="result-tag ${tagClass}">${tagLabel} · ${r.cat}</span>
+    <h2 class="result-dx">${r.dx}</h2>
+    <div class="result-section">
+      <h4>Key Features</h4>
+      <ul>${r.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+    </div>
+    <div class="result-section">
+      <h4>Why This Fits</h4>
+      <p>${r.why}</p>
+    </div>
+    <div class="result-section">
+      <div class="mimics"><b>Watch out for / distinguish from:</b> ${r.mimic}</div>
+    </div>
+    <div class="nav-row">
+      <button class="ghost-btn" id="backBtn2">&larr; Back</button>
+      <button class="ghost-btn" id="restartBtn2">Start a new vignette</button>
+    </div>
+  </div>`;
+}
+
+// re-bind result buttons after each render (since renderResult returns before listeners attach in main render())
+const origRender = render;
+render = function(){
+  origRender();
+  const bb2 = document.getElementById('backBtn2');
+  const rb2 = document.getElementById('restartBtn2');
+  if(bb2) bb2.addEventListener('click', back);
+  if(rb2) rb2.addEventListener('click', restart);
+};
+
+render();
+
+/* ============================================================
+   TABS
+   ============================================================ */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============================================================
+   REFERENCE TAB — color/feature quick lookup table
+   ============================================================ */
+const REF_GROUPS = [
+  {
+    title:'By Color',
+    rows:[
+      ['Light brown / tan (uniform, flat)','Café-au-lait macule, junctional/compound nevus, solar lentigo'],
+      ['Dark brown / black','Melanoma (irregular), dysplastic nevus ("fried egg"), seborrheic keratosis ("stuck-on")'],
+      ['Blue-gray / blue-black','Blue nevus (deep dermal), dermal melanocytosis / Mongolian spot (infant, fades), nodular melanoma'],
+      ['Reddish-brown, urticates on rubbing','Mastocytosis (Darier sign)'],
+      ['Pearly / translucent with telangiectasias','Basal cell carcinoma'],
+      ['Silvery / micaceous scale','Psoriasis'],
+      ['Greasy yellow scale','Seborrheic dermatitis'],
+      ['Violaceous (purple), polygonal','Lichen planus'],
+      ['Honey-colored crust','Impetigo'],
+      ['Red-violet, rapidly growing','Merkel cell carcinoma'],
+      ['Bright red, lobulated (infant)','Infantile hemangioma'],
+    ]
+  },
+  {
+    title:'By Key Sign',
+    rows:[
+      ['Nikolsky sign POSITIVE','Pemphigus vulgaris, SJS/TEN'],
+      ['Nikolsky sign NEGATIVE','Bullous pemphigoid'],
+      ['Auspitz sign (pinpoint bleeding)','Psoriasis'],
+      ['Koebner phenomenon (lesions at trauma sites)','Psoriasis, lichen planus'],
+      ['Darier sign (urtication on stroking)','Mastocytosis'],
+      ['Dimple / buttonhole sign','Dermatofibroma (present) vs. DFSP (absent)'],
+      ['Hutchinson sign (pigment onto nail fold)','Subungual/acral melanoma'],
+      ['Wickham striae (white lacy pattern)','Lichen planus'],
+      ['Central umbilication','Molluscum contagiosum'],
+      ['Central punctum','Epidermal inclusion cyst'],
+      ['Black dots on a hyperkeratotic papule','Verrucae (thrombosed capillaries)'],
+    ]
+  },
+  {
+    title:'By Distribution',
+    rows:[
+      ['Extensor surfaces (elbows, knees)','Psoriasis, dermatitis herpetiformis, ichthyosis'],
+      ['Flexor surfaces (wrists, ankles)','Lichen planus'],
+      ['Scalp, nasolabial folds, chest','Seborrheic dermatitis'],
+      ['Sun-exposed skin','Actinic keratosis, SCC, BCC, lentigo maligna, porphyria cutanea tarda'],
+      ['Palms / soles / subungual, NOT sun-related','Acral lentiginous melanoma'],
+      ['Flexural folds (axilla, neck, groin)','Acanthosis nigricans, acrochordon, intertrigo'],
+      ['Pretibial, bilateral, tender, subcutaneous','Erythema nodosum (panniculitis)'],
+      ['Scalp, multiple confluent nodules','Cylindroma ("turban tumor")'],
+    ]
+  },
+  {
+    title:'By Growth Behavior',
+    rows:[
+      ['Radial growth phase before vertical','Superficial spreading melanoma, lentigo maligna melanoma'],
+      ['No radial phase — vertical from the start','Nodular melanoma'],
+      ['Proliferates then involutes (infancy)','Infantile hemangioma'],
+      ['Rapid growth over weeks, may self-regress','Keratoacanthoma'],
+      ['Patch → plaque → tumor over YEARS','Mycosis fungoides'],
+      ['Locally invasive, essentially never metastasizes','Basal cell carcinoma'],
+      ['Locally aggressive, low metastatic risk, CD34+','Dermatofibrosarcoma protuberans'],
+      ['Rapid growth + high metastatic potential (elderly)','Merkel cell carcinoma'],
+    ]
+  },
+  {
+    title:'Neoplastic vs. Inflammatory vs. Infectious — the first fork',
+    rows:[
+      ['Fixed, enlarging, or new/changing lesion with atypia','Neoplastic — go to melanocytic vs. epidermal vs. adnexal vs. lymphoid subtype'],
+      ['Symmetric distribution, pruritic, waxing/waning, treatment-responsive','Inflammatory / immune-mediated'],
+      ['Contagious history, KOH/culture-relevant, honey-crust or umbilication','Infectious'],
+      ['Deep/subcutaneous, tender, systemic-disease association','Panniculitis'],
+    ]
+  },
+];
+
+function renderRef(filter){
+  const mount = document.getElementById('ref-mount');
+  const f = (filter||'').toLowerCase().trim();
+  let html = '';
+  REF_GROUPS.forEach(g=>{
+    const rows = g.rows.filter(r => !f || r[0].toLowerCase().includes(f) || r[1].toLowerCase().includes(f));
+    if(rows.length===0) return;
+    html += `<div class="ref-group"><h3>${g.title}</h3><table class="ref-table"><tbody>`;
+    rows.forEach(r=>{
+      html += `<tr><td style="width:38%"><span class="dx-name">${r[0]}</span></td><td>${r[1]}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  });
+  if(!html) html = '<p style="color:var(--ink-soft)">No matches — try a different term.</p>';
+  mount.innerHTML = html;
+}
+renderRef('');
+document.getElementById('refSearch').addEventListener('input', (e)=>renderRef(e.target.value));
+</script>
+</body>
+</html>
