@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review of Osteopathic Treatment Modalities — Study Guide</title>
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-2: #f2ecdd;
+    --forest-dark: #2f4a3c;
+    --forest: #3f6650;
+    --sage: #7fa389;
+    --sage-light: #dbe8dd;
+    --border: #c9d9c9;
+    --text: #2c2c26;
+    --accent-gold: #b8935a;
+    --direct: #c26b4f;
+    --indirect: #4f7fb0;
+    --mixed: #8a6bb0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.55;
+    padding-bottom: 60px;
+  }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    background: var(--cream);
+    border: 2px solid var(--forest);
+    color: var(--forest-dark);
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.12);
+    transition: background 0.2s, color 0.2s;
+  }
+  .back-btn:hover { background: var(--forest); color: var(--cream); }
+
+  header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  header h1 { margin: 0 0 8px; font-size: 2.1em; }
+  header p { margin: 4px 0; font-size: 1.05em; opacity: 0.92; }
+
+  .container { max-width: 950px; margin: 0 auto; padding: 30px 20px; }
+
+  .intro-box {
+    background: var(--cream-2);
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--accent-gold);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 30px;
+  }
+  .intro-box h3 { margin-top: 0; color: var(--forest-dark); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 16px 0 0;
+    font-size: 0.92em;
+  }
+  .legend span { display: flex; align-items: center; gap: 6px; }
+  .swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 34px;
+  }
+  .nav-grid a {
+    display: block;
+    text-align: center;
+    background: var(--sage-light);
+    border: 1px solid var(--border);
+    color: var(--forest-dark);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    transition: background 0.2s;
+  }
+  .nav-grid a:hover { background: var(--sage); color: white; }
+
+  section.technique {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 34px;
+    overflow: hidden;
+    box-shadow: 1px 2px 8px rgba(0,0,0,0.05);
+  }
+  .tech-header {
+    padding: 18px 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .tech-header h2 { margin: 0; font-size: 1.5em; }
+  .tech-tag {
+    background: rgba(255,255,255,0.22);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .direct-bg { background: linear-gradient(120deg, var(--direct), #a5533a); }
+  .indirect-bg { background: linear-gradient(120deg, var(--indirect), #3a6089); }
+  .mixed-bg { background: linear-gradient(120deg, var(--mixed), #6b4f8a); }
+  .neutral-bg { background: linear-gradient(120deg, var(--forest), var(--forest-dark)); }
+
+  .tech-body { padding: 22px 26px; }
+
+  .tech-body h3 {
+    color: var(--forest-dark);
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 4px;
+    margin-top: 28px;
+  }
+  .tech-body h3:first-child { margin-top: 0; }
+
+  ol.steps li, ul.plain li { margin-bottom: 6px; }
+  ol.steps { padding-left: 22px; }
+
+  .ind-contra-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  @media (max-width: 700px) { .ind-contra-grid { grid-template-columns: 1fr; } }
+
+  .box {
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.94em;
+  }
+  .indications-box { background: #eef6ef; border: 1px solid #c3ddc6; }
+  .absolute-box { background: #fbe9e7; border: 1px solid #eec2bc; }
+  .relative-box { background: #fff6e0; border: 1px solid #f0dca0; }
+  .box h4 { margin: 0 0 8px; color: var(--forest-dark); }
+  .box ul { margin: 0; padding-left: 18px; }
+  .box li { margin-bottom: 4px; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 5px solid var(--forest);
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 16px 0;
+    font-style: italic;
+  }
+
+  /* Quiz styling */
+  .quiz-section {
+    margin-top: 30px;
+    background: var(--cream-2);
+    border-radius: 10px;
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+  }
+  .quiz-section h3 {
+    margin-top: 0;
+    border: none;
+    color: var(--accent-gold);
+  }
+  .question {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .question p.stem { margin-top: 0; font-weight: bold; }
+  .choices { list-style: none; padding: 0; margin: 10px 0; }
+  .choices li {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--cream);
+    transition: background 0.15s;
+  }
+  .choices li:hover { background: var(--sage-light); }
+  .choices li.selected-correct { background: #cdeccd; border-color: #6cae6c; font-weight: bold; }
+  .choices li.selected-wrong { background: #f6cfc9; border-color: #d97b6c; }
+  .choices li.reveal-correct { background: #cdeccd; border-color: #6cae6c; font-weight: bold; }
+  .explanation {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: var(--sage-light);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .explanation.show { display: block; }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 10px;
+    font-size: 0.92em;
+  }
+  .comparison-table th, .comparison-table td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .comparison-table th { background: var(--forest); color: white; }
+  .comparison-table tr:nth-child(even) { background: var(--cream-2); }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--forest-dark);
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<header>
+  <h1>Review of Osteopathic Treatment Modalities</h1>
+  <p>OCS III — Dr. Michelle Coleman</p>
+  <p>Soft Tissue &middot; Myofascial Release &middot; Muscle Energy &middot; Counterstrain &middot; HVLA</p>
+</header>
+
+<div class="container">
+
+  <div class="intro-box">
+    <h3>Lecture Objectives</h3>
+    <p>Describe the steps for each of the five foundational OMT techniques, and list the indications and contraindications for each. This is a review of material officially taught in OMS1 — lymphatic release, BLT, FPR, cranial (BMT), still technique, and visceral technique are new techniques covered later in the OMS2 year and are <strong>not</strong> part of this lecture.</p>
+    <div class="legend">
+      <span><span class="swatch" style="background:var(--direct);"></span> Direct technique</span>
+      <span><span class="swatch" style="background:var(--indirect);"></span> Indirect technique</span>
+      <span><span class="swatch" style="background:var(--mixed);"></span> Mixed technique</span>
+    </div>
+  </div>
+
+  <div class="nav-grid">
+    <a href="#foundations">Foundations</a>
+    <a href="#soft-tissue">Soft Tissue</a>
+    <a href="#mfr">MFR</a>
+    <a href="#me">Muscle Energy</a>
+    <a href="#counterstrain">Counterstrain</a>
+    <a href="#hvla">HVLA</a>
+    <a href="#comparison">Comparison Table</a>
+  </div>
+
+  <!-- ===================== FOUNDATIONS ===================== -->
+  <section class="technique" id="foundations">
+    <div class="tech-header neutral-bg">
+      <h2>Foundational Concepts</h2>
+      <span class="tech-tag">Applies to all OMT</span>
+    </div>
+    <div class="tech-body">
+      <h3>Classification by Barrier Engagement</h3>
+      <ul class="plain">
+        <li><strong>Direct techniques</strong> start <em>against</em> a restrictive barrier and move the tissue through that barrier. Examples: soft tissue, muscle energy, HVLA (and lymphatic release, learned later).</li>
+        <li><strong>Indirect techniques</strong> start at a point of <em>maximal ease</em> (the "indirect barrier") — there is no restriction, and tissue feels free to move in all planes even if only a tiny distance. (Classic mnemonic image: a ring of pineapple balanced on top of a Jell-O mold.) Example: counterstrain. (BLT, FPR, and cranial are indirect techniques learned later.)</li>
+        <li><strong>Mixed techniques</strong> can be performed either directly or indirectly, or combine both in a single treatment. Example: myofascial release (MFR). (Still technique and visceral technique are mixed techniques learned later.)</li>
+      </ul>
+
+      <h3>Classification by Patient Involvement</h3>
+      <ul class="plain">
+        <li><strong>Passive:</strong> the patient completely relaxes; the physician does all the work.</li>
+        <li><strong>Active:</strong> the patient participates — usually by contracting specific muscles on command, but sometimes by breathing, moving the eyes, or another maneuver.</li>
+      </ul>
+
+      <div class="pearl">Every technique and modality shares two non-negotiable first steps: (1) establish an osteopathic diagnosis — you must document a somatic dysfunction before you can treat with OMT — and (2) obtain informed consent to treat, every visit (and every station on a competency exam), including risks/benefits and the patient's right to stop treatment at any time.</div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Foundations</h3>
+
+        <div class="question">
+          <p class="stem">Q1. A physician places a patient's cervical spine at the point where the tissue feels free to move equally in all three planes, with no sense of restriction in any direction. Which classification best describes this starting position?</p>
+          <ul class="choices" data-correct="2">
+            <li>Direct barrier</li>
+            <li>Feather edge</li>
+            <li>Indirect barrier (point of maximal ease)</li>
+            <li>Restrictive barrier</li>
+          </ul>
+          <div class="explanation">The point of maximal ease, where tissue can move freely in all planes with no restriction, is the indirect barrier — the starting point for indirect techniques such as counterstrain.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. During a manipulative treatment, the patient is asked to gently contract a specific muscle group against the physician's counterforce. This treatment is best classified as which of the following?</p>
+          <ul class="choices" data-correct="1">
+            <li>Passive and direct</li>
+            <li>Active</li>
+            <li>Passive and indirect</li>
+            <li>Mixed and passive</li>
+          </ul>
+          <div class="explanation">Any technique requiring the patient to actively participate (muscle contraction, breathing, eye movement) is classified as active, regardless of whether the underlying technique is direct, indirect, or mixed.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. Prior to performing any osteopathic manipulative technique, which of the following must be established first?</p>
+          <ul class="choices" data-correct="3">
+            <li>The feather edge of the restrictive barrier</li>
+            <li>A ten out of ten tenderness rating</li>
+            <li>The direction of the restrictive barrier</li>
+            <li>A documented somatic dysfunction and informed consent to treat</li>
+          </ul>
+          <div class="explanation">A somatic dysfunction must be identified and documented, and informed consent obtained, before any OMT technique is performed — this applies to every technique and every patient encounter.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOFT TISSUE ===================== -->
+  <section class="technique" id="soft-tissue">
+    <div class="tech-header direct-bg">
+      <h2>Soft Tissue Technique</h2>
+      <span class="tech-tag">Direct &middot; Passive</span>
+    </div>
+    <div class="tech-body">
+      <h3>Treatment Types</h3>
+      <ul class="plain">
+        <li><strong>Kneading (petrissage):</strong> stretch <em>perpendicular</em> to muscle fibers; rhythmical or constant.</li>
+        <li><strong>Linear stretching:</strong> stretch <em>parallel</em> to muscle fibers, separating origin from insertion; can hold the origin and move the insertion, or pull origin and insertion apart simultaneously; rhythmical or constant.</li>
+        <li><strong>Direct pressure / inhibition:</strong> constant pressure into the center of contracted muscle/fascia, starting where tissue just begins to push back and gradually increasing pressure as tolerated. May use thumb, fingers, elbow, knee, heel of hand, or knuckles — finger pads (not fingertips) are preferred initially, and the treating hand can be supported by the other hand.</li>
+        <li><strong>Skin rolling / effleurage (traction/flourish):</strong> continuous stroking of superficial tissue, typically distal to proximal; often used systemically for lymphatic conditions.</li>
+        <li><strong>Traction/skin rolling (pétrissage variant):</strong> deep pressure while lifting the skin to break up adhesions such as scar tissue.</li>
+        <li><strong>Tapotement (percussion):</strong> tapping, often with the sides of the hands or cupped hands, used to relax tight muscles and break up adhesions.</li>
+      </ul>
+
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Identify the somatic dysfunction.</li>
+        <li>Obtain permission to treat.</li>
+        <li>Engage/load the tissue with one or both hands — "melt, meld, or sink into" the tissue. The size of the treating surface should match the size of the area being treated (e.g., 2–3 finger pads for a small 2x2 inch muscle; both palms and all fingers for a large area like the glutes; a single supported finger pad for a 1 cm hypertonic fascial spot).</li>
+        <li>Return to neutral and recheck; repeat as needed, varying the direction of the force vector.</li>
+      </ol>
+
+      <div class="ind-contra-grid">
+        <div class="box indications-box">
+          <h4>Indications</h4>
+          <ul>
+            <li>Somatic dysfunction of soft tissue; tissue texture changes</li>
+            <li>Hypertonic muscles; excessive fascial tension</li>
+            <li>Abnormal somatosomatic, viscerosomatic, or somatovisceral reflexes</li>
+            <li>To enhance local circulation, tissue nutrition/oxygenation, and metabolic waste removal</li>
+            <li>To improve local/systemic immune response as an adjunct to further OMT</li>
+            <li>To identify restricted motion, texture change, and tenderness; to produce general relaxation; to prepare tissue for further techniques (e.g., HVLA)</li>
+          </ul>
+        </div>
+        <div class="box absolute-box">
+          <h4>Absolute Contraindication</h4>
+          <ul><li>Lack of patient consent</li></ul>
+          <h4 style="margin-top:12px;">Relative Contraindications</h4>
+          <ul>
+            <li>Infection, hematoma, or tear of the involved (agonist or antagonist) muscle</li>
+            <li>Soft tissue or bony infection/abscess in the area, or nearby DVT</li>
+            <li>Coagulopathy</li>
+            <li>Primary or secondary neoplastic process in the area</li>
+            <li>Directly over a recent operation or laceration site</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Soft Tissue</h3>
+
+        <div class="question">
+          <p class="stem">Q1. A physician applies rhythmic pressure directed perpendicular to the muscle fibers of the upper trapezius. This soft tissue technique is best described as which of the following?</p>
+          <ul class="choices" data-correct="0">
+            <li>Kneading</li>
+            <li>Linear stretching</li>
+            <li>Tapotement</li>
+            <li>Direct inhibition</li>
+          </ul>
+          <div class="explanation">Kneading (petrissage) applies force perpendicular to the muscle fibers and can be performed rhythmically or as a constant stretch.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. A 45-year-old patient has a large area of hypertonic musculature across the entire glute maximus. According to soft tissue technique principles, which approach to hand/tool sizing is most appropriate?</p>
+          <ul class="choices" data-correct="2">
+            <li>A single finger pad supported by another finger</li>
+            <li>The point of the elbow only</li>
+            <li>The entire surface of both palms and all fingers</li>
+            <li>Two to three finger pads only</li>
+          </ul>
+          <div class="explanation">The treating surface should be sized to the area being treated; a large area like the entire glute maximus requires the full surface of both palms and all fingers to adequately engage the tissue.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. Two weeks ago a patient underwent an open abdominal surgery. The incision has healed without complication, but the patient reports new hypertonicity in the paraspinal muscles at a distant, unrelated spinal level. Which of the following is true regarding soft tissue technique in this patient?</p>
+          <ul class="choices" data-correct="1">
+            <li>Soft tissue technique is absolutely contraindicated anywhere on this patient</li>
+            <li>Soft tissue technique may be used at the unrelated paraspinal region, but should be avoided directly over the recent operative site</li>
+            <li>Soft tissue technique should be delayed for six months following any abdominal surgery</li>
+            <li>Soft tissue technique requires surgical clearance before use anywhere on the trunk</li>
+          </ul>
+          <div class="explanation">A recent operative or laceration site is a relative, site-specific contraindication — treatment should avoid that specific area but can proceed elsewhere, provided consent is obtained and no other contraindications exist.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MFR ===================== -->
+  <section class="technique" id="mfr">
+    <div class="tech-header mixed-bg">
+      <h2>Myofascial Release (MFR)</h2>
+      <span class="tech-tag">Mixed (Direct or Indirect) &middot; Passive</span>
+    </div>
+    <div class="tech-body">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Identify the somatic dysfunction.</li>
+        <li>Obtain permission to treat.</li>
+        <li>Engage/load the tissue with one or both hands (same "melt, meld, sink in" concept as soft tissue).</li>
+        <li><strong>Direct MFR:</strong> move the tissue into the restrictive barrier in all three planes (flexion/extension, side bending, rotation) and apply a constant force holding against that barrier. <strong>Indirect MFR:</strong> move the tissue to the point of maximal ease — where it feels balanced and free to move in any direction — and apply the force needed to maintain that balance.</li>
+        <li><strong>Follow the barrier</strong> (or point of maximal ease) until motion stops. This "following" is the key feature that differentiates MFR from other modalities such as BLT or soft tissue. If the tissue is slow to move, have the patient take a deep breath in and out. Treatment duration can range from a few seconds to a few minutes.</li>
+        <li>Return to neutral and recheck.</li>
+      </ol>
+
+      <div class="pearl">MFR can be performed as either a direct or an indirect technique, or a combination of both in the same treatment — this is why it's classified as "mixed."</div>
+
+      <div class="ind-contra-grid">
+        <div class="box indications-box">
+          <h4>Indications</h4>
+          <ul>
+            <li>Somatic dysfunction involving myofascial tissue or other connective tissue (including bone or periosteum)</li>
+          </ul>
+        </div>
+        <div class="box absolute-box">
+          <h4>Absolute Contraindication</h4>
+          <ul><li>Lack of patient consent</li></ul>
+          <h4 style="margin-top:12px;">Relative Contraindications</h4>
+          <ul>
+            <li>Infection, hematoma, or tear of involved muscle</li>
+            <li>Fracture or dislocation of the involved area</li>
+            <li>Open wound in the area to be treated</li>
+            <li>Soft tissue/bony infection or abscess in the area, or nearby DVT/coagulopathy</li>
+            <li>Primary or secondary neoplastic process in the area</li>
+            <li>Directly over a recent operation/laceration site</li>
+            <li>Aortic aneurysm (if working in the abdomen)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Myofascial Release</h3>
+
+        <div class="question">
+          <p class="stem">Q1. Which feature most distinguishes myofascial release from other soft tissue-based modalities such as BLT or soft tissue technique?</p>
+          <ul class="choices" data-correct="3">
+            <li>The requirement of active patient participation</li>
+            <li>The use of a ten-point pain scale</li>
+            <li>The delivery of a rapid, low-amplitude thrust</li>
+            <li>Continuously following the restrictive barrier or point of maximal ease until motion ceases</li>
+          </ul>
+          <div class="explanation">MFR is defined by "following" the barrier or point of ease as it moves, holding a constant force until motion stops — this ongoing following is what sets it apart from other modalities.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. During indirect MFR of the thoracolumbar fascia, tissue motion is noted to stall partway through the treatment. Which of the following is the most appropriate next step?</p>
+          <ul class="choices" data-correct="0">
+            <li>Have the patient take a deep breath in and out</li>
+            <li>Immediately deliver a high-velocity thrust through the restrictive barrier</li>
+            <li>Increase pressure until the patient reports 10/10 tenderness</li>
+            <li>Stop treatment and reassess in one week</li>
+          </ul>
+          <div class="explanation">If tissue motion is slow or stalls during MFR, having the patient take a deep breath in and out often facilitates further release.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. A patient with a known abdominal aortic aneurysm presents with a somatic dysfunction of the lumbar fascia that would normally be treated with MFR. Which of the following best applies?</p>
+          <ul class="choices" data-correct="2">
+            <li>MFR is absolutely contraindicated in all patients with any vascular disease</li>
+            <li>MFR of the lumbar fascia is safe regardless of abdominal pathology</li>
+            <li>Abdominal MFR is relatively contraindicated given the aortic aneurysm</li>
+            <li>MFR requires vascular surgery clearance in all patients over age 50</li>
+          </ul>
+          <div class="explanation">An aortic aneurysm is a relative contraindication specifically to abdominal MFR/soft tissue work, due to the theoretical risk of increasing pressure on the aneurysmal wall.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MUSCLE ENERGY ===================== -->
+  <section class="technique" id="me">
+    <div class="tech-header direct-bg">
+      <h2>Muscle Energy (ME)</h2>
+      <span class="tech-tag">Direct &middot; Active &middot; Isometric/Post-Isometric</span>
+    </div>
+    <div class="tech-body">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Identify the somatic dysfunction.</li>
+        <li>Inform the patient and obtain permission to treat.</li>
+        <li>Move the patient to the <strong>feather edge</strong> of the direct (restrictive) barrier — the point where tissue just begins to resist motion.</li>
+        <li>Have the patient push gently toward their ease while the physician applies an equal, isometric counterforce (this is not a strength contest).</li>
+        <li>Hold the contraction for 3–5 seconds, then have the patient stop pushing; the physician also releases force, and both parties relax for about 2 seconds.</li>
+        <li>Repeat steps 3–5 a total of 3–5 times, engaging a new (further) restrictive barrier each repetition.</li>
+        <li>On the final repetition, an extra passive stretch may be added to enhance the treatment effect.</li>
+        <li>Return the patient to neutral and recheck.</li>
+      </ol>
+      <div class="pearl">Body positioning matters for both patient and physician — both need to feel comfortable, supported, and safe, since a technique that injures the physician can't be used for a career. Think ahead about how classic positions (e.g., seated thoracic spine, prone/supine positioning) might need modification if a treatment table, or the classic position, isn't available.</div>
+
+      <div class="ind-contra-grid">
+        <div class="box indications-box">
+          <h4>Indications</h4>
+          <ul>
+            <li>Clinically relevant somatic dysfunction, including decreased joint range of motion due to hyper- or hypertonic muscles</li>
+          </ul>
+        </div>
+        <div class="box absolute-box">
+          <h4>Absolute Contraindications</h4>
+          <ul>
+            <li>Lack of patient consent</li>
+            <li>Inability of the patient to respond to commands (needed for the active contraction)</li>
+          </ul>
+          <h4 style="margin-top:12px;">Relative Contraindications</h4>
+          <ul>
+            <li>Infection, hematoma, or tear of involved (agonist or antagonist) muscle</li>
+            <li>Fracture or dislocation of the involved joint</li>
+            <li>Rheumatologic conditions causing cervical spine instability</li>
+            <li>Undiagnosed swelling of the involved joint</li>
+            <li>Severe osteoporosis</li>
+            <li>Primary or secondary neoplastic process in the area</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Muscle Energy</h3>
+
+        <div class="question">
+          <p class="stem">Q1. Which of the following describes the "feather edge" in muscle energy technique?</p>
+          <ul class="choices" data-correct="1">
+            <li>The point of maximal ease with no tissue restriction</li>
+            <li>The point at which tissue just begins to resist motion at the restrictive barrier</li>
+            <li>The point 90 seconds into a sustained hold</li>
+            <li>The point where a 10/10 tenderness is elicited</li>
+          </ul>
+          <div class="explanation">The feather edge is the earliest point of resistance at the direct/restrictive barrier — the patient is positioned here before the isometric contraction step begins.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. A physician is treating a somatic dysfunction with muscle energy technique. After the patient contracts for 3–5 seconds, what should occur next?</p>
+          <ul class="choices" data-correct="3">
+            <li>The physician should deliver a high-velocity thrust</li>
+            <li>The patient should continue contracting at maximum effort for 90 additional seconds</li>
+            <li>The physician should reposition the patient at a 10/10 tenderness point</li>
+            <li>Both patient and physician should stop pushing and relax for about 2 seconds before re-engaging a new barrier</li>
+          </ul>
+          <div class="explanation">After the 3–5 second isometric contraction, both the patient and physician release force and relax briefly (~2 seconds) before repositioning at a new, further restrictive barrier for the next repetition.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. Muscle energy technique would be least appropriate — even relatively — in which of the following patients?</p>
+          <ul class="choices" data-correct="0">
+            <li>A patient with undiagnosed swelling of the joint being treated</li>
+            <li>A patient with mild hypertonicity of the hamstrings and normal joint exam</li>
+            <li>A patient recovering from a mild ankle sprain three weeks ago with no swelling</li>
+            <li>A healthy 30-year-old with restricted lumbar rotation</li>
+          </ul>
+          <div class="explanation">Undiagnosed swelling of the involved joint is a relative contraindication to muscle energy, since the underlying cause of the swelling has not yet been established and could represent an infectious, traumatic, or neoplastic process.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COUNTERSTRAIN ===================== -->
+  <section class="technique" id="counterstrain">
+    <div class="tech-header indirect-bg">
+      <h2>Counterstrain</h2>
+      <span class="tech-tag">Indirect &middot; Passive</span>
+    </div>
+    <div class="tech-body">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Find a counterstrain (tender) point.</li>
+        <li>Obtain permission to treat.</li>
+        <li>Establish a baseline tenderness rating of 10/10 on a 0–10 scale, pressing hard enough to blanch (whiten) your fingernail.</li>
+        <li>Relax pressure to just enough to monitor the point. Do <strong>not</strong> move your finger from this point until treatment is complete — moving it invalidates the retest.</li>
+        <li>Find a position that reduces the tenderness, ideally to 0/10, but at minimum a <strong>70% reduction</strong> (i.e., 2–3/10 or less). Fine adjustments to the starting position are usually needed to maximize pain relief.</li>
+        <li>The patient remains completely relaxed and passive throughout (may assist only with initial positioning, e.g., lifting a limb). The physician must also maintain a position they can sustain for 90 seconds.</li>
+        <li>Hold the position for <strong>90 seconds</strong> while continuously monitoring the counterstrain point for tissue texture change, using only light palpating pressure.</li>
+        <li>Slowly and passively return the patient to neutral while maintaining contact with the counterstrain point.</li>
+        <li>Reassess the tenderness. May repeat as needed.</li>
+      </ol>
+
+      <div class="ind-contra-grid">
+        <div class="box indications-box">
+          <h4>Indications</h4>
+          <ul>
+            <li>Acute or chronic traumatic dysfunction with an associated counterstrain (tender) point</li>
+          </ul>
+        </div>
+        <div class="box absolute-box">
+          <h4>Absolute Contraindications</h4>
+          <ul>
+            <li>Lack of patient consent</li>
+            <li>New abnormal neurological or vascular symptoms provoked by the treatment position</li>
+            <li>Exacerbation of potentially life-threatening symptomatology by the treatment position (e.g., EKG changes, drop in O2 sat on a monitored patient)</li>
+          </ul>
+          <h4 style="margin-top:12px;">Relative Contraindications</h4>
+          <ul>
+            <li>Patient unable to voluntarily relax, or severely ill/unable to understand the process</li>
+            <li>Need for upper cervical hyperrotation/hyperextension in a patient with vertebral artery disease, upper cervical ligamentous instability, dens malformation, or severe osteoporosis</li>
+            <li>Inability to tolerate the classic treatment position (position must be modified)</li>
+            <li>Inability to communicate or cooperate</li>
+            <li>Severe acute rheumatologic flare</li>
+            <li>Signs of apprehension as the treatment position is approached</li>
+            <li>Fracture or dislocation of joints involved in achieving the starting position</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Counterstrain</h3>
+
+        <div class="question">
+          <p class="stem">Q1. How long should the physician hold a counterstrain treatment position once identified?</p>
+          <ul class="choices" data-correct="2">
+            <li>3 to 5 seconds</li>
+            <li>30 seconds</li>
+            <li>90 seconds</li>
+            <li>5 minutes</li>
+          </ul>
+          <div class="explanation">Counterstrain requires a sustained 90-second hold while monitoring the tender point for tissue texture change.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. While positioning a patient for counterstrain treatment of a psoas tender point, the physician notes new lower extremity paresthesias that were not present before positioning. What is the most appropriate next step?</p>
+          <ul class="choices" data-correct="1">
+            <li>Continue holding the position for the full 90 seconds since paresthesias are expected</li>
+            <li>Abort the treatment position, since new neurological symptoms are an absolute contraindication</li>
+            <li>Increase pressure on the tender point to override the sensation</li>
+            <li>Switch to a high-velocity thrust technique instead</li>
+          </ul>
+          <div class="explanation">New abnormal neurological or vascular symptoms provoked by the treatment position are an absolute contraindication — the position must be abandoned.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. A physician establishes a counterstrain tender point as 10/10 and repositions the patient. Repeat palpation reveals the tenderness has decreased to 4/10. What should the physician do?</p>
+          <ul class="choices" data-correct="0">
+            <li>Continue fine-tuning the position, since a 70% reduction (to 3/10 or less) has not yet been achieved</li>
+            <li>Proceed to hold this position for 90 seconds since any reduction in tenderness is sufficient</li>
+            <li>Abandon counterstrain and switch to muscle energy</li>
+            <li>Increase the pressure applied to the tender point until tenderness reaches 10/10 again</li>
+          </ul>
+          <div class="explanation">The target reduction in counterstrain is to 0/10 ideally, with a minimum acceptable reduction of about 70% (down to roughly 2–3/10). A reduction to only 4/10 means further positional fine-tuning is needed before holding the position.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HVLA ===================== -->
+  <section class="technique" id="hvla">
+    <div class="tech-header direct-bg">
+      <h2>High-Velocity, Low-Amplitude (HVLA)</h2>
+      <span class="tech-tag">Direct &middot; Passive</span>
+    </div>
+    <div class="tech-body">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Find an articular somatic dysfunction with a firm, distinct restrictive barrier (end-feel).</li>
+        <li>Obtain permission to treat.</li>
+        <li>Prepare the tissue with soft tissue, myofascial release, or muscle energy technique.</li>
+        <li>Move the patient into the direct (restrictive) barrier in as many planes of motion as possible, ensuring the physician is comfortable enough to deliver a precise thrust.</li>
+        <li>Have the patient breathe and relax while the physician follows the barrier, staying engaged right up against it.</li>
+        <li>Deliver a short, quick thrust through the barrier, with force focused on the target facet/joint. Do not "wind up" or back off the barrier before thrusting.</li>
+        <li>Return to neutral and recheck. Do <strong>not</strong> repeat a thrust on the same area/segment.</li>
+      </ol>
+
+      <div class="ind-contra-grid">
+        <div class="box indications-box">
+          <h4>Indications</h4>
+          <ul>
+            <li>Articular somatic dysfunction with a firm, distinct restrictive barrier</li>
+          </ul>
+        </div>
+        <div class="box absolute-box">
+          <h4>Absolute Contraindications</h4>
+          <ul>
+            <li>Regional/segment-specific: upper cervical instability, advanced rheumatoid arthritis, Down syndrome, achondroplastic dwarfism, or Chiari malformation</li>
+            <li>Fracture, dislocation, or instability of the spine/joint</li>
+            <li>Joint fusion (surgical, congenital, or pathological); Klippel-Feil syndrome</li>
+            <li>Vertebrobasilar or carotid pathology</li>
+            <li>Acute local inflammatory arthritis (RA, lupus, IBD-associated arthritis, psoriatic arthritis, Still's disease, scleroderma)</li>
+            <li>Joint infection</li>
+            <li>Malignancy involving bone or soft tissue in the area</li>
+            <li>Myelopathy, cauda equina, or other spinal cord pathology (do not miss cauda equina!)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="box relative-box" style="margin-top:16px;">
+        <h4>Relative Contraindications</h4>
+        <ul>
+          <li>Acute herniated nucleus pulposus; acute radiculopathy</li>
+          <li>Acute whiplash; severe muscle spasm, strain, or sprain</li>
+          <li>Osteopenia, osteoporosis; spondylolisthesis; metabolic bone disease</li>
+          <li>Hypermobility syndromes</li>
+          <li>Regional implanted devices/joint replacements — pacemaker, ICD, spinal cord stimulator, intrathecal pain pump, insulin pump, breast implants, or any orthopedic hardware</li>
+          <li>History of inflammatory arthritis — confirm not currently flaring before treating</li>
+        </ul>
+      </div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — HVLA</h3>
+
+        <div class="question">
+          <p class="stem">Q1. Immediately prior to delivering an HVLA thrust, which finding at the restrictive barrier confirms the joint is an appropriate candidate for this technique?</p>
+          <ul class="choices" data-correct="2">
+            <li>A 10/10 tenderness rating at a discrete point</li>
+            <li>A soft, springy, indistinct end-feel</li>
+            <li>A firm, distinct articular restrictive barrier</li>
+            <li>A point of maximal ease in all three planes</li>
+          </ul>
+          <div class="explanation">HVLA targets an articular somatic dysfunction with a firm, distinct restrictive barrier — this is the end-feel that identifies the joint as appropriate for a thrusting technique, as opposed to a soft, ill-defined barrier better suited to other modalities.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. A physician is preparing to perform HVLA on the thoracic spine of a patient who has a spinal cord stimulator implanted at that level. Which best characterizes this scenario?</p>
+          <ul class="choices" data-correct="3">
+            <li>Absolute contraindication — HVLA must never be performed anywhere on this patient</li>
+            <li>No precaution is needed since spinal cord stimulators do not affect OMT safety</li>
+            <li>Absolute contraindication only if the device was implanted within the last year</li>
+            <li>Relative contraindication — caution is warranted at the level of the implanted device</li>
+          </ul>
+          <div class="explanation">Regional implanted devices such as spinal cord stimulators are a relative contraindication to HVLA at that level, requiring caution rather than complete avoidance of the technique elsewhere.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. A patient has chronic neck pain and is found to have basilar invagination with associated brainstem compression symptoms. Which technique is absolutely contraindicated at the level of the upper cervical spine in this patient?</p>
+          <ul class="choices" data-correct="1">
+            <li>Soft tissue technique</li>
+            <li>HVLA</li>
+            <li>Myofascial release</li>
+            <li>Counterstrain</li>
+          </ul>
+          <div class="explanation">Upper cervical instability and related craniocervical pathology (e.g., Chiari malformation, basilar invagination with cord/brainstem involvement) are absolute contraindications to HVLA at that region, given the risk of vertebrobasilar or spinal cord injury.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q4. After delivering a successful HVLA thrust to a lumbar segment with improved motion on recheck, the physician still notes mild residual restriction at the same segment. What is the most appropriate next step?</p>
+          <ul class="choices" data-correct="0">
+            <li>Return to neutral, and do not repeat a thrust on the same segment during this visit</li>
+            <li>Immediately repeat the thrust at the same segment with greater force</li>
+            <li>Repeat the thrust up to three times to be sure the barrier fully clears</li>
+            <li>Switch to counterstrain at the same segment and repeat until 0/10 tenderness</li>
+          </ul>
+          <div class="explanation">A thrust should not be repeated on the same segment/area in the same treatment, regardless of residual restriction — this is a core safety principle of HVLA technique.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPARISON ===================== -->
+  <section class="technique" id="comparison">
+    <div class="tech-header neutral-bg">
+      <h2>Comparison Table — The Five Techniques</h2>
+    </div>
+    <div class="tech-body">
+      <table class="comparison-table">
+        <tr>
+          <th>Technique</th>
+          <th>Direct/Indirect</th>
+          <th>Active/Passive</th>
+          <th>Key Timing/Detail</th>
+          <th>Signature Absolute Contraindication</th>
+        </tr>
+        <tr>
+          <td>Soft Tissue</td>
+          <td>Direct</td>
+          <td>Passive</td>
+          <td>Broadest reasonable surface; vary vector and repeat</td>
+          <td>Lack of consent</td>
+        </tr>
+        <tr>
+          <td>Myofascial Release</td>
+          <td>Mixed (direct or indirect)</td>
+          <td>Passive</td>
+          <td>"Follow" the barrier/point of ease until motion stops</td>
+          <td>Lack of consent</td>
+        </tr>
+        <tr>
+          <td>Muscle Energy</td>
+          <td>Direct</td>
+          <td>Active</td>
+          <td>Isometric contraction 3–5 sec &times; 3–5 reps at feather edge</td>
+          <td>Lack of consent; inability to follow commands</td>
+        </tr>
+        <tr>
+          <td>Counterstrain</td>
+          <td>Indirect</td>
+          <td>Passive</td>
+          <td>&ge;70% tenderness reduction; hold 90 seconds</td>
+          <td>New neuro/vascular symptoms or life-threatening symptom exacerbation with positioning</td>
+        </tr>
+        <tr>
+          <td>HVLA</td>
+          <td>Direct</td>
+          <td>Passive</td>
+          <td>Single short, quick thrust; never repeat same segment</td>
+          <td>Upper cervical instability, fracture/dislocation, cauda equina/myelopathy, active inflammatory arthritis, joint infection, malignancy</td>
+        </tr>
+      </table>
+      <div class="pearl">Across every technique, "lack of patient consent" is the universal absolute contraindication — informed consent is the one prerequisite you can never skip.</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>OCS III — Review of Osteopathic Treatment Modalities (Dr. Michelle Coleman) &middot; Built for OMS2 review</footer>
+
+<script>
+document.querySelectorAll('.choices').forEach(function(ul) {
+  const correctIdx = parseInt(ul.getAttribute('data-correct'), 10);
+  const items = ul.querySelectorAll('li');
+  let answered = false;
+  items.forEach(function(li, idx) {
+    li.addEventListener('click', function() {
+      if (answered) return;
+      answered = true;
+      items.forEach(function(item, i) {
+        if (i === correctIdx) item.classList.add('reveal-correct');
+      });
+      if (idx !== correctIdx) {
+        li.classList.add('selected-wrong');
+      } else {
+        li.classList.add('selected-correct');
+      }
+      const explanation = ul.parentElement.querySelector('.explanation');
+      if (explanation) explanation.classList.add('show');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
