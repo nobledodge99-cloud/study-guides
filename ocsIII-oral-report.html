@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giving Oral Report — Study Guide</title>
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-2: #f2ecdd;
+    --forest-dark: #2f4a3c;
+    --forest: #3f6650;
+    --sage: #7fa389;
+    --sage-light: #dbe8dd;
+    --border: #c9d9c9;
+    --text: #2c2c26;
+    --accent-gold: #b8935a;
+    --outpt: #4f7fb0;
+    --hosp: #c26b4f;
+    --reason: #8a6bb0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.55;
+    padding-bottom: 60px;
+  }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    background: var(--cream);
+    border: 2px solid var(--forest);
+    color: var(--forest-dark);
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.12);
+    transition: background 0.2s, color 0.2s;
+  }
+  .back-btn:hover { background: var(--forest); color: var(--cream); }
+
+  header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  header h1 { margin: 0 0 8px; font-size: 2.1em; }
+  header p { margin: 4px 0; font-size: 1.05em; opacity: 0.92; }
+
+  .container { max-width: 950px; margin: 0 auto; padding: 30px 20px; }
+
+  .intro-box {
+    background: var(--cream-2);
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--accent-gold);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 30px;
+  }
+  .intro-box h3 { margin-top: 0; color: var(--forest-dark); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 16px 0 0;
+    font-size: 0.92em;
+  }
+  .legend span { display: flex; align-items: center; gap: 6px; }
+  .swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 34px;
+  }
+  .nav-grid a {
+    display: block;
+    text-align: center;
+    background: var(--sage-light);
+    border: 1px solid var(--border);
+    color: var(--forest-dark);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    transition: background 0.2s;
+  }
+  .nav-grid a:hover { background: var(--sage); color: white; }
+
+  section.block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 34px;
+    overflow: hidden;
+    box-shadow: 1px 2px 8px rgba(0,0,0,0.05);
+  }
+  .block-header {
+    padding: 18px 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .block-header h2 { margin: 0; font-size: 1.5em; }
+  .block-tag {
+    background: rgba(255,255,255,0.22);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .neutral-bg { background: linear-gradient(120deg, var(--forest), var(--forest-dark)); }
+  .outpt-bg { background: linear-gradient(120deg, var(--outpt), #3a6089); }
+  .hosp-bg { background: linear-gradient(120deg, var(--hosp), #a5533a); }
+  .reason-bg { background: linear-gradient(120deg, var(--reason), #6b4f8a); }
+
+  .block-body { padding: 22px 26px; }
+
+  .block-body h3 {
+    color: var(--forest-dark);
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 4px;
+    margin-top: 28px;
+  }
+  .block-body h3:first-child { margin-top: 0; }
+
+  ol.steps li, ul.plain li { margin-bottom: 6px; }
+  ol.steps { padding-left: 22px; }
+
+  .example-box {
+    background: #eef6ef;
+    border: 1px solid #c3ddc6;
+    border-left: 5px solid var(--forest);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.94em;
+  }
+  .example-box strong { color: var(--forest-dark); }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 5px solid var(--forest);
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 16px 0;
+    font-style: italic;
+  }
+
+  .binoculars-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 700px) { .binoculars-box { grid-template-columns: 1fr; } }
+  .box-in { background: #eef6ef; border: 1px solid #c3ddc6; border-radius: 8px; padding: 14px 16px; font-size: 0.92em; }
+  .box-out { background: #f3f0ea; border: 1px solid #d8d2c4; border-radius: 8px; padding: 14px 16px; font-size: 0.92em; color: #6b6558; }
+  .box-in h4, .box-out h4 { margin: 0 0 8px; }
+  .box-in h4 { color: var(--forest-dark); }
+  .box-out h4 { color: #6b6558; }
+  .box-in ul, .box-out ul { margin: 0; padding-left: 18px; }
+  .box-in li, .box-out li { margin-bottom: 4px; }
+
+  /* Quiz styling */
+  .quiz-section {
+    margin-top: 30px;
+    background: var(--cream-2);
+    border-radius: 10px;
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+  }
+  .quiz-section h3 {
+    margin-top: 0;
+    border: none;
+    color: var(--accent-gold);
+  }
+  .question {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .question p.stem { margin-top: 0; font-weight: bold; }
+  .choices { list-style: none; padding: 0; margin: 10px 0; }
+  .choices li {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--cream);
+    transition: background 0.15s;
+  }
+  .choices li:hover { background: var(--sage-light); }
+  .choices li.selected-correct { background: #cdeccd; border-color: #6cae6c; font-weight: bold; }
+  .choices li.selected-wrong { background: #f6cfc9; border-color: #d97b6c; }
+  .choices li.reveal-correct { background: #cdeccd; border-color: #6cae6c; font-weight: bold; }
+  .explanation {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: var(--sage-light);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .explanation.show { display: block; }
+
+  .flow-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 10px;
+    font-size: 0.92em;
+  }
+  .flow-table th, .flow-table td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .flow-table th { background: var(--forest); color: white; }
+  .flow-table tr:nth-child(even) { background: var(--cream-2); }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--forest-dark);
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<header>
+  <h1>Giving Oral Report</h1>
+  <p>OCS III — Dr. Pamela Kinder</p>
+  <p>The Filter Framework &middot; Outpatient &middot; Hospital &middot; Assessment &amp; Plan</p>
+</header>
+
+<div class="container">
+
+  <div class="intro-box">
+    <h3>Learning Objectives</h3>
+    <ul class="plain">
+      <li><strong>Explain the purpose</strong> — describe how oral reports support efficient communication, safe care, and clinical decision-making.</li>
+      <li><strong>Filter information</strong> — select pertinent information for the audience, setting, and reason for presentation.</li>
+      <li><strong>Adapt the format</strong> — distinguish how new, follow-up, and acute outpatient visits differ, and how inpatient rounds, holdover, and new-admission reports differ.</li>
+      <li><strong>Show reasoning</strong> — present an assessment and plan that connects evidence, interpretation, and next steps.</li>
+      <li><strong>Recalibrate</strong> — adjust the depth and structure of the report based on service expectations and feedback.</li>
+    </ul>
+    <div class="pearl">The goal is not a memorized script — it is clear, adaptable clinical communication.</div>
+  </div>
+
+  <div class="nav-grid">
+    <a href="#central-skill">The Central Skill</a>
+    <a href="#framework">The Framework</a>
+    <a href="#outpatient">Outpatient Settings</a>
+    <a href="#hospital">Hospital Settings</a>
+    <a href="#ap">Assessment &amp; Plan</a>
+    <a href="#variation">Variation &amp; Practice</a>
+    <a href="#flow-summary">Flow Summary Table</a>
+  </div>
+
+  <!-- ===================== CENTRAL SKILL ===================== -->
+  <section class="block" id="central-skill">
+    <div class="block-header neutral-bg">
+      <h2>The Central Skill: Filtering</h2>
+      <span class="block-tag">Applies to every report</span>
+    </div>
+    <div class="block-body">
+      <h3>An Oral Report Is Not a Spoken H&amp;P</h3>
+      <p>The core skill of oral report is <strong>filtering</strong>: deciding what this specific listener needs to know about this specific patient <em>right now</em>. You have spent your training becoming an expert at <strong>collecting</strong> information; oral report training is about <strong>communicating</strong> it.</p>
+      <div class="pearl">THE FILTER: What does this listener need to know about this patient right now? If a fact does not help with the problem, your reasoning, or the next step — leave it out.</div>
+
+      <h3>Why Oral Reports Matter</h3>
+      <ul class="plain">
+        <li><strong>Communicate efficiently</strong> — pass along the right amount of patient information to a specific audience efficiently.</li>
+        <li><strong>Support decisions and action</strong> — help the listener quickly understand the patient's issues and generate an appropriate plan of action.</li>
+        <li><strong>Improve safety</strong> — reduce missing information and communication errors.</li>
+        <li><strong>Demonstrate your clinical reasoning</strong> — an oral report is one of the first places your clinical reasoning becomes visible. Your preceptor is listening not just to what happened, but to what you chose to mention, what you left out, what you put first, what you prioritized, whether you recognized important abnormalities, and whether you connected evidence to an assessment.</li>
+      </ul>
+
+      <div class="binoculars-box">
+        <div class="box-in">
+          <h4>Inside the Binoculars (Include)</h4>
+          <ul>
+            <li>The new story, the presenting symptom, the evidence</li>
+            <li>Whatever explains today's problem</li>
+          </ul>
+        </div>
+        <div class="box-out">
+          <h4>Outside the Field of View (Leave Out)</h4>
+          <ul>
+            <li>Remote medical history unrelated to today's problem</li>
+            <li>Unrelated medications, old imaging</li>
+            <li>Valid but non-contributory medical information</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pearl">Knowing a fact does not mean you say it during oral report — this is one of the hardest habits for students to develop, because you worked hard to collect every fact and understandably want credit for knowing it.</div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — The Central Skill</h3>
+
+        <div class="question">
+          <p class="stem">Q1. A student is preparing to present a patient and recalls the "filter" question taught for every oral report. Which question should the student ask themselves?</p>
+          <ul class="choices" data-correct="2">
+            <li>Did I remember every section of the H&amp;P?</li>
+            <li>How can I include every fact I collected during my interview?</li>
+            <li>What does this listener need to know about this patient right now?</li>
+            <li>What would a textbook chapter say about this diagnosis?</li>
+          </ul>
+          <div class="explanation">The central filtering question for every oral report is: what does this listener need to know about this patient right now? This determines what is selected, prioritized, and included.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. During a presentation, a student mentions a remote ankle fracture from ten years ago that has no bearing on the patient's current abdominal complaint. Which principle was violated?</p>
+          <ul class="choices" data-correct="0">
+            <li>If a fact does not help with the problem, reasoning, or next step, it should be left out</li>
+            <li>Reports must always be presented in strict chronological order</li>
+            <li>Objective findings must always precede subjective findings</li>
+            <li>Every chronic problem must receive equal emphasis in the report</li>
+          </ul>
+          <div class="explanation">Facts that don't help explain the current problem, support your reasoning, or inform the next step should be omitted — knowing a fact is not the same as needing to report it.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. Beyond simply conveying information, what is a second key purpose served by an oral report, according to the lecture?</p>
+          <ul class="choices" data-correct="3">
+            <li>It fulfills a billing requirement for every patient encounter</li>
+            <li>It replaces the need for written documentation</li>
+            <li>It tests the student's memorization of the H&amp;P template</li>
+            <li>It reveals the presenter's clinical reasoning to the listener</li>
+          </ul>
+          <div class="explanation">An oral report is not simply a communication exercise — it is one of the first places a student's clinical reasoning becomes visible to the preceptor, through what is selected, prioritized, and connected to the assessment.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FRAMEWORK ===================== -->
+  <section class="block" id="framework">
+    <div class="block-header neutral-bg">
+      <h2>One Framework, Adapted to the Setting</h2>
+      <span class="block-tag">The scaffolding for every report</span>
+    </div>
+    <div class="block-body">
+      <p>The same five-part reasoning framework applies to every oral report, regardless of setting. What changes across settings is how much time and emphasis each part receives — not the underlying structure.</p>
+      <ol class="steps">
+        <li><strong>Identify</strong> — Who is the patient, and why am I presenting them?</li>
+        <li><strong>Tell the story</strong> — What clinical information explains the current problem? (Tell it succinctly and efficiently, including only what matters to the current problem.)</li>
+        <li><strong>Report findings</strong> — Which exam, laboratory, or imaging findings matter? (Report objective findings pertinent to this case.)</li>
+        <li><strong>Interpret</strong> — What do I think is going on?</li>
+        <li><strong>Recommend</strong> — What should happen next, based on everything said previously?</li>
+      </ol>
+      <div class="pearl">The amount and emphasis change from setting to setting. The reasoning process does not.</div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — The Framework</h3>
+
+        <div class="question">
+          <p class="stem">Q1. Which of the following correctly lists the five components of the oral report framework, in order?</p>
+          <ul class="choices" data-correct="1">
+            <li>Report findings, Identify, Interpret, Tell the story, Recommend</li>
+            <li>Identify, Tell the story, Report findings, Interpret, Recommend</li>
+            <li>Interpret, Identify, Recommend, Tell the story, Report findings</li>
+            <li>Tell the story, Identify, Recommend, Report findings, Interpret</li>
+          </ul>
+          <div class="explanation">The framework proceeds: Identify (who/why) &rarr; Tell the story &rarr; Report findings &rarr; Interpret &rarr; Recommend. This order remains constant across all settings.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. According to the lecture, what is the one element of the oral report framework that changes as the clinical setting changes (e.g., outpatient vs. inpatient rounds)?</p>
+          <ul class="choices" data-correct="2">
+            <li>The five-step reasoning sequence itself</li>
+            <li>The requirement to obtain informed consent</li>
+            <li>The amount of time and emphasis given to each part</li>
+            <li>Whether an assessment and plan is required at all</li>
+          </ul>
+          <div class="explanation">The five-step reasoning framework (Identify, Tell the story, Report findings, Interpret, Recommend) stays constant; only the amount of detail and relative emphasis given to each part changes by setting.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OUTPATIENT ===================== -->
+  <section class="block" id="outpatient">
+    <div class="block-header outpt-bg">
+      <h2>Outpatient Presentations</h2>
+      <span class="block-tag">Same patient, different purpose</span>
+    </div>
+    <div class="block-body">
+      <p>In the outpatient setting, the same patient can generate very different reports depending on the clinical situation: a new primary care patient, a routine follow-up visit, a focused/acute visit, or a specialty visit. Your purpose determines what matters most. The information available may be extensive — the information you present should be selective.</p>
+
+      <h3>New Outpatient Patient — Start Broad, Then Prioritize</h3>
+      <p>This is the broadest presentation because the listener does not yet know the patient. Establish context: why the patient came, what they want from the visit, active and chronic problems, medications and allergies, and enough exam/testing for your attending to understand the problems. Prioritize — don't give twelve chronic diagnoses with equal emphasis. Develop a single opening sentence that tells your preceptor who the patient is and what needs attention.</p>
+      <div class="example-box"><strong>Example:</strong> "Jordan Lee is a 58-year-old male establishing primary care with hypertension and type 2 diabetes, here to improve blood pressure and diabetes control and to discuss intermittent postprandial right upper quadrant pain."</div>
+      <p>Follow a template (the H&amp;P/SOAP structure you've learned) — avoid giving physical exam findings before completing the pertinent history, and avoid giving your assessment before completing the chief complaint, HPI, and objective sections.</p>
+
+      <h3>Outpatient Follow-Up Visit — Emphasize What Changed</h3>
+      <p>The focus shifts to interval change: what happened since the last visit? Did the treatment work? Did the patient take it? Any adverse effects? New symptoms? Any urgent care or other doctor visits in the interim? What happened to ordered labs/imaging — obtained, reviewed, discussed with the patient? You need not repeat the full PMH, family history, or social history if the listener already knows them — only what is pertinent to the interval changes.</p>
+      <div class="example-box"><strong>Example:</strong> "Jordan returned six weeks after starting losartan. Home blood pressures are now 132–138/78–84. He reports no dizziness, and potassium and creatinine remain stable. I recommend continuing the current dose."</div>
+
+      <h3>Focused/Acute Visit — Stay Focused</h3>
+      <p>This is an established patient presenting with a specific acute issue. Use the "binoculars" metaphor: inside the field of view is the new story, the presenting symptom, and the evidence; outside the field of view is remote medical history, unrelated medications, old imaging — potentially valid information that doesn't help answer today's question.</p>
+      <div class="example-box"><strong>Example:</strong> "Jordan presents today for worsening postprandial right upper quadrant pain with nausea. There is no fever or jaundice. Jordan is afebrile with right upper quadrant tenderness. I'm concerned about biliary disease and would obtain liver chemistries and a right upper quadrant ultrasound."</div>
+
+      <h3>Specialty Clinic — Think Like the Listener</h3>
+      <p>Specialty presentations are not automatically more detailed — they are targeted. The referral question is your North Star: why did primary care send this patient here, and what does the specialist need to answer? Include prior testing/treatment and any comorbidities or medications that might change the specialist's opinion. Different specialties (neurology, cardiology, surgery, dermatology) apply a different filter to the same chart.</p>
+      <div class="example-box"><strong>Example:</strong> "Jordan was referred to general surgery for recurrent postprandial right upper quadrant pain. Ultrasound shows gallstones without ductal dilatation. Liver chemistries are normal, and there is no history of pancreatitis. The referral question is whether these symptoms represent biliary colic and whether elective cholecystectomy is appropriate."</div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Outpatient Presentations</h3>
+
+        <div class="question">
+          <p class="stem">Q1. A physician is presenting a patient who is establishing primary care for the first time. Which best describes the appropriate approach?</p>
+          <ul class="choices" data-correct="1">
+            <li>Present only the single most recent lab value, omitting all history</li>
+            <li>Start broad by establishing context and active/chronic problems, then prioritize what needs attention</li>
+            <li>Present interval change since the last visit only</li>
+            <li>Lead exclusively with the referral question</li>
+          </ul>
+          <div class="explanation">A new outpatient presentation is the broadest because the listener does not yet know the patient — the presenter must start broad (context, active/chronic problems, meds/allergies) and then prioritize, rather than treating every chronic diagnosis with equal emphasis.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. A patient returns for a routine hypertension follow-up six weeks after a medication change. Which question should primarily drive this oral report?</p>
+          <ul class="choices" data-correct="3">
+            <li>What is relevant to the referring specialist's question?</li>
+            <li>Why is this patient in the hospital today?</li>
+            <li>Who is this patient, established for the first time?</li>
+            <li>What has changed since the last visit?</li>
+          </ul>
+          <div class="explanation">A follow-up visit emphasizes interval change — what happened since the last visit, including treatment response, adherence, new symptoms, and results of previously ordered testing.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. During a focused/acute visit presentation, a student begins describing the patient's remote surgical history from 15 years ago that is unrelated to the current complaint. Using the "binoculars" metaphor from the lecture, this information is best classified as which of the following?</p>
+          <ul class="choices" data-correct="0">
+            <li>Outside the field of view</li>
+            <li>Inside the field of view</li>
+            <li>The referral question</li>
+            <li>An interval event</li>
+          </ul>
+          <div class="explanation">Unrelated remote history falls outside the "binoculars" field of view for a focused/acute visit — the field of view should be limited to the new story, presenting symptom, and evidence that explain today's problem.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q4. A patient has been referred to cardiology for evaluation of palpitations. Which principle should guide what the student includes in this specialty presentation?</p>
+          <ul class="choices" data-correct="2">
+            <li>Include every detail available in the chart to be thorough</li>
+            <li>Include only interval changes since the last office visit</li>
+            <li>Lead with the referral question and filter for what is relevant to that specialty</li>
+            <li>Omit all history since the specialist can review the chart independently</li>
+          </ul>
+          <div class="explanation">A specialty presentation is not simply "more detailed" — it is targeted to the referral question, filtering the same chart for what matters to that particular specialty's decision-making.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOSPITAL ===================== -->
+  <section class="block" id="hospital">
+    <div class="block-header hosp-bg">
+      <h2>Hospital Presentations</h2>
+      <span class="block-tag">Same framework, different emphasis</span>
+    </div>
+    <div class="block-body">
+      <p>In the hospital, the biggest variable is how much the team already knows. With a <strong>new admission</strong>, the team knows very little, so more context is provided. On <strong>daily rounds</strong>, the team already knows the patient, so the emphasis shifts to what changed. A <strong>holdover</strong> is in between — another team admitted the patient, and your team now needs enough context to safely assume care.</p>
+      <div class="pearl">The less the team knows, the more context you provide. The more the team knows, the more you emphasize change and next steps.</div>
+
+      <h3>New Admission — Tell the Story That Led to Hospitalization</h3>
+      <p>The fundamental question: why does this patient need to be in the hospital? Establish the baseline before describing what changed. Open with the chief concern and key clinical context, and present the HPI chronologically so the listener understands why admission was necessary. If past medical history explains the current illness, integrate it into the story early — don't make the listener wait for an important fact just because it technically belongs in the past medical history. Then complete the report with other relevant history, medications/allergies, exam, and key tests, ending with a clear assessment and plan.</p>
+      <div class="example-box"><strong>Example:</strong> "Jordan Lee is a 58-year-old with type 2 diabetes and several weeks of intermittent postprandial right upper quadrant pain who developed persistent pain, vomiting, and fever overnight. Jordan is febrile with focal right upper quadrant tenderness. White count is 15.8, and ultrasound shows gallstones with gallbladder wall thickening. Jordan is being admitted for IV fluids, antibiotics, and surgical evaluation."</div>
+      <p><strong>Pertinent does not mean incomplete.</strong> Integrate pertinent past history and ROS findings into the HPI where they help the story; highlight meaningful changes from baseline and abnormal findings; and organize the assessment and plan by problem/organ system, ordered by severity and urgency, showing how the evidence supports the assessment.</p>
+
+      <h3>Inpatient Rounds (Morning Report) — Today Matters</h3>
+      <p>Morning report is a brief update, not a complete replay of the admission H&amp;P. The keyword is <strong>trajectory</strong>: what happened over the interval since we last saw this patient, how the patient feels now, and what today's plan is.</p>
+      <ol class="steps">
+        <li>One-line orientation: "The patient is on hospital day ___ for ___."</li>
+        <li>Important 24-hour events, including how the patient currently feels.</li>
+        <li>Pertinent vital sign trends, exam changes, and laboratory/imaging changes.</li>
+        <li>Today's assessment and today's plan.</li>
+      </ol>
+      <div class="example-box"><strong>Example:</strong> "Jordan Lee is hospital day 3 for acute cholecystitis. He is now afebrile with improved pain after IV fluids and antibiotics. White count has fallen from 15.8 to 11.2. Surgery plans laparoscopic cholecystectomy later today."</div>
+      <div class="pearl">Give actual values, not vague descriptors — say "white count fell from 15.8 to 11.2," not "white count is now normal." Trends matter, and normal for one patient is not normal for another.</div>
+
+      <h3>Holdover Admission — Move the Clock Forward</h3>
+      <p>You are inheriting a story already in progress. First orient the team: why was the patient admitted, what important information was already known, and what was the initial plan. Then move the clock forward: what happened overnight, how did the patient respond to treatment, what's different this morning, and does the original assessment still fit?</p>
+      <div class="example-box"><strong>Example:</strong> "Jordan was admitted overnight for acute cholecystitis after worsening right upper quadrant pain, vomiting, and fever. He received IV fluids and antibiotics and remained hemodynamically stable. Pain has improved this morning, and surgery is evaluating for cholecystectomy today."</div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Hospital Presentations</h3>
+
+        <div class="question">
+          <p class="stem">Q1. Which principle explains why a new-admission presentation includes more context than a morning rounds presentation on the same patient two days later?</p>
+          <ul class="choices" data-correct="1">
+            <li>New admissions require a longer differential diagnosis list by hospital policy</li>
+            <li>The team's familiarity with the patient determines how much context is needed — new admissions require more, since the team knows little</li>
+            <li>Morning rounds never include an assessment and plan</li>
+            <li>New admissions must always include the complete social history regardless of relevance</li>
+          </ul>
+          <div class="explanation">The amount of context provided is driven by team familiarity: the less the team already knows (as with a brand-new admission), the more context is needed; the more the team already knows (as on established rounds), the more the emphasis shifts to what changed.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. On hospital day 3, a physician presents a patient's white count trend as "the white count has fallen from 15.8 to 11.2" rather than "the white count is now normal." What principle does this reflect?</p>
+          <ul class="choices" data-correct="2">
+            <li>Only the most recent value should ever be reported</li>
+            <li>Trends should never be discussed during rounds</li>
+            <li>The team needs actual values and trends, since normal for one patient is not normal for another</li>
+            <li>Descriptive terms are always preferred over numeric values</li>
+          </ul>
+          <div class="explanation">Reporting actual values and the trend (both the prior and current numbers) is preferred over vague descriptors like "normal," since it conveys direction of change and clinical context that a single descriptor cannot.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q3. A resident is presenting a patient admitted overnight by the nightfloat team, whom their team is now assuming care for on morning rounds. Which structure best fits this "holdover" scenario?</p>
+          <ul class="choices" data-correct="0">
+            <li>Briefly orient why the patient was admitted and what the initial plan was, then move the clock forward to describe overnight events and this morning's status</li>
+            <li>Present only today's vital signs with no reference to the admission</li>
+            <li>Repeat the entire admission history and physical exam in full detail</li>
+            <li>Omit the overnight course entirely and jump directly to today's plan</li>
+          </ul>
+          <div class="explanation">A holdover presentation orients the team to why the patient was admitted and the initial plan (inherited story), then moves the clock forward through overnight events, treatment response, and today's status — a hybrid between a new admission and a rounding update.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q4. Which of the following would most appropriately open a new-admission oral report?</p>
+          <ul class="choices" data-correct="3">
+            <li>"Labs today show a white count of 11.2 and improving pain."</li>
+            <li>"Home blood pressures have been well controlled on losartan."</li>
+            <li>"The patient is hospital day 3 for acute cholecystitis."</li>
+            <li>"Jordan Lee is a 58-year-old with type 2 diabetes and several weeks of postprandial right upper quadrant pain who developed persistent pain, vomiting, and fever overnight."</li>
+          </ul>
+          <div class="explanation">A new-admission report opens with the chief concern and key clinical context that explains why the patient needed to be admitted, presented chronologically — not with today's rounding update or an outpatient follow-up detail.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ASSESSMENT & PLAN ===================== -->
+  <section class="block" id="ap">
+    <div class="block-header reason-bg">
+      <h2>Assessment &amp; Plan: Show Your Thinking</h2>
+      <span class="block-tag">Where reporting becomes reasoning</span>
+    </div>
+    <div class="block-body">
+      <p>An oral report is not just what you found — it's what you think and what you'll do. Your assessment should cover active, prioritized diagnoses, starting with the lead problem (why the patient is in the hospital/being seen) and following with others affecting that lead problem.</p>
+      <div class="example-box"><strong>Example:</strong> "Acute cholecystitis, improved with fluids and antibiotics, most likely will need surgical intervention." Connect in pertinent subjective/objective findings and treatment/labs/imaging specifics, emphasizing based on acuity and importance.</div>
+
+      <div class="binoculars-box">
+        <div class="box-out">
+          <h4>Avoid — Doesn't Help the Listener</h4>
+          <ul>
+            <li>A list of diagnoses with no explanation ("Pneumonia. COPD. Diabetes.")</li>
+            <li>Repeating the history verbatim</li>
+            <li>A vague plan ("Monitor and treat as needed.")</li>
+            <li>Treating every problem with equal weight, with no hierarchy or urgency</li>
+          </ul>
+        </div>
+        <div class="box-in">
+          <h4>Aim For — Helps the Listener Understand and Act</h4>
+          <ul>
+            <li>Prioritized problems with supporting evidence ("Most likely community-acquired pneumonia because of fever, productive cough, RLL crackles, CXR infiltrate, and leukocytosis")</li>
+            <li>Synthesis of subjective + objective findings into a coherent clinical story</li>
+            <li>Specific next diagnostic or treatment steps ("Start IV ceftriaxone and azithromycin, obtain sputum culture, follow O2 sat, repeat CBC and CXR tomorrow")</li>
+            <li>Emphasis based on acuity and importance — most acute/unstable issues first</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pearl">By OMS II, the oral report should reveal how you are reasoning. Show the connection between the evidence, your conclusion, and your plan.</div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Assessment &amp; Plan</h3>
+
+        <div class="question">
+          <p class="stem">Q1. A student concludes their oral report by simply stating, "Pneumonia. COPD. Diabetes." Which improvement would best align with the principles taught for assessment and plan?</p>
+          <ul class="choices" data-correct="1">
+            <li>Add three additional chronic diagnoses to the list for completeness</li>
+            <li>State the prioritized problem with supporting evidence, such as identifying the most likely diagnosis and the findings that support it</li>
+            <li>Simply repeat the full history a second time</li>
+            <li>Remove the assessment entirely and only give a plan</li>
+          </ul>
+          <div class="explanation">An effective assessment presents prioritized problems together with the supporting evidence (e.g., naming the most likely diagnosis and citing the specific findings that support it), rather than an unexplained list of diagnoses.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. Which of the following plan statements best reflects the "aim for" column of effective assessment and plan presentation?</p>
+          <ul class="choices" data-correct="2">
+            <li>"Continue current management."</li>
+            <li>"Monitor and treat as needed."</li>
+            <li>"Start IV ceftriaxone and azithromycin, obtain sputum culture, follow O2 saturation, and repeat CBC and chest x-ray tomorrow."</li>
+            <li>"The patient has several chronic conditions."</li>
+          </ul>
+          <div class="explanation">Specific, actionable next steps (naming the treatment, diagnostic tests, and monitoring parameters) are preferred over vague plans like "monitor and treat as needed."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VARIATION & PRACTICE ===================== -->
+  <section class="block" id="variation">
+    <div class="block-header neutral-bg">
+      <h2>Expect Variation &amp; How to Practice</h2>
+      <span class="block-tag">Adapting on rotations</span>
+    </div>
+    <div class="block-body">
+      <h3>Expect Variation on Rotations</h3>
+      <ul class="plain">
+        <li><strong>Variation is normal</strong> — presentation structure varies by service, specialty, inpatient vs. outpatient setting, and individual preceptor.</li>
+        <li><strong>Different priorities</strong> — some listeners want more exam detail from students; others want a highly focused presentation. Neither is wrong.</li>
+        <li><strong>Use feedback</strong> — you may be interrupted and redirected; use that feedback to recalibrate your presentation.</li>
+        <li><strong>Ask early</strong> — a useful question: "How do you prefer students to present patients on this service?"</li>
+      </ul>
+
+      <h3>Before You Present: Six Decisions in 30 Seconds</h3>
+      <p>Think of this as a preflight check before you start talking. Notice that none of these questions ask, "Did I remember every section?" — the check forces you to think before you speak.</p>
+      <ol class="steps">
+        <li><strong>Frame the report:</strong> Who is listening? Why am I presenting?</li>
+        <li><strong>Filter the information:</strong> What has changed? What is pertinent?</li>
+        <li><strong>Finish with reasoning:</strong> What do I think? What happens next?</li>
+      </ol>
+      <div class="pearl">Your report should sound selected — not recited.</div>
+
+      <h3>Practice: From Complete Information to Oral Report</h3>
+      <ol class="steps">
+        <li><strong>Start with everything</strong> — begin with a complete written patient case; identify the clinical setting and audience.</li>
+        <li><strong>Filter + organize</strong> — cross out information the listener does not need; reorder what remains into a coherent clinical story.</li>
+        <li><strong>Present + refine</strong> — say it aloud, then adjust based on feedback, shortening or expanding without losing the clinical reasoning.</li>
+      </ol>
+      <div class="pearl">Practice out loud. Have someone change the conditions (new patient vs. follow-up, outpatient vs. rounds, time limit) so you can adapt. Most students start at 2–3 minutes and need to work down to 60 seconds, then 30 seconds.</div>
+
+      <div class="quiz-section">
+        <h3>Quick Check — Variation &amp; Practice</h3>
+
+        <div class="question">
+          <p class="stem">Q1. An attending interrupts a student's oral report and asks for a more focused presentation, while a different attending on a prior rotation wanted more exam detail. How should the student interpret this discrepancy?</p>
+          <ul class="choices" data-correct="0">
+            <li>This kind of variation between listeners is normal and expected — the student should use the feedback to recalibrate for that listener</li>
+            <li>One of the two attendings is presenting incorrect expectations and should be reported</li>
+            <li>The student should always default to the longest possible presentation to satisfy every listener</li>
+            <li>Oral report standards are fixed and should never vary by preceptor</li>
+          </ul>
+          <div class="explanation">Variation in preferences between preceptors, services, and settings is normal; the correct response is to listen to feedback and adapt, not to view the variation as an error to be corrected.</div>
+        </div>
+
+        <div class="question">
+          <p class="stem">Q2. Which of the following is one of the "six decisions in 30 seconds" a student should make before beginning an oral report?</p>
+          <ul class="choices" data-correct="3">
+            <li>Did I document every ROS system?</li>
+            <li>Have I memorized this presentation word-for-word?</li>
+            <li>Did I include every past surgical history detail?</li>
+            <li>What has changed, and what is pertinent?</li>
+          </ul>
+          <div class="explanation">The six-question preflight check includes "who is listening," "why am I presenting," "what has changed," "what is pertinent," "what do I think," and "what happens next" — none of which ask about completeness of documentation or memorization.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FLOW SUMMARY TABLE ===================== -->
+  <section class="block" id="flow-summary">
+    <div class="block-header neutral-bg">
+      <h2>Flow of Reporting — Summary Table</h2>
+    </div>
+    <div class="block-body">
+      <p>One question drives every format: <strong>What does this listener need to know right now?</strong> The setting determines what to lead with and what to emphasize — the underlying five-part framework (Identify &rarr; Tell the story &rarr; Report findings &rarr; Interpret &rarr; Recommend) never changes.</p>
+      <table class="flow-table">
+        <tr>
+          <th>Setting</th>
+          <th>Lead With</th>
+          <th>Emphasize</th>
+        </tr>
+        <tr>
+          <td>New outpatient</td>
+          <td>Reason for visit</td>
+          <td>Broad context + active issues</td>
+        </tr>
+        <tr>
+          <td>Follow-up visit</td>
+          <td>Reason for follow-up</td>
+          <td>Interval change + active problems</td>
+        </tr>
+        <tr>
+          <td>Focused/acute visit</td>
+          <td>Current problem</td>
+          <td>Pertinent history and findings</td>
+        </tr>
+        <tr>
+          <td>Specialty clinic</td>
+          <td>Referral or follow-up reason</td>
+          <td>Specialty-relevant information</td>
+        </tr>
+        <tr>
+          <td>New admission</td>
+          <td>Chief concern</td>
+          <td>Clinical story and change from baseline</td>
+        </tr>
+        <tr>
+          <td>Inpatient rounds (morning report)</td>
+          <td>Patient + hospital day + problem</td>
+          <td>24-hour change + today's assessment and plan</td>
+        </tr>
+        <tr>
+          <td>Holdover admission</td>
+          <td>Why the patient was admitted (inherited story)</td>
+          <td>Overnight course + what's different this morning</td>
+        </tr>
+      </table>
+      <div class="pearl">The patient does not change. The purpose of the presentation does. Every row above is still generated from the same five steps: Identify, Tell the story, Report findings, Interpret, Recommend.</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>OCS III — Giving Oral Report (Dr. Pamela Kinder) &middot; Built for OMS2 clinical skills review</footer>
+
+<script>
+document.querySelectorAll('.choices').forEach(function(ul) {
+  const correctIdx = parseInt(ul.getAttribute('data-correct'), 10);
+  const items = ul.querySelectorAll('li');
+  let answered = false;
+  items.forEach(function(li, idx) {
+    li.addEventListener('click', function() {
+      if (answered) return;
+      answered = true;
+      items.forEach(function(item, i) {
+        if (i === correctIdx) item.classList.add('reveal-correct');
+      });
+      if (idx !== correctIdx) {
+        li.classList.add('selected-wrong');
+      } else {
+        li.classList.add('selected-correct');
+      }
+      const explanation = ul.parentElement.querySelector('.explanation');
+      if (explanation) explanation.classList.add('show');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
