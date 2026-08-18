@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Competency Exam PMI &amp; OMM with Special Tests</title>
+<style>
+  :root{
+    color-scheme: light;
+    --cream:#fdfbf3;
+    --cream-2:#f7f1e0;
+    --ink:#2c2c24;
+    --ink-soft:#5c5a4a;
+    --green-deep:#3b5d43;
+    --green:#5e8461;
+    --green-light:#a9c2a0;
+    --line:#d8cfb4;
+    --highlight:#f4e2a8;
+    --pos:#8a2f2f;
+    --card-shadow: 0 2px 10px rgba(44,44,36,0.08);
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono: 'SFMono-Regular', Consolas, Menlo, monospace;
+  }
+  *{box-sizing:border-box;}
+  html{background:var(--cream);}
+  html, body{min-height:100%;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.55;}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 100px;}
+  header{border-bottom:2px solid var(--green-deep);padding-bottom:18px;margin-bottom:26px;}
+  header h1{font-family:var(--serif);font-size:1.9rem;margin:0 0 8px;color:var(--green-deep);}
+  header p{margin:0 0 6px;color:var(--ink-soft);font-size:0.95rem;}
+  .toolbar{display:flex;gap:10px;margin:16px 0 8px;flex-wrap:wrap;}
+  .tool-btn{font-family:var(--sans);font-weight:600;font-size:0.82rem;padding:8px 15px;border-radius:18px;border:1.5px solid var(--green-deep);background:var(--cream);color:var(--green-deep);cursor:pointer;}
+  .tool-btn:hover{background:var(--green-light);}
+  .overview-card{background:#fffdf7;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:26px;box-shadow:var(--card-shadow);}
+  .overview-card h2{font-family:var(--serif);color:var(--green-deep);margin:0 0 10px;font-size:1.25rem;}
+  .station-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0;}
+  .station{background:var(--cream-2);border-radius:10px;padding:12px 16px;font-size:0.88rem;}
+  .station b{color:var(--green-deep);display:block;font-size:0.95rem;margin-bottom:2px;}
+  @media (max-width:640px){ .station-grid{grid-template-columns:1fr;} }
+  nav.jumpnav{position:sticky;top:0;background:var(--cream);padding:10px 0 14px;margin-bottom:10px;z-index:50;border-bottom:1px solid var(--line);}
+  .jump-group{margin-bottom:8px;}
+  .jump-group-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-soft);font-weight:700;margin-bottom:5px;}
+  .jump-pills{display:flex;flex-wrap:wrap;gap:6px;}
+  .jump-pill{font-size:0.78rem;font-weight:600;padding:6px 12px;border-radius:14px;border:1.3px solid var(--green);color:var(--green-deep);text-decoration:none;background:var(--cream-2);}
+  .jump-pill:hover{background:var(--green-light);}
+  section.area{background:#fffdf7;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:22px;box-shadow:var(--card-shadow);scroll-margin-top:110px;}
+  section.area h2{font-family:var(--serif);color:var(--green-deep);font-size:1.5rem;margin:0 0 4px;border-bottom:2px solid var(--green-light);padding-bottom:8px;}
+  section.area .area-sub{color:var(--ink-soft);font-size:0.85rem;margin:0 0 16px;font-style:italic;}
+  section.area h3{font-family:var(--serif);color:var(--ink);font-size:1.15rem;margin:22px 0 8px;}
+  section.area h3:first-of-type{margin-top:0;}
+  section.area h4{font-family:var(--sans);color:var(--green-deep);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;margin:14px 0 6px;}
+  section.area p{margin:6px 0;font-size:0.92rem;}
+  section.area ul{margin:6px 0;padding-left:20px;font-size:0.92rem;}
+  section.area li{margin-bottom:4px;}
+  .exam-block{border:1.5px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:14px;background:var(--cream);}
+  .exam-block .exam-title{font-family:var(--serif);font-size:1.05rem;color:var(--green-deep);margin-bottom:6px;}
+  table.data-table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:0.87rem;}
+  table.data-table th{text-align:left;background:var(--cream-2);color:var(--green-deep);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;padding:8px 10px;border-bottom:2px solid var(--green-deep);}
+  table.data-table td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.data-table tr:hover td{background:var(--cream-2);}
+  table.data-table td.pos{color:var(--pos);font-weight:600;}
+  .tech-card{border:1.5px solid var(--green);border-radius:10px;padding:14px 18px;margin-bottom:10px;background:var(--cream-2);}
+  .tech-card .tech-name{font-family:var(--serif);font-weight:700;color:var(--green-deep);font-size:1rem;margin-bottom:4px;}
+  .tech-card ol, .tech-card ul{margin:6px 0 0;padding-left:20px;font-size:0.88rem;}
+  .tech-card ol li, .tech-card ul li{margin-bottom:4px;}
+  .sub-tech{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);}
+  .sub-tech .sub-name{font-weight:700;color:var(--ink);font-size:0.9rem;}
+  .back-to-top{display:inline-block;margin-top:14px;font-size:0.8rem;color:var(--green-deep);text-decoration:none;font-weight:600;}
+  .back-to-top:hover{text-decoration:underline;}
+  footer{text-align:center;color:var(--ink-soft);font-size:0.78rem;margin-top:40px;}
+  .back-btn{position:fixed;top:18px;left:18px;z-index:1000;font-family:var(--sans);font-size:0.78rem;font-weight:600;color:var(--green-deep);text-decoration:none;border:1.5px solid var(--green-deep);padding:7px 13px;border-radius:8px;background:var(--cream);box-shadow:var(--card-shadow);}
+  .back-btn:hover{background:var(--green-light);}
+  @media print{
+    .back-btn, nav.jumpnav, .toolbar, .back-to-top{display:none !important;}
+    section.area{box-shadow:none;border:1px solid #ccc;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+<div class="wrap">
+  <header>
+    <h1>Competency Exam PMI &amp; OMM with Special Tests</h1>
+    <p>Full checklist reference for the 4-station competency: PCM system exams, special tests by region, and every OMM technique setup (muscle energy, HVLA, counterstrain) tested.</p>
+    <div class="toolbar">
+      <button class="tool-btn" onclick="window.print()">Download / Print as PDF</button>
+    </div>
+  </header>
+
+  <div class="overview-card">
+    <h2>Competency Structure — 4 Stations Total</h2>
+    <div class="station-grid">
+      <div class="station"><b>PCM Station #1</b>(1) System Exam</div>
+      <div class="station"><b>PCM Station #2</b>(2) Special Tests</div>
+      <div class="station"><b>OMM Station #1</b>(1) Treatment Setup</div>
+      <div class="station"><b>OMM Station #2</b>(2) Counterstrain Treatment Setups</div>
+    </div>
+  </div>
+
+  <nav class="jumpnav">
+    <div class="jump-group">
+      <div class="jump-group-label">PCM Competency</div>
+      <div class="jump-pills">
+        <a class="jump-pill" href="#system-exam">System Exams</a>
+        <a class="jump-pill" href="#special-tests">Special Tests</a>
+      </div>
+    </div>
+    <div class="jump-group">
+      <div class="jump-group-label">OMM Competency</div>
+      <div class="jump-pills">
+        <a class="jump-pill" href="#spine-ribs">Cervical, Ribs, Thoracic, Lumbar</a>
+        <a class="jump-pill" href="#pelvis-sacrum">Pelvis &amp; Sacrum ME</a>
+        <a class="jump-pill" href="#extremities">Upper &amp; Lower Extremity ME/HVLA</a>
+        <a class="jump-pill" href="#counterstrain">Counterstrain Points</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= SYSTEM EXAM ================= -->
+  <section class="area" id="system-exam">
+    <h2>PCM System Exam Checklists</h2>
+    <p class="area-sub">PCM Station #1 — (1) System Exam</p>
+
+    <div class="exam-block">
+      <div class="exam-title">Abdominal</div>
+      <ul>
+        <li><b>Inspection:</b> Contour, scars, rashes, lesions</li>
+        <li><b>Auscultation:</b> All 4 quadrants, aorta</li>
+        <li><b>Palpation:</b> Light in 4 quadrants, deep in 4 quadrants, liver, spleen, aorta</li>
+        <li><b>Percussion:</b> Lloyd sign for CVA tenderness</li>
+      </ul>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">Cerebellar</div>
+      <ul>
+        <li>Assess for <b>dysdiadochokinesis:</b> rapid alternating movements</li>
+        <li>Assess for <b>dysmetria:</b> finger to nose, heel down shin</li>
+        <li><b>Romberg</b> and <b>pronator drift:</b> feet together, arms out, palms up</li>
+        <li>Assess balance: regular gait, tandem gait, toe walk, heel walk</li>
+      </ul>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">Cranial Nerves</div>
+      <table class="data-table">
+        <tr><th>CN</th><th>Test</th></tr>
+        <tr><td>II</td><td>Direct and indirect light in each eye</td></tr>
+        <tr><td>III, IV, VI</td><td>Follow finger in H pattern</td></tr>
+        <tr><td>V</td><td>Motor — palpate masseter while biting down. Sensory — cotton swab V1, V2, V3</td></tr>
+        <tr><td>VII</td><td>Raise eyebrows, close eyes tightly, smile, puff out cheeks</td></tr>
+        <tr><td>VIII</td><td>Finger rub / hearing test</td></tr>
+        <tr><td>IX, X</td><td>&ldquo;Say ahh&rdquo; and use tongue depressor to evaluate soft palate movement</td></tr>
+        <tr><td>XI</td><td>Shrug shoulders OR have patient turn head against resistance</td></tr>
+        <tr><td>XII</td><td>Stick out tongue and wiggle it</td></tr>
+      </table>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">Cardiovascular (CV)</div>
+      <ul>
+        <li><b>Inspection:</b> Chest shape, color of skin (cyanosis — perioral or distal extremities)</li>
+        <li><b>Palpation:</b> Precordium, PMI</li>
+        <li><b>Auscultation:</b> Aortic, pulmonic, Erb's, tricuspid, bicuspid (diaphragm then bell); carotid arteries using bell and have patient hold breath</li>
+        <li><b>Bilateral pulses:</b> Carotid, radial, tibialis posterior, dorsalis pedis</li>
+      </ul>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">HEENT</div>
+      <ul>
+        <li><b>Head</b> — Inspection (4 of): hair, scalp, skull, face, skin, nasal symmetry, pinna, lobe symmetry, lips, TMJ, trachea, thyroid. Palpation: frontal &amp; maxillary sinuses</li>
+        <li><b>Eyes</b> — Inspection (4 of): lashes, eyebrows, eyelids, conjunctiva, sclera, pupils, cornea. Pupillary light reflex (direct/indirect). EOMs: 6 cardinal positions (&ldquo;H&rdquo;) AND convergence</li>
+        <li><b>Ears</b> — Otoscopic inspection: ear tug, brace hand, verbalize external auditory canal &amp; tympanic membrane. Finger rub/hearing test</li>
+        <li><b>Nose</b> — Otoscopic inspection: verbalize patency, septum, turbinates, mucosa</li>
+        <li><b>Mouth</b> — Otoscopic inspection: &ldquo;Say ah&rdquo;, verbalize at least 4 of: oral mucosa, teeth, tongue, gums, uvula, soft palate, floor of mouth, posterior oropharynx, tonsils</li>
+      </ul>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">Lung</div>
+      <ul>
+        <li><b>Inspection</b> (verbalize all 4): chest shape/deformities, rate &amp; depth of breathing, effort of breathing, accessory muscle use</li>
+        <li><b>Palpation:</b> tenderness of anterior chest, tenderness of back and ribs, rib excursion posteriorly</li>
+        <li><b>Auscultation:</b> &ldquo;Deep breath through open mouth&rdquo;, compare lung fields side to side — anterior (4), midaxillary (4), posterior (6)</li>
+      </ul>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">Lymph &amp; Thyroid</div>
+      <ul>
+        <li><b>Lymph nodes:</b> pre-auricular, post-auricular, occipital, tonsillar, submandibular, submental, anterior cervical, posterior cervical, supraclavicular</li>
+        <li><b>Thyroid &amp; trachea:</b> evaluate tracheal cartilage, palpate both lobes of thyroid, instruct patient to swallow</li>
+      </ul>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">MSK Back, LE Exam, &amp; PNS LE</div>
+      <ul>
+        <li><b>Lumbar spine:</b> inspection, palpation, active or passive ROM (all 4 — F, E, SB, Rot)</li>
+        <li><b>Hip exam:</b> inspection, palpation, active or passive ROM (all 6 — F, E, IR, ER, Abd, Add)</li>
+        <li><b>Knee exam:</b> inspection, palpation, active or passive ROM (both — F, E)</li>
+        <li><b>Ankle exam:</b> inspection, palpation, active or passive ROM (all 4 — dorsi, plantar, invert, evert)</li>
+        <li><b>Bilateral strength:</b> hip flexors, hip extensors, knee flexors, knee extensors, ankle dorsiflexors, ankle plantarflexors</li>
+        <li><b>Dermatomes:</b> L2&ndash;S1</li>
+        <li><b>Bilateral reflexes:</b> Patellar (L4), Achilles (S1)</li>
+      </ul>
+    </div>
+
+    <div class="exam-block">
+      <div class="exam-title">MSK Neck, UE Exam, &amp; PNS UE Exam</div>
+      <ul>
+        <li><b>Cervical spine:</b> inspection, palpation, active or passive ROM (all 4 — F, E, SB, Rot)</li>
+        <li><b>Shoulder exam:</b> inspection, palpation, active or passive ROM (all 6 — F, E, IR, ER, Abd, Add)</li>
+        <li><b>Elbow exam:</b> inspection, palpation, active or passive ROM (all 4 — F, E, pronate, supinate)</li>
+        <li><b>Wrist exam:</b> inspection, palpation, active or passive ROM (all 4 — F, E, radial dev., ulnar dev.)</li>
+        <li><b>Bilateral strength:</b> biceps, triceps, forearm flexors, forearm extensors, hands</li>
+        <li><b>Dermatomes:</b> C5&ndash;T1</li>
+        <li><b>Bilateral reflexes:</b> Biceps (C5), Brachioradialis (C6), Triceps (C7)</li>
+      </ul>
+    </div>
+    <a class="back-to-top" href="#system-exam">&uarr; top of section</a>
+  </section>
+
+  <!-- ================= SPECIAL TESTS ================= -->
+  <section class="area" id="special-tests">
+    <h2>Special Tests</h2>
+    <p class="area-sub">PCM Station #2 — (2) Special Tests</p>
+
+    <h3>Neuro / HEENT</h3>
+    <table class="data-table">
+      <tr><th>Test</th><th>Technique</th><th>Positive Finding</th></tr>
+      <tr><td>Weber</td><td>Tuning fork to top of the head</td><td class="pos">Hear on one side only → do Rinne to localize. Sensorineural: Weber localizes to the unaffected ear. Conductive: Weber localizes to the affected ear</td></tr>
+      <tr><td>Rinne</td><td>Tuning fork to mastoid until patient can't hear it, then move in front of ear canal</td><td class="pos">Heard in front of ear after mastoid = air &gt; bone conduction = sensorineural loss. NOT heard = bone &gt; air conduction = conductive loss</td></tr>
+      <tr><td>Peripheral Fields</td><td>Sit facing patient, patient covers one eye, examiner closes the same eye, test peripheral fields (superior, inferior, medial, lateral) using your own field as a guide; repeat other eye</td><td class="pos">Note any discrepancy between your field and the patient's</td></tr>
+      <tr><td>LOL/AMEN</td><td>LOL first; if all correct, AMEN not required. LOL = Level of consciousness, Orientation (person/place/time), Language (name objects). AMEN = Attention (spell WORLD backwards), Memory (3 words, recall in 3&ndash;10 min), Executive function (compare 2 objects), Non-dominant hemisphere (draw/copy a cube)</td><td class="pos">Complete if patient- or family-reported memory issues</td></tr>
+      <tr><td>Ankle Clonus</td><td>Repetitively dorsiflex the foot several times, then hold in full dorsiflexion</td><td class="pos">Rhythmic oscillations = CNS disease</td></tr>
+      <tr><td>Babinski</td><td>Stroke lateral sole from heel to ball of foot with reflex hammer handle/tongue depressor</td><td class="pos">Great toe extends, other toes splay = abnormal = UMN lesion</td></tr>
+      <tr><td>Two-Point Discrimination</td><td>Eyes closed, palms up; test finger pad for smallest distance (mm) at which 2 points are distinguishable; compare sides</td><td class="pos">Normal for finger pad = 2&ndash;4 mm</td></tr>
+      <tr><td>Axial Compression Test</td><td>Press down on top of head — direct vertical compression, no side bend/rotation</td><td class="pos">Tingling down the arm (&ldquo;lightning bolt&rdquo;) = pinched cervical nerve</td></tr>
+    </table>
+
+    <h3>Cardiopulmonary / Abdominal</h3>
+    <table class="data-table">
+      <tr><th>Test</th><th>Technique</th><th>Positive Finding</th></tr>
+      <tr><td>Rovsing's Sign</td><td>Press deeply and evenly in the LLQ, then quickly withdraw fingers</td><td class="pos">Referred pain to RLQ with pressure or withdrawal = acute appendicitis</td></tr>
+      <tr><td>Murphy's Sign</td><td>As patient inhales, press inward/toward the gallbladder (RUQ)</td><td class="pos">Pain on inspiration causing patient to stop inhaling = inflamed gallbladder</td></tr>
+      <tr><td>McBurney's Point</td><td>1/3 the distance between ASIS and umbilicus (RLQ) — press deep</td><td class="pos">Deep tenderness = acute appendicitis</td></tr>
+      <tr><td>Lloyd's Sign (CVAT)</td><td>Firmly tap the ulnar side of the hand over the costovertebral angle</td><td class="pos">Pain = renal inflammation or infection</td></tr>
+      <tr><td>Egophony</td><td>Auscultate posterior auscultation points, ask patient to say &ldquo;E&rdquo;</td><td class="pos">&ldquo;E&rdquo; sounds like &ldquo;A&rdquo; = abnormal</td></tr>
+      <tr><td>Bronchophony</td><td>Auscultate posterior points, ask patient to say &ldquo;99&rdquo;</td><td class="pos">Louder/clearer than expected = abnormal (normal = muffled)</td></tr>
+      <tr><td>Whispered Pectoriloquy</td><td>Auscultate posterior points, ask patient to whisper &ldquo;1, 2, 3&rdquo;</td><td class="pos">Clearly heard = abnormal (normal = faint/not heard)</td></tr>
+      <tr><td>Tactile Fremitus</td><td>Ulnar aspects of both hands firmly against either side of chest, patient says &ldquo;Ninety-Nine&rdquo;</td><td class="pos">Asymmetric decreased = effusion/pneumothorax/neoplasm; asymmetric increased = pneumonia/consolidation</td></tr>
+      <tr><td>Liver Span</td><td>Percuss up the midclavicular line from RLQ (below umbilicus) to find lower dull border; percuss down from the nipple line to find upper dull border; measure the span</td><td class="pos">Normal 6&ndash;12 cm; larger = hepatomegaly</td></tr>
+      <tr><td>Diaphragmatic Excursion</td><td>Patient exhales fully and holds; percuss down medial to the scapula to mark dullness (diaphragm). Patient inhales fully and holds; percuss again and mark. Measure the distance</td><td class="pos">Normal 3&ndash;5 cm; reduced = disease</td></tr>
+      <tr><td>Valsalva Squat/Stand — Erb's Point</td><td>Auscultate Erb's point standing, then squatting, then standing again</td><td class="pos">Murmur worse squatting, better standing = MVP/mitral stenosis. Murmur worse standing after squat = hypertrophic cardiomyopathy</td></tr>
+    </table>
+
+    <h3>Shoulder</h3>
+    <table class="data-table">
+      <tr><th>Test</th><th>Technique</th><th>Positive Finding</th></tr>
+      <tr><td>Empty Can</td><td>Abduct arm to 90&deg;, bring forward to 30&ndash;45&deg;, thumb pointing down; press down while patient resists up</td><td class="pos">Unable to resist = supraspinatus</td></tr>
+      <tr><td>Drop Arm</td><td>(If empty can positive) passively abduct arm to 90&deg;, let go, ask patient to slowly lower it</td><td class="pos">Can't control the descent = supraspinatus</td></tr>
+      <tr><td>Resisted External Rotation</td><td>Arms adducted, flexed 90&deg;, thumbs up; grasp wrist, patient pushes outward into ER</td><td class="pos">Pain or weakness = infraspinatus</td></tr>
+      <tr><td>Bear Hug</td><td>Patient crosses hand to opposite shoulder, resists examiner lifting hand off shoulder</td><td class="pos">Inability to resist = subscapularis</td></tr>
+      <tr><td>Lift-Off</td><td>Internally rotate arm, dorsum of hand on low back, push posteriorly against resistance</td><td class="pos">Unable to push outward = subscapularis</td></tr>
+      <tr><td>AC Joint — Crossover</td><td>Adduct the arm across the chest</td><td class="pos">Pain = AC joint dysfunction</td></tr>
+      <tr><td>O'Brien's</td><td>Flex arm 90&deg;, adduct ~10&deg; across chest, internally rotate thumb-down, push down against resistance</td><td class="pos">Pain = labral tear</td></tr>
+      <tr><td>Speed's</td><td>Arm extended, palm up, resist patient pushing upward</td><td class="pos">Pain in bicipital groove = biceps</td></tr>
+      <tr><td>Yergason's</td><td>Elbow flexed 90&deg;, contact biceps tendon, patient externally rotates &amp; supinates against resistance</td><td class="pos">Pain/snapping in bicipital groove = biceps</td></tr>
+      <tr><td>Apprehension Test</td><td>&ldquo;Surrender&rdquo; position (abducted 90&deg;, elbow flexed 90&deg;); push gently forward on the shoulder</td><td class="pos">Look of alarm = GH (shoulder) dislocation risk</td></tr>
+      <tr><td>Neer's</td><td>Stabilize scapula posteriorly, internally rotate/pronate forearm while passively forward flexing the arm</td><td class="pos">Pain = subacromial impingement</td></tr>
+      <tr><td>Hawkins</td><td>Shoulder &amp; elbow flexed 90&deg;, palm down; internally rotate via downward force on forearm</td><td class="pos">Pain = supraspinatus/long head biceps impingement</td></tr>
+      <tr><td>Roos Test</td><td>Arms abducted 90&deg;, ER, elbows bent 90&deg;; open/close hands for 2&ndash;3 minutes</td><td class="pos">Weakness/numbness/tingling = thoracic outlet syndrome</td></tr>
+      <tr><td>Adson's</td><td>Palpate radial pulse; extend, abduct, externally rotate arm; patient turns head toward/away from tested side</td><td class="pos">Radial pulse diminishes = subclavian artery compression (TOS)</td></tr>
+    </table>
+
+    <h3>Elbow, Wrist &amp; Hand</h3>
+    <table class="data-table">
+      <tr><th>Test</th><th>Technique</th><th>Positive Finding</th></tr>
+      <tr><td>Medial Epicondylitis</td><td>Patient flexes wrist against resistance while palpating medial epicondyle</td><td class="pos">Pain = golfer's elbow</td></tr>
+      <tr><td>Lateral Epicondylitis</td><td>Patient extends wrist against resistance while palpating lateral epicondyle</td><td class="pos">Pain = tennis elbow</td></tr>
+      <tr><td>Phalen's Maneuver</td><td>Backs of hands together, wrists fully flexed, hold 1 minute</td><td class="pos">Numbness in first 3 digits = median nerve entrapment (carpal tunnel)</td></tr>
+      <tr><td>Reverse Phalen's</td><td>Wrists dorsiflexed, palms together (&ldquo;praying position&rdquo;)</td><td class="pos">Numbness in first 3 digits = median nerve entrapment (carpal tunnel)</td></tr>
+      <tr><td>Tinel's Sign</td><td>Tap over the median nerve at the carpal tunnel</td><td class="pos">Pain/tingling = carpal tunnel</td></tr>
+      <tr><td>Finkelstein Test</td><td>Thumb gripped in fist, passively ulnar deviate</td><td class="pos">Pain = De Quervain's tenosynovitis</td></tr>
+      <tr><td>Allen Test</td><td>Occlude ulnar &amp; radial arteries simultaneously, patient pumps fist, open hand, release one artery</td><td class="pos">Palm stays pale = occlusion in that arch; repeat other hand to compare</td></tr>
+      <tr><td>Thumb — Ulnar Collateral Ligament</td><td>Stress the MCP joint of the thumb by deviating radially</td><td class="pos">Pain/laxity vs. opposite hand = UCL sprain</td></tr>
+    </table>
+
+    <h3>Hip / SI</h3>
+    <table class="data-table">
+      <tr><th>Test</th><th>Technique</th><th>Positive Finding</th></tr>
+      <tr><td>FABER (Patrick) Test</td><td>Flexion, Abduction, External Rotation; supine, foot on opposite knee, press down on knee while stabilizing opposite ASIS</td><td class="pos">Pain = SI joint pathology</td></tr>
+      <tr><td>FADIR Test</td><td>Flexion, Adduction, Internal Rotation, supine</td><td class="pos">Pain = femoral acetabular impingement</td></tr>
+      <tr><td>Thomas Test</td><td>Supine, flex hips (knees to chest), extend one hip — that leg should relax and drop below the table</td><td class="pos">Leg can't fully relax = iliopsoas flexion contracture</td></tr>
+      <tr><td>Trendelenburg Test</td><td>Patient stands on one leg</td><td class="pos">Hip drops on the raised (unsupported) side = weak gluteus medius on stance side</td></tr>
+      <tr><td>Straight Leg Raise (SLR)</td><td>Supine, stabilize hip, lift straight leg to ~60&deg;</td><td class="pos">Pain = sciatica (central lumbar nerve impingement)</td></tr>
+    </table>
+
+    <h3>Knee</h3>
+    <table class="data-table">
+      <tr><th>Test</th><th>Technique</th><th>Positive Finding</th></tr>
+      <tr><td>Anterior Drawer</td><td>Supine, knee flexed 90&deg;, pull tibia forward relative to femur</td><td class="pos">&gt;2 cm forward motion = ACL tear</td></tr>
+      <tr><td>Posterior Drawer</td><td>Supine, knee flexed 90&deg;, push tibia posteriorly relative to femur</td><td class="pos">&gt;2 cm posterior motion = PCL tear</td></tr>
+      <tr><td>Lachman's</td><td>Knee flexed 15&deg;, externally rotated; move femur/tibia in opposite directions</td><td class="pos">Forward tibial translation = ACL tear</td></tr>
+      <tr><td>Thessaly</td><td>Standing, hold examiner for balance, lift normal leg, bend affected leg ~5&deg;, rotate back and forth</td><td class="pos">Medial pain = medial meniscus tear; lateral pain = lateral meniscus tear</td></tr>
+      <tr><td>McMurray</td><td>Medial: adduct thigh + externally rotate tibia (valgus), move to extension. Lateral: abduct thigh + internally rotate tibia (varus), move to extension</td><td class="pos">Pain = meniscus tear (medial or lateral, per maneuver)</td></tr>
+    </table>
+
+    <h3>Ankle</h3>
+    <table class="data-table">
+      <tr><th>Test</th><th>Technique</th><th>Positive Finding</th></tr>
+      <tr><td>Talar Tilt</td><td>ATFL: plantarflex + invert. CFL: invert in neutral. PTFL: dorsiflex + invert</td><td class="pos">Pain = tear/instability of that ligament</td></tr>
+      <tr><td>Ankle Anterior Drawer</td><td>Seated at table edge; grip calcaneus and lower tibia; pull calcaneus forward while pushing tibia posterior</td><td class="pos">&gt;5 mm displacement or pain = ATFL instability</td></tr>
+      <tr><td>Homan's Sign</td><td>Leg relaxed and extended; firmly/abruptly dorsiflex the foot; palpate the calf</td><td class="pos">Discomfort with dorsiflexion or calf palpation = DVT</td></tr>
+    </table>
+    <a class="back-to-top" href="#special-tests">&uarr; top of section</a>
+  </section>
+
+  <!-- ================= CERVICAL / RIBS / THORACIC / LUMBAR ================= -->
+  <section class="area" id="spine-ribs">
+    <h2>Cervical, Ribs, Thoracic &amp; Lumbar</h2>
+    <p class="area-sub">OMM Station #1 — (1) Treatment Setup</p>
+
+    <h3>Cervical</h3>
+    <div class="tech-card">
+      <div class="tech-name">Supine Cervical Muscle Energy</div>
+      <ol>
+        <li>Localize the segment: index fingers on the articular pillars of the diagnosis, middle fingers on the articular pillars monitoring the segment below</li>
+        <li>Bring the patient into the complete opposite of the diagnosis, to the feather edge of the barrier</li>
+        <li>Instruct patient to bring head back to center and resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Supine Cervical HVLA</div>
+      <p>Localize the segment: index fingers on the articular pillars of the diagnosis, middle fingers on the articular pillars monitoring the segment below.</p>
+      <div class="sub-tech">
+        <div class="sub-name">Rotational</div>
+        <ol>
+          <li>Bring patient into the barrier in flexion or extension and rotation</li>
+          <li>Bring them into the ease in sidebending</li>
+          <li>Deep breath; on exhalation, follow the barrier and deliver a quick short thrust anterior and superior. Return to neutral. Reassess</li>
+        </ol>
+      </div>
+      <div class="sub-tech">
+        <div class="sub-name">Translational</div>
+        <ol>
+          <li>Bring patient into the barrier in flexion or extension and sidebending</li>
+          <li>Bring them into the ease in rotation</li>
+          <li>Deep breath; on exhalation, follow the barrier and deliver a quick short thrust lateral to medial. Return to neutral. Reassess</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>Ribs</h3>
+    <div class="tech-card">
+      <div class="tech-name">Supine Muscle Energy — Rib</div>
+      <div class="sub-tech">
+        <div class="sub-name">Inhaled Ribs 2&ndash;4</div>
+        <ol>
+          <li>Cephalad hand contacts anterosuperior surface of rib 4, pushing inferiorly to the feather edge</li>
+          <li>Caudal hand pulls the inferior surface of rib 4 superiorly to the feather edge of the barrier</li>
+          <li>Patient exhales maximally and holds; induce inferior motion of anterior rib and superior motion of posterior rib</li>
+          <li>Patient inhales as you resist superior motion of anterior rib. Repeat 3&ndash;5x. Return to neutral and reassess</li>
+        </ol>
+      </div>
+      <div class="sub-tech">
+        <div class="sub-name">Inhaled Ribs 4&ndash;10</div>
+        <ol>
+          <li>Caudal hand contacts superolateral surface of rib 10, pushing inferior to the feather edge</li>
+          <li>Cephalad hand flexes and sidebends the patient toward the dysfunction</li>
+          <li>Patient exhales maximally and holds; induce inferior motion of lateral rib 10</li>
+          <li>Patient inhales as you resist superior motion of rib 10. Repeat 3&ndash;5x. Return to neutral and reassess</li>
+        </ol>
+      </div>
+      <div class="sub-tech">
+        <div class="sub-name">Exhaled Ribs 3&ndash;5 or 6&ndash;10</div>
+        <ol>
+          <li>Cephalad hand abducts the patient's arm to the feather edge of the barrier</li>
+          <li>Caudal hand monitors superior-posterior aspect of rib 3 (or 6), provides inferior traction to the feather edge</li>
+          <li>Patient inhales maximally and holds; induce inferior motion of posterior rib</li>
+          <li>Patient adducts, trying to bring elbow to opposite hip. Repeat 3&ndash;5x. Return to neutral and reassess</li>
+        </ol>
+      </div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Supine HVLA Rib — Exhaled Ribs 6&ndash;10</div>
+      <ol>
+        <li>Stand on the side opposite the diagnosis</li>
+        <li>Cephalad hand pulls the patient into flexion and sidebend toward you</li>
+        <li>Caudal hand thenar eminence on superior-posterior aspect of key rib 6; flex and sidebend left to approximate force vector at rib 6</li>
+        <li>Deep breath; on exhalation, follow the barrier, deliver a quick thrust posteriorly. Return to neutral and reassess</li>
+      </ol>
+    </div>
+
+    <h3>Thoracic</h3>
+    <div class="tech-card">
+      <div class="tech-name">Seated Thoracic Muscle Energy (T3 and above)</div>
+      <ol>
+        <li>Cephalad hand on top of patient's head, position head into the feather edge barrier</li>
+        <li>Caudal hand monitoring transverse processes</li>
+        <li>Patient brings head back to center, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Supine Thoracic Muscle Energy (T4 and below — same as lumbar)</div>
+      <ol>
+        <li>Patient overlaps arms and sits on the side of the direct barrier facing opposite the physician</li>
+        <li>Cephalad hand reaches around the patient, rests on the opposite shoulder to control motion</li>
+        <li>Caudal hand monitors transverse processes as you move into the feather edge of the barrier</li>
+        <li>Patient brings head back to center, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Supine Thoracic HVLA</div>
+      <ol>
+        <li>Patient supine, crosses arms with the arm on top on the side of diagnosis (ease); stand on the side opposite the diagnosis</li>
+        <li>Cephalad hand pulls patient into flexion and sidebend into the barrier</li>
+        <li>Caudal hand thenar eminence posterior to the transverse process; flex, rotate into barrier, and sidebend into barrier</li>
+        <li>Deep breath; on exhalation, follow the barrier, deliver a quick short thrust posteriorly. Return to neutral</li>
+      </ol>
+    </div>
+
+    <h3>Lumbar</h3>
+    <div class="tech-card">
+      <div class="tech-name">Seated Lumbar Muscle Energy (same as mid-lower thoracic)</div>
+      <ol>
+        <li>Patient overlaps arms and sits on the side of the direct barrier facing opposite the physician</li>
+        <li>Cephalad hand reaches around the patient, rests on the opposite shoulder to control motion</li>
+        <li>Caudal hand monitors transverse processes as you move into the feather edge of the barrier</li>
+        <li>Patient brings head back to center, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Side Lying Lumbar Muscle Energy</div>
+      <ol>
+        <li>Patient lies on the side of the diagnosis (ease); stand facing patient</li>
+        <li>Cephalad hand pulls lumbar spine toward you to induce extension, or brings knees toward you to induce flexion</li>
+        <li>Do-si-do with cephalad hand to rotate the patient; use caudal hand to monitor for rotation at transverse processes</li>
+        <li>Patient gently pushes right shoulder into your hand, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Lumbar HVLA</div>
+      <ol>
+        <li>Patient lies on the side of the diagnosis (ease); stand facing the patient</li>
+        <li>Cephalad hand monitors transverse process at the level of diagnosis</li>
+        <li>Caudal hand flexes patient's legs (if flexed dysfunction) or upper body (if extended) until monitoring hand feels motion</li>
+        <li>Caudal hand now monitors rotation at the level of diagnosis while cephalad hand do-si-dos with the patient's arm to bring them into rotation</li>
+        <li>Caudal hand flexes patient's top leg so the foot rests in the popliteal space; brace their leg with your leg</li>
+        <li>Bring your center of gravity over your contacts; patient takes a deep breath</li>
+        <li>On exhalation, follow the barrier and deliver a quick short thrust anterior and superior</li>
+      </ol>
+    </div>
+    <a class="back-to-top" href="#spine-ribs">&uarr; top of section</a>
+  </section>
+
+  <!-- ================= PELVIS & SACRUM ================= -->
+  <section class="area" id="pelvis-sacrum">
+    <h2>Pelvis &amp; Sacrum — Muscle Energy</h2>
+    <p class="area-sub">OMM Station #1 — (1) Treatment Setup</p>
+
+    <h3>Pelvis Muscle Energy</h3>
+    <div class="tech-card">
+      <div class="tech-name">Posterior Rotated Innominate</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side facing the feet</li>
+        <li>Patient moves to the edge of the table with their SI joint off the edge, dropping the leg off the table</li>
+        <li>Cephalad hand contacts the contralateral ASIS to stabilize the pelvis</li>
+        <li>Caudal hand extends the patient's thigh to the feather edge</li>
+        <li>Patient gently brings thigh toward the ceiling into your hand, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Anterior Rotated Innominate</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Cephalad hand flexes patient's hip to the feather edge, rotating the innominate posteriorly</li>
+        <li>Caudal hand contacts ischial tuberosity, pulling it inferiorly to guide posterior rotation of the innominate</li>
+        <li>Patient gently pushes knee into your hand, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Superior Innominate Shear</div>
+      <ol>
+        <li>Supine, stand at the foot of the table</li>
+        <li>Abduct and internally rotate the leg to localize to the SI joint</li>
+        <li>Apply traction to the leg until the feather edge</li>
+        <li>Patient gently pulls/hikes hip up toward shoulder, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Innominate Inflare</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Patient flexes knee, foot flat on table</li>
+        <li>Cephalad hand contacts contralateral ASIS to stabilize the pelvis</li>
+        <li>Caudal hand induces external rotation of the hip by pulling the knee laterally to the feather edge</li>
+        <li>Patient gently pushes knee medially into your hand, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+
+    <h3>Pubic Muscle Energy</h3>
+    <div class="tech-card">
+      <div class="tech-name">Superior Pubic Shear</div>
+      <ol>
+        <li>Supine; patient moves to the edge of the table with the SI joint still on the table, drops the leg off the table (foot off the floor)</li>
+        <li>Cephalad hand contacts the contralateral ASIS to stabilize the pelvis</li>
+        <li>Caudal hand abducts and extends the patient's thigh to the feather edge</li>
+        <li>Patient gently lifts thigh anterior and medial into your hand, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+
+    <h3>Sacrum Muscle Energy</h3>
+    <div class="tech-card">
+      <div class="tech-name">L on L Sacral Torsion — Up, Up, Up</div>
+      <ol>
+        <li>Side lying with L side up (axis up)</li>
+        <li>Stand in front of patient; caudal hand monitors R sacral base, cephalad hand rotates trunk to the left (face up)</li>
+        <li>Switch monitoring hand to cephalad on R sacral base. Caudal hand flexes patient's thighs and pelvis until posterior motion is felt at R sacral base. Lift the ankles toward the ceiling to the feather edge (physician force up)</li>
+        <li>Patient gently brings ankles down toward the table, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">R on R Sacral Torsion — Up, Up, Up</div>
+      <ol>
+        <li>Side lying with R side up (axis up)</li>
+        <li>Stand in front of patient; caudal hand monitors L sacral base, cephalad hand rotates trunk right until L5 begins to rotate right (face up)</li>
+        <li>Switch monitoring hand to cephalad on L sacral base. Caudal hand flexes patient's thighs and pelvis until posterior motion is felt at L sacral base. Lift the ankles toward the ceiling to the feather edge (physician force up)</li>
+        <li>Patient gently brings ankles down toward the table, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">R on L Sacral Torsion — Down, Up, Down</div>
+      <ol>
+        <li>Side lying with R side up (L axis down)</li>
+        <li>Stand in front of patient; caudal hand monitors R sacral base, cephalad hand pulls patient's arm anterior and caudal, inducing R rotation and L sidebending of spine (patient face up)</li>
+        <li>Switch monitoring hand to cephalad on R sacral base. Caudal hand extends patient's thighs and pelvis until anterior motion is felt at R sacral base. Bring the top leg off the table, bent, to the feather edge (physician force down)</li>
+        <li>Patient gently brings knee/ankle up toward the ceiling, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">L on R Sacral Torsion — Down, Up, Down</div>
+      <ol>
+        <li>Side lying with L side up (R axis down)</li>
+        <li>Stand in front of patient; caudal hand monitors L sacral base, cephalad hand pulls patient's arm anterior and caudal, inducing L rotation and R sidebending of spine (patient face up)</li>
+        <li>Switch monitoring hand to cephalad on L sacral base. Caudal hand extends patient's thighs and pelvis until anterior motion is felt at L sacral base. Bring the top leg off the table, bent, to the feather edge (physician force down)</li>
+        <li>Patient gently brings knee/ankle up toward the ceiling, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <a class="back-to-top" href="#pelvis-sacrum">&uarr; top of section</a>
+  </section>
+
+  <!-- ================= UPPER & LOWER EXTREMITY ================= -->
+  <section class="area" id="extremities">
+    <h2>Upper &amp; Lower Extremity — ME / HVLA</h2>
+    <p class="area-sub">OMM Station #1 — (1) Treatment Setup</p>
+
+    <h3>Upper Extremity — Muscle Energy</h3>
+    <div class="tech-card">
+      <div class="tech-name">Clavicle — Anterior Clavicular Head</div>
+      <ol>
+        <li>Supine, stand opposite the dysfunction</li>
+        <li>Caudal hand under the scapula, contacting the medial border</li>
+        <li>Engage feather edge by standing more erect until the scapula is slightly off the table</li>
+        <li>Cephalad hand index/middle fingers over the SC joint to monitor motion</li>
+        <li>Patient gently pulls shoulder back toward the table (retract), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Clavicle — Superior Clavicular Head</div>
+      <ol>
+        <li>Supine, slightly off-center toward the dysfunctional side, arm dropped off the table</li>
+        <li>Stand on the side of dysfunction; caudal hand grasps ipsilateral wrist, engage feather edge by extending and internally rotating (clavicle head should move inferiorly)</li>
+        <li>Cephalad hand index/middle fingers over the SC joint to monitor</li>
+        <li>Patient gently brings arm up toward the ceiling, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Ulna — Abducted Ulna</div>
+      <ol>
+        <li>Seated, arm flexed and supinated</li>
+        <li>Stand in front; engage feather edge with lateral force on the olecranon (index finger) and medial force on the distal forearm (into adduction)</li>
+        <li>Patient brings forearm out/away from body (abduct), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Ulna — Adducted Ulna</div>
+      <ol>
+        <li>Seated, arm flexed and supinated</li>
+        <li>Stand in front; engage feather edge with medial force on the olecranon (index finger) and lateral force on the distal forearm (into abduction)</li>
+        <li>Patient brings forearm in/toward body (adduct), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Radial Head — Posterior Radial Head</div>
+      <ol>
+        <li>Seated, arm flexed; hand opposite the diagnosis holds patient's hand in a handshake, index fingers on the distal radius</li>
+        <li>Supinate the forearm to engage feather edge; physician thumb acts as fulcrum, applying anterior-directed force to the radial head</li>
+        <li>Other hand around the forearm, thumb on the posterior aspect of the radial head</li>
+        <li>Patient gently pronates (palm down), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Radial Head — Anterior Radial Head</div>
+      <ol>
+        <li>Seated, arm flexed; hand opposite the diagnosis holds patient's hand in a handshake, index fingers on the distal radius</li>
+        <li>Pronate the forearm to engage feather edge; physician thumb acts as fulcrum, applying posterior-directed force to the radial head</li>
+        <li>Other hand around the forearm, thumb on the anterior aspect of the radial head</li>
+        <li>Patient gently supinates (palm up), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+
+    <h3>Lower Extremity — Muscle Energy</h3>
+    <div class="tech-card">
+      <div class="tech-name">Hip — Extended Hip (resists flexion)</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Cephalad hand on ipsilateral hip; use body and caudal arm to flex leg to the feather edge, leg on your shoulder</li>
+        <li>Patient gently pushes hip into extension (press down while you press up), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Hip — Flexed Hip (resists extension)</div>
+      <ol>
+        <li>Prone, stand on the dysfunctional side</li>
+        <li>Cranial hand fist contacts the ischial tuberosity with your knuckles to stabilize</li>
+        <li>Extend the hip with the caudal hand, cradling the knee; foot stabilized by physician's axilla</li>
+        <li>Engage feather edge by further extending the hip</li>
+        <li>Patient gently pushes hip into flexion, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Hip — Externally Rotated Hip (resists internal rotation)</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Flex hip and knee to 90&deg;; cephalad hand on knee, caudal hand on ankle</li>
+        <li>Brace the knee, engage feather edge by pulling the ankle laterally (induces internal rotation); fine-tune with adduction</li>
+        <li>Patient gently pushes foot medially, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Hip — Internally Rotated Hip (resists external rotation)</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Flex hip and knee to 90&deg;; cephalad hand on knee, caudal hand on ankle</li>
+        <li>Brace the knee, engage feather edge by moving the foot medially (induces external rotation)</li>
+        <li>Patient gently pushes foot laterally, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Hip — Adducted Hip (resists abduction)</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Cephalad hand stabilizes ASIS</li>
+        <li>Caudal hand abducts the leg; stand between the patient's leg and the table</li>
+        <li>Engage feather edge by further abducting the leg</li>
+        <li>Patient gently adducts leg, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Hip — Abducted Hip (resists adduction)</div>
+      <ol>
+        <li>Prone, stand on the side opposite the dysfunction</li>
+        <li>Caudal hand adducts the leg across midline while cephalad hand stabilizes the ischial tuberosity</li>
+        <li>Engage feather edge of the barrier</li>
+        <li>Patient gently abducts hip, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Fibula — Anterior Fibular Head</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Cephalad thumb on the anterior fibular head, caudal hand on the posterior aspect of the lateral malleolus</li>
+        <li>Engage feather edge by drawing the lateral malleolus anteriorly (supinate ankle — plantarflex, adduct, invert) and apply a posteromedial force to the fibular head</li>
+        <li>Patient pronates the foot (dorsiflex, abduct, evert) pushing up and out, resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Fibula — Posterior Fibular Head</div>
+      <ol>
+        <li>Supine, stand on the dysfunctional side</li>
+        <li>Caudal thumb on the anterior lateral malleolus, engage feather edge by pushing it posteriorly while pronating the foot</li>
+        <li>Cephalad index finger on the posterior fibular head, applying anterolateral force</li>
+        <li>Patient supinates the foot (pull down and in), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+    <div class="tech-card">
+      <div class="tech-name">Lateral Malleolus — Anterior Lateral Malleolus</div>
+      <ol>
+        <li>Standing at the foot of the table, patient supine</li>
+        <li>Bilateral thumbs on the anterior lateral malleolus, fingers wrapped around the ankle/foot; engage feather edge by inducing dorsiflexion with your thigh/abdomen and apply gentle posterior force to the lateral malleolus</li>
+        <li>Patient gently pushes foot down into your thigh/abdomen (plantarflex), resist 3&ndash;5 sec, relax 1&ndash;2 sec, re-engage feather edge, repeat 3&ndash;5x, return to neutral and reassess</li>
+      </ol>
+    </div>
+
+    <h3>Lower Extremity — HVLA</h3>
+    <div class="tech-card">
+      <div class="tech-name">Talus — Anterior Talus</div>
+      <ol>
+        <li>Standing at the foot of the table, patient supine</li>
+        <li>5th digits on the anterior/superior aspect of the talus, fingers interlaced around the dorsum of the foot, thumbs on the sole providing dorsiflexion to the restrictive barrier; slight inversion/eversion can further localize; induce traction by leaning back</li>
+        <li>Deep breath; on exhalation, follow the barrier and deliver a quick thrust inferior and posterior in a &ldquo;J&rdquo; motion. Return to neutral and reassess</li>
+      </ol>
+    </div>
+    <a class="back-to-top" href="#extremities">&uarr; top of section</a>
+  </section>
+
+  <!-- ================= COUNTERSTRAIN ================= -->
+  <section class="area" id="counterstrain">
+    <h2>Counterstrain Points</h2>
+    <p class="area-sub">OMM Station #2 — (2) Counterstrain Treatment Setups (2 randomly assigned points)</p>
+
+    <table class="data-table">
+      <tr><th>Point(s)</th><th>Location</th><th>Treatment Position</th></tr>
+      <tr><td>PC1</td><td>&mdash;</td><td>ESARA</td></tr>
+      <tr><td>AC1</td><td>Transverse process of C1 / mandible</td><td>RA</td></tr>
+      <tr><td>AC2&ndash;6</td><td>Transverse processes C2&ndash;6</td><td>FSARA</td></tr>
+      <tr><td>AC7</td><td>Lateral SC joint (where SCM attaches)</td><td>FSTAR</td></tr>
+      <tr><td>AC8</td><td>Medial sternal head / manubrium</td><td>FSARA</td></tr>
+      <tr><td>AT1&ndash;6</td><td>Midline along sternum @ vertebral level</td><td>Flexion</td></tr>
+      <tr><td>AT7&ndash;9</td><td>Lateral to midline, centered in rectus abdominis</td><td rowspan="4">FSTAR (AT7&ndash;12)</td></tr>
+      <tr><td>AT10</td><td>&frac14; distance from umbilicus to pubic tubercle</td></tr>
+      <tr><td>AT11</td><td>Midway between umbilicus and pubic tubercle</td></tr>
+      <tr><td>AT12</td><td>Anterior surface of iliac crest in midaxillary line</td></tr>
+      <tr><td>AL1</td><td>Medial to ASIS</td><td>FSTAR</td></tr>
+      <tr><td>AL2</td><td>Medial to AIIS</td><td rowspan="3">FSART</td></tr>
+      <tr><td>AL3</td><td>Lateral to AIIS</td></tr>
+      <tr><td>AL4</td><td>Inferior to AIIS</td></tr>
+      <tr><td>AL5</td><td>Pubic tubercle</td><td>FSARA</td></tr>
+      <tr><td>Upper Pole &mdash; L5</td><td>Superior medial aspect of PSIS</td><td>Extend and adduct hip, fine-tune with IR/ER</td></tr>
+      <tr><td>Piriformis</td><td>Within the triangle formed by the lateral sacrum, the ILA, and the greater trochanter (mid-butt cheek)</td><td>Flex, abduct, ER of lower extremity</td></tr>
+      <tr><td>Psoas</td><td>2/3 distance between ASIS and umbilicus</td><td>Flex, sidebend toward, rotate toward</td></tr>
+      <tr><td>Supraspinatus</td><td>Muscle belly superior to the spine of the scapula</td><td>ER, abduct, and flex the arm</td></tr>
+      <tr><td>Subscapularis</td><td>Anterolateral border of the scapula (basically the armpit)</td><td>IR, shoulder extended</td></tr>
+      <tr><td>Medial Meniscus</td><td>Anteromedial aspect of the meniscus on the joint line</td><td>Supine, knee moderately flexed (leg on your leg), adduct the leg slightly, fine-tune with IR/ER of tibia</td></tr>
+      <tr><td>Lateral Meniscus</td><td>Lateral aspect of the meniscus on the joint line</td><td>Supine, knee moderately flexed, abduct the leg slightly, fine-tune with IR/ER of tibia</td></tr>
+    </table>
+    <a class="back-to-top" href="#counterstrain">&uarr; top of section</a>
+  </section>
+
+  <footer>Competency Exam PMI &amp; OMM with Special Tests &middot; Built from the Competency Instructions handout &middot; Verify against your course's official OPP manual/rubric before the exam.</footer>
+</div>
+</body>
+</html>
