@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnosis by Lab Result — Study Guide</title>
+<style>
+  :root {
+    --cream: #FAF6EC;
+    --cream-alt: #F2EBD8;
+    --forest-dark: #1F3A2E;
+    --forest: #2C5541;
+    --sage: #6E8F72;
+    --sage-light: #C7D8C4;
+    --border: #D6C79E;
+    --text: #2B2620;
+    --gold: #A9803E;
+    --red: #A3372F;
+    --green: #2F7D4F;
+    --shadow: rgba(31,58,46,0.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 0 80px 0;
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+  }
+  .back-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 1000;
+    background: var(--cream);
+    color: var(--forest-dark);
+    border: 2px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 6px var(--shadow);
+    transition: background 0.15s, color 0.15s;
+  }
+  .back-btn:hover { background: var(--forest); color: var(--cream); }
+
+  header.hero {
+    background: linear-gradient(135deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+    padding: 70px 20px 40px 20px;
+    text-align: center;
+  }
+  header.hero h1 { margin: 0 0 8px 0; font-size: 2.1rem; letter-spacing: 0.5px; }
+  header.hero p.sub { margin: 0; font-size: 1.05rem; color: var(--sage-light); font-style: italic; }
+  header.hero p.meta { margin-top: 14px; font-size: 0.85rem; color: var(--cream-alt); opacity: 0.85; }
+
+  nav.toc {
+    max-width: 880px;
+    margin: -22px auto 40px auto;
+    background: var(--cream-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 26px;
+    box-shadow: 0 4px 14px var(--shadow);
+  }
+  nav.toc h2 { margin-top: 0; font-size: 1.1rem; color: var(--forest-dark); border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+  nav.toc ol { columns: 2; column-gap: 30px; padding-left: 20px; margin: 0; }
+  nav.toc li { margin-bottom: 6px; }
+  nav.toc a { color: var(--forest); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  main { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  section.block {
+    background: var(--cream-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 34px;
+    box-shadow: 0 3px 10px var(--shadow);
+  }
+  section.block h2 {
+    color: var(--forest-dark);
+    border-bottom: 3px solid var(--sage);
+    padding-bottom: 8px;
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+  section.block h3 { color: var(--forest); margin-top: 26px; font-size: 1.15rem; }
+  section.block p { margin: 10px 0; }
+  section.block ul, section.block ol { margin: 10px 0; padding-left: 24px; }
+  section.block li { margin-bottom: 6px; }
+
+  .pearl {
+    background: #EFE6C7;
+    border-left: 5px solid var(--gold);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 0.96rem;
+  }
+  .pearl strong { color: var(--gold); }
+
+  .case {
+    background: #EFF3EC;
+    border-left: 5px solid var(--sage);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.96rem;
+  }
+  .case strong.case-label { color: var(--forest-dark); display:block; margin-bottom: 4px; }
+
+  .flag {
+    background: #F3E6E1;
+    border: 2px dashed var(--red);
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 18px 0;
+    font-size: 0.92rem;
+    color: #6E241E;
+  }
+  .flag strong { color: var(--red); }
+
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.93rem; }
+  table caption { caption-side: top; text-align: left; font-weight: bold; color: var(--forest-dark); margin-bottom: 6px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--forest-dark); color: var(--cream); }
+  tr:nth-child(even) td { background: #F2ECDA; }
+
+  .formula {
+    background: var(--forest-dark);
+    color: var(--cream);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  /* MCQ styling */
+  .mcq {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .mcq .qstem { margin-top: 0; font-weight: normal; }
+  .mcq .qtag {
+    display: inline-block;
+    background: var(--sage);
+    color: var(--cream);
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+  }
+  .options { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .opt {
+    text-align: left;
+    background: var(--cream-alt);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .opt:hover:not(.answered) { background: var(--sage-light); }
+  .opt.answered { cursor: default; }
+  .opt.correct { background: #D8EDD9; border-color: var(--green); font-weight: bold; }
+  .opt.incorrect { background: #F3D9D6; border-color: var(--red); }
+  .explanation {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #EFE6C7;
+    border-left: 4px solid var(--gold);
+    border-radius: 6px;
+    font-size: 0.93rem;
+  }
+  .explanation strong.verdict-correct { color: var(--green); }
+  .explanation strong.verdict-incorrect { color: var(--red); }
+
+  .summary-final {
+    background: var(--cream-alt);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 60px;
+    box-shadow: 0 3px 10px var(--shadow);
+  }
+  .summary-final h2 { color: var(--forest-dark); border-bottom: 3px solid var(--sage); padding-bottom: 8px; margin-top: 0; }
+  .summary-final table { font-size: 0.88rem; }
+  .summary-final th { background: var(--forest-dark); color: var(--cream); }
+  .summary-final tr:nth-child(even) td { background: #F2ECDA; }
+  .summary-final td, .summary-final th { border-color: var(--border); color: var(--text); }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    section.block, .summary-final { padding: 20px 18px; }
+    header.hero { padding: 60px 14px 30px 14px; }
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<header class="hero">
+  <h1>Diagnosis by Lab Result</h1>
+  <p class="sub">OCS III &middot; PCM &middot; Dr. Ben Wilde</p>
+  <p class="meta">Purpose of testing &middot; screening vs. diagnostic tests &middot; incidence &amp; prevalence &middot; sensitivity/specificity &middot; PPV/NPV &middot; likelihood ratios</p>
+</header>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s1">1. Why Order a Lab Test?</a></li>
+    <li><a href="#s2">2. Screening vs. Diagnostic Tests</a></li>
+    <li><a href="#s3">3. Reading a Real Lab Panel</a></li>
+    <li><a href="#s4">4. Shotgun vs. Rifle: Test Selection</a></li>
+    <li><a href="#s5">5. Properties of a Useful Test</a></li>
+    <li><a href="#s6">6. Incidence &amp; Prevalence: the Bathtub</a></li>
+    <li><a href="#s7">7. Sensitivity &amp; Specificity</a></li>
+    <li><a href="#s8">8. PPV, NPV &amp; Likelihood Ratios</a></li>
+    <li><a href="#s9">9. Putting It Together: HIV Screening</a></li>
+    <li><a href="#s10">10. High-Yield Lab Patterns (Supplemental)</a></li>
+    <li><a href="#summary">Summary Table</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- SECTION 1 -->
+<section class="block" id="s1">
+  <h2>1. Why Order a Lab Test?</h2>
+  <p>Before reflexively ordering a test, Dr. Wilde frames five questions every clinician should be able to answer. If you can't answer these, step back and learn about the test before using it routinely:</p>
+  <ol>
+    <li>Why is the test being ordered?</li>
+    <li>What are the consequences of <em>not</em> ordering the test?</li>
+    <li>How good is this test at discriminating between health and disease?</li>
+    <li>How are the results interpreted?</li>
+    <li>How will the results influence patient management and outcome?</li>
+  </ol>
+
+  <h3>Four Sore-Throat Cases: Same Presentation, Different Testing Decisions</h3>
+  <div class="case"><strong class="case-label">Case 1 — 13yo boy</strong> Rapid strep negative, no formal culture sent, no antibiotics given. One month later: rheumatic fever with polyarthritis, weight loss, and heart failure requiring two valve replacements. <em>Lesson:</em> the rapid strep antigen test only detects Group A strep — a negative rapid test still requires a throat culture to catch other pathogenic strep, or true disease can be missed entirely.</div>
+  <div class="case"><strong class="case-label">Case 2 — 15yo girl</strong> Rapid strep negative, culture sent and returned positive for Group C strep three days later. Started on amoxicillin, full recovery — just a few days' delay in appropriate treatment.</div>
+  <div class="case"><strong class="case-label">Case 3 — 17yo boy</strong> Rapid strep negative, culture sent (also negative), started empirically on amoxicillin for a "presumed strep" picture that was actually mononucleosis. Amoxicillin (aminopenicillin) in a patient with mono classically triggers a diffuse morbilliform rash — even though he had tolerated amoxicillin before.</div>
+  <div class="case"><strong class="case-label">Case 4 — 16yo girl</strong> Rapid strep positive, treated appropriately with amoxicillin — but died overnight from a rapidly progressive retropharyngeal abscess that compromised her airway. <em>Lesson:</em> correct testing and correct treatment don't guarantee a good outcome — disease can progress faster than the interval between visits allows for.</div>
+
+  <h3>Four Primary Reasons to Order a Lab Test</h3>
+  <ul>
+    <li><strong>Screening</strong> — identify potential disease in <em>asymptomatic</em> individuals, often based on risk factors, exposures, or family history.</li>
+    <li><strong>Diagnosis</strong> — confirm or rule out disease in a <em>symptomatic</em> patient.</li>
+    <li><strong>Monitoring</strong> — assess treatment efficacy, evaluate for side effects, track disease progression.</li>
+    <li><strong>Research</strong> — better understand disease mechanisms and treatment options.</li>
+  </ul>
+  <div class="pearl"><strong>Pearl:</strong> the same test can serve different purposes in different contexts — hemoglobin A1c was originally approved only for monitoring known diabetics but is now also used as a screening tool.</div>
+
+  <div class="mcq">
+    <span class="qtag">Section 1</span>
+    <p class="qstem"><strong>Q1.</strong> A 16-year-old male has a negative rapid antigen strep test but no throat culture is sent, and he is not treated. One month later he develops migratory polyarthritis and new heart failure. This outcome is best explained by which limitation of the test used?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. The rapid strep test is a screening test that cannot be used in symptomatic patients</button>
+      <button class="opt" data-correct="true">B. The rapid strep test only detects Group A strep and a negative result still requires culture confirmation</button>
+      <button class="opt" data-correct="false">C. The rapid strep test has poor specificity for Group A strep</button>
+      <button class="opt" data-correct="false">D. Rheumatic fever occurs independent of streptococcal infection</button>
+      <button class="opt" data-correct="false">E. Amoxicillin should never be used for confirmed Group A strep</button>
+    </div>
+    <div class="explanation" style="display:none;">A negative rapid antigen test only rules out Group A strep with reasonable confidence — it does not detect other strep species and, in a clinically concerning picture, should be backed up with a throat culture. Missing that step here allowed untreated Group A strep to progress to rheumatic fever.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 1</span>
+    <p class="qstem"><strong>Q2.</strong> A patient with an unremarkable exam requests a colon cancer screening test as part of a routine wellness visit — she has no GI symptoms. Which of the five pre-test questions from this lecture is LEAST relevant to this specific decision?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. How are the results interpreted?</button>
+      <button class="opt" data-correct="false">B. What are the consequences of not ordering the test?</button>
+      <button class="opt" data-correct="true">C. How is the test performed in the laboratory at a technical level?</button>
+      <button class="opt" data-correct="false">D. How will the results influence management?</button>
+      <button class="opt" data-correct="false">E. How good is the test at discriminating health from disease?</button>
+    </div>
+    <div class="explanation" style="display:none;">The lecture's five pre-ordering questions are all clinically oriented (purpose, consequences of omission, discriminatory power, interpretation, and impact on management) — none of them concern the technical laboratory methodology itself, which is a separate consideration from clinical test selection.</div>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="block" id="s2">
+  <h2>2. Screening vs. Diagnostic Tests</h2>
+  <p><strong>Screening tests</strong> identify potential disease in asymptomatic people. <strong>Diagnostic tests</strong> confirm or rule out disease in symptomatic people, or follow up an abnormal screening result.</p>
+
+  <table>
+    <caption>Common Screening Tests and Their Diagnostic Follow-Up</caption>
+    <thead><tr><th>Screening Test</th><th>Screens For</th><th>Follow-Up If Abnormal</th></tr></thead>
+    <tbody>
+      <tr><td>Pap smear</td><td>Cervical cancer</td><td>Colposcopy + biopsy</td></tr>
+      <tr><td>Mammography</td><td>Breast cancer</td><td>Diagnostic breast US/mammo + biopsy</td></tr>
+      <tr><td>Fasting blood glucose</td><td>Diabetes mellitus</td><td>Repeat testing / HbA1c / OGTT</td></tr>
+      <tr><td>Hemoglobin A1c</td><td>Diabetes (screening &amp; monitoring)</td><td>Lifestyle change, repeat in ~3 months, medication</td></tr>
+      <tr><td>Blood pressure</td><td>Hypertension</td><td>Lipid panel, BMP to find underlying cause</td></tr>
+      <tr><td>Fecal occult blood</td><td>GI bleeding (may be positive with no visible blood)</td><td>Colonoscopy, sigmoidoscopy, EGD</td></tr>
+      <tr><td>PSA</td><td>Prostate cancer (also &uarr; in BPH)</td><td>Digital rectal exam, urology referral, track PSA velocity</td></tr>
+      <tr><td>PKU</td><td>Phenylketonuria (newborn + 2-week repeat)</td><td>Confirmatory testing, dietary management</td></tr>
+      <tr><td>TSH</td><td>Thyroid disease</td><td>Free T3/T4 if TSH abnormal</td></tr>
+      <tr><td>RPR/VDRL</td><td>Syphilis</td><td>Treponemal confirmatory test</td></tr>
+    </tbody>
+  </table>
+  <div class="pearl"><strong>Pearl:</strong> PSA interpretation isn't just about the absolute value — a rapid <em>rise</em> in PSA (e.g., doubling within a year) is concerning for malignancy even if the new value is still technically "normal."</div>
+
+  <div class="mcq">
+    <span class="qtag">Section 2</span>
+    <p class="qstem"><strong>Q3.</strong> A 58-year-old asymptomatic man's PSA rose from 1.0 ng/mL to 2.0 ng/mL over one year — both values fall within the "normal" reference range for his age. What is the most appropriate next step?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. No further action needed since PSA is not a validated screening test</button>
+      <button class="opt" data-correct="false">B. Start empiric treatment for BPH</button>
+      <button class="opt" data-correct="false">C. Reassure him — both values are within normal limits</button>
+      <button class="opt" data-correct="false">D. Repeat PSA in 5 years per standard screening interval</button>
+      <button class="opt" data-correct="true">E. Investigate further for prostatic malignancy given the rapid rate of rise</button>
+    </div>
+    <div class="explanation" style="display:none;">Even when the absolute PSA remains within the normal range, a doubling within one year (PSA velocity) raises concern for malignancy and warrants further workup — the rate of change matters as much as the number itself.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 2</span>
+    <p class="qstem"><strong>Q4.</strong> A 45-year-old asymptomatic woman undergoes a screening mammogram that shows a suspicious mass. Which of the following best describes the next test in this sequence?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Unnecessary, since screening tests are definitive</button>
+      <button class="opt" data-correct="false">B. A monitoring test to evaluate treatment response</button>
+      <button class="opt" data-correct="false">C. A research-only test with no clinical management implication</button>
+      <button class="opt" data-correct="false">D. A second screening test to confirm the first</button>
+      <button class="opt" data-correct="true">E. A diagnostic test used to confirm or rule out disease in a now-concerning finding</button>
+    </div>
+    <div class="explanation" style="display:none;">Once a screening test is abnormal, the patient is no longer "asymptomatic/average risk" for that finding — subsequent breast ultrasound, diagnostic mammography, and biopsy are diagnostic tests aimed at confirming or excluding disease.</div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="block" id="s3">
+  <h2>3. Reading a Real Lab Panel</h2>
+  <p>The lecture walks through actual patient panels to show how the same tests serve different purposes depending on context.</p>
+
+  <h3>64-Year-Old Male</h3>
+  <ul>
+    <li><strong>Basic Metabolic Panel (BMP):</strong> fasting glucose, BUN/creatinine, GFR, electrolytes — assesses renal function and bone/electrolyte status.</li>
+    <li><strong>Lipid panel:</strong> patient already had diagnosed hyperlipidemia and was on a statin — this panel is <em>monitoring</em> how well the medication is controlling cholesterol, not screening.</li>
+    <li><strong>Hepatic function panel:</strong> ordered alongside the statin to make sure the medication isn't causing hepatotoxicity — again, monitoring.</li>
+    <li><strong>Hemoglobin A1c: 5.7%</strong> — his first-ever above-normal value, falling in the <strong>prediabetes</strong> range. Management: lifestyle modification, recheck in ~3 months to assess progression.</li>
+    <li><strong>PSA: 4.4 ng/mL</strong> — just above the "high" cutoff, but this had been rising slowly (0.1&ndash;0.2/year) rather than jumping suddenly, which is reassuring. He also had a digital rectal exam (increases sensitivity of the workup). Plan: refer to urology for ongoing monitoring given the now-abnormal value.</li>
+    <li><strong>Vitamin D and CRP:</strong> obtained but are <em>not</em> routine screening tests, so they are often not covered by insurance — the physician should flag potential out-of-pocket cost to the patient before ordering.</li>
+  </ul>
+
+  <h3>48-Year-Old Female</h3>
+  <p>BMP, lipid panel, and HbA1c were obtained on an obese patient with multiple cardiovascular risk factors. She was started on a cholesterol-lowering medication and on metformin for prediabetes because of her risk profile and likelihood of progression — an example of using labs to guide <em>preventive</em> management, not just to label a diagnosis.</p>
+
+  <h3>37-Year-Old Female</h3>
+  <p>TSH with free T4/T3 obtained for ongoing diagnosis and monitoring of thyroid treatment — an example of the same panel serving both a diagnostic and a monitoring role over time.</p>
+
+  <div class="mcq">
+    <span class="qtag">Section 3</span>
+    <p class="qstem"><strong>Q5.</strong> A 60-year-old man on a statin for known hyperlipidemia has a lipid panel and hepatic function panel ordered at his follow-up visit. What is the primary purpose of these tests in this context?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Diagnosing a new symptomatic complaint</button>
+      <button class="opt" data-correct="false">B. Research into statin mechanisms</button>
+      <button class="opt" data-correct="false">C. Screening for new disease</button>
+      <button class="opt" data-correct="true">D. Monitoring treatment efficacy and detecting medication side effects</button>
+      <button class="opt" data-correct="false">E. Confirming a positive screening test</button>
+    </div>
+    <div class="explanation" style="display:none;">In a patient with an established diagnosis already on treatment, repeat lipid and hepatic panels serve to monitor how well the statin is controlling cholesterol and to watch for hepatotoxicity — this is monitoring, not screening or new diagnosis.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 3</span>
+    <p class="qstem"><strong>Q6.</strong> A patient's hemoglobin A1c returns at 5.7% for the first time, with no prior abnormal values. What does this result indicate and what is the appropriate next step?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Normal result; no further action needed</button>
+      <button class="opt" data-correct="true">B. Prediabetes; recommend lifestyle modification and recheck in about 3 months</button>
+      <button class="opt" data-correct="false">C. Laboratory error; repeat immediately with a fasting glucose only</button>
+      <button class="opt" data-correct="false">D. Type 2 diabetes mellitus; start metformin immediately</button>
+      <button class="opt" data-correct="false">E. Type 1 diabetes; refer to endocrinology for insulin initiation</button>
+    </div>
+    <div class="explanation" style="display:none;">An HbA1c of 5.7% falls into the prediabetes range as presented in this lecture's case. The appropriate initial management is lifestyle modification with a recheck in roughly three months to assess progression, not immediate pharmacologic therapy.</div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="block" id="s4">
+  <h2>4. Shotgun vs. Rifle: Test Selection</h2>
+  <div class="case"><strong class="case-label">Case</strong> A 4-year-old is brought to the ED with an upper respiratory infection, a fever of 102.2&deg;F, and a generalized seizure lasting ~2 minutes.</div>
+
+  <h3>Shotgun Approach</h3>
+  <p>Ordering everything available (blood draw, arterial stick, nasal swab, throat swab, stool test, PPD, x-rays, EKG, etc.) without a clear differential — "casting a wide net." May be justified in some contexts, but tests should be driven by history, physical exam, and differential diagnosis, not reflexive over-ordering.</p>
+
+  <h3>Rifle Approach</h3>
+  <p>If exam reveals <strong>nuchal rigidity</strong> and <strong>severe photophobia</strong> in addition to fever and seizure, concern shifts specifically to meningitis. A targeted lumbar puncture is performed, analyzing cerebrospinal fluid (CSF) for:</p>
+  <ul>
+    <li>White blood cells, red blood cells</li>
+    <li>Total protein and glucose</li>
+    <li>Gram stain</li>
+    <li>Cultures for bacteria, virus, fungi</li>
+    <li>Rapid PCR for meningococcal sequence</li>
+  </ul>
+  <div class="pearl"><strong>Pearl:</strong> before every workup ask yourself — am I doing a shotgun approach because I genuinely don't know what's going on, and if so, will I actually be able to interpret every result I get back? Go back to the five pre-ordering questions from Section 1.</div>
+
+  <div class="mcq">
+    <span class="qtag">Section 4</span>
+    <p class="qstem"><strong>Q7.</strong> A 4-year-old with fever and a generalized seizure is found on exam to have nuchal rigidity and photophobia. Which single test set represents the most appropriate "rifle" approach?</p>
+    <div class="options">
+            <button class="opt" data-correct="true">A. Lumbar puncture with CSF cell counts, protein, glucose, Gram stain, cultures, and PCR</button>
+      <button class="opt" data-correct="false">B. Full septic workup including PPD, EKG, and stool studies</button>
+      <button class="opt" data-correct="false">C. Rapid strep and throat culture</button>
+      <button class="opt" data-correct="false">D. Chest x-ray and arterial blood gas only</button>
+      <button class="opt" data-correct="false">E. Serum PSA and TSH</button>
+    </div>
+    <div class="explanation" style="display:none;">Nuchal rigidity and photophobia point specifically toward meningitis, so the targeted (rifle) workup is a lumbar puncture with full CSF analysis — this directly tests the leading diagnosis rather than casting a wide, undirected net.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 4</span>
+    <p class="qstem"><strong>Q8.</strong> Before ordering a broad panel of tests on a patient with a vague presentation, the lecture recommends the clinician ask which key self-check?</p>
+    <div class="options">
+            <button class="opt" data-correct="true">A. Whether they will be able to understand and interpret the results of each test ordered</button>
+      <button class="opt" data-correct="false">B. Whether the tests are covered by insurance</button>
+      <button class="opt" data-correct="false">C. Whether the patient prefers fewer needle sticks</button>
+      <button class="opt" data-correct="false">D. Whether the lab can process the panel same-day</button>
+      <button class="opt" data-correct="false">E. Whether a nurse can draw all the samples at once</button>
+    </div>
+    <div class="explanation" style="display:none;">The lecture's caution about the shotgun approach centers on whether the ordering clinician can meaningfully interpret every result obtained — ordering a test you can't interpret doesn't help the patient and may generate confusing incidental findings.</div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="block" id="s5">
+  <h2>5. Properties of a Useful Diagnostic Test</h2>
+  <p><strong>Validity</strong> = does the test actually indicate who has the disease and who doesn't (is it telling you what you need to know)? <strong>Reliability</strong> = consistency — does repeating the test give the same result each time?</p>
+
+  <h3>Four Properties</h3>
+  <ol>
+    <li><strong>Reproducibility:</strong> methodology is described in enough detail to be reliably reproduced across different sites, temperatures, and settings.</li>
+    <li><strong>Accuracy and precision established:</strong> accuracy = hitting the true center of the target (correctness); precision = hitting the same spot every time (consistency). A test can be accurate but imprecise (right on average, scattered results) or precise but inaccurate (consistently wrong).</li>
+    <li><strong>Reference interval appropriately established:</strong> a reference interval captures ~95% of a <em>healthy</em> population — meaning ~5% of healthy people will still fall outside "normal" limits and show an abnormal result despite being disease-free.</li>
+    <li><strong>Sensitivity and specificity reliably established against a gold standard:</strong> no test is 100% sensitive or 100% specific — a cutoff must be chosen balancing the two.</li>
+  </ol>
+
+  <div class="mcq">
+    <span class="qtag">Section 5</span>
+    <p class="qstem"><strong>Q9.</strong> A lab test consistently returns the same numeric value of 8.2 on repeated runs of the same sample, but the true value is actually 6.0. Which property does this test demonstrate?</p>
+    <div class="options">
+            <button class="opt" data-correct="true">A. High precision, low accuracy</button>
+      <button class="opt" data-correct="false">B. High sensitivity, low specificity</button>
+      <button class="opt" data-correct="false">C. Low reliability</button>
+      <button class="opt" data-correct="false">D. High accuracy, high precision</button>
+      <button class="opt" data-correct="false">E. High accuracy, low precision</button>
+    </div>
+    <div class="explanation" style="display:none;">Getting the same wrong answer every time is the classic definition of precise-but-inaccurate: reliability (consistency) is high, but validity (correctness) is poor.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 5</span>
+    <p class="qstem"><strong>Q10.</strong> A reference interval is defined to capture 95% of a healthy population. What does this imply about a healthy patient's chance of an "abnormal" result on any single test?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. 95% — most healthy patients will test abnormal</button>
+      <button class="opt" data-correct="true">B. About 5% — some healthy people will fall outside the normal limits by definition</button>
+      <button class="opt" data-correct="false">C. It cannot be estimated without knowing disease prevalence</button>
+      <button class="opt" data-correct="false">D. 0% — reference intervals guarantee normal results in healthy patients</button>
+      <button class="opt" data-correct="false">E. 50% — the interval is centered arbitrarily</button>
+    </div>
+    <div class="explanation" style="display:none;">Because the reference range is constructed to encompass 95% of healthy individuals, by definition about 5% of healthy people will fall outside it and receive an "abnormal" result despite having no disease.</div>
+  </div>
+</section>
+
+<!-- SECTION 6 -->
+<section class="block" id="s6">
+  <h2>6. Incidence &amp; Prevalence: the Bathtub Analogy</h2>
+  <p><strong>Incidence</strong> = number of <em>new</em> cases of a disease/condition in a specific time period (usually a year), divided by the population initially disease-free. It's a direct measure of disease <em>risk</em> — usually reported per 100,000 people.</p>
+  <p><strong>Prevalence</strong> = the total number of cases <em>alive</em> with the disease, either over a period (period prevalence — better reflects overall disease burden, since it captures both new cases and deaths between two dates) or at one moment (point prevalence — only counts those currently alive with disease). Usually reported as a fraction of the total population.</p>
+
+  <h3>The Bathtub</h3>
+  <ul>
+    <li>The <strong>bathtub</strong> = the total population being assessed.</li>
+    <li>The <strong>water in the tub</strong> = prevalence (how full the tub is right now).</li>
+    <li>The <strong>faucet dripping in</strong> = incidence (new cases entering, plus recurrences).</li>
+    <li>The <strong>drain</strong> = ways out of the disease state: recovery/cure, or death.</li>
+  </ul>
+
+  <table>
+    <caption>Applying the Bathtub to Real Diseases</caption>
+    <thead><tr><th>Condition</th><th>Incidence</th><th>Prevalence</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Influenza</td><td>High</td><td>Low</td><td>Very contagious (fills fast) but high cure rate, low mortality (drains fast too)</td></tr>
+      <tr><td>Ebola</td><td>High</td><td>Low</td><td>Highly contagious but almost universally fatal — the water leaves via the drain (death) almost as fast as it enters</td></tr>
+      <tr><td>Alzheimer's disease</td><td>Low</td><td>High</td><td>Relatively uncommon new-onset rate, but no cure and not highly fatal on its own — cases accumulate over time (tub stays full, drains slowly)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mcq">
+    <span class="qtag">Section 6</span>
+    <p class="qstem"><strong>Q11.</strong> Using the bathtub analogy, a disease with a very high cure rate and low mortality, but that is extremely contagious, would be expected to show which incidence/prevalence pattern?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Prevalence cannot be estimated from incidence data</button>
+      <button class="opt" data-correct="true">B. High incidence, low prevalence</button>
+      <button class="opt" data-correct="false">C. Low incidence, high prevalence</button>
+      <button class="opt" data-correct="false">D. High incidence, high prevalence</button>
+      <button class="opt" data-correct="false">E. Low incidence, low prevalence</button>
+    </div>
+    <div class="explanation" style="display:none;">Like influenza — the "faucet" runs fast (high incidence, very contagious) but the "drain" runs just as fast because most people recover quickly and few die, so the "tub" (prevalence) never gets very full.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 6</span>
+    <p class="qstem"><strong>Q12.</strong> Which measure best reflects the overall disease burden or "load" carried by a community over the course of a year, since it captures both new cases and those who died during that period?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Point prevalence</button>
+      <button class="opt" data-correct="false">B. Positive predictive value</button>
+      <button class="opt" data-correct="true">C. Period prevalence</button>
+      <button class="opt" data-correct="false">D. Likelihood ratio</button>
+      <button class="opt" data-correct="false">E. Incidence rate</button>
+    </div>
+    <div class="explanation" style="display:none;">Period prevalence spans two dates and includes everyone who had the disease during that window, including people who subsequently died — giving a fuller picture of community disease burden than a single-moment point prevalence.</div>
+  </div>
+</section>
+
+<!-- SECTION 7 -->
+<section class="block" id="s7">
+  <h2>7. Sensitivity &amp; Specificity</h2>
+  <p><strong>Sensitivity</strong> = the proportion of people <em>with</em> the disease who test positive (probability that, if disease is present, the test is positive). Highly sensitive tests are used for <strong>screening</strong> — cast a broad net so you don't miss anyone — at the cost of more false positives.</p>
+  <p><strong>Specificity</strong> = the proportion of people <em>without</em> the disease who test negative (probability that, if disease is absent, the test is negative). Highly specific tests are used to <strong>confirm</strong> a positive screening result.</p>
+
+  <div class="pearl"><strong>Mnemonics:</strong> <strong>SnNout</strong> — a highly <u>Sn</u>ensitive test, when <u>N</u>egative, rules <u>out</u> disease. <strong>SpPin</strong> — a highly <u>Sp</u>ecific test, when <u>P</u>ositive, rules <u>in</u> disease.</div>
+
+  <h3>The 2&times;2 Table</h3>
+  <table>
+    <thead><tr><th></th><th>Disease Present</th><th>Disease Absent</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Test Positive</strong></td><td>True Positive (TP)</td><td>False Positive (FP)</td></tr>
+      <tr><td><strong>Test Negative</strong></td><td>False Negative (FN)</td><td>True Negative (TN)</td></tr>
+    </tbody>
+  </table>
+  <p>Sensitivity is also called the <strong>true positive rate</strong>; specificity is the <strong>true negative rate</strong>.</p>
+  <div class="formula">Sensitivity = TP / (TP + FN)</div>
+  <div class="formula">Specificity = TN / (TN + FP)</div>
+  <p>No test is 100% sensitive or 100% specific — shifting a diagnostic cutoff to increase sensitivity (fewer false negatives) always increases false positives, and vice versa; there is always a trade-off.</p>
+
+  <div class="mcq">
+    <span class="qtag">Section 7</span>
+    <p class="qstem"><strong>Q13.</strong> A highly sensitive screening test returns a negative result in a patient with a low pre-test probability of disease. What is the most appropriate interpretation?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. A highly sensitive test cannot be used to rule anything out</button>
+      <button class="opt" data-correct="true">B. Disease can be reasonably ruled out (SnNout)</button>
+      <button class="opt" data-correct="false">C. The result is uninterpretable without a gold standard test first</button>
+      <button class="opt" data-correct="false">D. Disease is confirmed present</button>
+      <button class="opt" data-correct="false">E. Specificity, not sensitivity, determines how to interpret a negative result</button>
+    </div>
+    <div class="explanation" style="display:none;">By the SnNout rule, a highly sensitive test that comes back negative is good at ruling disease out, because a sensitive test rarely misses true disease (few false negatives).</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 7</span>
+    <p class="qstem"><strong>Q14.</strong> In a study of 200 patients with confirmed pneumonia and 300 without, a chest imaging test correctly identifies 180 of the pneumonia patients as positive. What is the sensitivity of this test?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. 60%</button>
+      <button class="opt" data-correct="false">B. 36%</button>
+      <button class="opt" data-correct="false">C. Cannot be calculated from the data given</button>
+      <button class="opt" data-correct="false">D. 100%</button>
+      <button class="opt" data-correct="true">E. 90%</button>
+    </div>
+    <div class="explanation" style="display:none;">Sensitivity = TP / (TP + FN) = 180 / 200 = 90%. Only the diseased population (200 patients) is used in this calculation — the 300 disease-free patients are irrelevant to sensitivity.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 7</span>
+    <p class="qstem"><strong>Q15.</strong> A car alarm is set to trigger at the slightest vibration, going off even when a pedestrian brushes past the car. This scenario is analogous to which test property in the lecture?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. High specificity, appropriately catching only true threats</button>
+      <button class="opt" data-correct="false">B. Low reliability</button>
+      <button class="opt" data-correct="true">C. Very high sensitivity, generating frequent false positives</button>
+      <button class="opt" data-correct="false">D. High positive predictive value</button>
+      <button class="opt" data-correct="false">E. A gold-standard reference test</button>
+    </div>
+    <div class="explanation" style="display:none;">The car alarm analogy illustrates that a very high sensitivity setting catches every possible signal (never misses a real burglar) but at the cost of frequent false alarms — the same trade-off as a highly sensitive lab test.</div>
+  </div>
+</section>
+
+<!-- SECTION 8 -->
+<section class="block" id="s8">
+  <h2>8. PPV, NPV &amp; Likelihood Ratios</h2>
+  <p>Sensitivity and specificity describe the <em>test itself</em> and guide which test to order. <strong>Predictive values</strong> describe how to interpret a <em>result you already have</em> in a specific patient.</p>
+  <div class="formula">Positive Predictive Value (PPV) = TP / (TP + FP)</div>
+  <div class="formula">Negative Predictive Value (NPV) = TN / (TN + FN)</div>
+  <p><strong>PPV</strong> = probability that a positive test correctly indicates disease. <strong>NPV</strong> = probability that a negative test correctly indicates absence of disease.</p>
+
+  <div class="pearl"><strong>Prevalence drives PPV/NPV:</strong> higher disease prevalence increases PPV and decreases NPV (and vice versa) — even though sensitivity and specificity themselves do not change with prevalence. Example: a D-dimer has a high NPV and is excellent for <em>ruling out</em> pulmonary embolism when negative, but a positive D-dimer is much less useful on its own, since many conditions besides PE can elevate it.</p></div>
+
+  <h3>Likelihood Ratios</h3>
+  <p>The likelihood ratio (LR) combines a test's sensitivity and specificity with its result to update the pre-test probability of disease into a post-test probability — and unlike PPV/NPV, it is <strong>not affected by prevalence</strong>, which is its main utility.</p>
+  <ul>
+    <li>LR 0&ndash;1: disease is unlikely</li>
+    <li>LR &gt; 1: disease is more likely</li>
+    <li>LR = 1: equivocal, not helpful</li>
+  </ul>
+
+  <div class="mcq">
+    <span class="qtag">Section 8</span>
+    <p class="qstem"><strong>Q16.</strong> A D-dimer test is ordered in a low-risk patient with suspected pulmonary embolism and returns negative. Which statement best reflects the correct interpretation?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. D-dimer is highly specific and a positive result confirms PE</button>
+      <button class="opt" data-correct="false">B. D-dimer results are unaffected by pre-test probability</button>
+      <button class="opt" data-correct="false">C. A negative D-dimer requires immediate CT pulmonary angiography regardless</button>
+      <button class="opt" data-correct="true">D. A negative D-dimer is reassuring because it has a high negative predictive value for ruling out PE</button>
+      <button class="opt" data-correct="false">E. A negative D-dimer confirms PE is present</button>
+    </div>
+    <div class="explanation" style="display:none;">D-dimer's strength is its high NPV — a negative result is reassuring for ruling out PE. Its low specificity means a positive result is far less useful, since many non-PE conditions can also elevate D-dimer.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 8</span>
+    <p class="qstem"><strong>Q17.</strong> As disease prevalence in a population increases, what happens to a test's positive predictive value and negative predictive value, assuming sensitivity and specificity stay constant?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Both decrease</button>
+      <button class="opt" data-correct="false">B. Neither is affected by prevalence</button>
+      <button class="opt" data-correct="true">C. PPV increases, NPV decreases</button>
+      <button class="opt" data-correct="false">D. Both increase</button>
+      <button class="opt" data-correct="false">E. PPV decreases, NPV increases</button>
+    </div>
+    <div class="explanation" style="display:none;">Because more of the tested population truly has disease as prevalence rises, positive results are more likely to be true positives (PPV rises), while negative results are more likely to include a missed true case (NPV falls).</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 8</span>
+    <p class="qstem"><strong>Q18.</strong> A clinician wants a test-result metric that will not be distorted by moving between a low-prevalence outpatient clinic and a high-prevalence referral center. Which metric should they rely on?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Point prevalence</button>
+      <button class="opt" data-correct="false">B. Negative predictive value</button>
+      <button class="opt" data-correct="false">C. Positive predictive value</button>
+      <button class="opt" data-correct="true">D. Likelihood ratio</button>
+      <button class="opt" data-correct="false">E. Incidence rate</button>
+    </div>
+    <div class="explanation" style="display:none;">Unlike PPV and NPV, the likelihood ratio is not affected by disease prevalence, making it a stable way to update pre-test probability across settings with different baseline disease rates.</div>
+  </div>
+</section>
+
+<!-- SECTION 9 -->
+<section class="block" id="s9">
+  <h2>9. Putting It Together: HIV Screening</h2>
+  <div class="case"><strong class="case-label">Case</strong> 100 people are tested for HIV using ELISA — a test that is very <strong>sensitive</strong> but not very <strong>specific</strong>. Everyone who tests positive on ELISA is then retested with a more <strong>specific</strong> confirmatory test (historically Western blot, now more sensitive gold-standard confirmatory assays), which almost never falsely shows HIV. Patients with a false-positive ELISA can then be confidently reassured they do not have HIV because of the accuracy of the confirmatory test.</div>
+  <p>Why not just use the specific test first? The specific/confirmatory test usually comes with <strong>higher cost, higher risk, and more limited access</strong>, while the sensitive screening test is cheap, low-risk, and widely available (e.g., in clinics, remote settings). This mirrors why we don't perform colposcopy or cardiac catheterization on everyone as a first-line screen — we screen broadly with a sensitive, low-risk test, then confirm narrowly with a specific test only in those who screen positive.</p>
+  <div class="flag"><strong>Clinical caution:</strong> never diagnose and disclose a serious disease ("you have HIV," "you have cancer") based on the initial sensitive screening test alone — confirmatory testing must occur first.</div>
+
+  <div class="mcq">
+    <span class="qtag">Section 9</span>
+    <p class="qstem"><strong>Q19.</strong> Why is a highly sensitive but less specific test (like ELISA) typically used as the first-line screening tool rather than going straight to the highly specific confirmatory test?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Specific tests cannot detect early disease</button>
+      <button class="opt" data-correct="false">B. Sensitive tests never produce false positives</button>
+      <button class="opt" data-correct="false">C. Sensitive tests are always more accurate overall</button>
+      <button class="opt" data-correct="false">D. Regulatory guidelines require sensitive tests to be used first in all cases</button>
+      <button class="opt" data-correct="true">E. The sensitive test is cheaper, lower risk, and more accessible, while the specific confirmatory test has higher cost, risk, and limited access</button>
+    </div>
+    <div class="explanation" style="display:none;">The two-tier screen-then-confirm strategy exists because sensitive screening tests are cheap, low-risk, and widely accessible, while highly specific confirmatory tests tend to be costlier, riskier, or less available — reserving the confirmatory test for the smaller group who screen positive is more efficient.</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 9</span>
+    <p class="qstem"><strong>Q20.</strong> A patient screens positive on an initial sensitive ELISA test for HIV. What is the most appropriate next step before informing the patient of a diagnosis?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Immediately inform the patient they have HIV</button>
+      <button class="opt" data-correct="false">B. No further testing is needed since ELISA is the gold standard</button>
+      <button class="opt" data-correct="false">C. Repeat the same ELISA test three times and average the results</button>
+      <button class="opt" data-correct="false">D. Order a random unrelated confirmatory panel</button>
+      <button class="opt" data-correct="true">E. Perform a highly specific confirmatory test before making the diagnosis</button>
+    </div>
+    <div class="explanation" style="display:none;">Because the initial screen is sensitive but not very specific, a positive result must be confirmed with a highly specific test before disclosing a diagnosis, since a meaningful fraction of initial positives will be false positives.</div>
+  </div>
+</section>
+
+<!-- SECTION 10 -->
+<section class="block" id="s10">
+  <h2>10. High-Yield Lab Patterns (Supplemental)</h2>
+  <div class="flag"><strong>Not part of this lecture's testable material.</strong> Dr. Wilde's lecture is about the <em>epistemology</em> of lab testing (why/when to order, sensitivity/specificity, incidence/prevalence) rather than normal values themselves. The panels below are commonly tested on COMLEX Level 1/2 and USMLE Step 1 pattern-recognition questions and are included here only as a high-yield supplemental reference — confirm with your official course material whether specific numeric ranges are fair game on your exam.</div>
+
+  <h3>Basic Metabolic Panel (BMP) — Typical Adult Reference Ranges</h3>
+  <table>
+    <thead><tr><th>Component</th><th>Typical Range</th><th>High-Yield Pattern</th></tr></thead>
+    <tbody>
+      <tr><td>Sodium (Na)</td><td>135&ndash;145 mEq/L</td><td>Hyponatremia &rarr; think SIADH, heart failure, hypovolemia; hypernatremia &rarr; free water loss, diabetes insipidus</td></tr>
+      <tr><td>Potassium (K)</td><td>3.5&ndash;5.0 mEq/L</td><td>Hyperkalemia &rarr; peaked T waves, renal failure, ACE-I/ARB use; hypokalemia &rarr; U waves, diuretics, vomiting</td></tr>
+      <tr><td>Chloride (Cl)</td><td>96&ndash;106 mEq/L</td><td>Tracks with Na; useful for anion gap calculation</td></tr>
+      <tr><td>CO2 (bicarbonate)</td><td>22&ndash;28 mEq/L</td><td>Low &rarr; metabolic acidosis; high &rarr; metabolic alkalosis or compensation for respiratory acidosis</td></tr>
+      <tr><td>BUN</td><td>7&ndash;20 mg/dL</td><td>Elevated with dehydration, GI bleed, renal impairment (BUN:Cr &gt;20:1 suggests prerenal)</td></tr>
+      <tr><td>Creatinine</td><td>0.6&ndash;1.3 mg/dL</td><td>Best single marker of renal function/GFR</td></tr>
+      <tr><td>Fasting glucose</td><td>70&ndash;99 mg/dL (normal); 100&ndash;125 (prediabetes); &ge;126 (diabetes)</td><td>Diagnostic cutoffs for diabetes screening</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Lipid Panel</h3>
+  <table>
+    <thead><tr><th>Component</th><th>Desirable</th><th>Pattern</th></tr></thead>
+    <tbody>
+      <tr><td>Total cholesterol</td><td>&lt;200 mg/dL</td><td>Used with LDL/HDL to calculate ASCVD risk</td></tr>
+      <tr><td>LDL ("bad")</td><td>&lt;100 mg/dL (lower goals if high risk)</td><td>Primary target of statin therapy</td></tr>
+      <tr><td>HDL ("good")</td><td>&gt;40 (men) / &gt;50 (women) mg/dL</td><td>Higher is protective</td></tr>
+      <tr><td>Triglycerides</td><td>&lt;150 mg/dL</td><td>Very high (&gt;500) &rarr; risk of pancreatitis</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Hepatic Function Panel</h3>
+  <table>
+    <thead><tr><th>Component</th><th>Pattern</th></tr></thead>
+    <tbody>
+      <tr><td>AST/ALT</td><td>ALT &gt; AST &rarr; more liver-specific (e.g., viral hepatitis); AST &gt; ALT (2:1) classically suggests alcoholic liver disease</td></tr>
+      <tr><td>Alkaline phosphatase</td><td>Elevated in cholestatic/biliary obstruction or bone disease</td></tr>
+      <tr><td>Total bilirubin</td><td>Elevated in hemolysis, hepatocellular disease, or biliary obstruction — direct vs. indirect fractionation localizes the cause</td></tr>
+      <tr><td>Albumin</td><td>Low in chronic liver disease, malnutrition, nephrotic syndrome</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Thyroid Panel Patterns</h3>
+  <table>
+    <thead><tr><th>TSH</th><th>Free T4</th><th>Interpretation</th></tr></thead>
+    <tbody>
+      <tr><td>High</td><td>Low</td><td>Primary hypothyroidism</td></tr>
+      <tr><td>Low</td><td>High</td><td>Primary hyperthyroidism</td></tr>
+      <tr><td>Low</td><td>Low</td><td>Central (secondary) hypothyroidism — pituitary/hypothalamic cause</td></tr>
+      <tr><td>High</td><td>Normal</td><td>Subclinical hypothyroidism</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mcq">
+    <span class="qtag">Section 10 — Supplemental, not this lecture's material</span>
+    <p class="qstem"><strong>Q21.</strong> A patient's TSH returns elevated with a low free T4. What is the most likely diagnosis?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Primary hyperthyroidism</button>
+      <button class="opt" data-correct="false">B. Central hypothyroidism</button>
+      <button class="opt" data-correct="true">C. Primary hypothyroidism</button>
+      <button class="opt" data-correct="false">D. Euthyroid sick syndrome</button>
+      <button class="opt" data-correct="false">E. Subclinical hyperthyroidism</button>
+    </div>
+    <div class="explanation" style="display:none;">High TSH with low free T4 is the classic pattern of primary hypothyroidism — the thyroid gland itself is failing, so the pituitary increases TSH output in an attempt to stimulate it, but T4 production remains low. (Supplemental content — not from this lecture.)</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 10 — Supplemental, not this lecture's material</span>
+    <p class="qstem"><strong>Q22.</strong> A patient with chronic alcohol use disorder has an AST of 180 U/L and an ALT of 90 U/L (AST:ALT ratio ~2:1). This pattern is most consistent with which process?</p>
+    <div class="options">
+            <button class="opt" data-correct="false">A. Hemolytic anemia</button>
+      <button class="opt" data-correct="false">B. Nonalcoholic fatty liver disease</button>
+      <button class="opt" data-correct="false">C. Acute viral hepatitis</button>
+      <button class="opt" data-correct="true">D. Alcoholic liver disease</button>
+      <button class="opt" data-correct="false">E. Biliary obstruction</button>
+    </div>
+    <div class="explanation" style="display:none;">An AST:ALT ratio of roughly 2:1 (AST greater than ALT) is a classic high-yield pattern for alcoholic liver disease, in contrast to viral hepatitis, where ALT typically exceeds AST. (Supplemental content — not from this lecture.)</div>
+  </div>
+
+  <div class="mcq">
+    <span class="qtag">Section 10 — Supplemental, not this lecture's material</span>
+    <p class="qstem"><strong>Q23.</strong> A BMP shows BUN 45 mg/dL and creatinine 1.1 mg/dL (BUN:Cr ratio &gt;20:1) in a patient with vomiting and poor oral intake. What does this pattern suggest?</p>
+    <div class="options">
+            <button class="opt" data-correct="true">A. Prerenal azotemia from volume depletion</button>
+      <button class="opt" data-correct="false">B. Postrenal obstruction</button>
+      <button class="opt" data-correct="false">C. Normal renal function</button>
+      <button class="opt" data-correct="false">D. Chronic kidney disease stage 5</button>
+      <button class="opt" data-correct="false">E. Intrinsic (renal) acute kidney injury</button>
+    </div>
+    <div class="explanation" style="display:none;">A disproportionately elevated BUN relative to creatinine (BUN:Cr &gt;20:1) with a history of volume loss classically indicates prerenal azotemia — the kidneys are under-perfused (e.g., from dehydration) but the nephrons themselves are not yet intrinsically damaged. (Supplemental content — not from this lecture.)</div>
+  </div>
+</section>
+
+</main>
+
+<div class="summary-final" style="max-width:880px; margin: 0 auto 60px auto; padding: 28px 32px;">
+  <h2>Summary Table — Key Facts at a Glance</h2>
+  <table>
+    <thead><tr><th>Concept</th><th>Definition / Formula</th><th>Clinical Use</th></tr></thead>
+    <tbody>
+      <tr><td>Screening test</td><td>Detects disease in asymptomatic patients</td><td>Broad, low-risk, based on risk factors (Pap, mammo, FBG, BP, FOBT, PSA, PKU, TSH, RPR)</td></tr>
+      <tr><td>Diagnostic test</td><td>Confirms/rules out disease in symptomatic patients or after abnormal screen</td><td>Colposcopy, biopsy, colonoscopy, confirmatory serology, etc.</td></tr>
+      <tr><td>Validity</td><td>Test correctly indicates disease status</td><td>Is the test telling you what you need to know?</td></tr>
+      <tr><td>Reliability</td><td>Consistency of repeated results</td><td>Precision-related; distinct from correctness</td></tr>
+      <tr><td>Accuracy vs. Precision</td><td>Accuracy = correctness (hits true center); Precision = consistency (tight grouping)</td><td>A test can be one without the other</td></tr>
+      <tr><td>Reference interval</td><td>Encompasses ~95% of a healthy population</td><td>~5% of healthy people will fall outside "normal"</td></tr>
+      <tr><td>Incidence</td><td>New cases / at-risk population over time</td><td>Direct measure of disease risk; the "faucet"</td></tr>
+      <tr><td>Prevalence</td><td>Total existing cases / total population (point or period)</td><td>Disease burden; the "water in the tub"</td></tr>
+      <tr><td>Sensitivity</td><td>TP / (TP + FN)</td><td>SnNout — rules OUT disease when negative; used for screening</td></tr>
+      <tr><td>Specificity</td><td>TN / (TN + FP)</td><td>SpPin — rules IN disease when positive; used to confirm</td></tr>
+      <tr><td>PPV</td><td>TP / (TP + FP)</td><td>Probability a positive result = true disease; rises with prevalence</td></tr>
+      <tr><td>NPV</td><td>TN / (TN + FN)</td><td>Probability a negative result = true health; falls with prevalence</td></tr>
+      <tr><td>Likelihood ratio</td><td>Combines sens/spec to update pre-test probability</td><td>Not affected by prevalence; LR&gt;1 raises, LR 0&ndash;1 lowers disease likelihood</td></tr>
+      <tr><td>Shotgun vs. Rifle</td><td>Broad undirected panel vs. targeted testing driven by H&amp;P/differential</td><td>Always ask: can I interpret every result I'm ordering?</td></tr>
+      <tr><td>Bathtub examples</td><td>Flu: high incidence/low prevalence &middot; Ebola: high incidence/low prevalence (fatal) &middot; Alzheimer's: low incidence/high prevalence</td><td>Framework for reasoning about any disease's epidemiology</td></tr>
+      <tr><td>HIV screening model</td><td>Sensitive ELISA screen &rarr; specific confirmatory test</td><td>Never diagnose off the sensitive screen alone</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+document.querySelectorAll('.mcq').forEach(function(mcq) {
+  var opts = mcq.querySelectorAll('.opt');
+  var expl = mcq.querySelector('.explanation');
+  opts.forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      if (mcq.classList.contains('locked')) return;
+      mcq.classList.add('locked');
+      var chosenCorrect = opt.dataset.correct === 'true';
+      opts.forEach(function(o) {
+        o.classList.add('answered');
+        if (o.dataset.correct === 'true') {
+          o.classList.add('correct');
+        } else if (o === opt) {
+          o.classList.add('incorrect');
+        }
+      });
+      if (expl) {
+        var verdict = expl.querySelector('.verdict');
+        expl.style.display = 'block';
+        var prefix = chosenCorrect
+          ? '<strong class="verdict-correct">Correct. </strong>'
+          : '<strong class="verdict-incorrect">Not quite. </strong>';
+        expl.innerHTML = prefix + expl.innerHTML;
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
