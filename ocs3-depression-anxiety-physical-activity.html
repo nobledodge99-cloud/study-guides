@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depression/Anxiety and Physical Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3d2b;
+    --forest: #2e5539;
+    --sage: #6a8f6b;
+    --sage-light: #dce8dc;
+    --border: #c9d9c4;
+    --accent: #b5651d;
+    --accent-soft: #e8c9a3;
+    --text-main: #26301f;
+    --text-soft: #55614c;
+    --correct: #2e6b3e;
+    --incorrect: #a13b30;
+    --shadow: 0 2px 10px rgba(31,61,43,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.65;
+    padding-bottom: 80px;
+  }
+  h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--forest-dark); }
+  code, .mono, .tag, .score-badge { font-family: 'IBM Plex Mono', monospace; }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  .header h1 { color: var(--cream); font-size: 2.1em; margin-bottom: 8px; }
+  .header p { color: var(--sage-light); font-size: 1.05em; margin: 4px 0; }
+  .header .source-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: -30px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { margin-top: 0; font-size: 1.2em; }
+  .toc-shared { list-style: none; padding-left: 0; margin: 0 0 16px; }
+  .toc-shared li { margin-bottom: 8px; }
+  .toc-columns { display: flex; gap: 30px; }
+  .toc-col { flex: 1; min-width: 0; }
+  .toc-col h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin: 0 0 10px;
+  }
+  .toc-col ul { list-style: none; padding-left: 0; margin: 0; }
+  .toc-col ul li { margin-bottom: 8px; }
+  .toc a { color: var(--forest); text-decoration: none; font-size: 0.95em; }
+  .toc a:hover { text-decoration: underline; }
+  @media (max-width: 640px) {
+    .toc-columns { flex-direction: column; gap: 6px; }
+  }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 26px 0;
+    box-shadow: var(--shadow);
+  }
+  section.card h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  section.card h3 { font-size: 1.12em; color: var(--forest); margin-top: 22px; }
+  section.card h4 { font-size: 1em; color: var(--accent); margin-bottom: 4px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.94em; }
+  th, td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--sage-light); color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .pearl strong { color: var(--forest-dark); }
+
+  .score-badge { display: inline-block; padding: 2px 8px; border-radius: 5px; font-size: 0.85em; margin-right: 4px; }
+  .sb-min { background: #e3ede2; }
+  .sb-mild { background: #f4e8c1; }
+  .sb-mod { background: #f0cf9e; }
+  .sb-modsev { background: #eeb489; }
+  .sb-sev { background: #e2967d; }
+
+  ul.plain, ol.plain { padding-left: 22px; }
+  ul.plain li, ol.plain li { margin-bottom: 6px; }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin: 24px 0 4px;
+  }
+  .quiz-q {
+    background: #f5f1e6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .quiz-q p.prompt { font-weight: 600; margin-top: 0; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.96em;
+    cursor: pointer;
+    color: var(--text-main);
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #d9ecd9; border-color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f3d9d4; border-color: var(--incorrect); }
+  .quiz-choice.disabled { pointer-events: none; }
+  .quiz-explain {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--cream-card);
+    border-left: 3px solid var(--forest);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 12px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 400;
+    box-shadow: var(--shadow);
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -3px 0 12px rgba(0,0,0,0.08);
+    transition: right 0.25s ease;
+    z-index: 450;
+    overflow-y: auto;
+    padding: 60px 16px 20px;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .sidenav-panel a.active { background: var(--sage-light); color: var(--forest-dark); font-weight: 600; }
+  .sidenav-panel a:hover { background: var(--sage-light); }
+
+  @media (max-width: 700px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>Depression/Anxiety and Physical Activity</h1>
+  <p>Depression &amp; Anxiety — Lifestyle Medicine</p>
+  <p style="font-size:0.9em;">Two-module series on exercise as treatment for mood disorders</p>
+  <p style="font-size:0.85em; opacity:0.85;">Pamela Kinder, MD — Assistant Professor of Clinical Medicine</p>
+  <span class="source-tag">Built from LM_YRB Depression &amp; Anxiety Panopto lecture narration</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul class="toc-shared">
+      <li><a href="#s00">00. Overview &amp; Learning Objectives</a></li>
+    </ul>
+    <div class="toc-columns">
+      <div class="toc-col">
+        <h3>Depression</h3>
+        <ul>
+          <li><a href="#s01">01. Definition &amp; Epidemiology</a></li>
+          <li><a href="#s02">02. Screening: PHQ-9 &amp; BDI-II</a></li>
+          <li><a href="#s03">03. Mechanisms of the Antidepressant Effect of Exercise</a></li>
+          <li><a href="#s04">04. Evidence for Exercise as Treatment</a></li>
+          <li><a href="#s05">05. Exercise in Comorbid Medical Conditions</a></li>
+          <li><a href="#s06">06. Predicting Response &amp; Practical Recommendations</a></li>
+        </ul>
+      </div>
+      <div class="toc-col">
+        <h3>Anxiety</h3>
+        <ul>
+          <li><a href="#s07">07. Definitions &amp; Classification</a></li>
+          <li><a href="#s08">08. Screening: GAD-7</a></li>
+          <li><a href="#s09">09. Epidemiology, Impact &amp; Risk Factors</a></li>
+          <li><a href="#s10">10. First-Line Treatments (Psychotherapy &amp; Pharmacotherapy)</a></li>
+          <li><a href="#s11">11. Psychological Mechanisms of Exercise</a></li>
+          <li><a href="#s12">12. Biological Mechanisms of Exercise</a></li>
+          <li><a href="#s13">13. Evidence &amp; Practical Recommendations</a></li>
+        </ul>
+      </div>
+    </div>
+    <ul class="toc-shared" style="margin-top:16px;">
+      <li><a href="#s14">14. Master High-Yield Table: Depression vs. Anxiety</a></li>
+    </ul>
+  </div>
+
+  <!-- 00 -->
+  <section class="card" id="s00">
+    <h2>00. Overview &amp; Learning Objectives</h2>
+    <h3>Depression module</h3>
+    <ul class="plain">
+      <li>Strong evidence supports physical activity for the <strong>treatment and prevention</strong> of depression, including both aerobic and resistance training.</li>
+      <li>Useful for recommending treatment in patients with a depressive mood disorder, or in populations where depression comorbidity worsens outcomes when untreated.</li>
+      <li>Understanding the biological mechanisms of the antidepressant effect of exercise helps match patients to effective treatment.</li>
+      <li>Barriers to implementing exercise as treatment exist in real-world clinical settings — a target for skills built during OCS, ESP, and DPR events.</li>
+    </ul>
+    <h3>Anxiety module</h3>
+    <ul class="plain">
+      <li>Anxiety is a basic, often adaptive emotion — <strong>not always pathological</strong>.</li>
+      <li>Psychotherapy and psychopharmacotherapy remain first-line treatments for anxiety disorders.</li>
+      <li>Physical inactivity is itself a <strong>risk factor</strong> for developing anxiety disorders.</li>
+      <li>Physical activity/exercise training has an anxiolytic effect in both healthy people and patients with anxiety disorders.</li>
+      <li>The anxiolytic effect is mediated by both biological and psychological mechanisms.</li>
+    </ul>
+    <div class="pearl"><strong>Framing pearl:</strong> Across both modules, the instructor emphasizes <em>physical activity</em> broadly (not just structured "exercise") — walking, chores, stairs — because that framing makes patient-centered recommendations more achievable.</div>
+  </section>
+
+  <!-- 01 -->
+  <section class="card" id="s01">
+    <h2>01. Depression: Definition &amp; Epidemiology</h2>
+    <h3>Major Depressive Disorder (MDD) — definition</h3>
+    <ul class="plain">
+      <li>Persistently low/depressed mood <strong>and/or anhedonia</strong> (decreased interest in pleasurable activities)</li>
+      <li>Feelings of guilt or worthlessness</li>
+      <li>Lack of energy, poor concentration</li>
+      <li>Appetite changes</li>
+      <li>Psychomotor retardation or agitation</li>
+      <li>Sleep disturbances; suicidal thoughts</li>
+      <li>Symptoms present <strong>≥ 2 weeks minimum</strong> (usually much longer in practice) and must significantly impair daily life</li>
+    </ul>
+    <h3>Epidemiology</h3>
+    <table>
+      <tr><th>Feature</th><th>Finding</th></tr>
+      <tr><td>Lifetime prevalence</td><td>5–17%; nearly <strong>2× higher in women</strong> than men</td></tr>
+      <tr><td>Proposed reasons for sex difference</td><td>Hormonal differences, childbirth effects, differing psychosocial stressors, learned helplessness</td></tr>
+      <tr><td>Race</td><td>No significant differences</td></tr>
+      <tr><td>Socioeconomic status</td><td>No significant differences</td></tr>
+      <tr><td>Mean age of onset</td><td>~40 years, trending younger with rising incidence in younger populations</td></tr>
+      <tr><td>Relationship status</td><td>More common in divorced, separated, widowed, or those lacking close personal relationships</td></tr>
+      <tr><td>Geography</td><td>More common in rural areas</td></tr>
+      <tr><td>Comorbidities</td><td>Alcohol/substance use disorders; panic attacks, social anxiety, OCD</td></tr>
+      <tr><td>Suicide risk</td><td>Higher with comorbid substance/alcohol abuse and early life stressors</td></tr>
+      <tr><td>Genetics</td><td>High twin concordance rate</td></tr>
+    </table>
+    <h3>Two behavioral/cognitive theories</h3>
+    <ul class="plain">
+      <li><strong>Learned helplessness theory</strong> — depression linked to experiencing uncontrollable events</li>
+      <li><strong>Cognitive theory</strong> — depression linked to cognitive distortions in susceptible individuals</li>
+    </ul>
+    <h3>Treatment access/effectiveness gap</h3>
+    <div class="pearl">Only <strong>55%</strong> of people with a depressive disorder receive treatment; of those, only <strong>32%</strong> experience symptom alleviation — roughly <strong>17%</strong> of all people with depression achieve alleviation of symptoms. This gap is a key rationale for exercise as an accessible adjunct/alternative.</div>
+  </section>
+
+  <!-- 02 -->
+  <section class="card" id="s02">
+    <h2>02. Depression Screening: PHQ-9 &amp; BDI-II</h2>
+    <h3>PHQ-9 (Patient Health Questionnaire-9)</h3>
+    <ul class="plain">
+      <li>Self-administered, 9 questions, each scored 0–3 (not at all → nearly every day) over the <strong>past 2 weeks</strong></li>
+      <li><strong>Sensitivity/specificity ~88%</strong> for MDD at a cutoff of <strong>≥10</strong></li>
+      <li>Covers: anhedonia, depressed mood, sleep disturbance, fatigue/energy, appetite change, worthlessness/guilt, concentration, psychomotor change, suicidal ideation</li>
+      <li>Extra (10th, unscored) question asks how difficult symptoms have made work/home/relationships — not at all / somewhat / very / extremely difficult — gauges functional impact</li>
+    </ul>
+    <h4>PHQ-9 scoring (remember by 5s)</h4>
+    <p>
+      <span class="score-badge sb-min">&lt;5: none</span>
+      <span class="score-badge sb-mild">5–9: mild</span>
+      <span class="score-badge sb-mod">10–14: moderate</span>
+      <span class="score-badge sb-modsev">15–19: moderately severe</span>
+      <span class="score-badge sb-sev">≥20: severe</span>
+    </p>
+    <div class="pearl"><strong>Clinical pearl:</strong> Psychomotor slowing (moving/speaking so slowly others notice) is a striking finding — the instructor notes the "life sucked out of the room" quality when interviewing a patient with significant MDD.</div>
+
+    <h3>Beck Depression Inventory (BDI-II)</h3>
+    <ul class="plain">
+      <li>Self-administered, <strong>21 statements</strong>, each with 4 graded choices (0–3) covering the characteristic symptoms of MDD</li>
+      <li>Max score = <strong>63</strong></li>
+      <li><strong>100% sensitivity, 96% specificity</strong> in older adult depressed outpatients</li>
+      <li>Test-retest reliability: <strong>0.73–0.92</strong> (consistent over time, good reliability/validity)</li>
+      <li>More often used in research studies and preferentially in older patients; PHQ-9 is more common in primary care</li>
+    </ul>
+    <h4>BDI-II interpretation (from slide, not narrated in lecture)</h4>
+    <p>
+      <span class="score-badge sb-min">1–10: normal ups &amp; downs</span>
+      <span class="score-badge sb-mild">11–16: mild mood disturbance</span>
+      <span class="score-badge sb-mod">17–20: borderline clinical depression</span>
+      <span class="score-badge sb-modsev">21–30: moderate depression</span>
+      <span class="score-badge sb-sev">31–40: severe depression</span>
+      <span class="score-badge sb-sev">&gt;40: extreme depression</span>
+    </p>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s02"></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card" id="s03">
+    <h2>03. Depression: Mechanisms of the Antidepressant Effect of Exercise</h2>
+    <h3>Serotonin</h3>
+    <p>Exercise increases neural discharge of serotonin (raphe nucleus, hippocampus), <strong>tryptophan levels</strong>, and serotonin metabolism/availability — a mechanism analogous to SSRIs.</p>
+
+    <h3>Brain-Derived Neurotrophic Factor (BDNF)</h3>
+    <ul class="plain">
+      <li>BDNF is <strong>lower</strong> in untreated MDD vs. healthy adults; inversely correlates with symptom severity; rises with treatment</li>
+      <li>Exercise <strong>increases peripheral BDNF</strong></li>
+      <li>Effect is <strong>greater in males</strong>, and with <strong>longer-duration</strong> sessions</li>
+    </ul>
+    <div class="pearl"><strong>Practical takeaway:</strong> Consider recommending exercise more strongly to men (larger BDNF response) and longer session durations for women.</div>
+
+    <h3>HPA axis / Cortisol</h3>
+    <p>MDD patients have elevated cortisol; acute and chronic aerobic exercise <strong>reduce cortisol</strong> and blunt stress-related cortisol spikes — parallel to the HPA effect seen in anxiety.</p>
+
+    <h3>Endocannabinoid system</h3>
+    <ul class="plain">
+      <li>A single bout of aerobic exercise activates the endocannabinoid system</li>
+      <li>Activation improves depression, general tension, and total mood disturbance; positively correlates with vigor</li>
+      <li>Chronic effects are less clear but may confer a <strong>protective effect against stress exposure</strong> (more robust response to future stress)</li>
+    </ul>
+
+    <h3>Psychosocial mechanisms</h3>
+    <ul class="plain">
+      <li>Low self-efficacy is associated with depressive symptoms</li>
+      <li>Chronic exercise/physical activity improves self-efficacy → decreased depressive symptoms</li>
+      <li>Competing theory: exercise as a <strong>distraction from stress</strong> (evidence is conflicting)</li>
+    </ul>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s03"></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card" id="s04">
+    <h2>04. Depression: Evidence for Exercise as Treatment</h2>
+    <h3>Aerobic exercise</h3>
+    <ul class="plain">
+      <li>Multiple studies show positive response on depressive symptoms with aerobic exercise vs. placebo (stretching)</li>
+      <li><strong>3×/week was just as effective as 5×/week</strong></li>
+      <li>Both vigorous and light aerobic exercise were better than treatment-as-usual</li>
+      <li>12-week, 4-arm study (treatment-as-usual vs. yoga/light vs. moderate vs. vigorous): <strong>all three exercise arms</strong> had significantly lower post-treatment depression scores than treatment-as-usual</li>
+    </ul>
+
+    <h3>Resistance training</h3>
+    <ul class="plain">
+      <li>10-week supervised resistance training: <strong>59% improved</strong> vs. <strong>26% of controls</strong></li>
+      <li>Improvement maintained through 10 further weeks of unsupervised, twice-weekly resistance training</li>
+      <li>At 26-month follow-up: <strong>73%</strong> of the resistance-training group were classified as non-depressed vs. <strong>36%</strong> of controls</li>
+    </ul>
+    <div class="pearl">Resistance training is a validated option for patients who dislike or cannot perform aerobic exercise.</div>
+
+    <h3>Comparative effect size &amp; augmentation</h3>
+    <ul class="plain">
+      <li>No significant difference in effect size between exercise and SSRIs or psychotherapy for depressive symptoms</li>
+      <li>Exercise as an <strong>adjunct</strong> to SSRIs or psychotherapy can augment effects (more robust studies still needed)</li>
+      <li>Aerobic exercise augments medication effects in patients with <strong>non-remitted MDD</strong> (harder-to-treat course)</li>
+      <li>Exercise also improves both physical and psychosocial quality-of-life indicators in depressed patients</li>
+    </ul>
+
+    <h3>Dose &amp; adherence</h3>
+    <ul class="plain">
+      <li>No difference by frequency — <strong>3×/week is sufficient</strong>, 5×/week not required</li>
+      <li>Suggested duration: <strong>45–59 minutes</strong> per session is most effective, though a routine the patient can sustain matters most</li>
+      <li>There may be a minimum weekly dose needed for symptom reduction (less clear for quality-of-life benefit)</li>
+      <li>No robust data on optimal intensity — any exercise is better than none</li>
+      <li><strong>No statistical difference in adherence</strong> between exercise and SSRIs; dropout rates comparable across exercise, SSRIs, and psychotherapy</li>
+      <li>Better adherence with <strong>home-based</strong> vs. lab-based programs</li>
+      <li>Altering session frequency does not affect adherence; some patients do better with a daily routine (personality-dependent)</li>
+      <li>Patients recruited into supervised sessions, or recruited from inpatient settings, are more likely to adhere (may bias study data upward)</li>
+    </ul>
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s04"></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card" id="s05">
+    <h2>05. Depression: Exercise in Comorbid Medical Conditions</h2>
+    <table>
+      <tr><th>Condition</th><th>Exercise effect on depressive symptoms</th></tr>
+      <tr><td>Cardiovascular disease (heart failure, CHF, ischemic heart disease)</td><td>Significant decrease in depression inventory score after 8–16 weeks of aerobic exercise intervention; relevant to cardiopulmonary rehab (covered further in CV/ESP course)</td></tr>
+      <tr><td>Type 2 diabetes</td><td>Benefit on both physical and mental health; normal/overweight patients respond to vigorous PA, obese patients respond to moderate-vigorous PA</td></tr>
+      <tr><td>Cancer</td><td>More limited data; meta-analysis shows a moderate effect on cancer-related fatigue and depressive symptoms, possibly more on quality of life</td></tr>
+      <tr><td>Fibromyalgia</td><td>Good data — exercise lowers depressive symptoms, possibly as/more effective than current medications for fibromyalgia</td></tr>
+      <tr><td>COPD</td><td>Reduction in depressive symptoms following exercise intervention</td></tr>
+    </table>
+  </section>
+
+  <!-- 06 -->
+  <section class="card" id="s06">
+    <h2>06. Depression: Predicting Response &amp; Practical Recommendations</h2>
+    <h3>Predictors of a better response to exercise</h3>
+    <ul class="plain">
+      <li>Higher <strong>baseline BDNF</strong></li>
+      <li>Higher baseline <strong>TNF-alpha</strong> and <strong>IL-6</strong> (elevated inflammatory markers)</li>
+      <li>Better baseline physical health</li>
+      <li>Lower anxiety</li>
+      <li>Hypersomnia and atypical depressive symptoms</li>
+    </ul>
+    <div class="pearl">Future direction: using baseline inflammatory markers to help decide whether to recommend exercise as a first-line treatment (heterogeneity of treatment response is the central challenge).</div>
+
+    <h3>Bottom-line recommendations</h3>
+    <ul class="plain">
+      <li>Exercise is efficacious as <strong>monotherapy or augmentation</strong> to antidepressant medication or CBT</li>
+      <li>Both aerobic and resistance training are effective</li>
+      <li><strong>WHO recommendation:</strong> 150 min/week moderate-intensity <em>or</em> 75 min/week vigorous-intensity aerobic activity, <strong>plus strength training ≥2 days/week</strong></li>
+    </ul>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s06"></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="card" id="s07">
+    <h2>07. Anxiety: Definitions &amp; Classification</h2>
+    <h3>Anxiety vs. panic</h3>
+    <ul class="plain">
+      <li>Anxiety is a <strong>normal, adaptive emotion</strong> — secures survival via fight-or-flight, signals danger</li>
+      <li>Physiologic changes: sweating, faster heart rate/breathing; cognitive/behavioral correlates: disordered thoughts, avoidance/leaving the situation</li>
+      <li><strong>Panic</strong> = faster onset, more intense defensive reaction allowing rapid escape from perceived danger</li>
+    </ul>
+    <h3>When anxiety becomes pathological</h3>
+    <ul class="plain">
+      <li>Emerges in situations that are <strong>not objectively dangerous</strong></li>
+      <li>Is <strong>excessively strong</strong></li>
+      <li>Is <strong>anticipatory</strong> and constrains the person's life</li>
+    </ul>
+    <p>Per WHO ICD classification, anxiety disorders fall under neurotic, stress-related, and somatoform disorders.</p>
+
+    <h3>Key anxiety disorder definitions</h3>
+    <table>
+      <tr><th>Disorder</th><th>Definition</th></tr>
+      <tr><td>Generalized anxiety disorder (GAD)</td><td>Excessive, persistent, unrealistic worry about everyday things, lasting &gt;6 months</td></tr>
+      <tr><td>Agoraphobia</td><td>Anxiety in ≥2 of: public places, crowds, traveling far from home, traveling alone</td></tr>
+      <tr><td>Social anxiety disorder</td><td>Anxiety around fear of scrutiny by others</td></tr>
+      <tr><td>Specific phobias</td><td>Anxiety restricted to highly specific situations/objects (heights, thunder, dental treatment, spiders, snakes); the stimulus is avoided whenever possible</td></tr>
+    </table>
+    <div class="pearl">As with MDD, a disorder diagnosis requires the anxiety to affect the patient's life and cause distress — not just be present.</div>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s07"></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card" id="s08">
+    <h2>08. Anxiety Screening: GAD-7</h2>
+    <ul class="plain">
+      <li>Self-administered screening tool for <strong>generalized anxiety disorder</strong></li>
+      <li><strong>7 questions</strong>, each scored 0–3 (not at all → nearly every day); max score <strong>21</strong></li>
+      <li>Covers: nervousness/being on edge, inability to stop/control worry, worrying too much, trouble relaxing, restlessness, irritability, fear something awful might happen</li>
+    </ul>
+    <h4>GAD-7 scoring (remember by 5s)</h4>
+    <p>
+      <span class="score-badge sb-min">&lt;5: minimal</span>
+      <span class="score-badge sb-mild">5–9: mild</span>
+      <span class="score-badge sb-mod">10–14: moderate</span>
+      <span class="score-badge sb-sev">≥15: severe</span>
+    </p>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s08"></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="card" id="s09">
+    <h2>09. Anxiety: Epidemiology, Impact &amp; Risk Factors</h2>
+    <table>
+      <tr><th>Feature</th><th>Finding</th></tr>
+      <tr><td>Lifetime prevalence (US)</td><td><strong>31%</strong> lifetime, <strong>22%</strong> 12-month (age 13+) — among the most common mental disorders; notably lower in the EU (<strong>14%</strong>)</td></tr>
+      <tr><td>Subtype-specific prevalence</td><td>Specific phobias <strong>12–15%</strong>; OCD <strong>1–2.3%</strong></td></tr>
+      <tr><td>Age of onset</td><td>Often childhood/adolescence, chronic recurrent pattern</td></tr>
+      <tr><td>Sex</td><td>Women much more likely to develop anxiety disorders, <strong>except OCD</strong> (higher in men)</td></tr>
+      <tr><td>Risk factors</td><td>Genetic predisposition, early life stress/trauma, chronic health conditions, substance abuse, <strong>physical inactivity</strong></td></tr>
+    </table>
+    <h3>Economic &amp; individual impact</h3>
+    <ul class="plain">
+      <li>Major health-economic burden (likely underestimated): psychiatric/non-psychiatric care, emergency care, hospitalization, medications, reduced productivity, absenteeism, suicide</li>
+      <li>Predicts unfavorable sociodemographic, clinical, and functional outcomes — especially <strong>interpersonal outcomes</strong></li>
+    </ul>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s09"></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="card" id="s10">
+    <h2>10. Anxiety: First-Line Treatments (Psychotherapy &amp; Pharmacotherapy)</h2>
+    <h3>Psychotherapy</h3>
+    <ul class="plain">
+      <li><strong>CBT</strong> is well-supported: cognitive therapy and exposure therapy, alone/combined/with relaxation training, effective across GAD, PTSD, social anxiety disorder, and phobias — <strong>no differential efficacy by diagnosis</strong></li>
+      <li>Neuroimaging: CBT alters neural activity in networks regulating negative emotion, fear conditioning/extinction; higher pretreatment left orbitofrontal metabolic activity predicts better OCD outcomes</li>
+      <li><strong>Internet-assisted CBT</strong> is as efficacious as in-person CBT for anxiety</li>
+    </ul>
+    <h3>Pharmacotherapy</h3>
+    <table>
+      <tr><th>Class</th><th>Examples / Notes</th></tr>
+      <tr><td>SSRIs</td><td>Sertraline, paroxetine, citalopram, escitalopram — once daily by mouth; good evidence base</td></tr>
+      <tr><td>SNRIs</td><td>Venlafaxine (and desvenlafaxine)</td></tr>
+      <tr><td>Benzodiazepines</td><td>Extraordinarily effective, rapid onset, can be dosed PRN; <strong>not recommended long-term</strong> due to abuse potential, tolerance, and CNS depressant effects</td></tr>
+      <tr><td>Non-benzodiazepine options</td><td>Buspirone-type agent up to TID PRN; hydroxyzine up to TID (often dosed at bedtime to aid sleep)</td></tr>
+      <tr><td>Endocannabinoids (CBD)</td><td>Preclinical anxiolytic effect via CB1 and 5-HT1A receptors, reduced fear/stress overactivation in animal models; clinical data limited but CBD appears to reduce symptoms in social anxiety, GAD, and PTSD, generally well tolerated — dosing standards remain the main challenge</td></tr>
+    </table>
+    <h3>Complementary/alternative interventions</h3>
+    <ul class="plain">
+      <li>Hypnosis, biofeedback, acupuncture, osteopathy, homeopathy — popular but generally poor evidence base</li>
+      <li>Some controlled evidence for <strong>lavender oil</strong> in GAD; inconsistent results for kava</li>
+      <li>Conflicting results for meditation; <strong>yoga has been shown to be effective</strong></li>
+      <li>Relaxation training (applied relaxation, autogenic training, Jacobson's progressive relaxation) is anxiolytic; mindfulness is an emerging area</li>
+    </ul>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s10"></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="card" id="s11">
+    <h2>11. Anxiety: Psychological Mechanisms of Exercise</h2>
+    <ul class="plain">
+      <li><strong>Improved coping skills &amp; self-efficacy</strong> — exercise offers a felt "way out" of the trapped/helpless experience common in anxiety disorders; regaining a sense of control reduces stress and improves symptoms</li>
+      <li><strong>Deflection of negative thought content</strong> — a competing theory; group exercise adds social interaction/reinforcement that can further relieve anxiety</li>
+      <li><strong>Interoceptive exposure</strong> — endurance training in panic disorder functions like a type of exposure therapy: repeated exposure to increased heart rate/pulse/breathing lets the patient learn these sensations are natural, not life-threatening, altering the cognitive/affective reaction over time</li>
+    </ul>
+    <div class="pearl"><strong>Summary:</strong> exercise reduces anxiety sensitivity (desensitization), and group/social exercise settings may further help deflect negative thought content.</div>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s11"></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="card" id="s12">
+    <h2>12. Anxiety: Biological Mechanisms of Exercise</h2>
+    <ul class="plain">
+      <li><strong>Serotonin</strong> — endurance training normalizes serotonin receptors, paralleling the change seen with SSRIs</li>
+      <li><strong>Endorphins</strong> — exercise-induced changes in these endogenous opioid-receptor agonists are linked to mood; evidence is mixed but likely contributes meaningfully</li>
+      <li><strong>HPA axis / cortisol</strong> — anxiety disorders may involve HPA overactivity and chronically elevated cortisol; exercise has positive effects on HPA stress reactivity, reducing/preventing cortisol elevation</li>
+      <li><strong>Atrial natriuretic peptide (ANP)</strong> — appears to modulate fear/panic and may drive psychological adaptation during exercise</li>
+      <li><strong>BDNF</strong> — reduced BDNF is linked to both general anxiety and anxiety disorders; exercise normalizes BDNF, supporting nerve regeneration (especially hippocampal) — effect shown especially for <strong>aerobic &gt; resistance</strong> training</li>
+    </ul>
+    <div class="pearl">Individual response depends on genes, age, and hormonal status — important to factor into patient-specific recommendations.</div>
+  </section>
+
+  <!-- 13 -->
+  <section class="card" id="s13">
+    <h2>13. Anxiety: Evidence &amp; Practical Recommendations</h2>
+    <ul class="plain">
+      <li>Regular physical activity has an anxiolytic effect in <strong>healthy people</strong> as well as those with established anxiety disorders</li>
+      <li>A <strong>single session</strong> of physical activity reduces panic reaction</li>
+      <li>Evidence supports endurance training for <strong>panic disorder, PTSD, and OCD</strong>; less support for GAD and social anxiety disorder specifically</li>
+      <li>Low baseline physical activity is itself a risk factor for developing anxiety</li>
+      <li><strong>Group exercise environments</strong> promote adherence better than individual environments; identifying with an exercising group increases regular exercise</li>
+      <li>In diagnosed anxiety disorders or high chronic stress, <strong>aerobic exercise has the stronger recommendation</strong> (both aerobic and resistance training help improve anxiety disorder status generally)</li>
+      <li>Physical inactivity itself contributes to coronary heart disease, diabetes, certain cancers, obesity, hypertension, and all-cause mortality — increasing PA helps across all of these</li>
+    </ul>
+    <h3>Recommendations</h3>
+    <ul class="plain">
+      <li><strong>WHO:</strong> 150 min/week moderate-intensity <em>or</em> 75 min/week vigorous-intensity aerobic exercise, plus strength training ≥2 days/week</li>
+      <li>Consider each patient's social/cultural context to support adherence</li>
+      <li><strong>Safety:</strong> inactive at-risk patients should have a medical checkup before starting a moderate-to-vigorous program</li>
+      <li>Clinical approach: assess whether inactivity was a risk factor in the anxiety's development, and consider PA as treatment or adjunct while supporting the patient in becoming/staying active</li>
+    </ul>
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s13"></div>
+  </section>
+
+  <!-- 14 -->
+  <section class="card" id="s14">
+    <h2>14. Master High-Yield Table: Depression vs. Anxiety</h2>
+    <table>
+      <tr><th>Feature</th><th>Depression (MDD)</th><th>Anxiety disorders</th></tr>
+      <tr><td>Screening tool</td><td>PHQ-9 (9 Q, cutoff ≥10, 88% sens/spec); BDI-II (21 items, max 63)</td><td>GAD-7 (7 Q, max 21)</td></tr>
+      <tr><td>Lifetime prevalence</td><td>5–17%, ~2× in women</td><td>31% (US), lower in EU</td></tr>
+      <tr><td>Sex pattern exception</td><td>—</td><td>Women &gt; men, <strong>except OCD</strong> (men &gt; women)</td></tr>
+      <tr><td>Serotonin</td><td>Exercise ↑ serotonin discharge/metabolism (SSRI-like)</td><td>Endurance training normalizes serotonin receptors (SSRI-like)</td></tr>
+      <tr><td>BDNF</td><td>↓ at baseline in untreated MDD; exercise ↑ peripheral BDNF (greater in males, longer sessions)</td><td>↓ BDNF linked to anxiety; exercise normalizes it, esp. aerobic &gt; resistance</td></tr>
+      <tr><td>Cortisol/HPA</td><td>Elevated cortisol in MDD; exercise reduces it</td><td>HPA overactivity possible; exercise improves HPA stress reactivity</td></tr>
+      <tr><td>Other unique mediator</td><td>Endocannabinoid system (single bout activates it; improves mood/vigor)</td><td>Atrial natriuretic peptide (modulates fear/panic)</td></tr>
+      <tr><td>Psychological mechanism</td><td>↑ self-efficacy; possible distraction effect (mixed evidence)</td><td>↑ coping/self-efficacy; thought-deflection; interoceptive exposure (panic disorder)</td></tr>
+      <tr><td>Best-supported exercise type</td><td>Both aerobic and resistance training effective</td><td>Both effective generally; aerobic favored in diagnosed disorders/high stress</td></tr>
+      <tr><td>Frequency needed</td><td>3×/week = 5×/week (no difference)</td><td>Group-based promotes better adherence than solo</td></tr>
+      <tr><td>Comparison to first-line Rx</td><td>No significant difference in effect size vs. SSRI or psychotherapy</td><td>Adjunct to CBT/SSRIs; not a first-line replacement</td></tr>
+      <tr><td>WHO recommendation</td><td>150 min/wk moderate or 75 min/wk vigorous + strength training ≥2 days/wk</td><td>Same WHO recommendation</td></tr>
+    </table>
+  </section>
+
+
+</div>
+
+<script>
+  const quizData = [
+    {
+      target: "quiz-s02",
+      q: "A patient scores 12 on the PHQ-9. Which severity category does this represent?",
+      choices: ["No depression", "Mild depression", "Moderate depression", "Severe depression"],
+      correct: 2,
+      explain: "PHQ-9 scoring: <5 none, 5–9 mild, 10–14 moderate, 15–19 moderately severe, ≥20 severe. A score of 12 falls in the moderate range."
+    },
+    {
+      target: "quiz-s03",
+      q: "Which biological mechanism of exercise's antidepressant effect shows a greater response in males and with longer exercise session duration?",
+      choices: ["Serotonin reuptake inhibition", "BDNF increase", "Cortisol reduction", "Endocannabinoid activation"],
+      correct: 1,
+      explain: "Exercise increases peripheral BDNF levels, and this effect is greater in males and with longer-duration exercise sessions — suggesting longer sessions may be especially useful to recommend for women."
+    },
+    {
+      target: "quiz-s04",
+      q: "In the 10-week supervised resistance training study for depression, what percentage of the resistance-training group was classified as non-depressed at 26-month follow-up, compared to controls?",
+      choices: ["59% vs 26%", "73% vs 36%", "88% vs 55%", "100% vs 96%"],
+      correct: 1,
+      explain: "73% of resistance-training patients were non-depressed at 26-month follow-up vs. 36% of controls. (59% vs 26% were the initial 10-week improvement rates.)"
+    },
+    {
+      target: "quiz-s04",
+      q: "A patient with major depressive disorder asks how often they need to exercise. Based on the evidence presented, what should you recommend?",
+      choices: ["5 times per week is required for benefit", "3 times per week is equally effective as 5 times per week", "Daily exercise is mandatory for all patients", "Exercise frequency has no evidence base"],
+      correct: 1,
+      explain: "Studies show 3×/week was just as effective as 5×/week; what matters most is a routine the patient can actually maintain."
+    },
+    {
+      target: "quiz-s06",
+      q: "Which baseline biomarker profile predicts a BETTER response to exercise as a treatment for depression?",
+      choices: ["Low baseline BDNF and low inflammatory markers", "High baseline BDNF, TNF-alpha, and IL-6", "Normal thyroid function only", "Low cortisol at baseline"],
+      correct: 1,
+      explain: "Higher baseline BDNF and higher baseline inflammatory markers (TNF-alpha, IL-6) predict a better response to exercise — a future direction for tailoring treatment."
+    },
+    {
+      target: "quiz-s07",
+      q: "Which of the following is a normal, non-pathological function of anxiety?",
+      choices: ["Anxiety that occurs in objectively safe situations", "Anxiety that helps prepare the body for a fight-or-flight response to real danger", "Anticipatory anxiety that limits daily activities", "Anxiety disproportionate to any trigger"],
+      correct: 1,
+      explain: "Anxiety is a normal, adaptive emotion that secures survival by preparing the organism for fight-or-flight. It becomes pathological when it occurs without objective danger, is excessively strong, or is anticipatory and life-constraining."
+    },
+    {
+      target: "quiz-s08",
+      q: "On the GAD-7, a score of 16 would be classified as:",
+      choices: ["Minimal anxiety", "Mild anxiety", "Moderate anxiety", "Severe anxiety"],
+      correct: 3,
+      explain: "GAD-7 scoring: <5 minimal, 5–9 mild, 10–14 moderate, ≥15 severe. A score of 16 is severe."
+    },
+    {
+      target: "quiz-s09",
+      q: "Which anxiety disorder is the EXCEPTION to the general pattern of higher prevalence in women?",
+      choices: ["Generalized anxiety disorder", "Social anxiety disorder", "Obsessive-compulsive disorder", "Agoraphobia"],
+      correct: 2,
+      explain: "Women are more likely to develop anxiety disorders overall, except for OCD, which has a higher incidence in men."
+    },
+    {
+      target: "quiz-s10",
+      q: "Which class of anti-anxiety medication is highly effective with rapid onset but is NOT recommended for long-term use due to abuse potential and tolerance?",
+      choices: ["SSRIs", "SNRIs", "Benzodiazepines", "CBD/endocannabinoids"],
+      correct: 2,
+      explain: "Benzodiazepines are extraordinarily effective with rapid onset and can be dosed PRN, but are not recommended long-term due to abuse potential, tolerance, and CNS depressant effects."
+    },
+    {
+      target: "quiz-s11",
+      q: "The anxiolytic effect of endurance training in panic disorder patients — where repeated increases in heart rate and breathing become recognized as natural rather than dangerous — is best described as a form of:",
+      choices: ["Cognitive restructuring", "Interoceptive exposure therapy", "Social reinforcement", "Distraction technique"],
+      correct: 1,
+      explain: "This repeated exposure to internal bodily sensations (interoceptive exposure) allows the patient to reinterpret them as non-threatening, altering the cognitive/affective response over time."
+    },
+    {
+      target: "quiz-s13",
+      q: "A 50-year-old patient with hypertension and generalized anxiety disorder (GAD) returns after a 3-month trial of sertraline. Symptoms have improved, but frequent bouts of anxiety remain. A social-media influencer recommends ninja-style exercise in competitive groups. Which is the most evidence-based advice?",
+      choices: ["Group exercise increases the body's stress response and is not recommended in GAD", "Cortisol levels increase with vigorous exercise and worsen anxiety", "Group exercise helps reduce anxiety by providing a sense of community", "Only resistance training has efficacy in treating anxiety"],
+      correct: 2,
+      explain: "Group exercise is thought to help reduce anxiety by providing a sense of community and improving adherence through group identification. Exercise decreases (not increases) the stress response and cortisol levels, and both aerobic and resistance training have efficacy in treating anxiety — so options limiting to one modality, or claiming exercise worsens the stress response, are incorrect. (Adapted from the lecturer's own sample exam question.)"
+    },
+    {
+      target: "quiz-s13",
+      q: "According to current WHO recommendations referenced in both modules, what is the recommended weekly aerobic activity target for adults?",
+      choices: ["75 minutes moderate or 150 minutes vigorous", "150 minutes moderate or 75 minutes vigorous, plus strength training ≥2 days/week", "300 minutes moderate activity only", "30 minutes daily of vigorous activity only"],
+      correct: 1,
+      explain: "WHO recommends 150 minutes/week of moderate-intensity OR 75 minutes/week of vigorous-intensity aerobic activity, plus strength training at least 2 days per week — the same target applies for both depression and anxiety recommendations."
+    }
+  ];
+
+  // Group questions by their target section, then render each group into that
+  // section's placeholder div, numbered locally within the group.
+  const grouped = {};
+  quizData.forEach(item => {
+    if (!grouped[item.target]) grouped[item.target] = [];
+    grouped[item.target].push(item);
+  });
+
+  Object.keys(grouped).forEach(targetId => {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+    grouped[targetId].forEach((item, qi) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'quiz-q';
+      const p = document.createElement('p');
+      p.className = 'prompt';
+      p.textContent = (qi + 1) + ". " + item.q;
+      qDiv.appendChild(p);
+
+      const explainDiv = document.createElement('div');
+      explainDiv.className = 'quiz-explain';
+      explainDiv.textContent = item.explain;
+
+      item.choices.forEach((choiceText, ci) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-choice';
+        btn.textContent = choiceText;
+        btn.addEventListener('click', () => {
+          const allBtns = qDiv.querySelectorAll('.quiz-choice');
+          allBtns.forEach(b => b.classList.add('disabled'));
+          if (ci === item.correct) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+            allBtns[item.correct].classList.add('correct');
+          }
+          explainDiv.classList.add('show');
+        });
+        qDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(explainDiv);
+      container.appendChild(qDiv);
+    });
+  });
+
+  // Side nav build + scroll spy
+  const sections = document.querySelectorAll('section.card');
+  const panel = document.getElementById('sidenavPanel');
+  sections.forEach(sec => {
+    const heading = sec.querySelector('h2').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = heading;
+    a.dataset.target = sec.id;
+    panel.appendChild(a);
+  });
+
+  document.getElementById('sidenavToggle').addEventListener('click', () => {
+    panel.classList.toggle('open');
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.target === current);
+    });
+  });
+</script>
+
+</body>
+</html>
