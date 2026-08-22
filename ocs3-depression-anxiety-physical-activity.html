@@ -207,8 +207,12 @@
     font-size: 12px;
     writing-mode: vertical-rl;
     cursor: pointer;
-    z-index: 400;
+    z-index: 460;
     box-shadow: var(--shadow);
+    transition: right 0.25s ease;
+  }
+  .sidenav-toggle.shifted {
+    right: 240px;
   }
   .sidenav-panel {
     position: fixed;
@@ -819,8 +823,11 @@
     panel.appendChild(a);
   });
 
-  document.getElementById('sidenavToggle').addEventListener('click', () => {
+  const sidenavToggleBtn = document.getElementById('sidenavToggle');
+  sidenavToggleBtn.addEventListener('click', () => {
     panel.classList.toggle('open');
+    sidenavToggleBtn.classList.toggle('shifted');
+    sidenavToggleBtn.textContent = panel.classList.contains('open') ? 'CLOSE' : 'SECTIONS';
   });
 
   const navLinks = panel.querySelectorAll('a');
