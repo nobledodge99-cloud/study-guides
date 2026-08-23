@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Overweight/Obesity Crisis &amp; the Effect of Physical Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3d2b;
+    --forest: #2e5539;
+    --sage: #6a8f6b;
+    --sage-light: #dce8dc;
+    --border: #c9d9c4;
+    --accent: #b5651d;
+    --accent-soft: #e8c9a3;
+    --text-main: #26301f;
+    --text-soft: #55614c;
+    --correct: #2e6b3e;
+    --incorrect: #a13b30;
+    --shadow: 0 2px 10px rgba(31,61,43,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.65;
+    padding-bottom: 80px;
+  }
+  h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--forest-dark); }
+  code, .mono, .tag, .score-badge { font-family: 'IBM Plex Mono', monospace; }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  .header h1 { color: var(--cream); font-size: 2.1em; margin-bottom: 8px; }
+  .header p { color: var(--sage-light); font-size: 1.05em; margin: 4px 0; }
+  .header .source-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: -30px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { margin-top: 0; font-size: 1.2em; }
+  .toc ul { list-style: none; padding-left: 0; margin: 0; columns: 2; column-gap: 30px; }
+  .toc ul li { margin-bottom: 8px; break-inside: avoid; }
+  .toc a { color: var(--forest); text-decoration: none; font-size: 0.95em; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 26px 0;
+    box-shadow: var(--shadow);
+  }
+  section.card h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  section.card h3 { font-size: 1.12em; color: var(--forest); margin-top: 22px; }
+  section.card h4 { font-size: 1em; color: var(--accent); margin-bottom: 4px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.92em; }
+  th, td { border: 1px solid var(--border); padding: 8px 11px; text-align: left; vertical-align: top; }
+  th { background: var(--sage-light); color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .pearl strong { color: var(--forest-dark); }
+
+  .mistake {
+    background: #f3e4d4;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .mistake strong { color: var(--accent); }
+
+  ul.plain, ol.plain { padding-left: 22px; }
+  ul.plain li, ol.plain li { margin-bottom: 6px; }
+  ul.tight li { margin-bottom: 2px; }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin: 24px 0 4px;
+  }
+  .quiz-q {
+    background: #f5f1e6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .quiz-q p.prompt { font-weight: 600; margin-top: 0; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.96em;
+    cursor: pointer;
+    color: var(--text-main);
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #d9ecd9; border-color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f3d9d4; border-color: var(--incorrect); }
+  .quiz-choice.disabled { pointer-events: none; }
+  .quiz-explain {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--cream-card);
+    border-left: 3px solid var(--forest);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 12px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 460;
+    box-shadow: var(--shadow);
+    transition: right 0.25s ease;
+  }
+  .sidenav-toggle.shifted {
+    right: 240px;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -3px 0 12px rgba(0,0,0,0.08);
+    transition: right 0.25s ease;
+    z-index: 450;
+    overflow-y: auto;
+    padding: 60px 16px 20px;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .sidenav-panel a.active { background: var(--sage-light); color: var(--forest-dark); font-weight: 600; }
+  .sidenav-panel a:hover { background: var(--sage-light); }
+
+  @media (max-width: 700px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>The Overweight/Obesity Crisis &amp; the Effect of Physical Activity</h1>
+  <p>Lifestyle Medicine — Clinical Reasoning Companion</p>
+  <p style="font-size:0.85em; opacity:0.85;">Joseph W. Bell, DO, FACOG — Assistant Professor of Obstetrics &amp; Gynecology</p>
+  <span class="source-tag">Built from lecture narration + slides + Clinical Reasoning Companion</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#s00">00. Overview &amp; Learning Objectives</a></li>
+      <li><a href="#s01">01. Body Mass Index &amp; Classification</a></li>
+      <li><a href="#s02">02. Epidemiology: Scope of the Crisis</a></li>
+      <li><a href="#s03">03. Contributing Factors</a></li>
+      <li><a href="#s04">04. Health Risks &amp; Consequences</a></li>
+      <li><a href="#s05">05. Economic &amp; Healthcare Burden</a></li>
+      <li><a href="#s06">06. Treatment Framework: Energy Balance &amp; Modalities</a></li>
+      <li><a href="#s07">07. Exercise Prescription: METs &amp; Intensity</a></li>
+      <li><a href="#s08">08. How Exercise Influences Weight</a></li>
+      <li><a href="#s09">09. Aerobic vs. Resistance Exercise</a></li>
+      <li><a href="#s10">10. How Much Exercise: Dosing Guidelines</a></li>
+      <li><a href="#s11">11. Individual Variability in Response</a></li>
+      <li><a href="#s12">12. Other Benefits of Exercise</a></li>
+      <li><a href="#s13">13. Medications &amp; Bariatric Surgery</a></li>
+      <li><a href="#s14">14. The Physician's Role</a></li>
+      <li><a href="#s15">15. Clinical Pattern Recognition &amp; Pearls</a></li>
+      <li><a href="#s16">16. Common Mistakes &amp; Board Tips</a></li>
+      <li><a href="#s17">17. Master High-Yield Summary Table</a></li>
+    </ul>
+  </div>
+
+  <!-- 00 -->
+  <section class="card" id="s00">
+    <h2>00. Overview &amp; Learning Objectives</h2>
+    <ul class="plain">
+      <li>Recognize the overweight/obesity crisis and how it may affect future patients and practice</li>
+      <li>Define how the overweight/obesity crisis has progressed and where it may eventually lead</li>
+      <li>Recognize how physical activity and exercise relate to an improved lifestyle, particularly the role they play in weight management</li>
+      <li>Understand and describe the physician's role in assisting patients with this problem</li>
+    </ul>
+    <div class="pearl"><strong>Framing:</strong> The overweight/obesity crisis is described as having become an <em>epidemic</em> much like COVID did — one that will affect nearly every physician's practice, regardless of specialty.</div>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s00"></div>
+  </section>
+
+  <!-- 01 -->
+  <section class="card" id="s01">
+    <h2>01. Body Mass Index &amp; Classification</h2>
+    <p>Body Mass Index (BMI) is calculated from a person's height and weight and used to estimate body fat percentage and categorize patients into weight groups.</p>
+    <p><strong>Formula:</strong> BMI = (weight in pounds &divide; height in inches&sup2;) &times; 703</p>
+    <div class="pearl"><strong>Watch out:</strong> The standard BMI classification chart applies to adults <strong>20 years of age and older</strong>. Pediatric patients require a separate, age/sex-specific growth chart — always confirm you are using the correct chart for the patient's age group.</div>
+    <table>
+      <tr><th>Classification</th><th>BMI (kg/m&sup2;)</th></tr>
+      <tr><td>Underweight</td><td>&lt; 18.5</td></tr>
+      <tr><td>Normal weight</td><td>18.5 – 24.9</td></tr>
+      <tr><td>Overweight</td><td>25 – 29.9</td></tr>
+      <tr><td>Obese</td><td>30 – 39.9</td></tr>
+      <tr><td>Severe / morbid obesity</td><td>&ge; 40</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s01"></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="card" id="s02">
+    <h2>02. Epidemiology: Scope of the Crisis</h2>
+    <p>Applying the BMI classification to the U.S. adult population (20 years and older) reveals the scale of the problem:</p>
+    <table>
+      <tr><th>Group</th><th>% of U.S. Adults</th></tr>
+      <tr><td>Overweight or greater (BMI &ge; 25)</td><td>76%</td></tr>
+      <tr><td>Obese (BMI 30 – 39.9)</td><td>43%</td></tr>
+      <tr><td>Severely / morbidly obese (BMI &ge; 40)</td><td>9%</td></tr>
+    </table>
+    <h3>CDC State-by-State Trends (2018 vs. 2022)</h3>
+    <ul class="plain">
+      <li>In 2018, Colorado was the only state with 20–24.9% of its population overweight/obese — the lowest category on the map.</li>
+      <li>By 2022, Colorado had shifted into the 25–29.9% category, alongside California, Vermont, and Rhode Island.</li>
+      <li>Every other state was at 30% or greater by 2022, with some states reaching 45–50%.</li>
+      <li>In just four years, the national trend shifted markedly upward — the epidemic is progressing rapidly.</li>
+    </ul>
+    <div class="pearl"><strong>Projection:</strong> At current trends, the population reaching an overweight/obese classification is projected to hit approximately <strong>50% by 2030</strong>.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s02"></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card" id="s03">
+    <h2>03. Contributing Factors</h2>
+    <ul class="plain">
+      <li><strong>Occupational shift:</strong> A marked decrease in high-activity occupations with a corresponding increase in low-activity, desk-based occupations. Medicine itself is an example — physicians once spent most of the day moving between patients; now, for every hour spent with a patient, an estimated two hours are spent on the computer.</li>
+      <li><strong>Transportation &amp; the built environment:</strong> Increased reliance on automobiles as suburbs have expanded; people drive short distances (even a few blocks to the grocery store) rather than walk or bike, and spend time sitting in traffic.</li>
+      <li><strong>Sedentary childhood:</strong> School-aged children spend more time in sedentary activities — TV, computers, cell phones/social media — rather than playing outside. Documented by the World Health Organization.</li>
+      <li><strong>Dietary shift:</strong> A move away from home-cooked, from-scratch meals toward fast food and processed/frozen meals, which are higher in calories, carbohydrates, and sugar. Dual-income households make convenience foods more appealing, since they take less time to prepare.</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s03"></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card" id="s04">
+    <h2>04. Health Risks &amp; Consequences</h2>
+    <ul class="plain">
+      <li><strong>Cancer:</strong> Increased incidence of certain cancers, including endometrial cancer and breast cancer in women</li>
+      <li><strong>Stroke:</strong> Increased incidence</li>
+      <li><strong>Metabolic disease:</strong> Type 2 diabetes has become epidemic and is strongly tied to obesity</li>
+      <li><strong>Cardiovascular disease:</strong> Increased hypertension, abnormal lipid levels, and resulting increase in myocardial infarction — both are reducible with weight loss</li>
+      <li><strong>Chronic low-grade inflammation:</strong> Excess weight drives a chronic inflammatory state that contributes to the conditions above</li>
+    </ul>
+    <h3>Reproductive Issues in Overweight/Obese Women</h3>
+    <p>Reproductive-aged women who are overweight or obese face a distinct set of elevated risks:</p>
+    <ul class="plain tight">
+      <li>Irregular ovulation</li>
+      <li>Polycystic ovarian disease (PCOS)</li>
+      <li>Infertility</li>
+      <li>Higher incidence of miscarriage</li>
+      <li>Higher incidence of stillbirth and birth defects</li>
+      <li>Gestational hypertension</li>
+      <li>Gestational diabetes</li>
+      <li>Pre-eclampsia</li>
+      <li>Higher incidence of cesarean section, with higher intraoperative complications, excessive blood loss, post-operative infection, and wound breakdown</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s04"></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card" id="s05">
+    <h2>05. Economic &amp; Healthcare Burden</h2>
+    <ul class="plain">
+      <li>The World Health Organization estimates that <strong>31% of adults</strong> and <strong>80% of adolescents</strong> do not meet recommended daily physical activity levels.</li>
+      <li>This inactivity is projected to cost global public healthcare systems approximately <strong>$300 billion</strong> between 2020 and 2030.</li>
+      <li>In the U.S. alone, an overweight individual spends approximately <strong>$1,800/year</strong> more on healthcare, while an obese individual spends approximately <strong>$3,200/year</strong> more.</li>
+    </ul>
+    <div class="pearl"><strong>Take-home:</strong> With 43% of the U.S. population currently overweight/obese and projections nearing 50% by 2030, this represents a major, growing stress on the healthcare system — one best addressed proactively in the doctor's office.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s05"></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="card" id="s06">
+    <h2>06. Treatment Framework: Energy Balance &amp; Modalities</h2>
+    <p>Weight management comes down to two levers:</p>
+    <ul class="plain tight">
+      <li><strong>Energy intake</strong> — addressed through dietary modification</li>
+      <li><strong>Energy output</strong> — addressed through physical activity/exercise, i.e., becoming less sedentary</li>
+    </ul>
+    <p>There are four treatment modalities, addressed in a specific order of preference:</p>
+    <ol class="plain">
+      <li>Exercise</li>
+      <li>Diet</li>
+      <li>Medications</li>
+      <li>Surgery</li>
+    </ol>
+    <div class="pearl"><strong>Osteopathic principle:</strong> As osteopathic physicians, the goal is to treat the whole patient and, when possible, without medication. Exercise and diet are addressed first; medications and surgery are reserved for when those measures are insufficient or for specific populations (see Section 13).</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s06"></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="card" id="s07">
+    <h2>07. Exercise Prescription: METs &amp; Intensity</h2>
+    <p>Exercises are classified by their <strong>Metabolic Equivalent of Task (MET)</strong>. One MET represents the energy expenditure of sitting quietly, equal to <strong>3.5 mL O&#8322;/kg/min</strong>, or approximately <strong>1 kcal/kg/hour</strong>.</p>
+    <table>
+      <tr><th>Intensity</th><th>MET Range</th><th>Examples</th></tr>
+      <tr><td>Light</td><td>&lt; 3</td><td>Sitting, desk work, walking slowly</td></tr>
+      <tr><td>Moderate</td><td>3 – 6</td><td>Vacuuming, yoga, doubles tennis, moderate weightlifting</td></tr>
+      <tr><td>Vigorous</td><td>6 – 12</td><td>Aerobic dancing, cycling 10–12 mph on the level, swimming, jogging 6–8 mph</td></tr>
+      <tr><td>Very vigorous</td><td>&gt; 12</td><td>Mountain biking (~18 METs)</td></tr>
+    </table>
+    <div class="pearl"><strong>Distinction:</strong> Sitting on the couch watching TV is still "physical activity" (MET of 1), but it is not <em>exercise</em>. When counseling for weight management, the goal is at least moderate-to-vigorous intensity activity.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s07"></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card" id="s08">
+    <h2>08. How Exercise Influences Weight</h2>
+    <table>
+      <tr><th>Clinical Pattern</th><th>Think About</th><th>Clinical Decision</th></tr>
+      <tr><td>Sedentary patient with increasing weight</td><td>Low energy expenditure</td><td>Increase physical activity</td></tr>
+      <tr><td>Patient seeking weight loss</td><td>Energy intake + expenditure</td><td>Combine activity with dietary modification</td></tr>
+      <tr><td>Weight loss followed by regain</td><td>Long-term maintenance</td><td>Sustain a higher weekly activity dose</td></tr>
+      <tr><td>Low fitness or limited endurance</td><td>Aerobic conditioning</td><td>Build aerobic activity gradually</td></tr>
+      <tr><td>Low strength or lean mass</td><td>Resistance exercise</td><td>Add strength training</td></tr>
+    </table>
+    <h3>Two Mechanisms</h3>
+    <ul class="plain">
+      <li><strong>Prevent weight gain:</strong> Multiple studies show an inverse relationship between exercise and BMI/total adiposity — the more (and more vigorously) one exercises, the lower the BMI and adiposity.</li>
+      <li><strong>Assist weight loss:</strong> Exercise alone is generally insufficient — weight loss requires sufficient physical activity <em>coupled with</em> a reduction in energy intake (diet).</li>
+    </ul>
+    <div class="pearl"><strong>Don't forget the psychological component:</strong> Many patients with obesity carry psychological patterns from upbringing (e.g., being told to "clean your plate"). Addressing diet and exercise alone, without addressing these behavioral patterns, is often insufficient — this conversation belongs in the physician's office.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s08"></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="card" id="s09">
+    <h2>09. Aerobic vs. Resistance Exercise</h2>
+    <table>
+      <tr><th>Type</th><th>Primary Effects</th><th>Effect on Weight</th></tr>
+      <tr><td>Aerobic exercise</td><td>Increases oxygen utilization; increases cardiopulmonary fitness</td><td>More effective for weight loss than resistance exercise</td></tr>
+      <tr><td>Resistance (anaerobic) exercise</td><td>Increases basal metabolic rate (BMR), strength, and lean body mass</td><td>Questionable/variable — may even <em>increase</em> weight, since lean muscle weighs more than adipose tissue</td></tr>
+    </table>
+    <div class="pearl"><strong>Why resistance exercise may not show scale change:</strong> An individual lifting heavy weight and building lean muscle mass may see their weight increase rather than decrease — the benefit of resistance training on weight comes indirectly, through a higher basal metabolic rate that burns more calories over time.</div>
+    <p>The American College of Cardiology recommends aerobic exercise as the primary modality, plus weight training approximately <strong>3 days per week</strong> — this does not need to involve heavy loads; light resistance training is effective for this purpose. Both types of exercise provide complementary benefits and are important.</p>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s09"></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="card" id="s10">
+    <h2>10. How Much Exercise: Dosing Guidelines</h2>
+    <ul class="plain">
+      <li><strong>General target:</strong> 1 hour/day, or 150–300 minutes/week of moderate-to-vigorous exercise</li>
+      <li><strong>Vigorous-only alternative:</strong> 75–150 minutes/week if exercise is limited to vigorous-intensity activities</li>
+      <li><strong>Long-term weight loss maintenance:</strong> A minimum of 200–300 minutes/week of moderate-to-vigorous exercise</li>
+      <li><strong>Bouts:</strong> Exercise does not need to be one continuous session — short bouts throughout the day are effective, but each bout should be greater than 10 minutes to count</li>
+    </ul>
+    <div class="pearl"><strong>Counseling tip:</strong> When a patient says "I don't have time," reframe the prescription around achievable bouts (&gt;10 minutes each) spread across the day rather than a single continuous session.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s10"></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="card" id="s11">
+    <h2>11. Individual Variability in Response</h2>
+    <p>Two patients with the same body build, given the identical exercise prescription, can have very different outcomes — one loses more weight than the other. Twin studies assigned to identical exercise prescriptions have demonstrated this same variability between twins.</p>
+    <ul class="plain">
+      <li><strong>Biologic and genetic factors</strong> contribute, though the mechanisms are not fully understood</li>
+      <li><strong>Resting basal metabolic rate (BMR)</strong> is individual — a person with a higher baseline BMR will burn more calories for the same added exercise than someone starting with a lower BMR</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s11"></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="card" id="s12">
+    <h2>12. Other Benefits of Exercise</h2>
+    <p>Exercise provides benefits well beyond the number on the scale:</p>
+    <ul class="plain">
+      <li><strong>Decreased anxiety/depression</strong> — related to endorphin release; regular exercisers also often report reduced tiredness after a workout</li>
+      <li><strong>Improved fitness and body image</strong></li>
+      <li><strong>Improved cardiovascular risk factors</strong> — decreased lipids, decreased hypertension, possible decreased risk of myocardial infarction</li>
+      <li><strong>Improved metabolic state</strong> — a patient with type 2 diabetes who returns to a normal BMI may be able to come off medication entirely, with improved blood sugar control</li>
+      <li><strong>Possible decreased mortality</strong> — more research is needed, but fit, active individuals appear to live longer and have a lower incidence of conditions like Alzheimer's disease, affecting both mental and physical state</li>
+    </ul>
+    <div class="pearl"><strong>Board tip:</strong> Health benefits from exercise occur even when weight change on the scale is modest or absent — don't treat exercise as useful only when it produces visible weight loss.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s12"></div>
+  </section>
+
+  <!-- 13 -->
+  <section class="card" id="s13">
+    <h2>13. Medications &amp; Bariatric Surgery</h2>
+    <h3>Medications</h3>
+    <ul class="plain">
+      <li>Eligible population: <strong>BMI &gt; 30</strong>, with or without comorbidities</li>
+      <li>Medication may produce weight loss, but maintaining a healthy weight long-term still requires psychological and physical behavior change — patients must also change dietary habits and exercise routines</li>
+      <li>A pill alone does not cure the underlying problem; patients are often drawn to medication (e.g., seeing ads for drugs like Ozempic) as an "easy" fix, but medication must be paired with lifestyle change</li>
+    </ul>
+    <h3>Bariatric Surgery</h3>
+    <ul class="plain">
+      <li>Eligible population: <strong>BMI &gt; 40</strong> (severe/morbid obesity), especially with comorbidities</li>
+      <li>Patients often lose significant weight in the first year, but commonly regain weight within 1–2 years if diet and exercise habits are not also changed — surgery alone does not change the underlying psychological outlook or lifestyle</li>
+      <li>Post-operative patients can and should exercise, but should typically start more gradually with lower-MET activities and build up over time</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s13"></div>
+  </section>
+
+  <!-- 14 -->
+  <section class="card" id="s14">
+    <h2>14. The Physician's Role</h2>
+    <ul class="plain">
+      <li><strong>Provide a good example</strong> — patients (like children) respond better to lifestyle advice when their physician models it. "Physician, heal thyself" is directly applicable to the overweight/obesity epidemic.</li>
+      <li><strong>Communicate with compassion</strong> — this is a sensitive topic, and patients can become upset; it must be approached the same way any other serious medical epidemic (e.g., COVID, tuberculosis, diabetes) would be discussed, but with tact and empathy.</li>
+      <li><strong>Use good clinical judgment</strong> in deciding who is appropriate for medication vs. surgery vs. lifestyle-only management.</li>
+      <li><strong>Know available resources</strong> for patient counseling and referral:
+        <ul class="plain tight">
+          <li>American College of Sports Medicine</li>
+          <li>The Obesity Medicine Association</li>
+          <li>The Obesity Society</li>
+          <li>American Society for Metabolic and Bariatric Surgery (ASMBS)</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s14"></div>
+  </section>
+
+  <!-- 15 -->
+  <section class="card" id="s15">
+    <h2>15. Clinical Pattern Recognition &amp; Pearls</h2>
+    <table>
+      <tr><th>Clinical Pattern</th><th>Think About</th><th>Clinical Decision</th></tr>
+      <tr><td>Sedentary patient with increasing weight</td><td>Low energy expenditure</td><td>Increase physical activity</td></tr>
+      <tr><td>Patient seeking weight loss</td><td>Energy intake + expenditure</td><td>Combine activity with dietary modification</td></tr>
+      <tr><td>Weight loss followed by regain</td><td>Long-term maintenance</td><td>Sustain a higher weekly activity dose</td></tr>
+      <tr><td>Low fitness or limited endurance</td><td>Aerobic conditioning</td><td>Build aerobic activity gradually</td></tr>
+      <tr><td>Low strength or lean mass</td><td>Resistance exercise</td><td>Add strength training</td></tr>
+    </table>
+    <div class="pearl"><strong>Pearl 1:</strong> Exercise can prevent weight gain and assist weight loss, but weight loss also requires attention to energy intake.</div>
+    <div class="pearl"><strong>Pearl 2:</strong> Aerobic and resistance exercise provide complementary benefits.</div>
+    <div class="pearl"><strong>Pearl 3:</strong> Health benefits occur even when weight change is modest.</div>
+    <div class="pearl"><strong>Pearl 4:</strong> Exercise response varies among individuals, including differences in biologic factors and resting BMR.</div>
+    <div class="pearl"><strong>Pearl 5:</strong> Physicians can counsel, advocate, and model an active lifestyle.</div>
+    <div class="pearl"><strong>Board Tip:</strong> When a question asks about exercise for weight management, distinguish <em>preventing weight gain</em> from <em>producing weight loss</em>. Exercise supports both, but weight loss requires sufficient activity together with reduced energy intake.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s15"></div>
+  </section>
+
+  <!-- 16 -->
+  <section class="card" id="s16">
+    <h2>16. Common Mistakes &amp; Board Tips</h2>
+    <div class="mistake"><strong>Mistake:</strong> Treating exercise as useful only when it produces visible weight loss.</div>
+    <div class="mistake"><strong>Mistake:</strong> Assuming resistance exercise has little value because scale weight may not change.</div>
+    <div class="mistake"><strong>Mistake:</strong> Ignoring the patient's baseline activity level when recommending intensity.</div>
+    <div class="mistake"><strong>Mistake:</strong> Focusing only on weight while overlooking cardiovascular, metabolic, fitness, mood, and body-image benefits.</div>
+    <div class="mistake"><strong>Mistake:</strong> Treating physical activity as separate from the broader weight-management plan (diet, medication, surgery, and behavioral/psychological factors all interact).</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s16"></div>
+  </section>
+
+  <!-- 17 -->
+  <section class="card" id="s17">
+    <h2>17. Master High-Yield Summary Table</h2>
+    <table>
+      <tr><th>Topic</th><th>Key Numbers / Facts</th></tr>
+      <tr><td>BMI classifications</td><td>Underweight &lt;18.5 · Normal 18.5–24.9 · Overweight 25–29.9 · Obese 30–39.9 · Severe/morbid obesity &ge;40</td></tr>
+      <tr><td>U.S. prevalence</td><td>76% overweight+, 43% obese, 9% severely obese</td></tr>
+      <tr><td>Projected 2030 prevalence</td><td>~50% overweight/obese</td></tr>
+      <tr><td>Global inactivity burden</td><td>31% of adults, 80% of adolescents insufficiently active; ~$300B global healthcare cost (2020–2030)</td></tr>
+      <tr><td>U.S. added healthcare cost</td><td>Overweight: ~$1,800/yr more · Obese: ~$3,200/yr more</td></tr>
+      <tr><td>1 MET</td><td>3.5 mL O&#8322;/kg/min &asymp; 1 kcal/kg/hour</td></tr>
+      <tr><td>Intensity zones</td><td>Light &lt;3 METs · Moderate 3–6 METs · Vigorous 6–12 METs</td></tr>
+      <tr><td>Weekly activity target</td><td>150–300 min/wk moderate-vigorous, OR 75–150 min/wk vigorous-only; 200–300 min/wk for long-term weight-loss maintenance; bouts &gt;10 min count</td></tr>
+      <tr><td>Aerobic exercise</td><td>Best for cardiopulmonary fitness &amp; weight loss</td></tr>
+      <tr><td>Resistance exercise</td><td>Increases BMR, strength, lean mass; weight change variable/may increase</td></tr>
+      <tr><td>Weight-loss medication eligibility</td><td>BMI &gt; 30, with or without comorbidities</td></tr>
+      <tr><td>Bariatric surgery eligibility</td><td>BMI &gt; 40, especially with comorbidities</td></tr>
+      <tr><td>Treatment order (osteopathic approach)</td><td>Exercise &rarr; Diet &rarr; Medications &rarr; Surgery</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s17"></div>
+  </section>
+
+</div>
+
+<script>
+  const quizData = [
+    {
+      target: "quiz-s00",
+      q: "A third-year medical student is counseling patients on lifestyle habits during clinical rotations. According to the lecture's framing, which comparison best describes the trajectory of the overweight/obesity crisis?",
+      choices: ["It is expected to decline in prevalence over the next decade", "It affects only pediatric populations and not adult patients", "It is progressing toward epidemic status in a manner comparable to COVID-19", "It is a stable, well-controlled condition affecting a small subset of patients"],
+      correct: 2,
+      explain: "The lecture explicitly frames the overweight/obesity crisis as becoming epidemic, much like COVID-19 did — a trend expected to affect nearly every physician's future practice, regardless of specialty."
+    },
+    {
+      target: "quiz-s01",
+      q: "A 45-year-old woman has a BMI of 31.5 kg/m². How is she classified, and what formula would you use to verify this manually?",
+      choices: ["Obese; weight (lb) ÷ height (in)² × 703", "Overweight; weight (lb) ÷ height (in)² × 703", "Severely obese; weight (kg) ÷ height (m)²", "Normal weight; weight (kg) ÷ height (m)² × 703"],
+      correct: 0,
+      explain: "A BMI of 30–39.9 is classified as obese. BMI is calculated as weight in pounds divided by height in inches squared, multiplied by 703 (equivalent to kg/m² when using metric units directly)."
+    },
+    {
+      target: "quiz-s01",
+      q: "A pediatrician is evaluating the weight status of an 8-year-old patient during a well-child visit. Which approach is most appropriate for classifying this patient's body mass index?",
+      choices: ["Use an age- and sex-specific pediatric growth chart rather than the adult BMI chart", "Calculate BMI using the standard adult formula and apply the adult classification chart", "Classify the patient using the severe obesity threshold applied to adults", "Skip BMI assessment entirely, since it is not validated in children"],
+      correct: 0,
+      explain: "The BMI classification chart used for individuals 20 years of age and older does not apply to pediatric patients. A separate, age- and sex-specific pediatric growth chart must be used instead."
+    },
+    {
+      target: "quiz-s02",
+      q: "A public health researcher is analyzing CDC obesity trend maps from 2018 to 2022. Which finding is most consistent with the data presented?",
+      choices: ["All states demonstrated a decrease in overweight/obesity prevalence during this period", "The national average overweight/obesity prevalence dropped below 30% by 2022", "Colorado remained the only state with less than 25% overweight/obesity prevalence in 2022", "Colorado shifted from the 20–24.9% category into the 25–29.9% category by 2022"],
+      correct: 3,
+      explain: "In 2018, Colorado was the only state in the lowest (20–24.9%) prevalence category. By 2022, Colorado had shifted upward into the 25–29.9% category, alongside California, Vermont, and Rhode Island, while all other states reached 30% or greater."
+    },
+    {
+      target: "quiz-s02",
+      q: "Based on current epidemiologic trends discussed in the lecture, what proportion of the U.S. adult population is projected to be overweight or obese by the year 2030?",
+      choices: ["Approximately 25% of the population", "Approximately 50% of the population", "Approximately 65% of the population", "Approximately 35% of the population"],
+      correct: 1,
+      explain: "With 43% of U.S. adults currently classified as obese and 76% overweight or greater, the lecture projects the overweight/obese population will reach approximately 50% by 2030."
+    },
+    {
+      target: "quiz-s03",
+      q: "A 45-year-old primary care physician reflects on why more of her patients are overweight than a generation ago. Which occupational trend best explains part of this shift?",
+      choices: ["An increase in high-activity occupations replacing sedentary desk jobs", "A shift toward manual labor across most industries", "A decrease in high-activity occupations with an increase in low-activity occupations", "Increased physical demands placed specifically on healthcare workers"],
+      correct: 2,
+      explain: "A key contributing factor to the epidemic has been a marked decrease in high-activity occupations with a corresponding rise in low-activity, desk-based occupations — including in medicine itself, where physicians now spend significant time at a computer rather than moving between patients."
+    },
+    {
+      target: "quiz-s03",
+      q: "A family reports that both parents work full-time and frequently rely on frozen, pre-packaged dinners instead of cooking from scratch. What is the most likely nutritional consequence of this pattern?",
+      choices: ["Decreased caloric intake due to smaller portion sizes", "Increased intake of fresh, home-prepared produce", "No significant change in dietary quality compared to home-cooked meals", "Increased intake of processed foods higher in calories, carbohydrates, and sugar"],
+      correct: 3,
+      explain: "The shift away from home-cooked meals toward convenient, processed, and frozen foods is a major contributing factor to the obesity epidemic, since these foods tend to be higher in calories, carbohydrates, and sugar."
+    },
+    {
+      target: "quiz-s04",
+      q: "A reproductive-aged woman with obesity is trying to conceive. Which of the following is she at increased risk for?",
+      choices: ["Improved fertility due to increased estrogen stores", "Irregular ovulation and polycystic ovarian disease", "Decreased risk of gestational diabetes", "Decreased risk of cesarean section"],
+      correct: 1,
+      explain: "Obesity in reproductive-aged women is associated with irregular ovulation, PCOS, infertility, and — if pregnancy occurs — increased risk of miscarriage, gestational hypertension, gestational diabetes, pre-eclampsia, and cesarean delivery with more intra/post-operative complications."
+    },
+    {
+      target: "quiz-s04",
+      q: "A 58-year-old man with obesity and a 20-year smoking history presents for a routine physical. Which cardiovascular/metabolic finding is he most likely to have compared to a normal-weight peer?",
+      choices: ["Decreased circulating lipid levels", "Reduced systemic inflammatory markers", "Increased hypertension and abnormal lipid levels", "Decreased risk of myocardial infarction"],
+      correct: 2,
+      explain: "Obesity is associated with increased hypertension and abnormal lipid levels, both of which raise the risk of myocardial infarction, as well as chronic low-grade inflammation that contributes to cardiovascular and metabolic disease."
+    },
+    {
+      target: "quiz-s05",
+      q: "A hospital administrator is preparing a budget presentation on the added healthcare costs attributable to excess body weight. Which figures should be cited for obese versus overweight individuals?",
+      choices: ["Obese: ~$1,800/year more; Overweight: ~$3,200/year more", "Obese: ~$3,200/year more; Overweight: ~$1,800/year more", "Obese: ~$5,000/year more; Overweight: ~$2,500/year more", "Obese and overweight individuals incur roughly equal added annual costs"],
+      correct: 1,
+      explain: "In the U.S., an overweight individual spends approximately $1,800/year more on healthcare, while an obese individual spends approximately $3,200/year more, reflecting the greater health burden of higher BMI categories."
+    },
+    {
+      target: "quiz-s05",
+      q: "According to World Health Organization estimates cited in the lecture, what percentage of adolescents fail to meet recommended daily physical activity levels?",
+      choices: ["31%", "50%", "80%", "65%"],
+      correct: 2,
+      explain: "The WHO estimates that 31% of adults and 80% of adolescents do not meet recommended daily physical activity levels, contributing to a projected $300 billion global healthcare cost between 2020 and 2030."
+    },
+    {
+      target: "quiz-s06",
+      q: "A physician is developing a weight-management plan for a patient with a BMI of 27 and no comorbidities, consistent with an osteopathic, whole-patient approach. What should be the first-line intervention?",
+      choices: ["Bariatric surgery referral", "Weight-loss medication", "Exercise and dietary modification", "No intervention is needed until BMI exceeds 30"],
+      correct: 2,
+      explain: "The osteopathic, whole-patient approach favors treating without medication when possible. Exercise and diet are the first-line treatment modalities, with medications and surgery reserved for when these are insufficient or for specific higher-BMI populations."
+    },
+    {
+      target: "quiz-s06",
+      q: "Which two levers together make up the fundamental energy-balance framework used to guide weight-management treatment?",
+      choices: ["Energy intake and energy output", "Muscle mass and bone density", "Blood glucose and insulin sensitivity", "Heart rate and respiratory rate"],
+      correct: 0,
+      explain: "Weight management is framed around two levers: energy intake (addressed through dietary modification) and energy output (addressed through physical activity/exercise, i.e., reducing sedentary behavior)."
+    },
+    {
+      target: "quiz-s07",
+      q: "A patient's exercise routine consists of doubles tennis and moderate weightlifting. What MET range and intensity classification does this fall into?",
+      choices: ["Moderate intensity, 3–6 METs", "Light intensity, <3 METs", "Vigorous intensity, 6–12 METs", "Very vigorous, >12 METs"],
+      correct: 0,
+      explain: "Doubles tennis, yoga, vacuuming, and moderate weightlifting fall into the moderate-intensity category (3–6 METs). Vigorous intensity (6–12 METs) includes activities like jogging 6–8 mph, swimming, and cycling 10–12 mph."
+    },
+    {
+      target: "quiz-s07",
+      q: "A patient reports going for a brisk jog at 7 mph three times per week. Into which MET-based intensity category does this activity fall?",
+      choices: ["Light intensity, <3 METs", "Very vigorous, >12 METs", "Moderate intensity, 3–6 METs", "Vigorous intensity, 6–12 METs"],
+      correct: 3,
+      explain: "Jogging at 6–8 mph is classified as a vigorous-intensity activity (6–12 METs), alongside aerobic dancing, cycling 10–12 mph on the level, and swimming."
+    },
+    {
+      target: "quiz-s08",
+      q: "A patient has maintained a consistent moderate exercise routine for the past year, but her BMI has neither increased nor decreased. Which mechanism best explains this outcome?",
+      choices: ["Exercise helped prevent the weight gain that might otherwise have occurred", "Exercise has failed and should be discontinued", "Exercise only produces benefit when paired with bariatric surgery", "Weight is unrelated to exercise and only reflects genetics"],
+      correct: 0,
+      explain: "One of the two primary mechanisms by which exercise influences weight is preventing weight gain — studies show an inverse relationship between exercise and BMI/adiposity, meaning a stable BMI over time may reflect gain that was successfully prevented."
+    },
+    {
+      target: "quiz-s08",
+      q: "A patient wants to lose 15 pounds and asks whether increasing her exercise alone will be sufficient. What is the most accurate counseling point?",
+      choices: ["Exercise alone, without dietary change, is typically sufficient for weight loss", "Weight loss requires sufficient physical activity combined with reduced energy intake", "Only resistance training, not dietary change, is needed for weight loss", "Weight loss cannot occur through lifestyle change and requires medication"],
+      correct: 1,
+      explain: "While exercise alone can help prevent weight gain, assisting active weight loss requires sufficient physical activity coupled with a reduction in energy intake — exercise and diet must work together."
+    },
+    {
+      target: "quiz-s09",
+      q: "A patient begins a heavy resistance-training program and gains 3 lbs over two months despite improved strength and endurance. What is the most likely explanation?",
+      choices: ["The resistance training is ineffective and should be discontinued", "Lean muscle mass has increased, and muscle weighs more than adipose tissue", "This indicates the patient is not adherent to the exercise prescription", "Resistance training always causes weight gain regardless of fat loss"],
+      correct: 1,
+      explain: "Resistance (anaerobic) exercise increases lean muscle mass, and lean muscle is denser/heavier than adipose tissue — so scale weight may increase even as body composition improves. Its benefit for weight management operates primarily through an increased basal metabolic rate rather than direct weight loss."
+    },
+    {
+      target: "quiz-s09",
+      q: "Which exercise recommendation from the American College of Cardiology best reflects the complementary roles of aerobic and resistance training?",
+      choices: ["Resistance training only, performed daily at maximal intensity", "Aerobic exercise exclusively, with resistance training discouraged entirely", "Resistance training only, since aerobic exercise provides no cardiovascular benefit", "Aerobic exercise as primary, plus light-to-moderate resistance training about 3 days per week"],
+      correct: 3,
+      explain: "The American College of Cardiology recommends aerobic exercise as the primary modality, plus weight training approximately 3 days per week — resistance training does not need to be high-intensity or heavy-load to provide benefit."
+    },
+    {
+      target: "quiz-s10",
+      q: "A patient wants to lose weight and maintain that loss long-term but says she can only find 15-minute windows throughout her day. What guidance is most appropriate?",
+      choices: ["Recommend short bouts of at least 10 minutes each, totaling 200–300 minutes/week for long-term maintenance", "Tell her that exercise must be one continuous 60-minute session to count", "Tell her light-intensity activity like desk work will be sufficient", "Recommend 75–150 minutes/week of light activity only"],
+      correct: 0,
+      explain: "Exercise bouts do not need to be continuous — bouts greater than 10 minutes count toward weekly totals. For long-term weight-loss maintenance specifically, a minimum of 200–300 minutes/week of moderate-to-vigorous activity is recommended (compared to the general 150–300 min/wk target)."
+    },
+    {
+      target: "quiz-s10",
+      q: "A patient states she can only exercise at vigorous intensity, with no time for moderate-intensity activity. What is the minimum weekly duration recommended if she exercises at vigorous intensity only?",
+      choices: ["30–60 minutes/week", "150–300 minutes/week", "75–150 minutes/week", "300–400 minutes/week"],
+      correct: 2,
+      explain: "If activity is limited to vigorous intensity only, 75–150 minutes/week is sufficient, compared to 150–300 minutes/week if the activity is moderate-to-vigorous intensity."
+    },
+    {
+      target: "quiz-s11",
+      q: "Twin studies in which both siblings are assigned an identical exercise prescription often show one twin losing more weight than the other. What is the best explanation for this finding?",
+      choices: ["One twin is intentionally being noncompliant with the prescription", "The prescription was not actually identical between twins", "Twins cannot be meaningfully compared in exercise research", "Differences in biologic/genetic factors and resting basal metabolic rate"],
+      correct: 3,
+      explain: "Twin studies using identical exercise prescriptions still show variable weight-loss outcomes, attributed to differences in biologic and genetic factors, including individual resting basal metabolic rate."
+    },
+    {
+      target: "quiz-s11",
+      q: "A patient with a naturally higher resting basal metabolic rate begins the same exercise program as a friend with a lower resting BMR. What outcome would be expected?",
+      choices: ["Both patients will burn identical amounts of additional energy", "The patient with the lower BMR will burn more additional calories", "The patient with the higher BMR will tend to burn more additional calories", "BMR has no bearing on the calories burned during exercise"],
+      correct: 2,
+      explain: "An individual with a higher resting basal metabolic rate will burn more calories for the same amount of added exercise compared to someone with a lower baseline BMR, contributing to individual variability in exercise response."
+    },
+    {
+      target: "quiz-s12",
+      q: "A 62-year-old man with type 2 diabetes loses enough weight through exercise to return to a normal BMI. What is a likely downstream effect?",
+      choices: ["Worsening glycemic control despite weight loss", "Improved blood sugar control, potentially allowing medication discontinuation", "No change in diabetic management is expected", "Increased requirement for insulin therapy"],
+      correct: 1,
+      explain: "Weight loss that returns a patient with type 2 diabetes to a normal BMI often improves the diabetic picture and blood sugar control, sometimes allowing the patient to discontinue diabetes medication entirely."
+    },
+    {
+      target: "quiz-s12",
+      q: "Beyond weight change, which of the following is a well-documented benefit of regular exercise discussed in this lecture?",
+      choices: ["Increased anxiety due to physical exertion", "Worsened body image due to increased self-scrutiny", "Decreased anxiety/depression related to endorphin release", "No measurable effect on cardiovascular risk factors"],
+      correct: 2,
+      explain: "Regular exercise is associated with decreased anxiety and depression, related in part to endorphin release, along with improved fitness, body image, cardiovascular risk factors, metabolic state, and possibly decreased mortality."
+    },
+    {
+      target: "quiz-s13",
+      q: "A patient with a BMI of 42 and obstructive sleep apnea is considering bariatric surgery. Which statement best reflects appropriate counseling?",
+      choices: ["She is an appropriate candidate given BMI >40 with comorbidities, but must still commit to dietary and exercise changes to avoid regain", "Surgery alone will permanently resolve her weight issue with no further lifestyle change needed", "Bariatric surgery is only appropriate for BMI >50", "She should be started on weight-loss medication instead, as she does not qualify for surgery"],
+      correct: 0,
+      explain: "Bariatric surgery is indicated for BMI >40, especially with comorbidities (like this patient's sleep apnea). However, patients often lose substantial weight in year one but regain it within 1–2 years if they do not also change their diet and exercise habits — surgery is a tool, not a standalone cure."
+    },
+    {
+      target: "quiz-s13",
+      q: "A patient with a BMI of 33 and no comorbidities asks about starting a weight-loss medication. Which statement reflects appropriate counseling?",
+      choices: ["She does not qualify for medication until her BMI exceeds 40", "She is not eligible for medication because she has no comorbidities", "Medication is only appropriate after bariatric surgery has failed", "She may be an appropriate candidate, since a BMI over 30 qualifies with or without comorbidities"],
+      correct: 3,
+      explain: "Weight-loss medication is appropriate for patients with a BMI greater than 30, with or without comorbidities. Medication must still be paired with dietary and exercise changes to maintain any resulting weight loss."
+    },
+    {
+      target: "quiz-s14",
+      q: "A resident wants to more effectively counsel patients on weight management. According to the lecture, which approach is most likely to improve patient receptiveness?",
+      choices: ["Avoiding the topic entirely to prevent patient discomfort", "Modeling an active, healthy lifestyle themselves while counseling patients", "Referring all overweight patients directly to bariatric surgery", "Focusing counseling exclusively on medication options"],
+      correct: 1,
+      explain: "The lecture emphasizes 'physician, heal thyself' — patients respond better to lifestyle counseling when their physician models the behavior being recommended, similar to how children respond to parental example."
+    },
+    {
+      target: "quiz-s14",
+      q: "A physician wants to refer a patient with obesity to an organization specializing in evidence-based obesity counseling and management. Which of the following is an appropriate resource?",
+      choices: ["The Obesity Medicine Association", "The American Academy of Dermatology", "The American College of Radiology", "The National Athletic Trainers' Association"],
+      correct: 0,
+      explain: "Appropriate counseling resources named in the lecture include the American College of Sports Medicine, the Obesity Medicine Association, The Obesity Society, and the American Society for Metabolic and Bariatric Surgery."
+    },
+    {
+      target: "quiz-s15",
+      q: "A patient has lost weight successfully but has regained it over the following year. According to the clinical pattern recognition framework, what should the clinical decision focus on?",
+      choices: ["Discontinuing all physical activity recommendations", "Sustaining a higher weekly activity dose for long-term maintenance", "Immediate referral for bariatric surgery regardless of BMI", "Reassurance only, since regain is unavoidable"],
+      correct: 1,
+      explain: "Weight loss followed by regain points to a long-term maintenance problem — the clinical decision is to sustain a higher weekly activity dose (200–300 min/week) rather than abandon the activity plan."
+    },
+    {
+      target: "quiz-s15",
+      q: "Which of the following best reflects Pearl 3 from the clinical reasoning companion regarding exercise and weight?",
+      choices: ["Health benefits occur even when weight change is modest", "Exercise only benefits patients who achieve significant weight loss", "Weight loss is impossible without bariatric surgery", "Resistance training provides no measurable health benefit"],
+      correct: 0,
+      explain: "Pearl 3 states that health benefits occur even when weight change is modest — cardiovascular, metabolic, fitness, and mood benefits accrue independent of dramatic scale change."
+    },
+    {
+      target: "quiz-s16",
+      q: "A physician tells a patient, 'Your resistance training isn't helping since your weight hasn't changed on the scale.' What mistake is being made?",
+      choices: ["No mistake — resistance training only matters if weight decreases", "Focusing only on scale weight while overlooking benefits like increased BMR, strength, lean mass, and metabolic health", "The physician should have recommended surgery instead", "Resistance training should never be recommended for weight management"],
+      correct: 1,
+      explain: "This reflects the common mistake of treating exercise as useful only when it produces visible weight loss, and assuming resistance exercise has little value because scale weight may not change. Resistance training provides meaningful benefits (BMR, strength, lean mass, metabolic health) independent of scale weight."
+    },
+    {
+      target: "quiz-s16",
+      q: "A physician recommends a single intensive gym session per week regardless of a sedentary patient's current fitness level. What common mistake does this reflect?",
+      choices: ["Appropriately individualizing the exercise prescription", "Correctly applying the recommended weekly activity dose", "Successfully integrating exercise into the overall weight-management plan", "Ignoring the patient's baseline activity level when recommending intensity"],
+      correct: 3,
+      explain: "A common mistake is ignoring the patient's baseline activity level when recommending intensity — exercise prescriptions should be individualized and built up gradually rather than starting at high intensity for a sedentary patient."
+    },
+    {
+      target: "quiz-s17",
+      q: "Which sequence correctly reflects the preferred order of treatment modalities for weight management under the osteopathic, whole-patient approach?",
+      choices: ["Surgery, medication, diet, exercise", "Medication, surgery, exercise, diet", "Exercise, diet, medications, surgery", "Diet, surgery, medication, exercise"],
+      correct: 2,
+      explain: "The preferred treatment order, consistent with treating the whole patient without medication when possible, is exercise, then diet, then medications, and finally surgery for appropriate candidates."
+    },
+    {
+      target: "quiz-s17",
+      q: "A patient asks what BMI threshold would make her eligible for a trial of weight-loss medication. Based on the summary table, what should she be told?",
+      choices: ["BMI greater than 25", "BMI greater than 40", "BMI greater than 35 only", "BMI greater than 30"],
+      correct: 3,
+      explain: "Weight-loss medication eligibility is a BMI greater than 30, with or without comorbidities. Bariatric surgery eligibility, by contrast, is a BMI greater than 40, especially with comorbidities."
+    }
+  ];
+
+  const grouped = {};
+  quizData.forEach(item => {
+    if (!grouped[item.target]) grouped[item.target] = [];
+    grouped[item.target].push(item);
+  });
+
+  Object.keys(grouped).forEach(targetId => {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+    grouped[targetId].forEach((item, qi) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'quiz-q';
+      const p = document.createElement('p');
+      p.className = 'prompt';
+      p.textContent = (qi + 1) + ". " + item.q;
+      qDiv.appendChild(p);
+
+      const explainDiv = document.createElement('div');
+      explainDiv.className = 'quiz-explain';
+      explainDiv.textContent = item.explain;
+
+      item.choices.forEach((choiceText, ci) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-choice';
+        btn.textContent = choiceText;
+        btn.addEventListener('click', () => {
+          const allBtns = qDiv.querySelectorAll('.quiz-choice');
+          allBtns.forEach(b => b.classList.add('disabled'));
+          if (ci === item.correct) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+            allBtns[item.correct].classList.add('correct');
+          }
+          explainDiv.classList.add('show');
+        });
+        qDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(explainDiv);
+      container.appendChild(qDiv);
+    });
+  });
+
+  // Side nav build + scroll spy
+  const sections = document.querySelectorAll('section.card');
+  const panel = document.getElementById('sidenavPanel');
+  sections.forEach(sec => {
+    const heading = sec.querySelector('h2').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = heading;
+    a.dataset.target = sec.id;
+    panel.appendChild(a);
+  });
+
+  const sidenavToggleBtn = document.getElementById('sidenavToggle');
+  sidenavToggleBtn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    sidenavToggleBtn.classList.toggle('shifted');
+    sidenavToggleBtn.textContent = panel.classList.contains('open') ? 'CLOSE' : 'SECTIONS';
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.target === current);
+    });
+  });
+</script>
+
+</body>
+</html>
