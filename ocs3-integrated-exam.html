@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integrated Osteopathic Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3d2b;
+    --forest: #2e5539;
+    --sage: #6a8f6b;
+    --sage-light: #dce8dc;
+    --border: #c9d9c4;
+    --accent: #b5651d;
+    --accent-soft: #e8c9a3;
+    --text-main: #26301f;
+    --text-soft: #55614c;
+    --correct: #2e6b3e;
+    --incorrect: #a13b30;
+    --shadow: 0 2px 10px rgba(31,61,43,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.65;
+    padding-bottom: 80px;
+  }
+  h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--forest-dark); }
+  code, .mono, .tag, .score-badge { font-family: 'IBM Plex Mono', monospace; }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  .header h1 { color: var(--cream); font-size: 2.1em; margin-bottom: 8px; }
+  .header p { color: var(--sage-light); font-size: 1.05em; margin: 4px 0; }
+  .header .source-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: -30px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { margin-top: 0; font-size: 1.2em; }
+  .toc ul { list-style: none; padding-left: 0; margin: 0; columns: 2; column-gap: 30px; }
+  .toc ul li { margin-bottom: 8px; break-inside: avoid; }
+  .toc a { color: var(--forest); text-decoration: none; font-size: 0.95em; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 26px 0;
+    box-shadow: var(--shadow);
+  }
+  section.card h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  section.card h3 { font-size: 1.12em; color: var(--forest); margin-top: 22px; }
+  section.card h4 { font-size: 1em; color: var(--accent); margin-bottom: 4px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.92em; }
+  th, td { border: 1px solid var(--border); padding: 8px 11px; text-align: left; vertical-align: top; }
+  th { background: var(--sage-light); color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .pearl strong { color: var(--forest-dark); }
+
+  ul.plain, ol.plain { padding-left: 22px; }
+  ul.plain li, ol.plain li { margin-bottom: 6px; }
+  ul.tight li { margin-bottom: 2px; }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin: 24px 0 4px;
+  }
+  .quiz-q {
+    background: #f5f1e6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .quiz-q p.prompt { font-weight: 600; margin-top: 0; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.96em;
+    cursor: pointer;
+    color: var(--text-main);
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #d9ecd9; border-color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f3d9d4; border-color: var(--incorrect); }
+  .quiz-choice.disabled { pointer-events: none; }
+  .quiz-explain {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--cream-card);
+    border-left: 3px solid var(--forest);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 12px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 460;
+    box-shadow: var(--shadow);
+    transition: right 0.25s ease;
+  }
+  .sidenav-toggle.shifted {
+    right: 240px;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -3px 0 12px rgba(0,0,0,0.08);
+    transition: right 0.25s ease;
+    z-index: 450;
+    overflow-y: auto;
+    padding: 60px 16px 20px;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .sidenav-panel a.active { background: var(--sage-light); color: var(--forest-dark); font-weight: 600; }
+  .sidenav-panel a:hover { background: var(--sage-light); }
+
+  @media (max-width: 700px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>Integrated Osteopathic Exam</h1>
+  <p>OCS III — OMM Video Lecture</p>
+  <p style="font-size:0.85em; opacity:0.85;">Melissa G. Pearce, DO, C-NMM/OMM — Assistant Professor, Clinical Sciences</p>
+  <span class="source-tag">Built from lecture narration + slides</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#s00">00. Overview &amp; Learning Objectives</a></li>
+      <li><a href="#s01">01. Where Did We Start? The Screening Exam</a></li>
+      <li><a href="#s02">02. Screening Checklist I: Vitals, General, Derm &amp; HEENT</a></li>
+      <li><a href="#s03">03. Screening Checklist II: Cranial Nerves, Pulmonary, CV &amp; Abdominal</a></li>
+      <li><a href="#s04">04. Screening Checklist III: MSK/PNS — Neck &amp; Upper Extremity</a></li>
+      <li><a href="#s05">05. Screening Checklist IV: Back, Lower Extremity &amp; CNS</a></li>
+      <li><a href="#s06">06. Where Are We Going? Building on the Foundation</a></li>
+      <li><a href="#s07">07. What Is the Integrated Osteopathic Examination?</a></li>
+      <li><a href="#s08">08. Purpose of Adaptable Examinations</a></li>
+      <li><a href="#s09">09. Benefits of the Integrated Osteopathic Examination</a></li>
+      <li><a href="#s10">10. Integrated Exam &amp; Osteopathic Philosophy</a></li>
+      <li><a href="#s11">11. Positional Exam: Overview</a></li>
+      <li><a href="#s12">12. Positional Exam: Standing</a></li>
+      <li><a href="#s13">13. Positional Exam: Seated (Anterior)</a></li>
+      <li><a href="#s14">14. Positional Exam: Seated (Posterior)</a></li>
+      <li><a href="#s15">15. Positional Exam: Supine</a></li>
+      <li><a href="#s16">16. Positional Exam: Prone</a></li>
+      <li><a href="#s17">17. Further Adaptations &amp; Focused Exams</a></li>
+      <li><a href="#s18">18. Take-Aways &amp; Master Summary Table</a></li>
+    </ul>
+  </div>
+
+  <!-- 00 -->
+  <section class="card" id="s00">
+    <h2>00. Overview &amp; Learning Objectives</h2>
+    <p>The student will:</p>
+    <ol class="plain">
+      <li>Recognize different methods of organizing the integrated physical examination and osteopathic structural exam (OSE):
+        <ul class="plain tight">
+          <li>Screening systems-based</li>
+          <li>Positional</li>
+          <li>Focused</li>
+        </ul>
+      </li>
+      <li>Appreciate the purpose of performing an integrated osteopathic examination</li>
+      <li>Develop applications of both a full integrated osteopathic examination and focused integrated examinations depending on patient presentation and clinical situation</li>
+    </ol>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s00"></div>
+  </section>
+
+  <!-- 01 -->
+  <section class="card" id="s01">
+    <h2>01. Where Did We Start? The Screening Exam</h2>
+    <ul class="plain">
+      <li>The initial screening examination (learned in first year, OCS I/II) already included some integration of the osteopathic structural examination (OSE)</li>
+      <li>That integration was mainly focused on incorporating the OSE within the <strong>musculoskeletal and peripheral nervous system (PNS)</strong> exam section of a systems-based examination</li>
+      <li>This forms a solid foundation for applying a systems-based approach to the integrated osteopathic examination</li>
+      <li>It enables components of the physical exam (PE) and OSE to be applied to focused examinations based on patient presentation</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s01"></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="card" id="s02">
+    <h2>02. Screening Checklist I: Vitals, General, Derm &amp; HEENT</h2>
+    <p>The comprehensive screening physical exam checklist begins as follows:</p>
+    <ul class="plain">
+      <li>Wash hands (or sanitize); obtain consent to examine</li>
+      <li><strong>Vitals:</strong> Blood pressure (palpatory and auscultatory), heart rate, respiratory rate</li>
+      <li><strong>General Assessment:</strong> Appearance/behavior, affect/mood, language</li>
+      <li><strong>Dermatological Exam:</strong> Inspection and palpation of skin, hair, and nails</li>
+      <li><strong>HEENT Exam:</strong> Inspection and palpation of head/face and neck; lymph nodes; sinuses; eye exam (pupil light reflex, extraocular movements); otoscopic ear exam; otoscopic nose exam; oral exam; thyroid</li>
+    </ul>
+    <div class="pearl"><strong>Time-management tip:</strong> Orthostatic blood pressure (supine, seated, standing) takes several minutes and would consume a significant portion of a typical 30-minute exam window. In a time-limited screening exam, perform <strong>palpatory</strong> and <strong>auscultatory</strong> blood pressure instead, and reserve orthostatics for when they are clinically indicated.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s02"></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card" id="s03">
+    <h2>03. Screening Checklist II: Cranial Nerves, Pulmonary, CV &amp; Abdominal</h2>
+    <ul class="plain">
+      <li><strong>Cranial Nerves (additional):</strong> Trigeminal (V), Facial (VII), Vestibulocochlear (VIII), Spinal Accessory (XI), Hypoglossal (XII) — the remaining nerves not already assessed during the HEENT/eye exam (II, III, IV, VI)</li>
+      <li><strong>Pulmonary Exam:</strong> Inspection, palpation, auscultation</li>
+      <li><strong>Cardiovascular Exam:</strong> Inspection and palpation; jugular venous pressure; pulses (carotid, radial, tibialis posterior, dorsalis pedis); cardiac auscultation; carotid auscultation</li>
+      <li><strong>Abdominal Exam:</strong> Inspection; auscultation (quadrants, aorta); palpation (quadrants, liver, spleen, aorta); costovertebral angle tenderness (Lloyd's sign)</li>
+    </ul>
+    <div class="pearl"><strong>Sequence logic:</strong> Every system exam in the checklist begins the same way — inspection, then palpation, then auscultation — followed by special tests specific to that system (e.g., JVP and carotid auscultation for cardiovascular; CVA tenderness for abdominal).</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s03"></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card" id="s04">
+    <h2>04. Screening Checklist III: MSK/PNS — Neck &amp; Upper Extremity</h2>
+    <ul class="plain">
+      <li><strong>Postural landmarks</strong></li>
+      <li><strong>Neck:</strong> Inspection and palpation; range of motion</li>
+      <li><strong>Upper Extremity:</strong> Inspection and palpation; range of motion (shoulder, elbow, wrist/hand)</li>
+      <li><strong>Strength:</strong> Biceps, triceps, forearm flexors, forearm extensors, hands</li>
+      <li><strong>Sensation:</strong> Dermatomes or peripheral cutaneous nerve distribution; 2-point discrimination</li>
+      <li><strong>Reflexes:</strong> Biceps (C5), Brachioradialis (C6), Triceps (C7)</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s04"></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card" id="s05">
+    <h2>05. Screening Checklist IV: Back, Lower Extremity &amp; CNS</h2>
+    <ul class="plain">
+      <li><strong>Back (standing):</strong> Inspection and palpation; standing flexion test; range of motion (active, passive); assess for Area of Greatest Restriction (AGR)</li>
+      <li><strong>Back (seated):</strong> Inspection and palpation; seated flexion test; range of motion; assess for AGR</li>
+      <li><strong>Lower Extremity (supine):</strong> Inspection and palpation; range of motion (hip, knees, ankles)</li>
+      <li><strong>Lower Extremity (seated) — Strength:</strong> Hip flexors, hip extensors, knee flexors, knee extensors, ankle dorsiflexors, ankle plantarflexors</li>
+      <li><strong>Lower Extremity (seated) — Sensation:</strong> Dermatomes or peripheral cutaneous nerve distribution; vibration; toe proprioception</li>
+      <li><strong>Lower Extremity (seated) — Reflexes:</strong> Patellar (L4), Achilles (S1)</li>
+      <li><strong>CNS Exam — Cerebellar:</strong> Rapid alternating movement; finger-to-nose test; heel-to-shin test; Romberg with pronator drift; gait testing (regular, tandem, toes, heels)</li>
+    </ul>
+    <div class="pearl"><strong>Testing order matters:</strong> Romberg is a separate test from pronator drift — perform the Romberg test first, then assess for pronator drift.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s05"></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="card" id="s06">
+    <h2>06. Where Are We Going? Building on the Foundation</h2>
+    <ul class="plain">
+      <li>Continued use of the entire systems-based physical examination remains valuable when useful for the clinical situation</li>
+      <li>Reviewing the examination as learned in OCS I/II reinforces all of its elements</li>
+      <li>This is particularly useful during <strong>peer-to-peer teaching</strong> activities — performing the exam in a familiar, consistent manner allows second-year students to provide examples and coaching for first-year students</li>
+      <li>It is entirely appropriate to adapt the exam reasonably from the checklist based on other experiences and growth as a second-year student advancing toward clinical rotations</li>
+      <li>This provides a basis upon which to build additional physical examinations suited for different settings and patient populations</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s06"></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="card" id="s07">
+    <h2>07. What Is the Integrated Osteopathic Examination?</h2>
+    <ul class="plain">
+      <li>Consists of elements of the typical physical examination (PE) combined with elements of the osteopathic structural examination (OSE), integrated into a <strong>smooth sequence</strong> of physical exam maneuvers</li>
+      <li>This does <em>not</em> mean performing all of the PE followed by a separate OSE block, or alternating PE-then-OSE within each section — it means the OSE is woven within each portion of the exam, whether that integration is almost entirely within the musculoskeletal/PNS exam (as in the screening exam) or spread more broadly (as in the positional exam)</li>
+      <li>Purpose: build the ability to apply appropriate PE and OSE elements into an <strong>adaptable</strong> examination suited to all circumstances encountered in clinical medicine</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s07"></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card" id="s08">
+    <h2>08. Purpose of Adaptable Examinations</h2>
+    <h3>Flexibility Across Clinical Settings</h3>
+    <p>Not every patient can tolerate the same examination sequence:</p>
+    <ul class="plain tight">
+      <li>A hospitalized or ICU patient may be unable to sit or stand → the exam must be adapted to a supine or semi-recumbent position. This can also occur with a patient in significant pain who gets onto the treatment table and has little ability to move without pain, requiring assessment (and treatment) before being repositioned.</li>
+      <li>A patient in respiratory distress (e.g., tripodding) may need to remain upright → the sequence must be adjusted to minimize exertion</li>
+    </ul>
+    <h3>Efficiency in Practice</h3>
+    <p>Having more than one "mental model" for the exam allows rapid adaptation. At the same time, there is value in an exam performed frequently and repetitively enough to build muscle memory — so that if paged to the ER, ICU, or Labor &amp; Delivery in the middle of the night, the exam sequence is already second nature.</p>
+    <h3>Options</h3>
+    <ul class="plain tight">
+      <li>System-based sequencing (traditional checklists, organ systems)</li>
+      <li>Position-based sequencing (standing &rarr; seated &rarr; supine &rarr; prone) — more natural for an integrated osteopathic assessment</li>
+    </ul>
+    <div class="pearl"><strong>Clinical realism:</strong> Actual patient encounters rarely follow the "ideal" exam flow learned in class — patients don't read the textbook. Developing flexible versions of the exam prepares you for real practice.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s08"></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="card" id="s09">
+    <h2>09. Benefits of the Integrated Osteopathic Examination</h2>
+    <h3>Efficiency &amp; Flow</h3>
+    <ul class="plain tight">
+      <li>Example: when assessing a patient for back pain, it's natural to check cardiorespiratory exams alongside AGR and TART findings in the same sequence</li>
+      <li>This prevents duplication — you don't have to examine the same body region twice in separate sections of the exam</li>
+    </ul>
+    <h3>Diagnostic Power</h3>
+    <ul class="plain tight">
+      <li>Integration makes it easier to correlate <strong>viscerosomatic findings</strong> with system exam findings — for example, a viscerosomatic reflex finding at T6&ndash;T9 (warm tissue, positive red reflex) may correlate with abdominal pain, or a restriction in rib motion may correlate with pulmonary findings</li>
+      <li>This helps you learn to notice patterns <em>across</em> systems rather than isolating musculoskeletal findings into their own separate bucket</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s09"></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="card" id="s10">
+    <h2>10. Integrated Exam &amp; Osteopathic Philosophy</h2>
+    <h3>Holistic Patient View</h3>
+    <ul class="plain tight">
+      <li>If the OSE is kept "tacked on" at the end of a typical physical exam, it becomes all too easy to let it fall away or think of it as separate or optional</li>
+      <li>The musculoskeletal exam and somatic dysfunction findings are part of the patient's health story — the body is telling you what is going on. Integrating the structural exam throughout, rather than appending it, helps weave the physical exam findings and somatic dysfunction into one coherent narrative for patient care.</li>
+    </ul>
+    <h3>Identity as an Osteopathic Physician</h3>
+    <ul class="plain tight">
+      <li>Embedding the OSE throughout the physical exam models the osteopathic philosophy of the <strong>unity of the person</strong> and <strong>unity of structure and function</strong></li>
+      <li>This encourages thinking "osteopathically" from early lab experiences and early patient contacts — not as an afterthought to the process</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s10"></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="card" id="s11">
+    <h2>11. Positional Exam: Overview</h2>
+    <p>The integrated osteopathic examination can be organized by patient position — standing, seated, supine, and prone — with all elements of the systems-based exam integrated within each position.</p>
+    <table>
+      <tr><th>Position</th><th>Components</th></tr>
+      <tr><td>Standing</td><td>General assessment · Musculoskeletal exam · CNS exam (cerebellar/gait testing)</td></tr>
+      <tr><td>Seated</td><td>Vitals · HEENT exam · Cranial nerves · Dermatological exam · Pulmonary exam · Cardiovascular exam · Musculoskeletal &amp; PNS exams</td></tr>
+      <tr><td>Supine</td><td>Abdominal exam · Musculoskeletal exam</td></tr>
+      <tr><td>Prone</td><td>Musculoskeletal exam</td></tr>
+    </table>
+    <div class="pearl"><strong>Practical flow:</strong> It is easier to break out the seated (and standing) exam into anterior and posterior components, moving smoothly as you examine — for example, postural assessment naturally breaks into anterior, posterior, and lateral views.</div>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s11"></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="card" id="s12">
+    <h2>12. Positional Exam: Standing</h2>
+    <ul class="plain">
+      <li><strong>General:</strong> Appearance &amp; behavior — this can be assessed as the patient walks into the room (reducing self-consciousness), though often the patient is already seated, in which case the sequence may begin seated and move to standing/gait later</li>
+      <li><strong>OSE:</strong> Postural landmarks; assess Area of Greatest Restriction (AGR) across cervical, thoracic, lumbar, sacral, and rib regions; standing flexion test (screens for a possible pelvic/innominate problem — note the finding to correlate later)</li>
+      <li><strong>MSK:</strong> Trunk range of motion (active/passive)</li>
+      <li><strong>MSK/CNS:</strong> Gait (regular, tandem, toes, heels)</li>
+      <li><strong>CNS:</strong> Rapid alternating movement; finger-to-nose; heel-to-shin; Romberg with pronator drift (test Romberg first, then pronator drift)</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s12"></div>
+  </section>
+
+  <!-- 13 -->
+  <section class="card" id="s13">
+    <h2>13. Positional Exam: Seated (Anterior)</h2>
+    <ul class="plain">
+      <li><strong>Vitals:</strong> Blood pressure, heart rate, respiratory rate — ideally after letting the patient sit for about five minutes (temperature is often omitted from a student screening exam since a thermometer typically isn't on hand, unless the full vital sign set is being obtained)</li>
+      <li><strong>HEENT/CNS:</strong> Head/neck mobility, palpation, and observation; lymph nodes; sinuses; eye exam (pupils, extraocular movements); ears, nose, oral exam</li>
+      <li><strong>CNS:</strong> Remaining cranial nerves — V, VII, VIII, XI, XII</li>
+      <li><strong>Derm:</strong> Skin, hair, nails — hair can be incorporated while examining the head and neck; skin and nails can be further assessed during the musculoskeletal component</li>
+      <li><strong>Cardiovascular:</strong> Inspection, palpation, auscultation (don't forget the carotid arteries)</li>
+      <li><strong>Pulmonary:</strong> Inspection, palpation, auscultation</li>
+      <li><strong>MSK/PNS:</strong> Upper extremities and lower extremities — range of motion, strength, sensation, reflexes</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s13"></div>
+  </section>
+
+  <!-- 14 -->
+  <section class="card" id="s14">
+    <h2>14. Positional Exam: Seated (Posterior)</h2>
+    <p>With the patient still seated, the exam continues posteriorly:</p>
+    <ul class="plain">
+      <li><strong>Pulmonary:</strong> Continue inspecting, palpating, and auscultating the posterior chest</li>
+      <li><strong>HEENT:</strong> Palpate the thyroid, completing the HEENT exam</li>
+      <li><strong>OSE:</strong> Assess AGR; TART findings; scapular motion test and upper extremity diagnosis if appropriate; seated flexion test (indicates possible sacral somatic dysfunction — investigate further if positive); make a vertebral diagnosis if indicated</li>
+      <li><strong>Abdomen:</strong> Complete the abdominal exam with costovertebral angle tenderness (CVA) / Lloyd's sign</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s14"></div>
+  </section>
+
+  <!-- 15 -->
+  <section class="card" id="s15">
+    <h2>15. Positional Exam: Supine</h2>
+    <ul class="plain">
+      <li><strong>Cardiovascular:</strong> Complete the exam with jugular venous pressure (JVP) — observe for jugular venous distension, and measure the pressure if indicated</li>
+      <li><strong>Abdominal Exam:</strong> Inspect, auscultate, and palpate</li>
+      <li><strong>OSE:</strong> ASIS compression test — used to further affirm or refute the standing and seated flexion test findings; assess for pelvic findings and diagnose pelvic somatic dysfunction if indicated</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s15"></div>
+  </section>
+
+  <!-- 16 -->
+  <section class="card" id="s16">
+    <h2>16. Positional Exam: Prone</h2>
+    <p>The prone position wraps up the integrated osteopathic examination, focusing entirely on the osteopathic structural exam:</p>
+    <ul class="plain">
+      <li>Thoracic and lumbar TART, if not already assessed while seated, and vertebral diagnosis if indicated — some clinicians find this position easier for these findings, though not every patient can tolerate prone positioning well</li>
+      <li>Sacral findings and somatic dysfunction diagnosis, if indicated</li>
+    </ul>
+    <div class="pearl"><strong>Adaptability reminder:</strong> If a patient cannot tolerate the prone position, thoracic, lumbar, and sacral findings can be obtained using an alternative position the patient can tolerate (e.g., seated or side-lying).</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s16"></div>
+  </section>
+
+  <!-- 17 -->
+  <section class="card" id="s17">
+    <h2>17. Further Adaptations &amp; Focused Exams</h2>
+    <ul class="plain">
+      <li>Adapt the full integrated exam to the patient in front of you — select the relevant systems and OSE findings for the presenting problem</li>
+      <li>Maintain flow by <strong>grouping related maneuvers</strong> — for example, lung auscultation, thoracic cage assessment, rib excursion/compliance, and seated AGR/TART findings can all be performed together</li>
+      <li>Ensure coverage of the general assessment and OSE — this may include more than just AGR and TART findings if a diagnosable (and treatable) somatic dysfunction is present</li>
+      <li><strong>Document what you evaluated</strong> — even without permission to treat with OMT on rotations, examining is always within your scope. Always examine, incorporate findings into your clinical decision-making, and document what was evaluated.</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s17"></div>
+  </section>
+
+  <!-- 18 -->
+  <section class="card" id="s18">
+    <h2>18. Take-Aways &amp; Master Summary Table</h2>
+    <ul class="plain">
+      <li>Combine the physical exam and osteopathic structural exam into a seamless sequence that flows well</li>
+      <li>Utilize systems-based, positional, or focused examination formats for flexibility</li>
+      <li>Avoid duplication of examination in the same area, and use osteopathic diagnostic value for efficiency in clinical decision-making</li>
+      <li>Think osteopathically at all times, and craft examinations that are adaptable, efficient, and patient-centered</li>
+    </ul>
+    <table>
+      <tr><th>Format</th><th>Best Suited For</th><th>Key Feature</th></tr>
+      <tr><td>Screening systems-based</td><td>Comprehensive baseline exam, peer-to-peer teaching, building foundational skill</td><td>OSE integrated mainly within MSK/PNS section</td></tr>
+      <tr><td>Positional</td><td>Efficient, natural flow across standing/seated/supine/prone</td><td>OSE distributed throughout each body position</td></tr>
+      <tr><td>Focused</td><td>Specific patient presentations or clinical situations (e.g., limited tolerance, targeted complaint)</td><td>Relevant systems + OSE findings grouped for the presenting problem</td></tr>
+    </table>
+    <table>
+      <tr><th>Position</th><th>Screening Test</th><th>Purpose</th></tr>
+      <tr><td>Standing</td><td>Standing flexion test</td><td>Screens for possible pelvic (innominate) dysfunction</td></tr>
+      <tr><td>Seated</td><td>Seated flexion test</td><td>Screens for possible sacral somatic dysfunction</td></tr>
+      <tr><td>Supine</td><td>ASIS compression test</td><td>Affirms/refutes standing &amp; seated flexion test findings; pelvic diagnosis</td></tr>
+      <tr><td>Prone</td><td>Thoracic/lumbar/sacral TART</td><td>Vertebral and sacral somatic dysfunction diagnosis</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s18"></div>
+  </section>
+
+</div>
+
+<script>
+  const quizData = [
+    {
+      target: "quiz-s00",
+      q: "According to this lecture, which three methods for organizing an integrated osteopathic examination were introduced as learning objectives?",
+      choices: ["Screening systems-based, positional, and focused", "Systems-based, regional, and diagnostic", "Positional, symptomatic, and systems-based", "Focused, regional, and comprehensive"],
+      correct: 0,
+      explain: "The three organizational methods introduced are screening systems-based, positional, and focused examinations — each suited to different clinical circumstances and levels of training."
+    },
+    {
+      target: "quiz-s01",
+      q: "In the initial screening physical examination learned in first year, where was the osteopathic structural exam (OSE) primarily integrated?",
+      choices: ["Entirely within the cardiovascular exam section", "As a separate exam performed before vital signs", "Within the abdominal exam section only", "Within the musculoskeletal and peripheral nervous system exam section"],
+      correct: 3,
+      explain: "The initial screening exam's integration of the OSE was mainly focused on incorporating it within the musculoskeletal and PNS exam section of the systems-based examination, forming a foundation for later, more distributed integration."
+    },
+    {
+      target: "quiz-s02",
+      q: "A student has 30 minutes to complete a comprehensive screening exam. Which blood pressure technique should generally be omitted to preserve time for other exam components?",
+      choices: ["Palpatory blood pressure", "Auscultatory blood pressure", "Orthostatic blood pressure (supine, seated, standing)", "Radial pulse blood pressure estimation"],
+      correct: 2,
+      explain: "Orthostatic blood pressure takes several minutes and would consume a significant portion of a time-limited exam. Palpatory and auscultatory blood pressure are performed instead unless orthostatics are specifically indicated."
+    },
+    {
+      target: "quiz-s02",
+      q: "Which of the following is included in the HEENT portion of the comprehensive screening exam?",
+      choices: ["Pupil light reflex and extraocular movements", "Deep tendon reflexes of the biceps and triceps", "Costovertebral angle tenderness assessment", "Standing flexion test for pelvic dysfunction"],
+      correct: 0,
+      explain: "The HEENT exam includes inspection and palpation of the head, face, and neck; lymph nodes; sinuses; an eye exam with pupil light reflex and extraocular movements; otoscopic ear and nose exams; oral exam; and thyroid."
+    },
+    {
+      target: "quiz-s03",
+      q: "After completing the HEENT exam with cranial nerves II, III, IV, and VI, which cranial nerves remain to be assessed separately according to the checklist?",
+      choices: ["I, II, III, and IV", "V, VII, VIII, XI, and XII", "III, IV, VI, and X only", "II, VI, IX, and X"],
+      correct: 1,
+      explain: "The remaining cranial nerves not already tested during the HEENT/eye portion (II, III, IV, VI) are Trigeminal (V), Facial (VII), Vestibulocochlear (VIII), Spinal Accessory (XI), and Hypoglossal (XII)."
+    },
+    {
+      target: "quiz-s03",
+      q: "A patient reports flank pain during the abdominal portion of the screening exam. Which special test assesses for this finding?",
+      choices: ["ASIS compression test", "Seated flexion test", "Costovertebral angle tenderness (Lloyd's sign)", "Standing flexion test"],
+      correct: 2,
+      explain: "Costovertebral angle tenderness, also known as Lloyd's sign, is the special test performed as part of the abdominal/posterior exam to assess for flank pain, often associated with renal pathology."
+    },
+    {
+      target: "quiz-s04",
+      q: "Which nerve root level corresponds to the brachioradialis reflex tested during the upper extremity exam?",
+      choices: ["C5", "C7", "C6", "C8"],
+      correct: 2,
+      explain: "The brachioradialis reflex corresponds to nerve root C6, distinct from the biceps reflex (C5) and triceps reflex (C7)."
+    },
+    {
+      target: "quiz-s04",
+      q: "Which of the following is part of the sensory examination of the upper extremities in the comprehensive screening checklist?",
+      choices: ["Vibration and toe proprioception", "Dermatomes and 2-point discrimination", "Patellar and Achilles reflex testing", "Standing flexion test for AGR"],
+      correct: 1,
+      explain: "Upper extremity sensory testing includes dermatomes (or peripheral cutaneous nerve distribution) and 2-point discrimination. Vibration and toe proprioception are part of the lower extremity sensory exam instead."
+    },
+    {
+      target: "quiz-s05",
+      q: "A student is performing the CNS/cerebellar portion of the standing exam. In what order should the Romberg test and pronator drift be performed?",
+      choices: ["Pronator drift first, then Romberg", "They must be performed simultaneously", "Order does not matter clinically", "Romberg first, then pronator drift"],
+      correct: 3,
+      explain: "Romberg and pronator drift are separate tests, and the lecture specifically notes to test the Romberg first and then assess for pronator drift."
+    },
+    {
+      target: "quiz-s05",
+      q: "Which reflex corresponds to the L4 nerve root during the lower extremity exam?",
+      choices: ["Achilles reflex", "Patellar reflex", "Babinski reflex", "Plantar reflex"],
+      correct: 1,
+      explain: "The patellar reflex corresponds to the L4 nerve root, while the Achilles reflex corresponds to S1."
+    },
+    {
+      target: "quiz-s06",
+      q: "According to the lecture, continued practice of the full systems-based screening exam is particularly useful for which of the following purposes?",
+      choices: ["Replacing the need for any osteopathic structural exam", "Eliminating the need for vital sign measurement", "Avoiding integration with focused examinations", "Providing examples and coaching during peer-to-peer teaching"],
+      correct: 3,
+      explain: "Continued, consistent practice of the systems-based screening exam is particularly useful for peer-to-peer teaching, allowing second-year students to model and coach first-year students through the same examination sequence."
+    },
+    {
+      target: "quiz-s07",
+      q: "Which statement best describes how the physical exam (PE) and osteopathic structural exam (OSE) should be combined in an integrated osteopathic examination?",
+      choices: ["The OSE should be performed entirely before the PE begins", "The OSE and PE should be woven smoothly throughout each section", "The OSE should be completed only after the entire PE is finished", "The OSE and PE must always be performed in separate patient visits"],
+      correct: 1,
+      explain: "The integrated osteopathic exam weaves OSE elements smoothly within each section of the physical exam, rather than performing the two as separate blocks before or after one another."
+    },
+    {
+      target: "quiz-s08",
+      q: "A hospitalized patient is unable to sit or stand due to their clinical condition. How should the integrated osteopathic exam be adapted?",
+      choices: ["The exam should be postponed until the patient can stand", "Only the cardiovascular exam should be performed", "The exam should be performed in a supine or semi-recumbent position", "The osteopathic structural exam should be omitted entirely"],
+      correct: 2,
+      explain: "A hospitalized or ICU patient unable to sit or stand requires the exam sequence to be adapted to a supine or semi-recumbent position while still incorporating relevant PE and OSE elements."
+    },
+    {
+      target: "quiz-s08",
+      q: "A patient in acute respiratory distress arrives tripodding and unable to lie flat. What adjustment to the exam sequence is most appropriate?",
+      choices: ["Proceed with the standard supine sequence regardless of distress", "Adjust the sequence to keep the patient upright and minimize exertion", "Delay all vital signs until the patient is lying flat", "Perform the full prone osteopathic structural exam first"],
+      correct: 1,
+      explain: "A patient in respiratory distress needs the exam sequence adjusted to keep them upright and minimize exertion, illustrating the value of having more than one mental model for exam sequencing."
+    },
+    {
+      target: "quiz-s09",
+      q: "When evaluating a patient presenting with back pain, which sequencing best reflects the efficiency principle of the integrated osteopathic exam?",
+      choices: ["Performing the cardiorespiratory exam, AGR, and TART findings in the same sequence", "Performing the entire cardiovascular exam on a separate visit", "Repeating the thoracic exam separately for PE and OSE portions", "Deferring all osteopathic findings until a follow-up appointment"],
+      correct: 0,
+      explain: "For a patient with back pain, it's natural and efficient to check cardiorespiratory findings alongside AGR and TART findings in the same sequence, avoiding duplicate examination of the same body region."
+    },
+    {
+      target: "quiz-s09",
+      q: "A student palpates warm, congested tissue with a positive red reflex at T6–T9. With which clinical finding might this viscerosomatic change correlate?",
+      choices: ["Lower extremity edema", "Cervical range of motion restriction", "Bicep reflex asymmetry", "Abdominal pain"],
+      correct: 3,
+      explain: "Viscerosomatic reflex findings at T6–T9, such as warm tissue and a positive red reflex, may correlate with abdominal pain, illustrating how integration helps correlate somatic findings with visceral system findings."
+    },
+    {
+      target: "quiz-s10",
+      q: "Why does this lecture caution against performing the osteopathic structural exam only at the very end of the physical exam?",
+      choices: ["It takes too much additional time to justify the placement", "End-of-exam findings are considered less clinically valid", "Patients tend to leave before the end of the exam", "It risks being viewed as separate or optional rather than part of the patient's story"],
+      correct: 3,
+      explain: "Tacking the OSE onto the end of the exam makes it easy to let it fall away or be viewed as optional, rather than being recognized as part of the patient's overall health story."
+    },
+    {
+      target: "quiz-s10",
+      q: "Embedding the osteopathic structural exam throughout the physical exam primarily reinforces which osteopathic principle?",
+      choices: ["Unity of structure and function", "The body's ability to self-medicate", "Rule of the artery is supreme", "Facilitated segments cause chronic pain"],
+      correct: 0,
+      explain: "Integrating the OSE throughout the physical exam models the osteopathic philosophy of unity of the person and unity of structure and function, encouraging osteopathic thinking from the earliest patient contacts."
+    },
+    {
+      target: "quiz-s11",
+      q: "In the positional format of the integrated osteopathic exam, during which position is the abdominal exam primarily performed?",
+      choices: ["Standing", "Seated", "Supine", "Prone"],
+      correct: 2,
+      explain: "In the positional format, the abdominal exam (inspection, auscultation, palpation) is primarily performed with the patient supine, alongside completion of the cardiovascular exam (JVP) and the ASIS compression test."
+    },
+    {
+      target: "quiz-s12",
+      q: "According to the lecture, what is one advantage of beginning the general assessment while the patient walks into the room?",
+      choices: ["It eliminates the need for a gait exam later", "It replaces the need for postural landmark assessment", "It reduces patient self-consciousness compared to observed walking later", "It allows skipping the standing flexion test"],
+      correct: 2,
+      explain: "Observing the patient's general appearance and gait as they walk into the room can reduce self-consciousness compared to formally asking them to walk for a gait assessment later in the exam."
+    },
+    {
+      target: "quiz-s12",
+      q: "A standing flexion test is positive on the right during the standing portion of the exam. What does this finding help screen for?",
+      choices: ["Cervical nerve root compression", "A possible problem in the pelvis (innominate)", "Cardiac arrhythmia", "Costovertebral angle tenderness"],
+      correct: 1,
+      explain: "The standing flexion test helps screen for a possible problem in the pelvis, such as an innominate dysfunction — this finding is noted and later correlated with the seated flexion test and ASIS compression test."
+    },
+    {
+      target: "quiz-s13",
+      q: "Prior to obtaining seated vital signs, the lecture recommends allowing the patient to do which of the following?",
+      choices: ["Stand for two minutes before measurement", "Lie supine for ten minutes before measurement", "Perform mild exertion before measurement", "Sit for approximately five minutes before measurement"],
+      correct: 3,
+      explain: "The lecture recommends letting the patient sit for approximately five minutes before obtaining seated vital signs, to allow for a more accurate resting measurement."
+    },
+    {
+      target: "quiz-s13",
+      q: "During the seated anterior portion of the positional exam, dermatological findings such as hair can conveniently be incorporated into which component?",
+      choices: ["The cardiovascular exam", "The head and neck exam", "The abdominal exam", "The lower extremity exam"],
+      correct: 1,
+      explain: "Hair can conveniently be assessed while examining the head and neck, while skin and nails can be further assessed during the musculoskeletal component, avoiding a fully separate dermatological exam step."
+    },
+    {
+      target: "quiz-s14",
+      q: "During the seated posterior portion of the exam, which finding helps identify possible sacral somatic dysfunction requiring further investigation?",
+      choices: ["Scapular motion test", "Costovertebral angle tenderness", "Seated flexion test", "Cardiac auscultation"],
+      correct: 2,
+      explain: "The seated flexion test, performed during the seated posterior exam, indicates possible sacral somatic dysfunction, prompting further investigation if positive."
+    },
+    {
+      target: "quiz-s14",
+      q: "Which structure is palpated during the seated posterior portion of the exam to complete the HEENT assessment?",
+      choices: ["Thyroid gland", "Carotid artery", "Cervical lymph nodes", "Trachea"],
+      correct: 0,
+      explain: "The thyroid is palpated during the seated posterior portion of the exam, completing the HEENT assessment that began during the seated anterior portion."
+    },
+    {
+      target: "quiz-s15",
+      q: "During the supine portion of the exam, the ASIS compression test is used to further evaluate findings from which earlier tests?",
+      choices: ["The pupil light reflex and extraocular movements", "The costovertebral angle tenderness test", "The Romberg and pronator drift tests", "The standing and seated flexion tests"],
+      correct: 3,
+      explain: "The ASIS compression test, performed supine, is used to further affirm or refute the findings from the standing and seated flexion tests, helping to identify pelvic somatic dysfunction."
+    },
+    {
+      target: "quiz-s15",
+      q: "A student observes jugular venous distension while the patient is supine. What is the appropriate next step according to the exam sequence?",
+      choices: ["Immediately move the patient to the prone position", "Measure the jugular venous pressure if indicated", "Skip the remainder of the cardiovascular exam", "Proceed directly to the ASIS compression test"],
+      correct: 1,
+      explain: "After observing for jugular venous distension, the jugular venous pressure should be measured if clinically indicated, completing the cardiovascular portion of the supine exam."
+    },
+    {
+      target: "quiz-s16",
+      q: "Which of the following findings are typically assessed during the prone portion of the positional integrated exam?",
+      choices: ["Cranial nerve testing and pupillary response", "Jugular venous pressure and carotid pulses", "Thoracic/lumbar TART and sacral findings", "Standing flexion test and gait assessment"],
+      correct: 2,
+      explain: "The prone position focuses on the osteopathic structural exam: thoracic and lumbar TART (if not already done seated) and sacral findings, with vertebral or sacral diagnoses made as indicated."
+    },
+    {
+      target: "quiz-s16",
+      q: "A patient with significant low back pain is unable to tolerate the prone position. How should the exam be adapted?",
+      choices: ["The exam cannot proceed under any circumstances", "The patient must be sedated before continuing", "Only the cardiovascular exam should be completed instead", "Thoracic, lumbar, and sacral findings can be obtained in another tolerated position"],
+      correct: 3,
+      explain: "If a patient cannot tolerate the prone position, thoracic, lumbar, and sacral findings can instead be obtained using an alternative position the patient is able to tolerate, reflecting the exam's overall adaptability."
+    },
+    {
+      target: "quiz-s17",
+      q: "When performing a focused examination for a patient with suspected pulmonary pathology, which maneuvers should be grouped together to maintain efficient flow?",
+      choices: ["Lung auscultation, thoracic cage assessment, rib compliance, and AGR/TART findings", "Patellar reflex, Achilles reflex, and gait testing", "Pupillary light reflex and extraocular movements only", "Costovertebral angle tenderness and thyroid palpation only"],
+      correct: 0,
+      explain: "Maintaining flow in a focused exam means grouping related maneuvers together — for a pulmonary-focused exam, this includes lung auscultation, thoracic cage assessment, rib compliance, and the corresponding seated AGR/TART findings."
+    },
+    {
+      target: "quiz-s17",
+      q: "A student on rotation does not have permission to perform osteopathic manipulative treatment. What is the most appropriate action regarding the osteopathic structural exam?",
+      choices: ["Skip the osteopathic structural exam entirely since treatment isn't allowed", "Only examine areas that will definitely be treated", "Document findings only if asked directly by the attending", "Still perform and document the examination, since evaluation is always within scope"],
+      correct: 3,
+      explain: "Even without permission to treat with OMT, examining is always within scope. The student should still perform the osteopathic structural exam, incorporate findings into clinical decision-making, and document what was evaluated."
+    },
+    {
+      target: "quiz-s18",
+      q: "Which of the following best summarizes a key take-away of the integrated osteopathic examination discussed in this lecture?",
+      choices: ["A seamless combined sequence avoids duplication and highlights diagnostic value", "The osteopathic structural exam should always be performed separately from the PE", "Only one examination format is appropriate for all clinical situations", "Focused exams should never be used outside of full comprehensive exams"],
+      correct: 0,
+      explain: "A key take-away is that combining the PE and OSE into a seamless sequence avoids duplication of examination and highlights the diagnostic value of osteopathic findings for efficient clinical decision-making."
+    },
+    {
+      target: "quiz-s18",
+      q: "Which of the following formats can the integrated osteopathic examination be adapted to use, according to this lecture?",
+      choices: ["Systems-based, positional, or focused formats", "Only strictly systems-based formats", "Only strictly positional formats", "Only formats requiring an assistant"],
+      correct: 0,
+      explain: "The integrated osteopathic examination is designed for flexibility and can be adapted to systems-based, positional, or focused formats depending on the clinical situation and patient presentation."
+    }
+  ];
+
+  const grouped = {};
+  quizData.forEach(item => {
+    if (!grouped[item.target]) grouped[item.target] = [];
+    grouped[item.target].push(item);
+  });
+
+  Object.keys(grouped).forEach(targetId => {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+    grouped[targetId].forEach((item, qi) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'quiz-q';
+      const p = document.createElement('p');
+      p.className = 'prompt';
+      p.textContent = (qi + 1) + ". " + item.q;
+      qDiv.appendChild(p);
+
+      const explainDiv = document.createElement('div');
+      explainDiv.className = 'quiz-explain';
+      explainDiv.textContent = item.explain;
+
+      item.choices.forEach((choiceText, ci) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-choice';
+        btn.textContent = choiceText;
+        btn.addEventListener('click', () => {
+          const allBtns = qDiv.querySelectorAll('.quiz-choice');
+          allBtns.forEach(b => b.classList.add('disabled'));
+          if (ci === item.correct) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+            allBtns[item.correct].classList.add('correct');
+          }
+          explainDiv.classList.add('show');
+        });
+        qDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(explainDiv);
+      container.appendChild(qDiv);
+    });
+  });
+
+  // Side nav build + scroll spy
+  const sections = document.querySelectorAll('section.card');
+  const panel = document.getElementById('sidenavPanel');
+  sections.forEach(sec => {
+    const heading = sec.querySelector('h2').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = heading;
+    a.dataset.target = sec.id;
+    panel.appendChild(a);
+  });
+
+  const sidenavToggleBtn = document.getElementById('sidenavToggle');
+  sidenavToggleBtn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    sidenavToggleBtn.classList.toggle('shifted');
+    sidenavToggleBtn.textContent = panel.classList.contains('open') ? 'CLOSE' : 'SECTIONS';
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.target === current);
+    });
+  });
+</script>
+
+</body>
+</html>
