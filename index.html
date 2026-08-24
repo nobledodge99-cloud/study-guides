@@ -251,7 +251,7 @@ transition:max-height 0.25s ease;
 background:var(--panel);
 }
 .sub-dropdown.open{
-max-height:1000px;
+max-height:2500px;
 overflow-y:auto;
 border-top:1px solid var(--line);
 }
@@ -271,6 +271,75 @@ padding:12px 20px 12px 46px;
 color:#8a8578;
 font-family:var(--mono);
 font-size:0.8rem;
+font-style:italic;
+border-bottom:1px solid var(--line);
+}
+
+/* ---- Third-level nested menu, e.g. OCS III & IV -> Exam 1 -> guides ---- */
+.subsubcourse-item{
+border-bottom:1px solid var(--line);
+background:var(--panel);
+}
+.sub-dropdown > .subsubcourse-item:last-child{
+border-bottom:none;
+}
+.subsubcourse-toggle{
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 20px 12px 46px;
+background:none;
+border:none;
+font-family:var(--serif);
+font-size:0.95rem;
+color:var(--ink);
+cursor:pointer;
+text-align:left;
+}
+.subsubcourse-toggle .chevron{
+font-family:var(--mono);
+color:var(--accent);
+transition:transform 0.2s ease;
+margin-left:12px;
+display:inline-block;
+}
+.subsubcourse-toggle.open .chevron{
+transform:rotate(180deg);
+}
+.subsubcourse-toggle.open{
+background:var(--accent-dim);
+}
+.subsub-dropdown{
+list-style:none;
+margin:0;
+padding:0;
+max-height:0;
+overflow:hidden;
+transition:max-height 0.25s ease;
+background:var(--panel);
+}
+.subsub-dropdown.open{
+max-height:2000px;
+overflow-y:auto;
+border-top:1px solid var(--line);
+}
+.subsub-dropdown a{
+display:block;
+padding:11px 20px 11px 60px;
+text-decoration:none;
+color:var(--ink);
+font-size:0.92rem;
+border-bottom:1px solid var(--line);
+}
+.subsub-dropdown li:last-child a, .subsub-dropdown li:last-child .empty-note{ border-bottom:none; }
+.subsub-dropdown a:hover{ background:var(--accent-dim); }
+.subsub-dropdown .empty-note{
+display:block;
+padding:11px 20px 11px 60px;
+color:#8a8578;
+font-family:var(--mono);
+font-size:0.78rem;
 font-style:italic;
 border-bottom:1px solid var(--line);
 }
@@ -482,13 +551,13 @@ text-align:center;
 </li>
 <li class="course-item">
 <button class="course-toggle" aria-expanded="false">
-<span> OCS I & II </span>
+<span> OCS </span>
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="guide-dropdown">
 <li class="subcourse-item">
 <button class="subcourse-toggle" aria-expanded="false">
-<span>OCS I</span>
+<span>OCS I & II</span>
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="sub-dropdown">
@@ -499,10 +568,16 @@ text-align:center;
 </li>
 <li class="subcourse-item">
 <button class="subcourse-toggle" aria-expanded="false">
-<span>OCS II</span>
+<span>OCS III & IV</span>
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="sub-dropdown">
+<li class="subsubcourse-item">
+<button class="subsubcourse-toggle" aria-expanded="false">
+<span>Exam 1</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="subsub-dropdown">
 <li><a href="ocs3-oral-report.html">Oral Reporting</a></li> 
 <li><a href="ocs3-ME-FPR.html">Specific Muscle Energy Techniques & Facilitated Positional Release</a></li>
 <li><a href="ocs3-illness-scripts.html">Illness Scripts</a></li>
@@ -519,6 +594,17 @@ text-align:center;
 <li><a href="ocs3-cardio.html">Osteopathic Approach to Cardiovascular Cases Study Guide</a></li>
 <li><a href="ocs3-obesity.html">The Overweight/Obesity Crisis & the Effect of Physical Activity</a></li>
 <li><a href="ocs3-integrated-exam.html">Integrated Osteopathic Exam Study Guide</a></li>
+</ul>
+</li>
+<li class="subsubcourse-item">
+<button class="subsubcourse-toggle" aria-expanded="false">
+<span>Exam 2</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="subsub-dropdown">
+<li><span class="empty-note">No guides yet</span></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -580,7 +666,7 @@ toggle.setAttribute('aria-expanded', String(willOpen));
 });
 });
 
-// Nested sub-course accordion (e.g. Exam 1 / Exam 2 within MSK II)
+// Nested sub-course accordion (e.g. Exam 1 / Exam 2 within MSK II, or OCS I & II / OCS III & IV within OCS)
 document.querySelectorAll('.subcourse-toggle').forEach(toggle => {
 const subDropdown = toggle.nextElementSibling;
 toggle.addEventListener('click', (e) => {
@@ -603,10 +689,35 @@ toggle.setAttribute('aria-expanded', String(willOpen));
 });
 });
 
+// Third-level sub-sub-course accordion (e.g. Exam 1 / Exam 2 within OCS III & IV)
+document.querySelectorAll('.subsubcourse-toggle').forEach(toggle => {
+const subSubDropdown = toggle.nextElementSibling;
+toggle.addEventListener('click', (e) => {
+e.stopPropagation(); // don't let this bubble up and toggle the parent subcourse/course
+
+const willOpen = !subSubDropdown.classList.contains('open');
+
+// close sibling subsub-dropdowns within the same parent subcourse
+const parentList = toggle.closest('.sub-dropdown');
+parentList.querySelectorAll(':scope > .subsubcourse-item > .subsub-dropdown.open').forEach(d => {
+if (d !== subSubDropdown) {
+d.classList.remove('open');
+d.previousElementSibling.classList.remove('open');
+d.previousElementSibling.setAttribute('aria-expanded', 'false');
+}
+});
+
+subSubDropdown.classList.toggle('open', willOpen);
+toggle.classList.toggle('open', willOpen);
+toggle.setAttribute('aria-expanded', String(willOpen));
+});
+});
+
 /* =========================================================
    Cross-guide search
    - Discovers every guide automatically from the <a href>
-     links already inside .guide-dropdown / .sub-dropdown.
+     links already inside .guide-dropdown / .sub-dropdown /
+     .subsub-dropdown.
    - Add a new guide the normal way (a new <li><a>) and it's
      searchable next time the index runs — nothing else to
      configure here.
@@ -625,7 +736,7 @@ toggle.setAttribute('aria-expanded', String(willOpen));
   let activeIndex = -1;
 
   function discoverLinks(){
-    const anchors = Array.from(document.querySelectorAll('.guide-dropdown a[href], .sub-dropdown a[href]'));
+    const anchors = Array.from(document.querySelectorAll('.guide-dropdown a[href], .sub-dropdown a[href], .subsub-dropdown a[href]'));
     const seen = new Set();
     const links = [];
     anchors.forEach(a => {
