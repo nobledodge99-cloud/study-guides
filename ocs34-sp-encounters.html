@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCS III/IV Standardized Patient Encounters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3d2b;
+    --forest: #2e5539;
+    --sage: #6a8f6b;
+    --sage-light: #dce8dc;
+    --border: #c9d9c4;
+    --accent: #b5651d;
+    --accent-soft: #e8c9a3;
+    --text-main: #26301f;
+    --text-soft: #55614c;
+    --shadow: 0 2px 10px rgba(31,61,43,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.65;
+    padding-bottom: 80px;
+  }
+  h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--forest-dark); }
+  code, .mono, .tag { font-family: 'IBM Plex Mono', monospace; }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  .header h1 { color: var(--cream); font-size: 2em; margin-bottom: 8px; }
+  .header p { color: var(--sage-light); font-size: 1.05em; margin: 4px 0; }
+  .header .source-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: -30px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { margin-top: 0; font-size: 1.2em; }
+  .toc ul { list-style: none; padding-left: 0; margin: 0; columns: 2; column-gap: 30px; }
+  .toc ul li { margin-bottom: 8px; break-inside: avoid; }
+  .toc a { color: var(--forest); text-decoration: none; font-size: 0.95em; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 26px 0;
+    box-shadow: var(--shadow);
+  }
+  section.card h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  section.card h3 { font-size: 1.12em; color: var(--forest); margin-top: 22px; }
+  section.card h4 { font-size: 1em; color: var(--accent); margin-bottom: 4px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.92em; }
+  th, td { border: 1px solid var(--border); padding: 8px 11px; text-align: left; vertical-align: top; }
+  th { background: var(--sage-light); color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .pearl strong { color: var(--forest-dark); }
+
+  .mistake {
+    background: #f3e4d4;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .mistake strong { color: var(--accent); }
+
+  ul.plain, ol.plain { padding-left: 22px; }
+  ul.plain li, ol.plain li { margin-bottom: 6px; }
+  ul.tight li { margin-bottom: 2px; }
+
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li {
+    padding: 6px 0 6px 30px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .checklist li::before {
+    content: "\2610";
+    position: absolute;
+    left: 0;
+    color: var(--forest);
+    font-size: 1.05em;
+  }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 12px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 460;
+    box-shadow: var(--shadow);
+    transition: right 0.25s ease;
+  }
+  .sidenav-toggle.shifted {
+    right: 240px;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -3px 0 12px rgba(0,0,0,0.08);
+    transition: right 0.25s ease;
+    z-index: 450;
+    overflow-y: auto;
+    padding: 60px 16px 20px;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .sidenav-panel a.active { background: var(--sage-light); color: var(--forest-dark); font-weight: 600; }
+  .sidenav-panel a:hover { background: var(--sage-light); }
+
+  @media (max-width: 700px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>OCS III/IV Standardized Patient Encounters</h1>
+  <p>PCM — SP Information &amp; Roadmap</p>
+  <p style="font-size:0.85em; opacity:0.85;">Ben Wilde, DO, FAAFP — Associate Professor of Family Medicine &amp; OMT</p>
+  <span class="source-tag">Built from lecture narration + slides + student instructions handout</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#s00">00. Overview &amp; Objectives</a></li>
+      <li><a href="#s01">01. What's Different in Year 2?</a></li>
+      <li><a href="#s02">02. The Four SP Events This Semester</a></li>
+      <li><a href="#s03">03. Focused History: What to Prioritize</a></li>
+      <li><a href="#s04">04. HPI Checklist</a></li>
+      <li><a href="#s05">05. PMH, Medications, Allergies &amp; Social History</a></li>
+      <li><a href="#s06">06. Family History: Efficient Questioning</a></li>
+      <li><a href="#s07">07. Focused Physical Exam Construction</a></li>
+      <li><a href="#s08">08. OMM: Somatic Dysfunction Evaluation</a></li>
+      <li><a href="#s09">09. End-of-Encounter Summary to the Patient</a></li>
+      <li><a href="#s10">10. Assessment: Structuring Your Differential</a></li>
+      <li><a href="#s11">11. Assessment: Problem List &amp; SDOH</a></li>
+      <li><a href="#s12">12. Plan: The Five Categories</a></li>
+      <li><a href="#s13">13. Verbal Presentation: Structure &amp; Rubric</a></li>
+      <li><a href="#s14">14. Additional Documentation Tips</a></li>
+      <li><a href="#s15">15. Timing &amp; Logistics for SP Day</a></li>
+      <li><a href="#s16">16. Master Quick-Reference Summary Table</a></li>
+    </ul>
+  </div>
+
+  <!-- 00 -->
+  <section class="card" id="s00">
+    <h2>00. Overview &amp; Objectives</h2>
+    <p>Understand the differences between OCS I/II and OCS III/IV standardized patient (SP) encounters, including:</p>
+    <ul class="plain">
+      <li>Problem-focused decision-making and documentation</li>
+      <li>Differential diagnosis development, including documentation of rationale and supporting evidence</li>
+      <li>Verbal presentations</li>
+    </ul>
+  </section>
+
+  <!-- 01 -->
+  <section class="card" id="s01">
+    <h2>01. What's Different in Year 2?</h2>
+    <p>There are three primary differences between OCS I/II and OCS III/IV standardized patient encounters:</p>
+    <ol class="plain">
+      <li><strong>Problem-focused encounters:</strong> You'll switch from a screening exam with a checklist of physical exam elements you demonstrate, to a more realistic clinical encounter — you decide which history and physical exam elements to apply based on the patient's chief complaint. This doesn't mean there's no right or wrong answer: specific historical and physical exam elements are naturally tied to each case, and those are what you'll be graded on.</li>
+      <li><strong>Differential diagnosis development gets top priority</strong> during these encounters and their associated notes. As you develop your differential, plan to write out your rationale or supporting evidence for each diagnosis, drawn from your history and physical exam findings.</li>
+      <li><strong>Verbal presentations are new this year.</strong> You will present the case to your standardized patient as though they were your attending physician.</li>
+    </ol>
+  </section>
+
+  <!-- 02 -->
+  <section class="card" id="s02">
+    <h2>02. The Four SP Events This Semester</h2>
+    <table>
+      <tr><th>Event</th><th>Chief Complaint / Focus</th></tr>
+      <tr><td>Doctor-Patient Relationship (DPR)</td><td>A difficult patient — they may be upset or mad at you about something</td></tr>
+      <tr><td>SP 1</td><td>Cough</td></tr>
+      <tr><td>SP 2</td><td>Palpitations</td></tr>
+      <tr><td>SP 3</td><td>Palpitations follow-up</td></tr>
+    </table>
+    <div class="pearl"><strong>New this semester:</strong> SP 3 is the first time a standardized patient will return to you a second time for a follow-up visit (where possible) — a new experience compared to prior semesters.</div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card" id="s03">
+    <h2>03. Focused History: What to Prioritize</h2>
+    <p>These are more focused encounters — you'll still use all of the historical elements you've been taught, just with a different focus in mind.</p>
+    <ul class="plain">
+      <li>The chief complaint, HPI elements, and review of systems are the elements that most directly inform your differential diagnosis — these are your key priorities</li>
+      <li>Past medical/surgical/social history are still important, but can be asked in a more abbreviated, consolidated way</li>
+    </ul>
+    <div class="pearl"><strong>Example of an efficient, consolidated question:</strong> Instead of asking about each family member and condition individually, you might ask: "As you consider your family members and extended family, is there any heart disease that runs in the family, or any conditions that run in your family?"</div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card" id="s04">
+    <h2>04. HPI Checklist</h2>
+    <ul class="checklist">
+      <li>Onset</li>
+      <li>Location</li>
+      <li>Timing / duration / frequency (constant vs. intermittent — if intermittent, how often and for how long?)</li>
+      <li>Temporal factors (what else happened around onset? the setting connected to the onset)</li>
+      <li>Character</li>
+      <li>Severity (scale of 1&ndash;10, or mild/moderate/severe)</li>
+      <li>Aggravating / alleviating factors</li>
+      <li>Radiation, if applicable</li>
+      <li>Associated symptoms</li>
+    </ul>
+    <div class="pearl">The review of systems can follow right after the HPI. Include both a brief general ROS and targeted questions based specifically on your working differential diagnosis.</div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card" id="s05">
+    <h2>05. PMH, Medications, Allergies &amp; Social History</h2>
+    <h3>Past Medical History — all of:</h3>
+    <ul class="checklist">
+      <li>Chronic illness</li>
+      <li>Hospitalizations</li>
+      <li>Surgeries</li>
+      <li>Major injury</li>
+    </ul>
+    <h3>Medications — all of:</h3>
+    <ul class="checklist">
+      <li>Prescription (with sig)</li>
+      <li>Over-the-counter</li>
+      <li>Supplements</li>
+    </ul>
+    <h3>Allergies — all of:</h3>
+    <ul class="checklist">
+      <li>Medication (with reaction)</li>
+      <li>Environmental (with reaction)</li>
+      <li>Food (with reaction)</li>
+    </ul>
+    <h3>Social History</h3>
+    <ul class="checklist">
+      <li>Occupation</li>
+      <li>Living situation</li>
+      <li>4 substances (this typically refers to tobacco, alcohol, illicit drugs, and caffeine — confirm the specific set expected in your course)</li>
+      <li>Diet / exercise / sleep</li>
+      <li>Sexual history</li>
+    </ul>
+  </section>
+
+  <!-- 06 -->
+  <section class="card" id="s06">
+    <h2>06. Family History: Efficient Questioning</h2>
+    <p>A useful consolidated prompt: <em>"Think about your close family members. Are there any major medical issues with anyone?"</em> Record what the patient tells you as they tell you, rather than asking about each condition and each relative one at a time.</p>
+  </section>
+
+  <!-- 07 -->
+  <section class="card" id="s07">
+    <h2>07. Focused Physical Exam Construction</h2>
+    <p>The physical exam you perform is chosen by you, based on your history findings — but it should follow a consistent construction:</p>
+    <ol class="plain">
+      <li><strong>Vitals</strong> (documented in the note)</li>
+      <li><strong>General assessment</strong> — a brief statement of how the patient looks to you (documented in the note)</li>
+      <li><strong>Primary system</strong> — a full, general (screening) exam of the body system most relevant to the chief complaint</li>
+      <li><strong>Other exam items</strong>, added as appropriate:
+        <ul class="plain tight">
+          <li><strong>Special test skill(s)</strong> to further examine any abnormal findings from the general (screening) exam</li>
+          <li><strong>Additional system item skill(s)</strong> addressing associated symptoms not covered in the primary system's screening exam — expect to need this in every case</li>
+          <li><strong>Targeted skill(s)</strong> that specifically address a diagnosis on your differential</li>
+        </ul>
+      </li>
+    </ol>
+    <div class="pearl">Use your history, your differential diagnosis, and your general (screening) exam results together to determine exactly what additional exam items to include.</div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card" id="s08">
+    <h2>08. OMM: Somatic Dysfunction Evaluation</h2>
+    <ul class="plain">
+      <li>Evaluate for <strong>somatic dysfunction (SD)</strong> as a diagnosis — not simply AGR or TART findings in isolation</li>
+      <li>Feel free to explain to your patient what you are doing and why during this portion of the exam</li>
+      <li>You do <strong>not</strong> need to treat and recheck your lesion during the encounter</li>
+    </ul>
+  </section>
+
+  <!-- 09 -->
+  <section class="card" id="s09">
+    <h2>09. End-of-Encounter Summary to the Patient</h2>
+    <p>Before you leave the room, once your exam is complete, briefly discuss with the patient what you believe may be causing their symptoms and how you plan to initially address it. Keep this brief — broad ideas are appropriate here, since the fuller reasoning goes into your differential diagnosis and plan.</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="card" id="s10">
+    <h2>10. Assessment: Structuring Your Differential</h2>
+    <ul class="plain">
+      <li><strong>Primary problem</strong> (or chief complaint)</li>
+      <li><strong>DDx #1, #2, #3</strong> — each with its own support</li>
+    </ul>
+    <div class="pearl"><strong>What counts as "support":</strong> At least one unique item (a specific piece of evidence) found in the case that explains why you think that diagnosis is a good fit. Support items <em>cannot</em> simply be the primary problem/chief complaint itself, but they <em>can</em> be qualifications of the chief complaint. Example: for a chief complaint of abdominal pain, "pain located in the RLQ" can serve as support for appendicitis, since that detail differentiates it from other items on your differential.</div>
+    <ul class="plain">
+      <li>Your <strong>working (provisional) diagnosis</strong> is the one you believe is most likely to be the actual diagnosis</li>
+      <li><strong>Somatic Dysfunction (SD) diagnosis</strong> — named by region, based on findings listed in your objective/exam section</li>
+    </ul>
+  </section>
+
+  <!-- 11 -->
+  <section class="card" id="s11">
+    <h2>11. Assessment: Problem List &amp; SDOH</h2>
+    <ul class="plain">
+      <li><strong>Other Problem List:</strong> Problems not directly associated with the primary problem — for example, a known PMH issue, abnormal vital signs, or a significant risk factor uncovered in the history (like a family history of diabetes)</li>
+      <li><strong>Social Determinants of Health (SDOH):</strong> Identify and include these in your assessment, under the problem list</li>
+    </ul>
+    <div class="mistake"><strong>Don't forget:</strong> An identified SDOH needs to be addressed somewhere in your plan as well — it shouldn't just sit in the assessment without a corresponding management idea.</div>
+  </section>
+
+  <!-- 12 -->
+  <section class="card" id="s12">
+    <h2>12. Plan: The Five Categories</h2>
+    <p>Address all five categories below as they pertain to the chief complaint and your working diagnosis. Every item in your plan should tie back to something identified in your assessment — especially your differential diagnosis items — showing how you intend to further refine your differential or address other identified problems.</p>
+    <h3>1. Testing</h3>
+    <ul class="plain tight">
+      <li>Be specific — "an ultrasound" isn't enough; specify which ultrasound, which X-ray views, or what kind of CT scan</li>
+      <li>Labs should also specifically target items on your differential — look up the details needed to be precise</li>
+      <li>If you genuinely don't want to order testing because you consider this a clinical diagnosis, simply communicate that</li>
+      <li>Conditional statements are acceptable — e.g., "not planning on labs or imaging now, but will consider adding this if ___"</li>
+    </ul>
+    <h3>2. Treatment</h3>
+    <ul class="plain tight">
+      <li>Prescriptions should include dose, route, and frequency</li>
+      <li>OTC medications should be specified with similar detail</li>
+      <li>Also consider: immobilization, PT/OT, activity modifications, or anything else reasonable given your assessment</li>
+    </ul>
+    <h3>3. OMT (Chosen Treatment)</h3>
+    <p>Deferring OMT is acceptable, if appropriate — just communicate that decision.</p>
+    <h3>4. Patient Education</h3>
+    <p>Aim for specifics rather than generic statements like "medication side effects." If you prescribed a medication, look it up and document the relevant, specific education points in your note.</p>
+    <h3>5. Specific Follow-Up</h3>
+    <ul class="plain tight">
+      <li>Be specific about when and how long — avoid vague terms like "PRN," "if worse," "not better," or "after discharge/testing"</li>
+      <li>Conditional statements are fine as long as there's a definitive timeframe attached — e.g., "Follow-up in 2 weeks. Sooner if worsening, or to the ER if [specific red flags]." This gives a firm 2-week mark with clear conditions for earlier action.</li>
+    </ul>
+    <div class="pearl"><strong>Amoxicillin example of specificity:</strong> Don't just say "give an antibiotic" — say <em>"Amoxicillin 875 mg PO BID x 7 days."</em> As a second-year student, you're expected to specify the exact medication, dose, interval, and duration.</div>
+  </section>
+
+  <!-- 13 -->
+  <section class="card" id="s13">
+    <h2>13. Verbal Presentation: Structure &amp; Rubric</h2>
+    <ul class="plain">
+      <li>After your encounter, you'll have <strong>5 minutes</strong> to prepare your thoughts before presenting</li>
+      <li>You will not have time to include everything from the encounter — highlight the important information</li>
+      <li>Re-enter the exam room and present the case to the SP, who is now acting as your attending physician</li>
+    </ul>
+    <h3>Verbal Presentation Grading Rubric (graded by the SP)</h3>
+    <table>
+      <tr><th>#</th><th>Element</th></tr>
+      <tr><td>1</td><td>Start with the age and sex of the patient</td></tr>
+      <tr><td>2</td><td>The history section contains only history — not exam findings</td></tr>
+      <tr><td>3</td><td>Begin the exam section with vitals</td></tr>
+      <tr><td>4</td><td>The exam section contains only exam items — not history</td></tr>
+      <tr><td>5</td><td>Discussed what you thought was going on, and why</td></tr>
+      <tr><td>6</td><td>Discussed an initial management plan</td></tr>
+      <tr><td>7</td><td>Organized presentation, not too difficult to follow</td></tr>
+      <tr><td>8</td><td>Completed in 5 minutes or less</td></tr>
+    </table>
+    <div class="pearl"><strong>This is formative:</strong> You're expected to make mistakes as you learn and progress with this skill throughout the year. Meet with faculty or fellows if you're struggling.</div>
+  </section>
+
+  <!-- 14 -->
+  <section class="card" id="s14">
+    <h2>14. Additional Documentation Tips</h2>
+    <ul class="plain">
+      <li>Look for efficient ways to acquire history items — the family history example (Section 06) applies to other history elements too</li>
+      <li>Identify and include your Social Determinants of Health in both your history and documentation — park these in your assessment, under the problem list, and make sure they tie into something found in the history and physical</li>
+      <li>Strive for greater specificity throughout your notes — don't just say you're giving "an antibiotic"; say which one, what dose, what interval, and for how long</li>
+    </ul>
+    <div class="pearl"><strong>Learning from feedback:</strong> Anything you learn during the visit, from SP feedback, or during the debrief can be used in your note as though you had actually performed it. Documenting a complete note with the key points and skills you <em>should</em> have obtained reinforces your ability to do so next time.</div>
+  </section>
+
+  <!-- 15 -->
+  <section class="card" id="s15">
+    <h2>15. Timing &amp; Logistics for SP Day</h2>
+    <table>
+      <tr><th>Step</th><th>Duration</th></tr>
+      <tr><td>Arrive for check-in</td><td>15 minutes early</td></tr>
+      <tr><td>Patient encounter</td><td>16 minutes (DPR encounter is 10 minutes, history only)</td></tr>
+      <tr><td>Step out &amp; prepare verbal presentation</td><td>5 minutes</td></tr>
+      <tr><td>Re-enter room &amp; give verbal presentation</td><td>Up to 5 minutes</td></tr>
+      <tr><td>Receive SP feedback</td><td>At least 8 minutes (more if your presentation finishes early)</td></tr>
+      <tr><td>Debrief session</td><td>~30 minutes</td></tr>
+      <tr><td>SOAP note due</td><td>By midnight the same day</td></tr>
+    </table>
+    <div class="mistake"><strong>Be on time:</strong> Students who arrive after the pre-brief/debrief has started will not be permitted to participate — this counts as an <strong>unexcused absence</strong>. These events run on a tight schedule, so be proactive and ready to go at your assigned time.</div>
+    <div class="pearl">A quiet, staffed documentation space is available in the SIM center for students who want to complete their SOAP note right after their encounter. Remember, this is still an individual exercise — do your own work.</div>
+  </section>
+
+  <!-- 16 -->
+  <section class="card" id="s16">
+    <h2>16. Master Quick-Reference Summary Table</h2>
+    <table>
+      <tr><th>Topic</th><th>Key Points</th></tr>
+      <tr><td>3 key differences from OCS I/II</td><td>Problem-focused decision-making &middot; DDx development with documented rationale &middot; new verbal presentations</td></tr>
+      <tr><td>4 SP events this semester</td><td>DPR (difficult patient) &middot; SP1 cough &middot; SP2 palpitations &middot; SP3 palpitations follow-up</td></tr>
+      <tr><td>History priorities</td><td>CC, HPI, ROS drive the differential; PMH/social history can be abbreviated/consolidated</td></tr>
+      <tr><td>Physical exam construction</td><td>Vitals &rarr; general assessment &rarr; full primary system exam &rarr; special tests/additional systems/targeted skills as indicated</td></tr>
+      <tr><td>OMM expectation</td><td>Diagnose somatic dysfunction by region; no treat-and-recheck required</td></tr>
+      <tr><td>DDx support rule</td><td>Each DDx needs at least one unique supporting piece of evidence; can't just restate the chief complaint</td></tr>
+      <tr><td>Plan's 5 categories</td><td>Testing &middot; Treatment &middot; OMT &middot; Patient education &middot; Specific follow-up (all with real specifics, not vague terms)</td></tr>
+      <tr><td>Verbal presentation</td><td>5 min to prepare, 5 min max to present; 8-item rubric graded by the SP acting as attending</td></tr>
+      <tr><td>Timing</td><td>Arrive 15 min early &middot; 16 min encounter (10 min for DPR) &middot; 5 min prep &middot; 5 min presentation &middot; 8+ min feedback &middot; 30 min debrief &middot; SOAP note due by midnight</td></tr>
+    </table>
+  </section>
+
+</div>
+
+<script>
+  // Side nav build + scroll spy
+  const sections = document.querySelectorAll('section.card');
+  const panel = document.getElementById('sidenavPanel');
+  sections.forEach(sec => {
+    const heading = sec.querySelector('h2').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = heading;
+    a.dataset.target = sec.id;
+    panel.appendChild(a);
+  });
+
+  const sidenavToggleBtn = document.getElementById('sidenavToggle');
+  sidenavToggleBtn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    sidenavToggleBtn.classList.toggle('shifted');
+    sidenavToggleBtn.textContent = panel.classList.contains('open') ? 'CLOSE' : 'SECTIONS';
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.target === current);
+    });
+  });
+</script>
+
+</body>
+</html>
