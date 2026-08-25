@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EBM: Importance of Clinical Practice Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3d2b;
+    --forest: #2e5539;
+    --sage: #6a8f6b;
+    --sage-light: #dce8dc;
+    --border: #c9d9c4;
+    --accent: #b5651d;
+    --accent-soft: #e8c9a3;
+    --text-main: #26301f;
+    --text-soft: #55614c;
+    --correct: #2e6b3e;
+    --incorrect: #a13b30;
+    --shadow: 0 2px 10px rgba(31,61,43,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.65;
+    padding-bottom: 80px;
+  }
+  h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--forest-dark); }
+  code, .mono, .tag, .score-badge { font-family: 'IBM Plex Mono', monospace; }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  .header h1 { color: var(--cream); font-size: 2em; margin-bottom: 8px; }
+  .header p { color: var(--sage-light); font-size: 1.05em; margin: 4px 0; }
+  .header .source-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: -30px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { margin-top: 0; font-size: 1.2em; }
+  .toc ul { list-style: none; padding-left: 0; margin: 0; columns: 2; column-gap: 30px; }
+  .toc ul li { margin-bottom: 8px; break-inside: avoid; }
+  .toc a { color: var(--forest); text-decoration: none; font-size: 0.95em; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 26px 0;
+    box-shadow: var(--shadow);
+  }
+  section.card h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  section.card h3 { font-size: 1.12em; color: var(--forest); margin-top: 22px; }
+  section.card h4 { font-size: 1em; color: var(--accent); margin-bottom: 4px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.9em; }
+  th, td { border: 1px solid var(--border); padding: 8px 11px; text-align: left; vertical-align: top; }
+  th { background: var(--sage-light); color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .pearl strong { color: var(--forest-dark); }
+
+  ul.plain, ol.plain { padding-left: 22px; }
+  ul.plain li, ol.plain li { margin-bottom: 6px; }
+  ul.tight li { margin-bottom: 2px; }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin: 24px 0 4px;
+  }
+  .quiz-q {
+    background: #f5f1e6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .quiz-q p.prompt { font-weight: 600; margin-top: 0; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.96em;
+    cursor: pointer;
+    color: var(--text-main);
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #d9ecd9; border-color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f3d9d4; border-color: var(--incorrect); }
+  .quiz-choice.disabled { pointer-events: none; }
+  .quiz-explain {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--cream-card);
+    border-left: 3px solid var(--forest);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 12px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 460;
+    box-shadow: var(--shadow);
+    transition: right 0.25s ease;
+  }
+  .sidenav-toggle.shifted {
+    right: 240px;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -3px 0 12px rgba(0,0,0,0.08);
+    transition: right 0.25s ease;
+    z-index: 450;
+    overflow-y: auto;
+    padding: 60px 16px 20px;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .sidenav-panel a.active { background: var(--sage-light); color: var(--forest-dark); font-weight: 600; }
+  .sidenav-panel a:hover { background: var(--sage-light); }
+
+  @media (max-width: 700px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>EBM: Importance of Clinical Practice Guidelines</h1>
+  <p>Evidence-Based Medicine I</p>
+  <p style="font-size:0.85em; opacity:0.85;">TyRee Jenks, MA, MLIS — Assistant Director of Library Services</p>
+  <span class="source-tag">Built from lecture narration + slides</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#s00">00. Overview &amp; Learning Objectives</a></li>
+      <li><a href="#s01">01. Definition of Clinical Practice Guidelines</a></li>
+      <li><a href="#s02">02. History of Clinical Practice Guidelines</a></li>
+      <li><a href="#s03">03. Key Principles of Guideline Development</a></li>
+      <li><a href="#s04">04. Criteria for Trustworthy Guidelines (IOM Standards)</a></li>
+      <li><a href="#s05">05. GRADE: Grading Recommendations &amp; Evidence</a></li>
+      <li><a href="#s06">06. Other Factors in Evaluating Guideline Credibility</a></li>
+      <li><a href="#s07">07. Guideline Currency, Sponsorship &amp; Conflicts of Interest</a></li>
+      <li><a href="#s08">08. Master High-Yield Summary Table</a></li>
+    </ul>
+  </div>
+
+  <!-- 00 -->
+  <section class="card" id="s00">
+    <h2>00. Overview &amp; Learning Objectives</h2>
+    <ul class="plain">
+      <li>Define clinical practice guidelines</li>
+      <li>Explore clinical practice guideline history and development</li>
+      <li>Identify good clinical practice guidelines</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s00"></div>
+  </section>
+
+  <!-- 01 -->
+  <section class="card" id="s01">
+    <h2>01. Definition of Clinical Practice Guidelines</h2>
+    <div class="pearl">"Clinical practice guidelines are systematically developed statements to assist practitioner and patient decisions about appropriate health care for specific clinical circumstances" &mdash; <strong>Institute of Medicine, 1990</strong></div>
+    <ul class="plain">
+      <li>Guidelines are recommendations for diagnosis, treatment, and prognosis, based on a careful review of the current available medical evidence on a disease or treatment topic</li>
+      <li>They help healthcare professionals understand the most important conclusions from all available studies on a topic, and how to use that information to improve patient care</li>
+      <li>Guidelines are <strong>not fixed protocols</strong> that must be followed — they identify and describe generally recommended courses of intervention, and are intended to <strong>complement, not replace, clinical judgment</strong></li>
+      <li>Patient and provider should work together to determine the best course of action for each individual patient</li>
+      <li>Guidelines are produced by many different organizations — healthcare organizations, medical societies, governmental bodies, and professional bodies — at the local, regional, national, and international levels</li>
+      <li>Because different organizations may review the same evidence differently, guidelines produced by different organizations on the same topic may make different recommendations</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s01"></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="card" id="s02">
+    <h2>02. History of Clinical Practice Guidelines</h2>
+    <ul class="plain">
+      <li>The first known practice guidelines probably appeared in the <strong>Hippocratic Corpus</strong>, a collection of medical texts written between the 6th and 4th centuries BCE — authorship by Hippocrates himself is debated, but this collection likely contains the earliest clinical guidelines between ancient Greece and today</li>
+      <li><strong>Beginning in the 1850s:</strong> standardization of medical terminology</li>
+      <li><strong>1880&ndash;1914:</strong> standardization of physician credentials</li>
+      <li><strong>Turn of the 20th century:</strong> large public health programs developed to prevent and treat endemic diseases like tuberculosis</li>
+      <li><strong>Until the 1970s:</strong> medical practice was regulated mainly by standardized training and credentials recognized by medical schools and state authorities, rather than by formal guidelines</li>
+      <li><strong>1970&ndash;1990:</strong> practice guidelines started to appear</li>
+      <li><strong>1989:</strong> the federal <strong>Agency for Healthcare Research and Quality (AHRQ)</strong> was established with a mandate to produce practice guidelines</li>
+      <li><strong>1990s:</strong> modern clinical practice guidelines developed alongside an Institute of Medicine report and the emergence of evidence-based medicine (EBM)</li>
+      <li><strong>By 2022:</strong> more than 3,000 practice guidelines had been published worldwide</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s02"></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card" id="s03">
+    <h2>03. Key Principles of Guideline Development</h2>
+    <ul class="plain">
+      <li>Establish a <strong>multidisciplinary guideline development group</strong></li>
+      <li>Include a wide range of experts from both local and regional contexts</li>
+      <li>Identify the problem and develop recommendations that are applicable and transferable across sites and health systems</li>
+      <li>Collaborate and consult with people both inside and outside the development group</li>
+    </ul>
+    <div class="pearl"><strong>Important limitation:</strong> Even with these key principles in place, there is still inconsistency in clinical practice and quality of care between different health organizations worldwide. The process for developing clinical practice guidelines has not yet been standardized, so guidelines of varying quality continue to be produced.</div>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s03"></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card" id="s04">
+    <h2>04. Criteria for Trustworthy Guidelines (IOM Standards)</h2>
+    <p>Based on the consensus report <em>Clinical Practice Guidelines We Can Trust</em> (Institute of Medicine of the National Academies), the most trustworthy guidelines can be recognized by how well they meet the following eight standards:</p>
+    <table>
+      <tr><th>Standard</th><th>Comments</th></tr>
+      <tr><td>1. Transparency</td><td>An explicit description of the development and funding process should be publicly accessible</td></tr>
+      <tr><td>2. Conflict of interest</td><td>Conflicts of interest for the guideline development group should be managed by reporting, exclusion, and divestment</td></tr>
+      <tr><td>3. Members of the guideline development group</td><td>The group should be multidisciplinary and balanced, comprising clinicians, methodological experts, and representatives (including a patient or consumer) of the population expected to be affected by the guideline</td></tr>
+      <tr><td>4. Review of the literature</td><td>The guideline should be based on a rigorous, systematic review of the literature, considering the quality, quantity, and consistency of the aggregate evidence</td></tr>
+      <tr><td>5. Rating strength of evidence and recommendations</td><td>Each recommendation should be accompanied by its underlying reasoning, potential benefits and harms, the evidence and its quality, the contribution of values/experience, a rating of confidence in the evidence, a rating of the strength of the recommendation, and any differences of opinion</td></tr>
+      <tr><td>6. Presentation of recommendations</td><td>The guideline should state precisely the recommended actions, when they should be performed, and how compliance could be measured</td></tr>
+      <tr><td>7. External review</td><td>The guideline should be reviewed by the full spectrum of relevant stakeholders, with an open period for public comment before it is finalized</td></tr>
+      <tr><td>8. Updating</td><td>The guideline should state its date of publication and evidence review, and be updated when new, clinically important evidence becomes available</td></tr>
+    </table>
+    <div class="pearl"><strong>Board tip:</strong> The IOM has noted that <em>all</em> of these criteria should be met for a guideline to be judged trustworthy — meeting only some of them is not sufficient.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s04"></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card" id="s05">
+    <h2>05. GRADE: Grading Recommendations &amp; Evidence</h2>
+    <p>The <strong>G</strong>rading of <strong>R</strong>ecommendations, <strong>A</strong>ssessment, <strong>D</strong>evelopment, and <strong>E</strong>valuation (GRADE) system is widely used to grade both the strength of a recommendation and the certainty of the underlying evidence — these are graded <strong>separately</strong>.</p>
+    <table>
+      <tr><th>Component</th><th>Levels</th></tr>
+      <tr><td>Strength of recommendation</td><td>2 levels: <strong>Strong</strong> or <strong>Weak</strong></td></tr>
+      <tr><td>Certainty of evidence</td><td>4 levels: <strong>High, Moderate, Low, Very low</strong></td></tr>
+    </table>
+    <ul class="plain">
+      <li>A <strong>strong recommendation</strong> is appropriate when benefits clearly outweigh risks (or vice versa) for nearly all patients</li>
+      <li>A <strong>weak recommendation</strong> is appropriate when risks and benefits are closely balanced or uncertain</li>
+    </ul>
+    <table>
+      <tr><th>Certainty of Evidence</th><th>Typical Source</th></tr>
+      <tr><td>High</td><td>Well-performed randomized controlled trials, or other overwhelming evidence (e.g., a well-executed observational study with very large effects)</td></tr>
+      <tr><td>Moderate</td><td>Randomized trials with important limitations, or other study designs with special strength</td></tr>
+      <tr><td>Low</td><td>Observational studies, or controlled trials with very serious limitations</td></tr>
+      <tr><td>Very low</td><td>Non-systematic observations, biological reasoning, or observational studies with serious limitations</td></tr>
+    </table>
+    <div class="pearl"><strong>Format note:</strong> Some sources (e.g., older UpToDate guideline grading) implement GRADE using a 3-level evidence-quality scale paired with a number/letter combination — for example, <strong>1A</strong> (strong recommendation, high-quality evidence) down to <strong>2C</strong> (weak recommendation, low-quality evidence) — rather than the 4-level "high/moderate/low/very low" scale described above. Both formats exist in practice, so recognize either presentation.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s05"></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="card" id="s06">
+    <h2>06. Other Factors in Evaluating Guideline Credibility</h2>
+    <p>Guidelines should consider more than simply whether an intervention has a measurable effect. Other clinically relevant factors — collectively part of the <strong>GRADE Evidence to Decision Framework</strong> — include:</p>
+    <ul class="plain tight">
+      <li>The magnitude of the effect</li>
+      <li>Harms from the intervention</li>
+      <li>Convenience and side effects</li>
+      <li>The clinical skills necessary to carry out the intervention successfully</li>
+      <li>Patient preferences</li>
+      <li>Cost and cost-effectiveness</li>
+      <li>The workforce necessary to implement the recommendations</li>
+    </ul>
+    <div class="pearl"><strong>On patient preferences:</strong> The role of (and variation in) patient preferences is now recognized as important for most healthcare decisions. Guidelines on most topics should explicitly state what assumptions about patient preferences were used in reaching each recommendation.</div>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s06"></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="card" id="s07">
+    <h2>07. Guideline Currency, Sponsorship &amp; Conflicts of Interest</h2>
+    <h3>Currency (How Up-to-Date Is It?)</h3>
+    <ul class="plain">
+      <li>Guidelines may be produced only once, or updated at several-year intervals</li>
+      <li>In fast-moving fields — such as HIV treatment — guidelines may be out of date in less than a year</li>
+      <li>The <strong>median survival time</strong> for a guideline (before it needs meaningful revision) is about <strong>5.5 years</strong></li>
+      <li>In the absence of strong justification, a guideline that has not undergone review (with updating, if needed) within 5 years of publication should <strong>not</strong> be considered current</li>
+    </ul>
+    <h3>Sponsoring Society</h3>
+    <ul class="plain">
+      <li>Statements formally endorsed by respected national bodies are subject to scrutiny by health professionals, and sometimes the public through media coverage</li>
+      <li>These organizations have a strong incentive to safeguard their reputation by ensuring their guidelines stand up to scrutiny</li>
+      <li>However, the good standing of a sponsoring organization does <strong>not</strong> guarantee quality — it is preferable that guidelines undergo careful review and endorsement by experts outside the organization (or at least by sponsoring-organization representatives other than the panel members)</li>
+    </ul>
+    <h3>Conflicts of Interest</h3>
+    <ul class="plain">
+      <li>Guidelines should report conflicts of interest — financial or otherwise — for each panel member</li>
+      <li>The IOM Committee on Standards for Developing Trustworthy Clinical Practice Guidelines recommends written disclosure of any commercial, noncommercial, intellectual, institutional, patient, or public activity pertinent to the guideline's scope</li>
+      <li>Conflicts of interest should be <strong>publicly disclosed</strong> and <strong>updated regularly</strong></li>
+      <li><strong>No one with a relevant conflict of interest should decide the direction or strength of a recommendation</strong></li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s07"></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card" id="s08">
+    <h2>08. Master High-Yield Summary Table</h2>
+    <table>
+      <tr><th>Topic</th><th>Key Facts</th></tr>
+      <tr><td>IOM definition (1990)</td><td>Systematically developed statements to assist practitioner and patient decisions for specific clinical circumstances</td></tr>
+      <tr><td>Role of guidelines</td><td>Complement, not replace, clinical judgment; not fixed/mandatory protocols</td></tr>
+      <tr><td>Earliest known guidelines</td><td>Hippocratic Corpus (6th&ndash;4th century BCE)</td></tr>
+      <tr><td>Key history dates</td><td>1850s terminology standardization &middot; 1880&ndash;1914 credentialing &middot; 1989 AHRQ established &middot; 1990s modern CPGs + EBM emergence &middot; 2022: &gt;3,000 guidelines published worldwide</td></tr>
+      <tr><td>Guideline development group</td><td>Multidisciplinary, local + regional experts, collaborates with outside consultants</td></tr>
+      <tr><td>8 IOM trustworthiness standards</td><td>Transparency, conflict of interest, balanced multidisciplinary group, systematic literature review, rating of evidence/recommendation strength, precise presentation, external review with public comment, scheduled updating</td></tr>
+      <tr><td>GRADE — strength of recommendation</td><td>2 levels: Strong or Weak</td></tr>
+      <tr><td>GRADE — certainty of evidence</td><td>4 levels: High, Moderate, Low, Very low</td></tr>
+      <tr><td>Evidence to Decision Framework factors</td><td>Effect magnitude, harms, convenience/side effects, needed clinical skill, patient preferences, cost/cost-effectiveness, workforce needs</td></tr>
+      <tr><td>Guideline currency rule</td><td>Median guideline "lifespan" ~5.5 years; not reviewed within 5 years &rarr; generally not current</td></tr>
+      <tr><td>Conflict of interest rule</td><td>Must be disclosed publicly, updated regularly; conflicted members should not decide recommendation direction/strength</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s08"></div>
+  </section>
+
+</div>
+
+<script>
+  const quizData = [
+    {
+      target: "quiz-s00",
+      q: "A student wants to explain to a colleague what clinical practice guidelines are actually meant to accomplish in patient care, based on the objectives of this lecture. Which of the following best captures that goal?",
+      choices: ["To provide fixed protocols that must be followed for every patient encounter", "To replace clinical judgment entirely with a single standardized decision tree", "To help clinicians understand and apply the most important evidence-based conclusions on a topic", "To eliminate the need for shared decision-making between patient and provider"],
+      correct: 2,
+      explain: "Clinical practice guidelines are meant to help healthcare professionals understand the most important conclusions from available evidence and use that information to improve patient care — not to serve as mandatory protocols or replace clinical judgment and shared decision-making."
+    },
+    {
+      target: "quiz-s01",
+      q: "According to the Institute of Medicine's 1990 definition, clinical practice guidelines are best described as which of the following?",
+      choices: ["Mandatory legal standards enforced by state medical boards", "Systematically developed statements to assist practitioner and patient decisions for specific clinical circumstances", "A single expert's personal treatment recommendations", "Insurance company policies dictating covered treatments"],
+      correct: 1,
+      explain: "The IOM's 1990 definition describes clinical practice guidelines as systematically developed statements intended to assist practitioner and patient decisions about appropriate health care for specific clinical circumstances."
+    },
+    {
+      target: "quiz-s01",
+      q: "A resident insists on following a guideline recommendation exactly, even though the patient's specific circumstances suggest a different approach might be more appropriate. What is the most accurate description of the intended role of guidelines in this situation?",
+      choices: ["Guidelines are intended to complement, not replace, individualized clinical judgment", "Guidelines are legally binding and must always be followed exactly as written", "Guidelines apply equally to every patient regardless of individual circumstances", "Guidelines are only suggestions with no basis in reviewed evidence"],
+      correct: 0,
+      explain: "Guidelines are not fixed protocols — they are intended to complement, not replace, clinical judgment, with patient and provider working together to determine the best course of action for each individual patient."
+    },
+    {
+      target: "quiz-s02",
+      q: "Which historical collection is credited as likely containing some of the earliest known clinical practice guidelines?",
+      choices: ["The Hippocratic Corpus", "The Merck Manual", "The Flexner Report", "The Nuremberg Code"],
+      correct: 0,
+      explain: "The Hippocratic Corpus, a collection of medical texts written between the 6th and 4th centuries BCE, probably contains the earliest clinical guidelines between ancient Greece and today, though Hippocrates' personal authorship of these texts is debated."
+    },
+    {
+      target: "quiz-s02",
+      q: "Which federal agency was established in 1989 with a mandate to produce practice guidelines?",
+      choices: ["The Food and Drug Administration", "The Centers for Disease Control and Prevention", "The Agency for Healthcare Research and Quality", "The National Institutes of Health"],
+      correct: 2,
+      explain: "The federal Agency for Healthcare Research and Quality (AHRQ) was established in 1989 with a mandate to produce practice guidelines, preceding the modern CPG movement of the 1990s."
+    },
+    {
+      target: "quiz-s03",
+      q: "According to the key principles of guideline development discussed in this lecture, which of the following should characterize a guideline development group?",
+      choices: ["It should consist solely of methodological experts with no clinical experience", "It should exclude outside consultation to avoid bias", "It should be limited to representatives of the sponsoring organization only", "It should be multidisciplinary, including a wide range of experts from local and regional contexts"],
+      correct: 3,
+      explain: "Key principles call for establishing a multidisciplinary guideline development group with a wide range of experts from both local and regional contexts, and for collaborating and consulting with people both inside and outside the group."
+    },
+    {
+      target: "quiz-s04",
+      q: "A guideline development group publishes their funding sources and development process publicly before releasing their recommendations. Which IOM standard for trustworthy guidelines does this best satisfy?",
+      choices: ["Transparency", "Rating strength of evidence", "External review", "Updating"],
+      correct: 0,
+      explain: "The Transparency standard specifically requires an explicit description of the development and funding process that is publicly accessible — exactly what this group has done."
+    },
+    {
+      target: "quiz-s04",
+      q: "Which IOM standard specifically requires that the general public have an opportunity to review a guideline before it is finalized?",
+      choices: ["Conflict of interest", "Review of the literature", "External review", "Presentation of recommendations"],
+      correct: 2,
+      explain: "The External Review standard requires that the guideline be reviewed by the full spectrum of relevant stakeholders, including an open period for public comment before the guideline is finalized."
+    },
+    {
+      target: "quiz-s05",
+      q: "A recommendation states that, for nearly all patients, the benefits of an intervention clearly outweigh the risks. How should this recommendation be graded using the GRADE system?",
+      choices: ["A weak recommendation with low certainty of evidence", "A strong recommendation", "A recommendation with no assigned strength, since GRADE does not rate strength", "A conditional recommendation dependent solely on patient preference"],
+      correct: 1,
+      explain: "A strong recommendation is appropriate for situations in which benefits clearly outweigh risks (or vice versa) for nearly all patients — this is one of GRADE's two strength-of-recommendation levels, along with weak."
+    },
+    {
+      target: "quiz-s05",
+      q: "Which level of evidence certainty in the GRADE system typically comes from well-performed randomized controlled trials or other overwhelming evidence?",
+      choices: ["Very low certainty", "Low certainty", "Moderate certainty", "High certainty"],
+      correct: 3,
+      explain: "High certainty evidence typically comes from well-performed randomized controlled trials, or other overwhelming evidence such as a well-executed observational study with very large effects."
+    },
+    {
+      target: "quiz-s05",
+      q: "A recommendation is based primarily on non-systematic observations and biological reasoning, without controlled studies. What certainty of evidence rating would this receive under GRADE?",
+      choices: ["High certainty", "Moderate certainty", "Low certainty", "Very low certainty"],
+      correct: 3,
+      explain: "Very low certainty evidence typically comes from non-systematic observations, biological reasoning, or observational studies with serious limitations."
+    },
+    {
+      target: "quiz-s06",
+      q: "Beyond whether an intervention has a measurable effect, which of the following is also considered part of the GRADE Evidence to Decision Framework?",
+      choices: ["The alphabetical order of the intervention's name", "Patient preferences and cost-effectiveness", "The number of authors on the guideline panel", "The publisher's marketing budget"],
+      correct: 1,
+      explain: "The GRADE Evidence to Decision Framework includes factors such as the magnitude of effect, harms, convenience and side effects, required clinical skill, patient preferences, cost and cost-effectiveness, and workforce needed for implementation."
+    },
+    {
+      target: "quiz-s07",
+      q: "A clinical practice guideline was published 6 years ago and has not undergone any review or update since. In the absence of strong justification, how should this guideline be regarded?",
+      choices: ["It should be considered fully current regardless of publication date", "It should be considered more reliable than newer guidelines", "It should be discarded entirely and never referenced", "It should generally not be considered current"],
+      correct: 3,
+      explain: "In the absence of strong justification, a guideline that has not undergone review (with updating, if needed) within 5 years of publication should not be considered current — this guideline exceeds that window."
+    },
+    {
+      target: "quiz-s07",
+      q: "According to IOM recommendations, which of the following is true regarding a guideline panel member with a relevant conflict of interest?",
+      choices: ["They should be allowed to lead the recommendation process if they disclose the conflict", "They should not be permitted to decide the direction or strength of a recommendation", "Conflicts of interest do not need to be disclosed if they are non-financial", "Conflicts of interest only need to be disclosed once and never updated"],
+      correct: 1,
+      explain: "The IOM recommends that no one with a relevant conflict of interest should decide the direction or strength of a recommendation, and that conflicts of interest (financial or otherwise) be publicly disclosed and updated regularly."
+    },
+    {
+      target: "quiz-s08",
+      q: "Which of the following best reflects the two components used to grade recommendations in the GRADE system?",
+      choices: ["Strength of recommendation and certainty of evidence", "Cost and patient age", "Publication year and journal impact factor", "Number of guideline panel members and their specialties"],
+      correct: 0,
+      explain: "GRADE has two components: a two-level representation of the strength of the recommendation (strong or weak), and a four-level representation of the certainty of evidence (high, moderate, low, very low)."
+    },
+    {
+      target: "quiz-s08",
+      q: "What is the approximate median time cited for a clinical practice guideline to remain valid before needing review or update?",
+      choices: ["About 1 year", "About 2.5 years", "About 5.5 years", "About 10 years"],
+      correct: 2,
+      explain: "The median survival time for a guideline before it needs meaningful revision is about 5.5 years, and guidelines not reviewed within 5 years (absent strong justification) should generally not be considered current."
+    }
+  ];
+
+  const grouped = {};
+  quizData.forEach(item => {
+    if (!grouped[item.target]) grouped[item.target] = [];
+    grouped[item.target].push(item);
+  });
+
+  Object.keys(grouped).forEach(targetId => {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+    grouped[targetId].forEach((item, qi) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'quiz-q';
+      const p = document.createElement('p');
+      p.className = 'prompt';
+      p.textContent = (qi + 1) + ". " + item.q;
+      qDiv.appendChild(p);
+
+      const explainDiv = document.createElement('div');
+      explainDiv.className = 'quiz-explain';
+      explainDiv.textContent = item.explain;
+
+      item.choices.forEach((choiceText, ci) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-choice';
+        btn.textContent = choiceText;
+        btn.addEventListener('click', () => {
+          const allBtns = qDiv.querySelectorAll('.quiz-choice');
+          allBtns.forEach(b => b.classList.add('disabled'));
+          if (ci === item.correct) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+            allBtns[item.correct].classList.add('correct');
+          }
+          explainDiv.classList.add('show');
+        });
+        qDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(explainDiv);
+      container.appendChild(qDiv);
+    });
+  });
+
+  // Side nav build + scroll spy
+  const sections = document.querySelectorAll('section.card');
+  const panel = document.getElementById('sidenavPanel');
+  sections.forEach(sec => {
+    const heading = sec.querySelector('h2').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = heading;
+    a.dataset.target = sec.id;
+    panel.appendChild(a);
+  });
+
+  const sidenavToggleBtn = document.getElementById('sidenavToggle');
+  sidenavToggleBtn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    sidenavToggleBtn.classList.toggle('shifted');
+    sidenavToggleBtn.textContent = panel.classList.contains('open') ? 'CLOSE' : 'SECTIONS';
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.target === current);
+    });
+  });
+</script>
+
+</body>
+</html>
