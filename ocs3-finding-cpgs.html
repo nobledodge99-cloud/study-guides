@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EBM II: Finding Clinical Practice Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3d2b;
+    --forest: #2e5539;
+    --sage: #6a8f6b;
+    --sage-light: #dce8dc;
+    --border: #c9d9c4;
+    --accent: #b5651d;
+    --accent-soft: #e8c9a3;
+    --text-main: #26301f;
+    --text-soft: #55614c;
+    --correct: #2e6b3e;
+    --incorrect: #a13b30;
+    --shadow: 0 2px 10px rgba(31,61,43,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.65;
+    padding-bottom: 80px;
+  }
+  h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--forest-dark); }
+  code, .mono, .tag, .score-badge { font-family: 'IBM Plex Mono', monospace; }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  .header h1 { color: var(--cream); font-size: 2em; margin-bottom: 8px; }
+  .header p { color: var(--sage-light); font-size: 1.05em; margin: 4px 0; }
+  .header .source-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: -30px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { margin-top: 0; font-size: 1.2em; }
+  .toc ul { list-style: none; padding-left: 0; margin: 0; columns: 2; column-gap: 30px; }
+  .toc ul li { margin-bottom: 8px; break-inside: avoid; }
+  .toc a { color: var(--forest); text-decoration: none; font-size: 0.95em; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 26px 0;
+    box-shadow: var(--shadow);
+  }
+  section.card h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  section.card h3 { font-size: 1.12em; color: var(--forest); margin-top: 22px; }
+  section.card h4 { font-size: 1em; color: var(--accent); margin-bottom: 4px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.9em; }
+  th, td { border: 1px solid var(--border); padding: 8px 11px; text-align: left; vertical-align: top; }
+  th { background: var(--sage-light); color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .pearl strong { color: var(--forest-dark); }
+
+  ul.plain, ol.plain { padding-left: 22px; }
+  ul.plain li, ol.plain li { margin-bottom: 6px; }
+  ul.tight li { margin-bottom: 2px; }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin: 24px 0 4px;
+  }
+  .quiz-q {
+    background: #f5f1e6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .quiz-q p.prompt { font-weight: 600; margin-top: 0; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.96em;
+    cursor: pointer;
+    color: var(--text-main);
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #d9ecd9; border-color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f3d9d4; border-color: var(--incorrect); }
+  .quiz-choice.disabled { pointer-events: none; }
+  .quiz-explain {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--cream-card);
+    border-left: 3px solid var(--forest);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 12px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 460;
+    box-shadow: var(--shadow);
+    transition: right 0.25s ease;
+  }
+  .sidenav-toggle.shifted {
+    right: 240px;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -3px 0 12px rgba(0,0,0,0.08);
+    transition: right 0.25s ease;
+    z-index: 450;
+    overflow-y: auto;
+    padding: 60px 16px 20px;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .sidenav-panel a.active { background: var(--sage-light); color: var(--forest-dark); font-weight: 600; }
+  .sidenav-panel a:hover { background: var(--sage-light); }
+
+  @media (max-width: 700px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>EBM II: Finding Clinical Practice Guidelines</h1>
+  <p>Evidence-Based Medicine II</p>
+  <p style="font-size:0.85em; opacity:0.85;">TyRee Jenks, MA, MLIS — Assistant Director of Library Services</p>
+  <span class="source-tag">Built from lecture narration + slides</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#s00">00. Overview &amp; Learning Objectives</a></li>
+      <li><a href="#s01">01. Organizations That Produce CPGs: NIH</a></li>
+      <li><a href="#s02">02. Organizations That Produce CPGs: ACP, HSTAT &amp; VA/DoD</a></li>
+      <li><a href="#s03">03. Other Guideline-Producing Organizations</a></li>
+      <li><a href="#s04">04. Access Considerations: Where &amp; How to Find Guidelines</a></li>
+      <li><a href="#s05">05. Finding CPGs at the NIH</a></li>
+      <li><a href="#s06">06. Finding CPGs at the American College of Physicians</a></li>
+      <li><a href="#s07">07. Finding CPGs at VA/DoD</a></li>
+      <li><a href="#s08">08. ECRI Guidelines Trust</a></li>
+      <li><a href="#s09">09. PubMed</a></li>
+      <li><a href="#s10">10. ClinicalKey</a></li>
+      <li><a href="#s11">11. DynaMed</a></li>
+      <li><a href="#s12">12. UpToDate</a></li>
+      <li><a href="#s13">13. MEDLINE Complete</a></li>
+      <li><a href="#s14">14. TRIP Database</a></li>
+      <li><a href="#s15">15. Guidelines International Network (GIN) &amp; WHO</a></li>
+      <li><a href="#s16">16. Trusted Professional Websites (MedlinePlus)</a></li>
+      <li><a href="#s17">17. Master Quick-Reference Summary Table</a></li>
+    </ul>
+  </div>
+
+  <!-- 00 -->
+  <section class="card" id="s00">
+    <h2>00. Overview &amp; Learning Objectives</h2>
+    <ul class="plain">
+      <li>Discover organizations that produce clinical practice guidelines</li>
+      <li>Explore available resources that contain clinical practice guidelines</li>
+      <li>Demonstrate the use of information technology to access clinical practice guidelines</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s00"></div>
+  </section>
+
+  <!-- 01 -->
+  <section class="card" id="s01">
+    <h2>01. Organizations That Produce CPGs: NIH</h2>
+    <ul class="plain">
+      <li>The <strong>National Institutes of Health (NIH)</strong> is composed of <strong>27 institutes and centers</strong>, each with its own research agenda, often focused on particular diseases and body systems</li>
+      <li>The NIH is the primary federal agency for conducting and supporting medical research</li>
+      <li>To find guidelines, you typically select the specific institute first (e.g., the National Cancer Institute), then search within that institute's own site</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s01"></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="card" id="s02">
+    <h2>02. Organizations That Produce CPGs: ACP, HSTAT &amp; VA/DoD</h2>
+    <h3>American College of Physicians (ACP)</h3>
+    <p>Produces evidence-based guidelines on many topics relating to internal medicine, with the goal of informing clinicians of the best available evidence, offering advice when there is no evidence, and helping clinicians deliver the best health care possible.</p>
+    <h3>Health Services/Technology Assessment Text (HSTAT)</h3>
+    <p>A free, searchable collection of large, full-text clinical practice guidelines, technology assessments, quick-reference guides for clinicians, consumer health brochures, evidence reports, and health information.</p>
+    <h3>VA/DoD Clinical Practice Guidelines</h3>
+    <p>The Veterans Health Administration, in collaboration with the Department of Defense, has been developing clinical practice guidelines since the <strong>early 1990s</strong>. In <strong>2010</strong>, the Institute of Medicine identified the VA and DoD as leaders in clinical practice guideline development.</p>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s02"></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card" id="s03">
+    <h2>03. Other Guideline-Producing Organizations</h2>
+    <ul class="plain">
+      <li>Specialist organizations, such as the <strong>American Psychological Association</strong></li>
+      <li>International organizations, such as the <strong>National Institute for Health and Care Excellence (NICE)</strong> in England</li>
+    </ul>
+    <div class="pearl">Because guidelines are produced by so many different organizations, they can be scattered across numerous resources — which can sometimes make finding a specific guideline a challenge.</div>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s03"></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card" id="s04">
+    <h2>04. Access Considerations: Where &amp; How to Find Guidelines</h2>
+    <ul class="plain">
+      <li>Some guidelines are freely available; others are behind paid services such as databases, journal subscriptions, or professional organization memberships</li>
+      <li>Guidelines may be published in professional journals, posted on health agency or professional organization websites, or embedded in point-of-care tools</li>
+      <li>Several factors can affect which resources you're able to access to find guidelines:
+        <ul class="plain tight">
+          <li>What point you're at in your medical education — internship, residency, clerkship, or fellowship</li>
+          <li>Where you practice medicine long-term — working for a health care system versus private practice</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s04"></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card" id="s05">
+    <h2>05. Finding CPGs at the NIH</h2>
+    <ol class="plain">
+      <li>Select the specific institute you're interested in — browse the full list of NIH institutes and centers, or use the Quick Links if you know the institute's acronym</li>
+      <li>Example: the <strong>National Cancer Institute</strong></li>
+      <li>Once on the institute's page, use its internal search box:
+        <ul class="plain tight">
+          <li>Search simply for "clinical practice guidelines" to see a list of all guidelines available at that site</li>
+          <li>Or search a specific topic plus the word "guidelines" to narrow the results</li>
+        </ul>
+      </li>
+      <li>Select a guideline of interest from the results list to review its full information</li>
+    </ol>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s05"></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="card" id="s06">
+    <h2>06. Finding CPGs at the American College of Physicians</h2>
+    <ul class="plain">
+      <li>The ACP website has a <strong>Clinical Guidelines and Recommendations</strong> page under Clinical Information</li>
+      <li>You can select a topic of interest directly, or use the search feature at the top of the page</li>
+      <li>Example: searching "appropriate antibiotic use" surfaces best practice advice as well as patient materials</li>
+      <li>The full text of the best practice advice contains the complete guidance on that topic</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s06"></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="card" id="s07">
+    <h2>07. Finding CPGs at VA/DoD</h2>
+    <ul class="plain">
+      <li>VA/DoD has a site dedicated specifically to clinical practice guidelines, including an introductory video with additional detail</li>
+      <li>Guidelines are broken up into major topic areas via a dedicated tab</li>
+      <li>An <strong>archive page</strong> holds any CPGs that have been retired</li>
+      <li>A <strong>"What's New"</strong> page shows updated guidelines and the newest published guidelines</li>
+      <li>Links to additional CPG resources are also provided, along with a search box at the top of the page</li>
+      <li>Selecting a topic provides: the full report, a provider summary, a reference card, and sometimes even pocket cards</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s07"></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card" id="s08">
+    <h2>08. ECRI Guidelines Trust</h2>
+    <ul class="plain">
+      <li>One of the best <strong>free</strong> resources for searching widely for practice guidelines — you can create an account, search for guidelines, and view original source documentation</li>
+      <li>ECRI outlines specific inclusion criteria required for a guideline to be added to the Guidelines Trust</li>
+      <li>Search by keyword, or browse by clinical area (e.g., Allergy and Immunology)</li>
+      <li>Each result shows: the title, a guideline ID number, publication date, the publishing group, and where to access the full information</li>
+      <li>Left-side limiters allow filtering by: most recently published, publishing organization, patient age (pediatric vs. adult), additional clinical areas, or specific interventions</li>
+      <li>Identifiers on each guideline indicate whether a systematic review was conducted, whether evidence quality was rated, and the strength of the recommendations</li>
+      <li>Clicking a guideline's title opens the full text with complete access to all its information</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s08"></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="card" id="s09">
+    <h2>09. PubMed</h2>
+    <p>PubMed was developed by the National Center for Biotechnology Information at the National Library of Medicine, providing access to bibliographic information and publisher-supplied citations.</p>
+    <ol class="plain">
+      <li>Search your topic first (e.g., "bipolar disorder")</li>
+      <li>Scroll to the bottom of the left-hand filters and select <strong>Additional filters</strong></li>
+      <li>Under <strong>Article Type</strong>, scroll down to find <strong>Practice Guideline</strong> and click Show — this adds it as a filter option</li>
+      <li>Apply the Practice Guideline filter to limit your results specifically to practice guidelines</li>
+      <li>Results show the total number of results, title, authors, and where each was published; you can further limit by publication date to see the most recent guidelines</li>
+      <li>Clicking a title opens the abstract, additional information, and a link to the full text</li>
+    </ol>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s09"></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="card" id="s10">
+    <h2>10. ClinicalKey</h2>
+    <ul class="plain">
+      <li>A comprehensive online clinical information resource including textbooks, journals, drug information, practice guidelines, and other resources — includes guideline updates</li>
+      <li>The homepage has a section dedicated specifically to clinical practice guidelines; clicking it lets you browse all listed guideline titles</li>
+      <li>You can also search by topic/keyword, or use the specialty limiters on the left</li>
+      <li>Example: searching "hypertension," then selecting "guidelines" as the result type</li>
+      <li>Results show the title, a link to download the full-text PDF, publication venue, authors, and publication date — with further limits available by specialty and date</li>
+      <li>Opening an article provides a table of contents for that guideline</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s10"></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="card" id="s11">
+    <h2>11. DynaMed</h2>
+    <ol class="plain">
+      <li>Enter keywords into the search box at the top of the page (e.g., "autism spectrum disorders")</li>
+      <li>This opens the overall topic guide compiled by DynaMed on that subject</li>
+      <li>In the left navigation, go to <strong>Guidelines and Resources</strong> to find the clinical practice guidelines</li>
+      <li>Results can be further limited by location/region</li>
+    </ol>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s11"></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="card" id="s12">
+    <h2>12. UpToDate</h2>
+    <p>UpToDate provides evidence-based, point-of-care clinical decision support, including clinical overviews, drug monographs and interactions, graphics and calculators, and clinical decision-making pathways. It can also point clinicians to numerous links for practice guidelines.</p>
+    <ol class="plain">
+      <li>Start with the search box and type in your topic of interest</li>
+      <li>Select an article on that topic</li>
+      <li>In the left navigation, scroll down to <strong>Society Guideline Links</strong></li>
+      <li>This shows all society guideline links related to your topic — often including international guidelines and guides from multiple countries</li>
+    </ol>
+    <div class="pearl"><strong>Example:</strong> A search on diabetes reveals multiple society guideline links relating to different diabetes-related conditions, plus links like the latest "Standards of Care in Diabetes" — complete with editorial board information and a revision history.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s12"></div>
+  </section>
+
+  <!-- 13 -->
+  <section class="card" id="s13">
+    <h2>13. MEDLINE Complete</h2>
+    <p>A full-text database of biomedical and health journals, offering access to over <strong>1,500 active, full-text journals</strong> with comprehensive cover-to-cover indexing — a valuable research tool for physicians, healthcare practitioners, and scholars.</p>
+    <p>To search: start from the Advanced Search screen and type in your subject of interest (e.g., "pain management").</p>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s13"></div>
+  </section>
+
+  <!-- 14 -->
+  <section class="card" id="s14">
+    <h2>14. TRIP Database</h2>
+    <p><strong>TRIP</strong> stands for "<strong>T</strong>urning <strong>R</strong>esearch <strong>I</strong>nto <strong>P</strong>ractice" — a clinical search engine designed to help users quickly and easily find and use high-quality research evidence to support their practice. It has both free and paid versions; you can create a free account or simply use the search feature directly.</p>
+    <ol class="plain">
+      <li>Search a topic of interest (e.g., "cardiomyopathy") to get a full results list</li>
+      <li>Use the <strong>Guidelines</strong> filter in the left navigation to limit results specifically to clinical practice guidelines</li>
+      <li>Results show the title, country of publication, publication date, and the society that published it</li>
+      <li>Each result also indicates where the evidence falls on the evidence pyramid, along with a quality/evidence-based rating scale</li>
+      <li>Clicking the title opens the full guide</li>
+    </ol>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s14"></div>
+  </section>
+
+  <!-- 15 -->
+  <section class="card" id="s15">
+    <h2>15. Guidelines International Network (GIN) &amp; WHO</h2>
+    <h3>Guidelines International Network (GIN Library)</h3>
+    <ul class="plain">
+      <li>Contains links to guidelines published or endorsed by GIN member organizations across the globe, in many languages</li>
+      <li>Also contains a registry of planned guidelines and guidelines currently in development</li>
+      <li>As an international library, you can apply filters (including language) via the left navigation</li>
+      <li>Results show: the title, MeSH terms, the guideline contact, scope of publication, country of application, publication status, languages, and publication year</li>
+    </ul>
+    <h3>World Health Organization (WHO)</h3>
+    <ul class="plain">
+      <li>Developing global guidelines that ensure the appropriate use of evidence is one of the core functions of the WHO</li>
+      <li>Recommendations that can impact health policies or clinical interventions are considered "guidelines" for WHO's purposes</li>
+      <li>WHO has a dedicated guidelines page — browse the most recent guidelines, or search a topic of interest (adding the term "guideline" to your search can help narrow results)</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s15"></div>
+  </section>
+
+  <!-- 16 -->
+  <section class="card" id="s16">
+    <h2>16. Trusted Professional Websites (MedlinePlus)</h2>
+    <ul class="plain">
+      <li>MedlinePlus maintains a list of <strong>trusted professional websites</strong>, organized by topic, linking to organizations that provide information on that topic</li>
+      <li>Example: searching "abdominal pain" points you toward the American College of Gastroenterology (ACG)</li>
+      <li>Many professional organization sites have a dedicated guidelines page accessible directly from their navigation — the ACG's guidelines page, for example, includes published guidelines, guidelines in progress, and new guidelines, sometimes with an accompanying podcast alongside the downloadable guideline content</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s16"></div>
+  </section>
+
+  <!-- 17 -->
+  <section class="card" id="s17">
+    <h2>17. Master Quick-Reference Summary Table</h2>
+    <table>
+      <tr><th>Resource</th><th>Key Feature</th></tr>
+      <tr><td>NIH</td><td>27 institutes/centers; search within the specific institute's own site</td></tr>
+      <tr><td>ACP</td><td>Dedicated Clinical Guidelines and Recommendations page; internal medicine focus</td></tr>
+      <tr><td>HSTAT</td><td>Free, searchable collection of full-text guidelines and assessments</td></tr>
+      <tr><td>VA/DoD</td><td>Guidelines by topic area, archive of retired guidelines, "What's New" page</td></tr>
+      <tr><td>ECRI Guidelines Trust</td><td>Free; keyword or clinical-area browsing; rates systematic review/evidence quality/recommendation strength</td></tr>
+      <tr><td>PubMed</td><td>Filter by Article Type &rarr; Practice Guideline under Additional Filters</td></tr>
+      <tr><td>ClinicalKey</td><td>Dedicated CPG homepage section; textbooks/journals/drug info bundled in</td></tr>
+      <tr><td>DynaMed</td><td>Topic guide &rarr; "Guidelines and Resources" in left navigation</td></tr>
+      <tr><td>UpToDate</td><td>Topic article &rarr; "Society Guideline Links" in left navigation</td></tr>
+      <tr><td>MEDLINE Complete</td><td>1,500+ full-text journals; search from Advanced Search screen</td></tr>
+      <tr><td>TRIP Database</td><td>"Turning Research Into Practice"; shows evidence-pyramid placement + rating scale</td></tr>
+      <tr><td>GIN Library</td><td>Global, multilingual; includes guidelines in development</td></tr>
+      <tr><td>WHO</td><td>Global guideline development is a core WHO function; browse or search + "guideline"</td></tr>
+      <tr><td>MedlinePlus</td><td>Trusted professional websites organized by topic</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s17"></div>
+  </section>
+
+</div>
+
+<script>
+  const quizData = [
+    {
+      target: "quiz-s00",
+      q: "According to the stated objectives for this module, which of the following is explicitly included as a learning goal?",
+      choices: ["Learning how to write your own clinical practice guideline from scratch", "Discovering organizations that produce CPGs and using information technology to access them", "Memorizing the GRADE system in full detail", "Learning how to bill for guideline-based care"],
+      correct: 1,
+      explain: "This module's objectives are to discover organizations that produce CPGs, explore available resources that contain CPGs, and demonstrate use of information technology to access them."
+    },
+    {
+      target: "quiz-s01",
+      q: "How many institutes and centers make up the National Institutes of Health (NIH)?",
+      choices: ["10", "15", "27", "50"],
+      correct: 2,
+      explain: "The NIH is composed of 27 institutes and centers, each with its own research agenda often focused on particular diseases and body systems."
+    },
+    {
+      target: "quiz-s01",
+      q: "What is the National Institutes of Health primarily known as?",
+      choices: ["A private, for-profit medical publishing company", "The primary federal agency for conducting and supporting medical research", "A single-institute organization focused only on cancer research", "An international guideline registry with no US-specific focus"],
+      correct: 1,
+      explain: "The NIH is the primary federal agency for conducting and supporting medical research in the United States."
+    },
+    {
+      target: "quiz-s02",
+      q: "According to this lecture, since when has the VA (in collaboration with the DoD) been developing clinical practice guidelines?",
+      choices: ["The late 1970s", "2010", "The early 1990s", "2020"],
+      correct: 2,
+      explain: "The VA, in collaboration with the DoD, has been developing clinical practice guidelines since the early 1990s."
+    },
+    {
+      target: "quiz-s02",
+      q: "In 2010, which organization identified the VA and DoD as leaders in clinical practice guideline development?",
+      choices: ["The World Health Organization", "The American College of Physicians", "The Institute of Medicine", "The National Institutes of Health"],
+      correct: 2,
+      explain: "In 2010, the Institute of Medicine identified the VA and DoD as leaders in clinical practice guideline development."
+    },
+    {
+      target: "quiz-s03",
+      q: "Which of the following is given as an example of an international organization that produces clinical practice guidelines?",
+      choices: ["The American College of Physicians", "The Veterans Health Administration", "The National Institute for Health and Care Excellence (NICE) in England", "PubMed"],
+      correct: 2,
+      explain: "The National Institute for Health and Care Excellence (NICE) in England is given as an example of an international organization producing clinical practice guidelines."
+    },
+    {
+      target: "quiz-s04",
+      q: "Which of the following factors can impact which resources a student or physician can access to find guidelines, according to this lecture?",
+      choices: ["Their preferred color scheme for note-taking", "The specific web browser they use", "Their stage of medical education or training and their long-term practice setting", "Their undergraduate major"],
+      correct: 2,
+      explain: "Access to guideline resources can depend on a person's stage of medical education or training (internship, residency, clerkship, fellowship), as well as their long-term practice setting (health system versus private practice)."
+    },
+    {
+      target: "quiz-s05",
+      q: "A student wants to find clinical practice guidelines specific to cancer through the NIH. What is the recommended first step?",
+      choices: ["Search PubMed exclusively, since NIH institutes do not have guidelines", "Select the relevant institute (e.g., the National Cancer Institute) and search within that institute's own site", "Email the NIH director directly", "Only look at guidelines published before 2000"],
+      correct: 1,
+      explain: "The recommended approach is to first select the relevant NIH institute — such as the National Cancer Institute — and then search within that institute's own site for guidelines."
+    },
+    {
+      target: "quiz-s06",
+      q: "On the American College of Physicians website, where would a student look to find clinical guidelines and recommendations?",
+      choices: ["Under a section labeled Careers", "Only within a members-only forum with no search function", "Under the Clinical Information section, in a dedicated Clinical Guidelines and Recommendations page", "ACP does not publish clinical guidelines"],
+      correct: 2,
+      explain: "The ACP website has a dedicated Clinical Guidelines and Recommendations page located under Clinical Information."
+    },
+    {
+      target: "quiz-s07",
+      q: "Which of the following resources are available when selecting a topic on the VA/DoD Clinical Practice Guidelines website?",
+      choices: ["Only a one-page summary with no further detail", "A full report, provider summary, reference card, and sometimes pocket cards", "A single PDF with no additional materials", "Access is restricted to VA employees only"],
+      correct: 1,
+      explain: "Selecting a topic on the VA/DoD Clinical Practice Guidelines website provides a full report, a provider summary, a reference card, and sometimes even pocket cards."
+    },
+    {
+      target: "quiz-s07",
+      q: "What can be found on the VA/DoD Clinical Practice Guidelines archive page?",
+      choices: ["Only guidelines currently in development", "A list of VA hospital locations", "Employee performance reviews", "Guidelines that have been retired"],
+      correct: 3,
+      explain: "The VA/DoD archive page contains guidelines that have been retired, separate from the current active guidelines and the 'What's New' page."
+    },
+    {
+      target: "quiz-s08",
+      q: "When browsing the ECRI Guidelines Trust by clinical area, what type of information is displayed for each guideline in the results list?",
+      choices: ["Only the guideline's price", "The title, guideline ID number, publication date, publishing group, and access information", "Only the author's contact information", "A list of unrelated guidelines from other clinical areas"],
+      correct: 1,
+      explain: "Each ECRI Guidelines Trust result displays the title, a guideline ID number, publication date, the publishing group, and where to access the guideline."
+    },
+    {
+      target: "quiz-s08",
+      q: "Which of the following can be used to limit search results within the ECRI Guidelines Trust?",
+      choices: ["Only the guideline's page count", "Only whether the guideline was published in a particular country", "ECRI Guidelines Trust does not allow any filtering", "Recency, publishing organization, patient age, and clinical area"],
+      correct: 3,
+      explain: "ECRI Guidelines Trust offers limiters for recency, publishing organization, patient age (pediatric vs. adult), additional clinical areas, and specific interventions."
+    },
+    {
+      target: "quiz-s09",
+      q: "When searching PubMed for clinical practice guidelines, what is the correct process to limit results specifically to practice guidelines?",
+      choices: ["There is no way to filter PubMed results by guideline type", "Only guidelines published in the last month are searchable", "You must download a separate plug-in to search for guidelines", "Use the 'Additional filters' option under Article Type and select Practice Guideline"],
+      correct: 3,
+      explain: "In PubMed, scrolling to Additional filters and selecting Practice Guideline under Article Type adds it as a filter option, limiting results specifically to practice guidelines."
+    },
+    {
+      target: "quiz-s10",
+      q: "Which of the following resources is described as a comprehensive online clinical information resource including textbooks, journals, drug information, and practice guidelines?",
+      choices: ["MedlinePlus", "The World Health Organization website", "The Guidelines International Network", "ClinicalKey"],
+      correct: 3,
+      explain: "ClinicalKey is described as a comprehensive online clinical information resource with textbooks, journals, drug information, practice guidelines, and other resources, including guideline updates."
+    },
+    {
+      target: "quiz-s11",
+      q: "In DynaMed, where would a user navigate to find clinical practice guidelines related to a searched topic?",
+      choices: ["A separate subscription service unrelated to DynaMed", "The billing information page", "DynaMed does not provide access to guidelines", "The 'Guidelines and Resources' section in the left navigation of the topic guide"],
+      correct: 3,
+      explain: "After searching a topic in DynaMed, users navigate to the 'Guidelines and Resources' section in the left navigation of the resulting topic guide to find clinical practice guidelines."
+    },
+    {
+      target: "quiz-s12",
+      q: "In UpToDate, which feature specifically points clinicians to numerous links for practice guidelines related to a topic?",
+      choices: ["The drug interaction checker", "The patient education handouts section", "The calculator tools page", "Society Guideline Links"],
+      correct: 3,
+      explain: "UpToDate's 'Society Guideline Links,' found in the left navigation of a topic article, points clinicians to numerous practice guideline links related to that topic."
+    },
+    {
+      target: "quiz-s12",
+      q: "According to this lecture, what might a search for 'diabetes' reveal within UpToDate's Society Guideline Links?",
+      choices: ["Only a single guideline with no further detail", "Multiple society guideline links relating to different conditions, including international and multi-country guides", "No results, since UpToDate does not cover diabetes", "Only guidelines published before 1990"],
+      correct: 1,
+      explain: "A diabetes search within UpToDate's Society Guideline Links reveals multiple society guideline links relating to different conditions, including international guides and guides from multiple countries."
+    },
+    {
+      target: "quiz-s13",
+      q: "MEDLINE Complete provides full-text access to approximately how many active journals, according to this lecture?",
+      choices: ["150", "500", "1,500", "15,000"],
+      correct: 2,
+      explain: "MEDLINE Complete offers access to over 1,500 active, full-text journals with comprehensive cover-to-cover indexing."
+    },
+    {
+      target: "quiz-s14",
+      q: "What does the acronym TRIP stand for in the TRIP Database?",
+      choices: ["Turning Research Into Practice", "Total Research Information Portal", "Trusted Reviews of Independent Publications", "Treatment Research Investigation Program"],
+      correct: 0,
+      explain: "TRIP stands for 'Turning Research Into Practice,' a clinical search engine designed to help users find and use high-quality research evidence."
+    },
+    {
+      target: "quiz-s14",
+      q: "In the TRIP Database, what unique visual indicator is provided alongside search results to help evaluate a guideline's evidence?",
+      choices: ["A star rating based only on user reviews", "An indication of where the evidence falls on the evidence pyramid, along with a quality/evidence-based rating scale", "A celebrity endorsement badge", "No evidence indicators are provided"],
+      correct: 1,
+      explain: "TRIP Database results indicate where the evidence falls on the evidence pyramid and provide a quality/evidence-based rating scale, helping users quickly assess guideline strength."
+    },
+    {
+      target: "quiz-s15",
+      q: "What does the Guidelines International Network (GIN) Library contain, according to this lecture?",
+      choices: ["Links to guidelines published or endorsed by GIN member organizations globally, plus a registry of guidelines in development", "Only guidelines published in the United States", "A single guideline updated annually", "Only guidelines related to infectious disease"],
+      correct: 0,
+      explain: "The GIN Library contains links to guidelines published or endorsed by GIN member organizations across the globe, in many languages, plus a registry of planned and in-development guidelines."
+    },
+    {
+      target: "quiz-s15",
+      q: "According to this lecture, what is described as one of the core functions of the World Health Organization?",
+      choices: ["Developing global guidelines that ensure the appropriate use of evidence", "Regulating pharmaceutical pricing worldwide", "Licensing physicians internationally", "Managing hospital accreditation standards"],
+      correct: 0,
+      explain: "Developing global guidelines that ensure the appropriate use of evidence is described as one of the core functions of the World Health Organization."
+    },
+    {
+      target: "quiz-s16",
+      q: "A physician wants to find a list of trusted professional organization websites related to abdominal pain. Which resource, discussed in this lecture, organizes such links by topic?",
+      choices: ["MedlinePlus", "PubMed", "ClinicalKey", "DynaMed"],
+      correct: 0,
+      explain: "MedlinePlus maintains a list of trusted professional websites organized by topic, such as directing a search on abdominal pain toward the American College of Gastroenterology."
+    },
+    {
+      target: "quiz-s17",
+      q: "Which of the following resources allows for a completely free account to search widely for practice guidelines with access to original documentation?",
+      choices: ["The ECRI Guidelines Trust", "UpToDate", "ClinicalKey", "MEDLINE Complete"],
+      correct: 0,
+      explain: "The ECRI Guidelines Trust is highlighted as one of the best free resources, allowing users to create an account, search for guidelines, and view original source documentation."
+    },
+    {
+      target: "quiz-s17",
+      q: "Which resource is specifically designed as a clinical search engine to help users quickly find high-quality research evidence, including an indicator of where evidence falls on the evidence pyramid?",
+      choices: ["The TRIP Database", "The National Institutes of Health website", "The American College of Physicians website", "MedlinePlus"],
+      correct: 0,
+      explain: "The TRIP Database is specifically designed as a clinical search engine to help users quickly find and use high-quality research evidence, including an evidence pyramid indicator and quality rating scale."
+    }
+  ];
+
+  const grouped = {};
+  quizData.forEach(item => {
+    if (!grouped[item.target]) grouped[item.target] = [];
+    grouped[item.target].push(item);
+  });
+
+  Object.keys(grouped).forEach(targetId => {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+    grouped[targetId].forEach((item, qi) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'quiz-q';
+      const p = document.createElement('p');
+      p.className = 'prompt';
+      p.textContent = (qi + 1) + ". " + item.q;
+      qDiv.appendChild(p);
+
+      const explainDiv = document.createElement('div');
+      explainDiv.className = 'quiz-explain';
+      explainDiv.textContent = item.explain;
+
+      item.choices.forEach((choiceText, ci) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-choice';
+        btn.textContent = choiceText;
+        btn.addEventListener('click', () => {
+          const allBtns = qDiv.querySelectorAll('.quiz-choice');
+          allBtns.forEach(b => b.classList.add('disabled'));
+          if (ci === item.correct) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+            allBtns[item.correct].classList.add('correct');
+          }
+          explainDiv.classList.add('show');
+        });
+        qDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(explainDiv);
+      container.appendChild(qDiv);
+    });
+  });
+
+  // Side nav build + scroll spy
+  const sections = document.querySelectorAll('section.card');
+  const panel = document.getElementById('sidenavPanel');
+  sections.forEach(sec => {
+    const heading = sec.querySelector('h2').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = heading;
+    a.dataset.target = sec.id;
+    panel.appendChild(a);
+  });
+
+  const sidenavToggleBtn = document.getElementById('sidenavToggle');
+  sidenavToggleBtn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    sidenavToggleBtn.classList.toggle('shifted');
+    sidenavToggleBtn.textContent = panel.classList.contains('open') ? 'CLOSE' : 'SECTIONS';
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.target === current);
+    });
+  });
+</script>
+
+</body>
+</html>
