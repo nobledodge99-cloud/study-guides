@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intro to Telemedicine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3d2b;
+    --forest: #2e5539;
+    --sage: #6a8f6b;
+    --sage-light: #dce8dc;
+    --border: #c9d9c4;
+    --accent: #b5651d;
+    --accent-soft: #e8c9a3;
+    --text-main: #26301f;
+    --text-soft: #55614c;
+    --correct: #2e6b3e;
+    --incorrect: #a13b30;
+    --shadow: 0 2px 10px rgba(31,61,43,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.65;
+    padding-bottom: 80px;
+  }
+  h1, h2, h3, h4 { font-family: 'Lora', serif; color: var(--forest-dark); }
+  code, .mono, .tag, .score-badge { font-family: 'IBM Plex Mono', monospace; }
+
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    color: var(--forest-dark);
+    border: 1.5px solid var(--forest);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: linear-gradient(180deg, var(--forest-dark), var(--forest));
+    color: var(--cream);
+  }
+  .header h1 { color: var(--cream); font-size: 2.1em; margin-bottom: 8px; }
+  .header p { color: var(--sage-light); font-size: 1.05em; margin: 4px 0; }
+  .header .source-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: -30px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { margin-top: 0; font-size: 1.2em; }
+  .toc ul { list-style: none; padding-left: 0; margin: 0; columns: 2; column-gap: 30px; }
+  .toc ul li { margin-bottom: 8px; break-inside: avoid; }
+  .toc a { color: var(--forest); text-decoration: none; font-size: 0.95em; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin: 26px 0;
+    box-shadow: var(--shadow);
+  }
+  section.card h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  section.card h3 { font-size: 1.12em; color: var(--forest); margin-top: 22px; }
+  section.card h4 { font-size: 1em; color: var(--accent); margin-bottom: 4px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.9em; }
+  th, td { border: 1px solid var(--border); padding: 8px 11px; text-align: left; vertical-align: top; }
+  th { background: var(--sage-light); color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .pearl strong { color: var(--forest-dark); }
+
+  .mistake {
+    background: #f3e4d4;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .mistake strong { color: var(--accent); }
+
+  ul.plain, ol.plain { padding-left: 22px; }
+  ul.plain li, ol.plain li { margin-bottom: 6px; }
+  ul.tight li { margin-bottom: 2px; }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin: 24px 0 4px;
+  }
+  .quiz-q {
+    background: #f5f1e6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .quiz-q p.prompt { font-weight: 600; margin-top: 0; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    font-family: 'Lora', serif;
+    font-size: 0.96em;
+    cursor: pointer;
+    color: var(--text-main);
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #d9ecd9; border-color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f3d9d4; border-color: var(--incorrect); }
+  .quiz-choice.disabled { pointer-events: none; }
+  .quiz-explain {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--cream-card);
+    border-left: 3px solid var(--forest);
+    border-radius: 6px;
+    font-size: 0.92em;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 12px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 460;
+    box-shadow: var(--shadow);
+    transition: right 0.25s ease;
+  }
+  .sidenav-toggle.shifted {
+    right: 240px;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -3px 0 12px rgba(0,0,0,0.08);
+    transition: right 0.25s ease;
+    z-index: 450;
+    overflow-y: auto;
+    padding: 60px 16px 20px;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .sidenav-panel a.active { background: var(--sage-light); color: var(--forest-dark); font-weight: 600; }
+  .sidenav-panel a:hover { background: var(--sage-light); }
+
+  @media (max-width: 700px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>Intro to Telemedicine</h1>
+  <p>OCS III — PCM</p>
+  <p style="font-size:0.85em; opacity:0.85;">Medina Culver, DO — Assistant Professor of Family Medicine &amp; OMT</p>
+  <span class="source-tag">Built from lecture narration + slides</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#s00">00. Overview &amp; Learning Objectives</a></li>
+      <li><a href="#s01">01. What Is Telemedicine?</a></li>
+      <li><a href="#s02">02. History of Telemedicine</a></li>
+      <li><a href="#s03">03. Telemedicine Companies</a></li>
+      <li><a href="#s04">04. Types of Telemedicine Services</a></li>
+      <li><a href="#s05">05. Telemedicine at MCOM</a></li>
+      <li><a href="#s06">06. Benefits for Medical Professionals</a></li>
+      <li><a href="#s07">07. Benefits for Patients</a></li>
+      <li><a href="#s08">08. Telemedicine Utilization by Specialty</a></li>
+      <li><a href="#s09">09. Regulations &amp; Legal Considerations</a></li>
+      <li><a href="#s10">10. Telemedicine Workflow</a></li>
+      <li><a href="#s11">11. Success &amp; Growth of Telemedicine</a></li>
+      <li><a href="#s12">12. Challenges of Telemedicine</a></li>
+      <li><a href="#s13">13. Telemedicine Ethics</a></li>
+      <li><a href="#s14">14. Overcoming Challenges</a></li>
+      <li><a href="#s15">15. Telemedicine &amp; COVID-19</a></li>
+      <li><a href="#s16">16. Telemedicine &amp; Health Equity</a></li>
+      <li><a href="#s17">17. Future Trends in Telemedicine</a></li>
+      <li><a href="#s18">18. Best Practices</a></li>
+      <li><a href="#s19">19. Master High-Yield Summary Table</a></li>
+    </ul>
+  </div>
+
+  <!-- 00 -->
+  <section class="card" id="s00">
+    <h2>00. Overview &amp; Learning Objectives</h2>
+    <ul class="plain">
+      <li>Understand the definition of telemedicine</li>
+      <li>Appreciate the evolution and importance of telemedicine</li>
+      <li>Know the benefits of telemedicine</li>
+      <li>Understand the key components of a successful telemedicine program</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s00"></div>
+  </section>
+
+  <!-- 01 -->
+  <section class="card" id="s01">
+    <h2>01. What Is Telemedicine?</h2>
+    <div class="pearl">Telemedicine is the delivery of health care from a distance using electronic information and technology — such as computers, cameras, videoconferencing, wireless communications, satellites, and the internet. It is also called <strong>telehealth</strong>.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s01"></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="card" id="s02">
+    <h2>02. History of Telemedicine</h2>
+    <table>
+      <tr><th>Era</th><th>Development</th></tr>
+      <tr><td>1879</td><td>The concept of telemedicine was first introduced with the invention of the telephone</td></tr>
+      <tr><td>1920s&ndash;1930s</td><td>Radiology images were sent via telephone to be interpreted by specialists at a distance</td></tr>
+      <tr><td>1950s&ndash;1960s</td><td>Closed-circuit television began to be used for medical consultations</td></tr>
+      <tr><td>1970s&ndash;1980s</td><td>NASA developed telemedicine technology to monitor astronauts' health in space, advancing remote healthcare</td></tr>
+      <tr><td>1990s</td><td>Widespread internet availability led to video conferencing technology</td></tr>
+      <tr><td>2000&ndash;present</td><td>Continued evolution with mobile health apps, remote monitoring devices, and virtual care platforms — now an integral part of modern healthcare delivery</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s02"></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card" id="s03">
+    <h2>03. Telemedicine Companies</h2>
+    <p>Well-known telemedicine companies mentioned in this lecture include:</p>
+    <ul class="plain tight">
+      <li>Teladoc Health</li>
+      <li>Amwell (American Well)</li>
+      <li>Doctor On Demand</li>
+      <li>MDLive</li>
+      <li>Babylon Health</li>
+      <li>Lemonaid Health</li>
+      <li>PlushCare</li>
+      <li>Joynt</li>
+      <li>98point6</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s03"></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card" id="s04">
+    <h2>04. Types of Telemedicine Services</h2>
+    <table>
+      <tr><th>Type</th><th>Description</th></tr>
+      <tr><td>Real-time telemedicine</td><td>Uses real-time video, allowing medical professionals to assess, consult, diagnose, and prescribe from hundreds or thousands of miles away — virtual visits between patients and providers from any location</td></tr>
+      <tr><td>Store-and-forward telemedicine</td><td>Collecting clinical information and sending it electronically to another site for evaluation (e.g., the radiology images sent via telephone in the 1920s&ndash;30s). Typically includes demographic data, medical history, lab reports, video or sound files, and images.</td></tr>
+      <tr><td>Remote patient monitoring</td><td>A type of telehealth often not thought of as "telehealth," in which providers monitor patients outside the traditional office setting — e.g., remote blood pressure monitors, glucose monitors, weight scales, and pulse oximeters</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s04"></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card" id="s05">
+    <h2>05. Telemedicine at MCOM</h2>
+    <p>MCOM has its own advanced telemedicine display and equipment cart, considered one of the more detailed and in-depth setups available — mobile, with a screen, scanning capability, and various diagnostic instrumentation. It's available for students to explore firsthand, since this kind of equipment will be part of their future careers.</p>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s05"></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="card" id="s06">
+    <h2>06. Benefits for Medical Professionals</h2>
+    <ul class="plain">
+      <li><strong>Increased reach and patient base:</strong> patients don't have to come into the office, take time off work, or find childcare — they can take a call from their office or their car</li>
+      <li><strong>Time-saving and efficient:</strong> one of the most efficient ways to see patients, deliver lab results, and have conversations — most practitioners can see more patients in the same amount of time</li>
+      <li><strong>Improved work-life balance:</strong> physicians can see the same (or more) patients in less time, mixing in-office and out-of-office visits to maximize their day and make sure all patients are seen and cared for</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s06"></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="card" id="s07">
+    <h2>07. Benefits for Patients</h2>
+    <ul class="plain">
+      <li><strong>Access to care from remote locations:</strong> in a state like Montana, where most of the state is considered remote, telemedicine can replace a three-hour, one-way drive to see a specialist — a real improvement in quality of care</li>
+      <li><strong>Reduced travel time and costs:</strong> less time off work, less spent on gas, less need for babysitting, and so on</li>
+      <li><strong>Continuity of care:</strong> it's often easier to see your provider through a telemedicine service than to wait for an in-person clinic visit</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s07"></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card" id="s08">
+    <h2>08. Telemedicine Utilization by Specialty</h2>
+    <p>Most specialties report being willing to use telemedicine, but actual usage varies considerably. Selected data on willingness versus actual use by specialty:</p>
+    <table>
+      <tr><th>Specialty</th><th>Willing to Use</th><th>Actually Used</th></tr>
+      <tr><td>Psychiatry</td><td>~81%</td><td>~81%</td></tr>
+      <tr><td>Neurology</td><td>~76%</td><td>~33%</td></tr>
+      <tr><td>Endocrinology</td><td>~69%</td><td>~33%</td></tr>
+      <tr><td>Dermatology</td><td>~53%</td><td>~29%</td></tr>
+      <tr><td>Ophthalmology</td><td>~64%</td><td>~26%</td></tr>
+      <tr><td>Internal medicine</td><td>~76%</td><td>~23%</td></tr>
+      <tr><td>Surgery</td><td>~45%</td><td>~6%</td></tr>
+      <tr><td>Cardiology</td><td>~42%</td><td>Minimal use reported</td></tr>
+    </table>
+    <div class="pearl"><strong>Key takeaway:</strong> Psychiatry stands out as the specialty with the highest actual use of telemedicine — its willingness and actual-use figures are essentially the same. By contrast, surgery, pediatric subspecialties, OB/GYN, and cardiology show the lowest actual use at this time, despite general willingness across most specialties.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s08"></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="card" id="s09">
+    <h2>09. Regulations &amp; Legal Considerations</h2>
+    <ul class="plain">
+      <li><strong>Licensure:</strong> telemedicine allows you to see patients in other states — a physician living in California could see a patient in New York, or one in Florida could see a patient in Texas. Telemedicine licensure requirements differ across states, so it's essential to hold appropriate licensure everywhere you practice, and to follow all licensing, CME, and telemedicine-specific requirements.</li>
+      <li><strong>Reimbursement:</strong> different payers and policies reimburse telemedicine differently — proper coding is crucial to obtaining appropriate reimbursement for the service.</li>
+      <li><strong>Patient privacy and security:</strong> HIPAA compliance must remain front and center. Telemedicine visits should be conducted in a space considered HIPAA-compliant — losing sight of privacy and security can be catastrophic.</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s09"></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="card" id="s10">
+    <h2>10. Telemedicine Workflow</h2>
+    <p>Workflow varies across different platforms, but a typical sequence looks like this:</p>
+    <ol class="plain">
+      <li>Patient calls or otherwise requests an appointment (scheduling)</li>
+      <li>Payment is typically made prior to the video consultation</li>
+      <li>Video consultation occurs with the physician</li>
+      <li>Labs are ordered or viewed, chart notes are written, and prescriptions are sent as needed</li>
+      <li>A visit summary is created and posted to the patient portal</li>
+    </ol>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s10"></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="card" id="s11">
+    <h2>11. Success &amp; Growth of Telemedicine</h2>
+    <ul class="plain">
+      <li>Telemedicine has seen huge success, especially over the last five years, driven substantially by a massive surge during COVID-19</li>
+      <li>Patients and providers report greater satisfaction with telemedicine compared to before</li>
+      <li>Growth has been supported by successful implementations, new programs, better workflows, and improved patient outcomes and satisfaction</li>
+    </ul>
+    <table>
+      <tr><th>Year</th><th>US Telemedicine Users (millions)</th><th>Year-over-Year Change</th></tr>
+      <tr><td>2019</td><td>21.0</td><td>&mdash;</td></tr>
+      <tr><td>2020</td><td>41.7</td><td>+98.8%</td></tr>
+      <tr><td>2021</td><td>48.1</td><td>+15.4%</td></tr>
+      <tr><td>2022</td><td>57.3</td><td>+19.1%</td></tr>
+      <tr><td>2023</td><td>64.0</td><td>+11.7%</td></tr>
+    </table>
+    <div class="pearl">Telemedicine users nearly doubled from 2019 to 2020 (21.0 to 41.7 million) — a direct reflection of the COVID-19 pandemic — and growth has continued steadily since, reaching 64 million users by 2023.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s11"></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="card" id="s12">
+    <h2>12. Challenges of Telemedicine</h2>
+    <p>Commonly reported challenges, in roughly descending order of frequency:</p>
+    <ol class="plain">
+      <li>Effectiveness</li>
+      <li>No knowledge of the patient's history</li>
+      <li>Limited physical exam</li>
+      <li>Uncertainty about the accuracy of treatment</li>
+      <li>Fewer in-person consultations (balancing in-person vs. telemedicine care)</li>
+      <li>Outdated equipment</li>
+      <li>Security and privacy of patients</li>
+      <li>Patient technology literacy/education</li>
+      <li>Misdiagnosis</li>
+      <li>General lack of confidence using telemedicine, from both physicians and patients</li>
+    </ol>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s12"></div>
+  </section>
+
+  <!-- 13 -->
+  <section class="card" id="s13">
+    <h2>13. Telemedicine Ethics</h2>
+    <ul class="plain tight">
+      <li>Security, HIPAA compliance, and privacy</li>
+      <li>Quality of care</li>
+      <li>The patient-physician relationship</li>
+      <li>Accessibility</li>
+      <li>Upholding the standard of care</li>
+      <li>Handling informed consent</li>
+      <li>Managing emergencies remotely (particularly risky and difficult)</li>
+      <li>Risk of fraud and abuse</li>
+    </ul>
+    <div class="pearl">As many benefits as telemedicine offers, there is also "the other side of the coin" — navigating these ethical issues while continuing to provide the standard of care patients deserve.</div>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s13"></div>
+  </section>
+
+  <!-- 14 -->
+  <section class="card" id="s14">
+    <h2>14. Overcoming Challenges</h2>
+    <ul class="plain">
+      <li><strong>Improved infrastructure</strong> &mdash; one of the biggest factors in improving effectiveness</li>
+      <li><strong>Enhanced staff training</strong> &mdash; staff familiarity with equipment helps physicians deliver better care</li>
+      <li><strong>Recognizing telehealth is here to stay</strong> &mdash; it's being incorporated by the millions every year. Providers who have practiced for 30&ndash;40 years and are resistant to it often benefit most from understanding how it can help their own practice.</li>
+      <li><strong>Awareness of and advocacy for policy changes</strong> &mdash; at the local, state, and federal level, regarding both ethical and structural issues</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s14"></div>
+  </section>
+
+  <!-- 15 -->
+  <section class="card" id="s15">
+    <h2>15. Telemedicine &amp; COVID-19</h2>
+    <p>There was rapid, massive growth in telemedicine utilization during COVID-19. With that rapid growth came both good and bad: changes had to happen quickly, and some companies or structures were slower to adapt, less prepared, or did not fully adhere to privacy requirements while everyone was scrambling to figure out how to see patients safely during an emergency.</p>
+    <div class="pearl">The lessons learned during the pandemic have allowed the field to be better prepared, putting in place structures that continue to support the growth of the telehealth platform today.</div>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s15"></div>
+  </section>
+
+  <!-- 16 -->
+  <section class="card" id="s16">
+    <h2>16. Telemedicine &amp; Health Equity</h2>
+    <ul class="plain">
+      <li>Telemedicine helps make healthcare more equitable by addressing disparities in access to care</li>
+      <li>It helps reach underserved populations — patients no longer need to drive hours, find childcare, or take time off work just to be seen</li>
+      <li>Patients can see their provider from wherever they are, on their own time, regardless of how far they live from that provider</li>
+      <li>Telemedicine also supports <strong>cultural competency</strong> in care delivery — an important piece of bridging gaps and making medicine more equitable</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s16"></div>
+  </section>
+
+  <!-- 17 -->
+  <section class="card" id="s17">
+    <h2>17. Future Trends in Telemedicine</h2>
+    <ul class="plain tight">
+      <li><strong>Artificial intelligence</strong> integration — increasingly prevalent across many fields, including telemedicine</li>
+      <li><strong>Virtual reality</strong> applications</li>
+      <li><strong>Wearable technology integration</strong> — already emerging, and increasingly accessible across various telemedicine platforms and practices</li>
+    </ul>
+
+    <div class="quiz-mini-header">Practice Question</div>
+    <div class="quiz-target" id="quiz-s17"></div>
+  </section>
+
+  <!-- 18 -->
+  <section class="card" id="s18">
+    <h2>18. Best Practices</h2>
+    <p>Three core areas support the continued growth of telemedicine in the best possible way:</p>
+    <ol class="plain">
+      <li><strong>Patient-centric care</strong></li>
+      <li><strong>Proper organization and staffing</strong></li>
+      <li><strong>Quality and continual evaluation</strong> — identifying what needs to improve and where the issues are</li>
+    </ol>
+    <p>Supporting practices include establishing and following clear protocols and guidelines, continuous staff training and education, and consistently gathering feedback to drive quality improvement.</p>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s18"></div>
+  </section>
+
+  <!-- 19 -->
+  <section class="card" id="s19">
+    <h2>19. Master High-Yield Summary Table</h2>
+    <table>
+      <tr><th>Topic</th><th>Key Facts</th></tr>
+      <tr><td>Definition</td><td>Delivery of health care from a distance using electronic information/technology; also called telehealth</td></tr>
+      <tr><td>Key history dates</td><td>1879 telephone invented &middot; 1920s-30s radiology images by phone &middot; 1950s-60s closed-circuit TV &middot; 1970s-80s NASA astronaut monitoring &middot; 1990s internet/video conferencing &middot; 2000-present mobile apps/remote monitoring/virtual care</td></tr>
+      <tr><td>3 types of telemedicine</td><td>Real-time &middot; Store-and-forward &middot; Remote patient monitoring</td></tr>
+      <tr><td>Highest specialty utilization</td><td>Psychiatry (willingness &asymp; actual use, both ~81%)</td></tr>
+      <tr><td>Lowest specialty utilization</td><td>Surgery, pediatric subspecialties, OB/GYN, cardiology</td></tr>
+      <tr><td>3 legal/regulatory pillars</td><td>Licensure (state-specific) &middot; Reimbursement/coding &middot; Privacy/HIPAA compliance</td></tr>
+      <tr><td>US telemedicine user growth</td><td>21.0M (2019) &rarr; 41.7M (2020, +98.8%) &rarr; 64.0M (2023)</td></tr>
+      <tr><td>Top challenges</td><td>Effectiveness, lack of patient history, limited physical exam, treatment accuracy uncertainty</td></tr>
+      <tr><td>Key ethical issues</td><td>Privacy/HIPAA, quality of care, patient-physician relationship, informed consent, remote emergencies, fraud/abuse</td></tr>
+      <tr><td>3 best-practice pillars</td><td>Patient-centric care &middot; Proper organization/staffing &middot; Quality/continual evaluation</td></tr>
+      <tr><td>Future trends</td><td>AI, virtual reality, wearable technology integration</td></tr>
+    </table>
+
+    <div class="quiz-mini-header">Practice Questions</div>
+    <div class="quiz-target" id="quiz-s19"></div>
+  </section>
+
+</div>
+
+<script>
+  const quizData = [
+    {
+      target: "quiz-s00",
+      q: "A student completes this introductory telemedicine course. According to the stated course objectives, which of the following is explicitly included as a learning goal?",
+      choices: ["Learning how to bill Medicare for in-person visits only", "Learning how to perform surgical procedures remotely", "Understanding the definition, evolution, benefits, and key components of a successful telemedicine program", "Understanding only the history of the telephone"],
+      correct: 2,
+      explain: "The course objectives include understanding the definition of telemedicine, appreciating its evolution and importance, knowing its benefits, and understanding the key components of a successful telemedicine program."
+    },
+    {
+      target: "quiz-s01",
+      q: "Which of the following best defines telemedicine?",
+      choices: ["The delivery of health care from a distance using electronic information and technology", "The practice of only prescribing medications without an exam", "A type of health insurance plan", "A specific brand of medical equipment"],
+      correct: 0,
+      explain: "Telemedicine is defined as the delivery of health care from a distance using electronic information and technology, such as computers, cameras, videoconferencing, wireless communications, satellites, and the internet."
+    },
+    {
+      target: "quiz-s01",
+      q: "Telemedicine is also commonly referred to by which alternative term?",
+      choices: ["Teleradiology", "Telehealth", "Telepathy", "Telemetry"],
+      correct: 1,
+      explain: "Telemedicine is also commonly called telehealth — the two terms are used interchangeably in this lecture."
+    },
+    {
+      target: "quiz-s02",
+      q: "In what year was the concept of telemedicine first introduced, coinciding with the invention of the telephone?",
+      choices: ["1850", "1920", "1950", "1879"],
+      correct: 3,
+      explain: "The concept of telemedicine was first introduced in 1879, coinciding with the invention of the telephone."
+    },
+    {
+      target: "quiz-s02",
+      q: "During the 1970s and 1980s, which organization developed telemedicine technology to monitor astronaut health in space?",
+      choices: ["The World Health Organization", "The Centers for Disease Control and Prevention", "NASA", "The Federal Communications Commission"],
+      correct: 2,
+      explain: "NASA developed telemedicine technology during the 1970s and 1980s to monitor astronauts' health in space, advancing remote healthcare technology more broadly."
+    },
+    {
+      target: "quiz-s03",
+      q: "Which of the following is an example of a telemedicine company mentioned in this lecture?",
+      choices: ["Teladoc Health", "UnitedHealth Group", "Cerner Corporation", "Epic Systems"],
+      correct: 0,
+      explain: "Teladoc Health is one of the most common and recognizable telemedicine companies mentioned, alongside others like Amwell, Doctor On Demand, and MDLive."
+    },
+    {
+      target: "quiz-s04",
+      q: "A dermatologist reviews a photograph and clinical history sent electronically from a rural clinic, then provides an evaluation without a live video call. Which type of telemedicine service does this represent?",
+      choices: ["Real-time telemedicine", "Store-and-forward telemedicine", "In-person consultation", "Remote patient monitoring"],
+      correct: 1,
+      explain: "This scenario — collecting clinical information and sending it electronically to another site for evaluation without a live encounter — describes store-and-forward telemedicine."
+    },
+    {
+      target: "quiz-s04",
+      q: "A patient uses a home blood pressure cuff that automatically transmits readings to their physician's office between scheduled visits. Which type of telemedicine service does this represent?",
+      choices: ["Real-time telemedicine", "Store-and-forward telemedicine", "Remote patient monitoring", "Synchronous telemedicine only"],
+      correct: 2,
+      explain: "Monitoring a patient's health data (like blood pressure) outside the traditional office setting is the defining feature of remote patient monitoring."
+    },
+    {
+      target: "quiz-s05",
+      q: "What is notable about the telemedicine equipment available at MCOM, according to this lecture?",
+      choices: ["It is a basic setup with no additional features", "It can only be used by faculty, never students", "It is a mobile, detailed setup that includes a screen, scanning capability, and various instrumentation", "It does not include any video capability"],
+      correct: 2,
+      explain: "MCOM's telemedicine equipment is described as mobile and unusually detailed, including a screen, scanning capability, and various instrumentation, making it one of the more advanced setups available for student use."
+    },
+    {
+      target: "quiz-s06",
+      q: "Which of the following is cited as a benefit of telemedicine for medical professionals?",
+      choices: ["Decreased ability to see patients", "Elimination of the need for licensure", "Increased reach and patient base", "Reduced patient satisfaction"],
+      correct: 2,
+      explain: "Increased reach and patient base is cited as a key benefit for medical professionals, since patients no longer need to physically come into the office to be seen."
+    },
+    {
+      target: "quiz-s06",
+      q: "How has telemedicine been reported to affect physician work-life balance?",
+      choices: ["It has worsened work-life balance for most physicians", "It has improved work-life balance by allowing flexible mixes of in-office and remote visits", "It has eliminated the need for physicians to see patients in person at all", "It has had no measurable effect on work-life balance"],
+      correct: 1,
+      explain: "Telemedicine has improved physician work-life balance by allowing a flexible mix of in-office and remote visits, helping physicians maximize their day while still seeing all their patients."
+    },
+    {
+      target: "quiz-s07",
+      q: "A patient living in a remote part of Montana uses telemedicine to see a specialist rather than driving three hours one way. Which benefit of telemedicine does this best illustrate?",
+      choices: ["Access to care from remote locations", "Improved billing accuracy", "Elimination of the need for any specialists", "Reduced medication costs"],
+      correct: 0,
+      explain: "This scenario directly illustrates improved access to care from remote locations, a key patient benefit of telemedicine highlighted using Montana as an example."
+    },
+    {
+      target: "quiz-s07",
+      q: "Which of the following is cited as a patient benefit of telemedicine?",
+      choices: ["Increased travel time to appointments", "Longer wait times for care", "Decreased continuity of care", "Reduced travel time and costs"],
+      correct: 3,
+      explain: "Reduced travel time and costs — including time off work, gas, and childcare expenses — is a key patient benefit of telemedicine."
+    },
+    {
+      target: "quiz-s08",
+      q: "According to the specialty utilization data discussed in this lecture, which specialty has the highest actual use of telemedicine services?",
+      choices: ["Surgery", "Cardiology", "Psychiatry", "Radiology"],
+      correct: 2,
+      explain: "Psychiatry has the highest actual use of telemedicine services, with willingness and actual use both around 81%, notably higher than most other specialties."
+    },
+    {
+      target: "quiz-s08",
+      q: "According to this lecture, which specialties are noted as using telemedicine the least at this time?",
+      choices: ["Psychiatry and endocrinology", "Surgery, pediatric subspecialties, OB/GYN, and cardiology", "Internal medicine and infectious diseases", "Neurology and dermatology"],
+      correct: 1,
+      explain: "Surgery, pediatric subspecialties, OB/GYN, and cardiology are noted as the specialties with the lowest actual telemedicine use at this time, despite general willingness across most fields."
+    },
+    {
+      target: "quiz-s09",
+      q: "A physician located in California wants to see a patient located in New York via telemedicine. What must the physician ensure before doing so?",
+      choices: ["Nothing additional is required beyond a California license", "Approval from the American Medical Association only", "A translator must be present regardless of language", "Appropriate licensure in New York, since telemedicine licensure requirements differ across states"],
+      correct: 3,
+      explain: "Since telemedicine licensure requirements differ across states, the physician must ensure appropriate licensure in every state where they are practicing, including New York in this scenario."
+    },
+    {
+      target: "quiz-s09",
+      q: "Why is proper coding important in telemedicine practice?",
+      choices: ["It has no bearing on reimbursement", "Different payers/policies reimburse telemedicine differently, so proper coding is crucial for appropriate reimbursement", "It is only relevant for in-person visits", "It is required only for pediatric telemedicine visits"],
+      correct: 1,
+      explain: "Different payers and policies reimburse telemedicine services differently, making proper coding essential to receiving appropriate reimbursement."
+    },
+    {
+      target: "quiz-s10",
+      q: "Which of the following best reflects a typical telemedicine workflow, according to this lecture?",
+      choices: ["Video consultation occurs before scheduling or payment", "Prescriptions are always mailed before any consultation occurs", "Scheduling and payment typically occur before the video consultation, followed by documentation and a visit summary", "There is no standard workflow across any platform"],
+      correct: 2,
+      explain: "A typical telemedicine workflow starts with scheduling and payment, followed by the video consultation, then documentation (labs, chart notes, prescriptions) and a visit summary posted to the patient portal."
+    },
+    {
+      target: "quiz-s11",
+      q: "According to the data discussed in this lecture, approximately how many million people in the US were using telemedicine in 2023?",
+      choices: ["21 million", "64 million", "98.8 million", "41.7 million"],
+      correct: 1,
+      explain: "By 2023, approximately 64 million people in the US were using telemedicine, continuing steady growth from 21.0 million in 2019."
+    },
+    {
+      target: "quiz-s11",
+      q: "What primarily drove the sharp increase in telemedicine users between 2019 and 2020?",
+      choices: ["A new federal tax incentive", "A decrease in in-person appointment availability unrelated to any pandemic", "A change in telephone technology", "The COVID-19 pandemic"],
+      correct: 3,
+      explain: "The COVID-19 pandemic drove a massive surge in telemedicine adoption, nearly doubling US users from 21.0 million in 2019 to 41.7 million in 2020 (a 98.8% increase)."
+    },
+    {
+      target: "quiz-s12",
+      q: "Which of the following is reported as the most commonly cited challenge of telemedicine?",
+      choices: ["Effectiveness", "Excessive cost to patients", "Overuse by younger patients", "Lack of available companies offering services"],
+      correct: 0,
+      explain: "Effectiveness is reported as the number one most commonly cited challenge of telemedicine, followed by concerns like lack of patient history knowledge and limited physical exam capability."
+    },
+    {
+      target: "quiz-s12",
+      q: "Which of the following is a specific challenge of telemedicine related to the physical exam?",
+      choices: ["The physical exam is always more thorough via telemedicine", "Physical exams cannot be documented in a telemedicine visit", "Physical exams are not permitted in telemedicine regardless of platform", "The physical exam is limited compared to an in-person encounter"],
+      correct: 3,
+      explain: "A limited physical exam is cited as one of the top challenges of telemedicine, since remote assessment cannot fully replicate an in-person physical examination."
+    },
+    {
+      target: "quiz-s13",
+      q: "Which of the following is an ethical consideration specific to managing emergencies during a telemedicine visit?",
+      choices: ["Emergencies are never a concern in telemedicine", "Managing emergencies remotely is considered particularly risky and difficult", "Telemedicine platforms automatically resolve all emergencies", "Emergencies should always be handled by the patient alone"],
+      correct: 1,
+      explain: "Managing emergencies remotely is specifically highlighted as a particularly risky and difficult ethical challenge unique to telemedicine practice."
+    },
+    {
+      target: "quiz-s13",
+      q: "Which of the following ethical issues is specifically associated with telemedicine, according to this lecture?",
+      choices: ["Risk of fraud and abuse", "Complete elimination of the patient-physician relationship", "Guaranteed accessibility for all patients regardless of technology access", "Absence of any privacy concerns"],
+      correct: 0,
+      explain: "Risk of fraud and abuse is explicitly listed among the ethical issues associated with telemedicine, alongside privacy, informed consent, and standard-of-care concerns."
+    },
+    {
+      target: "quiz-s14",
+      q: "According to this lecture, what is one of the biggest factors in improving the effectiveness of telemedicine?",
+      choices: ["Reducing the number of available telemedicine platforms", "Eliminating staff training requirements", "Limiting telemedicine to only younger patients", "Improved infrastructure"],
+      correct: 3,
+      explain: "Improved infrastructure is cited as one of the biggest factors in improving the overall effectiveness of telemedicine."
+    },
+    {
+      target: "quiz-s14",
+      q: "How does this lecture suggest addressing resistance from providers who have practiced for 30-40 years and are hesitant about telemedicine?",
+      choices: ["Requiring them to retire", "Ignoring their concerns entirely", "Restricting them from ever using telemedicine", "Helping them understand how telemedicine can benefit their practice"],
+      correct: 3,
+      explain: "Helping experienced, hesitant providers understand how telemedicine can benefit their own practice is highlighted as one of the biggest ways to overcome resistance."
+    },
+    {
+      target: "quiz-s15",
+      q: "According to this lecture, what was one of the downsides observed during the rapid adoption of telemedicine during the COVID-19 pandemic?",
+      choices: ["Some companies and structures did not adhere well to privacy requirements amid rapid changes", "Telemedicine usage decreased significantly during the pandemic", "No lessons were learned from the pandemic experience", "Patient satisfaction decreased permanently"],
+      correct: 0,
+      explain: "During the rapid, emergency-driven adoption of telemedicine in COVID-19, some companies and structures did not fully adhere to privacy requirements as everyone scrambled to adapt quickly."
+    },
+    {
+      target: "quiz-s16",
+      q: "How does telemedicine contribute to health equity, according to this lecture?",
+      choices: ["By making healthcare exclusively available to urban populations", "By addressing disparities in access to care and reaching underserved populations", "By restricting access to only those with the newest technology", "By eliminating the need for cultural competency"],
+      correct: 1,
+      explain: "Telemedicine contributes to health equity by addressing disparities in access to care and reaching underserved populations who might otherwise face significant barriers to receiving care."
+    },
+    {
+      target: "quiz-s16",
+      q: "Which of the following is highlighted as an important component of equitable telemedicine care?",
+      choices: ["Requiring all visits to occur in person", "Limiting telemedicine to a single specialty", "Ignoring geographic barriers to care", "Cultural competency"],
+      correct: 3,
+      explain: "Cultural competency in telemedicine is highlighted as crucial to bridging gaps in care and making medicine more equitable."
+    },
+    {
+      target: "quiz-s17",
+      q: "Which of the following is identified as a future trend in telemedicine?",
+      choices: ["Complete elimination of video-based visits", "A return to telephone-only consultations", "Discontinuation of remote patient monitoring", "Artificial intelligence, virtual reality applications, and wearable technology integration"],
+      correct: 3,
+      explain: "Future trends identified in this lecture include artificial intelligence, virtual reality applications, and continued wearable technology integration into telemedicine platforms."
+    },
+    {
+      target: "quiz-s18",
+      q: "According to this lecture, which three areas form the foundation of telemedicine best practices?",
+      choices: ["Patient-centric care, proper organization and staffing, and quality/continual evaluation", "Cost reduction, marketing, and advertising", "Hardware sales, software licensing, and insurance negotiation", "Physician recruitment, scheduling software, and billing codes"],
+      correct: 0,
+      explain: "The three foundational areas for telemedicine best practices are patient-centric care, proper organization and staffing, and quality with continual evaluation."
+    },
+    {
+      target: "quiz-s18",
+      q: "Which of the following is recommended as an ongoing practice to maintain telemedicine quality?",
+      choices: ["Continuous training and education, along with regular feedback for quality improvement", "A one-time training session with no follow-up", "Eliminating protocols once established", "Avoiding feedback from patients and staff"],
+      correct: 0,
+      explain: "Continuous training and education, combined with regularly gathering feedback for quality improvement, are recommended as ongoing practices to maintain and grow telemedicine quality."
+    },
+    {
+      target: "quiz-s19",
+      q: "Which of the following best summarizes the three types of telemedicine services discussed in this lecture?",
+      choices: ["In-person visits, phone calls, and text messaging only", "Surgical telemedicine, diagnostic telemedicine, and billing telemedicine", "Real-time telemedicine, store-and-forward telemedicine, and remote patient monitoring", "Urban telemedicine, rural telemedicine, and international telemedicine"],
+      correct: 2,
+      explain: "The three types of telemedicine services discussed are real-time telemedicine, store-and-forward telemedicine, and remote patient monitoring."
+    },
+    {
+      target: "quiz-s19",
+      q: "Which specialty was identified as having the highest actual use of telemedicine services, according to the data discussed in this lecture?",
+      choices: ["Surgery", "Psychiatry", "Cardiology", "Pediatrics"],
+      correct: 1,
+      explain: "Psychiatry was identified as the specialty with the highest actual use of telemedicine services."
+    }
+  ];
+
+  const grouped = {};
+  quizData.forEach(item => {
+    if (!grouped[item.target]) grouped[item.target] = [];
+    grouped[item.target].push(item);
+  });
+
+  Object.keys(grouped).forEach(targetId => {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+    grouped[targetId].forEach((item, qi) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'quiz-q';
+      const p = document.createElement('p');
+      p.className = 'prompt';
+      p.textContent = (qi + 1) + ". " + item.q;
+      qDiv.appendChild(p);
+
+      const explainDiv = document.createElement('div');
+      explainDiv.className = 'quiz-explain';
+      explainDiv.textContent = item.explain;
+
+      item.choices.forEach((choiceText, ci) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-choice';
+        btn.textContent = choiceText;
+        btn.addEventListener('click', () => {
+          const allBtns = qDiv.querySelectorAll('.quiz-choice');
+          allBtns.forEach(b => b.classList.add('disabled'));
+          if (ci === item.correct) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+            allBtns[item.correct].classList.add('correct');
+          }
+          explainDiv.classList.add('show');
+        });
+        qDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(explainDiv);
+      container.appendChild(qDiv);
+    });
+  });
+
+  // Side nav build + scroll spy
+  const sections = document.querySelectorAll('section.card');
+  const panel = document.getElementById('sidenavPanel');
+  sections.forEach(sec => {
+    const heading = sec.querySelector('h2').textContent.trim();
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = heading;
+    a.dataset.target = sec.id;
+    panel.appendChild(a);
+  });
+
+  const sidenavToggleBtn = document.getElementById('sidenavToggle');
+  sidenavToggleBtn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    sidenavToggleBtn.classList.toggle('shifted');
+    sidenavToggleBtn.textContent = panel.classList.contains('open') ? 'CLOSE' : 'SECTIONS';
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.target === current);
+    });
+  });
+</script>
+
+</body>
+</html>
