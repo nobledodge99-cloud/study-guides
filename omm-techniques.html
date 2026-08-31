@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brief OMM Techniques Comparison — MFR, HVLA, MET, Lymphatics, BLT/LAS, Still Technique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Lora',serif;
+    background:var(--cream);
+    color:var(--text-main);
+    line-height:1.55;
+  }
+  .back-btn{
+    position:fixed;
+    top:18px;
+    left:18px;
+    z-index:50;
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    color:var(--forest-dark);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{
+    background:var(--forest-dark);
+    color:var(--cream);
+    padding:56px 24px 34px;
+    text-align:center;
+  }
+  .header h1{
+    font-size:1.9rem;
+    margin:0 0 8px;
+    font-weight:700;
+  }
+  .header p{
+    margin:0;
+    color:var(--sage-light);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+  }
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:32px 20px 80px;
+  }
+
+  .pearl{
+    background:var(--sage-light);
+    border:1px solid var(--sage);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:28px;
+    font-size:0.95rem;
+  }
+  .pearl strong{ color:var(--forest-dark); }
+
+  .table-scroll{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--cream-card);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:1000px;
+  }
+
+  thead th{
+    background:var(--forest);
+    color:var(--cream);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:14px 14px;
+    text-align:left;
+    position:sticky;
+    top:0;
+    border-right:1px solid rgba(255,255,255,0.25);
+  }
+  thead th:last-child{
+    border-right:none;
+  }
+
+  tbody td{
+    padding:14px 14px;
+    border-top:1px solid var(--border);
+    border-right:1px solid var(--border);
+    vertical-align:top;
+    font-size:0.9rem;
+  }
+  tbody td:last-child{
+    border-right:none;
+  }
+
+  tbody tr:nth-child(even){
+    background:#f5f0e5;
+  }
+
+  .tech-name{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    color:var(--forest-dark);
+    font-size:0.85rem;
+    white-space:nowrap;
+  }
+
+  .tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    padding:2px 8px;
+    border-radius:6px;
+    background:var(--sage-light);
+    color:var(--forest-dark);
+    border:1px solid var(--sage);
+    margin-bottom:2px;
+  }
+
+  .absolute{
+    color:var(--incorrect);
+    font-weight:600;
+  }
+  .none-absolute{
+    color:var(--text-soft);
+    font-style:italic;
+  }
+
+  .legend{
+    margin-top:26px;
+    font-size:0.82rem;
+    color:var(--text-soft);
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  @media (max-width:700px){
+    .header h1{ font-size:1.4rem; }
+    .container{ padding:24px 12px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>OMM Techniques Comparison</h1>
+  <p>Myofascial Release &middot; HVLA &middot; Muscle Energy &middot; Lymphatics &middot; BLT/LAS &middot; Still Technique</p>
+</div>
+
+<div class="container">
+
+  <div class="pearl">
+    <strong>High-yield pattern:</strong> the gentler, lower-force techniques (MFR, BLT/LAS, and largely Lymphatics) have <strong>no true absolute contraindication</strong> beyond lack of patient consent — everything else on their list is relative. HVLA stands out with the most genuine absolute contraindications, since it's the highest-force technique and can't be adjusted mid-thrust the way other techniques can be backed off.
+  </div>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Technique</th>
+          <th>Active / Passive</th>
+          <th>Direct / Indirect</th>
+          <th>Target Tissue</th>
+          <th>Absolute Contraindications</th>
+          <th>Relative Contraindications</th>
+          <th>Steps (Brief)</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td class="tech-name">Myofascial<br>Release (MFR)</td>
+          <td>Passive <br><span class="tag">active variant exists</span></td>
+          <td>Both — direct engages/holds the barrier; indirect moves toward ease and holds</td>
+          <td>Fascia / myofascial planes</td>
+          <td><span class="none-absolute">None beyond lack of consent</span></td>
+          <td>Acute fracture, open wound/infection at site, anticoagulation/bleeding disorder near site, recent surgery at site</td>
+          <td>Locate the fascial restriction &rarr; apply gentle traction, compression, or torsion into the barrier (direct) or toward ease (indirect) &rarr; follow tissue as it releases &rarr; reassess</td>
+        </tr>
+
+        <tr>
+          <td class="tech-name">HVLA</td>
+          <td>Passive</td>
+          <td>Direct — engages and thrusts <em>through</em> the restrictive barrier</td>
+          <td>Articulation / joint</td>
+          <td class="absolute">Fracture; joint instability (incl. atlantoaxial instability, Down syndrome); active bone/joint infection; malignancy at site; severe/unstable osteoporosis; acute myelopathy; vertebrobasilar insufficiency (cervical)</td>
+          <td>Anticoagulation, mild&ndash;moderate osteoporosis, disc herniation with radiculopathy, spondylolisthesis, post-surgical fusion, pregnancy (region-dependent)</td>
+          <td>Diagnose restrictive barrier &rarr; precisely localize the joint to engage that barrier &rarr; deliver a quick, small-amplitude, high-velocity thrust through it (often an audible pop) &rarr; reassess</td>
+        </tr>
+
+        <tr>
+          <td class="tech-name">Muscle Energy<br>Technique (MET)</td>
+          <td><span class="tag">Active</span> — requires patient's own muscular effort</td>
+          <td>Direct — patient engages the barrier and contracts against it</td>
+          <td>Muscle (via reflex mechanisms — post-isometric relaxation, reciprocal inhibition — to restore joint mobility)</td>
+          <td class="absolute">Fracture at site; patient unable to voluntarily cooperate/contract (unconscious, severe cognitive impairment); acute muscle/tendon tear</td>
+          <td>Acute severe pain limiting contraction, severe osteoporosis, fragile post-surgical tissue</td>
+          <td>Diagnose barrier &rarr; position joint/muscle to engage it &rarr; patient performs brief (~3&ndash;5 sec) isometric contraction against matched counterforce &rarr; relax &rarr; move to new barrier &rarr; repeat 3&ndash;5x &rarr; reassess</td>
+        </tr>
+
+        <tr>
+          <td class="tech-name">Lymphatic<br>Techniques</td>
+          <td>Passive <br><span class="tag">breathing coordination</span></td>
+          <td>N/A — mechanical/pumping rather than barrier-based</td>
+          <td>Lymphatic system, fascial diaphragms (pelvic, respiratory, thoracic inlet)</td>
+          <td class="absolute">Active untreated infection (risk of dissemination/sepsis); malignancy (risk of promoting spread); DVT (embolism risk); decompensated CHF; fracture at site</td>
+          <td>Recent abdominal/thoracic surgery, pregnancy, severe osteoporosis (direct pressure techniques)</td>
+          <td>Release fascial diaphragms in sequence (pelvic &rarr; respiratory &rarr; thoracic inlet) &rarr; apply pump techniques (thoracic pump, pedal pump) synchronized with respiration to drive lymph centrally</td>
+        </tr>
+
+        <tr>
+          <td class="tech-name">BLT / LAS</td>
+          <td>Passive</td>
+          <td>Classified as indirect for COMLEX, though direct/indirect variants both exist</td>
+          <td>Ligaments (peri-articular)</td>
+          <td><span class="none-absolute">None beyond lack of consent</span></td>
+          <td>Acute fracture, open wounds, soft tissue/bony infection, abscess, DVT, anticoagulation, neoplasm, recent post-op site, aortic aneurysm</td>
+          <td><strong>D</strong>isengage (compress/decompress joint) &rarr; <strong>E</strong>xaggerate (move to position of ease across all planes to find balance point) &rarr; <strong>B</strong>alance (hold until release) &mdash; "DEB likes her BLT"</td>
+        </tr>
+
+        <tr>
+          <td class="tech-name">Still<br>Technique</td>
+          <td>Passive</td>
+          <td>Combined — begins indirect/ease, then moves <em>through</em> the restrictive barrier via a curved path</td>
+          <td>Joint/articulation and surrounding myofascial tissue</td>
+          <td class="absolute">Fracture, joint instability, active infection, malignancy at site, severe osteoporosis (compression component)</td>
+          <td>DVT (if compression used near it), anticoagulation, acute inflammatory conditions, fragile post-surgical tissue</td>
+          <td>Position toward ease &rarr; apply compression or traction &rarr; move the joint through a curved arc across and past the restrictive barrier &rarr; return to neutral &rarr; reassess</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    Note: exact direct/indirect and active/passive classifications for MFR and Lymphatics can vary slightly by textbook/program — cross-check against your course's specific framing if a question hinges on that exact wording.
+  </div>
+
+</div>
+
+</body>
+</html>
