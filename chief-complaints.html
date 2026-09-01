@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Top 50 Chief Complaints — ER / Primary Care Master Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --cardio:#a83f5c;
+    --gi:#c17f3e;
+    --resp:#3f6fa8;
+    --gen:#7a7a7a;
+    --neuro:#8a5a44;
+    --msk:#4a7c59;
+    --gu:#9b59b6;
+    --derm:#2f9e8f;
+    --psych:#b5602f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.55; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 26px; text-align:center; }
+  .header h1{ font-size:1.9rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .tabs{
+    display:flex; justify-content:center; gap:6px; background:var(--forest);
+    padding:0 12px; flex-wrap:wrap; position:sticky; top:0; z-index:60;
+  }
+  .tab-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.03em; background:transparent; border:none; color:var(--sage-light);
+    padding:12px 16px; cursor:pointer; border-bottom:3px solid transparent;
+  }
+  .tab-btn.active{ color:#fff; border-bottom:3px solid var(--accent); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .container{ max-width:1180px; margin:0 auto; padding:26px 20px 80px; }
+
+  .search-wrap{ position:sticky; top:41px; z-index:50; background:var(--cream); padding:14px 0 12px; }
+  #search{
+    width:100%; padding:13px 16px; font-family:'Lora',serif; font-size:1rem;
+    border:1px solid var(--border); border-radius:10px; background:var(--cream-card);
+    color:var(--text-main); outline:none;
+  }
+  #search:focus{ border-color:var(--forest); }
+
+  .cat-nav{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .cat-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase;
+    letter-spacing:0.03em; background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); padding:6px 12px; border-radius:20px; cursor:pointer;
+  }
+  .cat-btn.active{ background:var(--forest); color:var(--cream); border-color:var(--forest); }
+
+  .count-line{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--text-soft); margin:14px 2px 10px; }
+
+  .org-card{
+    background:var(--cream-card); border:1px solid var(--border); border-left:5px solid var(--sage);
+    border-radius:8px; padding:16px 20px; margin-bottom:12px;
+  }
+  .org-card.hidden{ display:none; }
+  .org-card[data-cat="Cardiopulmonary"]{ border-left-color:var(--cardio); }
+  .org-card[data-cat="Gastrointestinal"]{ border-left-color:var(--gi); }
+  .org-card[data-cat="Respiratory/ENT/Eye"]{ border-left-color:var(--resp); }
+  .org-card[data-cat="General/Systemic"]{ border-left-color:var(--gen); }
+  .org-card[data-cat="Neurologic"]{ border-left-color:var(--neuro); }
+  .org-card[data-cat="Musculoskeletal/Trauma"]{ border-left-color:var(--msk); }
+  .org-card[data-cat="Genitourinary/GYN"]{ border-left-color:var(--gu); }
+  .org-card[data-cat="Dermatologic"]{ border-left-color:var(--derm); }
+  .org-card[data-cat="Psychiatric/Toxicologic"]{ border-left-color:var(--psych); }
+
+  .org-top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
+  .org-name{ font-weight:700; font-size:1.12rem; color:var(--forest-dark); }
+  .org-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .org-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase;
+    padding:2px 8px; border-radius:6px; background:var(--sage-light); color:var(--forest-dark);
+    border:1px solid var(--sage); white-space:nowrap;
+  }
+  .org-grid{ display:grid; grid-template-columns:1fr; gap:8px; font-size:0.88rem; }
+  .org-field{ margin:0; }
+  .org-field b{
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase;
+    color:var(--accent); display:block; margin-bottom:2px; letter-spacing:0.02em;
+  }
+  .org-buzz{
+    margin-top:10px; padding:8px 12px; border-radius:6px;
+    background:#fdeceb; border:1px solid #e8b4ae;
+    font-size:0.85rem; color:#7a2e22; font-weight:600;
+  }
+  .no-results{ text-align:center; color:var(--text-soft); font-family:'IBM Plex Mono',monospace; font-size:0.85rem; padding:40px 0; display:none; }
+
+  h2.section-title{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--forest); border-bottom:2px solid var(--sage);
+    padding-bottom:6px; margin:36px 0 14px;
+  }
+  h2.section-title:first-child{ margin-top:0; }
+  h3.sub-title{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase; color:var(--accent); margin:22px 0 8px; }
+  .ref-card{ background:var(--cream-card); border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin-bottom:14px; }
+  .ref-card p{ margin:6px 0; font-size:0.92rem; }
+  table.ref-table{ border-collapse:collapse; width:100%; margin-bottom:16px; background:var(--cream-card); font-size:0.86rem; }
+  table.ref-table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem; text-transform:uppercase; padding:9px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table.ref-table td{ padding:9px 10px; border:1px solid var(--border); vertical-align:top; }
+  table.ref-table tr:nth-child(even) td{ background:#f5f0e5; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:14px 18px; margin:14px 0; font-size:0.9rem; }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:700px){ .two-col{ grid-template-columns:1fr; } }
+
+  .jumpnav{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; padding:12px; background:var(--sage-light); border-radius:10px; }
+  .jumpnav a{
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-decoration:none; color:var(--forest-dark);
+    background:var(--cream-card); border:1px solid var(--sage); padding:4px 9px; border-radius:14px;
+  }
+  .jumpnav a:hover{ background:var(--forest); color:var(--cream); }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Top 50 Chief Complaints</h1>
+  <p>ER / Primary Care Master Guide &middot; screening &middot; treatment &middot; brief differential</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="cc">Chief Complaint Database</button>
+  <button class="tab-btn" data-tab="frameworks">High-Yield Frameworks</button>
+  <button class="tab-btn" data-tab="systems">Clinical Correlations</button>
+</div>
+
+<div class="container">
+
+  <div class="tab-panel active" id="tab-cc">
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Search a complaint, workup, or diagnosis (e.g. 'chest pain', 'HEART score', 'appendicitis')...">
+      <div class="cat-nav" id="catNav"></div>
+    </div>
+    <div class="count-line" id="countLine"></div>
+    <div id="results"></div>
+    <div class="no-results" id="noResults">No complaints match your search.</div>
+  </div>
+
+  <div class="tab-panel" id="tab-frameworks">
+    
+<div class="jumpnav">
+  <a href="#fw-history">History-Taking Frameworks</a>
+  <a href="#fw-triage">Triage &amp; Vital Sign Danger Zones</a>
+  <a href="#fw-scores">Common Clinical Decision Scores</a>
+  <a href="#fw-labs">Common First-Line Workup by System</a>
+</div>
+
+<h2 class="section-title" id="fw-history">History-Taking Frameworks</h2>
+<div class="two-col">
+  <div class="ref-card">
+    <p><b>OPQRST</b> (characterizing any pain/symptom):</p>
+    <p><b>O</b>nset &mdash; sudden vs. gradual<br>
+    <b>P</b>rovocation/Palliation &mdash; what makes it better/worse<br>
+    <b>Q</b>uality &mdash; sharp, dull, burning, crampy<br>
+    <b>R</b>adiation &mdash; does it move anywhere<br>
+    <b>S</b>everity &mdash; 1–10 scale<br>
+    <b>T</b>iming &mdash; constant vs. intermittent, duration</p>
+  </div>
+  <div class="ref-card">
+    <p><b>SAMPLE</b> (rapid history in acute/trauma settings):</p>
+    <p><b>S</b>ymptoms<br>
+    <b>A</b>llergies<br>
+    <b>M</b>edications<br>
+    <b>P</b>ast medical history<br>
+    <b>L</b>ast oral intake<br>
+    <b>E</b>vents leading up to presentation</p>
+  </div>
+</div>
+<div class="callout"><b>AEIOU-TIPS</b> (altered mental status differential): <b>A</b>lcohol, <b>E</b>pilepsy/Electrolytes, <b>I</b>nsulin (hypo/hyperglycemia), <b>O</b>verdose/Oxygen (hypoxia), <b>U</b>remia, <b>T</b>rauma/Temperature, <b>I</b>nfection, <b>P</b>sychiatric/Poisoning, <b>S</b>troke/Space-occupying lesion/Subarachnoid hemorrhage</div>
+
+<h2 class="section-title" id="fw-triage">Triage &amp; Vital Sign Danger Zones</h2>
+<table class="ref-table">
+<tr><th>Vital Sign</th><th>Concerning Threshold</th><th>Consider</th></tr>
+<tr><td>Heart rate</td><td>&lt;50 or &gt;120 bpm (sustained)</td><td>Arrhythmia, sepsis, shock, medication toxicity</td></tr>
+<tr><td>Blood pressure</td><td>SBP &lt;90 or &ge;180/120</td><td>Shock/sepsis (low) vs. hypertensive emergency (high)</td></tr>
+<tr><td>Respiratory rate</td><td>&lt;10 or &gt;24/min</td><td>Respiratory failure, sepsis, metabolic acidosis (compensatory tachypnea)</td></tr>
+<tr><td>Oxygen saturation</td><td>&lt;94% on room air</td><td>Hypoxia — pneumonia, PE, CHF, COPD/asthma exacerbation</td></tr>
+<tr><td>Temperature</td><td>&gt;38.3°C (101°F) or &lt;36°C (96.8°F)</td><td>Infection/sepsis (fever or hypothermia both concerning in sepsis)</td></tr>
+<tr><td>Glucose</td><td>&lt;70 or &gt;400 mg/dL</td><td>Hypoglycemia (check immediately in AMS) vs. DKA/HHS</td></tr>
+</table>
+<div class="callout"><b>qSOFA</b> (quick sepsis screen — 2 of 3 suggests higher risk): Respiratory rate &ge;22/min, Altered mentation (GCS &lt;15), Systolic BP &le;100 mmHg</div>
+
+<h2 class="section-title" id="fw-scores">Common Clinical Decision Scores Referenced in This Guide</h2>
+<table class="ref-table">
+<tr><th>Score/Tool</th><th>Used For</th><th>Key Components</th></tr>
+<tr><td><b>HEART score</b></td><td>Chest pain risk stratification for ACS</td><td>History, ECG, Age, Risk factors, Troponin</td></tr>
+<tr><td><b>Centor criteria</b></td><td>Likelihood of strep pharyngitis</td><td>Fever, tonsillar exudate, tender anterior cervical nodes, absence of cough</td></tr>
+<tr><td><b>Ottawa ankle/knee rules</b></td><td>Need for x-ray after ankle/knee injury</td><td>Bony tenderness at specific landmarks, inability to bear weight</td></tr>
+<tr><td><b>Canadian C-spine rule / NEXUS</b></td><td>Need for cervical spine imaging after trauma</td><td>Age, dangerous mechanism, midline tenderness, neuro deficit, distracting injury</td></tr>
+<tr><td><b>Canadian CT Head Rule</b></td><td>Need for CT after minor head injury</td><td>GCS &lt;15, suspected skull fracture, vomiting &ge;2 episodes, age &ge;65</td></tr>
+<tr><td><b>CIWA-Ar</b></td><td>Alcohol withdrawal severity, guides benzodiazepine dosing</td><td>Tremor, sweating, anxiety, hallucinations, agitation, orientation</td></tr>
+<tr><td><b>PHQ-9 / GAD-7</b></td><td>Depression / generalized anxiety screening</td><td>Symptom frequency over the past 2 weeks</td></tr>
+<tr><td><b>San Francisco Syncope Rule</b></td><td>Risk stratification after syncope</td><td>CHF history, hematocrit &lt;30%, abnormal ECG, dyspnea, SBP &lt;90</td></tr>
+</table>
+
+<h2 class="section-title" id="fw-labs">Common First-Line Workup by System</h2>
+<table class="ref-table">
+<tr><th>System</th><th>Typical First-Line Tests</th></tr>
+<tr><td>Cardiac</td><td>ECG, troponin, CXR, BNP</td></tr>
+<tr><td>Pulmonary</td><td>Pulse ox, CXR, ABG/VBG, D-dimer (if PE pretest probability low)</td></tr>
+<tr><td>Abdominal/GI</td><td>CBC, CMP, lipase, urinalysis, pregnancy test, imaging by location</td></tr>
+<tr><td>Neurologic</td><td>Glucose (first!), CT head, electrolytes, consider LP</td></tr>
+<tr><td>Genitourinary</td><td>Urinalysis, urine culture, pregnancy test, renal function</td></tr>
+<tr><td>Infectious/Sepsis workup</td><td>CBC with differential, lactate, blood cultures x2, urinalysis, CXR</td></tr>
+<tr><td>Toxicologic/Psychiatric</td><td>Blood alcohol level, urine toxicology, acetaminophen/salicylate levels</td></tr>
+</table>
+
+  </div>
+
+  <div class="tab-panel" id="tab-systems">
+    
+<div class="jumpnav">
+  <a href="#sys-cantmiss">Can't-Miss Diagnoses by Chief Complaint</a>
+  <a href="#sys-disposition">ER vs. Outpatient Disposition Guide</a>
+  <a href="#sys-mimics">Classic Diagnostic Mimics &amp; Pitfalls</a>
+</div>
+
+<h2 class="section-title" id="sys-cantmiss">Can't-Miss ("Do Not Miss") Diagnoses by Presenting Complaint</h2>
+<table class="ref-table">
+<tr><th>Presenting Complaint</th><th>Can't-Miss Diagnosis</th><th>Why It's Dangerous</th></tr>
+<tr><td>Chest pain</td><td>Aortic dissection, ACS, PE, tension pneumothorax</td><td>Rapid deterioration/death if missed; dissection especially can mimic ACS</td></tr>
+<tr><td>Headache</td><td>Subarachnoid hemorrhage, meningitis, temporal arteritis</td><td>SAH has high mortality if the initial "sentinel bleed" is missed; temporal arteritis can cause irreversible blindness within hours</td></tr>
+<tr><td>Abdominal pain</td><td>Ruptured ectopic pregnancy, mesenteric ischemia, AAA rupture</td><td>All can cause rapid hemorrhagic/ischemic death; pain may be deceptively mild early</td></tr>
+<tr><td>Back pain</td><td>Cauda equina syndrome, spinal epidural abscess, AAA</td><td>Cauda equina requires surgery within hours to prevent permanent paralysis/incontinence</td></tr>
+<tr><td>Testicular pain</td><td>Testicular torsion</td><td>Salvage rate drops sharply after 6 hours from symptom onset</td></tr>
+<tr><td>Sore throat</td><td>Epiglottitis, peritonsillar/retropharyngeal abscess</td><td>Risk of sudden airway obstruction</td></tr>
+<tr><td>Dizziness</td><td>Posterior circulation (vertebrobasilar) stroke</td><td>Can be mistaken for benign peripheral vertigo; HINTS exam helps distinguish</td></tr>
+<tr><td>Single swollen joint</td><td>Septic arthritis</td><td>Rapid joint destruction within days if not promptly drained/treated</td></tr>
+<tr><td>Vaginal bleeding + positive pregnancy test</td><td>Ectopic pregnancy</td><td>Risk of tubal rupture and life-threatening hemorrhage</td></tr>
+<tr><td>Fever + rash</td><td>Meningococcemia</td><td>Can progress to septic shock and DIC within hours</td></tr>
+<tr><td>Extremity pain after injury/cast placement</td><td>Compartment syndrome</td><td>Irreversible muscle/nerve damage within 6–8 hours if untreated</td></tr>
+<tr><td>Depression/psychiatric complaint</td><td>Active suicidal ideation with plan and means</td><td>Requires immediate safety intervention; always ask directly</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-disposition">ER vs. Outpatient Disposition — General Guide</h2>
+<div class="ref-card">
+<p>These are general patterns, not rigid rules — always individualize based on the full clinical picture, comorbidities, and social factors (ability to follow up, home support).</p>
+</div>
+<table class="ref-table">
+<tr><th>Send to ER / Emergent Evaluation</th><th>Reasonable for Outpatient / Primary Care Workup</th></tr>
+<tr><td>Chest pain with cardiac risk factors or abnormal vitals</td><td>Chest wall pain reproducible on palpation, normal vitals, low HEART score</td></tr>
+<tr><td>Sudden severe ("thunderclap") headache</td><td>Chronic recurrent headache matching a known pattern (migraine, tension)</td></tr>
+<tr><td>Abdominal pain with peritoneal signs or hemodynamic instability</td><td>Mild, stable abdominal pain without alarm features</td></tr>
+<tr><td>Syncope with abnormal ECG or exertional trigger</td><td>Classic vasovagal syncope with clear trigger and normal exam/ECG</td></tr>
+<tr><td>Focal neuro deficits, suspected stroke (within treatment window)</td><td>Chronic stable paresthesias without acute change</td></tr>
+<tr><td>Any red-flag back pain feature (saddle anesthesia, bowel/bladder dysfunction)</td><td>Typical mechanical low back pain without neuro deficits</td></tr>
+<tr><td>High suspicion for testicular torsion, ectopic pregnancy, or ovarian torsion</td><td>Stable vaginal discharge/dysuria without pregnancy or peritoneal signs</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-mimics">Classic Diagnostic Mimics &amp; Pitfalls</h2>
+<table class="ref-table">
+<tr><th>Presentation</th><th>Commonly Mistaken For</th><th>Actually Consider</th></tr>
+<tr><td>Anxiety/panic attack</td><td>"Just anxiety"</td><td>Always exclude cardiac (ACS, arrhythmia) and thyroid causes first, especially on a first presentation</td></tr>
+<tr><td>Epigastric pain</td><td>GERD/gastritis</td><td>Inferior wall MI can present as epigastric pain/"indigestion" — get an ECG in at-risk patients</td></tr>
+<tr><td>Shoulder tip pain</td><td>Musculoskeletal shoulder injury</td><td>Referred diaphragmatic irritation (ruptured ectopic, splenic injury, subphrenic abscess)</td></tr>
+<tr><td>Back pain in a patient with fever/IV drug use</td><td>Simple musculoskeletal strain</td><td>Spinal epidural abscess — needs urgent MRI</td></tr>
+<tr><td>Confusion in an elderly patient</td><td>"Baseline dementia" or normal aging</td><td>New/acute confusion is delirium until proven otherwise — look for an underlying cause (infection, medication, metabolic)</td></tr>
+<tr><td>Calf pain/swelling</td><td>Muscle strain</td><td>DVT — especially with risk factors (immobility, malignancy, recent surgery, OCP use)</td></tr>
+<tr><td>"Worst headache" that has since resolved</td><td>Migraine, tension headache</td><td>Sentinel bleed from an unruptured aneurysm — still needs SAH workup even if pain resolved</td></tr>
+<tr><td>Vague weakness/fatigue in an elderly patient</td><td>"Just old age"</td><td>Can be the sole presenting symptom of MI, sepsis (occult UTI), or PE in the elderly — atypical presentations are the norm in this population</td></tr>
+</table>
+
+  </div>
+
+</div>
+
+<script>
+const CC = [{"name": "Chest pain", "cat": "Cardiopulmonary", "screening": "ECG within 10 min of arrival, troponin (serial), CXR; assess with HEART score; ask about exertional pattern, radiation, associated diaphoresis/dyspnea, cocaine use, recent surgery/immobility (PE risk)", "treatment": "If ACS: aspirin, nitrates, O2 if hypoxic, cardiology consult ± cath lab activation for STEMI. If PE suspected: CT angiography, anticoagulation. If low-risk (HEART score ≤3): outpatient stress test/follow-up", "ddx": "ACS/MI, unstable angina, aortic dissection, PE, pericarditis, pneumothorax, esophageal spasm/GERD, costochondritis, panic attack", "redflags": "Tearing pain radiating to back (dissection), pulse/BP differential between arms, sudden pleuritic pain with dyspnea (PE/pneumothorax), diaphoresis with radiation to jaw/arm (MI)"}, {"name": "Dyspnea (shortness of breath)", "cat": "Cardiopulmonary", "screening": "Pulse ox, CXR, BNP/NT-proBNP, ECG, consider D-dimer/CTA if PE suspected; ask about onset (sudden vs gradual), orthopnea/PND (CHF), fever/cough (pneumonia), exposure history", "treatment": "O2 to maintain SpO2 ≥94%; treat underlying cause — diuretics for CHF exacerbation, bronchodilators/steroids for COPD/asthma, antibiotics for pneumonia, anticoagulation for PE", "ddx": "CHF exacerbation, COPD/asthma exacerbation, pneumonia, PE, pneumothorax, anemia, anxiety/hyperventilation, ACS (dyspnea as anginal equivalent)", "redflags": "Sudden onset with pleuritic pain (PE/pneumothorax), stridor (airway obstruction — emergent), unable to speak in full sentences (impending respiratory failure)"}, {"name": "Palpitations", "cat": "Cardiopulmonary", "screening": "ECG, thyroid studies (TSH), electrolytes (K, Mg, Ca), ambulatory Holter/event monitor if intermittent; ask about caffeine/stimulant use, syncope, structural heart disease history", "treatment": "Treat underlying arrhythmia (rate/rhythm control for AFib, beta-blocker for SVT), correct electrolyte abnormalities, address thyroid dysfunction; refer to cardiology if structural disease or recurrent", "ddx": "Atrial fibrillation/flutter, SVT, PVCs, anxiety panic attack, hyperthyroidism, anemia, caffeine/stimulant use, pregnancy", "redflags": "Palpitations with syncope or chest pain, known structural heart disease, family history of sudden cardiac death"}, {"name": "Syncope", "cat": "Cardiopulmonary", "screening": "ECG (always), orthostatic vital signs, glucose, pregnancy test if applicable; use San Francisco Syncope Rule / Canadian Syncope Score to risk-stratify; ask about prodrome, exertional onset, cardiac history", "treatment": "Admit/monitor if high-risk features (abnormal ECG, structural heart disease, exertional syncope, no prodrome); reassurance + outpatient workup if vasovagal with normal ECG/exam", "ddx": "Vasovagal (neurocardiogenic), orthostatic hypotension, cardiac arrhythmia, structural heart disease (aortic stenosis, HCM), seizure, PE", "redflags": "Exertional syncope, syncope while supine/seated, no prodrome, family history of sudden death, abnormal ECG"}, {"name": "Hypertension (elevated blood pressure)", "cat": "Cardiopulmonary", "screening": "Confirm with repeat measurement (proper cuff size/technique), assess for end-organ damage if very elevated (headache, chest pain, vision changes, neuro deficits, creatinine, urinalysis for proteinuria)", "treatment": "Asymptomatic elevated BP: outpatient follow-up, lifestyle modification, start/adjust antihypertensive. Hypertensive emergency (end-organ damage): IV antihypertensives (labetalol, nicardipine) with gradual BP reduction", "ddx": "Essential hypertension, hypertensive urgency/emergency, white coat hypertension, secondary hypertension (renal, endocrine), medication non-adherence", "redflags": "BP ≥180/120 with symptoms (headache, chest pain, vision changes, confusion) = hypertensive emergency, requires immediate controlled lowering"}, {"name": "Leg swelling / edema", "cat": "Cardiopulmonary", "screening": "Assess for unilateral vs bilateral; D-dimer/venous duplex if unilateral (DVT concern); BNP, renal/liver function, albumin if bilateral; check for pitting vs non-pitting", "treatment": "Unilateral with DVT confirmed: anticoagulation. Bilateral from CHF: diuretics + treat underlying cardiac disease. Venous insufficiency: compression stockings, leg elevation", "ddx": "DVT, chronic venous insufficiency, CHF, cirrhosis/hypoalbuminemia, nephrotic syndrome, lymphedema, medication-induced (CCBs)", "redflags": "Unilateral swelling with calf pain/warmth (DVT), associated dyspnea/chest pain (consider concurrent PE)"}, {"name": "Hemoptysis", "cat": "Cardiopulmonary", "screening": "CXR, CT chest if significant volume or risk factors; CBC, coagulation studies; assess volume (streaking vs massive — >600 mL/24h is life-threatening); ask about smoking history, TB exposure", "treatment": "Massive hemoptysis: secure airway (lateral decubitus with bleeding side down), bronchoscopy, interventional radiology for embolization. Minor: treat underlying cause (antibiotics for infection, stop anticoagulation if applicable)", "ddx": "Bronchitis, pneumonia, malignancy (especially with smoking history), TB, bronchiectasis, PE, vasculitis (Goodpasture, GPA)", "redflags": "Massive volume, hemodynamic instability, associated weight loss/night sweats (malignancy/TB)"}, {"name": "Abdominal pain", "cat": "Gastrointestinal", "screening": "Full exam by location/quadrant, CBC, CMP, lipase, urinalysis, pregnancy test in women of childbearing age; imaging guided by location (RUQ ultrasound, CT for diffuse/RLQ pain); assess peritoneal signs", "treatment": "Treat underlying cause; surgical consult for peritonitis/acute abdomen; IV fluids, analgesia, antiemetics as needed; NPO if surgical concern", "ddx": "Appendicitis, cholecystitis, diverticulitis, bowel obstruction, pancreatitis, ectopic pregnancy, ovarian torsion, mesenteric ischemia, PID, nephrolithiasis", "redflags": "Peritoneal signs (rebound, guarding, rigidity), hemodynamic instability, pain out of proportion to exam (mesenteric ischemia)"}, {"name": "Nausea and vomiting", "cat": "Gastrointestinal", "screening": "Assess hydration status, electrolytes if prolonged/severe; consider abdominal imaging if concern for obstruction; pregnancy test; ask about associated headache (increased ICP), vertigo", "treatment": "Antiemetics (ondansetron), IV fluids for dehydration, treat underlying cause; address electrolyte abnormalities (hypokalemia, metabolic alkalosis with prolonged vomiting)", "ddx": "Gastroenteritis, medication side effect, bowel obstruction, pregnancy/hyperemesis, increased ICP, DKA, cyclic vomiting syndrome, vestibular disorder", "redflags": "Associated severe headache/neuro deficits (increased ICP), bilious/feculent vomiting (obstruction), hematemesis"}, {"name": "Diarrhea", "cat": "Gastrointestinal", "screening": "Assess hydration/volume status, stool studies (culture, O&P, C. diff toxin) if bloody/persistent/immunocompromised; ask about recent travel, antibiotic use, sick contacts, food exposure", "treatment": "Oral rehydration/IV fluids for dehydration; avoid antimotility agents if bloody/infectious concern; targeted antibiotics only for specific pathogens (not routine); C. diff → oral vancomycin or fidaxomicin", "ddx": "Viral gastroenteritis, bacterial infection (Salmonella, Campylobacter, E. coli, Shigella), C. difficile colitis, IBD flare, medication side effect, IBS", "redflags": "Bloody diarrhea, high fever, signs of severe dehydration, recent antibiotic use (C. diff), immunocompromised state"}, {"name": "Constipation", "cat": "Gastrointestinal", "screening": "Abdominal exam, rectal exam, assess for alarm features (weight loss, blood, anemia, age >50 without prior colonoscopy); abdominal X-ray if concern for obstruction/impaction", "treatment": "Increase fiber/fluid intake, osmotic laxatives (polyethylene glycol) first-line, stimulant laxatives if needed; disimpaction if severe; treat underlying cause (hypothyroidism, medications)", "ddx": "Functional constipation, IBS-C, medication-induced (opioids, anticholinergics), hypothyroidism, colorectal malignancy, bowel obstruction", "redflags": "Weight loss, rectal bleeding, new onset after age 50, family history of colorectal cancer, obstipation with distension"}, {"name": "GI bleeding (hematemesis / melena / hematochezia)", "cat": "Gastrointestinal", "screening": "CBC, coagulation studies, type and screen, lactate; assess hemodynamic stability; NG lavage historically used but largely replaced by clinical assessment; endoscopy for definitive diagnosis", "treatment": "IV access (2 large-bore), fluid resuscitation, transfusion if unstable/Hgb <7; PPI infusion for suspected upper GI bleed; endoscopy (EGD for upper, colonoscopy for lower) for source control", "ddx": "Peptic ulcer disease, esophageal varices, Mallory-Weiss tear, diverticulosis, angiodysplasia, colorectal malignancy, hemorrhoids", "redflags": "Hemodynamic instability, large volume blood loss, known cirrhosis/varices, coagulopathy/anticoagulant use"}, {"name": "GERD / heartburn", "cat": "Gastrointestinal", "screening": "Clinical diagnosis in typical presentation; upper endoscopy if alarm features (dysphagia, weight loss, anemia, age >60 new onset); consider H. pylori testing", "treatment": "Lifestyle modification (weight loss, avoid trigger foods, elevate head of bed), trial of PPI or H2 blocker; step down therapy once controlled; address alarm features before empiric treatment", "ddx": "GERD, peptic ulcer disease, esophagitis, gastritis, esophageal cancer, cardiac chest pain (must exclude)", "redflags": "Dysphagia, odynophagia, weight loss, anemia, GI bleeding, chest pain that could be cardiac in origin"}, {"name": "Jaundice", "cat": "Gastrointestinal", "screening": "LFTs (AST/ALT, alkaline phosphatase, bilirubin fractionation), hepatitis serologies, right upper quadrant ultrasound; distinguish unconjugated vs conjugated hyperbilirubinemia", "treatment": "Treat underlying cause; biliary obstruction may need ERCP/surgical decompression; supportive care for hepatitis; stop hepatotoxic medications", "ddx": "Hepatitis (viral, alcoholic, drug-induced), biliary obstruction (gallstones, malignancy), hemolysis, Gilbert syndrome, cirrhosis, pancreatic cancer", "redflags": "Painless jaundice with weight loss (pancreatic/biliary malignancy until proven otherwise), altered mental status (hepatic encephalopathy), coagulopathy"}, {"name": "Cough", "cat": "Respiratory/ENT/Eye", "screening": "CXR if concerning features (fever, weight loss, hemoptysis, duration >3 weeks, smoking history); assess acute (<3wk, usually viral) vs chronic (>8wk); consider PPD/IGRA if TB risk", "treatment": "Supportive care for viral URI; bronchodilators/steroids for asthma/COPD exacerbation; antibiotics only if bacterial pneumonia confirmed; address GERD/postnasal drip/ACE-inhibitor as chronic causes", "ddx": "Viral URI, post-nasal drip, asthma, GERD, ACE inhibitor use, pneumonia, COPD exacerbation, pertussis, TB, malignancy (chronic, smoker)", "redflags": "Hemoptysis, weight loss, night sweats, cough >3-8 weeks, smoking history with new cough (malignancy workup)"}, {"name": "Sore throat", "cat": "Respiratory/ENT/Eye", "screening": "Centor criteria (fever, tonsillar exudate, tender anterior cervical nodes, absence of cough) to guide rapid strep testing; throat culture if rapid negative in appropriate age group", "treatment": "Supportive care (NSAIDs, lozenges) for viral pharyngitis; penicillin/amoxicillin for confirmed strep pharyngitis; assess for peritonsillar abscess if unilateral swelling/trismus/muffled voice", "ddx": "Viral pharyngitis, streptococcal pharyngitis, mononucleosis (EBV), peritonsillar abscess, epiglottitis (rare in adults, emergent)", "redflags": "Drooling, muffled 'hot potato' voice, trismus, stridor, uvular deviation (peritonsillar abscess), severe unilateral pain"}, {"name": "Nasal congestion / rhinorrhea (common cold/URI)", "cat": "Respiratory/ENT/Eye", "screening": "Clinical diagnosis; assess duration and associated facial pain/pressure (sinusitis if >10 days or biphasic worsening); no imaging needed for typical URI", "treatment": "Supportive care — saline rinses, decongestants, antihistamines; antibiotics only if bacterial sinusitis suspected (symptoms >10 days, severe, or biphasic worsening)", "ddx": "Viral URI, allergic rhinitis, acute bacterial sinusitis, non-allergic rhinitis", "redflags": "Symptoms >10 days without improvement, high fever with facial pain (bacterial sinusitis), periorbital swelling (orbital cellulitis — emergent)"}, {"name": "Wheezing / asthma exacerbation", "cat": "Respiratory/ENT/Eye", "screening": "Peak flow/FEV1, pulse ox, assess work of breathing, accessory muscle use, ability to speak in full sentences; ABG if severe distress", "treatment": "Short-acting beta agonist (albuterol) ± ipratropium via nebulizer, systemic corticosteroids; O2 to maintain saturation; consider magnesium sulfate/escalation to ICU if severe/refractory", "ddx": "Asthma exacerbation, COPD exacerbation, CHF (cardiac wheeze), anaphylaxis, foreign body aspiration, vocal cord dysfunction", "redflags": "Silent chest (no air movement — impending respiratory failure), inability to speak, accessory muscle use, altered mental status"}, {"name": "Ear pain (otalgia)", "cat": "Respiratory/ENT/Eye", "screening": "Otoscopic exam (tympanic membrane appearance, canal inspection), assess for effusion/perforation; consider referred pain sources (dental, TMJ, pharyngeal) if exam normal", "treatment": "Acute otitis media: amoxicillin if bacterial criteria met (or watchful waiting in select cases); otitis externa: topical antibiotic/steroid drops, keep ear dry; analgesia for pain control", "ddx": "Acute otitis media, otitis externa ('swimmer's ear'), TMJ dysfunction, dental pain, referred pain (pharyngitis), cerumen impaction, mastoiditis", "redflags": "Postauricular swelling/erythema/protrusion (mastoiditis), facial nerve palsy, severe pain in diabetic/immunocompromised (malignant otitis externa)"}, {"name": "Epistaxis", "cat": "Respiratory/ENT/Eye", "screening": "Identify bleeding site (anterior vs posterior), assess for hemodynamic stability with large volume bleeds, check coagulation studies/platelet count if on anticoagulation or recurrent", "treatment": "Direct pressure on the nasal ala for 10-15 min, topical vasoconstrictor (oxymetazoline); nasal packing or cautery if bleeding persists; posterior bleeds may require ENT/balloon catheter", "ddx": "Anterior epistaxis (Kiesselbach plexus, most common), posterior epistaxis, coagulopathy, hypertension, nasal trauma, anticoagulant use", "redflags": "Posterior bleeding (bleeding into the throat, difficult to control), large volume blood loss, bleeding on anticoagulation"}, {"name": "Red eye / eye pain", "cat": "Respiratory/ENT/Eye", "screening": "Visual acuity (always first), pupillary exam, fluorescein stain for corneal abrasion/ulcer, assess for photophobia/consensual photophobia, intraocular pressure if glaucoma suspected", "treatment": "Bacterial conjunctivitis: topical antibiotics; viral: supportive care; corneal abrasion: topical antibiotic, avoid patching; acute angle-closure glaucoma: emergent ophtho consult, IOP-lowering agents", "ddx": "Conjunctivitis (viral/bacterial/allergic), corneal abrasion, uveitis/iritis, acute angle-closure glaucoma, keratitis, subconjunctival hemorrhage, orbital cellulitis", "redflags": "Vision loss, severe pain, photophobia with consensual photophobia (uveitis), fixed mid-dilated pupil with halos around lights (angle-closure glaucoma), contact lens wearer with pain (keratitis)"}, {"name": "Fever", "cat": "General/Systemic", "screening": "History of onset/duration, associated localizing symptoms, travel/sick contacts, immunization/immune status; CBC, blood cultures if concern for sepsis/bacteremia, urinalysis, CXR as indicated by symptoms", "treatment": "Treat underlying source; empiric broad-spectrum antibiotics if septic/neutropenic fever pending cultures; antipyretics for symptomatic relief; source control (drain abscess, remove infected line)", "ddx": "Viral illness, bacterial infection (UTI, pneumonia, cellulitis), sepsis, drug fever, malignancy (fever of unknown origin), autoimmune disease", "redflags": "Fever with hypotension/tachycardia (sepsis), neutropenic fever (oncology emergency), fever with rash and neck stiffness (meningococcemia/meningitis), fever in a returning traveler"}, {"name": "Fatigue", "cat": "General/Systemic", "screening": "CBC, CMP, TSH, screen for depression/sleep disorders; ask about sleep quality, medication changes, weight change, associated symptoms pointing to a specific system", "treatment": "Treat underlying cause (iron supplementation for anemia, thyroid hormone replacement, treat depression/sleep apnea); address lifestyle factors (sleep hygiene, exercise)", "ddx": "Anemia, hypothyroidism, depression, sleep apnea, chronic fatigue syndrome, malignancy, chronic infection, medication side effect, heart failure", "redflags": "Associated weight loss, night sweats, lymphadenopathy (malignancy/lymphoma workup), progressive dyspnea (cardiopulmonary cause)"}, {"name": "Unintentional weight loss", "cat": "General/Systemic", "screening": "Quantify amount/timeframe (>5% body weight in 6-12 months is significant); CBC, CMP, TSH, HbA1c, age-appropriate cancer screening, HIV testing; assess for depression/dysphagia", "treatment": "Targeted workup based on associated symptoms and exam findings; nutritional support; treat identified underlying cause (malignancy, hyperthyroidism, depression)", "ddx": "Malignancy, hyperthyroidism, diabetes (new/uncontrolled), depression, malabsorption/IBD, chronic infection (TB, HIV), dysphagia-related decreased intake", "redflags": "Weight loss with dysphagia, GI bleeding, palpable mass, or lymphadenopathy — warrants urgent malignancy workup"}, {"name": "Anaphylaxis / allergic reaction", "cat": "General/Systemic", "screening": "Rapid assessment of airway/breathing/circulation, identify trigger (food, medication, insect sting), assess for angioedema/stridor/hypotension", "treatment": "IM epinephrine immediately (first-line, do not delay), antihistamines (H1 + H2 blockers), corticosteroids to prevent biphasic reaction, IV fluids for hypotension, airway management if needed", "ddx": "Anaphylaxis, angioedema (ACE-inhibitor or hereditary), urticaria (isolated), vasovagal reaction, asthma exacerbation", "redflags": "Stridor/airway compromise, hypotension, rapid progression of symptoms — epinephrine should never be delayed for these findings"}, {"name": "Headache", "cat": "Neurologic", "screening": "Detailed history (onset — thunderclap vs gradual, associated neuro symptoms, prior headache history); neuro exam; CT head non-contrast if red flags present, LP if SAH suspected with negative CT", "treatment": "Migraine: triptans, NSAIDs, antiemetics; tension headache: NSAIDs/acetaminophen; treat underlying secondary cause (BP control, remove offending medication); avoid opioids as first-line", "ddx": "Migraine, tension headache, cluster headache, subarachnoid hemorrhage, meningitis, temporal arteritis, idiopathic intracranial hypertension, medication overuse headache", "redflags": "'Worst headache of life'/thunderclap onset (SAH), fever with neck stiffness (meningitis), new headache age >50 with jaw claudication/vision changes (temporal arteritis), papilledema, focal neuro deficits"}, {"name": "Dizziness / vertigo", "cat": "Neurologic", "screening": "Distinguish true vertigo (spinning) from presyncope/disequilibrium; HINTS exam (head impulse, nystagmus, test of skew) to differentiate peripheral vs central cause; orthostatic vitals", "treatment": "Peripheral (BPPV): Epley maneuver, vestibular suppressants short-term (meclizine); central causes require emergent neuroimaging and neurology consult; treat underlying cause (dehydration, medication)", "ddx": "BPPV, vestibular neuritis, Ménière disease, orthostatic hypotension, posterior circulation stroke, medication side effect, anxiety", "redflags": "Sudden onset with other neuro symptoms (diplopia, dysarthria, ataxia — concern for posterior circulation stroke), abnormal HINTS exam favoring central cause, inability to walk unassisted"}, {"name": "Numbness / tingling (paresthesia)", "cat": "Neurologic", "screening": "Determine distribution (single nerve/dermatomal vs stocking-glove vs one-sided); glucose/HbA1c, B12, TSH; nerve conduction studies if peripheral neuropathy suspected; neuroimaging if focal/acute onset", "treatment": "Treat underlying cause (glycemic control for diabetic neuropathy, B12 repletion); nerve-specific bracing/splinting for entrapment (carpal tunnel); urgent imaging/stroke workup if acute focal onset", "ddx": "Peripheral neuropathy (diabetic, B12 deficiency), nerve entrapment (carpal tunnel), radiculopathy, stroke/TIA, multiple sclerosis, anxiety/hyperventilation", "redflags": "Acute unilateral onset with weakness/facial droop/speech changes (stroke), rapidly ascending symmetric weakness (Guillain-Barré)"}, {"name": "Seizure", "cat": "Neurologic", "screening": "Glucose immediately (rule out hypoglycemia), electrolytes, toxicology screen, neuroimaging (CT/MRI) for first-time seizure, EEG if diagnosis unclear; obtain detailed witness history", "treatment": "Benzodiazepines (lorazepam/diazepam) for active seizure >5 min; treat underlying cause (correct glucose/electrolytes, alcohol withdrawal protocol); antiepileptic therapy and neurology referral for recurrent seizures", "ddx": "Epilepsy, febrile seizure (pediatric), hypoglycemia, alcohol withdrawal, eclampsia (pregnancy), CNS infection/mass lesion, non-epileptic (psychogenic) seizure", "redflags": "Status epilepticus (>5 min or recurrent without return to baseline), first-time seizure in adult (needs imaging), postictal focal deficit lasting beyond expected (Todd paralysis vs stroke)"}, {"name": "Altered mental status / confusion", "cat": "Neurologic", "screening": "\"AEIOU-TIPS\" framework (alcohol, epilepsy/electrolytes, insulin, overdose, uremia, trauma, infection, psychiatric, stroke/space-occupying); glucose immediately, CBC, CMP, urinalysis, CT head, consider LP", "treatment": "Treat identified cause (glucose for hypoglycemia, naloxone for opioid overdose, thiamine before glucose in suspected alcoholics, antibiotics for infection); supportive care and frequent reassessment", "ddx": "Delirium (infection, medication, metabolic), dementia, stroke, hypoglycemia, intoxication/withdrawal, hepatic/uremic encephalopathy, CNS infection", "redflags": "Rapid onset (hours) favors delirium over dementia; focal neuro deficits (stroke), fever with confusion (CNS infection or sepsis), pinpoint pupils with respiratory depression (opioid overdose)"}, {"name": "Back pain (low back pain)", "cat": "Musculoskeletal/Trauma", "screening": "Assess for red flags (bowel/bladder dysfunction, saddle anesthesia, progressive weakness, fever, IV drug use, cancer history, trauma); imaging NOT needed for typical acute back pain without red flags", "treatment": "NSAIDs, activity modification (avoid strict bed rest), physical therapy; muscle relaxants for short-term use; urgent MRI + surgical consult if cauda equina suspected", "ddx": "Musculoskeletal strain, disc herniation with radiculopathy, spinal stenosis, compression fracture, cauda equina syndrome, spinal epidural abscess, malignancy (metastatic)", "redflags": "Saddle anesthesia, urinary retention/incontinence, bilateral leg weakness (cauda equina — surgical emergency), fever with IV drug use (epidural abscess), unexplained weight loss"}, {"name": "Neck pain", "cat": "Musculoskeletal/Trauma", "screening": "Assess mechanism (trauma vs atraumatic), neuro exam of upper extremities, use NEXUS/Canadian C-spine rules to determine need for imaging after trauma", "treatment": "Musculoskeletal strain: NSAIDs, gentle range of motion, avoid rigid collar for prolonged periods; radiculopathy: physical therapy, consider epidural steroid injection; surgical evaluation for cord compression", "ddx": "Cervical strain/whiplash, cervical radiculopathy, cervical spondylosis, meningitis (with fever/photophobia), cervical fracture (trauma)", "redflags": "Neurologic deficits, fever with neck stiffness (meningitis), history of significant trauma, midline bony tenderness after trauma"}, {"name": "Joint pain (arthralgia)", "cat": "Musculoskeletal/Trauma", "screening": "Determine mono- vs polyarticular, inflammatory vs mechanical pattern; joint aspiration for monoarticular hot joint (cell count, gram stain, culture, crystals) to rule out septic arthritis/gout", "treatment": "Septic arthritis: emergent joint washout + IV antibiotics. Gout: NSAIDs/colchicine, avoid starting urate-lowering therapy acutely. RA/inflammatory: DMARDs per rheumatology; OA: NSAIDs, PT, weight loss", "ddx": "Osteoarthritis, rheumatoid arthritis, gout/pseudogout, septic arthritis, reactive arthritis, psoriatic arthritis, lupus", "redflags": "Single hot, swollen, exquisitely tender joint with fever (septic arthritis until proven otherwise — needs urgent aspiration)"}, {"name": "Extremity injury / possible fracture", "cat": "Musculoskeletal/Trauma", "screening": "Assess neurovascular status distal to injury (pulses, sensation, motor function) before and after any reduction/splinting; x-ray of the joint above and below the injury; Ottawa ankle/knee rules to guide imaging", "treatment": "Immobilize/splint, analgesia, ice/elevation (RICE); reduce and splint displaced fractures/dislocations emergently if neurovascular compromise; orthopedic referral for definitive management", "ddx": "Sprain/strain, fracture, dislocation, compartment syndrome, tendon rupture", "redflags": "Absent distal pulses, pain out of proportion to injury with pain on passive stretch (compartment syndrome — emergency), open fracture, obvious deformity with neurovascular compromise"}, {"name": "Laceration / wound", "cat": "Musculoskeletal/Trauma", "screening": "Assess depth, involvement of underlying structures (tendon, nerve, vessel, joint capsule), contamination, time since injury, tetanus vaccination status", "treatment": "Irrigation and debridement, primary closure if <6-12 hours and low contamination (longer for face/scalp), tetanus prophylaxis as indicated, antibiotics for high-risk wounds (bites, heavily contaminated)", "ddx": "Simple laceration, tendon laceration, nerve laceration, open fracture, foreign body retained in wound, bite wound (higher infection risk)", "redflags": "Neurovascular or tendon involvement, joint space penetration, heavily contaminated/crush wounds, bite wounds (especially cat bites — high infection risk)"}, {"name": "Head injury / minor trauma", "cat": "Musculoskeletal/Trauma", "screening": "Glasgow Coma Scale, assess for loss of consciousness/amnesia, use Canadian CT Head Rule / New Orleans Criteria to determine need for CT; anticoagulant use raises threshold for imaging", "treatment": "Observation for mild injury with normal imaging/exam; neurosurgical consult for intracranial hemorrhage; discharge with head injury precautions and return instructions", "ddx": "Concussion, epidural hematoma, subdural hematoma, subarachnoid hemorrhage, skull fracture", "redflags": "GCS <15, worsening headache, repeated vomiting, seizure, anticoagulant use, signs of basilar skull fracture (raccoon eyes, Battle sign, CSF rhinorrhea/otorrhea)"}, {"name": "Dysuria / urinary symptoms", "cat": "Genitourinary/GYN", "screening": "Urinalysis ± urine culture, pregnancy test in women of childbearing age; assess for upper tract symptoms (fever, flank pain, CVA tenderness) suggesting pyelonephritis; consider STI testing if sexually active", "treatment": "Uncomplicated cystitis: nitrofurantoin or TMP-SMX; pyelonephritis: fluoroquinolone or ceftriaxone, IV fluids, admit if unable to tolerate PO/systemically ill; treat identified STI per pathogen", "ddx": "Uncomplicated UTI/cystitis, pyelonephritis, urethritis (STI), interstitial cystitis, vaginitis (referred symptoms)", "redflags": "Fever, flank pain, CVA tenderness (pyelonephritis, especially concerning in pregnancy), signs of sepsis, pregnancy with UTI symptoms (treat even if asymptomatic bacteriuria)"}, {"name": "Hematuria", "cat": "Genitourinary/GYN", "screening": "Urinalysis with microscopy (confirm true hematuria vs. myoglobinuria/hemoglobinuria), urine culture, consider CT urogram/cystoscopy for gross or persistent microscopic hematuria (especially age >35, smoker)", "treatment": "Treat identified cause (antibiotics for UTI, stop offending anticoagulant if supratherapeutic); urology referral for unexplained hematuria to evaluate for malignancy", "ddx": "UTI, nephrolithiasis, bladder/renal malignancy, glomerulonephritis, BPH, trauma, anticoagulation, exercise-induced", "redflags": "Painless gross hematuria (bladder cancer until proven otherwise, especially in smokers), hematuria with clots and clot retention, hematuria with hypertension/edema (glomerulonephritis)"}, {"name": "Testicular pain", "cat": "Genitourinary/GYN", "screening": "Urgent scrotal ultrasound with Doppler flow to distinguish torsion from epididymitis; assess cremasteric reflex (absent in torsion), onset (sudden = torsion, gradual = epididymitis), urinalysis", "treatment": "Testicular torsion is a SURGICAL EMERGENCY — urology consult for immediate detorsion/orchiopexy (salvage rate drops sharply after 6 hours); epididymitis/orchitis: antibiotics targeting likely pathogen (STI vs enteric)", "ddx": "Testicular torsion, epididymitis, orchitis, incarcerated inguinal hernia, testicular tumor, Fournier gangrene", "redflags": "Sudden severe pain with absent cremasteric reflex and high-riding transverse testicle (torsion — do not delay for imaging if clinical suspicion high), fever with scrotal skin necrosis (Fournier gangrene)"}, {"name": "Abnormal vaginal bleeding", "cat": "Genitourinary/GYN", "screening": "Pregnancy test (always first), CBC if heavy bleeding, pelvic ultrasound; assess bleeding pattern relative to menstrual cycle and reproductive stage (pre-menarchal, reproductive age, post-menopausal)", "treatment": "Hemodynamically unstable: IV fluids, transfusion, gynecology consult for surgical management; hormonal therapy (OCPs) for dysfunctional uterine bleeding; treat underlying structural cause", "ddx": "Dysfunctional uterine bleeding/anovulation, fibroids, endometrial polyps, ectopic pregnancy, miscarriage, endometrial hyperplasia/cancer (especially postmenopausal)", "redflags": "Postmenopausal bleeding (endometrial cancer until proven otherwise), positive pregnancy test with pain/bleeding (rule out ectopic), hemodynamic instability from bleeding"}, {"name": "Vaginal discharge", "cat": "Genitourinary/GYN", "screening": "Wet mount microscopy (clue cells, hyphae, trichomonads), vaginal pH, whiff test (KOH); STI testing (gonorrhea/chlamydia NAAT) if sexually active", "treatment": "Bacterial vaginosis: metronidazole or clindamycin; candidiasis: topical or oral azole; trichomoniasis: metronidazole (treat partner too); PID: broad-spectrum antibiotics covering gonorrhea/chlamydia/anaerobes", "ddx": "Bacterial vaginosis, vulvovaginal candidiasis, trichomoniasis, cervicitis (gonorrhea/chlamydia), PID, foreign body (pediatric)", "redflags": "Fever with lower abdominal/pelvic pain and cervical motion tenderness (PID — needs prompt antibiotics to prevent infertility/scarring)"}, {"name": "Pelvic pain", "cat": "Genitourinary/GYN", "screening": "Pregnancy test (always first), pelvic exam, pelvic ultrasound (transvaginal preferred); assess for peritoneal signs, cervical motion tenderness, adnexal mass", "treatment": "Ectopic pregnancy: methotrexate (stable, unruptured) or surgical management (ruptured/unstable); ovarian torsion: emergent gynecologic surgery; PID: antibiotics; ovarian cyst: supportive/observation", "ddx": "Ectopic pregnancy, ovarian torsion, ruptured ovarian cyst, PID, endometriosis, appendicitis, tubo-ovarian abscess", "redflags": "Positive pregnancy test with pain (ectopic until proven otherwise), sudden severe unilateral pain with adnexal mass (torsion — surgical emergency), peritoneal signs with fever (TOA/PID)"}, {"name": "Skin rash", "cat": "Dermatologic", "screening": "Characterize morphology (macular, papular, vesicular, petechial/purpuric), distribution, and progression; ask about new medications, fever, associated systemic symptoms", "treatment": "Antihistamines/topical steroids for allergic/contact dermatitis; antibiotics for bacterial (cellulitis, impetigo); antivirals for herpes zoster/HSV; stop offending drug for drug eruption", "ddx": "Contact dermatitis, drug eruption, cellulitis, viral exanthem, herpes zoster, urticaria, Stevens-Johnson syndrome/TEN (severe)", "redflags": "Petechiae/purpura with fever (meningococcemia, needs emergent workup), mucosal involvement with skin sloughing (SJS/TEN), rapidly spreading erythema with systemic toxicity (necrotizing fasciitis)"}, {"name": "Pruritus (itching)", "cat": "Dermatologic", "screening": "Examine for primary skin lesions vs. generalized itch without rash (consider systemic cause); CBC, LFTs, renal function, TSH if no primary skin lesion identified", "treatment": "Topical emollients/antihistamines for symptomatic relief; treat underlying cause (antifungals for tinea, permethrin for scabies, address systemic disease — renal/hepatic/thyroid)", "ddx": "Xerosis (dry skin), scabies, atopic dermatitis, contact dermatitis, cholestasis/liver disease, chronic kidney disease, lymphoma (paraneoplastic itch)", "redflags": "Generalized pruritus with no rash and abnormal LFTs/renal function (systemic cause), pruritus with unexplained weight loss/lymphadenopathy (lymphoma)"}, {"name": "Burn", "cat": "Dermatologic", "screening": "Estimate total body surface area (Rule of Nines), assess burn depth (superficial, partial, full-thickness), assess for inhalation injury (facial burns, singed nasal hair, carbonaceous sputum)", "treatment": "Cool (not ice) the burn, cover with clean dressing; IV fluid resuscitation for burns >20% TBSA (Parkland formula); refer to burn center for large/full-thickness/high-risk-location burns; tetanus prophylaxis", "ddx": "Superficial (first-degree) burn, partial-thickness (second-degree) burn, full-thickness (third-degree) burn, chemical burn, electrical burn, inhalation injury", "redflags": "Signs of inhalation injury (stridor, hoarseness, facial burns), circumferential full-thickness burns (risk of compartment syndrome), burns involving face/hands/genitalia/joints"}, {"name": "Anxiety", "cat": "Psychiatric/Toxicologic", "screening": "Rule out organic causes first (thyroid studies, ECG if palpitations/chest pain, glucose); screen with GAD-7; assess for panic attacks, substance use, comorbid depression", "treatment": "SSRIs/SNRIs first-line for ongoing management, cognitive behavioral therapy; short-term benzodiazepines only for acute severe symptoms (caution for dependence); avoid long-term benzodiazepine use", "ddx": "Generalized anxiety disorder, panic disorder, hyperthyroidism, cardiac arrhythmia (mimics anxiety), substance intoxication/withdrawal, PTSD", "redflags": "Chest pain/palpitations that could represent cardiac cause rather than anxiety (must exclude organic cause first, especially on a first presentation)"}, {"name": "Depression / suicidal ideation", "cat": "Psychiatric/Toxicologic", "screening": "Screen with PHQ-9; always directly ask about suicidal ideation, plan, intent, access to means (asking does NOT increase risk); assess safety and need for hospitalization", "treatment": "Active suicidal intent/plan with access to means: emergent psychiatric hospitalization/1:1 observation; SSRIs first-line pharmacotherapy, psychotherapy (CBT); safety planning for lower-risk patients", "ddx": "Major depressive disorder, adjustment disorder, bipolar depression, substance-induced mood disorder, medical causes (hypothyroidism, medication side effect)", "redflags": "Active plan with means and intent, prior suicide attempts, command auditory hallucinations, recent major loss/stressor with hopelessness"}, {"name": "Insomnia", "cat": "Psychiatric/Toxicologic", "screening": "Sleep history (onset, maintenance, early awakening), sleep hygiene assessment, screen for depression/anxiety, restless legs, sleep apnea (snoring, witnessed apneas, daytime somnolence)", "treatment": "Cognitive behavioral therapy for insomnia (CBT-I) is first-line; sleep hygiene counseling; short-term pharmacotherapy (avoid long-term benzodiazepine/Z-drug use); treat underlying sleep apnea/psychiatric cause", "ddx": "Primary insomnia, depression/anxiety-related, obstructive sleep apnea, restless legs syndrome, medication/caffeine-induced, circadian rhythm disorder", "redflags": "Loud snoring with witnessed apneas and daytime hypersomnolence (sleep apnea — needs polysomnography), insomnia as a symptom of underlying depression/mania"}, {"name": "Alcohol / substance use or withdrawal", "cat": "Psychiatric/Toxicologic", "screening": "CIWA-Ar scale for alcohol withdrawal severity, screen with CAGE/AUDIT questionnaire; check blood alcohol level, urine toxicology, electrolytes (especially magnesium, phosphate), LFTs", "treatment": "Benzodiazepines (symptom-triggered per CIWA protocol) for alcohol withdrawal, thiamine BEFORE glucose (prevent Wernicke encephalopathy), folate/multivitamin; naloxone for opioid overdose", "ddx": "Alcohol withdrawal (including delirium tremens), opioid withdrawal/overdose, stimulant intoxication, benzodiazepine withdrawal, Wernicke-Korsakoff syndrome", "redflags": "Delirium tremens (autonomic instability, hallucinations, confusion — high mortality if untreated), seizures during withdrawal, respiratory depression with opioid overdose (give naloxone immediately)"}, {"name": "Falls (geriatric)", "cat": "General/Systemic", "screening": "Assess for injury (head CT if on anticoagulation or LOC, x-rays of painful areas), orthostatic vitals, medication review (polypharmacy, sedatives), gait/balance assessment, ECG, glucose", "treatment": "Treat acute injuries; address reversible contributors (deprescribe unnecessary sedating/hypotensive medications, correct vitamin D deficiency, vision correction); PT/OT referral for gait training and home safety evaluation", "ddx": "Mechanical fall, orthostatic hypotension, cardiac arrhythmia/syncope, medication side effect (polypharmacy), gait/balance disorder, occult infection (UTI) causing weakness in elderly", "redflags": "Head strike with anticoagulant use (needs CT even if asymptomatic), inability to get up afterward (long lie time — risk for rhabdomyolysis/pressure injury), recurrent falls (needs full syncope/gait workup)"}];
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'instant'});
+  });
+});
+
+const container = document.getElementById('results');
+const searchInput = document.getElementById('search');
+const catNav = document.getElementById('catNav');
+const countLine = document.getElementById('countLine');
+const noResults = document.getElementById('noResults');
+
+const CAT_ORDER = ["Cardiopulmonary","Gastrointestinal","Respiratory/ENT/Eye","General/Systemic","Neurologic","Musculoskeletal/Trauma","Genitourinary/GYN","Dermatologic","Psychiatric/Toxicologic"];
+let activeCat = 'All';
+
+function renderCatNav(){
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.textContent = 'All (' + CC.length + ')';
+  allBtn.onclick = () => setCategory('All', allBtn);
+  catNav.appendChild(allBtn);
+  CAT_ORDER.forEach(cat => {
+    const n = CC.filter(o=>o.cat===cat).length;
+    if(n===0) return;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = cat + ' (' + n + ')';
+    btn.onclick = () => setCategory(cat, btn);
+    catNav.appendChild(btn);
+  });
+}
+
+function setCategory(cat, btnEl){
+  activeCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  filterAndRender();
+}
+
+function fieldRow(label, val){
+  if(!val) return '';
+  return '<div class="org-field"><b>'+label+'</b>'+val+'</div>';
+}
+
+function renderCC(){
+  container.innerHTML = '';
+  CC.forEach(o => {
+    const card = document.createElement('div');
+    card.className = 'org-card';
+    card.dataset.cat = o.cat;
+    const searchBlob = [o.name,o.cat,o.screening,o.treatment,o.ddx,o.redflags].filter(Boolean).join(' ').toLowerCase();
+    card.dataset.search = searchBlob;
+    let badges = '<span class="org-badge">'+o.cat+'</span>';
+    card.innerHTML = `
+      <div class="org-top">
+        <span class="org-name">${o.name}</span>
+        <span class="org-tags">${badges}</span>
+      </div>
+      <div class="org-grid">
+        ${fieldRow('How to Screen / Workup', o.screening)}
+        ${fieldRow('Treatment', o.treatment)}
+        ${fieldRow('Brief Differential', o.ddx)}
+      </div>
+      ${o.redflags ? '<div class="org-buzz">\u{1F6A9} Red Flags: '+o.redflags+'</div>' : ''}
+    `;
+    container.appendChild(card);
+  });
+}
+
+function filterAndRender(){
+  const q = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
+  document.querySelectorAll('.org-card').forEach(card => {
+    const matchesCat = (activeCat === 'All' || card.dataset.cat === activeCat);
+    const matchesSearch = (q === '' || card.dataset.search.includes(q));
+    const show = matchesCat && matchesSearch;
+    card.classList.toggle('hidden', !show);
+    if(show) visibleCount++;
+  });
+  countLine.textContent = `Showing ${visibleCount} of ${CC.length} chief complaints`;
+  noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+renderCatNav();
+renderCC();
+filterAndRender();
+searchInput.addEventListener('input', filterAndRender);
+</script>
+
+</body>
+</html>
