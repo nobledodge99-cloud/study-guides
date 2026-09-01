@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Microbiology Memorization — Master Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --bacteria:#4a7c59;
+    --fungi:#c17f3e;
+    --virus:#3f6fa8;
+    --prion:#7a7a7a;
+    --parasite:#8a5a44;
+    --protozoa:#2f9e8f;
+    --ecto:#a83f5c;
+    --toxin:#9b59b6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Lora',serif;
+    background:var(--cream);
+    color:var(--text-main);
+    line-height:1.55;
+  }
+  .back-btn{
+    position:fixed;
+    top:18px;
+    left:18px;
+    z-index:70;
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    color:var(--forest-dark);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{
+    background:var(--forest-dark);
+    color:var(--cream);
+    padding:56px 24px 26px;
+    text-align:center;
+  }
+  .header h1{ font-size:1.9rem; margin:0 0 8px; font-weight:700; }
+  .header p{
+    margin:0;
+    color:var(--sage-light);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.82rem;
+  }
+
+  /* top-level tab nav */
+  .tabs{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    background:var(--forest);
+    padding:0 12px;
+    flex-wrap:wrap;
+    position:sticky;
+    top:0;
+    z-index:60;
+  }
+  .tab-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    background:transparent;
+    border:none;
+    color:var(--sage-light);
+    padding:12px 16px;
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+  }
+  .tab-btn.active{
+    color:#fff;
+    border-bottom:3px solid var(--accent);
+  }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:26px 20px 80px;
+  }
+
+  /* ===== Organism DB tab ===== */
+  .search-wrap{
+    position:sticky;
+    top:41px;
+    z-index:50;
+    background:var(--cream);
+    padding:14px 0 12px;
+  }
+  #search{
+    width:100%;
+    padding:13px 16px;
+    font-family:'Lora',serif;
+    font-size:1rem;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--cream-card);
+    color:var(--text-main);
+    outline:none;
+  }
+  #search:focus{ border-color:var(--forest); }
+
+  .cat-nav{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .cat-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    color:var(--forest-dark);
+    padding:6px 12px;
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .cat-btn.active{ background:var(--forest); color:var(--cream); border-color:var(--forest); }
+
+  .count-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;
+    color:var(--text-soft);
+    margin:14px 2px 10px;
+  }
+
+  .org-card{
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    border-left:5px solid var(--sage);
+    border-radius:8px;
+    padding:16px 20px;
+    margin-bottom:12px;
+  }
+  .org-card.hidden{ display:none; }
+  .org-card[data-cat="Bacteria"]{ border-left-color:var(--bacteria); }
+  .org-card[data-cat="Fungi"]{ border-left-color:var(--fungi); }
+  .org-card[data-cat="Virus"]{ border-left-color:var(--virus); }
+  .org-card[data-cat="Prion"]{ border-left-color:var(--prion); }
+  .org-card[data-cat="Parasite"]{ border-left-color:var(--parasite); }
+  .org-card[data-cat="Protozoa"]{ border-left-color:var(--protozoa); }
+  .org-card[data-cat="Ectoparasite"]{ border-left-color:var(--ecto); }
+  .org-card[data-cat="Toxin"]{ border-left-color:var(--toxin); }
+
+  .org-top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:8px;
+  }
+  .org-name{ font-weight:700; font-size:1.12rem; color:var(--forest-dark); font-style:italic; }
+  .org-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .org-badge{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:6px;
+    background:var(--sage-light);
+    color:var(--forest-dark);
+    border:1px solid var(--sage);
+    white-space:nowrap;
+  }
+  .org-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 24px;
+    font-size:0.88rem;
+  }
+  @media (max-width:700px){ .org-grid{ grid-template-columns:1fr; } }
+  .org-field{ margin:0; }
+  .org-field b{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:block;
+    margin-bottom:2px;
+    letter-spacing:0.02em;
+  }
+  .org-buzz{
+    margin-top:10px;
+    padding-top:8px;
+    border-top:1px dashed var(--border);
+    font-size:0.85rem;
+    color:var(--forest-dark);
+    font-weight:600;
+  }
+  .no-results{
+    text-align:center;
+    color:var(--text-soft);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+    padding:40px 0;
+    display:none;
+  }
+
+  /* ===== Frameworks/reference tab ===== */
+  h2.section-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--forest);
+    border-bottom:2px solid var(--sage);
+    padding-bottom:6px;
+    margin:36px 0 14px;
+  }
+  h2.section-title:first-child{ margin-top:0; }
+  h3.sub-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:22px 0 8px;
+  }
+  .ref-card{
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 18px;
+    margin-bottom:14px;
+  }
+  .ref-card p{ margin:6px 0; font-size:0.92rem; }
+  table.ref-table{
+    border-collapse:collapse;
+    width:100%;
+    margin-bottom:16px;
+    background:var(--cream-card);
+    font-size:0.86rem;
+  }
+  table.ref-table th{
+    background:var(--forest);
+    color:var(--cream);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    padding:9px 10px;
+    text-align:left;
+    border:1px solid var(--forest-dark);
+  }
+  table.ref-table td{
+    padding:9px 10px;
+    border:1px solid var(--border);
+    vertical-align:top;
+  }
+  table.ref-table tr:nth-child(even) td{ background:#f5f0e5; }
+  ul.tree, ul.tree ul{ list-style:none; margin:0; padding-left:18px; }
+  ul.tree{ padding-left:0; }
+  ul.tree li{
+    position:relative;
+    padding:4px 0 4px 18px;
+    border-left:1px dashed var(--sage);
+    margin-left:6px;
+  }
+  ul.tree > li{ border-left:none; margin-left:0; padding-left:0; }
+  ul.tree li::before{ content:"\2192  "; color:var(--accent); }
+  ul.tree > li::before{ content:""; }
+  .pill{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    background:var(--sage-light);
+    border:1px solid var(--sage);
+    color:var(--forest-dark);
+    padding:1px 7px;
+    border-radius:5px;
+    margin:0 3px;
+  }
+  .callout{
+    background:var(--sage-light);
+    border:1px solid var(--sage);
+    border-radius:10px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:0.9rem;
+  }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:700px){ .two-col{ grid-template-columns:1fr; } }
+
+  /* side quick-jump nav for reference tab */
+  .jumpnav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:22px;
+    padding:12px;
+    background:var(--sage-light);
+    border-radius:10px;
+  }
+  .jumpnav a{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    text-decoration:none;
+    color:var(--forest-dark);
+    background:var(--cream-card);
+    border:1px solid var(--sage);
+    padding:4px 9px;
+    border-radius:14px;
+  }
+  .jumpnav a:hover{ background:var(--forest); color:var(--cream); }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Microbiology Memorization</h1>
+  <p>Master reference &middot; organism database &middot; high-yield frameworks &middot; clinical correlations</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="organisms">Organism Database</button>
+  <button class="tab-btn" data-tab="frameworks">High-Yield Frameworks</button>
+  <button class="tab-btn" data-tab="systems">Summary of Systems</button>
+</div>
+
+<div class="container">
+
+  <!-- ============ TAB 1: ORGANISM DATABASE ============ -->
+  <div class="tab-panel active" id="tab-organisms">
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Search an organism, buzzword, or feature (e.g. 'rusty sputum', 'catalase', 'Klebsiella')...">
+      <div class="cat-nav" id="catNav"></div>
+    </div>
+    <div class="count-line" id="countLine"></div>
+    <div id="results"></div>
+    <div class="no-results" id="noResults">No organisms match your search.</div>
+  </div>
+
+  <!-- ============ TAB 2: HIGH-YIELD FRAMEWORKS ============ -->
+  <div class="tab-panel" id="tab-frameworks">
+    
+<div class="jumpnav">
+  <a href="#fw-oxygen">Oxygen Requirements</a>
+  <a href="#fw-control">Control of Microorganisms</a>
+  <a href="#fw-gram-pos">Gram+ Algorithm</a>
+  <a href="#fw-gram-neg">Gram− Algorithm</a>
+  <a href="#fw-hemolysis">Hemolysis</a>
+  <a href="#fw-salmonella-shigella">Salmonella vs Shigella</a>
+  <a href="#fw-syphilis">Syphilis Staging</a>
+  <a href="#fw-virus-genomes">Virus Genome Families</a>
+  <a href="#fw-virus-receptors">Viral Receptors</a>
+  <a href="#fw-endemic-mycoses">Endemic Mycoses Map</a>
+  <a href="#fw-parasite-hints">Parasite Hints</a>
+</div>
+
+<h2 class="section-title" id="fw-oxygen">Oxygen Requirements</h2>
+<div class="ref-card">
+  <p><b>Aerobe</b> — grows in presence of atmospheric O&#8322; (~20% O&#8322;)</p>
+  <p><b>Obligate aerobe</b> — <i>requires</i> O&#8322;</p>
+  <p><b>Anaerobe</b> — grows in the absence of O&#8322;</p>
+  <p><b>Obligate anaerobe</b> — usually killed in presence of O&#8322; (lacks catalase/superoxide dismutase)</p>
+  <p><b>Microaerophile</b> — requires 2–10% O&#8322;</p>
+  <p><b>Facultative anaerobe</b> — does not require O&#8322; but grows better in its presence</p>
+  <p><b>Aerotolerant anaerobe</b> — grows with or without O&#8322;</p>
+</div>
+
+<div class="callout">
+  <b>Bacterial Biochemistry — Some Main Points</b>
+  <ul>
+    <li>Bacteria need a source of building blocks, energy, and electrons.</li>
+    <li>Energy production can involve aerobic respiration, anaerobic respiration, or fermentation. Aerobic respiration uses O&#8322; as an exogenous electron acceptor; anaerobic respiration uses another exogenous electron acceptor; fermentation uses an endogenous electron acceptor.</li>
+    <li>Metabolism includes catabolism (breaking things down) and anabolism (building things up).</li>
+    <li>Bacteria that infect us must be able to grow at body temperature, but that doesn't have to be their optimal temperature.</li>
+    <li>Oxygen requirements can include obligate aerobes, obligate anaerobes, facultative anaerobes, aerotolerant, or microaerophiles.</li>
+    <li>Factors such as pH and salt can affect which bacteria grow in which parts of the body.</li>
+    <li>Biochemical pathways can produce molecules that can be virulence factors such as capsules, adhesion molecules, enzymes, toxins, immune evasion factors, and chelators.</li>
+    <li>Biochemical analysis can differentiate between different bacteria — catalase, coagulase, oxidase, citrate, CAMP, and carbohydrate utilization tests are common.</li>
+    <li>Media can include selective and differential types (e.g. TSI tubes, blood agar, chocolate agar, MacConkey agar, and mannitol salt agar).</li>
+    <li>Immune tests can also be used to identify bacteria.</li>
+  </ul>
+</div>
+
+<h2 class="section-title" id="fw-control">Control of Microorganisms</h2>
+<div class="ref-card">
+  <p><b>Sterilization</b> — kills ALL organisms, including endospores.</p>
+  <p><b>Disinfection</b> — kills all pathogenic organisms, with the possible exception of endospores.</p>
+  <p><b>Sanitization</b> — kills pathogens down to a safe level.</p>
+  <p><b>Antisepsis</b> — less potent than disinfectants; can be used on living tissue.</p>
+  <p><b>Degerming</b> — procedures (e.g. handwashing) that mechanically reduce microbes on skin/other tissues.</p>
+  <p>Agents named with a prefix for what's affected (<i>bacteri-, viru-, fungi-, germi-</i>) and a suffix: <b>-cide</b> = kills the organisms, <b>-stat</b> = stops them from growing.</p>
+</div>
+
+<h3 class="sub-title">Biosafety Levels</h3>
+<table class="ref-table">
+<tr><th>BSL</th><th>Description</th><th>Sample Organisms</th><th>Autoclave Requirements</th></tr>
+<tr><td><b>BSL-1</b></td><td>No containment; defined organisms unlikely to cause disease</td><td>E. coli (lab strain)</td><td>None</td></tr>
+<tr><td><b>BSL-2</b></td><td>Containment; moderate risk; disease of varying severity</td><td>Influenza, HIV, Lyme disease</td><td>None</td></tr>
+<tr><td><b>BSL-3</b></td><td>High containment; aerosol transmission; serious/potentially lethal disease</td><td>Tuberculosis</td><td>Pass-thru autoclave w/ Bioseal required in lab room</td></tr>
+<tr><td><b>BSL-4</b></td><td>Max containment; "exotic," high-risk, life-threatening agents</td><td>Ebola virus</td><td>Pass-thru autoclave w/ Bioseal required in lab room</td></tr>
+</table>
+
+<h3 class="sub-title">Common Protocols for Control of Microbial Growth</h3>
+<table class="ref-table">
+<tr><th>Protocol</th><th>Definition</th><th>Common Agents</th></tr>
+<tr><td colspan="3"><b>For use on fomites:</b></td></tr>
+<tr><td>Disinfection</td><td>Reduces microbial load of an inanimate item through heat/chemicals</td><td>Chlorine bleach, phenols (e.g. Lysol), glutaraldehyde</td></tr>
+<tr><td>Sanitization</td><td>Reduces microbial load to safe public-health levels</td><td>Detergents with phosphates, industrial cleaners with quaternary ammonium compounds</td></tr>
+<tr><td>Sterilization</td><td>Completely eliminates all vegetative cells, endospores, and viruses</td><td>Pressurized steam (autoclave), chemicals, radiation</td></tr>
+<tr><td colspan="3"><b>For use on living tissue:</b></td></tr>
+<tr><td>Antisepsis</td><td>Reduces microbial load on skin/tissue through an antimicrobial chemical</td><td>Boric acid, isopropyl alcohol, hydrogen peroxide, iodine (betadine)</td></tr>
+<tr><td>Degerming</td><td>Reduces microbial load on skin through gentle scrubbing/mild chemicals</td><td>Soap, alcohol swab</td></tr>
+</table>
+
+<h2 class="section-title" id="fw-gram-pos">Gram-Positive Identification Algorithm</h2>
+<div class="ref-card">
+  <ul class="tree">
+    <li><b>Gram + (purple/blue)</b>
+      <ul>
+        <li><b>Cocci</b>
+          <ul>
+            <li><b>Streptococcus</b> (pairs/chains) &mdash; catalase negative
+              <ul>
+                <li>Hemolysis &alpha; (partial, green) &mdash; optochin sensitivity + bile solubility &rarr; <span class="pill">S. pneumoniae</span> (optochin sensitive, bile soluble) vs viridans strep (no capsule, e.g. S. mutans, S. mitis)</li>
+                <li>Hemolysis &beta; (complete, clear) &mdash; bacitracin sensitivity + PYR &rarr; <span class="pill">Group A / S. pyogenes</span> (bacitracin sensitive, PYR+) vs <span class="pill">Group B / S. agalactiae</span> (bacitracin resistant, PYR&minus;)</li>
+                <li>Hemolysis &gamma; (none, grows in bile) &mdash; growth in 6.5% NaCl &rarr; <span class="pill">Enterococcus</span> (E. faecium, E. faecalis) vs nonenterococcus (S. gallolyticus)</li>
+              </ul>
+            </li>
+            <li><b>Staphylococcus</b> (clusters) &mdash; catalase positive
+              <ul>
+                <li>Coagulase + &rarr; <span class="pill">S. aureus</span> (also &beta;-hemolytic)</li>
+                <li>Coagulase &minus; &mdash; novobiocin sensitivity &rarr; <span class="pill">S. epidermidis</span> (sensitive) vs <span class="pill">S. saprophyticus</span> (resistant)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><b>Bacilli (rods)</b>
+          <ul>
+            <li>Aerobic &rarr; <i>Listeria, Bacillus, Corynebacterium</i> (Listeria/Bacillus are also weakly &beta;-hemolytic)</li>
+            <li>Anaerobic &rarr; <i>Clostridium, Cutibacterium</i> (formerly Propionibacterium)</li>
+          </ul>
+        </li>
+        <li><b>Branching filaments</b>
+          <ul>
+            <li>Aerobic, weakly acid-fast &rarr; <i>Nocardia</i></li>
+            <li>Anaerobic, not acid-fast &rarr; <i>Actinomyces</i></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<h2 class="section-title" id="fw-gram-neg">Gram-Negative Identification Algorithm</h2>
+<div class="ref-card">
+  <ul class="tree">
+    <li><b>Gram &minus; (pink)</b>
+      <ul>
+        <li><b>Diplococci</b> &mdash; aerobic &mdash; maltose fermentation &rarr; <span class="pill">N. meningitidis</span> (ferments maltose + glucose) vs <span class="pill">N. gonorrhoeae / Moraxella</span> (glucose only)</li>
+        <li><b>Coccobacilli</b> &rarr; <i>Haemophilus influenzae, Bordetella pertussis, Pasteurella, Brucella, Francisella tularensis, Acinetobacter baumannii</i></li>
+        <li><b>Curved rods</b> &mdash; oxidase +
+          <ul>
+            <li>Grows at 42&deg;C &rarr; <span class="pill">Campylobacter jejuni</span></li>
+            <li>Grows in alkaline media &rarr; <span class="pill">Vibrio cholerae</span></li>
+            <li>Produces urease &rarr; <span class="pill">Helicobacter pylori</span></li>
+          </ul>
+        </li>
+        <li><b>Bacilli (rods)</b> &mdash; lactose fermentation
+          <ul>
+            <li><b>Non-fermenter</b> &mdash; oxidase
+              <ul>
+                <li>Oxidase + &rarr; <i>Pseudomonas, Burkholderia</i></li>
+                <li>Oxidase &minus; &mdash; H&#8322;S production on TSI agar &rarr; <span class="pill">Salmonella, Proteus</span> (H&#8322;S+) vs <span class="pill">Shigella, Yersinia</span> (H&#8322;S&minus;, *pleomorphic rod/coccobacillus)</li>
+              </ul>
+            </li>
+            <li><b>Fast fermenter</b> &rarr; <i>E. coli, Klebsiella, Enterobacter</i></li>
+            <li><b>Slow fermenter</b> &rarr; <i>Citrobacter, Serratia</i></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p style="margin-top:10px; font-size:0.82rem; color:var(--text-soft);"><b>Important tests are bolded; important pathogens are bold italic.</b> *Yersinia is a pleomorphic rod/coccobacillus.</p>
+</div>
+
+<h2 class="section-title" id="fw-hemolysis">Hemolytic Bacteria (&alpha; + &beta;)</h2>
+<table class="ref-table">
+<tr><th>Type</th><th>Appearance</th><th>Organisms</th></tr>
+<tr><td><b>&alpha;-hemolytic</b></td><td>Partial oxidation of hemoglobin &rarr; greenish/brownish color without clearing around growth on blood agar</td><td><i>Streptococcus pneumoniae</i>, viridans streptococci</td></tr>
+<tr><td><b>&beta;-hemolytic</b></td><td>Complete lysis of RBCs &rarr; pale/clear area surrounding colony on blood agar</td><td><i>Staphylococcus aureus</i>, <i>Streptococcus pyogenes</i> (Group A), <i>Streptococcus agalactiae</i> (Group B), <i>Listeria monocytogenes</i></td></tr>
+</table>
+<div class="callout">Quick recall: <b>Strep = catalase negative.</b> <b>Staph = catalase positive</b> &rarr; if catalase+ and coagulase+, it's <i>S. aureus</i>.</div>
+
+<h2 class="section-title" id="fw-salmonella-shigella">Salmonella vs. Shigella</h2>
+<div class="ref-card">
+  <p>Both are gram &minus; rods, non-lactose fermenters, oxidase &minus;, and can invade the GI tract via M cells of Peyer patches.</p>
+</div>
+<table class="ref-table">
+<tr><th></th><th><i>Salmonella</i> Typhi (ty-Vi)</th><th><i>Salmonella</i> spp. (except S. typhi)</th><th><i>Shigella</i></th></tr>
+<tr><td><b>Reservoirs</b></td><td>Humans only</td><td>Humans and animals</td><td>Humans only</td></tr>
+<tr><td><b>Spread</b></td><td>Hematogenous</td><td>Hematogenous</td><td>Cell to cell; no hematogenous spread</td></tr>
+<tr><td><b>H&#8322;S production</b></td><td>Yes</td><td>Yes</td><td>No</td></tr>
+<tr><td><b>Flagella</b></td><td>Yes ("salmon swim")</td><td>Yes ("salmon swim")</td><td>No</td></tr>
+<tr><td><b>Virulence factors</b></td><td>Endotoxin; Vi capsule ("tyVi")</td><td>Endotoxin; LPS</td><td>Endotoxin; Shiga toxin (enterotoxin)</td></tr>
+<tr><td><b>Infectious dose</b></td><td>High &mdash; large inoculum required; acid-labile</td><td>High</td><td>Low &mdash; very small inoculum; acid stable</td></tr>
+<tr><td><b>Effect of antibiotics on fecal excretion</b></td><td>Prolongs duration</td><td>Prolongs duration</td><td>Shortens duration</td></tr>
+<tr><td><b>Immune response</b></td><td>Primarily monocytes</td><td>PMNs in disseminated disease</td><td>Primarily PMN infiltration</td></tr>
+<tr><td><b>GI manifestations</b></td><td>Constipation, then diarrhea</td><td>Diarrhea (possibly bloody)</td><td>Crampy pain &rarr; tenesmus, bloody mucoid stools</td></tr>
+<tr><td><b>Vaccine</b></td><td>Oral (live attenuated) or IM (Vi capsular polysaccharide)</td><td>No vaccine</td><td>No vaccine</td></tr>
+<tr><td><b>Unique properties</b></td><td>Typhoid fever (rose spots, "step-ladder" fever, hepatosplenomegaly); gallbladder carrier state</td><td>Poultry, eggs, pets, turtles; supportive treatment, abx not indicated in immunocompetent</td><td>4 F's: fingers, flies, food, feces. Decreasing severity: dysenteriae &gt; flexneri &gt; boydii &gt; sonnei</td></tr>
+</table>
+
+<h2 class="section-title" id="fw-syphilis">Syphilis Staging &amp; Diagnosis</h2>
+<table class="ref-table">
+<tr><th>Stage</th><th>Findings</th></tr>
+<tr><td><b>Primary</b></td><td>Localized disease; painless chancre. Dark-field/fluorescent microscopy visualizes treponemes. VDRL+ in ~80%.</td></tr>
+<tr><td><b>Secondary</b></td><td>Disseminated, constitutional symptoms; maculopapular rash (palms/soles), condylomata lata, lymphadenopathy, patchy hair loss. Systemic disease.</td></tr>
+<tr><td><b>Tertiary</b></td><td>Gummas (chronic granulomas), aortitis, neurosyphilis (tabes dorsalis, general paresis), Argyll Robertson pupil (accommodates but doesn't react to light).</td></tr>
+<tr><td><b>Congenital</b></td><td>Facial abnormalities (rhagades, saddle nose, Hutchinson teeth, mulberry molars, saber shins), snuffles, CN VIII deafness. Prevent by treating early in pregnancy.</td></tr>
+</table>
+<div class="callout">
+  <b>Diagnosing syphilis:</b> VDRL/RPR are nontreponemal (nonspecific) tests — sensitive but not specific, revert to negative after treatment. FTA-ABS/TP-PA are treponemal (specific) tests — remain positive for life.<br><br>
+  <b>False positive VDRL mnemonic (VDRL):</b> <b>V</b>iral infection (EBV, hepatitis), <b>D</b>rugs (chlorpromazine, procainamide), <b>R</b>heumatic fever, <b>L</b>upus/Leprosy. Also seen in pregnancy.
+</div>
+
+<h2 class="section-title" id="fw-virus-genomes">Virus Genome Family Reference</h2>
+<h3 class="sub-title">DNA Viruses — all icosahedral and replicate in the nucleus, EXCEPT poxviruses ("Pox is out of the box")</h3>
+<table class="ref-table">
+<tr><th>Family</th><th>Envelope</th><th>DNA Structure</th><th>Medical Importance</th></tr>
+<tr><td>Herpesviruses</td><td>Yes</td><td>DS, linear</td><td>See Herpesvirus entry (HSV, VZV, CMV, EBV)</td></tr>
+<tr><td>Poxvirus</td><td>Yes</td><td>DS, linear (largest DNA virus)</td><td>Smallpox (eradicated by live-attenuated vaccine); Cowpox ("milkmaid's blisters"); Molluscum contagiosum — flesh-colored papule with central umbilication</td></tr>
+<tr><td>Hepadnavirus</td><td>Yes</td><td>Partially DS, circular</td><td>HBV — acute or chronic hepatitis; not a retrovirus but has reverse transcriptase</td></tr>
+<tr><td>Adenovirus</td><td>No</td><td>DS, linear</td><td>Febrile pharyngitis, hemorrhagic cystitis, pneumonia, conjunctivitis ("pink eye"), gastroenteritis, myocarditis</td></tr>
+<tr><td>Papillomavirus</td><td>No</td><td>DS, circular</td><td>HPV — warts, cancer (cervical, anal, penile, oropharyngeal); serotypes 1,2,6,11 = warts, 16/18 = cancer</td></tr>
+<tr><td>Polyomavirus</td><td>No</td><td>DS, circular</td><td>JC virus — progressive multifocal leukoencephalopathy (PML) in immunocompromised; BK virus — transplant patients, targets kidney</td></tr>
+<tr><td>Parvovirus</td><td>No</td><td>SS, linear (smallest DNA virus)</td><td>B19V — aplastic crisis in sickle cell disease, "slapped cheek" in children, hydrops fetalis, RBC destruction</td></tr>
+</table>
+
+<h3 class="sub-title">RNA Viruses — all replicate in the cytoplasm EXCEPT retrovirus and influenza virus ("Retro flu is outta cyst/sight")</h3>
+<table class="ref-table">
+<tr><th>Family</th><th>Envelope</th><th>RNA Structure</th><th>Medical Importance</th></tr>
+<tr><td>Reoviruses</td><td>No</td><td>DS, segmented</td><td>Rotavirus — important cause of diarrhea in young children; may be fatal</td></tr>
+<tr><td>Picornaviruses</td><td>No</td><td>SS (+), linear</td><td>Poliovirus (polio-Salk/Sabin vaccines), Echovirus (aseptic meningitis), Rhinovirus ("common cold"), Coxsackievirus (aseptic meningitis, herpangina, hand-foot-mouth disease, myocarditis, pericarditis), HAV (acute viral hepatitis) — mnemonic PERCH</td></tr>
+<tr><td>Hepevirus</td><td>No</td><td>SS (+), linear</td><td>HEV — waterborne, high mortality in pregnancy</td></tr>
+<tr><td>Caliciviruses</td><td>No</td><td>SS (+), linear</td><td>Norovirus — viral gastroenteritis</td></tr>
+<tr><td>Flaviviruses</td><td>Yes</td><td>SS (+), linear</td><td>HCV, Yellow fever, Dengue, West Nile virus — meningoencephalitis/acute asymmetric flaccid paralysis, Zika virus</td></tr>
+<tr><td>Togaviruses</td><td>Yes</td><td>SS (+), linear</td><td>Chikungunya virus (co-infection with dengue can occur), Rubella (formerly a togavirus), Eastern/Western equine encephalitis</td></tr>
+<tr><td>Matonavirus</td><td>Yes</td><td>SS (+), linear</td><td>Rubella</td></tr>
+<tr><td>Retroviruses</td><td>Yes</td><td>SS (+), linear</td><td>Have reverse transcriptase; HTLV — T cell leukemia; HIV — AIDS</td></tr>
+<tr><td>Coronaviruses</td><td>Yes</td><td>SS (+), linear</td><td>"Common cold," SARS, COVID-19, MERS</td></tr>
+<tr><td>Orthomyxoviruses</td><td>Yes</td><td>SS (−), segmented</td><td>Influenza virus</td></tr>
+<tr><td>Paramyxoviruses</td><td>Yes</td><td>SS (−)</td><td>Parainfluenza (croup), RSV (bronchiolitis in babies), Measles, Mumps — mnemonic PaRaMyxovirus</td></tr>
+<tr><td>Pneumoviruses</td><td>Yes</td><td>SS (−)</td><td>RSV — bronchiolitis in babies</td></tr>
+<tr><td>Rhabdoviruses</td><td>Yes</td><td>SS (−)</td><td>Rabies</td></tr>
+<tr><td>Filoviruses</td><td>Yes</td><td>SS (−), linear</td><td>Ebola/Marburg hemorrhagic fever — often fatal</td></tr>
+<tr><td>Arenaviruses</td><td>Yes</td><td>SS (+ and −), circular, multisegmented</td><td>LCMV — lymphocytic choriomeningitis virus, spread by rodents; Lassa fever encephalitis</td></tr>
+<tr><td>Bunyaviruses</td><td>Yes</td><td>SS (−), circular, multisegmented</td><td>California encephalitis, Sandfly/Rift Valley fever, Crimean-Congo hemorrhagic fever, Hantavirus — pneumonia</td></tr>
+<tr><td>Delta virus</td><td>Yes</td><td>SS (−), circular</td><td>HDV is "defective" — requires presence of HBV to replicate</td></tr>
+</table>
+
+<div class="two-col">
+  <div class="callout">
+    <b>Viral genetics:</b><br>
+    <b>Recombination</b> — exchange of genes between 2 chromosomes by crossing over within regions of significant base sequence homology.<br><br>
+    <b>Reassortment</b> — when viruses with segmented genomes (e.g. influenza) exchange genetic material (e.g. 2009 H1N1 pandemic); potential for antigenic shift.<br><br>
+    <b>Complementation</b> — when 1 of 2 viruses infecting a cell has a mutation causing a nonfunctional protein; the nonmutated virus "complements" by making a functional protein that serves both viruses.<br><br>
+    <b>Phenotypic mixing</b> — simultaneous infection of a cell with 2 viruses produces progeny with a genome from one virus (A) but the surface proteins from the other (B); infectivity of the pseudovirion is determined by the coat (B tropism), but progeny from that infection encode type A capsid.
+  </div>
+  <div class="callout">
+    <b>Viral genomes:</b><br>
+    Naked nucleic acids of most dsDNA viruses (except poxviruses/HBV) and (+) strand ssRNA viruses are infectious. Naked nucleic acids of (−) strand ssRNA and dsRNA viruses are NOT infectious (lack the RNA-dependent RNA polymerase needed to transcribe (−) strand to (+)).<br><br>
+    <b>DNA viruses:</b> all have dsDNA genomes (like our cells) except Parvoviridae (ssDNA); all are linear except papilloma-, polyoma-, and hepadnaviruses (circular). Mnemonic: "Part of a HHAPPPy virus" (repeato-virus)<br><br>
+    <b>RNA viruses:</b> all have ssRNA genomes except Reoviridae (dsRNA); (+) stranded = retro, toga, flavi, corona, hepe, calici, picorna (also = mRNA); (−) stranded = arena, bunya, paramyxo, orthomyxo, filo, rhabdo; Segmented = Bunya, Orthomyxo, Arena, and Reoviruses ("BOAR").<br><br>
+    <b>Viral envelopes:</b> generally acquired from the plasma membrane when they exit the cell. Exceptions: herpesviruses acquire their envelope from the nuclear membrane.
+  </div>
+</div>
+
+<h2 class="section-title" id="fw-virus-receptors">Receptors Used by Viruses</h2>
+<table class="ref-table">
+<tr><th>Virus</th><th>Receptor(s)</th></tr>
+<tr><td>CMV</td><td>Integrins (heparan sulfate)</td></tr>
+<tr><td>EBV</td><td>CD21</td></tr>
+<tr><td>HIV</td><td>CD4, CXCR4, CCR5</td></tr>
+<tr><td>Parvovirus B19</td><td>P antigen on RBCs</td></tr>
+<tr><td>Rabies</td><td>Nicotinic AChR</td></tr>
+<tr><td>Rhinovirus</td><td>ICAM-1 ("I CAMe to see the rhino")</td></tr>
+<tr><td>SARS-CoV-2</td><td>ACE2</td></tr>
+</table>
+
+<h2 class="section-title" id="fw-endemic-mycoses">Endemic (Systemic Dimorphic) Mycoses</h2>
+<div class="ref-card">
+  <p>All of the following can cause pneumonia and can disseminate. All are caused by dimorphic fungi (mold cold [25&deg;C] = mold; heat [37&deg;C] = yeast). Only exception is <i>Coccidioides</i>, which is a spherule (not yeast) in tissue. Systemic mycoses can form granulomas (like TB), cannot be transmitted person-to-person (unlike TB), and amphotericin B can be used for local or systemic infection.</p>
+  <table class="ref-table">
+    <tr><th>Organism</th><th>Endemic Region</th><th>Distinguishing Tissue Form</th></tr>
+    <tr><td><i>Histoplasma capsulatum</i></td><td>Mississippi and Ohio River Valleys</td><td>Macrophage-filled with tiny yeast (intracellular)</td></tr>
+    <tr><td><i>Blastomyces dermatitidis</i></td><td>Eastern and Central US, Great Lakes</td><td>Broad-based budding yeast</td></tr>
+    <tr><td><i>Coccidioides immitis</i></td><td>Southwestern US, California ("Valley Fever")</td><td>Spherule filled with endospores</td></tr>
+    <tr><td><i>Paracoccidioides brasiliensis</i></td><td>Latin America</td><td>Budding yeast with "captain's wheel" formation</td></tr>
+  </table>
+</div>
+
+<h2 class="section-title" id="fw-parasite-hints">High-Yield Parasite Hints</h2>
+<table class="ref-table">
+<tr><th>Clinical Association</th><th>Organism</th></tr>
+<tr><td>Biliary tract disease, cholangiocarcinoma</td><td><i>Clonorchis sinensis</i></td></tr>
+<tr><td>Brain cysts, seizures</td><td><i>Taenia solium</i> (neurocysticercosis)</td></tr>
+<tr><td>Hematuria, squamous cell bladder cancer</td><td><i>Schistosoma haematobium</i></td></tr>
+<tr><td>Liver (hydatid) cysts, exposure to infected dogs</td><td><i>Echinococcus granulosus</i></td></tr>
+<tr><td>Iron deficiency anemia</td><td><i>Ancylostoma, Necator</i></td></tr>
+<tr><td>Myalgias, periorbital edema</td><td><i>Trichinella spiralis</i></td></tr>
+<tr><td>Nocturnal perianal pruritus</td><td><i>Enterobius</i></td></tr>
+<tr><td>Portal hypertension</td><td><i>Schistosoma mansoni, S. japonicum</i></td></tr>
+<tr><td>Vitamin B12 deficiency</td><td><i>Diphyllobothrium latum</i></td></tr>
+</table>
+<div class="callout">
+  <b>Nematode routes of infection:</b><br>
+  <b>Ingested</b> — <i>Enterobius, Ascaris, Toxocara, Trichinella, Trichuris</i> &mdash; "you'll get sick if you EATTT these!"<br>
+  <b>Cutaneous</b> — <i>Strongyloides, Ancylostoma, Necator</i> &mdash; "these get into your feet from the SAN'd" (swimming or bathing)<br>
+  <b>Bites</b> — <i>Loa loa, Onchocerca volvulus, Wuchereria bancrofti</i> &mdash; "lay LOW to avoid getting bitten"
+</div>
+
+  </div>
+
+  <!-- ============ TAB 3: SUMMARY OF SYSTEMS ============ -->
+  <div class="tab-panel" id="tab-systems">
+    
+<div class="jumpnav">
+  <a href="#sys-foodborne">Foodborne Illness</a>
+  <a href="#sys-diarrhea">Diarrhea by Type</a>
+  <a href="#sys-pneumonia">Pneumonia by Age/Group</a>
+  <a href="#sys-meningitis">Meningitis</a>
+  <a href="#sys-csf">CSF Findings</a>
+  <a href="#sys-osteo">Osteomyelitis</a>
+  <a href="#sys-brainabscess">Brain Abscess</a>
+  <a href="#sys-rashes">Rashes of Childhood</a>
+  <a href="#sys-sti">STIs</a>
+  <a href="#sys-torch">TORCH Infections</a>
+  <a href="#sys-vaginal">Vaginal Infections</a>
+  <a href="#sys-uti">UTI Pathogens</a>
+  <a href="#sys-hai">Healthcare-Associated Infections</a>
+  <a href="#sys-unvax">Bugs Affecting Unvaccinated Children</a>
+</div>
+
+<h2 class="section-title" id="sys-foodborne">Bugs Causing Food-Borne Illness</h2>
+<table class="ref-table">
+<tr><th>Microorganism</th><th>Source of Infection</th></tr>
+<tr><td><i>B. cereus</i></td><td>Reheated rice ("Food poisoning from reheated rice? Be cereus!")</td></tr>
+<tr><td><i>C. botulinum</i></td><td>Improperly canned foods (toxins), raw honey</td></tr>
+<tr><td><i>C. perfringens</i></td><td>Reheated meat</td></tr>
+<tr><td><i>E. coli</i> O157:H7</td><td>Undercooked meat</td></tr>
+<tr><td><i>L. monocytogenes</i></td><td>Deli meats, soft cheeses, unpasteurized dairy</td></tr>
+<tr><td><i>Salmonella</i></td><td>Poultry, meat, and eggs</td></tr>
+<tr><td><i>S. aureus</i></td><td>Meats, mayonnaise, custard (preformed toxin)</td></tr>
+<tr><td><i>V. parahaemolyticus</i> and <i>V. vulnificus</i></td><td>Raw/undercooked seafood (V. vulnificus predominantly causes wound infections from contact with contaminated water or shellfish)</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-diarrhea">Bugs Causing Diarrhea</h2>
+<h3 class="sub-title">Bloody Diarrhea</h3>
+<table class="ref-table">
+<tr><th>Organism</th><th>Key Feature</th></tr>
+<tr><td><i>Campylobacter</i></td><td>Comma- or S-shaped organisms; growth at 42&deg;C</td></tr>
+<tr><td><i>E. histolytica</i></td><td>Protozoan; amebic dysentery; liver abscess</td></tr>
+<tr><td>Enterohemorrhagic <i>E. coli</i></td><td>O157:H7; can cause HUS; makes Shiga toxin</td></tr>
+<tr><td>Enteroinvasive <i>E. coli</i></td><td>Invades colonic mucosa</td></tr>
+<tr><td><i>Salmonella</i> (non-typhoidal)</td><td>Lactose &minus;; flagellar motility; animal reservoir, esp. poultry/eggs</td></tr>
+<tr><td><i>Shigella</i></td><td>Lactose &minus;; very low ID50; produces Shiga toxin; human reservoir only; bacillary dysentery</td></tr>
+<tr><td><i>Y. enterocolitica</i></td><td>Day care outbreaks; pseudoappendicitis</td></tr>
+</table>
+<h3 class="sub-title">Watery Diarrhea</h3>
+<table class="ref-table">
+<tr><th>Organism</th><th>Key Feature</th></tr>
+<tr><td><i>C. difficile</i></td><td>Pseudomembranous colitis; associated with antibiotics and PPIs; occasionally bloody</td></tr>
+<tr><td><i>C. perfringens</i></td><td>Also causes gas gangrene</td></tr>
+<tr><td>Enterotoxigenic <i>E. coli</i></td><td>Traveler's diarrhea; produces heat-labile (LT) and heat-stable (ST) toxins</td></tr>
+<tr><td>Protozoa</td><td><i>Giardia, Cryptosporidium</i></td></tr>
+<tr><td><i>V. cholerae</i></td><td>Comma-shaped organisms; rice-water diarrhea; often from infected seafood</td></tr>
+<tr><td>Viruses</td><td><i>Norovirus</i> (most common cause in developed countries), <i>rotavirus</i> (&darr; incidence in developed countries due to vaccination), enteric adenovirus</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-pneumonia">Common Causes of Pneumonia by Age/Risk Group</h2>
+<table class="ref-table">
+<tr><th>Group</th><th>Common Pathogens</th></tr>
+<tr><td><b>Neonates (&lt;4 wk)</b></td><td>Group B Streptococcus, E. coli</td></tr>
+<tr><td><b>Children (4wk–18 yr)</b></td><td>Viruses (RSV), Mycoplasma, C. trachomatis (infants 1–3 yr), C. pneumoniae (school-aged children), S. pneumoniae</td></tr>
+<tr><td><b>Adults (18–40 yr)</b></td><td>Mycoplasma, C. pneumoniae, S. pneumoniae, viruses (e.g. influenza)</td></tr>
+<tr><td><b>Adults (40–65 yr)</b></td><td>S. pneumoniae, H. influenzae, anaerobes, viruses, Mycoplasma</td></tr>
+<tr><td><b>Adults (65 yr+)</b></td><td>S. pneumoniae, influenza virus, anaerobes, H. influenzae, gram &minus; rods</td></tr>
+</table>
+<h3 class="sub-title">Special Groups</h3>
+<table class="ref-table">
+<tr><th>Setting</th><th>Common Pathogens</th></tr>
+<tr><td>Alcohol overuse</td><td>Klebsiella, anaerobes (also due to aspiration; e.g. Peptostreptococcus, Fusobacterium, Prevotella, Bacteroides)</td></tr>
+<tr><td>Injection drug use</td><td>S. pneumoniae, S. aureus</td></tr>
+<tr><td>Aspiration</td><td>Anaerobes</td></tr>
+<tr><td>Atypical</td><td>Mycoplasma, Chlamydophila, Legionella, viruses (RSV, CMV, influenza, adenovirus)</td></tr>
+<tr><td>Cystic fibrosis</td><td>Pseudomonas, S. aureus, Burkholderia cepacia</td></tr>
+<tr><td>Immunocompromised</td><td>S. aureus, enteric gram &minus; rods, fungi, viruses, P. jirovecii (with HIV)</td></tr>
+<tr><td>Healthcare-associated</td><td>S. aureus, Pseudomonas, other enteric gram &minus; rods</td></tr>
+<tr><td>Postviral</td><td>S. aureus, S. pneumoniae, H. influenzae</td></tr>
+<tr><td>COPD</td><td>S. pneumoniae, H. influenzae, M. catarrhalis, Pseudomonas</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-meningitis">Common Causes of Meningitis by Age</h2>
+<table class="ref-table">
+<tr><th>Newborn (0–6 mo)</th><th>Children (6 mo–6 yr)</th><th>6–60 yr</th><th>60 yr+</th></tr>
+<tr>
+<td>Group B Streptococcus<br>E. coli<br>Listeria</td>
+<td>S. pneumoniae<br>N. meningitidis<br>H. influenzae type b<br>Group B Streptococcus<br>Enteroviruses</td>
+<td>S. pneumoniae<br>N. meningitidis<br>Enteroviruses<br>HSV</td>
+<td>S. pneumoniae<br>N. meningitidis<br>H. influenzae type b<br>Group B Streptococcus<br>Listeria</td>
+</tr>
+</table>
+<div class="callout">
+  Give ceftriaxone and vancomycin empirically (add ampicillin if <i>Listeria</i> is suspected); add acyclovir if viral encephalitis is suspected.<br>
+  Viral causes of meningitis: enteroviruses (especially coxsackievirus), HSV-2 (HSV-1 = encephalitis), HIV, West Nile virus (also causes encephalitis), VZV.<br>
+  <b>In HIV:</b> incidence of Group B streptococcal meningitis in neonates has &darr; greatly due to screening/antibiotic prophylaxis in pregnancy. Incidence of <i>H. influenzae</i> meningitis has &darr; greatly due to conjugate vaccination; today, cases are usually seen in unimmunized children.
+</div>
+
+<h2 class="section-title" id="sys-csf">Cerebrospinal Fluid Findings in Meningitis</h2>
+<table class="ref-table">
+<tr><th>Type</th><th>Opening Pressure</th><th>Cell Type</th><th>Protein</th><th>Glucose</th></tr>
+<tr><td><b>Bacterial</b></td><td>&uarr;</td><td>&uarr; PMNs</td><td>&uarr;</td><td>&darr;</td></tr>
+<tr><td><b>Fungal/TB</b></td><td>&uarr;</td><td>&uarr; lymphocytes</td><td>&uarr;</td><td>&darr;</td></tr>
+<tr><td><b>Viral</b></td><td>Normal/&uarr;</td><td>&uarr; lymphocytes</td><td>Normal/&uarr;</td><td>Normal</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-osteo">Osteomyelitis by Risk Factor</h2>
+<table class="ref-table">
+<tr><th>Risk Factor</th><th>Associated Infection</th></tr>
+<tr><td>If no other information is available</td><td><i>S. aureus</i> (most common overall)</td></tr>
+<tr><td>Sexually active</td><td><i>N. gonorrhoeae</i> (rare; septic arthritis more common)</td></tr>
+<tr><td>Sickle cell disease</td><td><i>Salmonella</i>, S. aureus</td></tr>
+<tr><td>Prosthetic joint replacement</td><td>S. aureus, S. epidermidis</td></tr>
+<tr><td>Vertebral involvement</td><td>S. aureus, M. tuberculosis (Pott disease)</td></tr>
+<tr><td>Cat and dog bites</td><td>Pasteurella multocida</td></tr>
+<tr><td>Injection drug use</td><td>S. aureus; also Pseudomonas, Candida</td></tr>
+</table>
+<div class="callout">Elevated ESR and CRP are sensitive but not specific. Radiographs are insensitive early but useful in chronic osteomyelitis; MRI is best for detecting acute disease and detailing anatomic involvement; biopsy/aspiration with culture necessary to identify the organism.</div>
+
+<h2 class="section-title" id="sys-brainabscess">Brain Abscess</h2>
+<div class="ref-card">
+  <p>Most commonly caused by viridans streptococci and <i>Staphylococcus aureus</i>. If dental infection or extraction precedes the abscess, oral anaerobes are commonly involved.</p>
+  <p>Multiple abscesses are usually from bacteremia (hematogenous spread); single lesions arise from contiguous sites: otitis media/mastoiditis &rarr; temporal lobe and cerebellum; sinusitis/dental infection &rarr; frontal lobe.</p>
+  <p><i>Toxoplasma</i> reactivation is an important cause in AIDS patients.</p>
+</div>
+
+<h2 class="section-title" id="sys-rashes">Red Rashes of Childhood</h2>
+<table class="ref-table">
+<tr><th>Agent</th><th>Associated Syndrome</th><th>Clinical Presentation</th></tr>
+<tr><td>Coxsackievirus type A</td><td>Hand-foot-mouth disease</td><td>Oval vesicles on palms/soles and ulcers in oral mucosa (herpangina)</td></tr>
+<tr><td>Human herpesvirus 6</td><td>Roseola (exanthem subitum)</td><td>Asymptomatic rose-colored macules on body after several days of high fever; can present with febrile seizures; mostly affects infants</td></tr>
+<tr><td>Measles virus</td><td>Measles (rubeola)</td><td>Confluent rash beginning at head and moving down, preceded by cough, coryza, conjunctivitis, and blue-white spots on buccal mucosa (Koplik spots)</td></tr>
+<tr><td>Parvovirus B19</td><td>Erythema infectiosum (fifth disease)</td><td>"Slapped cheek" rash</td></tr>
+<tr><td>Rubella virus</td><td>Rubella</td><td>Pink macules and papules beginning on head and moving down, discrete rash with fine desquamating trunk, postauricular lymphadenopathy</td></tr>
+<tr><td><i>Streptococcus pyogenes</i></td><td>Scarlet fever</td><td>Sore throat, circumoral pallor, group A strep rash (sandpaper), fades from trunk to extremities, lymphadenopathy, erythematous toxin, strawberry tongue (SCARLET)</td></tr>
+<tr><td>Varicella-zoster virus</td><td>Chickenpox</td><td>Vesicular rash begins on trunk and face, spreads to extremities with lesions of different stages</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-sti">Sexually Transmitted Infections</h2>
+<table class="ref-table">
+<tr><th>Disease</th><th>Clinical Features</th><th>Pathogen</th></tr>
+<tr><td>AIDS</td><td>Opportunistic infections, Kaposi sarcoma, lymphoma</td><td>HIV</td></tr>
+<tr><td>Chancroid</td><td>Painful genital ulcer(s) with exudate, painful inguinal adenopathy ("do cry")</td><td><i>Haemophilus ducreyi</i></td></tr>
+<tr><td>Chlamydia</td><td>Urethritis, cervicitis, epididymitis, conjunctivitis, reactive arthritis, PID</td><td><i>Chlamydia trachomatis</i> (D&ndash;K)</td></tr>
+<tr><td>Condylomata acuminata</td><td>Genital warts</td><td>HPV-6 and -11</td></tr>
+<tr><td>Herpes genitalis</td><td>Painful penile, vulvar, or perianal ulcers with bilateral tender inguinal lymphadenopathy; systemic symptoms with fever, headache</td><td>HSV-2, less commonly HSV-1</td></tr>
+<tr><td>Gonorrhea</td><td>Urethritis, cervicitis, prostatitis, epididymitis, PID, purulent discharge</td><td><i>Neisseria gonorrhoeae</i></td></tr>
+<tr><td>Granuloma inguinale (Donovanosis)</td><td>Painless, beefy red ulcer that bleeds readily on contact</td><td><i>Klebsiella granulomatis</i>; cytoplasmic Donovan bodies (bipolar staining) seen on microscopy</td></tr>
+<tr><td>Hepatitis B</td><td>Jaundice</td><td>HBV</td></tr>
+<tr><td>Lymphogranuloma venereum</td><td>Painful genital papule/ulcer, painful inguinal lymphadenopathy</td><td><i>C. trachomatis</i> (L1&ndash;L3)</td></tr>
+<tr><td>Primary syphilis</td><td>Painless chancre</td><td><i>Treponema pallidum</i></td></tr>
+<tr><td>Secondary syphilis</td><td>Fever, diffuse lymphadenopathy, generalized rash, condylomata lata</td><td><i>Treponema pallidum</i></td></tr>
+<tr><td>Tertiary syphilis</td><td>Gummas, tabes dorsalis, general paresis, Argyll Robertson pupil</td><td><i>Treponema pallidum</i></td></tr>
+<tr><td>Trichomoniasis</td><td>Vaginitis, strawberry cervix, motile in wet prep</td><td><i>Trichomonas vaginalis</i></td></tr>
+</table>
+
+<h2 class="section-title" id="sys-torch">TORCH Infections</h2>
+<div class="ref-card">
+  <p>Microbes that may pass from mother to fetus. Transmission is transplacental in most cases, or in special cases (especially HSV-2) via vaginal delivery. Nonspecific signs common to many TORCH infections include hepatosplenomegaly, jaundice, thrombocytopenia, and growth restriction. Other important infectious agents include Streptococcus agalactiae (group B strep), E. coli, and Listeria monocytogenes &mdash; all cases of meningitis in neonates.</p>
+</div>
+<table class="ref-table">
+<tr><th>Agent</th><th>Maternal Acquisition</th><th>Maternal Manifestations</th><th>Neonatal Manifestations</th></tr>
+<tr><td><i>Toxoplasma gondii</i></td><td>Cat feces or ingestion of undercooked meat</td><td>Usually asymptomatic</td><td>Classic triad: chorioretinitis, hydrocephalus, intracranial calcifications; "blueberry muffin" rash</td></tr>
+<tr><td>Rubella</td><td>Respiratory droplets</td><td>Rash, lymphadenopathy, polyarthritis</td><td>Classic triad: eye abnormalities (cataracts), ear deafness, congenital heart disease (PDA); "blueberry muffin" rash, "salt and pepper" chorioretinitis</td></tr>
+<tr><td>Cytomegalovirus</td><td>Sexual contact, organ transplant</td><td>Usually asymptomatic; mononucleosis-like illness</td><td>Hearing loss, seizures, petechial "blueberry muffin" rash, periventricular calcifications</td></tr>
+<tr><td>HIV</td><td>Sexual contact, needlestick</td><td>Variable presentation depending on CD4+ cell count</td><td>Recurrent infections, chronic diarrhea</td></tr>
+<tr><td>Herpes simplex virus-2</td><td>Skin or mucous membrane contact</td><td>Usually asymptomatic; herpetic (vesicular) lesions</td><td>Meningoencephalitis, herpetic (vesicular) lesions</td></tr>
+<tr><td>Syphilis</td><td>Sexual contact</td><td>Chancre (1&deg;) and disseminated rash (2&deg;) are the most likely to result in fetal infection</td><td>Often results in stillbirth, hydrops fetalis; if survives with fetal abnormalities (eg, notched teeth, short maxilla, short nose, saddle nose, saber shins, CN VIII deafness)</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-vaginal">Common Vaginal Infections</h2>
+<table class="ref-table">
+<tr><th></th><th>Bacterial Vaginosis</th><th><i>Trichomonas</i> Vaginitis</th><th><i>Candida</i> Vulvovaginitis</th></tr>
+<tr><td><b>Signs/Symptoms</b></td><td>No inflammation; thin, white discharge with fishy odor</td><td>Inflammation ("strawberry cervix"); frothy, yellow-green, foul-smelling discharge</td><td>Inflammation; thick, white, "cottage cheese" discharge</td></tr>
+<tr><td><b>Lab Findings</b></td><td>Clue cells (bacteria-coated epithelial cells); pH &gt; 4.5</td><td>Motile trichomonads; pH &gt; 4.5</td><td>Pseudohyphae; pH normal (4.0&ndash;4.5)</td></tr>
+<tr><td><b>Treatment</b></td><td>Metronidazole or clindamycin</td><td>Metronidazole; treat sexual partner(s)</td><td>Azoles</td></tr>
+</table>
+<div class="callout"><b>Pelvic inflammatory disease (PID):</b> ascending infection causing inflammation of the female genital tract. May include salpingitis, endometritis, tubo-ovarian abscess. Signs include cervical motion tenderness, adnexal tenderness, purulent cervical discharge. Can lead to ectopic pregnancy, infertility, chronic pelvic pain, adhesions. Fitz-Hugh-Curtis syndrome — infection/inflammation of liver capsule causing "violin string" adhesions of the peritoneum to liver. Top bugs: <i>Chlamydia trachomatis</i> (subacute, often undiagnosed), <i>Neisseria gonorrhoeae</i> (acute). <i>C. trachomatis</i> is the most common bacterial STI in the US.</div>
+
+<h2 class="section-title" id="sys-uti">Urinary Tract Infections</h2>
+<table class="ref-table">
+<tr><th>Species</th><th>Features</th><th>Diagnostic Markers</th></tr>
+<tr><td><i>Escherichia coli</i></td><td>Leading cause of UTI overall; colonies show strong pink lactose fermentation on MacConkey agar</td><td>Leukocyte esterase = evidence of WBC activity. Nitrite reduction = evidence of urinary nitrates reduced by gram &minus; bacterial species (eg, E. coli)</td></tr>
+<tr><td><i>Staphylococcus saprophyticus</i></td><td>2nd leading cause of UTI, particularly in young, sexually active females</td><td></td></tr>
+<tr><td><i>Klebsiella pneumoniae</i></td><td>3rd leading cause of UTI; large mucoid capsule</td><td></td></tr>
+<tr><td><i>Serratia marcescens</i></td><td>Some strains produce a red pigment; often healthcare-associated and drug resistant</td><td></td></tr>
+<tr><td><i>Enterococcus</i></td><td>Often healthcare-associated and drug resistant</td><td></td></tr>
+<tr><td><i>Proteus mirabilis</i></td><td>Motility causes "swarming" on agar; produces urease</td><td></td></tr>
+<tr><td><i>Pseudomonas aeruginosa</i></td><td>Blue-green pigment and fruity odor; usually healthcare-associated</td><td></td></tr>
+</table>
+
+<h2 class="section-title" id="sys-hai">Healthcare-Associated Infections</h2>
+<div class="ref-card"><p><i>E. coli</i> (UTI) and <i>S. aureus</i> (wound infection) are the two most common causes overall.</p></div>
+<table class="ref-table">
+<tr><th>Risk Factor</th><th>Pathogen</th><th>Unique Signs/Symptoms</th></tr>
+<tr><td>Antibiotic use, PPIs</td><td><i>Clostridioides difficile</i></td><td>Watery diarrhea, leukocytosis</td></tr>
+<tr><td>Aspiration (2&deg; to altered mental status, old age)</td><td>Polymicrobial, gram &minus; often anaerobes</td><td>Right lower lobe or right upper/middle lobe infiltrate (patient recumbent); purulent malodorous sputum</td></tr>
+<tr><td>Decubitus ulcers, surgical wounds, drains</td><td>S. aureus (including MRSA), gram &minus; anaerobes (Bacteroides, Prevotella, Fusobacterium)</td><td>Erythema, tenderness, induration, drainage from surgical wound sites</td></tr>
+<tr><td>Intravascular catheters</td><td>S. aureus (including MRSA), S. epidermidis (long term)</td><td>Erythema, induration, tenderness, drainage from access sites</td></tr>
+<tr><td>Mechanical ventilation, endotracheal intubation</td><td>Late-onset: P. aeruginosa, Klebsiella, Acinetobacter, S. aureus</td><td>New infiltrate on CXR, &uarr; sputum production; sweet odor (Pseudomonas)</td></tr>
+<tr><td>Exposure to blood products, shared medical equipment, needlesticks</td><td>HBV, HCV</td><td></td></tr>
+<tr><td>Urinary catheterization</td><td><i>Proteus</i> spp, E. coli, Klebsiella (PEcK)</td><td>Dysuria, leukocytosis, flank pain or costovertebral angle tenderness</td></tr>
+<tr><td>Water aerosols</td><td><i>Legionella</i></td><td>Signs of pneumonia, GI symptoms (diarrhea, nausea, vomiting), neurologic abnormalities</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-unvax">Bugs Affecting Unvaccinated Children</h2>
+<table class="ref-table">
+<tr><th>System</th><th>Clinical Presentation</th><th>Findings/Labs</th><th>Pathogen</th></tr>
+<tr><td>Dermatologic</td><td>Rash beginning at head and moving down, with postauricular/posterior cervical lymphadenopathy</td><td></td><td>Rubella virus</td></tr>
+<tr><td>Dermatologic</td><td>Rash beginning at head and moving down, preceded by cough, coryza, conjunctivitis and Koplik spots</td><td></td><td>Measles virus</td></tr>
+<tr><td>Neurologic</td><td>Meningitis; microbe colonizes nasopharynx</td><td></td><td><i>H. influenzae</i> type b</td></tr>
+<tr><td>Neurologic</td><td>Meningitis; can also lead to myalgia and paralysis</td><td></td><td>Poliovirus</td></tr>
+<tr><td>Neurologic</td><td>Tetanus; muscle spasms and spastic paralysis (eg, lockjaw, opisthotonos)</td><td></td><td><i>Clostridium tetani</i></td></tr>
+<tr><td>Respiratory</td><td>Epiglottitis; fever with dysphagia, drooling, inspiratory stridor, and difficulty breathing due to edema</td><td></td><td><i>H. influenzae</i> type b (also capable of causing epiglottitis in fully immunized children)</td></tr>
+<tr><td>Respiratory</td><td>Pertussis (whooping cough); low-grade fevers, coryza &rarr; whooping cough, post-tussive vomiting &rarr; gradual recovery</td><td></td><td><i>Bordetella pertussis</i></td></tr>
+<tr><td>Respiratory</td><td>Diphtheria; grayish pseudomembranes may obstruct airway</td><td></td><td><i>Corynebacterium diphtheriae</i></td></tr>
+</table>
+
+  </div>
+
+</div>
+
+<script>
+const ORGANISMS = [{"name": "Staphylococcus aureus", "cat": "Bacteria", "gram": "+", "morph": "Cocci, clusters", "features": "Coagulase+, \u03b2-hemolytic, catalase+", "virulence": "Protein A, TSST-1, \u03b1-toxin, PVL, exfoliative toxins, enterotoxins, coagulase, capsule", "pathogenesis": "Colonizes nares; breaches skin/mucosa; toxin-mediated disease and invasive infections", "diseases": "Skin abscesses, cellulitis, osteomyelitis, endocarditis, pneumonia, toxic shock, scalded skin (SSSS), food poisoning, necrotizing fasciitis", "buzz": "Golden clusters, nares, MRSA, rapid onset vomiting"}, {"name": "Staphylococcus epidermidis", "cat": "Bacteria", "gram": "+", "morph": "Cocci, clusters", "features": "Coagulase\u2212, catalase+, novobiocin sensitive", "virulence": "Biofilm (polysaccharide intercellular adhesin)", "pathogenesis": "Device colonization \u2192 persistent bacteremia; does not ferment mannitol (vs S. aureus)", "diseases": "Prosthetic valve endocarditis, catheter infections, prosthetic joint infections", "buzz": "Normal skin flora, biofilm, contaminant on medical devices, IV catheters"}, {"name": "Staphylococcus saprophyticus", "cat": "Bacteria", "gram": "+", "morph": "Cocci, clusters", "features": "Coagulase\u2212, catalase+, novobiocin resistant", "virulence": "Adherence to uroepithelium", "pathogenesis": "Ascending urinary tract infection; second most common cause of uncomplicated UTI in young females (most common is E. coli)", "diseases": "Honeymoon cystitis (UTI in young sexually active women)", "buzz": "Novobiocin resistant, uropathogen"}, {"name": "Micrococcus", "cat": "Bacteria", "gram": "+", "morph": "Cocci, tetrads/clusters", "features": "Strict aerobes, pigmented colonies, sensitive to bacitracin", "virulence": "Catalase+, carotenoids", "pathogenesis": "Opportunistic in immunocompromised", "diseases": "Bacteremia, skin contaminants", "buzz": "Tetrads, yellow colonies"}, {"name": "Enterococcus (faecalis/faecium)", "cat": "Bacteria", "gram": "+", "morph": "Cocci, pairs/chains", "features": "PYR+, bile-esculin+, growth in 6.5% NaCl", "virulence": "Aggregation substance, cytolysin, biofilm; VRE", "pathogenesis": "GI colonizer \u2192 device/urinary spread", "diseases": "UTI, endocarditis, biliary infections", "buzz": "VRE, bile-esculin, hardy"}, {"name": "Streptococcus pneumoniae", "cat": "Bacteria", "gram": "+", "morph": "Lancet diplococci", "features": "\u03b1-hemolytic, optochin sensitive, bile soluble", "virulence": "Capsule, pneumolysin, IgA protease", "pathogenesis": "Aspiration \u2192 alveolar inflammation; sinus/ear colonization", "diseases": "Pneumonia (MOPS: Meningitis, Otitis media, Pneumonia, Sinusitis)", "buzz": "Rusty sputum, lancet-shaped, capsule = virulence"}, {"name": "Streptococcus viridans (viridans group)", "cat": "Bacteria", "gram": "+", "morph": "Cocci, chains", "features": "\u03b1-hemolytic, optochin resistant, bile insoluble", "virulence": "Dextran-mediated adhesion to damaged valves", "pathogenesis": "Dental caries \u2192 transient bacteremia", "diseases": "Subacute endocarditis (native valves), dental caries", "buzz": "Dental procedures, biofilm on valves, 'not afraid of the chin (op-to-chin resistant)'"}, {"name": "Streptococcus agalactiae (Group B Strep, GBS)", "cat": "Bacteria", "gram": "+", "morph": "Cocci, chains", "features": "\u03b2-hemolytic (narrow, sometimes), CAMP+, hippurate+, bacitracin resistant, PYR\u2212", "virulence": "Capsule (sialic acid), \u03b2-hemolysins", "pathogenesis": "Maternal colonization \u2192 neonatal sepsis", "diseases": "Neonatal meningitis, pneumonia, sepsis", "buzz": "CAMP test, screen pregnant women 35-37 weeks"}, {"name": "Streptococcus pyogenes (Group A Strep, GAS)", "cat": "Bacteria", "gram": "+", "morph": "Cocci, chains", "features": "\u03b2-hemolytic, bacitracin sensitive, PYR+", "virulence": "M protein, streptolysins O/S, SPE toxins, hyaluronidase", "pathogenesis": "Pharyngitis \u2192 immune sequelae; skin breach", "diseases": "Pharyngitis, impetigo, cellulitis, necrotizing fasciitis, rheumatic fever, PSGN, scarlet fever, erysipelas", "buzz": "Strawberry tongue, ASO titers, 'flesh-eating bacteria'"}, {"name": "Bacillus cereus", "cat": "Bacteria", "gram": "+", "morph": "Rods", "features": "Motile, \u03b2-hemolytic", "virulence": "Emetic toxin (cereulide), diarrheal enterotoxins", "pathogenesis": "Preformed toxin (emetic, 1-5 hrs); spores germinate for diarrheal type (8-18 hrs)", "diseases": "Food poisoning \u2014 'reheated rice syndrome' (fried rice)", "buzz": "Fried rice, emetic 1-6h"}, {"name": "Bacillus anthracis", "cat": "Bacteria", "gram": "+", "morph": "Rods", "features": "Nonmotile, non-hemolytic, spore-forming, 'Medusa head' colonies", "virulence": "Poly-D-glutamate capsule, lethal/edema toxins (protective antigen + lethal factor + edema factor)", "pathogenesis": "Cutaneous/inhalational/GI entry \u2192 edema, necrosis", "diseases": "Cutaneous eschar (painless), inhalational anthrax (woolsorter's disease), GI anthrax; can also cause hemorrhagic meningitis", "buzz": "Boxcar rods, widened mediastinum, powdery letter/spores"}, {"name": "Corynebacterium diphtheriae", "cat": "Bacteria", "gram": "+", "morph": "Club-shaped rods", "features": "Metachromatic granules, 'Chinese letters' arrangement", "virulence": "Diphtheria toxin (ADP-ribosylates EF-2, inhibiting protein synthesis)", "pathogenesis": "Colonizes oropharynx \u2192 pseudomembrane; toxin-mediated myocarditis/neuritis", "diseases": "Pharyngitis, bull-neck, pseudomembrane (grey), myocarditis, neuropathy", "buzz": "Grey pseudomembrane, Elek test"}, {"name": "Cutibacterium acnes", "cat": "Bacteria", "gram": "+", "morph": "Small rods", "features": "Anaerobic, skin/sebaceous flora, lipid-rich media", "virulence": "Lipases, biofilm", "pathogenesis": "Follicular occlusion \u2192 inflammation", "diseases": "Acne vulgaris; prosthetic shoulder infections", "buzz": "Sebum, anaerobe, comedones"}, {"name": "Clostridium perfringens", "cat": "Bacteria", "gram": "+", "morph": "Rods", "features": "Anaerobic, double-zone hemolysis, spore-forming", "virulence": "\u03b1-toxin (lecithinase, a phospholipase), enterotoxin", "pathogenesis": "Tissue inoculation \u2192 gas gangrene/myonecrosis; heavily spore-contaminated food held warm \u2192 late-onset food poisoning", "diseases": "Myonecrosis (gas gangrene), food poisoning", "buzz": "Gas bubbles, crepitus, 'stormy fermentation'"}, {"name": "Clostridium tetani", "cat": "Bacteria", "gram": "+", "morph": "Rods", "features": "Terminal spores ('drumstick' appearance), obligate anaerobe", "virulence": "Tetanospasmin (blocks release of GABA/glycine from Renshaw cells), tetanolysin", "pathogenesis": "Wound entry \u2192 retrograde axonal transport of toxin to CNS", "diseases": "Tetanus \u2014 spastic paralysis, trismus (lockjaw), risus sardonicus, opisthotonos", "buzz": "Puncture wounds, lockjaw"}, {"name": "Clostridium botulinum", "cat": "Bacteria", "gram": "+", "morph": "Rods", "features": "Anaerobe, spores in soil", "virulence": "Botulinum neurotoxin (A-G), a heat-labile toxin that prevents ACh release at the NMJ", "pathogenesis": "Preformed toxin in adults (improperly canned food); spore ingestion in infants (honey)", "diseases": "Flaccid paralysis, cranial neuropathies, infant botulism (floppy baby syndrome)", "buzz": "Honey (infants), descending paralysis, 5 D's (diplopia, dysarthria, dysphagia, dyspnea, descending weakness)"}, {"name": "Clostridioides difficile", "cat": "Bacteria", "gram": "+", "morph": "Rods", "features": "Anaerobe, forms spores", "virulence": "Toxins A/B (cytotoxins), binary toxin", "pathogenesis": "Antibiotic disruption of normal flora \u2192 colitis", "diseases": "Pseudomembranous colitis, toxic megacolon", "buzz": "Watery diarrhea post-antibiotics, PCR for toxins"}, {"name": "Listeria monocytogenes", "cat": "Bacteria", "gram": "+", "morph": "Rods", "features": "Tumbling motility, cold growth (grows at refrigeration temperatures), weakly \u03b2-hemolytic", "virulence": "Listeriolysin O (avoids/escapes lysosome), ActA (forms actin 'rocket tails' for cell-to-cell spread), crosses placenta", "pathogenesis": "Intracellular spread via actin polymerization, avoiding antibody", "diseases": "Meningitis (neonates, elderly), sepsis, miscarriage/chorioamnionitis; increases with age/immunocompromise", "buzz": "Unpasteurized dairy, deli meats, cold enrichment"}, {"name": "Neisseria meningitidis", "cat": "Bacteria", "gram": "\u2212", "morph": "Diplococci", "features": "Oxidase+, maltose AND glucose fermentation (differentiates from N. gonorrhoeae, which ferments glucose only)", "virulence": "Capsule (polysaccharide, key virulence factor), LOS endotoxin, IgA protease, pili", "pathogenesis": "Nasopharyngeal colonization \u2192 bacteremia \u2192 meningitis", "diseases": "Meningitis, meningococcemia (petechiae, DIC), Waterhouse-Friderichsen syndrome (adrenal hemorrhage)", "buzz": "College dorms, petechiae, vaccine available (unlike gonorrhoeae)"}, {"name": "Neisseria gonorrhoeae", "cat": "Bacteria", "gram": "\u2212", "morph": "Diplococci", "features": "Oxidase+, glucose fermentation only (no maltose), no polysaccharide capsule, no vaccine", "virulence": "Pili antigenic variation, Opa proteins, IgA protease", "pathogenesis": "Mucosal infection via sexual transmission", "diseases": "Urethritis/cervicitis, PID, neonatal conjunctivitis, disseminated gonococcal arthritis", "buzz": "Intracellular diplococci, pus, NAAT diagnosis, long-term infertility"}, {"name": "Moraxella catarrhalis", "cat": "Bacteria", "gram": "\u2212", "morph": "Diplococci", "features": "\u03b2-lactamase producer", "virulence": "Adhesins, LOS", "pathogenesis": "Upper respiratory tract colonizer; opportunist", "diseases": "Otitis media, sinusitis, COPD exacerbations", "buzz": "Elderly COPD, \u03b2-lactamase"}, {"name": "Kingella kingae", "cat": "Bacteria", "gram": "\u2212", "morph": "Short rods/coccobacilli", "features": "Pediatric oropharyngeal colonizer", "virulence": "RTX toxin, pili", "pathogenesis": "Bloodstream seeding to bone/joint", "diseases": "Pediatric osteoarticular infections (septic arthritis in children 1-4 yo)", "buzz": "Daycare clusters, septic arthritis in 1-4 yo, PCR diagnosis"}, {"name": "Escherichia coli \u2013 Enterotoxigenic (ETEC)", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Traveler's diarrhea strains", "virulence": "LT/ST enterotoxins (increase cAMP/cGMP), colonization factors", "pathogenesis": "Watery diarrhea via \u2191cAMP/cGMP \u2014 no invasion", "diseases": "Traveler's diarrhea", "buzz": "Montezuma's revenge, contaminated water"}, {"name": "Escherichia coli \u2013 Enterohemorrhagic (EHEC)", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "O157:H7 common serotype, sorbitol-negative", "virulence": "Shiga-like toxin (Stx2), intimin", "pathogenesis": "Cytotoxic colitis \u2192 HUS (no bacterial invasion)", "diseases": "Bloody diarrhea, hemolytic uremic syndrome (HUS)", "buzz": "Undercooked beef, no sorbitol fermentation"}, {"name": "Escherichia coli \u2013 Enteropathogenic (EPEC)", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Pediatric diarrhea", "virulence": "Bundle-forming pili, T3SS, intimin", "pathogenesis": "Attaching/effacing lesions \u2192 malabsorption", "diseases": "Watery diarrhea in infants", "buzz": "Nursery outbreaks, A/E lesions, 'EPEC = pediatric'"}, {"name": "Escherichia coli \u2013 Enteroinvasive (EIEC)", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Similar to Shigella", "virulence": "Invasion plasmid antigens", "pathogenesis": "Mucosal invasion \u2192 inflammatory diarrhea", "diseases": "Dysentery-like illness", "buzz": "Lactose variable, invasion"}, {"name": "Escherichia coli \u2013 Uropathogenic (UPEC)", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Hemolysin+, P fimbriae", "virulence": "Adhesins (P pili), hemolysin", "pathogenesis": "Ascending UTI", "diseases": "Cystitis, pyelonephritis", "buzz": "Dysuria, nitrites, P fimbriae/pili \u2014 leading overall cause of UTI"}, {"name": "Escherichia coli \u2013 Neonatal meningitis strains", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "K1 capsule strains", "virulence": "K1 capsule", "pathogenesis": "Hematogenous spread in neonates", "diseases": "Neonatal meningitis, sepsis", "buzz": "K1 antigen, maternal colonization"}, {"name": "Escherichia coli \u2013 Sepsis-associated strains", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Diverse serotypes", "virulence": "LPS endotoxin, siderophores", "pathogenesis": "Translocation/bacteremia", "diseases": "Sepsis, bacteremia", "buzz": "Gut translocation, LPS"}, {"name": "Enterobacter aerogenes", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Motile, lactose fermenter (slow)", "virulence": "AmpC \u03b2-lactamase", "pathogenesis": "Nosocomial device infections", "diseases": "Pneumonia, UTI, bacteremia", "buzz": "Opportunist, multidrug resistance"}, {"name": "Klebsiella pneumoniae", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Mucoid lactose fermenter, nonmotile", "virulence": "Thick capsule, siderophores", "pathogenesis": "Aspiration/alcoholics \u2192 necrotizing pneumonia (ABCDE's: Aspiration pneumonia, Abscess lungs/liver, Currant jelly sputum, Diabetes mellitus, EtOH overuse)", "diseases": "Currant jelly sputum, UTI", "buzz": "Mucoid colonies, alcoholics"}, {"name": "Acinetobacter baumannii", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Non-fermenter, oxidase\u2212, hardy", "virulence": "OMPs, biofilm, efflux pumps", "pathogenesis": "Environmental persistence \u2192 ICU outbreaks", "diseases": "VAP, bacteremia, wound infections", "buzz": "War wounds, MDR, ICU"}, {"name": "Pseudomonas aeruginosa", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Oxidase+, non-fermenter, blue-green pigment (pyocyanin/pyoverdin), fruity/grape odor", "virulence": "Exotoxin A, elastase, biofilm, pyocyanin", "pathogenesis": "Opportunist in burns, CF lungs, devices", "diseases": "Pneumonia (CF), ecthyma gangrenosum, hot-tub folliculitis, malignant otitis externa", "buzz": "Blue-green pigment, grape smell, CF, hot tub, healthcare-associated"}, {"name": "Proteus mirabilis", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Swarming motility, urease+", "virulence": "Urease, fimbriae", "pathogenesis": "Urease \u2192 alkaline urine \u2192 struvite stones (significant blockage of renal calyces = staghorn calculi)", "diseases": "UTI, pyelonephritis", "buzz": "Staghorn calculi, ammonia smell, swarming on agar"}, {"name": "Serratia marcescens", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Red pigment (prodigiosin), slow lactose fermenter", "virulence": "Biofilms, efflux pumps", "pathogenesis": "Nosocomial device colonizer", "diseases": "Pneumonia, UTI, bacteremia", "buzz": "Red colonies, 'shower pink slime'"}, {"name": "Salmonella enteritidis (non-typhoidal)", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Motile, H2S+, does not ferment lactose", "virulence": "Type III secretion, Vi factors (less in non-typhi)", "pathogenesis": "Invasion of intestinal M cells", "diseases": "Inflammatory (non-bloody typically) diarrhea", "buzz": "Poultry, eggs, turtles/reptiles"}, {"name": "Salmonella enterica serovar Typhi", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Motile, H2S+, Vi capsule", "virulence": "Vi capsule, type III secretion", "pathogenesis": "Systemic dissemination via macrophages (reticuloendothelial system)", "diseases": "Typhoid fever, rose spots, hepatosplenomegaly, chronic gallbladder carrier state", "buzz": "Typhoid, gallbladder carrier, oral live-attenuated vaccine available"}, {"name": "Shigella dysenteriae", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Nonmotile, lactose\u2212, H2S\u2212", "virulence": "Shiga toxin (AB toxin cleaves host 60S ribosome, stopping translation), T3SS", "pathogenesis": "Invasion of colonic epithelium \u2192 cytotoxicity (very low infectious dose, 10-100 organisms)", "diseases": "Severe dysentery \u2014 bloody diarrhea, HUS risk", "buzz": "Shiga toxin, epidemic outbreaks \u2014 most severe Shigella species"}, {"name": "Shigella sonnei", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Nonmotile, lactose\u2212 (late fermenter), H2S\u2212", "virulence": "Ipa proteins", "pathogenesis": "Milder disease", "diseases": "Pediatric diarrhea in developed countries", "buzz": "Daycare outbreaks \u2014 most common in USA/UK"}, {"name": "Shigella flexneri", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Nonmotile, lactose\u2212, H2S\u2212", "virulence": "IcsA-mediated actin-based spread", "pathogenesis": "Moderate dysentery", "diseases": "Developing world dysentery; associated with reactive arthritis", "buzz": "Reactive arthritis association, most common globally"}, {"name": "Shigella boydii", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Nonmotile, lactose\u2212, H2S\u2212", "virulence": "Similar invasion plasmids", "pathogenesis": "Regional disease", "diseases": "Dysentery (rare)", "buzz": "Indian subcontinent"}, {"name": "Bacteroides fragilis", "cat": "Bacteria", "gram": "\u2212", "morph": "Rods", "features": "Anaerobic, bile-resistant, polysaccharide capsule", "virulence": "Capsule, \u03b2-lactamase, fragilysin", "pathogenesis": "Gut flora/mucosa damage \u2192 peritoneal abscesses", "diseases": "Intraabdominal abscess, bacteremia", "buzz": "Foul-smelling anaerobe, bile tolerant"}, {"name": "Vibrio cholerae", "cat": "Bacteria", "gram": "\u2212", "morph": "Curved rods", "features": "Oxidase+, grows in alkaline media", "virulence": "Cholera toxin (CTX, permanently activates Gs \u2192 \u2191cAMP), TCP pili", "pathogenesis": "\u2191cAMP \u2192 Cl\u2212 secretion, watery diarrhea", "diseases": "Rice-water stools, severe dehydration", "buzz": "Contaminated water, endemic shores"}, {"name": "Vibrio parahaemolyticus", "cat": "Bacteria", "gram": "\u2212", "morph": "Curved rods", "features": "Halophilic, marine", "virulence": "TDH/TRH hemolysins, potassium ionophore", "pathogenesis": "Seafood ingestion \u2192 gastroenteritis", "diseases": "Watery diarrhea, wound infections", "buzz": "Contaminated seafood, bile salts"}, {"name": "Vibrio vulnificus", "cat": "Bacteria", "gram": "\u2212", "morph": "Curved rods", "features": "Halophilic, encapsulated", "virulence": "Capsule, siderophores", "pathogenesis": "Wound/sepsis in liver disease; high serum iron increases risk", "diseases": "Necrotizing skin infection, septicemia", "buzz": "Raw oysters, brackish water, iron overload/cirrhosis"}, {"name": "Campylobacter jejuni", "cat": "Bacteria", "gram": "\u2212", "morph": "Curved/S-shaped rods", "features": "Microaerophilic, oxidase+, grows at 42\u00b0C ('likes the hot campfire')", "virulence": "Cytolethal distending toxin", "pathogenesis": "Invasion \u2192 inflammatory bloody diarrhea", "diseases": "Bloody diarrhea; common antecedent to Guillain-Barr\u00e9 syndrome and reactive arthritis", "buzz": "Undercooked poultry, 42\u00b0C growth"}, {"name": "Helicobacter pylori", "cat": "Bacteria", "gram": "\u2212", "morph": "Curved rods", "features": "Urease+, motile", "virulence": "Urease (produces ammonia, raises pH), VacA, CagA", "pathogenesis": "Mucus colonization of antrum \u2192 gastritis/ulcer", "diseases": "Peptic ulcer, gastric cancer, MALT lymphoma", "buzz": "Urease breath test, spiral, triple therapy"}, {"name": "Haemophilus influenzae", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Requires X/V factors (hemin/NAD) \u2014 chocolate agar; type b capsule (PRP)", "virulence": "PRP capsule (type b), IgA protease", "pathogenesis": "Nasopharyngeal colonization \u2192 invasion", "diseases": "Epiglottitis, meningitis (unvaccinated), otitis/sinusitis", "buzz": "'Thumb sign' (epiglottitis), chocolate agar"}, {"name": "Bordetella pertussis", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Strict aerobe", "virulence": "Pertussis toxin, FHA, tracheal cytotoxin, respiratory droplet spread", "pathogenesis": "Ciliated cell paralysis \u2192 lymphocytosis", "diseases": "Whooping cough (catarrhal, paroxysmal stages)", "buzz": "Post-tussive vomiting, whoop"}, {"name": "Brucella melitensis", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Zoonotic from goats/sheep", "virulence": "Intracellular survival, LPS", "pathogenesis": "Reticuloendothelial infection", "diseases": "Undulant fever, hepatosplenomegaly (brucellosis)", "buzz": "Unpasteurized dairy, occupational exposure"}, {"name": "Brucella abortus", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Cattle reservoir", "virulence": "Similar virulence to other Brucella spp.", "pathogenesis": "Chronic granulomatous disease", "diseases": "Brucellosis", "buzz": "Dairy, ranch exposure"}, {"name": "Brucella suis", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Swine reservoir", "virulence": "Similar virulence to other Brucella spp.", "pathogenesis": "More suppurative/relapsing disease", "diseases": "Brucellosis", "buzz": "Hunters, feral swine"}, {"name": "Brucella canis", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Dogs reservoir", "virulence": "Similar virulence to other Brucella spp.", "pathogenesis": "Milder brucellosis", "diseases": "Brucellosis", "buzz": "Kennel exposure. (Note: all Brucella spp. are zoonotic and all cause brucellosis.)"}, {"name": "Francisella tularensis", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Fastidious, needs cysteine", "virulence": "Intracellular, antiphagocytic (inhibits fusion of lysosome)", "pathogenesis": "Ulceroglandular route; aerosol exposure is severe", "diseases": "Tularemia (ulceroglandular, pneumonic)", "buzz": "Rabbits, ticks, biothreat agent"}, {"name": "Pasteurella multocida", "cat": "Bacteria", "gram": "\u2212", "morph": "Coccobacilli", "features": "Bipolar staining, oxidase+", "virulence": "Capsule, PMT toxin", "pathogenesis": "Animal bite inoculation", "diseases": "Cellulitis (at site of bite), tenosynovitis, osteomyelitis", "buzz": "Cat/dog bite, rapid onset (within 24h)"}, {"name": "Nocardia", "cat": "Bacteria", "gram": "Weakly + (partial acid-fast)", "morph": "Branching filamentous rods", "features": "Aerobic, partially acid-fast, catalase+", "virulence": "Cord factor, catalase", "pathogenesis": "Inhalation/trauma \u2192 disseminates in immunocompromised", "diseases": "Pulmonary nocardiosis, brain abscess, cutaneous infections", "buzz": "Soil, immunocompromised"}, {"name": "Actinomyces", "cat": "Bacteria", "gram": "+", "morph": "Branching filamentous rods", "features": "Anaerobic, not acid-fast", "virulence": "Sulfur granules", "pathogenesis": "Oral flora \u2192 trauma, aspiration", "diseases": "Cervicofacial actinomycosis ('lumpy jaw'), pelvic infections (IUD-associated)", "buzz": "Sulfur granules, jaw abscess"}, {"name": "Mycobacterium leprae", "cat": "Bacteria", "gram": "Acid-fast", "morph": "Rods", "features": "Cannot grow in vitro; armadillo reservoir", "virulence": "Phenolic glycolipid, cell wall lipids", "pathogenesis": "Infects skin/Schwann cells", "diseases": "Leprosy \u2014 tuberculoid (Th1) vs lepromatous (Th2)", "buzz": "Armadillo, skin lesions, glove-and-stocking neuropathy"}, {"name": "Mycobacterium tuberculosis", "cat": "Bacteria", "gram": "Acid-fast", "morph": "Rods", "features": "Niacin+, cord factor, obligate aerobe", "virulence": "Cord factor (serpentine growth, activates macrophages, induces TNF-\u03b1), sulfatides (inhibit phagolysosomal fusion)", "pathogenesis": "Inhalation \u2192 granulomas", "diseases": "Pulmonary TB, miliary TB, Pott's disease (vertebral TB)", "buzz": "Caseating granulomas, Ghon complex, serpentine growth"}, {"name": "Mycobacterium bovis", "cat": "Bacteria", "gram": "Acid-fast", "morph": "Rods", "features": "From unpasteurized milk", "virulence": "Similar to M. tuberculosis", "pathogenesis": "GI entry \u2192 systemic spread", "diseases": "GI TB, systemic TB", "buzz": "Unpasteurized milk"}, {"name": "Mycobacterium africanum", "cat": "Bacteria", "gram": "Acid-fast", "morph": "Rods", "features": "Endemic in Africa", "virulence": "Similar to M. tuberculosis", "pathogenesis": "Pulmonary infection", "diseases": "TB-like illness", "buzz": "Africa, TB variant"}, {"name": "Mycobacterium avium complex (MAC)", "cat": "Bacteria", "gram": "Acid-fast", "morph": "Rods", "features": "Opportunistic in AIDS", "virulence": "Intracellular survival", "pathogenesis": "Disseminated infection in immunocompromised (CD4 <50)", "diseases": "Disseminated MAC in AIDS", "buzz": "AIDS, CD4 <50, bird droppings/soil"}, {"name": "Mycobacterium kansasii", "cat": "Bacteria", "gram": "Acid-fast", "morph": "Rods", "features": "Photochromogenic colonies", "virulence": "Similar to TB", "pathogenesis": "Pulmonary disease", "diseases": "TB-like pulmonary disease", "buzz": "Midwest US, TB mimic"}, {"name": "Mycobacterium marinum", "cat": "Bacteria", "gram": "Acid-fast", "morph": "Rods", "features": "Grows at low temperature, aquatic", "virulence": "Similar to TB", "pathogenesis": "Skin inoculation from water", "diseases": "Fish tank granuloma", "buzz": "Aquarium, swimming pool"}, {"name": "Treponema pallidum pallidum", "cat": "Bacteria", "gram": "Spirochete", "morph": "Thin spiral", "features": "Cannot be cultured; visualized by dark-field microscopy", "virulence": "Outer membrane proteins", "pathogenesis": "Sexual transmission \u2192 systemic spread", "diseases": "Syphilis (primary chancre, secondary rash, tertiary gummas/neuro)", "buzz": "Painless chancre, palm/sole rash"}, {"name": "Treponema pallidum pertenue", "cat": "Bacteria", "gram": "Spirochete", "morph": "Thin spiral", "features": "Endemic in tropics", "virulence": "Similar to T. pallidum pallidum", "pathogenesis": "Skin-to-skin transmission", "diseases": "Yaws (skin lesions, bone deformities)", "buzz": "Tropical yaws"}, {"name": "Treponema pallidum carateum", "cat": "Bacteria", "gram": "Spirochete", "morph": "Thin spiral", "features": "Endemic in South America", "virulence": "Similar to T. pallidum pallidum", "pathogenesis": "Skin-to-skin transmission", "diseases": "Pinta (skin depigmentation)", "buzz": "Pinta, South America"}, {"name": "Borrelia burgdorferi", "cat": "Bacteria", "gram": "Spirochete", "morph": "Large spiral", "features": "Visualized with Giemsa/Wright stain; transmitted by Ixodes deer tick", "virulence": "Outer surface proteins", "pathogenesis": "Ixodes tick transmission", "diseases": "Lyme disease (erythema migrans, arthritis, neuro (facial palsy), carditis)", "buzz": "Bull's-eye rash, deer tick"}, {"name": "Borrelia recurrentis / hermsii", "cat": "Bacteria", "gram": "Spirochete", "morph": "Spiral", "features": "Antigenic variation", "virulence": "Variable surface proteins", "pathogenesis": "Lice (recurrentis) or tick (hermsii) transmission", "diseases": "Relapsing fever", "buzz": "Antigenic variation, relapsing fever"}, {"name": "Leptospira interrogans", "cat": "Bacteria", "gram": "Spirochete", "morph": "Spiral with hooked ends", "features": "Thin, motile; found in water contaminated with animal urine", "virulence": "Adhesins, motility", "pathogenesis": "Water exposure \u2192 bloodstream spread", "diseases": "Leptospirosis, Weil's disease (jaundice, azotemia, hepatic/renal failure)", "buzz": "Surfer's disease, animal urine"}, {"name": "Mycoplasma pneumoniae", "cat": "Bacteria", "gram": "No cell wall", "morph": "Pleomorphic", "features": "Sterols in membrane (not cell wall), grown on Eaton agar", "virulence": "P1 adhesin", "pathogenesis": "Respiratory mucosa colonization", "diseases": "Atypical 'walking pneumonia', tracheobronchitis; produces cold agglutinins (IgM)", "buzz": "Walking pneumonia, cold agglutinins"}, {"name": "Mycoplasma hominis", "cat": "Bacteria", "gram": "No cell wall", "morph": "Pleomorphic", "features": "Urogenital colonizer", "virulence": "Adhesins", "pathogenesis": "Ascending infection", "diseases": "PID, postpartum fever", "buzz": "Genital mycoplasma"}, {"name": "Mycoplasma genitalium", "cat": "Bacteria", "gram": "No cell wall", "morph": "Pleomorphic", "features": "Smallest genome of any bacterium", "virulence": "Adhesins", "pathogenesis": "Urogenital colonization", "diseases": "NGU (nongonococcal urethritis), cervicitis", "buzz": "STI, persistent urethritis"}, {"name": "Ureaplasma urealyticum", "cat": "Bacteria", "gram": "No cell wall", "morph": "Pleomorphic", "features": "Urease+", "virulence": "Urease", "pathogenesis": "Urogenital colonization", "diseases": "NGU, chorioamnionitis", "buzz": "Urease+, STI"}, {"name": "Chlamydophila pneumoniae", "cat": "Bacteria", "gram": "\u2212 (intracellular)", "morph": "Obligate intracellular", "features": "Biphasic life cycle (elementary body/reticulate body)", "virulence": "Inhibition of phagolysosome fusion", "pathogenesis": "Respiratory infection", "diseases": "Atypical pneumonia, bronchitis", "buzz": "Atypical pneumonia, EB/RB cycle"}, {"name": "Chlamydophila psittaci", "cat": "Bacteria", "gram": "\u2212 (intracellular)", "morph": "Obligate intracellular", "features": "Bird reservoir", "virulence": "Similar to C. pneumoniae", "pathogenesis": "Inhalation of bird feces", "diseases": "Psittacosis (atypical pneumonia)", "buzz": "Parrots, bird exposure"}, {"name": "Chlamydia trachomatis (serovars A\u2013C)", "cat": "Bacteria", "gram": "\u2212 (intracellular)", "morph": "Obligate intracellular", "features": "Serovars A-C; EB/RB cycle", "virulence": "EB/RB cycle proteins", "pathogenesis": "Ocular infection", "diseases": "Trachoma (chronic follicular conjunctivitis \u2192 blindness)", "buzz": "ABC = Africa, Blindness, Chronic infection"}, {"name": "Chlamydia trachomatis (serovars D\u2013K)", "cat": "Bacteria", "gram": "\u2212 (intracellular)", "morph": "Obligate intracellular", "features": "Serovars D-K; EB/RB cycle", "virulence": "EB/RB cycle proteins", "pathogenesis": "Urogenital infection", "diseases": "STI \u2014 nongonococcal urethritis, cervicitis, PID, neonatal conjunctivitis/pneumonia (staccato cough)", "buzz": "D-K = 'DiCk' (everything else); neonatal pneumonia with staccato cough"}, {"name": "Chlamydia trachomatis (serovars L1\u2013L3)", "cat": "Bacteria", "gram": "\u2212 (intracellular)", "morph": "Obligate intracellular", "features": "Serovars L1-L3; EB/RB cycle", "virulence": "EB/RB cycle proteins", "pathogenesis": "Lymphatic spread", "diseases": "Lymphogranuloma venereum (LGV) \u2014 painful genital ulcers, swollen inguinal nodes/buboes", "buzz": "Painful lymphadenopathy, buboes"}, {"name": "Paracoccidioides brasiliensis", "cat": "Fungi", "gram": null, "morph": "Yeast with multiple buds ('pilot wheel'); mold with septate hyphae in culture", "features": "Dimorphic fungus endemic to Latin America", "virulence": "Adhesins, cell wall \u03b1-glucan", "pathogenesis": "Inhalation \u2192 pulmonary infection \u2192 dissemination", "diseases": "Paracoccidioidomycosis (chronic pulmonary, mucocutaneous lesions)", "buzz": "Pilot wheel yeast, South America \u2014 one of the 4 classic systemic dimorphic mycoses"}, {"name": "Sporothrix schenckii", "cat": "Fungi", "gram": null, "morph": "Cigar-shaped budding yeast in tissue; mold with conidiophores ('daisy arrangement') in culture", "features": "Dimorphic fungus; lives on vegetation", "virulence": "Melanin, adhesins", "pathogenesis": "Traumatic inoculation (rose thorn) \u2192 lymphatic spread", "diseases": "Sporotrichosis ('rose gardener's disease' \u2014 nodular lymphangitis)", "buzz": "Rose thorns, gardening, itraconazole/potassium iodide treatment"}, {"name": "Candida albicans", "cat": "Fungi", "gram": null, "morph": "Yeast, pseudohyphae, true hyphae in tissue; creamy white colonies in culture", "features": "Germ tube positive", "virulence": "Adhesins, proteases, biofilm, interferes with superoxide", "pathogenesis": "Opportunistic overgrowth", "diseases": "Oral thrush, vaginitis, diaper rash, endocarditis, disseminated candidiasis", "buzz": "Germ tube test, pseudohyphae, opposite morphology (yeast in body, mold-like structures in culture)"}, {"name": "Candida glabrata", "cat": "Fungi", "gram": null, "morph": "Yeast only (no hyphae/pseudohyphae)", "features": "Small yeast colonies that burst cell", "virulence": "Biofilm, stress resistance", "pathogenesis": "Opportunistic infection", "diseases": "Fungemia, UTI", "buzz": "Germ tube negative, azole resistant, less virulent"}, {"name": "Candida auris", "cat": "Fungi", "gram": null, "morph": "Yeast", "features": "Difficult to identify, multidrug resistant, emerging nosocomial pathogen", "virulence": "Biofilm, drug resistance", "pathogenesis": "Colonizes skin \u2192 bloodstream", "diseases": "Fungemia, ICU outbreaks", "buzz": "MDR yeast, hospital outbreaks"}, {"name": "Cryptococcus neoformans", "cat": "Fungi", "gram": null, "morph": "Encapsulated yeast (India ink halo) in tissue; mucoid colonies in culture", "features": "5-10 \u00b5m with narrow-based budding; heavily encapsulated; not dimorphic; found in soil/pigeon droppings; urease+", "virulence": "Polysaccharide capsule, melanin", "pathogenesis": "Inhalation \u2192 CNS dissemination (hematogenous dissemination to meninges)", "diseases": "Meningitis in immunocompromised, pneumonia, encephalitis ('soap bubble' lesions in brain)", "buzz": "India ink, latex agglutination, pigeon droppings"}, {"name": "Malassezia", "cat": "Fungi", "gram": null, "morph": "Yeast with short hyphae ('spaghetti and meatballs'); lipophilic yeast in culture", "features": "Requires lipid supplementation", "virulence": "Lipases", "pathogenesis": "Overgrowth on oily skin", "diseases": "Tinea versicolor, hypopigmented patches", "buzz": "Spaghetti and meatballs, hypopigmented patches"}, {"name": "Trichosporon", "cat": "Fungi", "gram": null, "morph": "Yeast with hyphae and arthroconidia; white cotton ball colonies in culture", "features": "Opportunistic in immunocompromised", "virulence": "Biofilm, adhesins", "pathogenesis": "Disseminated infection in neutropenic patients", "diseases": "Trichosporonosis", "buzz": "Arthroconidia, immunocompromised"}, {"name": "Rhodotorula", "cat": "Fungi", "gram": null, "morph": "Yeast", "features": "Pink/red pigmented colonies, opportunistic", "virulence": "Biofilm", "pathogenesis": "Opportunistic fungemia", "diseases": "Fungemia in immunocompromised, catheter infections", "buzz": "Pink colonies, catheter infections"}, {"name": "Pneumocystis jirovecii", "cat": "Fungi", "gram": null, "morph": "Cysts and trophozoites in alveoli; cannot be cultured", "features": "Opportunistic, protozoan-like fungus; major surface glycoprotein; no ergosterol in membrane", "virulence": "Major surface glycoprotein", "pathogenesis": "Inhalation \u2192 alveolar infection", "diseases": "PCP pneumonia in AIDS (diffuse interstitial pneumonia, ground-glass opacities)", "buzz": "Ground-glass opacities, silver stain, CD4 <200 prophylaxis"}, {"name": "Trichophyton rubrum", "cat": "Fungi", "gram": null, "morph": "Hyphae invading keratin; red colonies with microconidia in culture", "features": "Dermatophyte, skin/nail infections", "virulence": "Keratinases", "pathogenesis": "Invades keratinized tissue", "diseases": "Tinea corporis, pedis, unguium", "buzz": "Most common dermatophyte"}, {"name": "Trichophyton interdigitale", "cat": "Fungi", "gram": null, "morph": "Hyphae in keratin; white colonies in culture", "features": "Similar to rubrum, interdigital", "virulence": "Keratinases", "pathogenesis": "Skin/nail infection", "diseases": "Tinea pedis, onychomycosis", "buzz": "Athlete's foot"}, {"name": "Microsporum canis", "cat": "Fungi", "gram": null, "morph": "Hyphae in keratin; fluffy colonies with spindle-shaped macroconidia", "features": "Zoophilic dermatophyte", "virulence": "Keratinases", "pathogenesis": "Animal-to-human transmission", "diseases": "Tinea capitis, corporis", "buzz": "Cats/dogs, spindle macroconidia"}, {"name": "Epidermophyton floccosum", "cat": "Fungi", "gram": null, "morph": "Hyphae in keratin; yellow-green colonies with club-shaped macroconidia, no microconidia", "features": "Human-to-human transmission", "virulence": "Keratinases", "pathogenesis": "Human-to-human transmission", "diseases": "Tinea cruris, pedis", "buzz": "Club-shaped macroconidia"}, {"name": "Aspergillus fumigatus", "cat": "Fungi", "gram": null, "morph": "Septate hyphae with acute-angle (45\u00b0) branching in tissue; mold with conidial heads in culture", "features": "Most common Aspergillus species pathogen", "virulence": "Gliotoxin, elastase", "pathogenesis": "Inhalation \u2192 colonization/invasion", "diseases": "Aspergillosis (allergic \u2014 ABPA, invasive, aspergilloma/fungus ball)", "buzz": "Acute angle branching, fungus ball, ABPA"}, {"name": "Aspergillus flavus", "cat": "Fungi", "gram": null, "morph": "Septate hyphae; mold with yellow-green colonies", "features": "Produces aflatoxin", "virulence": "Aflatoxin, elastase", "pathogenesis": "Contaminated grains/nuts \u2192 hepatotoxicity", "diseases": "Hepatocellular carcinoma, invasive aspergillosis", "buzz": "Aflatoxin, peanuts"}, {"name": "Aspergillus niger", "cat": "Fungi", "gram": null, "morph": "Septate hyphae with acute-angle branching; black colonies with radiating conidial heads", "features": "Produces black spores; common contaminant", "virulence": "Conidial production, elastase", "pathogenesis": "Inhalation \u2192 colonization/invasion", "diseases": "Otomycosis, aspergilloma, allergic aspergillosis", "buzz": "Black mold, ear infection, neutrophils involved in defense"}, {"name": "Blastomyces dermatitidis", "cat": "Fungi", "gram": null, "morph": "Broad-based budding yeast in tissue; mold with conidia in culture", "features": "Dimorphic fungus endemic to Mississippi/Ohio River valleys", "virulence": "BAD1 adhesin", "pathogenesis": "Inhalation \u2192 pulmonary infection \u2192 dissemination", "diseases": "Blastomycosis (pulmonary, cutaneous, osteomyelitis/bone)", "buzz": "Broad-based buds, Great Lakes region"}, {"name": "Coccidioides immitis", "cat": "Fungi", "gram": null, "morph": "Spherules with endospores in tissue; mold with barrel-shaped arthroconidia in culture", "features": "Dimorphic fungus endemic to Southwest US", "virulence": "Arthroconidia, spherule formation", "pathogenesis": "Inhalation \u2192 spherules in lungs", "diseases": "Coccidioidomycosis (Valley fever, disseminated disease)", "buzz": "Desert, San Joaquin Valley, spherules"}, {"name": "Histoplasma capsulatum", "cat": "Fungi", "gram": null, "morph": "Intracellular yeast in macrophages; mold with tuberculate macroconidia in culture", "features": "Dimorphic fungus endemic to Ohio/Mississippi River valleys", "virulence": "Intracellular survival, calcium-binding proteins", "pathogenesis": "Inhalation of spores \u2192 macrophage spread", "diseases": "Histoplasmosis (pulmonary, disseminated in immunocompromised)", "buzz": "Bird/bat droppings, caves, intracellular yeast"}, {"name": "Monkeypox (Orthopoxvirus)", "cat": "Virus", "gram": "dsDNA", "morph": "Enveloped, multi-layered, large brick-shaped virion", "features": "Large brick-shaped poxvirus", "virulence": "Viral proteins that evade host immunity; replicates in cytoplasm (all DNA viruses replicate in nucleus EXCEPT poxviruses)", "pathogenesis": "Respiratory/skin inoculation \u2192 systemic spread", "diseases": "Monkeypox (fever, lymphadenopathy, pustular rash)", "buzz": "Pox lesions, lymphadenopathy"}, {"name": "Adenoviruses", "cat": "Virus", "gram": "dsDNA", "morph": "Naked, icosahedral, stable in environment", "features": "Icosahedral, stable in environment", "virulence": "Fiber proteins, E1A/E3 proteins", "pathogenesis": "Respiratory/GI/ocular infection", "diseases": "Pharyngitis, conjunctivitis (pink eye), gastroenteritis, hemorrhagic cystitis", "buzz": "Swimming pools, pink eye"}, {"name": "Papillomavirus (HPV)", "cat": "Virus", "gram": "dsDNA", "morph": "Naked, circular DNA", "features": "Infects keratinocytes", "virulence": "E6/E7 oncoproteins (inhibit p53, Rb)", "pathogenesis": "Skin/mucosal infection \u2192 oncogenesis", "diseases": "Warts, cervical cancer (types 16, 18, 31, 45 associated with cancer; 6, 11 with warts)", "buzz": "Koilocytes, cervical dysplasia, congenital"}, {"name": "Herpes simplex virus I/II (HSV)", "cat": "Virus", "gram": "dsDNA", "morph": "Enveloped", "features": "Latency in neurons (HSV-1 typically trigeminal ganglion, HSV-2 sacral ganglion)", "virulence": "Glycoproteins, thymidine kinase", "pathogenesis": "Mucocutaneous infection \u2192 latency/reactivation", "diseases": "Oral herpes (HSV-1, cold sores), genital herpes (HSV-2), encephalitis (HSV-1, temporal lobe)", "buzz": "Cold sores, painful vesicles"}, {"name": "Varicella-zoster virus (VZV)", "cat": "Virus", "gram": "dsDNA", "morph": "Enveloped", "features": "Latency in dorsal root ganglia (or trigeminal)", "virulence": "Glycoproteins, immune evasion", "pathogenesis": "Respiratory entry \u2192 viremia \u2192 latency", "diseases": "Chickenpox (primary, epithelial cells), shingles (reactivation, nerve cells/dermatomal)", "buzz": "Dewdrop on rose petal, dermatomal rash, post-herpetic neuralgia"}, {"name": "Cytomegalovirus (CMV)", "cat": "Virus", "gram": "dsDNA", "morph": "Enveloped", "features": "Latency in monocytes", "virulence": "Immune evasion proteins", "pathogenesis": "Latency in monocytes; reactivates in immunocompromised", "diseases": "Congenital CMV, retinitis (immunocompromised), pneumonia, mononucleosis (monospot-negative)", "buzz": "Owl's eye inclusions, blueberry muffin rash"}, {"name": "Epstein-Barr virus (EBV)", "cat": "Virus", "gram": "dsDNA", "morph": "Enveloped", "features": "Infects B cells via CD21 ('must be 21 to drink Beer in a Barr')", "virulence": "LMP1, EBNA proteins; latency in B cells", "pathogenesis": "Respiratory secretions/saliva ('kissing disease') \u2192 B cell infection", "diseases": "Mononucleosis, Burkitt lymphoma, nasopharyngeal carcinoma", "buzz": "Atypical lymphocytes (B cells with reactive cytotoxic T cells), heterophile antibody (Monospot)"}, {"name": "Parvovirus B19", "cat": "Virus", "gram": "ssDNA", "morph": "Naked", "features": "Smallest DNA virus ('parvus' = small)", "virulence": "Capsid proteins", "pathogenesis": "Infects erythroid precursors", "diseases": "Fifth disease (erythema infectiosum, 'slapped cheek' rash), aplastic crisis (esp. sickle cell), hydrops fetalis", "buzz": "Slapped cheek rash, aplastic crisis"}, {"name": "Reovirus", "cat": "Virus", "gram": "dsRNA (segmented)", "morph": "Naked, icosahedral, double-layered capsid", "features": "Stable capsid", "virulence": "Stable capsid", "pathogenesis": "GI infection", "diseases": "Mild gastroenteritis", "buzz": "dsRNA virus"}, {"name": "Rotavirus", "cat": "Virus", "gram": "dsRNA (segmented)", "morph": "Naked, wheel-like appearance", "features": "Segmented dsRNA (a reovirus); most important global cause of infantile gastroenteritis", "virulence": "NSP4 enterotoxin", "pathogenesis": "Infects enterocytes \u2192 villous destruction/atrophy \u2192 diarrhea", "diseases": "Severe infantile diarrhea, major cause of acute diarrhea in US in winter", "buzz": "Wheel virus, watery diarrhea, vaccine available"}, {"name": "Coltivirus (Colorado tick fever virus)", "cat": "Virus", "gram": "dsRNA", "morph": "Naked", "features": "Arbovirus, tick-borne", "virulence": "Stable capsid", "pathogenesis": "Tick bite \u2192 viremia", "diseases": "Colorado tick fever (biphasic fever)", "buzz": "Tick-borne dsRNA"}, {"name": "Poliovirus (Enterovirus)", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Naked", "features": "Picornavirus, acid-stable; RNA translated as one large polypeptide cleaved by viral protease into functional proteins", "virulence": "IRES (internal ribosome entry site)", "pathogenesis": "Fecal-oral \u2192 CNS spread", "diseases": "Poliomyelitis (paralysis)", "buzz": "Iron lung, single polypeptide translation"}, {"name": "Norovirus", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Naked", "features": "Calicivirus, highly contagious", "virulence": "Capsid proteins", "pathogenesis": "Infects GI tract", "diseases": "Acute gastroenteritis (vomiting and diarrhea); most common cause of gastroenteritis outbreaks in developed countries", "buzz": "Cruise ships, outbreaks"}, {"name": "Rhinovirus", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Naked", "features": "Picornavirus, acid-labile (does not infect GI tract, unlike other picornaviruses)", "virulence": "ICAM-1 receptor binding", "pathogenesis": "Upper respiratory tract infection", "diseases": "Common cold", "buzz": "Acid-labile, 100+ serotypes"}, {"name": "West Nile virus (Flavivirus)", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Enveloped", "features": "Arbovirus, mosquito-borne", "virulence": "Envelope glycoproteins", "pathogenesis": "Mosquito bite \u2192 viremia \u2192 CNS", "diseases": "Encephalitis, meningitis", "buzz": "Mosquito, neuroinvasive"}, {"name": "Chikungunya virus (Togavirus)", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Enveloped", "features": "Arbovirus, mosquito-borne", "virulence": "Envelope proteins", "pathogenesis": "Mosquito bite \u2192 systemic spread", "diseases": "Fever, polyarthritis (rash + fever + arthritis)", "buzz": "Mosquito, joint pain"}, {"name": "Coronavirus (SARS-CoV-2/MERS)", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Enveloped", "features": "Large RNA virus, crown-like spikes", "virulence": "Spike protein", "pathogenesis": "Respiratory entry \u2192 pneumonia", "diseases": "SARS, MERS, COVID-19-like illness", "buzz": "Crown spikes, severe pneumonia"}, {"name": "Influenza virus", "cat": "Virus", "gram": "ssRNA (\u2212, segmented)", "morph": "Enveloped", "features": "Orthomyxovirus, segmented genome (allows reassortment/antigenic shift)", "virulence": "Hemagglutinin, neuraminidase", "pathogenesis": "Respiratory infection \u2192 systemic symptoms", "diseases": "Influenza, pneumonia", "buzz": "Antigenic shift/drift, reassortment"}, {"name": "Hantavirus (Bunyavirus)", "cat": "Virus", "gram": "ssRNA (\u2212, segmented)", "morph": "Enveloped", "features": "Rodent reservoir", "virulence": "Glycoproteins", "pathogenesis": "Inhalation of rodent excreta", "diseases": "Hantavirus pulmonary syndrome (HPS), hemorrhagic fever with renal syndrome (HFRS)", "buzz": "Rodent urine, deer mice, pulmonary edema"}, {"name": "Rabies virus (Rhabdovirus)", "cat": "Virus", "gram": "ssRNA (\u2212)", "morph": "Enveloped, bullet-shaped", "features": "Bullet-shaped; Negri bodies (cytoplasmic inclusions) in Purkinje cells/hippocampal neurons", "virulence": "Glycoprotein G, retrograde axonal transport", "pathogenesis": "Bite \u2192 retrograde axonal transport \u2192 CNS infection", "diseases": "Rabies encephalitis (agitation, hydrophobia, paralysis, coma, death)", "buzz": "Negri bodies, hydrophobia, animal bite/scratch"}, {"name": "Ebola virus (Filovirus)", "cat": "Virus", "gram": "ssRNA (\u2212)", "morph": "Enveloped, filamentous", "features": "Filovirus; incubation up to 21 days", "virulence": "Glycoprotein, VP24/VP35", "pathogenesis": "Infects endothelial cells \u2192 cytokine storm", "diseases": "Hemorrhagic fever, severe bleeding, DIC", "buzz": "Filovirus, hemorrhage, fruit bats and primates"}, {"name": "Measles virus (Paramyxovirus)", "cat": "Virus", "gram": "ssRNA (\u2212)", "morph": "Enveloped", "features": "Koplik spots (pathognomonic, seen before rash)", "virulence": "Hemagglutinin, fusion protein", "pathogenesis": "Respiratory entry \u2192 viremia", "diseases": "Measles (rash starting at head/neck moving down, preceded by cough/coryza/conjunctivitis \u2014 3 C's), pneumonia, encephalitis, SSPE", "buzz": "Koplik spots, SSPE (subacute sclerosing panencephalitis)"}, {"name": "HIV (Retrovirus)", "cat": "Virus", "gram": "ssRNA (+, diploid)", "morph": "Enveloped", "features": "Reverse transcriptase, gp120/gp41 envelope proteins", "virulence": "gp120 (CD4 attachment), gp41 (fusion), reverse transcriptase/integrase/protease (pol gene)", "pathogenesis": "Infects CD4+ T cells (via CD4 + CCR5/CXCR4 coreceptor) \u2192 immunodeficiency", "diseases": "AIDS", "buzz": "gp120, CD4 tropism, CCR5/CXCR4 coreceptors"}, {"name": "Hepatitis B virus (Hepadnavirus)", "cat": "Virus", "gram": "dsDNA (partially)", "morph": "Enveloped", "features": "Reverse transcriptase, Dane particle (complete virion)", "virulence": "HBsAg, HBx protein", "pathogenesis": "Infects hepatocytes \u2192 chronic infection", "diseases": "Hepatitis, cirrhosis, hepatocellular carcinoma", "buzz": "Dane particle, HBsAg, HBeAg, HBcAg"}, {"name": "Hepatitis A virus (HAV)", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Naked (picornavirus)", "features": "Fecal-oral transmission, short incubation (weeks)", "virulence": "Capsid proteins", "pathogenesis": "Fecal-oral \u2192 acute self-limited hepatitis", "diseases": "Acute hepatitis (usually self-limited); good prognosis, no chronic carrier state", "buzz": "Travelers, daycare, shellfish; vaccine available"}, {"name": "Hepatitis C virus (HCV)", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Enveloped (Flavivirus)", "features": "Parenteral transmission (blood); lacks proofreading ability \u2192 high mutation rate/antigenic variation", "virulence": "Envelope glycoprotein variability", "pathogenesis": "Parenteral/sexual/perinatal transmission \u2192 chronic infection", "diseases": "Chronic hepatitis, cirrhosis, hepatocellular carcinoma; majority progress to chronic infection", "buzz": "IV drug use, transfusions (pre-1992), chronic carrier common"}, {"name": "Hepatitis D virus (HDV)", "cat": "Virus", "gram": "ssRNA (\u2212, circular)", "morph": "Enveloped", "features": "Defective virus; requires HBsAg (HBV coinfection) to replicate/be infectious", "virulence": "Delta antigen, requires HBV envelope", "pathogenesis": "Coinfection or superinfection with HBV", "diseases": "Fulminant hepatitis (especially with superinfection)", "buzz": "Requires HBV, delta agent"}, {"name": "Hepatitis E virus (HEV)", "cat": "Virus", "gram": "ssRNA (+)", "morph": "Naked", "features": "Fecal-oral, waterborne, especially in developing countries", "virulence": "Capsid proteins", "pathogenesis": "Fecal-oral transmission", "diseases": "Acute hepatitis; high mortality in pregnant patients", "buzz": "Waterborne, pregnant patients at high risk"}, {"name": "Scrapie", "cat": "Prion", "gram": null, "morph": null, "features": "Affects sheep and goats; earliest recognized prion disease", "virulence": "Misfolded PrP^Sc protein", "pathogenesis": "Accumulation of PrP^Sc in CNS \u2192 neurodegeneration", "diseases": "Scrapie in sheep/goats", "buzz": "Sheep scratching, ataxia"}, {"name": "Kuru", "cat": "Prion", "gram": null, "morph": null, "features": "Found in Papua New Guinea; linked to ritual cannibalism", "virulence": "PrP^Sc", "pathogenesis": "Transmission via ingestion of infected neural tissue", "diseases": "Progressive cerebellar ataxia, tremors, neurodegeneration", "buzz": "Laughing death, cannibalism"}, {"name": "Creutzfeldt-Jakob Disease (CJD)", "cat": "Prion", "gram": null, "morph": null, "features": "Sporadic, familial, iatrogenic, or variant forms", "virulence": "PrP^Sc", "pathogenesis": "Misfolded prion accumulates \u2192 spongiform changes in brain", "diseases": "Rapidly progressive dementia, myoclonus, ataxia", "buzz": "Sporadic dementia, spongiform encephalopathy, 14-3-3 protein"}, {"name": "Bovine Spongiform Encephalopathy (BSE)", "cat": "Prion", "gram": null, "morph": null, "features": "'Mad cow disease'; cattle reservoir; zoonotic variant CJD in humans", "virulence": "PrP^Sc", "pathogenesis": "Ingestion of contaminated beef \u2192 CNS prion accumulation", "diseases": "Neurodegeneration in cattle; variant CJD in humans", "buzz": "Mad cow, UK outbreak"}, {"name": "Chronic Wasting Disease (CWD)", "cat": "Prion", "gram": null, "morph": null, "features": "Affects deer, elk, moose; highly contagious among cervids", "virulence": "PrP^Sc", "pathogenesis": "Horizontal transmission via saliva, urine, feces", "diseases": "Progressive wasting, behavioral changes in cervids", "buzz": "Deer/elk wasting, wildlife prion"}, {"name": "Clonorchis sinensis (Chinese liver fluke)", "cat": "Parasite", "gram": "Trematode (fluke)", "morph": null, "features": "Ingestion of raw freshwater fish", "virulence": "\u2014", "pathogenesis": "Migrates to biliary tree", "diseases": "Cholangiocarcinoma, biliary obstruction", "buzz": "Chinese liver fluke, fish ingestion"}, {"name": "Fasciola spp (liver fluke)", "cat": "Parasite", "gram": "Trematode (fluke)", "morph": null, "features": "Ingestion of aquatic plants (watercress)", "virulence": "\u2014", "pathogenesis": "Migrates to biliary ducts/liver", "diseases": "Fascioliasis, biliary obstruction", "buzz": "Watercress, sheep/cattle reservoir"}, {"name": "Opisthorchis sinensis (SE Asian liver fluke)", "cat": "Parasite", "gram": "Trematode (fluke)", "morph": null, "features": "Ingestion of raw freshwater fish", "virulence": "\u2014", "pathogenesis": "Migrates to biliary tree", "diseases": "Cholangiocarcinoma, biliary disease", "buzz": "Southeast Asia, fish-borne"}, {"name": "Paragonimus westermani (lung fluke)", "cat": "Parasite", "gram": "Trematode (fluke)", "morph": null, "features": "Ingestion of raw crab/crayfish", "virulence": "\u2014", "pathogenesis": "Migrates to lungs", "diseases": "Paragonimiasis, hemoptysis", "buzz": "Crab/crayfish, lung fluke"}, {"name": "Schistosoma spp (blood fluke)", "cat": "Parasite", "gram": "Trematode (fluke)", "morph": null, "features": "Skin penetration in freshwater (cercariae)", "virulence": "\u2014", "pathogenesis": "S. mansoni/japonicum \u2192 mesenteric veins; S. haematobium \u2192 bladder veins", "diseases": "Schistosomiasis, portal hypertension, hematuria, bladder cancer (S. haematobium)", "buzz": "Snails (intermediate host), swimmer's itch, hematuria"}, {"name": "Ancylostoma (hookworm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Skin penetration (larvae in soil)", "virulence": "\u2014", "pathogenesis": "Larvae penetrate skin from walking barefoot on contaminated soil; migrate to small intestine", "diseases": "Iron-deficiency anemia (sucks blood from intestinal wall), cutaneous larva migrans", "buzz": "Ground itch, hookworm"}, {"name": "Ascaris lumbricoides (giant roundworm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Ingestion of eggs (fecal-oral)", "virulence": "\u2014", "pathogenesis": "Larvae migrate to lungs then small intestine (L\u00f6ffler syndrome during migration)", "diseases": "Intestinal obstruction, biliary obstruction, L\u00f6ffler syndrome (pulmonary eosinophilia)", "buzz": "Large roundworm, intestinal blockage, knobby-coated eggs in feces"}, {"name": "Brugia malayi (filarial worm)", "cat": "Parasite", "gram": "Nematode (filarial worm)", "morph": null, "features": "Mosquito bite", "virulence": "\u2014", "pathogenesis": "Worms invade lymph nodes \u2192 lymphedema", "diseases": "Lymphatic filariasis, elephantiasis", "buzz": "Elephantiasis, mosquito, female mosquito vector"}, {"name": "Dracunculus medinensis (Guinea worm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Ingestion of copepods in water", "virulence": "\u2014", "pathogenesis": "Migrates to subcutaneous tissue", "diseases": "Painful skin ulcers (Guinea worm disease)", "buzz": "Guinea worm, water ingestion"}, {"name": "Enterobius vermicularis (pinworm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Ingestion of eggs (fecal-oral); autoinfection common", "virulence": "\u2014", "pathogenesis": "Adults live in intestine/colon/rectum; migrate to perianal area at night to lay eggs", "diseases": "Perianal itching (worse at night); most common in children 5-10", "buzz": "Scotch tape test, pinworm"}, {"name": "Loa loa (eye worm)", "cat": "Parasite", "gram": "Nematode (filarial worm)", "morph": null, "features": "Bite of deer fly (Chrysops)", "virulence": "\u2014", "pathogenesis": "Migrates through subcutaneous tissue and conjunctiva", "diseases": "Calabar swellings, subconjunctival migration (worm crosses via conjunctiva)", "buzz": "Eye worm, deer fly"}, {"name": "Necator americanus (hookworm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Skin penetration", "virulence": "\u2014", "pathogenesis": "Larvae penetrate skin, migrate to small intestine, suck blood from intestinal wall", "diseases": "Iron-deficiency anemia", "buzz": "Hookworm, ground itch"}, {"name": "Onchocerca volvulus", "cat": "Parasite", "gram": "Nematode (filarial worm)", "morph": null, "features": "Blackfly bite", "virulence": "\u2014", "pathogenesis": "Migrates to subcutaneous tissue and eyes", "diseases": "River blindness, dermatitis (black skin nodules)", "buzz": "Blackfly, river blindness"}, {"name": "Strongyloides stercoralis (threadworm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Skin penetration", "virulence": "\u2014", "pathogenesis": "Capable of autoinfection \u2014 can cause hyperinfection syndrome in immunocompromised", "diseases": "Autoinfection, hyperinfection in immunocompromised (threadworm infection)", "buzz": "Threadworm, autoinfection"}, {"name": "Trichinella spiralis", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Ingestion of undercooked pork", "virulence": "\u2014", "pathogenesis": "Larvae encyst in striated/skeletal muscle tissue", "diseases": "Trichinosis \u2014 myositis, periorbital edema, myalgia", "buzz": "Undercooked pork, muscle cysts"}, {"name": "Trichuris trichiura (whipworm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Ingestion of eggs (fecal-oral)", "virulence": "\u2014", "pathogenesis": "Resides in large intestine", "diseases": "Whipworm infection, rectal prolapse (heavy infection)", "buzz": "Whipworm, barrel-shaped eggs"}, {"name": "Toxocara canis (dog roundworm)", "cat": "Parasite", "gram": "Nematode", "morph": null, "features": "Ingestion of eggs from dog feces", "virulence": "\u2014", "pathogenesis": "Migration into blood \u2192 inflammation of various tissues (visceral larva migrans)", "diseases": "Visceral larva migrans (eyes, CNS, heart); often asymptomatic", "buzz": "Dog roundworm, eosinophilia"}, {"name": "Wuchereria bancrofti (filarial worm)", "cat": "Parasite", "gram": "Nematode (filarial worm)", "morph": null, "features": "Mosquito bite", "virulence": "\u2014", "pathogenesis": "Worms invade lymph nodes \u2192 lymphedema; symptom onset after 9 mo-1 yr", "diseases": "Lymphatic filariasis (elephantiasis)", "buzz": "Elephantiasis, nocturnal microfilaria"}, {"name": "Diphyllobothrium latum (fish tapeworm)", "cat": "Parasite", "gram": "Cestode (tapeworm)", "morph": null, "features": "Ingestion of raw freshwater fish", "virulence": "\u2014", "pathogenesis": "Resides in small intestine; competes for vitamin B12", "diseases": "Vitamin B12 deficiency, megaloblastic anemia", "buzz": "Fish tapeworm, B12 deficiency"}, {"name": "Echinococcus granulosus", "cat": "Parasite", "gram": "Cestode", "morph": null, "features": "Ingestion of eggs from dog feces (sheep are intermediate host)", "virulence": "\u2014", "pathogenesis": "Larvae form cysts in liver, lungs", "diseases": "Hydatid cyst disease ('eggshell calcification'; cyst rupture can cause anaphylaxis)", "buzz": "Hydatid cyst, sheep/dog cycle"}, {"name": "Taenia solium (pork tapeworm)", "cat": "Parasite", "gram": "Cestode (tapeworm)", "morph": null, "features": "Ingestion of undercooked pork (larvae/cysticerci) or eggs (from food contaminated with human feces)", "virulence": "\u2014", "pathogenesis": "Adult tapeworm in intestine; larvae (cysticerci) can migrate to tissues including brain", "diseases": "Intestinal tapeworm, cysticercosis/neurocysticercosis (seizures, CNS lesions)", "buzz": "Pork tapeworm, seizures, cysticercosis"}, {"name": "Acanthamoeba", "cat": "Protozoa", "gram": null, "morph": "Free-living amoeba; forms cysts", "features": "Contact lens solution, soil, water", "virulence": "\u2014", "pathogenesis": "Contact lens misuse \u2192 cornea/CNS invasion", "diseases": "Keratitis, granulomatous amoebic encephalitis", "buzz": "Contact lens keratitis"}, {"name": "Cryptosporidium parvum", "cat": "Protozoa", "gram": null, "morph": "Acid-fast oocysts; chlorine resistant", "features": "Fecal-oral (contaminated water)", "virulence": "\u2014", "pathogenesis": "Infects small intestine", "diseases": "Watery diarrhea (esp. AIDS patients); severe disease in immunocompromised, mild in immunocompetent", "buzz": "Acid-fast oocysts, swimming pools, oocysts on acid-fast stain"}, {"name": "Entamoeba histolytica", "cat": "Protozoa", "gram": null, "morph": "Trophozoites with ingested RBCs", "features": "Fecal-oral (cysts in water/food)", "virulence": "\u2014", "pathogenesis": "Infects colon; can spread to liver", "diseases": "Amebic dysentery (bloody diarrhea), liver abscess ('anchovy paste')", "buzz": "Flask-shaped ulcers, anchovy paste abscess"}, {"name": "Giardia lamblia", "cat": "Protozoa", "gram": null, "morph": "Pear-shaped trophozoites with flagella", "features": "Fecal-oral (cysts in water); backpacker's/hiker's exposure", "virulence": "Multinucleated trophozoites, cysts in stool", "pathogenesis": "Infects small intestine", "diseases": "Giardiasis \u2014 malabsorption, foul-smelling ('greasy') steatorrheic diarrhea, bloating, flatulence", "buzz": "Backpacker's diarrhea, steatorrhea, greasy stools"}, {"name": "Leishmania", "cat": "Protozoa", "gram": null, "morph": "Intracellular amastigotes in macrophages", "features": "Sandfly bite", "virulence": "\u2014", "pathogenesis": "Infects reticuloendothelial system/skin", "diseases": "Visceral leishmaniasis (kala-azar, hepatosplenomegaly), cutaneous leishmaniasis", "buzz": "Sandfly, kala-azar, hepatosplenomegaly"}, {"name": "Naegleria fowleri", "cat": "Protozoa", "gram": null, "morph": "Free-living amoeba; trophozoites invade CNS", "features": "Swimming in warm freshwater", "virulence": "\u2014", "pathogenesis": "Enters via olfactory nerve/cribriform plate \u2192 CNS (rapidly fatal)", "diseases": "Primary amoebic meningoencephalitis (rapidly fatal)", "buzz": "Brain-eating amoeba, warm freshwater swimming"}, {"name": "Plasmodium falciparum", "cat": "Protozoa", "gram": null, "morph": "Banana-shaped gametocytes; multiple rings per RBC", "features": "Anopheles mosquito bite", "virulence": "\u2014", "pathogenesis": "Severe, irregular fever pattern; parasitized RBCs occlude capillaries", "diseases": "Severe malaria, cerebral malaria", "buzz": "Cerebral malaria, banana gametocyte, headphone-shaped trophozoite ring"}, {"name": "Plasmodium malariae", "cat": "Protozoa", "gram": null, "morph": "Band-form trophozoites; single infection per RBC", "features": "Anopheles mosquito bite", "virulence": "\u2014", "pathogenesis": "Infects RBCs/liver", "diseases": "Quartan malaria (72 hr fever cycle)", "buzz": "Quartan fever, band form"}, {"name": "Plasmodium ovale", "cat": "Protozoa", "gram": null, "morph": "Oval-shaped RBCs with Sch\u00fcffner's dots", "features": "Anopheles mosquito bite", "virulence": "\u2014", "pathogenesis": "Infects RBCs/liver (can form dormant hypnozoites)", "diseases": "Tertian malaria (48 hr cycle); relapse possible from hypnozoites", "buzz": "Oval RBCs, Sch\u00fcffner's dots"}, {"name": "Plasmodium vivax", "cat": "Protozoa", "gram": null, "morph": "Enlarged RBCs with Sch\u00fcffner's dots", "features": "Anopheles mosquito bite", "virulence": "\u2014", "pathogenesis": "Infects RBCs/liver (hypnozoites \u2192 relapse)", "diseases": "Relapsing tertian malaria (48 hr cycle)", "buzz": "Hypnozoites, relapse, Sch\u00fcffner's dots"}, {"name": "Toxoplasma gondii", "cat": "Protozoa", "gram": null, "morph": "Intracellular cysts; crescent-shaped tachyzoites", "features": "Ingestion of oocysts (cat feces), transplacental transmission, undercooked meat", "virulence": "\u2014", "pathogenesis": "Infects CNS, muscle", "diseases": "Toxoplasmosis \u2014 encephalitis (ring-enhancing brain lesions) in AIDS, congenital disease (chorioretinitis, hydrocephalus, intracranial calcifications)", "buzz": "Cat feces, ring-enhancing brain lesions"}, {"name": "Trichomonas vaginalis", "cat": "Protozoa", "gram": null, "morph": "Motile trophozoites with flagella; no cyst form", "features": "Sexual transmission", "virulence": "\u2014", "pathogenesis": "Infects urogenital tract", "diseases": "Trichomoniasis (vaginitis, urethritis)", "buzz": "Strawberry cervix, motile trophozoites"}, {"name": "Trypanosoma brucei gambiense", "cat": "Protozoa", "gram": null, "morph": "West African strain; variable surface glycoproteins", "features": "Tsetse fly bite", "virulence": "\u2014", "pathogenesis": "Infects blood, lymph, CNS", "diseases": "African sleeping sickness (chronic) \u2014 enlarged lymph nodes, recurring fever, somnolence, coma", "buzz": "West Africa, chronic, somnolence"}, {"name": "Trypanosoma brucei rhodesiense", "cat": "Protozoa", "gram": null, "morph": "East African strain; more acute", "features": "Tsetse fly bite", "virulence": "\u2014", "pathogenesis": "Infects blood, lymph, CNS", "diseases": "African sleeping sickness (acute, rapid progression)", "buzz": "East Africa, rapid progression"}, {"name": "Trypanosoma cruzi", "cat": "Protozoa", "gram": null, "morph": "C-shaped trypomastigotes", "features": "Reduviid ('kissing') bug feces \u2014 inoculated via scratching bite site/mucosa", "virulence": "\u2014", "pathogenesis": "Infects cardiac muscle, GI tract", "diseases": "Chagas disease \u2014 dilated cardiomyopathy, megacolon, megaesophagus (unilateral periorbital swelling/Roma\u00f1a sign in acute stage)", "buzz": "Kissing bug, Roma\u00f1a sign, dilated cardiomyopathy"}, {"name": "Scabies (Sarcoptes scabiei)", "cat": "Ectoparasite", "gram": null, "morph": "Mite burrows into stratum corneum; microscopic arthropod", "features": "Direct skin-to-skin contact, fomites (clothing, bedding)", "virulence": "\u2014", "pathogenesis": "Burrows in stratum corneum (epidermis)", "diseases": "Intense pruritus (worse at night), papular rash, secondary bacterial infection", "buzz": "Burrows, interdigital spaces, nocturnal itching, packed environments (nursing homes, jails)"}, {"name": "Bed Bugs (Cimex lectularius)", "cat": "Ectoparasite", "gram": null, "morph": "Wingless insect, nocturnal feeder", "features": "Contact with infested bedding/furniture", "virulence": "\u2014", "pathogenesis": "Feeds on blood at skin surface", "diseases": "Pruritic erythematous bites in linear clusters", "buzz": "Breakfast-lunch-dinner bite pattern, nocturnal bites"}, {"name": "Head Lice (Pediculus humanus capitis)", "cat": "Ectoparasite", "gram": null, "morph": "Small insect; nits attached to hair shafts", "features": "Direct head-to-head contact, shared combs/hats", "virulence": "\u2014", "pathogenesis": "Lives on scalp hair", "diseases": "Pruritus, excoriations, secondary bacterial infection", "buzz": "Nits on hair shafts, school outbreaks"}, {"name": "Body Lice (Pediculus humanus corporis)", "cat": "Ectoparasite", "gram": null, "morph": "Larger than head lice; lives in clothing seams", "features": "Contact with infested clothing/bedding", "virulence": "\u2014", "pathogenesis": "Lives in clothing, feeds on skin surface; vector for epidemic typhus, trench fever, relapsing fever", "diseases": "Pruritus, excoriations; vector for epidemic typhus (Rickettsia prowazekii), trench fever (Bartonella quintana), relapsing fever (Borrelia recurrentis)", "buzz": "Clothing seams, poor hygiene, typhus vector"}, {"name": "Brevetoxin (Red Tide)", "cat": "Toxin", "gram": null, "morph": null, "features": "Dinoflagellates (Karenia brevis) in coastal harmful algal blooms/red tide", "virulence": "Keeps Na+ channels open", "pathogenesis": "Aerosol (respiratory irritation) + shellfish ingestion", "diseases": "GI symptoms + paresthesias + mild neuro symptoms; usually nonfatal", "buzz": "'Red tide' on coasts, respiratory irritation on beaches; heat-stable"}, {"name": "Saxitoxin (Paralytic Shellfish Poisoning)", "cat": "Toxin", "gram": null, "morph": null, "features": "Dinoflagellates (Alexandrium, Gonyaulax) in cold/temperate waters", "virulence": "Blocks Na+ channels", "pathogenesis": "Shellfish ingestion (mussels, clams, scallops)", "diseases": "Rapid paresthesias \u2192 paralysis \u2192 respiratory failure (can be fatal)", "buzz": "Paralytic shellfish poisoning, cold water shellfish; heat-stable"}, {"name": "Ciguatoxin (Reef Fish)", "cat": "Toxin", "gram": null, "morph": null, "features": "Dinoflagellates (Gambierdiscus) on coral reefs; bioaccumulate in large reef fish (barracuda, snapper, grouper)", "virulence": "Keeps Na+ channels open", "pathogenesis": "Reef fish consumption", "diseases": "GI symptoms, sensory disturbances, hot-cold reversal, bradycardia/hypotension", "buzz": "Hot-cold reversal, large reef fish exposure; heat-stable"}];
+
+// ---------- Tab switching ----------
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'instant'});
+  });
+});
+
+// ---------- Organism DB ----------
+const container = document.getElementById('results');
+const searchInput = document.getElementById('search');
+const catNav = document.getElementById('catNav');
+const countLine = document.getElementById('countLine');
+const noResults = document.getElementById('noResults');
+
+const CAT_ORDER = ["Bacteria","Fungi","Virus","Prion","Parasite","Protozoa","Ectoparasite","Toxin"];
+let activeCat = 'All';
+
+function renderCatNav(){
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.textContent = 'All (' + ORGANISMS.length + ')';
+  allBtn.onclick = () => setCategory('All', allBtn);
+  catNav.appendChild(allBtn);
+  CAT_ORDER.forEach(cat => {
+    const n = ORGANISMS.filter(o=>o.cat===cat).length;
+    if(n===0) return;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = cat + ' (' + n + ')';
+    btn.onclick = () => setCategory(cat, btn);
+    catNav.appendChild(btn);
+  });
+}
+
+function setCategory(cat, btnEl){
+  activeCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  filterAndRender();
+}
+
+function fieldRow(label, val){
+  if(!val || val === "\u2014") return '';
+  return '<div class="org-field"><b>'+label+'</b>'+val+'</div>';
+}
+
+function renderOrganisms(){
+  container.innerHTML = '';
+  ORGANISMS.forEach(o => {
+    const card = document.createElement('div');
+    card.className = 'org-card';
+    card.dataset.cat = o.cat;
+    const searchBlob = [o.name,o.cat,o.gram,o.morph,o.features,o.virulence,o.pathogenesis,o.diseases,o.buzz].filter(Boolean).join(' ').toLowerCase();
+    card.dataset.search = searchBlob;
+    let badges = '<span class="org-badge">'+o.cat+'</span>';
+    if(o.gram) badges += '<span class="org-badge">'+o.gram+'</span>';
+    card.innerHTML = `
+      <div class="org-top">
+        <span class="org-name">${o.name}</span>
+        <span class="org-tags">${badges}</span>
+      </div>
+      <div class="org-grid">
+        ${fieldRow('Morphology', o.morph)}
+        ${fieldRow('Distinguishing Features', o.features)}
+        ${fieldRow('Virulence Factors', o.virulence)}
+        ${fieldRow('Pathogenesis', o.pathogenesis)}
+        ${fieldRow('Common Diseases/Illness', o.diseases)}
+      </div>
+      ${o.buzz ? '<div class="org-buzz">\u{1F4A1} '+o.buzz+'</div>' : ''}
+    `;
+    container.appendChild(card);
+  });
+}
+
+function filterAndRender(){
+  const q = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
+  document.querySelectorAll('.org-card').forEach(card => {
+    const matchesCat = (activeCat === 'All' || card.dataset.cat === activeCat);
+    const matchesSearch = (q === '' || card.dataset.search.includes(q));
+    const show = matchesCat && matchesSearch;
+    card.classList.toggle('hidden', !show);
+    if(show) visibleCount++;
+  });
+  countLine.textContent = `Showing ${visibleCount} of ${ORGANISMS.length} organisms`;
+  noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+renderCatNav();
+renderOrganisms();
+filterAndRender();
+searchInput.addEventListener('input', filterAndRender);
+</script>
+
+</body>
+</html>
