@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathology of Blood Vessels — Complete Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.65; }
+  h1,h2,h3,h4{ font-family:'Lora',serif; color:var(--forest-dark); }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:80;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ color:var(--cream); font-size:1.9rem; margin:0 0 10px; font-weight:700; }
+  .header p{ margin:4px 0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:840px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:20px 28px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--forest); }
+  .top-contents ul{ columns:2; column-gap:32px; margin:12px 0 0; padding-left:18px; }
+  .top-contents li{ margin-bottom:6px; break-inside:avoid; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .container{ max-width:840px; margin:0 auto; padding:30px 24px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border); border-radius:12px;
+    padding:26px 30px; margin-bottom:24px; scroll-margin-top:24px;
+  }
+  section.card h2{ font-size:1.35rem; border-bottom:2px solid var(--sage-light); padding-bottom:8px; margin-top:0; }
+  section.card h3{ font-size:1.05rem; color:var(--forest); margin-top:22px; }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:0.92rem; }
+  th,td{ border:1px solid var(--border); padding:8px 10px; text-align:left; vertical-align:top; }
+  th{ background:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.03em; color:var(--forest-dark); }
+  tr:nth-child(even) td{ background:#fbf9f3; }
+
+  .callout{
+    background:var(--sage-light); border-left:4px solid var(--forest);
+    padding:12px 16px; border-radius:6px; margin:14px 0; font-size:0.94rem;
+  }
+  .pearl{
+    background:#fdf3ea; border-left:4px solid var(--accent);
+    padding:12px 16px; border-radius:6px; margin:14px 0; font-size:0.92rem;
+  }
+  .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.76rem; text-transform:uppercase; }
+  .case{
+    background:#f4f1ea; border:1px dashed var(--border); border-radius:8px; padding:14px 18px; margin:14px 0;
+  }
+  .case-label{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--forest); display:block; margin-bottom:6px; }
+
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--forest); margin:22px 0 10px; border-top:1px solid var(--border); padding-top:16px;
+  }
+  .quiz-q{ background:#f6f3ec; border:1px solid var(--border); border-radius:8px; padding:14px 16px; margin-bottom:14px; }
+  .quiz-q p.stem{ margin:0 0 10px; font-weight:600; }
+  .quiz-choice{
+    display:block; background:var(--cream-card); border:1px solid var(--border); border-radius:6px;
+    padding:8px 12px; margin-bottom:6px; cursor:pointer; font-size:0.92rem; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-q.answered .quiz-choice{ cursor:default; }
+  .quiz-q.answered .quiz-choice:hover{ background:var(--cream-card); }
+  .quiz-choice.correct{ background:#e4f2e6; border-color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#f7e6e3; border-color:var(--incorrect); }
+  .quiz-explain{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); font-size:0.9rem; color:var(--text-soft); }
+
+  ul.plain{ padding-left:20px; }
+  ul.plain li{ margin-bottom:5px; }
+
+  .sidenav-toggle{
+    position:fixed; top:50%; right:0; transform:translateY(-50%);
+    background:var(--forest-dark); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem; letter-spacing:0.05em; border:none; border-radius:8px 0 0 8px;
+    padding:14px 8px; writing-mode:vertical-rl; cursor:pointer; z-index:75;
+  }
+  .sidenav-panel{
+    position:fixed; top:0; right:-280px; width:260px; height:100%; background:var(--cream-card);
+    border-left:1px solid var(--border); box-shadow:-2px 0 10px rgba(0,0,0,0.08);
+    padding:70px 20px 20px; overflow-y:auto; transition:right 0.25s ease; z-index:74;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel ul{ list-style:none; padding:0; margin:0; }
+  .sidenav-panel li{ margin-bottom:4px; }
+  .sidenav-panel a{
+    display:block; padding:7px 10px; border-radius:6px; color:var(--text-main);
+    text-decoration:none; font-size:0.88rem;
+  }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+  .sidenav-panel a.active{ background:var(--forest); color:var(--cream); }
+
+  @media (max-width:640px){
+    .top-contents ul{ columns:1; }
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<nav class="sidenav-panel" id="sidenavPanel">
+  <ul>
+    <li><a href="#sec1">1. Vessel Wall &amp; Endothelium</a></li>
+    <li><a href="#sec2">2. Atherosclerosis Pathogenesis</a></li>
+    <li><a href="#sec3">3. Plaque Morphology &amp; Complications</a></li>
+    <li><a href="#sec4">4. Monckeberg &amp; Arteriolosclerosis</a></li>
+    <li><a href="#sec5">5. Blood Pressure Regulation &amp; Definitions</a></li>
+    <li><a href="#sec6">6. Primary vs. Secondary Hypertension</a></li>
+    <li><a href="#sec7">7. Hypertensive Vascular Disease</a></li>
+    <li><a href="#sec8">8. Aneurysms &amp; Aortic Dissection</a></li>
+    <li><a href="#sec9">9. Venous Disease</a></li>
+    <li><a href="#sec10">10. Lymphatic Disease</a></li>
+    <li><a href="#sec11">11. Vasculitis: Overview &amp; Classification</a></li>
+    <li><a href="#sec12">12. Large &amp; Medium Vessel Vasculitis</a></li>
+    <li><a href="#sec13">13. ANCA-Associated Small Vessel Vasculitis</a></li>
+    <li><a href="#sec14">14. Immune Complex Vasculitis &amp; Related Syndromes</a></li>
+    <li><a href="#sec15">15. Benign Vascular Neoplasms &amp; Ectasias</a></li>
+    <li><a href="#sec16">16. Borderline &amp; Malignant Vascular Neoplasms</a></li>
+    <li><a href="#sec17">17. High-Yield Summary Tables</a></li>
+  </ul>
+</nav>
+
+<div class="header">
+  <h1>Pathology of Blood Vessels</h1>
+  <p>CV/Resp II Pathology &middot; Atherosclerosis &middot; Hypertension &middot; Aneurysms/Venous/Lymphatic &middot; Vasculitis &middot; Neoplasms</p>
+  <p>Dr. Simon &middot; Dr. Kareemzadeh &middot; Robbins &amp; Cotran Ch. 11</p>
+</div>
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Vessel Wall &amp; Endothelium</a></li>
+    <li><a href="#sec2">2. Atherosclerosis Pathogenesis</a></li>
+    <li><a href="#sec3">3. Plaque Morphology &amp; Complications</a></li>
+    <li><a href="#sec4">4. Monckeberg &amp; Arteriolosclerosis</a></li>
+    <li><a href="#sec5">5. Blood Pressure Regulation &amp; Definitions</a></li>
+    <li><a href="#sec6">6. Primary vs. Secondary Hypertension</a></li>
+    <li><a href="#sec7">7. Hypertensive Vascular Disease</a></li>
+    <li><a href="#sec8">8. Aneurysms &amp; Aortic Dissection</a></li>
+    <li><a href="#sec9">9. Venous Disease</a></li>
+    <li><a href="#sec10">10. Lymphatic Disease</a></li>
+    <li><a href="#sec11">11. Vasculitis: Overview &amp; Classification</a></li>
+    <li><a href="#sec12">12. Large &amp; Medium Vessel Vasculitis</a></li>
+    <li><a href="#sec13">13. ANCA-Associated Small Vessel Vasculitis</a></li>
+    <li><a href="#sec14">14. Immune Complex Vasculitis &amp; Related Syndromes</a></li>
+    <li><a href="#sec15">15. Benign Vascular Neoplasms &amp; Ectasias</a></li>
+    <li><a href="#sec16">16. Borderline &amp; Malignant Vascular Neoplasms</a></li>
+    <li><a href="#sec17">17. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1 -->
+<section class="card" id="sec1">
+<h2>1. Vessel Wall &amp; Endothelium</h2>
+<div class="callout">Arteries carry <b>pressure</b>, veins carry <b>volume</b>. The three-layer plan (intima / media / adventitia) scales up or down depending on the job a given vessel is doing — and every vascular disease in this guide is really a disease of one of those three layers.</div>
+
+<h3>Vessel Types by Size</h3>
+<table>
+<tr><th>Vessel</th><th>Wall Features</th><th>Function</th></tr>
+<tr><td>Large elastic arteries (aorta, innominate, subclavian)</td><td>Thick media with abundant elastic lamellae between internal &amp; external elastic laminae</td><td>Elastic recoil during diastole propels blood forward ("pressure reservoir")</td></tr>
+<tr><td>Medium muscular arteries (coronary, renal)</td><td>Media dominated by smooth muscle, thick wall</td><td>Distribute blood, regulate flow via vasomotor tone</td></tr>
+<tr><td>Small arteries / arterioles (&lt;2 mm)</td><td>Media = principal component, little adventitia</td><td>Principal site of physiologic resistance &amp; blood pressure control</td></tr>
+<tr><td>Capillaries (7&ndash;8 &micro;m)</td><td>Endothelium only, no media</td><td>Gas/nutrient exchange; slow, low-pressure laminar flow</td></tr>
+<tr><td>Veins</td><td>Thin media, more collagen (adventitia), easily compressed</td><td>Capacitance/volume reservoir, return blood to heart</td></tr>
+<tr><td>Lymphatics</td><td>Endothelial-lined channels only</td><td>Return interstitial fluid to venous circulation via thoracic duct</td></tr>
+</table>
+
+<h3>The Endothelium</h3>
+<ul class="plain">
+<li>Maintains a <b>permeability barrier</b>, regulates coagulation (anticoagulant at baseline), inflammation, and vascular tone</li>
+<li>Key mediators: <b>nitric oxide &amp; prostacyclin</b> (vasodilators, antithrombotic); <b>ACE</b> (angiotensin I&rarr;II); <b>P- and E-selectins/ICAM/VCAM</b> — adhesion molecules for leukocyte rolling/adhesion</li>
+<li><b>Endothelial activation:</b> physiologic stimuli (turbulent flow, cytokines, hypoxia) upregulate adhesion molecules and procoagulant factors in a controlled way</li>
+<li><b>Endothelial dysfunction:</b> pathologic stimuli — cigarette smoke, hypoxia, acidosis, advanced glycation end-products, hypertension — produce a persistently pro-inflammatory, pro-thrombotic phenotype</li>
+</ul>
+<div class="pearl"><b>Board Tip</b> The "response-to-injury" hypothesis that drives atherosclerosis (Section 2) is built entirely on this endothelial injury/dysfunction concept — learn it once here and it explains the rest of the unit.</div>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="c">
+<p class="stem">Which vessel layer is the primary determinant of peripheral vascular resistance and is therefore the principal site of blood pressure regulation?</p>
+<div class="quiz-choice" data-choice="a">A) Adventitia of large elastic arteries</div>
+<div class="quiz-choice" data-choice="b">B) Intima of medium muscular arteries</div>
+<div class="quiz-choice" data-choice="c">C) Media of small arteries and arterioles</div>
+<div class="quiz-choice" data-choice="d">D) Endothelium of capillaries</div>
+<div class="quiz-explain">Small arteries and arterioles have a media that dominates the vessel wall relative to their diameter; smooth muscle tone here is the chief regulator of total peripheral resistance and thus blood pressure.</div>
+</div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="card" id="sec2">
+<h2>2. Atherosclerosis Pathogenesis</h2>
+<h3>Arteriosclerosis: The Umbrella Term</h3>
+<p>"Arteriosclerosis" = thickening and hardening of arteries. Three distinct pathological entities fall under it:</p>
+<table>
+<tr><th>Entity</th><th>Vessel affected</th><th>Clinical significance</th></tr>
+<tr><td><b>Atherosclerosis</b></td><td>Elastic &amp; muscular arteries</td><td>High — #1 cause of CAD, MI, stroke, gangrene</td></tr>
+<tr><td><b>Monckeberg medial calcific sclerosis</b></td><td>Muscular arteries (media)</td><td>Low — incidental, does not narrow lumen</td></tr>
+<tr><td><b>Arteriolosclerosis</b> (hyaline/hyperplastic)</td><td>Small arteries/arterioles</td><td>Associated with hypertension &amp; diabetes</td></tr>
+</table>
+
+<h3>Response-to-Injury Hypothesis</h3>
+<ul class="plain">
+<li>Atherosclerosis is a chronic inflammatory/healing response of the arterial wall to <b>endothelial injury</b></li>
+<li>Sequence: injury &rarr; endothelial dysfunction &rarr; monocyte adhesion &amp; migration into intima (become macrophages) &rarr; lipid uptake (foam cells) &rarr; smooth muscle migration/proliferation from media into intima &rarr; extracellular matrix deposition &rarr; fibrofatty plaque</li>
+<li>Begins in the teens (fatty streaks) — a preclinical process that progresses silently for decades before an event</li>
+</ul>
+
+<h3>Major Risk Factors</h3>
+<table>
+<tr><th>Modifiable — Major</th><th>Modifiable — Minor</th><th>Non-modifiable</th></tr>
+<tr><td>Hyperlipidemia (&uarr;LDL, &darr;HDL, &uarr;triglycerides), hypertension, diabetes, smoking</td><td>Obesity, physical inactivity, Type-A personality/stress, high-fat diet</td><td>Increasing age, male sex/postmenopausal female, family history, genetic disorders</td></tr>
+</table>
+<div class="pearl"><b>Board Tip</b> Homozygous familial hypercholesterolemia (LDL-receptor defect) &rarr; MI by ~age 20; heterozygous form &rarr; disease by ~40. Elevated <b>hs-CRP</b> is an independent marker of vascular inflammation/risk.</div>
+
+<h3>Pathogenic Contributors</h3>
+<ul class="plain">
+<li>Chronic hyperlipidemia &rarr; LDL accumulates in intima &rarr; oxidized by free radicals &rarr; oxidized LDL is cytotoxic to endothelium and is what macrophages avidly take up</li>
+<li>Endothelial permeability to lipoprotein, hemodynamic turbulence (branch points), hypertension, and thrombosis all contribute</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="b">
+<p class="stem">A 19-year-old who dies in a motor vehicle accident is found at autopsy to have yellow, minimally raised intimal streaks at arterial branch points. This finding most likely represents which stage of vascular disease?</p>
+<div class="quiz-choice" data-choice="a">A) Monckeberg medial calcific sclerosis</div>
+<div class="quiz-choice" data-choice="b">B) Early fatty streak — the preclinical phase of atherosclerosis</div>
+<div class="quiz-choice" data-choice="c">C) Hyperplastic arteriolosclerosis</div>
+<div class="quiz-choice" data-choice="d">D) Cystic medial degeneration</div>
+<div class="quiz-explain">Fatty streaks (lipid-laden macrophages/foam cells) begin forming in the teens, well before clinical disease — atherosclerosis is a decades-long process that begins far earlier than symptoms appear.</div>
+</div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="card" id="sec3">
+<h2>3. Plaque Morphology &amp; Complications</h2>
+<h3>Components of the Atheroma</h3>
+<ul class="plain">
+<li><b>Fibrous cap:</b> smooth muscle cells, macrophages, foam cells, collagen</li>
+<li><b>Necrotic core:</b> cell debris, cholesterol clefts (dissolved during processing, leaving clear spaces on H&amp;E), foam cells, calcium</li>
+<li><b>Shoulder region:</b> ongoing inflammation and neovascularization</li>
+</ul>
+
+<h3>Stable vs. Unstable (Vulnerable) Plaque</h3>
+<table>
+<tr><th></th><th>Stable Plaque</th><th>Unstable/Vulnerable Plaque</th></tr>
+<tr><td>Fibrous cap</td><td>Thick</td><td>Thin</td></tr>
+<tr><td>Lipid core</td><td>Small</td><td>Large, necrotic</td></tr>
+<tr><td>Inflammation</td><td>Minimal</td><td>Prominent</td></tr>
+<tr><td>Major complication</td><td>Chronic, progressive luminal narrowing &rarr; critical stenosis/ischemia (e.g., stable angina)</td><td>Plaque rupture/hemorrhage &rarr; superimposed thrombosis &rarr; acute occlusion (MI, stroke)</td></tr>
+</table>
+<div class="callout"><b>Critical stenosis</b> is generally cited at &gt;70&ndash;90% luminal occlusion — beyond this point fixed flow limitation itself can precipitate ischemia (e.g., stable angina); acute events, however, are usually driven by rupture of a plaque that was not previously flow-limiting.</div>
+
+<h3>Complications</h3>
+<ul class="plain">
+<li>Rupture with superimposed thrombosis &rarr; MI, stroke</li>
+<li>Hemorrhage into the plaque &rarr; sudden expansion/occlusion</li>
+<li>Calcification &rarr; wall rigidity</li>
+<li>Weakening of the media underneath &rarr; aneurysm formation</li>
+<li>Embolization of plaque/thrombus material</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="a">
+<p class="stem">Which plaque feature is most predictive of acute rupture and thrombotic occlusion, as opposed to gradual flow-limiting stenosis?</p>
+<div class="quiz-choice" data-choice="a">A) Thin fibrous cap over a large necrotic lipid core with active inflammation</div>
+<div class="quiz-choice" data-choice="b">B) Thick fibrous cap with dense calcification</div>
+<div class="quiz-choice" data-choice="c">C) Concentric medial hyperplasia</div>
+<div class="quiz-choice" data-choice="d">D) Monckeberg-type calcification of the media</div>
+<div class="quiz-explain">The vulnerable/unstable plaque phenotype — thin cap, large necrotic core, ongoing inflammation — is prone to rupture and superimposed thrombosis, producing acute events like MI even when luminal narrowing was previously mild.</div>
+</div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="card" id="sec4">
+<h2>4. Monckeberg &amp; Arteriolosclerosis</h2>
+<h3>Monckeberg Medial Calcific Sclerosis</h3>
+<ul class="plain">
+<li>Dystrophic calcification of the media of muscular arteries</li>
+<li>Does <b>not</b> encroach on the lumen — little to no clinical significance</li>
+<li>Palpable, "pipestem" vessels; visible on X-ray as calcified rings</li>
+</ul>
+
+<h3>Arteriolosclerosis (Associated with Hypertension)</h3>
+<table>
+<tr><th>Type</th><th>Morphology</th><th>Clinical Association</th></tr>
+<tr><td><b>Hyaline arteriolosclerosis</b></td><td>Homogeneous pink hyaline thickening of the arteriolar wall (leaked plasma proteins + increased matrix)</td><td>Benign/chronic hypertension, diabetes, elderly; diffuse glomerular scarring in kidney</td></tr>
+<tr><td><b>Hyperplastic arteriolosclerosis</b></td><td>"Onion-skinning" — concentric, laminated smooth muscle proliferation; may show <b>fibrinoid necrosis</b> of the wall</td><td>Malignant/accelerated hypertension (typically &gt;200/120 mmHg); medical emergency</td></tr>
+</table>
+<div class="pearl"><b>Board Tip</b> Onion-skinning = hyperplastic arteriolosclerosis = malignant hypertension. Fibrinoid necrosis on immunofluorescence shows bright staining for <b>fibrin</b> within the vessel wall.</div>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="d">
+<p class="stem">A patient presents with a blood pressure of 220/130 mmHg, papilledema, and acute kidney injury. Renal biopsy shows concentric, laminated ("onion-skin") thickening of arteriolar walls with fibrinoid necrosis. What is this lesion called?</p>
+<div class="quiz-choice" data-choice="a">A) Hyaline arteriolosclerosis</div>
+<div class="quiz-choice" data-choice="b">B) Monckeberg medial calcific sclerosis</div>
+<div class="quiz-choice" data-choice="c">C) Fibromuscular dysplasia</div>
+<div class="quiz-choice" data-choice="d">D) Hyperplastic arteriolosclerosis</div>
+<div class="quiz-explain">Onion-skinning with fibrinoid necrosis is the histologic signature of hyperplastic arteriolosclerosis, the vascular lesion of malignant/accelerated hypertension.</div>
+</div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="card" id="sec5">
+<h2>5. Blood Pressure Regulation &amp; Definitions</h2>
+<h3>Blood Pressure Categories (mmHg)</h3>
+<table>
+<tr><th>Category</th><th>Systolic</th><th>Diastolic</th></tr>
+<tr><td>Normal</td><td>&lt;120</td><td>and &lt;80</td></tr>
+<tr><td>Elevated ("pre-hypertension")</td><td>120&ndash;129</td><td>and &lt;80</td></tr>
+<tr><td>Hypertension Stage 1</td><td>130&ndash;139</td><td>or 80&ndash;89</td></tr>
+<tr><td>Hypertension Stage 2</td><td>&ge;140</td><td>or &ge;90</td></tr>
+<tr><td>Hypertensive crisis/emergency</td><td>&gt;180</td><td>and/or &gt;120</td></tr>
+</table>
+
+<h3>Determinants of Pressure</h3>
+<div class="callout">Blood pressure = <b>Cardiac Output (CO) &times; Total Peripheral Resistance (TPR)</b>. Every mechanism of hypertension in this guide funnels through one or both of these two variables.</div>
+<ul class="plain">
+<li><b>&uarr;CO:</b> &uarr;heart rate, &uarr;sodium/water retention (aldosterone, ANP dysregulation)</li>
+<li><b>&uarr;TPR:</b> vasoconstrictors (angiotensin II, catecholamines), structural wall thickening reducing lumen caliber</li>
+</ul>
+
+<h3>Epidemiology &amp; Consequences</h3>
+<ul class="plain">
+<li>Affects ~30% of US adults; risk increases with age; higher prevalence/severity in African-Americans</li>
+<li>Most important risk factor for cardiovascular disease over age 45; patients are usually asymptomatic (found incidentally)</li>
+<li>Untreated: ~50% die of heart disease/CHF, ~1/3 die of stroke</li>
+<li>End-organ damage: <b>left ventricular hypertrophy</b>/heart failure, <b>multi-infarct dementia</b>, <b>aortic dissection</b>, <b>renal failure (nephrosclerosis)</b>, <b>retinopathy</b></li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="b">
+<p class="stem">The two physiologic variables that directly determine arterial blood pressure are:</p>
+<div class="quiz-choice" data-choice="a">A) Stroke volume and heart rate only</div>
+<div class="quiz-choice" data-choice="b">B) Cardiac output and total peripheral resistance</div>
+<div class="quiz-choice" data-choice="c">C) Renin and aldosterone only</div>
+<div class="quiz-choice" data-choice="d">D) Blood volume and vessel compliance only</div>
+<div class="quiz-explain">BP = CO &times; TPR. Every hormonal or structural mechanism of hypertension acts by raising one (or both) of these two variables.</div>
+</div>
+</section>
+
+<!-- SECTION 6 -->
+<section class="card" id="sec6">
+<h2>6. Primary vs. Secondary Hypertension</h2>
+<h3>Primary (Essential/Idiopathic) Hypertension</h3>
+<ul class="plain">
+<li>Accounts for <b>~90&ndash;95%</b> of all hypertension</li>
+<li>Multifactorial: genetic + environmental (stress, obesity, smoking, inactivity, heavy salt intake)</li>
+<li>Core defect: impaired renal sodium excretion at a given pressure &rarr; fluid overload/&uarr;CO, with compensatory but pathologic peripheral vasoconstriction resetting the pressure "set point" upward</li>
+</ul>
+
+<h3>Secondary Hypertension — "RENAL" Mnemonic</h3>
+<table>
+<tr><th>Letter</th><th>Category</th><th>Examples</th></tr>
+<tr><td><b>R</b></td><td>Renal</td><td>Renal artery stenosis (&uarr;renin), chronic kidney disease — most common secondary cause</td></tr>
+<tr><td><b>E</b></td><td>Endocrine</td><td>Primary hyperaldosteronism (most common endocrine cause), Cushing syndrome, pheochromocytoma, hyperthyroidism</td></tr>
+<tr><td><b>N</b></td><td>Neurologic</td><td>&uarr;Intracranial pressure</td></tr>
+<tr><td><b>A</b></td><td>Aortic</td><td>Coarctation of the aorta</td></tr>
+<tr><td><b>L</b></td><td>"Labor"/Latrogenic-Lifestyle</td><td>Pregnancy (preeclampsia), psychogenic stress, post-operative state, drugs</td></tr>
+</table>
+
+<h3>The RAAS Pathway</h3>
+<ul class="plain">
+<li>&darr;Renal perfusion &rarr; <b>juxtaglomerular (JG) cells</b> (modified smooth muscle near the glomerulus) release <b>renin</b></li>
+<li>Renin converts <b>angiotensinogen</b> (liver) &rarr; <b>angiotensin I</b></li>
+<li><b>ACE</b> (lung/vascular endothelium) converts angiotensin I &rarr; <b>angiotensin II</b></li>
+<li>Angiotensin II: direct vasoconstriction (&uarr;TPR) + stimulates <b>adrenal cortex</b> to release <b>aldosterone</b> &rarr; renal Na&#8314;/water retention (&uarr;CO)</li>
+</ul>
+<div class="pearl"><b>Board Tip</b> Other secondary endocrine mimics of hyperaldosteronism: <b>Liddle syndrome</b> (ENaC gain-of-function), <b>11&beta;-HSD2 deficiency/licorice ingestion</b> (impaired cortisol&rarr;cortisone conversion lets cortisol activate mineralocorticoid receptors), and <b>congenital adrenal hyperplasia</b> (11&beta;-hydroxylase or 17&alpha;-hydroxylase deficiency) — all converge on excess distal nephron sodium reabsorption.</div>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="c">
+<p class="stem">A 45-year-old with resistant hypertension is found to have an abdominal bruit and unilateral renal artery stenosis on imaging. Which enzyme, produced in response to the resulting hypoperfusion, initiates the cascade responsible for this patient's hypertension?</p>
+<div class="quiz-choice" data-choice="a">A) Angiotensin-converting enzyme</div>
+<div class="quiz-choice" data-choice="b">B) Aldosterone synthase</div>
+<div class="quiz-choice" data-choice="c">C) Renin</div>
+<div class="quiz-choice" data-choice="d">D) 11-beta hydroxylase</div>
+<div class="quiz-explain">Renal artery stenosis causes hypoperfusion sensed by juxtaglomerular cells, which release renin — the rate-limiting first step that cleaves angiotensinogen to angiotensin I and initiates the RAAS cascade (renovascular hypertension, the "R" in RENAL).</div>
+</div>
+</section>
+
+<!-- SECTION 7 -->
+<section class="card" id="sec7">
+<h2>7. Hypertensive Vascular Disease</h2>
+<h3>Benign vs. Malignant Hypertension</h3>
+<table>
+<tr><th></th><th>Benign (Chronic) Hypertension</th><th>Malignant Hypertension</th></tr>
+<tr><td>Frequency</td><td>~90&ndash;95% of hypertensives</td><td>~5% — minority, but a medical emergency</td></tr>
+<tr><td>Blood pressure</td><td>Stage 1&ndash;2, stable over years</td><td>Often &gt;200/120 mmHg, rapid rise</td></tr>
+<tr><td>Vessel lesion</td><td>Hyaline arteriolosclerosis</td><td>Hyperplastic arteriolosclerosis + fibrinoid necrosis</td></tr>
+<tr><td>Course</td><td>Can develop on top of pre-existing benign HTN</td><td>Renal failure, retinal hemorrhage/papilledema, encephalopathy; death within 1&ndash;2 years if untreated</td></tr>
+</table>
+
+<h3>Vessel-Specific Effects of Chronic Hypertension</h3>
+<ul class="plain">
+<li><b>Large elastic arteries:</b> accelerates atherosclerosis</li>
+<li><b>Arterioles:</b> hyaline arteriolosclerosis (pink hyaline material replacing the wall) &rarr; nephrosclerosis, diffuse glomerular scarring</li>
+<li><b>Muscular arteries:</b> medial thickening from increased collagen, elastic tissue, smooth muscle, fibroblasts</li>
+</ul>
+<div class="pearl"><b>Board Tip</b> Funduscopic exam ("look in the eyes") is a bedside window into malignant hypertension — retinal hemorrhage and papilledema reflect identical arteriolar pathology occurring systemically.</div>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="a">
+<p class="stem">Which of the following best distinguishes malignant hypertension from benign essential hypertension?</p>
+<div class="quiz-choice" data-choice="a">A) It represents a small minority of cases but is a medical emergency with rapid, severe pressure elevation and fibrinoid necrosis of arterioles</div>
+<div class="quiz-choice" data-choice="b">B) It is more common overall and rarely causes end-organ damage</div>
+<div class="quiz-choice" data-choice="c">C) It exclusively affects large elastic arteries</div>
+<div class="quiz-choice" data-choice="d">D) It is defined by Monckeberg medial calcific sclerosis</div>
+<div class="quiz-explain">Malignant hypertension is the minority form (~5%) but is a true emergency — pressures often exceeding 200/120 with fibrinoid necrosis/hyperplastic arteriolosclerosis and rapid end-organ failure if untreated.</div>
+</div>
+</section>
+
+<!-- SECTION 8 -->
+<section class="card" id="sec8">
+<h2>8. Aneurysms &amp; Aortic Dissection</h2>
+<h3>Definitions</h3>
+<table>
+<tr><th>Term</th><th>Definition</th></tr>
+<tr><td><b>True aneurysm</b></td><td>Localized dilation involving <b>all three</b> wall layers (intima, media, adventitia); may be <b>fusiform</b> (circumferential) or <b>saccular</b> (localized outpouching)</td></tr>
+<tr><td><b>False (pseudo-) aneurysm</b></td><td>Breach in the wall with a contained extravascular hematoma — not bounded by all three layers</td></tr>
+<tr><td><b>Dissection</b></td><td>Blood tracks through a tear into the media, splitting the wall along its length</td></tr>
+<tr><td><b>Arteriovenous fistula</b></td><td>Direct artery-to-vein connection bypassing capillaries — may shunt large volumes &rarr; high-output cardiac failure</td></tr>
+</table>
+
+<h3>Two Most Common Causes of Aortic Aneurysm</h3>
+<ul class="plain">
+<li><b>Atherosclerosis</b> — greatest factor in <b>abdominal aortic aneurysm (AAA)</b>; weakens the media by compressing/compromising its nutrient supply</li>
+<li><b>Hypertension</b> — most associated with <b>ascending aortic aneurysm</b> and with cystic medial degeneration</li>
+</ul>
+<div class="callout">AAA rupture risk scales sharply with size: &lt;4 cm minimal risk (observe); 4&ndash;5 cm ~1%/yr; 5&ndash;6 cm ~11%/yr; &gt;6 cm ~25%/yr. Surgery is generally indicated above ~5&ndash;5.5 cm.</div>
+
+<h3>Connective Tissue Disorders &amp; Aneurysm</h3>
+<table>
+<tr><th>Syndrome</th><th>Defect</th></tr>
+<tr><td>Marfan syndrome</td><td>Fibrillin-1 mutation &rarr; fails to sequester TGF-&beta; &rarr; excess signaling degrades elastic media</td></tr>
+<tr><td>Ehlers-Danlos (vascular/Type IV)</td><td>Type III collagen synthesis defect</td></tr>
+<tr><td>Loeys-Dietz syndrome</td><td>TGF-&beta; receptor/SMAD3 mutations — increased TGF-&beta; signaling; aneurysms rupture at <b>smaller</b> sizes &rarr; aggressive course</td></tr>
+</table>
+<p>Other causes: tertiary syphilis (thoracic aortic aneurysm from obliterative vasa vasorum arteritis), cystic medial degeneration (hypertension), vasculitis.</p>
+
+<h3>Aortic Dissection — DeBakey Classification</h3>
+<table>
+<tr><th>Type</th><th>Involvement</th><th>Note</th></tr>
+<tr><td><b>DeBakey I</b></td><td>Ascending + descending aorta (extensive)</td><td rowspan="2">Both = <b>Stanford Type A</b> — involve ascending aorta, higher mortality, usually surgical</td></tr>
+<tr><td><b>DeBakey II</b></td><td>Ascending aorta only</td></tr>
+<tr><td><b>DeBakey III</b></td><td>Descending aorta only, distal to left subclavian</td><td><b>Stanford Type B</b> — can often be managed medically</td></tr>
+</table>
+<ul class="plain">
+<li>75&ndash;90% of untreated aortic dissections have a rapid fatal course</li>
+<li>Risk factors: hypertension, Marfan syndrome, pregnancy, bicuspid aortic valve, trauma, atherosclerosis, cardiac catheterization/intra-aortic balloon pump</li>
+<li>Begins as an intimal tear &rarr; blood dissects the media &rarr; can rupture externally or re-enter the lumen</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="d">
+<p class="stem">A 60-year-old smoker with known abdominal atherosclerosis presents with a pulsatile, tender periumbilical mass. Which type of aneurysm is most likely, and what is its most common underlying cause?</p>
+<div class="quiz-choice" data-choice="a">A) Thoracic aortic aneurysm; cystic medial degeneration</div>
+<div class="quiz-choice" data-choice="b">B) Berry aneurysm; congenital wall defect</div>
+<div class="quiz-choice" data-choice="c">C) Mycotic aneurysm; bacterial seeding</div>
+<div class="quiz-choice" data-choice="d">D) Abdominal aortic aneurysm; atherosclerosis</div>
+<div class="quiz-explain">AAA is classically associated with atherosclerosis, presents as a pulsatile abdominal mass, and carries rupture risk that rises steeply with diameter.</div>
+</div>
+</section>
+
+<!-- SECTION 9 -->
+<section class="card" id="sec9">
+<h2>9. Venous Disease</h2>
+<h3>Varicose Veins</h3>
+<table>
+<tr><th>Type</th><th>Mechanism</th><th>Example</th></tr>
+<tr><td><b>Primary</b></td><td>Inherent weakness of the vessel wall (~43% familial)</td><td>Lower extremity varicose veins</td></tr>
+<tr><td><b>Secondary</b></td><td>&uarr;Back-pressure from venous obstruction, or wall weakening from inflammation</td><td>Esophageal varices (portal hypertension/cirrhosis), hemorrhoids</td></tr>
+</table>
+<ul class="plain">
+<li>Dilated, tortuous veins with poorly supported, often incompetent valves</li>
+<li>Esophageal varices are invisible at autopsy (collapse after death) but can cause massive, fatal hemorrhage in life</li>
+</ul>
+
+<h3>Venous Thrombosis (DVT) &amp; Virchow Triad</h3>
+<div class="callout"><b>Virchow Triad:</b> (1) <b>Endothelial injury</b> — trauma, surgery, catheters; (2) <b>Stasis</b> — immobility, prolonged travel, cardiac failure; (3) <b>Hypercoagulability</b> — pregnancy, malignancy, Factor V Leiden, oral contraceptives.</div>
+<ul class="plain">
+<li>90% of DVTs occur in the deep veins of the lower extremity (popliteal and above)</li>
+<li>Insidious — few clear symptoms; requires a high index of clinical suspicion</li>
+<li><b>Migratory thrombophlebitis (Trousseau sign):</b> associated with visceral malignancy (pancreas, colon, lung) via tumor-driven hypercoagulability</li>
+<li><b>Complication:</b> pulmonary embolism — a large embolus lodging at the bifurcation is a <b>saddle embolus</b>, causing acute hypoxia and sudden death</li>
+</ul>
+
+<h3>Superior/Inferior Vena Cava Obstruction</h3>
+<ul class="plain">
+<li>IVC obstruction more common — classically from renal cell carcinoma tumor thrombus extending up the renal vein/IVC</li>
+<li>Produces marked lower extremity edema, distended superficial abdominal collateral veins, and proteinuria (renal vein involvement)</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="b">
+<p class="stem">A patient with newly diagnosed pancreatic adenocarcinoma develops recurrent, migrating episodes of superficial vein tenderness and redness in different limbs over several weeks. This finding is best known as:</p>
+<div class="quiz-choice" data-choice="a">A) Virchow triad</div>
+<div class="quiz-choice" data-choice="b">B) Trousseau sign (migratory thrombophlebitis)</div>
+<div class="quiz-choice" data-choice="c">C) Peau d'orange</div>
+<div class="quiz-choice" data-choice="d">D) Raynaud phenomenon</div>
+<div class="quiz-explain">Trousseau sign describes migratory superficial thrombophlebitis associated with an underlying hypercoagulable malignancy — classically pancreatic, colon, or lung cancer.</div>
+</div>
+</section>
+
+<!-- SECTION 10 -->
+<section class="card" id="sec10">
+<h2>10. Lymphatic Disease</h2>
+<h3>Primary Lymphatic Disease</h3>
+<ul class="plain">
+<li><b>Congenital</b> (rare): head/neck cystic hygroma, congenital lymphedema, cystic hygroma associated with <b>Turner syndrome</b></li>
+<li><b>Familial (Milroy disease):</b> hereditary lymphatic hypoplasia, chronic limb swelling</li>
+</ul>
+
+<h3>Secondary Lymphatic Disease</h3>
+<ul class="plain">
+<li>Causes: filarial parasites, metastatic tumor obstructing lymphatics, irradiation, trauma, surgery (e.g., axillary lymph node dissection for breast cancer)</li>
+<li>Increased interstitial fluid &rarr; interstitial fibrosis &rarr; skin becomes thickened, resembles <b>peau d'orange</b> (orange peel) or ulcerates</li>
+<li>Extreme, disfiguring lower extremity lymphedema = <b>elephantiasis</b> (classically parasitic — filariasis)</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="c">
+<p class="stem">A woman develops chronic swelling and thickened, dimpled ("peau d'orange") skin of her arm several years after axillary lymph node dissection for breast cancer. This is best classified as:</p>
+<div class="quiz-choice" data-choice="a">A) Primary congenital lymphedema</div>
+<div class="quiz-choice" data-choice="b">B) Milroy disease</div>
+<div class="quiz-choice" data-choice="c">C) Secondary lymphedema</div>
+<div class="quiz-choice" data-choice="d">D) Cystic hygroma</div>
+<div class="quiz-explain">Surgical lymph node dissection is a classic cause of secondary (acquired) lymphedema, producing chronic interstitial fibrosis and the characteristic peau d'orange skin change.</div>
+</div>
+</section>
+
+<!-- SECTION 11 -->
+<section class="card" id="sec11">
+<h2>11. Vasculitis: Overview &amp; Classification</h2>
+<h3>Two Broad Categories</h3>
+<table>
+<tr><th>Infectious Vasculitis</th><th>Non-Infectious (Immune-Mediated) Vasculitis</th></tr>
+<tr><td>Direct vessel wall invasion by bacteria, fungi, viruses, spirochetes (e.g., syphilitic aortitis, herpes zoster, Rocky Mountain spotted fever, Aspergillus)</td><td>Immune complex deposition, ANCA, anti-endothelial antibodies, anti-basement membrane antibodies, or cell-mediated (granulomatous) mechanisms</td></tr>
+</table>
+
+<h3>Classify Non-Infectious Vasculitis by Vessel Size</h3>
+<table>
+<tr><th>Vessel Size</th><th>Diseases</th></tr>
+<tr><td><b>Large</b></td><td>Giant cell (temporal) arteritis, Takayasu arteritis</td></tr>
+<tr><td><b>Medium</b></td><td>Polyarteritis nodosa (PAN), Kawasaki disease, Buerger disease (thromboangiitis obliterans)</td></tr>
+<tr><td><b>Small</b></td><td>Granulomatosis with polyangiitis (GPA/Wegener), microscopic polyangiitis (MPA), eosinophilic granulomatosis with polyangiitis (EGPA/Churg-Strauss), IgA vasculitis (Henoch-Sch&ouml;nlein purpura), cryoglobulinemic vasculitis</td></tr>
+</table>
+
+<h3>Classify by ANCA Status</h3>
+<table>
+<tr><th>ANCA Type</th><th>Target</th><th>Associated Disease</th></tr>
+<tr><td><b>c-ANCA / PR3-ANCA</b></td><td>Proteinase-3</td><td>GPA (granulomas present)</td></tr>
+<tr><td><b>p-ANCA / MPO-ANCA</b></td><td>Myeloperoxidase</td><td>MPA (no granulomas), EGPA (granulomas + eosinophilia)</td></tr>
+<tr><td><b>No ANCA</b></td><td>&mdash;</td><td>PAN, Kawasaki, Takayasu, GCA, Buerger, IgA vasculitis, cryoglobulinemic vasculitis</td></tr>
+</table>
+<div class="pearl"><b>Board Tip: "Pauci-immune"</b> means little to no immune complex/antibody deposition is seen on immunofluorescence at the vessel wall despite active vasculitis — this describes the ANCA-associated vasculitides (GPA, MPA, EGPA), where injury is thought to be driven by ANCA-activated neutrophils rather than by immune complex deposition.</div>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="a">
+<p class="stem">Which term describes vasculitis with minimal immunoglobulin or complement deposition on immunofluorescence, despite active vessel wall inflammation, as is characteristically seen with ANCA-associated vasculitides?</p>
+<div class="quiz-choice" data-choice="a">A) Pauci-immune</div>
+<div class="quiz-choice" data-choice="b">B) Immune complex-mediated</div>
+<div class="quiz-choice" data-choice="c">C) Anti-basement membrane</div>
+<div class="quiz-choice" data-choice="d">D) Granulomatous</div>
+<div class="quiz-explain">"Pauci-immune" (literally "few immune") describes vasculitis lacking significant immunoglobulin/complement deposits — the hallmark of ANCA-associated small vessel vasculitis (GPA, MPA, EGPA), distinguishing it from immune complex-mediated disease.</div>
+</div>
+</section>
+
+<!-- SECTION 12 -->
+<section class="card" id="sec12">
+<h2>12. Large &amp; Medium Vessel Vasculitis</h2>
+<h3>Giant Cell (Temporal) Arteritis vs. Takayasu Arteritis</h3>
+<table>
+<tr><th></th><th>Giant Cell Arteritis</th><th>Takayasu Arteritis</th></tr>
+<tr><td>Age</td><td><b>&gt;50 years</b> — most common vasculitis in adults</td><td><b>&lt;50 years</b> (typically &lt;40); Asian females</td></tr>
+<tr><td>Vessels</td><td>Branches of carotid, especially <b>temporal artery</b></td><td>Aorta &amp; its major branches ("pulseless disease")</td></tr>
+<tr><td>Histology</td><td>Granulomatous inflammation with multinucleated giant cells; elastic lamina fragmentation; "skip lesions" (patchy — may need multiple biopsy sites)</td><td>Granulomatous inflammation, giant cells, medial destruction</td></tr>
+<tr><td>Symptoms</td><td>Headache, jaw claudication, visual loss (ophthalmic artery), scalp tenderness</td><td>Diminished/absent pulses, limb claudication, BP discrepancy between arms</td></tr>
+<tr><td>ANCA</td><td>Negative</td><td>Negative</td></tr>
+</table>
+<div class="pearl"><b>Board Tip</b> Both are granulomatous, giant-cell-containing large-vessel vasculitides — age is the key discriminator (&gt;50 = GCA, &lt;50 = Takayasu).</div>
+
+<h3>Polyarteritis Nodosa (PAN)</h3>
+<ul class="plain">
+<li>Medium-vessel, <b>segmental necrotizing</b> vasculitis; lesions all at the <b>same stage</b> (unlike MPA)</li>
+<li><b>No granulomas</b>, ANCA-negative; classically associated with <b>hepatitis B</b></li>
+<li>Spares the lung; involves kidney, heart, GI tract, skin, peripheral nerves — mononeuritis multiplex (wrist/foot drop), palpable purpura</li>
+<li>Angiography: multiple small aneurysms ("beads on a string")</li>
+</ul>
+
+<h3>Kawasaki Disease</h3>
+<ul class="plain">
+<li>Children, medium vessel — classically <b>coronary arteries</b></li>
+<li>Segmental necrosis, acute inflammation; predisposes to thrombosis and <b>coronary artery aneurysm</b></li>
+<li>Also known as mucocutaneous lymph node syndrome</li>
+</ul>
+
+<h3>Buerger Disease (Thromboangiitis Obliterans)</h3>
+<ul class="plain">
+<li>Young/middle-aged <b>heavy smokers</b> — strong association, especially Jewish, Japanese, and Indian populations</li>
+<li>Segmental, thrombosing, acute and chronic inflammation of medium/small arteries of the extremities with <b>microabscesses</b>; may extend to adjacent veins/nerves</li>
+<li>Angiography: <b>corkscrew</b> collateral vessels</li>
+<li>Presents with severe distal ischemia, ulceration, gangrene — often affects the fingers used to hold cigarettes; smoking cessation is essential to halt progression</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="c">
+<p class="stem">A 45-year-old man with chronic hepatitis B infection presents with abdominal pain, hypertension, weight loss, and foot drop. Biopsy of an affected nerve shows segmental transmural necrotizing inflammation of medium-sized arteries with lesions all at the same histologic stage, no granulomas, and negative ANCA. What is the diagnosis?</p>
+<div class="quiz-choice" data-choice="a">A) Microscopic polyangiitis</div>
+<div class="quiz-choice" data-choice="b">B) Granulomatosis with polyangiitis</div>
+<div class="quiz-choice" data-choice="c">C) Polyarteritis nodosa</div>
+<div class="quiz-choice" data-choice="d">D) Kawasaki disease</div>
+<div class="quiz-explain">PAN is a medium-vessel, ANCA-negative, non-granulomatous necrotizing vasculitis with lesions of uniform age, classically linked to hepatitis B, sparing the lung, and causing mononeuritis multiplex (foot/wrist drop) via vasa nervorum involvement.</div>
+</div>
+</section>
+
+<!-- SECTION 13 -->
+<section class="card" id="sec13">
+<h2>13. ANCA-Associated Small Vessel Vasculitis</h2>
+<table>
+<tr><th></th><th>GPA (Wegener)</th><th>MPA</th><th>EGPA (Churg-Strauss)</th></tr>
+<tr><td>ANCA</td><td>c-ANCA (PR3) ~90%</td><td>p-ANCA (MPO) ~80%; PR3 in ~20%</td><td>p-ANCA (MPO) in a subset</td></tr>
+<tr><td>Granulomas</td><td><b>Present</b></td><td>Absent</td><td><b>Present</b></td></tr>
+<tr><td>Lesion timing</td><td>Same stage</td><td>Different stages (unlike PAN)</td><td>Same stage</td></tr>
+<tr><td>Classic organs</td><td><b>Upper &amp; lower respiratory tract</b> (necrotizing granulomas — sinuses, nose, lung geographic necrosis) + <b>crescentic (rapidly progressive) glomerulonephritis</b></td><td>Lung, kidney (crescentic GN), skin, nerve — no granulomas, no asthma</td><td><b>Asthma</b>, allergic rhinitis, peripheral <b>eosinophilia</b> (up to 70%), palpable purpura, mononeuritis multiplex</td></tr>
+</table>
+<div class="pearl"><b>Board Tip</b> Crescentic glomerulonephritis in GPA/MPA is a nephrologic emergency. Think "triad" for GPA: upper respiratory + lower respiratory + renal (crescentic GN).</div>
+
+<h3>IgA Vasculitis (Henoch-Sch&ouml;nlein Purpura)</h3>
+<ul class="plain">
+<li>Small vessel, <b>leukocytoclastic vasculitis (LCV)</b> with <b>IgA</b> immune complex deposition — not ANCA-associated</li>
+<li>Palpable purpura (lower extremities/buttocks), arthralgia, abdominal pain, IgA nephropathy-like renal disease</li>
+<li>Often follows an upper respiratory infection in children</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="d">
+<p class="stem">A 50-year-old with chronic sinusitis, hemoptysis, and hematuria is found to have c-ANCA (PR3-ANCA) positivity, with biopsy showing necrotizing granulomatous inflammation of small vessels and crescentic glomerulonephritis. What is the diagnosis?</p>
+<div class="quiz-choice" data-choice="a">A) Microscopic polyangiitis</div>
+<div class="quiz-choice" data-choice="b">B) Eosinophilic granulomatosis with polyangiitis</div>
+<div class="quiz-choice" data-choice="c">C) Polyarteritis nodosa</div>
+<div class="quiz-choice" data-choice="d">D) Granulomatosis with polyangiitis</div>
+<div class="quiz-explain">The upper respiratory (sinusitis), lower respiratory (hemoptysis), and renal (crescentic GN) triad with c-ANCA/PR3 and granulomatous inflammation is classic for GPA (Wegener granulomatosis).</div>
+</div>
+</section>
+
+<!-- SECTION 14 -->
+<section class="card" id="sec14">
+<h2>14. Immune Complex Vasculitis &amp; Related Syndromes</h2>
+<h3>Cryoglobulinemic Vasculitis</h3>
+<table>
+<tr><th>Type</th><th>Composition</th><th>Association</th></tr>
+<tr><td><b>Type I</b></td><td>Monoclonal Ig, no rheumatoid factor activity</td><td>Lymphoma, Waldenstr&ouml;m macroglobulinemia, multiple myeloma — hyperviscosity syndrome, often asymptomatic until Ig levels are very high</td></tr>
+<tr><td><b>Type II</b></td><td>Monoclonal RF + polyclonal IgG (mixed)</td><td><b>Hepatitis C</b> (most common association)</td></tr>
+<tr><td><b>Type III</b></td><td>Polyclonal RF + polyclonal IgG (mixed)</td><td>Rheumatoid disease, chronic infection, hepatitis C</td></tr>
+</table>
+<p>Types II &amp; III present with vasculitis: palpable purpura (lower extremity), membranous/membranoproliferative nephritis, peripheral neuropathy.</p>
+
+<h3>Raynaud Phenomenon vs. Raynaud Disease</h3>
+<ul class="plain">
+<li><b>Raynaud disease (primary):</b> exaggerated vasospasm of small arteries/arterioles in young, otherwise healthy females in response to cold/emotion; no underlying structural disease; benign</li>
+<li><b>Raynaud phenomenon (secondary):</b> arterial insufficiency of the extremities from an <b>underlying disease</b> — SLE, scleroderma, atherosclerosis, Buerger disease — must be excluded before diagnosing primary Raynaud disease</li>
+<li>Classic <b>white &rarr; blue &rarr; red</b> color sequence: white (vasospasm/ischemia) &rarr; blue (cyanosis from stasis/deoxygenated blood) &rarr; red (reactive hyperemia on rewarming)</li>
+</ul>
+
+<h3>Beh&ccedil;et Disease</h3>
+<ul class="plain">
+<li>Vasculitis affecting vessels of nearly all sizes, arteries and veins; classic triad: recurrent <b>oral ulcers</b>, <b>genital ulcers</b>, and <b>uveitis</b></li>
+<li>Associated with <b>HLA-B51</b>; higher incidence along the ancient Silk Road (Japan/China to Turkey/Iran); leading cause of blindness in some of these regions</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="b">
+<p class="stem">A 55-year-old woman with chronic hepatitis C develops palpable purpura, arthralgias, and membranoproliferative glomerulonephritis. Serum studies reveal a mixed monoclonal rheumatoid factor with polyclonal IgG. Which type of cryoglobulinemia is this?</p>
+<div class="quiz-choice" data-choice="a">A) Type I</div>
+<div class="quiz-choice" data-choice="b">B) Type II</div>
+<div class="quiz-choice" data-choice="c">C) Type III</div>
+<div class="quiz-choice" data-choice="d">D) Type IV</div>
+<div class="quiz-explain">Type II (mixed) cryoglobulinemia consists of monoclonal rheumatoid factor plus polyclonal IgG and is the type most strongly linked to hepatitis C infection.</div>
+</div>
+</section>
+
+<!-- SECTION 15 -->
+<section class="card" id="sec15">
+<h2>15. Benign Vascular Neoplasms &amp; Ectasias</h2>
+<h3>Vascular Ectasias (Non-Neoplastic Dilations)</h3>
+<table>
+<tr><th>Lesion</th><th>Features</th></tr>
+<tr><td>Nevus flammeus ("birthmark")</td><td>Light-red macule/patch on head/neck; typically fades over time</td></tr>
+<tr><td><b>Port-wine stain</b></td><td>Does <b>not</b> fade; part of <b>Sturge-Weber syndrome</b> (with ipsilateral leptomeningeal vascular malformation, seizures, intellectual disability, glaucoma) when in a trigeminal distribution</td></tr>
+<tr><td>Spider telangiectasia</td><td>Central arteriole with radiating fine vessels; blanches with central pressure; associated with hyperestrogenism, cirrhosis, pregnancy</td></tr>
+<tr><td>Hereditary hemorrhagic telangiectasia (Osler-Weber-Rendu)</td><td>Autosomal dominant, TGF-&beta; receptor mutation (endoglin/ALK1); widespread telangiectasias/AVMs; recurrent epistaxis, GI bleeding, pulmonary AVMs (right-to-left shunt &rarr; cyanosis), stroke/brain abscess risk</td></tr>
+</table>
+
+<h3>Benign Vascular Tumors</h3>
+<table>
+<tr><th>Tumor</th><th>Key Features</th></tr>
+<tr><td><b>Hemangioma</b></td><td>Capillary (strawberry, infants) or cavernous type; significance depends on location (brain, orbit)</td></tr>
+<tr><td>Pyogenic granuloma (lobular capillary hemangioma)</td><td>Trauma-associated, exuberant granulation tissue; seen in oral cavity/tongue; "pregnancy tumor" variant regresses postpartum</td></tr>
+<tr><td>Glomus tumor</td><td>Painful lesion of the distal digits (subungual), arising from glomus body smooth muscle; excision is curative</td></tr>
+<tr><td>Lymphangioma (simple/capillary)</td><td>Lymph-filled spaces, <b>no RBCs</b> (distinguishes from hemangioma); subcutaneous, head/neck/axilla</td></tr>
+<tr><td>Cystic hygroma</td><td>Cavernous lymphangioma variant, large dilated cystic spaces, neck/axilla; associated with <b>Turner syndrome</b></td></tr>
+</table>
+
+<h3>Bacillary Angiomatosis</h3>
+<ul class="plain">
+<li>Caused by <i>Bartonella henselae</i> (cat scratch disease agent, transmitted by cat/flea) or <i>B. quintana</i> (trench fever, body louse)</li>
+<li>Seen in <b>immunocompromised/HIV/AIDS</b> patients — vascular proliferation of skin, bone, brain, liver ("bacillary peliosis hepatis")</li>
+<li>Papules/nodules resembling <b>pyogenic granuloma</b> or Kaposi sarcoma; silver stain shows clusters of bacilli</li>
+</ul>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="a">
+<p class="stem">An infant is found to have a facial port-wine stain in a trigeminal distribution along with seizures and intellectual disability. Imaging reveals an ipsilateral leptomeningeal vascular malformation. What syndrome is this?</p>
+<div class="quiz-choice" data-choice="a">A) Sturge-Weber syndrome</div>
+<div class="quiz-choice" data-choice="b">B) Hereditary hemorrhagic telangiectasia</div>
+<div class="quiz-choice" data-choice="c">C) Turner syndrome</div>
+<div class="quiz-choice" data-choice="d">D) Kasabach-Merritt syndrome</div>
+<div class="quiz-explain">A non-fading port-wine stain in a trigeminal distribution with ipsilateral leptomeningeal angiomatosis, seizures, and cognitive impairment defines Sturge-Weber syndrome.</div>
+</div>
+</section>
+
+<!-- SECTION 16 -->
+<section class="card" id="sec16">
+<h2>16. Borderline &amp; Malignant Vascular Neoplasms</h2>
+<h3>Kaposi Sarcoma — Four Clinical Forms</h3>
+<table>
+<tr><th>Form</th><th>Population</th><th>Course</th></tr>
+<tr><td>Chronic (Classic)</td><td>Older males of Eastern European/Mediterranean/Ashkenazi Jewish descent</td><td>Indolent, distal extremity plaques/nodules; not HIV-associated</td></tr>
+<tr><td>Lymphadenopathic (African/endemic)</td><td>Young children in equatorial Africa</td><td>Aggressive, involves lymph nodes/viscera; same geography as Burkitt lymphoma</td></tr>
+<tr><td>Transplant-associated</td><td>Solid organ transplant + immunosuppression</td><td>Can be widely metastatic; may regress if immunosuppression is reduced</td></tr>
+<tr><td><b>AIDS-associated (epidemic)</b></td><td>~25% of untreated AIDS patients (esp. MSM)</td><td>May be the presenting sign of AIDS; blue-black/purple plaques; associated with <b>HHV-8</b></td></tr>
+</table>
+<p>Histology: spindle cell proliferation forming slit-like vascular spaces with extravasated red cells — not a true sarcoma in the conventional sense despite the name.</p>
+
+<h3>Hemangioendothelioma</h3>
+<ul class="plain">
+<li>Borderline behavior — intermediate between benign hemangioma and angiosarcoma</li>
+<li><b>Epithelioid hemangioendothelioma:</b> occurs in medium/large veins; plump, epithelioid endothelial cells; ~40% recur, 20&ndash;30% metastasize, 15% die of disease</li>
+</ul>
+
+<h3>Angiosarcoma</h3>
+<ul class="plain">
+<li>Aggressive malignant endothelial tumor, older adults, no sex predilection, long latency</li>
+<li>Associated with prior <b>mastectomy/lymphedema</b>, radiation, or exposure to <b>arsenic, vinyl chloride, Thorotrast</b> (classically liver angiosarcoma)</li>
+<li>Deceptively small red nodules progress to large fleshy hemorrhagic masses</li>
+<li>Immunohistochemistry: <b>CD31, von Willebrand factor</b> confirm endothelial origin (varying differentiation makes diagnosis difficult on morphology alone)</li>
+</ul>
+
+<h3>Hemangiopericytoma (Solitary Fibrous Tumor Family)</h3>
+<ul class="plain">
+<li>Rare; retroperitoneum, lower thigh; very slow-growing (diagnosis may take ~20 years)</li>
+<li>Classic <b>"staghorn" branching vascular pattern</b> — but tumor cells lie <b>outside</b> the endothelium-lined vessels (unlike angiosarcoma)</li>
+<li><b>CD31 negative</b> (distinguishes from angiosarcoma, which is CD31 positive); silver stain highlights reticulin sheath around each tumor cell</li>
+<li>Angiography: spider-like branching vessels</li>
+<li>Prognosis depends on grade; ~75% 5-year survival, but long-term outcome variable</li>
+</ul>
+<div class="pearl"><b>Board Tip</b> CD31-<b>positive</b> spindle/epithelioid cells forming vascular spaces &rarr; think angiosarcoma/Kaposi (true endothelial tumors). CD31-<b>negative</b> cells surrounding — but not forming — a staghorn vascular pattern &rarr; think hemangiopericytoma.</div>
+
+<div class="quiz-mini-header">Practice Question</div>
+<div class="quiz-q" data-correct="c">
+<p class="stem">An HIV-positive man presents with new violaceous skin plaques. Biopsy shows spindle cells forming slit-like vascular spaces with extravasated erythrocytes. Which virus is most strongly associated with this lesion?</p>
+<div class="quiz-choice" data-choice="a">A) Epstein-Barr virus</div>
+<div class="quiz-choice" data-choice="b">B) Hepatitis B virus</div>
+<div class="quiz-choice" data-choice="c">C) Human herpesvirus 8 (HHV-8)</div>
+<div class="quiz-choice" data-choice="d">D) Human papillomavirus</div>
+<div class="quiz-explain">Kaposi sarcoma — spindle cells forming slit-like vascular spaces with extravasated RBCs — is driven by HHV-8 infection, and the AIDS-associated form may be the presenting sign of underlying HIV disease.</div>
+</div>
+</section>
+
+<!-- SECTION 17 -->
+<section class="card" id="sec17">
+<h2>17. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review — every disease across this guide condensed to the single fact most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>Arteriosclerosis Family</h3>
+<table>
+<tr><th>Entity</th><th>Vessel</th><th>Key Histology</th><th>Clinical Pearl</th></tr>
+<tr><td>Atherosclerosis</td><td>Elastic &amp; muscular arteries</td><td>Fibrous cap over necrotic lipid core, foam cells, cholesterol clefts</td><td>#1 cause of MI/stroke; response-to-injury hypothesis; unstable plaque = thin cap + rupture</td></tr>
+<tr><td>Monckeberg medial calcific sclerosis</td><td>Muscular artery media</td><td>Dystrophic calcification of media</td><td>Does not narrow lumen — clinically silent</td></tr>
+<tr><td>Hyaline arteriolosclerosis</td><td>Arterioles</td><td>Homogeneous pink hyaline wall thickening</td><td>Benign/chronic HTN, diabetes, elderly</td></tr>
+<tr><td>Hyperplastic arteriolosclerosis</td><td>Arterioles</td><td>"Onion-skinning," &plusmn; fibrinoid necrosis</td><td>Malignant hypertension — medical emergency</td></tr>
+</table>
+
+<h3>Hypertension</h3>
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Formula</td><td>BP = Cardiac Output &times; Total Peripheral Resistance</td></tr>
+<tr><td>Primary (essential) HTN</td><td>~90&ndash;95% of cases; genetic + environmental; impaired renal Na excretion</td></tr>
+<tr><td>Secondary HTN mnemonic</td><td><b>RENAL</b> — Renal (most common), Endocrine (hyperaldosteronism most common endocrine cause), Neurologic (&uarr;ICP), Aortic (coarctation), Labor/lifestyle (pregnancy, drugs, stress)</td></tr>
+<tr><td>RAAS order</td><td>&darr;Renal perfusion &rarr; JG cells release renin &rarr; angiotensinogen&rarr;angiotensin I &rarr; ACE &rarr; angiotensin II &rarr; vasoconstriction + aldosterone &rarr; Na/water retention</td></tr>
+<tr><td>Benign vs. malignant HTN</td><td>Benign = hyaline arteriolosclerosis, 90&ndash;95% of hypertensives; Malignant = hyperplastic arteriolosclerosis/fibrinoid necrosis, ~5%, BP often &gt;200/120, emergency</td></tr>
+<tr><td>Complications</td><td>LVH/CHF, multi-infarct dementia, aortic dissection, nephrosclerosis/renal failure, retinopathy</td></tr>
+</table>
+
+<h3>Aneurysms &amp; Aortic Dissection</h3>
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>True aneurysm</td><td>All 3 wall layers involved; fusiform (circumferential) or saccular</td></tr>
+<tr><td>False aneurysm</td><td>Contained hematoma through a wall breach — not bounded by all 3 layers</td></tr>
+<tr><td>Two most common aortic aneurysm causes</td><td>Atherosclerosis (AAA) and hypertension (ascending aortic aneurysm/cystic medial degeneration)</td></tr>
+<tr><td>AAA rupture risk</td><td>&lt;4 cm minimal; 4&ndash;5 cm ~1%/yr; 5&ndash;6 cm ~11%/yr; &gt;6 cm ~25%/yr; surgery ~&ge;5&ndash;5.5 cm</td></tr>
+<tr><td>Connective tissue syndromes</td><td>Marfan (fibrillin-1), vascular Ehlers-Danlos (type III collagen), Loeys-Dietz (TGF-&beta; pathway — ruptures at smaller size, aggressive)</td></tr>
+<tr><td>DeBakey/Stanford</td><td>DeBakey I &amp; II (ascending &plusmn; descending) = Stanford A (surgical); DeBakey III (descending only) = Stanford B (often medical)</td></tr>
+</table>
+
+<h3>Venous &amp; Lymphatic Disease</h3>
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Virchow triad</td><td>Endothelial injury + stasis + hypercoagulability &rarr; venous thrombosis</td></tr>
+<tr><td>Trousseau sign</td><td>Migratory thrombophlebitis — think occult visceral malignancy (pancreas, colon, lung)</td></tr>
+<tr><td>Saddle embolus</td><td>Large PE lodged at pulmonary artery bifurcation &rarr; acute hypoxia, sudden death</td></tr>
+<tr><td>Primary vs. secondary varicosities</td><td>Primary = inherent wall weakness (~43% familial); secondary = venous obstruction/back-pressure (e.g., esophageal varices in cirrhosis) or inflammation</td></tr>
+<tr><td>Peau d'orange / elephantiasis</td><td>Chronic lymphedema (e.g., post lymph node dissection); elephantiasis classically from filariasis</td></tr>
+</table>
+
+<h3>Vasculitis by Vessel Size &amp; ANCA Status</h3>
+<table>
+<tr><th>Vessel Size</th><th>Disease</th><th>ANCA</th><th>Granulomas</th><th>Signature Feature</th></tr>
+<tr><td>Large</td><td>Giant cell arteritis</td><td>Negative</td><td>Yes</td><td>&gt;50 y/o, temporal artery, headache, jaw claudication, vision loss</td></tr>
+<tr><td>Large</td><td>Takayasu arteritis</td><td>Negative</td><td>Yes</td><td>&lt;50 y/o, aorta/branches, "pulseless disease"</td></tr>
+<tr><td>Medium</td><td>Polyarteritis nodosa</td><td>Negative</td><td>No</td><td>Hepatitis B, same-stage lesions, spares lung, mononeuritis multiplex</td></tr>
+<tr><td>Medium</td><td>Kawasaki disease</td><td>Negative</td><td>No</td><td>Children, coronary artery aneurysms</td></tr>
+<tr><td>Medium</td><td>Buerger disease</td><td>Negative</td><td>No</td><td>Heavy smokers, corkscrew collaterals, digit gangrene</td></tr>
+<tr><td>Small</td><td>Granulomatosis with polyangiitis (GPA)</td><td>c-ANCA (PR3)</td><td>Yes</td><td>Upper + lower respiratory tract + crescentic GN</td></tr>
+<tr><td>Small</td><td>Microscopic polyangiitis (MPA)</td><td>p-ANCA (MPO)</td><td>No</td><td>Lung/kidney (crescentic GN), different-stage lesions</td></tr>
+<tr><td>Small</td><td>Eosinophilic granulomatosis with polyangiitis (EGPA)</td><td>p-ANCA (MPO) subset</td><td>Yes</td><td>Asthma, eosinophilia, mononeuritis multiplex</td></tr>
+<tr><td>Small</td><td>IgA vasculitis (HSP)</td><td>Negative</td><td>No</td><td>Children, palpable purpura, IgA deposition, post-URI</td></tr>
+</table>
+
+<h3>Other Immune/Vasospastic Syndromes</h3>
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Cryoglobulinemia I</td><td>Monoclonal Ig, no RF — lymphoproliferative disease (myeloma, Waldenstr&ouml;m)</td></tr>
+<tr><td>Cryoglobulinemia II</td><td>Monoclonal RF + polyclonal IgG — hepatitis C</td></tr>
+<tr><td>Cryoglobulinemia III</td><td>Polyclonal RF + polyclonal IgG — rheumatoid disease/chronic infection</td></tr>
+<tr><td>Raynaud disease</td><td>Primary, young females, cold/emotion, no underlying disease, benign</td></tr>
+<tr><td>Raynaud phenomenon</td><td>Secondary to SLE, scleroderma, atherosclerosis, Buerger disease</td></tr>
+<tr><td>Beh&ccedil;et disease</td><td>Oral + genital ulcers + uveitis; HLA-B51; Silk Road distribution</td></tr>
+</table>
+
+<h3>Vascular Tumors: Benign &rarr; Malignant Spectrum</h3>
+<table>
+<tr><th>Tumor</th><th>Behavior</th><th>Key Fact</th></tr>
+<tr><td>Hemangioma</td><td>Benign</td><td>Capillary (strawberry) or cavernous; significance = location</td></tr>
+<tr><td>Lymphangioma / cystic hygroma</td><td>Benign</td><td>No RBCs inside (vs. hemangioma); cystic hygroma &rarr; Turner syndrome</td></tr>
+<tr><td>Glomus tumor</td><td>Benign</td><td>Painful, subungual, curative excision</td></tr>
+<tr><td>Bacillary angiomatosis</td><td>Benign (infectious)</td><td><i>Bartonella</i> in immunocompromised/HIV patients; mimics Kaposi</td></tr>
+<tr><td>Hemangioendothelioma</td><td>Borderline</td><td>Intermediate behavior; epithelioid type in medium/large veins</td></tr>
+<tr><td>Kaposi sarcoma</td><td>Borderline/malignant</td><td>HHV-8; 4 forms (chronic, African, transplant, AIDS-associated); slit-like vascular spaces</td></tr>
+<tr><td>Angiosarcoma</td><td>Malignant</td><td>Post-mastectomy lymphedema, radiation, arsenic/vinyl chloride/Thorotrast; CD31/vWF positive</td></tr>
+<tr><td>Hemangiopericytoma</td><td>Malignant (variable grade)</td><td>Staghorn vessels, cells outside endothelium, CD31 <b>negative</b> (vs. angiosarcoma)</td></tr>
+</table>
+
+</section>
+
+</div>
+
+<script>
+  // Sidenav toggle
+  const toggle = document.getElementById('sidenavToggle');
+  const panel = document.getElementById('sidenavPanel');
+  toggle.addEventListener('click', () => panel.classList.toggle('open'));
+
+  // Scroll-spy
+  const sections = document.querySelectorAll('section.card');
+  const navLinks = document.querySelectorAll('.sidenav-panel a');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector('.sidenav-panel a[href="#' + id + '"]');
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => spy.observe(s));
+
+  // Quiz interaction
+  document.querySelectorAll('.quiz-choice').forEach(choice => {
+    choice.addEventListener('click', function() {
+      const q = this.closest('.quiz-q');
+      if (q.classList.contains('answered')) return;
+      q.classList.add('answered');
+      const correct = q.dataset.correct;
+      const chosen = this.dataset.choice;
+      q.querySelectorAll('.quiz-choice').forEach(c => {
+        if (c.dataset.choice === correct) c.classList.add('correct');
+      });
+      if (chosen !== correct) this.classList.add('incorrect');
+      const explain = q.querySelector('.quiz-explain');
+      if (explain) explain.style.display = 'block';
+    });
+  });
+  document.querySelectorAll('.quiz-explain').forEach(e => e.style.display = 'none');
+</script>
+
+</body>
+</html>
