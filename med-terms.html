@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Common Medical Terminology Glossary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Lora',serif;
+    background:var(--cream);
+    color:var(--text-main);
+    line-height:1.55;
+  }
+  .back-btn{
+    position:fixed;
+    top:18px;
+    left:18px;
+    z-index:60;
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    color:var(--forest-dark);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{
+    background:var(--forest-dark);
+    color:var(--cream);
+    padding:56px 24px 30px;
+    text-align:center;
+  }
+  .header h1{
+    font-size:1.9rem;
+    margin:0 0 8px;
+    font-weight:700;
+  }
+  .header p{
+    margin:0;
+    color:var(--sage-light);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+  }
+
+  .container{
+    max-width:980px;
+    margin:0 auto;
+    padding:28px 20px 80px;
+  }
+
+  .search-wrap{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:var(--cream);
+    padding:14px 0 16px;
+  }
+  #search{
+    width:100%;
+    padding:13px 16px;
+    font-family:'Lora',serif;
+    font-size:1rem;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--cream-card);
+    color:var(--text-main);
+    outline:none;
+  }
+  #search:focus{ border-color:var(--forest); }
+
+  .cat-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+  }
+  .cat-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    color:var(--forest-dark);
+    padding:6px 12px;
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .cat-btn.active{
+    background:var(--forest);
+    color:var(--cream);
+    border-color:var(--forest);
+  }
+
+  .count-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;
+    color:var(--text-soft);
+    margin:14px 2px 6px;
+  }
+
+  h2.section-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--forest);
+    border-bottom:2px solid var(--sage);
+    padding-bottom:6px;
+    margin:34px 0 14px;
+  }
+
+  .term-card{
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--sage);
+    border-radius:8px;
+    padding:14px 18px;
+    margin-bottom:10px;
+  }
+  .term-card.hidden{ display:none; }
+
+  .term-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .term-name{
+    font-weight:700;
+    font-size:1.08rem;
+    color:var(--forest-dark);
+  }
+  .term-parts{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+  .term-def{
+    margin-top:4px;
+    font-size:0.95rem;
+  }
+  .term-note{
+    margin-top:6px;
+    font-size:0.85rem;
+    color:var(--text-soft);
+    font-style:italic;
+  }
+
+  .no-results{
+    text-align:center;
+    color:var(--text-soft);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+    padding:40px 0;
+    display:none;
+  }
+
+  @media (max-width:600px){
+    .header h1{ font-size:1.4rem; }
+    .term-row{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Common Medical Terminology</h1>
+  <p>Quick-reference glossary &middot; word roots &middot; documentation shorthand</p>
+</div>
+
+<div class="container">
+
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search a term, abbreviation, or definition (e.g. 'dyspnea', 'NPO', 'fever')...">
+    <div class="cat-nav" id="catNav"></div>
+  </div>
+
+  <div class="count-line" id="countLine"></div>
+  <div id="results"></div>
+  <div class="no-results" id="noResults">No terms match your search.</div>
+
+</div>
+
+<script>
+const GLOSSARY = [
+  // ===== Vitals / General =====
+  {term:"Afebrile", parts:"a- (without) + febris (fever)", cat:"Vitals & General", def:"Without fever; a normal body temperature.", note:"Opposite: febrile"},
+  {term:"Febrile", parts:"febris (fever)", cat:"Vitals & General", def:"Having a fever; elevated body temperature, generally &ge;100.4&deg;F (38&deg;C)."},
+  {term:"Tachycardia", parts:"tachy- (fast) + cardia (heart)", cat:"Vitals & General", def:"Heart rate greater than 100 beats per minute in an adult."},
+  {term:"Bradycardia", parts:"brady- (slow) + cardia (heart)", cat:"Vitals & General", def:"Heart rate less than 60 beats per minute in an adult."},
+  {term:"Tachypnea", parts:"tachy- (fast) + pnea (breathing)", cat:"Vitals & General", def:"Abnormally rapid breathing rate."},
+  {term:"Bradypnea", parts:"brady- (slow) + pnea (breathing)", cat:"Vitals & General", def:"Abnormally slow breathing rate."},
+  {term:"Hypertension", parts:"hyper- (excessive) + tension (pressure)", cat:"Vitals & General", def:"Persistently elevated blood pressure, generally &ge;130/80 mmHg per current guidelines."},
+  {term:"Hypotension", parts:"hypo- (deficient) + tension (pressure)", cat:"Vitals & General", def:"Abnormally low blood pressure, generally systolic <90 mmHg, that may cause inadequate organ perfusion."},
+  {term:"Orthostatic (Postural) Hypotension", parts:"orthos (upright) + statikos (standing)", cat:"Vitals & General", def:"A drop in blood pressure (&ge;20 mmHg systolic or &ge;10 mmHg diastolic) upon standing, often causing dizziness."},
+  {term:"Malaise", parts:"French: mal (bad) + aise (ease)", cat:"Vitals & General", def:"A general feeling of discomfort, illness, or unease, often the first sign of a disease process."},
+  {term:"Diaphoresis", parts:"dia- (through) + phorein (to carry)", cat:"Vitals & General", def:"Excessive or profuse sweating, often associated with pain, shock, MI, or hypoglycemia."},
+  {term:"Cachexia", parts:"kakos (bad) + hexis (condition)", cat:"Vitals & General", def:"Severe weight loss and muscle wasting associated with chronic illness (e.g., cancer, heart failure)."},
+  {term:"Syncope", parts:"syn- (with) + koptein (to cut off)", cat:"Vitals & General", def:"A temporary loss of consciousness due to a drop in blood flow to the brain; fainting."},
+  {term:"Prodrome", parts:"pro- (before) + dromos (running)", cat:"Vitals & General", def:"Early symptoms that indicate the onset of a disease, before the characteristic signs appear."},
+
+  // ===== Cardiovascular =====
+  {term:"Arrhythmia (Dysrhythmia)", parts:"a-/dys- (abnormal) + rhythmos (rhythm)", cat:"Cardiovascular", def:"Any abnormality in the rate or rhythm of the heartbeat."},
+  {term:"Murmur", parts:"Latin: murmur (a low continuous sound)", cat:"Cardiovascular", def:"An extra or unusual sound heard during a heartbeat, often caused by turbulent blood flow across a valve."},
+  {term:"Edema", parts:"oidema (swelling)", cat:"Cardiovascular", def:"Swelling caused by excess fluid trapped in body tissues, often seen in the lower extremities with heart failure."},
+  {term:"Cyanosis", parts:"kyanos (dark blue)", cat:"Cardiovascular", def:"A bluish discoloration of the skin or mucous membranes due to poor oxygenation of the blood."},
+  {term:"Ischemia", parts:"ischein (to hold back) + haima (blood)", cat:"Cardiovascular", def:"Inadequate blood supply to an organ or tissue, often causing pain and tissue dysfunction."},
+  {term:"Infarction", parts:"infarcire (to stuff)", cat:"Cardiovascular", def:"Tissue death (necrosis) due to a lack of blood supply, as in a myocardial infarction (heart attack)."},
+  {term:"Palpitations", parts:"Latin: palpitare (to throb)", cat:"Cardiovascular", def:"A sensation of a rapid, fluttering, or pounding heartbeat, which may or may not correspond to an actual arrhythmia."},
+  {term:"Claudication", parts:"claudicare (to limp)", cat:"Cardiovascular", def:"Cramping pain in the leg brought on by exercise (typically due to peripheral artery disease) and relieved by rest."},
+  {term:"Thrombosis", parts:"thrombos (clot) + -osis (condition)", cat:"Cardiovascular", def:"The formation of a blood clot within a blood vessel, obstructing blood flow."},
+  {term:"Embolism", parts:"embolos (a plug)", cat:"Cardiovascular", def:"Obstruction of a blood vessel by a clot, air bubble, or other material that has traveled from elsewhere in the body."},
+
+  // ===== Respiratory =====
+  {term:"Dyspnea", parts:"dys- (difficult) + pnea (breathing)", cat:"Respiratory", def:"Difficult or labored breathing; shortness of breath."},
+  {term:"Apnea", parts:"a- (without) + pnea (breathing)", cat:"Respiratory", def:"Temporary cessation of breathing."},
+  {term:"Orthopnea", parts:"orthos (straight/upright) + pnea (breathing)", cat:"Respiratory", def:"Shortness of breath that occurs when lying flat, relieved by sitting or standing up."},
+  {term:"Hypoxia", parts:"hypo- (deficient) + oxy- (oxygen)", cat:"Respiratory", def:"Inadequate oxygen supply to the tissues of the body."},
+  {term:"Hypoxemia", parts:"hypo- (deficient) + ox- (oxygen) + -emia (blood)", cat:"Respiratory", def:"Abnormally low level of oxygen specifically in the arterial blood."},
+  {term:"Hypercapnia", parts:"hyper- (excessive) + kapnos (smoke/vapor, i.e. CO2)", cat:"Respiratory", def:"Abnormally elevated carbon dioxide levels in the blood."},
+  {term:"Rales (Crackles)", parts:"French: r&acirc;le (rattle)", cat:"Respiratory", def:"Discontinuous, crackling lung sounds heard on auscultation, often indicating fluid in the alveoli (e.g., pneumonia, CHF)."},
+  {term:"Rhonchi", parts:"Greek: rhonchos (snore)", cat:"Respiratory", def:"Low-pitched, continuous rattling lung sounds caused by secretions in larger airways, often clearing with cough."},
+  {term:"Wheeze", parts:"Old English: hwesan (to hiss)", cat:"Respiratory", def:"A high-pitched, whistling sound produced by air moving through narrowed airways, classically heard in asthma."},
+  {term:"Stridor", parts:"Latin: stridor (a harsh, creaking sound)", cat:"Respiratory", def:"A high-pitched sound, usually on inspiration, caused by obstruction of the upper airway (e.g., trachea, larynx)."},
+  {term:"Productive Cough", parts:"&mdash;", cat:"Respiratory", def:"A cough that brings up sputum or mucus, as opposed to a dry/nonproductive cough."},
+  {term:"Hemoptysis", parts:"haima (blood) + ptysis (spitting)", cat:"Respiratory", def:"Coughing up blood or blood-streaked sputum originating from the lungs or airway."},
+
+  // ===== Renal / Urinary =====
+  {term:"Anuria", parts:"an- (without) + ouron (urine)", cat:"Renal & Urinary", def:"Absent or minimal urine output, generally defined as less than 50&ndash;100 mL per day."},
+  {term:"Oliguria", parts:"oligos (few/scanty) + ouron (urine)", cat:"Renal & Urinary", def:"Decreased urine output, generally defined as less than 400&ndash;500 mL per day (or <0.5 mL/kg/hr)."},
+  {term:"Polyuria", parts:"poly- (many/much) + ouron (urine)", cat:"Renal & Urinary", def:"Excessive urine production and output, often seen in diabetes mellitus or diabetes insipidus."},
+  {term:"Dysuria", parts:"dys- (painful/difficult) + ouron (urine)", cat:"Renal & Urinary", def:"Pain or a burning sensation during urination, commonly seen in urinary tract infections."},
+  {term:"Hematuria", parts:"haima (blood) + ouron (urine)", cat:"Renal & Urinary", def:"The presence of blood in the urine, either visible (gross) or detected only microscopically."},
+  {term:"Proteinuria", parts:"protein + ouron (urine)", cat:"Renal & Urinary", def:"An abnormal amount of protein in the urine, often a marker of kidney damage."},
+  {term:"Nocturia", parts:"nox/nocti- (night) + ouron (urine)", cat:"Renal & Urinary", def:"Waking at night one or more times to urinate."},
+  {term:"Incontinence", parts:"in- (not) + continere (to hold together)", cat:"Renal & Urinary", def:"Involuntary loss of urine (or stool) control."},
+  {term:"Azotemia", parts:"azote (nitrogen) + -emia (blood)", cat:"Renal & Urinary", def:"Elevated levels of nitrogen-containing waste products (BUN, creatinine) in the blood, reflecting impaired kidney function."},
+  {term:"Uremia", parts:"ouron (urine) + -emia (blood)", cat:"Renal & Urinary", def:"A clinical syndrome of symptoms (nausea, confusion, fatigue) resulting from severe azotemia/kidney failure."},
+
+  // ===== Hematologic =====
+  {term:"Anemia", parts:"an- (without) + haima (blood)", cat:"Hematologic", def:"A deficiency of red blood cells or hemoglobin, reducing the blood's oxygen-carrying capacity."},
+  {term:"Leukocytosis", parts:"leukos (white) + kytos (cell) + -osis (condition)", cat:"Hematologic", def:"An elevated white blood cell count, often indicating infection or inflammation."},
+  {term:"Leukopenia", parts:"leukos (white) + penia (deficiency)", cat:"Hematologic", def:"An abnormally low white blood cell count, increasing infection risk."},
+  {term:"Thrombocytopenia", parts:"thrombos (clot) + kytos (cell) + penia (deficiency)", cat:"Hematologic", def:"An abnormally low platelet count, increasing bleeding risk."},
+  {term:"Thrombocytosis", parts:"thrombos (clot) + kytos (cell) + -osis (condition)", cat:"Hematologic", def:"An abnormally elevated platelet count."},
+  {term:"Hemolysis", parts:"haima (blood) + lysis (destruction)", cat:"Hematologic", def:"The destruction or breakdown of red blood cells, releasing hemoglobin into the plasma."},
+  {term:"Coagulopathy", parts:"coagulare (to clot) + -pathy (disease)", cat:"Hematologic", def:"A condition in which the blood's ability to clot is impaired."},
+  {term:"Petechiae", parts:"Italian: petecchia (a small red spot)", cat:"Hematologic", def:"Tiny, pinpoint, non-blanching red or purple spots on the skin caused by minor bleeding, often from low platelets."},
+  {term:"Ecchymosis", parts:"ek- (out) + chymos (juice)", cat:"Hematologic", def:"A bruise; a larger area of skin discoloration caused by blood leaking from broken vessels into subcutaneous tissue."},
+
+  // ===== Gastrointestinal =====
+  {term:"Emesis (Vomiting)", parts:"emein (to vomit)", cat:"Gastrointestinal", def:"The forceful expulsion of stomach contents through the mouth."},
+  {term:"Hematemesis", parts:"haima (blood) + emesis (vomiting)", cat:"Gastrointestinal", def:"Vomiting of blood, indicating upper GI bleeding."},
+  {term:"Melena", parts:"melas (black)", cat:"Gastrointestinal", def:"Black, tarry, foul-smelling stool caused by digested blood, usually from an upper GI bleed."},
+  {term:"Hematochezia", parts:"haima (blood) + chezein (to defecate)", cat:"Gastrointestinal", def:"Passage of bright red blood through the rectum, typically indicating a lower GI source of bleeding."},
+  {term:"Dysphagia", parts:"dys- (difficult) + phagein (to eat)", cat:"Gastrointestinal", def:"Difficulty swallowing."},
+  {term:"Odynophagia", parts:"odyne (pain) + phagein (to eat)", cat:"Gastrointestinal", def:"Painful swallowing."},
+  {term:"Anorexia", parts:"an- (without) + orexis (appetite)", cat:"Gastrointestinal", def:"Loss of appetite or desire to eat."},
+  {term:"Hepatomegaly", parts:"hepar (liver) + megas (large)", cat:"Gastrointestinal", def:"Abnormal enlargement of the liver."},
+  {term:"Splenomegaly", parts:"splen (spleen) + megas (large)", cat:"Gastrointestinal", def:"Abnormal enlargement of the spleen."},
+  {term:"Ascites", parts:"askos (bag/bladder)", cat:"Gastrointestinal", def:"Abnormal accumulation of fluid within the peritoneal (abdominal) cavity."},
+  {term:"Jaundice (Icterus)", parts:"French: jaune (yellow)", cat:"Gastrointestinal", def:"Yellowing of the skin and sclera caused by elevated bilirubin levels."},
+  {term:"Constipation", parts:"Latin: constipare (to press together)", cat:"Gastrointestinal", def:"Infrequent or difficult passage of stool."},
+
+  // ===== Neurological =====
+  {term:"Paresthesia", parts:"para- (abnormal) + aisthesis (sensation)", cat:"Neurological", def:"An abnormal sensation such as tingling, burning, or 'pins and needles,' typically without a physical stimulus."},
+  {term:"Paresis", parts:"parienai (to relax/let go)", cat:"Neurological", def:"Partial or mild weakness/paralysis of voluntary movement."},
+  {term:"Paralysis (Plegia)", parts:"para- (beside) + lyein (to loosen)", cat:"Neurological", def:"Complete loss of muscle function or voluntary movement in a body part."},
+  {term:"Hemiparesis", parts:"hemi- (half) + paresis (weakness)", cat:"Neurological", def:"Weakness affecting one side of the body."},
+  {term:"Hemiplegia", parts:"hemi- (half) + plegia (paralysis)", cat:"Neurological", def:"Complete paralysis affecting one side of the body."},
+  {term:"Ataxia", parts:"a- (without) + taxis (order)", cat:"Neurological", def:"Loss of full control of bodily movements, resulting in a lack of coordination or unsteady gait."},
+  {term:"Aphasia", parts:"a- (without) + phasis (speech)", cat:"Neurological", def:"Impaired ability to produce or comprehend language, often due to stroke or brain injury."},
+  {term:"Dysarthria", parts:"dys- (difficult) + arthroun (to articulate)", cat:"Neurological", def:"Difficulty with the physical production of speech (slurred speech) due to muscle weakness, distinct from aphasia."},
+  {term:"Hyperreflexia", parts:"hyper- (excessive) + reflex", cat:"Neurological", def:"Overactive or overresponsive reflexes, often indicating an upper motor neuron lesion."},
+  {term:"Hyporeflexia", parts:"hypo- (deficient) + reflex", cat:"Neurological", def:"Diminished or absent reflexes, often indicating a lower motor neuron or peripheral nerve lesion."},
+  {term:"Nystagmus", parts:"nystagmos (nodding, drowsiness)", cat:"Neurological", def:"Involuntary, rhythmic oscillation of the eyes."},
+  {term:"Photophobia", parts:"photos (light) + phobos (fear)", cat:"Neurological", def:"Abnormal sensitivity to or discomfort from light."},
+  {term:"Vertigo", parts:"Latin: vertere (to turn)", cat:"Neurological", def:"A false sensation of spinning or movement, often related to inner ear or vestibular dysfunction."},
+  {term:"Syncope", parts:"syn- (with) + koptein (to cut off)", cat:"Neurological", def:"Temporary loss of consciousness due to reduced cerebral blood flow; fainting. (See also: Vitals & General)"},
+
+  // ===== Dermatologic / Wound =====
+  {term:"Purulent", parts:"Latin: pus/puris (pus)", cat:"Dermatologic & Wound", def:"Containing, consisting of, or producing pus; often used to describe an infected wound or discharge."},
+  {term:"Erythema", parts:"erythros (red)", cat:"Dermatologic & Wound", def:"Redness of the skin caused by increased blood flow to superficial capillaries, often from inflammation."},
+  {term:"Pruritus", parts:"Latin: prurire (to itch)", cat:"Dermatologic & Wound", def:"Itching of the skin."},
+  {term:"Urticaria (Hives)", parts:"Latin: urtica (nettle)", cat:"Dermatologic & Wound", def:"Raised, itchy welts on the skin, typically an allergic reaction."},
+  {term:"Ecchymosis", parts:"ek- (out) + chymos (juice)", cat:"Dermatologic & Wound", def:"A bruise caused by blood leaking into subcutaneous tissue. (See also: Hematologic)"},
+  {term:"Induration", parts:"Latin: indurare (to harden)", cat:"Dermatologic & Wound", def:"Abnormal hardening of soft tissue, often around an area of inflammation or infection."},
+  {term:"Dehiscence", parts:"Latin: dehiscere (to gape open)", cat:"Dermatologic & Wound", def:"The reopening or splitting apart of a previously closed surgical wound."},
+  {term:"Necrosis", parts:"nekros (dead body)", cat:"Dermatologic & Wound", def:"Death of tissue cells, usually due to lack of blood supply, injury, or infection."},
+  {term:"Erythematous", parts:"erythros (red)", cat:"Dermatologic & Wound", def:"Adjective form of erythema; describing skin that is reddened."},
+
+  // ===== Musculoskeletal =====
+  {term:"Arthralgia", parts:"arthron (joint) + algos (pain)", cat:"Musculoskeletal", def:"Joint pain without associated inflammation/swelling (as opposed to arthritis)."},
+  {term:"Myalgia", parts:"mys (muscle) + algos (pain)", cat:"Musculoskeletal", def:"Muscle pain or aching."},
+  {term:"Contracture", parts:"Latin: contrahere (to draw together)", cat:"Musculoskeletal", def:"Permanent shortening/tightening of a muscle, tendon, or joint tissue, limiting range of motion."},
+  {term:"Atrophy", parts:"a- (without) + trophe (nourishment)", cat:"Musculoskeletal", def:"A decrease in the size of a muscle or tissue, often from disuse, denervation, or disease."},
+  {term:"Hypertrophy", parts:"hyper- (excessive) + trophe (nourishment)", cat:"Musculoskeletal", def:"An increase in the size of a tissue or organ due to enlargement of its existing cells."},
+  {term:"Crepitus", parts:"Latin: crepitare (to crackle)", cat:"Musculoskeletal", def:"A crackling or grating sensation/sound, felt or heard with joint movement or in tissue containing air (subcutaneous emphysema)."},
+  {term:"Effusion", parts:"Latin: effundere (to pour out)", cat:"Musculoskeletal", def:"Abnormal accumulation of fluid in a body cavity or joint space."},
+
+  // ===== High-Yield Prefixes & Suffixes =====
+  {term:"-itis", parts:"suffix", cat:"Prefixes & Suffixes", def:"Inflammation of (e.g., appendicitis = inflammation of the appendix)."},
+  {term:"-ectomy", parts:"suffix", cat:"Prefixes & Suffixes", def:"Surgical removal of (e.g., appendectomy = removal of the appendix)."},
+  {term:"-otomy", parts:"suffix", cat:"Prefixes & Suffixes", def:"A surgical incision into (e.g., tracheotomy = incision into the trachea)."},
+  {term:"-ostomy", parts:"suffix", cat:"Prefixes & Suffixes", def:"Surgical creation of an opening (e.g., colostomy = opening into the colon)."},
+  {term:"-scopy", parts:"suffix", cat:"Prefixes & Suffixes", def:"Visual examination of, using a scope (e.g., colonoscopy)."},
+  {term:"-emia", parts:"suffix", cat:"Prefixes & Suffixes", def:"Referring to a condition of the blood (e.g., anemia, hypoxemia)."},
+  {term:"-penia", parts:"suffix", cat:"Prefixes & Suffixes", def:"Deficiency or reduction of (e.g., thrombocytopenia = low platelets)."},
+  {term:"-osis", parts:"suffix", cat:"Prefixes & Suffixes", def:"An abnormal condition or process, often (but not always) a disease state (e.g., leukocytosis)."},
+  {term:"-algia / -dynia", parts:"suffix", cat:"Prefixes & Suffixes", def:"Pain (e.g., myalgia = muscle pain; odynophagia = pain on swallowing)."},
+  {term:"-megaly", parts:"suffix", cat:"Prefixes & Suffixes", def:"Enlargement of (e.g., hepatomegaly = enlarged liver)."},
+  {term:"-plasty", parts:"suffix", cat:"Prefixes & Suffixes", def:"Surgical repair or reconstruction of (e.g., angioplasty)."},
+  {term:"-pathy", parts:"suffix", cat:"Prefixes & Suffixes", def:"Disease of (e.g., neuropathy = disease of the nerves)."},
+  {term:"a- / an-", parts:"prefix", cat:"Prefixes & Suffixes", def:"Without, absence of (e.g., anuria = absence of urine; apnea = absence of breathing)."},
+  {term:"dys-", parts:"prefix", cat:"Prefixes & Suffixes", def:"Difficult, painful, or abnormal (e.g., dyspnea, dysuria, dysphagia)."},
+  {term:"hyper-", parts:"prefix", cat:"Prefixes & Suffixes", def:"Excessive, above normal (e.g., hypertension, hyperreflexia)."},
+  {term:"hypo-", parts:"prefix", cat:"Prefixes & Suffixes", def:"Deficient, below normal (e.g., hypotension, hypoxia)."},
+  {term:"poly-", parts:"prefix", cat:"Prefixes & Suffixes", def:"Many, much, excessive (e.g., polyuria, polydipsia)."},
+  {term:"tachy-", parts:"prefix", cat:"Prefixes & Suffixes", def:"Fast, rapid (e.g., tachycardia, tachypnea)."},
+  {term:"brady-", parts:"prefix", cat:"Prefixes & Suffixes", def:"Slow (e.g., bradycardia, bradypnea)."},
+
+  // ===== Clinical Documentation Shorthand =====
+  {term:"Hx", parts:"historia (history)", cat:"Clinical Documentation Shorthand", def:"History &mdash; the patient's medical background."},
+  {term:"Dx", parts:"dia- (through) + gignoskein (to know)", cat:"Clinical Documentation Shorthand", def:"Diagnosis."},
+  {term:"Tx", parts:"Old French: traitier (to treat)", cat:"Clinical Documentation Shorthand", def:"Treatment."},
+  {term:"Sx", parts:"symptoma (a happening)", cat:"Clinical Documentation Shorthand", def:"Symptoms or signs."},
+  {term:"CC", parts:"Chief Complaint", cat:"Clinical Documentation Shorthand", def:"The primary reason for the patient's visit, ideally recorded in the patient's own words."},
+  {term:"HPI", parts:"History of Present Illness", cat:"Clinical Documentation Shorthand", def:"The detailed, chronological narrative expanding on the chief complaint (onset, location, duration, character, aggravating/alleviating factors, etc.)."},
+  {term:"PMH", parts:"Past Medical History", cat:"Clinical Documentation Shorthand", def:"A patient's prior diagnosed medical conditions."},
+  {term:"PSH", parts:"Past Surgical History", cat:"Clinical Documentation Shorthand", def:"A patient's prior surgeries or procedures."},
+  {term:"FHx", parts:"Family History", cat:"Clinical Documentation Shorthand", def:"Medical conditions present in a patient's biological family members, used to assess hereditary risk."},
+  {term:"SHx", parts:"Social History", cat:"Clinical Documentation Shorthand", def:"A patient's lifestyle information &mdash; occupation, tobacco/alcohol/drug use, living situation, support system, etc."},
+  {term:"ROS", parts:"Review of Systems", cat:"Clinical Documentation Shorthand", def:"A systematic list of questions by body system used to uncover symptoms not already mentioned in the HPI."},
+  {term:"A&Ox4", parts:"Alert and Oriented x4", cat:"Clinical Documentation Shorthand", def:"Alert and oriented to person, place, time, and situation."},
+  {term:"A&Ox3", parts:"Alert and Oriented x3", cat:"Clinical Documentation Shorthand", def:"Alert and oriented to person, place, and time only (situation/circumstance not confirmed) &mdash; a lower level of orientation than A&Ox4."},
+  {term:"NAD", parts:"No Acute Distress", cat:"Clinical Documentation Shorthand", def:"A general appearance descriptor indicating the patient does not appear to be in immediate/severe distress."},
+  {term:"WNL", parts:"Within Normal Limits", cat:"Clinical Documentation Shorthand", def:"Used to indicate an exam finding or lab value falls within the expected normal range."},
+  {term:"NKDA", parts:"No Known Drug Allergies", cat:"Clinical Documentation Shorthand", def:"Indicates the patient has no documented allergic reactions to medications."},
+  {term:"NKA", parts:"No Known Allergies", cat:"Clinical Documentation Shorthand", def:"Indicates the patient has no documented allergies of any kind (drug, food, environmental)."},
+  {term:"VSS", parts:"Vital Signs Stable", cat:"Clinical Documentation Shorthand", def:"Indicates the patient's vital signs are within an acceptable/expected range and not acutely concerning."},
+  {term:"s/p", parts:"status post", cat:"Clinical Documentation Shorthand", def:"Indicates a condition or event that occurred in the past (e.g., 's/p appendectomy' = after having had an appendectomy)."},
+  {term:"c/o", parts:"complains of", cat:"Clinical Documentation Shorthand", def:"Used to introduce a patient-reported symptom (e.g., 'c/o chest pain')."},
+  {term:"r/o", parts:"rule out", cat:"Clinical Documentation Shorthand", def:"Indicates a diagnosis being considered and actively investigated/excluded, not yet confirmed or denied."},
+  {term:"h/o", parts:"history of", cat:"Clinical Documentation Shorthand", def:"Indicates a patient has a documented history of a condition (e.g., 'h/o MI')."},
+  {term:"f/u", parts:"follow up", cat:"Clinical Documentation Shorthand", def:"Indicates a plan for a subsequent visit or check-in to reassess a condition."},
+  {term:"d/c", parts:"discharge / discontinue", cat:"Clinical Documentation Shorthand", def:"Can mean either 'discharge' (send the patient home) or 'discontinue' (stop a medication/treatment) &mdash; context-dependent and a known source of documentation ambiguity, so it's often spelled out in practice."},
+  {term:"w/ , w/o", parts:"with / without", cat:"Clinical Documentation Shorthand", def:"Shorthand for 'with' and 'without,' respectively."},
+  {term:"SOAP (note)", parts:"Subjective, Objective, Assessment, Plan", cat:"Clinical Documentation Shorthand", def:"The standard structure for a clinical progress note: Subjective (patient-reported symptoms/HPI), Objective (exam/vitals/labs), Assessment (diagnosis/clinical impression), Plan (next steps)."},
+
+  // ===== Medication, Frequency & Route Abbreviations =====
+  {term:"NPO", parts:"nil per os (nothing by mouth)", cat:"Medication, Frequency & Route", def:"Nil per os &mdash; the patient is to have nothing by mouth, often before surgery or a procedure."},
+  {term:"PRN", parts:"pro re nata (for an occasion that has arisen)", cat:"Medication, Frequency & Route", def:"As needed; a medication or intervention given only when a specific symptom or situation arises, not on a fixed schedule."},
+  {term:"STAT", parts:"statim (immediately)", cat:"Medication, Frequency & Route", def:"Immediately &mdash; indicates an order that must be carried out right away, without delay."},
+  {term:"BID", parts:"bis in die (twice a day)", cat:"Medication, Frequency & Route", def:"Twice daily dosing."},
+  {term:"TID", parts:"ter in die (three times a day)", cat:"Medication, Frequency & Route", def:"Three times daily dosing."},
+  {term:"QID", parts:"quater in die (four times a day)", cat:"Medication, Frequency & Route", def:"Four times daily dosing."},
+  {term:"QHS", parts:"quaque hora somni (every night at bedtime)", cat:"Medication, Frequency & Route", def:"Every night at bedtime dosing."},
+  {term:"Q_H (e.g., Q4H, Q6H)", parts:"quaque hora (every hour)", cat:"Medication, Frequency & Route", def:"Every specified number of hours (e.g., Q4H = every 4 hours)."},
+  {term:"QD", parts:"quaque die (every day)", cat:"Medication, Frequency & Route", def:"Once daily.", note:"On The Joint Commission's 'Do Not Use' list &mdash; easily mistaken for QID; 'daily' is written out instead in practice."},
+  {term:"QOD", parts:"every other day", cat:"Medication, Frequency & Route", def:"Every other day dosing.", note:"Also on the 'Do Not Use' list due to mix-ups with QD/QID; 'every other day' is written out instead."},
+  {term:"AC", parts:"ante cibum (before meals)", cat:"Medication, Frequency & Route", def:"Before meals."},
+  {term:"PC", parts:"post cibum (after meals)", cat:"Medication, Frequency & Route", def:"After meals."},
+  {term:"PO", parts:"per os (by mouth)", cat:"Medication, Frequency & Route", def:"By mouth / orally administered."},
+  {term:"IV", parts:"Intravenous", cat:"Medication, Frequency & Route", def:"Administered directly into a vein."},
+  {term:"IM", parts:"Intramuscular", cat:"Medication, Frequency & Route", def:"Administered directly into a muscle."},
+  {term:"SC / SubQ", parts:"Subcutaneous", cat:"Medication, Frequency & Route", def:"Administered into the fatty tissue just beneath the skin."},
+  {term:"SL", parts:"Sublingual", cat:"Medication, Frequency & Route", def:"Administered under the tongue, allowing rapid absorption (e.g., sublingual nitroglycerin)."},
+  {term:"PR", parts:"per rectum", cat:"Medication, Frequency & Route", def:"Administered rectally."},
+
+  // ===== Labs & Imaging Abbreviations =====
+  {term:"CBC", parts:"Complete Blood Count", cat:"Labs & Imaging", def:"A lab panel measuring red blood cells, white blood cells, and platelets."},
+  {term:"BMP", parts:"Basic Metabolic Panel", cat:"Labs & Imaging", def:"A lab panel measuring electrolytes, BUN, creatinine, and glucose."},
+  {term:"CMP", parts:"Comprehensive Metabolic Panel", cat:"Labs & Imaging", def:"A BMP plus liver function tests (AST, ALT, bilirubin, albumin, etc.)."},
+  {term:"UA", parts:"Urinalysis", cat:"Labs & Imaging", def:"A physical, chemical, and microscopic examination of urine."},
+  {term:"CXR", parts:"Chest X-Ray", cat:"Labs & Imaging", def:"A radiographic image of the chest, used to evaluate the lungs, heart, and bony thorax."},
+  {term:"CT", parts:"Computed Tomography", cat:"Labs & Imaging", def:"A cross-sectional imaging technique using multiple X-ray images processed by computer."},
+  {term:"MRI", parts:"Magnetic Resonance Imaging", cat:"Labs & Imaging", def:"An imaging technique using magnetic fields and radio waves to visualize soft tissue in detail, without ionizing radiation."},
+  {term:"EKG / ECG", parts:"German: Elektrokardiogramm", cat:"Labs & Imaging", def:"Electrocardiogram &mdash; a recording of the heart's electrical activity. EKG reflects the original German spelling; ECG is the English abbreviation."},
+];
+
+const container = document.getElementById('results');
+const searchInput = document.getElementById('search');
+const catNav = document.getElementById('catNav');
+const countLine = document.getElementById('countLine');
+const noResults = document.getElementById('noResults');
+
+const categories = [...new Set(GLOSSARY.map(g => g.cat))];
+let activeCat = 'All';
+
+function renderCatNav(){
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.textContent = 'All';
+  allBtn.onclick = () => setCategory('All', allBtn);
+  catNav.appendChild(allBtn);
+
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = cat;
+    btn.onclick = () => setCategory(cat, btn);
+    catNav.appendChild(btn);
+  });
+}
+
+function setCategory(cat, btnEl){
+  activeCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  filterAndRender();
+}
+
+function renderGlossary(){
+  const sorted = [...GLOSSARY].sort((a,b) => a.term.localeCompare(b.term));
+  const byCat = {};
+  categories.forEach(c => byCat[c] = []);
+  sorted.forEach(item => byCat[item.cat].push(item));
+
+  container.innerHTML = '';
+  categories.forEach(cat => {
+    const heading = document.createElement('h2');
+    heading.className = 'section-title';
+    heading.dataset.cat = cat;
+    heading.textContent = cat;
+    container.appendChild(heading);
+
+    byCat[cat].forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'term-card';
+      card.dataset.cat = cat;
+      card.dataset.search = (item.term + ' ' + item.def + ' ' + item.parts).toLowerCase();
+      card.innerHTML = `
+        <div class="term-row">
+          <span class="term-name">${item.term}</span>
+          <span class="term-parts">${item.parts}</span>
+        </div>
+        <div class="term-def">${item.def}</div>
+        ${item.note ? `<div class="term-note">${item.note}</div>` : ''}
+      `;
+      container.appendChild(card);
+    });
+  });
+}
+
+function filterAndRender(){
+  const q = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
+
+  document.querySelectorAll('.term-card').forEach(card => {
+    const matchesCat = (activeCat === 'All' || card.dataset.cat === activeCat);
+    const matchesSearch = (q === '' || card.dataset.search.includes(q));
+    const show = matchesCat && matchesSearch;
+    card.classList.toggle('hidden', !show);
+    if(show) visibleCount++;
+  });
+
+  document.querySelectorAll('.section-title').forEach(heading => {
+    const cat = heading.dataset.cat;
+    const matchesCat = (activeCat === 'All' || cat === activeCat);
+    const anyVisibleInCat = [...document.querySelectorAll(`.term-card[data-cat="${cat}"]`)]
+      .some(c => !c.classList.contains('hidden'));
+    heading.style.display = (matchesCat && anyVisibleInCat) ? 'block' : 'none';
+  });
+
+  countLine.textContent = `Showing ${visibleCount} of ${GLOSSARY.length} terms`;
+  noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+renderCatNav();
+renderGlossary();
+filterAndRender();
+searchInput.addEventListener('input', filterAndRender);
+</script>
+
+</body>
+</html>
