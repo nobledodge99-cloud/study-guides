@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nerve Lesions — Master Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --upper:#3f6fa8;
+    --lower:#4a7c59;
+    --trunk:#a83f5c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Lora',serif;
+    background:var(--cream);
+    color:var(--text-main);
+    line-height:1.55;
+  }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 26px; text-align:center; }
+  .header h1{ font-size:1.9rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .tabs{
+    display:flex; justify-content:center; gap:6px; background:var(--forest);
+    padding:0 12px; flex-wrap:wrap; position:sticky; top:0; z-index:60;
+  }
+  .tab-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.03em; background:transparent; border:none; color:var(--sage-light);
+    padding:12px 16px; cursor:pointer; border-bottom:3px solid transparent;
+  }
+  .tab-btn.active{ color:#fff; border-bottom:3px solid var(--accent); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .container{ max-width:1180px; margin:0 auto; padding:26px 20px 80px; }
+
+  .search-wrap{ position:sticky; top:41px; z-index:50; background:var(--cream); padding:14px 0 12px; }
+  #search{
+    width:100%; padding:13px 16px; font-family:'Lora',serif; font-size:1rem;
+    border:1px solid var(--border); border-radius:10px; background:var(--cream-card);
+    color:var(--text-main); outline:none;
+  }
+  #search:focus{ border-color:var(--forest); }
+
+  .cat-nav{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .cat-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase;
+    letter-spacing:0.03em; background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); padding:6px 12px; border-radius:20px; cursor:pointer;
+  }
+  .cat-btn.active{ background:var(--forest); color:var(--cream); border-color:var(--forest); }
+
+  .count-line{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--text-soft); margin:14px 2px 10px; }
+
+  .org-card{
+    background:var(--cream-card); border:1px solid var(--border); border-left:5px solid var(--sage);
+    border-radius:8px; padding:16px 20px; margin-bottom:12px;
+  }
+  .org-card.hidden{ display:none; }
+  .org-card[data-cat="Upper Extremity"]{ border-left-color:var(--upper); }
+  .org-card[data-cat="Lower Extremity"]{ border-left-color:var(--lower); }
+  .org-card[data-cat="Trunk / Neck"]{ border-left-color:var(--trunk); }
+
+  .org-top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
+  .org-name{ font-weight:700; font-size:1.12rem; color:var(--forest-dark); }
+  .org-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .org-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase;
+    padding:2px 8px; border-radius:6px; background:var(--sage-light); color:var(--forest-dark);
+    border:1px solid var(--sage); white-space:nowrap;
+  }
+  .org-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px 24px; font-size:0.88rem; }
+  @media (max-width:700px){ .org-grid{ grid-template-columns:1fr; } }
+  .org-field{ margin:0; }
+  .org-field b{
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase;
+    color:var(--accent); display:block; margin-bottom:2px; letter-spacing:0.02em;
+  }
+  .org-buzz{ margin-top:10px; padding-top:8px; border-top:1px dashed var(--border); font-size:0.85rem; color:var(--forest-dark); font-weight:600; }
+  .no-results{ text-align:center; color:var(--text-soft); font-family:'IBM Plex Mono',monospace; font-size:0.85rem; padding:40px 0; display:none; }
+
+  h2.section-title{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--forest); border-bottom:2px solid var(--sage);
+    padding-bottom:6px; margin:36px 0 14px;
+  }
+  h2.section-title:first-child{ margin-top:0; }
+  h3.sub-title{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase; color:var(--accent); margin:22px 0 8px; }
+  .ref-card{ background:var(--cream-card); border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin-bottom:14px; }
+  .ref-card p{ margin:6px 0; font-size:0.92rem; }
+  table.ref-table{ border-collapse:collapse; width:100%; margin-bottom:16px; background:var(--cream-card); font-size:0.86rem; }
+  table.ref-table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem; text-transform:uppercase; padding:9px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table.ref-table td{ padding:9px 10px; border:1px solid var(--border); vertical-align:top; }
+  table.ref-table tr:nth-child(even) td{ background:#f5f0e5; }
+  ul.tree, ul.tree ul{ list-style:none; margin:0; padding-left:18px; }
+  ul.tree{ padding-left:0; }
+  ul.tree li{ position:relative; padding:4px 0 4px 18px; border-left:1px dashed var(--sage); margin-left:6px; }
+  ul.tree > li{ border-left:none; margin-left:0; padding-left:0; }
+  ul.tree li::before{ content:"\2192  "; color:var(--accent); }
+  ul.tree > li::before{ content:""; }
+  .pill{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.7rem;
+    background:var(--sage-light); border:1px solid var(--sage); color:var(--forest-dark);
+    padding:1px 7px; border-radius:5px; margin:0 3px;
+  }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:14px 18px; margin:14px 0; font-size:0.9rem; }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:700px){ .two-col{ grid-template-columns:1fr; } }
+
+  .jumpnav{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; padding:12px; background:var(--sage-light); border-radius:10px; }
+  .jumpnav a{
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-decoration:none; color:var(--forest-dark);
+    background:var(--cream-card); border:1px solid var(--sage); padding:4px 9px; border-radius:14px;
+  }
+  .jumpnav a:hover{ background:var(--forest); color:var(--cream); }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Nerve Lesions</h1>
+  <p>Master reference &middot; peripheral nerve database &middot; plexus frameworks &middot; classic clinical correlations</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="nerves">Nerve Database</button>
+  <button class="tab-btn" data-tab="frameworks">High-Yield Frameworks</button>
+  <button class="tab-btn" data-tab="systems">Clinical Correlations</button>
+</div>
+
+<div class="container">
+
+  <div class="tab-panel active" id="tab-nerves">
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Search a nerve, root, or finding (e.g. 'wrist drop', 'L4', 'foot drop')...">
+      <div class="cat-nav" id="catNav"></div>
+    </div>
+    <div class="count-line" id="countLine"></div>
+    <div id="results"></div>
+    <div class="no-results" id="noResults">No nerves match your search.</div>
+  </div>
+
+  <div class="tab-panel" id="tab-frameworks">
+    
+<div class="jumpnav">
+  <a href="#fw-brachial">Brachial Plexus Structure</a>
+  <a href="#fw-lumbosacral">Lumbosacral Plexus Structure</a>
+  <a href="#fw-landmarks-upper">Upper Extremity Landmarks</a>
+  <a href="#fw-landmarks-lower">Lower Extremity Landmarks</a>
+  <a href="#fw-compartments-upper">Upper Extremity Compartments</a>
+  <a href="#fw-compartments-lower">Lower Extremity Compartments</a>
+</div>
+
+<h2 class="section-title" id="fw-brachial">Brachial Plexus Structure</h2>
+<div class="ref-card">
+  <p>The brachial plexus (C5–T1) is organized, proximal to distal: <b>Roots → Trunks → Divisions → Cords → Branches</b>.</p>
+  <p style="font-style:italic;">Mnemonic: "<b>R</b>eal <b>T</b>exans <b>D</b>rink <b>C</b>old <b>B</b>eer" (or "Randy Travis Drinks Cold Beer")</p>
+  <ul class="tree">
+    <li><b>Roots</b> (C5, C6, C7, C8, T1)
+      <ul>
+        <li><b>Trunks</b>
+          <ul>
+            <li>Upper trunk (C5–C6) &mdash; injured in Erb-Duchenne palsy</li>
+            <li>Middle trunk (C7)</li>
+            <li>Lower trunk (C8–T1) &mdash; injured in Klumpke palsy</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>Each trunk splits into an anterior and posterior <b>division</b>, which recombine into three <b>cords</b>, named for their position relative to the axillary artery:</p>
+  <ul class="tree">
+    <li><b>Lateral cord</b> (anterior divisions of upper + middle trunks) &rarr; musculocutaneous n. + lateral head of median n.</li>
+    <li><b>Posterior cord</b> (posterior divisions of all three trunks) &rarr; axillary n. + radial n.</li>
+    <li><b>Medial cord</b> (anterior division of lower trunk) &rarr; ulnar n. + medial head of median n.</li>
+  </ul>
+  <p>Terminal branches mnemonic: "<b>M</b>usty <b>A</b>unt <b>R</b>osy <b>U</b>ses <b>M</b>ilk" for the 5 terminal nerves in order (roughly proximal-to-distal on a plexus diagram): Musculocutaneous, Axillary, Radial, Ulnar, Median.</p>
+  <p><b>Nerves that branch directly off the roots</b> (before the trunks even form) include the <b>long thoracic nerve</b> (C5–C7) and the dorsal scapular nerve; the <b>suprascapular nerve</b> branches off the upper trunk itself.</p>
+</div>
+
+<h2 class="section-title" id="fw-lumbosacral">Lumbosacral Plexus Structure</h2>
+<div class="ref-card">
+  <p>The lumbosacral plexus is formed from the anterior rami of L1–S4, conventionally divided into the <b>lumbar plexus</b> (L1–L4, mostly supplying the anterior/medial thigh) and the <b>sacral plexus</b> (L4–S4, mostly supplying the posterior thigh, leg, and foot), connected by the lumbosacral trunk.</p>
+  <ul class="tree">
+    <li><b>Lumbar plexus (L1–L4)</b>
+      <ul>
+        <li>Iliohypogastric n. (L1)</li>
+        <li>Ilioinguinal n. (L1)</li>
+        <li>Genitofemoral n. (L1–L2)</li>
+        <li>Lateral femoral cutaneous n. (L2–L3)</li>
+        <li>Obturator n. (L2–L4) &mdash; medial thigh (adductor compartment)</li>
+        <li>Femoral n. (L2–L4) &mdash; anterior thigh</li>
+      </ul>
+    </li>
+    <li><b>Sacral plexus (L4–S4)</b>, via the <b>lumbosacral trunk (L4–L5)</b>
+      <ul>
+        <li>Superior gluteal n. (L4–S1)</li>
+        <li>Inferior gluteal n. (L5–S2)</li>
+        <li>Nerve to piriformis (L5–S2), nerve to obturator internus (L5–S2), nerve to quadratus femoris (L4–S1)</li>
+        <li>Posterior femoral cutaneous n. (S1–S3)</li>
+        <li>Pudendal n. (S2–S4)</li>
+        <li><b>Sciatic n. (L4–S3)</b> &mdash; splits (usually at/near the popliteal fossa) into:
+          <ul>
+            <li>Tibial n. &rarr; posterior leg, sole of foot</li>
+            <li>Common fibular n. &rarr; splits into superficial fibular n. (lateral leg, eversion) and deep fibular n. (anterior leg, dorsiflexion, 1st web space)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<h2 class="section-title" id="fw-landmarks-upper">Upper Extremity Anatomic Landmarks</h2>
+<table class="ref-table">
+<tr><th>Landmark</th><th>Key Contents / Relationships</th><th>Clinical Relevance</th></tr>
+<tr><td><b>Axilla</b></td><td>Brachial plexus cords surround the axillary artery (lateral, posterior, medial cords named for their position relative to the artery)</td><td>Axillary lymph node dissection risks the long thoracic n. (winging) and thoracodorsal n.</td></tr>
+<tr><td><b>Quadrangular space</b></td><td>Axillary n. + posterior circumflex humeral a.; bordered by teres minor, teres major, long head of triceps, humeral shaft</td><td>Quadrangular space syndrome compresses the axillary n. &rarr; deltoid weakness/atrophy</td></tr>
+<tr><td><b>Spiral (radial) groove</b></td><td>Radial n. + profunda brachii (deep brachial) a. wrap around the posterior humeral shaft</td><td>Midshaft humerus fracture classically injures the radial n. here</td></tr>
+<tr><td><b>Cubital tunnel</b></td><td>Ulnar n. passes posterior to the medial epicondyle of the humerus</td><td>Most common site of ulnar n. entrapment ("funny bone"); medial epicondyle fracture</td></tr>
+<tr><td><b>Carpal tunnel</b></td><td>Median n. + 9 flexor tendons (4 FDS, 4 FDP, 1 FPL) pass under the flexor retinaculum; ulnar n./artery pass outside the tunnel</td><td>Carpal tunnel syndrome (repetitive use, pregnancy, hypothyroidism, RA, acromegaly, amyloidosis) &mdash; median n. compression</td></tr>
+<tr><td><b>Guyon's canal</b></td><td>Ulnar n. + ulnar artery pass superficial to the flexor retinaculum, between the pisiform and hook of hamate</td><td>Cyclist's palsy (handlebar pressure), hook of hamate fracture</td></tr>
+</table>
+
+<h2 class="section-title" id="fw-landmarks-lower">Lower Extremity Anatomic Landmarks</h2>
+<table class="ref-table">
+<tr><th>Landmark</th><th>Key Contents / Relationships</th><th>Clinical Relevance</th></tr>
+<tr><td><b>Femoral triangle</b></td><td>Borders: inguinal ligament (superior), sartorius (lateral), adductor longus (medial). Contents lateral&rarr;medial: <b>NAVEL</b> &mdash; <b>N</b>erve, <b>A</b>rtery, <b>V</b>ein, <b>E</b>mpty space, <b>L</b>ymphatics</td><td>Femoral vein is the most medial structure inside the femoral sheath (useful for central line placement); femoral hernias occur medial to the vein</td></tr>
+<tr><td><b>Popliteal fossa</b></td><td>Contents (superficial to deep, roughly): tibial n., common fibular n. (most lateral/superficial), popliteal vein, popliteal artery (deepest)</td><td>Posterior knee dislocation risks the popliteal a. and tibial n.; site of Baker cyst formation</td></tr>
+<tr><td><b>Tarsal tunnel</b></td><td>Posteromedial ankle, deep to the flexor retinaculum. Mnemonic (anterior&rarr;posterior): "<b>T</b>om, <b>D</b>ick, <b>An</b>d <b>N</b>ervous <b>H</b>arry" = <b>T</b>ibialis posterior tendon, flexor <b>D</b>igitorum longus tendon, tibial <b>A</b>rtery a<b>N</b>d tibial <b>N</b>erve, flexor <b>H</b>allucis longus tendon</td><td>Tarsal tunnel syndrome &mdash; tibial n. compression causing sole-of-foot numbness/pain (the most common site of distal tibial n. injury)</td></tr>
+<tr><td><b>Fibular (peroneal) neck</b></td><td>Common fibular n. winds superficially around the fibular neck, just under the skin</td><td>Highly exposed to trauma (fibular fracture), external compression (tight casts, lateral decubitus positioning, leg crossing) &mdash; the most commonly injured nerve in the lower extremity</td></tr>
+</table>
+
+<h2 class="section-title" id="fw-compartments-upper">Upper Extremity Fascial Compartments</h2>
+<table class="ref-table">
+<tr><th>Compartment</th><th>Nerve</th><th>Artery</th><th>Key Muscles</th><th>Function</th></tr>
+<tr><td>Anterior arm</td><td>Musculocutaneous n.</td><td>Brachial a.</td><td>Biceps brachii, brachialis, coracobrachialis</td><td>Elbow flexion, forearm supination</td></tr>
+<tr><td>Posterior arm</td><td>Radial n.</td><td>Deep brachial (profunda brachii) a.</td><td>Triceps brachii</td><td>Elbow extension</td></tr>
+<tr><td>Anterior forearm</td><td>Median n. (+ ulnar n. to FCU/medial FDP)</td><td>Ulnar &amp; radial a.</td><td>Wrist/finger flexors, pronator teres/quadratus</td><td>Wrist/finger flexion, forearm pronation</td></tr>
+<tr><td>Posterior forearm</td><td>Radial n. (posterior interosseous n.)</td><td>Posterior interosseous a.</td><td>Wrist/finger extensors, supinator</td><td>Wrist/finger extension, forearm supination (assist)</td></tr>
+</table>
+
+<h2 class="section-title" id="fw-compartments-lower">Lower Extremity Fascial Compartments</h2>
+<table class="ref-table">
+<tr><th>Compartment</th><th>Nerve</th><th>Artery</th><th>Key Muscles</th><th>Function</th></tr>
+<tr><td>Anterior thigh</td><td>Femoral n.</td><td>Femoral a.</td><td>Quadriceps femoris, sartorius, pectineus, iliacus</td><td>Hip flexion, knee extension</td></tr>
+<tr><td>Medial thigh</td><td>Obturator n.</td><td>Obturator a.</td><td>Adductor longus/brevis, adductor part of adductor magnus, gracilis, obturator externus</td><td>Hip adduction</td></tr>
+<tr><td>Posterior thigh</td><td>Sciatic n.</td><td>Deep femoral (profunda femoris) a.</td><td>Biceps femoris (long head), semitendinosus, semimembranosus, hamstring part of adductor magnus</td><td>Hip extension, knee flexion</td></tr>
+<tr><td>Anterior leg</td><td>Deep fibular n.</td><td>Anterior tibial a.</td><td>Tibialis anterior, extensor digitorum longus, extensor hallucis longus, fibularis tertius</td><td>Ankle dorsiflexion, subtalar inversion, MTP joint extension</td></tr>
+<tr><td>Lateral leg</td><td>Superficial fibular n.</td><td>Anterior tibial a. / fibular a.</td><td>Fibularis longus/brevis</td><td>Subtalar joint eversion</td></tr>
+<tr><td>Superficial posterior leg</td><td>Tibial n.</td><td>Posterior tibial a.</td><td>Gastrocnemius, soleus, plantaris</td><td>Ankle plantarflexion</td></tr>
+<tr><td>Deep posterior leg</td><td>Tibial n.</td><td>Posterior tibial a. / fibular a.</td><td>Flexor digitorum longus, tibialis posterior, flexor hallucis longus, popliteus</td><td>Subtalar inversion, MTP joint flexion</td></tr>
+</table>
+<div class="callout">
+  <b>Chronic common fibular nerve injury at the ankle:</b> if a compartment "goes down," the foot is held in the position of the remaining (unopposed) compartments. Losing the anterior + lateral compartments (dorsiflexion + eversion + assist-inversion) leaves the posterior compartment (plantarflexion + inversion) unopposed &rarr; the foot rests <b>plantarflexed and inverted</b> &mdash; the classic chronic foot-drop posture.
+</div>
+
+  </div>
+
+  <div class="tab-panel" id="tab-systems">
+    
+<div class="jumpnav">
+  <a href="#sys-dermatomes">Key Dermatomes</a>
+  <a href="#sys-myotomes">Myotomes &amp; Reflexes</a>
+  <a href="#sys-deformities">Classic Deformities</a>
+  <a href="#sys-mechanisms">Mechanism &rarr; Nerve (Vignette Cheat Sheet)</a>
+</div>
+
+<h2 class="section-title" id="sys-dermatomes">Key Dermatomes to Know Cold</h2>
+<h3 class="sub-title">Lower Extremity</h3>
+<table class="ref-table">
+<tr><th>Spinal Nerve</th><th>Region of Innervation</th><th>Memory Trick</th></tr>
+<tr><td><b>L1</b></td><td>Inguinal region</td><td>"IL is L1" &mdash; Inguinal Ligament</td></tr>
+<tr><td><b>L3</b></td><td>Anterior/medial knee</td><td>"L3, anterior to the knee" (it rhymes)</td></tr>
+<tr><td><b>L4</b></td><td>Anteromedial leg and medial malleolus</td><td>Glides down the tibia-side to the medial malleolus</td></tr>
+<tr><td><b>L5</b></td><td>Anterolateral leg and medial foot/big toe</td><td>Glides down the fibula-side, along the medial foot, tickles the big toe</td></tr>
+<tr><td><b>S1</b></td><td>Lateral foot and lateral malleolus</td><td>Lateral plantar foot and lateral malleolus</td></tr>
+<tr><td><b>S2</b></td><td>Posterior leg and thigh</td><td>Climbs up the posterior leg/thigh (popliteal fossa)</td></tr>
+<tr><td><b>S3–C0</b></td><td>Gluteal region</td><td>"Bullseye" pattern over the buttock</td></tr>
+</table>
+<h3 class="sub-title">Upper Extremity</h3>
+<table class="ref-table">
+<tr><th>Spinal Nerve</th><th>Region of Innervation</th></tr>
+<tr><td><b>C5</b></td><td>Lateral arm (over the deltoid, "regimental badge" area)</td></tr>
+<tr><td><b>C6</b></td><td>Thumb and index finger (mnemonic: C6 shoots a "6-shooter" thumbs-up)</td></tr>
+<tr><td><b>C7</b></td><td>Middle finger</td></tr>
+<tr><td><b>C8</b></td><td>Ring and little finger</td></tr>
+<tr><td><b>T1</b></td><td>Medial forearm</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-myotomes">Myotomes &amp; Deep Tendon Reflexes</h2>
+<table class="ref-table">
+<tr><th>Spinal Nerve</th><th>Functional Myotome</th></tr>
+<tr><td>L2/L3</td><td>Hip flexion</td></tr>
+<tr><td><b>L3/L4</b></td><td>Knee extension (<b>patellar reflex</b>; mainly L4)</td></tr>
+<tr><td>L4/L5</td><td>Ankle dorsiflexion, big toe extension</td></tr>
+<tr><td><b>S1/S2</b></td><td>Ankle plantarflexion (<b>calcaneal/Achilles reflex</b>; mainly S1)</td></tr>
+<tr><td>S2/S3</td><td>Toe flexion</td></tr>
+</table>
+<table class="ref-table">
+<tr><th>Deep Tendon Reflex</th><th>Spinal Cord Segments</th></tr>
+<tr><td>Biceps</td><td>C5–C6</td></tr>
+<tr><td>Brachioradialis</td><td>C5–C6</td></tr>
+<tr><td>Triceps</td><td>C7–C8</td></tr>
+<tr><td>Patellar (quadriceps/knee jerk)</td><td>L3–L4</td></tr>
+<tr><td>Achilles (calcaneal/ankle jerk)</td><td>S1–S2</td></tr>
+</table>
+<div class="callout">Mnemonic for lower extremity reflexes: "S1, 2 &mdash; buckle my shoe" (ankle jerk); "L3, 4 &mdash; kick the door" (knee jerk).</div>
+
+<h2 class="section-title" id="sys-deformities">Classic Named Deformities &amp; Signs</h2>
+<table class="ref-table">
+<tr><th>Sign / Deformity</th><th>Nerve</th><th>Description</th></tr>
+<tr><td><b>Wrist drop</b></td><td>Radial n.</td><td>Cannot extend the wrist or fingers; hand hangs flexed at the wrist</td></tr>
+<tr><td><b>Claw hand</b></td><td>Ulnar n.</td><td>Hyperextension of the MCP joints with flexion of the DIP/PIP joints of the ring and little fingers (worse with a distal/wrist lesion — the "ulnar paradox")</td></tr>
+<tr><td><b>Hand of Benediction / "Pope's blessing"</b></td><td>Median n. (when trying to make a fist)</td><td>Index and middle fingers fail to flex while ring/little fingers flex normally</td></tr>
+<tr><td><b>Ape hand</b></td><td>Median n. (chronic)</td><td>Thenar eminence wasting with the thumb held adducted/extended in the same plane as the fingers, due to loss of opposition</td></tr>
+<tr><td><b>OK sign weakness</b></td><td>Anterior interosseous n. (median n. branch)</td><td>Cannot form a full circle pinching thumb to index finger &mdash; forms a triangle/pinch weakness instead</td></tr>
+<tr><td><b>Froment's sign</b></td><td>Ulnar n.</td><td>Substitution of thumb flexion (via median-innervated FPL) for weak adduction (adductor pollicis) when pinching a piece of paper</td></tr>
+<tr><td><b>Winged scapula (medial winging)</b></td><td>Long thoracic n.</td><td>Medial border of the scapula protrudes posteriorly, especially when pushing against a wall</td></tr>
+<tr><td><b>Winged scapula (lateral winging)</b></td><td>Spinal accessory n. (CN XI)</td><td>Lateral scapular winging with shoulder droop and weak shrug (trapezius palsy)</td></tr>
+<tr><td><b>Waiter's tip position</b></td><td>Erb-Duchenne palsy (upper trunk, C5–C6)</td><td>Arm adducted, internally rotated, extended at the elbow, forearm pronated, wrist flexed</td></tr>
+<tr><td><b>Claw hand at birth &plusmn; Horner syndrome</b></td><td>Klumpke palsy (lower trunk, C8–T1)</td><td>Intrinsic hand muscle paralysis; Horner syndrome if the T1 root avulses (ptosis, miosis, anhidrosis)</td></tr>
+<tr><td><b>Foot drop</b></td><td>Common/deep fibular n.</td><td>Cannot dorsiflex the foot; high-stepping ("steppage") gait to avoid dragging the toes</td></tr>
+<tr><td><b>Trendelenburg sign</b></td><td>Superior gluteal n.</td><td>Pelvis drops on the side CONTRALATERAL to the lesion when standing on the affected leg</td></tr>
+<tr><td><b>Gluteus maximus lurch</b></td><td>Inferior gluteal n.</td><td>Thorax lurches posteriorly over the stance leg on the SAME side as the lesion, to substitute for weak hip extension</td></tr>
+<tr><td><b>Meralgia paresthetica</b></td><td>Lateral femoral cutaneous n.</td><td>Burning/tingling over the lateral thigh from entrapment under the inguinal ligament</td></tr>
+</table>
+
+<h2 class="section-title" id="sys-mechanisms">Mechanism &rarr; Nerve: Classic Vignette Cheat Sheet</h2>
+<table class="ref-table">
+<tr><th>Clinical Scenario / Mechanism</th><th>Nerve Injured</th></tr>
+<tr><td>Midshaft humerus fracture</td><td>Radial n. (&plusmn; profunda brachii a.)</td></tr>
+<tr><td>Surgical neck of humerus fracture; anterior shoulder dislocation</td><td>Axillary n. (&plusmn; posterior circumflex humeral a.)</td></tr>
+<tr><td>"Saturday night palsy" (arm draped over a chair); prolonged crutch use; "honeymooner's palsy"</td><td>Radial n. (compression in the spiral groove or axilla)</td></tr>
+<tr><td>Supracondylar humerus fracture (children)</td><td>Median n. (&plusmn; brachial a.); AIN especially vulnerable</td></tr>
+<tr><td>Medial epicondyle fracture; leaning on elbows; "funny bone"</td><td>Ulnar n. (cubital tunnel)</td></tr>
+<tr><td>Cyclist's palsy (handlebar pressure); hook of hamate fracture</td><td>Ulnar n. (Guyon's canal)</td></tr>
+<tr><td>Carpal tunnel syndrome (repetitive wrist use, pregnancy, hypothyroidism, RA, acromegaly)</td><td>Median n.</td></tr>
+<tr><td>Wrist laceration (volar surface)</td><td>Median and/or ulnar n. depending on location/depth</td></tr>
+<tr><td>Axillary lymph node dissection (mastectomy); stab wound to lateral chest wall</td><td>Long thoracic n. &rarr; medial winged scapula</td></tr>
+<tr><td>Posterior triangle of the neck lymph node biopsy/dissection</td><td>Spinal accessory n. (CN XI) &rarr; lateral winged scapula, shoulder droop</td></tr>
+<tr><td>Thyroidectomy/parathyroidectomy</td><td>Recurrent laryngeal n. (hoarseness) or superior laryngeal n. (pitch changes)</td></tr>
+<tr><td>Thoracic aortic aneurysm, mediastinal mass</td><td>Left recurrent laryngeal n. (longer intrathoracic course looping under the aortic arch)</td></tr>
+<tr><td>Neck trauma, cardiac/thoracic surgery, Pancoast tumor</td><td>Phrenic n. &rarr; elevated hemidiaphragm, dyspnea</td></tr>
+<tr><td>Posterior hip dislocation</td><td>Sciatic n. (especially the common fibular component)</td></tr>
+<tr><td>Anterior hip dislocation; pelvic fracture; pelvic/gynecologic surgery</td><td>Obturator n. or femoral n.</td></tr>
+<tr><td>Retroperitoneal/psoas hematoma (e.g., anticoagulation); femoral catheterization; hip surgery</td><td>Femoral n. &rarr; weak knee extension, absent patellar reflex</td></tr>
+<tr><td>Intragluteal injection outside the safe upper-outer quadrant</td><td>Sciatic n. (too medial/inferior) or superior gluteal n. (too superior)</td></tr>
+<tr><td>Fibular neck fracture; tight leg cast; prolonged leg crossing; lateral decubitus positioning</td><td>Common fibular n. &rarr; foot drop</td></tr>
+<tr><td>Posterior knee dislocation</td><td>Tibial n. and/or popliteal a.</td></tr>
+<tr><td>Baker cyst</td><td>Tibial n. (proximal compression in the popliteal fossa)</td></tr>
+<tr><td>Tarsal tunnel syndrome</td><td>Tibial n. (distal branches at the ankle)</td></tr>
+<tr><td>Tight belt/waistband, obesity, pregnancy, seatbelt injury</td><td>Lateral femoral cutaneous n. &rarr; meralgia paresthetica</td></tr>
+<tr><td>Prolonged sitting/cycling; vaginal childbirth; pudendal nerve block</td><td>Pudendal n. &rarr; perineal numbness, incontinence</td></tr>
+<tr><td>Difficult vaginal delivery with shoulder dystocia; fall onto the shoulder with head forced away</td><td>Erb-Duchenne palsy (upper trunk, C5–C6) &rarr; waiter's tip</td></tr>
+<tr><td>Breech delivery with arm traction; grabbing something overhead while falling</td><td>Klumpke palsy (lower trunk, C8–T1) &rarr; claw hand &plusmn; Horner syndrome</td></tr>
+</table>
+
+  </div>
+
+</div>
+
+<script>
+const NERVES = [{"name": "Musculocutaneous nerve", "cat": "Upper Extremity", "roots": "C5-C7 (lateral cord)", "motor": "Biceps brachii, brachialis, coracobrachialis — elbow flexion, forearm supination", "sensory": "Lateral forearm (as the lateral antebrachial cutaneous nerve)", "injury": "Rarely isolated; can occur with axilla trauma or lateral cord injury", "buzz": "Loss of elbow flexion/supination, lateral forearm sensory loss"}, {"name": "Axillary nerve", "cat": "Upper Extremity", "roots": "C5-C6 (posterior cord)", "motor": "Deltoid, teres minor — shoulder abduction beyond 15°, external rotation", "sensory": "'Regimental badge' area — skin over the lateral deltoid (superior lateral cutaneous nerve of arm)", "injury": "Surgical neck of humerus fracture, anterior shoulder dislocation, improper crutch use", "buzz": "Flattened deltoid contour, cannot abduct arm past 15°, regimental badge sensory loss"}, {"name": "Radial nerve", "cat": "Upper Extremity", "roots": "C5-T1 (posterior cord)", "motor": "Triceps, brachioradialis, supinator, extensor carpi radialis/ulnaris, extensors of wrist/fingers/thumb", "sensory": "Posterior arm/forearm, dorsal hand including the dorsal web space between thumb and index finger", "injury": "Midshaft humerus fracture (radial/spiral groove); 'Saturday night palsy' (compression from arm draped over a chair while intoxicated); crutches; 'honeymooner's palsy' (arm compressed under a sleeping partner)", "buzz": "Wrist drop, finger drop, weak grip (can't stabilize wrist in extension), dorsal 1st web space sensory loss"}, {"name": "Median nerve", "cat": "Upper Extremity", "roots": "C5-T1 (lateral + medial cords)", "motor": "Forearm flexors/pronators (except FCU and medial half FDP — those are ulnar); thenar muscles via recurrent branch (LOAF: Lateral 2 lumbricals, Opponens pollicis, Abductor pollicis brevis, Flexor pollicis brevis)", "sensory": "Palmar surface of lateral 3.5 digits and their fingertips", "injury": "Supracondylar humerus fracture (with brachial artery), carpal tunnel syndrome (compression at wrist), wrist laceration", "buzz": "'Hand of benediction'/'Pope's blessing' when making a fist; 'Ape hand' with thenar wasting (chronic); 'OK sign' weakness with anterior interosseous nerve (AIN) branch injury"}, {"name": "Anterior interosseous nerve (AIN)", "cat": "Upper Extremity", "roots": "C8-T1 (branch of median n.)", "motor": "Flexor pollicis longus, lateral half of flexor digitorum profundus (digits 2-3), pronator quadratus — pure motor, no cutaneous sensory branch", "sensory": "None (pure motor nerve)", "injury": "Supracondylar fracture, forearm trauma, or isolated compression (rare neuritis)", "buzz": "Cannot make the 'OK sign' (weak pinch between thumb and index finger); no sensory loss"}, {"name": "Ulnar nerve", "cat": "Upper Extremity", "roots": "C8-T1 (medial cord)", "motor": "Flexor carpi ulnaris, medial half of flexor digitorum profundus (digits 4-5); hypothenar muscles, interossei, adductor pollicis, medial 2 lumbricals", "sensory": "Palmar and dorsal skin of the medial 1.5 digits (ring and little finger)", "injury": "Fracture of the medial epicondyle ('funny bone', cubital tunnel); compression at Guyon's canal at the wrist (cyclist's palsy, handlebar pressure); hook of hamate fracture (deep branch)", "buzz": "'Claw hand' (worse with a distal/wrist lesion than a proximal/elbow lesion — the 'ulnar paradox', since a proximal lesion also weakens the FDP to digits 4-5, reducing DIP flexion and the appearance of clawing); positive Froment's sign (using FPL/median n. to compensate for weak adductor pollicis when pinching paper); positive Tinel's sign at the elbow"}, {"name": "Long thoracic nerve", "cat": "Upper Extremity", "roots": "C5-C7 (direct branches off the roots, before trunks form)", "motor": "Serratus anterior — protracts scapula, holds it against the thoracic wall, assists arm abduction above horizontal", "sensory": "None (pure motor nerve)", "injury": "Axillary lymph node dissection (mastectomy), stab wound, blow to the lateral ribs", "buzz": "Medial winging of the scapula (protrudes when pushing against a wall); difficulty raising the arm above the head"}, {"name": "Suprascapular nerve", "cat": "Upper Extremity", "roots": "C5-C6 (direct branch off the upper trunk)", "motor": "Supraspinatus (initiates abduction 0-15°), infraspinatus (external rotation)", "sensory": "Small area of the posterior shoulder (variable/inconsistent)", "injury": "Traction injury, backpack straps, entrapment at the suprascapular notch", "buzz": "Weak initiation of arm abduction, weak external rotation"}, {"name": "Thoracodorsal nerve", "cat": "Upper Extremity", "roots": "C6-C8 (posterior cord)", "motor": "Latissimus dorsi — arm adduction, extension, internal rotation", "sensory": "None (pure motor nerve)", "injury": "Axillary surgery/lymph node dissection (rare isolated injury)", "buzz": "Weak arm adduction/extension, difficulty with pull-up-type movements"}, {"name": "Erb-Duchenne palsy (upper trunk, C5-C6)", "cat": "Upper Extremity", "roots": "C5-C6 (upper trunk)", "motor": "Affects axillary, musculocutaneous, and suprascapular nerve distributions — shoulder abduction, external rotation, elbow flexion, forearm supination", "sensory": "Lateral arm/forearm sensory loss (variable)", "injury": "Lateral traction on the neck with the shoulder pulled down — shoulder dystocia during difficult vaginal delivery, or a fall/motorcycle accident forcing the head away from the shoulder", "buzz": "'Waiter's tip' position — arm hangs adducted, internally rotated, extended at the elbow, forearm pronated, wrist flexed"}, {"name": "Klumpke palsy (lower trunk, C8-T1)", "cat": "Upper Extremity", "roots": "C8-T1 (lower trunk)", "motor": "Affects ulnar nerve and intrinsic hand muscles predominantly", "sensory": "Medial arm/forearm sensory loss", "injury": "Upward traction on the arm — grabbing a branch/ledge while falling, or a breech delivery where the arm is pulled upward", "buzz": "'Claw hand' at birth; can be associated with Horner syndrome (ptosis, miosis, anhidrosis) if the T1 root avulses and disrupts the sympathetic chain"}, {"name": "Posterior interosseous nerve (PIN)", "cat": "Upper Extremity", "roots": "C7-C8 (deep branch of radial n.)", "motor": "Extensor digitorum, extensor carpi ulnaris, and other finger/thumb extensors (spares extensor carpi radialis longus, which is proximal, so wrist extension with radial deviation is preserved)", "sensory": "None (pure motor branch)", "injury": "Radial head fracture/dislocation, entrapment at the supinator (arcade of Fröhse), 'resistant tennis elbow'", "buzz": "Finger drop with relatively preserved wrist extension (deviates radially); no sensory loss"}, {"name": "Subcostal nerve", "cat": "Lower Extremity", "roots": "T12", "motor": "Internal/external abdominal oblique muscles, transversus abdominis, rectus abdominis", "sensory": "T12 dermatome", "injury": "—", "buzz": "Continuation of T12 intercostal nerve below the 12th rib"}, {"name": "Ilioinguinal nerve", "cat": "Lower Extremity", "roots": "L1", "motor": "Anterolateral abdominal wall", "sensory": "L1 dermatome, scrotum/labia majora", "injury": "Inguinal hernia repair, pregnancy", "buzz": "Can be injured in inguinal surgery — numbness of the groin/scrotum"}, {"name": "Iliohypogastric nerve", "cat": "Lower Extremity", "roots": "L1", "motor": "Anterolateral abdominal wall", "sensory": "Suprapubic area", "injury": "Abdominal/laparoscopic surgery (Pfannenstiel incision)", "buzz": "Runs with the ilioinguinal nerve; suprapubic numbness after low transverse incisions"}, {"name": "Genitofemoral nerve", "cat": "Lower Extremity", "roots": "L1-L2", "motor": "Cremaster muscle — retraction of testes (cremasteric reflex)", "sensory": "Medial thigh (femoral branch), scrotum/labia majora (genital branch)", "injury": "Abdominal/laparoscopic surgery, retroperitoneal dissection", "buzz": "Loss of the cremasteric reflex; genital branch runs through the inguinal canal, femoral branch through the femoral sheath"}, {"name": "Lateral femoral cutaneous nerve", "cat": "Lower Extremity", "roots": "L2-L3", "motor": "None (pure sensory nerve)", "sensory": "Lateral thigh", "injury": "Compression under the inguinal ligament — tight belts/waistbands, obesity, pregnancy, seatbelts", "buzz": "Meralgia paresthetica — burning/tingling lateral thigh pain; classic 'tool belt neuropathy'"}, {"name": "Femoral nerve", "cat": "Lower Extremity", "roots": "L2-L4 (posterior divisions), patellar reflex", "motor": "Quadriceps femoris (knee extension, hip flexion), sartorius, iliacus, pectineus — hip joint flexion", "sensory": "Anterior thigh, medial leg (via the saphenous nerve)", "injury": "Femur fracture, anterior hip dislocation, retroperitoneal/psoas hematoma, pelvic surgery, femoral catheterization", "buzz": "Weak knee extension, diminished/absent patellar reflex, anteromedial thigh and medial leg sensory loss"}, {"name": "Obturator nerve", "cat": "Lower Extremity", "roots": "L2-L4", "motor": "Obturator externus (hip external rotation), adductor longus/brevis, adductor part of adductor magnus, gracilis, pectineus — hip joint adduction", "sensory": "Medial thigh ('little circle of medial thigh')", "injury": "Pelvic surgery, nerve compression, obturator hernia", "buzz": "Weak hip adduction, medial thigh sensory loss; classically injured in pelvic/gynecologic surgery"}, {"name": "Lumbosacral trunk", "cat": "Lower Extremity", "roots": "L4-L5", "motor": "Contributes to the sciatic nerve, superior/inferior gluteal nerves, nerve to quadratus femoris, nerve to obturator internus", "sensory": "L4-L5 dermatomes", "injury": "—", "buzz": "The connecting link between the lumbar and sacral plexuses"}, {"name": "Sciatic nerve", "cat": "Lower Extremity", "roots": "L4-S3", "motor": "Tibial component: biceps femoris long head, semitendinosus, semimembranosus, hamstring part of adductor magnus (hip extension, knee flexion). Common fibular component: biceps femoris short head (knee flexion)", "sensory": "None directly, but its branches (tibial, common fibular) supply the entire leg/foot below the knee except the medial leg", "injury": "Posterior hip dislocation, intragluteal injection outside the safe upper-outer quadrant, herniated disc, piriformis syndrome, hip arthroplasty", "buzz": "Widest and thickest nerve in the body; splits into tibial + common fibular nerves at (or proximal to) the popliteal fossa"}, {"name": "Common fibular (peroneal) nerve", "cat": "Lower Extremity", "roots": "L4-S2", "motor": "Branches: superficial fibular n., deep fibular n., lateral sural cutaneous n., short head of biceps femoris", "sensory": "Posterior leg via the sural nerve contribution", "injury": "Fracture of the fibular head/neck (nerve wraps superficially around the fibular neck — very exposed to trauma/compression)", "buzz": "The most commonly injured nerve of the lower extremity; leg casts, prolonged leg crossing, or lateral decubitus positioning also compress it here"}, {"name": "Superficial fibular (peroneal) nerve", "cat": "Lower Extremity", "roots": "L4-S2", "motor": "Fibularis longus/brevis — subtalar joint eversion", "sensory": "Lateral leg, dorsal foot (except the web space between digits 1-2)", "injury": "Fibula fracture, nerve compression (lateral decubitus position, tight leg casts)", "buzz": "Weak foot eversion; lateral leg/dorsal foot numbness"}, {"name": "Deep fibular (peroneal) nerve", "cat": "Lower Extremity", "roots": "L4-S2", "motor": "Tibialis anterior, extensor hallucis longus/brevis, extensor digitorum longus/brevis, fibularis tertius — ankle dorsiflexion, subtalar joint inversion", "sensory": "Web space between digits 1 and 2 of the foot only", "injury": "Fibula fracture, nerve compression (surgery, lateral decubitus, tight casts)", "buzz": "FOOT DROP (loss of dorsiflexion); numbness limited to the web space between the great and second toe"}, {"name": "Tibial nerve", "cat": "Lower Extremity", "roots": "L4-S3, calcaneal (Achilles) reflex (mainly S1)", "motor": "Gastrocnemius, soleus, plantaris (ankle plantarflexion); popliteus (unlocks the knee for flexion); tibialis posterior, flexor digitorum longus, flexor hallucis longus (subtalar inversion); intrinsic foot muscles via medial and lateral plantar nerves", "sensory": "Posterior leg (via sural n.), plantar surface/sole of the foot", "injury": "Posterior knee dislocation (proximal lesion), Baker cyst (proximal lesion — fluid-filled cyst from arthritis/torn cartilage/knee inflammation), tarsal tunnel syndrome (distal lesion — the most common site of tibial nerve injury)", "buzz": "Cannot stand on tiptoes (plantarflexion); tarsal tunnel syndrome causes numbness down the sole of the foot"}, {"name": "Sural nerve", "cat": "Lower Extremity", "roots": "S1-S2 (branch of tibial n. and common fibular n.)", "motor": "None (pure sensory nerve)", "sensory": "Posterolateral leg, lateral foot", "injury": "Rarely injured in isolation; frequently harvested as a nerve graft donor", "buzz": "Formed by contributions from both the tibial and common fibular nerves"}, {"name": "Posterior femoral cutaneous nerve", "cat": "Lower Extremity", "roots": "S1-S3", "motor": "None (pure sensory nerve)", "sensory": "Posterior thigh", "injury": "Rarely injured in isolation (pelvic trauma, prolonged sitting)", "buzz": "Also supplies the inferior buttock and perineum in some individuals"}, {"name": "Pudendal nerve", "cat": "Lower Extremity", "roots": "S2-S4", "motor": "External urethral sphincter (urination), external anal sphincter (defecation), muscles of the perineum/pelvic floor (ejaculation/erection)", "sensory": "External genitalia, perineum ('the taint')", "injury": "Nerve compression from prolonged sitting/cycling, vaginal childbirth (stretch injury), pudendal nerve block during labor", "buzz": "Mnemonic: 'S2,3,4 keeps the [poop, pee, and sex] off the floor'; injury causes fecal/urinary incontinence and perineal numbness"}, {"name": "Nerve to quadratus femoris", "cat": "Lower Extremity", "roots": "L4-S1", "motor": "Inferior gemellus, quadratus femoris — hip external rotation, adduction (also stabilizes the femoral head)", "sensory": "None (pure motor nerve)", "injury": "Rare isolated injury; can occur with posterior hip dislocation", "buzz": "Deep to the sciatic nerve; often discussed alongside hip external rotators"}, {"name": "Superior gluteal nerve", "cat": "Lower Extremity", "roots": "L4-S1", "motor": "Gluteus medius, gluteus minimus (hip abduction), tensor fasciae latae (hip abduction, internal rotation, flexion)", "sensory": "None (pure motor nerve)", "injury": "Intragluteal injection outside the safe upper-outer quadrant, posterior hip surgery, hip fracture/dislocation", "buzz": "Positive Trendelenburg sign — contralateral pelvic drop when standing on the affected leg (the nerve lesion is CONTRALATERAL to the side of pelvic drop, since the ipsilateral gluteus medius/minimus fails to hold the pelvis level)"}, {"name": "Inferior gluteal nerve", "cat": "Lower Extremity", "roots": "L5-S2", "motor": "Gluteus maximus — hip extension, external rotation (key for climbing stairs and rising from a seated position)", "sensory": "None (pure motor nerve)", "injury": "Posterior hip dislocation, hip surgery", "buzz": "Gluteus maximus lurch/lunging gait — the lesion is IPSILATERAL to the side of the lurch (patient thrusts the thorax posteriorly over the stance leg to substitute for weak hip extension)"}, {"name": "Nerve to obturator internus", "cat": "Lower Extremity", "roots": "L5-S2", "motor": "Superior gemellus, obturator internus — hip external rotation, abduction (when hip is flexed)", "sensory": "None (pure motor nerve)", "injury": "Rare isolated injury", "buzz": "Runs alongside the pudendal nerve through the lesser sciatic foramen"}, {"name": "Nerve to piriformis", "cat": "Lower Extremity", "roots": "L5-S2", "motor": "Piriformis — hip external rotation, abduction", "sensory": "None (pure motor nerve)", "injury": "Piriformis syndrome can secondarily compress the adjacent sciatic nerve", "buzz": "The piriformis muscle is a key landmark — most structures exiting the greater sciatic foramen pass below it"}, {"name": "Recurrent laryngeal nerve", "cat": "Trunk / Neck", "roots": "Branch of vagus (CN X)", "motor": "Intrinsic muscles of the larynx (except cricothyroid) — vocal cord movement", "sensory": "Sensation below the vocal cords", "injury": "Thyroid/parathyroid surgery, mediastinal masses, thoracic aortic aneurysm (left side has a longer intrathoracic course, looping under the aortic arch)", "buzz": "Hoarseness, vocal cord paralysis; bilateral injury can cause airway obstruction requiring emergent airway management"}, {"name": "Superior laryngeal nerve (external branch)", "cat": "Trunk / Neck", "roots": "Branch of vagus (CN X)", "motor": "Cricothyroid muscle — tenses the vocal cords", "sensory": "Internal branch supplies sensation above the vocal cords", "injury": "Thyroid surgery (runs close to the superior thyroid artery)", "buzz": "Loss of high-pitched phonation/voice projection (subtle change, unlike RLN injury)"}, {"name": "Phrenic nerve", "cat": "Trunk / Neck", "roots": "C3-C5", "motor": "Diaphragm — primary muscle of inspiration", "sensory": "Diaphragmatic pleura, pericardium", "injury": "Neck trauma, cardiac/thoracic surgery, Pancoast tumor (apical lung cancer), mediastinal mass", "buzz": "Mnemonic: 'C3, 4, 5 keeps the diaphragm alive'; injury causes elevated hemidiaphragm on CXR and dyspnea (paradoxical abdominal movement on inspiration)"}, {"name": "Spinal accessory nerve (CN XI)", "cat": "Trunk / Neck", "roots": "Cranial roots + C1-C5 spinal roots", "motor": "Sternocleidomastoid (head rotation to the opposite side), trapezius (shoulder shrug, scapular stabilization)", "sensory": "None (pure motor nerve)", "injury": "Posterior triangle of the neck lymph node biopsy/dissection (most common iatrogenic cause)", "buzz": "Lateral winging of the scapula (different from long thoracic's medial winging) with shoulder droop and weak shrug"}];
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'instant'});
+  });
+});
+
+const container = document.getElementById('results');
+const searchInput = document.getElementById('search');
+const catNav = document.getElementById('catNav');
+const countLine = document.getElementById('countLine');
+const noResults = document.getElementById('noResults');
+
+const CAT_ORDER = ["Upper Extremity","Lower Extremity","Trunk / Neck"];
+let activeCat = 'All';
+
+function renderCatNav(){
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.textContent = 'All (' + NERVES.length + ')';
+  allBtn.onclick = () => setCategory('All', allBtn);
+  catNav.appendChild(allBtn);
+  CAT_ORDER.forEach(cat => {
+    const n = NERVES.filter(o=>o.cat===cat).length;
+    if(n===0) return;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = cat + ' (' + n + ')';
+    btn.onclick = () => setCategory(cat, btn);
+    catNav.appendChild(btn);
+  });
+}
+
+function setCategory(cat, btnEl){
+  activeCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  filterAndRender();
+}
+
+function fieldRow(label, val){
+  if(!val || val === "—") return '';
+  return '<div class="org-field"><b>'+label+'</b>'+val+'</div>';
+}
+
+function renderNerves(){
+  container.innerHTML = '';
+  NERVES.forEach(o => {
+    const card = document.createElement('div');
+    card.className = 'org-card';
+    card.dataset.cat = o.cat;
+    const searchBlob = [o.name,o.cat,o.roots,o.motor,o.sensory,o.injury,o.buzz].filter(Boolean).join(' ').toLowerCase();
+    card.dataset.search = searchBlob;
+    let badges = '<span class="org-badge">'+o.cat+'</span>';
+    if(o.roots) badges += '<span class="org-badge">'+o.roots+'</span>';
+    card.innerHTML = `
+      <div class="org-top">
+        <span class="org-name">${o.name}</span>
+        <span class="org-tags">${badges}</span>
+      </div>
+      <div class="org-grid">
+        ${fieldRow('Motor Innervation', o.motor)}
+        ${fieldRow('Sensory Innervation', o.sensory)}
+        ${fieldRow('Injury Mechanism &amp; Presentation', o.injury)}
+      </div>
+      ${o.buzz ? '<div class="org-buzz">\u{1F4A1} '+o.buzz+'</div>' : ''}
+    `;
+    container.appendChild(card);
+  });
+}
+
+function filterAndRender(){
+  const q = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
+  document.querySelectorAll('.org-card').forEach(card => {
+    const matchesCat = (activeCat === 'All' || card.dataset.cat === activeCat);
+    const matchesSearch = (q === '' || card.dataset.search.includes(q));
+    const show = matchesCat && matchesSearch;
+    card.classList.toggle('hidden', !show);
+    if(show) visibleCount++;
+  });
+  countLine.textContent = `Showing ${visibleCount} of ${NERVES.length} nerves`;
+  noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+renderCatNav();
+renderNerves();
+filterAndRender();
+searchInput.addEventListener('input', filterAndRender);
+</script>
+
+</body>
+</html>
