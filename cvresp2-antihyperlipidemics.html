@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Antihyperlipidemics — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.8rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ columns:2; margin:10px 0 0; padding-left:20px; }
+  .top-contents li{ margin-bottom:6px; font-size:0.9rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-240px; top:0; height:100vh; width:230px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:9px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.82rem; padding:6px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+
+  .container{ max-width:900px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:20px 0 8px; letter-spacing:0.02em;
+  }
+  section.card p, section.card li{ font-size:0.95rem; }
+  section.card ul{ padding-left:22px; }
+
+  .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0 auto; min-width:560px; }
+  table{ border-collapse:collapse; width:100%; margin:12px auto 18px; font-size:0.85rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .figure{ text-align:center; margin:16px 0; }
+  .figure img{ max-width:100%; height:auto; border:1px solid var(--border); border-radius:8px; background:#fff; padding:6px; }
+  .fig-cap{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--text-soft); margin-top:6px; }
+
+  /* Quiz styling */
+  .quiz-block{ margin-top:24px; padding-top:18px; border-top:2px dashed var(--sage); }
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--forest); letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .quiz-q{ background:#fffefb; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  .quiz-q p.stem{ font-weight:600; margin:0 0 10px; font-size:0.93rem; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:7px; padding:9px 12px;
+    margin-bottom:7px; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+    cursor:pointer; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:#e5f2e7; border-color:var(--correct); color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#fbe9e6; border-color:var(--incorrect); color:var(--incorrect); }
+  .quiz-choice[disabled]{ cursor:default; }
+  .quiz-explain{
+    display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light);
+    border-left:3px solid var(--forest); border-radius:6px; font-size:0.87rem;
+  }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:700px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+
+<div class="header">
+  <h1>Antihyperlipidemics</h1>
+  <p>Statins, PCSK9 Pathways &amp; Beyond &middot; Dr. Waterfall's CV II Lecture Series</p>
+</div>
+
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Lipid Physiology &amp; Lipoprotein Review</a></li>
+    <li><a href="#sec2">2. Pathophysiology &amp; Classification of Dyslipidemia</a></li>
+    <li><a href="#sec3">3. Non-Pharmacologic Management</a></li>
+    <li><a href="#sec4">4. HMG-CoA Reductase Inhibitors (Statins)</a></li>
+    <li><a href="#sec5">5. Cholesterol Absorption Inhibitor: Ezetimibe</a></li>
+    <li><a href="#sec6">6. PCSK9-Targeted Therapies</a></li>
+    <li><a href="#sec7">7. ATP-Citrate Lyase Inhibitor: Bempedoic Acid</a></li>
+    <li><a href="#sec8">8. Niacin</a></li>
+    <li><a href="#sec9">9. Fibrates</a></li>
+    <li><a href="#sec10">10. Bile Acid Binding Resins</a></li>
+    <li><a href="#sec11">11. HoFH Agents &amp; Omega-3 Fatty Acids</a></li>
+    <li><a href="#sec12">12. 2026 Guidelines &amp; Drug Selection</a></li>
+    <li><a href="#sec13">13. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#sec1">Lipid Physiology</a>
+  <a href="#sec2">Dyslipidemia Pathophysiology</a>
+  <a href="#sec3">Lifestyle Management</a>
+  <a href="#sec4">Statins</a>
+  <a href="#sec5">Ezetimibe</a>
+  <a href="#sec6">PCSK9 Therapies</a>
+  <a href="#sec7">Bempedoic Acid</a>
+  <a href="#sec8">Niacin</a>
+  <a href="#sec9">Fibrates</a>
+  <a href="#sec10">Bile Acid Resins</a>
+  <a href="#sec11">HoFH &amp; Omega-3</a>
+  <a href="#sec12">2026 Guidelines</a>
+  <a href="#sec13">Summary Tables</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="sec1">
+<h2>1. Lipid Physiology &amp; Lipoprotein Review</h2>
+
+<h3>Why Lipids Need Lipoproteins</h3>
+<ul>
+<li>Lipids (triglycerides, cholesterol, phospholipids) are hydrophobic and cannot circulate freely in aqueous plasma</li>
+<li><b>Triglycerides</b> &mdash; three fatty acids esterified to a glycerol backbone; primary energy storage form</li>
+<li><b>Cholesterol</b> &mdash; a sterol; structural component of membranes and precursor for steroid hormones, bile acids, and vitamin D; exists free and esterified</li>
+<li><b>Phospholipids</b> &mdash; amphipathic; form membrane bilayers and stabilize the lipoprotein surface monolayer</li>
+</ul>
+
+<h3>Lipoprotein Structure</h3>
+<div class="callout">Every lipoprotein is a sphere: a <b>hydrophobic core</b> of triglycerides and cholesteryl esters, surrounded by a <b>surface monolayer</b> of phospholipids, free cholesterol, and apolipoproteins. Apolipoproteins play structural, enzymatic, and receptor-binding roles.</div>
+
+<h3>The Five Lipoprotein Classes</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lipoprotein</th><th>Origin</th><th>Main Cargo</th><th>Key Apolipoproteins</th><th>Role</th></tr>
+<tr><td>Chylomicron</td><td>Intestine (post-meal)</td><td>Dietary triglycerides</td><td>ApoB-48, ApoC-II, ApoE</td><td>Deliver dietary fat to peripheral tissues</td></tr>
+<tr><td>VLDL</td><td>Liver</td><td>Endogenous triglycerides</td><td>ApoB-100, ApoC-II, ApoE</td><td>Deliver liver-made TG to tissues</td></tr>
+<tr><td>IDL</td><td>VLDL catabolism</td><td>TG + cholesterol</td><td>ApoB-100, ApoE</td><td>Transitional; cleared or &rarr; LDL</td></tr>
+<tr><td>LDL</td><td>IDL catabolism</td><td>Cholesterol (esterified)</td><td>ApoB-100</td><td>Deliver cholesterol to tissues; cleared by hepatic LDL receptors</td></tr>
+<tr><td>HDL</td><td>Liver &amp; intestine</td><td>Cholesterol (esterified)</td><td>ApoA-I</td><td>Reverse cholesterol transport back to liver</td></tr>
+</table>
+</div>
+
+<h3>Exogenous Pathway</h3>
+<ul>
+<li>Dietary triglycerides/cholesterol absorbed by enterocytes &rarr; packaged into chylomicrons (ApoB-48) &rarr; enter circulation via lymph</li>
+<li><b>Lipoprotein lipase (LPL)</b>, endothelium-bound and activated by <b>ApoC-II</b>, hydrolyzes chylomicron triglycerides into free fatty acids + glycerol for tissue use/storage</li>
+<li>Cholesterol-enriched <b>chylomicron remnants</b> (containing ApoE) are cleared by the liver via receptor-mediated uptake</li>
+</ul>
+
+<h3>Endogenous Pathway</h3>
+<ul>
+<li>Liver assembles triglycerides + cholesterol into <b>VLDL</b> (ApoB-100)</li>
+<li>Stepwise LPL-mediated hydrolysis: VLDL &rarr; IDL &rarr; LDL</li>
+<li>IDL may be taken up directly by the liver or further processed by hepatic lipase into LDL</li>
+<li>LDL (ApoB-100) is <b>~70&ndash;75% cleared by hepatic LDL receptors</b> &mdash; the major pharmacologic target in hypercholesterolemia</li>
+</ul>
+
+<h3>Reverse Cholesterol Transport (HDL)</h3>
+<ul>
+<li><b>Cholesterol efflux</b>: free cholesterol transfers from peripheral cells (especially macrophages in plaques) onto nascent HDL (ApoA-I)</li>
+<li><b>LCAT</b> esterifies this free cholesterol into cholesteryl esters, which migrate into the HDL core &rarr; mature HDL</li>
+<li>HDL delivers cholesteryl esters to the liver two ways: <b>directly via SR-B1</b>, or <b>indirectly via CETP</b> (transfers esters to VLDL/IDL/LDL, which are then cleared by LDL receptors)</li>
+<li>HDL cholesterol efflux <i>capacity</i> is emerging as a more reliable marker of cardioprotection than HDL-C concentration alone</li>
+</ul>
+
+<h3>Therapeutically Relevant Targets</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Target</th><th>Role</th><th>Drug(s) That Act Here</th></tr>
+<tr><td>HMG-CoA reductase</td><td>Rate-limiting enzyme, hepatic cholesterol synthesis</td><td>Statins</td></tr>
+<tr><td>NPC1L1</td><td>Intestinal/biliary cholesterol absorption</td><td>Ezetimibe</td></tr>
+<tr><td>PCSK9</td><td>Degrades hepatic LDL receptors</td><td>Alirocumab, evolocumab, inclisiran</td></tr>
+<tr><td>ATP-citrate lyase</td><td>Upstream of HMG-CoA reductase</td><td>Bempedoic acid</td></tr>
+<tr><td>MTP</td><td>Assembles ApoB-containing lipoproteins</td><td>Lomitapide</td></tr>
+<tr><td>Lipoprotein lipase (LPL)</td><td>Hydrolyzes TG in chylomicrons/VLDL</td><td>Fibrates, omega-3 fatty acids (enhance activity)</td></tr>
+<tr><td>ANGPTL3</td><td>Inhibits LPL and endothelial lipase</td><td>Evinacumab (neutralizes it)</td></tr>
+<tr><td>Bile acids</td><td>Intrahepatic recirculation of bile acids</td><td>Bile acid sequestrants</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Approximately what percentage of circulating LDL is cleared via hepatic LDL receptors, making this pathway the major target in hypercholesterolemia treatment?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">70&ndash;75%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">95&ndash;99%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">10&ndash;15%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">25&ndash;30%</button>
+<div class="quiz-explain"><b>Explanation:</b> Roughly 70&ndash;75% of circulating LDL is cleared by hepatic LDL receptors, which is why upregulating these receptors (statins, ezetimibe, PCSK9 inhibitors, bempedoic acid, bile acid sequestrants) is the central strategy in LDL-lowering pharmacotherapy.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which apolipoprotein serves as the essential cofactor that activates lipoprotein lipase, allowing hydrolysis of chylomicron and VLDL triglycerides?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ApoE</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">ApoC-II</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ApoB-100</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ApoA-I</button>
+<div class="quiz-explain"><b>Explanation:</b> ApoC-II is the obligate activating cofactor for lipoprotein lipase; without it (as in ApoC-II deficiency), triglyceride-rich lipoproteins cannot be hydrolyzed, producing severe hypertriglyceridemia.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. HDL can deliver cholesteryl esters to the liver directly, without destroying the HDL particle, via which receptor?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">LDL receptor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">NPC1L1</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">SR-B1</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PCSK9</button>
+<div class="quiz-explain"><b>Explanation:</b> SR-B1 (scavenger receptor class B type 1) allows the liver to selectively extract cholesteryl esters from HDL directly, remodeling and recycling the particle &mdash; the 'direct' route of reverse cholesterol transport.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec2">
+<h2>2. Pathophysiology &amp; Classification of Dyslipidemia</h2>
+
+<h3>What Is Dyslipidemia?</h3>
+<ul>
+<li>Abnormal levels of cholesterol, triglycerides, or both &mdash; a major <b>modifiable</b> risk factor for atherosclerotic cardiovascular disease (ASCVD)</li>
+<li>Types: <b>hypercholesterolemia</b> (&uarr;LDL-C), <b>hypertriglyceridemia</b> (&uarr;TG), <b>mixed dyslipidemia</b> (both)</li>
+<li>Severe hypertriglyceridemia (TG &gt;500 mg/dL, especially &gt;1,000 mg/dL) &rarr; sharply increased risk of <b>acute pancreatitis</b></li>
+</ul>
+
+<h3>Primary (Genetic) Dyslipidemias</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Disorder</th><th>Defect</th><th>Key Feature</th></tr>
+<tr><td>Familial hypercholesterolemia (FH)</td><td>Mutations in LDL receptor, ApoB, or PCSK9</td><td>Markedly &uarr;LDL-C, premature ASCVD; homozygous FH can exceed 500 mg/dL, presenting in childhood</td></tr>
+<tr><td>Lipoprotein(a) [Lp(a)]</td><td>Apo(a) covalently linked to ApoB-100</td><td>Independent risk factor for CAD and aortic stenosis; not on standard lipid panels; impairs fibrinolysis, promotes inflammation</td></tr>
+<tr><td>Familial combined hyperlipidemia</td><td>&uarr;ApoB and VLDL overproduction</td><td>Variable phenotype (high LDL, high TG, or both) within the same family</td></tr>
+<tr><td>Familial dysbetalipoproteinemia</td><td>Remnant particle accumulation (often ApoE2/E2)</td><td>Roughly proportional &uarr;cholesterol and &uarr;TG</td></tr>
+<tr><td>Familial chylomicronemia syndrome</td><td>LPL deficiency or ApoC-II defects</td><td>Extreme hypertriglyceridemia, recurrent pancreatitis</td></tr>
+</table>
+</div>
+
+<h3>Secondary (Acquired) Dyslipidemias</h3>
+<ul>
+<li>Uncontrolled diabetes mellitus, obesity, hypothyroidism, chronic kidney disease, nephrotic syndrome, excessive alcohol intake</li>
+<li>Medications: glucocorticoids, antiretrovirals, atypical antipsychotics</li>
+<li>Every dyslipidemia workup should screen for these secondary causes, which often require simultaneous management</li>
+</ul>
+
+<h3>Atherogenesis: The Mechanistic Story</h3>
+<div class="callout">LDL infiltrates the endothelium &rarr; <b>oxidative modification</b> &rarr; oxidized LDL triggers inflammation &rarr; monocytes differentiate into macrophages &rarr; macrophages engulf oxidized LDL via scavenger receptors &rarr; <b>foam cells</b> (hallmark of early plaque) &rarr; ongoing inflammation + smooth muscle proliferation &rarr; fibrous cap &rarr; plaque progression &rarr; unstable plaque rupture &rarr; thrombosis/acute coronary syndrome.</div>
+<ul>
+<li>Triglyceride-rich lipoproteins (VLDL and their remnants) are also pro-atherogenic, though less so than LDL</li>
+<li>When TG &gt;500&ndash;1,000 mg/dL, LPL-mediated clearance saturates &rarr; chylomicron/VLDL accumulation &rarr; hydrolysis in pancreatic capillaries generates cytotoxic free fatty acids &rarr; local pancreatic inflammation/injury</li>
+</ul>
+
+<h3>Classification of Lipid Parameters</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Parameter</th><th>Normal/Desirable</th><th>Borderline High</th><th>High</th><th>Very High/Concern</th></tr>
+<tr><td>LDL-C</td><td>&lt;100 mg/dL (optimal)</td><td>130&ndash;159</td><td>160&ndash;189</td><td>&ge;190 &rarr; high-intensity statin indicated</td></tr>
+<tr><td>HDL-C</td><td>&ge;60 mg/dL (protective)</td><td>&mdash;</td><td>&mdash;</td><td>&lt;40 (men)/&lt;50 (women) &rarr; risk factor</td></tr>
+<tr><td>Triglycerides</td><td>&lt;150 mg/dL</td><td>150&ndash;199</td><td>200&ndash;499</td><td>&ge;500 &rarr; &uarr;pancreatitis risk</td></tr>
+<tr><td>Total cholesterol</td><td>&lt;200 mg/dL</td><td>200&ndash;239</td><td>&ge;240</td><td>&mdash;</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient's triglyceride level is 1,100 mg/dL. The primary immediate clinical concern is:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hemolytic anemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Nephrotic syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Accelerated atherosclerosis</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Acute pancreatitis</button>
+<div class="quiz-explain"><b>Explanation:</b> Triglycerides above 500 mg/dL (especially beyond 1,000) saturate LPL-mediated clearance, causing chylomicron/VLDL accumulation and pancreatic capillary hydrolysis that generates cytotoxic free fatty acids &mdash; precipitating acute pancreatitis, the priority concern at this level.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Lipoprotein(a) is structurally unique among LDL particles because it contains which additional covalently linked protein?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Apo(a), homologous to plasminogen</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ApoA-I</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ApoC-II</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ApoE</button>
+<div class="quiz-explain"><b>Explanation:</b> Lp(a) is an LDL particle with Apo(a) &mdash; a protein homologous to plasminogen &mdash; covalently attached to ApoB-100. This structural similarity to plasminogen is thought to impair fibrinolysis and promote both atherogenesis and thrombosis.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which cell type internalizes oxidized LDL via scavenger receptors to form the lipid-laden foam cells characteristic of early atherosclerotic plaque?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neutrophils</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Macrophages</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hepatocytes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Endothelial progenitor cells</button>
+<div class="quiz-explain"><b>Explanation:</b> Monocytes that have migrated into the subendothelial space differentiate into macrophages, which internalize oxidized LDL through scavenger receptors (unregulated by feedback), becoming cholesterol-laden foam cells.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec3">
+<h2>3. Non-Pharmacologic Management</h2>
+
+<div class="callout">Lifestyle modification is the <b>cornerstone</b> of dyslipidemia management for every patient &mdash; sufficient alone for mild abnormalities, and an essential adjunct even when drug therapy is required.</div>
+
+<h3>Dietary Goals</h3>
+<ul>
+<li>Reduce saturated fat to &lt;7% of daily calories; eliminate trans fats</li>
+<li>Limit dietary cholesterol to &lt;200 mg/day</li>
+<li>Replace saturated fats with mono- and polyunsaturated fats (olive oil, nuts, fish)</li>
+<li>Increase soluble fiber (oats, legumes, fruits) &mdash; reduces LDL-C by interfering with bile acid reabsorption</li>
+<li>Plant sterols/stanols (fortified foods) competitively inhibit intestinal cholesterol absorption &rarr; can lower LDL-C by 5&ndash;15%</li>
+<li>Reduce total calories, avoid simple sugars (especially fructose), and minimize alcohol &mdash; all promote hepatic VLDL synthesis and worsen hypertriglyceridemia</li>
+</ul>
+
+<h3>Evidence-Based Dietary Patterns</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Pattern</th><th>Emphasis</th><th>Evidence</th></tr>
+<tr><td>Mediterranean diet</td><td>Vegetables, whole grains, legumes, nuts, fish, olive oil</td><td>Reduces cardiovascular events even in high-risk populations</td></tr>
+<tr><td>DASH diet</td><td>Fruits, vegetables, low-fat dairy; &darr;sodium and saturated fat</td><td>Originally for blood pressure; also improves lipid profile</td></tr>
+</table>
+</div>
+
+<h3>Other Lifestyle Interventions</h3>
+<ul>
+<li><b>Aerobic exercise</b> &ge;150 min/week &mdash; modestly &uarr;HDL-C, &darr;TG, improves insulin sensitivity</li>
+<li><b>Weight loss</b> of even 5&ndash;10% body weight improves LDL-C, TG, and HDL-C</li>
+<li><b>Smoking cessation</b> &mdash; smoking lowers HDL-C, promotes LDL oxidation, and independently causes endothelial dysfunction</li>
+<li><b>Alcohol moderation</b> &mdash; especially important in hypertriglyceridemia, since alcohol stimulates hepatic triglyceride synthesis</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient adopts a diet rich in fortified foods containing plant sterols. Through which mechanism do these lower LDL-C?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Upregulating hepatic PCSK9</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inhibiting HMG-CoA reductase</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Competitively inhibiting intestinal cholesterol absorption</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Binding bile acids in the intestinal lumen</button>
+<div class="quiz-explain"><b>Explanation:</b> Plant sterols and stanols structurally resemble cholesterol and competitively inhibit its intestinal absorption, lowering LDL-C by roughly 5&ndash;15% when consumed regularly in fortified foods.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which lifestyle factor most directly promotes hepatic VLDL synthesis and can worsen hypertriglyceridemia?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Weight loss</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Soluble fiber intake</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aerobic exercise</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Alcohol consumption</button>
+<div class="quiz-explain"><b>Explanation:</b> Alcohol stimulates hepatic triglyceride synthesis and VLDL secretion; along with excess calories and simple sugars (especially fructose), it is a key dietary driver of hypertriglyceridemia and should be moderated.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Increasing soluble fiber intake (oats, legumes, fruits) lowers LDL-C primarily by which mechanism?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Interfering with bile acid reabsorption in the gut</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inhibiting PCSK9 synthesis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Increasing hepatic VLDL export</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Enhancing lipoprotein lipase activity</button>
+<div class="quiz-explain"><b>Explanation:</b> Soluble fiber binds bile acids in the intestinal lumen, interfering with their reabsorption. This mimics (on a smaller scale) the mechanism of bile acid sequestrant drugs, forcing increased hepatic conversion of cholesterol to bile acids and upregulating LDL receptors.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec4">
+<h2>4. HMG-CoA Reductase Inhibitors (Statins)</h2>
+
+<div class="callout">Statins are <b>first-line pharmacologic therapy</b> for dyslipidemia and the cornerstone of ASCVD risk reduction.</div>
+
+<h3>Mechanism &amp; Effects</h3>
+<ul>
+<li>Competitive inhibitors of <b>HMG-CoA reductase</b>, the rate-limiting enzyme in hepatic cholesterol synthesis</li>
+<li>&darr;Intracellular cholesterol &rarr; <b>upregulates hepatic LDL receptor expression</b> &rarr; &uarr;clearance of circulating LDL</li>
+<li>Pleiotropic effects: improve endothelial function, stabilize plaque, reduce vascular inflammation</li>
+<li>Reduce LDL-C by ~20&ndash;60%; also lower triglycerides and modestly raise HDL-C</li>
+</ul>
+
+<h3>Statin Intensity Classification</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Intensity</th><th>Expected LDL-C &darr;</th><th>Example Regimens</th></tr>
+<tr><td><b>High-intensity</b></td><td>&ge;50%</td><td>Atorvastatin 40&ndash;80 mg; rosuvastatin 20&ndash;40 mg</td></tr>
+<tr><td><b>Moderate-intensity</b></td><td>30&ndash;49%</td><td>Atorvastatin 10&ndash;20 mg; rosuvastatin 5&ndash;10 mg; simvastatin 20&ndash;40 mg; pravastatin 40&ndash;80 mg</td></tr>
+<tr><td><b>Low-intensity</b></td><td>&lt;30%</td><td>Simvastatin 10 mg; pravastatin 10&ndash;20 mg (rarely used today)</td></tr>
+</table>
+</div>
+
+<h3>Therapeutic Uses &amp; Pharmacokinetics</h3>
+<ul>
+<li>Primary and secondary ASCVD prevention, familial hypercholesterolemia, mixed dyslipidemia with elevated TG</li>
+<li>Most undergo significant first-pass hepatic uptake; best taken in the <b>evening</b> to align with nocturnal cholesterol synthesis &mdash; <i>except</i> atorvastatin, rosuvastatin, and pitavastatin (long half-lives, dosed any time)</li>
+<li>Lovastatin and simvastatin are <b>prodrugs</b> with absorption enhanced by food</li>
+<li>Many are CYP3A4 substrates (lovastatin, simvastatin, atorvastatin) &mdash; susceptible to interactions; pravastatin and rosuvastatin are <b>not</b> significantly CYP-metabolized</li>
+</ul>
+
+<h3>Adverse Effects, Contraindications &amp; Interactions</h3>
+<ul>
+<li><b>Myopathy</b> &mdash; myalgia to rhabdomyolysis; risk factors include high dose, interacting drugs, advanced age, genetic variants; usually resolves with discontinuation; rarely persists as immune-mediated necrotizing myopathy requiring immunosuppression. Rosuvastatin and pravastatin are often better tolerated in patients with prior statin myalgia</li>
+<li><b>Hepatotoxicity</b> &mdash; mild transaminase elevation is not itself a reason to stop unless persistently &gt;3&times; ULN; routine LFT monitoring is not recommended (check if symptomatic)</li>
+<li>Small increase in fasting glucose/new-onset diabetes risk &mdash; ASCVD benefit still outweighs this risk</li>
+<li><b>Contraindicated</b> in pregnancy and active liver disease; discontinue when planning pregnancy, avoid in lactation; may be held during serious illness/major surgery/trauma</li>
+<li><b>Drug interactions:</b> avoid red yeast rice (contains statin-like compounds); CYP3A4 inhibitors (macrolides, azole antifungals, grapefruit juice) raise levels of CYP3A4-metabolized statins &rarr; &uarr;myopathy risk; when combining with a fibrate, <b>fenofibrate is preferred over gemfibrozil</b> (lower myopathy risk)</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which two statins have long half-lives that allow dosing at any time of day, unlike most other statins which should be taken in the evening?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Pravastatin and fluvastatin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Atorvastatin and rosuvastatin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Gemfibrozil and fenofibrate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Lovastatin and simvastatin</button>
+<div class="quiz-explain"><b>Explanation:</b> Atorvastatin, rosuvastatin, and pitavastatin have long half-lives, so unlike most statins (best taken in the evening to align with nocturnal cholesterol synthesis), they can be dosed at any time of day.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient on simvastatin is started on a macrolide antibiotic. The most important concern with this combination is:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Decreased LDL receptor expression</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Reduced ASCVD benefit from the statin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Increased risk of myopathy due to CYP3A4 inhibition raising statin levels</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Increased risk of hepatic encephalopathy</button>
+<div class="quiz-explain"><b>Explanation:</b> Simvastatin is a CYP3A4 substrate; macrolides (and other CYP3A4 inhibitors like azole antifungals or grapefruit juice) raise statin plasma levels, increasing the risk of myopathy up to rhabdomyolysis.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. When combination therapy with a statin and a fibrate is necessary, which fibrate is preferred due to a lower risk of myopathy?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cholestyramine</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Gemfibrozil</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Niacin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Fenofibrate</button>
+<div class="quiz-explain"><b>Explanation:</b> Fenofibrate is preferred over gemfibrozil when combined with a statin because gemfibrozil inhibits hepatic OATP1B1-mediated statin uptake and competes for glucuronidation, raising statin levels and increasing rhabdomyolysis risk.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec5">
+<h2>5. Cholesterol Absorption Inhibitor: Ezetimibe</h2>
+
+<h3>Mechanism &amp; Effects</h3>
+<ul>
+<li>Selectively inhibits the <b>NPC1L1 transporter</b> at the brush border of the small intestine</li>
+<li>&darr;Intestinal absorption of dietary and biliary cholesterol &rarr; &darr;cholesterol incorporation into chylomicrons &rarr; &darr;hepatic cholesterol delivery &rarr; compensatory <b>upregulation of hepatic LDL receptors</b></li>
+<li>Monotherapy: &darr;LDL-C by ~18&ndash;20%, with minimal effect on HDL-C/TG</li>
+</ul>
+
+<h3>Therapeutic Uses</h3>
+<ul>
+<li>Adjunct to statin therapy for additional LDL-C lowering, or in patients who cannot tolerate high-intensity statins</li>
+<li>Statin-intolerant patients, alone or combined with bempedoic acid</li>
+<li>Statin + ezetimibe is synergistic: statins block synthesis, ezetimibe blocks absorption &mdash; complementary mechanisms</li>
+<li>Fixed-dose combinations exist (ezetimibe/simvastatin, ezetimibe/bempedoic acid)</li>
+</ul>
+
+<h3>Pharmacokinetics &amp; Adverse Effects</h3>
+<ul>
+<li>Half-life ~22 hours &mdash; once-daily dosing, with or without food</li>
+<li>No significant CYP450 interactions &mdash; favorable safety profile with fewer drug-drug interactions than statins</li>
+<li>Uncommon, generally mild adverse effects; mild transaminase elevation possible; myopathy rare but slightly more frequent when combined with a statin or fibrate</li>
+</ul>
+
+<h3>Drug Interactions &amp; Contraindications</h3>
+<ul>
+<li><b>Fibrates increase</b> ezetimibe plasma concentration</li>
+<li><b>Bile acid sequestrants reduce</b> ezetimibe absorption &mdash; avoid combining (impaired absorption)</li>
+<li>Contraindicated in pregnancy and lactation as monotherapy; safety of the combination with a statin in pregnancy is not established and should be avoided</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Ezetimibe lowers LDL-C by inhibiting which specific transporter?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">NPC1L1</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">HMG-CoA reductase</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PCSK9</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ATP-citrate lyase</button>
+<div class="quiz-explain"><b>Explanation:</b> Ezetimibe selectively inhibits NPC1L1, the transporter responsible for intestinal (and biliary) cholesterol absorption at the brush border of the small intestine.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which combination should generally be avoided due to impaired absorption of one of the drugs?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ezetimibe with bempedoic acid</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ezetimibe with a bile acid sequestrant</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ezetimibe with a fibrate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ezetimibe with a statin</button>
+<div class="quiz-explain"><b>Explanation:</b> Bile acid sequestrants reduce ezetimibe absorption; this combination should generally be avoided, whereas fibrates actually increase ezetimibe plasma concentrations.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is the combination of a statin plus ezetimibe considered synergistic for LDL-C lowering?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The statin blocks NPC1L1 while ezetimibe blocks HMG-CoA reductase</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both drugs inhibit the same enzyme, producing additive potency at that single step</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ezetimibe blocks intestinal cholesterol absorption while the statin blocks endogenous synthesis, two complementary pathways</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ezetimibe increases statin bioavailability via CYP3A4 inhibition</button>
+<div class="quiz-explain"><b>Explanation:</b> Statins reduce endogenous hepatic cholesterol synthesis while ezetimibe reduces intestinal cholesterol absorption &mdash; two distinct, complementary mechanisms that together produce greater LDL-C lowering than either alone.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec6">
+<h2>6. PCSK9-Targeted Therapies</h2>
+
+<h3>PCSK9 Monoclonal Antibodies: Alirocumab &amp; Evolocumab</h3>
+<ul>
+<li>Fully human monoclonal antibodies that bind circulating <b>PCSK9</b>, a hepatic protease that normally binds LDL receptors on hepatocytes and directs them to lysosomal degradation</li>
+<li>By inhibiting PCSK9, <b>LDL receptor recycling and surface expression increase</b>, enhancing clearance of circulating LDL-C</li>
+<li>&darr;LDL-C by ~45&ndash;60% when added to statin therapy; ~47&ndash;58% as monotherapy; up to 60&ndash;70% in FH or statin-intolerant patients</li>
+<li>Also modestly reduce triglycerides and lipoprotein(a)</li>
+</ul>
+
+<h3>Therapeutic Uses &amp; Pharmacokinetics</h3>
+<ul>
+<li>Heterozygous or homozygous familial hypercholesterolemia</li>
+<li>Established ASCVD requiring additional LDL-C lowering despite maximally tolerated statin &plusmn; ezetimibe</li>
+<li>Sometimes used in documented statin intolerance, though not currently FDA-approved for that indication without ASCVD</li>
+<li>Administered subcutaneously every 2 weeks or monthly; high cost and need for refrigeration/injection limit use to high-risk populations</li>
+</ul>
+
+<h3>Adverse Effects &amp; Contraindications</h3>
+<ul>
+<li>Most common: injection site reactions, nasopharyngitis, influenza-like symptoms; rare hypersensitivity</li>
+<li><b>Do not</b> increase myopathy or hepatotoxicity risk, and have no CYP450-mediated interactions &mdash; favorable in polypharmacy</li>
+<li>Rare reports of neurocognitive effects (no established causal link; long-term data ongoing)</li>
+<li>Contraindicated in pregnancy; not recommended in lactation (LDL receptor pathway is important in fetal development)</li>
+</ul>
+
+<h3>siRNA Therapy: Inclisiran</h3>
+<div class="callout">Inclisiran is a small interfering RNA (siRNA) that <b>suppresses hepatic PCSK9 synthesis at the mRNA level</b> &mdash; a fundamentally different mechanism than the antibodies, which block circulating PCSK9 protein.</div>
+<ul>
+<li>Administered subcutaneously <b>every 6 months</b> &mdash; the major practical advantage over monthly/biweekly antibody dosing</li>
+<li>Lowers LDL-C by ~50%; approved for heterozygous FH or ASCVD requiring additional LDL-C lowering</li>
+<li>Well tolerated: injection site reactions and bronchitis reported infrequently; no significant drug interactions; no dose adjustment needed in mild-moderate renal/hepatic impairment</li>
+<li>Contraindicated in pregnancy; not recommended in lactation</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. PCSK9 normally promotes degradation of which cellular structure, thereby reducing LDL clearance?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ApoB-100 molecules</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">NPC1L1 transporters</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">HMG-CoA reductase enzyme complexes</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Hepatic LDL receptors</button>
+<div class="quiz-explain"><b>Explanation:</b> PCSK9 binds LDL receptors on the hepatocyte surface and directs them toward lysosomal degradation. Inhibiting PCSK9 (with antibodies or siRNA) allows more LDL receptors to recycle back to the surface, enhancing LDL clearance.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the key mechanistic difference between inclisiran and alirocumab/evolocumab?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Inclisiran suppresses hepatic PCSK9 mRNA synthesis, while the antibodies neutralize circulating PCSK9 protein</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inclisiran is administered orally while the antibodies are intravenous</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inclisiran works independently of the LDL receptor pathway</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inclisiran inhibits HMG-CoA reductase while the antibodies inhibit NPC1L1</button>
+<div class="quiz-explain"><b>Explanation:</b> Inclisiran is a siRNA that silences PCSK9 mRNA translation in the liver, reducing PCSK9 production at its source, whereas alirocumab and evolocumab are monoclonal antibodies that bind and neutralize PCSK9 protein already in circulation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A major practical advantage of inclisiran over the PCSK9 monoclonal antibodies is:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Greater LDL-C reduction in all patients</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Dosing only twice yearly instead of every 2 weeks to monthly</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ability to use during pregnancy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Lower cost and no refrigeration requirement</button>
+<div class="quiz-explain"><b>Explanation:</b> Inclisiran is dosed subcutaneously only once every 6 months, compared to the every-2-week or monthly dosing required for alirocumab and evolocumab &mdash; a significant adherence advantage, even though both classes remain costly and are contraindicated in pregnancy.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec7">
+<h2>7. ATP-Citrate Lyase Inhibitor: Bempedoic Acid</h2>
+
+<h3>Mechanism</h3>
+<ul>
+<li>Oral prodrug activated in the <b>liver</b> by very long-chain acyl-CoA synthetase 1 (ACSVL1) into bempedoic acid-CoA, its active form</li>
+<li>Active metabolite inhibits <b>ATP-citrate lyase (ACL)</b>, a cytosolic enzyme upstream of HMG-CoA reductase that converts citrate to acetyl-CoA (a precursor for both fatty acid and cholesterol synthesis)</li>
+<li>&darr;Hepatic cholesterol synthesis &rarr; &uarr;LDL receptor expression &rarr; enhanced LDL-C clearance &mdash; the same downstream effect as statins, but one step further upstream</li>
+</ul>
+
+<div class="callout"><b>Key distinguishing feature:</b> ACSVL1 (the activating enzyme) is expressed only in the liver, <i>not</i> skeletal muscle &mdash; so bempedoic acid does not interfere with muscle cholesterol synthesis, giving it a lower risk of myopathy compared to statins.</div>
+
+<h3>Efficacy &amp; Therapeutic Uses</h3>
+<ul>
+<li>Combined with ezetimibe: LDL-C reduction approaches ~30%</li>
+<li>Triple therapy (statin + ezetimibe + bempedoic acid): LDL-C reduction up to ~65%</li>
+<li>FDA-approved as add-on therapy for adults with heterozygous FH or established ASCVD requiring additional LDL-C lowering beyond maximally tolerated statins; also useful in statin-intolerant patients</li>
+<li>Administered orally once daily, alone or as a fixed-dose combination with ezetimibe</li>
+</ul>
+
+<h3>Adverse Effects, Interactions &amp; Contraindications</h3>
+<ul>
+<li><b>Hyperuricemia</b> (may increase gout risk via competition for renal tubular transporter OAT2); small risk of <b>tendon rupture</b></li>
+<li>Mild elevations in serum creatine kinase, creatinine, and hepatic transaminases</li>
+<li>Lower myopathy risk than statins, but caution when co-administered with higher doses of simvastatin or rosuvastatin (bempedoic acid can increase statin exposure)</li>
+<li>Contraindicated in pregnancy (inhibition of cholesterol synthesis may adversely affect fetal development)</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Bempedoic acid's lower risk of myopathy compared to statins is best explained by which fact?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It has no effect on cholesterol synthesis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It does not cross the blood-brain barrier</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Its activating enzyme (ACSVL1) is expressed only in the liver, not skeletal muscle</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is eliminated renally rather than hepatically</button>
+<div class="quiz-explain"><b>Explanation:</b> Bempedoic acid is a prodrug activated by ACSVL1, an enzyme expressed only in the liver and not in skeletal muscle. Because the active drug is never generated in muscle tissue, it spares muscle cholesterol synthesis and carries a lower myopathy risk than statins.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Bempedoic acid inhibits ATP-citrate lyase, an enzyme positioned where relative to HMG-CoA reductase in the cholesterol synthesis pathway?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It acts on the identical active site as HMG-CoA reductase</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It has no relationship to the HMG-CoA reductase pathway</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Downstream of HMG-CoA reductase</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Upstream of HMG-CoA reductase</button>
+<div class="quiz-explain"><b>Explanation:</b> ATP-citrate lyase converts citrate to acetyl-CoA, a step upstream of HMG-CoA reductase in the cholesterol biosynthesis pathway. Inhibiting it reduces the acetyl-CoA precursor pool, decreasing cholesterol synthesis similarly to statins but via an earlier step.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which adverse effect should prompt monitoring in a patient with a history of gout who is started on bempedoic acid?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Hyperuricemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hyponatremia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hypokalemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hypoglycemia</button>
+<div class="quiz-explain"><b>Explanation:</b> Bempedoic acid can cause hyperuricemia by competing for the renal tubular transporter OAT2, which may increase the risk of gout flares in susceptible patients.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec8">
+<h2>8. Niacin</h2>
+
+<h3>Mechanism &amp; Effects</h3>
+<ul>
+<li>Niacin (nicotinic acid, vitamin B3) at pharmacologic doses inhibits <b>lipolysis in adipose tissue</b> via GPR109A-mediated signaling &rarr; &darr;free fatty acid flux to the liver &rarr; &darr;hepatic VLDL synthesis</li>
+<li>Also enhances lipoprotein lipase activity and delays HDL catabolism</li>
+<li>Effects: &darr;LDL-C and &darr;TG, &uarr;HDL-C, and &darr;lipoprotein(a)</li>
+<li><b>Most effective available agent for raising HDL-C</b> (up to 30&ndash;40%); lowers TG 35&ndash;50% at doses of 2&ndash;6 g/day; additional LDL-C lowering of ~25% at higher doses</li>
+</ul>
+
+<h3>The Outcomes Problem</h3>
+<div class="callout">Despite favorable lipid changes, large outcome trials showed <b>no added cardiovascular benefit</b> when niacin was combined with statins &mdash; leading the FDA to withdraw approval for that combination in 2016. Niacin is <b>no longer recommended as adjunctive therapy in patients already on statins.</b></div>
+
+<h3>Adverse Effects</h3>
+<ul>
+<li><b>Flushing</b> (prostaglandin D2-mediated) &mdash; the most frequent complaint; mitigated by low-dose aspirin 30 minutes before dosing, gradual titration, or extended-release formulations</li>
+<li>Pruritus, acanthosis nigricans (uncommon); GI intolerance, especially at higher doses or with peptic ulcer disease</li>
+<li>More serious: hepatotoxicity (especially with sustained-release formulations), hyperuricemia, hyperglycemia (insulin resistance)</li>
+<li>Monitor: liver enzymes, fasting glucose, uric acid</li>
+</ul>
+
+<h3>Formulations &amp; Current Role</h3>
+<ul>
+<li>Crystalline (immediate-release) and prescription extended-release niacin are FDA-approved for dyslipidemia</li>
+<li>OTC sustained-release and "flush-free" formulations lack FDA approval, show variable efficacy, and carry higher hepatotoxicity risk at lipid-lowering doses</li>
+<li>May still be considered in <b>statin-intolerant patients</b> with mixed hyperlipidemia or elevated Lp(a)</li>
+<li>Maximum dose should not exceed 6 g/day; initiate low with meals, titrate gradually, and educate patients about expected flushing</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why did the FDA withdraw approval for adding niacin to statin therapy in 2016?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Niacin was found to significantly worsen LDL-C</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Large outcome trials showed no added cardiovascular benefit despite favorable lipid changes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Niacin caused unacceptable rates of rhabdomyolysis when combined with statins</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Niacin interfered with statin absorption</button>
+<div class="quiz-explain"><b>Explanation:</b> Large cardiovascular outcome trials showed that adding niacin to statin therapy improved lipid parameters (HDL-C, TG, LDL-C) but produced no additional reduction in cardiovascular events, leading the FDA to withdraw the combination indication in 2016.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Niacin-induced flushing is mediated by which substance, and how can it be mitigated?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Serotonin; a 5-HT3 antagonist</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Histamine; pretreatment with an H1 blocker</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Prostaglandin D2; low-dose aspirin taken 30 minutes before dosing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bradykinin; ACE inhibitor pretreatment</button>
+<div class="quiz-explain"><b>Explanation:</b> Niacin-induced flushing is mediated by prostaglandin D2 release; taking low-dose aspirin 30 minutes before the niacin dose, gradual titration, or using extended-release formulations can reduce this common and often treatment-limiting side effect.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Niacin remains a reasonable option in which of the following clinical scenarios?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">As first-line monotherapy for isolated LDL-C elevation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">In a pregnant patient with hypertriglyceridemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">As routine adjunctive therapy in a patient already well-controlled on a statin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">In a statin-intolerant patient with mixed hyperlipidemia or elevated Lp(a)</button>
+<div class="quiz-explain"><b>Explanation:</b> Given the lack of added cardiovascular benefit with statins and its adverse effect profile, niacin's remaining niche is in statin-intolerant patients with mixed hyperlipidemia or elevated lipoprotein(a) &mdash; not as routine statin adjunct therapy.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec9">
+<h2>9. Fibrates</h2>
+
+<h3>Mechanism &amp; Effects</h3>
+<ul>
+<li>Gemfibrozil and fenofibrate are <b>PPAR-&alpha; agonists</b> that modulate lipid metabolism</li>
+<li><b>Upregulate lipoprotein lipase (LPL)</b> and enhance fatty acid oxidation in liver and muscle &rarr; increased clearance of triglyceride-rich lipoproteins (VLDL, chylomicrons)</li>
+<li><b>Suppress ApoC-III</b> (an inhibitor of lipolysis) and increase synthesis of ApoA-I and ApoA-II &rarr; modestly raise HDL-C</li>
+</ul>
+
+<h3>Therapeutic Uses</h3>
+<ul>
+<li>Primary indication: <b>severe hypertriglyceridemia</b> to reduce pancreatitis risk</li>
+<li>Also used in dysbetalipoproteinemia and mixed hyperlipidemia</li>
+<li>No consistent ASCVD benefit when added to statin therapy for most patients &mdash; FDA withdrew the fenofibrate add-on indication for ASCVD prevention in 2016; subgroup analyses suggest possible benefit in patients with type 2 diabetes and atherogenic dyslipidemia</li>
+<li>Fibrates remain a cornerstone in managing chylomicronemia syndrome and severe hypertriglyceridemia</li>
+</ul>
+
+<h3>Choosing Between Fibrates</h3>
+<div class="callout"><b>Fenofibrate is preferred over gemfibrozil</b> when combined with a statin. Gemfibrozil inhibits hepatic statin uptake via OATP1B1 and competes for glucuronidation enzymes, raising statin levels and increasing rhabdomyolysis risk &mdash; gemfibrozil should generally be avoided with statins.</div>
+
+<h3>Pharmacokinetics, Adverse Effects &amp; Interactions</h3>
+<ul>
+<li>Absorbed more efficiently with food; dosing adjustments required in renal impairment; avoid in significant hepatic or renal dysfunction</li>
+<li>Fenofibrate may have some benefit in nonalcoholic fatty liver disease</li>
+<li>Adverse effects: myopathy, cholesterol gallstones, GI upset, transaminase elevations, rare hematologic abnormalities; cholelithiasis risk higher in women, obese patients, and Native Americans</li>
+<li><b>Potentiate warfarin</b> by displacing it from albumin &mdash; requires INR monitoring and dose adjustment</li>
+<li>Contraindicated in pregnancy, children, and pre-existing gallbladder disease</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Fibrates lower triglycerides primarily by which mechanism?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Upregulating lipoprotein lipase and suppressing ApoC-III</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Blocking NPC1L1 in the intestine</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inhibiting PCSK9-mediated LDL receptor degradation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inhibiting HMG-CoA reductase</button>
+<div class="quiz-explain"><b>Explanation:</b> As PPAR-alpha agonists, fibrates upregulate LPL activity and suppress ApoC-III (an LPL inhibitor), together enhancing clearance of triglyceride-rich VLDL and chylomicrons.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient on atorvastatin requires fibrate therapy for severe hypertriglyceridemia. Which fibrate is preferred, and why?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Gemfibrozil, because it has a shorter half-life</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Fenofibrate, because gemfibrozil inhibits hepatic statin uptake and increases rhabdomyolysis risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Gemfibrozil, because it lowers LDL-C more effectively</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Fenofibrate, because it has no interaction with warfarin</button>
+<div class="quiz-explain"><b>Explanation:</b> Gemfibrozil inhibits OATP1B1-mediated hepatic statin uptake and competes for glucuronidation, raising statin plasma levels and rhabdomyolysis risk. Fenofibrate lacks this significant interaction and is preferred when a fibrate must be combined with a statin.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient taking warfarin is started on fenofibrate. What is the most important monitoring consideration?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Thyroid function testing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Frequent blood glucose checks</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">INR monitoring, as fibrates potentiate warfarin by displacing it from albumin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Daily creatine kinase levels</button>
+<div class="quiz-explain"><b>Explanation:</b> Fibrates displace warfarin from albumin-binding sites, potentiating its anticoagulant effect and increasing bleeding risk; INR should be monitored closely with warfarin dose adjustment as needed.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec10">
+<h2>10. Bile Acid Binding Resins</h2>
+
+<h3>Mechanism &amp; Effects</h3>
+<ul>
+<li>Cholestyramine, colestipol, colesevelam are non-absorbable, <b>positively charged anion-exchange resins</b></li>
+<li>Bind negatively charged bile acids in the intestinal lumen, preventing reabsorption and increasing fecal bile acid excretion</li>
+<li>Depletes the bile acid pool &rarr; stimulates hepatic conversion of cholesterol to bile acids via upregulation of <b>cholesterol 7&alpha;-hydroxylase</b> &rarr; reduces hepatic cholesterol stores &rarr; compensatory <b>upregulation of hepatic LDL receptors</b></li>
+<li>Reduce LDL-C by 15&ndash;25%; <b>no effect in homozygous FH</b> (patients lack functional LDL receptors to upregulate)</li>
+</ul>
+
+<h3>Therapeutic Uses</h3>
+<ul>
+<li>Mild-to-moderate LDL-C elevations, especially in <b>statin-intolerant patients, children, and pregnant women</b> where other agents may be contraindicated</li>
+<li>Also occasionally leveraged to treat digitalis toxicity and cholestatic pruritus (bile salt accumulation)</li>
+<li>Second-line therapy overall, particularly when statin use is limited</li>
+</ul>
+
+<h3>The Triglyceride Trap</h3>
+<div class="callout">Bile acid resins may <b>stimulate increased hepatic VLDL production</b>, potentially worsening triglyceride levels. They are <b>contraindicated in severe hypertriglyceridemia</b> and should be used cautiously with moderately elevated TG.</div>
+
+<h3>Adverse Effects &amp; Drug Interactions</h3>
+<ul>
+<li>Constipation, bloating, dyspepsia, diarrhea (increase dietary fiber, hydrate); rare: folic acid malabsorption, gallstone formation, vitamin K deficiency &rarr; hypoprothrombinemia (monitor INR, especially with concurrent warfarin)</li>
+<li>Impair absorption of many oral drugs: <b>warfarin, digoxin, thiazides, levothyroxine, tetracyclines, statins (except pravastatin/rosuvastatin), iron, fat-soluble vitamins</b> &mdash; take other medications at least 1 hour before or 3&ndash;4 hours after the resin</li>
+<li>Contraindicated in biliary obstruction, chronic constipation, diverticulitis, and severe hypertriglyceridemia</li>
+</ul>
+
+<h3>Colesevelam &mdash; the Newer, Better-Tolerated Option</h3>
+<ul>
+<li>Better tolerated; does <b>not</b> significantly bind concomitant oral agents &mdash; preferred in patients with polypharmacy</li>
+<li>Modestly improves glycemic control in type 2 diabetes by increasing GLP-1 secretion</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Bile acid sequestrants would be expected to have minimal LDL-lowering effect in a patient with which condition?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mild hypercholesterolemia in childhood</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Statin intolerance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Pregnancy</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Homozygous familial hypercholesterolemia</button>
+<div class="quiz-explain"><b>Explanation:</b> Bile acid sequestrants work by upregulating hepatic LDL receptors in response to depleted bile acid/cholesterol stores. Patients with homozygous FH lack functional LDL receptors, so this compensatory upregulation cannot occur and the drugs are ineffective.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which patient population is bile acid sequestrant therapy particularly well suited for, given the safety profiles of other lipid-lowering agents?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Pregnant women needing LDL-C lowering</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients with active gallbladder disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients with chronic constipation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients with severe hypertriglyceridemia</button>
+<div class="quiz-explain"><b>Explanation:</b> Because they are not systemically absorbed, bile acid sequestrants are a preferred option in pregnancy (and in children and statin-intolerant patients) where other lipid-lowering therapies may be contraindicated or unstudied.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient taking cholestyramine and levothyroxine together should be counseled to:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Take both medications together for best absorption</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Take levothyroxine at least 1 hour before or 3&ndash;4 hours after the resin dose</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Discontinue levothyroxine while on cholestyramine</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Double the levothyroxine dose</button>
+<div class="quiz-explain"><b>Explanation:</b> Bile acid resins impair absorption of many oral drugs, including levothyroxine. Other medications should be taken at least 1 hour before or 3&ndash;4 hours after the resin dose to avoid reduced absorption.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec11">
+<h2>11. HoFH Agents &amp; Omega-3 Fatty Acids</h2>
+
+<h3>Lomitapide (MTP Inhibitor)</h3>
+<ul>
+<li>Oral inhibitor of <b>microsomal triglyceride transfer protein (MTP)</b>, essential for assembling triglycerides into VLDL (liver) and chylomicrons (intestine)</li>
+<li>Reduces VLDL and LDL production &mdash; lowers LDL-C by up to 50% in <b>homozygous FH</b>, as an adjunct to maximally tolerated statin therapy</li>
+<li>Must be taken &ge;2 hours after food or on an empty stomach; requires a strict low-fat diet and fat-soluble vitamin supplementation/monitoring</li>
+<li><b>Significant hepatotoxicity risk</b> (elevated LFTs, hepatic steatosis) &mdash; requires regular liver monitoring and is <b>only available through an FDA REMS program</b></li>
+<li>Metabolized by CYP3A4 &mdash; contraindicated with strong CYP3A4 inhibitors; embryotoxic &mdash; negative pregnancy test required before starting, effective contraception throughout therapy</li>
+</ul>
+
+<h3>Evinacumab (ANGPTL3 Inhibitor)</h3>
+<ul>
+<li>Fully human monoclonal IgG4 antibody that inhibits <b>ANGPTL3</b>, a hepatic protein that normally inhibits both lipoprotein lipase and endothelial lipase</li>
+<li>By neutralizing ANGPTL3, evinacumab <b>enhances LPL and endothelial lipase activity</b> &rarr; reduces triglycerides, LDL-C, and HDL-C</li>
+<li><b>LDL-C reduction is independent of the LDL receptor pathway</b> &mdash; particularly valuable in HoFH patients with absent/severely defective LDL receptors</li>
+<li>FDA-approved as adjunct for HoFH; reduces LDL-C by ~47% when added to maximal standard therapy (including statins, ezetimibe, PCSK9 inhibitors, lomitapide, apheresis)</li>
+<li>Administered as an IV infusion every 4 weeks; half-life ~17&ndash;25 days; metabolized via nonspecific proteolysis</li>
+<li>Adverse effects: hypersensitivity reactions, embryo-fetal toxicity (contraindicated in pregnancy); common: nasopharyngitis, influenza-like illness, dizziness, nausea; no clinically significant drug interactions identified</li>
+</ul>
+
+<h3>Omega-3 Fatty Acids</h3>
+<ul>
+<li>Primarily EPA and DHA; <b>icosapent ethyl</b> is a highly purified EPA-only formulation; OTC fish oil varies widely in EPA/DHA content and dose</li>
+<li>Mechanism: reduce VLDL triglyceride synthesis/secretion by decreasing fatty acid substrate availability and limiting lipolysis</li>
+<li>Used as adjunctive therapy for <b>severe hypertriglyceridemia</b> to reduce pancreatitis risk (icosapent ethyl FDA-approved at 4 g/day total, divided doses with food)</li>
+<li><b>Icosapent ethyl</b> has demonstrated cardiovascular benefit &mdash; guidelines recommend it in diabetic/high-risk patients with persistently elevated TG despite statin therapy</li>
+</ul>
+<div class="callout"><b>EPA vs. DHA:</b> DHA-containing products may <b>modestly increase LDL-C</b>; EPA-only formulations like icosapent ethyl typically do <b>not</b> raise LDL-C significantly &mdash; a key distinguishing point.</div>
+<ul>
+<li>Adverse effects: nausea, dyspepsia, fishy aftertaste, arthralgia; can prolong bleeding time (monitor with anticoagulants); icosapent ethyl associated with a slight increase in atrial fibrillation/flutter</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Evinacumab lowers LDL-C through a mechanism that is notable for being independent of which pathway, making it uniquely useful in homozygous FH?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The NPC1L1 pathway</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The bile acid recirculation pathway</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The LDL receptor pathway</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The HMG-CoA reductase pathway</button>
+<div class="quiz-explain"><b>Explanation:</b> By inhibiting ANGPTL3, evinacumab enhances lipoprotein lipase and endothelial lipase activity, clearing triglyceride-rich lipoproteins upstream of LDL formation independent of hepatic LDL receptors &mdash; crucial for HoFH patients with absent or defective LDL receptors.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with homozygous familial hypercholesterolemia is prescribed lomitapide. Which monitoring/safety measure is essential given its major risk?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Weekly complete blood counts</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Continuous cardiac telemetry</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Monthly thyroid function tests</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Regular liver function monitoring due to significant hepatotoxicity risk</button>
+<div class="quiz-explain"><b>Explanation:</b> Lomitapide carries a significant hepatotoxicity risk (elevated liver enzymes, hepatic steatosis), requiring regular liver function monitoring; it is available only through an FDA REMS program for this reason.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Compared to DHA-containing omega-3 formulations, EPA-only formulations like icosapent ethyl have which distinguishing lipid effect?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">They typically do not raise LDL-C, whereas DHA-containing products may modestly increase it</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They raise LDL-C more than DHA formulations</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They have no effect on triglycerides</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They lower HDL-C significantly</button>
+<div class="quiz-explain"><b>Explanation:</b> DHA-containing omega-3 products can modestly increase LDL-C, while EPA-only formulations such as icosapent ethyl typically do not raise LDL-C significantly &mdash; an important distinction when selecting a triglyceride-lowering omega-3 product.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec12">
+<h2>12. 2026 Guidelines &amp; Drug Selection</h2>
+
+<h3>What Changed in 2026</h3>
+<ul>
+<li>Lifestyle modification remains foundational; statins remain first-line pharmacologic therapy</li>
+<li><b>PREVENT-ASCVD</b> equations replace the older pooled cohort equations for primary prevention &mdash; estimate both 10-year and longer-term risk, beginning at age 30</li>
+<li>Greater emphasis on identifying additional risk: measure <b>lipoprotein(a)</b> at least once in adulthood; selectively use ApoB and coronary artery calcium (CAC) scoring to refine decisions</li>
+</ul>
+
+<h3>PREVENT-ASCVD Risk Thresholds</h3>
+<div class="table-scroll">
+<table>
+<tr><th>10-Year Risk</th><th>Action</th></tr>
+<tr><td>3&ndash;&lt;5%</td><td>Consider lipid-lowering therapy</td></tr>
+<tr><td>5&ndash;&lt;10%</td><td>Initiate lipid-lowering therapy</td></tr>
+<tr><td>&ge;10%</td><td>High-intensity lipid-lowering therapy</td></tr>
+<tr><td>LDL-C &ge;190 mg/dL</td><td>Treat regardless of calculated risk</td></tr>
+</table>
+</div>
+
+<h3>Renewed LDL-C Treatment Goals</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Risk Category</th><th>LDL-C Goal</th></tr>
+<tr><td>Borderline/intermediate primary prevention</td><td>&lt;100 mg/dL</td></tr>
+<tr><td>High-risk primary prevention</td><td>&lt;70 mg/dL</td></tr>
+<tr><td>Very-high-risk established ASCVD</td><td>&lt;55 mg/dL</td></tr>
+</table>
+</div>
+
+<h3>Escalation Pathway</h3>
+<div class="callout">Statins remain first-line. When statin therapy alone does not achieve the LDL-C goal, add <b>ezetimibe, bempedoic acid, or a PCSK9-targeted therapy</b> based on the patient's risk and treatment needs &mdash; in that general order of typical practice, though selection is individualized.</div>
+
+<h3>Severe/Persistent Hypertriglyceridemia</h3>
+<ul>
+<li>Statins remain foundational for overall ASCVD risk reduction even when TG is elevated</li>
+<li>Triglyceride-lowering therapy (fibrates, prescription omega-3s) becomes a priority specifically to prevent pancreatitis when TG is very high (especially &ge;1,000 mg/dL)</li>
+</ul>
+
+<h3>Pediatric &amp; Pregnancy Considerations</h3>
+<ul>
+<li>Drug treatment generally avoided in pregnancy, lactation, and children</li>
+<li>Pharmacologic therapy may be initiated for familial hypercholesterolemia typically after <b>age 8</b>, depending on LDL-C level and other risk factors</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. According to the 2026 guideline framework, a patient with a calculated 10-year PREVENT-ASCVD risk of 7% should generally:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only receive lifestyle counseling with no drug therapy consideration</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Be offered initiation of lipid-lowering therapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Automatically receive high-intensity statin therapy regardless of other factors</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Be reassessed only after 5 years</button>
+<div class="quiz-explain"><b>Explanation:</b> A 10-year risk of 5% to <10% falls into the range where the guidelines recommend initiating lipid-lowering therapy (as opposed to the 3-<5% range, where therapy is only 'considered').</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient has established ASCVD and is classified as very-high-risk. What is the target LDL-C goal under the 2026 guidelines?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)"><130 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)"><70 mg/dL</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)"><55 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)"><100 mg/dL</button>
+<div class="quiz-explain"><b>Explanation:</b> Very-high-risk patients with established ASCVD have the most stringent LDL-C target of <55 mg/dL, compared to <70 mg/dL for high-risk primary prevention and <100 mg/dL for borderline/intermediate-risk primary prevention.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient on statin therapy has persistently very high triglycerides (>1,000 mg/dL). According to current guidance, the treatment priority should shift toward:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Starting a bile acid sequestrant</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Discontinuing the statin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Adding a PCSK9 inhibitor for further LDL-C lowering</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Triglyceride-lowering therapy (e.g., fibrate or prescription omega-3) to prevent pancreatitis</button>
+<div class="quiz-explain"><b>Explanation:</b> When triglycerides are very high (especially ≥ 1,000 mg/dL), the immediate priority shifts to triglyceride-lowering therapy (fibrates, prescription omega-3 fatty acids) to reduce the risk of acute pancreatitis, while statins remain in place for overall ASCVD risk reduction. Bile acid sequestrants would be contraindicated here since they can worsen hypertriglyceridemia.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec13">
+<h2>13. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review &mdash; every drug class condensed to the single facts most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>Master Drug Class Comparison</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Drug/Class</th><th>Mechanism</th><th>Effect on Lipids</th><th>Clinical Use</th><th>Key Adverse Effects</th><th>High-Yield Note</th></tr>
+<tr><td>Statins (atorvastatin, rosuvastatin)</td><td>Inhibit HMG-CoA reductase &rarr; &darr;cholesterol synthesis &rarr; &uarr;LDL receptor expression</td><td>&darr;&darr;&darr;LDL, &darr;TG, &uarr;HDL</td><td>1&deg;/2&deg; ASCVD prevention; cornerstone of therapy</td><td>Myopathy, &uarr;LFTs, modest &uarr;diabetes risk</td><td>High-intensity for clinical ASCVD or LDL &ge;190</td></tr>
+<tr><td>Ezetimibe</td><td>Inhibits NPC1L1 &rarr; &darr;intestinal cholesterol absorption</td><td>&darr;LDL (modest), minimal TG effect</td><td>Add-on to statin; statin-intolerant patients</td><td>Well tolerated; rare myopathy w/ combo</td><td>No CYP interactions; avoid with bile acid resins</td></tr>
+<tr><td>PCSK9 mAbs (alirocumab, evolocumab)</td><td>Inhibit PCSK9 &rarr; &uarr;LDL receptor recycling/expression</td><td>&darr;&darr;&darr;LDL (45&ndash;60%)</td><td>HeFH/HoFH; ASCVD not at goal on statin+ezetimibe</td><td>Injection site rxns, rare hypersensitivity</td><td>No myopathy/hepatotoxicity risk; SC q2wk-monthly</td></tr>
+<tr><td>Inclisiran (siRNA)</td><td>Suppresses hepatic PCSK9 mRNA synthesis</td><td>&darr;LDL ~50%</td><td>HeFH or ASCVD needing more LDL-C lowering</td><td>Injection site rxns, bronchitis (rare)</td><td>Dosed SC only every 6 months</td></tr>
+<tr><td>Bempedoic acid</td><td>Inhibits ATP-citrate lyase (upstream of HMG-CoA reductase); liver-specific activation</td><td>&darr;LDL (~15&ndash;30%; up to 65% triple therapy)</td><td>Statin-intolerant; add-on to statin</td><td>Hyperuricemia, tendon rupture, &uarr;LFTs</td><td>No myopathy (inactive in muscle); oral</td></tr>
+<tr><td>Bile acid sequestrants (cholestyramine, colesevelam)</td><td>Bind bile acids &rarr; &uarr;fecal excretion &rarr; &uarr;LDL receptor expression</td><td>&darr;LDL (15&ndash;25%), &uarr;TG possible</td><td>2nd-line; children, pregnancy, statin-intolerant</td><td>GI upset, &darr;absorption of other drugs/vitamins</td><td>Ineffective in HoFH; contraindicated in severe &uarr;TG</td></tr>
+<tr><td>Niacin</td><td>&darr;Hepatic VLDL synthesis via &darr;lipolysis (GPR109A)</td><td>&darr;TG, &darr;LDL, &uarr;HDL (most potent HDL raiser)</td><td>Statin-intolerant with mixed hyperlipidemia/&uarr;Lp(a)</td><td>Flushing, hepatotoxicity, hyperglycemia, hyperuricemia</td><td>No added CV benefit with statins &mdash; 2016 FDA withdrawal of that combo</td></tr>
+<tr><td>Fibrates (fenofibrate, gemfibrozil)</td><td>PPAR-&alpha; agonists &rarr; &uarr;LPL activity, &darr;ApoC-III</td><td>&darr;&darr;&darr;TG, &uarr;HDL, variable LDL</td><td>Severe hypertriglyceridemia; pancreatitis prevention</td><td>Myopathy (esp. w/ statins), gallstones, &uarr;LFTs</td><td>Fenofibrate preferred over gemfibrozil with statins</td></tr>
+<tr><td>Omega-3 fatty acids (icosapent ethyl)</td><td>&darr;Hepatic VLDL-TG synthesis/secretion</td><td>&darr;&darr;TG, minimal LDL effect</td><td>TG &gt;500; icosapent ethyl for high-risk pts w/ persistent &uarr;TG on statin</td><td>Fishy taste, GI upset, &uarr;A-fib risk</td><td>EPA-only (icosapent ethyl) avoids the LDL rise seen with DHA</td></tr>
+<tr><td>Lomitapide</td><td>Inhibits MTP &rarr; &darr;VLDL/chylomicron assembly</td><td>&darr;&darr;&darr;LDL (~50%)</td><td>HoFH only, adjunct to max statin</td><td>Significant hepatotoxicity, GI upset, steatosis</td><td>Requires REMS program; strict low-fat diet</td></tr>
+<tr><td>Evinacumab</td><td>Inhibits ANGPTL3 &rarr; &uarr;LPL/endothelial lipase activity</td><td>&darr;&darr;&darr;LDL (~47%), &darr;TG, &darr;HDL</td><td>HoFH only, IV infusion</td><td>Hypersensitivity, nasopharyngitis, embryo-fetal toxicity</td><td>Works independent of LDL receptor function</td></tr>
+</table>
+</div>
+
+<h3>Statin Intensity at a Glance</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Intensity</th><th>LDL-C Reduction</th><th>Examples</th></tr>
+<tr><td>High</td><td>&ge;50%</td><td>Atorvastatin 40&ndash;80 mg; rosuvastatin 20&ndash;40 mg</td></tr>
+<tr><td>Moderate</td><td>30&ndash;49%</td><td>Atorvastatin 10&ndash;20 mg; rosuvastatin 5&ndash;10 mg; simvastatin 20&ndash;40 mg; pravastatin 40&ndash;80 mg</td></tr>
+<tr><td>Low</td><td>&lt;30%</td><td>Simvastatin 10 mg; pravastatin 10&ndash;20 mg</td></tr>
+</table>
+</div>
+
+<h3>Key Drug Interaction Pairs</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Combination</th><th>Issue</th><th>Management</th></tr>
+<tr><td>Statin (CYP3A4 substrate) + macrolide/azole/grapefruit</td><td>&uarr;Statin levels &rarr; &uarr;myopathy risk</td><td>Use pravastatin/rosuvastatin (not CYP-metabolized) if interacting drug needed</td></tr>
+<tr><td>Statin + gemfibrozil</td><td>Gemfibrozil &uarr;statin levels via OATP1B1/glucuronidation inhibition</td><td>Use fenofibrate instead</td></tr>
+<tr><td>Ezetimibe + bile acid sequestrant</td><td>&darr;Ezetimibe absorption</td><td>Avoid combination</td></tr>
+<tr><td>Bile acid resin + warfarin/digoxin/levothyroxine/statins/etc.</td><td>&darr;Absorption of the other drug</td><td>Separate dosing by 1 hr before or 3&ndash;4 hrs after resin</td></tr>
+<tr><td>Fibrate + warfarin</td><td>Fibrate displaces warfarin from albumin &rarr; &uarr;bleeding risk</td><td>Monitor INR closely</td></tr>
+<tr><td>Bempedoic acid + high-dose simvastatin/rosuvastatin</td><td>&uarr;Statin exposure</td><td>Use caution/lower statin dose</td></tr>
+<tr><td>Lomitapide + strong CYP3A4 inhibitors</td><td>&uarr;Lomitapide levels &rarr; &uarr;hepatotoxicity</td><td>Contraindicated combination</td></tr>
+</table>
+</div>
+
+<h3>Pregnancy &amp; Special Population Quick Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent(s)</th><th>Pregnancy/Lactation</th><th>Preferred in Special Populations</th></tr>
+<tr><td>Statins, PCSK9 mAbs, inclisiran, bempedoic acid, lomitapide, evinacumab</td><td>Contraindicated</td><td>&mdash;</td></tr>
+<tr><td>Fibrates</td><td>Contraindicated (also children, gallbladder disease)</td><td>&mdash;</td></tr>
+<tr><td>Bile acid sequestrants</td><td>Safe &mdash; not systemically absorbed</td><td>Children, pregnancy, statin-intolerant patients (colesevelam best tolerated)</td></tr>
+</table>
+</div>
+
+<h3>The Core Take-Home Logic</h3>
+<div class="callout">
+<b>Predominant LDL-C elevation</b> &rarr; statin first &rarr; add ezetimibe &rarr; add bempedoic acid or a PCSK9-targeted therapy.<br>
+<b>Predominant severe hypertriglyceridemia</b> &rarr; statin remains foundational for ASCVD risk, but add a fibrate or prescription omega-3 (icosapent ethyl) specifically to prevent pancreatitis.<br>
+<b>HoFH unresponsive to standard therapy</b> &rarr; consider lomitapide (MTP inhibitor) or evinacumab (ANGPTL3 inhibitor), both of which work even without functional LDL receptors.<br>
+<b>Statin-intolerant</b> &rarr; ezetimibe, bempedoic acid, PCSK9-targeted therapy, or bile acid sequestrant, depending on the predominant lipid abnormality.
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+function answerQuiz(btn, isCorrect) {
+  const qDiv = btn.closest('.quiz-q');
+  const choices = qDiv.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    const correctBtn = qDiv.querySelector('.quiz-choice[data-correct="true"]');
+    if (correctBtn) correctBtn.classList.add('correct');
+  }
+  const explain = qDiv.querySelector('.quiz-explain');
+  if (explain) explain.classList.add('show');
+}
+</script>
+
+</body>
+</html>
