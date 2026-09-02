@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EKG Interpretation — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.8rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ columns:2; margin:10px 0 0; padding-left:20px; }
+  .top-contents li{ margin-bottom:6px; font-size:0.9rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-240px; top:0; height:100vh; width:230px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:9px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.82rem; padding:6px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+
+  .container{ max-width:900px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:20px 0 8px; letter-spacing:0.02em;
+  }
+  section.card p, section.card li{ font-size:0.95rem; }
+  section.card ul{ padding-left:22px; }
+
+  .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl{ background:#fdf3ea; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; margin:14px 0; font-size:0.9rem; }
+  .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0 auto; min-width:560px; }
+  table{ border-collapse:collapse; width:100%; margin:12px auto 18px; font-size:0.85rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .figure{ text-align:center; margin:16px 0; }
+  .figure img{ max-width:100%; height:auto; border:1px solid var(--border); border-radius:8px; background:#fff; padding:6px; }
+  .fig-cap{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--text-soft); margin-top:6px; }
+
+  /* Quiz styling */
+  .quiz-block{ margin-top:24px; padding-top:18px; border-top:2px dashed var(--sage); }
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--forest); letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .quiz-q{ background:#fffefb; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  .quiz-q p.stem{ font-weight:600; margin:0 0 10px; font-size:0.93rem; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:7px; padding:9px 12px;
+    margin-bottom:7px; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+    cursor:pointer; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:#e5f2e7; border-color:var(--correct); color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#fbe9e6; border-color:var(--incorrect); color:var(--incorrect); }
+  .quiz-choice[disabled]{ cursor:default; }
+  .quiz-explain{
+    display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light);
+    border-left:3px solid var(--forest); border-radius:6px; font-size:0.87rem;
+  }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:700px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+
+<div class="header">
+  <h1>EKG Interpretation</h1>
+  <p>Rate &middot; Rhythm &middot; Axis &middot; Abnormalities &middot; Dr. Pressie Joyce's CV/Resp II CLIN Lecture</p>
+</div>
+
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Cardiac Electrophysiology &amp; the Action Potential</a></li>
+    <li><a href="#sec2">2. EKG Basics: Paper, Leads &amp; Wave Properties</a></li>
+    <li><a href="#sec3">3. P Wave, PR Interval &amp; Atrial Depolarization</a></li>
+    <li><a href="#sec4">4. QRS Complex &amp; Ventricular Conduction</a></li>
+    <li><a href="#sec5">5. ST Segment, T Wave &amp; QT Interval</a></li>
+    <li><a href="#sec6">6. Calculating Heart Rate</a></li>
+    <li><a href="#sec7">7. Determining Axis</a></li>
+    <li><a href="#sec8">8. Approach to Rhythm &amp; Causes of Arrhythmia</a></li>
+    <li><a href="#sec9">9. Sinus Rhythms &amp; Escape Rhythms</a></li>
+    <li><a href="#sec10">10. Supraventricular Arrhythmias</a></li>
+    <li><a href="#sec11">11. Premature Complexes &amp; Junctional Rhythm</a></li>
+    <li><a href="#sec12">12. Ventricular Arrhythmias</a></li>
+    <li><a href="#sec13">13. Conduction Blocks</a></li>
+    <li><a href="#sec14">14. Pacemakers on EKG</a></li>
+    <li><a href="#sec15">15. Ischemia &amp; Infarction</a></li>
+    <li><a href="#sec16">16. Chamber Enlargement &amp; Ventricular Hypertrophy</a></li>
+    <li><a href="#sec17">17. Metabolic &amp; Other EKG Manifestations</a></li>
+    <li><a href="#sec18">18. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#sec1">Electrophysiology</a>
+  <a href="#sec2">EKG Basics</a>
+  <a href="#sec3">P Wave &amp; PR Interval</a>
+  <a href="#sec4">QRS Complex</a>
+  <a href="#sec5">ST/T/QT</a>
+  <a href="#sec6">Calculating Rate</a>
+  <a href="#sec7">Determining Axis</a>
+  <a href="#sec8">Rhythm Approach</a>
+  <a href="#sec9">Sinus &amp; Escape Rhythms</a>
+  <a href="#sec10">SVT/AFib/Flutter</a>
+  <a href="#sec11">PACs/PJCs/Junctional</a>
+  <a href="#sec12">Ventricular Arrhythmias</a>
+  <a href="#sec13">Conduction Blocks</a>
+  <a href="#sec14">Pacemakers</a>
+  <a href="#sec15">Ischemia &amp; Infarction</a>
+  <a href="#sec16">Enlargement/Hypertrophy</a>
+  <a href="#sec17">Metabolic Manifestations</a>
+  <a href="#sec18">Summary Tables</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="sec1">
+<h2>1. Cardiac Electrophysiology &amp; the Action Potential</h2>
+
+<h3>Polarization, Depolarization, Repolarization</h3>
+<ul>
+<li>Resting cardiac cells are electrically <b>polarized</b>: the inside is negative relative to the outside, maintained by membrane pumps controlling K&#8314;, Na&#8314;, Cl&#8315;, and Ca&#178;&#8314; distribution</li>
+<li><b>Depolarization</b> = loss of internal negativity. In pacemaker cells it occurs <b>spontaneously</b>; in other cells it is triggered by an arriving electrical impulse causing positive ions to cross the membrane</li>
+<li>Depolarization propagates cell-to-cell as a wave across the entire heart &mdash; this wave of electricity is what the EKG records</li>
+<li><b>Repolarization</b> restores resting polarity via membrane pumps reversing ion flow &mdash; unlike depolarization, this requires active cellular energy expenditure</li>
+</ul>
+
+<h3>Three Cell Types</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Cell Type</th><th>Role</th></tr>
+<tr><td>Pacemaker cells</td><td>Depolarize spontaneously; determine heart rate (electrical "power source")</td></tr>
+<tr><td>Electrical conducting cells</td><td>The "hard wiring" &mdash; transmit the impulse rapidly through the heart</td></tr>
+<tr><td>Myocardial cells</td><td>Contractile machinery of the heart</td></tr>
+</table>
+</div>
+<div class="callout">Every cardiac cell has <b>automaticity</b> &mdash; the latent ability to act as a pacemaker. This is normally suppressed unless the dominant sinus node fails or something abnormal stimulates it.</div>
+
+<h3>The Pacemaker Action Potential vs. Phases of Contraction</h3>
+<ul>
+<li>Pacemaker cells lack a true resting potential: charge drops to only about <b>&minus;60 mV</b> briefly, then spontaneously rises to threshold, triggering the next action potential</li>
+</ul>
+<div class="table-scroll">
+<table>
+<tr><th>Phase</th><th>Ionic Event</th><th>Corresponding EKG Feature</th></tr>
+<tr><td>Phase 4</td><td>Resting/diastole; high intracellular K&#8314;</td><td>Baseline (TP segment)</td></tr>
+<tr><td>Phase 0</td><td>Rapid Na&#8314; influx + slow Ca&#178;&#8314; influx &mdash; depolarization/contraction begins</td><td><b>QRS complex</b></td></tr>
+<tr><td>Phase 1</td><td>Na&#8314; channels close; K&#8314; exits; Cl&#8315; enters</td><td>End of depolarization</td></tr>
+<tr><td>Phase 2 (plateau)</td><td>Slow Na&#8314;/Ca&#178;&#8314; influx continues; K&#8314; continues to leave; muscle still contracting</td><td><b>ST segment</b></td></tr>
+<tr><td>Phase 3</td><td>Ca&#178;&#8314; channels close/Ca&#178;&#8314; exits; rapid K&#8314; efflux; membrane potential becomes negative</td><td><b>T wave</b></td></tr>
+<tr><td>End of Phase 3</td><td>Na&#8314;/K&#8314; ATPase pump restores resting potential</td><td>Return to baseline</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which phase of the cardiac action potential corresponds to the QRS complex on the EKG?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Phase 0</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Phase 2</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Phase 3</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Phase 4</button>
+<div class="quiz-explain"><b>Explanation:</b> Phase 0 is the rapid depolarization phase (fast Na&#8314; influx plus slow Ca&#178;&#8314; influx), which initiates contraction and corresponds to the QRS complex on the surface EKG.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A pacemaker cell differs from other cardiac cells in that it:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Has a true, stable resting potential of -90 mV</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Depolarizes spontaneously after only briefly reaching a minimal negative potential of about -60 mV</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Never undergoes repolarization</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cannot depolarize at all without external stimulation</button>
+<div class="quiz-explain"><b>Explanation:</b> Pacemaker cells lack a true resting potential; their charge briefly drops to about -60 mV before spontaneously rising to threshold, triggering the next action potential without external stimulation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Repolarization differs fundamentally from depolarization in that repolarization:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Always occurs faster than depolarization regardless of heart rate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Occurs passively with no energy expenditure</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Requires active cellular energy expenditure via membrane pumps</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cannot be affected by non-cardiac factors</button>
+<div class="quiz-explain"><b>Explanation:</b> Unlike depolarization, which is a largely passive ionic event, repolarization requires active energy expenditure by membrane pumps (like the Na/K-ATPase) to restore the resting ionic gradients, making it more susceptible to metabolic and pharmacologic influences.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec2">
+<h2>2. EKG Basics: Paper, Leads &amp; Wave Properties</h2>
+
+<h3>The 12-Lead Setup</h3>
+<ul>
+<li>Two electrodes on the arms, two on the legs &rarr; form the <b>six limb leads</b> (three standard + three augmented)</li>
+<li>Six electrodes across the chest &rarr; the <b>six precordial (chest) leads</b></li>
+<li>Standard electrode positioning protocols allow valid comparison of EKGs taken at different times/settings on the same patient</li>
+</ul>
+
+<h3>EKG Paper: The Grid</h3>
+<div class="callout">Standard EKG paper speed is <b>25 mm/second</b>. Small squares = 1&times;1 mm; large (bold) squares = 5&times;5 mm.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Axis</th><th>Small Square</th><th>Large Square</th></tr>
+<tr><td>Horizontal (time)</td><td>0.04 seconds</td><td>0.2 seconds (5 small squares)</td></tr>
+<tr><td>Vertical (voltage)</td><td>0.1 millivolts</td><td>0.5 millivolts</td></tr>
+</table>
+</div>
+<p>Five large squares together = 1 full second. Doubling paper speed to 50 mm/second "stretches out" the tracing &mdash; useful for distinguishing arrhythmias, but must be recognized or rate/interval calculations will be wrong.</p>
+
+<h3>Three Wave Characteristics</h3>
+<ul>
+<li><b>Duration</b> &mdash; measured in fractions of a second</li>
+<li><b>Amplitude</b> &mdash; measured in millivolts</li>
+<li><b>Configuration</b> &mdash; the shape/appearance of the wave</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. On standard EKG paper, how many seconds does one large (bold) box represent?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">1.0 seconds</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">0.04 seconds</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">0.1 seconds</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">0.2 seconds</button>
+<div class="quiz-explain"><b>Explanation:</b> One large box contains five small squares, each 0.04 seconds, totaling 0.2 seconds &mdash; a key reference for measuring intervals like the PR interval and QRS duration.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A technician doubles the EKG paper speed from the standard 25 mm/sec to 50 mm/sec to better evaluate an arrhythmia. What is the main consequence of this change?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Waveforms appear stretched out over a greater horizontal distance for the same time interval</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The QRS complex will appear artificially narrow</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Rate calculations using standard methods will be unaffected</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The voltage scale doubles as well</button>
+<div class="quiz-explain"><b>Explanation:</b> Doubling the paper speed to 50 mm/sec stretches the tracing horizontally for the same time interval, which can help distinguish arrhythmias but requires the reader to recognize the altered speed, or rate/interval calculations using standard methods will be inaccurate.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Along the vertical axis of EKG paper, one large (5x5 mm) box corresponds to how many millivolts?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">0.2 mV</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">0.5 mV</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">1.0 mV</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">0.1 mV</button>
+<div class="quiz-explain"><b>Explanation:</b> Each small square vertically represents 0.1 mV; a large box (5 small squares) therefore represents 0.5 mV &mdash; used to assess amplitude criteria such as those for ventricular hypertrophy.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec3">
+<h2>3. P Wave, PR Interval &amp; Atrial Depolarization</h2>
+
+<h3>The P Wave</h3>
+<ul>
+<li>Atrial depolarization begins at the <b>sinus (SA) node</b>: right atrium depolarizes first, left atrium follows a few milliseconds later</li>
+<li>The vector of atrial depolarization points <b>right to left and slightly inferior</b></li>
+<li>Leads viewing this wave of depolarization <i>approaching</i> record a <b>positive</b> deflection; leads viewing it <i>receding</i> record a <b>negative</b> deflection</li>
+</ul>
+
+<div class="table-scroll">
+<table>
+<tr><th>Lead</th><th>P Wave Deflection</th><th>Why</th></tr>
+<tr><td>I, aVL (left lateral); II, aVF (inferior)</td><td>Positive</td><td>Directly in line with the atrial depolarization vector</td></tr>
+<tr><td>III</td><td>Often biphasic</td><td>Sits at ~+120&deg;, nearly perpendicular to the atrial current</td></tr>
+<tr><td>aVR</td><td>Purely negative</td><td>Most rightward lead (~&minus;150&deg;); sees current moving away from it</td></tr>
+</table>
+</div>
+
+<h3>The Sinus Node</h3>
+<ul>
+<li>Dominant pacemaker cells of the right atrium; fire at <b>60&ndash;100/min</b>, modulated heavily by the autonomic nervous system and metabolic demand</li>
+</ul>
+
+<h3>PR Interval vs. PR Segment</h3>
+<div class="callout">
+<b>PR interval:</b> start of atrial depolarization &rarr; start of ventricular depolarization (includes the AV nodal delay). Normal: <b>0.12&ndash;0.20 seconds</b> (~3&ndash;5 mm).<br>
+<b>PR segment:</b> end of atrial depolarization &rarr; start of ventricular depolarization (just the AV nodal delay portion); usually horizontal, along the same baseline as the start of the P wave.
+</div>
+<ul>
+<li>The AV node deliberately slows conduction "to a crawl" &mdash; this physiologic delay lets the atria finish contracting before the ventricles begin</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Lead aVR characteristically shows a purely negative P wave. This is best explained by which fact?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">aVR has no clinical utility for atrial waveforms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">aVR is positioned to view atrial depolarization directly approaching it</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">aVR is the most rightward frontal plane lead and views the atrial depolarization vector as moving away from it</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">aVR only records ventricular activity</button>
+<div class="quiz-explain"><b>Explanation:</b> aVR sits at approximately -150 degrees, the most rightward orientation of the frontal plane leads, so it views the right-to-left, slightly inferior vector of atrial depolarization as receding from it, producing a purely negative deflection.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What physiologic purpose does the AV nodal delay (reflected in the PR segment) serve?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It prevents the sinus node from firing too quickly</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It generates the T wave</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It has no functional purpose and is simply a conduction artifact</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">It allows the atria to finish contracting before the ventricles begin to contract</button>
+<div class="quiz-explain"><b>Explanation:</b> The AV node deliberately slows conduction, creating the physiologic delay reflected in the PR segment. This ensures the atria complete their contraction and empty into the ventricles before ventricular depolarization and contraction begin.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient's PR interval measures 0.28 seconds. How should this be characterized relative to normal?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Prolonged, since the normal range is 0.12-0.20 seconds</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Shortened, indicative of pre-excitation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This value is not measurable from a standard EKG</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Normal, since the upper limit is 0.30 seconds</button>
+<div class="quiz-explain"><b>Explanation:</b> The normal PR interval is 0.12-0.20 seconds. A PR interval of 0.28 seconds exceeds this range, indicating a delay in conduction from the atria to the ventricles (as seen in first-degree AV block).</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec4">
+<h2>4. QRS Complex &amp; Ventricular Conduction</h2>
+
+<h3>The Ventricular Conducting System</h3>
+<ul>
+<li><b>Bundle of His</b> emerges from the AV node &rarr; divides into <b>right and left bundle branches</b></li>
+<li><b>Right bundle branch</b> carries current down the right side of the interventricular septum</li>
+<li><b>Left bundle branch</b> has three fascicles: <b>septal</b> (depolarizes the interventricular septum left-to-right), <b>anterior</b> (anterior LV wall), <b>posterior</b> (posterior LV wall)</li>
+<li><b>Purkinje fibers</b> are the terminal fascicles of both bundle branches, delivering current into ventricular myocardium</li>
+</ul>
+<div class="callout">The earliest part of the QRS represents septal depolarization via the <b>septal fascicle</b> of the left bundle branch (left-to-right). This tiny initial deflection may be visible as a small negative deflection (Q wave) in leads I, aVL, V5, and V6.</div>
+
+<h3>Naming QRS Components</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Wave</th><th>Definition</th></tr>
+<tr><td>Q wave</td><td>First deflection, if downward (only the <i>first</i> wave of the complex can be called a Q wave)</td></tr>
+<tr><td>R wave</td><td>First upward deflection</td></tr>
+<tr><td>R&prime;</td><td>A second upward deflection</td></tr>
+<tr><td>S wave</td><td>Any downward deflection following an upward deflection (not the first wave)</td></tr>
+<tr><td>QS wave</td><td>Entire complex is a single downward deflection</td></tr>
+</table>
+</div>
+
+<h3>Normal vs. Abnormal Q Waves &amp; R Wave Amplitude</h3>
+<div class="callout">
+<b>Normal Q wave:</b> &lt;0.04 sec wide and &lt;3 mm deep.<br>
+<b>Abnormal ("pathologic") Q wave:</b> &gt;3 mm deep <i>or</i> &gt;1/3 the height of the QRS complex &mdash; suggests prior transmural infarction/scar.<br>
+<b>Normal R wave:</b> &le;7.5 mm high (in the small/medium precordial leads before hypertrophy criteria are applied).
+</div>
+
+<h3>R Wave Progression</h3>
+<ul>
+<li><b>V1</b> (overlies right ventricle): deep S wave &mdash; current moves leftward, away from the right side</li>
+<li><b>V5/V6</b> (overlie left ventricle): tall, positive R waves</li>
+<li>The progressive increase in R wave amplitude moving right-to-left across the precordial leads is called <b>R wave progression</b></li>
+<li>The left ventricle, being far more massive, dominates the remainder of the QRS; the average vector swings leftward, generally 0&deg; to +90&deg;</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A downward deflection can only be labeled a 'Q wave' under which condition?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is the largest deflection in the complex</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">It is the first wave of the entire QRS complex</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It follows an R wave</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It occurs in a precordial lead</button>
+<div class="quiz-explain"><b>Explanation:</b> By convention, a downward deflection is called a Q wave only if it is the very first wave of the complex. Any downward deflection that follows an upward (R) wave is instead called an S wave, regardless of its size.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which fascicle of the left bundle branch is responsible for the earliest portion of the QRS complex, depolarizing the interventricular septum left-to-right?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The anterior fascicle</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The posterior fascicle</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The septal fascicle</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The right bundle branch</button>
+<div class="quiz-explain"><b>Explanation:</b> The septal fascicle of the left bundle branch depolarizes the interventricular septum in a left-to-right direction first, producing the earliest portion of the QRS complex (sometimes visible as a small Q wave in leads I, aVL, V5, and V6).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why does lead V1 typically show a deep S wave while V5/V6 show tall R waves during normal ventricular depolarization?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">V5/V6 record only atrial activity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no physiologic explanation; it is purely due to electrode placement error</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">V1 is malfunctioning and should be excluded from interpretation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">V1 overlies the right ventricle, and the dominant leftward current from the larger left ventricle moves away from it, while V5/V6 overlie the left ventricle and see this current approaching</button>
+<div class="quiz-explain"><b>Explanation:</b> V1 sits over the right ventricle; as the much more massive left ventricle depolarizes and dominates the overall current, that leftward-moving current moves away from V1 (producing a deep S wave) and toward V5/V6 (producing tall R waves) &mdash; the basis of normal R wave progression.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec5">
+<h2>5. ST Segment, T Wave &amp; QT Interval</h2>
+
+<h3>Repolarization &amp; the T Wave</h3>
+<ul>
+<li>Repolarization usually begins in the <b>last area depolarized</b> and travels <b>backward</b> (opposite direction from depolarization)</li>
+<li>Both an approaching depolarization wave and a receding repolarization wave produce a <b>positive</b> deflection &mdash; so leads with tall R waves normally also show <b>positive T waves</b></li>
+<li>Normal T wave amplitude: <b>1/3 to 2/3</b> the height of the corresponding R wave</li>
+<li>Repolarization requires active energy expenditure, making the T wave highly susceptible to cardiac and noncardiac influences (electrolytes, ischemia, drugs)</li>
+</ul>
+
+<h3>Segments &amp; Intervals: Precise Definitions</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Segment/Interval</th><th>Spans</th><th>Normal Duration</th></tr>
+<tr><td>PR interval</td><td>Start of atrial depolarization &rarr; start of ventricular depolarization</td><td>0.12&ndash;0.20 sec</td></tr>
+<tr><td>PR segment</td><td>End of P wave &rarr; start of QRS</td><td>(part of PR interval)</td></tr>
+<tr><td>QRS interval/duration</td><td>Duration of the QRS complex alone</td><td>0.06&ndash;0.10 sec</td></tr>
+<tr><td>ST segment</td><td>End of QRS &rarr; start of T wave (end of ventricular depolarization &rarr; start of repolarization)</td><td>Usually horizontal/gently upsloping</td></tr>
+<tr><td>QT interval</td><td>Start of QRS &rarr; end of T wave (all ventricular electrical events)</td><td>QTc &le;0.44 sec</td></tr>
+<tr><td>P wave duration</td><td>Duration of atrial depolarization</td><td>0.08&ndash;0.10 sec</td></tr>
+</table>
+</div>
+
+<h3>The QT Interval &amp; Heart Rate</h3>
+<div class="callout">QT duration is <b>inversely proportional to heart rate</b>: faster rates &rarr; shorter QT (repolarization must keep pace); slower rates &rarr; longer QT. Repolarization accounts for ~40% of the normal cardiac cycle (measured R-to-R). The <b>QTc</b> (corrected QT, adjusted for heart rate) is normally &le;0.44 seconds &mdash; critical when evaluating arrhythmia risk or drug-induced QT prolongation.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why do leads that record tall R waves during depolarization normally also record positive T waves during repolarization?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Both an approaching depolarization wave and a receding repolarization wave produce a positive deflection on the same lead</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">T waves are always positive regardless of lead placement</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is a coincidence with no underlying physiologic basis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">R waves and T waves are generated by entirely separate electrical events unrelated to lead orientation</button>
+<div class="quiz-explain"><b>Explanation:</b> Both an approaching wave of depolarization and a receding wave of repolarization generate a positive deflection on the EKG in the same lead, which is why leads with tall R waves typically also show upright, positive T waves.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. As heart rate increases, what happens to the QT interval and why?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It lengthens, because repolarization slows at higher rates</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">It shortens, because repolarization must occur more quickly to prepare for the next contraction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It remains completely unchanged regardless of rate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It becomes unmeasurable</button>
+<div class="quiz-explain"><b>Explanation:</b> The QT interval is inversely related to heart rate: as the heart beats faster, repolarization must occur more quickly to be ready for the next contraction, shortening the QT interval; at slower rates, the QT interval lengthens.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient's corrected QT interval (QTc) is measured at 0.52 seconds. This value is significant primarily because:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It confirms a diagnosis of atrial fibrillation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is within normal limits and requires no further action</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Values above the normal threshold of ~0.44 seconds raise concern for ventricular arrhythmia risk, including with QT-prolonging medications</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It indicates a shortened PR interval</button>
+<div class="quiz-explain"><b>Explanation:</b> The normal QTc is <=0.44 seconds. A QTc of 0.52 seconds is prolonged, which is clinically important because prolonged QT increases the risk of dangerous ventricular arrhythmias such as polymorphic ventricular tachycardia/torsades de pointes, particularly with certain medications.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec6">
+<h2>6. Calculating Heart Rate</h2>
+
+<h3>Three Methods</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Method</th><th>Formula</th><th>Example</th></tr>
+<tr><td>Small square method</td><td>1500 &divide; (number of small squares between consecutive R waves)</td><td>15 small squares &rarr; 1500/15 = 100 bpm</td></tr>
+<tr><td>Large square method</td><td>300 &divide; (number of large squares between consecutive R waves)</td><td>4 large squares &rarr; 300/4 = 75 bpm</td></tr>
+<tr><td><b>"300-150-100" sequence method</b> (preferred by the lecturer)</td><td>Find an R wave falling on/near a bold line; count down the next bold lines as 300, 150, 100, 75, 60, 50...</td><td>Next R falls between 100 and 75 &rarr; estimate ~85&ndash;86 bpm</td></tr>
+</table>
+</div>
+
+<div class="pearl"><b>Practical Tip</b> Always confirm the rhythm strip is running at the standard 25 mm/sec before calculating rate &mdash; paper speed is sometimes doubled to 50 mm/sec to better visualize arrhythmias, which will throw off any rate calculation if not recognized.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Using the small square method, if there are 20 small squares between two consecutive R waves, what is the heart rate?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">100 bpm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">150 bpm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">60 bpm</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">75 bpm</button>
+<div class="quiz-explain"><b>Explanation:</b> The small square method divides 1500 by the number of small squares between R waves: 1500 / 20 = 75 beats per minute.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Using the large square ('300 method') sequence, if the next R wave falls exactly on the third bold line after the starting R wave, what is the heart rate?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">100 bpm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">75 bpm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">300 bpm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">150 bpm</button>
+<div class="quiz-explain"><b>Explanation:</b> The sequence for the large square method is 300 (1st line), 150 (2nd line), 100 (3rd line), 75 (4th line), and so on. An R wave falling on the third bold line corresponds to a rate of 100 bpm.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Before applying any of the standard rate calculation methods, what must first be confirmed about the EKG tracing?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">That the patient is supine</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">That the paper speed is the standard 25 mm/second (not doubled to 50 mm/second)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">That all 12 leads are visible</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">That the patient has a normal axis</button>
+<div class="quiz-explain"><b>Explanation:</b> Since paper speed is sometimes doubled to 50 mm/second to help evaluate arrhythmias, confirming the standard 25 mm/second speed is essential before applying the small square, large square, or sequence methods &mdash; otherwise the calculated rate will be inaccurate.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec7">
+<h2>7. Determining Axis</h2>
+
+<h3>The Six Frontal Plane Leads &amp; Their Angles</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lead</th><th>Type</th><th>Angle of Orientation</th></tr>
+<tr><td>I</td><td>Standard (left arm+, right arm&minus;)</td><td>0&deg;</td></tr>
+<tr><td>II</td><td>Standard (legs+, right arm&minus;)</td><td>+60&deg;</td></tr>
+<tr><td>III</td><td>Standard (legs+, left arm&minus;)</td><td>+120&deg;</td></tr>
+<tr><td>aVL</td><td>Augmented (left arm+)</td><td>&minus;30&deg;</td></tr>
+<tr><td>aVR</td><td>Augmented (right arm+)</td><td>&minus;150&deg; (the only true right-sided limb lead)</td></tr>
+<tr><td>aVF</td><td>Augmented (legs+)</td><td>+90&deg;</td></tr>
+</table>
+</div>
+<ul>
+<li>Leads II, III, aVF = <b>inferior</b> leads; leads I, aVL = <b>left lateral</b> leads</li>
+</ul>
+
+<h3>The Quick Axis Method: Lead I and aVF</h3>
+<div class="table-scroll">
+<table>
+<tr><th>QRS in Lead I</th><th>QRS in aVF</th><th>Axis</th><th>Range</th></tr>
+<tr><td>Positive</td><td>Positive</td><td><b>Normal axis</b></td><td>&minus;30&deg; to +90&deg;</td></tr>
+<tr><td>Positive</td><td>Negative</td><td><b>Left axis deviation</b></td><td>&minus;30&deg; to &minus;90&deg;</td></tr>
+<tr><td>Negative</td><td>Positive</td><td><b>Right axis deviation</b></td><td>+90&deg; to +180&deg;</td></tr>
+<tr><td>Negative</td><td>Negative</td><td><b>Extreme axis deviation</b></td><td>&minus;90&deg; to +180&deg;</td></tr>
+</table>
+</div>
+<div class="callout">Normal axis lies between <b>aVL (&minus;30&deg;)</b> and <b>aVF (+90&deg;)</b>. Memorize the lead I / aVF quadrant method &mdash; it's fast and reliable for boards and clinical practice.</div>
+
+<h3>Clinical Correlates</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Right Axis Deviation</th><th>Left Axis Deviation</th></tr>
+<tr><td>Right ventricular hypertrophy</td><td>Inferior wall MI</td></tr>
+<tr><td>Acute lung disease (PE)</td><td>Left bundle branch block</td></tr>
+<tr><td>Chronic lung disease (COPD)</td><td>Left ventricular hypertrophy</td></tr>
+<tr><td>Wolff-Parkinson-White</td><td>Paced rhythm</td></tr>
+<tr><td>Lateral MI</td><td>Wolff-Parkinson-White</td></tr>
+<tr><td>Left posterior fascicular block</td><td>Ventricular ectopy</td></tr>
+<tr><td>Sodium channel blocker toxicity</td><td>Left anterior fascicular block</td></tr>
+<tr><td>Ventricular ectopy</td><td>&mdash;</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> WPW can cause <i>either</i> right or left axis deviation depending on the accessory pathway's location &mdash; don't assume it only points one direction. Fascicular (hemi)blocks are also a classic axis-deviation cause: left anterior fascicular block &rarr; left axis deviation; left posterior fascicular block &rarr; right axis deviation.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. An EKG shows a positive QRS deflection in lead I and a negative QRS deflection in aVF. What is the axis?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Extreme axis deviation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Normal axis</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Left axis deviation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Right axis deviation</button>
+<div class="quiz-explain"><b>Explanation:</b> Positive in lead I with negative in aVF indicates left axis deviation, corresponding to an axis between -30 and -90 degrees.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient presents with acute shortness of breath and is found to have a new right axis deviation on EKG. Which diagnosis should be strongly considered given this finding?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left ventricular hypertrophy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hypokalemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inferior wall myocardial infarction</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Pulmonary embolism</button>
+<div class="quiz-explain"><b>Explanation:</b> Right axis deviation can result from acute lung disease including pulmonary embolism (via acute right heart strain), as well as COPD, right ventricular hypertrophy, and sodium channel blocker toxicity.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which lead is described as the only true right-sided limb lead, with an angle of orientation of approximately -150 degrees?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">aVR</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Lead I</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Lead III</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">aVL</button>
+<div class="quiz-explain"><b>Explanation:</b> aVR is the most rightward of all frontal plane leads (~-150 degrees) and is considered the only true right-sided limb lead, which is why it normally records a purely negative P wave and QRS.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec8">
+<h2>8. Approach to Rhythm &amp; Causes of Arrhythmia</h2>
+
+<h3>The Four Rhythm Questions</h3>
+<div class="callout">Every time you assess rhythm, ask: (1) Are there normal P waves present? (2) Is the QRS narrow or wide? (3) What is the relationship between the P wave and the QRS? (4) Is the rhythm regular or irregular?</div>
+
+<h3>Normal Rate Ranges (Adult)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Rate</th></tr>
+<tr><td>Normal sinus rhythm</td><td>60&ndash;100 bpm, P wave before every QRS</td></tr>
+<tr><td>Tachycardia</td><td>&gt;100 bpm</td></tr>
+<tr><td>Bradycardia</td><td>&lt;60 bpm</td></tr>
+</table>
+</div>
+<p>Pediatric patients (newborns, children) have faster normal resting rates than adults.</p>
+
+<h3>Causes of Arrhythmia</h3>
+<div class="callout">
+<b>S</b> &mdash; Sympathetic stimulation (enhanced sympathetic tone from any cause)<br>
+<b>H</b> &mdash; Hypoxia (oxygen-deprived myocardium becomes irritable)<br>
+<b>E</b> &mdash; Electrolyte disturbances (hypo/hyperkalemia especially)<br>
+<b>B</b> &mdash; Bradycardia (slow rates predispose to arrhythmia)<br>
+<b>I</b> &mdash; Ischemia (an ischemic heart is irritable; seen in acute infarction)<br>
+<b>D</b> &mdash; Drugs/toxins (including the very antiarrhythmics used to treat arrhythmias)<br>
+<b>S</b> &mdash; Stretch (chamber enlargement/hypertrophy predisposes to arrhythmia)
+</div>
+
+<h3>Symptoms of Arrhythmia</h3>
+<ul>
+<li>Many arrhythmias are asymptomatic, found incidentally</li>
+<li><b>Palpitations</b> &mdash; awareness of one's own heartbeat (accelerations, decelerations, or sustained rapid rate)</li>
+<li><b>Decreased cardiac output</b> symptoms &mdash; lightheadedness, syncope</li>
+<li><b>Increased myocardial O2 demand</b> &mdash; angina-type pain</li>
+<li>Can precipitate CHF in a patient with underlying cardiac disease</li>
+<li>Rarely, the first manifestation is cardiac arrest or sudden death</li>
+</ul>
+<div class="pearl"><b>Important</b> Not every arrhythmia is abnormal or dangerous &mdash; e.g., trained athletes may have normal resting heart rates as low as 35&ndash;40 bpm.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient in the ICU with a serum potassium of 6.8 mEq/L develops new ventricular ectopy. Which letter of the arrhythmia mnemonic does this best represent?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">H for hypoxia</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">E for electrolyte disturbance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">D for drugs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">S for sympathetic stimulation</button>
+<div class="quiz-explain"><b>Explanation:</b> Hyperkalemia is a classic electrolyte disturbance that predisposes to various arrhythmias, represented by the 'E' in the arrhythmia causation framework.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A trained marathon runner is found to have a resting heart rate of 38 bpm on a routine physical. What is the most appropriate interpretation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is diagnostic of hyperkalemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is always pathologic and requires an emergent pacemaker</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">This may be a normal physiologic finding in a highly trained athlete</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This confirms third-degree heart block</button>
+<div class="quiz-explain"><b>Explanation:</b> Not every arrhythmia (including bradycardia) is abnormal or dangerous. Highly trained athletes can have normal resting heart rates as low as 35-40 bpm due to increased vagal tone, without underlying pathology.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. When systematically assessing cardiac rhythm, which of the following is NOT one of the four key questions to ask?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Is the rhythm regular or irregular?</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Are normal P waves present?</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Is the QRS narrow or wide?</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">What is the patient's blood pressure?</button>
+<div class="quiz-explain"><b>Explanation:</b> The four systematic rhythm questions are: are P waves present, is the QRS narrow or wide, what is the P-QRS relationship, and is the rhythm regular or irregular. Blood pressure, while clinically relevant, is not one of these four EKG-focused questions.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec9">
+<h2>9. Sinus Rhythms &amp; Escape Rhythms</h2>
+
+<h3>Sinus Arrhythmias</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Rhythm</th><th>Rate</th><th>Notes</th></tr>
+<tr><td>Sinus tachycardia</td><td>&gt;100 bpm</td><td>P wave before every QRS; consider sepsis, hypovolemia, PE, MI, <b>hyperthyroidism</b>, heart failure, pain, fear</td></tr>
+<tr><td>Sinus bradycardia</td><td>&lt;60 bpm</td><td>P wave before every QRS, just slower; often a disorder of impulse formation</td></tr>
+<tr><td>Sinus arrhythmia</td><td>Normal range</td><td>Mild irregularity, often respiratory (varies with breathing)</td></tr>
+</table>
+</div>
+
+<h3>Escape Rhythms</h3>
+<div class="callout">When the sinus node fails to fire, subsidiary pacemakers "escape" and take over, each with its own intrinsic rate &mdash; progressively slower the lower in the conduction system:</div>
+<div class="table-scroll">
+<table>
+<tr><th>Escape Pacemaker</th><th>Intrinsic Rate</th></tr>
+<tr><td>Sinus node</td><td>60&ndash;100 bpm</td></tr>
+<tr><td>Atrial pacemaker</td><td>60&ndash;75 bpm</td></tr>
+<tr><td>Junctional pacemaker</td><td>40&ndash;60 bpm</td></tr>
+<tr><td>Ventricular (idioventricular) pacemaker</td><td>30&ndash;45 bpm</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient's EKG shows a narrow QRS at a rate of 50 bpm with no discernible P wave associated with any QRS complex. Which escape rhythm is most consistent with this rate and QRS width?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Junctional escape rhythm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Idioventricular escape rhythm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus rhythm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrial escape rhythm</button>
+<div class="quiz-explain"><b>Explanation:</b> A junctional pacemaker fires at 40-60 bpm and produces a narrow QRS (since conduction still proceeds through the normal His-Purkinje system) with no associated P wave, matching this presentation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which of the following differential diagnoses should be considered in a patient found to have new sinus tachycardia?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only anxiety, since sinus tachycardia is always benign</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Sepsis, pulmonary embolism, myocardial infarction, hyperthyroidism, or pain/fear</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Third-degree heart block exclusively</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Digoxin toxicity exclusively</button>
+<div class="quiz-explain"><b>Explanation:</b> Sinus tachycardia has a broad differential including sepsis, hypovolemia, pulmonary embolism, myocardial infarction, hyperthyroidism, heart failure, pain, and fear &mdash; it should prompt a search for an underlying cause rather than being dismissed.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. If the sinus node fails and both the atrial and junctional escape pacemakers also fail to activate, what is the expected intrinsic rate of the resulting ventricular (idioventricular) escape rhythm?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">60-100 bpm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">40-60 bpm</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">30-45 bpm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">100-150 bpm</button>
+<div class="quiz-explain"><b>Explanation:</b> The idioventricular (ventricular) escape pacemaker, the lowest and slowest in the hierarchy, has an intrinsic rate of only about 30-45 bpm, activating only when all higher pacemakers (sinus, atrial, junctional) fail.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec10">
+<h2>10. Supraventricular Arrhythmias</h2>
+
+<h3>Atrial Flutter</h3>
+<ul>
+<li>Characteristic <b>sawtooth pattern</b>, visible in <b>all leads</b> (not lead-specific)</li>
+<li>Narrow QRS; regularly abnormal rhythm; atrial rate classically ~<b>150</b> bpm-range flutter waves with variable AV conduction ratios</li>
+</ul>
+
+<h3>Atrial Fibrillation</h3>
+<ul>
+<li><b>Irregularly irregular</b> rhythm; rate variable (fast or slow if there's an associated block)</li>
+<li>Risk factors: hypertension, heart failure, diabetes, advanced age, hyperthyroidism, intrinsic cardiac disease</li>
+</ul>
+
+<h3>Multifocal Atrial Tachycardia (MAT)</h3>
+<div class="callout">Also called <b>"wandering atrial pacemaker"</b> when non-tachycardic &mdash; a chaotic atrial rhythm from increased automaticity within multiple atrial foci. Fairly uncommon; classically seen in elderly patients with COPD or CHF.</div>
+<ul>
+<li>Narrow QRS, variable/tachycardic rate, with <b>&ge;3 distinct P wave morphologies</b> (multiple atrial foci)</li>
+<li>Seldom life-threatening; consider theophylline toxicity, COPD, CHF</li>
+<li><b>Key pearl:</b> when MAT occurs <i>without</i> underlying COPD or CHF, strongly consider <b>acute pulmonary embolism</b> &mdash; acute right heart strain makes the right atrium irritable</li>
+</ul>
+
+<h3>Supraventricular Tachycardia (SVT) &amp; Reentry</h3>
+<ul>
+<li>SVT = regular, narrow-complex tachycardia originating above the ventricle</li>
+<li><b>Paroxysmal SVT (PSVT)</b> starts and stops abruptly; P wave often buried in the preceding T wave; causes include <b>WPW</b>, anemia, dehydration/fatigue, excess caffeine, <b>pseudoephedrine</b>, and hyperthyroidism</li>
+</ul>
+<div class="callout"><b>Reentry mechanism:</b> a premature beat arrives while one of two conduction pathways (A, fast) is still refractory; the impulse travels down the other pathway (B, slow), which has recovered, then circles back up pathway A once it too has recovered &mdash; creating a self-sustaining reentry loop.</div>
+
+<h3>AVRT vs. AVNRT</h3>
+<div class="table-scroll">
+<table>
+<tr><th></th><th>AVRT (AV Reentry Tachycardia)</th><th>AVNRT (AV Nodal Reentry Tachycardia)</th></tr>
+<tr><td>Mechanism</td><td>Reentry circuit between AV node and an anatomical accessory pathway</td><td>Reentry circuit looping within the AV node itself</td></tr>
+<tr><td>Rate</td><td>Variable</td><td>150&ndash;250 bpm, regular</td></tr>
+<tr><td>Orthodromic AVRT</td><td>Conducts via AV node &rarr; regular, <b>narrow</b> complex</td><td>&mdash;</td></tr>
+<tr><td>Antidromic AVRT</td><td>Conducts via accessory pathway &rarr; regular, <b>wide</b> complex</td><td>&mdash;</td></tr>
+<tr><td>P wave</td><td>Retrograde, long R-P interval</td><td>Retrograde; may see "pseudo R&prime;" in V1; often buried in QRS</td></tr>
+<tr><td>Epidemiology</td><td><b>Most common SVT in children (~30%)</b></td><td><b>Most common SVT in adults (~50%)</b></td></tr>
+</table>
+</div>
+<div class="pearl"><b>Critical Clinical Point</b> A wide-complex, regular tachycardia from antidromic AVRT is very difficult to distinguish from ventricular tachycardia. <b>Treat it as VT</b> &mdash; do NOT give AV nodal blockers (beta-blockers, calcium channel blockers), which can be dangerous if this is actually pre-excited AFib/VT.</div>
+
+<h3>Wolff-Parkinson-White (WPW) Syndrome</h3>
+<ul>
+<li>Congenital accessory pathway (<b>bundle of Kent</b>) causing pre-excitation; affects &lt;0.2% of the population</li>
+<li>Baseline sinus rhythm EKG findings: <b>short PR interval</b> (&lt;0.12 sec), <b>delta wave</b> (slurred upstroke of the QRS), slight QRS prolongation, ST/T discordance, possible pseudo-infarct pattern</li>
+<li>Associated tacky arrhythmias: paroxysmal SVT (via reentry through the bundle of Kent) or atrial fibrillation</li>
+<li>Small but real risk of sudden cardiac death</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A 65-year-old with COPD develops a narrow-complex tachycardia with at least three distinct P wave morphologies on the rhythm strip. What is the most likely diagnosis?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrioventricular nodal reentry tachycardia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ventricular tachycardia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrial flutter</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Multifocal atrial tachycardia</button>
+<div class="quiz-explain"><b>Explanation:</b> Multifocal atrial tachycardia (MAT) is defined by narrow QRS complexes with a variable, tachycardic rate and at least three distinct P wave morphologies, reflecting multiple atrial foci. It is classically associated with COPD, CHF, and theophylline toxicity.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with no history of lung or cardiac disease develops multifocal atrial tachycardia. Which diagnosis should be strongly suspected?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Acute pulmonary embolism</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Chronic stable angina</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Primary hyperaldosteronism</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hypothyroidism</button>
+<div class="quiz-explain"><b>Explanation:</b> When MAT occurs in a patient without underlying COPD or CHF, acute pulmonary embolism should be strongly suspected &mdash; the acute strain on the right heart from pumping against a pulmonary clot burden makes the right atrium irritable.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient with known WPW develops a regular, wide-complex tachycardia (antidromic AVRT). What is the appropriate management approach?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Administer a calcium channel blocker</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Treat as though the patient has ventricular tachycardia, avoiding AV nodal blocking agents</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No treatment is necessary since WPW is always benign</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Administer a beta-blocker to slow AV nodal conduction</button>
+<div class="quiz-explain"><b>Explanation:</b> A wide-complex, regular tachycardia from antidromic AVRT is difficult to distinguish clinically from ventricular tachycardia, so it should be treated as VT. AV nodal blocking agents (beta-blockers, calcium channel blockers) should be avoided, as they can be dangerous in pre-excited rhythms.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec11">
+<h2>11. Premature Complexes &amp; Junctional Rhythm</h2>
+
+<h3>Premature Atrial Contraction (PAC)</h3>
+<ul>
+<li>A P wave arrives earlier than expected in the sinus cycle, typically followed by a normal, narrow QRS</li>
+</ul>
+
+<h3>Premature Junctional Contraction (PJC)</h3>
+<ul>
+<li>A narrow QRS complex arrives early with <b>no preceding P wave</b> &mdash; the impulse originates above the ventricle (narrow QRS) but not from the sinus node</li>
+</ul>
+
+<h3>Junctional Rhythm</h3>
+<div class="callout">Defining features: <b>narrow QRS</b> (impulse originates above the ventricle) with <b>no P wave</b> associated with any QRS complex. Rate is typically <b>40&ndash;60 bpm</b>, consistent with the junctional pacemaker's intrinsic rate.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. An EKG shows an early, narrow QRS complex with no P wave preceding it, followed by a return to normal sinus rhythm. What is this best described as?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Third-degree AV block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Premature atrial contraction (PAC)</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Premature junctional contraction (PJC)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Premature ventricular contraction (PVC)</button>
+<div class="quiz-explain"><b>Explanation:</b> A PJC presents as an early, narrow QRS complex with no preceding P wave, since the impulse originates in the AV junction (above the ventricle, producing a narrow complex, but not from the sinus node).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A sustained rhythm shows narrow QRS complexes at a rate of 45 bpm with no P waves associated with any QRS. What is this rhythm?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Idioventricular rhythm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrial fibrillation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus bradycardia</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Junctional rhythm</button>
+<div class="quiz-explain"><b>Explanation:</b> A junctional rhythm shows a narrow QRS (impulse originates above the ventricle) with no associated P waves, at a rate consistent with the junctional pacemaker's intrinsic rate of 40-60 bpm.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What key feature distinguishes a PAC from a PJC?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">PACs are preceded by an early P wave, while PJCs have no preceding P wave</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PJCs only occur during exercise</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PACs always require a pacemaker</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PACs have a wide QRS while PJCs have a narrow QRS</button>
+<div class="quiz-explain"><b>Explanation:</b> A PAC is characterized by a P wave arriving earlier than expected (from an ectopic atrial focus), typically followed by a normal QRS, whereas a PJC has no preceding P wave since the impulse originates in the AV junction.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec12">
+<h2>12. Ventricular Arrhythmias</h2>
+
+<h3>Premature Ventricular Contraction (PVC)</h3>
+<ul>
+<li>Most common ventricular arrhythmia; wide, bizarre QRS (&ge;<b>0.12 sec</b>) because depolarization bypasses the normal conduction pathway</li>
+<li>Usually followed by a <b>compensatory pause</b>; if it falls between two normal beats with no pause, it's an <b>interpolated PVC</b></li>
+<li>Isolated PVCs are common in normal hearts and rarely need intervention &mdash; <i>but</i> a PVC during acute MI is more ominous (impending ischemia; can trigger VT/VF)</li>
+<li><b>Bigeminy</b> = 1 normal beat : 1 PVC pattern; <b>trigeminy</b> = 2 normal beats : 1 PVC pattern</li>
+</ul>
+
+<h3>Ventricular Tachycardia (VT)</h3>
+<ul>
+<li><b>&ge;3 consecutive PVCs</b> at a regular rate &gt;120 bpm (usually 150&ndash;220 bpm); wide QRS; can show <b>AV dissociation</b></li>
+<li>Classified as <b>sustained</b> (&gt;30 sec or hemodynamically unstable) vs. <b>nonsustained</b>, and as <b>monomorphic</b> (single QRS morphology) vs. <b>polymorphic</b> (varying morphology)</li>
+<li><b>Fusion beats:</b> sinus impulse partially conducts and collides with the ventricular impulse &rarr; hybrid QRS morphology</li>
+<li><b>Capture beats:</b> sinus impulse fully "captures" the ventricle &rarr; a normal-appearing QRS amid the VT</li>
+<li><b>Polymorphic VT</b>: multiple QRS morphologies; higher risk in patients with prolonged QT; treat with <b>IV magnesium</b></li>
+<li><b>Torsades de pointes:</b> uncommon form of polymorphic VT with gradual amplitude change and "twisting" of the QRS around the isoelectric line; associated with prolonged QT</li>
+</ul>
+
+<h3>Ventricular Fibrillation (VF)</h3>
+<div class="callout">A <b>terminal rhythm</b> &mdash; fine or coarse chaotic zigzag with no true QRS complexes, no organized electrical activity, and <b>no cardiac output</b>. Requires immediate CPR and/or defibrillation.</div>
+
+<h3>Accelerated Idioventricular Rhythm (AIVR)</h3>
+<ul>
+<li>Rate <b>50&ndash;100 bpm</b>, wide QRS; seen during acute MI or after reperfusion (angioplasty/stenting or thrombolytics)</li>
+</ul>
+
+<h3>Tachyarrhythmia Framework by QRS Width &amp; Regularity</h3>
+<div class="table-scroll">
+<table>
+<tr><th>QRS Width</th><th>Regular</th><th>Irregular</th></tr>
+<tr><td>Narrow</td><td>Sinus tach, AVRT/AVNRT, atrial flutter</td><td>Atrial fibrillation, MAT</td></tr>
+<tr><td>Wide</td><td>Ventricular tachycardia (monomorphic), antidromic AVRT</td><td>Polymorphic VT</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A PVC falls between two normally conducted sinus beats without disrupting the underlying rhythm or causing a pause. What is this called?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Trigeminy</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">An interpolated PVC</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Torsades de pointes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bigeminy</button>
+<div class="quiz-explain"><b>Explanation:</b> An interpolated PVC occurs between two normally conducted beats without a compensatory pause, distinguishing it from the typical PVC pattern that is followed by a pause.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with a known history of prolonged QT syndrome develops a wide-complex tachycardia with multiple, constantly changing QRS morphologies and a twisting appearance around the isoelectric line. What is the diagnosis and first-line treatment?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">AVNRT; adenosine</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Monomorphic VT; synchronized cardioversion</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Torsades de pointes; IV magnesium</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ventricular fibrillation; defibrillation only</button>
+<div class="quiz-explain"><b>Explanation:</b> This description is classic for torsades de pointes, a form of polymorphic VT associated with prolonged QT interval; first-line treatment is IV magnesium, in addition to correcting any underlying electrolyte abnormality and discontinuing QT-prolonging drugs.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A wide-complex, irregular tachycardia with constantly varying QRS morphology (not a single consistent wide morphology) is most consistent with which rhythm?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrial fibrillation with normal conduction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus tachycardia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Monomorphic ventricular tachycardia</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Polymorphic ventricular tachycardia</button>
+<div class="quiz-explain"><b>Explanation:</b> Using the width/regularity framework, a wide, irregular QRS tachycardia with varying morphology corresponds to polymorphic ventricular tachycardia, distinct from monomorphic VT (wide, regular).</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec13">
+<h2>13. Conduction Blocks</h2>
+
+<h3>Three Categories of Block</h3>
+<ul>
+<li><b>Sinus node block:</b> sinus node fires normally, but the impulse is blocked from spreading through atrial tissue &mdash; looks like a pause on the EKG</li>
+<li><b>AV block:</b> any block between the sinus node and terminal Purkinje fibers (includes AV node and bundle of His)</li>
+<li><b>Bundle branch block:</b> block in one or both ventricular bundle branches; partial block of one fascicle = <b>hemiblock</b></li>
+</ul>
+
+<h3>AV Block Classification</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Site</th><th>EKG Pattern</th><th>Clinical Significance</th></tr>
+<tr><td><b>First-degree AV block</b></td><td>AV node or bundle of His</td><td>Prolonged PR interval (&gt;0.20 sec), every P conducts (1:1)</td><td>Common in normal hearts (sleep, athletes); usually benign, no treatment needed</td></tr>
+<tr><td><b>Mobitz I (Wenckebach)</b> &mdash; 2nd degree</td><td>Usually within the AV node</td><td><b>Progressive PR lengthening</b> until a P wave fails to conduct (dropped beat); pattern repeats</td><td>Usually transient/benign; rarely progresses to complete block; rarely needs a pacemaker</td></tr>
+<tr><td><b>Mobitz II</b> &mdash; 2nd degree</td><td>Usually below the AV node (bundle of His)</td><td><b>Fixed PR interval</b>, sudden dropped beat with no warning (all-or-nothing)</td><td>Far more serious; often progresses to complete heart block; symptomatic Mobitz II requires pacing</td></tr>
+<tr><td><b>Third-degree (complete) block</b></td><td>AV node or lower</td><td>Complete <b>AV dissociation</b> &mdash; P waves and QRS complexes march independently at their own rates</td><td>Ventricles generate their own escape rhythm (~30&ndash;45 bpm, similar to idioventricular); requires pacemaker</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> Mobitz I = progressive PR lengthening &rarr; dropped beat (benign, transient). Mobitz II = fixed PR, sudden dropped beat (serious, often needs pacing). Third-degree = atria and ventricles completely dissociated, each with independent rates.</div>
+
+<h3>Bundle Branch Blocks</h3>
+<ul>
+<li>QRS 0.09&ndash;0.11 sec = <b>incomplete</b> BBB; QRS &ge;<b>0.12 sec</b> = <b>complete</b> BBB</li>
+</ul>
+<div class="table-scroll">
+<table>
+<tr><th></th><th>Right Bundle Branch Block (RBBB)</th><th>Left Bundle Branch Block (LBBB)</th></tr>
+<tr><td>Mechanism</td><td>Delayed RV depolarization (via cell-to-cell conduction after LV finishes)</td><td>Delayed LV depolarization</td></tr>
+<tr><td>V1/V2 pattern</td><td>RSR&prime; ("rabbit ears") with <b>R&prime; larger than the initial R</b>; T wave deflection opposite the terminal QRS</td><td><b>Negative</b> wave (QS or rS pattern); secondary ST-T changes</td></tr>
+<tr><td>I, aVL, V5, V6 pattern</td><td>Wide S wave (reciprocal changes)</td><td><b>Absent Q wave</b>; broad monophasic or notched R wave</td></tr>
+<tr><td>QRS duration</td><td>&gt;0.12 sec</td><td>&gt;0.12 sec</td></tr>
+<tr><td>Axis association</td><td>&mdash;</td><td>Left axis deviation commonly present</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. An EKG shows progressive lengthening of the PR interval with each beat until one P wave is not followed by a QRS, after which the pattern repeats. What is this rhythm?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Mobitz I (Wenckebach) second-degree AV block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mobitz II second-degree AV block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Third-degree AV block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">First-degree AV block</button>
+<div class="quiz-explain"><b>Explanation:</b> Progressive PR interval lengthening culminating in a dropped beat, with the cycle then repeating, is the hallmark of Mobitz I (Wenckebach) second-degree AV block, typically due to a block within the AV node.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient has a fixed, normal PR interval with a sudden, unpredicted dropped QRS complex (no progressive PR lengthening beforehand). This finding is concerning because it suggests:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">First-degree AV block, which is benign</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Mobitz II second-degree AV block, which often progresses to complete heart block and may require pacing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus arrhythmia, a normal variant</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrial fibrillation</button>
+<div class="quiz-explain"><b>Explanation:</b> A fixed PR interval with a sudden, unwarned dropped beat is characteristic of Mobitz II second-degree AV block, usually due to disease below the AV node (in the bundle of His). This carries a much higher risk of progressing to complete heart block and often requires pacing, unlike the more benign Mobitz I.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. On EKG, the P waves and QRS complexes appear to occur at completely independent, unrelated rates with no relationship between them. What is this finding called, and what does the patient need?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrial flutter; rate control</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus arrhythmia; no treatment needed</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Third-degree (complete) AV block/AV dissociation; the patient needs a pacemaker</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mobitz I block; observation only</button>
+<div class="quiz-explain"><b>Explanation:</b> Complete independence between atrial (P wave) and ventricular (QRS) activity defines third-degree AV block, also called AV dissociation. The ventricles generate their own slow escape rhythm, and a pacemaker is required.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec14">
+<h2>14. Pacemakers on EKG</h2>
+
+<h3>Indications for Pacemaker Placement</h3>
+<ul>
+<li>Third-degree AV block/AV dissociation</li>
+<li>Sick sinus syndrome (a form of AV block or bradycardia)</li>
+<li>Acute MI causing AV block or bundle branch block</li>
+<li>Recurrent ventricular tachycardia (overdrive pacing to prevent VT)</li>
+<li>Symptomatic Mobitz II</li>
+</ul>
+
+<h3>Recognizing Pacer Spikes</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Pacing Mode</th><th>EKG Appearance</th></tr>
+<tr><td>Atrial pacing</td><td>Spike &rarr; P wave &rarr; normal PR interval &rarr; normal narrow QRS</td></tr>
+<tr><td>Ventricular pacing</td><td>Spike before a <b>wide QRS resembling LBBB</b> (RV electrode depolarizes the right ventricle first, then spreads cell-to-cell to the left ventricle)</td></tr>
+<tr><td>Sequential (dual-chamber) pacing</td><td>Atrial spike &rarr; P wave &rarr; ventricular spike &rarr; wide QRS</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> A ventricular pacer produces a wide QRS that looks like LBBB because the right ventricle (where the electrode sits) depolarizes first, and the current then spreads to the left ventricle by slower cell-to-cell conduction &mdash; mimicking the sequence seen in native LBBB.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A ventricular pacemaker's paced QRS complex characteristically resembles which native conduction abnormality, and why?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">First-degree AV block, because pacing delays the PR interval</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus arrhythmia, due to respiratory variation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">RBBB, because the right ventricle depolarizes last</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">LBBB, because the right ventricle (where the electrode sits) depolarizes first and the left ventricle depolarizes secondarily by cell-to-cell spread</button>
+<div class="quiz-explain"><b>Explanation:</b> Because the ventricular pacing electrode typically sits in the right ventricle, that chamber depolarizes first, with the left ventricle depolarizing afterward via slower cell-to-cell conduction &mdash; mimicking the sequence of a native left bundle branch block on EKG.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which of the following is an indication for pacemaker placement?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Third-degree (complete) AV block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus arrhythmia related to respiration</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">First-degree AV block in an asymptomatic athlete</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mobitz I block that is transient and asymptomatic</button>
+<div class="quiz-explain"><b>Explanation:</b> Third-degree AV block (complete heart block/AV dissociation) is a clear indication for pacemaker placement, unlike the generally benign first-degree block or transient Mobitz I, or the normal variant of respiratory sinus arrhythmia.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. On an EKG with sequential (dual-chamber) pacing, what is the expected sequence of findings?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A single spike followed immediately by a T wave</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">An atrial spike followed by a P wave, then a ventricular spike followed by a wide QRS</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only a ventricular spike with no atrial spike ever present</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A P wave followed by a spike and then a narrow QRS</button>
+<div class="quiz-explain"><b>Explanation:</b> Sequential (dual-chamber) pacing produces an atrial spike followed by a P wave, and then a separate ventricular spike followed by a wide QRS complex, reflecting pacing of both chambers in sequence.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec15">
+<h2>15. Ischemia &amp; Infarction</h2>
+
+<h3>STEMI vs. NSTEMI</h3>
+<div class="table-scroll">
+<table>
+<tr><th></th><th>STEMI</th><th>NSTEMI</th></tr>
+<tr><td>ST segment</td><td>Elevated, classic "tombstone" morphology</td><td>Normal or minor changes (T wave inversion, ST depression)</td></tr>
+<tr><td>Pathophysiology</td><td>Complete coronary occlusion &mdash; true emergency</td><td>Partial occlusion; less myocardium involved</td></tr>
+<tr><td>Diagnosis basis</td><td>EKG criteria (see below)</td><td>Primarily troponin/clinical presentation, since EKG changes are subtle</td></tr>
+</table>
+</div>
+
+<h3>Diagnostic Criteria (ESC/ACC/AHA)</h3>
+<ul>
+<li><b>STEMI:</b> new ST elevation at the J point in <b>two contiguous leads</b> meeting these cut-points:</li>
+</ul>
+<div class="table-scroll">
+<table>
+<tr><th>Lead Group</th><th>Minimum ST Elevation</th></tr>
+<tr><td>All leads except V2&ndash;V3</td><td>&ge;1 mm</td></tr>
+<tr><td>V2&ndash;V3, males &ge;40 years</td><td>&ge;2 mm</td></tr>
+<tr><td>V2&ndash;V3, males &lt;40 years</td><td>&ge;2.5 mm</td></tr>
+<tr><td>V2&ndash;V3, females (any age)</td><td>&ge;1.5 mm</td></tr>
+</table>
+</div>
+<ul>
+<li><b>NSTEMI/unstable angina:</b> new horizontal or downsloping ST depression in contiguous leads</li>
+</ul>
+
+<h3>Evolution of STEMI Changes (Granular Sequence)</h3>
+<div class="callout">
+1. Hyperacute T wave<br>
+2. Elevation of the J point with ST segment <b>concavity</b><br>
+3. ST elevation becomes more pronounced, turns <b>convex</b> (rounded upward) &mdash; the classic "tombstone"<br>
+4. ST segment and T wave merge into one complex<br>
+5. (After reperfusion) ST returns to baseline; initial Q wave develops; loss of R wave amplitude<br>
+6. T wave inverts, or may eventually return to baseline &mdash; but <b>Q waves persist</b> as a permanent marker of prior infarction/scar
+</div>
+
+<h3>Reciprocal Changes</h3>
+<ul>
+<li>ST depression in leads <b>opposite</b> the infarcting territory reflects ischemia (not injury) in that region and helps localize/confirm a STEMI</li>
+<li>Example: anterolateral STEMI (I, aVL, V2&ndash;V6) with reciprocal ST depression in the inferior leads (III, aVF)</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient presents with chest pain and an EKG showing new ST elevation with a 'tombstone' appearance across the anterior precordial leads, plus ST depression in the inferior leads. How should the inferior ST depression be interpreted?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It confirms this is an NSTEMI rather than a STEMI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It indicates a separate, simultaneous inferior wall infarction</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">It represents reciprocal changes reflecting ischemia in the region opposite the infarcting territory</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is an artifact and should be ignored</button>
+<div class="quiz-explain"><b>Explanation:</b> ST depression in leads opposite the infarcting territory represents reciprocal changes, reflecting diminished blood flow/ischemia (not acute injury) in that region, and helps confirm the diagnosis and localize the true area of infarction.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Weeks after a STEMI, an EKG shows resolution of ST elevation and normalization of T waves, but Q waves remain present in the previously affected leads. What does this finding represent?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A technical error in EKG lead placement</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ongoing acute ischemia requiring immediate intervention</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A normal finding with no clinical significance</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Permanent evidence of prior myocardial infarction/scar tissue</button>
+<div class="quiz-explain"><b>Explanation:</b> As the infarcted myocardium heals and scars, Q waves develop and persist as a permanent marker of the region of prior infarction, even after the ST segment normalizes and the T wave returns upright.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient with classic anginal symptoms has an EKG showing T wave inversions and mild ST depression in the lateral leads, without significant ST elevation. Troponin is elevated. This presentation is most consistent with:</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">NSTEMI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Pericarditis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Wolff-Parkinson-White syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">STEMI</button>
+<div class="quiz-explain"><b>Explanation:</b> Subtle EKG changes (T wave inversion, mild ST depression) without ST elevation, in the setting of elevated troponin and anginal symptoms, is classic for NSTEMI, which is diagnosed primarily by biomarkers and clinical presentation rather than dramatic EKG findings.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec16">
+<h2>16. Chamber Enlargement &amp; Ventricular Hypertrophy</h2>
+
+<h3>Atrial Enlargement (Best Seen in Leads II and V1)</h3>
+<div class="table-scroll">
+<table>
+<tr><th></th><th>Right Atrial Enlargement</th><th>Left Atrial Enlargement</th></tr>
+<tr><td>P wave change</td><td>&uarr;Amplitude of the <b>first</b> part of the P wave ("P pulmonale")</td><td>&uarr;Amplitude/notching of the <b>second</b> part of the P wave</td></tr>
+<tr><td>Cause (pressure/volume overload)</td><td>Tricuspid regurgitation, pulmonic valve stenosis, pulmonary hypertension, cor pulmonale (chronic lung disease)</td><td>Mitral stenosis, LV dysfunction (pressure overload); mitral regurgitation, ventricular septal defect (volume overload)</td></tr>
+</table>
+</div>
+
+<h3>Right Ventricular Hypertrophy (RVH)</h3>
+<ul>
+<li>Most common feature: <b>right axis deviation</b>; QRS remains narrow (&lt;120 ms)</li>
+<li><b>Tall R wave in V1</b> &mdash; R&gt;S, &gt;7 mm tall, or R/S ratio &gt;1</li>
+<li><b>Dominant S wave in V6</b> &mdash; &gt;7 mm deep, or R/S ratio &lt;1</li>
+<li><b>Right ventricular strain pattern</b> (V1&ndash;V3, II, III, aVF): T wave inversion, ST depression, &plusmn; RBBB or incomplete RBBB</li>
+</ul>
+
+<h3>Left Ventricular Hypertrophy (LVH)</h3>
+<div class="callout"><b>Voltage criteria (Sokolow-Lyon):</b> S wave in V1 + R wave in V5 or V6 (whichever is taller) &gt; 35 mm (7 large boxes).</div>
+<ul>
+<li><b>Non-voltage criteria:</b> increased R wave peak time &gt;50 ms in V5/V6; ST depression and T wave inversion in the left-sided leads (a <b>"left ventricular strain"</b> pattern)</li>
+<li>Increased R wave amplitude in leads overlying the left ventricle is the underlying basis for the voltage-based diagnosis</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. An EKG shows notching and increased amplitude of the second component of the P wave in lead II. This finding suggests:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Right atrial enlargement</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Left atrial enlargement</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Right ventricular hypertrophy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left ventricular hypertrophy</button>
+<div class="quiz-explain"><b>Explanation:</b> Left atrial enlargement is reflected by increased amplitude or notching of the second (terminal) portion of the P wave, often due to pressure overload from conditions like mitral stenosis or LV dysfunction with mitral regurgitation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Using the Sokolow-Lyon voltage criteria, LVH is diagnosed when the sum of the S wave depth in V1 and the R wave amplitude in V5 or V6 exceeds which threshold?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">15 mm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">25 mm</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">35 mm</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">50 mm</button>
+<div class="quiz-explain"><b>Explanation:</b> The Sokolow-Lyon criteria diagnose LVH when the S wave depth in V1 plus the R wave amplitude in whichever of V5/V6 is taller totals more than 35 mm (7 large boxes).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. An EKG shows right axis deviation, a tall R wave (taller than the S wave) in V1, and a dominant S wave in V6. This pattern is most consistent with:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left bundle branch block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">First-degree AV block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left atrial enlargement</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Right ventricular hypertrophy</button>
+<div class="quiz-explain"><b>Explanation:</b> Right axis deviation with a tall R wave (R>S) in V1 and a dominant S wave in V6 is the classic EKG pattern of right ventricular hypertrophy, reflecting the electrically dominant, hypertrophied right ventricle.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec17">
+<h2>17. Metabolic &amp; Other EKG Manifestations</h2>
+
+<h3>Hypothermia</h3>
+<ul>
+<li>Sinus bradycardia (the body "slows down")</li>
+<li><b>J wave (Osborn wave):</b> a distinctive abrupt notch/hump at the J point &mdash; ascent then plunge back to baseline. Different in appearance from the "tombstone" ST elevation of STEMI</li>
+<li>Tremor artifact may mimic atrial fibrillation (patient shivering)</li>
+<li>Treatment: <b>rewarm the patient</b> &mdash; the J wave resolves with rewarming</li>
+</ul>
+
+<h3>Hyperkalemia (Progressive Changes)</h3>
+<div class="callout">Peaked/tented T waves (earliest change) &rarr; widened QRS + flattened P waves &rarr; sine wave pattern &rarr; asystole (unless treated).</div>
+
+<h3>Hypokalemia</h3>
+<ul>
+<li>ST segment depression, flattened T wave, and a <b>U wave</b> (a small notch appearing after the T wave, before the next P wave)</li>
+</ul>
+
+<h3>Digoxin Effect</h3>
+<ul>
+<li>Characteristic <b>scooped</b> ST segment depression with flattened/inverted T wave &mdash; the "Salvador Dali mustache" appearance</li>
+</ul>
+
+<h3>Pericardial Effusion</h3>
+<div class="callout"><b>Low QRS voltage + electrical alternans</b> (beat-to-beat alternating QRS amplitude, best seen on the rhythm strip) together strongly suggest pericardial effusion &mdash; the heart is "swinging" within a fluid-filled pericardial sac.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A hypothermic patient's EKG shows a distinctive notch at the J point with an abrupt ascent followed by a plunge back to baseline. What is this finding called, and what is the treatment?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">J wave (Osborn wave); rewarm the patient</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">U wave; correct hypokalemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Epsilon wave; implant a defibrillator</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Delta wave; observation only</button>
+<div class="quiz-explain"><b>Explanation:</b> The J wave (Osborn wave) is a hallmark EKG finding of hypothermia, appearing as an abrupt notch at the J point. It resolves once the patient is rewarmed.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which sequence correctly describes the progressive EKG changes of worsening hyperkalemia?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sine wave -> peaked T waves -> asystole</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Peaked/tented T waves -> widened QRS and flattened P waves -> sine wave -> asystole</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">U waves -> ST depression -> peaked T waves</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Delta wave -> short PR interval -> widened QRS</button>
+<div class="quiz-explain"><b>Explanation:</b> Hyperkalemia progresses in a classic sequence: peaked/tented T waves appear earliest, followed by QRS widening and P wave flattening, then a sine wave pattern, and finally asystole if untreated.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. An EKG shows low QRS voltage along with beat-to-beat alternation in QRS amplitude on the rhythm strip. This combination of findings is most suggestive of:</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Wolff-Parkinson-White syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Digoxin toxicity</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Pericardial effusion with electrical alternans</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hyperkalemia</button>
+<div class="quiz-explain"><b>Explanation:</b> Low QRS voltage combined with electrical alternans (alternating tall and short QRS complexes) strongly suggests a pericardial effusion, as the heart swings within the fluid-filled pericardial sac, alternately moving closer to and farther from the recording electrodes.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec18">
+<h2>18. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review &mdash; every core fact condensed to what's most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>Normal Values Cheat Sheet</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Parameter</th><th>Normal Value</th></tr>
+<tr><td>P wave duration</td><td>0.08&ndash;0.10 sec</td></tr>
+<tr><td>PR interval</td><td>0.12&ndash;0.20 sec</td></tr>
+<tr><td>QRS duration</td><td>0.06&ndash;0.10 sec</td></tr>
+<tr><td>QTc</td><td>&le;0.44 sec</td></tr>
+<tr><td>Small square (time)</td><td>0.04 sec</td></tr>
+<tr><td>Large square (time)</td><td>0.2 sec</td></tr>
+<tr><td>Small square (voltage)</td><td>0.1 mV</td></tr>
+<tr><td>Large square (voltage)</td><td>0.5 mV</td></tr>
+<tr><td>Paper speed</td><td>25 mm/sec</td></tr>
+<tr><td>Normal sinus rate (adult)</td><td>60&ndash;100 bpm</td></tr>
+<tr><td>LVH voltage criteria (Sokolow-Lyon)</td><td>S(V1) + R(V5 or V6) &gt; 35 mm</td></tr>
+</table>
+</div>
+
+<h3>Pacemaker Escape Rate Hierarchy</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Pacemaker</th><th>Intrinsic Rate</th></tr>
+<tr><td>Sinus node</td><td>60&ndash;100 bpm</td></tr>
+<tr><td>Atrial escape</td><td>60&ndash;75 bpm</td></tr>
+<tr><td>Junctional escape</td><td>40&ndash;60 bpm</td></tr>
+<tr><td>Ventricular (idioventricular) escape</td><td>30&ndash;45 bpm</td></tr>
+</table>
+</div>
+
+<h3>Axis Determination (Lead I / aVF Method)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lead I</th><th>aVF</th><th>Axis</th></tr>
+<tr><td>+</td><td>+</td><td>Normal (&minus;30&deg; to +90&deg;)</td></tr>
+<tr><td>+</td><td>&minus;</td><td>Left axis deviation (&minus;30&deg; to &minus;90&deg;)</td></tr>
+<tr><td>&minus;</td><td>+</td><td>Right axis deviation (+90&deg; to +180&deg;)</td></tr>
+<tr><td>&minus;</td><td>&minus;</td><td>Extreme axis deviation (&minus;90&deg; to +180&deg;)</td></tr>
+</table>
+</div>
+
+<h3>Arrhythmia Quick-Sort by QRS Width &amp; Regularity</h3>
+<div class="table-scroll">
+<table>
+<tr><th>QRS Width</th><th>Regular</th><th>Irregular</th></tr>
+<tr><td>Narrow</td><td>Sinus tachycardia, AVRT (orthodromic)/AVNRT, atrial flutter</td><td>Atrial fibrillation, multifocal atrial tachycardia</td></tr>
+<tr><td>Wide</td><td>Ventricular tachycardia (monomorphic), antidromic AVRT</td><td>Polymorphic VT</td></tr>
+</table>
+</div>
+
+<h3>AV Block Comparison</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>PR Pattern</th><th>Dropped Beats?</th><th>Severity</th></tr>
+<tr><td>First-degree</td><td>Prolonged but fixed, 1:1 conduction</td><td>No</td><td>Benign</td></tr>
+<tr><td>Mobitz I (Wenckebach)</td><td>Progressive lengthening</td><td>Yes, cyclic</td><td>Usually benign/transient</td></tr>
+<tr><td>Mobitz II</td><td>Fixed PR</td><td>Yes, sudden/unpredictable</td><td>Serious &mdash; often progresses; may need pacing</td></tr>
+<tr><td>Third-degree</td><td>No relationship (AV dissociation)</td><td>Complete block</td><td>Requires pacemaker</td></tr>
+</table>
+</div>
+
+<h3>Ventricular Arrhythmia Spectrum</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Rhythm</th><th>Key Feature</th><th>Rate</th></tr>
+<tr><td>PVC</td><td>Wide, bizarre QRS &ge;0.12 sec, usually with compensatory pause</td><td>Single ectopic beat</td></tr>
+<tr><td>Ventricular tachycardia</td><td>&ge;3 consecutive PVCs; may show AV dissociation, fusion/capture beats</td><td>120&ndash;200 bpm</td></tr>
+<tr><td>Polymorphic VT / torsades</td><td>Varying QRS morphology; "twisting" around baseline; linked to prolonged QT; treat with IV Mg</td><td>Variable, fast</td></tr>
+<tr><td>Ventricular fibrillation</td><td>Chaotic, no true QRS, no cardiac output</td><td>N/A &mdash; terminal rhythm</td></tr>
+<tr><td>Accelerated idioventricular rhythm</td><td>Wide QRS; seen in acute MI/reperfusion</td><td>50&ndash;100 bpm</td></tr>
+</table>
+</div>
+
+<h3>Metabolic/Toxic EKG Signatures</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Condition</th><th>EKG Finding</th></tr>
+<tr><td>Hypothermia</td><td>Sinus bradycardia + J (Osborn) wave; treat by rewarming</td></tr>
+<tr><td>Hyperkalemia</td><td>Peaked T waves &rarr; wide QRS/flat P &rarr; sine wave &rarr; asystole</td></tr>
+<tr><td>Hypokalemia</td><td>ST depression, flattened T wave, U wave</td></tr>
+<tr><td>Digoxin effect</td><td>Scooped ST depression ("Salvador Dali mustache")</td></tr>
+<tr><td>Pericardial effusion</td><td>Low voltage QRS + electrical alternans</td></tr>
+</table>
+</div>
+
+<h3>Bundle Branch Block Key Discriminators</h3>
+<div class="table-scroll">
+<table>
+<tr><th></th><th>RBBB</th><th>LBBB</th></tr>
+<tr><td>V1/V2</td><td>RSR&prime; ("rabbit ears"), R&prime;&gt;initial R</td><td>Negative (QS/rS pattern)</td></tr>
+<tr><td>I, aVL, V5, V6</td><td>Wide S wave</td><td>Absent Q; broad/notched R wave</td></tr>
+<tr><td>QRS duration for "complete"</td><td>&gt;0.12 sec</td><td>&gt;0.12 sec (often with LAD)</td></tr>
+</table>
+</div>
+
+<h3>STEMI Evolution Timeline</h3>
+<div class="callout">
+Hyperacute T waves &rarr; ST elevation ("tombstone") with J-point elevation &rarr; (post-reperfusion) ST returns to baseline &rarr; Q waves develop &rarr; loss of R wave amplitude &rarr; T wave normalizes, <b>but Q waves persist permanently</b> as scar evidence.
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+function answerQuiz(btn, isCorrect) {
+  const qDiv = btn.closest('.quiz-q');
+  const choices = qDiv.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    const correctBtn = qDiv.querySelector('.quiz-choice[data-correct="true"]');
+    if (correctBtn) correctBtn.classList.add('correct');
+  }
+  const explain = qDiv.querySelector('.quiz-explain');
+  if (explain) explain.classList.add('show');
+}
+</script>
+
+</body>
+</html>
