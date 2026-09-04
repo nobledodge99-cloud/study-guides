@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aortic, Mitral &amp; Other Valve Disease — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.7rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ columns:2; margin:10px 0 0; padding-left:20px; }
+  .top-contents li{ margin-bottom:6px; font-size:0.9rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-240px; top:0; height:100vh; width:230px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:4px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.8rem; padding:6px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+
+  .container{ max-width:900px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:20px 0 8px; letter-spacing:0.02em;
+  }
+  section.card p, section.card li{ font-size:0.95rem; }
+  section.card ul{ padding-left:22px; }
+
+  .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl{ background:#fdf3ea; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; margin:14px 0; font-size:0.9rem; }
+  .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0 auto; min-width:560px; }
+  table{ border-collapse:collapse; width:100%; margin:12px auto 18px; font-size:0.85rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .quiz-block{ margin-top:24px; padding-top:18px; border-top:2px dashed var(--sage); }
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--forest); letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .quiz-q{ background:#fffefb; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  .quiz-q p.stem{ font-weight:600; margin:0 0 10px; font-size:0.93rem; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:7px; padding:9px 12px;
+    margin-bottom:7px; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+    cursor:pointer; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:#e5f2e7; border-color:var(--correct); color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#fbe9e6; border-color:var(--incorrect); color:var(--incorrect); }
+  .quiz-choice[disabled]{ cursor:default; }
+  .quiz-explain{
+    display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light);
+    border-left:3px solid var(--forest); border-radius:6px; font-size:0.87rem;
+  }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:700px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+
+<div class="header">
+  <h1>Aortic, Mitral &amp; Other Valve Disease</h1>
+  <p>Dr. Preeti Jois &middot; Adult Valvular Heart Disease</p>
+</div>
+
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Definitions &amp; General Auscultation Principles</a></li>
+    <li><a href="#sec2">2. Aortic Stenosis: Etiology &amp; Pathophysiology</a></li>
+    <li><a href="#sec3">3. Aortic Stenosis: Murmur, Signs &amp; Mimics</a></li>
+    <li><a href="#sec4">4. Aortic Stenosis: Symptoms, Diagnosis &amp; Treatment</a></li>
+    <li><a href="#sec5">5. Aortic Regurgitation: Etiology &amp; Pathophysiology</a></li>
+    <li><a href="#sec6">6. Aortic Regurgitation: Signs, Murmur &amp; Eponyms</a></li>
+    <li><a href="#sec7">7. Aortic Regurgitation: Symptoms, Diagnosis &amp; Treatment</a></li>
+    <li><a href="#sec8">8. Mitral Stenosis: Etiology, Symptoms &amp; Murmur</a></li>
+    <li><a href="#sec9">9. Mitral Stenosis: Diagnosis &amp; Treatment</a></li>
+    <li><a href="#sec10">10. Mitral Regurgitation: Etiology, Symptoms &amp; Signs</a></li>
+    <li><a href="#sec11">11. Mitral Regurgitation: Murmur, Diagnosis &amp; Treatment</a></li>
+    <li><a href="#sec12">12. Mitral Valve Prolapse</a></li>
+    <li><a href="#sec13">13. Tricuspid Valve Disease</a></li>
+    <li><a href="#sec14">14. Pulmonary Valve Disease</a></li>
+    <li><a href="#sec15">15. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#sec1">Definitions &amp; Principles</a>
+  <a href="#sec2">AS: Etiology</a>
+  <a href="#sec3">AS: Murmur &amp; Signs</a>
+  <a href="#sec4">AS: Dx &amp; Treatment</a>
+  <a href="#sec5">AR: Etiology</a>
+  <a href="#sec6">AR: Signs &amp; Eponyms</a>
+  <a href="#sec7">AR: Dx &amp; Treatment</a>
+  <a href="#sec8">MS: Etiology &amp; Murmur</a>
+  <a href="#sec9">MS: Dx &amp; Treatment</a>
+  <a href="#sec10">MR: Etiology &amp; Signs</a>
+  <a href="#sec11">MR: Murmur &amp; Treatment</a>
+  <a href="#sec12">Mitral Valve Prolapse</a>
+  <a href="#sec13">Tricuspid Valve Disease</a>
+  <a href="#sec14">Pulmonary Valve Disease</a>
+  <a href="#sec15">Summary Tables</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="sec1">
+<h2>1. Definitions &amp; General Auscultation Principles</h2>
+
+<h3>Core Definitions</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Term</th><th>Definition</th></tr>
+<tr><td><b>Afterload</b></td><td>The tension in the LV wall developed during systole — the load against which the heart beats. Typically reflects systemic vascular resistance, but may be <b>fixed</b> in the setting of aortic or mitral stenosis (the stenotic valve itself becomes the obstruction, independent of vascular tone).</td></tr>
+<tr><td><b>Preload</b></td><td>The volume of the right or left ventricle at <b>end-diastole</b> — the stretch of the myocardium from ventricular filling. Reflects volume status: <b>high</b> in volume overload (e.g., CHF), <b>low</b> when dehydrated/hypovolemic.</td></tr>
+</table>
+</div>
+
+<h3>Epidemiology of Valvular Heart Disease</h3>
+<ul>
+<li>Ranks well below coronary heart disease, stroke, hypertension, obesity, and diabetes as a public health threat overall</li>
+<li><b>Rheumatic fever</b> is the dominant cause of valvular heart disease in <b>low- and middle-income countries</b></li>
+<li>RHD prevalence ranges from ~1/100,000 school-age children (Costa Rica) to ~150/100,000 (China)</li>
+<li>Accounts for 12&ndash;65% of cardiovascular hospital admissions and 2&ndash;10% of hospital discharges in some endemic countries</li>
+<li>Disease progresses <b>more rapidly</b> in economically deprived, tropical/subtropical regions (Indian subcontinent, Southeast Asia, Central America, Middle East) — frequently causing serious symptoms in patients <b>&lt;20 years old</b>, attributed to repeated infection with more virulent rheumatogenic streptococcal strains</li>
+<li>~<b>30&ndash;35 million</b> people live with rheumatic heart disease worldwide</li>
+</ul>
+<div class="pearl"><b>High-Income Countries</b> Valve disease here is instead dominated by <b>degenerative/inflammatory</b> processes causing valve thickening, fibrosis, calcification, and dysfunction — prevalence rises significantly with age.</div>
+
+<h3>Universal Murmur Maneuver Principles</h3>
+<div class="callout">
+<b>Respiratory cycle:</b> <b>Right</b>-sided murmurs increase with <b>inhalation</b> (increased venous return to the right heart); <b>left</b>-sided murmurs increase with <b>exhalation</b>.<br><br>
+<b>Maneuvers that increase venous return</b> (&uarr;preload): squatting, passive leg raise &mdash; generally <b>increase</b> most left- and right-sided murmurs (except HCM, which decreases).<br><br>
+<b>Maneuvers that decrease venous return</b> (&darr;preload): standing, Valsalva &mdash; generally <b>decrease</b> most murmurs (except HCM, which increases).
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why is afterload considered 'fixed' in a patient with severe aortic stenosis, rather than variable with systemic vascular resistance?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The stenotic valve itself becomes the fixed obstruction the LV must pump against, largely independent of systemic vascular tone</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Afterload only applies to the right ventricle</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aortic stenosis eliminates afterload entirely</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aortic stenosis has no relationship to afterload</button>
+<div class="quiz-explain"><b>Explanation:</b> In aortic or mitral stenosis, the stenotic valve itself becomes a fixed mechanical obstruction that the ventricle must pump against, making afterload relatively fixed rather than variable with changes in systemic vascular resistance.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. In general, how do right-sided and left-sided heart murmurs respond to the respiratory cycle?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Right-sided murmurs increase with exhalation; left-sided murmurs increase with inhalation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Right-sided murmurs increase with inhalation; left-sided murmurs increase with exhalation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both increase equally regardless of respiratory phase</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Respiratory phase has no effect on any murmur</button>
+<div class="quiz-explain"><b>Explanation:</b> Right-sided murmurs increase with inhalation due to increased venous return to the right heart, while left-sided murmurs increase with exhalation -- a general principle useful for lateralizing an unclear murmur.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. In high-income countries, valvular heart disease is most commonly driven by which process, in contrast to low- and middle-income countries where rheumatic fever dominates?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Autoimmune vasculitis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Congenital malformations exclusively</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Degenerative/inflammatory processes causing valve thickening, fibrosis, and calcification, with prevalence rising with age</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Viral myocarditis</button>
+<div class="quiz-explain"><b>Explanation:</b> In high-income countries, valvular heart disease is dominated by degenerative and inflammatory processes leading to valve thickening, fibrosis, and calcification, with prevalence increasing significantly with age, in contrast to the rheumatic fever-driven disease seen in lower-income, endemic regions.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec2">
+<h2>2. Aortic Stenosis: Etiology &amp; Pathophysiology</h2>
+
+<div class="callout">Aortic stenosis (AS) is the <b>most common valve lesion</b> among adults with chronic valvular heart disease and the <b>most common cause of LV outflow obstruction</b> in adults. Most symptomatic patients are <b>male</b>.</div>
+
+<h3>Three Common Etiologies</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Etiology</th><th>Notes</th></tr>
+<tr><td><b>Calcific disease of a trileaflet (normal) aortic valve</b></td><td>Most prevalent cause in <b>North America and Europe</b>; is the most common surgical valve repair indication in developed countries; many elderly patients; shares risk factors with atherosclerosis (<b>hypertension, hypercholesterolemia, smoking</b>) — but atherosclerosis therapies do <b>not</b> slow AS progression once mild disease is present</td></tr>
+<tr><td><b>Superimposed calcification of a congenitally abnormal (bicuspid) valve</b></td><td>See below</td></tr>
+<tr><td><b>Sequela of rheumatic fever</b></td><td>Most common cause <b>worldwide</b></td></tr>
+</table>
+</div>
+
+<h3>Calcific AS — Mechanism</h3>
+<div class="callout">A normal trileaflet or congenitally bicuspid valve undergoes gradual <b>lipid accumulation, inflammation, and calcification</b> (aortic sclerosis) &rarr; leaflets become thick and stiff and fail to open fully during systole &rarr; disease accelerates as mechanical stress/shear force wears on the valve. <b>NOTCH1</b> gene intercellular signaling has been implicated in mediating this process.</div>
+
+<h3>Bicuspid Aortic Valve — Key Facts</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Fact</th><th>Detail</th></tr>
+<tr><td>Nature</td><td>Congenital</td></tr>
+<tr><td>Presentation</td><td>Can present in adolescence, but <b>more common age 50&ndash;65</b> after years of calcification/degeneration</td></tr>
+<tr><td>Aortic dilation</td><td>Dilated ascending aorta in <b>~1/2</b> of patients</td></tr>
+<tr><td>Associated anomaly</td><td><b>Coarctation of the aorta</b> can co-occur</td></tr>
+<tr><td>Heritability</td><td><b>~30%</b> of offspring have disease in the aorta, valve, or both</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which etiology of aortic stenosis is the most prevalent in North America and Europe, versus the most common cause worldwide?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Rheumatic fever is most prevalent in North America/Europe; bicuspid valve disease is most common worldwide</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bicuspid valve disease dominates both regions equally</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Calcific disease dominates worldwide with no regional variation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Calcific disease of a trileaflet valve is most prevalent in North America/Europe; rheumatic fever is the most common cause worldwide</button>
+<div class="quiz-explain"><b>Explanation:</b> Calcific disease of a trileaflet valve is the most prevalent cause of AS in North America and Europe, while rheumatic fever remains the most common cause of AS worldwide, reflecting differing disease burdens between high-income and lower-income regions.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with a known bicuspid aortic valve is being counseled about associated risks. Which of the following should be included in this discussion?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Approximately 30% of offspring may have disease in the aorta, valve, or both, and about half of patients have a dilated ascending aorta with possible coarctation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bicuspid aortic valve never causes any aortic dilation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This condition only affects the mitral valve</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bicuspid valve disease has no heritable component</button>
+<div class="quiz-explain"><b>Explanation:</b> Bicuspid aortic valve carries a heritable component (~30% of offspring affected), is associated with dilated ascending aorta in about half of patients, and can co-occur with coarctation of the aorta -- all important points for patient counseling.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which gene's intercellular signaling has been implicated in mediating the progression of calcific aortic valve disease?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">BRCA1</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">NOTCH1</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">TP53</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">APOE</button>
+<div class="quiz-explain"><b>Explanation:</b> NOTCH1 gene signaling, which mediates communication between adjacent cells in tissue morphogenesis and homeostasis, has been implicated in the progression of calcific aortic valve disease once mild disease is present.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec3">
+<h2>3. Aortic Stenosis: Murmur, Signs &amp; Mimics</h2>
+
+<h3>The Murmur</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Quality</td><td>Harsh, <b>crescendo-decrescendo systolic ejection murmur</b>; may begin with an ejection click</td></tr>
+<tr><td>Location</td><td>Right upper sternal border (2nd ICS)</td></tr>
+<tr><td>Radiation</td><td>To the <b>carotids</b></td></tr>
+<tr><td>As stenosis worsens</td><td>Peak of murmur moves closer to S2, eventually softening/obliterating S2</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Gallavardin Phenomenon</b> Transmission of the murmur to the <b>apex</b>, where it becomes higher-pitched and more musical/acoustically pure — can mimic mitral regurgitation, but (unlike true MR) does <b>not radiate to the axilla</b>.</div>
+
+<h3>Distinguishing AS From Its Mimics</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Condition</th><th>Key Distinguishing Feature</th></tr>
+<tr><td><b>Aortic sclerosis</b></td><td>Shares a similar murmur quality but does <b>not radiate to the carotids</b> and does <b>not obliterate S2</b></td></tr>
+<tr><td><b>Hypertrophic cardiomyopathy (HCM)</b></td><td>Murmur may be indistinguishable by sound alone — use <b>maneuvers</b>: &darr;preload (standing from sitting) &rarr; HCM murmur <b>increases</b>; &uarr;preload (Valsalva, leg raise) &rarr; HCM murmur <b>decreases</b>. <b>Neither maneuver affects the AS murmur.</b></td></tr>
+</table>
+</div>
+
+<h3>Physical Exam Signs</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Sign</th><th>Detail</th></tr>
+<tr><td><b>Pulsus parvus et tardus</b></td><td>Parvus = smaller; Tardus = late — a smaller, delayed carotid upstroke relative to the heart sounds</td></tr>
+<tr><td>Apical impulse</td><td><b>Sustained</b> (longer contraction needed to empty the hypertrophied LV), but its <b>location remains unmoved</b></td></tr>
+<tr><td>Pulse pressure</td><td><b>Decreased</b></td></tr>
+<tr><td>S4</td><td>Can be present (reflects a stiff, hypertrophied LV and atrial contraction against it)</td></tr>
+</table>
+</div>
+
+<h3>Severe AS — Additional Findings</h3>
+<ul>
+<li>Palpable LV heave or thrill</li>
+<li><b>Weak or absent</b> aortic component of S2 (A2)</li>
+<li><b>Reversed/paradoxical S2 splitting:</b> normally A2 precedes P2; in severe AS, the stiff/thickened valve delays aortic closure so much that <b>A2 now follows P2</b>. A2 remains fixed in this delayed position, while P2 still varies normally with respiration.</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A murmur initially heard as a harsh crescendo-decrescendo systolic murmur at the right upper sternal border is also heard at the apex, where it sounds higher-pitched and more musical, without radiating to the axilla. What is this phenomenon called?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Corrigan pulse</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Austin-Flint murmur</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Gallavardin phenomenon</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Carvallo's sign</button>
+<div class="quiz-explain"><b>Explanation:</b> The Gallavardin phenomenon describes transmission of the aortic stenosis murmur to the apex, where it becomes higher-pitched and musical, potentially mimicking mitral regurgitation -- but true MR would radiate to the axilla, which this does not.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient's murmur is suspected to be either aortic stenosis or hypertrophic cardiomyopathy. Which maneuver-based finding would suggest HCM rather than AS?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The murmur only changes with respiration</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The murmur disappears with any maneuver</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The murmur is completely unaffected by any maneuver</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The murmur increases when the patient stands up from a sitting position (decreasing preload)</button>
+<div class="quiz-explain"><b>Explanation:</b> The HCM murmur characteristically increases with maneuvers that decrease preload, such as standing from a sitting position (less blood return, exacerbating the dynamic outflow obstruction), whereas the AS murmur is unaffected by this or Valsalva/leg-raise maneuvers.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. In severe aortic stenosis, why does 'reversed' or paradoxical splitting of S2 occur?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The stiff, thickened aortic valve delays aortic closure so much that A2 now follows P2, with A2 remaining fixed in this delayed position</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">S2 splitting is never affected by aortic stenosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Reversed splitting reflects early mitral valve closure</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The pulmonic valve closes prematurely, before the aortic valve</button>
+<div class="quiz-explain"><b>Explanation:</b> In severe AS, the markedly increased pressure and delayed emptying of the left ventricle delays aortic valve closure so significantly that A2 now occurs after P2 (reversed from normal), with A2 remaining fixed in this delayed position while P2 continues to vary normally with respiration.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec4">
+<h2>4. Aortic Stenosis: Symptoms, Diagnosis &amp; Treatment</h2>
+
+<h3>Pathophysiology &rarr; Symptoms</h3>
+<div class="callout">
+Progressive afterload &rarr; <b>concentric LV hypertrophy</b> &rarr; decreased compliance and difficulty supplying blood through the thickened muscle (decreased O2 perfusion, despite <i>increased</i> O2 demand to pump against higher pressures) &rarr; can progress to myocardial dysfunction (a form of hypertrophic cardiomyopathy). Cardiac output is maintained <b>until stenosis is severe</b>.<br><br>
+Increased LA pressure &rarr; LA enlargement &rarr; atrial fibrillation (loss of the atrial kick, which is especially poorly tolerated when LV filling already depends on it) &rarr; pressure transmitted back to lungs and right heart.
+</div>
+<div class="table-scroll">
+<table>
+<tr><th>Classic Symptom Triad</th><th>Mechanism</th></tr>
+<tr><td><b>Angina</b></td><td>Thickened myocardium outgrows capillary supply + increased O2 demand</td></tr>
+<tr><td><b>Syncope</b></td><td>Fixed obstruction prevents CO from rising during exercise; peripheral vasodilation during exercise + fixed CO &rarr; BP falls &rarr; decreased cerebral perfusion</td></tr>
+<tr><td><b>Dyspnea</b></td><td>Diastolic dysfunction/heart failure from chronic pressure overload</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Sudden death</b> can also occur, particularly once symptoms have developed.</div>
+
+<h3>Diagnosis</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Modality</th><th>Findings</th></tr>
+<tr><td>EKG</td><td>LVH, secondary repolarization changes; <b>normal in ~10%</b> of patients</td></tr>
+<tr><td>Chest X-ray</td><td>Normal or enlarged cardiac silhouette; calcification of the aortic valve; dilation/calcification of the ascending aorta</td></tr>
+<tr><td>Echocardiogram</td><td>Aortic valve calcification, valve opening/area, severity of LVH, LV function</td></tr>
+<tr><td>Cardiac catheterization</td><td>Coronary angiography and hemodynamics (often to assess for concurrent CAD before surgery)</td></tr>
+</table>
+</div>
+
+<h3>Surgical Intervention — Full Criteria</h3>
+<div class="callout">
+<b>Symptomatic severe AS</b> &mdash; always an indication.<br>
+<b>Asymptomatic severe AS</b> (valve area &lt;1.0 cm&sup2;) — surgery indicated if <b>any</b> of:
+<ul>
+<li>Undergoing other cardiac surgery (e.g., CABG)</li>
+<li>LVEF &lt;50%</li>
+<li>Mean gradient exceeds 55 mmHg</li>
+<li>Blood pressure fails to rise &gt;20 mmHg with exercise</li>
+<li>Severe valvular calcium</li>
+<li>Rapid increase in peak aortic gradient (&gt;0.3 m/sec/year)</li>
+<li>Symptoms provoked by exercise/stress testing in a previously asymptomatic patient</li>
+</ul>
+</div>
+<div class="pearl"><b>Prognosis Without Treatment</b> Prognosis is poor after the onset of heart failure, angina, or syncope — <b>50% mortality within 3 years</b> of symptom onset.</div>
+
+<h3>Balloon Aortic Valvuloplasty</h3>
+<div class="callout">May be considered in patients with severe AS who are <b>not candidates for surgical intervention</b>. Its capacity to help is <b>limited</b> — <b>aortic valve replacement remains the standard of care</b> for severe AS.</div>
+
+<h3>Aortic Valve Replacement Options</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Valve Type</th><th>Key Fact</th></tr>
+<tr><td><b>Mechanical valve</b></td><td>Requires lifelong <b>warfarin</b> (INR 2&ndash;3) + low-dose aspirin</td></tr>
+<tr><td><b>Bioprosthetic (bovine/porcine)</b></td><td>Life expectancy of the valve: <b>10&ndash;15 years</b>; preferred for patients <b>&gt;60 years old</b> (only needs anticoagulation ~3 months post-op)</td></tr>
+<tr><td><b>TAVR</b> (transcatheter AVR)</td><td>Indicated for patients with <b>intermediate or high surgical risk</b>; minimally invasive; a very commonly used option today for patients needing AVR</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Medical Management Caveats</b> There is no effective medical therapy to reverse AS. Concomitant hypertension should be treated cautiously (e.g., ACE inhibitors, carefully titrated) — aggressively lowering BP in AS is <b>poorly tolerated</b> since cardiac output is relatively fixed, and can precipitate syncope. In AFib, beta-blockers help with rate control since rapid ventricular rates worsen diastolic filling.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with severe aortic stenosis undergoes exercise stress testing. Which finding on this test would be an indication for surgery even if the patient is otherwise asymptomatic?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Blood pressure rises appropriately by 30 mmHg</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Blood pressure fails to rise more than 20 mmHg with exercise</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Heart rate increases normally with exercise</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The patient completes the full exercise protocol without any findings</button>
+<div class="quiz-explain"><b>Explanation:</b> Failure of blood pressure to rise more than 20 mmHg with exercise is one of the specific criteria indicating surgery in an asymptomatic patient with severe aortic stenosis, reflecting an inadequate hemodynamic response to increased demand.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the approximate 3-year mortality rate for a patient with severe aortic stenosis once symptoms of heart failure, angina, or syncope have developed, if left untreated?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">10%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">25%</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">50%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">90%</button>
+<div class="quiz-explain"><b>Explanation:</b> Once symptoms (heart failure, angina, or syncope) develop in severe aortic stenosis, prognosis is poor, with approximately 50% mortality within 3 years if the valve is not replaced.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A 45-year-old patient requires aortic valve replacement and wishes to avoid lifelong anticoagulation. Which valve type would best meet this preference, and what is its main trade-off?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">TAVR; requires no follow-up of any kind</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both valve types are functionally identical with no trade-offs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mechanical valve; requires lifelong warfarin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Bioprosthetic valve; only needs anticoagulation for about 3 months post-op, but has a shorter valve life expectancy of 10-15 years</button>
+<div class="quiz-explain"><b>Explanation:</b> A bioprosthetic (bovine or porcine) valve only requires anticoagulation for about 3 months after surgery, avoiding the lifelong warfarin needed with a mechanical valve, but trades this off against a shorter valve life expectancy of 10-15 years, generally making it preferred for older patients (>60) rather than younger ones who would likely outlive the valve.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec5">
+<h2>5. Aortic Regurgitation: Etiology &amp; Pathophysiology</h2>
+
+<div class="callout">In aortic regurgitation (AR), the aortic valve fails to close properly, so blood flows backward from the aorta into the LV during diastole. Initially, the dilated LV compensates well; eventually the heart becomes deconditioned and weak.</div>
+
+<h3>Etiology</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Causes</th></tr>
+<tr><td><b>Leaflet dysfunction</b> (leading causes)</td><td><b>Bicuspid aortic valve</b>, <b>rheumatic heart disease</b> (thickening, deformity, shortening of cusps), <b>infective endocarditis</b> (perforation/erosion of leaflets, whether the valve was previously normal, rheumatic, or congenitally deformed)</td></tr>
+<tr><td>Other leaflet causes</td><td>Membranous subaortic stenosis (high-velocity jet causes secondary leaflet thickening/scarring); cusp prolapse; traumatic rupture/avulsion of a cusp (uncommon)</td></tr>
+<tr><td><b>Aortic root disease</b> (leading cause)</td><td><b>Longstanding hypertension</b></td></tr>
+</table>
+</div>
+<div class="pearl"><b>Bicuspid Valve &amp; AR</b> A patient born with a congenital bicuspid aortic valve may develop predominantly AR (rather than AS); about <b>20%</b> of these patients will require aortic valve surgery <b>between ages 10 and 40</b>.</div>
+
+<h3>Pathophysiology</h3>
+<div class="callout">
+Chronic AR &rarr; increased LV pressure &rarr; progressive <b>eccentric LV hypertrophy</b> and increased LV end-diastolic volume (chronic volume overload stimulates myocyte remodeling). Simultaneously: <b>decreased diastolic pressure</b> and <b>increased systolic pressure</b> &rarr; increased pulse pressure.
+</div>
+<div class="pearl"><b>The Aorta as a "Failed Pump"</b> Normally, the aorta acts like an elastic reservoir — it dilates as blood leaves the LV during systole, then its wall elasticity causes it to "recoil" and help propel blood forward once the aortic valve closes. In AR, this normal recoil process fails because the incompetent valve lets blood leak backward instead of being propelled forward — contributing to the widened pulse pressure and inefficient forward flow.</div>
+<ul>
+<li>The LV can compensate (via dilatation, maintaining forward output without a large diastolic pressure rise) for some time — but eventually ventricular enlargement and interstitial fibrosis lead to both systolic <i>and</i> diastolic dysfunction</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the leading cause of aortic root disease resulting in aortic regurgitation?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Longstanding hypertension</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Rheumatic heart disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bicuspid aortic valve</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Infective endocarditis</button>
+<div class="quiz-explain"><b>Explanation:</b> Longstanding hypertension is the leading cause of aortic root disease (as opposed to primary leaflet dysfunction) resulting in aortic regurgitation, distinct from bicuspid valve, rheumatic disease, and endocarditis, which are the leading causes of leaflet dysfunction.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Approximately what percentage of patients with a congenital bicuspid aortic valve who develop predominant aortic regurgitation will require valve surgery between ages 10 and 40?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">5%</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">20%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">50%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">80%</button>
+<div class="quiz-explain"><b>Explanation:</b> Approximately 20% of patients with a bicuspid aortic valve who develop predominant aortic regurgitation will require aortic valve surgery somewhere between ages 10 and 40.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. How does the normal 'pump' function of the aorta fail in chronic aortic regurgitation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This pump function is unrelated to aortic regurgitation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The aorta stops dilating entirely, preventing any blood flow</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Normally the aorta dilates with LV ejection then recoils to help propel blood forward after valve closure; in AR, the incompetent valve allows backward leakage instead, disrupting this forward-propelling recoil</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The aorta becomes permanently narrowed in AR</button>
+<div class="quiz-explain"><b>Explanation:</b> The aorta normally functions somewhat like an elastic pump: it dilates as blood is ejected during systole, then its elastic recoil helps propel blood forward once the valve closes. In AR, the incompetent aortic valve allows blood to leak backward into the LV instead, disrupting this normal forward-propelling mechanism and contributing to the widened pulse pressure.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec6">
+<h2>6. Aortic Regurgitation: Signs, Murmur &amp; Eponyms</h2>
+
+<h3>Core Exam Findings</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td>Pulse pressure</td><td><b>Widened</b></td></tr>
+<tr><td>Carotid upstrokes</td><td>Brisk</td></tr>
+<tr><td>Apical impulse</td><td><b>Hyperdynamic and laterally displaced</b>; thrill may be present</td></tr>
+<tr><td>S1</td><td>Soft</td></tr>
+<tr><td>S2</td><td><b>Widely split</b> — due to early aortic valve closure from reduced transaortic flow in systole</td></tr>
+<tr><td>S3</td><td>Can sometimes be heard</td></tr>
+</table>
+</div>
+
+<h3>The Murmur</h3>
+<div class="callout">A <b>high-pitched, blowing, decrescendo, early diastolic murmur</b>, heard best at the <b>apex</b> (radiating to the axilla) or along the <b>left sternal border (3rd&ndash;4th ICS)</b> — best heard with the patient <b>leaning forward</b>.</div>
+<div class="pearl"><b>Board Tip</b> Severity of AR correlates with the <b>duration</b> of the murmur, not its intensity.</div>
+
+<h3>Named/Eponymous Findings of Chronic Severe AR (Widened Pulse Pressure)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Eponym</th><th>Finding</th></tr>
+<tr><td><b>Corrigan pulse</b> ("water-hammer" pulse)</td><td>Rapidly rising, forceful pulse that collapses suddenly as arterial pressure falls rapidly in late systole</td></tr>
+<tr><td><b>de Musset sign</b></td><td>Head bobbing with each heartbeat</td></tr>
+<tr><td><b>Quincke's pulse</b></td><td>Visible capillary pulsation (flushing/paling) at the nail bed root when light pressure is applied to the nail tip</td></tr>
+<tr><td><b>Traube's sign</b> ("pistol shot" sound)</td><td>A booming, pistol-shot sound heard over the femoral arteries</td></tr>
+<tr><td><b>Duroziez's sign</b></td><td>A "to-and-fro" murmur heard over the femoral artery with light stethoscope compression</td></tr>
+<tr><td><b>Austin Flint murmur</b></td><td>See below</td></tr>
+</table>
+</div>
+
+<h3>Austin Flint Murmur — Detail</h3>
+<div class="callout">A <b>lower-pitched, mid-to-late diastolic murmur at the apex</b>, thought to reflect turbulence at the mitral inflow area from mixing of regurgitant aortic blood with forward-flowing mitral blood.</div>
+<div class="pearl"><b>Distinguishing From Mitral Stenosis</b> Unlike the murmur of mitral stenosis, the Austin Flint murmur has <b>no opening snap</b>, and it will <b>decrease</b> in duration/intensity (become shorter and softer) in response to a <b>vasodilator challenge</b> (e.g., a nitrate) — lowering afterload reduces the aortic-to-LV diastolic pressure gradient driving the murmur.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with chronic severe aortic regurgitation is found to have visible flushing and paling of the nail bed with light pressure applied to the nail tip. What is this eponymous finding called?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">de Musset sign</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Traube's sign</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Corrigan pulse</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Quincke's pulse</button>
+<div class="quiz-explain"><b>Explanation:</b> Quincke's pulse describes the visible capillary pulsation (alternating flushing and paling) seen at the nail bed root when light pressure is applied to the nail tip, a classic finding in chronic severe aortic regurgitation from the widened pulse pressure.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. How can the Austin Flint murmur be distinguished from the murmur of mitral stenosis, and how does it respond to a vasodilator challenge?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">It lacks an opening snap (unlike MS) and decreases in duration/intensity with a vasodilator (afterload-reducing) challenge</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It cannot be distinguished from mitral stenosis by any means</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It occurs only in systole, unlike mitral stenosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It has an opening snap identical to MS and increases with vasodilators</button>
+<div class="quiz-explain"><b>Explanation:</b> The Austin Flint murmur lacks the opening snap characteristic of mitral stenosis, and because it results from the aortic regurgitant jet interacting with mitral inflow, lowering afterload with a vasodilator (nitrate) reduces the aortic-to-LV diastolic pressure gradient, making the murmur shorter and softer -- a response mitral stenosis does not share.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What determines the clinical severity of aortic regurgitation based on the murmur characteristics, according to board-level teaching?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The intensity (loudness) of the murmur</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The duration of the murmur</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The pitch of the murmur exclusively</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The murmur provides no information about severity</button>
+<div class="quiz-explain"><b>Explanation:</b> The severity of aortic regurgitation correlates with the duration of the diastolic murmur, not its intensity -- a longer murmur indicates a more prolonged pressure gradient and generally more severe regurgitation.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec7">
+<h2>7. Aortic Regurgitation: Symptoms, Diagnosis &amp; Treatment</h2>
+
+<h3>Symptoms</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Symptom</th><th>Mechanism</th></tr>
+<tr><td>Exertional dyspnea, fatigue</td><td>Progressive LV dysfunction</td></tr>
+<tr><td>PND, pulmonary edema</td><td>Backward failure once LV dysfunction develops</td></tr>
+<tr><td>Angina/atypical chest pain</td><td>Coronary perfusion is driven by <b>diastolic</b> blood pressure, which is low in AR</td></tr>
+<tr><td>Presyncope/syncope</td><td>Low diastolic pressure &rarr; poor cerebral perfusion</td></tr>
+<tr><td>CHF symptoms</td><td>Progressive LV failure</td></tr>
+</table>
+</div>
+
+<h3>Diagnosis</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Modality</th><th>Findings</th></tr>
+<tr><td>EKG</td><td>LVH</td></tr>
+<tr><td>Chest X-ray</td><td>Cardiomegaly with LV prominence; dilated aorta on occasion</td></tr>
+<tr><td>Echocardiography</td><td>Mainstay for severity, mechanism, LV function, and aortic root anatomy</td></tr>
+</table>
+</div>
+
+<h3>Treatment — Surgical Indications</h3>
+<div class="callout">
+<b>Symptomatic</b> severe AR — always an indication.<br>
+<b>Asymptomatic</b> severe AR — surgery indicated if <b>any</b> of:
+<ul>
+<li>LVEF &lt;50%</li>
+<li>Normal LVEF but LV end-systolic dimension (LVESD) &gt;50 mm</li>
+<li>Normal LVEF but LV end-diastolic dimension (LVEDD) &gt;65 mm</li>
+<li>Undergoing other heart surgery</li>
+</ul>
+</div>
+<div class="pearl"><b>Don't Confuse With MR Criteria</b> These AR thresholds (LVEF &lt;50%, LVESD &gt;50 mm, LVEDD &gt;65 mm) are numerically different from the mitral regurgitation surgical criteria (Section 11: LVEF &lt;60%, LVESD &gt;40 mm) — a common source of exam confusion since both are "asymptomatic + LV dimension/function" criteria.</div>
+
+<h3>Medical Therapy (When Not an Operative Candidate)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Situation</th><th>Therapy</th></tr>
+<tr><td>Severe AR, not an operative candidate</td><td>Vasodilator therapy — ACE inhibitors, hydralazine, calcium channel blockers</td></tr>
+<tr><td>Significant aortic root dilatation</td><td>Beta-blockers and/or ARB — <b>especially with Marfan syndrome</b></td></tr>
+</table>
+</div>
+
+<h3>Surgical Options</h3>
+<ul>
+<li><b>AV repair:</b> separation of fused cusps, reshaping/removing excess tissue so cusps close tightly, patching a hole in a cusp</li>
+<li><b>AV replacement:</b> mechanical or bioprosthetic (bovine, porcine, or human tissue) valve</li>
+<li><b>TAVR</b> (transcatheter AVR): minimally invasive; common option for patients needing AVR</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why does chronic severe aortic regurgitation predispose to angina, even in the absence of coronary artery disease?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Angina in AR is unrelated to any hemodynamic mechanism</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">AR directly causes coronary artery spasm</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Coronary perfusion is driven by diastolic blood pressure, which is characteristically low in AR</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">AR increases coronary blood flow excessively, causing steal phenomenon</button>
+<div class="quiz-explain"><b>Explanation:</b> Coronary artery perfusion occurs predominantly during diastole and is driven by diastolic blood pressure. Since AR characteristically lowers diastolic pressure, coronary perfusion can become inadequate even without underlying coronary artery disease, producing angina.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. An asymptomatic patient with severe aortic regurgitation has a normal LVEF but an LV end-diastolic dimension of 68 mm. Based on surgical criteria, what is the appropriate next step?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This patient should be treated with mechanical valve replacement only, never bioprosthetic</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This finding is only relevant for mitral regurgitation, not AR</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No intervention is needed since the LVEF is normal</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Surgery should be considered, since an LVEDD greater than 65 mm with normal LVEF is an indication even in asymptomatic patients</button>
+<div class="quiz-explain"><b>Explanation:</b> Even with a normal LVEF, an asymptomatic patient with severe AR and an LV end-diastolic dimension greater than 65 mm meets surgical criteria, since this indicates significant ventricular remodeling from chronic volume overload.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient with aortic regurgitation and significant aortic root dilatation is found to also have Marfan syndrome. Which medical therapy is specifically favored in this scenario?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Beta-blockers and/or angiotensin receptor blockers (ARBs)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">High-dose aspirin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Digoxin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Loop diuretics alone</button>
+<div class="quiz-explain"><b>Explanation:</b> In patients with AR and significant aortic root dilatation, beta-blockers and/or ARBs are favored, and this combination is specifically emphasized in patients with underlying Marfan syndrome, given the added benefit for aortic root protection in this population.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec8">
+<h2>8. Mitral Stenosis: Etiology, Symptoms &amp; Murmur</h2>
+
+<h3>Etiology</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Cause</th><th>Frequency/Detail</th></tr>
+<tr><td><b>(Untreated) rheumatic heart disease</b></td><td>Most common etiology — accounts for <b>~1/3</b> of MS cases; typically seen in the <b>3rd&ndash;4th decade</b> of life; thick leaflets, fused commissures, retracted/thickened/fused chordae, calcium deposition</td></tr>
+<tr><td>Congenital mitral stenosis</td><td>&mdash;</td></tr>
+<tr><td>Elderly patients</td><td>Calcified valves</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Two Different Statistics — Don't Confuse Them</b> "Pure/predominant MS occurs in ~40% of patients with a history of rheumatic heart disease" (i.e., of people who had RHD, 40% develop MS) is a <i>different</i> statistic from "rheumatic disease accounts for ~1/3 of MS cases" (i.e., of people with MS, 1/3 got it from RHD). Both facts can be true simultaneously since they answer different questions.</div>
+
+<h3>Natural History</h3>
+<div class="callout">Symptom onset generally begins in the <b>2nd decade</b> of life; most patients experience some disability by the <b>4th decade</b>. Once seriously symptomatic, disease progresses toward death within <b>2&ndash;5 years</b> without treatment.</div>
+
+<h3>Symptoms by Severity</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Severity</th><th>Findings</th></tr>
+<tr><td>Mild-moderate</td><td>LA pressure and CO can be normal; symptomatic only with extreme exertion, or asymptomatic</td></tr>
+<tr><td>Severe</td><td>Left heart failure symptoms (dyspnea, orthopnea, PND) — <b>pulmonary edema is uncommon</b>; atrial fibrillation (thrombus risk); pulmonary hypertension; right heart failure develops over time; can result in <b>hemoptysis</b> (from rupture of pulmonary bronchial venous connections due to pulmonary venous hypertension)</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Progressive/Precipitating Factors</b> As MS progresses, lesser and lesser degrees of stress (tachycardia, thyrotoxicosis, pregnancy) can precipitate dyspnea. <b>New-onset persistent atrial fibrillation</b> is often a key turning point, accelerating symptom progression.</div>
+
+<h3>The Murmur</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Quality</td><td><b>Low-pitched, mid-diastolic, rumbling</b> — best heard with the <b>bell</b></td></tr>
+<tr><td>Location/position</td><td>Best at the apex, in the <b>left lateral decubitus</b> position</td></tr>
+<tr><td>Augmentation</td><td>Increases with anything that raises cardiac output (e.g., exercise)</td></tr>
+<tr><td>Timing feature</td><td><b>Presystolic accentuation</b> — increased intensity just before S1</td></tr>
+<tr><td>Duration</td><td>Reflects how long LA pressure exceeds LV diastolic pressure — <b>duration increases with severity</b></td></tr>
+</table>
+</div>
+
+<h3>The Opening Snap</h3>
+<div class="callout">A high-pitched sound occurring shortly after S2 (specifically following A2), from a stiff mitral valve. <b>S1 is loud</b>. The <b>A2-to-opening-snap interval</b> is a severity clue: <b>long</b> when LA pressure is <b>low</b>; <b>shortens</b> as LA pressure <b>rises</b> (more severe disease).</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the most common overall etiology of mitral stenosis, and approximately what fraction of MS cases does it account for?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Congenital mitral stenosis; ~10%</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Untreated rheumatic heart disease; ~1/3 of cases</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Age-related calcification; ~1/3 of cases</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Infective endocarditis; ~50% of cases</button>
+<div class="quiz-explain"><b>Explanation:</b> Untreated rheumatic heart disease is the most common etiology of mitral stenosis overall, accounting for approximately one-third of MS cases, typically presenting in the 3rd-4th decade of life with thickened, fused, calcified valve structures.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. The interval between A2 and the opening snap in mitral stenosis provides a clue to disease severity. What does a SHORT A2-to-opening-snap interval indicate?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Right atrial pressure elevation specifically</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Low left atrial pressure and mild disease</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">High (elevated) left atrial pressure, indicating more severe disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The interval has no relationship to disease severity</button>
+<div class="quiz-explain"><b>Explanation:</b> The A2-to-opening-snap interval shortens as left atrial pressure rises, since higher LA pressure causes the stiff mitral valve to open (snap) sooner after aortic valve closure -- a shorter interval therefore indicates more severe, hemodynamically significant mitral stenosis.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which symptom is notably UNCOMMON in severe mitral stenosis, despite the presence of significant left heart failure symptoms like dyspnea, orthopnea, and PND?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hemoptysis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Pulmonary hypertension</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Atrial fibrillation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Pulmonary edema</button>
+<div class="quiz-explain"><b>Explanation:</b> Despite the left heart failure symptoms seen in severe mitral stenosis, frank pulmonary edema is actually uncommon -- an important nuance, since the chronic elevation in pulmonary venous pressure leads to compensatory changes (e.g., pulmonary lymphatic drainage, vascular remodeling) that make acute pulmonary edema less frequent than might be expected.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec9">
+<h2>9. Mitral Stenosis: Diagnosis &amp; Treatment</h2>
+
+<h3>Additional Signs</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td>Atrial fibrillation</td><td>Occurs in <b>50&ndash;80%</b> of patients; increased heart rate decreases diastolic filling time and increases the mitral gradient — <b>rate control is critical</b> to allow more LV diastolic filling time; can rarely precipitate pulmonary edema</td></tr>
+<tr><td>Mitral facies</td><td>Rosy/flushed cheeks over the malar bones, sometimes with a bluish tinge; seen in longstanding severe MS, often with pulmonary hypertension and low cardiac output</td></tr>
+</table>
+</div>
+
+<h3>Diagnostic Workup</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Modality</th><th>Findings</th></tr>
+<tr><td>Labs (BNP)</td><td>Increases due to chamber stretch; more useful for <b>following progression over time</b> than for acute diagnosis</td></tr>
+<tr><td>EKG</td><td>Left atrial enlargement, right axis deviation, RVH, atrial fibrillation</td></tr>
+<tr><td>Chest X-ray</td><td>LA enlargement &plusmn; cephalization (of pulmonary vessels)</td></tr>
+<tr><td>Echocardiography</td><td>Leaflet thickening/mobility, submitral scarring, commissural calcium, LA size, calculated mitral valve area and RV pressure; classic <b>"hockey stick" sign</b> of the anterior mitral leaflet</td></tr>
+<tr><td>Cardiac catheterization</td><td>Detects coronary artery disease; guides stent/bypass timing relative to valve repair/replacement</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Hockey Stick Sign</b> Thickening and calcification of the anterior mitral leaflet tip causes it to bow abnormally during diastole, creating a characteristic hockey-stick-shaped appearance on echo.</div>
+
+<h3>Valve Area — The Key Number</h3>
+<div class="callout">Normal mitral valve area is <b>4&ndash;6 cm&sup2;</b>. An area <b>&lt;2 cm&sup2;</b> impedes flow, creating a pressure gradient across the valve — this drives increased atrial contraction ("atrial kick"), leading over time to LA enlargement and impaired LV diastolic filling.</div>
+
+<h3>Treatment</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Problem</th><th>Approach</th></tr>
+<tr><td>Heart failure</td><td>Very limited medical options; consider a loop diuretic</td></tr>
+<tr><td>Rheumatic MS prevention</td><td>Antibiotics — secondary prevention of Group A strep pharyngitis (penicillin)</td></tr>
+<tr><td>Atrial fibrillation</td><td>Rate control (beta-blockers, CCBs); rhythm control <b>only if LA is not severely dilated and disease is early (&lt;6&ndash;12 months)</b>; anticoagulation (20&ndash;30% risk of systemic embolization if untreated) — use <b>CHA<sub>2</sub>DS<sub>2</sub>-VASc</b> score, prefer <b>VKA/warfarin</b> over DOACs (insufficient trial data/safety evidence for DOACs in this population)</td></tr>
+</table>
+</div>
+
+<h3>Procedural/Surgical Options</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Procedure</th><th>Key Criteria</th></tr>
+<tr><td><b>Balloon valvuloplasty</b></td><td>&lt;0.5% mortality; requires an <b>echo score of &le;8</b>; indicated for <b>symptomatic patients with NYHA functional class &gt;2</b>, or <b>any asymptomatic patient with pulmonary hypertension</b>; improves symptoms by increasing mitral valve area and reducing the transvalvular gradient</td></tr>
+<tr><td><b>Mitral valve replacement</b></td><td>1&ndash;3% mortality; requires lifelong warfarin; used when combined stenosis+regurgitation is present, or <b>echo score &gt;8&ndash;10</b>, or when the patient is not a candidate for valvuloplasty; can be combined with a <b>Maze procedure</b> to reduce recurrent AFib</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the normal mitral valve area, and below what threshold does an impediment to flow with a pressure gradient typically develop?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Normal is 4-6 cm2; impediment develops below 2 cm2</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Normal is 10-12 cm2; impediment below 5 cm2</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Valve area is not a relevant measurement in MS</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Normal is 1-2 cm2; impediment below 0.5 cm2</button>
+<div class="quiz-explain"><b>Explanation:</b> The normal mitral valve area is 4-6 cm2. When the area falls below 2 cm2, it impedes blood flow and creates a pressure gradient across the valve, driving compensatory changes including increased atrial contraction and eventual left atrial enlargement.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with mitral stenosis is being evaluated for balloon valvuloplasty versus mitral valve replacement. An echo score of 6 is reported. Which procedure is favored based on this score, and what is its approximate mortality?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mitral valve replacement, with 1-3% mortality</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Balloon valvuloplasty, with less than 0.5% mortality, since the echo score is 8 or less</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither procedure can be performed with this echo score</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The echo score is irrelevant to procedural choice</button>
+<div class="quiz-explain"><b>Explanation:</b> An echo score of 8 or less favors balloon valvuloplasty, which carries less than 0.5% mortality, whereas valve replacement (1-3% mortality) is reserved for higher echo scores (>8-10) or when combined stenosis and regurgitation are present.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. For a patient with mitral stenosis and atrial fibrillation requiring anticoagulation, which anticoagulant class is preferred, and why?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin alone is sufficient</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">DOACs, because they require no monitoring</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Vitamin K antagonists (warfarin), because DOACs lack sufficient clinical trial data on safety/efficacy in this population</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No anticoagulation is ever indicated in mitral stenosis with AFib</button>
+<div class="quiz-explain"><b>Explanation:</b> Vitamin K antagonists (warfarin) are preferred over DOACs for anticoagulation in mitral stenosis with atrial fibrillation, since DOACs lack sufficient clinical trial data supporting their safety and efficacy in this specific valvular AFib population.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec10">
+<h2>10. Mitral Regurgitation: Etiology, Symptoms &amp; Signs</h2>
+
+<div class="callout">MR = something is preventing the mitral valve from closing properly, allowing blood to flow backward across the valve. Can coexist with mitral stenosis, and is often associated with mitral valve prolapse.</div>
+
+<h3>Etiology — The Five Functional Components of the Mitral Apparatus</h3>
+<div class="callout">Any abnormality of the <b>leaflets</b>, <b>annulus</b>, <b>chordae tendineae</b>, <b>papillary muscles</b>, or the <b>myocardium</b> itself can cause MR.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Mechanism</th></tr>
+<tr><td><b>Primary (degenerative) MR</b></td><td>Leaflets and/or chordae tendineae are <b>primarily</b> abnormal</td></tr>
+<tr><td><b>Secondary (functional) MR</b></td><td>Leaflets/chordae are usually <b>normal</b>; regurgitation is caused by LV remodeling, annular dilation, papillary muscle displacement, dyssynchrony, posterior leaflet tethering, or a combination</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Why This Distinction Matters</b> Patient management differs substantially between primary and secondary MR.</div>
+
+<h3>Acute MR — Causes</h3>
+<ul>
+<li><b>Papillary muscle rupture</b> during acute MI</li>
+<li>Blunt chest trauma</li>
+<li><b>Infective endocarditis</b> — can tear or destroy leaflets</li>
+</ul>
+
+<h3>Chronic Severe MR</h3>
+<div class="callout">Marked LA enlargement with <b>increased LA compliance</b> — meaning only a minimal rise in LA pressure/pulmonary venous pressure occurs despite a large increase in LA volume (a compensatory mechanism that can mask severity for a time).</div>
+
+<h3>Symptoms &amp; Signs</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Symptoms</th><th>Signs</th></tr>
+<tr><td>May be asymptomatic</td><td>Chronic LA and LV enlargement</td></tr>
+<tr><td>Arrhythmias</td><td>Atrial fibrillation</td></tr>
+<tr><td>Heart failure (left-sided): dyspnea, orthopnea, PND</td><td>LV dysfunction; hyperdynamic LV impulse (becomes displaced later in disease); brisk carotid upstroke with <b>normal pulse pressure</b>; S3</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which five functional components make up the mitral valve apparatus, any of which can be responsible for mitral regurgitation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only the leaflets and chordae tendineae are relevant</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">SA node, AV node, bundle of His, Purkinje fibers, and myocardium</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aortic root, sinus of Valsalva, coronary ostia, commissures, and annulus</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Leaflets, annulus, chordae tendineae, papillary muscles, and the myocardium</button>
+<div class="quiz-explain"><b>Explanation:</b> The mitral valve apparatus consists of five functional components -- leaflets, annulus, chordae tendineae, papillary muscles, and the myocardium itself -- and abnormality of any of these can produce mitral regurgitation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient's mitral regurgitation is found to result from left ventricular remodeling and annular dilation, with structurally normal leaflets and chordae. How is this classified?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Secondary (functional) MR</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Acute MR from papillary muscle rupture</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This does not fit any recognized MR category</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Primary (degenerative) MR</button>
+<div class="quiz-explain"><b>Explanation:</b> Secondary (functional) MR is characterized by normal leaflets and chordae tendineae, with regurgitation instead caused by processes like LV remodeling, annular dilation, papillary muscle displacement, or leaflet tethering -- distinguishing it from primary (degenerative) MR where the leaflets/chordae themselves are abnormal.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why can chronic severe mitral regurgitation remain relatively well-tolerated for a period of time despite significant valve dysfunction?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The left atrium loses all compliance, preventing further volume increase</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Marked LA enlargement is accompanied by increased LA compliance, allowing only a minimal rise in LA pressure despite large increases in LA volume</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">MR never causes any hemodynamic consequences</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The left ventricle stops functioning entirely, eliminating symptoms</button>
+<div class="quiz-explain"><b>Explanation:</b> In chronic severe MR, the left atrium enlarges and becomes more compliant, meaning it can accommodate a large increase in regurgitant volume with only a minimal rise in LA pressure and pulmonary venous pressure -- a compensatory mechanism that can delay the onset of overt symptoms.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec11">
+<h2>11. Mitral Regurgitation: Murmur, Diagnosis &amp; Treatment</h2>
+
+<h3>The Murmur</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Grade</td><td>III/VI</td></tr>
+<tr><td>Quality</td><td>Classically <b>holosystolic</b> (can also be decrescendo)</td></tr>
+<tr><td>Location</td><td>Maximal at the <b>apex</b>, radiating to the <b>axilla</b> (occasionally to the base)</td></tr>
+</table>
+</div>
+<div class="callout"><b>Maneuvers:</b> anything that <b>increases preload</b> (handgrip, squatting) <b>increases</b> the murmur; anything that <b>decreases afterload</b> (standing, Valsalva, nitrates) <b>decreases</b> the murmur.</div>
+<div class="pearl"><b>MR vs. TR</b> Both can be holosystolic murmurs — the key distinguisher is that <b>TR gets louder with inspiration</b> (a right-sided murmur), while MR does not change with respiration (a left-sided murmur).</div>
+
+<h3>Diagnosis</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Modality</th><th>Findings</th></tr>
+<tr><td>EKG</td><td>Left axis deviation, LA enlargement, LVH, strain pattern</td></tr>
+<tr><td>Chest X-ray</td><td>Enlarged cardiac silhouette</td></tr>
+<tr><td>Transthoracic echo</td><td>LV size increase, regurgitant jet into LA, LA size increase, PA pressure, RV function</td></tr>
+<tr><td>Cardiac catheterization</td><td>Adjunct evaluation</td></tr>
+</table>
+</div>
+
+<h3>Treatment — Surgical Indications</h3>
+<div class="callout">
+Surgery indicated once <b>symptomatic</b>, or in <b>asymptomatic</b> patients with:
+<ul>
+<li>LV dysfunction: <b>EF &lt;60%</b></li>
+<li>LV dilation with end-systolic dimension <b>&gt;40 mm</b></li>
+<li>Pulmonary hypertension</li>
+</ul>
+</div>
+<div class="pearl"><b>Repair &gt; Replacement</b> <b>Repair is preferred</b> over replacement — valve reconstruction (valvuloplasty + annuloplasty ring) carries fewer long-term complications (thromboembolism, hemorrhage, late valve failure) than replacement.</div>
+
+<h3>MitraClip — Transcatheter Repair</h3>
+<div class="callout">A newer device treating <b>both degenerative (primary) and functional (secondary) MR</b>: a small metallic clip covered in polyester fabric, delivered via catheter from the femoral vein to the left atrium, where it sits flush on the mitral valve to reduce regurgitation without open-heart surgery.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A holosystolic murmur is heard at the apex. Which finding would help distinguish tricuspid regurgitation from mitral regurgitation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both murmurs are identical with no distinguishing features</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">TR is always higher-pitched than MR</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">TR gets louder with inspiration, while MR does not change with the respiratory cycle</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">MR gets louder with inspiration, while TR does not</button>
+<div class="quiz-explain"><b>Explanation:</b> Tricuspid regurgitation, being a right-sided murmur, characteristically increases in intensity with inspiration, while mitral regurgitation (a left-sided murmur) does not show this respiratory variation -- a key bedside distinguishing feature.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. An asymptomatic patient with severe mitral regurgitation has an ejection fraction of 55% and an LV end-systolic dimension of 45 mm. Based on surgical criteria, what is the appropriate recommendation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Surgery is only indicated if EF drops below 30%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This patient should be treated with balloon valvuloplasty</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No surgery is indicated since the patient is asymptomatic</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Surgery should be considered, since the LV end-systolic dimension exceeds 40 mm even though the patient is asymptomatic</button>
+<div class="quiz-explain"><b>Explanation:</b> Even in an asymptomatic patient, an LV end-systolic dimension greater than 40 mm meets surgical criteria for mitral regurgitation, reflecting significant LV remodeling from the chronic volume overload, regardless of a currently preserved EF.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. For mitral regurgitation requiring surgical intervention, which approach is generally preferred, and why?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Repair (valvuloplasty with annuloplasty ring), because it has fewer long-term complications such as thromboembolism, hemorrhage, and late valve failure compared to replacement</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither repair nor replacement is ever performed for MR</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">TAVR is always used instead of surgical repair or replacement</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Replacement, because it has fewer long-term complications than repair</button>
+<div class="quiz-explain"><b>Explanation:</b> Repair (valve reconstruction with valvuloplasty and an annuloplasty ring) is generally preferred over replacement for mitral regurgitation, since it is associated with fewer long-term complications including thromboembolism, hemorrhage, and late valve failure.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec12">
+<h2>12. Mitral Valve Prolapse</h2>
+
+<div class="callout">Also known as: <b>systolic click-murmur syndrome</b>, <b>Barlow syndrome</b> (floppy-valve syndrome), and <b>billowing mitral leaflet syndrome</b>. <b>MVP is the most common cause of primary MR</b>, and in North America is the most common cause of <b>isolated severe MR requiring surgical repair</b>.</div>
+
+<h3>Etiology</h3>
+<ul>
+<li>Usually unknown cause; some genetic etiology involving <b>reduced type III collagen</b> production or collagen fibril fragmentation</li>
+<li>Pathology: <b>myxomatous degeneration</b> of the mitral valve, affecting the <b>posterior leaflet more than the anterior</b>; the mitral annulus is usually dilated</li>
+<li>Frequently seen with connective tissue disorders: <b>Marfan syndrome</b>, <b>osteogenesis imperfecta</b>, <b>Ehlers-Danlos syndrome</b></li>
+<li>Rarely a sequela of acute rheumatic fever; also seen with ischemic heart disease and various cardiomyopathies</li>
+</ul>
+
+<h3>Clinical Demographics</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Population</th><th>Detail</th></tr>
+<tr><td>Women, ages 15&ndash;30</td><td>More commonly affected; clinical course generally <b>benign</b></td></tr>
+<tr><td>Older patients &gt;50, usually men</td><td>Higher risk of <b>chordal rupture requiring surgical treatment</b> — often precipitated by an <b>acute myocardial infarction</b> in this population</td></tr>
+</table>
+</div>
+<div class="pearl">Most patients are asymptomatic throughout life.</div>
+
+<h3>Symptoms (When Present)</h3>
+<ul>
+<li>Palpitations (from arrhythmias), lightheadedness, syncope, anxiety/panic attacks, chest pain</li>
+<li><b>Rarely:</b> sudden death</li>
+</ul>
+
+<h3>Auscultation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Click</td><td>Mid-to-late (non-ejection) systolic click — thought to be caused by sudden tensing of the chordae tendineae as the leaflet reaches maximal excursion (like a parachute reaching full extension)</td></tr>
+<tr><td>Murmur</td><td>High-pitched, mid-to-late systolic crescendo-decrescendo murmur (sometimes described as "whooping" or "honking"); heard best at the apex</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Leaflet-Specific Radiation Pattern</b> <b>Posterior leaflet prolapse</b> &rarr; murmur radiates to the <b>base of the heart</b>. <b>Anterior leaflet prolapse</b> &rarr; murmur radiates <b>posteriorly to the back and axilla</b>.</div>
+
+<h3>Maneuvers</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Maneuver</th><th>Effect on LV Volume</th><th>Effect on Click-Murmur Complex</th></tr>
+<tr><td>Squatting (&uarr;LV volume/preload)</td><td>Increases</td><td>Click/murmur occurs <b>later</b>; murmur becomes louder but shorter — <b>reduces overall intensity of the complex timing shift</b></td></tr>
+<tr><td>Standing (&darr;LV volume/preload)</td><td>Decreases</td><td>Click/murmur occurs <b>earlier</b>; increases intensity of the click-murmur complex</td></tr>
+<tr><td>Valsalva</td><td>Decreases (like standing)</td><td>Murmur becomes <b>louder and longer</b></td></tr>
+</table>
+</div>
+
+<h3>Treatment</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Approach</th><th>Detail</th></tr>
+<tr><td>Surgical (symptomatic)</td><td>Mitral valve repair: chordal shortening, chordal transfer, wedge resection of redundant tissue, annular ring insertion, or a combination</td></tr>
+<tr><td>Surgical (select asymptomatic)</td><td>Considered in low-risk patients when a durable, successful repair is anticipated</td></tr>
+<tr><td>Medical</td><td>Infective endocarditis prophylaxis <b>only if prior history of endocarditis</b> (not for every MVP patient); anticoagulation for AFib based on <b>CHA<sub>2</sub>DS<sub>2</sub>-VASc</b> score/bleeding risk</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Surgical Indications</b> Established or progressive LV systolic dysfunction is a key indication for surgery.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with MVP has posterior leaflet prolapse. Where would the associated murmur be expected to radiate?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">To the axilla and back</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">To the base of the heart</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It would not radiate at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Exclusively to the right side of the chest</button>
+<div class="quiz-explain"><b>Explanation:</b> Posterior leaflet prolapse causes a murmur that radiates to the base of the heart, while anterior leaflet prolapse causes radiation posteriorly to the back and axilla -- an important leaflet-specific distinguishing feature.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which patient population with MVP is at highest risk for chordal rupture requiring surgical treatment?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Chordal rupture risk is identical across all ages and sexes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Women aged 15-30, who generally have a benign course</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Men over age 50</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Children under age 10</button>
+<div class="quiz-explain"><b>Explanation:</b> While MVP is more common overall in women aged 15-30 (who typically have a benign course), older patients over age 50 -- usually men -- are at higher risk for chordal rupture requiring surgical treatment.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Infective endocarditis prophylaxis is recommended for which subset of patients with mitral valve prolapse?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only patients under age 20</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Prophylaxis is never recommended for any MVP patient</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">All patients diagnosed with MVP, regardless of history</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Only those patients with a prior history of endocarditis</button>
+<div class="quiz-explain"><b>Explanation:</b> Infective endocarditis prophylaxis is only needed in MVP patients who have a prior history of endocarditis -- it is not indicated for every patient simply diagnosed with MVP.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec13">
+<h2>13. Tricuspid Valve Disease</h2>
+
+<h3>Tricuspid Stenosis (TS)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Fact</th><th>Detail</th></tr>
+<tr><td>Prevalence</td><td>Less prevalent than mitral stenosis</td></tr>
+<tr><td>Cause</td><td>Generally rheumatic heart disease — <b>usually occurs together with mitral stenosis</b></td></tr>
+<tr><td>Sex</td><td>Affects <b>women &gt; men</b></td></tr>
+<tr><td>Hemodynamics</td><td>Diastolic pressure gradient between RA and RV; <b>augmented with inspiration</b>, declines with expiration</td></tr>
+<tr><td>Venous congestion</td><td>Hepatomegaly, ascites, edema, elevated JVP (<b>prominent "a" wave</b>)</td></tr>
+</table>
+</div>
+
+<h3>TS — Presentation &amp; Exam</h3>
+<div class="callout">Because TS usually follows/accompanies mitral stenosis, presentation overlaps (pulmonary congestion, fatigue). <b>The diagnosis is often missed</b> unless specifically considered — classically suspected when a patient <b>fails to improve after mitral valve commissurotomy</b> for MS.</div>
+<ul>
+<li>Physical exam: hepatic congestion (cirrhosis, jaundice, anasarca, ascites); JVD with <b>giant "a" waves and slow "y" descent</b>; presystolic liver pulsation</li>
+</ul>
+
+<h3>TS — Murmur &amp; Evaluation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Similarities to MS murmur</td><td>Opening snap; low-pitched diastolic murmur</td></tr>
+<tr><td><b>Key difference</b></td><td>TS murmur is best heard at the <b>left lower sternal border</b> (vs. apex for MS); augmented with <b>inspiration</b>, reduced with expiration/Valsalva strain</td></tr>
+<tr><td>EKG</td><td>Right atrial enlargement (peaked P waves in lead II, prominent upright P waves in V1); <b>absence</b> of RVH</td></tr>
+<tr><td>CXR</td><td>Prominent RA and SVC</td></tr>
+<tr><td>TTE</td><td>Thickened tricuspid valve; domes in diastole</td></tr>
+</table>
+</div>
+
+<h3>TS — Treatment</h3>
+<div class="callout">Due to marked systemic venous congestion: salt restriction, diuretic therapy, bed rest — all in preparation for surgery. TS usually accompanies tricuspid regurgitation. <b>Commissurotomy preferred</b>; full valve replacement otherwise.</div>
+
+<h3>Tricuspid Regurgitation (TR)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Frequency/Cause</th></tr>
+<tr><td><b>Functional (secondary)</b></td><td><b>Most common — 75&ndash;90%</b> of cases; from tricuspid annular dilatation and/or leaflet tethering, especially in the setting of <b>RV remodeling from RVH, myocardial infarction, or trauma</b>; can also develop from <b>chronic RV apical pacing</b> with dyssynchronous contraction</td></tr>
+<tr><td><b>Primary</b></td><td>Congenitally deformed tricuspid valves — seen with AV canal defects, <b>Ebstein's malformation</b></td></tr>
+</table>
+</div>
+
+<h3>TR — Signs &amp; Diagnosis</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td>Significant TR causes</td><td>RA enlargement, elevated RA pressure, elevated JVP with <b>prominent "c" waves</b> (contrast: TS = prominent "a" waves)</td></tr>
+<tr><td><b>Carvallo's sign</b></td><td>Blowing holosystolic murmur at the left lower sternal margin that gets <b>louder with inspiration</b></td></tr>
+<tr><td>Presentation nuance</td><td>TR often coexists with left-sided valve lesions, so left heart failure symptoms may predominate over the expected right-sided symptoms (peripheral edema, distended neck veins, hepatosplenomegaly)</td></tr>
+<tr><td>EKG</td><td>RA enlargement; look for the underlying lesion responsible (RV MI, RVH, Ebstein's-associated RBBB)</td></tr>
+<tr><td>CXR</td><td>RA, RV enlargement</td></tr>
+<tr><td>TTE</td><td>RA dilatation, RV volume overload, prolapsing/flail/scarred/tethered tricuspid leaflets with annular dilatation; color flow Doppler confirms the diagnosis</td></tr>
+</table>
+</div>
+
+<h3>TR — Treatment</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Approach</th><th>Detail</th></tr>
+<tr><td>Medical</td><td><b>Treat the underlying cause</b> (e.g., pulmonary hypertension); diuretics; aldosterone inhibitors (patients may have marked hyperaldosteronism from hepatic congestion); ACE inhibitors</td></tr>
+<tr><td>Surgical</td><td>Tricuspid valve repair with annuloplasty, or tricuspid valve replacement — <b>almost always bioprosthetic</b> (due to the low risk of thromboembolism on the low-pressure right side)</td></tr>
+</table>
+</div>
+
+<h3>Quick Comparison: TS vs. TR on JVP</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>JVP Finding</th></tr>
+<tr><td>Tricuspid stenosis</td><td>Giant "a" wave, slow "y" descent</td></tr>
+<tr><td>Tricuspid regurgitation</td><td>Large "v"/"c" wave, blunted "a" wave</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with known mitral stenosis undergoes successful mitral commissurotomy but fails to improve clinically. What diagnosis should be strongly considered, and why might it have been missed initially?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Tricuspid stenosis, because it usually coexists with mitral stenosis and its symptoms overlap, so it is often missed unless specifically considered</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Pulmonary regurgitation, because it always presents identically to MS</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Recurrent mitral stenosis, since commissurotomy is never effective</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aortic stenosis, because it is unrelated to mitral disease</button>
+<div class="quiz-explain"><b>Explanation:</b> Tricuspid stenosis usually occurs together with mitral stenosis and shares overlapping symptoms (pulmonary congestion, fatigue), so the diagnosis is often missed unless specifically considered -- classically suspected when a patient fails to improve after mitral commissurotomy for MS.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the most common overall cause of tricuspid regurgitation, and what is its underlying mechanism?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Primary congenital deformity from Ebstein's malformation, accounting for 90% of cases</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Functional (secondary) TR from tricuspid annular dilatation and/or leaflet tethering, accounting for 75-90% of cases</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Infective endocarditis, accounting for the majority of cases</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Rheumatic heart disease exclusively</button>
+<div class="quiz-explain"><b>Explanation:</b> Functional (secondary) tricuspid regurgitation, arising from tricuspid annular dilatation and/or leaflet tethering (often due to right heart or pulmonary pressure changes), accounts for the majority (75-90%) of TR cases, distinct from the less common primary form seen with congenitally deformed valves.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A holosystolic murmur at the left lower sternal border becomes noticeably louder during inspiration. What is this finding called, and what valve lesion does it indicate?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Gallavardin phenomenon; aortic stenosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Austin Flint murmur; aortic regurgitation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Carvallo's sign; tricuspid regurgitation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Graham Steell murmur; pulmonary regurgitation</button>
+<div class="quiz-explain"><b>Explanation:</b> Carvallo's sign describes the increase in intensity of the tricuspid regurgitation murmur with inspiration, reflecting the general principle that right-sided murmurs augment with inspiration due to increased venous return.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec14">
+<h2>14. Pulmonary Valve Disease</h2>
+
+<h3>Etiology</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Pulmonary Stenosis</th><th>Pulmonary Regurgitation</th></tr>
+<tr><td>Congenital (e.g., <b>congenital rubella syndrome</b>); rheumatic fever; carcinoid syndrome</td><td>Pulmonary hypertension; complication of <b>surgical repair of Tetralogy of Fallot</b> (a very common cause in adults, given how often TOF repair involves the pulmonary valve); rheumatic fever; carcinoid syndrome</td></tr>
+</table>
+</div>
+
+<h3>Signs — Pulmonary Stenosis</h3>
+<ul>
+<li>Harsh crescendo-decrescendo ejection murmur, similar in character to aortic stenosis but heard at a <b>different location</b> — left parasternal 2nd or 4th ICS (rather than the right upper sternal border), with the diaphragm of the stethoscope, patient leaning forward</li>
+</ul>
+
+<h3>Signs — Pulmonary Regurgitation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td>Murmur</td><td>High-pitched, early diastolic, decrescendo — begins with P2 and ends before S1; radiates toward the mid-right sternal edge; heard best at the <b>left upper sternal border</b>, with the patient sitting upright and holding their breath at end-expiration; <b>fixed split S2 with a loud P2 component</b></td></tr>
+<tr><td>EKG</td><td>RBBB, RVH</td></tr>
+<tr><td>Chest X-ray</td><td>RV enlargement, pulmonary artery enlargement</td></tr>
+<tr><td>Echo</td><td><b>Paradoxical septal wall motion</b>, due to RV volume overload</td></tr>
+</table>
+</div>
+
+<h3>Treatment</h3>
+<div class="callout">Treatment is directed at the underlying <b>pulmonary hypertension</b> when present: diuretics, anti-arrhythmics, anticoagulation. <b>Valve commissurotomy or replacement is not common</b> for pulmonary valve disease — it's usually managed medically/by treating the cause.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient who underwent surgical repair of Tetralogy of Fallot years ago now presents with a new murmur similar to aortic regurgitation but at a different location, along with a fixed split S2 and loud P2. What is the most likely diagnosis?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mitral regurgitation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tricuspid stenosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aortic regurgitation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Pulmonary regurgitation, a recognized late complication of TOF surgical repair</button>
+<div class="quiz-explain"><b>Explanation:</b> Pulmonary regurgitation is a well-recognized complication of surgical repair of Tetralogy of Fallot (which often involves the pulmonary valve/outflow tract), presenting with a murmur resembling aortic regurgitation but at a different (pulmonic) location, along with a fixed split S2 and loud P2.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What echocardiographic finding is characteristic of pulmonary regurgitation, reflecting right ventricular volume overload?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Paradoxical septal wall motion</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Austin Flint murmur pattern</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Systolic anterior motion of the mitral valve</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hockey stick sign of the mitral valve</button>
+<div class="quiz-explain"><b>Explanation:</b> Paradoxical septal wall motion is seen on echo in pulmonary regurgitation, reflecting the right ventricular volume overload that alters the normal motion pattern of the interventricular septum.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What is the general approach to treatment for pulmonary valve disease, in contrast to the more aggressive surgical approach often used for left-sided valve lesions?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Valve commissurotomy or replacement is common and first-line</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Treatment is directed at the underlying cause (e.g., pulmonary hypertension) with medical therapy; valve commissurotomy or replacement is not common</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No treatment of any kind is ever offered</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">TAVR is the standard first-line treatment</button>
+<div class="quiz-explain"><b>Explanation:</b> Pulmonary valve disease is generally managed by treating the underlying cause (such as pulmonary hypertension) with diuretics, anti-arrhythmics, and anticoagulation, since valve commissurotomy or replacement is not a common approach for this valve, unlike the more frequent surgical interventions for left-sided valve disease.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec15">
+<h2>15. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review — every core fact condensed to what's most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>Murmur Location, Timing &amp; Quality — Master Table</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>Timing/Quality</th><th>Best Location</th><th>Radiation</th></tr>
+<tr><td>Aortic stenosis</td><td>Crescendo-decrescendo systolic ejection</td><td>Right upper sternal border</td><td>Carotids</td></tr>
+<tr><td>Aortic regurgitation</td><td>High-pitched blowing decrescendo diastolic</td><td>Left sternal border 3rd-4th ICS (leaning forward)</td><td>Apex/axilla</td></tr>
+<tr><td>Austin Flint (2&deg; to AR)</td><td>Low-pitched mid-late diastolic</td><td>Apex</td><td>No opening snap; decreases w/ vasodilators</td></tr>
+<tr><td>Mitral stenosis</td><td>Low-pitched mid-diastolic rumble, presystolic accentuation</td><td>Apex, left lateral decubitus, bell</td><td>Localized</td></tr>
+<tr><td>Mitral regurgitation</td><td>Holosystolic (III/VI)</td><td>Apex</td><td>Axilla</td></tr>
+<tr><td>MVP</td><td>Mid-late systolic click -&gt; crescendo-decrescendo murmur</td><td>Apex</td><td>Base (posterior leaflet) or back/axilla (anterior leaflet)</td></tr>
+<tr><td>Tricuspid stenosis</td><td>Opening snap + low-pitched diastolic</td><td>Left lower sternal border</td><td>&uarr;inspiration</td></tr>
+<tr><td>Tricuspid regurgitation (Carvallo's)</td><td>Holosystolic blowing</td><td>Left lower sternal border</td><td>&uarr;inspiration</td></tr>
+</table>
+</div>
+
+<h3>Maneuver Effects Cheat Sheet</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Maneuver</th><th>Effect</th><th>Murmurs That Increase</th><th>Murmurs That Decrease</th></tr>
+<tr><td>Squatting / leg raise / handgrip (&uarr;preload)</td><td>&uarr;Venous return</td><td>Most murmurs; MVP click-murmur occurs later</td><td>HCM murmur decreases</td></tr>
+<tr><td>Standing / Valsalva (&darr;preload)</td><td>&darr;Venous return</td><td>HCM murmur increases; MVP click-murmur occurs earlier/louder</td><td>Most other murmurs decrease</td></tr>
+<tr><td>Inspiration</td><td>&uarr;RV venous return</td><td>Right-sided murmurs (TS, TR/Carvallo's)</td><td>&mdash;</td></tr>
+<tr><td>Expiration</td><td>&uarr;LV venous return</td><td>Left-sided murmurs</td><td>&mdash;</td></tr>
+<tr><td>Nitrate/vasodilator (&darr;afterload)</td><td>&darr;Aortic-LV gradient</td><td>&mdash;</td><td>Austin Flint murmur</td></tr>
+</table>
+</div>
+
+<h3>Surgical/Intervention Thresholds — Master Table</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>Key Numeric Criteria</th></tr>
+<tr><td>Aortic stenosis</td><td>Valve area &lt;1.0cm&sup2;; EF&lt;50%; mean gradient &gt;55mmHg; BP fails to rise &gt;20mmHg w/ exercise; peak gradient &uarr;&gt;0.3 m/s/yr; 50% 3yr mortality once symptomatic</td></tr>
+<tr><td>Aortic regurgitation</td><td>EF&lt;50% OR LVESD&gt;50mm OR LVEDD&gt;65mm (asymptomatic)</td></tr>
+<tr><td>Mitral stenosis</td><td>Valve area &lt;2cm&sup2; = significant; balloon valvuloplasty if echo score &le;8 (&lt;0.5% mortality); MVR if score &gt;8-10 (1-3% mortality)</td></tr>
+<tr><td>Mitral regurgitation</td><td>EF&lt;60% OR LVESD&gt;40mm (asymptomatic) OR pulmonary HTN</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Don't Mix These Up</b> AR uses EF&lt;50%/LVESD&gt;50mm/LVEDD&gt;65mm. MR uses EF&lt;60%/LVESD&gt;40mm. Different valves, different numbers — a classic exam trap.</div>
+
+<h3>Etiology Quick Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>Leading Cause(s)</th></tr>
+<tr><td>Aortic stenosis</td><td>Calcific disease (N. America/Europe) vs. rheumatic fever (worldwide) vs. bicuspid valve</td></tr>
+<tr><td>Aortic regurgitation</td><td>Leaflet: bicuspid valve, RHD, endocarditis. Root: longstanding HTN</td></tr>
+<tr><td>Mitral stenosis</td><td>Rheumatic heart disease (~1/3 of cases)</td></tr>
+<tr><td>Mitral regurgitation</td><td>Primary (leaflet/chordae) vs. Secondary (LV remodeling/annular dilation, normal leaflets)</td></tr>
+<tr><td>MVP</td><td>Myxomatous degeneration; associated with Marfan, Ehlers-Danlos, osteogenesis imperfecta</td></tr>
+<tr><td>Tricuspid stenosis</td><td>Rheumatic (usually with MS)</td></tr>
+<tr><td>Tricuspid regurgitation</td><td>Functional/secondary (75-90%, annular dilation) vs. primary (Ebstein's, AV canal defects)</td></tr>
+<tr><td>Pulmonary stenosis</td><td>Congenital (rubella), rheumatic, carcinoid</td></tr>
+<tr><td>Pulmonary regurgitation</td><td>Pulmonary HTN, post-TOF repair, rheumatic, carcinoid</td></tr>
+</table>
+</div>
+
+<h3>Named Eponyms — Aortic Regurgitation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Eponym</th><th>Finding</th></tr>
+<tr><td>Corrigan pulse</td><td>"Water-hammer" collapsing pulse</td></tr>
+<tr><td>de Musset sign</td><td>Head bobbing with heartbeat</td></tr>
+<tr><td>Quincke's pulse</td><td>Nail bed capillary pulsation</td></tr>
+<tr><td>Traube's sign</td><td>"Pistol shot" femoral sound</td></tr>
+<tr><td>Duroziez's sign</td><td>To-and-fro femoral murmur w/ compression</td></tr>
+<tr><td>Austin Flint murmur</td><td>Apical diastolic rumble from aortic jet/mitral inflow mixing</td></tr>
+</table>
+</div>
+
+<h3>JVP Waveform Differentiators</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>JVP Pattern</th></tr>
+<tr><td>Tricuspid stenosis</td><td>Giant "a" wave, slow "y" descent</td></tr>
+<tr><td>Tricuspid regurgitation</td><td>Large "v"/"c" wave, blunted "a" wave</td></tr>
+</table>
+</div>
+
+<h3>Valve Replacement Options (General)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Best For</th><th>Key Trade-off</th></tr>
+<tr><td>Mechanical</td><td>Younger patients (longer valve life needed)</td><td>Lifelong warfarin (INR 2-3) + ASA</td></tr>
+<tr><td>Bioprosthetic</td><td>Patients &gt;60 years old</td><td>10-15 year valve lifespan; ~3 months anticoagulation only</td></tr>
+<tr><td>TAVR</td><td>Intermediate/high surgical risk</td><td>Minimally invasive; growing indications</td></tr>
+</table>
+</div>
+
+<h3>Physical Exam Pearls Recap</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Lesion</th></tr>
+<tr><td>Pulsus parvus et tardus</td><td>Aortic stenosis</td></tr>
+<tr><td>Reversed/paradoxical S2 split</td><td>Severe aortic stenosis</td></tr>
+<tr><td>Widely split S2 (early A2 closure)</td><td>Aortic regurgitation</td></tr>
+<tr><td>Fixed split S2, loud P2</td><td>Pulmonary regurgitation</td></tr>
+<tr><td>Opening snap</td><td>Mitral stenosis (also seen, differently, in TS)</td></tr>
+<tr><td>Mid-late systolic click</td><td>Mitral valve prolapse</td></tr>
+<tr><td>Gallavardin phenomenon</td><td>AS murmur transmitted to apex, mimics MR (no axillary radiation)</td></tr>
+<tr><td>Carvallo's sign</td><td>TR murmur louder with inspiration</td></tr>
+</table>
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+function answerQuiz(btn, isCorrect) {
+  const qDiv = btn.closest('.quiz-q');
+  const choices = qDiv.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    const correctBtn = qDiv.querySelector('.quiz-choice[data-correct="true"]');
+    if (correctBtn) correctBtn.classList.add('correct');
+  }
+  const explain = qDiv.querySelector('.quiz-explain');
+  if (explain) explain.classList.add('show');
+}
+</script>
+
+</body>
+</html>
