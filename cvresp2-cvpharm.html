@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Antiplatelets, Anticoagulants &amp; Fibrinolytics — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.6rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ columns:2; margin:10px 0 0; padding-left:20px; }
+  .top-contents li{ margin-bottom:6px; font-size:0.9rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-240px; top:0; height:100vh; width:230px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:3px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.76rem; padding:5px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+
+  .container{ max-width:900px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:20px 0 8px; letter-spacing:0.02em;
+  }
+  section.card p, section.card li{ font-size:0.95rem; }
+  section.card ul{ padding-left:22px; }
+
+  .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl{ background:#fdf3ea; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; margin:14px 0; font-size:0.9rem; }
+  .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0 auto; min-width:560px; }
+  table{ border-collapse:collapse; width:100%; margin:12px auto 18px; font-size:0.85rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .quiz-block{ margin-top:24px; padding-top:18px; border-top:2px dashed var(--sage); }
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--forest); letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .quiz-q{ background:#fffefb; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  .quiz-q p.stem{ font-weight:600; margin:0 0 10px; font-size:0.93rem; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:7px; padding:9px 12px;
+    margin-bottom:7px; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+    cursor:pointer; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:#e5f2e7; border-color:var(--correct); color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#fbe9e6; border-color:var(--incorrect); color:var(--incorrect); }
+  .quiz-choice[disabled]{ cursor:default; }
+  .quiz-explain{
+    display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light);
+    border-left:3px solid var(--forest); border-radius:6px; font-size:0.87rem;
+  }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:700px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+
+<div class="header">
+  <h1>Antiplatelets, Anticoagulants &amp; Fibrinolytics</h1>
+  <p>Dr. Natalie Waterfall &middot; CV II Pharmacology</p>
+</div>
+
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Hemostasis, Thrombosis &amp; Platelet Physiology</a></li>
+    <li><a href="#sec2">2. Aspirin: Mechanism, Dosing &amp; Clinical Use</a></li>
+    <li><a href="#sec3">3. P2Y12 Inhibitors: Clopidogrel &amp; Prasugrel</a></li>
+    <li><a href="#sec4">4. P2Y12 Inhibitors: Ticagrelor &amp; Cangrelor</a></li>
+    <li><a href="#sec5">5. Glycoprotein IIb/IIIa Inhibitors</a></li>
+    <li><a href="#sec6">6. Other Antiplatelets: PDE Inhibitors &amp; PAR-1 Antagonist</a></li>
+    <li><a href="#sec7">7. Coagulation Cascade Review</a></li>
+    <li><a href="#sec8">8. Unfractionated Heparin</a></li>
+    <li><a href="#sec9">9. Low Molecular Weight Heparin &amp; Fondaparinux</a></li>
+    <li><a href="#sec10">10. Heparin-Induced Thrombocytopenia (HIT)</a></li>
+    <li><a href="#sec11">11. Parenteral Direct Thrombin Inhibitors</a></li>
+    <li><a href="#sec12">12. DOACs: Dabigatran</a></li>
+    <li><a href="#sec13">13. DOACs: Factor Xa Inhibitors</a></li>
+    <li><a href="#sec14">14. Warfarin: Mechanism, Monitoring &amp; Bridging</a></li>
+    <li><a href="#sec15">15. Warfarin: Adverse Effects, Interactions &amp; Pharmacogenomics</a></li>
+    <li><a href="#sec16">16. Fibrinolysis Physiology &amp; Older Agents</a></li>
+    <li><a href="#sec17">17. Modern Fibrinolytics: Alteplase, Reteplase, Tenecteplase</a></li>
+    <li><a href="#sec18">18. Reversal Strategies: Warfarin, Heparin &amp; DOACs</a></li>
+    <li><a href="#sec19">19. Reversal Strategies: Fibrinolytics &amp; Antiplatelets</a></li>
+    <li><a href="#sec20">20. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#sec1">Hemostasis &amp; Platelets</a>
+  <a href="#sec2">Aspirin</a>
+  <a href="#sec3">Clopidogrel &amp; Prasugrel</a>
+  <a href="#sec4">Ticagrelor &amp; Cangrelor</a>
+  <a href="#sec5">GPIIb/IIIa Inhibitors</a>
+  <a href="#sec6">PDE Inhibitors &amp; Vorapaxar</a>
+  <a href="#sec7">Coagulation Cascade</a>
+  <a href="#sec8">Unfractionated Heparin</a>
+  <a href="#sec9">LMWH &amp; Fondaparinux</a>
+  <a href="#sec10">HIT</a>
+  <a href="#sec11">Parenteral DTIs</a>
+  <a href="#sec12">Dabigatran</a>
+  <a href="#sec13">Factor Xa Inhibitors</a>
+  <a href="#sec14">Warfarin: Mechanism</a>
+  <a href="#sec15">Warfarin: ADRs/DI</a>
+  <a href="#sec16">Fibrinolysis &amp; Older Agents</a>
+  <a href="#sec17">Modern Fibrinolytics</a>
+  <a href="#sec18">Reversal: Warfarin/Heparin/DOAC</a>
+  <a href="#sec19">Reversal: Fibrinolytic/Antiplt</a>
+  <a href="#sec20">Summary Tables</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="sec1">
+<h2>1. Hemostasis, Thrombosis &amp; Platelet Physiology</h2>
+
+<h3>Hemostasis — Four Coordinated Steps</h3>
+<div class="callout">1. <b>Vasoconstriction</b> &rarr; 2. <b>Formation of a platelet plug</b> &rarr; 3. <b>Activation of the coagulation cascade</b> with fibrin clot formation &rarr; 4. <b>Fibrinolysis</b> to remove the clot once healing is complete (mediated by plasmin, which degrades fibrin into soluble fibrin degradation products).</div>
+<div class="pearl"><b>The Balance</b> Insufficient hemostasis &rarr; bleeding. Excessive/unregulated clot formation &rarr; thrombosis, which can occlude vessels and cause tissue ischemia.</div>
+
+<h3>Thrombosis &amp; Virchow's Triad</h3>
+<div class="callout">Thrombosis = the pathological formation of a clot within an <b>intact</b> vessel — the dysregulated counterpart of hemostasis. Underlies MI, ischemic stroke, DVT, and PE. An <b>embolus</b> is a piece of thrombus that breaks off and travels through circulation to lodge distally (e.g., PE, embolic stroke).</div>
+<div class="table-scroll">
+<table>
+<tr><th>Virchow's Triad Component</th><th>Detail</th></tr>
+<tr><td>Endothelial injury</td><td>e.g., ruptured atherosclerotic plaque</td></tr>
+<tr><td>Abnormal blood flow</td><td>e.g., stasis</td></tr>
+<tr><td>Hypercoagulability</td><td>Inherited or acquired</td></tr>
+</table>
+</div>
+
+<h3>Arterial vs. Venous Thrombosis — Why It Dictates Drug Choice</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Thrombus Type</th><th>Mechanism</th><th>Composition</th><th>Best Treated With</th></tr>
+<tr><td><b>Arterial</b></td><td>High shear stress, endothelial disruption (e.g., ruptured plaque)</td><td><b>Platelet-rich</b></td><td>Antiplatelet agents</td></tr>
+<tr><td><b>Venous</b></td><td>Stasis</td><td><b>Fibrin- and RBC-rich</b></td><td>Anticoagulants</td></tr>
+<tr><td>Acute vascular occlusion (emergent)</td><td>&mdash;</td><td>&mdash;</td><td>Fibrinolytics (to actively dissolve the thrombus)</td></tr>
+</table>
+</div>
+
+<h3>Platelet Adhesion, Activation &amp; Aggregation</h3>
+<div class="callout">These steps are <b>overlapping and interdependent</b>, not strictly sequential.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>Mechanism</th></tr>
+<tr><td><b>Adhesion</b></td><td>Vascular injury exposes subendothelial collagen and von Willebrand factor (vWF). Platelet <b>GPIb</b> receptors bind vWF; <b>GPVI</b> binds collagen directly, initiating activation signaling.</td></tr>
+<tr><td><b>Activation</b></td><td>Platelets change shape and release granule contents: <b>ADP, serotonin, Ca&sup2;&#8314;</b>. Thrombin (factor IIa) binds <b>PAR-1</b>, stimulating phospholipase A2 to liberate arachidonic acid &rarr; <b>COX-1</b> converts it to prostaglandin H2 &rarr; thromboxane synthase produces <b>thromboxane A2 (TxA2)</b>. TxA2 binds thromboxane receptors, promoting vasoconstriction and further activation. ADP activates <b>P2Y12</b> receptors, reinforcing activation via G-protein-mediated inhibition of adenylyl cyclase (&darr;intracellular cAMP).</td></tr>
+<tr><td><b>Aggregation</b></td><td>Converging signals cause a conformational change in <b>GPIIb/IIIa</b> receptors, enabling them to bind fibrinogen. Fibrinogen cross-links adjacent activated platelets &rarr; aggregation and stabilization of the primary hemostatic plug.</td></tr>
+</table>
+</div>
+
+<h3>Pharmacologic Targets Within This Cascade</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Target</th><th>Drug Class Example</th><th>Effect</th></tr>
+<tr><td>COX-1</td><td>Aspirin</td><td>&darr;TxA2 synthesis &rarr; &darr;activation</td></tr>
+<tr><td>P2Y12 receptor</td><td>Clopidogrel and other P2Y12 inhibitors</td><td>&darr;ADP-mediated amplification</td></tr>
+<tr><td>GPIIb/IIIa</td><td>Abciximab and other GPIIb/IIIa inhibitors</td><td>Blocks the final common pathway (fibrinogen binding)</td></tr>
+<tr><td>PAR-1</td><td>Vorapaxar</td><td>Blocks thrombin-mediated platelet activation</td></tr>
+<tr><td>Phosphodiesterase</td><td>Dipyridamole, cilostazol</td><td>&uarr;cAMP &rarr; &darr;Ca&sup2;&#8314;-dependent activation; vasodilation</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A ruptured atherosclerotic plaque produces high shear stress and endothelial disruption. What type of thrombus typically forms in this setting, and what is the preferred pharmacologic treatment?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A platelet-rich arterial thrombus, treated with antiplatelet agents</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A fibrinolytic-dependent thrombus, treated only with tPA</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This scenario does not produce a thrombus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A fibrin-rich venous thrombus, treated with anticoagulants</button>
+<div class="quiz-explain"><b>Explanation:</b> Arterial thrombi, classically arising from high shear stress and endothelial disruption such as a ruptured atherosclerotic plaque, are platelet-rich and best managed with antiplatelet agents, in contrast to fibrin-rich venous thrombi from stasis, which are better treated with anticoagulants.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which platelet surface receptor undergoes a conformational change during activation, enabling it to bind fibrinogen and cross-link adjacent platelets during aggregation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">GPVI</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">GPIIb/IIIa</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PAR-1</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">GPIb</button>
+<div class="quiz-explain"><b>Explanation:</b> GPIIb/IIIa undergoes a conformational change upon platelet activation, allowing it to bind fibrinogen; fibrinogen then cross-links adjacent activated platelets, forming and stabilizing the primary hemostatic plug -- this is the final common pathway of platelet aggregation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which three components make up Virchow's triad, the classic framework for understanding thrombus formation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">COX-1 activity, P2Y12 activity, and GPIIb/IIIa activity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Platelet activation, fibrin formation, and clot retraction</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Endothelial injury, abnormal blood flow, and hypercoagulability</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vasoconstriction, vasodilation, and normal blood flow</button>
+<div class="quiz-explain"><b>Explanation:</b> Virchow's triad consists of endothelial injury, abnormal blood flow (such as stasis), and hypercoagulability -- the three major factors that influence thrombus formation.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec2">
+<h2>2. Aspirin: Mechanism, Dosing &amp; Clinical Use</h2>
+
+<h3>Mechanism</h3>
+<div class="callout">Aspirin <b>irreversibly acetylates a serine residue</b> in the active site of <b>COX-1</b> in platelets, permanently inactivating the enzyme and preventing conversion of arachidonic acid to prostaglandin H2 (the TxA2 precursor). Because platelets are <b>anucleate</b> and cannot synthesize new COX-1, this effect persists for the <b>lifespan of the platelet (~7&ndash;10 days)</b>.</div>
+
+<h3>Dose-Dependent Selectivity — The Key Distinction</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Dose</th><th>Effect</th></tr>
+<tr><td><b>Low dose (&le;100 mg/day)</b></td><td>Selectively inhibits <b>platelet-derived TxA2</b> synthesis, while largely <b>sparing vascular endothelial prostacyclin (PGI2)</b> production (PGI2 inhibits platelet aggregation and promotes vasodilation) &rarr; this selectivity underlies aspirin's antiplatelet efficacy and favorable risk-benefit profile</td></tr>
+<tr><td><b>Higher dose (&ge;160&ndash;325 mg/day)</b></td><td>Inhibits <b>both COX-1 and COX-2</b> &rarr; systemic <b>anti-inflammatory</b> effects, but increased risk of GI toxicity/bleeding (reduced PGI2-mediated mucosal protection)</td></tr>
+</table>
+</div>
+
+<h3>Clinical Use</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Setting</th><th>Role</th></tr>
+<tr><td><b>Secondary prevention</b> of ASCVD (prior MI, ischemic stroke, PAD)</td><td>Firmly established — benefits generally outweigh bleeding risk</td></tr>
+<tr><td><b>Primary prevention</b> (no established ASCVD)</td><td><b>Nuanced/controversial</b> — large trials show limited net benefit, often negated by major bleeding risk; may offer modest benefit in carefully selected high-risk patients (e.g., diabetes) without elevated bleeding risk; requires a <b>personalized approach</b></td></tr>
+<tr><td>Dual antiplatelet therapy (DAPT)</td><td>Low-dose aspirin + a P2Y12 inhibitor (e.g., clopidogrel), especially post-PCI or in ACS</td></tr>
+</table>
+</div>
+
+<h3>Adverse Effects</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Effect</th><th>Detail</th></tr>
+<tr><td>GI irritation, dyspepsia, upper GI bleeding</td><td>Risk increased by concomitant NSAID use, <i>H. pylori</i> infection, or anticoagulant therapy</td></tr>
+<tr><td><b>Reye syndrome</b></td><td>Avoid in children/adolescents with viral illness — rare but potentially fatal acute liver failure + encephalopathy</td></tr>
+<tr><td>Hypersensitivity / AERD</td><td>Rare; aspirin-exacerbated respiratory disease in asthmatics — bronchospasm + nasal polyps</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why does aspirin's antiplatelet effect persist for the entire 7-10 day lifespan of an affected platelet, rather than wearing off as the drug is cleared from plasma?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Platelets actively concentrate aspirin intracellularly for days</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is incorrect; aspirin's effect actually wears off within hours</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin has an unusually long plasma half-life of 7-10 days</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Aspirin irreversibly inactivates COX-1, and platelets, being anucleate, cannot synthesize new COX-1 to replace it</button>
+<div class="quiz-explain"><b>Explanation:</b> Aspirin covalently and irreversibly acetylates COX-1. Since platelets are anucleate and cannot synthesize new proteins, once a platelet's COX-1 is inactivated it remains so for that platelet's entire lifespan (~7-10 days), regardless of aspirin's own plasma half-life.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. At a dose of 75 mg/day, aspirin selectively inhibits platelet-derived thromboxane A2 while relatively sparing which endothelial-derived mediator?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Prostacyclin (PGI2)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">von Willebrand factor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Fibrinogen</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Thrombin</button>
+<div class="quiz-explain"><b>Explanation:</b> At low doses, aspirin selectively inhibits platelet COX-1-derived thromboxane A2 while largely sparing vascular endothelial production of prostacyclin (PGI2), which itself inhibits platelet aggregation and promotes vasodilation -- this selectivity underlies aspirin's favorable risk-benefit profile at low doses.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is aspirin use in primary prevention of cardiovascular disease considered more controversial than its use in secondary prevention?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin has no antiplatelet effect at all in patients without established disease</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Large trials show that in patients without established ASCVD, the net clinical benefit is limited and may be negated by increased major bleeding risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin is contraindicated in all patients without established cardiovascular disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Secondary prevention has never been studied in clinical trials</button>
+<div class="quiz-explain"><b>Explanation:</b> In primary prevention (patients without established ASCVD), large trials have shown the net clinical benefit of aspirin is limited and may be offset by increased major bleeding risk, requiring a personalized approach weighing cardiovascular risk against bleeding risk -- unlike secondary prevention, where benefits generally clearly outweigh risks.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec3">
+<h2>3. P2Y12 Inhibitors: Clopidogrel &amp; Prasugrel</h2>
+
+<h3>Class Overview</h3>
+<div class="callout">P2Y12 inhibitors block the P2Y12 subtype of ADP receptors, preventing ADP-mediated activation of GPIIb/IIIa. This class includes <b>irreversible thienopyridines</b> (clopidogrel, prasugrel) and <b>reversible non-thienopyridines</b> (ticagrelor oral, cangrelor IV).</div>
+<div class="table-scroll">
+<table>
+<tr><th>Reversibility</th><th>Agents</th><th>Platelet Function Recovery</th></tr>
+<tr><td>Irreversible</td><td>Clopidogrel, prasugrel</td><td>Impaired for the platelet's lifespan (~7&ndash;10 days)</td></tr>
+<tr><td>Reversible</td><td>Ticagrelor, cangrelor</td><td>Ticagrelor: 3&ndash;5 days; Cangrelor: ~1 hour (very short half-life)</td></tr>
+</table>
+</div>
+
+<h3>Clopidogrel</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>Secondary prevention of MI, ischemic stroke, PAD; key component of DAPT (+ aspirin) in ACS, especially post-PCI/stent</td></tr>
+<tr><td>PK</td><td><b>Prodrug</b> requiring hepatic bioactivation via <b>CYP2C19</b></td></tr>
+<tr><td>ADRs</td><td>Bleeding; rare — TTP, neutropenia</td></tr>
+<tr><td>DI</td><td>CYP2C19 inhibitors (e.g., omeprazole, esomeprazole) &rarr; &darr;active metabolite &rarr; &darr;efficacy, &uarr;thrombotic risk</td></tr>
+<tr><td>CI</td><td>Active pathological bleeding</td></tr>
+</table>
+</div>
+<div class="pearl"><b>DAPT Rationale</b> Aspirin (COX-1/TxA2 inhibition) + clopidogrel (P2Y12/ADP inhibition) target <b>distinct pathways</b> for complementary, more potent and sustained platelet inhibition — critical for preventing stent thrombosis after PCI.</div>
+<div class="pearl"><b>CYP2C19 Poor Metabolizers</b> Patients with CYP2C19 loss-of-function alleles convert less clopidogrel to its active metabolite, reducing antiplatelet efficacy and increasing thrombotic risk — use clopidogrel cautiously in known poor metabolizers.</div>
+
+<h3>Prasugrel</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>Reduction of thrombotic events in ACS patients undergoing PCI; <b>more effective than clopidogrel</b> at preventing stent thrombosis</td></tr>
+<tr><td>Trade-off</td><td>Greater efficacy &rarr; <b>increased risk of major bleeding</b>, including fatal hemorrhage</td></tr>
+<tr><td>PK</td><td>Prodrug, but activated more efficiently/consistently via <b>esterases and multiple CYP enzymes</b> with minimal CYP2C19 dependence; faster onset, greater potency, lower interpatient variability than clopidogrel</td></tr>
+<tr><td>CI</td><td><b>History of stroke or TIA</b>; age <b>&ge;75</b>; weight <b>&lt;60 kg</b> (all due to elevated bleeding risk)</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient taking clopidogrel is also started on omeprazole for GERD. What is the clinical concern with this combination?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This combination is required for clopidogrel to work at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Omeprazole has no interaction with clopidogrel</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Omeprazole inhibits CYP2C19, reducing conversion of clopidogrel to its active metabolite and diminishing antiplatelet efficacy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Omeprazole increases clopidogrel's antiplatelet effect, raising bleeding risk</button>
+<div class="quiz-explain"><b>Explanation:</b> Omeprazole and esomeprazole are CYP2C19 inhibitors, which reduce the hepatic bioactivation of clopidogrel (a prodrug) to its active metabolite, diminishing antiplatelet efficacy and potentially increasing thrombotic risk.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which of the following is a contraindication specific to prasugrel that does not apply to clopidogrel?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">CYP2C19 poor metabolizer status</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Use in combination with aspirin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Active pathological bleeding</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">History of stroke or TIA, age 75 or older, or weight less than 60 kg</button>
+<div class="quiz-explain"><b>Explanation:</b> Prasugrel is specifically contraindicated in patients with a history of stroke or TIA, those 75 years or older, and those weighing less than 60 kg, due to elevated bleeding risk in these populations -- these are prasugrel-specific contraindications not shared by clopidogrel.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why does prasugrel have more consistent and predictable antiplatelet activity than clopidogrel across different patients?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Prasugrel is activated more efficiently via esterases and multiple CYP enzymes with minimal dependence on the polymorphic CYP2C19 enzyme</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Prasugrel binds a completely different receptor than clopidogrel</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Prasugrel has no metabolism at all and is renally cleared unchanged</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Prasugrel is not a prodrug and requires no metabolic activation</button>
+<div class="quiz-explain"><b>Explanation:</b> Unlike clopidogrel, which depends heavily on the polymorphic CYP2C19 enzyme for activation, prasugrel undergoes more efficient and consistent activation via esterases and multiple CYP enzymes with minimal CYP2C19 dependence, resulting in faster onset, greater potency, and lower interpatient variability.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec4">
+<h2>4. P2Y12 Inhibitors: Ticagrelor &amp; Cangrelor</h2>
+
+<h3>Ticagrelor</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>ACS patients managed medically <i>or</i> with PCI; <b>superior to clopidogrel</b> in reducing CV death and MI</td></tr>
+<tr><td>PK</td><td>Oral, <b>direct-acting, reversible</b> P2Y12 inhibitor — does <b>not</b> require metabolic activation for its own effect, but is also metabolized by <b>CYP3A4</b> to an active metabolite that contributes additional activity; rapid onset and offset</td></tr>
+<tr><td>ADRs</td><td>Bleeding; transient <b>dyspnea</b>; <b>bradyarrhythmias</b> (likely from inhibition of adenosine reuptake)</td></tr>
+<tr><td>CI</td><td>History of intracranial hemorrhage, active bleeding, severe hepatic impairment</td></tr>
+<tr><td>DI</td><td>Strong CYP3A4 inhibitors &rarr; &uarr;levels/bleeding risk (avoid); strong CYP3A4 inducers &rarr; &darr;efficacy (avoid)</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Platelet Transfusion Doesn't Work</b> Because ticagrelor binds <b>reversibly</b> with high receptor affinity, platelet transfusion is <b>ineffective</b> for reversing its effect — transfused platelets can still be inhibited by circulating drug.</div>
+
+<h3>Cangrelor</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>PCI, to reduce periprocedural MI and stent thrombosis, specifically in patients <b>not pretreated</b> with an oral P2Y12 inhibitor</td></tr>
+<tr><td>PK</td><td><b>IV</b>, direct, reversible; very short half-life (<b>~3&ndash;6 minutes</b>); normal platelet function returns within <b>~60 minutes</b> of stopping</td></tr>
+<tr><td>ADRs</td><td>Bleeding</td></tr>
+<tr><td>DI</td><td>Prevents the <b>active metabolites of clopidogrel and prasugrel</b> from binding the P2Y12 receptor — these oral agents should only be given <b>after</b> the cangrelor infusion is stopped</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Ticagrelor Is the Exception</b> Unlike clopidogrel/prasugrel, ticagrelor <b>may be started during or immediately after</b> cangrelor administration — since ticagrelor doesn't require the same receptor-binding competition issue.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Platelet transfusion is given to a patient with life-threatening bleeding while on a P2Y12 inhibitor. For which agent would this strategy be expected to be ineffective, and why?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Clopidogrel, because it is an irreversible inhibitor</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ticagrelor, because it binds reversibly with high receptor affinity and circulating drug can still inhibit the transfused platelets</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Prasugrel, because it has no antiplatelet effect at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cangrelor, because its half-life is too long</button>
+<div class="quiz-explain"><b>Explanation:</b> Because ticagrelor binds the P2Y12 receptor reversibly with high affinity, circulating drug can inhibit newly transfused platelets as well, making platelet transfusion an ineffective reversal strategy -- unlike with irreversible agents like clopidogrel or prasugrel, where transfused (drug-free) platelets can still function.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient receiving a cangrelor infusion during PCI needs to be transitioned to oral clopidogrel afterward. What is the correct timing for starting the clopidogrel?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The timing does not matter for clopidogrel, only for prasugrel</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Clopidogrel should be given during the cangrelor infusion for optimal effect</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Clopidogrel should only be administered after the cangrelor infusion has been stopped, since cangrelor prevents clopidogrel's active metabolite from binding the P2Y12 receptor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Clopidogrel and cangrelor can never be used in the same patient under any circumstances</button>
+<div class="quiz-explain"><b>Explanation:</b> Cangrelor prevents the active metabolites of clopidogrel and prasugrel from binding to the P2Y12 receptor while cangrelor is still present, so these oral agents should only be administered after the cangrelor infusion has been stopped -- ticagrelor is the exception and may be started during or immediately after cangrelor.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which adverse effect is relatively unique to ticagrelor among the P2Y12 inhibitors, thought to result from inhibition of adenosine reuptake?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Thrombotic thrombocytopenic purpura</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Purple toe syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neutropenia</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Transient dyspnea and bradyarrhythmias</button>
+<div class="quiz-explain"><b>Explanation:</b> Ticagrelor is associated with transient dyspnea and bradyarrhythmias, adverse effects thought to result from its inhibition of adenosine reuptake -- a mechanism not shared by the other P2Y12 inhibitors.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec5">
+<h2>5. Glycoprotein IIb/IIIa Inhibitors</h2>
+
+<div class="callout">These potent <b>parenteral</b> agents block the <b>final common pathway</b> of platelet aggregation — preventing GPIIb/IIIa from binding fibrinogen (and vWF), regardless of the activating stimulus. Particularly effective in <b>high thrombus burden</b> settings, though use has declined with potent oral P2Y12 inhibitors available.</div>
+
+<h3>Abciximab</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Structure/binding</td><td>Chimeric monoclonal antibody fragment; <b>noncompetitive and irreversible</b>; also binds the <b>vitronectin receptor</b> (vascular/inflammatory cells) — potential off-target effects</td></tr>
+<tr><td>Use</td><td>During PCI in patients at high risk for thrombotic complications</td></tr>
+<tr><td>PK</td><td>IV bolus + continuous infusion; plasma half-life short (~30 min), but antiplatelet effect persists <b>24&ndash;48 hours</b> due to prolonged receptor occupancy</td></tr>
+<tr><td>ADRs</td><td>Bleeding; <b>immune-mediated thrombocytopenia</b>; hypersensitivity on re-administration (human anti-chimeric antibodies) — consider carefully before repeat use</td></tr>
+</table>
+</div>
+
+<h3>Eptifibatide</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Structure</td><td>Cyclic peptide derived from <b>rattlesnake venom</b>; <b>reversible</b>; does <b>not</b> bind the vitronectin receptor (fewer off-target effects)</td></tr>
+<tr><td>Use</td><td>NSTE-ACS and during PCI</td></tr>
+<tr><td>PK</td><td>Double IV bolus + continuous infusion; renally cleared (dose-adjust in renal impairment); half-life ~2.5 hours; platelet function recovers in ~4&ndash;6 hours</td></tr>
+<tr><td>ADRs</td><td>Bleeding; thrombocytopenia (<b>less frequent than abciximab</b>)</td></tr>
+</table>
+</div>
+
+<h3>Tirofiban</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Structure</td><td>Small non-peptide molecule; <b>competitive and reversible</b></td></tr>
+<tr><td>Use</td><td>NSTE-ACS</td></tr>
+<tr><td>PK</td><td>IV bolus + continuous infusion; renally cleared, short duration of action</td></tr>
+<tr><td>ADRs</td><td>Bleeding; thrombocytopenia (<b>less frequent than abciximab</b>)</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> Abciximab = irreversible antibody, longest effect (24-48h), highest thrombocytopenia risk. Eptifibatide and tirofiban = reversible, renally cleared, shorter acting, lower thrombocytopenia risk.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which GPIIb/IIIa inhibitor's antiplatelet effect persists for 24-48 hours despite a plasma half-life of only about 30 minutes, due to prolonged receptor occupancy?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Abciximab</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">All three have identical duration of effect</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Eptifibatide</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tirofiban</button>
+<div class="quiz-explain"><b>Explanation:</b> Abciximab's antiplatelet effect persists for 24-48 hours despite its short 30-minute plasma half-life, because its noncompetitive, irreversible binding to GPIIb/IIIa results in prolonged receptor occupancy independent of plasma drug clearance.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which GPIIb/IIIa inhibitor is derived from rattlesnake venom and does not bind the vitronectin receptor, minimizing off-target effects?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Abciximab</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Eptifibatide</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tirofiban</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">None of these agents are peptide-derived</button>
+<div class="quiz-explain"><b>Explanation:</b> Eptifibatide is a cyclic peptide derived from rattlesnake venom that reversibly binds GPIIb/IIIa without binding the vitronectin receptor, distinguishing it from abciximab, which does bind vitronectin receptors on vascular and inflammatory cells.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Compared to abciximab, eptifibatide and tirofiban share which common feature regarding thrombocytopenia risk?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only abciximab can cause thrombocytopenia; the other two cannot</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They both carry a higher risk of thrombocytopenia than abciximab</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">They both carry a lower risk of thrombocytopenia than abciximab</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Thrombocytopenia risk is identical across all three agents</button>
+<div class="quiz-explain"><b>Explanation:</b> Both eptifibatide and tirofiban are associated with a lower frequency of thrombocytopenia compared to abciximab, likely related to abciximab's irreversible, antibody-mediated mechanism versus the reversible, smaller-molecule mechanisms of the other two agents.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec6">
+<h2>6. Other Antiplatelets: PDE Inhibitors &amp; PAR-1 Antagonist</h2>
+
+<h3>Dipyridamole</h3>
+<div class="callout">A PDE inhibitor that <b>also blocks adenosine reuptake</b> — increasing extracellular adenosine and intracellular cAMP, which reduces platelet activation/aggregation and promotes vasodilation.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Monotherapy</td><td><b>Ineffective</b> as monotherapy for antiplatelet purposes</td></tr>
+<tr><td>Combined with aspirin</td><td>Secondary prevention of <b>non-cardioembolic ischemic stroke</b> (combination product Aggrenox) — reduces recurrent stroke more effectively than aspirin alone, though may increase headache/bleeding risk</td></tr>
+<tr><td>Combined with warfarin</td><td>Mechanical prosthetic heart valves, to reduce thromboembolism risk — antiplatelet/vasodilator effects complement warfarin's anticoagulant action</td></tr>
+<tr><td>ADRs</td><td>Headache, hypotension, GI discomfort</td></tr>
+</table>
+</div>
+
+<h3>Cilostazol</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Mechanism</td><td>Selective <b>PDE3 inhibitor</b> — inhibits platelet aggregation and promotes arterial vasodilation</td></tr>
+<tr><td>Use</td><td><b>Intermittent claudication</b> in PAD — improves walking distance and quality of life</td></tr>
+<tr><td>ADRs</td><td>Headache, diarrhea, palpitations</td></tr>
+<tr><td>CI</td><td><b>Heart failure of any severity</b> — increased mortality risk observed in this population</td></tr>
+<tr><td>Metabolism</td><td>CYP3A4 and CYP2C19 — potential drug interactions</td></tr>
+</table>
+</div>
+
+<h3>Vorapaxar (PAR-1 Antagonist)</h3>
+<div class="callout">A first-in-class antagonist of <b>protease-activated receptor-1 (PAR-1)</b>, inhibiting <b>thrombin-mediated platelet activation</b>.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>PK</td><td>Oral; long terminal half-life — antiplatelet effects may persist for <b>up to 4 weeks</b> after discontinuation (irreversible receptor binding)</td></tr>
+<tr><td>Use</td><td><b>Never</b> monotherapy — always combined with aspirin and/or clopidogrel, to reduce thrombotic CV events in patients with prior MI or established PAD</td></tr>
+<tr><td>Metabolism</td><td>Primarily CYP3A4</td></tr>
+<tr><td>CI</td><td>History of stroke, TIA, or intracranial hemorrhage — high risk of serious (especially intracranial) bleeding</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Dipyridamole is combined with low-dose aspirin for secondary stroke prevention. Why is dipyridamole not used alone for this purpose?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Dipyridamole has no mechanism of action related to platelets</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin is required to activate dipyridamole</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Dipyridamole is only approved for use in mechanical heart valve patients</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Dipyridamole is ineffective as monotherapy for antiplatelet purposes</button>
+<div class="quiz-explain"><b>Explanation:</b> Dipyridamole is ineffective as monotherapy for antiplatelet purposes; it is used in combination with low-dose aspirin (as in the combination product Aggrenox) for secondary prevention of non-cardioembolic ischemic stroke, where the two agents provide complementary mechanisms.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Cilostazol is contraindicated in which patient population due to an observed increase in mortality risk?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Patients with heart failure of any severity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients with a history of stroke</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients over age 65</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients with peripheral artery disease</button>
+<div class="quiz-explain"><b>Explanation:</b> Cilostazol is contraindicated in patients with heart failure of any severity, due to increased mortality risk observed in this population -- despite its usefulness for intermittent claudication in peripheral artery disease.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Vorapaxar's antiplatelet effects can persist for up to 4 weeks after the drug is discontinued. What explains this unusually long duration of action?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vorapaxar has an extremely long plasma half-life measured in weeks</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Vorapaxar irreversibly binds PAR-1 receptors on platelets, and since platelets cannot synthesize new receptors, the effect persists for the platelet's lifespan and beyond due to slow receptor turnover</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vorapaxar is stored in adipose tissue and slowly released</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is incorrect; vorapaxar's effect resolves within hours</button>
+<div class="quiz-explain"><b>Explanation:</b> Vorapaxar's antiplatelet effect persists for up to 4 weeks after discontinuation due to its irreversible binding to thrombin receptors (PAR-1) on platelets, combined with its long terminal half-life -- similar in concept to aspirin's irreversible COX-1 binding, but with an even longer persistence of effect.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec7">
+<h2>7. Coagulation Cascade Review</h2>
+
+<div class="callout">The cascade is a series of proteolytic reactions converting inactive precursors to active serine proteases, occurring on phospholipid-rich surfaces (activated platelets) and requiring activated cofactors, Ca&sup2;&#8314;, and negatively charged phospholipids. The intrinsic/extrinsic division reflects <i>in vitro</i> clotting assays rather than full <i>in vivo</i> complexity — the <b>extrinsic pathway predominates</b>, while intrinsic components <b>amplify and sustain</b> thrombin generation.</div>
+
+<h3>Extrinsic Pathway</h3>
+<div class="callout">Initiated by vascular injury: <b>tissue factor (TF)</b> is exposed and binds <b>activated factor VII</b>. This <b>TF&ndash;VIIa complex</b> rapidly activates <b>factor X</b> and also contributes to factor IX activation.</div>
+
+<h3>Intrinsic Pathway</h3>
+<div class="callout">Sequential activation of factors <b>XI, IX, and VIII</b>, triggered and sustained by thrombin-mediated positive feedback. Factor IXa + VIIIa form the <b>"intrinsic tenase" complex</b> on the platelet surface, efficiently converting factor X to Xa — particularly efficient once thrombin is already being generated.</div>
+
+<h3>Common Pathway — Convergence at Factor X</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>Detail</th></tr>
+<tr><td>Prothrombinase complex</td><td>Factor Xa + Va + Ca&sup2;&#8314; + phospholipids &rarr; catalyzes prothrombin (factor II) &rarr; <b>thrombin (factor IIa)</b></td></tr>
+<tr><td>Thrombin's roles</td><td>Converts fibrinogen &rarr; fibrin; activates factor XIII (cross-links/stabilizes fibrin); activates platelets via PARs; <b>amplifies the cascade</b> by activating upstream factors V, VIII, and XI (positive feedback loop)</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Amplification</b> One molecule of factor Xa can generate <b>hundreds to thousands</b> of thrombin molecules — enabling rapid, robust clot formation from even minor vascular injury.</div>
+
+<h3>Vitamin K-Dependent Factors</h3>
+<div class="callout">Factors <b>II, VII, IX, and X</b> require hepatic <b>gamma-carboxylation</b> of glutamic acid residues to become functional — this modification enables calcium-dependent binding to phospholipid membranes.</div>
+
+<h3>Endogenous Anticoagulant Mechanisms</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Inhibitor</th><th>Action</th></tr>
+<tr><td><b>Antithrombin</b></td><td>Inactivates thrombin (IIa) and factors Xa and IXa</td></tr>
+<tr><td><b>Protein C + Protein S</b></td><td>Degrade cofactors Va and VIIIa</td></tr>
+</table>
+</div>
+
+<h3>Where Anticoagulant Drug Classes Act</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Drug Class</th><th>Mechanism</th></tr>
+<tr><td>Heparins</td><td>Potentiate antithrombin activity &rarr; inactivate factors Xa and IIa</td></tr>
+<tr><td>DOACs</td><td>Inhibit factor Xa or thrombin <b>directly</b></td></tr>
+<tr><td>Vitamin K antagonists (warfarin)</td><td>Impair hepatic synthesis of vitamin K-dependent clotting factors</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which pathway of the coagulation cascade predominates physiologically in vivo, with the other pathway's components serving mainly to amplify and sustain thrombin generation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither pathway is physiologically relevant; only the common pathway matters</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The intrinsic pathway predominates; the extrinsic pathway amplifies it</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The extrinsic pathway predominates; the intrinsic pathway amplifies and sustains thrombin generation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both pathways contribute exactly equally with no predominance</button>
+<div class="quiz-explain"><b>Explanation:</b> The extrinsic pathway (tissue factor-initiated) predominates physiologically, while the intrinsic pathway components serve to amplify and sustain thrombin generation once initiated -- the intrinsic/extrinsic division itself reflects in vitro clotting assays rather than the full complexity of in vivo coagulation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Approximately how many thrombin molecules can a single molecule of factor Xa generate, illustrating the amplification built into the coagulation cascade?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Amplification does not occur in the coagulation cascade</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Just 1-2 molecules</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">10-20 molecules</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Hundreds to thousands of molecules</button>
+<div class="quiz-explain"><b>Explanation:</b> One molecule of factor Xa can generate hundreds to thousands of thrombin molecules, enabling rapid and robust clot formation in response to even minor vascular injury -- this amplification is a key feature of the cascade's design.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which two endogenous proteins work together to degrade activated cofactors Va and VIIIa, limiting excessive clot propagation?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Protein C and Protein S</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tissue factor and factor VIIa</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Fibrinogen and fibrin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Antithrombin and factor Xa</button>
+<div class="quiz-explain"><b>Explanation:</b> Protein C, together with its cofactor Protein S, degrades activated cofactors Va and VIIIa, serving as an endogenous anticoagulant mechanism that limits excessive clot propagation, complementary to antithrombin's inactivation of thrombin and factors Xa/IXa.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec8">
+<h2>8. Unfractionated Heparin</h2>
+
+<h3>Mechanism</h3>
+<div class="callout">Binds to <b>antithrombin</b>, inducing a conformational change that dramatically enhances antithrombin's ability to inactivate factor Xa <b>and</b> thrombin (factor IIa). Only about <b>1/3</b> of heparin molecules contain the specific <b>pentasaccharide sequence</b> needed for high-affinity antithrombin binding.</div>
+<div class="pearl"><b>Why UFH Inhibits Thrombin But LMWH Doesn't (As Well)</b> Inhibiting thrombin requires the heparin chain to be long enough to bind <b>both</b> antithrombin and thrombin simultaneously (a "bridging" interaction) — this requires the <b>longer</b> polysaccharide chains found in unfractionated heparin, not the shorter chains of LMWH.</div>
+
+<h3>Structure</h3>
+<div class="callout">A heterogeneous mixture of sulfated glycosaminoglycan chains, molecular weight <b>5,000&ndash;30,000 Daltons</b>.</div>
+
+<h3>Therapeutic Uses &amp; Pharmacokinetics</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>Treatment/prevention of VTE, ACS, perioperative anticoagulation (cardiac/vascular surgery)</td></tr>
+<tr><td>Why preferred when rapid reversal needed</td><td>Effects can be quickly reversed with <b>protamine sulfate</b></td></tr>
+<tr><td>Administration</td><td>Parenteral — IV infusion (rapid anticoagulation) or subcutaneous (prophylaxis)</td></tr>
+<tr><td>Monitoring</td><td><b>aPTT</b> required (variable PK, extensive protein binding, dose-dependent clearance); target <b>1.5&ndash;2.5&times; baseline</b>; anti-Xa levels available as an alternative</td></tr>
+<tr><td>Half-life</td><td><b>Short: 30 minutes to 2 hours</b> — allows rapid titration and reversal</td></tr>
+</table>
+</div>
+
+<h3>Adverse Effects &amp; Contraindications</h3>
+<div class="table-scroll">
+<table>
+<tr><th>ADRs</th><th>CI</th></tr>
+<tr><td>Bleeding; <b>osteopenia/osteoporosis</b> with prolonged use; hypersensitivity reactions; <b>HIT</b> (can cause skin necrosis at injection sites, or rarely more widespread thrombotic skin lesions)</td><td>Active bleeding, severe thrombocytopenia/HIT, certain neurosurgical/spinal procedures (high risk of epidural/intracranial hemorrhage &rarr; potentially irreversible neurologic injury)</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why is unfractionated heparin (UFH) able to inhibit both thrombin and factor Xa, while low molecular weight heparin preferentially inhibits factor Xa alone?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">UFH binds a completely different site on antithrombin than LMWH</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Thrombin inhibition requires a heparin chain long enough to simultaneously bind both antithrombin and thrombin, a bridging interaction only possible with UFH's longer chains</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">LMWH does not bind antithrombin at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">UFH has a different pentasaccharide sequence than LMWH</button>
+<div class="quiz-explain"><b>Explanation:</b> Inhibiting thrombin requires the heparin chain to be long enough to bind both antithrombin and thrombin simultaneously in a bridging interaction. UFH's longer polysaccharide chains can accomplish this, while LMWH's shorter chains, though still able to bind antithrombin and inhibit factor Xa, are too short for this thrombin-bridging interaction.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the target aPTT range (relative to baseline) typically used to monitor therapeutic unfractionated heparin dosing?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">aPTT monitoring is not used for heparin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">0.5-1.0 times baseline</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">1.5-2.5 times baseline</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">3-4 times baseline</button>
+<div class="quiz-explain"><b>Explanation:</b> The target aPTT for therapeutic unfractionated heparin dosing is typically 1.5-2.5 times the baseline value, reflecting adequate anticoagulation; anti-factor Xa levels are available as an alternative monitoring method.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which adverse effect of unfractionated heparin is specifically associated with prolonged use and involves bone density loss?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Heparin-induced thrombocytopenia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Skin necrosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hypersensitivity reactions</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Osteopenia/osteoporosis</button>
+<div class="quiz-explain"><b>Explanation:</b> Osteopenia or osteoporosis is an adverse effect specifically associated with prolonged unfractionated heparin use, distinct from the more acute adverse effects like bleeding, hypersensitivity, and heparin-induced thrombocytopenia.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec9">
+<h2>9. Low Molecular Weight Heparin &amp; Fondaparinux</h2>
+
+<h3>Low Molecular Weight Heparin (LMWH)</h3>
+<div class="callout">Agents: <b>enoxaparin, dalteparin, nadroparin, tinzaparin</b>. Derived from UFH but consist of <b>shorter polysaccharide chains</b>. They retain the pentasaccharide region (inhibiting factor Xa) but are <b>less able to inhibit thrombin</b> (can't bridge both antithrombin and thrombin simultaneously) &rarr; <b>higher anti-Xa:anti-IIa ratio</b> than UFH, reflecting greater Xa selectivity.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>Similar to UFH; has largely <b>replaced UFH for outpatient VTE</b> treatment and thromboprophylaxis after orthopedic surgery (greater convenience, lower HIT risk)</td></tr>
+<tr><td>Reversal</td><td><b>Only partially reversed by protamine</b></td></tr>
+<tr><td>PK</td><td>Subcutaneous; more predictable PK, higher bioavailability, longer half-life (<b>~4&ndash;6 hours</b>) than UFH — permits once/twice-daily dosing</td></tr>
+<tr><td>Monitoring</td><td>Routine monitoring generally <b>not needed</b>; consider anti-factor Xa monitoring in <b>renal impairment, obesity, or pregnancy</b></td></tr>
+</table>
+</div>
+
+<h3>Fondaparinux (Indirect Factor Xa Inhibitor)</h3>
+<div class="callout">A <b>synthetic pentasaccharide</b> that selectively binds antithrombin to inhibit factor Xa — too short to facilitate thrombin inhibition, so it has <b>no effect on factor IIa</b>.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>VTE prophylaxis (orthopedic/abdominal surgery); treatment of DVT/PE</td></tr>
+<tr><td>Reversal</td><td>Protamine has <b>no effect</b></td></tr>
+<tr><td>PK</td><td>Subcutaneous, once daily; long half-life (<b>~17 hours</b>); excreted <b>unchanged by the kidneys</b> &rarr; <b>contraindicated in CrCl &lt;30 mL/min</b></td></tr>
+<tr><td>HIT</td><td><b>Less likely to cause HIT</b>; may be safely used in patients with a <b>history of HIT</b></td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why do low molecular weight heparins have a higher anti-factor Xa to anti-factor IIa ratio compared to unfractionated heparin?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">LMWH's shorter chains retain the pentasaccharide sequence for factor Xa inhibition but are too short to bridge antithrombin and thrombin simultaneously, reducing thrombin inhibition</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">LMWH does not bind antithrombin at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">UFH cannot inhibit factor Xa under any circumstances</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">LMWH binds antithrombin with greater affinity than UFH</button>
+<div class="quiz-explain"><b>Explanation:</b> LMWH's shorter polysaccharide chains retain the pentasaccharide sequence needed to enhance antithrombin's inhibition of factor Xa, but are too short to simultaneously bridge antithrombin and thrombin, reducing thrombin (factor IIa) inhibition relative to factor Xa inhibition -- resulting in a higher anti-Xa:anti-IIa ratio than UFH.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with a creatinine clearance of 25 mL/min is being considered for fondaparinux therapy. What is the appropriate action?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Fondaparinux can be used without any dose adjustment</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Fondaparinux is contraindicated, since it is excreted unchanged by the kidneys and CrCl <30 mL/min is a contraindication</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Fondaparinux should be combined with protamine for safety</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Fondaparinux requires no consideration of renal function</button>
+<div class="quiz-explain"><b>Explanation:</b> Fondaparinux is excreted unchanged by the kidneys and is contraindicated in patients with CrCl less than 30 mL/min due to the risk of drug accumulation and excessive anticoagulation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient with a documented history of heparin-induced thrombocytopenia requires anticoagulation for VTE prophylaxis. Which agent can be safely used in this scenario, given its low HIT risk?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unfractionated heparin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Enoxaparin (a LMWH)</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Fondaparinux</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">None of these agents are safe in a patient with a history of HIT</button>
+<div class="quiz-explain"><b>Explanation:</b> Fondaparinux is less likely to cause HIT and may be safely used in patients with a history of HIT, unlike unfractionated heparin (highest HIT risk) or LMWH (lower risk than UFH, but still heparin-derived and not preferred in this scenario).</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec10">
+<h2>10. Heparin-Induced Thrombocytopenia (HIT)</h2>
+
+<div class="callout">A serious <b>immune-mediated</b> adverse effect of heparin therapy — occurring in <b>~1&ndash;4%</b> with UFH, less frequently with LMWH.</div>
+
+<h3>Mechanism</h3>
+<div class="callout"><b>IgG antibodies</b> form against complexes of <b>heparin and platelet factor 4 (PF4)</b>. These antibodies <b>activate platelets</b>, resulting in the paradoxical combination of <b>thrombocytopenia AND a prothrombotic state</b>.</div>
+
+<h3>Clinical Presentation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Platelet drop</td><td><b>&gt;50% drop</b> in platelet count</td></tr>
+<tr><td>Timing</td><td>Most often <b>5&ndash;10 days</b> after heparin initiation</td></tr>
+<tr><td>Thrombosis</td><td>May be associated with new venous <i>or</i> arterial thrombosis, despite falling platelets</td></tr>
+<tr><td>Diagnostic tool</td><td><b>4T score</b> — considers thrombocytopenia (degree), timing of onset, thrombosis, and presence of oTher causes — estimates HIT probability</td></tr>
+</table>
+</div>
+
+<h3>Management</h3>
+<div class="callout">
+<ol>
+<li><b>Immediately discontinue ALL heparin products</b></li>
+<li>Initiate a <b>non-heparin anticoagulant</b> — a direct thrombin inhibitor (argatroban, bivalirudin) or fondaparinux</li>
+<li><b>Do NOT initiate warfarin</b> until platelet counts recover to <b>&ge;150,000/mL</b></li>
+</ol>
+</div>
+<div class="pearl"><b>Why Warfarin Must Wait</b> Protein C has a much shorter half-life than the pro-coagulant clotting factors. Starting warfarin too early creates a <b>transient pro-thrombotic state</b> (protein C drops fast while pro-coagulant factors remain active) — this risk is compounded in HIT, which is already a hypercoagulable state, and can precipitate <b>warfarin-induced skin necrosis</b>. Once platelets recover, warfarin may be started cautiously with continued overlap of the non-heparin anticoagulant for a <b>minimum of 5 days</b> and until the INR is therapeutic for at least 24 hours.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the underlying immunologic mechanism of heparin-induced thrombocytopenia (HIT)?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Direct toxic destruction of platelets by heparin itself</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Complement-mediated platelet lysis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">IgE-mediated mast cell degranulation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">IgG antibodies form against heparin-platelet factor 4 complexes, activating platelets and causing both thrombocytopenia and a prothrombotic state</button>
+<div class="quiz-explain"><b>Explanation:</b> HIT results from IgG antibody formation against complexes of heparin and platelet factor 4 (PF4); these antibodies activate platelets, paradoxically producing both thrombocytopenia (from platelet consumption/clearance) and a prothrombotic state (from platelet activation).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient develops HIT and their platelet count begins to recover. What must be true before warfarin can be safely initiated?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Platelet counts must recover to at least 150,000/mL before starting warfarin, with continued overlap of a non-heparin anticoagulant</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Warfarin should never be used in any patient with a history of HIT</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only the INR needs to be checked; platelet count is irrelevant</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Warfarin can be started immediately regardless of platelet count</button>
+<div class="quiz-explain"><b>Explanation:</b> Warfarin should not be initiated until platelet counts recover to at least 150,000/mL, and even then it should be started with continued overlap of a non-heparin anticoagulant for a minimum of 5 days and until the INR is therapeutic for at least 24 hours -- premature warfarin initiation risks warfarin-induced skin necrosis due to early protein C depletion in an already hypercoagulable state.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. The 4T score is a clinical tool used to estimate the probability of HIT. Which of the following is NOT one of the four components considered by this score?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Presence of new thrombosis</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Patient's baseline creatinine clearance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Timing of platelet count fall onset</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Degree of thrombocytopenia</button>
+<div class="quiz-explain"><b>Explanation:</b> The 4T score considers thrombocytopenia (degree of platelet fall), timing of onset, thrombosis (presence of new venous or arterial thrombosis), and oTher causes of thrombocytopenia -- baseline creatinine clearance is not one of the four components.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec11">
+<h2>11. Parenteral Direct Thrombin Inhibitors</h2>
+
+<h3>Class Overview</h3>
+<div class="callout">Directly bind thrombin (factor IIa) and inhibit its activity. Unlike heparins, they <b>do not require antithrombin</b> as a cofactor and can inhibit <b>both free and clot-bound thrombin</b> — more consistent, predictable effects. Particularly useful in <b>HIT</b>, where heparin is contraindicated.</div>
+<div class="pearl"><b>Historical Note</b> The earliest DTI was <b>hirudin</b> (from medicinal leech saliva); its recombinant form, lepirudin, was discontinued due to antibody formation/anaphylaxis concerns — but it paved the way for today's agents.</div>
+
+<h3>Bivalirudin</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Structure/binding</td><td>Synthetic <b>bivalent</b> peptide analog of hirudin — binds <b>both the active site and exosite</b> of thrombin</td></tr>
+<tr><td>PK</td><td>IV; short half-life (~25 minutes); cleared by proteolytic degradation + some renal excretion</td></tr>
+<tr><td>Use</td><td>FDA-approved for anticoagulation during <b>PCI</b>, especially with/at risk for HIT — short duration allows tight procedural control</td></tr>
+</table>
+</div>
+
+<h3>Argatroban</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Structure/binding</td><td><b>Univalent</b> — binds reversibly to the active site only</td></tr>
+<tr><td>PK</td><td>IV; half-life ~45 minutes; <b>metabolized hepatically</b> (preferred DTI in renal impairment; use cautiously in hepatic dysfunction)</td></tr>
+<tr><td>Use</td><td>Treatment/prophylaxis of <b>HIT</b>; anticoagulation in HIT patients undergoing PCI</td></tr>
+</table>
+</div>
+
+<h3>Monitoring</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Parameter</th><th>Detail</th></tr>
+<tr><td>Standard monitoring</td><td>Both agents monitored via <b>aPTT</b></td></tr>
+<tr><td>Argatroban + INR</td><td><b>Prolongs the INR</b>, which can complicate transitioning to warfarin — chromogenic factor X activity assays may better assess true warfarin effect during overlap; monitor closely, as a supratherapeutic INR may not reliably reflect actual anticoagulant status</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why are direct thrombin inhibitors particularly useful in patients with heparin-induced thrombocytopenia (HIT)?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They are contraindicated in HIT and should never be used</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They work by potentiating antithrombin activity, just like heparin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">They do not require antithrombin as a cofactor, providing effective anticoagulation without triggering the heparin-PF4 immune mechanism responsible for HIT</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They have no anticoagulant effect and are used only for their antiplatelet properties</button>
+<div class="quiz-explain"><b>Explanation:</b> Direct thrombin inhibitors act independently of antithrombin and are not heparin-based, so they provide effective anticoagulation in HIT patients without perpetuating the heparin-PF4 antibody-mediated mechanism responsible for the disorder -- making them a key alternative when heparin must be avoided.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which parenteral direct thrombin inhibitor is preferred in patients with renal impairment, due to its primary route of metabolism?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both are equally safe regardless of renal function</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither agent can be used in renal impairment</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bivalirudin, due to renal metabolism</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Argatroban, due to hepatic metabolism</button>
+<div class="quiz-explain"><b>Explanation:</b> Argatroban is metabolized hepatically, making it the preferred direct thrombin inhibitor in patients with renal impairment, though it must be used cautiously in hepatic dysfunction, where impaired clearance could lead to drug accumulation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient on argatroban is being transitioned to warfarin. Why can the INR be misleading during this overlap period?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Argatroban itself prolongs the INR, which can make it difficult to distinguish argatroban's effect from warfarin's true anticoagulant effect</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Warfarin cannot be used in any patient who has received argatroban</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">INR monitoring is not affected by any direct thrombin inhibitor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Argatroban has no effect on INR at all</button>
+<div class="quiz-explain"><b>Explanation:</b> Argatroban itself prolongs the INR, which complicates the transition to warfarin since a supratherapeutic INR during overlap may reflect argatroban's effect rather than an adequate warfarin effect; chromogenic factor X activity assays can help more accurately assess the true warfarin effect in this setting.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec12">
+<h2>12. DOACs: Dabigatran</h2>
+
+<div class="callout">Direct oral anticoagulants (DOACs) offer <b>oral administration, more predictable PK, fewer drug/dietary interactions, and less frequent monitoring</b> than warfarin. Two classes: oral direct thrombin inhibitors (dabigatran) and oral direct factor Xa inhibitors (apixaban, rivaroxaban, edoxaban).</div>
+
+<h3>Dabigatran — Mechanism</h3>
+<div class="callout">A <b>low molecular weight prodrug</b>, rapidly converted by plasma/hepatic esterases to its active form, which binds <b>directly and reversibly</b> to the active site of thrombin. Like parenteral DTIs, inhibits <b>both free and fibrin-bound thrombin</b>, blocking thrombin-mediated activation of fibrinogen, factor XIII, and platelets.</div>
+
+<h3>Therapeutic Uses</h3>
+<ul>
+<li>Reduction of stroke/systemic embolism risk in <b>nonvalvular AFib</b></li>
+<li>Treatment and secondary prevention of DVT/PE, <b>after at least 5&ndash;10 days</b> of initial parenteral anticoagulation</li>
+<li>VTE prophylaxis after hip replacement surgery</li>
+</ul>
+
+<h3>Pharmacokinetics</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Parameter</th><th>Detail</th></tr>
+<tr><td>Monitoring</td><td>No routine coagulation monitoring required</td></tr>
+<tr><td>Onset</td><td>Rapid; peak plasma concentration in <b>1&ndash;2 hours</b></td></tr>
+<tr><td>Elimination</td><td>Primarily <b>renal, unchanged</b> &rarr; dose adjustment in moderate renal impairment; avoid if <b>CrCl &lt;30 mL/min</b></td></tr>
+</table>
+</div>
+
+<h3>Adverse Effects</h3>
+<div class="table-scroll">
+<table>
+<tr><th>ADR</th><th>Detail</th></tr>
+<tr><td><b>Dyspepsia</b></td><td>From the tartaric acid core in the formulation — causes local gastric irritation, can limit tolerability</td></tr>
+<tr><td>Bleeding</td><td><b>Lower</b> risk of intracranial hemorrhage than warfarin, but potentially <b>higher GI bleeding</b> risk, especially in patients &gt;75</td></tr>
+<tr><td>Bleeding risk factors</td><td>Advanced age, renal dysfunction, concomitant antiplatelet/NSAID use</td></tr>
+</table>
+</div>
+
+<h3>Reversal, Interactions &amp; Contraindications</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Reversal agent</td><td><b>Idarucizumab</b> — humanized monoclonal antibody fragment; binds dabigatran with high affinity; neutralizes within minutes; for life-threatening bleeding or urgent surgery</td></tr>
+<tr><td>DI</td><td>Substrate of <b>P-glycoprotein (P-gp)</b>; P-gp inhibitors (ketoconazole, verapamil) &uarr;levels; P-gp inducers (rifampin) &darr;levels; caution with strong P-gp inhibitors especially in renal impairment</td></tr>
+<tr><td>CI</td><td><b>Mechanical prosthetic heart valves</b>; <b>triple-positive antiphospholipid syndrome</b> — increased thromboembolic risk in these populations</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with a mechanical prosthetic heart valve is being considered for anticoagulation. Why would dabigatran be an inappropriate choice?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Dabigatran is only available as an IV formulation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Dabigatran is contraindicated in patients with mechanical prosthetic heart valves due to increased thromboembolic risk observed in this population</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Dabigatran has no anticoagulant effect in this population</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Mechanical heart valves require higher, not lower, anticoagulation, and dabigatran is too weak</button>
+<div class="quiz-explain"><b>Explanation:</b> Dabigatran (like other DOACs) is contraindicated in patients with mechanical prosthetic heart valves due to an increased risk of thromboembolic events observed in this population -- warfarin remains the anticoagulant of choice for these patients instead.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which adverse effect of dabigatran is specifically attributed to its formulation with a tartaric acid core?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Thrombocytopenia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bleeding</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Dyspepsia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Reduced intracranial hemorrhage risk</button>
+<div class="quiz-explain"><b>Explanation:</b> Dyspepsia is a notable adverse effect of dabigatran attributed to its formulation with a tartaric acid core, which causes local gastric irritation and can limit patient tolerability.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient on dabigatran develops life-threatening bleeding. Which specific reversal agent should be administered?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Protamine sulfate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vitamin K</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Andexanet alfa</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Idarucizumab</button>
+<div class="quiz-explain"><b>Explanation:</b> Idarucizumab is the specific reversal agent for dabigatran -- a humanized monoclonal antibody fragment that binds dabigatran with high affinity and neutralizes its anticoagulant effect within minutes, making it appropriate for life-threatening bleeding or urgent surgery.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec13">
+<h2>13. DOACs: Factor Xa Inhibitors</h2>
+
+<h3>Mechanism</h3>
+<div class="callout">Apixaban, rivaroxaban, and edoxaban <b>selectively and directly inhibit factor Xa</b>, reducing thrombin generation, fibrin formation, and clot development. Unlike heparins, their anticoagulation is <b>independent of antithrombin</b>.</div>
+
+<h3>Therapeutic Uses</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Indication</th><th>Detail</th></tr>
+<tr><td>Nonvalvular AFib</td><td>Stroke/systemic embolism prevention (all three agents)</td></tr>
+<tr><td>VTE (DVT/PE)</td><td>Treatment and secondary prevention (all three agents)</td></tr>
+<tr><td>Chronic CAD or PAD</td><td><b>Rivaroxaban + low-dose aspirin</b> — uniquely approved for secondary prevention of major CV events</td></tr>
+<tr><td>Post-op prophylaxis</td><td>Rivaroxaban and apixaban — after hip/knee replacement</td></tr>
+</table>
+</div>
+
+<h3>Pharmacokinetics — Agent-Specific Differences</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Dosing</th><th>Metabolism/Elimination</th><th>Special Notes</th></tr>
+<tr><td><b>Rivaroxaban</b></td><td>Once daily, with the evening meal (enhances bioavailability, esp. &ge;15 mg)</td><td>~95% protein-bound; CYP3A4 and CYP2J2; renal + hepatic elimination</td><td>&mdash;</td></tr>
+<tr><td><b>Apixaban</b></td><td>Twice daily</td><td>CYP3A4; renal + biliary/fecal elimination</td><td><b>Often preferred in higher bleeding risk</b> patients (favorable safety profile)</td></tr>
+<tr><td><b>Edoxaban</b></td><td>Once daily</td><td>Minimally metabolized; primarily excreted unchanged in urine</td><td><b>Reduced efficacy if CrCl &gt;95 mL/min</b> (enhanced renal clearance/reduced exposure) — use an alternative anticoagulant in these patients</td></tr>
+</table>
+</div>
+<div class="callout">General PK: rapid onset (peak effect 1&ndash;4 hours), shorter half-lives than warfarin, no routine monitoring; dose-adjust in renal impairment, avoid if <b>CrCl &lt;15 mL/min</b>.</div>
+
+<h3>Adverse Effects &amp; Reversal</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Bleeding</td><td>Lower ICH risk than warfarin; <b>apixaban has lower GI bleeding risk</b> than both rivaroxaban and warfarin — preferred with history of GI bleed</td></tr>
+<tr><td>Reversal agent</td><td><b>Andexanet alfa</b> — recombinant modified factor Xa decoy protein; FDA-approved for apixaban/rivaroxaban reversal in life-threatening/uncontrolled bleeding (has in vitro activity against edoxaban but not FDA-approved for it)</td></tr>
+<tr><td>Off-label reversal</td><td><b>4-factor PCC</b> — off-label option for severe bleeding with any factor Xa inhibitor</td></tr>
+</table>
+</div>
+
+<h3>Drug Interactions &amp; Contraindications</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>&uarr;Levels (avoid/caution)</td><td>Ketoconazole, ritonavir, clarithromycin (strong CYP3A4/P-gp inhibitors)</td></tr>
+<tr><td>&darr;Efficacy (avoid/caution)</td><td>Rifampin, phenytoin, carbamazepine (strong inducers)</td></tr>
+<tr><td>CI</td><td>Active major bleeding, severe hepatic impairment, mechanical heart valves; use discouraged in <b>triple-positive antiphospholipid syndrome</b> (warfarin preferred — higher thrombotic risk observed with DOACs in this population)</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with a history of significant GI bleeding requires anticoagulation for nonvalvular atrial fibrillation. Which factor Xa inhibitor would be preferred based on its bleeding risk profile?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Apixaban</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Edoxaban at high doses</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">All three carry identical GI bleeding risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Rivaroxaban</button>
+<div class="quiz-explain"><b>Explanation:</b> Apixaban has been shown to have a lower risk of GI bleeding compared to both rivaroxaban and warfarin, making it a preferred option in patients with a history of GI bleeding or increased bleeding risk.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with a creatinine clearance of 100 mL/min is prescribed edoxaban. What is the clinical concern?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No concern; edoxaban works optimally at this CrCl</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Edoxaban's efficacy is reduced in patients with CrCl greater than 95 mL/min, likely due to enhanced renal clearance and reduced systemic drug exposure, and an alternative anticoagulant should be considered</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This CrCl requires an increased edoxaban dose</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Edoxaban is contraindicated only below this CrCl, not above it</button>
+<div class="quiz-explain"><b>Explanation:</b> Edoxaban's efficacy is reduced in patients with very high creatinine clearance (>95 mL/min), likely due to enhanced renal clearance leading to reduced systemic drug exposure; alternative anticoagulants are recommended in such patients.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which reversal agent is FDA-approved specifically for apixaban and rivaroxaban in cases of life-threatening bleeding?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Idarucizumab</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Protamine sulfate</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Andexanet alfa</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vitamin K</button>
+<div class="quiz-explain"><b>Explanation:</b> Andexanet alfa, a recombinant modified factor Xa decoy protein, is FDA-approved for the reversal of apixaban and rivaroxaban in life-threatening or uncontrolled bleeding; it has in vitro activity against edoxaban but is not yet FDA-approved for that specific agent.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec14">
+<h2>14. Warfarin: Mechanism, Monitoring &amp; Bridging</h2>
+
+<h3>Mechanism</h3>
+<div class="callout">Inhibits <b>vitamin K epoxide reductase complex subunit 1 (VKORC1)</b>, the enzyme that regenerates reduced vitamin K from its epoxide form. Reduced vitamin K is a required cofactor for <b>gamma-carboxylation</b> of glutamate residues on factors <b>II, VII, IX, X</b>, as well as <b>protein C and protein S</b>. Inhibiting carboxylation produces <b>nonfunctional, undercarboxylated</b> clotting factors.</div>
+
+<h3>Why Warfarin's Onset Is Delayed</h3>
+<div class="callout">Warfarin does <b>not</b> affect clotting factors that are already carboxylated/circulating — its effect reflects the <b>clearance</b> of pre-existing active factors. <b>Factor II (prothrombin) has the longest half-life (~60&ndash;72 hours)</b>, so full anticoagulant effect is delayed several days.</div>
+<div class="pearl"><b>The Transient Hypercoagulable Window</b> <b>Protein C has a short half-life (~8 hours)</b> and declines rapidly after warfarin initiation — while pro-coagulant factors (especially factor II) remain active longer. This early loss of anticoagulant activity while pro-coagulants persist creates a <b>transient pro-thrombotic state</b>, especially dangerous in patients with inherited protein C deficiency, and can cause <b>warfarin-induced skin necrosis</b>.</div>
+
+<h3>Bridging Therapy — Why 5&ndash;7 Days</h3>
+<div class="callout">Bridging with a parenteral anticoagulant (UFH or LMWH) is recommended during the <b>first 5&ndash;7 days</b> of warfarin therapy in patients with active thrombosis or elevated thrombotic risk — this covers the delayed onset period and the transient hypercoagulable window until warfarin's antithrombotic effect (via factor II depletion) is fully established.</div>
+
+<h3>Therapeutic Uses &amp; Monitoring</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Uses</td><td>DVT/PE prevention and treatment; stroke prevention in AFib; anticoagulant of choice for <b>mechanical prosthetic heart valves</b> (especially mitral position) — DOACs are contraindicated here</td></tr>
+<tr><td>Monitoring</td><td><b>INR</b>; target <b>2&ndash;3</b> for most indications; <b>2.5&ndash;3.5</b> for mechanical valves or high thrombotic risk</td></tr>
+</table>
+</div>
+
+<h3>Pharmacokinetics</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Parameter</th><th>Detail</th></tr>
+<tr><td>Bioavailability</td><td>Nearly complete; oral</td></tr>
+<tr><td>Enantiomers</td><td><b>Racemic mixture</b> of R and S — <b>S-warfarin is more potent</b>, metabolized by <b>CYP2C9</b>; R-warfarin metabolized by CYP1A2 and CYP3A4</td></tr>
+<tr><td>Protein binding</td><td>&gt;99%</td></tr>
+<tr><td>Half-life</td><td>25&ndash;60 hours (pharmacodynamic duration can persist several days due to time needed to synthesize new clotting factors)</td></tr>
+<tr><td>Dosing</td><td>Typically initiated at <b>2&ndash;5 mg/day</b>, adjusted by INR; lower starting doses for elderly/frail patients or increased bleeding risk</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why does warfarin have a delayed onset of anticoagulant effect despite rapidly inhibiting VKORC1?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">VKORC1 is a slow enzyme that takes days to inhibit</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is incorrect; warfarin's effect is actually immediate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Warfarin takes days to be absorbed from the GI tract</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Warfarin does not affect already-circulating, previously carboxylated clotting factors; the delay reflects the time needed for these factors (especially long-lived factor II) to clear from circulation</button>
+<div class="quiz-explain"><b>Explanation:</b> Warfarin prevents the carboxylation (activation) of new clotting factors but has no effect on those already circulating in their active, carboxylated form. Since factor II (prothrombin) has the longest half-life (~60-72 hours), the delayed onset of warfarin's anticoagulant effect reflects the time needed for pre-existing active factors, especially factor II, to clear from circulation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Why is bridging anticoagulation with heparin recommended during the first 5-7 days of warfarin initiation in high-risk patients?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">This period covers both warfarin's delayed onset and the transient pro-thrombotic state created by rapid protein C decline while pro-coagulant factors remain active</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Bridging is only done to prevent GI upset from warfarin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Heparin bridging has no relationship to protein C levels</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Warfarin has no anticoagulant properties at all during this time and requires heparin for any effect</button>
+<div class="quiz-explain"><b>Explanation:</b> Bridging with a parenteral anticoagulant covers the period during which warfarin has not yet achieved its full antithrombotic effect (due to the long half-life of factor II) while also protecting against the transient hypercoagulable state caused by the rapid early decline in protein C (short half-life) relative to still-active pro-coagulant factors.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What is the target INR range for a patient on warfarin with a mechanical mitral valve, compared to most other indications?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">2-3, the same as most other indications</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">2.5-3.5, higher than the standard 2-3 range used for most indications</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">4-5, much higher than any other indication</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">1.5-2.0, lower than standard indications</button>
+<div class="quiz-explain"><b>Explanation:</b> For mechanical heart valves (particularly in the mitral position) or high thrombotic risk, the target INR is 2.5-3.5, higher than the standard 2-3 range used for most other warfarin indications such as DVT/PE prevention or AFib stroke prevention.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec15">
+<h2>15. Warfarin: Adverse Effects, Interactions &amp; Pharmacogenomics</h2>
+
+<h3>Adverse Effects</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Effect</th><th>Detail</th></tr>
+<tr><td>Bleeding</td><td>Minor bruising to life-threatening hemorrhage; risk &uarr; with supratherapeutic INR, advanced age, concurrent hemostasis-impairing drugs; <b>intracranial hemorrhage can occur even within therapeutic INR range</b></td></tr>
+<tr><td><b>Warfarin-induced skin necrosis</b></td><td>Develops within <b>3&ndash;10 days</b> of initiation; especially with underlying protein C or S deficiency</td></tr>
+<tr><td><b>Purple toe syndrome</b></td><td>Rare; thought to result from <b>cholesterol microembolization</b></td></tr>
+</table>
+</div>
+
+<h3>Drug &amp; Dietary Interactions</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Interaction Type</th><th>Example</th><th>Effect</th></tr>
+<tr><td>Pharmacokinetic — &uarr;effect</td><td>CYP2C9 inhibitors</td><td>&darr;Clearance of S-warfarin &rarr; &uarr;anticoagulation/bleeding risk</td></tr>
+<tr><td>Pharmacokinetic — &darr;effect</td><td>CYP2C9 inducers</td><td>&uarr;Warfarin metabolism &rarr; &darr;efficacy</td></tr>
+<tr><td>GI binding</td><td>Cholestyramine</td><td>Binds warfarin in the GI tract &rarr; &darr;absorption</td></tr>
+<tr><td>Pharmacodynamic</td><td>Antiplatelet agents, NSAIDs</td><td>&uarr;Bleeding risk <b>independent of INR</b> (platelet inhibition, GI mucosal injury)</td></tr>
+<tr><td>Dietary</td><td>Vitamin K (leafy greens)</td><td>Antagonizes warfarin, &darr;INR — counsel patients to maintain <b>consistent</b> intake rather than avoid entirely</td></tr>
+</table>
+</div>
+
+<h3>Genetic Variation in Warfarin Response</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Gene</th><th>Effect</th></tr>
+<tr><td><b>CYP2C9</b> (*2 and *3 alleles)</td><td>Reduced enzymatic activity &rarr; slower S-warfarin metabolism</td></tr>
+<tr><td><b>VKORC1 promoter polymorphisms</b></td><td>Affect sensitivity to warfarin — certain variants require lower initial doses</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> These genetic variants differ by ethnicity, partially explaining interindividual dosing variability. Pharmacogenetic dosing algorithms exist but are <b>not yet standard in routine practice</b> — traditional INR-based titration remains the mainstay.</div>
+
+<h3>Pregnancy &amp; Contraindications</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Detail</th></tr>
+<tr><td>Pregnancy</td><td><b>Teratogenic</b>, crosses the placenta — risk of fetal bleeding, spontaneous abortion, developmental abnormalities (especially 1st trimester) &rarr; <b>contraindicated</b>; LMWH is preferred during gestation</td></tr>
+<tr><td>Other CI</td><td>Active major bleeding, recent high-risk surgery, inability to adhere to INR monitoring; use cautiously in hepatic dysfunction (decreased clotting factor synthesis can exaggerate effect)</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient on stable warfarin therapy develops intracranial hemorrhage despite having an INR within the therapeutic range (2-3). What does this illustrate about warfarin therapy?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This proves the patient must have an undiagnosed genetic condition</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This cannot happen; ICH only occurs with supratherapeutic INR</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Intracranial hemorrhage can occur even when the INR is within the therapeutic range, meaning a 'normal' INR does not eliminate bleeding risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This indicates a laboratory error and the INR must be repeated</button>
+<div class="quiz-explain"><b>Explanation:</b> Notably, intracranial hemorrhage can occur even when the INR is within the therapeutic range -- this is an important safety point, since patients and clinicians should not assume that a therapeutic INR guarantees freedom from serious bleeding risk.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient on warfarin asks whether they should completely avoid leafy green vegetables due to their vitamin K content. What is the appropriate counseling?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vitamin K intake has no effect on warfarin and can be ignored</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vitamin K should be taken as a supplement to counteract warfarin's effect</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Yes, all vitamin K-containing foods should be completely eliminated from the diet</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">No, patients should maintain a consistent intake of vitamin K-containing foods rather than avoiding them entirely, since consistency allows for stable dosing</button>
+<div class="quiz-explain"><b>Explanation:</b> Patients on warfarin should be counseled to maintain a consistent intake of vitamin K-containing foods rather than avoiding them entirely -- consistency allows for stable, predictable warfarin dosing, whereas erratic intake (including sudden avoidance) can cause unpredictable INR fluctuations.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which genetic polymorphism affects warfarin sensitivity by altering the target enzyme itself, rather than warfarin's metabolism?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">VKORC1 promoter polymorphisms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">CYP3A4 polymorphisms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">CYP1A2 polymorphisms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">CYP2C9 polymorphisms</button>
+<div class="quiz-explain"><b>Explanation:</b> VKORC1 promoter polymorphisms affect sensitivity to warfarin at the level of its target enzyme (vitamin K epoxide reductase), with certain variants requiring lower initial doses -- this is distinct from CYP2C9 polymorphisms, which affect the metabolism (clearance) of S-warfarin itself.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec16">
+<h2>16. Fibrinolysis Physiology &amp; Older Agents</h2>
+
+<h3>Fibrinolysis — Physiologic Process</h3>
+<div class="callout">The body's process for dissolving fibrin clots to restore vascular patency once hemostasis is complete. <b>Plasminogen</b> (synthesized in the liver, circulates in plasma) is converted to <b>plasmin</b> by plasminogen activators — primarily <b>tissue plasminogen activator (tPA)</b> and <b>urokinase-type plasminogen activator (uPA)</b>.</div>
+
+<h3>Localization of Fibrinolytic Activity</h3>
+<div class="pearl"><b>Why Physiologic Clot Breakdown Is Localized</b> Endothelial-derived tPA is released in response to thrombin, venous stasis, and inflammatory cytokines. Critically, tPA <b>preferentially activates plasminogen when it is bound to fibrin</b> — this <b>localizes</b> fibrinolytic activity to the site of thrombus formation and minimizes systemic fibrinogen degradation. Plasmin binds fibrin via <b>kringle domains</b>, cleaving cross-linked fibrin into fibrin degradation products.</div>
+
+<h3>Endogenous Regulation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Inhibitor</th><th>Action</th></tr>
+<tr><td><b>Plasminogen activator inhibitor-1 (PAI-1)</b></td><td>Limits excessive tPA/uPA activity</td></tr>
+<tr><td><b>Alpha-2 antiplasmin</b></td><td>Rapidly inactivates <i>free</i> plasmin, protecting fibrinogen and other coagulation proteins from nonspecific degradation</td></tr>
+</table>
+</div>
+<div class="callout">Therapeutic fibrinolysis uses <b>pharmacologic doses</b> of exogenous recombinant plasminogen activators to <b>overwhelm</b> these endogenous inhibitory mechanisms and accelerate thrombus dissolution.</div>
+
+<h3>Older (Now Largely Obsolete) Agents</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Mechanism</th><th>Key Limitation</th></tr>
+<tr><td><b>Streptokinase</b></td><td>Derived from beta-hemolytic streptococci; forms a complex with plasminogen, inducing a conformational change that exposes the active site &rarr; converts additional plasminogen to plasmin</td><td><b>Non-fibrin-specific</b> (systemic bleeding risk); <b>antigenic</b> — repeated administration can provoke allergic reactions or reduced efficacy from antibodies</td></tr>
+<tr><td><b>Urokinase</b></td><td>Directly converts plasminogen to plasmin, without complex formation; originally isolated from human urine, now recombinant</td><td><b>Non-fibrin-specific</b> — similarly increased bleeding risk</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> Both agents have been largely replaced by recombinant tPAs in high-income countries due to improved efficacy/safety, but may still be used where cost or availability limits access to newer agents.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why does tissue plasminogen activator (tPA) preferentially localize its fibrinolytic activity to the site of an actual thrombus, rather than causing widespread systemic fibrinogen breakdown?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">tPA is only released at the site of a thrombus and nowhere else in the body</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">tPA preferentially activates plasminogen when it is already bound to fibrin, localizing activity to the clot itself</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">tPA has no mechanism for localization and always acts systemically</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Alpha-2 antiplasmin specifically blocks tPA everywhere except at the thrombus</button>
+<div class="quiz-explain"><b>Explanation:</b> tPA preferentially activates plasminogen when it is bound to fibrin (as at a thrombus), which localizes fibrinolytic activity to the site of clot formation and minimizes systemic fibrinogen degradation -- a key physiologic safety mechanism.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the major limitation shared by both streptokinase and urokinase that has led to their being largely replaced by recombinant tPA agents?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They can only be given orally, unlike modern IV agents</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">They are both prohibitively expensive compared to newer agents</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">They are both non-fibrin-specific, increasing the risk of systemic bleeding compared to more fibrin-specific modern agents</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither agent has any fibrinolytic activity at all</button>
+<div class="quiz-explain"><b>Explanation:</b> Both streptokinase and urokinase are non-fibrin-specific, meaning they activate plasminogen throughout the circulation rather than selectively at the thrombus site, increasing the risk of systemic bleeding -- a key reason they have been largely replaced by more fibrin-specific recombinant tPA agents in high-income countries.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which endogenous protein rapidly inactivates free plasmin, protecting circulating fibrinogen and other coagulation proteins from nonspecific degradation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Antithrombin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Protein C</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Plasminogen activator inhibitor-1 (PAI-1)</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Alpha-2 antiplasmin</button>
+<div class="quiz-explain"><b>Explanation:</b> Alpha-2 antiplasmin is a circulating serine protease inhibitor that rapidly inactivates free plasmin, protecting fibrinogen and other coagulation proteins from nonspecific degradation, while PAI-1 instead limits excessive activity of the plasminogen activators (tPA/uPA) themselves.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec17">
+<h2>17. Modern Fibrinolytics: Alteplase, Reteplase, Tenecteplase</h2>
+
+<div class="callout">All three are <b>recombinant tissue plasminogen activators (rtPA)</b> that convert plasminogen to plasmin, degrading the fibrin matrix of clots.</div>
+
+<h3>Therapeutic Uses (Time-Sensitive Emergencies)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Indication</th><th>Detail</th></tr>
+<tr><td><b>STEMI</b></td><td>When PCI is unavailable or delayed beyond guideline-directed windows</td></tr>
+<tr><td><b>Acute ischemic stroke</b></td><td>Within <b>4.5 hours</b> of symptom onset</td></tr>
+<tr><td><b>Massive PE</b></td><td>With hemodynamic compromise</td></tr>
+</table>
+</div>
+
+<h3>Structural &amp; Pharmacokinetic Differences</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Structure</th><th>Half-Life</th><th>Administration</th></tr>
+<tr><td><b>Alteplase</b></td><td>Structurally <b>identical</b> to endogenous human tPA</td><td>~5 minutes (short)</td><td><b>Continuous IV infusion</b></td></tr>
+<tr><td><b>Reteplase</b></td><td><b>Truncated</b> variant</td><td>~15&ndash;20 minutes</td><td><b>IV bolus</b></td></tr>
+<tr><td><b>Tenecteplase</b></td><td>Genetically modified for <b>increased fibrin specificity</b> and <b>resistance to PAI-1</b></td><td>~20&ndash;25 minutes</td><td><b>IV bolus</b></td></tr>
+</table>
+</div>
+<div class="pearl"><b>Why Bolus Dosing Is Possible for Reteplase/Tenecteplase</b> Their longer half-lives (vs. alteplase's very short 5 minutes) allow convenient IV bolus dosing rather than the continuous infusion required for alteplase. All three are primarily cleared by <b>hepatic metabolism</b>.</div>
+
+<h3>Adverse Effects</h3>
+<div class="callout">Bleeding is the major concern — <b>intracranial hemorrhage</b> is the most feared/serious adverse effect. Also: GI bleeding, bleeding at vascular access/surgical sites. Risk is <b>magnified</b> when given concurrently with anticoagulants (e.g., heparin).</div>
+
+<h3>Contraindications</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Examples</th></tr>
+<tr><td><b>Absolute</b></td><td>Active internal bleeding, history of hemorrhagic stroke, recent intracranial/spinal surgery, severe uncontrolled hypertension</td></tr>
+<tr><td><b>Relative</b></td><td>Recent major surgery, recent ischemic stroke (outside the acute window), bleeding diatheses</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why can reteplase and tenecteplase be administered as convenient IV boluses, while alteplase requires a continuous IV infusion?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Reteplase and tenecteplase have longer half-lives (~15-25 minutes) compared to alteplase's very short half-life (~5 minutes), allowing bolus dosing to maintain therapeutic levels</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Alteplase cannot be given as a bolus due to its molecular size</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is incorrect; all three agents require continuous infusion</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Reteplase and tenecteplase are less potent and therefore safer to bolus</button>
+<div class="quiz-explain"><b>Explanation:</b> Reteplase and tenecteplase have longer half-lives (approximately 15-20 and 20-25 minutes respectively) compared to alteplase's very short 5-minute half-life, which allows them to be administered as convenient IV bolus injections while still maintaining therapeutic drug levels, unlike alteplase which requires continuous infusion.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which structural modification distinguishes tenecteplase from alteplase, contributing to its use as a bolus-dosed agent?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tenecteplase is a truncated variant with no other modifications</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Tenecteplase is genetically modified for increased fibrin specificity and resistance to PAI-1</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tenecteplase is structurally identical to endogenous tPA</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tenecteplase lacks any fibrinolytic activity</button>
+<div class="quiz-explain"><b>Explanation:</b> Tenecteplase is genetically modified for increased fibrin specificity and resistance to plasminogen activator inhibitor-1 (PAI-1), distinguishing it from alteplase, which is structurally identical to endogenous human tPA, and from reteplase, which is simply a truncated variant.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient presents with acute ischemic stroke. Within what time window from symptom onset must fibrinolytic therapy be administered according to standard guidelines?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">24 hours</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">1 hour</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">4.5 hours</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">12 hours</button>
+<div class="quiz-explain"><b>Explanation:</b> Fibrinolytic therapy for acute ischemic stroke must be administered within 4.5 hours of symptom onset, one of the key time-sensitive indications for these agents alongside STEMI (when PCI is unavailable/delayed) and massive PE with hemodynamic compromise.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec18">
+<h2>18. Reversal Strategies: Warfarin, Heparin &amp; DOACs</h2>
+
+<h3>Warfarin Reversal</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Detail</th></tr>
+<tr><td><b>Vitamin K1</b></td><td>Restores synthesis of functional clotting factors; reversal takes <b>6&ndash;24 hours</b> — limits its role in truly acute bleeding</td></tr>
+<tr><td><b>4-factor PCC (4F-PCC)</b></td><td><b>Preferred in urgent settings</b> — immediate hemostatic effect; contains vitamin K-dependent factors II, VII, IX, X; often <b>co-administered with vitamin K</b> to sustain reversal as PCC's effect wanes</td></tr>
+<tr><td>Fresh frozen plasma (FFP)</td><td><b>Largely replaced</b> by 4F-PCC (slower onset, larger volume, higher risk of volume overload — especially in heart failure/renal impairment)</td></tr>
+</table>
+</div>
+
+<h3>Heparin &amp; LMWH Reversal</h3>
+<div class="callout"><b>Protamine sulfate</b> — a positively charged polypeptide that binds negatively charged heparin, forming a stable inactive complex. IV administration; reverses UFH's anticoagulant effect within <b>minutes</b>.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Heparin Type</th><th>Protamine Efficacy</th></tr>
+<tr><td>UFH</td><td>Full reversal</td></tr>
+<tr><td>LMWH</td><td>Neutralizes only <b>~60&ndash;75%</b> of anti-factor Xa activity; repeat dosing may be needed; <b>complete reversal not guaranteed</b></td></tr>
+<tr><td>Fondaparinux</td><td>Protamine has <b>NO effect</b></td></tr>
+</table>
+</div>
+
+<h3>DOAC Reversal</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Reverses</th><th>Mechanism</th></tr>
+<tr><td><b>Idarucizumab</b></td><td>Dabigatran</td><td>Specific — humanized mAb fragment, binds with high affinity, neutralizes within minutes</td></tr>
+<tr><td><b>4F-PCC</b></td><td>Factor Xa inhibitors (life-threatening/uncontrolled bleeding)</td><td><b>Nonspecific</b> hemostatic strategy — does NOT bind/neutralize the anticoagulant directly; instead provides concentrated vitamin K-dependent factors to increase thrombin generation and promote hemostasis</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Specific vs. Nonspecific Reversal</b> Idarucizumab (dabigatran) and andexanet alfa (factor Xa inhibitors, from Section 13) are <b>drug-specific antidotes</b>. 4F-PCC used for factor Xa inhibitor bleeding is a <b>nonspecific hemostatic strategy</b> — it doesn't neutralize the drug itself, just overwhelms the anticoagulant effect with more clotting factors.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why is 4F-PCC generally preferred over fresh frozen plasma (FFP) for urgent reversal of warfarin-associated bleeding?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">FFP works faster than 4F-PCC in all situations</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">FFP is no longer manufactured</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">4F-PCC is cheaper and more widely available in all settings</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">4F-PCC provides more immediate hemostatic effect without the large volume requirements and volume overload risk associated with FFP</button>
+<div class="quiz-explain"><b>Explanation:</b> 4F-PCC is preferred over FFP for urgent warfarin reversal because it provides an immediate hemostatic effect (containing concentrated vitamin K-dependent factors II, VII, IX, and X) without FFP's slower onset, larger volume requirements, and increased risk of volume overload, particularly concerning in patients with heart failure or renal impairment.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Protamine sulfate is administered to reverse the anticoagulant effect of a heparin product. In which scenario would protamine be expected to have essentially NO effect?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Fondaparinux-associated bleeding</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Protamine works equally well in all three scenarios</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unfractionated heparin overdose</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Low molecular weight heparin (partial reversal expected)</button>
+<div class="quiz-explain"><b>Explanation:</b> Protamine sulfate has no effect on fondaparinux, unlike its full reversal of UFH and partial reversal (60-75% of anti-Xa activity) of LMWH -- fondaparinux's structure (a short synthetic pentasaccharide) does not allow protamine binding in the same way.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What is the key mechanistic difference between idarucizumab (used for dabigatran) and 4F-PCC (used off-label for factor Xa inhibitor bleeding)?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both agents work by directly binding and neutralizing the anticoagulant drug</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Idarucizumab specifically binds and neutralizes dabigatran, while 4F-PCC is a nonspecific hemostatic strategy that provides clotting factors without directly neutralizing the factor Xa inhibitor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">4F-PCC directly binds factor Xa inhibitors while idarucizumab works nonspecifically</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither agent has any real clinical effect on bleeding</button>
+<div class="quiz-explain"><b>Explanation:</b> Idarucizumab is a specific antidote that directly binds and neutralizes dabigatran, whereas 4F-PCC used for factor Xa inhibitor-associated bleeding is a nonspecific hemostatic strategy -- it does not bind or neutralize the anticoagulant itself, but instead provides concentrated vitamin K-dependent clotting factors to increase thrombin generation and promote hemostasis despite the ongoing drug effect.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec19">
+<h2>19. Reversal Strategies: Fibrinolytics &amp; Antiplatelets</h2>
+
+<h3>Antifibrinolytic Agents (for Fibrinolytic-Associated Bleeding)</h3>
+<div class="callout"><b>Tranexamic acid</b> and <b>aminocaproic acid</b> are <b>lysine analogs</b> that competitively inhibit the binding of plasminogen/plasmin to fibrin, thereby preventing fibrin breakdown — used for bleeding from excessive fibrinolysis (post-thrombolytic therapy, surgery, trauma, bleeding disorders).</div>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Detail</th></tr>
+<tr><td><b>Tranexamic acid</b></td><td>Used <b>more frequently</b>; broad applications in trauma, obstetrics, major surgery (cardiac, orthopedic); IV and oral formulations; supported by <b>mortality reduction data in trauma</b> when given early (<b>CRASH-2 trial</b>)</td></tr>
+<tr><td><b>Aminocaproic acid</b></td><td>Mechanistically similar but used <b>less often</b> — less robust trial data, shorter half-life (more frequent dosing), greater potential for side effects (hypotension, myopathy); still viable if tranexamic acid unavailable/contraindicated</td></tr>
+</table>
+</div>
+
+<h3>Cryoprecipitate</h3>
+<div class="callout">Unlike the antifibrinolytics, cryoprecipitate does <b>not inhibit fibrinolysis directly</b> — instead, it provides <b>concentrated fibrinogen</b> and other coagulation proteins to restore fibrin formation when fibrinogen has been depleted. Particularly important in <b>fibrinolytic-associated intracranial hemorrhage</b>.</div>
+
+<h3>Antiplatelet Agent Reversal — No Specific Antidotes</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent(s)</th><th>Approach</th></tr>
+<tr><td>Aspirin &amp; irreversible P2Y12 inhibitors (clopidogrel, prasugrel)</td><td>No specific reversal agent; discontinue drug + supportive care; <b>platelet transfusion may help</b> (effectiveness depends on timing since last dose)</td></tr>
+<tr><td><b>Ticagrelor</b></td><td>No approved specific reversal; platelet transfusion <b>may be less effective</b> — circulating drug can inhibit the transfused platelets too</td></tr>
+<tr><td>GPIIb/IIIa inhibitors</td><td>Stop drug + supportive care; <b>abciximab</b> has a longer platelet effect and may require transfusion in severe bleeding; <b>eptifibatide/tirofiban</b> are short-acting — bleeding risk typically resolves with discontinuation and time (renal clearance)</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the mechanistic difference between tranexamic acid and cryoprecipitate when both are used to manage fibrinolytic-associated bleeding?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither agent has any role in managing fibrinolytic-associated bleeding</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both agents work identically by replacing fibrinogen</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Tranexamic acid competitively inhibits plasminogen/plasmin binding to fibrin (blocking fibrinolysis), while cryoprecipitate provides concentrated fibrinogen and other coagulation proteins to restore fibrin formation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cryoprecipitate inhibits fibrinolysis while tranexamic acid replaces fibrinogen</button>
+<div class="quiz-explain"><b>Explanation:</b> Tranexamic acid (a lysine analog) works by competitively inhibiting the binding of plasminogen and plasmin to fibrin, directly blocking fibrinolysis, while cryoprecipitate works by a completely different mechanism -- providing concentrated fibrinogen and other coagulation proteins to restore fibrin formation when fibrinogen has been depleted.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A trauma patient with significant hemorrhage is being considered for tranexamic acid administration. What supports its early use in this setting?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tranexamic acid is only approved for use in cardiac surgery</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aminocaproic acid has more robust trauma data than tranexamic acid</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No clinical trial data supports its use in trauma</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The CRASH-2 trial demonstrated mortality reduction when tranexamic acid was administered early in trauma patients</button>
+<div class="quiz-explain"><b>Explanation:</b> The CRASH-2 trial provided evidence of mortality reduction when tranexamic acid was administered early in trauma patients, supporting its broad clinical use in this setting, along with obstetric and major surgical bleeding.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why might platelet transfusion be less effective for reversing ticagrelor's antiplatelet effect compared to reversing aspirin's effect?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ticagrelor binds reversibly with high affinity, so circulating drug can inhibit newly transfused platelets, unlike aspirin's irreversible mechanism which spares new platelets</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Platelet transfusion has no role in reversing any antiplatelet agent</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin and ticagrelor have identical reversal profiles</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ticagrelor destroys platelets permanently, so transfusion is pointless</button>
+<div class="quiz-explain"><b>Explanation:</b> Because ticagrelor binds the P2Y12 receptor reversibly, circulating drug in the plasma can still inhibit newly transfused platelets, limiting the effectiveness of platelet transfusion -- in contrast to irreversible agents like aspirin, where transfused platelets (free of the irreversibly-bound drug) can function normally.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec20">
+<h2>20. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review — every core fact condensed to what's most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>The Big Picture: Antiplatelets vs. Anticoagulants vs. Fibrinolytics</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Class</th><th>Primary Target</th><th>What It Does</th><th>Typical Role</th></tr>
+<tr><td><b>Antiplatelets</b></td><td>Platelet activation/aggregation</td><td>PREVENT platelet aggregation</td><td>Arterial thrombosis: ACS, PCI/stents, non-cardioembolic stroke prevention</td></tr>
+<tr><td><b>Anticoagulants</b></td><td>Coagulation factors/thrombin</td><td>PREVENT fibrin formation/propagation</td><td>VTE, cardioembolic stroke prevention (AFib)</td></tr>
+<tr><td><b>Fibrinolytics</b></td><td>Plasminogen &rarr; plasmin</td><td>BREAK DOWN existing fibrin</td><td>STEMI (no timely PCI), acute ischemic stroke, high-risk PE</td></tr>
+</table>
+</div>
+
+<h3>Antiplatelet Drug Class Master Table</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Class</th><th>Key Agents</th><th>Mechanism</th><th>Key Notes</th></tr>
+<tr><td>COX inhibitor</td><td>Aspirin</td><td>Irreversible COX-1 &darr;TXA2 &darr;aggregation</td><td>Lasts platelet lifespan (7-10d); low dose = selective; high dose = COX-1+2</td></tr>
+<tr><td>P2Y12 inhibitors</td><td>Clopidogrel, prasugrel, ticagrelor, cangrelor</td><td>Block ADP-mediated activation</td><td>Prasugrel CI in stroke/TIA/age&ge;75/&lt;60kg; ticagrelor reversible; cangrelor IV, ~1h offset</td></tr>
+<tr><td>GPIIb/IIIa inhibitors</td><td>Abciximab, eptifibatide, tirofiban</td><td>Block fibrinogen binding (final common pathway)</td><td>IV only; abciximab = irreversible/longest/highest thrombocytopenia risk</td></tr>
+<tr><td>PDE inhibitors</td><td>Dipyridamole, cilostazol</td><td>&uarr;cAMP &rarr; &darr;aggregation + vasodilation</td><td>Dipyridamole+ASA for stroke; cilostazol for claudication (CI in HF)</td></tr>
+<tr><td>PAR-1 antagonist</td><td>Vorapaxar</td><td>Blocks thrombin-mediated activation</td><td>Never monotherapy; effect persists 4wks; CI in stroke/TIA/ICH history</td></tr>
+</table>
+</div>
+
+<h3>Coagulation Cascade Quick Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Concept</th><th>Key Fact</th></tr>
+<tr><td>Extrinsic pathway</td><td>TF + VIIa &rarr; activates X (predominates physiologically)</td></tr>
+<tr><td>Intrinsic pathway</td><td>XI&rarr;IX&rarr;VIII; IXa+VIIIa = "intrinsic tenase" (amplifies/sustains)</td></tr>
+<tr><td>Common pathway</td><td>Xa+Va+Ca+phospholipid = prothrombinase &rarr; thrombin (IIa)</td></tr>
+<tr><td>Thrombin roles</td><td>Fibrinogen&rarr;fibrin; activates XIII (cross-link); activates platelets (PARs); amplifies via V/VIII/XI</td></tr>
+<tr><td>Vitamin K-dependent factors</td><td>II, VII, IX, X (+ proteins C and S)</td></tr>
+<tr><td>Endogenous anticoagulants</td><td>Antithrombin (inactivates IIa, Xa, IXa); Protein C+S (degrade Va, VIIIa)</td></tr>
+</table>
+</div>
+
+<h3>Anticoagulant Drug Class Master Table</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Class</th><th>Key Agents</th><th>Mechanism</th><th>Monitoring</th><th>Reversal</th></tr>
+<tr><td>UFH</td><td>Heparin</td><td>Binds AT &rarr; inactivates IIa+Xa</td><td>aPTT (1.5-2.5x baseline)</td><td>Protamine (full)</td></tr>
+<tr><td>LMWH</td><td>Enoxaparin, dalteparin, etc.</td><td>Binds AT &rarr; preferentially inhibits Xa</td><td>Usually none (anti-Xa if renal/obese/pregnant)</td><td>Protamine (partial, 60-75%)</td></tr>
+<tr><td>Indirect Xa inhibitor</td><td>Fondaparinux</td><td>Binds AT &rarr; selectively inhibits Xa</td><td>None</td><td>NONE (protamine has no effect)</td></tr>
+<tr><td>Parenteral DTIs</td><td>Argatroban, bivalirudin</td><td>Direct thrombin binding (AT-independent)</td><td>aPTT (argatroban also &uarr;INR)</td><td>None specific; short half-life</td></tr>
+<tr><td>Oral DTI</td><td>Dabigatran</td><td>Direct, reversible thrombin inhibition</td><td>None routine</td><td>Idarucizumab</td></tr>
+<tr><td>Oral factor Xa inhibitors</td><td>Apixaban, rivaroxaban, edoxaban</td><td>Direct Xa inhibition (AT-independent)</td><td>None routine</td><td>Andexanet alfa (apixaban/rivaroxaban); 4F-PCC off-label</td></tr>
+<tr><td>Vitamin K antagonist</td><td>Warfarin</td><td>Inhibits VKORC1 &rarr; &darr;II,VII,IX,X + protein C/S</td><td>INR (2-3 standard; 2.5-3.5 mechanical valve)</td><td>Vitamin K1 (slow) + 4F-PCC (fast)</td></tr>
+</table>
+</div>
+
+<h3>HIT — Quick Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Incidence</td><td>1-4% UFH; less with LMWH</td></tr>
+<tr><td>Mechanism</td><td>IgG anti-heparin/PF4 antibodies activate platelets</td></tr>
+<tr><td>Presentation</td><td>&gt;50% platelet drop, day 5-10, +/- new thrombosis</td></tr>
+<tr><td>Diagnostic tool</td><td>4T score</td></tr>
+<tr><td>Management</td><td>STOP all heparin; start non-heparin anticoagulant; NO warfarin until platelets &ge;150,000</td></tr>
+</table>
+</div>
+
+<h3>Warfarin Deep Dive</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Half-lives driving delayed onset</td><td>Factor II ~60-72h (longest); Protein C ~8h (shortest) &rarr; transient hypercoagulable window</td></tr>
+<tr><td>Bridging</td><td>5-7 days with UFH/LMWH in active thrombosis/high risk</td></tr>
+<tr><td>Metabolism</td><td>S-warfarin (more potent) via CYP2C9; R-warfarin via CYP1A2/CYP3A4</td></tr>
+<tr><td>Genetic factors</td><td>CYP2C9 *2/*3 (slower metabolism); VKORC1 promoter variants (sensitivity)</td></tr>
+<tr><td>Unique toxicities</td><td>Skin necrosis (day 3-10, protein C/S deficiency); purple toe syndrome (cholesterol emboli)</td></tr>
+<tr><td>Pregnancy</td><td>Teratogenic - CONTRAINDICATED; use LMWH instead</td></tr>
+</table>
+</div>
+
+<h3>Fibrinolytics Master Table</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Structure</th><th>Half-Life</th><th>Dosing</th></tr>
+<tr><td>Alteplase</td><td>Identical to endogenous tPA</td><td>~5 min</td><td>Continuous IV infusion</td></tr>
+<tr><td>Reteplase</td><td>Truncated variant</td><td>~15-20 min</td><td>IV bolus</td></tr>
+<tr><td>Tenecteplase</td><td>&uarr;Fibrin specificity, PAI-1 resistant</td><td>~20-25 min</td><td>IV bolus</td></tr>
+<tr><td>Streptokinase (obsolete)</td><td>Complexes w/ plasminogen</td><td>&mdash;</td><td>Non-fibrin-specific, antigenic</td></tr>
+<tr><td>Urokinase (obsolete)</td><td>Directly converts plasminogen</td><td>&mdash;</td><td>Non-fibrin-specific</td></tr>
+</table>
+</div>
+<div class="callout">Uses: STEMI (no timely PCI), acute ischemic stroke (&le;4.5h), massive PE. Major toxicity: bleeding, esp. ICH.</div>
+
+<h3>Complete Reversal Agent Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Drug/Class</th><th>Reversal Agent</th><th>Specific or Nonspecific?</th></tr>
+<tr><td>Warfarin</td><td>Vitamin K1 (slow) + 4F-PCC (fast)</td><td>Specific (restores factor synthesis)</td></tr>
+<tr><td>UFH</td><td>Protamine sulfate</td><td>Specific — full reversal</td></tr>
+<tr><td>LMWH</td><td>Protamine sulfate</td><td>Specific — partial only (60-75%)</td></tr>
+<tr><td>Fondaparinux</td><td>None (protamine ineffective)</td><td>&mdash;</td></tr>
+<tr><td>Dabigatran</td><td>Idarucizumab</td><td>Specific — binds drug directly</td></tr>
+<tr><td>Factor Xa inhibitors</td><td>Andexanet alfa (apixaban/rivaroxaban); 4F-PCC (off-label, any)</td><td>Andexanet = specific; 4F-PCC = nonspecific</td></tr>
+<tr><td>Fibrinolytics</td><td>Cryoprecipitate (fibrinogen) &plusmn; tranexamic/aminocaproic acid</td><td>Nonspecific/supportive</td></tr>
+<tr><td>Aspirin/irreversible P2Y12</td><td>None specific; platelet transfusion may help</td><td>Nonspecific</td></tr>
+<tr><td>Ticagrelor</td><td>None; platelet transfusion may be LESS effective</td><td>&mdash;</td></tr>
+<tr><td>GPIIb/IIIa inhibitors</td><td>None; supportive; abciximab may need transfusion</td><td>Nonspecific</td></tr>
+</table>
+</div>
+
+<h3>Key Numeric Values to Memorize</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Value</th><th>What It Refers To</th></tr>
+<tr><td>7-10 days</td><td>Aspirin/clopidogrel/prasugrel effect duration (platelet lifespan)</td></tr>
+<tr><td>&le;100 mg vs. &ge;160-325 mg</td><td>Aspirin low-dose (antiplatelet) vs. high-dose (anti-inflammatory) cutoffs</td></tr>
+<tr><td>~60 minutes</td><td>Cangrelor platelet function recovery after stopping</td></tr>
+<tr><td>3-5 days</td><td>Ticagrelor platelet function recovery</td></tr>
+<tr><td>24-48 hours</td><td>Abciximab antiplatelet effect duration</td></tr>
+<tr><td>1.5-2.5x baseline</td><td>Target aPTT for UFH</td></tr>
+<tr><td>&gt;50% platelet drop, day 5-10</td><td>Classic HIT presentation</td></tr>
+<tr><td>CrCl &lt;30 mL/min</td><td>Fondaparinux and dabigatran renal cutoff (avoid/CI)</td></tr>
+<tr><td>CrCl &lt;15 mL/min</td><td>Factor Xa inhibitor renal cutoff (avoid)</td></tr>
+<tr><td>CrCl &gt;95 mL/min</td><td>Edoxaban reduced efficacy cutoff (too high clearance)</td></tr>
+<tr><td>2-3 vs. 2.5-3.5</td><td>Warfarin INR target: standard vs. mechanical valve/high-risk</td></tr>
+<tr><td>5-7 days</td><td>Warfarin bridging duration</td></tr>
+<tr><td>3-10 days</td><td>Warfarin-induced skin necrosis onset window</td></tr>
+<tr><td>4.5 hours</td><td>Fibrinolytic window for acute ischemic stroke</td></tr>
+</table>
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+function answerQuiz(btn, isCorrect) {
+  const qDiv = btn.closest('.quiz-q');
+  const choices = qDiv.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    const correctBtn = qDiv.querySelector('.quiz-choice[data-correct="true"]');
+    if (correctBtn) correctBtn.classList.add('correct');
+  }
+  const explain = qDiv.querySelector('.quiz-explain');
+  if (explain) explain.classList.add('show');
+}
+</script>
+
+</body>
+</html>
