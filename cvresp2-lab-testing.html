@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Laboratory Testing in Cardiovascular Disease — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.7rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ columns:2; margin:10px 0 0; padding-left:20px; }
+  .top-contents li{ margin-bottom:6px; font-size:0.9rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-240px; top:0; height:100vh; width:230px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:4px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.8rem; padding:6px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+
+  .container{ max-width:900px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:20px 0 8px; letter-spacing:0.02em;
+  }
+  section.card p, section.card li{ font-size:0.95rem; }
+  section.card ul{ padding-left:22px; }
+
+  .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl{ background:#fdf3ea; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; margin:14px 0; font-size:0.9rem; }
+  .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; }
+  .case{ background:#f4f1ea; border:1px dashed var(--border); border-radius:8px; padding:14px 18px; margin:14px 0; }
+  .case-label{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--forest); display:block; margin-bottom:6px; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0 auto; min-width:560px; }
+  table{ border-collapse:collapse; width:100%; margin:12px auto 18px; font-size:0.85rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .quiz-block{ margin-top:24px; padding-top:18px; border-top:2px dashed var(--sage); }
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--forest); letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .quiz-q{ background:#fffefb; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  .quiz-q p.stem{ font-weight:600; margin:0 0 10px; font-size:0.93rem; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:7px; padding:9px 12px;
+    margin-bottom:7px; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+    cursor:pointer; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:#e5f2e7; border-color:var(--correct); color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#fbe9e6; border-color:var(--incorrect); color:var(--incorrect); }
+  .quiz-choice[disabled]{ cursor:default; }
+  .quiz-explain{
+    display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light);
+    border-left:3px solid var(--forest); border-radius:6px; font-size:0.87rem;
+  }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:700px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+
+<div class="header">
+  <h1>Laboratory Testing in Cardiovascular Disease</h1>
+  <p>Dr. Dennis Kinder &middot; Myocardial Infarction, Heart Failure &amp; Hyperlipidemia Biomarkers</p>
+</div>
+
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Case 1: Systematic CXR &amp; EKG Reading Approach</a></li>
+    <li><a href="#sec2">2. Acute MI: Definitions, Epidemiology &amp; Presentation</a></li>
+    <li><a href="#sec3">3. Cardiac Troponin: Structure &amp; the 99th Percentile URL</a></li>
+    <li><a href="#sec4">4. Universal Diagnostic Criteria for MI Subtypes</a></li>
+    <li><a href="#sec5">5. Etiologies of Increased Cardiac Troponin</a></li>
+    <li><a href="#sec6">6. Troponin Ordering, Prognosis &amp; High-Sensitivity Assays</a></li>
+    <li><a href="#sec7">7. Case 2: Heart Failure &amp; CXR Comparison (CHF vs. Pneumonia)</a></li>
+    <li><a href="#sec8">8. Natriuretic Peptides: Diagnosis of Heart Failure</a></li>
+    <li><a href="#sec9">9. Natriuretic Peptides: Non-Specific Causes &amp; Prognosis</a></li>
+    <li><a href="#sec10">10. Case 3 &amp; Cardiovascular Risk Calculators</a></li>
+    <li><a href="#sec11">11. High-Sensitivity CRP &amp; Atherosclerosis Risk</a></li>
+    <li><a href="#sec12">12. Historical Perspective: Cholesterol &amp; Statin Discovery</a></li>
+    <li><a href="#sec13">13. Hypercholesterolemia: Epidemiology &amp; Screening Guidelines</a></li>
+    <li><a href="#sec14">14. Lipid Panel Testing &amp; Non-Lipid Risk Markers</a></li>
+    <li><a href="#sec15">15. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#sec1">Case 1: CXR/EKG Reading</a>
+  <a href="#sec2">AMI: Definitions &amp; Epi</a>
+  <a href="#sec3">Troponin: Structure &amp; URL</a>
+  <a href="#sec4">MI Subtype Criteria</a>
+  <a href="#sec5">Troponin Etiologies</a>
+  <a href="#sec6">Troponin: Ordering &amp; hs-cTn</a>
+  <a href="#sec7">Case 2: HF vs. Pneumonia CXR</a>
+  <a href="#sec8">Natriuretic Peptides: Dx</a>
+  <a href="#sec9">Natriuretic Peptides: Causes</a>
+  <a href="#sec10">Case 3: Risk Calculators</a>
+  <a href="#sec11">hs-CRP</a>
+  <a href="#sec12">History: Cholesterol/Statins</a>
+  <a href="#sec13">Hyperlipidemia Screening</a>
+  <a href="#sec14">Lipid Panel &amp; Non-Lipid Tests</a>
+  <a href="#sec15">Summary Tables</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="sec1">
+<h2>1. Case 1: Systematic CXR &amp; EKG Reading Approach</h2>
+
+<div class="case"><span class="case-label">Case 1</span>An <b>80-year-old female</b> presents to the ED after awakening from sleep with <b>chest pain, nausea, vomiting, and diaphoresis</b>. Exam: diaphoretic, BP 140/80, pulse 80, RR 20, O2 sat 94% on room air, JVD present, lungs clear, <b>irregular heart rhythm without murmurs/rubs/gallops</b>, no clubbing/cyanosis/edema.</div>
+
+<h3>Systematic Chest X-Ray Reading — A Reusable Framework</h3>
+<div class="callout">Use this same sequence for every CXR you read:</div>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>What to Check</th></tr>
+<tr><td>1. Technical quality</td><td>Position/rotation, inspiration effort, over- vs. under-penetration of the film</td></tr>
+<tr><td>2. Bones &amp; soft tissue</td><td>Fractures, soft tissue abnormalities</td></tr>
+<tr><td>3. Heart size</td><td>Normal: <b>&lt;50%</b> of total chest diameter (cardiothoracic ratio)</td></tr>
+<tr><td>4. Diaphragm</td><td>Sharp edges expected; <b>right hemidiaphragm normally sits higher than the left</b>; look for free air under the diaphragm</td></tr>
+<tr><td>5. Pleura</td><td>Check costophrenic angles for blunting (pleural effusion)</td></tr>
+<tr><td>6. Great vessels</td><td>Aorta contour; mediastinal or hilar adenopathy</td></tr>
+<tr><td>7. Lung fields</td><td>Infiltrate, nodules, masses, increased lung fluid, <b>Kerley B lines</b> (a sign of interstitial edema/heart failure)</td></tr>
+</table>
+</div>
+
+<h3>Case 1 CXR Findings</h3>
+<div class="callout">Adequate position/inspiration; no fracture or soft tissue abnormality; <b>heart size normal</b> (&lt;50% of chest diameter); diaphragm edges sharp, right side appropriately higher than left; no free air, no pleural effusion; great vessels normal; <b>no infiltrate, nodules, masses, or Kerley B lines</b>. &rarr; <b>Normal chest X-ray.</b></div>
+
+<h3>Systematic EKG Reading — A Reusable Framework</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>What to Check</th></tr>
+<tr><td>Rhythm</td><td>Sinus vs. other; look for a P wave before every QRS (best seen in lead II)</td></tr>
+<tr><td>Rate</td><td>Count over a standard interval</td></tr>
+<tr><td>Axis</td><td>Use an isoelectric lead as reference (e.g., if lead III is isoelectric, the axis is roughly perpendicular to lead III's orientation)</td></tr>
+<tr><td>ST segments</td><td>Elevation, depression, or reciprocal changes</td></tr>
+</table>
+</div>
+
+<h3>Case 1 EKG Findings</h3>
+<div class="callout"><b>Normal sinus rhythm with first-degree AV block</b> (best seen in lead II); rate ~75 bpm; axis ~<b>30&deg;</b> (using lead III as the isoelectric reference; leads I and aVF upright); <b>ST elevation in leads II, III, aVF, V5, and V6</b> &mdash; consistent with an <b>inferior wall MI</b>; <b>reciprocal changes in V1, V2, and aVL</b>.</div>
+<div class="pearl"><b>Comparison EKG (Normal)</b> A normal sinus rhythm EKG shows a P wave before every QRS (lead II), rate ~75 bpm, axis ~60&deg; (using aVL as the isoelectric reference), and no ST segment abnormalities — contrast this directly with Case 1's inferior MI pattern above.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. On a chest X-ray, what is considered the upper limit of normal for heart size relative to total chest diameter?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">50%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">75%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no standard cutoff</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">25%</button>
+<div class="quiz-explain"><b>Explanation:</b> A normal heart size on chest X-ray is less than 50% of the total chest diameter (the cardiothoracic ratio); exceeding this threshold suggests cardiomegaly.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. On a normal chest X-ray, which hemidiaphragm is expected to sit higher, and why is this relevant to systematic film reading?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The left hemidiaphragm normally sits higher, due to the position of the heart</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The right hemidiaphragm normally sits higher, a normal anatomic finding related to the underlying liver</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both hemidiaphragms are always at exactly the same height in a normal film</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Diaphragm height is not part of a systematic CXR reading approach</button>
+<div class="quiz-explain"><b>Explanation:</b> The right hemidiaphragm normally sits higher than the left, due to the liver positioned beneath it -- this is a standard checkpoint in the systematic diaphragm assessment step of CXR interpretation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. In Case 1, the EKG shows ST elevation in leads II, III, aVF, V5, and V6, with reciprocal changes in V1, V2, and aVL. What does this pattern indicate?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">First-degree AV block without any ischemic changes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A normal EKG variant</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">An inferior wall myocardial infarction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">An anterior wall myocardial infarction</button>
+<div class="quiz-explain"><b>Explanation:</b> ST elevation in leads II, III, and aVF (the inferior leads), extending to V5/V6, with reciprocal ST depression in V1, V2, and aVL, is the classic EKG pattern of an inferior wall myocardial infarction.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec2">
+<h2>2. Acute MI: Definitions, Epidemiology &amp; Presentation</h2>
+
+<h3>Definitions</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Term</th><th>Definition</th></tr>
+<tr><td><b>Acute MI</b></td><td>Imbalance between myocardial O2 supply (ischemia) and demand &rarr; myocyte injury and eventual death</td></tr>
+<tr><td><b>STEMI</b></td><td>ST-segment elevation MI &mdash; <b>total occlusion</b> of a coronary artery</td></tr>
+<tr><td><b>NSTEMI</b></td><td>Non-ST-segment elevation MI &mdash; <b>partial loss</b> of coronary perfusion</td></tr>
+<tr><td><b>Angina</b></td><td><b>No myocardial necrosis</b>; can be stable or unstable</td></tr>
+<tr><td><b>Acute coronary syndrome (ACS)</b></td><td>Umbrella term encompassing unstable angina, NSTEMI, and STEMI</td></tr>
+</table>
+</div>
+
+<h3>Epidemiology (US)</h3>
+<div class="callout">
+ACS: <b>1.7 million</b> hospitalizations/year &mdash; <b>700,000</b> initial acute MIs, <b>500,000</b> recurrent MIs.<br>
+Coronary artery disease causes <b>20%</b> of all deaths; cardiovascular disease overall causes <b>40%</b> of all deaths.
+</div>
+
+<h3>Prodromal Symptoms — Precise Breakdown</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Statistic</th><th>Value</th></tr>
+<tr><td>Patients with acute MI who have a prodrome</td><td><b>40&ndash;50%</b></td></tr>
+<tr><td>Of those with a prodrome: symptoms 1&ndash;4 weeks before hospitalization</td><td><b>1/3</b></td></tr>
+<tr><td>Of those with a prodrome: symptoms &le;1 week before hospitalization</td><td><b>2/3</b></td></tr>
+<tr><td>Of those with a prodrome: symptoms &le;24 hours before hospitalization</td><td><b>1/3</b></td></tr>
+</table>
+</div>
+
+<h3>Pain Characteristics</h3>
+<ul>
+<li>Variable intensity; described as <b>squeezing, choking, vise-like, or heavy</b> &mdash; or alternately as <b>stabbing, knife-like, boring, or burning</b></li>
+<li>Often radiates down the <b>left arm</b>; can also radiate to the shoulders, upper extremities, neck, or jaw</li>
+<li><b>Epigastric pain</b> can be mistaken for indigestion</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the key pathophysiologic distinction between STEMI and NSTEMI?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">NSTEMI always requires emergent catheterization while STEMI does not</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no meaningful pathophysiologic difference</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">STEMI involves no myocardial necrosis while NSTEMI does</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">STEMI represents total coronary artery occlusion, while NSTEMI represents partial loss of coronary perfusion</button>
+<div class="quiz-explain"><b>Explanation:</b> STEMI results from total occlusion of a coronary artery, whereas NSTEMI results from partial loss of coronary perfusion -- this distinction is reflected in the presence or absence of ST-segment elevation on EKG.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Among acute MI patients who experience prodromal symptoms, what fraction have symptoms for 24 hours or less before hospitalization?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">1/3</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">None have symptoms this briefly</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">1/2</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">2/3</button>
+<div class="quiz-explain"><b>Explanation:</b> Of the 40-50% of acute MI patients who experience prodromal symptoms, one-third have symptoms for 24 hours or less before hospitalization, while two-thirds have symptoms for a week or less, and one-third have symptoms lasting 1-4 weeks.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient describes their chest discomfort as 'stabbing, knife-like, and burning' rather than the classic 'squeezing or vise-like' description. Does this description exclude acute MI as a diagnosis?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Yes, only squeezing/vise-like pain is consistent with MI</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">No, MI pain can also present as stabbing, knife-like, boring, or burning discomfort</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This description is only ever seen in musculoskeletal chest pain</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This description is specific to pericarditis and never MI</button>
+<div class="quiz-explain"><b>Explanation:</b> Acute MI pain has variable character and can present as stabbing, knife-like, boring, or burning discomfort, in addition to the more classically taught squeezing, choking, vise-like, or heavy quality -- this variability should not be used to exclude MI.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec3">
+<h2>3. Cardiac Troponin: Structure &amp; the 99th Percentile URL</h2>
+
+<h3>The Ideal Biomarker (What We're Looking For)</h3>
+<ul>
+<li>Early detection of myocardial injury; rapid, sensitive, and specific diagnosis</li>
+<li>Risk stratification of ACS patients</li>
+<li>Assess success of reperfusion therapy; detect re-occlusion/reinfarction</li>
+<li>Determine timing and size of infarction</li>
+<li>Detect procedural-related perioperative MI (cardiac or noncardiac surgery)</li>
+</ul>
+
+<h3>Cardiac Troponin — Structure</h3>
+<div class="callout">A regulatory protein complex of the myofibril, composed of three subunits, located <b>94&ndash;97% in the myofibril</b> and <b>3&ndash;6% in the cytoplasm</b>.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Subunit</th><th>Function</th><th>Cardiac Specificity</th></tr>
+<tr><td>Troponin C</td><td>Calcium-binding component</td><td>Present in both cardiac <i>and</i> skeletal muscle</td></tr>
+<tr><td><b>Troponin I</b></td><td>Inhibitory component</td><td><b>Specific to cardiac muscle</b> (cTnI)</td></tr>
+<tr><td><b>Troponin T</b></td><td>Tropomyosin-binding component</td><td><b>Specific to cardiac muscle</b> (cTnT)</td></tr>
+</table>
+</div>
+
+<h3>The 99th Percentile Upper Reference Limit (URL) — Core Concept</h3>
+<div class="callout">The 99th percentile URL is a statistical value <b>below which 99% of a healthy reference population's values fall</b> — i.e., the largest value occurring 99% of the time in healthy people. It is calculated from a reference population of healthy individuals, and patients are considered to have myocardial injury when their high-sensitivity troponin exceeds this value.</div>
+<div class="pearl"><b>Why the 99th Percentile URL Matters</b> It is considered the <b>gold standard</b> for building accelerated diagnostic protocols — it provides a consistent cut point for clinical decision-making and is both analytically and clinically evidence-based (though not perfect).</div>
+
+<h3>Factors That Affect the URL</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Factor</th><th>Effect</th></tr>
+<tr><td>Gender</td><td>Men have <b>higher</b> URL levels than women</td></tr>
+<tr><td>Age</td><td>URL levels are <b>higher in elderly</b> patients than younger patients</td></tr>
+<tr><td>Assay used</td><td>URL varies by the specific assay and its reference population</td></tr>
+<tr><td>Reference population representativeness</td><td>The URL may not replicate accurately if the reference population doesn't match the patient population being studied</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which two troponin subunits are specific to cardiac muscle, distinguishing them from troponin found in skeletal muscle?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">All three subunits are equally cardiac-specific</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Troponin C and Troponin I</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Troponin I and Troponin T</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Troponin C and Troponin T</button>
+<div class="quiz-explain"><b>Explanation:</b> Troponin I (the inhibitory component) and Troponin T (the tropomyosin-binding component) are specific to cardiac muscle (cTnI and cTnT), while Troponin C (the calcium-binding component) is present in both cardiac and skeletal muscle.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. How is the 99th percentile upper reference limit (URL) for cardiac troponin defined?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A fixed value that is identical across all assays and populations</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The lowest detectable troponin concentration by any assay</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The average troponin value seen in patients with confirmed myocardial infarction</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The value below which 99% of a healthy reference population's troponin values fall</button>
+<div class="quiz-explain"><b>Explanation:</b> The 99th percentile URL is a statistical concept defined as the value below which 99% of a healthy reference population's troponin values fall -- essentially the largest value occurring 99% of the time in healthy individuals, calculated from a healthy reference population.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which patient factor is associated with a higher 99th percentile URL for cardiac troponin, all else being equal?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Male sex and older age</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Lower body weight</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Female sex</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Younger age</button>
+<div class="quiz-explain"><b>Explanation:</b> Both male sex and older age are associated with higher 99th percentile URL values for cardiac troponin, which is why gender- and age-specific considerations can be important when interpreting results near the diagnostic cutoff.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec4">
+<h2>4. Universal Diagnostic Criteria for MI Subtypes</h2>
+
+<h3>Universal (Spontaneous) Acute MI Criteria</h3>
+<div class="callout">Detection of a <b>rise and/or fall</b> of cardiac biomarker values (cardiac troponin) with <b>at least 1 value above the 99th percentile URL</b>, <b>PLUS at least one</b> of:
+<ul>
+<li>Symptoms of ischemia</li>
+<li>New or presumed-new significant ST-T changes, or new LBBB</li>
+<li>Development of pathological Q waves on EKG</li>
+<li>Imaging evidence of new loss of viable myocardium or new regional wall motion abnormality</li>
+<li>Identification of an intracoronary thrombus by angiography or autopsy</li>
+</ul>
+</div>
+
+<h3>PCI-Related MI — Exact Numeric Criteria</h3>
+<div class="callout">
+Elevation of cTn <b>&gt;5&times; the 99th percentile URL</b> in patients with a <i>normal</i> baseline (&le;99th percentile URL), <b>OR</b> a rise in cTn <b>&gt;20%</b> if baseline values are already elevated and stable/falling — <b>PLUS one or more</b> of:
+<ul>
+<li>Symptoms suggestive of myocardial ischemia</li>
+<li>New ischemic EKG changes</li>
+<li>Angiographic findings consistent with a procedural complication</li>
+<li>Imaging evidence of new loss of viable myocardium or new regional wall motion abnormality</li>
+</ul>
+</div>
+
+<h3>Stent Thrombosis-Associated MI</h3>
+<div class="callout">Detected by coronary angiography or autopsy, in the setting of myocardial ischemia, with a rise and/or fall of cardiac troponin with at least 1 value above the 99th percentile URL.</div>
+
+<h3>CABG-Related MI — Exact Numeric Criteria</h3>
+<div class="callout">
+Elevation of cardiac troponin <b>&gt;10&times; the 99th percentile URL</b> in a patient with a normal baseline (&le;99th percentile URL), <b>PLUS 1 or more</b> of:
+<ul>
+<li>New pathological Q waves or new LBBB</li>
+<li>Angiographically documented new graft or new native coronary artery occlusion</li>
+<li>Imaging evidence of new loss of viable myocardium or new regional wall motion abnormality</li>
+</ul>
+</div>
+<div class="pearl"><b>Board Tip — Memorize the Multipliers</b> PCI-related MI: <b>&gt;5&times;</b> URL (or &gt;20% rise from an elevated baseline). CABG-related MI: <b>&gt;10&times;</b> URL. CABG is the more invasive procedure and expected to cause more troponin leak, hence the higher threshold to call it a true infarction rather than expected procedural injury.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with a normal baseline troponin undergoes PCI. Post-procedure, troponin rises to 6 times the 99th percentile URL, and the patient has new ischemic EKG changes. Does this meet criteria for PCI-related MI?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No, because the threshold for PCI-related MI is greater than 10 times the URL</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Yes, because troponin exceeds 5 times the URL from a normal baseline, plus a qualifying additional criterion (new ischemic EKG changes) is present</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No, because PCI-related MI has no defined numeric troponin threshold</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Yes, but only because the EKG changes alone are sufficient regardless of troponin level</button>
+<div class="quiz-explain"><b>Explanation:</b> PCI-related MI requires troponin elevation greater than 5 times the 99th percentile URL from a normal baseline, plus at least one additional criterion such as new ischemic EKG changes, angiographic complication, symptoms, or imaging evidence -- this patient meets both components.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What numeric troponin threshold, relative to the 99th percentile URL, is required (from a normal baseline) to diagnose CABG-related MI?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Greater than 2 times the URL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Greater than 5 times the URL</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Greater than 10 times the URL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Any detectable rise above the URL</button>
+<div class="quiz-explain"><b>Explanation:</b> CABG-related MI requires troponin elevation greater than 10 times the 99th percentile URL (from a normal baseline), a higher threshold than PCI-related MI (>5x), reflecting the greater expected degree of troponin release from the more invasive CABG procedure itself.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which finding, if identified by coronary angiography or autopsy in the setting of myocardial ischemia along with a rise/fall of troponin above the 99th percentile, defines stent thrombosis-associated MI?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">An elevated CK-MB level exclusively</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A normal coronary angiogram with elevated troponin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A new pathological Q wave alone, without any angiographic finding</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Detection of the stent thrombosis itself by angiography or autopsy</button>
+<div class="quiz-explain"><b>Explanation:</b> Stent thrombosis-associated MI is defined by detection of the stent thrombosis via coronary angiography or autopsy, occurring in the setting of myocardial ischemia, together with a rise and/or fall of cardiac troponin with at least one value above the 99th percentile URL.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec5">
+<h2>5. Etiologies of Increased Cardiac Troponin</h2>
+<div class="callout">Not every troponin elevation is a "heart attack" in the classic sense — troponin rises whenever cardiac myocytes are injured, regardless of mechanism. The differential is organized into four categories:</div>
+
+<h3>1. Injury Related to Primary Myocardial Ischemia</h3>
+<ul>
+<li>Plaque rupture</li>
+<li>Intraluminal coronary artery thrombus</li>
+</ul>
+
+<h3>2. Injury Related to Supply/Demand Imbalance</h3>
+<ul>
+<li>Tachyarrhythmia/bradyarrhythmia</li>
+<li>Aortic dissection or severe aortic valve disease</li>
+<li>Hypertrophic cardiomyopathy</li>
+<li>Cardiogenic, hypovolemic, or septic shock</li>
+<li>Severe respiratory failure; severe anemia</li>
+<li>Hypertension with or without LVH</li>
+<li>Coronary spasm; coronary embolism or vasculitis</li>
+<li>Coronary endothelial dysfunction without significant CAD</li>
+</ul>
+
+<h3>3. Injury Not Related to Myocardial Ischemia</h3>
+<ul>
+<li>Cardiac contusion, surgery, ablation, pacing, or defibrillator shocks</li>
+<li>Rhabdomyolysis with cardiac involvement</li>
+<li>Myocarditis</li>
+<li><b>Cardiotoxic agents</b> — specifically <b>anthracyclines</b> and <b>Herceptin (trastuzumab)</b></li>
+</ul>
+
+<h3>4. Multifactorial or Indeterminate Myocardial Injury</h3>
+<ul>
+<li><b>Heart failure</b></li>
+<li><b>Stress (takotsubo) cardiomyopathy</b></li>
+<li>Severe pulmonary embolism or pulmonary hypertension</li>
+<li>Sepsis and critically ill patients</li>
+<li>Renal failure</li>
+<li>Severe acute neurological disease (<b>stroke, subarachnoid hemorrhage</b>)</li>
+<li>Infiltrative diseases (<b>amyloidosis, sarcoidosis</b>)</li>
+<li>Strenuous exercise</li>
+</ul>
+<div class="pearl"><b>Board Tip</b> An elevated troponin is not synonymous with "MI" — it reflects myocyte injury from <i>any</i> cause. Always correlate with the clinical picture and the Universal MI Criteria (Section 4) before diagnosing acute MI.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient undergoing chemotherapy with an anthracycline agent develops an elevated troponin without evidence of coronary ischemia. Into which etiologic category does this fall?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Injury not related to myocardial ischemia (cardiotoxic agents)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This does not represent a recognized cause of troponin elevation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Primary myocardial ischemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Supply/demand imbalance</button>
+<div class="quiz-explain"><b>Explanation:</b> Cardiotoxic agents such as anthracyclines and Herceptin (trastuzumab) cause myocardial injury not related to ischemia, representing a distinct category of troponin elevation separate from ischemic causes.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient presenting with severe emotional stress develops acute heart failure symptoms and an elevated troponin, with a pattern of reversible apical ballooning on echocardiogram and no significant coronary disease. Which condition, listed among the multifactorial/indeterminate causes of troponin elevation, does this describe?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hypertrophic cardiomyopathy</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Stress (takotsubo) cardiomyopathy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Rhabdomyolysis with cardiac involvement</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Coronary endothelial dysfunction</button>
+<div class="quiz-explain"><b>Explanation:</b> Stress (takotsubo) cardiomyopathy is listed among the multifactorial/indeterminate causes of troponin elevation, classically triggered by severe emotional or physical stress and presenting with reversible wall motion abnormalities in the absence of significant coronary disease.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which of the following is classified as a cause of troponin elevation from supply/demand imbalance rather than primary myocardial ischemia or a non-ischemic cause?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Amyloidosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Myocarditis</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Severe anemia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Rhabdomyolysis with cardiac involvement</button>
+<div class="quiz-explain"><b>Explanation:</b> Severe anemia is classified under supply/demand imbalance-related troponin elevation, since reduced oxygen-carrying capacity can create a mismatch between myocardial oxygen supply and demand, distinct from primary plaque-related ischemia or non-ischemic injury causes.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec6">
+<h2>6. Troponin Ordering, Prognosis &amp; High-Sensitivity Assays</h2>
+
+<h3>Ordering &amp; Retesting</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Scenario</th><th>Timing</th></tr>
+<tr><td>Standard ACS workup</td><td>Typically ordered at <b>0, 3, 6, 9, and 12 hours</b></td></tr>
+<tr><td>High clinical suspicion, prior samples normal</td><td>May extend sampling to <b>up to 24 hours</b></td></tr>
+<tr><td>Suspected recurrent MI</td><td>Begin retesting at <b>0, 3, 6, and 9 hours</b> from the time of the suspicious event</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Recurrent Infarction Criterion</b> Suspect recurrent infarction if there is a <b>&gt;20% increase</b> in the second troponin value, <b>as long as it exceeds the 99th percentile</b>.</div>
+
+<h3>Troponin as a Prognostic Indicator</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Prognostic Significance</th></tr>
+<tr><td>Troponin elevation without ST elevation</td><td><b>4-fold increase</b> in cardiac mortality</td></tr>
+<tr><td>TnI on admission (heart failure patients)</td><td>Correlates with mortality at <b>6 weeks</b></td></tr>
+<tr><td>&uarr;Troponin + &uarr;creatinine</td><td>Strong predictors of <b>in-hospital worsening heart failure</b></td></tr>
+<tr><td>TnI and TnT levels</td><td>Correlate with mortality rate and adverse event rate in ACS</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> Even <i>small</i> rises in troponin are associated with a poor prognosis, regardless of whether formal MI criteria are met.</div>
+
+<h3>High-Sensitivity Cardiac Troponin (hs-cTn) — The Two Defining Criteria</h3>
+<div class="callout">
+<ol>
+<li>Total imprecision at the 99th percentile value should be <b>&le;10%</b></li>
+<li>Measurable concentrations <i>below</i> the 99th percentile URL should be attainable, above the assay's limit of detection, in <b>at least 50% of healthy individuals</b></li>
+</ol>
+</div>
+
+<h3>hs-cTn — Practical Considerations</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Consideration</th><th>Detail</th></tr>
+<tr><td>Confounders to consider</td><td>Medication history, underlying disease, natriuretic peptide level, ventricular dysfunction, GFR/renal dysfunction</td></tr>
+<tr><td>Gender-specific cutoffs</td><td><b>Men have a 2-fold higher</b> 99th percentile than women</td></tr>
+<tr><td>Rule in/out speed</td><td>Can rule in <i>and</i> rule out MI by <b>3 hours</b> instead of the traditional 6 hours</td></tr>
+<tr><td>Trade-off</td><td><b>Increased sensitivity, decreased specificity</b> compared to standard assays (10&ndash;100&times; more sensitive)</td></tr>
+<tr><td>Improving specificity</td><td><b>Delta change</b> (the change in troponin level over time) can improve specificity to <b>95%</b></td></tr>
+</table>
+</div>
+
+<div class="case"><span class="case-label">Case 1 Resolution</span>Initial cardiac troponin was <b>normal</b>; a repeat troponin <b>3 hours later was elevated</b>. This rising pattern is consistent with an <b>acute MI</b>.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient's second troponin value, drawn a few hours after the first, is 25% higher than the initial value and exceeds the 99th percentile. What should be suspected?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This pattern definitively rules out any cardiac event</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This finding is only relevant if troponin decreases, not increases</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is a normal, expected fluctuation with no clinical significance</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Recurrent infarction should be suspected, since a rise greater than 20% exceeding the 99th percentile meets this criterion</button>
+<div class="quiz-explain"><b>Explanation:</b> A greater than 20% increase in the second troponin value, as long as it exceeds the 99th percentile, is the criterion used to suspect recurrent infarction in a patient being monitored for this possibility.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which of the two defining criteria must a high-sensitivity cardiac troponin assay meet regarding measurable concentrations in healthy individuals?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Measurable concentrations below the 99th percentile URL, above the limit of detection, must be attainable in at least 50% of healthy individuals</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The assay must only detect troponin in patients with confirmed MI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no requirement related to healthy individuals</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Concentrations must be undetectable in 100% of healthy individuals</button>
+<div class="quiz-explain"><b>Explanation:</b> One of the two defining criteria for a high-sensitivity troponin assay is that measurable concentrations below the 99th percentile URL (but above the assay's limit of detection) must be attainable in at least 50% of healthy individuals -- reflecting the assay's improved lower limit of detection.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. How does 'delta change' (the change in troponin level over serial measurements) improve the diagnostic performance of high-sensitivity troponin assays?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It decreases sensitivity to an unusable level</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">It can improve specificity to approximately 95%, helping offset the decreased specificity inherent to high-sensitivity assays</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It has no effect on either sensitivity or specificity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is only useful for ruling in MI, never for improving specificity</button>
+<div class="quiz-explain"><b>Explanation:</b> Delta change -- tracking the change in troponin level over time via serial measurements -- can improve specificity to approximately 95%, helping to offset the decreased specificity that comes with the increased sensitivity of high-sensitivity troponin assays.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec7">
+<h2>7. Case 2: Heart Failure &amp; CXR Comparison (CHF vs. Pneumonia)</h2>
+
+<div class="case"><span class="case-label">Case 2</span>A <b>76-year-old female</b> presents with 2 weeks of progressive shortness of breath, <b>PND, orthopnea</b>, and lower extremity edema. Exam: BP 135/82, pulse 80, RR 16, <b>JVD, rales at the lung bases, S3</b> heart sound. Labs: <b>Na 130 (hyponatremia)</b>, K 4, creatinine 1.</div>
+
+<h3>Case 2 CXR — Decompensated CHF</h3>
+<div class="callout">
+<b>Cardiomegaly</b> (heart size &gt;50% of chest wall diameter); <b>increased interstitial fluid markings</b> bilaterally; <b>increased pulmonary vasculature</b> extending toward the apices (cephalization); <b>Kerley B lines</b> (horizontal lines in the lung periphery, indicating increased interstitial fluid). &rarr; Consistent with <b>decompensated congestive heart failure</b>.
+</div>
+
+<h3>Comparison CXR — Right Middle Lobe Pneumonia (a Different Patient)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>CHF (Case 2)</th><th>Pneumonia (Comparison)</th></tr>
+<tr><td>Heart size</td><td>&gt;50% of chest diameter</td><td><b>&lt;50%</b> — normal</td></tr>
+<tr><td>Pulmonary vasculature</td><td>Increased, cephalized</td><td>Not increased</td></tr>
+<tr><td>Interstitial markings</td><td>Increased</td><td>Not increased</td></tr>
+<tr><td>Kerley B lines</td><td>Present</td><td>Absent</td></tr>
+<tr><td>Distinctive finding</td><td>&mdash;</td><td><b>Loss of the right heart border</b> (silhouette sign, from adjacent consolidation) — left heart border remains clearly seen; <b>air bronchograms</b> visible through the area of infiltrate/consolidation</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip — The Silhouette Sign</b> Loss of a normally sharp cardiac/mediastinal border indicates that adjacent lung tissue (consolidation, in this case right middle lobe pneumonia) is in direct contact with that border, obscuring it on X-ray. Since the left heart border remains sharp, the pathology must be adjacent to the right heart border specifically.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which chest X-ray finding is most specific for distinguishing decompensated heart failure from pneumonia?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Absence of any findings on the film</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Presence of any lung infiltrate</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Kerley B lines and cephalization of pulmonary vasculature with cardiomegaly</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A normal-appearing heart size</button>
+<div class="quiz-explain"><b>Explanation:</b> Kerley B lines (indicating interstitial edema) together with cephalization of pulmonary vasculature and cardiomegaly are the findings that point toward decompensated heart failure, distinguishing it from pneumonia, which instead shows a focal infiltrate/consolidation with a normal heart size.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A chest X-ray shows loss of the right heart border while the left heart border remains clearly visible, along with air bronchograms in the adjacent lung. What does this pattern suggest, and what is the underlying principle?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left-sided heart failure exclusively; based on cephalization</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This pattern has no diagnostic significance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left lower lobe pneumonia; based on the cardiophrenic angle</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Right middle lobe pneumonia (or right-sided consolidation); based on the silhouette sign, where adjacent consolidation obscures a normally sharp border</button>
+<div class="quiz-explain"><b>Explanation:</b> This describes the silhouette sign: consolidation (such as right middle lobe pneumonia) adjacent to the right heart border obscures that border on X-ray, while the unaffected left heart border remains sharp -- together with air bronchograms through the area of consolidation, this points to pneumonia rather than heart failure.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. In Case 2, which combination of exam and lab findings supports a diagnosis of heart failure?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">JVD, bibasilar rales, an S3 heart sound, and hyponatremia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Absence of any abnormal heart sounds with normal potassium</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Isolated peripheral edema without any other findings</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Clear lungs, normal JVP, and a normal sodium level</button>
+<div class="quiz-explain"><b>Explanation:</b> The combination of JVD, rales at the lung bases, an S3 heart sound, and hyponatremia (sodium 130) together support a diagnosis of heart failure, consistent with volume overload and neurohormonal activation.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec8">
+<h2>8. Natriuretic Peptides: Diagnosis of Heart Failure</h2>
+
+<h3>Heart Failure Epidemiology</h3>
+<div class="callout">
+Affects <b>5 million Americans</b>; incidence of approximately <b>400,000 new cases/year</b>. <b>Leading cause of hospitalization</b> in individuals 65 years and older.<br><br>
+<b>5-year mortality:</b> ~<b>10%</b> in mild disease, <b>20&ndash;30%</b> in moderate disease, up to <b>80%</b> in end-stage disease.
+</div>
+
+<h3>The Two Natriuretic Peptide Biomarkers</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Biomarker</th><th>Key Fact</th></tr>
+<tr><td><b>BNP</b> (B-type natriuretic peptide)</td><td><b>Pharmacologically active</b></td></tr>
+<tr><td><b>NT-proBNP</b> (N-terminal proBNP)</td><td><b>NOT pharmacologically active</b></td></tr>
+</table>
+</div>
+<div class="callout">Both are secreted from the ventricles in a <b>pulsatile fashion</b>, in response to increased wall stress.</div>
+
+<h3>Diagnostic Thresholds</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Scenario</th><th>Value</th></tr>
+<tr><td>Heart failure — BNP</td><td>Often <b>&gt;1000 ng/L</b></td></tr>
+<tr><td>Heart failure — NT-proBNP</td><td>Often <b>&gt;1800 ng/L</b></td></tr>
+<tr><td>LV dysfunction — both BNP and NT-proBNP</td><td>Often <b>&lt;300 ng/L</b></td></tr>
+</table>
+</div>
+
+<h3>Emergency Room Use</h3>
+<div class="table-scroll">
+<table>
+<tr><th>BNP Level</th><th>Disposition Tendency</th></tr>
+<tr><td>&gt;500 ng/L</td><td>Tend toward hospital admission</td></tr>
+<tr><td>&lt;300 ng/L</td><td>Tend toward discharge (HF unlikely)</td></tr>
+</table>
+</div>
+<div class="callout"><b>BNP &gt;100 ng/L as an independent predictor of heart failure:</b> <b>90% sensitivity</b>, <b>75% specificity</b>, <b>81% accuracy</b>. With BNP testing, diagnostic uncertainty dropped from <b>43% to 11%</b>. Without BNP monitoring, diagnostic accuracy is only <b>74%</b>.</div>
+<div class="pearl"><b>Best Use: Ruling OUT Heart Failure</b> A <b>BNP &lt;100 ng/L</b> or <b>NT-proBNP &lt;300 ng/L</b> rules out heart failure. Natriuretic peptides are <b>not generally recommended for ongoing management/monitoring</b> — their strongest use case is diagnostic rule-out at presentation.</div>
+
+<div class="case"><span class="case-label">Case 2 Resolution</span>The patient's clinical presentation plus <b>elevated BNP</b> confirms a diagnosis of heart failure.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which natriuretic peptide biomarker is pharmacologically active, in contrast to its inactive counterpart?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">NT-proBNP</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">BNP</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both are equally pharmacologically active</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither peptide has any pharmacologic activity</button>
+<div class="quiz-explain"><b>Explanation:</b> BNP is pharmacologically active, while NT-proBNP is not pharmacologically active -- both are secreted from the ventricles in a pulsatile fashion in response to increased wall stress, but only BNP itself exerts direct physiologic effects.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. At what BNP level does the literature describe 90% sensitivity and 75% specificity for diagnosing heart failure, with diagnostic uncertainty dropping substantially when this cutoff is used?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">BNP > 1800 ng/L</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">BNP > 50 ng/L</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">BNP > 100 ng/L</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">BNP > 1000 ng/L</button>
+<div class="quiz-explain"><b>Explanation:</b> A BNP level above 100 ng/L functions as an independent predictor of heart failure with 90% sensitivity, 75% specificity, and 81% accuracy, and using this cutoff dropped diagnostic uncertainty from 43% to 11% in the emergency room setting.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What is considered the best clinical use for natriuretic peptide testing (BNP/NT-proBNP)?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Diagnosing acute myocardial infarction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Screening asymptomatic patients for coronary artery disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ongoing monitoring of heart failure treatment response over time</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ruling out heart failure, using a BNP <100 ng/L or NT-proBNP <300 ng/L</button>
+<div class="quiz-explain"><b>Explanation:</b> The best use of natriuretic peptides is ruling out heart failure: a BNP less than 100 ng/L or NT-proBNP less than 300 ng/L effectively rules out the diagnosis, whereas natriuretic peptide monitoring is not generally recommended for ongoing heart failure management.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec9">
+<h2>9. Natriuretic Peptides: Non-Specific Causes &amp; Prognosis</h2>
+
+<h3>Natriuretic Peptides Are NOT Specific to Heart Failure</h3>
+<div class="callout">Elevated natriuretic peptide levels can also be seen in:</div>
+<ul>
+<li>Left ventricular hypertrophy</li>
+<li>Inflammatory cardiac diseases</li>
+<li>Systemic arterial hypertension</li>
+<li>Pulmonary hypertension</li>
+<li>Acute and chronic renal failure</li>
+<li>Cirrhosis</li>
+<li>Hyperaldosteronism</li>
+<li>Cushing syndrome</li>
+</ul>
+<div class="pearl"><b>Board Tip</b> Because of this broad differential, elevated natriuretic peptide levels must always be interpreted <b>in the context of the full clinical picture</b> — an elevated BNP alone does not confirm heart failure.</div>
+
+<h3>Hyponatremia as a Prognostic Indicator in Heart Failure</h3>
+<div class="callout">Hyponatremia is a <b>poor prognostic indicator</b> in heart failure.</div>
+<div class="pearl"><b>Mechanism</b> Low cardiac output &rarr; decreased renal blood flow &rarr; (this combination, along with resultant hypotension) &rarr; increased release of <b>arginine vasopressin</b> &rarr; water retention diluting serum sodium. Additionally, low cardiac output and <b>angiotensin II</b> mediate increased thirst, compounding the dilutional hyponatremia. Diuretic use can further contribute.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. An elevated BNP is found in a patient with known cirrhosis and no clinical signs of heart failure. What is the most appropriate interpretation?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Natriuretic peptides are not specific to heart failure and can be elevated in cirrhosis, so this finding must be interpreted in the context of the full clinical picture</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This result must be a laboratory error</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">BNP is never elevated in any condition other than heart failure</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This confirms a diagnosis of heart failure regardless of clinical findings</button>
+<div class="quiz-explain"><b>Explanation:</b> Natriuretic peptides can be elevated in numerous non-heart-failure conditions, including cirrhosis, renal failure, pulmonary hypertension, LVH, and hyperaldosteronism among others -- an elevated level must always be interpreted alongside the full clinical picture rather than in isolation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the physiologic mechanism by which low cardiac output in heart failure leads to hyponatremia?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Low cardiac output directly excretes sodium through the kidneys</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Decreased renal blood flow and low cardiac output increase arginine vasopressin release, causing water retention that dilutes serum sodium; angiotensin II and low cardiac output also increase thirst</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hyponatremia in heart failure is unrelated to any hormonal mechanism</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sodium is lost directly through pulmonary edema fluid</button>
+<div class="quiz-explain"><b>Explanation:</b> Low cardiac output and decreased renal blood flow increase arginine vasopressin release, promoting water retention that dilutes serum sodium; additionally, low cardiac output and angiotensin II increase thirst, further compounding this dilutional hyponatremia -- explaining why hyponatremia is a poor prognostic sign in heart failure.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which of the following conditions is NOT listed among the causes of natriuretic peptide elevation unrelated to heart failure?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hyperaldosteronism</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Pulmonary hypertension</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Acute appendicitis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cushing syndrome</button>
+<div class="quiz-explain"><b>Explanation:</b> Acute appendicitis is not among the recognized non-heart-failure causes of natriuretic peptide elevation, unlike Cushing syndrome, hyperaldosteronism, pulmonary hypertension, LVH, inflammatory cardiac disease, systemic hypertension, cirrhosis, and renal failure.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec10">
+<h2>10. Case 3 &amp; Cardiovascular Risk Calculators</h2>
+
+<div class="case"><span class="case-label">Case 3</span>A <b>54-year-old male</b>, <b>non-diabetic, non-smoker</b>, presents for lipid follow-up. BP 130/80; total cholesterol 225 mg/dL; HDL 40 mg/dL. <b>What is his 10-year cardiovascular risk, and should he be on a statin?</b></div>
+
+<h3>Case 3 Risk Calculation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Calculator</th><th>Result</th><th>Category</th></tr>
+<tr><td>Pooled Cohort Equation</td><td><b>7.4%</b></td><td>Intermediate</td></tr>
+<tr><td>Framingham Risk Score</td><td><b>14.4%</b></td><td>Intermediate</td></tr>
+</table>
+</div>
+<div class="pearl">Both calculators classify this patient as <b>intermediate risk</b> — this is exactly the risk category where additional testing (hs-CRP, Section 11) is most useful for guiding the statin decision.</div>
+
+<h3>Framingham Risk Calculator — Categories</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>10-Year ASCVD Risk</th></tr>
+<tr><td>Low</td><td>&lt;10%</td></tr>
+<tr><td>Intermediate</td><td>10&ndash;20%</td></tr>
+<tr><td>High</td><td>&gt;20%</td></tr>
+</table>
+</div>
+
+<h3>Pooled Cohort Equation — Categories</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>10-Year ASCVD Risk</th></tr>
+<tr><td>Low</td><td>&lt;5%</td></tr>
+<tr><td>Intermediate</td><td>5&ndash;7.5%</td></tr>
+<tr><td>High</td><td>&gt;7.5%</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> The Pooled Cohort Equation is calibrated to <b>flag intermediate/high risk at lower absolute percentages</b> than Framingham (7.5% vs. 20% for the "high" threshold) — don't apply Framingham's category cutoffs to a Pooled Cohort Equation result or vice versa.</div>
+
+<h3>Pooled Cohort Equation — Input Variables</h3>
+<div class="callout">Age, sex, race, total and HDL cholesterol, systolic blood pressure, blood pressure-lowering medication use, diabetes status, smoking status. Applies to the <b>first ASCVD event</b> in patients aged <b>40&ndash;79</b>.</div>
+
+<h3>Reynolds Risk Score</h3>
+<div class="callout">Developed from <b>healthy, non-diabetic</b> men and women, monitored for MI, stroke, angioplasty, CABG, and death from heart disease.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Input Variables</th></tr>
+<tr><td>Cholesterol, HDL, systolic BP, hs-CRP, smoking status, parental history of heart disease before age 60</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> The Reynolds Risk Score is <b>better than Framingham at estimating risk in women</b>, and is restricted to non-diabetic patients. Notably, it's the only one of these three calculators to directly incorporate <b>hs-CRP</b> as an input.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Using the Pooled Cohort Equation, a patient's calculated 10-year ASCVD risk is 6%. How is this classified?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">High risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This value falls outside the calculator's defined categories</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Low risk</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Intermediate risk</button>
+<div class="quiz-explain"><b>Explanation:</b> Using the Pooled Cohort Equation's categories (low <5%, intermediate 5-7.5%, high >7.5%), a 6% calculated risk falls into the intermediate risk category.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Which risk calculator directly incorporates hs-CRP as one of its input variables, and in which patient population was it originally developed?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The Reynolds Risk Score; developed in healthy, non-diabetic men and women</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The Pooled Cohort Equation; developed in patients with known coronary artery disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">None of these calculators use hs-CRP as an input</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The Framingham Risk Calculator; developed in diabetic patients only</button>
+<div class="quiz-explain"><b>Explanation:</b> The Reynolds Risk Score directly incorporates hs-CRP as an input variable (along with cholesterol, HDL, systolic BP, smoking status, and parental history), and was originally developed and validated in healthy, non-diabetic men and women.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient's Pooled Cohort Equation risk is 7.4% and their Framingham Risk Score is 14.4%. What do both of these results have in common?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both classify the patient as low risk</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Both classify the patient as intermediate risk, despite the different absolute percentages</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Both classify the patient as high risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">These two calculators cannot be compared in any way</button>
+<div class="quiz-explain"><b>Explanation:</b> Despite very different absolute percentages (7.4% vs. 14.4%), both calculators classify this patient as intermediate risk, since each tool uses its own distinct percentage thresholds for risk categories -- illustrating why it's important not to cross-apply one calculator's thresholds to another's result.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec11">
+<h2>11. High-Sensitivity CRP &amp; Atherosclerosis Risk</h2>
+
+<h3>What Is hs-CRP?</h3>
+<div class="callout">CRP is an <b>acute phase protein of hepatic origin</b>, produced by the liver in response to the pro-inflammatory cytokines <b>interleukin-1, interleukin-6, and tumor necrosis factor</b> secreted by macrophages and T cells.</div>
+
+<h3>Risk Categories</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>hs-CRP Level</th></tr>
+<tr><td>Low risk</td><td>&lt;1.0 mg/L</td></tr>
+<tr><td>Average risk</td><td>1.0&ndash;3.0 mg/L</td></tr>
+<tr><td>High risk</td><td>&gt;3.0 mg/L</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> hs-CRP needs to be <b>repeated</b> to demonstrate persistent low levels of inflammation before it's used to guide decisions — a single value can be a transient false elevation from an unrelated acute process.</div>
+
+<h3>Inflammation &amp; Atherosclerosis</h3>
+<ul>
+<li>Inflammation is an <b>integral component of atherosclerosis</b></li>
+<li>Median hs-CRP in the US: <b>2 mg/L</b></li>
+<li>hs-CRP is elevated in <b>metabolic syndrome</b>, likely secondary to inflammatory cytokines released from visceral fat</li>
+</ul>
+
+<h3>hs-CRP &amp; Statin Therapy</h3>
+<div class="callout">Best treatment outcomes are seen when <b>both</b> LDL-C is treated to <b>&lt;70 mg/dL</b> <i>and</i> hs-CRP is treated to <b>&lt;2 mg/L</b>.</div>
+<div class="pearl"><b>Key Trial Data</b> In healthy men and women with hs-CRP &gt;2 mg/L and LDL-C &lt;130 mg/dL, treatment with <b>rosuvastatin 20 mg</b> reduced major cardiovascular endpoints by <b>50%</b> and all-cause mortality by <b>20%</b> — this trial demonstrated benefit from statin therapy driven by inflammation reduction, even when LDL-C was not markedly elevated to begin with.</div>
+
+<h3>Clinical Utility</h3>
+<div class="callout">hs-CRP <b>independently predicts</b> cardiovascular disease risk, but is <b>not clinically useful in most patients</b>. Its main value is in <b>intermediate-risk patients</b> (10&ndash;20% over 10 years by Framingham) where further risk assessment would change primary prevention therapy — exactly the scenario in Case 3.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. An hs-CRP level of 4.5 mg/L is reported for a patient. How is this classified according to standard risk categories?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Low risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Average risk</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">High risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This value is invalid and must be repeated</button>
+<div class="quiz-explain"><b>Explanation:</b> An hs-CRP level above 3.0 mg/L is classified as high risk, distinct from low risk (<1.0 mg/L) and average risk (1.0-3.0 mg/L).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. In a landmark trial of healthy individuals with hs-CRP >2 mg/L and LDL-C <130 mg/dL, treatment with rosuvastatin 20 mg produced what outcome?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A 20% reduction in cardiovascular endpoints and 50% reduction in mortality</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">An increase in cardiovascular events despite LDL lowering</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No significant change in cardiovascular endpoints or mortality</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A 50% reduction in major cardiovascular endpoints and a 20% reduction in all-cause mortality</button>
+<div class="quiz-explain"><b>Explanation:</b> This trial demonstrated that rosuvastatin 20 mg reduced major cardiovascular endpoints by 50% and all-cause mortality by 20% in healthy individuals with elevated hs-CRP but relatively low LDL-C -- supporting the concept that statins provide benefit through anti-inflammatory effects independent of marked LDL lowering.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. For which patient population is hs-CRP testing considered most clinically useful?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Patients at intermediate cardiovascular risk (10-20% over 10 years), where the result would influence the decision about primary prevention therapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients already on maximal statin therapy with LDL <50 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">hs-CRP is equally useful in all risk categories</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patients already classified as low risk by standard risk calculators</button>
+<div class="quiz-explain"><b>Explanation:</b> hs-CRP testing is most clinically useful in patients at intermediate cardiovascular risk, where additional risk stratification could meaningfully change the decision about whether to initiate statin therapy for primary prevention -- it is not considered clinically useful in most other patients.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec12">
+<h2>12. Historical Perspective: Cholesterol &amp; Statin Discovery</h2>
+
+<h3>Discovery &amp; Naming of Cholesterol</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Year</th><th>Milestone</th><th>Investigator</th></tr>
+<tr><td>1784</td><td>Isolated from gallstones</td><td>Fran&ccedil;ois Poulletier (French physician-chemist)</td></tr>
+<tr><td>1815</td><td>Named "cholesterine" (<i>chole</i> = bile, <i>stereos</i> = solid)</td><td>Michel Chevreul (French chemist)</td></tr>
+<tr><td>1888</td><td>Molecular formula elucidated</td><td>Friedrich Reinitzer (Austrian botanist)</td></tr>
+<tr><td>1927</td><td>Proof of cholesterol structure (Nobel Prize in Chemistry, 1927 &amp; 1928)</td><td>Heinrich Wieland &amp; Adolf Windaus</td></tr>
+</table>
+</div>
+
+<h3>Establishing the Cholesterol&ndash;Atherosclerosis Link</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Year</th><th>Finding</th><th>Investigator</th></tr>
+<tr><td>1910</td><td>Atherosclerotic plaques from human aortas contain <b>20-fold higher</b> cholesterol concentrations than normal aortas</td><td>Adolf Windaus</td></tr>
+<tr><td>1913</td><td>Fed pure cholesterol to rabbits, producing hypercholesterolemia and severe aortic atherosclerosis</td><td>Nikolai Anitschkow (Russian pathologist)</td></tr>
+<tr><td>1939</td><td>Described large families with an inherited trait of high blood cholesterol and premature heart attacks</td><td>Carl M&uuml;ller (Norwegian clinician)</td></tr>
+</table>
+</div>
+
+<h3>Lipoprotein Fractionation &amp; the LDL/HDL Story</h3>
+<div class="callout"><b>John Gofman</b> (Berkeley, 1950s) used an <b>ultracentrifuge</b> to separate lipoproteins by flotation — heart attacks correlated with elevated <b>LDL</b>, and were <b>less frequent</b> with high blood levels of <b>HDL</b>.</div>
+<div class="callout"><b>Ancel Keys</b> (University of Minnesota, 1960s) conducted the <b>Seven Countries Study</b>: 15,000 middle-aged men followed for 10 years — the incidence of heart attacks was found to be <b>linearly proportional</b> to cholesterol level. This study lent support to the <b>Mediterranean diet</b>. (Keys was also known for his work on starvation physiology and inventing <b>K-rations</b> for the US military.)</div>
+
+<h3>Cholesterol Synthesis &amp; the Discovery of Statins</h3>
+<div class="callout"><b>Konrad Bloch &amp; Feodor Lynen</b> (1964 Nobel Prize) completed the pathway of cholesterol synthesis in the body — the <b>rate-limiting step</b> is the conversion of <b>HMG-CoA to mevalonate</b>.</div>
+<div class="pearl"><b>Akira Endo</b> (Japanese microbiologist) theorized a mold/fungus could produce a natural HMG-CoA reductase inhibitor useful as an antimicrobial. After screening <b>3,800 different molds/fungi</b>, he discovered <b>compactin</b> in a fermentation broth of <i>Penicillium citrinum</i> in the 1970s. Though not useful as an antibiotic, the potential of an HMG-CoA reductase inhibitor as a <b>lipid-lowering agent</b> was quickly realized — leading to the development of statins.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which investigator used an ultracentrifuge in the 1950s to separate lipoproteins by flotation, establishing the correlation between LDL, HDL, and heart attack risk?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ancel Keys</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">John Gofman</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Nikolai Anitschkow</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Akira Endo</button>
+<div class="quiz-explain"><b>Explanation:</b> John Gofman, working at Berkeley in the 1950s, used an ultracentrifuge to separate lipoproteins by flotation, discovering that heart attacks correlated with elevated LDL cholesterol and were less frequent with high HDL levels.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. The Seven Countries Study, which followed 15,000 middle-aged men over 10 years and found a linear relationship between cholesterol level and heart attack incidence, was conducted by which researcher?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">John Gofman</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Konrad Bloch</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ancel Keys</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Carl Muller</button>
+<div class="quiz-explain"><b>Explanation:</b> Ancel Keys, a physiologist at the University of Minnesota, conducted the Seven Countries Study in the 1960s, demonstrating a linear relationship between cholesterol level and heart attack incidence, and lending support to the Mediterranean diet.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Akira Endo's discovery of compactin, a natural HMG-CoA reductase inhibitor, came from screening thousands of molds and fungi in search of what original application?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A cancer treatment</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A blood pressure medication</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A cholesterol-lowering agent, from the very beginning of his research</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">An antimicrobial agent, with the lipid-lowering potential only recognized afterward</button>
+<div class="quiz-explain"><b>Explanation:</b> Akira Endo originally theorized that a mold or fungus producing a natural HMG-CoA reductase inhibitor could serve as an antimicrobial agent; after screening 3,800 molds/fungi and discovering compactin, it was not useful as an antibiotic, but its potential as a lipid-lowering agent (by inhibiting the rate-limiting step of cholesterol synthesis) was then quickly recognized.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec13">
+<h2>13. Hypercholesterolemia: Epidemiology &amp; Screening Guidelines</h2>
+
+<h3>Epidemiology</h3>
+<div class="callout">
+Hypercholesterolemia is the <b>11th most common diagnosis</b> made during family physician visits. High cholesterol is reported in <b>35% of adults</b> having cholesterol screening in the US. The <b>30-year risk</b> of developing high LDL cholesterol is approximately <b>50%</b>.
+</div>
+<div class="table-scroll">
+<table>
+<tr><th>Risk Factors</th></tr>
+<tr><td>Obesity, physical inactivity, metabolic syndrome, type II diabetes</td></tr>
+</table>
+</div>
+
+<h3>USPSTF Screening Recommendations</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Population</th><th>Recommendation</th></tr>
+<tr><td>Men</td><td>Screen starting at <b>&ge;35 years old</b></td></tr>
+<tr><td>Women</td><td>Screen starting at <b>&ge;45 years old</b> if at increased risk for CAD</td></tr>
+<tr><td>Younger adults at increased CAD risk</td><td>Men <b>20&ndash;35</b> and women <b>20&ndash;45</b> years old, if at increased risk for CAD</td></tr>
+</table>
+</div>
+
+<h3>ACC/AHA Screening Recommendations</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>Detail</th></tr>
+<tr><td>Assess traditional risk factors</td><td>Ages <b>20&ndash;79</b> without known cardiovascular disease, <b>every 4&ndash;6 years</b>: age, sex, total cholesterol, HDL cholesterol, systolic BP, antihypertensive use, diabetes, current smoking</td></tr>
+<tr><td>Estimate 10-year ASCVD risk</td><td>Ages <b>40&ndash;79</b> without atherosclerotic cardiovascular disease</td></tr>
+<tr><td>If risk-based treatment decision is uncertain</td><td>Consider additional assessment: <b>family history, hs-CRP, coronary artery calcium (CAC) score, or ankle-brachial index (ABI)</b></td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> The additional workup tools for an uncertain risk-based decision (family history, hs-CRP, CAC score, ABI) are exactly the kind of "tiebreaker" tests appropriate for a patient like Case 3, who falls into an intermediate-risk category on standard calculators.</div>
+
+<h3>ATP III Classification of Cholesterol Levels</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Total Cholesterol</th><th>Category</th></tr>
+<tr><td>&lt;200 mg/dL</td><td>Desirable</td></tr>
+<tr><td>200&ndash;239 mg/dL</td><td>Borderline high</td></tr>
+<tr><td>&ge;240 mg/dL</td><td>High</td></tr>
+</table>
+</div>
+<div class="table-scroll">
+<table>
+<tr><th>LDL Cholesterol</th><th>Category</th></tr>
+<tr><td>&lt;100 mg/dL</td><td>Optimal</td></tr>
+<tr><td>100&ndash;129 mg/dL</td><td>Above optimal</td></tr>
+<tr><td>130&ndash;159 mg/dL</td><td>Borderline high</td></tr>
+<tr><td>160&ndash;189 mg/dL</td><td>High</td></tr>
+<tr><td>&ge;190 mg/dL</td><td>Very high</td></tr>
+</table>
+</div>
+<div class="table-scroll">
+<table>
+<tr><th>HDL Cholesterol</th><th>Category</th></tr>
+<tr><td>&lt;40 mg/dL</td><td>Low</td></tr>
+<tr><td>&ge;60 mg/dL</td><td>High (protective)</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. According to USPSTF recommendations, at what age should routine cholesterol screening begin in men without other risk factors?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">35 years old</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">45 years old</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">50 years old</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">20 years old</button>
+<div class="quiz-explain"><b>Explanation:</b> USPSTF recommends cholesterol screening in men starting at age 35, while women are screened starting at age 45 if at increased risk for CAD (or earlier, ages 20-45, if at increased risk).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient's risk-based statin treatment decision remains uncertain after standard risk factor assessment. Which additional tools does the ACC/AHA recommend considering at this point?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Repeat total cholesterol testing only</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Family history, hs-CRP, coronary artery calcium score, or ankle-brachial index</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Immediate initiation of high-intensity statin regardless of further testing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cardiac catheterization</button>
+<div class="quiz-explain"><b>Explanation:</b> When a risk-based treatment decision remains uncertain after standard assessment, the ACC/AHA recommends considering additional tools including family history, hs-CRP, coronary artery calcium (CAC) score, or ankle-brachial index (ABI) to help refine the decision.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Using the ATP III classification, an LDL cholesterol of 145 mg/dL falls into which category?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Optimal</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Above optimal</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Borderline high</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">High</button>
+<div class="quiz-explain"><b>Explanation:</b> An LDL cholesterol of 145 mg/dL falls into the borderline high category (130-159 mg/dL) under the ATP III classification system.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec14">
+<h2>14. Lipid Panel Testing &amp; Non-Lipid Risk Markers</h2>
+
+<h3>The Standard Lipid Profile</h3>
+<div class="callout">Total cholesterol, HDL, triglycerides, LDL (calculated or direct).</div>
+<div class="pearl"><b>LDL Calculation (Friedewald Equation)</b><br>
+LDL = Total cholesterol &minus; (HDL cholesterol + Triglycerides/5)</div>
+
+<h3>Fasting Requirements</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Situation</th><th>Requirement</th></tr>
+<tr><td>Standard lipid panel to assess cardiac risk</td><td><b>Fasting is NOT necessary</b></td></tr>
+<tr><td>Triglycerides &gt;500 mg/dL</td><td><b>Must repeat fasting</b> — the calculated LDL is no longer accurate at this triglyceride level (the Friedewald equation breaks down)</td></tr>
+</table>
+</div>
+
+<h3>Non-Lipid Blood Tests</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Test</th><th>Role</th></tr>
+<tr><td><b>hs-CRP</b></td><td>Independently predicts cardiovascular disease risk; not clinically useful in most patients; may help in patients with <b>intermediate risk</b> (10&ndash;20% over 10 years) where further risk assessment would affect primary prevention therapy</td></tr>
+<tr><td><b>Homocysteine</b></td><td>Elevated levels <i>may</i> be a cardiac risk factor, but is <b>not recommended for screening</b></td></tr>
+</table>
+</div>
+
+<h3>Tests to Rule Out Secondary Causes of Hypercholesterolemia</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Test</th><th>Rules Out</th></tr>
+<tr><td>Glucose or HbA1c</td><td>Diabetes</td></tr>
+<tr><td>TSH</td><td>Thyroid disease</td></tr>
+<tr><td>Urinalysis</td><td>Proteinuria (nephrotic syndrome can cause secondary hyperlipidemia)</td></tr>
+<tr><td>Alkaline phosphatase</td><td>Obstructive biliary disease</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Using the Friedewald equation, if a patient's total cholesterol is 200 mg/dL, HDL is 50 mg/dL, and triglycerides are 150 mg/dL, what is the calculated LDL?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">150 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">180 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">100 mg/dL</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">120 mg/dL</button>
+<div class="quiz-explain"><b>Explanation:</b> LDL = Total cholesterol - (HDL + Triglycerides/5) = 200 - (50 + 150/5) = 200 - (50 + 30) = 200 - 80 = 120 mg/dL.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. At what triglyceride level does the calculated LDL become inaccurate, requiring a repeat fasting lipid panel?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Triglycerides > 500 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Triglycerides > 1000 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Calculated LDL is always accurate regardless of triglyceride level</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Triglycerides > 200 mg/dL</button>
+<div class="quiz-explain"><b>Explanation:</b> When triglycerides exceed 500 mg/dL, the Friedewald equation used to calculate LDL is no longer accurate, requiring a repeat fasting lipid panel (often with direct LDL measurement) for reliable results.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient being worked up for newly diagnosed hypercholesterolemia should have which of the following tests to help rule out a secondary cause?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only a repeat lipid panel</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">TSH, glucose/HbA1c, urinalysis, and alkaline phosphatase</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cardiac troponin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Homocysteine, as a routine screening test</button>
+<div class="quiz-explain"><b>Explanation:</b> TSH (thyroid disease), glucose or HbA1c (diabetes), urinalysis (proteinuria/nephrotic syndrome), and alkaline phosphatase (obstructive biliary disease) are the recommended tests to rule out secondary causes of hypercholesterolemia -- homocysteine, by contrast, is not recommended for routine screening.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec15">
+<h2>15. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review — every core fact condensed to what's most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>MI Classification &amp; Epidemiology</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Term</th><th>Key Fact</th></tr>
+<tr><td>STEMI</td><td>Total coronary occlusion</td></tr>
+<tr><td>NSTEMI</td><td>Partial loss of coronary perfusion</td></tr>
+<tr><td>Angina</td><td>No myocardial necrosis</td></tr>
+<tr><td>ACS epidemiology</td><td>1.7M hospitalizations/yr; 700K initial MI; 500K recurrent MI; CAD=20% of deaths, CVD overall=40%</td></tr>
+<tr><td>Prodrome</td><td>40-50% of MI patients; of those, 1/3 have symptoms 1-4wk prior, 2/3 &le;1wk, 1/3 &le;24h</td></tr>
+</table>
+</div>
+
+<h3>Cardiac Troponin Core Facts</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Structure</td><td>94-97% myofibril, 3-6% cytoplasm; TnC (Ca-binding, not cardiac-specific), TnI &amp; TnT (both cardiac-specific)</td></tr>
+<tr><td>99th percentile URL</td><td>Value below which 99% of healthy reference population falls; gold standard for diagnostic protocols</td></tr>
+<tr><td>URL affected by</td><td>Gender (M&gt;F), age (elderly&gt;young), assay type, reference population representativeness</td></tr>
+<tr><td>Obsolete biomarkers</td><td>AST, total CK/CK-MB, myoglobin, LDH/LDH isoenzymes</td></tr>
+</table>
+</div>
+
+<h3>MI Subtype Diagnostic Criteria — Master Table</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Troponin Threshold</th><th>Additional Criteria (need &ge;1)</th></tr>
+<tr><td>Universal/spontaneous MI</td><td>Rise/fall, &ge;1 value &gt;99th %ile URL</td><td>Ischemic symptoms, new ST-T/LBBB, pathologic Q wave, imaging of new wall motion abnormality, intracoronary thrombus</td></tr>
+<tr><td>PCI-related MI</td><td>&gt;5&times; URL (normal baseline) OR &gt;20% rise (elevated baseline)</td><td>Ischemic symptoms, new ischemic EKG changes, angiographic procedural complication, imaging findings</td></tr>
+<tr><td>Stent thrombosis MI</td><td>Rise/fall, &ge;1 value &gt;99th %ile URL</td><td>Detected by angiography/autopsy in setting of ischemia</td></tr>
+<tr><td>CABG-related MI</td><td>&gt;10&times; URL (normal baseline)</td><td>New Q wave/LBBB, new graft/native occlusion, imaging findings</td></tr>
+</table>
+</div>
+
+<h3>Etiologies of &uarr;Troponin (4 Categories)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Examples</th></tr>
+<tr><td>Primary ischemia</td><td>Plaque rupture, intraluminal thrombus</td></tr>
+<tr><td>Supply/demand imbalance</td><td>Tachy/bradyarrhythmia, aortic dissection/severe AS, HCM, shock, severe resp. failure/anemia, HTN&plusmn;LVH, coronary spasm/embolism/vasculitis</td></tr>
+<tr><td>Not ischemia-related</td><td>Cardiac contusion/surgery/ablation/pacing/shocks, rhabdomyolysis, myocarditis, cardiotoxic agents (anthracyclines, Herceptin)</td></tr>
+<tr><td>Multifactorial/indeterminate</td><td>Heart failure, takotsubo, severe PE/pulm HTN, sepsis, renal failure, stroke/SAH, amyloid/sarcoid, strenuous exercise</td></tr>
+</table>
+</div>
+
+<h3>Troponin Ordering, Prognosis &amp; hs-cTn</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Standard ordering</td><td>0, 3, 6, 9, 12 hours (up to 24h if high suspicion, prior normal)</td></tr>
+<tr><td>Recurrent MI retest</td><td>0,3,6,9h from suspicious event; suspect if &gt;20% rise in 2nd value + exceeds 99th %ile</td></tr>
+<tr><td>Prognosis</td><td>&uarr;Trop w/o ST elevation = 4x mortality; even small rises = poor prognosis</td></tr>
+<tr><td>hs-cTn criteria</td><td>Imprecision &le;10% at 99th %ile; measurable in &ge;50% of healthy individuals below 99th %ile</td></tr>
+<tr><td>hs-cTn practical facts</td><td>10-100x more sensitive; men have 2x higher 99th %ile; rules in/out by 3h (vs 6h); delta change improves specificity to 95%</td></tr>
+</table>
+</div>
+
+<h3>Natriuretic Peptides — Master Table</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>HF epidemiology</td><td>5M Americans; ~400K new cases/yr; 5-yr mortality 10% mild/20-30% moderate/80% end-stage</td></tr>
+<tr><td>BNP vs NT-proBNP</td><td>BNP = pharmacologically active; NT-proBNP = NOT active</td></tr>
+<tr><td>HF diagnostic thresholds</td><td>BNP often &gt;1000, NT-proBNP often &gt;1800; LV dysfunction often &lt;300 (both)</td></tr>
+<tr><td>ER disposition</td><td>BNP&gt;500 -&gt; admit; BNP&lt;300 -&gt; discharge likely</td></tr>
+<tr><td>BNP&gt;100 performance</td><td>90% sens, 75% spec, 81% accuracy; uncertainty dropped 43%-&gt;11%; w/o monitoring = 74% accuracy</td></tr>
+<tr><td>Best use</td><td>RULING OUT HF: BNP&lt;100 or NT-proBNP&lt;300; NOT for ongoing monitoring</td></tr>
+<tr><td>Non-specific causes</td><td>LVH, inflammatory cardiac disease, systemic/pulmonary HTN, renal failure, cirrhosis, hyperaldosteronism, Cushing's</td></tr>
+<tr><td>Hyponatremia in HF</td><td>Poor prognosis; via &uarr;ADH (from &darr;CO/&darr;renal blood flow) + &uarr;thirst (low CO + angiotensin II)</td></tr>
+</table>
+</div>
+
+<h3>CXR Differentiation: Normal vs. CHF vs. Pneumonia</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Normal</th><th>Decompensated CHF</th><th>Pneumonia</th></tr>
+<tr><td>Heart size</td><td>&lt;50%</td><td>&gt;50%</td><td>&lt;50%</td></tr>
+<tr><td>Pulm. vasculature</td><td>Normal</td><td>&uarr;, cephalized</td><td>Normal</td></tr>
+<tr><td>Interstitial markings</td><td>Normal</td><td>Increased</td><td>Normal (focal infiltrate instead)</td></tr>
+<tr><td>Kerley B lines</td><td>Absent</td><td>Present</td><td>Absent</td></tr>
+<tr><td>Distinctive sign</td><td>&mdash;</td><td>&mdash;</td><td>Silhouette sign (lost border) + air bronchograms</td></tr>
+</table>
+</div>
+
+<h3>Cardiovascular Risk Calculators</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Calculator</th><th>Low</th><th>Intermediate</th><th>High</th><th>Unique Feature</th></tr>
+<tr><td>Framingham</td><td>&lt;10%</td><td>10-20%</td><td>&gt;20%</td><td>Original CV risk tool</td></tr>
+<tr><td>Pooled Cohort Equation</td><td>&lt;5%</td><td>5-7.5%</td><td>&gt;7.5%</td><td>Ages 40-79; includes race; first ASCVD event</td></tr>
+<tr><td>Reynolds Risk Score</td><td colspan="3">Not standardized into 3 tiers the same way</td><td>Only calculator using hs-CRP; better for women; non-diabetic only</td></tr>
+</table>
+</div>
+
+<h3>hs-CRP Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Level</th></tr>
+<tr><td>Low risk</td><td>&lt;1.0 mg/L</td></tr>
+<tr><td>Average risk</td><td>1.0-3.0 mg/L</td></tr>
+<tr><td>High risk</td><td>&gt;3.0 mg/L</td></tr>
+<tr><td>US median</td><td>2 mg/L</td></tr>
+<tr><td>Best statin outcomes</td><td>LDL-C&lt;70 AND hs-CRP&lt;2</td></tr>
+<tr><td>Clinical utility</td><td>Best for intermediate-risk patients (10-20% by Framingham) to guide statin decision</td></tr>
+</table>
+</div>
+
+<h3>Historical Timeline (Cholesterol/Statins)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Year</th><th>Milestone</th><th>Person</th></tr>
+<tr><td>1784</td><td>Isolated from gallstones</td><td>Poulletier</td></tr>
+<tr><td>1815</td><td>Named "cholesterine"</td><td>Chevreul</td></tr>
+<tr><td>1888</td><td>Molecular formula</td><td>Reinitzer</td></tr>
+<tr><td>1910</td><td>20x cholesterol in atherosclerotic plaques</td><td>Windaus</td></tr>
+<tr><td>1913</td><td>Cholesterol-fed rabbits -&gt; atherosclerosis</td><td>Anitschkow</td></tr>
+<tr><td>1927/28</td><td>Cholesterol structure (Nobel Prize)</td><td>Wieland &amp; Windaus</td></tr>
+<tr><td>1939</td><td>Familial hypercholesterolemia described</td><td>Muller</td></tr>
+<tr><td>1950s</td><td>Ultracentrifuge lipoprotein separation (LDL/HDL)</td><td>Gofman</td></tr>
+<tr><td>1960s</td><td>Seven Countries Study</td><td>Ancel Keys</td></tr>
+<tr><td>1964</td><td>Cholesterol synthesis pathway (Nobel Prize); rate-limiting step HMG-CoA-&gt;mevalonate</td><td>Bloch &amp; Lynen</td></tr>
+<tr><td>1970s</td><td>Compactin discovered (Penicillium citrinum)</td><td>Akira Endo</td></tr>
+</table>
+</div>
+
+<h3>Hyperlipidemia Screening &amp; Classification</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Epidemiology</td><td>11th most common family med diagnosis; 35% of screened US adults; 30-yr risk of high LDL ~50%</td></tr>
+<tr><td>USPSTF</td><td>Men &ge;35; Women &ge;45 if increased CAD risk (or 20-35/20-45 if increased risk)</td></tr>
+<tr><td>ACC/AHA</td><td>Risk factors q4-6yr (ages 20-79); 10-yr ASCVD risk (ages 40-79); tiebreakers = family hx, hs-CRP, CAC, ABI</td></tr>
+<tr><td>ATP III total cholesterol</td><td>&lt;200 desirable, 200-239 borderline, &ge;240 high</td></tr>
+<tr><td>ATP III LDL</td><td>&lt;100 optimal, 100-129 above optimal, 130-159 borderline, 160-189 high, &ge;190 very high</td></tr>
+<tr><td>ATP III HDL</td><td>&lt;40 low, &ge;60 high</td></tr>
+<tr><td>LDL formula (Friedewald)</td><td>LDL = Total - (HDL + TG/5)</td></tr>
+<tr><td>Fasting</td><td>Not necessary for standard panel; required if repeating due to TG&gt;500</td></tr>
+</table>
+</div>
+
+<h3>Non-Lipid Risk/Secondary-Cause Tests</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Test</th><th>Purpose</th></tr>
+<tr><td>hs-CRP</td><td>Independent CV risk predictor; useful only in intermediate-risk patients</td></tr>
+<tr><td>Homocysteine</td><td>Possible risk factor; NOT recommended for screening</td></tr>
+<tr><td>Glucose/HbA1c</td><td>Rule out diabetes (2&deg; cause)</td></tr>
+<tr><td>TSH</td><td>Rule out thyroid disease (2&deg; cause)</td></tr>
+<tr><td>Urinalysis</td><td>Rule out proteinuria/nephrotic syndrome (2&deg; cause)</td></tr>
+<tr><td>Alkaline phosphatase</td><td>Rule out obstructive biliary disease (2&deg; cause)</td></tr>
+</table>
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+function answerQuiz(btn, isCorrect) {
+  const qDiv = btn.closest('.quiz-q');
+  const choices = qDiv.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    const correctBtn = qDiv.querySelector('.quiz-choice[data-correct="true"]');
+    if (correctBtn) correctBtn.classList.add('correct');
+  }
+  const explain = qDiv.querySelector('.quiz-explain');
+  if (explain) explain.classList.add('show');
+}
+</script>
+
+</body>
+</html>
