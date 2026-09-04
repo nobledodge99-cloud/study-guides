@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ASD, VSD, Tetralogy of Fallot &amp; Congenital Heart Disease — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.7rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ columns:2; margin:10px 0 0; padding-left:20px; }
+  .top-contents li{ margin-bottom:6px; font-size:0.9rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-240px; top:0; height:100vh; width:230px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:4px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.8rem; padding:6px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+
+  .container{ max-width:900px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:20px 0 8px; letter-spacing:0.02em;
+  }
+  section.card p, section.card li{ font-size:0.95rem; }
+  section.card ul{ padding-left:22px; }
+
+  .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl{ background:#fdf3ea; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; margin:14px 0; font-size:0.9rem; }
+  .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; }
+  .gap-notice{ background:#f7e6e3; border:1px dashed var(--incorrect); border-radius:8px; padding:12px 16px; margin:14px 0; font-size:0.87rem; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0 auto; min-width:560px; }
+  table{ border-collapse:collapse; width:100%; margin:12px auto 18px; font-size:0.85rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .quiz-block{ margin-top:24px; padding-top:18px; border-top:2px dashed var(--sage); }
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--forest); letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .quiz-q{ background:#fffefb; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  .quiz-q p.stem{ font-weight:600; margin:0 0 10px; font-size:0.93rem; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:7px; padding:9px 12px;
+    margin-bottom:7px; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+    cursor:pointer; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:#e5f2e7; border-color:var(--correct); color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#fbe9e6; border-color:var(--incorrect); color:var(--incorrect); }
+  .quiz-choice[disabled]{ cursor:default; }
+  .quiz-explain{
+    display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light);
+    border-left:3px solid var(--forest); border-radius:6px; font-size:0.87rem;
+  }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:700px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+
+<div class="header">
+  <h1>ASD, VSD, Tetralogy of Fallot &amp; Other Congenital Heart Diseases</h1>
+  <p>Dr. Preeti Jois &middot; Pediatric/Congenital Cardiology</p>
+</div>
+
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Cardiac Embryology &amp; ASD: Types &amp; Etiology</a></li>
+    <li><a href="#sec2">2. ASD: Clinical Presentation, EKG &amp; CXR</a></li>
+    <li><a href="#sec3">3. ASD: Diagnostic Imaging, Complications &amp; Treatment</a></li>
+    <li><a href="#sec4">4. VSD: Epidemiology, Types &amp; Size Classification</a></li>
+    <li><a href="#sec5">5. VSD: Signs, Eisenmenger Syndrome &amp; Presentation by Age</a></li>
+    <li><a href="#sec6">6. VSD: EKG, CXR, Imaging &amp; Management</a></li>
+    <li><a href="#sec7">7. Complete Atrioventricular Septal Defect (AVSD)</a></li>
+    <li><a href="#sec8">8. Fetal Circulation &amp; Transition to Postnatal Life</a></li>
+    <li><a href="#sec9">9. Cyanotic Heart Disease Overview: The &quot;5 T's&quot;</a></li>
+    <li><a href="#sec10">10. Tetralogy of Fallot: Components &amp; Pathophysiology</a></li>
+    <li><a href="#sec11">11. Tetralogy of Fallot: Tet Spells &amp; Clinical Presentation</a></li>
+    <li><a href="#sec12">12. Tetralogy of Fallot: Diagnostics &amp; Surgical Repair</a></li>
+    <li><a href="#sec13">13. Patent Ductus Arteriosus &amp; Coarctation of the Aorta</a></li>
+    <li><a href="#sec14">14. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#sec1">Embryology &amp; ASD Types</a>
+  <a href="#sec2">ASD: Clinical/EKG/CXR</a>
+  <a href="#sec3">ASD: Imaging &amp; Treatment</a>
+  <a href="#sec4">VSD: Types &amp; Size</a>
+  <a href="#sec5">VSD: Signs &amp; Eisenmenger</a>
+  <a href="#sec6">VSD: Diagnostics &amp; Mgmt</a>
+  <a href="#sec7">Complete AVSD</a>
+  <a href="#sec8">Fetal Circulation</a>
+  <a href="#sec9">Cyanotic HD: 5 T's</a>
+  <a href="#sec10">TOF: Components</a>
+  <a href="#sec11">TOF: Tet Spells</a>
+  <a href="#sec12">TOF: Dx &amp; Repair</a>
+  <a href="#sec13">PDA &amp; Coarctation</a>
+  <a href="#sec14">Summary Tables</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="sec1">
+<h2>1. Cardiac Embryology &amp; ASD: Types &amp; Etiology</h2>
+
+<h3>Septation Basics</h3>
+<ul>
+<li>The interatrial septum forms from two overlapping partitions: the <b>septum primum</b> (first, more superior/posterior) and the <b>septum secundum</b> (second, forms to its right)</li>
+<li>Each septum has its own opening — the <b>foramen primum</b> and <b>foramen secundum</b> — that normally close or overlap appropriately during development</li>
+<li>The <b>atrioventricular endocardial cushions</b> are critical for both septal fusion and formation of the mitral/tricuspid valves</li>
+</ul>
+
+<h3>Epidemiology</h3>
+<div class="callout">ASDs occur in <b>6&ndash;8%</b> of all children born with congenital heart disease. <b>Females</b> have ASDs <b>twice as often</b> as males.</div>
+
+<h3>The Three (Four) Types of ASD</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Frequency</th><th>Mechanism</th><th>Key Association</th></tr>
+<tr><td><b>Ostium secundum</b></td><td><b>80%</b> — most common type of ASD</td><td>Foramen secundum remains open, due to excessive resorption of the septum primum <i>or</i> interrupted septum secundum development</td><td>&mdash;</td></tr>
+<tr><td><b>Ostium primum</b></td><td><b>15%</b></td><td>Foramen primum remains open — incomplete fusion of the septum primum and the AV endocardial cushions</td><td>More common in <b>Down syndrome</b> (disrupted endocardial cushion development)</td></tr>
+<tr><td><b>Patent foramen ovale (PFO)</b></td><td>Common, but not a true persistent shunt</td><td>Incomplete fusion of the septum secundum <i>and</i> septum primum &mdash; septal overlap exists, but non-closure</td><td>Can function like a <b>one-way valve</b></td></tr>
+<tr><td>(Sinus venosus ASD)</td><td>Less common</td><td>Defect near the SVC/pulmonary vein connections</td><td>Often associated with anomalous pulmonary venous return</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Key Conceptual Distinction</b> Primum and secundum ASDs form a <b>persistent, structurally open shunt</b> between the atria. A PFO, by contrast, is covered by a flap that <b>can function as a valve</b> — it may open and close intermittently rather than remaining fixed open.</div>
+
+<h3>Why PFOs Are Usually Asymptomatic</h3>
+<ul>
+<li>Most PFO patients are asymptomatic because the defect remains <b>functionally closed</b> due to normally <b>higher left atrial pressure</b> (which holds the flap shut)</li>
+<li><b>Spontaneous emboli formation</b> can occur, especially with atrial arrhythmias (e.g., atrial fibrillation)</li>
+<li><b>Hypercoagulable states</b> (e.g., pregnancy) + a <b>transient increase in right atrial pressure</b> (Valsalva, childbirth, constipation) can push emboli through the PFO into the systemic circulation &rarr; <b>paradoxical embolism/stroke</b> risk</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which type of atrial septal defect is the most common overall, accounting for approximately 80% of ASD cases?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ostium secundum</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patent foramen ovale</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus venosus ASD</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ostium primum</button>
+<div class="quiz-explain"><b>Explanation:</b> Ostium secundum is the most common type of ASD (~80% of cases), resulting from excessive resorption of the septum primum or interrupted development of the septum secundum.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. An ostium primum ASD is more commonly seen in which of the following conditions?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Marfan syndrome</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Down syndrome (trisomy 21)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Turner syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">DiGeorge syndrome</button>
+<div class="quiz-explain"><b>Explanation:</b> Ostium primum ASD, resulting from incomplete fusion of the septum primum and the atrioventricular endocardial cushions, is more commonly seen in Down syndrome due to disruptions in endocardial cushion development.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A pregnant patient with a known PFO develops a stroke shortly after a difficult vaginal delivery. What is the most likely mechanism?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This mechanism only applies to men with PFO</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The PFO spontaneously converted into a fixed ostium secundum defect</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The transient increase in right atrial pressure during childbirth, combined with the hypercoagulable state of pregnancy, pushed an embolus through the PFO into the systemic circulation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PFOs are structurally identical to ostium secundum ASDs and always shunt left-to-right</button>
+<div class="quiz-explain"><b>Explanation:</b> Pregnancy is a hypercoagulable state, and events like childbirth transiently raise right atrial pressure; this combination can push a venous embolus through a PFO into the systemic circulation, causing a paradoxical embolic stroke.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec2">
+<h2>2. ASD: Clinical Presentation, EKG &amp; CXR</h2>
+
+<h3>Clinical Presentation</h3>
+<div class="callout">Most patients are <b>asymptomatic before age 40</b>.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Symptoms</th><th>Physical Exam Findings</th></tr>
+<tr><td>Exertional dyspnea; heart failure (when present)</td><td><b>Systolic ejection murmur</b> — from turbulent flow across the <b>pulmonic valve</b> (not the ASD itself); <b>fixed split S2</b></td></tr>
+</table>
+</div>
+<div class="pearl"><b>Why "Fixed" Split S2?</b> The left-to-right shunt through the ASD keeps right-sided volume (and thus pulmonic valve closure timing) relatively constant across the respiratory cycle, so the normal respiratory variation in the S2 split is lost — the split becomes <i>fixed</i> rather than varying with inspiration/expiration.</div>
+
+<h3>Classic Case Presentation</h3>
+<div class="callout">A <b>15-year-old female</b> presents with <b>fatigue</b>. Exam: widely split S2 + pulmonary flow murmur. EKG: incomplete RBBB, right axis deviation, RVH.</div>
+
+<h3>EKG Findings</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Note</th></tr>
+<tr><td>Incomplete or complete RBBB</td><td>Common</td></tr>
+<tr><td><b>Right axis deviation</b></td><td>Seen in <b>secundum</b> ASD</td></tr>
+<tr><td><b>Left axis deviation</b></td><td>Seen in <b>primum</b> ASD</td></tr>
+<tr><td>Right ventricular hypertrophy</td><td>From chronic RV volume overload</td></tr>
+<tr><td>Right atrial enlargement</td><td>&mdash;</td></tr>
+<tr><td>Atrial fibrillation or atrial flutter</td><td>May develop, especially with long-standing atrial stretch</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> Axis deviation direction is a quick way to distinguish ASD subtype on EKG: <b>secundum = right</b> axis, <b>primum = left</b> axis.</div>
+
+<h3>Chest X-Ray Findings</h3>
+<ul>
+<li>Enlarged pulmonary arteries; increased pulmonary vascularity (increased hilar markings)</li>
+<li>Enlarged right ventricle; enlarged right atrium</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with an atrial septal defect has a split S2 that does not vary normally with respiration. What is this finding called, and why does it occur?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Wide physiologic splitting; a normal age-related finding</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Single S2; due to absence of the pulmonic component</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Paradoxical splitting; due to delayed aortic valve closure</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Fixed splitting; because the left-to-right shunt keeps right-sided volume and pulmonic closure timing relatively constant across the respiratory cycle</button>
+<div class="quiz-explain"><b>Explanation:</b> A fixed split S2 occurs in ASD because the left-to-right shunt maintains relatively constant right-sided volume and pulmonic valve closure timing regardless of the respiratory cycle, eliminating the normal respiratory variation in the S2 split.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. On EKG, a patient with a suspected atrial septal defect shows right axis deviation. Which type of ASD is this most consistent with?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Ostium secundum</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Sinus venosus ASD only</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PFO exclusively</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Ostium primum</button>
+<div class="quiz-explain"><b>Explanation:</b> Right axis deviation on EKG is characteristically seen with ostium secundum ASD, while left axis deviation is more typical of ostium primum ASD -- a useful distinguishing EKG clue.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which chest X-ray findings would be expected in a patient with a significant, longstanding atrial septal defect?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Decreased pulmonary vascularity with a boot-shaped heart</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Enlarged pulmonary arteries, increased pulmonary vascularity, and an enlarged right atrium and ventricle</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left ventricular hypertrophy with a normal-sized right heart</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A completely normal chest X-ray in all cases</button>
+<div class="quiz-explain"><b>Explanation:</b> ASD produces chronic right-sided volume overload, leading to enlarged pulmonary arteries, increased pulmonary vascularity, and enlargement of the right atrium and right ventricle on chest X-ray.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec3">
+<h2>3. ASD: Diagnostic Imaging, Complications &amp; Treatment</h2>
+
+<h3>Diagnostic Imaging Modalities</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Modality</th><th>Use</th></tr>
+<tr><td>Transthoracic echocardiography</td><td>Saline injection with bubble contrast demonstrates a right-to-left shunt; pulsed and color flow Doppler show the shunt directly</td></tr>
+<tr><td>Transesophageal echocardiography</td><td>Used when transthoracic image quality is suboptimal</td></tr>
+<tr><td>CT and MRI</td><td>Better elucidate atrial septal anatomy</td></tr>
+<tr><td>Cardiac catheterization</td><td>Defines size/location of the shunt; determines pulmonary pressure and pulmonary vascular resistance</td></tr>
+</table>
+</div>
+
+<h3>Complications of Untreated ASD</h3>
+<div class="callout">Atrial fibrillation &middot; Heart failure &middot; <b>Paradoxical systemic embolization</b> (e.g., embolic/hemorrhagic stroke)</div>
+
+<h3>Treatment &amp; Patient Selection</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Shunt Size</th><th>Prognosis/Approach</th></tr>
+<tr><td>Small</td><td>Normal lifespan without treatment</td></tr>
+<tr><td>Large</td><td>Can lead to disability by age 40 if untreated</td></tr>
+</table>
+</div>
+<div class="callout"><b>Who should be treated:</b> left-to-right shunts with a ratio &ge;<b>1.5:1</b> — left untreated, this leads to RV volume overload and eventually <b>Eisenmenger syndrome</b> (shunt reversal from chronic pulmonary hypertension).</div>
+<div class="pearl"><b>Critical Cutoff for Closure Eligibility</b> Pulmonary hypertension <b>precludes closure</b> if the pulmonary systolic pressure is greater than <b>2/3 of the systemic systolic pressure</b> — beyond this point, the right heart has already adapted to high pulmonary pressures, and closing the shunt could acutely overload/fail the right ventricle.</div>
+<ul>
+<li>Treatment options: <b>percutaneous device closure</b> or <b>open surgery</b></li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which imaging technique uses saline injection with bubble contrast to demonstrate a right-to-left shunt in a suspected ASD?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cardiac catheterization exclusively</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cardiac MRI</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Transthoracic echocardiography</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Chest CT without contrast</button>
+<div class="quiz-explain"><b>Explanation:</b> Transthoracic echocardiography with saline (bubble) contrast injection is used to demonstrate a right-to-left shunt, often paired with pulsed and color flow Doppler for further characterization.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. At what left-to-right shunt ratio should closure of an atrial septal defect generally be considered?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">3:1 or greater</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Closure is never based on shunt ratio</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">1.1:1 or greater</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">1.5:1 or greater</button>
+<div class="quiz-explain"><b>Explanation:</b> A left-to-right shunt ratio of 1.5:1 or greater is generally the threshold at which ASD closure should be considered, since larger shunts lead to progressive RV volume overload if left untreated.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient being evaluated for ASD closure is found to have a pulmonary systolic pressure that is 75% of their systemic systolic pressure. What is the clinical implication?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">This exceeds the 2/3 threshold, meaning pulmonary hypertension likely precludes safe closure</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This finding is irrelevant to treatment decisions</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This indicates the defect has already spontaneously closed</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Closure should proceed immediately regardless of this finding</button>
+<div class="quiz-explain"><b>Explanation:</b> Pulmonary systolic pressure exceeding two-thirds of systemic systolic pressure indicates significant pulmonary hypertension that precludes safe closure, since the right heart has adapted to high pulmonary pressures and closure risks acute right heart overload.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec4">
+<h2>4. VSD: Epidemiology, Types &amp; Size Classification</h2>
+
+<h3>Epidemiology</h3>
+<div class="callout">VSDs are the <b>most common type of congenital heart defect</b> overall, accounting for about <b>half</b> of all congenital heart disease cases.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Down Syndrome (Trisomy 21) — Heart Defect Breakdown</th><th>Frequency</th></tr>
+<tr><td>Atrioventricular septal defect</td><td><b>45%</b></td></tr>
+<tr><td>Ventricular septal defect</td><td><b>35%</b></td></tr>
+<tr><td>Atrial septal defect</td><td><b>8%</b></td></tr>
+<tr><td>Patent ductus arteriosus</td><td><b>7%</b></td></tr>
+<tr><td>Tetralogy of Fallot</td><td><b>4%</b></td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip</b> ~40&ndash;50% of children with Down syndrome have a congenital heart defect, most commonly from disrupted endocardial cushion development — this is why AVSD tops the list.</div>
+
+<h3>Classic Case</h3>
+<div class="callout">A <b>5-year-old male with trisomy 21</b> presents for a routine exam: <b>grade IV/VI holosystolic murmur</b>, loudest at the left lower sternal border, radiating throughout the precordium — classic for VSD.</div>
+
+<h3>The Four Types of VSD</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Location</th><th>Key Fact</th></tr>
+<tr><td><b>Conal/outflow tract VSD</b></td><td>Directly below the pulmonary valve</td><td><b>Rarest</b> type</td></tr>
+<tr><td><b>Membranous VSD</b></td><td>Upper section of the ventricular septum, near the valves</td><td><b>Most commonly operated on</b> — most do not close spontaneously</td></tr>
+<tr><td><b>Inlet/AV canal type VSD</b></td><td>Near the AV canal, directly beneath the tricuspid/mitral valves</td><td>Often seen as part of an atrioventricular septal defect</td></tr>
+<tr><td><b>Muscular VSD</b></td><td>Muscular (lower) portion of the septum</td><td><b>Most common</b> type overall; many close spontaneously</td></tr>
+</table>
+</div>
+
+<h3>Size Classification (Relative to Aortic Root Diameter)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Size</th></tr>
+<tr><td>Small/restrictive</td><td>&lt;25% of the aortic root diameter</td></tr>
+<tr><td>Moderately restrictive</td><td>25&ndash;75% of the aortic root diameter</td></tr>
+<tr><td>Unrestricted</td><td>&gt;75% of the aortic root diameter</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which type of ventricular septal defect is the most common overall, located in the muscular portion of the septum, and often closes spontaneously?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Inlet/AV canal VSD</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Muscular VSD</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Conal/outflow tract VSD</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Membranous VSD</button>
+<div class="quiz-explain"><b>Explanation:</b> Muscular VSD is the most common type overall, located in the muscular (lower) portion of the ventricular septum, and a large number close spontaneously without requiring surgery.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A membranous VSD is notable for which of the following characteristics?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is located in the lower muscular septum</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is the rarest type of VSD</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">It is the type most commonly requiring surgical operation, since most do not close spontaneously</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It always closes spontaneously without intervention</button>
+<div class="quiz-explain"><b>Explanation:</b> Membranous VSDs, located in the upper septum near the valves, are the type most commonly operated on because most do not close spontaneously, unlike the more common muscular VSDs.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A VSD is measured to be 60% of the aortic root diameter. How is this classified?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unrestricted</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This size does not fit any classification</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Small/restrictive</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Moderately restrictive</button>
+<div class="quiz-explain"><b>Explanation:</b> A VSD measuring 25-75% of the aortic root diameter is classified as moderately restrictive, distinct from small/restrictive (<25%) and unrestricted (>75%) categories.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec5">
+<h2>5. VSD: Signs, Eisenmenger Syndrome &amp; Presentation by Age</h2>
+
+<h3>Signs by Shunt Size</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Shunt Size</th><th>Findings</th></tr>
+<tr><td><b>Small shunts</b></td><td>Loud, harsh <b>holosystolic murmur</b> in the left 3rd/4th interspaces along the sternum; <b>systolic thrill</b></td></tr>
+<tr><td><b>Larger shunts</b></td><td>RV volume and pressure overload; pulmonary regurgitation; <b>late finding:</b> cyanosis from right-to-left shunting &mdash; <b>Eisenmenger syndrome</b></td></tr>
+</table>
+</div>
+
+<h3>Eisenmenger Syndrome — Pathophysiology</h3>
+<div class="callout">
+Uncorrected left-to-right shunt (since systemic pressure &gt; pulmonary pressure) &rarr; <b>increased pulmonary blood flow</b> &rarr; pathologic pulmonary vascular remodeling &rarr; <b>pulmonary arterial hypertension</b> &rarr; <b>RV hypertrophy</b> as a compensatory mechanism (chronically straining to pump against abnormally high pulmonary pressures) &rarr; the shunt <b>reverses</b> to right-to-left &rarr; <b>cyanosis with pulmonary hypertension and an intracardiac shunt</b> = Eisenmenger syndrome.
+</div>
+<div class="pearl"><b>Board Tip</b> Eisenmenger syndrome can complicate <i>any</i> uncorrected left-to-right shunt lesion — it is not unique to VSD. It has now appeared as a potential complication of both ASD (Section 3) and VSD in this guide.</div>
+
+<h3>Presentation by Age</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Age Group</th><th>Presentation</th></tr>
+<tr><td>Baby</td><td>Poor eating, failure to thrive; fast/tachypnea, dyspnea; easy tiring</td></tr>
+<tr><td>Child</td><td>Dyspnea on exertion; not gaining weight; dyspnea when eating or crying</td></tr>
+<tr><td>Adult</td><td>Dyspnea on exertion, orthopnea; irregular heartbeat; fatigue/weakness</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with a long-standing, uncorrected VSD develops cyanosis. Workup reveals pulmonary hypertension with a shunt that has reversed from left-to-right to right-to-left. What is this condition called?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Eisenmenger syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tricuspid atresia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Truncus arteriosus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tetralogy of Fallot</button>
+<div class="quiz-explain"><b>Explanation:</b> Eisenmenger syndrome describes the reversal of a chronic left-to-right shunt to a right-to-left shunt due to progressive pulmonary arterial hypertension, resulting in cyanosis -- it can complicate any uncorrected left-to-right shunt lesion, including VSD and ASD.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Why does the right ventricle hypertrophy in the pathophysiologic progression toward Eisenmenger syndrome?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The right ventricle is directly damaged by the initial shunt</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The right ventricle compensates for chronically pumping against abnormally elevated pulmonary arterial pressures caused by pathologic vascular remodeling</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">RV hypertrophy occurs randomly and is unrelated to the shunt</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The left ventricle transfers its workload directly to the right ventricle</button>
+<div class="quiz-explain"><b>Explanation:</b> As pulmonary vascular remodeling and pulmonary arterial hypertension develop from chronic increased pulmonary blood flow, the right ventricle hypertrophies as a compensatory mechanism to continue pumping against these elevated pressures.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. An infant with a moderate VSD is brought in for poor eating and failure to thrive, with fast breathing and easy tiring. Which age group's typical presentation does this match?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This does not match any typical VSD presentation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Adult presentation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Baby presentation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Presentation is identical across all ages</button>
+<div class="quiz-explain"><b>Explanation:</b> Poor eating, failure to thrive, tachypnea/dyspnea, and easy tiring are the classic presentation of VSD in babies, distinct from the dyspnea on exertion and weight concerns seen in children or the orthopnea and fatigue seen in adults.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec6">
+<h2>6. VSD: EKG, CXR, Imaging &amp; Management</h2>
+
+<h3>EKG Findings</h3>
+<div class="callout">May be <b>normal</b>, or show <b>right, left, or biventricular hypertrophy</b> depending on shunt size/direction.</div>
+<div class="pearl"><b>Applying Sokolow-Lyon Criteria to VSD</b> Example: S wave in V1 = 15 mm (3 large boxes) + R wave in V6 = 30 mm (6 large boxes) = 45 mm total, which exceeds the 35 mm threshold &rarr; meets voltage criteria for <b>LVH</b>, consistent with a VSD causing left heart volume overload.</div>
+
+<h3>Chest X-Ray Findings</h3>
+<ul>
+<li>Left ventricular hypertrophy; left atrial enlargement</li>
+<li>Enlarged pulmonary arteries and increased pulmonary vascularity</li>
+</ul>
+
+<h3>Imaging Modalities</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Modality</th><th>Use</th></tr>
+<tr><td>Echocardiography (with Doppler)</td><td>Chamber sizes; magnitude of shunting; estimation of RV systolic pressure; valvular regurgitation</td></tr>
+<tr><td>MRI or CT</td><td>Adjunct for cardiac anatomy</td></tr>
+<tr><td>Cardiac catheterization</td><td>PA pressure/systemic pressure ratio</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Critical Inoperability Cutoff</b> A PA pressure/systemic pressure ratio <b>&gt;0.67</b> on cardiac catheterization is considered <b>inoperable</b> — analogous to (though numerically distinct from) the 2/3 systemic pressure cutoff used for ASD closure eligibility.</div>
+
+<h3>Neonatal Monitoring &amp; Management Approach</h3>
+<ul>
+<li>Degree of shunting varies during the <b>first week of life</b> as the infant transitions from intrauterine to extrauterine circulation (changing pulmonary/systemic vascular resistance)</li>
+<li><b>Small VSD:</b> likely to remain asymptomatic; reasonable chance of spontaneous closure</li>
+<li><b>Moderate/large VSD:</b> often become symptomatic in the first months of life as pulmonary vascular resistance normally declines (unmasking the shunt); monitor for tachypnea, increased work of breathing, poor weight gain/failure to thrive</li>
+</ul>
+
+<h3>Treatment</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Approach</th><th>Detail</th></tr>
+<tr><td><b>Direct patch closure</b> (cardiopulmonary bypass)</td><td>Procedure of choice for surgical candidates; excellent outcomes with low mortality/reoperation rates</td></tr>
+<tr><td>Transcatheter closure</td><td>Reported for muscular, peri-membranous, and residual VSD after surgical repair; technically challenging with a <b>higher complication rate than surgery</b></td></tr>
+</table>
+</div>
+<ul>
+<li>Patients with repaired VSD and normal pulmonary artery pressures generally have <b>normal lifespans</b>; late problems are uncommon (occasional aortic or tricuspid valve issues)</li>
+<li>Lifelong follow-up with an <b>adult congenital heart disease cardiologist</b> is recommended after repair</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. On cardiac catheterization, a patient being evaluated for VSD closure has a PA pressure/systemic pressure ratio of 0.75. What is the clinical significance?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This ratio is normal and closure should proceed without concern</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This measurement is not relevant to surgical decision-making for VSD</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This ratio indicates the defect is small and does not require closure</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">This ratio exceeds the 0.67 threshold, indicating the defect is likely inoperable</button>
+<div class="quiz-explain"><b>Explanation:</b> A PA pressure/systemic pressure ratio greater than 0.67 is considered the threshold beyond which a VSD is deemed inoperable, reflecting pulmonary vascular disease too advanced for safe correction.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Why do infants with moderate or large VSDs often become symptomatic specifically in the first few months of life, rather than immediately at birth?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">As pulmonary vascular resistance normally declines after birth, the left-to-right shunt increases, unmasking symptoms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Symptoms are unrelated to changes in vascular resistance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This pattern is not actually observed clinically</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The VSD does not actually exist until several months after birth</button>
+<div class="quiz-explain"><b>Explanation:</b> At birth, pulmonary vascular resistance is still relatively high, which limits left-to-right shunting through a VSD. As pulmonary vascular resistance normally declines over the following weeks to months, the shunt increases, unmasking symptoms of volume overload.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What is the procedure of choice for surgical closure of a significant VSD, and how does its outcome compare to transcatheter closure?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Transcatheter closure; it has a lower complication rate than surgery in all cases</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Direct patch closure under cardiopulmonary bypass; it has excellent outcomes with lower complication rates than the technically challenging transcatheter approach</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither approach is used for VSD; medical management alone is sufficient</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Heart transplantation is the only definitive treatment</button>
+<div class="quiz-explain"><b>Explanation:</b> Direct patch closure under cardiopulmonary bypass is the procedure of choice for VSD, with excellent outcomes and low mortality/reoperation rates, whereas transcatheter closure -- while reported for select cases -- remains technically challenging with a higher complication rate.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec7">
+<h2>7. Complete Atrioventricular Septal Defect (AVSD)</h2>
+
+<div class="callout">Complete AVSD = a <b>central endocardial cushion defect</b> that allows blood to flow between <b>all four chambers</b> of the heart, with <b>one common AV valve</b> instead of separate mitral and tricuspid valves.</div>
+
+<h3>Embryologic Mechanism</h3>
+<ul>
+<li>In the embryo, a single common AV valve normally separates into two distinct valves — the tricuspid and mitral valves</li>
+<li>In complete AVSD, this <b>common valve fails to separate</b>, and the <b>septae between the atria and ventricles fail to fuse</b></li>
+<li>The resulting common valve has leaflets that may be malformed or fail to close tightly, contributing to regurgitation</li>
+</ul>
+<div class="pearl"><b>Connecting the Dots</b> Recall from Section 4 that AVSD is the <b>most common heart defect in Down syndrome (45%)</b> — this direct link to disrupted endocardial cushion development explains why Down syndrome, ostium primum ASD, and complete AVSD are all closely associated with one another on exams.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the fundamental embryologic defect underlying a complete atrioventricular septal defect?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Transposition of the great vessels</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Failure of the ductus arteriosus to close after birth</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A central endocardial cushion defect preventing separation of the common AV valve and fusion of the atrial/ventricular septae</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Isolated failure of the pulmonary valve to form</button>
+<div class="quiz-explain"><b>Explanation:</b> Complete AVSD results from a central endocardial cushion defect: the common AV valve fails to separate into distinct tricuspid and mitral valves, and the septae between the atria and ventricles fail to fuse, allowing blood flow between all four chambers.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Complete AVSD is most strongly associated with which congenital condition, accounting for its highest proportion of heart defects?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Turner syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Noonan syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Marfan syndrome</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Down syndrome (trisomy 21)</button>
+<div class="quiz-explain"><b>Explanation:</b> Complete AVSD is the most common heart defect in Down syndrome, accounting for 45% of cardiac defects in this population, reflecting the shared underlying mechanism of disrupted endocardial cushion development.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. In a complete AVSD, how many distinct atrioventricular valves are present, and what is the functional consequence?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">One common AV valve, with leaflets that may be malformed and fail to close tightly, contributing to regurgitation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Three AV valves due to septal duplication</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No AV valve is present at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Two normally formed valves with no functional consequence</button>
+<div class="quiz-explain"><b>Explanation:</b> In complete AVSD, there is one common AV valve rather than separate mitral and tricuspid valves; this common valve's leaflets may be malformed or fail to close tightly, contributing to valvular regurgitation.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec8">
+<h2>8. Fetal Circulation &amp; Transition to Postnatal Life</h2>
+
+<h3>Fetal Circulation</h3>
+<div class="callout">Oxygenated blood from the placenta enters the fetus via the <b>umbilical vein</b> and reaches the <b>right atrium</b> (via the IVC/ductus venosus pathway). From there:</div>
+<ul>
+<li>Most blood flows through the <b>foramen ovale</b> into the <b>left atrium</b> — a natural shunt that <b>bypasses the fluid-filled fetal lungs</b></li>
+<li>The remainder enters the <b>right ventricle</b>; because fetal pulmonary vascular resistance is <b>high</b> (lungs aren't yet breathing air), most of this blood is shunted from the <b>pulmonary artery into the aorta via the ductus arteriosus</b>, again bypassing the lungs</li>
+<li>The <b>lower body</b> is supplied partly via blood passing through the patent ductus arteriosus</li>
+<li>Blood in the <b>left ventricle</b> is pumped out the aorta to supply the <b>brain</b> and upper body</li>
+</ul>
+
+<h3>The Transition at Birth</h3>
+<div class="callout">
+1. Umbilical cord is clamped &mdash; placental blood/nutrient supply stops<br>
+2. First breath &rarr; lungs expand &rarr; alveolar fluid clears<br>
+3. Systemic blood pressure <b>increases</b>; pulmonary vascular resistance <b>drops sharply</b><br>
+4. Reduced need for the ductus arteriosus to shunt blood &rarr; <b>ductus arteriosus closes</b> (becomes the ligamentum arteriosum)<br>
+5. Increased pulmonary blood return raises <b>left atrial pressure</b>, which now exceeds right atrial pressure &rarr; this pressure shift pushes the septum primum flap closed against the septum secundum &rarr; <b>foramen ovale closes</b> (becomes the fossa ovalis)
+</div>
+<div class="pearl"><b>Why This Matters Clinically</b> Some congenital cyanotic lesions (Section 9) are only survivable in the newborn period because the ductus arteriosus is still open. Recognizing this transition explains why <b>prostaglandin E1 (PGE1)</b> is used to keep the ductus <i>artificially</i> open in these babies until surgical correction is possible.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. In fetal circulation, why does most blood entering the right atrium get shunted through the foramen ovale into the left atrium rather than passing through the right ventricle and pulmonary artery?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The right ventricle is absent in the fetus</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The fetal lungs are fluid-filled and non-functional for gas exchange, so this shunt bypasses the unnecessary pulmonary circulation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The foramen ovale actively pumps blood in this direction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This description is inaccurate; fetal blood always flows through the lungs first</button>
+<div class="quiz-explain"><b>Explanation:</b> Since fetal lungs are fluid-filled and not yet functioning for gas exchange, shunting blood from the right atrium directly to the left atrium via the foramen ovale bypasses the unnecessary pulmonary circulation, directing oxygenated placental blood toward the systemic circulation and brain.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the key hemodynamic change at birth that triggers closure of the foramen ovale?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Closure occurs independently of any pressure changes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A sudden drop in left atrial pressure below right atrial pressure</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">An increase in left atrial pressure (from increased pulmonary venous return) that now exceeds right atrial pressure, pushing the septal flap closed</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Complete absence of any pressure change in either atrium</button>
+<div class="quiz-explain"><b>Explanation:</b> As pulmonary blood flow increases after birth, left atrial pressure rises and now exceeds right atrial pressure; this pressure gradient pushes the septum primum flap against the septum secundum, functionally closing the foramen ovale.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is prostaglandin E1 (PGE1) administered to neonates with certain cyanotic congenital heart defects?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">To increase pulmonary vascular resistance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">To close the foramen ovale more rapidly</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">To promote closure of the ductus arteriosus as quickly as possible</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">To keep the ductus arteriosus artificially open, since these lesions require this shunt for survival until surgical correction</button>
+<div class="quiz-explain"><b>Explanation:</b> PGE1 is used to keep the ductus arteriosus patent in neonates with ductal-dependent cyanotic lesions, since closure of this shunt (which normally occurs after birth) would be fatal before surgical correction can be performed.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec9">
+<h2>9. Cyanotic Heart Disease Overview: The "5 T's"</h2>
+
+<h3>Classic Case</h3>
+<div class="callout">A <b>6-week-old female infant</b> presents with respiratory distress: wheezing, increased work of breathing, pale/mottled with <b>cyanosis around the lips</b>. Vitals: T 35.2&deg;C, HR 169, RR 50, <b>O2 sat on room air 72%</b>, BP 38/23. This presentation should immediately prompt consideration of cyanotic congenital heart lesions.</div>
+
+<h3>The "5 T's" of Cyanotic Heart Disease</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>Core Defect</th></tr>
+<tr><td><b>T</b>ransposition of the great arteries (TGA)</td><td>Aorta arises from the RV, pulmonary artery from the LV — complete separation of systemic and pulmonary circuits</td></tr>
+<tr><td><b>T</b>runcus arteriosus</td><td>A single truncal vessel fails to divide into the aorta and pulmonary trunk</td></tr>
+<tr><td><b>T</b>ricuspid atresia</td><td>Failure of tricuspid valve development</td></tr>
+<tr><td><b>T</b>otal anomalous pulmonary venous return (TAPVR)</td><td>Pulmonary veins fail to connect normally to the left atrium</td></tr>
+<tr><td><b>T</b>etralogy of Fallot</td><td>See Sections 10&ndash;12</td></tr>
+</table>
+</div>
+<div class="callout">Other (less common) causes: single ventricle, hypoplastic left heart syndrome, double outlet right ventricle, single atrium, pulmonic stenosis or atresia.</div>
+
+<h3>Transposition of the Great Arteries (TGA)</h3>
+<ul>
+<li>Complete separation of pulmonary and systemic circulations — incompatible with life without a shunt allowing blood mixing</li>
+<li>Often detected prenatally or shortly after birth</li>
+<li>A shunt (patent ductus arteriosus, ASD, or VSD) is needed to allow mixing; the ductus must be kept open (PGE1) pending prompt surgical correction</li>
+</ul>
+
+<h3>Truncus Arteriosus</h3>
+<ul>
+<li>The primary truncal vessel fails to divide into separate pulmonary and aortic trunks</li>
+<li>Detected prenatally or immediately after birth</li>
+<li>Shunts (e.g., ductus arteriosus) are required for any chance of survival pending prompt surgical correction</li>
+</ul>
+
+<h3>Tricuspid Atresia</h3>
+<div class="callout">Failure of tricuspid valve development. Requires maintenance of a patent ductus arteriosus (treat with <b>prostaglandin</b>) to supply blood flow to the lungs, pending surgical management.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which mnemonic groups the five classic causes of cyanotic congenital heart disease, and what are they?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The '5 T's': Transposition of the great arteries, Truncus arteriosus, Tricuspid atresia, Total anomalous pulmonary venous return, Tetralogy of Fallot</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The '5 A's': ASD, Aortic stenosis, Atrial flutter, Anomalous coronary artery, Aortic coarctation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The '5 P's': Pulmonic stenosis, PDA, PFO, Pericarditis, Pulmonary hypertension</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The '5 V's': VSD, Ventricular hypertrophy, Valve prolapse, Vasculitis, Vena cava anomaly</button>
+<div class="quiz-explain"><b>Explanation:</b> The '5 T's' -- Transposition of the great arteries, Truncus arteriosus, Tricuspid atresia, Total anomalous pulmonary venous return, and Tetralogy of Fallot -- are the classic causes of cyanotic congenital heart disease most likely to be tested.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. In transposition of the great arteries, why is a shunt (such as a PDA, ASD, or VSD) necessary for the infant's survival?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The heart is too small to pump blood without a shunt</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">TGA creates complete separation of the systemic and pulmonary circulations, so a shunt is the only way for oxygenated and deoxygenated blood to mix</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The shunt directly oxygenates the blood itself</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Shunts are not actually necessary in TGA</button>
+<div class="quiz-explain"><b>Explanation:</b> In TGA, the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, creating two parallel, separate circulations. Without a shunt allowing blood to mix between these circuits, the infant cannot survive, since oxygenated blood would never reach the systemic circulation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. An infant with tricuspid atresia requires which medication to maintain ductal patency prior to surgical correction?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Digoxin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Furosemide</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Prostaglandin E1</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Indomethacin</button>
+<div class="quiz-explain"><b>Explanation:</b> Prostaglandin E1 is used to maintain patency of the ductus arteriosus in tricuspid atresia (and other ductal-dependent cyanotic lesions), ensuring adequate pulmonary blood flow until surgical correction can be performed.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec10">
+<h2>10. Tetralogy of Fallot: Components &amp; Pathophysiology</h2>
+
+<div class="callout">Tetralogy of Fallot (TOF) is the <b>most common cyanotic heart defect</b>, accounting for <b>5&ndash;7%</b> of congenital heart defects.</div>
+
+<h3>The Four Components — Mnemonic: "I have to PROVE..."</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Letter</th><th>Component</th></tr>
+<tr><td><b>P</b></td><td><b>P</b>ulmonary stenosis</td></tr>
+<tr><td><b>R</b></td><td><b>R</b>ight ventricular hypertrophy</td></tr>
+<tr><td><b>O</b></td><td><b>O</b>verriding aorta</td></tr>
+<tr><td><b>V</b></td><td><b>V</b>SD</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Memory Aid</b> "I have to <b>PROVE</b> that the patient has tetralogy" — P-R-O-V spells out the four defects in order.</div>
+
+<h3>Severity Determinant</h3>
+<div class="callout">Severity is determined by the <b>degree of right ventricular outflow tract (RVOT) obstruction</b> (i.e., how severe the pulmonary stenosis is):</div>
+<div class="table-scroll">
+<table>
+<tr><th>Degree of Obstruction</th><th>Shunt Direction</th><th>Clinical Result</th></tr>
+<tr><td>Lesser obstruction</td><td>Left-to-right</td><td>Allows for oxygenation — less severe cyanosis</td></tr>
+<tr><td>Greater obstruction</td><td>Right-to-left</td><td>Cyanosis</td></tr>
+</table>
+</div>
+
+<h3>Associations</h3>
+<ul>
+<li><b>Trisomy 21</b> (Down syndrome)</li>
+<li><b>DiGeorge syndrome</b></li>
+<li><b>Velocardiofacial syndrome</b></li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Using the mnemonic 'I have to PROVE...' for the four components of Tetralogy of Fallot, what does the letter 'O' represent?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Open ductus arteriosus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Outflow tract atresia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Obstructed tricuspid valve</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Overriding aorta</button>
+<div class="quiz-explain"><b>Explanation:</b> In the PROVE mnemonic for Tetralogy of Fallot, 'O' stands for overriding aorta -- the aorta sits above the VSD, receiving blood from both ventricles -- alongside Pulmonary stenosis, Right ventricular hypertrophy, and VSD.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What determines the clinical severity of cyanosis in a patient with Tetralogy of Fallot?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The degree of right ventricular outflow tract obstruction (severity of pulmonary stenosis)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The patient's birth weight</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The presence or absence of a patent foramen ovale</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The size of the atrial septal defect, if present</button>
+<div class="quiz-explain"><b>Explanation:</b> The severity of Tetralogy of Fallot, and specifically the degree of cyanosis, is determined by the severity of right ventricular outflow tract obstruction: lesser obstruction allows a left-to-right shunt with adequate oxygenation, while greater obstruction forces a right-to-left shunt causing cyanosis.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Tetralogy of Fallot is associated with which of the following syndromes?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Marfan syndrome only</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Trisomy 21, DiGeorge syndrome, and velocardiofacial syndrome</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Turner syndrome exclusively</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No genetic syndromes are associated with TOF</button>
+<div class="quiz-explain"><b>Explanation:</b> Tetralogy of Fallot is associated with trisomy 21 (Down syndrome), DiGeorge syndrome, and velocardiofacial syndrome, reflecting shared underlying developmental pathways affecting cardiac outflow tract formation.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec11">
+<h2>11. Tetralogy of Fallot: Tet Spells &amp; Clinical Presentation</h2>
+
+<h3>Presentation by Age</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Age</th><th>Presentation</th></tr>
+<tr><td><b>Neonate</b></td><td>Critically ill, cyanotic; decreased paO2/SpO2; <b>requires PGE1</b> to keep the PDA patent</td></tr>
+<tr><td><b>Up to 1st year of life</b></td><td>Dyspnea on exertion; cyanosis; exercise-induced "squatting"; <b>"Tet" spells</b></td></tr>
+</table>
+</div>
+
+<h3>Tet Spells — Mechanism</h3>
+<div class="callout">Hypercyanotic episodes precipitated by a sudden increase in right-to-left shunting. Elicited by feeding, crying, or exertion; may also be spontaneous.</div>
+<ul>
+<li>Classical description: the patient becomes cyanotic, then instinctively <b>squats</b> to relieve the cyanosis/hypoxia</li>
+</ul>
+<div class="pearl"><b>Why Squatting Works</b> Squatting <b>increases systemic vascular resistance and aortic pressure</b>. This <b>decreases right-to-left shunting</b> across the VSD (there's now more resistance pushing blood the "wrong way" out to the body, so more blood is forced through the stenotic pulmonary outflow toward the lungs instead) &mdash; allowing more blood to reach the lungs for oxygenation and raising arterial O2 saturation.</div>
+
+<h3>Cardiac Exam</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Detail</th></tr>
+<tr><td>Right ventricular outflow tract murmur</td><td><b>Crescendo-decrescendo</b> harsh systolic ejection murmur</td></tr>
+<tr><td>Location</td><td>Loudest at the <b>left mid-to-upper sternal border</b>; radiates <b>posteriorly</b></td></tr>
+<tr><td>Heart sounds</td><td>Normal S1; <b>single S2</b> (due to diminished P2, since the pulmonic valve component is weak/soft from stenosis)</td></tr>
+<tr><td>Cyanosis</td><td>Visible in the lips and nail beds</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A toddler with known Tetralogy of Fallot suddenly becomes cyanotic during feeding and instinctively squats. What physiologic effect does squatting have that improves the child's oxygenation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Squatting has no physiologic effect and is purely behavioral</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Squatting decreases systemic vascular resistance, increasing right-to-left shunting</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Squatting increases systemic vascular resistance and aortic pressure, which decreases right-to-left shunting and forces more blood toward the lungs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Squatting directly closes the VSD temporarily</button>
+<div class="quiz-explain"><b>Explanation:</b> Squatting increases systemic vascular resistance and aortic pressure, which decreases right-to-left shunting across the VSD, forcing more blood through the pulmonary outflow tract to be oxygenated in the lungs, thereby raising arterial oxygen saturation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. On cardiac auscultation, a patient with Tetralogy of Fallot has a single S2 sound. What is the explanation for this finding?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This finding is unrelated to Tetralogy of Fallot</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It reflects a superimposed complete heart block</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Complete absence of the aortic valve component (A2)</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Diminished P2 (pulmonic component) due to the underlying pulmonary stenosis</button>
+<div class="quiz-explain"><b>Explanation:</b> The single S2 in Tetralogy of Fallot results from a diminished P2 (pulmonic valve closure sound) due to the underlying pulmonary stenosis, making the aortic component (A2) the dominant or only audible component of S2.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A neonate with Tetralogy of Fallot is critically ill and cyanotic shortly after birth. What medication is required to stabilize this patient prior to surgical intervention?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Prostaglandin E1 (PGE1)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Digoxin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Furosemide</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Indomethacin</button>
+<div class="quiz-explain"><b>Explanation:</b> PGE1 is required in critically ill cyanotic neonates with Tetralogy of Fallot to maintain patency of the ductus arteriosus, ensuring adequate pulmonary blood flow until surgical correction can be performed.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec12">
+<h2>12. Tetralogy of Fallot: Diagnostics &amp; Surgical Repair</h2>
+
+<h3>EKG Findings</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Finding</th><th>Note</th></tr>
+<tr><td>Right ventricular hypertrophy</td><td>&mdash;</td></tr>
+<tr><td>Right axis deviation</td><td>&mdash;</td></tr>
+<tr><td>RBBB</td><td>Commonly seen <b>after surgical repair</b></td></tr>
+<tr><td><b>QRS &gt;180 msec</b></td><td>Associated with the <b>greatest risk of sudden death</b></td></tr>
+</table>
+</div>
+
+<h3>Chest X-Ray</h3>
+<div class="callout"><b>"Boot-shaped heart"</b> (<i>Coeur en Sabot</i>) — prominent right ventricle, concave right ventricular outflow tract; enlarged right-sided aorta in some cases.</div>
+<div class="pearl"><b>Fun Fact</b> "Sabot" is a wooden shoe; the heart's silhouette resembles this shoe shape. (Historical aside: the word "sabotage" is said to derive from workers throwing their wooden sabots into machinery.)</div>
+
+<h3>Echocardiography</h3>
+<ul>
+<li>Unrestricted VSD; right ventricular infundibular (outflow tract) stenosis; overriding aorta</li>
+</ul>
+
+<h3>Surgical Repair</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Stage</th><th>Procedure</th></tr>
+<tr><td>Palliative (temporary)</td><td>A small synthetic shunt sewn between the aorta and pulmonary artery, to provide adequate pulmonary blood flow until the child is ready for complete repair</td></tr>
+<tr><td>Complete/definitive repair</td><td>Temporary shunt is closed; <b>VSD closed with a patch</b>; RVOT widened by removing thickened muscle below the pulmonary valve; obstructive pulmonary valve repaired or removed; branch pulmonary arteries enlarged if needed</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A postoperative patient with repaired Tetralogy of Fallot has a QRS duration of 190 msec on EKG. What is the clinical significance of this finding?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is a normal, expected finding with no clinical significance</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A QRS duration greater than 180 msec is associated with the greatest risk of sudden death in this population</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This finding indicates the repair failed completely</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">QRS duration is unrelated to prognosis in repaired TOF</button>
+<div class="quiz-explain"><b>Explanation:</b> A QRS duration greater than 180 msec in patients with Tetralogy of Fallot (particularly post-repair) is associated with the greatest risk of sudden death, making this an important EKG parameter to monitor.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What classic chest X-ray finding, resembling a type of wooden footwear, is associated with Tetralogy of Fallot?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Snowman sign</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Water-bottle heart</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Boot-shaped heart (Coeur en Sabot)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Egg-on-a-string sign</button>
+<div class="quiz-explain"><b>Explanation:</b> The boot-shaped heart, or Coeur en Sabot (named for a wooden shoe called a sabot), is the classic chest X-ray finding in Tetralogy of Fallot, reflecting a prominent right ventricle and concave right ventricular outflow tract.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. During the definitive (complete) surgical repair of Tetralogy of Fallot, which structure is closed with a patch?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The foramen ovale</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The ductus arteriosus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The atrial septal defect</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The ventricular septal defect (VSD)</button>
+<div class="quiz-explain"><b>Explanation:</b> During complete repair of Tetralogy of Fallot, the VSD is closed with a patch, the right ventricular outflow tract is widened by removing thickened muscle, and the obstructive pulmonary valve is repaired or removed as needed.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec13">
+<h2>13. Patent Ductus Arteriosus &amp; Coarctation of the Aorta</h2>
+
+<div class="gap-notice"><b>Coverage Note:</b> In the source lecture, these two topics were each presented as a title slide pointing to a separate embedded supplemental video ("please watch the full video for this slide in the supplement handout PowerPoint") rather than as slide bullets or narrated content. That embedded video content was not available to build this guide from. The summary below reflects standard, well-established teaching on these two lesions so you have a working baseline — but you should treat your own viewing of the embedded PDA/coarctation videos as the authoritative source for anything more specific (exact numbers, exam-style phrasing) your instructor wants you to know, since that content could not be independently verified against this guide.</div>
+
+<h3>Patent Ductus Arteriosus (PDA) — Baseline Overview</h3>
+<ul>
+<li>Failure of the ductus arteriosus (the fetal vessel connecting the pulmonary artery to the aorta) to close after birth</li>
+<li>Produces a persistent left-to-right shunt (aorta &rarr; pulmonary artery, since aortic pressure normally exceeds pulmonary pressure postnatally)</li>
+<li>Classic exam finding: <b>continuous "machinery" murmur</b></li>
+<li>Small PDAs may be asymptomatic; larger ones can cause left heart volume overload, failure to thrive, and (if uncorrected) pulmonary hypertension with eventual Eisenmenger physiology</li>
+<li>Management: pharmacologic closure (e.g., indomethacin/NSAIDs) in premature infants, or surgical/catheter-based closure; conversely, PGE1 is used to <i>keep</i> a PDA open in ductal-dependent cyanotic lesions (see Section 9)</li>
+</ul>
+
+<h3>Coarctation of the Aorta — Baseline Overview</h3>
+<ul>
+<li>Narrowing of the aorta, classically near the ligamentum arteriosum (the site of the closed ductus arteriosus)</li>
+<li>Classic exam findings: <b>upper extremity hypertension with diminished/delayed femoral pulses</b> (brachial-femoral pulse delay), lower extremity blood pressure lower than upper extremity</li>
+<li>Associated with <b>bicuspid aortic valve</b> and <b>Turner syndrome</b></li>
+<li>Chest X-ray finding in older children/adults: <b>"rib notching"</b> from collateral vessel formation</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the classic auscultatory finding associated with a patent ductus arteriosus?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A continuous 'machinery' murmur</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A mid-systolic click</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">An opening snap</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A diastolic decrescendo murmur</button>
+<div class="quiz-explain"><b>Explanation:</b> PDA classically produces a continuous 'machinery' murmur, reflecting the persistent left-to-right shunt from the aorta to the pulmonary artery throughout both systole and diastole.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A child is found to have hypertension in the upper extremities with diminished and delayed femoral pulses compared to the brachial pulses. What congenital lesion does this suggest?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Patent ductus arteriosus</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Coarctation of the aorta</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Tricuspid atresia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Truncus arteriosus</button>
+<div class="quiz-explain"><b>Explanation:</b> Upper extremity hypertension with diminished/delayed femoral pulses (brachial-femoral pulse delay) is the classic presentation of coarctation of the aorta, a narrowing typically located near the ligamentum arteriosum.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Coarctation of the aorta is classically associated with which chromosomal condition and which valve abnormality?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Trisomy 18 and pulmonic stenosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Down syndrome and mitral valve prolapse</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Turner syndrome and bicuspid aortic valve</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Klinefelter syndrome and tricuspid atresia</button>
+<div class="quiz-explain"><b>Explanation:</b> Coarctation of the aorta is classically associated with Turner syndrome and with a bicuspid aortic valve, an important pairing of findings to recognize together on exams.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec14">
+<h2>14. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review — every core fact condensed to what's most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>ASD Types at a Glance</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Frequency</th><th>Mechanism</th><th>Key Fact</th></tr>
+<tr><td>Ostium secundum</td><td>80%</td><td>Excess septum primum resorption or interrupted septum secundum</td><td>Most common ASD; right axis deviation on EKG</td></tr>
+<tr><td>Ostium primum</td><td>15%</td><td>Incomplete septum primum/AV cushion fusion</td><td>Associated with Down syndrome; left axis deviation on EKG</td></tr>
+<tr><td>PFO</td><td>Common</td><td>Overlap without closure of septum primum/secundum</td><td>Functions as a valve; usually asymptomatic (high LA pressure keeps it shut); paradoxical embolism risk</td></tr>
+</table>
+</div>
+
+<h3>ASD Clinical/Diagnostic/Treatment Facts</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Physical exam</td><td>Systolic ejection murmur (turbulent pulmonic flow) + fixed split S2</td></tr>
+<tr><td>Complications</td><td>AFib, heart failure, paradoxical systemic embolization</td></tr>
+<tr><td>Treatment threshold</td><td>L-to-R shunt ratio &ge;1.5:1</td></tr>
+<tr><td>Closure precluded if</td><td>Pulmonary systolic pressure &gt;2/3 systemic systolic pressure</td></tr>
+</table>
+</div>
+
+<h3>VSD Types &amp; Sizes</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Key Fact</th></tr>
+<tr><td>Muscular</td><td>Most common; often closes spontaneously</td></tr>
+<tr><td>Membranous</td><td>Most commonly operated on; rarely closes spontaneously</td></tr>
+<tr><td>Inlet/AV canal</td><td>Beneath tricuspid/mitral valves; part of AVSD</td></tr>
+<tr><td>Conal/outflow tract</td><td>Rarest; below pulmonary valve</td></tr>
+<tr><td>Size grading</td><td>Small &lt;25%, Moderate 25-75%, Unrestricted &gt;75% of aortic root diameter</td></tr>
+</table>
+</div>
+
+<h3>VSD Clinical/Diagnostic Facts</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Small shunt</td><td>Loud holosystolic murmur + systolic thrill</td></tr>
+<tr><td>Large shunt</td><td>RV volume/pressure overload -> pulm regurgitation -> late cyanosis -> Eisenmenger</td></tr>
+<tr><td>Down syndrome breakdown</td><td>AVSD 45% &gt; VSD 35% &gt; ASD 8% &gt; PDA 7% &gt; TOF 4%</td></tr>
+<tr><td>Inoperable cutoff</td><td>PA/systemic pressure ratio &gt;0.67</td></tr>
+<tr><td>Treatment of choice</td><td>Direct patch closure under CPB (transcatheter = higher complication rate)</td></tr>
+</table>
+</div>
+
+<h3>Eisenmenger Syndrome Pathway</h3>
+<div class="callout">Uncorrected L-to-R shunt &rarr; &uarr;pulmonary blood flow &rarr; pathologic vascular remodeling &rarr; pulmonary arterial HTN &rarr; RVH (compensatory) &rarr; shunt reverses to R-to-L &rarr; cyanosis. Can complicate ASD, VSD, PDA, or AVSD.</div>
+
+<h3>Fetal-to-Postnatal Circulation Transition</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Fetal Structure</th><th>Function</th><th>Postnatal Fate</th></tr>
+<tr><td>Foramen ovale</td><td>RA -&gt; LA shunt, bypasses lungs</td><td>Closes (LA pressure &gt; RA pressure) -&gt; fossa ovalis</td></tr>
+<tr><td>Ductus arteriosus</td><td>PA -&gt; aorta shunt, bypasses lungs</td><td>Closes (&darr;pulmonary resistance) -&gt; ligamentum arteriosum</td></tr>
+<tr><td>Ductus venosus</td><td>Bypasses fetal liver</td><td>Closes -&gt; ligamentum venosum</td></tr>
+</table>
+</div>
+
+<h3>Cyanotic Heart Disease: The "5 T's"</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>Core Defect</th><th>Key Management</th></tr>
+<tr><td>Transposition of great arteries</td><td>Aorta from RV, PA from LV (parallel circuits)</td><td>Shunt needed for mixing + prompt surgery</td></tr>
+<tr><td>Truncus arteriosus</td><td>Single trunk fails to divide</td><td>Shunt needed + prompt surgery</td></tr>
+<tr><td>Tricuspid atresia</td><td>Tricuspid valve fails to develop</td><td>PGE1 (maintain PDA) + surgery</td></tr>
+<tr><td>Total anomalous pulmonary venous return</td><td>Pulm veins don't connect to LA</td><td>Surgical correction</td></tr>
+<tr><td>Tetralogy of Fallot</td><td>See below</td><td>PGE1 in neonate, staged surgical repair</td></tr>
+</table>
+</div>
+
+<h3>Tetralogy of Fallot — Complete Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Key Fact</th></tr>
+<tr><td>Components (PROVE)</td><td>Pulmonary stenosis, RVH, Overriding aorta, VSD</td></tr>
+<tr><td>Epidemiology</td><td>Most common cyanotic heart defect; 5-7% of CHD</td></tr>
+<tr><td>Severity determinant</td><td>Degree of RVOT obstruction (more obstruction = more R-to-L shunt = more cyanosis)</td></tr>
+<tr><td>Associations</td><td>Trisomy 21, DiGeorge, velocardiofacial syndrome</td></tr>
+<tr><td>Tet spells</td><td>Sudden &uarr;R-to-L shunt; squatting -&gt; &uarr;SVR -&gt; &darr;R-to-L shunt -&gt; &uarr;pulmonary flow -&gt; &uarr;O2 sat</td></tr>
+<tr><td>Murmur</td><td>Crescendo-decrescendo, left mid-upper sternal border, radiates posteriorly; single S2 (&darr;P2)</td></tr>
+<tr><td>EKG</td><td>RVH, RAD, RBBB (post-repair); QRS &gt;180ms = greatest SCD risk</td></tr>
+<tr><td>CXR</td><td>Boot-shaped heart (Coeur en Sabot)</td></tr>
+<tr><td>Echo</td><td>Unrestricted VSD, RV infundibular stenosis, overriding aorta</td></tr>
+<tr><td>Repair</td><td>Palliative shunt (aorta-to-PA) -&gt; definitive repair (VSD patch + RVOT widening +/- valve work)</td></tr>
+</table>
+</div>
+
+<h3>PDA &amp; Coarctation Quick Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Lesion</th><th>Classic Finding</th><th>Association</th></tr>
+<tr><td>PDA</td><td>Continuous "machinery" murmur</td><td>Closure: indomethacin/NSAIDs, surgery, or catheter; PGE1 keeps it OPEN in ductal-dependent lesions</td></tr>
+<tr><td>Coarctation of the aorta</td><td>Upper extremity HTN + brachial-femoral pulse delay; rib notching on CXR</td><td>Turner syndrome, bicuspid aortic valve</td></tr>
+</table>
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+function answerQuiz(btn, isCorrect) {
+  const qDiv = btn.closest('.quiz-q');
+  const choices = qDiv.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    const correctBtn = qDiv.querySelector('.quiz-choice[data-correct="true"]');
+    if (correctBtn) correctBtn.classList.add('correct');
+  }
+  const explain = qDiv.querySelector('.quiz-explain');
+  if (explain) explain.classList.add('show');
+}
+</script>
+
+</body>
+</html>
