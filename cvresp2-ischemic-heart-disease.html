@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ischemic Heart Disease — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a4f;
+    --incorrect:#a33c2f;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.8rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ columns:2; margin:10px 0 0; padding-left:20px; }
+  .top-contents li{ margin-bottom:6px; font-size:0.9rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-240px; top:0; height:100vh; width:230px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:3px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.78rem; padding:5px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+
+  .container{ max-width:900px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:20px 0 8px; letter-spacing:0.02em;
+  }
+  section.card p, section.card li{ font-size:0.95rem; }
+  section.card ul{ padding-left:22px; }
+
+  .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl{ background:#fdf3ea; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; margin:14px 0; font-size:0.9rem; }
+  .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; }
+  .case{ background:#f4f1ea; border:1px dashed var(--border); border-radius:8px; padding:14px 18px; margin:14px 0; }
+  .case-label{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--forest); display:block; margin-bottom:6px; }
+  .gap-notice{ background:#f7e6e3; border:1px dashed var(--incorrect); border-radius:8px; padding:12px 16px; margin:14px 0; font-size:0.87rem; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0 auto; min-width:560px; }
+  table{ border-collapse:collapse; width:100%; margin:12px auto 18px; font-size:0.85rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .quiz-block{ margin-top:24px; padding-top:18px; border-top:2px dashed var(--sage); }
+  .quiz-mini-header{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase;
+    color:var(--forest); letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .quiz-q{ background:#fffefb; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px; }
+  .quiz-q p.stem{ font-weight:600; margin:0 0 10px; font-size:0.93rem; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:7px; padding:9px 12px;
+    margin-bottom:7px; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+    cursor:pointer; transition:background 0.15s;
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:#e5f2e7; border-color:var(--correct); color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect{ background:#fbe9e6; border-color:var(--incorrect); color:var(--incorrect); }
+  .quiz-choice[disabled]{ cursor:default; }
+  .quiz-explain{
+    display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light);
+    border-left:3px solid var(--forest); border-radius:6px; font-size:0.87rem;
+  }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:700px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+
+<div class="header">
+  <h1>Ischemic Heart Disease</h1>
+  <p>Risk Factors, ACS, Risk Stratification &amp; Prevention</p>
+</div>
+
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+    <li><a href="#sec1">1. Ischemic Heart Disease: Definition &amp; Risk Factors</a></li>
+    <li><a href="#sec2">2. Pathophysiology: Atherosclerosis &amp; Plaque Rupture</a></li>
+    <li><a href="#sec3">3. Stable, Unstable &amp; Vasospastic Angina</a></li>
+    <li><a href="#sec4">4. Acute Coronary Syndrome: NSTEMI vs. STEMI</a></li>
+    <li><a href="#sec5">5. Symptoms of Coronary Ischemia &amp; Anginal Equivalents</a></li>
+    <li><a href="#sec6">6. Chest Pain: Differential Diagnosis &amp; Evaluation</a></li>
+    <li><a href="#sec7">7. Troponin I: Pathophysiology &amp; Role in Chest Pain Evaluation</a></li>
+    <li><a href="#sec8">8. Risk Stratification for Chest Pain &amp; Stress Testing</a></li>
+    <li><a href="#sec9">9. Diagnostic Testing: Imaging &amp; Angiography</a></li>
+    <li><a href="#sec10">10. ASCVD Risk Estimator &amp; Primary Prevention Overview</a></li>
+    <li><a href="#sec11">11. Primary Prevention: Lifestyle &amp; Risk Factor Management</a></li>
+    <li><a href="#sec12">12. Secondary Prevention</a></li>
+    <li><a href="#sec13">13. Acute Treatment of Cardiac Ischemia</a></li>
+    <li><a href="#sec14">14. Post-Acute/Chronic Treatment of Cardiac Ischemia</a></li>
+    <li><a href="#sec15">15. Complications of Myocardial Infarction</a></li>
+    <li><a href="#sec16">16. High-Yield Summary Tables</a></li>
+  </ul>
+</div>
+
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#sec1">IHD: Definition &amp; Risk</a>
+  <a href="#sec2">Pathophysiology</a>
+  <a href="#sec3">Angina Types</a>
+  <a href="#sec4">ACS: NSTEMI vs STEMI</a>
+  <a href="#sec5">Symptoms &amp; Equivalents</a>
+  <a href="#sec6">Chest Pain Differential</a>
+  <a href="#sec7">Troponin I</a>
+  <a href="#sec8">Risk Stratification</a>
+  <a href="#sec9">Imaging &amp; Angiography</a>
+  <a href="#sec10">ASCVD Risk Estimator</a>
+  <a href="#sec11">Primary Prevention</a>
+  <a href="#sec12">Secondary Prevention</a>
+  <a href="#sec13">Acute Treatment</a>
+  <a href="#sec14">Post-Acute Treatment</a>
+  <a href="#sec15">MI Complications</a>
+  <a href="#sec16">Summary Tables</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="sec1">
+<h2>1. Ischemic Heart Disease: Definition &amp; Risk Factors</h2>
+
+<div class="callout">Ischemic heart disease (IHD) is a broad term for clinical syndromes caused by <b>atherosclerosis and narrowing of the coronary arteries</b>. Narrowing limits blood flow; combined with myocardial O2 demand, this causes tissue <b>ischemia</b>. Mild/transient ischemia is recoverable; <b>severe or prolonged ischemia causes irreversible tissue death (infarction)</b>.</div>
+<div class="pearl"><b>Terminology</b> Atherosclerosis <i>in the coronary arteries</i> = coronary artery disease (CAD). When CAD becomes severe enough to cause myocardial ischemia, it's called IHD. <b>Coronary artery atherosclerosis causes most IHD</b>, though a rarer cause is <b>vasospastic angina</b> (coronary occlusion from vasospasm, not atherosclerosis).</div>
+
+<h3>Risk Factors — Three Categories</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Factors</th></tr>
+<tr><td><b>Nonmodifiable</b></td><td>Increasing age; male sex; race/ethnicity; family history of premature ASCVD</td></tr>
+<tr><td><b>Modifiable</b></td><td>Type 2 diabetes mellitus; hypertension; dyslipidemia (&uarr;LDL/&uarr;triglycerides); cigarette smoking/tobacco use <b>(the single biggest one)</b>; obesity and metabolic syndrome; physical inactivity; chronic kidney disease</td></tr>
+<tr><td><b>Risk-enhancing factors</b></td><td>Chronic systemic inflammatory disorders (rheumatoid arthritis, SLE, HIV, psoriasis); adverse pregnancy-related conditions (preeclampsia, gestational diabetes, premature menopause); persistently elevated triglycerides and lipoprotein(a); psychosocial stressors and adverse social determinants of health</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Current Framing</b> Rather than focusing on single cutoff values, current thinking emphasizes a person's <b>lifetime exposure and overall risk</b>. Inflammation, insulin resistance, endothelial dysfunction, and abnormal lipid metabolism all accelerate atherosclerosis — especially with ongoing cardiometabolic risk factors.</div>
+
+<h3>Epidemiology</h3>
+<div class="callout">IHD causes <b>&gt;9 million deaths/year worldwide</b> (low- and middle-income countries hit hardest); <b>&gt;18 million US adults</b> have CAD. More common in men and older adults. Marginalized groups tend to develop CAD earlier, have more complications, and worse outcomes — driven by more risk factors, less healthcare access, and other social determinants.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which of the following is considered the single most significant modifiable risk factor for ischemic heart disease?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Cigarette smoking/tobacco use</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Chronic kidney disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Obesity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Physical inactivity</button>
+<div class="quiz-explain"><b>Explanation:</b> While all listed factors are modifiable risk factors for IHD, cigarette smoking/tobacco use is specifically emphasized as one of the biggest modifiable risk factors, alongside hypertension, diabetes, and hyperlipidemia.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient with a history of preeclampsia during pregnancy is now being risk-stratified for future cardiovascular disease. How should this history be classified?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A traditional modifiable risk factor</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A risk-enhancing factor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This history has no bearing on cardiovascular risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A nonmodifiable risk factor</button>
+<div class="quiz-explain"><b>Explanation:</b> Adverse pregnancy-related conditions such as preeclampsia, gestational diabetes, and premature menopause are classified as risk-enhancing factors for ASCVD, a category distinct from the traditional nonmodifiable and modifiable risk factors.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What is the current emphasis in ASCVD risk assessment, as opposed to relying only on single risk factor cutoff values?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Risk assessment should not consider any individual risk factors</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Focusing exclusively on LDL cholesterol level</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Considering a person's lifetime exposure and overall cumulative risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Using only the patient's age to determine risk</button>
+<div class="quiz-explain"><b>Explanation:</b> Current thinking in ASCVD risk assessment emphasizes a person's lifetime exposure and overall risk, rather than focusing only on whether individual risk factors cross single cutoff values -- reflecting a more personalized, cumulative approach to risk.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec2">
+<h2>2. Pathophysiology: Atherosclerosis &amp; Plaque Rupture</h2>
+
+<h3>How Atherosclerosis Develops</h3>
+<div class="callout">
+Endothelial damage (from chronic exposure to high cholesterol, hypertension, smoking, hyperglycemia, systemic inflammation) &rarr; increased <b>LDL entry into the arterial wall</b>, where it's oxidized/modified &rarr; attracts monocytes &rarr; monocytes differentiate into <b>macrophages</b>, take up oxidized LDL, become <b>foam cells</b> (the first visible sign of atherosclerosis — a "fatty streak") &rarr; ongoing inflammation causes smooth muscle cell migration/proliferation &rarr; a <b>fibrous cap</b> forms over a core of dead, fatty material (the atheroma).
+</div>
+<div class="pearl"><b>Board Tip — Which Layer?</b> Atherosclerosis develops in the <b>intimal layer</b> of the arterial wall — where cholesterol and fat deposit and form the plaque.</div>
+
+<h3>Stable vs. High-Risk (Vulnerable) Plaque</h3>
+<div class="callout">Initially, the artery may compensate and preserve its lumen size. As plaque grows/hardens and the fibrous cap thins, blood flow is reduced. <b>Plaque destabilization — not gradual narrowing — is the main driver of acute coronary syndromes.</b></div>
+<div class="table-scroll">
+<table>
+<tr><th>High-Risk Plaque Features</th></tr>
+<tr><td>Large lipid/necrotic core</td></tr>
+<tr><td>Thin fibrous cap</td></tr>
+<tr><td>High density of active macrophages within the plaque</td></tr>
+<tr><td>Intraplaque hemorrhage</td></tr>
+<tr><td>Damage/erosion to the endothelial surface layer</td></tr>
+</table>
+</div>
+<div class="pearl"><b>The Final Common Pathway to MI</b> When a plaque ruptures or its surface is damaged, it exposes thrombogenic material to the bloodstream &rarr; triggers platelet aggregation and thrombus formation &rarr; can rapidly and completely occlude the artery &rarr; reduced blood flow to the heart, or a full heart attack.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which layer of the coronary artery wall is the primary site of cholesterol and lipid deposition in atherosclerosis?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The media</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The endothelium is the only layer involved, with no deeper penetration</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The adventitia</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The intima</button>
+<div class="quiz-explain"><b>Explanation:</b> Atherosclerosis develops in the intimal layer of the arterial wall, where cholesterol and fat deposit, become oxidized, and are taken up by macrophages to form foam cells and eventually the atherosclerotic plaque.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. According to current understanding, what is the primary trigger for acute coronary syndromes, rather than simply the gradual narrowing of the coronary artery lumen?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Plaque destabilization/rupture with subsequent thrombus formation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A slow, steady increase in plaque size over decades without any acute event</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Complete absence of any plaque at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Increased HDL cholesterol levels</button>
+<div class="quiz-explain"><b>Explanation:</b> Plaque destabilization, rather than gradual arterial narrowing, is the main cause of acute coronary syndromes -- when a high-risk plaque ruptures or its surface erodes, it exposes thrombogenic material that triggers platelet aggregation and thrombus formation, which can acutely and completely occlude the artery.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which of the following is a feature of a high-risk ('vulnerable') atherosclerotic plaque, as opposed to a stable plaque?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A thick, robust fibrous cap</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A thin fibrous cap covering a large lipid/necrotic core with high macrophage density</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Complete absence of any inflammatory cells</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A small, calcified, fibrotic core</button>
+<div class="quiz-explain"><b>Explanation:</b> High-risk plaques are characterized by a thin fibrous cap covering a large lipid/necrotic core, a high density of active macrophages, intraplaque hemorrhage, and endothelial surface damage -- features that predispose to rupture and acute coronary events, in contrast to more stable, thick-capped plaques.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec3">
+<h2>3. Stable, Unstable &amp; Vasospastic Angina</h2>
+
+<div class="callout">Angina pectoris = chest pain caused by myocardial <b>ischemia without necrosis</b> — myocytes get reduced (not absent) oxygen, so they don't die and don't release cardiac enzymes (troponin, CK-MB). Angina is a <b>symptom</b> of CAD, not a disease itself.</div>
+
+<h3>Stable Angina</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Prevalence</td><td>~<b>3%</b> of the US population</td></tr>
+<tr><td>Pattern</td><td><b>Predictable</b> — the same level of exertion reliably brings on the same pain each time; does not worsen over time</td></tr>
+<tr><td>Pain quality</td><td>Substernal, non-sharp — squeezing, tight, or burning; gradual onset; lasts <b>2&ndash;5 minutes</b> (not seconds, not hours); not positional</td></tr>
+<tr><td>Relief</td><td>Rest or sublingual nitroglycerin</td></tr>
+<tr><td>Pathophysiology</td><td><b>Fixed atherosclerotic narrowing</b> (no thrombus); at rest, O2 demand is low and flow is adequate; with exertion, the diseased vessel can't meet increased demand &rarr; ischemia stimulates visceral afferent (sympathetic) fibers &rarr; pain</td></tr>
+<tr><td>Alternate name</td><td>"Chronic coronary syndrome"</td></tr>
+</table>
+</div>
+
+<h3>Unstable Angina</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Incidence</td><td>~<b>3 per 1,000</b> people annually — less common than stable angina, but far more dangerous</td></tr>
+<tr><td>Pattern</td><td><b>New onset</b>, occurs <b>at rest or unexpectedly</b>, or more severe/frequent than the patient's prior chest pain; may not resolve with rest or nitroglycerin; typically lasts <b>&gt;10 minutes</b></td></tr>
+<tr><td>Pathophysiology</td><td>Fibrous cap <b>rupture</b> &rarr; exposed collagen triggers platelet aggregation &rarr; <b>thrombus</b> (platelets + fibrin) forms &rarr; inadequate flow even at rest</td></tr>
+<tr><td>Relationship to MI</td><td>A likely <b>continuum</b> with MI — may progress to MI; classified as part of ACS since initial management resembles MI treatment</td></tr>
+</table>
+</div>
+<div class="pearl"><b>A Vanishing Diagnosis?</b> With more sensitive troponin assays, many/most cases historically called "unstable angina" now show elevated troponin and are reclassified as <b>small MIs (NSTEMI)</b> — the term "unstable angina" is used less over time, though it's still used clinically.</div>
+
+<h3>Vasospastic (Prinzmetal) Angina</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Mechanism</td><td><b>Intermittent coronary artery spasm</b> — NOT primarily due to atherosclerosis; mechanism not fully understood (possible hyper-reactive smooth muscle, sympathetic stimulation, inflammation)</td></tr>
+<tr><td>Rarity</td><td>Rare</td></tr>
+<tr><td>Pattern</td><td>Angina <b>at rest</b>, responds to <b>nitrates</b>; presents similarly to unstable angina</td></tr>
+<tr><td>Risk factors</td><td><b>Cigarette smoking</b> is a key risk factor (not the traditional atherosclerosis risk factors like diabetes/hyperlipidemia); implicated drugs: <b>cocaine, amphetamines, marijuana, alcohol</b></td></tr>
+</table>
+</div>
+
+<h3>Other Presentations</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Entity</th><th>Detail</th></tr>
+<tr><td><b>Cardiac syndrome X (CSX)</b></td><td>Angina in <b>females without obstructive CAD</b>; attributed to abnormal coronary microvascular function or altered pain perception; &gt;50% have a <b>normal coronary angiogram</b></td></tr>
+<tr><td><b>Silent ischemia</b></td><td>Ischemia with <b>no clinical manifestations</b>; more prevalent in patients with <b>diabetes</b>; associated with higher complication/mortality rates</td></tr>
+</table>
+</div>
+
+<h3>Histologic Comparison</h3>
+<div class="pearl"><b>Board Tip</b> Stable and unstable angina both show atherosclerosis in the coronary arteries — but <b>only unstable angina</b> shows rupture of the fibrous cap with superimposed thrombus formation.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient reports chest pain that reliably occurs after walking exactly two blocks, resolves with rest, and has been unchanged in character for the past 6 months. Which type of angina does this represent, and what is the underlying pathophysiology?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This presentation does not represent angina</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unstable angina; plaque rupture with thrombosis</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Stable angina; fixed atherosclerotic narrowing without thrombus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vasospastic angina; coronary artery spasm</button>
+<div class="quiz-explain"><b>Explanation:</b> This presentation -- predictable, exertional chest pain that is unchanged over time and relieved by rest -- is classic for stable angina, caused by fixed atherosclerotic narrowing of the coronary arteries without superimposed thrombus.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A young female patient has recurrent anginal chest pain, but coronary angiography shows no obstructive disease. What is this condition called, and what is a key feature of its evaluation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unstable angina; requires emergent thrombolysis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">STEMI; requires immediate PCI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vasospastic angina; diagnosed by inducing spasm in the cath lab</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Cardiac syndrome X; more than 50% of patients have a normal coronary angiogram</button>
+<div class="quiz-explain"><b>Explanation:</b> Cardiac syndrome X refers to angina in females without obstructive coronary artery disease, attributed to abnormal coronary microvascular function or altered pain perception; more than 50% of these patients have a normal coronary angiogram.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. What key histologic feature distinguishes unstable angina from stable angina in the coronary arteries?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Only unstable angina shows rupture of the fibrous cap with superimposed thrombus formation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only stable angina shows evidence of foam cells</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no histologic difference between the two conditions</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only unstable angina shows any evidence of atherosclerosis</button>
+<div class="quiz-explain"><b>Explanation:</b> While both stable and unstable angina show underlying atherosclerosis in the coronary arteries, only unstable angina shows rupture of the fibrous cap with superimposed thrombus formation -- the key pathophysiologic distinction between the two.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec4">
+<h2>4. Acute Coronary Syndrome: NSTEMI vs. STEMI</h2>
+
+<div class="callout"><b>Acute coronary syndrome (ACS)</b> is an umbrella term for any acute chest pain presentation where MI is suspected — a <b>clinical classification based on symptoms and ECG findings</b>, not pathology. ACS includes three syndromes: <b>unstable angina, NSTEMI, and STEMI</b>.</div>
+<div class="pearl"><b>ACS vs. Chronic Coronary Syndrome</b> The contrasting term "chronic coronary syndrome" describes the longstanding, stable symptoms of stable angina.</div>
+
+<h3>Myocardial Infarction — Basic Mechanism</h3>
+<div class="callout">MI = myocyte death from lack of O2. Occurs when an atherosclerotic plaque ruptures &rarr; thrombus forms &rarr; obstructs (partially or completely) blood flow. <b>Thrombus formation causes most MIs</b>, though other mechanisms exist (e.g., severe hypotension reducing cardiac O2 delivery).</div>
+
+<h3>NSTEMI vs. STEMI — The Key Distinction</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>STEMI</th><th>NSTEMI</th></tr>
+<tr><td>Coronary occlusion</td><td><b>Total (100%)</b> occlusion</td><td><b>Partial (&lt;100%)</b> occlusion — still enough to limit O2 delivery and kill myocytes</td></tr>
+<tr><td>Thickness of injury</td><td><b>Full-thickness</b> loss of myocardium</td><td><b>Less-than-full-thickness</b> (less severe) injury</td></tr>
+<tr><td>ECG</td><td><b>ST-segment elevation</b></td><td>No ST elevation; may show ST depression, T-wave inversion, or be nonspecific</td></tr>
+<tr><td>Cardiac enzymes</td><td>Elevated</td><td>Elevated</td></tr>
+<tr><td>Urgency of reperfusion</td><td><b>More aggressive/urgent</b> — rapid angioplasty or thrombolytics; "<b>time is myocardium</b>," initiate within <b>90&ndash;120 minutes</b> of ED arrival</td><td>Also frequently receives angioplasty, but <b>not as urgently</b> given the lesser occlusion</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Board Tip — Only 50% of MIs Show ST Elevation</b> ST-segment elevation is present in only about <b>50%</b> of MIs confirmed by cardiac enzymes — an ECG without ST elevation does NOT rule out MI.</div>
+
+<h3>Unstable Angina vs. NSTEMI — The Overlap</h3>
+<div class="pearl"><b>Board Tip</b> Classic teaching: unstable angina has a <b>normal/stable ECG</b> and <b>normal cardiac enzymes</b> (ruling out MI), while NSTEMI has <b>elevated enzymes without ST elevation</b>. In practice, with high-sensitivity troponin assays, many cases once labeled "unstable angina" now show troponin elevation and are reclassified as NSTEMI.</div>
+
+<h3>Ischemic Heart Failure</h3>
+<div class="callout">Chronic ischemic damage to the myocardium can cause <b>permanent loss of contractility</b> and heart failure. <b>Coronary artery disease/ischemia causes most ventricular dilation and systolic HF</b> (decreased LV systolic pumping function). Presents with typical HF symptoms: dyspnea, edema, severe fatigue.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient presents with chest pain and elevated troponin, but the EKG shows no ST-segment elevation. What is the underlying mechanism, and how does it differ from a STEMI?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Total (100%) coronary occlusion, identical to STEMI</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Partial coronary occlusion causing a less-than-full-thickness injury, in contrast to the total occlusion and full-thickness injury of STEMI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No coronary artery involvement at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This presentation is inconsistent with any form of myocardial infarction</button>
+<div class="quiz-explain"><b>Explanation:</b> NSTEMI results from partial (less than 100%) coronary artery occlusion, causing a less-than-full-thickness myocardial injury -- still enough to elevate cardiac enzymes, but pathologically distinct from the total occlusion and full-thickness injury seen in STEMI.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Approximately what percentage of myocardial infarctions confirmed by cardiac enzyme elevation actually show ST-segment elevation on EKG?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">100%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">10%</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">50%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">90%</button>
+<div class="quiz-explain"><b>Explanation:</b> ST-segment elevation is present in only about 50% of myocardial infarctions confirmed by cardiac enzymes, which is why a normal or non-diagnostic EKG cannot be used alone to rule out MI.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is the time-to-reperfusion goal for STEMI (90-120 minutes) more urgent than for NSTEMI?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">NSTEMI is actually more dangerous and requires faster intervention</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no difference in urgency between the two conditions</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">STEMI patients never require any reperfusion therapy</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">STEMI represents total coronary occlusion causing full-thickness myocardial injury, making rapid reperfusion critical to salvage myocardium ('time is myocardium')</button>
+<div class="quiz-explain"><b>Explanation:</b> Because STEMI results from total coronary occlusion causing full-thickness myocardial damage, rapid reperfusion (within 90-120 minutes of ED arrival) is critical to salvage as much myocardium as possible -- captured by the phrase 'time is myocardium.' NSTEMI, from partial occlusion, is also often treated with angioplasty but with less urgency.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec5">
+<h2>5. Symptoms of Coronary Ischemia &amp; Anginal Equivalents</h2>
+
+<h3>Classic Presentation</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Location</td><td>Left-sided, deep/retrosternal or substernal chest pain; may radiate to the <b>left arm, neck, or jaw</b> (and can radiate to shoulders, back, or upper abdomen)</td></tr>
+<tr><td>Quality</td><td>Squeezing, tightness, pressure, burning, or vague discomfort — <b>not</b> sharp or stabbing</td></tr>
+<tr><td>Onset</td><td>Sudden onset is <b>more worrisome</b> for IHD</td></tr>
+<tr><td>Aggravating factors</td><td>Exercise and stress <b>worsen</b> IHD chest pain</td></tr>
+<tr><td>MI-specific features</td><td>More sustained, unrelieved by rest; often with nausea, sweating (diaphoresis), dizziness, dyspnea</td></tr>
+</table>
+</div>
+
+<h3>Anginal Equivalents</h3>
+<div class="callout">Some patients — often <b>older patients, females, and those with diabetes mellitus</b> — may <b>not</b> have classic chest pain. Instead, they present with less specific symptoms: <b>dyspnea, dizziness, or nausea</b> — termed <b>"anginal equivalents."</b></div>
+<div class="pearl"><b>Board Tip — Historical Bias</b> Most early IHD literature was gathered exclusively in male patients, so many preconceptions about typical angina/MI presentations are limited by this sex and age bias. Always keep anginal equivalents in mind, especially in women, older adults, and diabetics.</div>
+
+<h3>Distinguishing IHD Pain From Other Causes</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Clue</th><th>Points TOWARD IHD</th><th>Points AWAY from IHD</th></tr>
+<tr><td>Location/quality</td><td>Deep, substernal, squeezing/tightness/pressure</td><td>Sharp, stabbing (usually not IHD)</td></tr>
+<tr><td>Onset</td><td>Sudden</td><td>Gradual, longstanding, unchanged</td></tr>
+<tr><td>Aggravating factor</td><td>Exercise/stress</td><td>Deep inspiration/leaning forward &rarr; suggests <b>pericarditis</b>; lying down &rarr; suggests <b>GERD</b>; positional with arm movement &rarr; suggests <b>intercostal muscle injury</b></td></tr>
+<tr><td>Associated symptoms</td><td>Diaphoresis, nausea, dyspnea, dizziness</td><td>Fever + difficulty breathing &rarr; consider <b>pneumonia</b></td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. An 82-year-old diabetic woman presents with new-onset dyspnea and nausea but no chest pain. Why should ischemic heart disease still be on the differential?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Older patients, females, and diabetics may present with 'anginal equivalents' -- dyspnea, dizziness, or nausea -- instead of classic chest pain</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Dyspnea and nausea are only ever caused by pulmonary conditions</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This presentation is diagnostic of a non-cardiac cause</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">IHD cannot present without chest pain, so it should be excluded</button>
+<div class="quiz-explain"><b>Explanation:</b> Anginal equivalents -- dyspnea, dizziness, or nausea without classic chest pain -- are recognized presentations of myocardial ischemia, particularly in older patients, females, and those with diabetes mellitus, and IHD must remain on the differential despite the absence of typical chest pain.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient's chest pain worsens with deep inspiration and improves when leaning forward. Which diagnosis does this classically suggest, as opposed to myocardial ischemia?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unstable angina</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Acute pericarditis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Stable angina</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">STEMI</button>
+<div class="quiz-explain"><b>Explanation:</b> Chest pain that worsens with deep inspiration and improves with leaning forward is a classic feature of acute pericarditis, distinguishing it from ischemic chest pain, which is typically aggravated by exertion rather than respiration or position.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is caution advised when applying classic teaching about anginal presentation to all patient populations equally?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Chest pain presentation is identical across all ages and sexes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Classic angina presentations are equally well-studied in all demographic groups</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Most early literature on IHD was gathered exclusively in male patients, introducing a sex and age bias into common preconceptions about presentation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Anginal equivalents were discovered to be a myth</button>
+<div class="quiz-explain"><b>Explanation:</b> Most early literature on ischemic heart disease was gathered exclusively in male patients, meaning many common preconceptions about angina and MI presentation reflect this sex and age bias -- an important reason to actively consider anginal equivalents in women, older patients, and other underrepresented groups.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec6">
+<h2>6. Chest Pain: Differential Diagnosis &amp; Evaluation</h2>
+
+<h3>Epidemiology of Chest Pain in the ED</h3>
+<div class="callout">Chest pain is the <b>2nd most common ED complaint</b> (~5% of all ED visits).</div>
+<div class="table-scroll">
+<table>
+<tr><th>Cause</th><th>Approx. % of ED Chest Pain Presentations</th></tr>
+<tr><td><b>Acute coronary syndrome</b></td><td><b>31%</b></td></tr>
+<tr><td>GERD</td><td>30%</td></tr>
+<tr><td>Musculoskeletal</td><td>28%</td></tr>
+<tr><td>Pericarditis</td><td>4%</td></tr>
+<tr><td>Pneumonia/pleuritis</td><td>2%</td></tr>
+<tr><td>Pulmonary embolism</td><td>2%</td></tr>
+<tr><td>Aortic dissection</td><td>1%</td></tr>
+<tr><td>Herpes zoster</td><td>0.5%</td></tr>
+</table>
+</div>
+
+<h3>Visceral vs. Somatic Pain — A Useful Framework</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Localization</th><th>Descriptors</th><th>Example</th></tr>
+<tr><td><b>Visceral</b></td><td>Vague, diffuse (patient can't point to one spot)</td><td>Dull, deep, pressure, squeezing; can refer to shoulder/jaw/arm; may include nausea/vomiting</td><td>Ischemic heart pain</td></tr>
+<tr><td><b>Somatic</b></td><td>Specific (patient can point with one finger)</td><td>Sharp, stabbing, poking</td><td>Musculoskeletal chest wall pain</td></tr>
+</table>
+</div>
+
+<h3>Key History Elements</h3>
+<div class="callout">Onset (what were they doing?), location (localized vs. diffuse), duration, character (patient's own words), aggravating/alleviating factors (exertional? eating? breathing? position? new workout?), radiation, timing/frequency, and associated symptoms (SOB, nausea/vomiting, fever, diaphoresis, cough, dyspepsia, edema, calf pain/swelling, recent illness).</div>
+
+<h3>Risk Factor Screening by Differential</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Concern</th><th>Risk Factors to Screen For</th></tr>
+<tr><td>ACS</td><td>Prior MI, family history of cardiac disease, smoking, HTN, hyperlipidemia, diabetes</td></tr>
+<tr><td>PE</td><td>Prior DVT/PE, hormone use (incl. OCPs), recent surgery, cancer, immobility</td></tr>
+<tr><td>Other</td><td>Recent GI procedures (scopes); drug abuse (cocaine, methamphetamines)</td></tr>
+</table>
+</div>
+
+<h3>Physical Exam</h3>
+<div class="callout">Full vitals (BP in <b>both arms</b> — a discrepancy raises concern for aortic dissection); general appearance (diaphoresis, distress); skin exam (shingles); neck exam (JVD, especially with inspiration = <b>Kussmaul sign</b>); chest palpation (reproducible pain, crepitus); heart, lung, abdominal exams; extremities (unilateral swelling, calf pain, edema, pulse symmetry).</div>
+
+<h3>Initial Workup</h3>
+<div class="callout">EKG (ideally within <b>first 10 minutes</b> of arrival; consider serial EKGs); chest X-ray; CBC, BMP, <b>troponin</b> (consider serial troponin <b>4 hours apart</b>), lipase; CT pulmonary angiography (CTPA) if PE suspected (V/Q scan if CTPA contraindicated); bedside ultrasound if tamponade suspected.</div>
+<div class="pearl"><b>Board Tip</b> Younger patients and those without risk factors <b>can still have an MI</b> — don't anchor on age alone. Aortic dissection can cause a stroke — always consider it in the workup.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient describes chest pain by pointing precisely to one spot with a single finger, describing it as sharp and stabbing. Is this pain more consistent with a visceral or somatic origin?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Neither category applies to chest pain</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This description is inconsistent with any recognized pain pattern</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Visceral, typical of ischemic heart pain</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Somatic, typical of musculoskeletal chest wall pain</button>
+<div class="quiz-explain"><b>Explanation:</b> The ability to precisely localize pain with one finger, combined with a sharp, stabbing quality, is characteristic of somatic pain, such as musculoskeletal chest wall pain -- in contrast to visceral pain (like ischemic heart pain), which is vague, diffuse, and described as dull, deep, or squeezing.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What percentage of ED chest pain presentations is attributable to acute coronary syndrome, based on the epidemiologic data reviewed?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">31%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">50%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">75%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">5%</button>
+<div class="quiz-explain"><b>Explanation:</b> Acute coronary syndrome accounts for approximately 31% of ED chest pain presentations, making it the single most common identifiable cause, followed closely by GERD (30%) and musculoskeletal causes (28%).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is it important to measure blood pressure in both arms during the physical exam of a patient with chest pain?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This is done purely as a formality with no diagnostic value</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A significant discrepancy between arms raises concern for aortic dissection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Blood pressure is only relevant in one arm and the other measurement is discarded</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This practice is outdated and no longer recommended</button>
+<div class="quiz-explain"><b>Explanation:</b> Measuring blood pressure in both arms is important because a significant discrepancy between the two readings raises concern for aortic dissection, a life-threatening cause of chest pain that must not be missed.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec7">
+<h2>7. Troponin I: Pathophysiology &amp; Role in Chest Pain Evaluation</h2>
+
+<h3>Why Cardiac Enzymes Matter</h3>
+<div class="callout">In angina, myocytes get <b>reduced but not absent</b> oxygen — they don't die, so they <b>don't release troponin or CK-MB</b>. This is why lab tests <b>don't help diagnose angina</b> the way they do MI. In MI, myocytes actually <b>die (necrosis)</b>, releasing these intracellular proteins into the bloodstream — <b>troponin and CK-MB become elevated only when myocardial cell death has occurred.</b></div>
+
+<h3>Troponin's Diagnostic Role Across the ACS Spectrum</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Condition</th><th>Troponin Level</th></tr>
+<tr><td>Stable angina</td><td>Normal (no myocyte death)</td></tr>
+<tr><td>Vasospastic angina</td><td>Normal</td></tr>
+<tr><td>Unstable angina (classic definition)</td><td>Normal by traditional assay</td></tr>
+<tr><td>NSTEMI</td><td><b>Elevated</b>, without ST elevation</td></tr>
+<tr><td>STEMI</td><td><b>Elevated</b>, with ST elevation</td></tr>
+</table>
+</div>
+<div class="pearl"><b>The High-Sensitivity Troponin Shift</b> Traditional troponin assays are normal in unstable angina. But <b>high-sensitivity troponin assays</b> are increasingly able to detect elevated troponin even in what was classically called "unstable angina" — meaning many of these cases are now recognized as <b>small NSTEMIs</b> rather than true angina without necrosis. This is why the term "unstable angina" is used less over time, even though it's retained clinically.</div>
+
+<h3>Practical Use in the Chest Pain Workup</h3>
+<div class="callout">Order troponin as part of the initial ACS workup; consider <b>serial troponin levels ~4 hours apart</b> to capture a rising/falling pattern and detect delayed elevation. Elevated troponin, combined with the clinical picture and EKG findings, helps classify the patient along the ACS spectrum (unstable angina/NSTEMI/STEMI) and guides urgency of intervention.</div>
+<div class="pearl"><b>Board Tip</b> A single normal troponin at presentation does <b>not</b> rule out MI — this is precisely why <b>serial</b> troponin testing is standard practice; myocardial injury markers take time to rise into the detectable/diagnostic range after the ischemic insult begins.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Why do cardiac enzyme levels (troponin, CK-MB) remain normal in stable angina but become elevated in myocardial infarction?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Cardiac enzymes are elevated in both conditions equally</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Stable angina and MI both cause identical myocyte death, but the enzymes are only detectable in MI due to lab testing limitations</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">In stable angina, myocytes receive reduced but adequate oxygen and do not die, so they don't release these intracellular proteins; in MI, myocyte death (necrosis) releases these enzymes into the blood</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Troponin and CK-MB are unrelated to myocyte injury of any kind</button>
+<div class="quiz-explain"><b>Explanation:</b> In angina (including stable angina), myocytes receive reduced but still adequate oxygen and do not die, so intracellular proteins like troponin and CK-MB are not released. In MI, actual myocyte death (necrosis) occurs, releasing these enzymes into the bloodstream -- this is the fundamental reason troponin distinguishes ischemia without infarction from true infarction.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Why has the use of the term 'unstable angina' decreased over time in clinical practice?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unstable angina is now considered identical to stable angina</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Troponin testing has become less available over time</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Unstable angina has been shown to not actually exist</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">High-sensitivity troponin assays increasingly detect elevated troponin in cases previously classified as unstable angina, reclassifying many as small NSTEMIs</button>
+<div class="quiz-explain"><b>Explanation:</b> With the advent of high-sensitivity troponin assays, many cases that would have historically been classified as unstable angina (with normal traditional troponin) now show detectable troponin elevation, leading experts to reclassify these as small NSTEMIs -- hence the declining clinical use of the term 'unstable angina.'</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is serial troponin testing (e.g., 4 hours apart) recommended rather than relying on a single troponin level at presentation?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A single normal troponin at presentation does not rule out MI, since troponin takes time to rise into a detectable range after myocardial injury begins</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Troponin levels are always immediately elevated at the exact moment of any myocardial injury</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Serial troponin testing has no clinical value and is not actually recommended</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Serial testing is only done to reduce laboratory costs</button>
+<div class="quiz-explain"><b>Explanation:</b> A single normal troponin at presentation does not rule out MI, because troponin release and detection takes time following the onset of myocardial injury. Serial troponin testing (such as 4 hours apart) captures the rising (or falling) pattern needed to accurately diagnose or exclude MI.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec8">
+<h2>8. Risk Stratification for Chest Pain &amp; Stress Testing</h2>
+
+<h3>Pretest Probability Drives Testing Strategy</h3>
+<div class="callout">Stress testing is most useful in patients with an <b>intermediate</b> pretest probability of CAD (based on history and physical). <b>Low-risk patients have a high false-positive rate</b> with stress testing; <b>high-risk patients may have more false-negatives</b> and are often better served by direct angiography.</div>
+<div class="pearl"><b>Sensitivity Ceiling</b> Regardless of stress test type, sensitivity for detecting obstructive CAD is only <b>70&ndash;90%</b> — stress testing will <b>not</b> detect all patients with IHD.</div>
+
+<h3>Exercise Electrocardiography (Treadmill EST)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Detail</th></tr>
+<tr><td>Positive test criteria</td><td>Ischemic ECG changes — classically <b>large ST-segment depressions (&gt;2&ndash;3 mm)</b>, most significant with concurrent angina-like chest pain; <b>exercise-induced hypotension</b> (drop &gt;10 mmHg) also qualifies</td></tr>
+<tr><td>Result categories</td><td>Low-risk, intermediate-risk, or high-risk</td></tr>
+<tr><td>Contraindications</td><td>Acute MI within the prior 2&ndash;3 days, unstable angina, active arrhythmias, decompensated heart failure</td></tr>
+</table>
+</div>
+
+<h3>Pharmacologic Stress Testing</h3>
+<div class="callout">Used when the patient <b>can't exercise</b> fully. Two approaches:</div>
+<div class="table-scroll">
+<table>
+<tr><th>Agent Type</th><th>Examples</th><th>Mechanism</th></tr>
+<tr><td>Peripheral vasodilators</td><td>Adenosine, dipyridamole</td><td>Increase heart rate/cardiac work</td></tr>
+<tr><td>Positive inotrope/chronotrope</td><td>Dobutamine</td><td>Increases heart rate/cardiac work</td></tr>
+</table>
+</div>
+<div class="callout">Cardiac performance is assessed via <b>nuclear perfusion imaging (scintigraphy)</b> or <b>echocardiography</b> — showing abnormal ventricular wall motion or perfusion defects during stress, useful when baseline ECG abnormalities would make exercise ECG hard to interpret.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Agent</th><th>Contraindications</th></tr>
+<tr><td>Vasodilators</td><td>Severe asthma (bronchospasm risk), hypotension, 2nd/3rd-degree AV block</td></tr>
+<tr><td>Dobutamine</td><td>Active ventricular arrhythmias/rapid AFib, severe hypertension, recent MI</td></tr>
+</table>
+</div>
+
+<h3>Stress Testing by Angina Type</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Type</th><th>Role of Stress Testing</th></tr>
+<tr><td>Stable angina</td><td>Used when history/exam alone can't confirm diagnosis (atypical/vague symptoms)</td></tr>
+<tr><td>Unstable angina</td><td><b>Contraindicated during active symptoms</b>; may be used to risk-stratify before hospital discharge</td></tr>
+<tr><td>Vasospastic angina</td><td>Used to <b>rule out</b> atherosclerotic occlusion — not useful to provoke/diagnose vasospasm itself</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with a low pretest probability of CAD undergoes exercise stress testing and the result is positive. What is the most important consideration in interpreting this result?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The result should be trusted completely with no further consideration</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Low-risk patients have a high false-positive rate with stress testing, so this positive result may not reflect true disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This result definitively confirms severe CAD requiring immediate angiography</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Low-risk patients cannot have positive stress tests</button>
+<div class="quiz-explain"><b>Explanation:</b> Stress testing is most useful in intermediate-risk patients; in low-risk patients, a positive result carries a high false-positive rate, so the result must be interpreted cautiously in the context of the patient's overall pretest probability.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What EKG finding, along with the degree of blood pressure change, defines a positive exercise stress test?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A heart rate increase of more than 50%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">ST-segment elevation only, with no blood pressure criteria</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">ST-segment depression >2-3mm and/or exercise-induced hypotension (drop >10 mmHg)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Any T-wave inversion regardless of degree</button>
+<div class="quiz-explain"><b>Explanation:</b> A positive exercise stress test is classically defined by large ST-segment depressions (>2-3mm), especially with concurrent angina-like chest pain, and/or exercise-induced hypotension (a drop in blood pressure of more than 10 mmHg).</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Why is exercise stress testing not useful for diagnosing vasospastic (Prinzmetal) angina, even though it may still be performed in these patients?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vasospastic angina always produces a positive stress test</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Vasospastic angina cannot be evaluated by any testing modality</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Stress testing is completely contraindicated in vasospastic angina</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Stress testing is used in these patients specifically to rule out atherosclerotic coronary occlusion, not to provoke or diagnose the vasospasm itself</button>
+<div class="quiz-explain"><b>Explanation:</b> In vasospastic angina, stress testing is performed to rule out underlying atherosclerotic coronary artery occlusion as a competing or coexisting diagnosis -- it is not useful for provoking or diagnosing the vasospasm itself, which requires different provocative testing (e.g., ergonovine or acetylcholine challenge) if needed.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec9">
+<h2>9. Diagnostic Testing: Imaging &amp; Angiography</h2>
+
+<h3>Coronary CT Angiography (CTA)</h3>
+<div class="callout">High-resolution, sensitive for coronary occlusion. Used in <b>low-risk angina patients</b> where stress testing might not be appropriate — good for <b>ruling out</b> CAD. <b>Positive results require confirmatory testing</b> (stress ECG or coronary angiography).</div>
+
+<h3>Coronary Angiography</h3>
+<div class="callout">The definitive, invasive test — uses contrast dye and x-ray to directly visualize coronary occlusion. Advantage: <b>percutaneous coronary intervention (PCI)</b> can be performed during the same procedure (diagnosis + treatment). Downsides: invasive, expensive — not every stable angina patient needs it.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Angina Type</th><th>Angiography Timing/Use</th></tr>
+<tr><td>Stable angina</td><td>Used if the patient fails medical management, or stress ECG shows a large amount of at-risk myocardium (ST depressions in multiple leads)</td></tr>
+<tr><td>Unstable angina</td><td>Most patients undergo angiography within <b>24 hours</b> of ED arrival (not as immediate as STEMI)</td></tr>
+<tr><td>Vasospastic angina</td><td>May be done to exclude occlusive disease; vasospasm can be induced with ergonovine/acetylcholine under observation (now uncommon)</td></tr>
+</table>
+</div>
+
+<h3>Additional Modalities Used in Practice</h3>
+<div class="callout">Echocardiogram, cardiac MRI, and cardiac CT can also aid stratification. <b>Wall motion abnormalities</b> on TTE may prompt ischemic workup even in an asymptomatic patient. Cardiac CT/MRI can show <b>coronary artery calcification</b>, prompting further workup even in asymptomatic or stable patients.</div>
+<div class="pearl"><b>ECG Reminder</b> ECG is essential for evaluating both stable and emergent chest pain patients, but remember: <b>ST elevation is present in only ~50%</b> of enzyme-confirmed MIs — a normal or nonspecific ECG never fully excludes ischemia.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A low-risk patient with atypical chest pain undergoes coronary CTA, which shows a significant stenosis. What is the appropriate next step?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Obtain confirmatory testing such as stress ECG or coronary angiography, since a positive CTA result requires further evaluation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Repeat the CTA in one year</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Discharge the patient with reassurance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No further testing is needed; proceed directly to medication changes only</button>
+<div class="quiz-explain"><b>Explanation:</b> While coronary CTA is useful for ruling out CAD in low-risk patients, a positive result requires confirmatory testing such as stress ECG testing or coronary angiography before proceeding with further management decisions.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is a key advantage of coronary angiography over noninvasive testing modalities?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It carries no risk and requires no contrast</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Percutaneous coronary intervention can be performed during the same procedure, combining diagnosis and treatment</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is less expensive than noninvasive testing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">It is recommended as the first-line test for all patients with any chest pain</button>
+<div class="quiz-explain"><b>Explanation:</b> A key advantage of coronary angiography is that percutaneous coronary intervention (PCI), such as balloon angioplasty, can be performed during the same procedure if a significant lesion is found -- combining diagnostic and therapeutic capability, unlike purely diagnostic noninvasive tests.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. For a patient with unstable angina who is hemodynamically stable, what is the typical timing for coronary angiography, in contrast to a STEMI?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Angiography is never indicated in unstable angina</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Immediately, with no delay whatsoever, identical to STEMI</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Within 24 hours of ED arrival, though not as immediate as required for STEMI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only after 1 week of medical management</button>
+<div class="quiz-explain"><b>Explanation:</b> Most patients with unstable angina undergo coronary angiography within 24 hours of arrival at the emergency department -- urgent, but not requiring the same immediate (within 90-120 minutes) timeline as STEMI, which represents complete coronary occlusion.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec10">
+<h2>10. ASCVD Risk Estimator &amp; Primary Prevention Overview</h2>
+
+<div class="gap-notice"><b>Sourcing Note:</b> The uploaded StatPearls and ScholarRx sources discuss 10-year ASCVD risk thresholds extensively (used throughout this section) but do not name or describe the "ASCVD Risk Estimator Plus" tool itself. The tool details below come directly from a screenshot of the live calculator, since the tool has changed meaningfully from the classic 2013 Pooled Cohort Equations description found in older references (notably, race is no longer a collected input).</div>
+
+<h3>The ASCVD Risk Estimator Plus — Two Modes</h3>
+<div class="callout">The current live tool offers <b>two estimator modes</b>, selected via a toggle: <b>PREVENT&trade;</b> (the newer, 2023 AHA equations) and <b>Pooled Cohort</b> (the traditional equations). A banner instructs: <i>"this calculator should be used for primary prevention patients (those without CVD) only."</i> Age range accepted: <b>30&ndash;79 years</b>.</div>
+
+<h3>Required Input Fields</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Field</th><th>Accepted Range</th></tr>
+<tr><td>Sex</td><td>Female / Male</td></tr>
+<tr><td>Age</td><td>30&ndash;79 years</td></tr>
+<tr><td>HDL cholesterol</td><td>20&ndash;100 mg/dL</td></tr>
+<tr><td>Total cholesterol</td><td>130&ndash;320 mg/dL</td></tr>
+<tr><td>Currently smoking</td><td>Yes / No</td></tr>
+<tr><td>Systolic blood pressure</td><td>90&ndash;200 mmHg</td></tr>
+<tr><td>BMI</td><td>18.5&ndash;39.9 kg/m&sup2; (a "Calculate BMI" helper is provided)</td></tr>
+<tr><td>eGFR</td><td>15&ndash;140 mL/min/1.73 m&sup2;</td></tr>
+<tr><td>Lipid-lowering medication</td><td>Yes / No</td></tr>
+<tr><td>Anti-hypertensive medication</td><td>Yes / No</td></tr>
+<tr><td>Diabetes</td><td>Yes / No</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Notable Change From Older Teaching</b> <b>Race is no longer one of the input fields</b> in the current tool — a meaningful departure from the original 2013 Pooled Cohort Equations, which did require race as an input. BMI and eGFR are now collected as standard inputs (not optional), reflecting the newer equations' broader use of metabolic and renal function data.</div>
+
+<h3>Optional Inputs for Further Personalization</h3>
+<div class="callout">Three additional predictors are optional, offered "for further personalization of risk assessment when indicated or available":</div>
+<div class="table-scroll">
+<table>
+<tr><th>Optional Field</th><th>Accepted Range</th></tr>
+<tr><td>UACR (urine albumin-to-creatinine ratio)</td><td>0&ndash;25,000 mg/g</td></tr>
+<tr><td>HbA1c</td><td>3&ndash;15%</td></tr>
+<tr><td>Zip code</td><td>Used for area-level social deprivation data</td></tr>
+</table>
+</div>
+
+<h3>Risk Categories &amp; Their Treatment Implications</h3>
+<div class="table-scroll">
+<table>
+<tr><th>10-Year ASCVD Risk</th><th>Category</th><th>Statin Recommendation</th></tr>
+<tr><td>&lt;5%</td><td>Low</td><td>Lifestyle counseling; routine statin generally not indicated</td></tr>
+<tr><td>5&ndash;7.5%</td><td>Borderline</td><td>Discuss initiating statin if risk-enhancing factors are present</td></tr>
+<tr><td>7.5&ndash;20%</td><td>Intermediate</td><td><b>Moderate-intensity statin</b>, targeting &ge;30% LDL reduction</td></tr>
+<tr><td>&gt;20%</td><td>High</td><td><b>Maximally tolerated statin</b>, targeting &ge;50% LDL reduction</td></tr>
+</table>
+</div>
+
+<h3>When the Risk Score Alone Isn't Enough</h3>
+<div class="callout">Coronary artery calcium (CAC) scoring can further guide decisions when the 10-year ASCVD risk assessment is inconclusive, especially at <b>borderline or intermediate risk</b>:</div>
+<div class="table-scroll">
+<table>
+<tr><th>CAC Score</th><th>Implication</th></tr>
+<tr><td>0, no other risk factors</td><td>Reasonable to <b>hold</b> statin therapy</td></tr>
+<tr><td>1&ndash;99</td><td>Favors statin use, <b>especially if age &ge;55</b></td></tr>
+<tr><td>&gt;100</td><td>Reasonable to <b>start</b> statin therapy</td></tr>
+</table>
+</div>
+
+<h3>Special Populations</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Population</th><th>Guidance</th></tr>
+<tr><td>Type 2 diabetes, age 40&ndash;75</td><td>Moderate-intensity statin recommended <b>regardless</b> of cholesterol level/ASCVD risk; if LDL &gt;190, use high/maximum-tolerated intensity</td></tr>
+<tr><td>Age 20&ndash;39</td><td>Calculate <b>lifetime risk</b> to encourage lifestyle changes; consider statin if strong family history of premature ASCVD <b>and</b> LDL &ge;160</td></tr>
+<tr><td>Age &gt;75</td><td>Individualized discussion — weigh risk factors and potential side effects</td></tr>
+</table>
+</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. Which of the following is NOT one of the input fields in the current live ASCVD Risk Estimator Plus tool?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">BMI and eGFR</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Total and HDL cholesterol</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Systolic blood pressure and antihypertensive medication status</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Race</button>
+<div class="quiz-explain"><b>Explanation:</b> Race is not one of the input fields in the current live ASCVD Risk Estimator Plus tool -- a change from the original 2013 Pooled Cohort Equations, which did require race as an input. The current tool instead collects sex, age, HDL/total cholesterol, smoking status, systolic BP, BMI, eGFR, lipid-lowering/antihypertensive medication use, and diabetes status, with UACR, HbA1c, and zip code as optional additional predictors.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. A patient's calculated 10-year ASCVD risk is 12%. Based on standard risk categories, what statin intensity would typically be recommended?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Moderate-intensity statin, targeting at least 30% LDL reduction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Maximally tolerated statin, targeting at least 50% LDL reduction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Low-dose statin regardless of LDL reduction achieved</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No statin is indicated at this risk level</button>
+<div class="quiz-explain"><b>Explanation:</b> A 10-year ASCVD risk of 12% falls into the intermediate risk category (7.5-20%), for which a moderate-intensity statin targeting at least 30% LDL reduction is typically recommended.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient with a borderline 10-year ASCVD risk (6%) has an inconclusive risk discussion. Their coronary artery calcium score comes back at 150. What does this suggest?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">The CAC score suggests holding statin therapy entirely</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A CAC score above 100 suggests it is reasonable to start statin therapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">CAC scoring is not useful in this scenario</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This CAC score is within the normal range and requires no action</button>
+<div class="quiz-explain"><b>Explanation:</b> A CAC score above 100 suggests that starting statin therapy is reasonable, providing additional risk information to help guide the treatment decision when the 10-year ASCVD risk score alone falls into an inconclusive borderline or intermediate range.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec11">
+<h2>11. Primary Prevention: Lifestyle &amp; Risk Factor Management</h2>
+
+<div class="callout"><b>Primary prevention</b> = assessing ASCVD risk in a structured way, making lifestyle changes, and treating key risk factors (cholesterol, BP, diabetes, smoking) <b>before</b> a first cardiovascular event, matching treatment intensity to overall risk.</div>
+
+<h3>Diet</h3>
+<div class="callout">The <b>Mediterranean diet</b> (vegetables, fruits, legumes, nuts, whole grains, fish) is highly recommended. Replace saturated fats with <b>mono- and polyunsaturated fats</b>. <b>DASH diet</b> sodium reduction lowers BP and reduces cardiovascular event risk. Sugar-sweetened/artificial sweeteners and <b>trans fats</b> both correlate with increased 10-year ASCVD risk.</div>
+
+<h3>Exercise, Physical Activity &amp; Weight</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Activity Level</th><th>Recommendation</th><th>Examples</th></tr>
+<tr><td>Moderate-intensity</td><td>&ge;<b>150 min/week</b></td><td>Brisk walking (2.4&ndash;4 mph), biking (5&ndash;9 mph), yoga, recreational swimming</td></tr>
+<tr><td>Vigorous-intensity</td><td>&gt;<b>75 min/week</b></td><td>Jogging/running, biking (10+ mph), tennis, competitive swimming</td></tr>
+</table>
+</div>
+<div class="table-scroll">
+<table>
+<tr><th>BMI Category</th><th>Threshold</th></tr>
+<tr><td>Overweight</td><td>25&ndash;29.9 kg/m&sup2;</td></tr>
+<tr><td>Obese</td><td>&ge;30 kg/m&sup2;</td></tr>
+</table>
+</div>
+<div class="callout">Weight loss consistently improves ASCVD risk profile. Recommendations: <b>200&ndash;300 min/week</b> physical activity; low-calorie diet (<b>800&ndash;1500 kcal/day</b>) if indicated.</div>
+
+<h3>Tobacco Cessation</h3>
+<div class="callout">Assess tobacco use at <b>every</b> primary care visit; a brief (3&ndash;10 min) status assessment with quit counseling should occur at each encounter. Nicotine replacement (patches, gum, lozenges, nasal spray, oral inhaler) and medications (<b>bupropion, varenicline</b>) assist cessation.</div>
+
+<h3>Hypertension Management</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Blood Pressure</th></tr>
+<tr><td>Normal HTN definition</td><td>&ge;130/80 mmHg</td></tr>
+<tr><td>Stage 1</td><td>SBP 130&ndash;139 or DBP 80&ndash;89</td></tr>
+<tr><td>Stage 2</td><td>SBP &ge;140 or DBP &ge;90</td></tr>
+</table>
+</div>
+<div class="callout">Stage 1 HTN + 10-yr ASCVD risk <b>&lt;10%</b> &rarr; nonpharmacologic measures (diet/exercise) first. Stage 1 HTN + 10-yr risk <b>&ge;10%</b> &rarr; add pharmacologic therapy. Stage 2 HTN &rarr; pharmacologic therapy from the start.</div>
+<div class="table-scroll">
+<table>
+<tr><th>Nonpharmacologic Intervention</th><th>Approx. SBP Reduction</th></tr>
+<tr><td>DASH diet pattern</td><td>~11 mmHg</td></tr>
+<tr><td>&darr;Sodium 1000&ndash;1500 mg/day + &uarr;potassium 3500&ndash;5000 mg/day</td><td>~5 mmHg</td></tr>
+<tr><td>1 kg weight loss (overweight adults)</td><td>~1 mmHg</td></tr>
+<tr><td>Aerobic exercise 90&ndash;150 min/week</td><td>5&ndash;8 mmHg</td></tr>
+<tr><td>Dynamic resistance training 90&ndash;150 min/week</td><td>5&ndash;8 mmHg</td></tr>
+<tr><td>Isometric resistance training</td><td>~4 mmHg</td></tr>
+<tr><td>Alcohol moderation (&le;2 drinks/day men, &le;1/day women)</td><td>~4 mmHg</td></tr>
+</table>
+</div>
+
+<h3>Type 2 Diabetes Mellitus</h3>
+<div class="callout">Diagnosed at <b>HbA1c &gt;6.5%</b>. ~12% of US adults have diabetes; 90&ndash;95% is <b>type 2</b>. Initial management: heart-healthy diet, &ge;150 min/week activity, weight loss if overweight/obese; <b>metformin</b> is first-line therapy. If HbA1c remains &gt;7% despite lifestyle + metformin, add an <b>SGLT2 inhibitor</b> or <b>GLP-1 agonist</b> (both reduce ASCVD risk).</div>
+
+<h3>Aspirin for Primary Prevention</h3>
+<div class="callout">Increasingly <b>controversial</b>. Per ACC/AHA 2019: may be considered in patients <b>ages 40&ndash;70</b> with significant CV risk factors <b>and low bleeding risk</b> — a relatively weak recommendation requiring individualized risk-benefit discussion. <b>Routine aspirin use is generally NOT advised</b> for primary prevention.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient asks about starting aspirin for primary prevention of cardiovascular disease. What is the current guidance on this practice?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin for primary prevention requires no risk-benefit discussion</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin should be routinely recommended to all adults over age 40 for primary prevention</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Routine aspirin use is generally not advised for primary prevention; it may be considered in select patients aged 40-70 with significant risk factors and low bleeding risk</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin is absolutely contraindicated in all patients without established cardiovascular disease</button>
+<div class="quiz-explain"><b>Explanation:</b> Current guidance indicates that routine aspirin use is generally not advised for primary prevention; its use may be considered in patients aged 40-70 with significant ASCVD risk factors and low bleeding risk, following an individualized risk-versus-benefit discussion.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the first-line pharmacologic therapy for a patient newly diagnosed with type 2 diabetes mellitus, in the context of cardiovascular risk reduction?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A GLP-1 receptor agonist</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Insulin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">An SGLT2 inhibitor</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Metformin</button>
+<div class="quiz-explain"><b>Explanation:</b> Metformin is considered first-line therapy for type 2 diabetes mellitus, used alongside lifestyle modifications; SGLT2 inhibitors or GLP-1 receptor agonists are added if HbA1c remains above 7% despite these measures, given their demonstrated ASCVD risk reduction.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. A patient with stage 1 hypertension (132/84 mmHg) has a calculated 10-year ASCVD risk of 12%. What is the recommended management approach?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Pharmacologic therapy should be added to nonpharmacologic measures, since the 10-year ASCVD risk exceeds 10%</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No treatment is needed since blood pressure is only mildly elevated</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Immediate hospitalization is required</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Nonpharmacologic measures alone, since this is stage 1 hypertension</button>
+<div class="quiz-explain"><b>Explanation:</b> For stage 1 hypertension with a 10-year ASCVD risk of 10% or greater, pharmacologic therapy should be initiated in addition to nonpharmacologic (lifestyle) measures -- this patient's 12% risk exceeds that threshold, warranting pharmacologic treatment.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec12">
+<h2>12. Secondary Prevention</h2>
+
+<div class="callout"><b>Secondary prevention</b> targets individuals with <b>established</b> cardiovascular disease (post-MI, post-PCI, post-CABG, or diagnosed CAD) — a <b>lifelong, intensive</b> process. Main goals: lower LDL-C, control BP, stop smoking, participate in cardiac rehab, use proven medications to prevent recurrent events.</div>
+
+<h3>Key Components</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Component</th><th>Detail</th></tr>
+<tr><td><b>Antithrombotic therapy</b></td><td>Unlike primary prevention, <b>low-dose aspirin is strongly recommended</b> unless contraindicated; <b>clopidogrel 75 mg/day</b> if aspirin-intolerant/allergic; DAPT tailored to ischemic/bleeding risk after ACS or PCI</td></tr>
+<tr><td><b>Lipid-lowering</b></td><td><b>High-intensity or maximally tolerated statin</b>, independent of baseline lipid levels, as long as tolerated — goal LDL <b>&lt;70 mg/dL</b>; add ezetimibe if LDL remains above target; consider PCSK9 inhibitors or bempedoic acid next</td></tr>
+<tr><td><b>Blood pressure</b></td><td>Should be lowered in all CAD patients with stage 1 HTN, using both nonpharmacologic and pharmacologic therapy; ACE inhibitors/ARBs preferred with diabetes, CKD, or LV dysfunction</td></tr>
+<tr><td><b>Diabetes management</b></td><td><b>Metformin</b> remains first-line even in secondary prevention</td></tr>
+<tr><td><b>Cardiac rehabilitation</b></td><td>Structured lifestyle change programs to improve function, adherence, and long-term outcomes</td></tr>
+<tr><td>Beta-blockers</td><td>Used for patients with recent MI, reduced ejection fraction, or ongoing angina</td></tr>
+</table>
+</div>
+
+<h3>Primary vs. Secondary Prevention — Key Contrast</h3>
+<div class="pearl"><b>Board Tip</b> Aspirin use is the clearest contrast point: <b>controversial/generally not advised</b> in primary prevention, but <b>strongly recommended</b> (unless contraindicated) in secondary prevention. Similarly, statin intensity is risk-stratified in primary prevention but is <b>high-intensity/maximally tolerated regardless of baseline LDL</b> once secondary prevention is indicated.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. How does the recommendation for aspirin use differ between primary and secondary prevention of cardiovascular disease?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin is recommended equally in both settings</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Aspirin is controversial/generally not advised in primary prevention, but strongly recommended (unless contraindicated) in secondary prevention</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin is contraindicated in secondary prevention but recommended in primary prevention</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Aspirin has no role in either primary or secondary prevention</button>
+<div class="quiz-explain"><b>Explanation:</b> This is a key distinction: in primary prevention, routine aspirin use is generally not advised and is considered only in select higher-risk, lower-bleeding-risk patients. In secondary prevention (established CVD), low-dose aspirin is strongly recommended unless contraindicated.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. What is the LDL-C goal for a patient undergoing secondary prevention after a myocardial infarction?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no specific LDL-C goal in secondary prevention</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Less than 100 mg/dL</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Less than 70 mg/dL</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Less than 130 mg/dL</button>
+<div class="quiz-explain"><b>Explanation:</b> In secondary prevention, the goal is to achieve an LDL-C of less than 70 mg/dL, using a high-intensity or maximally tolerated statin regardless of the patient's baseline lipid levels, as long as the medication is tolerated.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which medication is recommended for a patient in secondary prevention who is intolerant or allergic to aspirin?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No alternative antiplatelet is recommended</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">High-dose ibuprofen</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Warfarin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Clopidogrel 75 mg daily</button>
+<div class="quiz-explain"><b>Explanation:</b> Clopidogrel at a daily dose of 75 mg is recommended as an alternative antithrombotic agent for secondary prevention in patients who are intolerant or allergic to aspirin.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec13">
+<h2>13. Acute Treatment of Cardiac Ischemia</h2>
+
+<h3>Initial Steps for Suspected ACS</h3>
+<div class="callout">Cardiac monitor; IV access; <b>chewable aspirin 162&ndash;325 mg</b>; add a P2Y12 inhibitor (<b>clopidogrel or ticagrelor</b>) unless bypass surgery is imminent; control pain; consider O2 therapy; quickly obtain <b>ECG and troponin</b>; start anti-ischemic and antithrombotic treatment; consider an early invasive approach if appropriate.</div>
+
+<h3>Nitroglycerin</h3>
+<div class="callout">Shown to have a <b>mortality benefit</b>. Target: <b>10% MAP reduction</b> in normotensive patients, <b>30% MAP reduction</b> in hypertensive patients. <b>Avoid</b> in hypotensive patients and those with <b>inferior ST elevation</b> (right ventricular involvement makes these patients preload-dependent).</div>
+<div class="pearl"><b>Mechanism Recap</b> NTG generates cGMP &rarr; vasodilation, preferentially of veins &rarr; &darr;venous return &rarr; &darr;LV preload &rarr; &darr;contraction force and myocardial O2 demand. Also causes direct coronary vasodilation, increasing O2 supply. Most common adverse effect: <b>headache (&gt;60% of patients)</b>; can also cause postural hypotension.</div>
+
+<h3>STEMI — Reperfusion Is Time-Critical</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Scenario</th><th>Target Timing</th></tr>
+<tr><td>Primary PCI on-site</td><td>Within <b>90 minutes</b></td></tr>
+<tr><td>Transfer to another facility for PCI</td><td>Within <b>120 minutes</b></td></tr>
+<tr><td>PCI not available/achievable in time</td><td>Give <b>thrombolytics within 30 minutes</b>, then transfer for angiography if needed</td></tr>
+</table>
+</div>
+
+<h3>NSTEMI &amp; Unstable Angina</h3>
+<div class="callout">Admit for <b>cardiology consult and workup</b>. <b>DAPT + parenteral anticoagulation</b> in the acute phase, adjusted for each patient's ischemic vs. bleeding risk. <b>High-risk NSTEMI patients</b> generally do better with an <b>early invasive</b> evaluation strategy.</div>
+
+<h3>Additional Acute Anti-Ischemic Therapy</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Drug</th><th>Use/Caveat</th></tr>
+<tr><td>Beta-blockers</td><td>Use "when appropriate"</td></tr>
+<tr><td>Morphine</td><td>Only for severe pain/anxiety, used carefully — <b>not routine</b></td></tr>
+<tr><td>Nitrates</td><td>Avoid if hypotensive, RV infarct, or taking a <b>PDE5 inhibitor</b> (e.g., sildenafil — risk of profound hypotension)</td></tr>
+</table>
+</div>
+
+<h3>Begin Secondary Prevention Early — Even During the Acute Admission</h3>
+<div class="callout">High-intensity lipid-lowering, BP management, smoking cessation support, cardiac rehab referral, and cardiometabolic optimization should all begin <b>early, in the hospital</b> — not deferred to outpatient follow-up.</div>
+
+<h3>Stable Angina — Acute Symptom Relief</h3>
+<div class="callout"><b>Sublingual nitroglycerin</b> is used PRN for acute anginal chest pain relief (as opposed to the daily preventive medications discussed in Section 14).</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with an inferior wall STEMI (ST elevation in II, III, aVF) is being considered for nitroglycerin administration. What is the concern with this approach?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Inferior STEMI often involves the right ventricle, making these patients preload-dependent, so nitroglycerin's preload-reducing effect can cause dangerous hypotension</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Nitroglycerin is only contraindicated in anterior STEMI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">There is no specific concern with nitroglycerin in this scenario</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Nitroglycerin has no role in any type of STEMI</button>
+<div class="quiz-explain"><b>Explanation:</b> Inferior STEMI frequently involves the right ventricle, making cardiac output highly dependent on adequate preload. Nitroglycerin's venodilating effect reduces preload, which can precipitate severe hypotension in these preload-dependent patients -- hence the recommendation to avoid nitrates with inferior ST elevation.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. For a STEMI patient who cannot undergo primary PCI within the target window and no transfer for PCI is feasible in time, what is the appropriate next step?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Wait for PCI to become available regardless of delay</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Administer thrombolytics within 30 minutes, then transfer for angiography if needed</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">No treatment can be given until PCI is available</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Discharge the patient with outpatient follow-up</button>
+<div class="quiz-explain"><b>Explanation:</b> If primary PCI is not achievable within the target timeframe, thrombolytic therapy should be administered within 30 minutes, with subsequent transfer for angiography if needed -- reflecting the urgency of restoring reperfusion ('time is myocardium').</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. When should secondary prevention measures (high-intensity statin, blood pressure management, smoking cessation counseling) be initiated for a patient admitted with acute coronary syndrome?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Secondary prevention is not relevant during an acute ACS admission</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only after discharge, at the first outpatient follow-up visit</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Early, beginning during the acute hospital admission itself</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only if the patient specifically requests it</button>
+<div class="quiz-explain"><b>Explanation:</b> Secondary prevention measures, including high-intensity lipid-lowering therapy, blood pressure management, smoking cessation support, and cardiac rehab referral, should begin early during the acute hospital admission itself, rather than being deferred to outpatient follow-up.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec14">
+<h2>14. Post-Acute/Chronic Treatment of Cardiac Ischemia</h2>
+
+<div class="callout">For patients with <b>chronic coronary disease</b> (stable angina) managed in the outpatient setting, the main goals are: control symptoms, prevent MI/stroke/death, and reduce atherosclerotic risk.</div>
+
+<h3>Stepwise Antianginal Therapy</h3>
+<div class="callout">Adjust based on heart rate, blood pressure, and comorbidities:</div>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>Therapy</th></tr>
+<tr><td>1st-line</td><td><b>Beta-blockers</b> or <b>calcium channel blockers</b></td></tr>
+<tr><td>If symptoms persist</td><td>Add <b>long-acting nitrates</b> or <b>ranolazine</b></td></tr>
+<tr><td>If symptoms/ischemia persist</td><td>Consider lifestyle changes or <b>revascularization</b></td></tr>
+</table>
+</div>
+
+<h3>Beta-Blockers — Detailed Mechanism (Stable Angina)</h3>
+<div class="callout"><b>First-line</b> for stable angina; reduce angina frequency/severity but do <b>NOT decrease overall mortality</b> in stable angina specifically. Block myocyte &beta;1 receptors &rarr; &darr;contractility and &darr;heart rate &rarr; &darr;myocardial O2 demand. <b>Selective</b> agents (metoprolol, atenolol) block only &beta;1 (avoid &beta;2-mediated bronchospasm); both selective and nonselective agents work for angina.</div>
+<div class="pearl"><b>If Beta-Blocker Intolerant</b> Alternatives: a <b>nondihydropyridine CCB</b> (diltiazem, verapamil), or a <b>long-acting nitrate</b>.</div>
+
+<h3>Statins in Chronic Management</h3>
+<div class="callout">Reduce LDL and <b>stabilize plaque</b> — should be prescribed to <b>anyone with angina</b>. High-intensity statin is first choice; add <b>ezetimibe</b> if LDL remains above target; consider <b>PCSK9 inhibitors or bempedoic acid</b> next depending on risk/tolerance/cost.</div>
+
+<h3>Aspirin in Chronic Angina</h3>
+<div class="callout">Doesn't directly treat stable angina (not platelet/thrombus-mediated) — prescribed for <b>secondary prevention</b> in patients with a history of ASCVD, MI, stroke, stent, or CABG. Mechanism: COX pathway inhibition, preventing platelet-mediated clotting.</div>
+
+<h3>Antiplatelet Therapy Duration</h3>
+<div class="callout">For most patients with established CAD, <b>single antiplatelet therapy</b> is standard. After ACS or PCI, DAPT duration/intensity is <b>tailored</b> to each patient's ischemic vs. bleeding risk.</div>
+
+<h3>Renin-Angiotensin System Inhibitors</h3>
+<div class="callout">ACE inhibitors or ARBs recommended for CAD patients who also have <b>hypertension, diabetes, CKD, or LV dysfunction</b>.</div>
+
+<h3>Invasive/Surgical Options for Refractory Stable Angina</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Procedure</th><th>Indication</th></tr>
+<tr><td><b>PCI</b> (angioplasty &plusmn; stent)</td><td>Patients who fail medical management or have high-risk features (multiple risk factors, severe pain)</td></tr>
+<tr><td><b>CABG</b></td><td>Particularly for <b>left main CAD</b> or <b>multivessel disease</b>; commonly harvested vessels: internal mammary artery, leg veins</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Why Left Main Gets Surgery, Not Just a Stent</b> The left main artery gives rise to <b>both</b> the circumflex and LAD arteries, supplying a huge myocardial territory. Stenting here is risky — if the stent occludes, it deprives the entire left coronary circulation at once. CABG is generally favored for this anatomy.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. A patient with stable angina intolerant to beta-blockers needs an alternative first-line agent. Which medication class would be an appropriate substitute?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A PDE5 inhibitor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">An SGLT2 inhibitor</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">A dihydropyridine calcium channel blocker only</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">A nondihydropyridine calcium channel blocker (e.g., diltiazem or verapamil)</button>
+<div class="quiz-explain"><b>Explanation:</b> For patients intolerant of beta-blockers, a nondihydropyridine calcium channel blocker such as diltiazem or verapamil is an appropriate alternative first-line agent for stable angina, with a long-acting nitrate as another option.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Why is coronary artery bypass grafting (CABG) generally preferred over PCI/stenting for left main coronary artery disease?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">The left main artery supplies a large myocardial territory via both the circumflex and LAD, and stent occlusion here would deprive the entire left coronary circulation at once</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">PCI cannot technically reach the left main artery</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Left main disease never requires any intervention</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">CABG is always cheaper than PCI</button>
+<div class="quiz-explain"><b>Explanation:</b> The left main coronary artery gives rise to both the circumflex and left anterior descending arteries, supplying a large area of myocardium. Because stent occlusion in this critical location would acutely deprive the entire left coronary circulation, CABG is generally favored over PCI/stenting for significant left main disease.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. In stable angina, what is a key limitation of beta-blocker therapy despite being first-line treatment?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Beta-blockers have no effect on angina symptoms at all</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Beta-blockers reduce angina frequency and severity but do not decrease overall mortality in stable angina</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Beta-blockers are contraindicated in all patients with angina</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Beta-blockers only work in patients with vasospastic angina</button>
+<div class="quiz-explain"><b>Explanation:</b> While beta-blockers are first-line therapy for stable angina and effectively reduce the frequency and severity of anginal episodes, they do not decrease overall mortality in stable angina specifically -- an important nuance distinguishing symptom control from mortality benefit.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec15">
+<h2>15. Complications of Myocardial Infarction</h2>
+
+<h3>Categories of Complications</h3>
+<div class="callout">CAD/MI can cause ongoing perfusion problems, sudden plaque changes, and changes in the heart's <b>structure</b> or <b>electrical system</b>.</div>
+
+<h3>Structural Complications</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Complication</th><th>Detail</th></tr>
+<tr><td>Damage to heart muscle or valves</td><td>Can occur post-MI</td></tr>
+<tr><td>Ventricular septal defect ("hole in the heart wall")</td><td>Post-MI complication</td></tr>
+<tr><td>Left ventricular aneurysm ("bulge")</td><td>Post-MI complication</td></tr>
+<tr><td><b>Cardiogenic shock</b></td><td>Can result in severe cases of the above structural complications</td></tr>
+</table>
+</div>
+
+<h3>Electrical Complications (Arrhythmias)</h3>
+<div class="callout"><b>Atrial fibrillation</b> and <b>ventricular tachyarrhythmias</b> can occur from poor blood flow or heart scarring — these raise the risk of <b>sudden cardiac death</b>.</div>
+
+<h3>Heart Failure</h3>
+<div class="callout">A long-term consequence of CAD — repeated myocardial insults cause the heart to <b>remodel</b> (change shape) and progressively lose pumping ability. <b>CAD is the leading cause of heart failure with reduced ejection fraction (HFrEF)</b>, driving many hospitalizations and deaths.</div>
+
+<h3>Systemic/Vascular Complications</h3>
+<div class="callout">CAD is linked to atherosclerosis elsewhere in the body — increasing risk of <b>stroke, peripheral artery disease, and recurrent blood clots</b>.</div>
+
+<h3>Populations at Higher Complication Risk</h3>
+<div class="callout">Patients with <b>diabetes, chronic kidney disease, or poorly managed risk factors</b> more often have repeated episodes of reduced blood flow and worse overall outcomes.</div>
+<div class="pearl"><b>Board Tip — The Complication Cascade</b> Recurrent ischemia &rarr; myocardial scarring/remodeling &rarr; HFrEF; separately, scarred/damaged tissue also creates an <b>arrhythmogenic substrate</b> &rarr; AFib or ventricular tachyarrhythmias &rarr; risk of sudden cardiac death. Both pathways stem from the same underlying repeated ischemic insult.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">&#128221; Check Your Understanding (3 questions)</div>
+<div class="quiz-q">
+<p class="stem">1. What is the leading cause of heart failure with reduced ejection fraction (HFrEF)?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Hypertrophic cardiomyopathy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Valvular heart disease</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Coronary artery disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Congenital heart defects</button>
+<div class="quiz-explain"><b>Explanation:</b> Coronary artery disease is the leading cause of heart failure with reduced ejection fraction; repeated ischemic insults over time cause the heart to remodel and progressively lose contractile function.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">2. Why do patients with a history of myocardial infarction have an increased risk of ventricular tachyarrhythmias and sudden cardiac death?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Arrhythmias only occur in patients without any history of MI</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">This risk is entirely unrelated to the underlying myocardial damage</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">MI has no relationship to future arrhythmia risk</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Scarred, damaged myocardial tissue from prior infarction creates an arrhythmogenic substrate that predisposes to ventricular tachyarrhythmias</button>
+<div class="quiz-explain"><b>Explanation:</b> Myocardial scarring from a prior infarction creates an arrhythmogenic substrate -- areas of scar tissue can disrupt normal electrical conduction, predisposing to ventricular tachyarrhythmias and increasing the risk of sudden cardiac death.</div>
+</div>
+<div class="quiz-q">
+<p class="stem">3. Which patient populations are noted to have a higher risk of complications and repeated episodes of reduced coronary blood flow after an MI?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQuiz(this, true)">Patients with diabetes, chronic kidney disease, or poorly managed risk factors</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only patients without any cardiovascular risk factors</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Risk of complications is identical across all patient populations</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQuiz(this, false)">Only young, otherwise healthy patients</button>
+<div class="quiz-explain"><b>Explanation:</b> Patients with diabetes, chronic kidney disease, or poorly managed risk factors are noted to have a higher risk of repeated episodes of reduced blood flow and worse overall complications and outcomes following myocardial infarction.</div>
+</div>
+</div>
+
+</section>
+<section class="card" id="sec16">
+<h2>16. High-Yield Summary Tables</h2>
+<div class="callout">One-stop review — every core fact condensed to what's most likely to be tested. Use this section for final review; go back to the full section if a row doesn't immediately make sense.</div>
+
+<h3>IHD Risk Factors</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Factors</th></tr>
+<tr><td>Nonmodifiable</td><td>Age, male sex, race/ethnicity, family history of premature ASCVD</td></tr>
+<tr><td>Modifiable</td><td>T2DM, HTN, dyslipidemia, smoking (biggest one), obesity/metabolic syndrome, physical inactivity, CKD</td></tr>
+<tr><td>Risk-enhancing</td><td>Chronic inflammatory disorders, adverse pregnancy conditions, &uarr;TG/&uarr;Lp(a), psychosocial stressors/adverse SDOH</td></tr>
+</table>
+</div>
+
+<h3>The ACS/Angina Spectrum — Master Comparison</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Feature</th><th>Stable Angina</th><th>Unstable Angina</th><th>NSTEMI</th><th>STEMI</th></tr>
+<tr><td>Necrosis?</td><td>No</td><td>No (classically)</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Trigger</td><td>Exertion (predictable)</td><td>Rest/unpredictable, new/worsening</td><td>Rest</td><td>Rest</td></tr>
+<tr><td>Duration</td><td>2-5 min</td><td>&gt;10 min</td><td>Sustained</td><td>Sustained</td></tr>
+<tr><td>Pathology</td><td>Fixed atherosclerotic stenosis</td><td>Plaque rupture + thrombus (partial)</td><td>Partial occlusion</td><td>Total (100%) occlusion</td></tr>
+<tr><td>Troponin</td><td>Normal</td><td>Normal (classic)/may be + with hs-assay</td><td>Elevated</td><td>Elevated</td></tr>
+<tr><td>EKG</td><td>Normal (at rest)</td><td>ST depression/T inversion (nonspecific)</td><td>No ST elevation</td><td>ST elevation</td></tr>
+<tr><td>Injury depth</td><td>N/A</td><td>N/A</td><td>Less than full-thickness</td><td>Full-thickness</td></tr>
+</table>
+</div>
+
+<h3>Vasospastic Angina &amp; Special Presentations</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Entity</th><th>Key Fact</th></tr>
+<tr><td>Vasospastic (Prinzmetal)</td><td>Coronary spasm, not atherosclerosis; smoking is a key risk factor; also cocaine/amphetamines/marijuana/alcohol; responds to nitrates/CCBs</td></tr>
+<tr><td>Cardiac syndrome X</td><td>Angina in females w/o obstructive CAD; &gt;50% normal angiogram; microvascular dysfunction</td></tr>
+<tr><td>Silent ischemia</td><td>No clinical manifestations; more common in diabetics; higher mortality</td></tr>
+<tr><td>Anginal equivalents</td><td>Dyspnea/dizziness/nausea instead of chest pain; more common in elderly, women, diabetics</td></tr>
+</table>
+</div>
+
+<h3>Chest Pain Epidemiology (ED)</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Cause</th><th>% of ED Chest Pain</th></tr>
+<tr><td>ACS</td><td>31%</td></tr>
+<tr><td>GERD</td><td>30%</td></tr>
+<tr><td>Musculoskeletal</td><td>28%</td></tr>
+<tr><td>Pericarditis</td><td>4%</td></tr>
+<tr><td>Pneumonia/pleuritis, PE</td><td>2% each</td></tr>
+<tr><td>Aortic dissection</td><td>1%</td></tr>
+</table>
+</div>
+
+<h3>Troponin &amp; the ACS Spectrum</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Concept</th><th>Key Fact</th></tr>
+<tr><td>Why angina doesn't elevate troponin</td><td>Reduced (not absent) O2 -> myocytes survive, don't release enzymes</td></tr>
+<tr><td>Why MI elevates troponin</td><td>Myocyte necrosis -> intracellular proteins released</td></tr>
+<tr><td>hs-troponin effect</td><td>Reclassifying many "unstable angina" cases as small NSTEMIs</td></tr>
+<tr><td>Serial testing</td><td>~4 hours apart; single normal value does NOT rule out MI</td></tr>
+</table>
+</div>
+
+<h3>Stress Testing Quick Reference</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Best population</td><td>Intermediate pretest probability</td></tr>
+<tr><td>Sensitivity ceiling</td><td>70-90% for obstructive CAD (any modality)</td></tr>
+<tr><td>Positive exercise EKG</td><td>ST depression &gt;2-3mm and/or exercise-induced hypotension (&gt;10mmHg drop)</td></tr>
+<tr><td>Pharmacologic options</td><td>Vasodilators (adenosine, dipyridamole) or dobutamine, + imaging (echo/scintigraphy)</td></tr>
+<tr><td>Vasodilator CI</td><td>Severe asthma, hypotension, 2nd/3rd-degree AV block</td></tr>
+<tr><td>Dobutamine CI</td><td>Active ventricular arrhythmias/rapid AFib, severe HTN, recent MI</td></tr>
+<tr><td>Unstable angina + EST</td><td>Contraindicated acutely; used pre-discharge for risk stratification</td></tr>
+</table>
+</div>
+
+<h3>ASCVD Risk Estimator &amp; Statin Intensity</h3>
+<div class="table-scroll">
+<table>
+<tr><th>10-Yr Risk</th><th>Category</th><th>Statin</th></tr>
+<tr><td>&lt;5%</td><td>Low</td><td>Lifestyle only</td></tr>
+<tr><td>5-7.5%</td><td>Borderline</td><td>Discuss if risk-enhancers present</td></tr>
+<tr><td>7.5-20%</td><td>Intermediate</td><td>Moderate-intensity (&ge;30% LDL reduction)</td></tr>
+<tr><td>&gt;20%</td><td>High</td><td>Max-tolerated (&ge;50% LDL reduction)</td></tr>
+</table>
+</div>
+<div class="table-scroll">
+<table>
+<tr><th>CAC Score</th><th>Action</th></tr>
+<tr><td>0, no risk factors</td><td>Hold statin</td></tr>
+<tr><td>1-99</td><td>Favors statin, esp. age&ge;55</td></tr>
+<tr><td>&gt;100</td><td>Start statin</td></tr>
+</table>
+</div>
+
+<h3>Primary vs. Secondary Prevention — The Key Contrasts</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Factor</th><th>Primary Prevention</th><th>Secondary Prevention</th></tr>
+<tr><td>Aspirin</td><td>Generally NOT advised routinely; selective use 40-70yo + risk factors + low bleed risk</td><td>Strongly recommended unless contraindicated</td></tr>
+<tr><td>Statin</td><td>Intensity matched to calculated risk category</td><td>High-intensity/max-tolerated regardless of baseline LDL; goal &lt;70</td></tr>
+<tr><td>Population</td><td>No established ASCVD</td><td>Established disease (post-MI/PCI/CABG/dx CAD)</td></tr>
+</table>
+</div>
+
+<h3>Acute ACS Management Checklist</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>Detail</th></tr>
+<tr><td>Initial</td><td>Monitor, IV access, chewable ASA 162-325mg, P2Y12 inhibitor (unless CABG imminent), pain control, +/-O2, ECG+troponin</td></tr>
+<tr><td>Nitroglycerin</td><td>Mortality benefit; target 10% MAP&darr; (normotensive)/30% MAP&darr; (HTN); AVOID if hypotensive, inferior STEMI, or PDE5i use</td></tr>
+<tr><td>STEMI timing</td><td>PCI &le;90min on-site / &le;120min transfer; thrombolytics within 30min if PCI unavailable</td></tr>
+<tr><td>NSTEMI/UA</td><td>Admit, DAPT+anticoagulation; high-risk -&gt; early invasive strategy</td></tr>
+<tr><td>Morphine</td><td>Severe pain/anxiety only, NOT routine</td></tr>
+</table>
+</div>
+
+<h3>Chronic Stable Angina Management Ladder</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Step</th><th>Therapy</th></tr>
+<tr><td>1st-line</td><td>Beta-blocker OR CCB</td></tr>
+<tr><td>If sx persist</td><td>+Long-acting nitrate or ranolazine</td></tr>
+<tr><td>If sx/ischemia persist</td><td>Revascularization (PCI or CABG)</td></tr>
+<tr><td>All patients</td><td>Statin (plaque stabilization + LDL&darr;); aspirin for 2&deg; prevention (not direct angina Rx)</td></tr>
+</table>
+</div>
+<div class="table-scroll">
+<table>
+<tr><th>Revascularization</th><th>Preferred For</th></tr>
+<tr><td>PCI</td><td>Failed medical management, high-risk features</td></tr>
+<tr><td>CABG</td><td>Left main disease, multivessel disease</td></tr>
+</table>
+</div>
+
+<h3>Complications of MI</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Category</th><th>Examples</th></tr>
+<tr><td>Structural</td><td>Valve damage, VSD, LV aneurysm, cardiogenic shock</td></tr>
+<tr><td>Electrical</td><td>AFib, ventricular tachyarrhythmias -&gt; sudden cardiac death</td></tr>
+<tr><td>Chronic</td><td>HFrEF (CAD = #1 cause)</td></tr>
+<tr><td>Systemic</td><td>Stroke, PAD, recurrent thrombosis</td></tr>
+<tr><td>Higher-risk populations</td><td>Diabetes, CKD, poorly managed risk factors</td></tr>
+</table>
+</div>
+
+</section>
+
+
+</div>
+
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+function answerQuiz(btn, isCorrect) {
+  const qDiv = btn.closest('.quiz-q');
+  const choices = qDiv.querySelectorAll('.quiz-choice');
+  choices.forEach(c => c.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    const correctBtn = qDiv.querySelector('.quiz-choice[data-correct="true"]');
+    if (correctBtn) correctBtn.classList.add('correct');
+  }
+  const explain = qDiv.querySelector('.quiz-explain');
+  if (explain) explain.classList.add('show');
+}
+</script>
+
+</body>
+</html>
