@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pharmacology of Antiarrhythmics — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-card:#fffdf7;
+  --forest-dark:#2f5233;
+  --forest:#3f7d52;
+  --sage:#7fa47f;
+  --sage-light:#e4ede2;
+  --border:#d8cfb8;
+  --accent:#b5502f;
+  --text-main:#2a2a24;
+  --text-soft:#5b5a4f;
+  --correct:#2f7d4f;
+  --incorrect:#b5502f;
+  --core-red:#a3271f;
+  --core-red-bg:#fbe7e5;
+  --add-gray:#6b6558;
+  --add-gray-bg:#ece7da;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Lora',serif;background:var(--cream);color:var(--text-main);line-height:1.6;}
+.back-btn{position:fixed;top:16px;left:16px;z-index:200;background:var(--cream-card);border:1px solid var(--forest);color:var(--forest-dark);font-family:'IBM Plex Mono',monospace;font-size:13px;text-decoration:none;padding:8px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.back-btn:hover{background:var(--sage-light);}
+.pdf-btn{position:fixed;top:16px;right:16px;z-index:200;background:var(--forest-dark);border:1px solid var(--forest-dark);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;padding:8px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.pdf-btn:hover{background:var(--forest);}
+.sidenav-toggle{position:fixed;top:70px;right:0;z-index:200;background:var(--forest-dark);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;border:none;padding:14px 8px;writing-mode:vertical-rl;cursor:pointer;border-radius:6px 0 0 6px;}
+.sidenav-panel{position:fixed;top:0;right:-280px;width:270px;height:100%;background:var(--cream-card);border-left:1px solid var(--border);padding:70px 18px 18px 18px;overflow-y:auto;transition:right 0.25s ease;z-index:199;}
+.sidenav-panel.open{right:0;}
+.sidenav-panel a{display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-main);text-decoration:none;padding:6px 8px;border-radius:4px;margin-bottom:2px;}
+.sidenav-panel a:hover, .sidenav-panel a.active{background:var(--sage-light);color:var(--forest-dark);}
+.header{text-align:center;padding:70px 20px 30px 20px;}
+.header h1{color:var(--forest-dark);font-size:2.2em;margin-bottom:6px;}
+.header .subtitle{font-family:'IBM Plex Mono',monospace;color:var(--text-soft);font-size:14px;}
+.container{max-width:900px;margin:0 auto;padding:0 20px 80px 20px;}
+.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:36px;}
+.toc h2{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:1px;color:var(--forest-dark);text-transform:uppercase;margin-top:0;}
+.toc ul{margin:0;padding-left:20px;}
+.toc li{margin-bottom:6px;}
+.toc a{color:var(--text-main);text-decoration:none;}
+.toc a:hover{color:var(--forest);text-decoration:underline;}
+section.card{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:28px 30px;margin-bottom:28px;}
+section.card h2{color:var(--forest-dark);border-bottom:2px solid var(--sage);padding-bottom:8px;font-size:1.5em;}
+section.card h3{color:var(--forest);font-size:1.15em;margin-top:24px;}
+.badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.5px;padding:3px 9px;border-radius:20px;vertical-align:middle;margin-left:8px;}
+.badge-core{color:var(--core-red);background:var(--core-red-bg);border:1px solid var(--core-red);}
+.badge-add{color:var(--add-gray);background:var(--add-gray-bg);border:1px solid var(--add-gray);}
+.legend{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--text-soft);margin-bottom:30px;padding:12px 18px;background:var(--sage-light);border-radius:8px;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9em;}
+th{background:var(--forest-dark);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.5px;text-transform:uppercase;padding:9px 10px;text-align:left;}
+td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--sage-light);}
+.pearl{background:var(--sage-light);border-left:4px solid var(--forest);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:0.95em;}
+.pearl strong{color:var(--forest-dark);}
+.case{background:#fdf8ee;border:1px dashed var(--accent);border-radius:8px;padding:14px 18px;margin:16px 0;}
+.case-label{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);font-weight:700;}
+.figure{margin:18px 0;text-align:center;}
+ul, ol{padding-left:22px;}
+li{margin-bottom:4px;}
+.quiz-mini-header{font-family:'IBM Plex Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--forest-dark);margin:26px 0 12px 0;border-top:1px solid var(--border);padding-top:18px;}
+.quiz-q{background:#fdfcf6;border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-bottom:16px;}
+.quiz-q p.prompt{font-weight:600;margin-top:0;}
+.quiz-choice{display:block;width:100%;text-align:left;background:var(--cream-card);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:6px;cursor:pointer;font-family:'Lora',serif;font-size:0.96em;color:var(--text-main);}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#e3f3e6;border-color:var(--correct);color:var(--correct);font-weight:600;}
+.quiz-choice.incorrect{background:#fbe7e3;border-color:var(--incorrect);color:var(--incorrect);font-weight:600;}
+.quiz-choice.disabled{cursor:default;}
+.quiz-explain{display:none;margin-top:10px;padding:10px 14px;background:var(--sage-light);border-radius:6px;font-size:0.92em;}
+.quiz-explain.show{display:block;}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="pdf-btn" onclick="window.print()">Download PDF</button>
+<button class="sidenav-toggle" onclick="document.getElementById('sidenav').classList.toggle('open')">SECTIONS</button>
+<div class="sidenav-panel" id="sidenav">
+  <a href="#ephys">1. Cardiac Electrophysiology for Pharm</a>
+  <a href="#mechanisms">2. Mechanisms of Arrhythmias</a>
+  <a href="#vw">3. Vaughan-Williams Classification</a>
+  <a href="#classI">4. Class I — Na&#8314; Channel Blockers</a>
+  <a href="#classII">5. Class II — Beta-Blockers</a>
+  <a href="#classIV">6. Class IV — Ca&#178;&#8314; Channel Blockers</a>
+  <a href="#classIII">7. Class III — K&#8314; Channel Blockers</a>
+  <a href="#classV">8. "Class V" — Miscellaneous</a>
+  <a href="#clinical">9. Clinical Application: Putting It Together</a>
+  <a href="#summary">10. Master Summary Tables</a>
+  <a href="#takeaways">11. High-Yield Clinical Takeaways</a>
+</div>
+
+<div class="header">
+  <h1>Pharmacology of Antiarrhythmics</h1>
+  <div class="subtitle">CV II &middot; Natalie Waterfall, PharmD &middot; RVU-MCOM</div>
+</div>
+
+<div class="container">
+
+  <div class="legend">
+    <span class="badge badge-core">CORE</span> = drug list "Core Agent" (full depth — mechanism, clinical role, major ADRs, key monitoring/safety)
+    &nbsp;&nbsp;
+    <span class="badge badge-add">ADDITIONAL</span> = "Class-Level Agent" (know class/target, drug names, class-level ADRs/safety — drug-by-drug comparisons not expected)
+  </div>
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#ephys">1. Cardiac Electrophysiology for Pharm</a></li>
+      <li><a href="#mechanisms">2. Mechanisms of Arrhythmias</a></li>
+      <li><a href="#vw">3. Vaughan-Williams Classification</a></li>
+      <li><a href="#classI">4. Class I — Sodium Channel Blockers (IA, IB, IC)</a></li>
+      <li><a href="#classII">5. Class II — Beta-Adrenergic Blockers</a></li>
+      <li><a href="#classIV">6. Class IV — Calcium Channel Blockers</a></li>
+      <li><a href="#classIII">7. Class III — Potassium Channel Blockers</a></li>
+      <li><a href="#classV">8. "Class V" — Miscellaneous Agents</a></li>
+      <li><a href="#clinical">9. Clinical Application: Putting It Together</a></li>
+      <li><a href="#summary">10. Master Summary Tables</a></li>
+      <li><a href="#takeaways">11. High-Yield Clinical Takeaways</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section class="card" id="ephys">
+    <h2>1. Cardiac Electrophysiology for Pharm</h2>
+    <p>Conduction pathway: <strong>SA node &rarr; atrial myocardium &rarr; AV node &rarr; bundle of His &rarr; right/left bundle branches &rarr; Purkinje fibers &rarr; ventricular myocardium.</strong></p>
+
+    <h3>ECG Correlates</h3>
+    <ul>
+      <li><strong>P wave</strong> — atrial depolarization</li>
+      <li><strong>PR interval</strong> — AV nodal conduction delay</li>
+      <li><strong>QRS complex</strong> — ventricular depolarization</li>
+      <li><strong>T wave</strong> — ventricular repolarization</li>
+    </ul>
+    <p>Drug-induced ECG changes (QRS widening, QT prolongation) are key pharmacologic markers of both efficacy and toxicity.</p>
+
+    <h3>Fast-Response Tissues</h3>
+    <p>Atrial/ventricular myocytes, His-Purkinje fibers — depolarization driven by fast Na&#8314; influx.</p>
+    <ul>
+      <li><strong>Phase 0:</strong> rapid depolarization (fast Na&#8314; current)</li>
+      <li><strong>Phase 1:</strong> transient early repolarization (K&#8314; efflux)</li>
+      <li><strong>Phase 2:</strong> plateau (Ca&#178;&#8314; influx balanced by K&#8314; efflux)</li>
+      <li><strong>Phase 3:</strong> repolarization (K&#8314; efflux predominates as Ca&#178;&#8314; channels close)</li>
+      <li><strong>Phase 4:</strong> resting membrane potential (Na&#8314;/K&#8314;-ATPase, Na&#8314;/Ca&#178;&#8314; exchanger)</li>
+    </ul>
+
+    <h3>Slow-Response Tissues</h3>
+    <p>SA and AV nodes — lack functional fast Na&#8314; channels; depolarization relies on Ca&#178;&#8314; influx through L-type channels.</p>
+    <ul>
+      <li><strong>Phase 4:</strong> spontaneous depolarization (inward "funny" current, mostly Na&#8314;, augmented by T-type Ca&#178;&#8314;) — underlies automaticity</li>
+      <li><strong>Phase 0:</strong> upstroke via L-type Ca&#178;&#8314; influx</li>
+      <li><strong>Phase 3:</strong> repolarization via outward K&#8314; currents</li>
+    </ul>
+    <div class="pearl"><strong>Pearl:</strong> This ionic difference explains why CCBs and beta-blockers are the nodal agents (calcium-dependent tissue) while Na&#8314; channel blockers act on fast-response tissue and have minimal nodal effect.</div>
+
+    <h3>Basic Electrophysiologic Properties</h3>
+    <ul>
+      <li><strong>Pacemaker hierarchy:</strong> SA node (60&ndash;100 bpm) &rarr; AV node (40&ndash;60 bpm) &rarr; His-Purkinje system (20&ndash;40 bpm)</li>
+      <li><strong>Automaticity:</strong> spontaneous AP generation, primarily SA/AV nodes</li>
+      <li><strong>Effective refractory period (ERP):</strong> time during which a cardiac cell cannot be re-excited — a protective mechanism against premature impulses, and a major pharmacologic target</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="card" id="mechanisms">
+    <h2>2. Mechanisms of Arrhythmias</h2>
+    <p>Arrhythmias arise from <strong>abnormal impulse formation</strong>, <strong>abnormal impulse conduction</strong>, or a combination of both.</p>
+
+    <h3>Abnormal Impulse Formation — Enhanced Automaticity</h3>
+    <ul>
+      <li>Pacemaker cells depolarize faster than normal, or non-pacemaker cells acquire spontaneous depolarizing activity &rarr; ectopic beats/tachyarrhythmias</li>
+      <li><strong>Common triggers:</strong> &uarr; sympathetic tone, myocardial ischemia/hypoxia, electrolyte disturbances (hypokalemia)</li>
+      <li><strong>Suppressed by:</strong> beta-blockers (Class II) and non-DHP CCBs (Class IV) — reduce phase 4 slope, slow HR</li>
+    </ul>
+
+    <h3>Abnormal Impulse Formation — Triggered Activity</h3>
+    <ul>
+      <li><strong>Early afterdepolarizations (EADs):</strong> occur during phase 3; associated with prolonged APs & QT prolongation; precursor to TdP; triggered by Class III agents, hypokalemia, congenital long QT</li>
+      <li><strong>Delayed afterdepolarizations (DADs):</strong> occur after full repolarization (phase 4); related to intracellular Ca&#178;&#8314; overload; seen with digoxin toxicity, excess catecholamines, myocardial ischemia</li>
+      <li><strong>Treatment:</strong> CCBs, magnesium, or drugs that decrease sympathetic tone</li>
+    </ul>
+
+    <h3>Abnormal Impulse Conduction — Conduction Block</h3>
+    <ul>
+      <li>Impulse fails to propagate through part of the conduction system &rarr; bradyarrhythmias or substrate for reentrant circuits</li>
+      <li>Used therapeutically: intentional AV nodal blockade to control ventricular rate in SVT</li>
+    </ul>
+
+    <h3>Abnormal Impulse Conduction — Reentry</h3>
+    <p>Requires three conditions:</p>
+    <ol>
+      <li>Two pathways with different conduction velocities or refractory periods</li>
+      <li>Unidirectional block in one pathway</li>
+      <li>Slowed conduction in the alternate pathway (allows time for tissue to recover excitability)</li>
+    </ol>
+    <p>This enables a self-perpetuating loop. Reentrant tachyarrhythmias: AVNRT, atrial flutter, monomorphic VT.</p>
+    <ul>
+      <li><strong>Class I agents</strong> slow conduction velocity (block fast Na&#8314; channels) &rarr; destabilize the reentry loop</li>
+      <li><strong>Class III agents</strong> prolong the ERP &rarr; prevent premature re-excitation</li>
+      <li><strong>Adenosine, beta-blockers, non-DHP CCBs</strong> acutely interrupt the circuit and restore sinus rhythm in SVT</li>
+    </ul>
+
+    <div class="quiz-mini-header">Quick Check — Mechanisms</div>
+    <div class="quiz-q">
+      <p class="prompt">Delayed afterdepolarizations (DADs) are most classically associated with which clinical scenario?</p>
+      <button class="quiz-choice" data-correct="false">Congenital long QT syndrome</button>
+      <button class="quiz-choice" data-correct="false">Class III drug therapy</button>
+      <button class="quiz-choice" data-correct="true">Digoxin toxicity</button>
+      <button class="quiz-choice" data-correct="false">Hypokalemia-induced QT prolongation</button>
+      <div class="quiz-explain">DADs occur after full repolarization (phase 4) and relate to intracellular calcium overload — classically from digoxin toxicity, excess catecholamines, or ischemia. EADs (not DADs) relate to QT prolongation and Class III drugs.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="card" id="vw">
+    <h2>3. Vaughan-Williams Classification</h2>
+    <table>
+      <tr><th>Class</th><th>Mechanism</th><th>Representative Drugs</th></tr>
+      <tr><td>Class I</td><td>Na&#8314; channel blockers — &darr; phase 0 depolarization in fast-response tissue</td><td>—</td></tr>
+      <tr><td>&nbsp;&nbsp;IA</td><td>Moderate Na&#8314; block; prolongs APD (also blocks K&#8314;)</td><td>Quinidine, Procainamide, Disopyramide</td></tr>
+      <tr><td>&nbsp;&nbsp;IB</td><td>Weak Na&#8314; block; shortens APD</td><td>Lidocaine, Mexiletine</td></tr>
+      <tr><td>&nbsp;&nbsp;IC</td><td>Strong Na&#8314; block; minimal APD effect</td><td>Flecainide, Propafenone</td></tr>
+      <tr><td>Class II</td><td>&beta;-blockers — &darr; automaticity (&darr; phase 4 slope), &darr; AV nodal conduction</td><td>Metoprolol, Esmolol, Propranolol</td></tr>
+      <tr><td>Class III</td><td>K&#8314; channel blockers — prolong repolarization (phase 3); &uarr; APD & ERP</td><td>Amiodarone, Sotalol, Dofetilide, Ibutilide</td></tr>
+      <tr><td>Class IV</td><td>Inhibit L-type Ca&#178;&#8314; channels in SA/AV nodes; &darr; conduction, &uarr; nodal refractoriness</td><td>Verapamil, Diltiazem</td></tr>
+      <tr><td>Class V / Misc.</td><td>&uarr; K&#8314; efflux (transient AV block); &uarr; vagal tone; membrane stabilization</td><td>Adenosine; Digoxin; Magnesium sulfate</td></tr>
+    </table>
+    <div class="pearl"><strong>Pearl — overlapping mechanisms:</strong> Some drugs span multiple classes. <strong>Amiodarone</strong> has properties of all four classes. <strong>Sotalol</strong> combines Class II (beta-blockade) + Class III (K&#8314; blockade). Recognizing this explains both broad efficacy and complex toxicity profiles.</div>
+  </section>
+
+  <!-- SECTION 4: CLASS I -->
+  <section class="card" id="classI">
+    <h2>4. Class I — Sodium Channel Blockers</h2>
+    <p>Reduce the fast inward Na&#8314; current during phase 0 &rarr; slow depolarization rate & conduction velocity in fast-response tissue &rarr; <strong>widened QRS complex</strong>.</p>
+
+    <h3>Use-Dependence (Phase-Dependence)</h3>
+    <ul>
+      <li>Class I drugs preferentially bind Na&#8314; channels in the <strong>open or inactivated</strong> states — more common at fast heart rates or in depolarized/ischemic tissue</li>
+      <li>Greater effect in diseased myocardium and during tachyarrhythmias</li>
+      <li>Recovery kinetics differ by drug: <strong>fast dissociators</strong> (lidocaine) act mainly at high heart rates with minimal effect at normal sinus rates; <strong>slow dissociators</strong> (flecainide, &gt;10 sec recovery) block significantly even at resting rates, prolonging PR/QRS at baseline</li>
+      <li>Raises the threshold for excitability &rarr; &darr; automaticity; suppresses triggered activity (EADs/DADs); can terminate reentrant arrhythmias by slowing conduction enough to extinguish the circuit (but this same slowing can also be proarrhythmic)</li>
+    </ul>
+
+    <h3>Class IA — Procainamide <span class="badge badge-core">CORE</span>, Quinidine & Disopyramide <span class="badge badge-add">ADDITIONAL</span></h3>
+    <ul>
+      <li><strong>MOA:</strong> moderate Na&#8314; block + K&#8314; channel block &rarr; prolongs QRS <em>and</em> QT/APD; intermediate dissociation kinetics</li>
+      <li><strong>Use:</strong> SVT and VT — use has declined given safer alternatives</li>
+      <li><strong>Shared risk:</strong> QT prolongation and TdP for all three agents</li>
+    </ul>
+    <p><strong>Procainamide (CORE):</strong></p>
+    <ul>
+      <li>Blocks open-state Na&#8314; channels + nonspecific K&#8314; channels; slows conduction</li>
+      <li>Active metabolite <strong>NAPA</strong> retains Class III (K&#8314;-blocking) activity and contributes to QT prolongation; accumulates in renal dysfunction</li>
+      <li><strong>Use:</strong> acute atrial and ventricular arrhythmias (IV, e.g., post-MI monomorphic VT if amiodarone/lidocaine unavailable)</li>
+      <li><strong>ADRs:</strong> drug-induced lupus erythematosus (especially slow acetylators), hypotension, GI upset, agranulocytosis, rare hepatotoxicity, QT prolongation/TdP</li>
+      <li>Monitor procainamide + NAPA levels, especially in renal impairment</li>
+    </ul>
+    <p><strong>Quinidine (Additional):</strong> blocks Na&#8314; + multiple K&#8314; channels; alpha-blocking & vagolytic activity can paradoxically enhance AV conduction (worsening ventricular response in atrial flutter) — often needs a co-administered AV nodal blocker. ADRs: GI toxicity, cinchonism, immune reactions, TdP. Strong CYP2D6/P-gp inhibitor.</p>
+    <p><strong>Disopyramide (Additional):</strong> strong anticholinergic effects (dry mouth, constipation, urinary retention, blurred vision); negative inotrope — avoid in heart failure; used for ventricular arrhythmias with preserved systolic function; QT prolongation/TdP risk; hepatic + renal clearance.</p>
+
+    <h3>Class IB — Lidocaine <span class="badge badge-core">CORE</span>, Mexiletine <span class="badge badge-add">ADDITIONAL</span></h3>
+    <ul>
+      <li><strong>MOA:</strong> preferentially bind open/inactivated Na&#8314; channels, especially in depolarized/ischemic tissue; <strong>shorten</strong> APD by accelerating phase 3; rapid kinetics; minimal atrial effect</li>
+      <li><strong>Use:</strong> ventricular arrhythmias, particularly acute ischemic settings</li>
+    </ul>
+    <p><strong>Lidocaine (CORE):</strong></p>
+    <ul>
+      <li>Used acutely for monomorphic VT or to prevent VF after cardioversion</li>
+      <li>Main action: ventricular tissue & Purkinje fibers; little atrial effect</li>
+      <li>Extensive first-pass metabolism &rarr; <strong>IV only</strong>; short half-life (1&ndash;2 hr) — bolus + infusion; adjust for HF/liver disease</li>
+      <li><strong>ADRs:</strong> neurologic (tremor, confusion, slurred speech, paresthesia, seizures; nystagmus is an early toxicity sign)</li>
+      <li><strong>CI:</strong> significant conduction disease without pacemaker support</li>
+    </ul>
+    <p><strong>Mexiletine (Additional):</strong> oral analog of lidocaine, resists first-pass metabolism; used for chronic suppression of ventricular arrhythmias; hepatic metabolism; ADRs: GI symptoms, CNS effects; avoid in structural heart disease; CI: cardiogenic shock, severe SA/AV disease without pacing; CYP450 inducers lower levels.</p>
+
+    <h3>Class IC — Flecainide <span class="badge badge-core">CORE</span>, Propafenone <span class="badge badge-add">ADDITIONAL</span></h3>
+    <ul>
+      <li><strong>MOA:</strong> strongest Na&#8314; channel blockade of Class I, very slow dissociation kinetics &rarr; marked conduction slowing even at normal rates; <strong>minimal effect on QT/APD</strong></li>
+    </ul>
+    <p><strong>Flecainide (CORE):</strong></p>
+    <ul>
+      <li>Blocks fast Na&#8314; current, delayed rectifier K&#8314; and Ca&#178;&#8314; currents to a lesser extent, and RyR2 (relevant to CPVT)</li>
+      <li>Widens PR, QRS, <em>and</em> QT intervals</li>
+      <li><strong>Use:</strong> SVT in patients <strong>without structural heart disease</strong>; refractory VT; CPVT; some inherited channelopathies</li>
+      <li>Eliminated by kidney & liver (CYP2D6)</li>
+      <li><strong>ADRs:</strong> blurred vision, dizziness, worsening HF; most serious concern is <strong>proarrhythmia</strong>; overdose &rarr; AV block, wide QRS, hemodynamic collapse (may respond to IV sodium bicarbonate)</li>
+      <li><strong>CI: history of MI or structural heart disease</strong> — classic exam point (CAST trial legacy)</li>
+    </ul>
+    <p><strong>Propafenone (Additional):</strong> potent Na&#8314; blocker + weak beta-blocking activity; used for AF/flutter/SVT without structural heart disease; hepatic (CYP2D6) metabolism, dose-reduce in liver disease; ADRs: metallic taste, constipation, dizziness, can worsen arrhythmias, avoid in reduced EF.</p>
+
+    <div class="case">
+      <div class="case-label">Case Snapshot</div>
+      <p>A patient with a prior MI is started on flecainide for symptomatic PVCs and subsequently has an increase in sudden cardiac death risk. What historical trial does this reflect, and what's the teaching point?</p>
+      <p><strong>Answer:</strong> This reflects the CAST trial findings — Class IC agents are proarrhythmic in structural/ischemic heart disease and are contraindicated post-MI.</p>
+    </div>
+
+    <div class="quiz-mini-header">Quick Check — Class I</div>
+    <div class="quiz-q">
+      <p class="prompt">Which Class I subclass shortens the action potential duration and is most useful in ischemic/depolarized ventricular tissue?</p>
+      <button class="quiz-choice" data-correct="false">IA</button>
+      <button class="quiz-choice" data-correct="true">IB</button>
+      <button class="quiz-choice" data-correct="false">IC</button>
+      <div class="quiz-explain">Class IB drugs (lidocaine, mexiletine) shorten APD and preferentially act on ischemic/depolarized tissue due to their affinity for inactivated sodium channels.</div>
+    </div>
+    <div class="quiz-q">
+      <p class="prompt">Flecainide is contraindicated in which patient population?</p>
+      <button class="quiz-choice" data-correct="false">Patients with asthma</button>
+      <button class="quiz-choice" data-correct="true">Patients with prior MI or structural heart disease</button>
+      <button class="quiz-choice" data-correct="false">Patients with renal impairment</button>
+      <button class="quiz-choice" data-correct="false">Patients with hyperthyroidism</button>
+      <div class="quiz-explain">Class IC agents markedly slow conduction and are proarrhythmic in structural/ischemic heart disease — flecainide is contraindicated post-MI.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: CLASS II -->
+  <section class="card" id="classII">
+    <h2>5. Class II — Beta-Adrenergic Blockers</h2>
+    <p>Metoprolol <span class="badge badge-core">CORE</span> &middot; Propranolol, Esmolol <span class="badge badge-add">ADDITIONAL</span></p>
+
+    <h3>Mechanism & Effects</h3>
+    <ul>
+      <li>&beta;&#8321;-antagonism at the AV node (and to a lesser extent SA node) &rarr; &darr; phase 4 depolarization slope, &darr; AV nodal conduction, &uarr; AV nodal refractoriness &rarr; &uarr; PR interval</li>
+      <li>Limits transmission of rapid atrial impulses to the ventricles</li>
+      <li><strong>Effective for:</strong> ventricular rate control in AF and paroxysmal SVT; suppress AV-nodal-dependent tachycardias (AVNRT, AVRT); suppress PVCs; beneficial post-MI and in congenital long QT syndrome</li>
+      <li><strong>Do NOT terminate arrhythmias directly</strong> — valuable for rate control, not rhythm conversion</li>
+    </ul>
+
+    <h3>Class-Wide ADRs & Contraindications</h3>
+    <ul>
+      <li><strong>ADRs:</strong> bradycardia, AV block, hypotension, fatigue</li>
+      <li><strong>CI:</strong> severe bradycardia, 2nd/3rd-degree AV block (without pacemaker), acute decompensated HF, cardiogenic shock, severe bronchospastic disease</li>
+      <li><strong>Caution:</strong> asthma, diabetes, peripheral vascular disease — beta-1 selective agents preferred here</li>
+    </ul>
+
+    <h3>Metoprolol <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li>&beta;&#8321;-selective; used for <strong>chronic rate control</strong> in AF and other SVTs</li>
+      <li>Moderately lipophilic &rarr; CNS penetration (fatigue, vivid dreams, depression); sexual dysfunction reported</li>
+      <li>Generally safer than nonselective agents in mild asthma/COPD</li>
+      <li>Metabolized by <strong>CYP2D6</strong> — poor metabolizers/CYP2D6 inhibitors (e.g., SSRIs like fluoxetine, paroxetine) &uarr; levels</li>
+      <li><strong>DI:</strong> combining with non-DHP CCBs (verapamil, diltiazem) &uarr; risk of bradycardia/heart block</li>
+    </ul>
+
+    <h3>Propranolol <span class="badge badge-add">ADDITIONAL</span></h3>
+    <p>Nonselective (&beta;&#8321; + &beta;&#8322;); highly lipophilic &rarr; CNS effects (fatigue, depression, nightmares); &beta;&#8322; blockade &rarr; bronchospasm, cold extremities, blunted hypoglycemia awareness; extensive first-pass hepatic metabolism (CYP1A2, CYP2D6 substrate); additive bradycardia/AV block with other AV nodal blockers.</p>
+
+    <h3>Esmolol <span class="badge badge-add">ADDITIONAL</span></h3>
+    <p>&beta;&#8321;-selective, ultra-short acting; metabolized by RBC esterases &rarr; half-life ~9 min; IV only; ideal for perioperative, critical care, or emergency rapid titration/reversal (e.g., intraoperative tachyarrhythmias, hypertensive crisis with tachycardia). Hydrophilic &rarr; minimal CNS penetration; effects resolve quickly on discontinuation.</p>
+
+    <div class="quiz-mini-header">Quick Check — Class II</div>
+    <div class="quiz-q">
+      <p class="prompt">Which beta-blocker is preferred for rapid intraoperative rate control given its ultra-short half-life?</p>
+      <button class="quiz-choice" data-correct="false">Metoprolol</button>
+      <button class="quiz-choice" data-correct="false">Propranolol</button>
+      <button class="quiz-choice" data-correct="true">Esmolol</button>
+      <div class="quiz-explain">Esmolol's ~9-minute half-life (metabolized by RBC esterases) allows rapid titration and quick reversal, making it ideal for perioperative/critical care settings.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: CLASS IV -->
+  <section class="card" id="classIV">
+    <h2>6. Class IV — Calcium Channel Blockers</h2>
+    <p>Verapamil & Diltiazem <span class="badge badge-core">CORE</span> (no additional agents listed for this class)</p>
+
+    <h3>Mechanism</h3>
+    <ul>
+      <li>Non-DHP CCBs directly inhibit L-type Ca&#178;&#8314; channels (open & inactivated states), particularly in the <strong>SA and AV nodes</strong> where conduction is calcium-dependent</li>
+      <li>&darr; Ca&#178;&#8314; influx &rarr; &darr; nodal automaticity & conduction &rarr; slows atrial signal transmission to ventricles, disrupts AV nodal reentry</li>
+      <li>&darr; slope of phase 0 depolarization & slows phase 4 spontaneous depolarization in nodal tissue</li>
+      <li>Suppress EADs and DADs; <strong>rarely terminate arrhythmias directly</strong> — used for rate control, not rhythm conversion</li>
+      <li>Verapamil may also mildly suppress SA node activity (dose-dependent bradycardia)</li>
+    </ul>
+
+    <h3>Therapeutic Use</h3>
+    <ul>
+      <li>Rate control in SVT (AVNRT) and AF/flutter — IV for acute, oral for chronic management</li>
+      <li><strong>Ineffective for ventricular arrhythmias</strong> and potentially harmful in wide-complex tachycardia of uncertain origin (especially with an accessory pathway)</li>
+    </ul>
+
+    <h3>PK / Adverse Effects / Interactions</h3>
+    <ul>
+      <li>Extensive first-pass hepatic metabolism &rarr; low oral bioavailability; both are <strong>CYP3A4 substrates and inhibitors</strong></li>
+      <li><strong>ADRs:</strong> bradycardia, hypotension, AV block, peripheral edema, fatigue, dizziness; <strong>constipation particularly with verapamil</strong> (dose-dependent)</li>
+      <li><strong>DI:</strong> additive AV nodal suppression with beta-blockers or digoxin (risk of severe bradycardia/AV block); as CYP3A4 inhibitors, can raise levels of statins, cyclosporine, amiodarone, and digoxin</li>
+      <li><strong>CI:</strong> severe hypotension, 2nd/3rd-degree AV block (no pacemaker), sick sinus syndrome, acute decompensated HF</li>
+      <li><strong>High-yield CI:</strong> <strong>AFib in the setting of WPW syndrome</strong> — AV nodal blockade can enhance conduction through the accessory pathway, precipitating VF and hemodynamic collapse. Never use verapamil/diltiazem in AF + WPW.</li>
+    </ul>
+
+    <div class="pearl"><strong>Pearl:</strong> Class II and Class IV agents share the same clinical niche — AV nodal rate control — but act through different mechanisms (beta blockade vs. direct Ca&#178;&#8314; channel blockade). Combining them additively risks bradycardia/AV block.</div>
+
+    <div class="quiz-mini-header">Quick Check — Class IV</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient with atrial fibrillation and known WPW syndrome is given IV verapamil. What is the major concern?</p>
+      <button class="quiz-choice" data-correct="false">Worsening asthma</button>
+      <button class="quiz-choice" data-correct="true">Enhanced conduction through the accessory pathway, risking VF</button>
+      <button class="quiz-choice" data-correct="false">Hepatotoxicity</button>
+      <button class="quiz-choice" data-correct="false">QT prolongation and TdP</button>
+      <div class="quiz-explain">AV nodal blockade in AF+WPW can preferentially enhance conduction down the accessory pathway, leading to a dangerously fast ventricular response and potential VF. Non-DHP CCBs (and other AV nodal blockers) are contraindicated in this setting.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: CLASS III -->
+  <section class="card" id="classIII">
+    <h2>7. Class III — Potassium Channel Blockers</h2>
+    <p>Amiodarone, Sotalol, Dofetilide <span class="badge badge-core">CORE</span> &middot; Dronedarone, Ibutilide <span class="badge badge-add">ADDITIONAL</span></p>
+
+    <h3>Shared Mechanism</h3>
+    <ul>
+      <li>Block cardiac K&#8314; channels (mainly phase 3 repolarization) &rarr; prolonged repolarization, &uarr; APD, &uarr; ERP &rarr; suppresses reentrant arrhythmias</li>
+      <li>ECG correlate: <strong>QT interval prolongation</strong></li>
+      <li>Used for both atrial and ventricular arrhythmias</li>
+      <li><strong>Class-wide risk: proarrhythmia, especially Torsades de Pointes (TdP)</strong> — risk rises with hypokalemia, bradycardia, or co-administration of other QT-prolonging drugs</li>
+      <li><strong>Exception:</strong> amiodarone rarely induces TdP despite significant QT prolongation, likely due to its multichannel effects (Na&#8314;, Ca&#178;&#8314;, &beta;-blockade) that offset the risk</li>
+    </ul>
+
+    <h3>Amiodarone <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li><strong>Multi-class activity:</strong> Class III (K&#8314; block, dominant), Class I (Na&#8314; block), Class II (noncompetitive beta-blockade), Class IV (mild Ca&#178;&#8314; block)</li>
+      <li><strong>Use:</strong> broad spectrum — AF/SVT (rhythm & rate control) and life-threatening VT/VF; favored in structural heart disease/HF (not shown to increase mortality here, unlike many other antiarrhythmics)</li>
+      <li>Available IV (emergency, e.g., pulseless VT/VF) and oral (long-term rhythm maintenance)</li>
+      <li><strong>PK:</strong> highly lipophilic, huge volume of distribution, very long/complex half-life (weeks to months); requires a loading phase; hepatic metabolism via CYP3A4 (active metabolite)</li>
+      <li><strong>ADRs (extensive):</strong> pulmonary toxicity (interstitial pneumonitis, fibrosis — can be fatal), thyroid dysfunction (hyper or hypo, from iodine content), hepatotoxicity, corneal microdeposits, photosensitivity with blue-gray skin discoloration, bradyarrhythmias; TdP is rare despite QT prolongation</li>
+      <li>Routine monitoring: thyroid, liver, pulmonary function</li>
+      <li><strong>DI:</strong> inhibits CYP3A4, CYP2C9, P-gp &rarr; &uarr; digoxin and warfarin levels (reduce warfarin dose ~30&ndash;50%, monitor INR closely); additive QT/bradycardia risk with sotalol, azithromycin, fluoroquinolones, haloperidol, beta-blockers</li>
+    </ul>
+
+    <h3>Sotalol <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li>Racemic mixture: <strong>Class II</strong> (L-enantiomer nonselective beta-blockade) + <strong>Class III</strong> (both enantiomers block delayed rectifier K&#8314;) &rarr; prolonged APD & QT</li>
+      <li><strong>Use:</strong> life-threatening VT, maintenance of sinus rhythm in AF/flutter, pediatric arrhythmias</li>
+      <li>Nearly complete bioavailability, <strong>not metabolized</strong> — excreted unchanged renally; renal function is a key determinant of safety</li>
+      <li><strong>ADRs:</strong> TdP (dose-limiting, worsened by renal impairment, hypokalemia, bradycardia, other QT drugs); fatigue, bronchospasm, bradycardia (nonselective beta-blocker effects)</li>
+      <li><strong>CI:</strong> baseline QTc &gt;450 ms, CrCl &lt;40 mL/min, overt HF, asthma</li>
+      <li>Initiation/dose escalation requires a monitored setting with continuous ECG and renal function assessment</li>
+    </ul>
+
+    <h3>Dofetilide <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li><strong>Pure Class III</strong> — selectively blocks the rapid component of the delayed rectifier K&#8314; current (I<sub>Kr</sub>); no significant Na&#8314;, beta, or Ca&#178;&#8314; activity</li>
+      <li><strong>Use:</strong> conversion to and maintenance of sinus rhythm in AF/flutter — valuable in structural heart disease/HF (does not increase mortality here)</li>
+      <li>~100% oral bioavailability; eliminated unchanged, <strong>renally</strong> — dose based on CrCl</li>
+      <li><strong>Must be initiated in a monitored inpatient setting for &ge;3 days</strong> with continuous ECG and renal monitoring; baseline QTc must be &lt;440&ndash;450 ms; correct K&#8314;/Mg&#178;&#8314; before starting</li>
+      <li><strong>ADRs:</strong> TdP (dose-dependent, worse with renal impairment, bradycardia, electrolyte disturbance)</li>
+      <li><strong>DI:</strong> agents inhibiting renal cation secretion (cimetidine, trimethoprim, verapamil) and other QT-prolonging drugs</li>
+      <li><strong>CI:</strong> marked renal impairment, baseline QT prolongation, hypokalemia, bradycardia</li>
+    </ul>
+
+    <h3>Dronedarone <span class="badge badge-add">ADDITIONAL</span></h3>
+    <p>Non-iodinated amiodarone analog developed to reduce thyroid/pulmonary toxicity; multi-class activity (blocks Na&#8314;, Ca&#178;&#8314;, K&#8314;, has anti-adrenergic effect) but <strong>less effective than amiodarone</strong> at maintaining sinus rhythm. Approved to reduce CV hospitalization risk in paroxysmal/persistent AF/flutter. Metabolized by/inhibits CYP3A4, CYP2D6, P-gp; take with food. ADRs: GI upset, bradycardia, QT prolongation, rare serious hepatotoxicity. <strong>Black box warning: contraindicated in symptomatic HF or permanent AF</strong> (increased mortality). DI: &uarr; digoxin, metoprolol, statin levels; avoid strong CYP3A4 inhibitors.</p>
+
+    <h3>Ibutilide <span class="badge badge-add">ADDITIONAL</span></h3>
+    <p>IV-only, used <strong>exclusively for acute conversion</strong> of AF/flutter to sinus rhythm (not maintenance). Blocks I<sub>Kr</sub> and uniquely activates a slow inward Na&#8314; current, prolonging phases 2 & 3 (especially in atrial tissue) — more effective in atrial flutter than AF. ADRs: TdP (~4&ndash;8%) — requires continuous ECG monitoring for &ge;4 hours post-infusion or until QT returns to baseline. CI: baseline QT prolongation, history of drug-induced TdP, marked electrolyte abnormalities. Correct K&#8314;/Mg&#178;&#8314; before administration.</p>
+
+    <div class="quiz-mini-header">Quick Check — Class III</div>
+    <div class="quiz-q">
+      <p class="prompt">Why does amiodarone rarely cause Torsades de Pointes despite prolonging the QT interval?</p>
+      <button class="quiz-choice" data-correct="false">It does not actually prolong the QT interval</button>
+      <button class="quiz-choice" data-correct="true">Its multichannel effects (Na⁺, Ca²⁺, beta-blockade) offset the proarrhythmic risk</button>
+      <button class="quiz-choice" data-correct="false">It is renally cleared, unlike other Class III agents</button>
+      <button class="quiz-choice" data-correct="false">It has no effect on potassium channels</button>
+      <div class="quiz-explain">Amiodarone's broad multichannel blockade is thought to counterbalance the QT-prolonging risk that would otherwise predispose to TdP with pure K⁺ channel blockade.</div>
+    </div>
+    <div class="quiz-q">
+      <p class="prompt">Which Class III agent must be initiated in a monitored inpatient setting for at least 3 days due to TdP risk?</p>
+      <button class="quiz-choice" data-correct="false">Amiodarone</button>
+      <button class="quiz-choice" data-correct="true">Dofetilide</button>
+      <button class="quiz-choice" data-correct="false">Dronedarone</button>
+      <div class="quiz-explain">Dofetilide requires inpatient initiation with continuous ECG/renal monitoring for at least 3 days because of its dose-dependent, renally-cleared TdP risk.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: CLASS V -->
+  <section class="card" id="classV">
+    <h2>8. "Class V" — Miscellaneous Agents</h2>
+    <p>Adenosine, Digoxin, Magnesium sulfate <span class="badge badge-core">CORE</span> (no additional agents listed for this class)</p>
+
+    <h3>Adenosine <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li><strong>First-line for acute termination of PSVT</strong>, particularly AVNRT</li>
+      <li><strong>MOA:</strong> activates A1 receptors (Gi-coupled) &rarr; opens inward-rectifying K&#8314; channels & inhibits L-type Ca&#178;&#8314; channels in the AV node &rarr; hyperpolarization + transient AV nodal block</li>
+      <li>Also used diagnostically to differentiate regular narrow-complex tachycardias (prompt conversion supports AVNRT/AVRT; transient slowing without termination suggests atrial tachycardia)</li>
+      <li><strong>PK:</strong> half-life &lt;10 seconds — rapid IV bolus through a large/proximal vein + saline flush; initial dose 6 mg, may repeat 12 mg if ineffective within 1&ndash;2 min</li>
+      <li><strong>Blunted by</strong> methylxanthines (caffeine, theophylline); <strong>potentiated by</strong> dipyridamole (inhibits adenosine reuptake)</li>
+      <li><strong>ADRs:</strong> flushing, chest pressure, dyspnea, sense of impending doom, transient bradycardia/high-grade AV block (self-limited); rarely triggers AF or bronchospasm (caution in reactive airway disease)</li>
+    </ul>
+
+    <h3>Digoxin <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li><strong>Use:</strong> rate control in AF/flutter, particularly with concurrent HFrEF</li>
+      <li><strong>MOA (indirect):</strong> &uarr; vagal tone &rarr; &uarr; AV nodal refractoriness & &darr; conduction &rarr; slows ventricular rate</li>
+      <li><strong>MOA (direct, inotropic):</strong> inhibits Na&#8314;/K&#8314;-ATPase &rarr; &uarr; intracellular Na&#8314; &rarr; &darr; Na&#8314;/Ca&#178;&#8314; exchanger activity &rarr; &uarr; intracellular Ca&#178;&#8314; &rarr; &uarr; contractility (positive inotrope)</li>
+      <li><strong>Narrow therapeutic index</strong> — toxicity signs: arrhythmias (PVCs, VT, various AV blocks), GI symptoms (N/V, abdominal pain), visual disturbances (xanthopsia/yellow-green vision, blurred vision), neurologic symptoms (confusion, dizziness, weakness)</li>
+      <li><strong>Risk factors for toxicity:</strong> hypokalemia, hypomagnesemia, renal impairment, P-gp inhibitor interactions (amiodarone, verapamil, quinidine raise digoxin levels)</li>
+      <li>Requires monitoring of digoxin levels, renal function, and electrolytes</li>
+    </ul>
+
+    <h3>Magnesium Sulfate <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li><strong>First-line treatment for TdP</strong> — give promptly, even before correcting underlying electrolytes or stopping the offending QT-prolonging drug</li>
+      <li>Also used for digoxin-induced arrhythmias</li>
+      <li><strong>Proposed mechanism:</strong> modulates Ca&#178;&#8314;/K&#8314; channels, suppresses EADs, stabilizes cardiac membranes — effective even when serum Mg&#178;&#8314; is normal</li>
+      <li>Administered IV over 15&ndash;20 minutes; may repeat</li>
+      <li><strong>ADRs:</strong> hypotension, flushing, rarely respiratory depression or conduction abnormalities (especially with rapid infusion/high doses)</li>
+      <li>Caution in significant renal impairment (Mg&#178;&#8314; is renally excreted — can accumulate)</li>
+    </ul>
+
+    <div class="case">
+      <div class="case-label">Case Snapshot</div>
+      <p>A patient develops Torsades de Pointes on the monitor. What is the first-line treatment, and should you wait for a lab-confirmed low magnesium level before treating?</p>
+      <p><strong>Answer:</strong> IV magnesium sulfate is first-line and should be given promptly — it works even with a normal serum magnesium level. Don't wait for lab confirmation in an unstable rhythm.</p>
+    </div>
+
+    <div class="quiz-mini-header">Quick Check — "Class V"</div>
+    <div class="quiz-q">
+      <p class="prompt">Which drug is both diagnostic and therapeutic in the acute setting of a regular narrow-complex tachycardia?</p>
+      <button class="quiz-choice" data-correct="false">Digoxin</button>
+      <button class="quiz-choice" data-correct="true">Adenosine</button>
+      <button class="quiz-choice" data-correct="false">Magnesium sulfate</button>
+      <div class="quiz-explain">Adenosine's transient AV block both terminates AVNRT/AVRT (therapeutic) and reveals underlying atrial activity if the tachycardia doesn't terminate (diagnostic).</div>
+    </div>
+  </section>
+
+  <!-- SECTION 9 -->
+  <section class="card" id="clinical">
+    <h2>9. Clinical Application: Putting It Together</h2>
+    <p>When selecting an antiarrhythmic, consider three questions:</p>
+    <ol>
+      <li><strong>Where is the arrhythmia originating?</strong> Supraventricular (atria/AV node) vs. ventricular arrhythmias require different agents.</li>
+      <li><strong>Is the goal rate control, rhythm control, or acute termination?</strong>
+        <ul>
+          <li>AF/flutter rate control &rarr; beta-blockers or non-DHP CCBs</li>
+          <li>AF/flutter rhythm control &rarr; Class I or Class III agents</li>
+          <li>AV-node-dependent SVT acute termination &rarr; adenosine (transient AV block interrupts the reentrant circuit)</li>
+          <li>Unstable/life-threatening VT/VF &rarr; may require immediate electrical therapy (cardioversion/defibrillation) rather than drugs alone</li>
+        </ul>
+      </li>
+      <li><strong>What cardiac disease or toxicity risk limits drug selection?</strong> Structural heart disease, LV function, baseline QT interval/QT-prolongation risk, renal/hepatic function, and the drug's own proarrhythmic potential.</li>
+    </ol>
+    <div class="pearl"><strong>Framework:</strong> match the <em>location and mechanism</em> of the arrhythmia + the <em>therapeutic goal</em> + the <em>patient's individual risk factors</em>.</div>
+
+    <h3>Common Arrhythmia &rarr; Drug Class Mapping</h3>
+    <table>
+      <tr><th>Arrhythmia</th><th>Class I</th><th>Class II</th><th>Class III</th><th>Class IV</th><th>Other</th></tr>
+      <tr><td>Atrial flutter</td><td>—</td><td>Metoprolol</td><td>—</td><td>Verapamil</td><td>Digoxin</td></tr>
+      <tr><td>Atrial fibrillation</td><td>Propafenone</td><td>Metoprolol</td><td>Amiodarone, Dofetilide</td><td>Diltiazem</td><td>Anticoagulation, Digoxin</td></tr>
+      <tr><td>AV nodal reentry</td><td>—</td><td>Metoprolol</td><td>—</td><td>Verapamil</td><td>Digoxin</td></tr>
+      <tr><td>Acute SVT</td><td>—</td><td>—</td><td>—</td><td>Diltiazem</td><td><strong>Adenosine</strong></td></tr>
+      <tr><td>Acute VT</td><td>Lidocaine</td><td>—</td><td>Amiodarone</td><td>—</td><td>—</td></tr>
+      <tr><td>Ventricular fibrillation (refractory to defib)</td><td>Lidocaine</td><td>—</td><td>Amiodarone</td><td>—</td><td>Epinephrine</td></tr>
+    </table>
+  </section>
+
+  <!-- SECTION 10 -->
+  <section class="card" id="summary">
+    <h2>10. Master Summary Tables</h2>
+
+    <h3>Class I Summary</h3>
+    <table>
+      <tr><th>Class</th><th>Drug</th><th>Primary Uses</th><th>Key ADRs</th><th>Key CI</th><th>Notes</th></tr>
+      <tr><td>IA</td><td>Quinidine <span class="badge badge-add">ADD</span></td><td>Atrial/ventricular arrhythmias</td><td>GI upset, cinchonism, TdP, thrombocytopenia</td><td>QT prolongation, heart block</td><td>Strong CYP3A4 inhibitor; also &alpha;-blocking</td></tr>
+      <tr><td>IA</td><td>Procainamide <span class="badge badge-core">CORE</span></td><td>Atrial/ventricular arrhythmias</td><td>Lupus-like syndrome, hypotension, TdP</td><td>Prolonged QT, heart block</td><td>Active metabolite NAPA (Class III activity)</td></tr>
+      <tr><td>IA</td><td>Disopyramide <span class="badge badge-add">ADD</span></td><td>Ventricular arrhythmias</td><td>Anticholinergic effects, negative inotropy</td><td>Heart failure, glaucoma</td><td>Negative inotrope — avoid in HF</td></tr>
+      <tr><td>IB</td><td>Lidocaine <span class="badge badge-core">CORE</span></td><td>Acute ventricular arrhythmias (post-MI)</td><td>CNS toxicity (seizures, confusion)</td><td>Bradycardia, severe SA/AV block</td><td>Rapid onset, short half-life; IV only</td></tr>
+      <tr><td>IB</td><td>Mexiletine <span class="badge badge-add">ADD</span></td><td>Ventricular arrhythmias (chronic)</td><td>GI upset, tremor, dizziness</td><td>Similar to lidocaine</td><td>Oral lidocaine analog</td></tr>
+      <tr><td>IC</td><td>Flecainide <span class="badge badge-core">CORE</span></td><td>SVT, WPW</td><td>Proarrhythmia, especially post-MI</td><td>Structural/ischemic heart disease</td><td>Contraindicated post-MI</td></tr>
+      <tr><td>IC</td><td>Propafenone <span class="badge badge-add">ADD</span></td><td>SVT</td><td>Bradycardia, metallic taste</td><td>Structural heart disease</td><td>Has beta-blocking activity</td></tr>
+    </table>
+
+    <h3>Class II & IV Summary</h3>
+    <table>
+      <tr><th>Class</th><th>Drug</th><th>Primary Uses</th><th>Key ADRs</th><th>Key CI</th><th>Notes</th></tr>
+      <tr><td>II</td><td>Propranolol <span class="badge badge-add">ADD</span></td><td>Rate control, HTN, post-MI</td><td>Bradycardia, bronchospasm, fatigue</td><td>Asthma, severe bradycardia</td><td>Non-selective; oral/IV</td></tr>
+      <tr><td>II</td><td>Metoprolol <span class="badge badge-core">CORE</span></td><td>Rate control AF/flutter, HTN, post-MI</td><td>Bradycardia, fatigue, hypotension</td><td>Severe bradycardia, AV block, acute HF</td><td>CYP2D6 metabolism</td></tr>
+      <tr><td>II</td><td>Esmolol <span class="badge badge-add">ADD</span></td><td>Acute SVT, intraop tachycardia</td><td>Hypotension, bradycardia</td><td>Severe bradycardia, heart block</td><td>IV only, t&#189; ~9 min</td></tr>
+      <tr><td>IV</td><td>Verapamil / Diltiazem <span class="badge badge-core">CORE</span></td><td>Rate control AF, SVT</td><td>Constipation (verapamil), hypotension, AV block</td><td>HF w/ reduced EF, AV block, <strong>AF+WPW</strong></td><td>Negative inotrope/chronotrope; CYP3A4</td></tr>
+    </table>
+
+    <h3>Class III & "Class V" Summary</h3>
+    <table>
+      <tr><th>Class</th><th>Drug</th><th>Primary Uses</th><th>Key ADRs</th><th>Key CI</th><th>Notes</th></tr>
+      <tr><td>III</td><td>Amiodarone <span class="badge badge-core">CORE</span></td><td>Broad spectrum (AF, VT, VF)</td><td>Pulmonary fibrosis, thyroid dysfunction, hepatotoxicity, blue-gray skin, TdP (rare)</td><td>Severe sinus node dysfunction, AV block</td><td>Very long half-life (~58 days); CYP3A4 inhibitor</td></tr>
+      <tr><td>III</td><td>Dronedarone <span class="badge badge-add">ADD</span></td><td>AF/flutter (non-permanent)</td><td>GI upset, QT prolongation, hepatotoxicity</td><td>Decompensated HF, permanent AF</td><td>Shorter half-life (~24 hr); less effective than amiodarone</td></tr>
+      <tr><td>II+III</td><td>Sotalol <span class="badge badge-core">CORE</span></td><td>Ventricular arrhythmias, AF/flutter</td><td>TdP, bradycardia, bronchospasm</td><td>QT prolongation, asthma, renal impairment</td><td>Renally excreted; dose-adjust</td></tr>
+      <tr><td>III</td><td>Dofetilide <span class="badge badge-core">CORE</span></td><td>AF/flutter (conversion/maintenance)</td><td>TdP (requires ECG monitoring)</td><td>QT prolongation, renal impairment</td><td>Requires inpatient initiation</td></tr>
+      <tr><td>III</td><td>Ibutilide <span class="badge badge-add">ADD</span></td><td>Acute conversion of AF/flutter</td><td>TdP, QT prolongation</td><td>QT prolongation, previous TdP</td><td>IV only; continuous ECG monitoring</td></tr>
+      <tr><td>"V"</td><td>Adenosine <span class="badge badge-core">CORE</span></td><td>Acute termination of AVNRT/SVT</td><td>Flushing, chest pain, bronchospasm</td><td>Asthma, 2nd/3rd-degree AV block</td><td>t&#189; ~10 sec; rapid IV bolus</td></tr>
+      <tr><td>"V"</td><td>Digoxin <span class="badge badge-core">CORE</span></td><td>Rate control AF, heart failure</td><td>Arrhythmias, GI upset, visual disturbances</td><td>VF, AV block without pacemaker</td><td>Narrow therapeutic index</td></tr>
+      <tr><td>"V"</td><td>Magnesium sulfate <span class="badge badge-core">CORE</span></td><td>TdP, digitalis toxicity</td><td>Flushing, hypotension (high doses)</td><td>Hypermagnesemia</td><td>Effective even with normal Mg levels</td></tr>
+    </table>
+  </section>
+
+  <!-- SECTION 11 -->
+  <section class="card" id="takeaways">
+    <h2>11. High-Yield Clinical Takeaways</h2>
+    <ul>
+      <li><strong>Class I:</strong> Na&#8314; channel blockade &rarr; slowed conduction/QRS widening
+        <ul>
+          <li><strong>IA:</strong> &uarr; APD/QT &rarr; TdP risk</li>
+          <li><strong>IB:</strong> best in ischemic/depolarized ventricular tissue</li>
+          <li><strong>IC:</strong> marked conduction slowing; <strong>avoid with prior MI/structural heart disease</strong></li>
+        </ul>
+      </li>
+      <li><strong>Class II & IV:</strong> slow AV nodal conduction &rarr; rate control (not rhythm conversion)</li>
+      <li><strong>Class III:</strong> prolong repolarization/ERP &rarr; QT prolongation and TdP risk
+        <ul>
+          <li>Amiodarone: broad efficacy + substantial extracardiac toxicity; TdP uncommon despite QT effect</li>
+          <li>Sotalol/dofetilide: renal function and QT monitoring are essential</li>
+        </ul>
+      </li>
+      <li><strong>Adenosine:</strong> first-line for acute AV-nodal-dependent SVT (AVNRT)</li>
+      <li><strong>Magnesium:</strong> first-line for TdP, even with normal serum Mg&#178;&#8314;</li>
+      <li><strong>Never</strong> use AV nodal blockers (CCBs, beta-blockers, digoxin, adenosine) in <strong>AF with WPW</strong></li>
+      <li>Drug selection always depends on the <strong>arrhythmia</strong> + <strong>underlying cardiac disease</strong> + <strong>proarrhythmic risk</strong> of the drug itself</li>
+    </ul>
+  </section>
+
+</div>
+
+<script>
+document.querySelectorAll('.quiz-q').forEach(function(q){
+  var choices = q.querySelectorAll('.quiz-choice');
+  var explain = q.querySelector('.quiz-explain');
+  choices.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      choices.forEach(function(b){
+        b.classList.add('disabled');
+        if(b.dataset.correct === 'true'){ b.classList.add('correct'); }
+      });
+      if(btn.dataset.correct !== 'true'){ btn.classList.add('incorrect'); }
+      explain.classList.add('show');
+    });
+  });
+});
+
+var sections = document.querySelectorAll('section.card');
+var navLinks = document.querySelectorAll('.sidenav-panel a');
+window.addEventListener('scroll', function(){
+  var pos = window.scrollY + 120;
+  sections.forEach(function(sec){
+    if(pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight){
+      navLinks.forEach(function(a){ a.classList.remove('active'); });
+      var link = document.querySelector('.sidenav-panel a[href="#'+sec.id+'"]');
+      if(link) link.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
