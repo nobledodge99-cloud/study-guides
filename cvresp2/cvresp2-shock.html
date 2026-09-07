@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shock — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3a2e;
+    --forest: #2f5541;
+    --sage: #7c9885;
+    --sage-light: #e4ecdf;
+    --border: #d8cfb8;
+    --accent: #c1622d;
+    --text-main: #262521;
+    --text-soft: #5c584f;
+    --correct: #2f6b3a;
+    --incorrect: #a5342a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Lora', serif;
+    background: var(--cream);
+    color: var(--text-main);
+    line-height: 1.65;
+  }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    border: 1.5px solid var(--forest);
+    color: var(--forest-dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(31,58,46,0.12);
+    transition: background 0.15s, color 0.15s;
+  }
+  .back-btn:hover { background: var(--forest-dark); color: var(--cream-card); }
+
+  .header {
+    background: linear-gradient(135deg, var(--forest-dark), var(--forest));
+    color: var(--cream-card);
+    padding: 64px 24px 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.6rem;
+    margin: 0 0 8px;
+    letter-spacing: 0.5px;
+  }
+  .header p.subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--sage-light);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 24px 100px;
+  }
+
+  nav.toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-bottom: 32px;
+  }
+  nav.toc h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest-dark);
+    margin-top: 0;
+  }
+  nav.toc ul {
+    columns: 2;
+    -webkit-columns: 2;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav.toc li { break-inside: avoid; margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    scroll-margin-top: 20px;
+  }
+  section.card h2 {
+    color: var(--forest-dark);
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  section.card h3 {
+    color: var(--forest);
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+  section.card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--sage-light);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--forest-dark);
+  }
+  tr:nth-child(even) td { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--sage);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .pearl .pearl-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest-dark);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .case {
+    background: #fbeee2;
+    border: 1px solid #e3c4a4;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .case-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .boards-flag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  code, .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--sage-light);
+    border-radius: 6px;
+    padding: 10px 16px;
+    display: inline-block;
+    margin: 6px 0;
+    font-size: 0.98rem;
+  }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+  .quiz-q {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    background: #fffefb;
+  }
+  .quiz-q p.stem { font-weight: 600; margin-top: 4px; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-family: 'Lora', serif;
+    font-size: 0.96rem;
+    color: var(--text-main);
+    transition: background 0.15s;
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #e2f0e3; border-color: var(--correct); color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f6e2e0; border-color: var(--incorrect); color: var(--incorrect); font-weight: 600; }
+  .quiz-choice[disabled] { cursor: default; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: var(--sage-light);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream-card);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 6px 0 0 6px;
+    padding: 12px 6px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 600;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -4px 0 12px rgba(0,0,0,0.08);
+    padding: 70px 18px 18px;
+    overflow-y: auto;
+    transition: right 0.25s ease;
+    z-index: 550;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--forest-dark);
+    margin-top: 0;
+  }
+  .sidenav-panel ul { list-style: none; padding: 0; margin: 0; }
+  .sidenav-panel li { margin-bottom: 10px; }
+  .sidenav-panel a {
+    text-decoration: none;
+    color: var(--text-soft);
+    font-size: 0.85rem;
+  }
+  .sidenav-panel a.active { color: var(--accent); font-weight: 700; }
+
+  figure.figure { margin: 20px 0; text-align: center; }
+  figure.figure figcaption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <h3>Jump to</h3>
+  <ul id="sidenavList"></ul>
+</div>
+
+<div class="header">
+  <h1>Shock</h1>
+  <p class="subtitle">OCS III PCM · Cardiovascular Physiology &amp; Clinical Reasoning</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ul>
+    <li><a href="#definition">1. What Is Shock?</a></li>
+    <li><a href="#presentation">2. Clinical Presentation</a></li>
+    <li><a href="#stages">3. Stages of Shock</a></li>
+    <li><a href="#parameters">4. Physiologic Parameters</a></li>
+    <li><a href="#types">5. The Five Types of Shock</a></li>
+    <li><a href="#distributive">5a. Distributive Shock</a></li>
+    <li><a href="#cardiogenic">5b. Cardiogenic Shock</a></li>
+    <li><a href="#hypovolemic">5c. Hypovolemic Shock</a></li>
+    <li><a href="#neurogenic">5d. Neurogenic Shock</a></li>
+    <li><a href="#obstructive">5e. Obstructive Shock</a></li>
+    <li><a href="#comparison">6. Comparison Table</a></li>
+    <li><a href="#complications">7. Complications</a></li>
+    <li><a href="#evaluation">8. Evaluation &amp; Diagnosis</a></li>
+    <li><a href="#management">9. Management</a></li>
+    <li><a href="#ddx">10. Differential Diagnosis</a></li>
+    <li><a href="#prognosis">11. Prognosis</a></li>
+    <li><a href="#case">12. Case Connection</a></li>
+  </ul>
+</nav>
+<p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--text-soft); text-align:center; margin-top:-16px;">Each section below ends with a short "Check Your Understanding" quiz on that section's material.</p>
+
+<section class="card" id="definition">
+<h2>1. What Is Shock?</h2>
+<p><strong>Shock</strong> occurs when blood flow to vital organs drops below the rate required to sustain their critical functions — <strong>hypoperfusion</strong>. This leads to widespread cellular and tissue hypoxia. Left uncorrected, this cascades to cellular death, multiorgan failure (MOF), and death. Crucially, the early stages of shock are <strong>reversible</strong> — a delay in diagnosis or treatment is what allows progression to irreversible damage.</p>
+<p>Shock is most easily flagged by <strong>hypotension</strong> — systolic blood pressure &lt;90 mmHg or MAP &lt;65 mmHg — but blood pressure and blood flow are <em>not</em> the same thing:</p>
+<ul>
+  <li>Patients with normally low resting blood pressure may tolerate lower pressures before true hypoperfusion sets in.</li>
+  <li>Chronically hypertensive patients may develop hypoperfusion at higher-than-expected pressures.</li>
+</ul>
+<p>So the assessment of shock always requires <strong>both</strong> an objective vital sign measurement <strong>and</strong> a subjective assessment of end-organ perfusion (mental status, urine output, skin findings, capillary refill).</p>
+<div class="pearl">
+  <span class="pearl-label">Mechanistic definition</span>
+  Shock is characterized by decreased oxygen delivery and/or increased oxygen consumption and/or inadequate oxygen utilization at the tissue level — the common final pathway is cellular and tissue hypoxia, regardless of the upstream cause.
+</div>
+<h3>Four vs. Five Categories — a Terminology Note</h3>
+<p>Sources classify shock slightly differently. The classic ScholarRx breakdown gives <strong>five</strong> categories, splitting neurogenic shock out on its own:</p>
+<div class="pearl">
+  <span class="pearl-label">Mnemonic</span>
+  <strong>"New Cells Down and Out (from) Hypoxia"</strong> = <strong>N</strong>eurogenic, <strong>C</strong>ardiogenic, <strong>D</strong>istributive, <strong>O</strong>bstructive, <strong>H</strong>ypovolemic
+</div>
+<p>StatPearls instead uses <strong>four broad categories</strong> — distributive, hypovolemic, cardiogenic, obstructive — folding neurogenic (and endocrine) shock in as subtypes of distributive shock, since both share the hallmark of decreased systemic vascular resistance. <strong>Know both framings</strong>: exam questions may test either the "5 distinct types" model (useful for hemodynamic reasoning, since neurogenic shock behaves very differently from vasodilatory septic shock) or the "distributive umbrella" model.</p>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="def-q1">
+  <p class="stem">1. Shock is most easily flagged clinically by which threshold?</p>
+  <button class="quiz-choice" data-correct="true">SBP &lt;90 mmHg or MAP &lt;65 mmHg</button>
+  <button class="quiz-choice" data-correct="false">SBP &lt;100 mmHg regardless of MAP</button>
+  <button class="quiz-choice" data-correct="false">Heart rate &gt;100 bpm</button>
+  <button class="quiz-choice" data-correct="false">Respiratory rate &gt;20/min</button>
+  <div class="quiz-explain"><strong>Correct: SBP &lt;90 mmHg or MAP &lt;65 mmHg.</strong> These are the standard hypotension thresholds used to flag possible shock, though they must be interpreted alongside perfusion signs, not in isolation.</div>
+</div>
+<div class="quiz-q" id="def-q2">
+  <p class="stem">2. A chronically hypertensive patient is more likely to develop true tissue hypoperfusion:</p>
+  <button class="quiz-choice" data-correct="true">At a higher blood pressure than the standard shock thresholds</button>
+  <button class="quiz-choice" data-correct="false">Only once their pressure falls below the standard shock thresholds</button>
+  <button class="quiz-choice" data-correct="false">Never, since chronic hypertension is protective against hypoperfusion</button>
+  <button class="quiz-choice" data-correct="false">At exactly the same pressure as a normotensive patient</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Chronically hypertensive patients have adapted to higher baseline perfusion pressures, so their organs can become underperfused at blood pressures that would look "normal" or only mildly low on a standard chart — this is why perfusion assessment (mental status, urine output, skin) matters alongside the number itself.</div>
+</div>
+<div class="quiz-q" id="def-q3">
+  <p class="stem">3. Which classification scheme places neurogenic shock as a subtype of distributive shock rather than as its own separate category?</p>
+  <button class="quiz-choice" data-correct="false">The 5-type ScholarRx model</button>
+  <button class="quiz-choice" data-correct="true">The 4-category StatPearls model</button>
+  <button class="quiz-choice" data-correct="false">Neither model separates them differently</button>
+  <button class="quiz-choice" data-correct="false">Both models treat neurogenic shock identically to cardiogenic shock</button>
+  <div class="quiz-explain"><strong>Correct: the StatPearls 4-category model.</strong> It groups neurogenic (and endocrine) shock under the distributive umbrella since SVR falls in both. The 5-type model keeps neurogenic shock separate because its cardiac response (no compensatory tachycardia) is fundamentally different.</div>
+</div>
+</section>
+
+<section class="card" id="presentation">
+<h2>2. Clinical Presentation</h2>
+<p>Patients with shock appear acutely ill and may be obtunded or unconscious. Common findings include:</p>
+<ul>
+  <li>Hypotension</li>
+  <li>Tachycardia, tachypnea</li>
+  <li>Syncope or presyncope (especially orthostatic)</li>
+  <li>Altered mental status / obtundation</li>
+  <li>Shortness of breath, chest pain, abdominal pain</li>
+  <li>Cool, clammy, mottled extremities; cool/blue/painful fingers and toes</li>
+  <li>Oliguria</li>
+  <li>Metabolic acidosis, hyperlactatemia</li>
+</ul>
+<p>Sometimes the cause is obvious (massive GI bleed, high fever, burns, trauma); often it is not, and the patient presents as <strong>undifferentiated shock</strong> — the diagnosis of shock is clear, but the underlying etiology is not yet known.</p>
+<h3>Clues by Type</h3>
+<table>
+<tr><th>Type</th><th>Distinguishing clinical clues</th></tr>
+<tr><td>Hypovolemic</td><td>Orthostatic hypotension, pallor, flattened JVP; sequelae of chronic liver disease if variceal bleed</td></tr>
+<tr><td>Septic</td><td>Fever/source symptoms (cellulitis, erysipelas, necrotizing soft-tissue infection, endocarditis stigmata)</td></tr>
+<tr><td>Anaphylactic</td><td>Flushing, urticaria/hives, tachypnea, hoarseness, oral/facial edema, wheeze, inspiratory stridor, known allergen exposure</td></tr>
+<tr><td>Tension pneumothorax</td><td>Unilateral pleuritic chest pain, absent/diminished breath sounds, tracheal deviation <em>away</em> from the affected side, distended neck veins, recent trauma/mechanical ventilation</td></tr>
+<tr><td>Cardiac tamponade</td><td>Dyspnea, Beck triad (&uarr;JVP, muffled heart sounds, hypotension), pulsus paradoxus, recent trauma/pericardial effusion/thoracic procedure</td></tr>
+<tr><td>Cardiogenic</td><td>Cardiac chest pain, narrow pulse pressure, &uarr;JVP or lung crackles, arrhythmias on telemetry/EKG</td></tr>
+</table>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="pres-q1">
+  <p class="stem">1. A trauma patient has unilateral pleuritic chest pain, absent breath sounds on that side, tracheal deviation away from it, and distended neck veins. This picture best fits:</p>
+  <button class="quiz-choice" data-correct="true">Tension pneumothorax</button>
+  <button class="quiz-choice" data-correct="false">Cardiac tamponade</button>
+  <button class="quiz-choice" data-correct="false">Septic shock</button>
+  <button class="quiz-choice" data-correct="false">Anaphylactic shock</button>
+  <div class="quiz-explain"><strong>Correct: tension pneumothorax.</strong> Absent breath sounds plus tracheal deviation away from the affected side is the classic pneumothorax pattern; JVD reflects impaired venous return from the elevated intrathoracic pressure.</div>
+</div>
+<div class="quiz-q" id="pres-q2">
+  <p class="stem">2. The Beck triad (&uarr;JVP, muffled heart sounds, hypotension) is a diagnostic clue for:</p>
+  <button class="quiz-choice" data-correct="true">Cardiac tamponade</button>
+  <button class="quiz-choice" data-correct="false">Tension pneumothorax</button>
+  <button class="quiz-choice" data-correct="false">Septic shock</button>
+  <button class="quiz-choice" data-correct="false">Adrenal crisis</button>
+  <div class="quiz-explain"><strong>Correct: cardiac tamponade.</strong> Pericardial fluid restricts cardiac filling and contraction, producing muffled heart sounds, elevated JVP, and hypotension — often with pulsus paradoxus as well.</div>
+</div>
+<div class="quiz-q" id="pres-q3">
+  <p class="stem">3. Flushing, urticaria, oral/facial edema, wheeze, and inspiratory stridor minutes after a bee sting point to:</p>
+  <button class="quiz-choice" data-correct="true">Anaphylactic shock</button>
+  <button class="quiz-choice" data-correct="false">Septic shock</button>
+  <button class="quiz-choice" data-correct="false">Cardiogenic shock</button>
+  <button class="quiz-choice" data-correct="false">Neurogenic shock</button>
+  <div class="quiz-explain"><strong>Correct: anaphylactic shock.</strong> This is the classic IgE-mediated hypersensitivity presentation, with rapid onset after antigen exposure (here, an insect sting).</div>
+</div>
+</section>
+
+<section class="card" id="stages">
+<h2>3. Stages of Shock</h2>
+<p>Regardless of trigger, shock tends to progress through a recognizable pattern (these are markers of progression, not discrete stages every patient exhibits):</p>
+<p class="mono" style="text-align:center; font-weight:600; color:var(--forest-dark);">Trigger Insult &rarr; Compensated Shock &rarr; Uncompensated Shock &rarr; End-Organ Failure / Irreversible Shock</p>
+<h3>Compensated (Pre-Shock)</h3>
+<p>The body maintains a normal blood pressure while responding to the trigger. Sympathetic activation increases heart rate and contractility (&uarr; cardiac output) and drives peripheral vasoconstriction (&uarr; SVR). Clinically: tachycardia, restlessness/rapid breathing, cool distal extremities with delayed capillary refill.</p>
+<h3>Uncompensated Shock</h3>
+<p>Compensatory mechanisms fail and blood pressure falls. End-organ dysfunction becomes apparent — syncope, confusion, declining urine output, weak/thready pulses. Anaerobic glycolysis increases as oxygen delivery fails, producing metabolic (lactic) acidosis; respiratory rate increases to compensate.</p>
+<h3>End-Organ Failure / Irreversible Shock</h3>
+<p>Vital organs fail sequentially. Heart rate, MAP, and respiration become unresponsive to therapy. Urine output stops, neurologic function fades, coma and death follow.</p>
+<table>
+<tr><th>System</th><th>Late-stage signs</th></tr>
+<tr><td>Nervous</td><td>Mental status change (confusion &rarr; loss of consciousness)</td></tr>
+<tr><td>Cardiovascular</td><td>Diaphoresis, &uarr;HR, &darr;BP</td></tr>
+<tr><td>Respiratory</td><td>&uarr;Respiratory rate</td></tr>
+<tr><td>Extremities</td><td>Cyanosis</td></tr>
+<tr><td>Renal</td><td>&darr;Urine output (oliguria/anuria)</td></tr>
+</table>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="stage-q1">
+  <p class="stem">1. Which finding best marks the transition from compensated to uncompensated shock?</p>
+  <button class="quiz-choice" data-correct="true">New confusion and declining urine output as blood pressure begins to fall</button>
+  <button class="quiz-choice" data-correct="false">Mild tachycardia alone</button>
+  <button class="quiz-choice" data-correct="false">Cool distal extremities alone</button>
+  <button class="quiz-choice" data-correct="false">A slightly increased respiratory rate</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Tachycardia and cool extremities are compensatory (still "compensated" stage) findings. Confusion, syncope, and falling urine output signal that compensation is failing and end-organ dysfunction is beginning — the hallmark of uncompensated shock.</div>
+</div>
+<div class="quiz-q" id="stage-q2">
+  <p class="stem">2. Increasing reliance on anaerobic glycolysis during uncompensated shock produces which acid-base picture?</p>
+  <button class="quiz-choice" data-correct="true">Metabolic (lactic) acidosis, with compensatory tachypnea</button>
+  <button class="quiz-choice" data-correct="false">Primary respiratory alkalosis</button>
+  <button class="quiz-choice" data-correct="false">Metabolic alkalosis</button>
+  <button class="quiz-choice" data-correct="false">No acid-base change occurs</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Tissue hypoxia forces cells into anaerobic glycolysis, raising serum lactate and causing metabolic acidosis; respiratory rate increases as the body tries to compensate by blowing off CO2.</div>
+</div>
+<div class="quiz-q" id="stage-q3">
+  <p class="stem">3. In the end-organ failure/irreversible stage of shock, which parameters become unresponsive to therapy?</p>
+  <button class="quiz-choice" data-correct="true">Heart rate, MAP, and respiration</button>
+  <button class="quiz-choice" data-correct="false">Only temperature</button>
+  <button class="quiz-choice" data-correct="false">Only serum glucose</button>
+  <button class="quiz-choice" data-correct="false">Only skin color</button>
+  <div class="quiz-explain"><strong>Correct.</strong> By this final stage, heart rate, MAP, and respiratory rate all enter free fall and no longer respond to treatment, alongside falling urine output and fading neurologic activity — this stage is generally irreversible.</div>
+</div>
+</section>
+
+<section class="card" id="parameters">
+<h2>4. Physiologic Parameters</h2>
+<p>All types of shock ultimately alter one or more of: <strong>mean arterial pressure (MAP)</strong>, <strong>cardiac output (CO)</strong>, and <strong>systemic vascular resistance (SVR)</strong>.</p>
+<h3>Mean Arterial Pressure</h3>
+<div class="formula">MAP = diastolic BP + &frac13;(systolic BP &minus; diastolic BP) = diastolic BP + &frac13;(pulse pressure)</div>
+<h3>Cardiac Output</h3>
+<div class="formula">CO = Heart Rate &times; Stroke Volume</div>
+<p>Stroke volume is decreased by:</p>
+<ul>
+  <li><strong>Decreased preload</strong> — decreased end-diastolic pressure/volume (EDV)</li>
+  <li><strong>Increased afterload</strong> — increased resistance to ejection, mainly driven by SVR (also estimated by MAP)</li>
+  <li><strong>Decreased contractility</strong> — reduced force of contraction, independent of preload/afterload</li>
+</ul>
+<p>Echocardiography can noninvasively estimate cardiac output.</p>
+<h3>Systemic Vascular Resistance</h3>
+<div class="formula">SVR = MAP / Cardiac Output</div>
+<p>SVR is mainly determined by arteriolar tone, regulated largely by the sympathetic nervous system.</p>
+<h3>Arterial Oxygen Content &amp; Delivery</h3>
+<p>Since shock ultimately reflects failed tissue oxygenation, oxygen delivery is a key concept:</p>
+<div class="formula">Oxygen delivery = Cardiac Output &times; Arterial Oxygen Content</div>
+<div class="formula">Arterial O<sub>2</sub> content (Ca) &asymp; Hb &times; 1.36 &times; SaO<sub>2</sub></div>
+<p>Arterial oxygen content can fall because of: <strong>decreased cardiac output</strong>, <strong>anemia</strong> (&darr;Hb), or <strong>hypoxemia</strong> (&darr;SaO<sub>2</sub>, usually from lung disease) — treating these three is the primary ICU focus.</p>
+<div class="pearl">
+  <span class="pearl-label">High-yield detail</span>
+  In septic shock, tissues often fail to <em>extract</em> oxygen normally, producing a <strong>small arteriovenous oxygen difference</strong> despite adequate delivery — a clue that distinguishes distributive shock's oxygen-utilization defect from the delivery-limited defect of the other shock types.
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="param-q1">
+  <p class="stem">1. A patient's blood pressure is 120/60 mmHg. What is their MAP?</p>
+  <button class="quiz-choice" data-correct="false">70 mmHg</button>
+  <button class="quiz-choice" data-correct="true">80 mmHg</button>
+  <button class="quiz-choice" data-correct="false">90 mmHg</button>
+  <button class="quiz-choice" data-correct="false">100 mmHg</button>
+  <div class="quiz-explain"><strong>Correct: 80 mmHg.</strong> MAP = diastolic + &frac13;(pulse pressure) = 60 + &frac13;(60) = 60 + 20 = 80 mmHg.</div>
+</div>
+<div class="quiz-q" id="param-q2">
+  <p class="stem">2. Systemic vascular resistance is calculated as:</p>
+  <button class="quiz-choice" data-correct="true">MAP &divide; cardiac output</button>
+  <button class="quiz-choice" data-correct="false">Cardiac output &divide; MAP</button>
+  <button class="quiz-choice" data-correct="false">Heart rate &times; stroke volume</button>
+  <button class="quiz-choice" data-correct="false">Cardiac output &times; arterial oxygen content</button>
+  <div class="quiz-explain"><strong>Correct: SVR = MAP / cardiac output.</strong> The other formulas listed are cardiac output (HR &times; SV) and oxygen delivery (CO &times; Ca), respectively — easy to mix up on a timed exam.</div>
+</div>
+<div class="quiz-q" id="param-q3">
+  <p class="stem">3. A patient develops significant anemia. Which shock-relevant parameter is most directly reduced as a result?</p>
+  <button class="quiz-choice" data-correct="true">Arterial oxygen content</button>
+  <button class="quiz-choice" data-correct="false">Systemic vascular resistance</button>
+  <button class="quiz-choice" data-correct="false">Heart rate</button>
+  <button class="quiz-choice" data-correct="false">Mean arterial pressure, by formula</button>
+  <div class="quiz-explain"><strong>Correct: arterial oxygen content.</strong> Ca &asymp; Hb &times; 1.36 &times; SaO2, so a falling hemoglobin directly lowers oxygen content (and therefore oxygen delivery) even if cardiac output and SaO2 are unchanged.</div>
+</div>
+</section>
+
+<section class="card" id="types">
+<h2>5. The Five Types of Shock</h2>
+<p>Each type differs in how it perturbs cardiac output, afterload (SVR), and preload (EDV). Figure logic to memorize: which variable is the <strong>primary</strong> derangement (P), and which variables move to <strong>compensate</strong>.</p>
+</section>
+
+<section class="card" id="distributive">
+<h2>5a. Distributive Shock — &darr; Systemic Vascular Resistance</h2>
+<p>Primary problem: extensive systemic <strong>vasodilation</strong> &rarr; &darr;SVR &rarr; &darr;MAP. The body compensates by driving up cardiac output (&uarr;HR and &uarr;SV via sympathetic activation), which rapidly empties the heart and <strong>decreases EDV (preload)</strong>.</p>
+<p><strong>Clinically:</strong> hypotensive, but skin may be <em>warm</em> even at the extremities (unlike the cold extremities of the other shock types) because of peripheral vasodilation.</p>
+<h3>Causes</h3>
+<h4>Septic Shock <span class="boards-flag">HIGH YIELD</span></h4>
+<p>Sepsis = life-threatening organ dysfunction from a dysregulated host response to infection. <strong>Septic shock</strong> = sepsis + hypotension requiring vasopressors + lactate &gt;2 mmol/L despite adequate fluid resuscitation. Most common US pathogens: gram-positive bacteria (e.g., <em>Streptococcus pneumoniae</em>, <em>Enterococcus</em>). Mechanism: bacterial components (e.g., LPS) trigger cytokine release (TGF, IL-1, IFN-&gamma;, IL-6, IL-12, IL-18) &rarr; endothelial damage &rarr; release of vasodilators (nitric oxide, prostaglandin I<sub>2</sub>).</p>
+<h4>Systemic Inflammatory Response Syndrome (SIRS)</h4>
+<p>A whole-body inflammatory response to stress — infectious (sepsis) or noninfectious (trauma, pancreatitis, burns, fat/air/amniotic fluid embolism). Presentation varies: tachycardia, hyper- or hypothermia, very high or very low WBC. Can progress to multiorgan failure via complement activation, cytokines, and humoral/cellular immune activation.</p>
+<h4>Anaphylactic Shock</h4>
+<p>IgE-mediated hypersensitivity reaction on re-exposure to an antigen. Basophil/mast cell degranulation releases histamine, prostaglandins, and leukotrienes &rarr; vasodilation + bronchospasm. Onset within seconds to minutes. Common triggers: drugs (antibiotics, NSAIDs), food, insect stings, latex. Clinically also produces flushing, urticaria, oral/facial edema, wheeze, stridor.</p>
+<h4>Adrenal Crisis / Endocrine Shock</h4>
+<p>Major deficiency of cortisol and/or aldosterone — classically abrupt withdrawal of chronic corticosteroids (Addisonian crisis). These hormones are critical for maintaining SVR; their loss produces hypotension/shock. StatPearls also groups <strong>myxedema</strong> (severe hypothyroidism) under this "endocrine shock" umbrella.</p>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="dist-q1">
+  <p class="stem">1. Septic shock is defined, in part, by a serum lactate level above:</p>
+  <button class="quiz-choice" data-correct="false">1 mmol/L</button>
+  <button class="quiz-choice" data-correct="true">2 mmol/L</button>
+  <button class="quiz-choice" data-correct="false">4 mmol/L</button>
+  <button class="quiz-choice" data-correct="false">10 mmol/L</button>
+  <div class="quiz-explain"><strong>Correct: &gt;2 mmol/L.</strong> Septic shock requires sepsis + hypotension needing vasopressors to maintain MAP + a lactate &gt;2 mmol/L despite adequate fluid resuscitation.</div>
+</div>
+<div class="quiz-q" id="dist-q2">
+  <p class="stem">2. The most common gram-positive pathogens implicated in US sepsis/septic shock include:</p>
+  <button class="quiz-choice" data-correct="true"><em>Streptococcus pneumoniae</em> and <em>Enterococcus</em></button>
+  <button class="quiz-choice" data-correct="false"><em>E. coli</em> and <em>Klebsiella</em></button>
+  <button class="quiz-choice" data-correct="false"><em>Pseudomonas</em> and <em>Candida</em></button>
+  <button class="quiz-choice" data-correct="false"><em>Neisseria</em> and <em>Haemophilus</em></button>
+  <div class="quiz-explain"><strong>Correct.</strong> The other options list gram-negative bacteria or fungi, which are also important sepsis pathogens but are not the most common gram-positive culprits.</div>
+</div>
+<div class="quiz-q" id="dist-q3">
+  <p class="stem">3. Abrupt discontinuation of chronic corticosteroid therapy can precipitate which type of distributive shock?</p>
+  <button class="quiz-choice" data-correct="true">Adrenal crisis</button>
+  <button class="quiz-choice" data-correct="false">Septic shock</button>
+  <button class="quiz-choice" data-correct="false">Anaphylactic shock</button>
+  <button class="quiz-choice" data-correct="false">SIRS from burns</button>
+  <div class="quiz-explain"><strong>Correct: adrenal crisis.</strong> Sudden loss of exogenous corticosteroid support (on top of suppressed endogenous adrenal function) causes a profound cortisol/aldosterone deficiency, impairing the ability to maintain SVR.</div>
+</div>
+</section>
+
+<section class="card" id="cardiogenic">
+<h2>5b. Cardiogenic Shock — &darr; Cardiac Output</h2>
+<p>Primary problem: the heart fails to pump effectively &rarr; &darr;cardiac output &rarr; &darr;MAP. The body compensates by raising SVR (arteriolar constriction) — this produces <strong>high afterload despite low blood pressure</strong>, which can be clinically confusing. Remember: BP depends on the combination of SVR, CO, and volume — here, profoundly low CO dominates the picture.</p>
+<p>Preload (EDV) <strong>rises</strong> because the failing heart cannot adequately eject the blood returning to it, leading to pulmonary edema.</p>
+<p><strong>Clinically:</strong> tachycardia, dyspnea (pulmonary edema), S3 heart sound.</p>
+<h3>Causes</h3>
+<ul>
+  <li><strong>Cardiomyopathies</strong> — acute MI affecting &gt;40% of the LV, MI with multivessel CAD, RV MI, fulminant dilated cardiomyopathy, cardiac arrest (myocardial stunning), myocarditis</li>
+  <li><strong>Arrhythmias</strong> — both tachy- and bradyarrhythmias</li>
+  <li><strong>Mechanical</strong> — severe aortic or mitral insufficiency, papillary muscle/chordae tendineae rupture, ventricular free wall aneurysm rupture</li>
+  <li>Valvular disease</li>
+</ul>
+<div class="pearl">
+  <span class="pearl-label">Clinical correlation — treatment logic</span>
+  Inotropes (e.g., dobutamine) increase contractility but raise arrhythmia risk. Vasodilators lower SVR and cardiac workload but can drop the diastolic pressure needed to perfuse the coronary arteries (which fill only in diastole) — so vasodilators are <strong>not</strong> used alone in cardiogenic shock. Some agents (dobutamine, milrinone) act as combined inotrope/vasodilators but still risk further decompensating blood pressure.
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="cardio-q1">
+  <p class="stem">1. A 60-year-old male has an MI, is initially stabilized, then develops a ventricular arrhythmia hours later and loses consciousness. BP falls to 90/60 mmHg, pulse 130 bpm, respirations 20/min, lungs clear. A change in which parameter contributes most to this hypotension?</p>
+  <button class="quiz-choice" data-correct="false">Arterial oxygen content</button>
+  <button class="quiz-choice" data-correct="true">Contractility</button>
+  <button class="quiz-choice" data-correct="false">Heart rate</button>
+  <button class="quiz-choice" data-correct="false">Preload</button>
+  <button class="quiz-choice" data-correct="false">Vascular radius (r)</button>
+  <div class="quiz-explain"><strong>Correct: contractility.</strong> This patient is in cardiogenic shock. The drop in cardiac output can result from low contractility, low preload, or high afterload — here, the MI has caused loss of myocytes, greatly lowering contractility. <strong>Arterial oxygen content</strong> would drop if there were pulmonary edema causing poor oxygen exchange, but there's no evidence of that here (lungs are clear). <strong>Heart rate</strong> is increased as a compensation for the low MAP — a high heart rate raises MAP, it doesn't cause the hypotension. <strong>Preload</strong> is reduced in hypovolemic shock, not cardiogenic shock — in cardiogenic shock preload is increased, from compensatory renal reabsorption of salt and water. <strong>Vascular radius</strong> is proportional to SVR; decreased SVR is the primary distributive-shock mechanism, but in cardiogenic shock SVR increases to compensate for the failing heart.</div>
+</div>
+<div class="quiz-q" id="cardio-q2">
+  <p class="stem">2. Which class of drug should generally NOT be used alone to treat cardiogenic shock, given the risk of dropping coronary perfusion pressure?</p>
+  <button class="quiz-choice" data-correct="true">Vasodilators</button>
+  <button class="quiz-choice" data-correct="false">Inotropes</button>
+  <button class="quiz-choice" data-correct="false">Anticoagulants</button>
+  <button class="quiz-choice" data-correct="false">Loop diuretics</button>
+  <div class="quiz-explain"><strong>Correct: vasodilators.</strong> Coronary arteries fill only during diastole, so lowering SVR/diastolic pressure with a vasodilator alone can worsen coronary perfusion in an already-failing heart. Combined inotrope/vasodilator agents (dobutamine, milrinone) are used more cautiously for this reason.</div>
+</div>
+<div class="quiz-q" id="cardio-q3">
+  <p class="stem">3. A patient has central, crushing chest pain radiating to the left arm/neck, hypotension, and tachycardia. Echo shows decreased stroke volume. Which pattern of shock is this?</p>
+  <button class="quiz-choice" data-correct="true">Cardiogenic shock</button>
+  <button class="quiz-choice" data-correct="false">Distributive shock</button>
+  <button class="quiz-choice" data-correct="false">Hypovolemic shock</button>
+  <button class="quiz-choice" data-correct="false">Obstructive shock</button>
+  <div class="quiz-explain"><strong>Correct: cardiogenic shock.</strong> Classic ACS presentation with decreased stroke volume on echo points to primary pump failure — falling cardiac output driving the hypotension, with reflex tachycardia and typically rising preload.</div>
+</div>
+</section>
+
+<section class="card" id="hypovolemic">
+<h2>5c. Hypovolemic Shock — &darr; Preload</h2>
+<p>Primary problem: loss of intravascular volume &rarr; &darr;venous return &rarr; <strong>&darr;preload (EDV)</strong> &rarr; &darr;stroke volume &rarr; &darr;cardiac output. The body compensates by raising SVR (afterload) via arteriolar constriction and raising HR/contractility — but because preload is low, cardiac output stays low despite these compensations.</p>
+<p><strong>Clinically:</strong> cold extremities (vasoconstriction), pallor; a bleeding source is often evident.</p>
+<h3>Hemorrhagic Causes</h3>
+<ul>
+  <li>GI bleed (upper or lower — variceal bleed, portal hypertensive gastropathy, peptic ulcer, diverticulosis), trauma</li>
+  <li>Vascular etiologies — aortoenteric fistula, ruptured AAA, tumor eroding into a major vessel</li>
+  <li>Spontaneous bleeding with supratherapeutic anticoagulation</li>
+</ul>
+<h3>Non-Hemorrhagic Causes</h3>
+<ul>
+  <li><strong>GI losses</strong> — vomiting, diarrhea, NG suction, drains</li>
+  <li><strong>Renal losses</strong> — diuretic-induced, hypoaldosteronism</li>
+  <li><strong>Skin/insensible losses</strong> — burns, Stevens-Johnson syndrome/TEN, heatstroke, fever</li>
+  <li><strong>Third-spacing</strong> — pancreatitis, cirrhosis, bowel obstruction, trauma</li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="hypo-q1">
+  <p class="stem">1. Which of the following is a non-hemorrhagic cause of hypovolemic shock?</p>
+  <button class="quiz-choice" data-correct="true">Severe diarrhea</button>
+  <button class="quiz-choice" data-correct="false">Ruptured abdominal aortic aneurysm</button>
+  <button class="quiz-choice" data-correct="false">Variceal bleed</button>
+  <button class="quiz-choice" data-correct="false">Aortoenteric fistula</button>
+  <div class="quiz-explain"><strong>Correct: severe diarrhea.</strong> The other three options are hemorrhagic causes. Non-hemorrhagic causes include GI losses (vomiting/diarrhea), renal losses, skin/insensible losses, and third-spacing.</div>
+</div>
+<div class="quiz-q" id="hypo-q2">
+  <p class="stem">2. In hypovolemic shock, what happens to SVR, and why?</p>
+  <button class="quiz-choice" data-correct="true">SVR rises via compensatory arteriolar vasoconstriction</button>
+  <button class="quiz-choice" data-correct="false">SVR falls due to systemic vasodilation</button>
+  <button class="quiz-choice" data-correct="false">SVR is unaffected by volume status</button>
+  <button class="quiz-choice" data-correct="false">SVR rises due to a primary vasculitis</button>
+  <div class="quiz-explain"><strong>Correct.</strong> As preload and cardiac output fall, the body compensates by raising SVR (afterload) through arteriolar constriction — this is why hypovolemic shock patients have cold, vasoconstricted extremities.</div>
+</div>
+<div class="quiz-q" id="hypo-q3">
+  <p class="stem">3. A trauma patient has pale, cool extremities and an obvious actively bleeding wound. Which type of shock is most likely?</p>
+  <button class="quiz-choice" data-correct="true">Hypovolemic shock</button>
+  <button class="quiz-choice" data-correct="false">Distributive shock</button>
+  <button class="quiz-choice" data-correct="false">Neurogenic shock</button>
+  <button class="quiz-choice" data-correct="false">Obstructive shock</button>
+  <div class="quiz-explain"><strong>Correct: hypovolemic shock.</strong> Cool, pale extremities reflect compensatory vasoconstriction from falling preload/volume, and an obvious bleeding source strongly supports a hemorrhagic hypovolemic picture.</div>
+</div>
+</section>
+
+<section class="card" id="neurogenic">
+<h2>5d. Neurogenic Shock — Everything Down</h2>
+<p>Caused by <strong>failure of the autonomic nervous system</strong>, classically from traumatic brain or spinal cord injury. Autonomic failure disrupts <em>all</em> compensatory responses simultaneously:</p>
+<ul>
+  <li>Arterial vasodilation &rarr; <strong>low SVR/afterload</strong></li>
+  <li>Loss of sympathetic drive to the heart &rarr; <strong>low HR and contractility &rarr; low CO</strong></li>
+  <li>Loss of venous tone &rarr; <strong>low EDV/preload</strong></li>
+</ul>
+<div class="pearl">
+  <span class="pearl-label">Distinguishing feature</span>
+  Neurogenic shock is the <strong>only</strong> type of shock <strong>without compensatory tachycardia</strong> — heart rate is normal or even low — because the sympathetic nervous system itself cannot mount the response. This is the key differentiator from distributive (septic/anaphylactic) shock, which is otherwise hemodynamically similar (both have &darr;SVR).
+</div>
+<p>Some sources classify neurogenic shock as a subtype of distributive shock (since SVR falls in both), but its cardiac response is fundamentally different — hence the "5 types" model keeps it separate.</p>
+<p><strong>Clinically:</strong> neurologic signs/symptoms with a history of brain or spinal cord trauma; notably warm, dry skin below the level of injury (vasodilated) without reflex tachycardia.</p>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="neuro-q1">
+  <p class="stem">1. Which type of shock is unique in that patients typically do NOT develop compensatory tachycardia?</p>
+  <button class="quiz-choice" data-correct="false">Cardiogenic</button>
+  <button class="quiz-choice" data-correct="false">Hypovolemic</button>
+  <button class="quiz-choice" data-correct="true">Neurogenic</button>
+  <button class="quiz-choice" data-correct="false">Septic</button>
+  <div class="quiz-explain"><strong>Correct: neurogenic shock.</strong> Because the autonomic nervous system itself has failed, the sympathetic surge that produces tachycardia in every other type of shock cannot occur — heart rate stays normal or even falls despite hypotension.</div>
+</div>
+<div class="quiz-q" id="neuro-q2">
+  <p class="stem">2. What is the classic trigger for neurogenic shock?</p>
+  <button class="quiz-choice" data-correct="true">Traumatic brain or spinal cord injury</button>
+  <button class="quiz-choice" data-correct="false">Bacterial sepsis</button>
+  <button class="quiz-choice" data-correct="false">IgE-mediated antigen re-exposure</button>
+  <button class="quiz-choice" data-correct="false">Acute myocardial infarction</button>
+  <div class="quiz-explain"><strong>Correct: traumatic brain or spinal cord injury.</strong> This disrupts the autonomic pathways controlling vascular tone, heart rate, and venous tone all at once.</div>
+</div>
+<div class="quiz-q" id="neuro-q3">
+  <p class="stem">3. A patient with a cervical spinal cord injury has BP 78/40, HR 58, and warm, dry extremities below the injury level. This pattern is best explained by:</p>
+  <button class="quiz-choice" data-correct="true">Loss of sympathetic outflow (neurogenic shock)</button>
+  <button class="quiz-choice" data-correct="false">Primary cardiogenic pump failure</button>
+  <button class="quiz-choice" data-correct="false">Anaphylactic shock</button>
+  <button class="quiz-choice" data-correct="false">Compensated hypovolemic shock</button>
+  <div class="quiz-explain"><strong>Correct: neurogenic shock.</strong> Hypotension without reflex tachycardia, plus warm/dry (vasodilated) skin rather than the cold, clammy skin of most other shock types, is the classic neurogenic shock picture following spinal cord injury.</div>
+</div>
+</section>
+
+<section class="card" id="obstructive">
+<h2>5e. Obstructive Shock — Blockage &rarr; &darr; Cardiac Output</h2>
+<p>Circulation through the heart is physically blocked. Two subtypes, each with a distinct mechanism:</p>
+<h3>Pulmonary (Vascular) Obstructive Shock</h3>
+<p>Increased resistance within the pulmonary circulation prevents blood from reaching the left heart. This <strong>raises RV preload</strong> but <strong>lowers LV preload</strong> (and stroke volume), so total cardiac output drops. Classic cause: <strong>massive pulmonary embolism</strong>; also severe pulmonary hypertension.</p>
+<h3>Structural (Mechanical) Obstructive Shock</h3>
+<p>Resistance arises within the heart itself, restricting ventricular filling. This decreases <strong>both right and left ventricular preload</strong> and cardiac output. Causes:</p>
+<ul>
+  <li><strong>Tension pneumothorax</strong> — air in the pleural space collapses the lung; high intrathoracic pressure prevents venous return and cardiac filling</li>
+  <li><strong>Cardiac tamponade</strong> — pericardial fluid prevents normal cardiac contraction/filling</li>
+  <li>Restrictive cardiomyopathy, constrictive pericarditis</li>
+</ul>
+<p>In both subtypes: HR rises to compensate for low CO, and SVR/afterload rises in response to low CO — superficially resembling cardiogenic shock. The key difference: in obstructive shock, <strong>LV preload is decreased</strong> because the obstruction itself is preventing venous return/filling, whereas in cardiogenic shock, preload <em>rises</em> because a healthy venous system keeps returning blood to a heart that can't eject it.</p>
+<p><strong>Clinically:</strong> dominated by the underlying cause — leg swelling/dyspnea/pleuritic chest pain (PE); absent breath sounds, tracheal deviation (pneumothorax); distant heart sounds + JVD (tamponade).</p>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="obst-q1">
+  <p class="stem">1. A truck driver develops a pulmonary embolism after a long-haul DVT. If he develops shock from the PE, which of the following is most likely?</p>
+  <button class="quiz-choice" data-correct="false">Decreased contractility</button>
+  <button class="quiz-choice" data-correct="false">Decreased heart rate</button>
+  <button class="quiz-choice" data-correct="false">Increased left ventricular end-diastolic volume</button>
+  <button class="quiz-choice" data-correct="true">Increased systemic vascular resistance</button>
+  <div class="quiz-explain"><strong>Correct: increased SVR.</strong> Cardiac output falls (impaired LV filling from the PE), so the body compensates by raising SVR/afterload, just as in cardiogenic shock. Heart rate rises to compensate, and LV preload actually falls — blood can't get past the obstruction to fill the left heart.</div>
+</div>
+<div class="quiz-q" id="obst-q2">
+  <p class="stem">2. A trauma patient has a tension pneumothorax. Which physical exam pattern is expected?</p>
+  <button class="quiz-choice" data-correct="true">Tracheal deviation away from the affected side, absent breath sounds, distended neck veins</button>
+  <button class="quiz-choice" data-correct="false">Muffled heart sounds, pulsus paradoxus, narrow pulse pressure</button>
+  <button class="quiz-choice" data-correct="false">Widened pulse pressure, bounding pulses, flushed skin</button>
+  <button class="quiz-choice" data-correct="false">Warm extremities, low SVR</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Muffled heart sounds + pulsus paradoxus instead describe cardiac tamponade — a common distractor pairing on obstructive shock questions.</div>
+</div>
+<div class="quiz-q" id="obst-q3">
+  <p class="stem">3. How does LV preload in structural obstructive shock differ from cardiogenic shock, and why?</p>
+  <button class="quiz-choice" data-correct="true">Obstructive: preload is decreased (obstruction blocks filling). Cardiogenic: preload is increased (failing heart can't eject what returns to it)</button>
+  <button class="quiz-choice" data-correct="false">Both have increased preload for the same reason</button>
+  <button class="quiz-choice" data-correct="false">Both have decreased preload for the same reason</button>
+  <button class="quiz-choice" data-correct="false">Preload direction is identical and cannot be used to distinguish them</button>
+  <div class="quiz-explain"><strong>Correct.</strong> This is the key hemodynamic distinguisher between the two: in obstructive shock the obstruction itself prevents venous return/filling (preload falls), while in cardiogenic shock a healthy venous system keeps returning blood to a heart that can't pump it out (preload rises).</div>
+</div>
+</section>
+
+<section class="card" id="comparison">
+<h2>6. Comparison Table — Hemodynamics by Shock Type</h2>
+<p>"P" marks the <strong>primary</strong> precipitating derangement for that type; an asterisk (*) marks something unique to that column.</p>
+<table>
+<tr><th>Type</th><th>MAP</th><th>Preload (EDV)</th><th>SVR</th><th>Cardiac Output</th><th>Heart Rate</th></tr>
+<tr><td>Distributive</td><td>&darr;</td><td>&darr;</td><td>&darr; (P)</td><td>&uarr;*</td><td>&uarr;</td></tr>
+<tr><td>Cardiogenic</td><td>&darr;</td><td>&uarr;*</td><td>&uarr;</td><td>&darr; (P)</td><td>&uarr;</td></tr>
+<tr><td>Hypovolemic</td><td>&darr;</td><td>&darr; (P)</td><td>&uarr;</td><td>&darr;</td><td>&uarr;</td></tr>
+<tr><td>Neurogenic</td><td>&darr; (P)</td><td>&darr; (P)</td><td>&darr; (P)</td><td>&darr; (P)</td><td>Normal or &darr;*</td></tr>
+<tr><td>Obstructive — pulmonary</td><td>&darr;</td><td>&uarr;(RV)* / &darr;(LV)</td><td>&uarr;</td><td>&darr; (P)</td><td>&uarr;</td></tr>
+<tr><td>Obstructive — structural</td><td>&darr;</td><td>&darr;</td><td>&uarr;</td><td>&darr; (P)</td><td>&uarr;</td></tr>
+</table>
+<div class="pearl">
+  <span class="pearl-label">How to use this table on exam questions</span>
+  Given a vignette with hemodynamic numbers (echo showing &darr;stroke volume, catheter data, etc.), work backward: identify which variable is <em>primary</em> (P) vs. compensatory, and match the pattern. Neurogenic is easiest to spot (everything down + no tachycardia). Cardiogenic vs. hypovolemic vs. obstructive-structural are distinguished mainly by <strong>preload</strong> direction (up in cardiogenic, down in the other two) plus history/exam clues.
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="comp-q1">
+  <p class="stem">1. Which shock type is the only one where MAP, preload, SVR, and cardiac output are ALL listed as primary (P) derangements?</p>
+  <button class="quiz-choice" data-correct="true">Neurogenic</button>
+  <button class="quiz-choice" data-correct="false">Cardiogenic</button>
+  <button class="quiz-choice" data-correct="false">Distributive</button>
+  <button class="quiz-choice" data-correct="false">Hypovolemic</button>
+  <div class="quiz-explain"><strong>Correct: neurogenic.</strong> Because autonomic failure knocks out every compensatory mechanism at once, all four variables fall together as primary derangements rather than one falling and the others compensating.</div>
+</div>
+<div class="quiz-q" id="comp-q2">
+  <p class="stem">2. A patient's workup shows high preload, low cardiac output, and high SVR. Which type of shock best fits this profile?</p>
+  <button class="quiz-choice" data-correct="true">Cardiogenic shock</button>
+  <button class="quiz-choice" data-correct="false">Hypovolemic shock</button>
+  <button class="quiz-choice" data-correct="false">Distributive shock</button>
+  <button class="quiz-choice" data-correct="false">Structural obstructive shock</button>
+  <div class="quiz-explain"><strong>Correct: cardiogenic shock.</strong> It's the only type on the comparison table with an <em>increased</em> preload (the failing heart can't eject the blood returning to it) alongside low CO and compensatory high SVR — hypovolemic and structural obstructive shock both have decreased preload instead.</div>
+</div>
+</section>
+
+<section class="card" id="complications">
+<h2>7. Complications</h2>
+<p>Nearly all complications trace back to hypoperfusion/hypoxia of individual organ systems:</p>
+<ul>
+  <li><strong>Cardiac:</strong> arrhythmias, cardiac arrest, myocardial infarction</li>
+  <li><strong>GI:</strong> mesenteric ischemia and necrosis</li>
+  <li><strong>Hematologic:</strong> disseminated intravascular coagulation (DIC)</li>
+  <li><strong>Pulmonary:</strong> ARDS (noncardiogenic pulmonary edema/respiratory failure)</li>
+  <li><strong>Renal:</strong> acute tubular necrosis &rarr; kidney failure &rarr; anuria</li>
+  <li><strong>MSK:</strong> ischemic/necrotic digits, especially toes</li>
+  <li><strong>Neurologic:</strong> stroke, ischemic injury, coma</li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="comp2-q1">
+  <p class="stem">1. Widespread activation of the clotting cascade during severe shock can lead to which hematologic complication?</p>
+  <button class="quiz-choice" data-correct="true">Disseminated intravascular coagulation (DIC)</button>
+  <button class="quiz-choice" data-correct="false">Polycythemia vera</button>
+  <button class="quiz-choice" data-correct="false">Hemophilia A</button>
+  <button class="quiz-choice" data-correct="false">Immune thrombocytopenia (ITP)</button>
+  <div class="quiz-explain"><strong>Correct: DIC.</strong> Systemic hypoperfusion and inflammation can trigger widespread microvascular clotting that consumes clotting factors and platelets, paradoxically leading to bleeding as well.</div>
+</div>
+<div class="quiz-q" id="comp2-q2">
+  <p class="stem">2. Noncardiogenic pulmonary edema and respiratory failure occurring as a complication of shock is termed:</p>
+  <button class="quiz-choice" data-correct="true">ARDS</button>
+  <button class="quiz-choice" data-correct="false">COPD exacerbation</button>
+  <button class="quiz-choice" data-correct="false">Pulmonary embolism</button>
+  <button class="quiz-choice" data-correct="false">Tension pneumothorax</button>
+  <div class="quiz-explain"><strong>Correct: ARDS (acute/adult respiratory distress syndrome).</strong> This reflects diffuse alveolar-capillary injury from systemic hypoperfusion/inflammation rather than a cardiac cause of pulmonary edema.</div>
+</div>
+</section>
+
+<section class="card" id="evaluation">
+<h2>8. Evaluation &amp; Diagnosis</h2>
+<p><strong>Resuscitation should never be delayed while searching for the etiology of undifferentiated shock.</strong> Evaluation happens in parallel with treatment.</p>
+<h3>History &amp; Physical</h3>
+<p>Focused history (from patient/family if possible) plus review of outpatient records for baseline vitals, risk factors, and medications. Look for clues: chest pain, infectious symptoms, trauma, abdominal pain. Note febrile state or <strong>paradoxical bradycardia + hypotension in trauma</strong> as a clue pattern.</p>
+<h3>Workup</h3>
+<ul>
+  <li><strong>Telemetry + 12-lead EKG</strong> — may show ACS, arrhythmia, or clues to tamponade/PE</li>
+  <li><strong>Labs:</strong> CBC with differential, renal/liver function, <strong>serum lactate</strong> (key risk-stratification marker), cardiac biomarkers, D-dimer, coagulation panel, type &amp; screen, blood/urine cultures, blood gas</li>
+  <li><strong>Imaging:</strong> chest X-ray (source of infection, ARDS, pulmonary edema, widened mediastinum in aortic dissection); CT as indicated</li>
+  <li><strong>Point-of-care ultrasound (POCUS)/focused cardiac ultrasound</strong> — reduces diagnostic uncertainty and guides resuscitation at the bedside</li>
+  <li><strong>Right heart (Swan-Ganz) catheter</strong> — measures right/left atrial pressure (preload), cardiac output, and allows precise SVR calculation in unclear cases. Used less often now (recognized risks, no mortality benefit) — best reserved for cases where <em>volume status is genuinely uncertain</em> and needs to guide fluid therapy.</li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="eval-q1">
+  <p class="stem">1. Which single lab value is emphasized as a key risk-stratification tool in undifferentiated shock?</p>
+  <button class="quiz-choice" data-correct="true">Serum lactate</button>
+  <button class="quiz-choice" data-correct="false">Serum albumin</button>
+  <button class="quiz-choice" data-correct="false">ESR</button>
+  <button class="quiz-choice" data-correct="false">Uric acid</button>
+  <div class="quiz-explain"><strong>Correct: serum lactate.</strong> Elevated lactate reflects the anaerobic metabolism of tissue hypoperfusion and is used both to help diagnose shock and to track response to resuscitation.</div>
+</div>
+<div class="quiz-q" id="eval-q2">
+  <p class="stem">2. Right heart (Swan-Ganz) catheterization is used less often today primarily because:</p>
+  <button class="quiz-choice" data-correct="true">It carries procedural risk without a demonstrated mortality benefit</button>
+  <button class="quiz-choice" data-correct="false">It has been shown to be inaccurate at measuring pressures</button>
+  <button class="quiz-choice" data-correct="false">It is no longer manufactured</button>
+  <button class="quiz-choice" data-correct="false">It is contraindicated in all forms of shock</button>
+  <div class="quiz-explain"><strong>Correct.</strong> It remains useful when volume status is genuinely unclear and needs to guide fluid therapy, but routine use has declined given its risks and lack of proven mortality benefit.</div>
+</div>
+<div class="quiz-q" id="eval-q3">
+  <p class="stem">3. Which bedside diagnostic tool has been shown to reduce diagnostic uncertainty and guide resuscitation in undifferentiated hypotension?</p>
+  <button class="quiz-choice" data-correct="true">Point-of-care ultrasound (POCUS)</button>
+  <button class="quiz-choice" data-correct="false">MRI</button>
+  <button class="quiz-choice" data-correct="false">Nuclear stress test</button>
+  <button class="quiz-choice" data-correct="false">Pulmonary function testing</button>
+  <div class="quiz-explain"><strong>Correct: POCUS/focused cardiac ultrasound.</strong> It can be performed immediately at the bedside, unlike the other listed studies, which are either too slow or not appropriate for an acutely unstable patient.</div>
+</div>
+</section>
+
+<section class="card" id="management">
+<h2>9. Management</h2>
+<p><strong>Overall goal:</strong> stabilize the patient and treat the underlying cause. Initial approach: secure airway/breathing (oxygen, intubation if needed), obtain IV or IO access (central access if peripheral access fails or prolonged pressors/large-volume resuscitation are anticipated).</p>
+<h3>First Step (Undifferentiated Shock)</h3>
+<p>Unless the patient has pulmonary edema, give an initial normal saline infusion to any hypotensive patient and observe the response — <strong>hypovolemic shock responds well</strong>. No response &rarr; ICU-level monitoring for further diagnosis and therapy.</p>
+<h3>Type-Specific Management</h3>
+<table>
+<tr><th>Type</th><th>Management</th></tr>
+<tr><td>Septic shock</td><td>Aggressive fluids (30 mL/kg isotonic crystalloid within 3 hr, reassess and add more as needed); empiric antibiotics within 1 hr; if vasopressors needed, target <strong>MAP 65 mmHg</strong>; <strong>norepinephrine first-line</strong>, add vasopressin if refractory</td></tr>
+<tr><td>Anaphylactic shock</td><td>Aggressive IV crystalloids (4&ndash;6 L); stop offending agent; <strong>IM epinephrine</strong>, antihistamines, corticosteroids, nebulized albuterol</td></tr>
+<tr><td>Adrenal crisis</td><td>Judicious fluids; IV dexamethasone</td></tr>
+<tr><td>Hypovolemic shock</td><td>Two large-bore IVs or central line; Trendelenburg position; aggressive isotonic crystalloids (2&ndash;4 L); PRBC transfusion if ongoing bleed; treat the underlying source; continue crystalloids &plusmn; vasopressors</td></tr>
+<tr><td>Obstructive shock (general)</td><td>Judicious IV crystalloids; early norepinephrine (&plusmn; vasopressin) if shock persists; continue fluids but monitor closely for worsening</td></tr>
+<tr><td>Massive PE</td><td>Thrombolysis. <strong>Caution:</strong> aggressive IV fluids can paradoxically worsen hypotension via RV dilation/septal bowing that compromises LV filling</td></tr>
+<tr><td>Tension pneumothorax</td><td>Needle thoracostomy &rarr; tube thoracostomy</td></tr>
+<tr><td>Cardiac tamponade</td><td>Pericardiocentesis — even small-volume fluid removal can produce significant clinical improvement</td></tr>
+<tr><td>Cardiogenic shock</td><td>ACLS/cardioversion for unstable arrhythmia; judicious fluids only if no pulmonary edema; inotropes (dobutamine most common) or intra-aortic balloon pump (IABP) if refractory; norepinephrine + inotropes if needed; thrombolysis/revascularization &plusmn; IABP for STEMI</td></tr>
+<tr><td>Neurogenic shock</td><td>Saline; vasoconstrictors if needed</td></tr>
+</table>
+<div class="pearl">
+  <span class="pearl-label">Distributive vs. cardiogenic drug logic, at a glance</span>
+  <strong>Distributive</strong> &rarr; SVR is the problem &rarr; treat with <strong>pressors</strong> (norepinephrine, vasopressin). <strong>Cardiogenic</strong> &rarr; pump function is the problem &rarr; treat with <strong>inotropes</strong> (dobutamine). <strong>Hypovolemic/neurogenic</strong> &rarr; volume/preload is the problem &rarr; treat with <strong>fluids</strong> (&plusmn; pressors in neurogenic once volume is addressed).
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="mgmt-q1">
+  <p class="stem">1. A patient in septic shock requires vasopressor support. What is the target MAP, and what is the first-line agent?</p>
+  <button class="quiz-choice" data-correct="false">MAP 55 mmHg; dobutamine</button>
+  <button class="quiz-choice" data-correct="true">MAP 65 mmHg; norepinephrine</button>
+  <button class="quiz-choice" data-correct="false">MAP 65 mmHg; epinephrine</button>
+  <button class="quiz-choice" data-correct="false">MAP 90 mmHg; norepinephrine</button>
+  <div class="quiz-explain"><strong>Correct: MAP 65 mmHg, norepinephrine first-line.</strong> Vasopressin is added if refractory to norepinephrine alone. Dobutamine is an inotrope for cardiogenic shock/concurrent cardiac dysfunction, not first-line pressor support.</div>
+</div>
+<div class="quiz-q" id="mgmt-q2">
+  <p class="stem">2. Why should IV fluids be given cautiously in a hypotensive patient with a suspected massive pulmonary embolism?</p>
+  <button class="quiz-choice" data-correct="false">Fluids increase clot burden</button>
+  <button class="quiz-choice" data-correct="true">Fluids can worsen RV dilation and septal bowing, compromising LV filling</button>
+  <button class="quiz-choice" data-correct="false">Fluids directly lower systemic vascular resistance</button>
+  <button class="quiz-choice" data-correct="false">Fluids dissolve the embolus prematurely</button>
+  <div class="quiz-explain"><strong>Correct.</strong> An already-strained right ventricle can over-distend with aggressive fluids, bowing the septum into the LV cavity and further reducing LV filling and cardiac output — a paradoxical worsening of shock.</div>
+</div>
+<div class="quiz-q" id="mgmt-q3">
+  <p class="stem">3. What is the first-line treatment for anaphylactic shock?</p>
+  <button class="quiz-choice" data-correct="true">Intramuscular epinephrine</button>
+  <button class="quiz-choice" data-correct="false">IV corticosteroids alone</button>
+  <button class="quiz-choice" data-correct="false">Antihistamines alone</button>
+  <button class="quiz-choice" data-correct="false">Nebulized albuterol alone</button>
+  <div class="quiz-explain"><strong>Correct: IM epinephrine.</strong> It reverses both the vasodilation and bronchospasm of anaphylaxis rapidly. Antihistamines, corticosteroids, and nebulized albuterol are adjuncts, not substitutes for epinephrine.</div>
+</div>
+</section>
+
+<section class="card" id="ddx">
+<h2>10. Differential Diagnosis</h2>
+<p>Undifferentiated shock's differential spans all four/five major categories above. Two additional considerations:</p>
+<ul>
+  <li>Patients can have a <strong>combination of shock syndromes</strong> simultaneously (e.g., septic + hypovolemic from poor oral intake).</li>
+  <li><strong>Pharmacologic shock</strong> — vasodilation or myocardial depression from medications: benzodiazepines, beta-blockers, calcium channel blockers, opioids, anticholinergics, sildenafil.</li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="ddx-q1">
+  <p class="stem">1. Which of the following medication classes can cause "pharmacologic shock" via vasodilation or myocardial depression?</p>
+  <button class="quiz-choice" data-correct="true">Beta-blockers</button>
+  <button class="quiz-choice" data-correct="false">Antibiotics</button>
+  <button class="quiz-choice" data-correct="false">Proton pump inhibitors</button>
+  <button class="quiz-choice" data-correct="false">Statins</button>
+  <div class="quiz-explain"><strong>Correct: beta-blockers.</strong> Along with calcium channel blockers, benzodiazepines, opioids, anticholinergics, and sildenafil, beta-blockers can produce shock-like hypotension through myocardial depression or vasodilation, independent of an infectious or hemorrhagic cause.</div>
+</div>
+<div class="quiz-q" id="ddx-q2">
+  <p class="stem">2. Can a patient have more than one type of shock occurring simultaneously?</p>
+  <button class="quiz-choice" data-correct="true">Yes — combined shock syndromes are recognized (e.g., septic plus hypovolemic)</button>
+  <button class="quiz-choice" data-correct="false">No — shock types are always mutually exclusive</button>
+  <div class="quiz-explain"><strong>Correct: yes.</strong> A patient can, for example, be septic (distributive) while also volume-depleted from poor oral intake (hypovolemic) — this is part of why undifferentiated shock can be diagnostically challenging.</div>
+</div>
+</section>
+
+<section class="card" id="prognosis">
+<h2>11. Prognosis</h2>
+<table>
+<tr><th>Type</th><th>Approximate mortality</th></tr>
+<tr><td>Septic shock</td><td>40&ndash;50%</td></tr>
+<tr><td>Cardiogenic shock</td><td>50&ndash;75% (improved from historical rates)</td></tr>
+<tr><td>Distributive shock (overall)</td><td>25&ndash;50%</td></tr>
+<tr><td>Hypovolemic / obstructive shock</td><td>Generally lower mortality, respond better to timely treatment</td></tr>
+</table>
+<p>Septic shock survivors also carry significant long-term morbidity, often requiring long-term acute care or post-acute placement.</p>
+<div class="pearl">
+  <span class="pearl-label">Epidemiology</span>
+  <strong>Distributive shock is the most common overall type</strong>, followed by hypovolemic, then cardiogenic; obstructive shock is comparatively rare. Within distributive shock, <strong>septic shock is the most common subtype.</strong>
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="prog-q1">
+  <p class="stem">1. Which type of shock is the most common overall?</p>
+  <button class="quiz-choice" data-correct="true">Distributive</button>
+  <button class="quiz-choice" data-correct="false">Cardiogenic</button>
+  <button class="quiz-choice" data-correct="false">Hypovolemic</button>
+  <button class="quiz-choice" data-correct="false">Obstructive</button>
+  <div class="quiz-explain"><strong>Correct: distributive</strong>, with septic shock as its most common subtype — followed by hypovolemic, then cardiogenic; obstructive shock is comparatively rare.</div>
+</div>
+<div class="quiz-q" id="prog-q2">
+  <p class="stem">2. Approximate mortality for cardiogenic shock is closest to:</p>
+  <button class="quiz-choice" data-correct="false">5&ndash;10%</button>
+  <button class="quiz-choice" data-correct="true">50&ndash;75%</button>
+  <button class="quiz-choice" data-correct="false">90&ndash;100%</button>
+  <button class="quiz-choice" data-correct="false">&lt;5%</button>
+  <div class="quiz-explain"><strong>Correct: 50&ndash;75%,</strong> an improvement over historical rates but still the highest mortality among the major shock types alongside septic shock (40&ndash;50%). Hypovolemic and obstructive shock generally carry lower mortality and respond better to timely treatment.</div>
+</div>
+</section>
+
+<section class="card" id="case">
+<h2>12. Case Connection</h2>
+<div class="case">
+<span class="case-label">Case</span>
+ST, a middle-aged female, arrives after a car crash. Blood pressure has been falling over 15 minutes despite IV fluids en route. Exam: BP 74/50 mmHg, HR 120 bpm, abdomen distended and firm, extremities cool.
+</div>
+<p><strong>What's happening?</strong> ST is in <strong>hypovolemic shock</strong> from ongoing blood loss into her abdomen (hemoperitoneum) — a firm, distended abdomen after trauma is a red flag for internal hemorrhage. Her tachycardia and cool extremities reflect the expected compensatory response (&uarr;SVR, &uarr;HR) to falling preload.</p>
+<p><strong>Management:</strong> because preload must be restored, the rate of IV fluids is increased and blood transfusion is arranged; surgery is urgently consulted for the hemoperitoneum. She goes to the OR for hemorrhage control and recovers.</p>
+</section>
+
+</div>
+
+<script>
+  // Build side-nav from card sections
+  (function() {
+    var sections = document.querySelectorAll('section.card[id]');
+    var list = document.getElementById('sidenavList');
+    sections.forEach(function(sec) {
+      var heading = sec.querySelector('h2');
+      if (!heading) return;
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + sec.id;
+      a.textContent = heading.textContent;
+      a.dataset.target = sec.id;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    var toggle = document.getElementById('sidenavToggle');
+    var panel = document.getElementById('sidenavPanel');
+    toggle.addEventListener('click', function() {
+      panel.classList.toggle('open');
+    });
+
+    var navLinks = panel.querySelectorAll('a');
+    function onScroll() {
+      var scrollPos = window.scrollY + 100;
+      var current = null;
+      sections.forEach(function(sec) {
+        if (sec.offsetTop <= scrollPos) current = sec.id;
+      });
+      navLinks.forEach(function(a) {
+        a.classList.toggle('active', a.dataset.target === current);
+      });
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  })();
+
+  // Inline quiz logic
+  document.querySelectorAll('.quiz-q').forEach(function(q) {
+    var choices = q.querySelectorAll('.quiz-choice');
+    var explain = q.querySelector('.quiz-explain');
+    choices.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (btn.disabled) return;
+        choices.forEach(function(b) {
+          b.disabled = true;
+          if (b.dataset.correct === 'true') {
+            b.classList.add('correct');
+          } else if (b === btn) {
+            b.classList.add('incorrect');
+          }
+        });
+        explain.classList.add('show');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
