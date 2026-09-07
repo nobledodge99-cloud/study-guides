@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Drugs Used to Treat Angina — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-card:#fffdf7;
+  --forest-dark:#2f5233;
+  --forest:#3f7d52;
+  --sage:#7fa47f;
+  --sage-light:#e4ede2;
+  --border:#d8cfb8;
+  --accent:#b5502f;
+  --text-main:#2a2a24;
+  --text-soft:#5b5a4f;
+  --correct:#2f7d4f;
+  --incorrect:#b5502f;
+  --core-red:#a3271f;
+  --core-red-bg:#fbe7e5;
+  --add-gray:#6b6558;
+  --add-gray-bg:#ece7da;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Lora',serif;
+  background:var(--cream);
+  color:var(--text-main);
+  line-height:1.6;
+}
+.back-btn{
+  position:fixed;
+  top:16px;
+  left:16px;
+  z-index:200;
+  background:var(--cream-card);
+  border:1px solid var(--forest);
+  color:var(--forest-dark);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:6px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+.back-btn:hover{background:var(--sage-light);}
+.pdf-btn{
+  position:fixed;
+  top:16px;
+  right:16px;
+  z-index:200;
+  background:var(--forest-dark);
+  border:1px solid var(--forest-dark);
+  color:#fff;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  cursor:pointer;
+  padding:8px 14px;
+  border-radius:6px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+.pdf-btn:hover{background:var(--forest);}
+.sidenav-toggle{
+  position:fixed;
+  top:70px;
+  right:0;
+  z-index:200;
+  background:var(--forest-dark);
+  color:#fff;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:1px;
+  border:none;
+  padding:14px 8px;
+  writing-mode:vertical-rl;
+  cursor:pointer;
+  border-radius:6px 0 0 6px;
+}
+.sidenav-panel{
+  position:fixed;
+  top:0;
+  right:-280px;
+  width:260px;
+  height:100%;
+  background:var(--cream-card);
+  border-left:1px solid var(--border);
+  padding:70px 18px 18px 18px;
+  overflow-y:auto;
+  transition:right 0.25s ease;
+  z-index:199;
+}
+.sidenav-panel.open{right:0;}
+.sidenav-panel a{
+  display:block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  color:var(--text-main);
+  text-decoration:none;
+  padding:7px 8px;
+  border-radius:4px;
+  margin-bottom:2px;
+}
+.sidenav-panel a:hover, .sidenav-panel a.active{
+  background:var(--sage-light);
+  color:var(--forest-dark);
+}
+.header{
+  text-align:center;
+  padding:70px 20px 30px 20px;
+}
+.header h1{
+  color:var(--forest-dark);
+  font-size:2.3em;
+  margin-bottom:6px;
+}
+.header .subtitle{
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--text-soft);
+  font-size:14px;
+}
+.container{
+  max-width:880px;
+  margin:0 auto;
+  padding:0 20px 80px 20px;
+}
+.toc{
+  background:var(--cream-card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px 26px;
+  margin-bottom:36px;
+}
+.toc h2{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:14px;
+  letter-spacing:1px;
+  color:var(--forest-dark);
+  text-transform:uppercase;
+  margin-top:0;
+}
+.toc ul{margin:0;padding-left:20px;}
+.toc li{margin-bottom:6px;}
+.toc a{color:var(--text-main);text-decoration:none;}
+.toc a:hover{color:var(--forest);text-decoration:underline;}
+section.card{
+  background:var(--cream-card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:28px 30px;
+  margin-bottom:28px;
+}
+section.card h2{
+  color:var(--forest-dark);
+  border-bottom:2px solid var(--sage);
+  padding-bottom:8px;
+  font-size:1.5em;
+}
+section.card h3{
+  color:var(--forest);
+  font-size:1.15em;
+  margin-top:24px;
+}
+.badge{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  padding:3px 9px;
+  border-radius:20px;
+  vertical-align:middle;
+  margin-left:8px;
+}
+.badge-core{
+  color:var(--core-red);
+  background:var(--core-red-bg);
+  border:1px solid var(--core-red);
+}
+.badge-add{
+  color:var(--add-gray);
+  background:var(--add-gray-bg);
+  border:1px solid var(--add-gray);
+}
+.legend{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  color:var(--text-soft);
+  margin-bottom:30px;
+  padding:12px 18px;
+  background:var(--sage-light);
+  border-radius:8px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  font-size:0.93em;
+}
+th{
+  background:var(--forest-dark);
+  color:#fff;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  padding:9px 10px;
+  text-align:left;
+}
+td{
+  padding:9px 10px;
+  border-bottom:1px solid var(--border);
+  vertical-align:top;
+}
+tr:nth-child(even) td{background:var(--sage-light);}
+.pearl{
+  background:var(--sage-light);
+  border-left:4px solid var(--forest);
+  padding:12px 16px;
+  border-radius:0 8px 8px 0;
+  margin:16px 0;
+  font-size:0.95em;
+}
+.pearl strong{color:var(--forest-dark);}
+.case{
+  background:#fdf8ee;
+  border:1px dashed var(--accent);
+  border-radius:8px;
+  padding:14px 18px;
+  margin:16px 0;
+}
+.case-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--accent);
+  font-weight:700;
+}
+.figure{margin:18px 0;text-align:center;}
+.figure-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+ul, ol{padding-left:22px;}
+li{margin-bottom:4px;}
+.quiz-mini-header{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--forest-dark);
+  margin:26px 0 12px 0;
+  border-top:1px solid var(--border);
+  padding-top:18px;
+}
+.quiz-q{
+  background:#fdfcf6;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.quiz-q p.prompt{font-weight:600;margin-top:0;}
+.quiz-choice{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:var(--cream-card);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:9px 12px;
+  margin-bottom:6px;
+  cursor:pointer;
+  font-family:'Lora',serif;
+  font-size:0.96em;
+  color:var(--text-main);
+}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#e3f3e6;border-color:var(--correct);color:var(--correct);font-weight:600;}
+.quiz-choice.incorrect{background:#fbe7e3;border-color:var(--incorrect);color:var(--incorrect);font-weight:600;}
+.quiz-choice.disabled{cursor:default;}
+.quiz-explain{
+  display:none;
+  margin-top:10px;
+  padding:10px 14px;
+  background:var(--sage-light);
+  border-radius:6px;
+  font-size:0.92em;
+}
+.quiz-explain.show{display:block;}
+.core-note{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--core-red);
+  font-style:normal;
+}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="pdf-btn" onclick="window.print()">Download PDF</button>
+<button class="sidenav-toggle" onclick="document.getElementById('sidenav').classList.toggle('open')">SECTIONS</button>
+<div class="sidenav-panel" id="sidenav">
+  <a href="#overview">1. Overview & Classification</a>
+  <a href="#patho">2. Pathophysiology</a>
+  <a href="#goals">3. Therapeutic Goals</a>
+  <a href="#nitrates">4. Organic Nitrates</a>
+  <a href="#betablockers">5. Beta-Blockers</a>
+  <a href="#ccb">6. Calcium Channel Blockers</a>
+  <a href="#ranolazine">7. Ranolazine</a>
+  <a href="#acutechronic">8. Acute vs Chronic Algorithm</a>
+  <a href="#preventive">9. Preventive & Adjunctive Tx</a>
+  <a href="#stress">10. Pharmacologic Stress Testing</a>
+  <a href="#summary">11. Summary Table</a>
+  <a href="#takeaways">12. High-Yield Takeaways</a>
+</div>
+
+<div class="header">
+  <h1>Drugs Used to Treat Angina</h1>
+  <div class="subtitle">CV II &middot; Natalie Waterfall, PharmD &middot; RVU-MCOM</div>
+</div>
+
+<div class="container">
+
+  <div class="legend">
+    <span class="badge badge-core">CORE</span> = drug list "Core Agent" (highlighted for full depth — mechanism, clinical role, major ADRs, key monitoring/safety)
+    &nbsp;&nbsp;
+    <span class="badge badge-add">ADDITIONAL</span> = "Additional Agent" (know class/target, drug names, class-level ADRs/safety — drug-by-drug comparisons not expected)
+  </div>
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#overview">1. Overview & Classification of Angina</a></li>
+      <li><a href="#patho">2. Pathophysiology</a></li>
+      <li><a href="#goals">3. Therapeutic Goals & Symptom Relief vs Mortality Benefit</a></li>
+      <li><a href="#nitrates">4. Organic Nitrates</a></li>
+      <li><a href="#betablockers">5. Beta-Blockers</a></li>
+      <li><a href="#ccb">6. Calcium Channel Blockers</a></li>
+      <li><a href="#ranolazine">7. Ranolazine</a></li>
+      <li><a href="#acutechronic">8. Acute Relief vs Chronic Prophylaxis — Clinical Algorithm</a></li>
+      <li><a href="#preventive">9. Preventive & Adjunctive Interventions</a></li>
+      <li><a href="#stress">10. Pharmacologic Stress Testing</a></li>
+      <li><a href="#summary">11. Angina Pharmacology Summary Table</a></li>
+      <li><a href="#takeaways">12. High-Yield Clinical Takeaways</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section class="card" id="overview">
+    <h2>1. Overview & Classification of Angina</h2>
+    <p>Angina pectoris is the <strong>cardinal symptom of myocardial ischemia</strong>, affecting nearly 8 million Americans. It results from an imbalance between myocardial O&#8322; supply and demand.</p>
+    <ul>
+      <li>Myocardial infarction &rarr; <strong>irreversible</strong> cell death</li>
+      <li>Angina &rarr; <strong>reversible</strong> stage of ischemia</li>
+      <li>Ischemic heart disease remains a leading cause of morbidity and mortality worldwide</li>
+    </ul>
+
+    <h3>Stable (Effort) Angina</h3>
+    <ul>
+      <li>Due to fixed atherosclerotic narrowing of a coronary artery</li>
+      <li>Predictable symptoms with exertion/emotional stress (&uarr; O&#8322; demand); relieved by rest or nitroglycerin</li>
+    </ul>
+
+    <h3>Unstable Angina (ACS Spectrum)</h3>
+    <ul>
+      <li>Plaque rupture + platelet aggregation/thrombosis &rarr; abrupt &darr; coronary flow</li>
+      <li>By definition, <strong>no myocardial necrosis</strong> &rarr; troponin normal (though ST depression/T-wave inversion may be seen on ECG)</li>
+      <li>High risk of progression to NSTEMI/STEMI</li>
+      <li>Initial Tx: anti-ischemic therapy, antiplatelets, anticoagulation to prevent progression to infarction</li>
+    </ul>
+
+    <h3>Variant (Prinzmetal / Vasospastic) Angina</h3>
+    <ul>
+      <li>Focal coronary vessel spasm, typically occurring <strong>at rest</strong> (not with exertion)</li>
+      <li>Associated with <strong>transient ST-segment elevation</strong> during attacks</li>
+      <li>Responds to vasodilators: nitrates and calcium channel blockers</li>
+    </ul>
+
+    <h3>Microvascular Angina</h3>
+    <ul>
+      <li>More common in women and patients with diabetes</li>
+      <li>Reflects impaired coronary microvascular vasodilator function rather than epicardial stenosis — angiography may look normal</li>
+      <li>Tx: beta-blockers, nitrates, CCBs (variable response); ranolazine sometimes used when refractory</li>
+    </ul>
+
+    <div class="figure">
+      <em>Ischemic heart disease branches into chronic CAD (stable angina) and acute coronary syndromes (unstable angina, NSTEMI, STEMI).</em>
+    </div>
+
+    <div class="quiz-mini-header">Quick Check — Classification</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient reports chest pain occurring at rest, with transient ST-elevation on ECG that resolves with symptom resolution. Troponins are negative. This is most consistent with:</p>
+      <button class="quiz-choice" data-correct="false">Stable (effort) angina</button>
+      <button class="quiz-choice" data-correct="false">Unstable angina (ACS)</button>
+      <button class="quiz-choice" data-correct="true">Variant (Prinzmetal) angina</button>
+      <button class="quiz-choice" data-correct="false">Microvascular angina</button>
+      <div class="quiz-explain">Rest-onset pain with transient ST-elevation is the hallmark of coronary vasospasm — variant/Prinzmetal angina — which responds to nitrates and CCBs; beta-blockers should be avoided.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="card" id="patho">
+    <h2>2. Pathophysiology</h2>
+    <p>Angina occurs when myocardial O&#8322; demand &gt; O&#8322; supply.</p>
+    <h3>Determinants of Oxygen Demand</h3>
+    <ul>
+      <li>Heart rate</li>
+      <li>Contractility</li>
+      <li>Wall stress (preload + afterload)</li>
+    </ul>
+    <h3>Determinants of Oxygen Supply</h3>
+    <ul>
+      <li>Coronary blood flow</li>
+      <li>Vascular tone & endothelial function</li>
+      <li>Blood oxygen-carrying capacity</li>
+    </ul>
+    <h3>Mapping Clinical Type to Mechanism</h3>
+    <table>
+      <tr><th>Type</th><th>Core Mechanism</th></tr>
+      <tr><td>Stable angina</td><td>&uarr; demand against a fixed, limited supply</td></tr>
+      <tr><td>Unstable angina</td><td>Acute &darr; supply from thrombosis</td></tr>
+      <tr><td>Variant angina</td><td>Dynamic &darr; supply from vasospasm</td></tr>
+    </table>
+    <div class="pearl"><strong>Pearl:</strong> Almost every antianginal drug class works by shifting one side of this equation — most lower demand (&darr; HR, contractility, wall stress); nitrates and CCBs can also raise supply via coronary vasodilation.</div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="card" id="goals">
+    <h2>3. Therapeutic Goals & Symptom Relief vs Mortality Benefit</h2>
+    <h3>Stable Angina</h3>
+    <ul>
+      <li>Restore balance between O&#8322; supply and demand</li>
+      <li>Most drugs &darr; demand (&darr; HR, BP, contractility, wall stress)</li>
+      <li>Some drugs &uarr; supply (coronary vasodilation) — especially nitrates and CCBs</li>
+    </ul>
+    <h3>Variant (Prinzmetal) Angina</h3>
+    <p>Goal: reverse vasospasm (nitrates, DHP-CCBs).</p>
+    <h3>Unstable Angina (ACS)</h3>
+    <p>Goal: prevent thrombus progression — this is <strong>not</strong> just symptom relief; antiplatelets/anticoagulants/revascularization take priority over antianginal drugs.</p>
+
+    <h3>Symptom Relief (No Survival Benefit)</h3>
+    <p>Nitrates, CCBs, ranolazine — improve symptoms and exercise tolerance but do <strong>not</strong> reduce mortality in stable angina/ACS.</p>
+
+    <h3>Mortality Benefit (Disease-Modifying Therapies)</h3>
+    <ul>
+      <li>Beta-blockers (post-MI, HFrEF)</li>
+      <li>Statins</li>
+      <li>ACE inhibitors / ARBs</li>
+      <li>Antiplatelet agents (aspirin, P2Y&#8321;&#8322; inhibitors)</li>
+    </ul>
+    <div class="pearl"><strong>Clinical strategy:</strong> Combine symptomatic therapy + preventive/disease-modifying therapy for optimal care — an antianginal regimen alone is incomplete management of CAD.</div>
+
+    <div class="quiz-mini-header">Quick Check — Symptom vs Mortality</div>
+    <div class="quiz-q">
+      <p class="prompt">Which of the following drug classes used in angina management has been shown to reduce mortality, rather than only relieve symptoms?</p>
+      <button class="quiz-choice" data-correct="false">Organic nitrates</button>
+      <button class="quiz-choice" data-correct="false">Ranolazine</button>
+      <button class="quiz-choice" data-correct="true">Beta-blockers</button>
+      <button class="quiz-choice" data-correct="false">Dihydropyridine CCBs</button>
+      <div class="quiz-explain">Beta-blockers are disease-modifying — proven survival benefit post-MI and in HFrEF. Nitrates, CCBs, and ranolazine provide symptom relief only.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: NITRATES -->
+  <section class="card" id="nitrates">
+    <h2>4. Organic Nitrates</h2>
+    <p>Class: <strong>Nitroglycerin</strong> <span class="badge badge-core">CORE</span>, <strong>Isosorbide dinitrate</strong> & <strong>Isosorbide mononitrate</strong> <span class="badge badge-add">ADDITIONAL</span></p>
+
+    <h3>Mechanism of Action</h3>
+    <ul>
+      <li>Prodrugs &rarr; release <strong>nitric oxide (NO)</strong> in vascular smooth muscle &rarr; activates guanylyl cyclase &rarr; &uarr; cGMP &rarr; dephosphorylates myosin light chains &rarr; smooth muscle relaxation</li>
+      <li><strong>Venodilation predominates</strong> at therapeutic doses &rarr; &darr; preload &rarr; &darr; myocardial O&#8322; demand</li>
+      <li>Arteriolar dilation at higher doses &rarr; modest &darr; afterload</li>
+      <li>Coronary vasodilation &rarr; improved perfusion, especially useful in vasospastic angina</li>
+    </ul>
+
+    <h3>Therapeutic Effects</h3>
+    <ul>
+      <li>&darr; ventricular filling pressures & &darr; myocardial O&#8322; consumption &rarr; relief of angina</li>
+      <li>Coronary dilation &rarr; &darr; ischemia in vasospastic angina</li>
+      <li>Acute HF: IV nitroglycerin &darr; LV filling & pulmonary pressures &rarr; relieves dyspnea</li>
+      <li>Chronic therapy: <strong>symptom relief only</strong> — no survival benefit in stable angina/ACS</li>
+    </ul>
+
+    <h3>Adverse Effects, Tolerance, & Interactions</h3>
+    <ul>
+      <li><strong>ADRs:</strong> headache (meningeal vessel dilation), dizziness, orthostatic hypotension, syncope, reflex tachycardia (especially short-acting forms)</li>
+      <li><strong>Tolerance/tachyphylaxis:</strong> develops with continuous exposure — mechanisms include sulfhydryl/cofactor depletion, reactive oxygen species accumulation, and neurohormonal counter-regulation. Prevented clinically with a <strong>10&ndash;12 hour nitrate-free interval</strong> (often overnight)</li>
+      <li><strong>Contraindications:</strong> concurrent PDE-5 inhibitors (profound hypotension risk), severe hypotension, shock, hypertrophic cardiomyopathy</li>
+      <li><strong>Drug interactions:</strong> potentiated by alcohol and other antihypertensives</li>
+    </ul>
+
+    <h3>Nitroglycerin <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li>Used for <strong>both</strong> acute angina relief and prophylaxis</li>
+      <li>Sublingual/spray: rapid onset (1&ndash;3 min) — the <strong>gold standard for acute relief</strong></li>
+      <li>Oral sustained-release & transdermal: prevention of recurrent angina</li>
+      <li>Extensive first-pass metabolism &rarr; low oral bioavailability (hence SL/spray/transdermal routes preferred)</li>
+      <li>Transdermal patches require a daily nitrate-free interval to prevent tolerance</li>
+    </ul>
+
+    <h3>Isosorbide Dinitrate <span class="badge badge-add">ADDITIONAL</span></h3>
+    <ul>
+      <li>Angina prophylaxis; combined with <strong>hydralazine</strong> for HFrEF (particularly in Black patients)</li>
+      <li>Low oral bioavailability (~25%) due to first-pass metabolism</li>
+      <li>Converted to isosorbide mononitrate, its active metabolite</li>
+      <li>Immediate-release: 4&ndash;6 hr duration; sustained-release forms last longer</li>
+    </ul>
+
+    <h3>Isosorbide Mononitrate <span class="badge badge-add">ADDITIONAL</span></h3>
+    <ul>
+      <li>Used <strong>exclusively for chronic prophylaxis</strong> — not effective for acute relief</li>
+      <li>Nearly complete oral bioavailability, long half-life &rarr; once/twice-daily dosing</li>
+      <li>Extended-release forms provide 12&ndash;24 hr coverage</li>
+    </ul>
+
+    <div class="case">
+      <div class="case-label">Case Snapshot</div>
+      <p>A patient using sildenafil for erectile dysfunction develops chest pain and takes sublingual nitroglycerin. What's the concern?</p>
+      <p><strong>Answer:</strong> Co-administration of nitrates with PDE-5 inhibitors can cause profound, life-threatening hypotension via excessive cGMP accumulation — this combination is contraindicated.</p>
+    </div>
+
+    <div class="quiz-mini-header">Quick Check — Organic Nitrates</div>
+    <div class="quiz-q">
+      <p class="prompt">Which nitrate is used exclusively for chronic angina prophylaxis and is not effective for acute symptom relief?</p>
+      <button class="quiz-choice" data-correct="false">Nitroglycerin (sublingual)</button>
+      <button class="quiz-choice" data-correct="false">Isosorbide dinitrate</button>
+      <button class="quiz-choice" data-correct="true">Isosorbide mononitrate</button>
+      <div class="quiz-explain">Isosorbide mononitrate has nearly complete oral bioavailability and a long half-life, making it ideal for chronic prophylaxis, but its slow onset makes it unsuitable for acute relief.</div>
+    </div>
+    <div class="quiz-q">
+      <p class="prompt">What is the primary strategy to prevent nitrate tolerance during chronic therapy?</p>
+      <button class="quiz-choice" data-correct="false">Switch to IV administration</button>
+      <button class="quiz-choice" data-correct="true">Provide a 10–12 hour nitrate-free interval daily</button>
+      <button class="quiz-choice" data-correct="false">Co-administer a PDE-5 inhibitor</button>
+      <button class="quiz-choice" data-correct="false">Increase the dose progressively</button>
+      <div class="quiz-explain">A daily nitrate-free interval (often overnight) allows restoration of sulfhydryl groups/nitrate responsiveness and prevents tachyphylaxis.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: BETA BLOCKERS -->
+  <section class="card" id="betablockers">
+    <h2>5. Beta-Blockers</h2>
+    <p>Class: <strong>Metoprolol</strong> <span class="badge badge-core">CORE</span>, <strong>Atenolol</strong> & <strong>Carvedilol</strong> <span class="badge badge-add">ADDITIONAL</span></p>
+
+    <h3>Mechanism of Action</h3>
+    <ul>
+      <li>&beta;&#8321;-receptor blockade &rarr; &darr; HR, contractility, and BP &rarr; &darr; myocardial O&#8322; demand</li>
+      <li>Prolongs diastole &rarr; improves coronary perfusion (more time for coronary filling)</li>
+    </ul>
+
+    <h3>Therapeutic Effects & Use</h3>
+    <ul>
+      <li>&darr; frequency/severity of exertional angina, &uarr; exercise tolerance</li>
+      <li>Improves survival post-MI and in chronic HFrEF &rarr; <strong>disease-modifying</strong>, not just symptomatic</li>
+      <li><strong>First-line option in stable angina</strong> (often combined with nitrates)</li>
+      <li><strong>Ineffective / may worsen vasospastic (Prinzmetal) angina</strong> — unopposed alpha-mediated vasoconstriction can worsen coronary spasm</li>
+    </ul>
+
+    <h3>Adverse Effects, Contraindications, Interactions</h3>
+    <ul>
+      <li><strong>ADRs:</strong> bradycardia, fatigue, &darr; exercise tolerance, dizziness, sexual dysfunction</li>
+      <li><strong>CI:</strong> severe bradycardia, AV block, acute decompensated HF, severe asthma/COPD (cardioselective &beta;&#8321;-blockers may be used cautiously in mild/moderate bronchospasm)</li>
+      <li><strong>Caution:</strong> avoid abrupt withdrawal — risk of rebound ischemia/MI</li>
+      <li><strong>DI:</strong> additive bradycardia/hypotension with other negative chronotropes (CCBs, antiarrhythmics)</li>
+    </ul>
+
+    <div class="pearl"><strong>Pearl:</strong> Metoprolol succinate, carvedilol, and bisoprolol are the agents with proven survival benefit specifically in HFrEF — know these by name.</div>
+
+    <div class="quiz-mini-header">Quick Check — Beta-Blockers</div>
+    <div class="quiz-q">
+      <p class="prompt">Beta-blockers are generally avoided as monotherapy in which type of angina, and why?</p>
+      <button class="quiz-choice" data-correct="false">Stable angina — no proven benefit</button>
+      <button class="quiz-choice" data-correct="true">Variant (Prinzmetal) angina — unopposed alpha vasoconstriction can worsen coronary spasm</button>
+      <button class="quiz-choice" data-correct="false">Unstable angina — contraindicated due to bleeding risk</button>
+      <button class="quiz-choice" data-correct="false">Microvascular angina — no receptors present</button>
+      <div class="quiz-explain">Blocking beta-2 mediated vasodilation while leaving alpha-mediated vasoconstriction unopposed can worsen coronary vasospasm in Prinzmetal angina.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: CCBs -->
+  <section class="card" id="ccb">
+    <h2>6. Calcium Channel Blockers</h2>
+    <p>Block L-type calcium channels in vascular smooth muscle and cardiac myocytes &rarr; reduces myocardial O&#8322; demand and improves O&#8322; supply.</p>
+
+    <h3>Non-Dihydropyridines (NDHPs): Verapamil, Diltiazem <span class="badge badge-core">CORE</span></h3>
+    <ul>
+      <li><strong>MOA:</strong> more pronounced <em>cardiac</em> effects — slow HR, &darr; contractility, prolong diastolic filling &rarr; &darr; O&#8322; demand & &uarr; perfusion</li>
+      <li><strong>Therapeutic use:</strong> alternative to beta-blockers in stable angina; rate control in AFib/flutter; <strong>not recommended in vasospastic angina</strong> (DHPs preferred)</li>
+      <li><strong>ADRs:</strong> bradycardia, AV block, hypotension, constipation (particularly verapamil), can worsen HFrEF</li>
+      <li><strong>CI:</strong> advanced AV block, severe LV dysfunction, acute decompensated HF</li>
+      <li><strong>DI:</strong> additive risk with beta-blockers or other negative chronotropes (bradycardia/AV block)</li>
+    </ul>
+
+    <h3>Dihydropyridines (DHPs): Amlodipine <span class="badge badge-core">CORE</span>, Nifedipine <span class="badge badge-add">ADDITIONAL</span></h3>
+    <ul>
+      <li><strong>MOA:</strong> potent arterial vasodilation &rarr; &darr; afterload, &darr; O&#8322; demand, &uarr; coronary perfusion, relieves vasospasm</li>
+      <li><strong>Therapeutic use:</strong> <strong>first-line for vasospastic (Prinzmetal) angina</strong>; chronic stable angina when beta-blockers insufficient/contraindicated; often combined with nitrates for additive benefit</li>
+      <li><strong>ADRs:</strong> headache, flushing, dizziness, peripheral edema (vasodilation-related); reflex tachycardia (especially immediate-release nifedipine, which may worsen angina/HF)</li>
+      <li><strong>HF safety:</strong> DHPs are generally neutral in HF — <strong>amlodipine is the safest choice</strong> in reduced ejection fraction</li>
+      <li><strong>DI:</strong> other antihypertensives, CYP3A4 modulators</li>
+    </ul>
+
+    <h3>Non-DHP vs DHP — Key Distinction</h3>
+    <table>
+      <tr><th>Feature</th><th>Non-DHP (Verapamil, Diltiazem)</th><th>DHP (Amlodipine, Nifedipine)</th></tr>
+      <tr><td>Primary site</td><td>Cardiac &gt; vascular</td><td>Vascular &gt; cardiac</td></tr>
+      <tr><td>HR effect</td><td>&darr; HR (negative chronotrope)</td><td>Minimal / reflex &uarr; HR</td></tr>
+      <tr><td>Vasospastic angina</td><td>Not preferred</td><td>First-line</td></tr>
+      <tr><td>Combine w/ beta-blocker?</td><td>Avoid (additive bradycardia/AV block)</td><td>Often combined safely</td></tr>
+    </table>
+
+    <div class="pearl"><strong>Pearl:</strong> Both CCB subclasses relieve symptoms but neither improves long-term survival — agent selection depends on pathophysiology (rate control vs vasospasm) and comorbidities (HFrEF favors amlodipine over non-DHPs).</div>
+
+    <div class="quiz-mini-header">Quick Check — Calcium Channel Blockers</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient with vasospastic (Prinzmetal) angina and no other cardiac comorbidities needs a CCB. Which is preferred?</p>
+      <button class="quiz-choice" data-correct="false">Verapamil</button>
+      <button class="quiz-choice" data-correct="false">Diltiazem</button>
+      <button class="quiz-choice" data-correct="true">Amlodipine</button>
+      <div class="quiz-explain">Dihydropyridines are first-line for vasospastic angina because of their potent arterial/coronary vasodilating effect; non-DHPs are not preferred here.</div>
+    </div>
+    <div class="quiz-q">
+      <p class="prompt">Combining verapamil with a beta-blocker carries a significant risk of:</p>
+      <button class="quiz-choice" data-correct="false">Peripheral edema</button>
+      <button class="quiz-choice" data-correct="true">Severe bradycardia / AV block</button>
+      <button class="quiz-choice" data-correct="false">Reflex tachycardia</button>
+      <button class="quiz-choice" data-correct="false">QT prolongation</button>
+      <div class="quiz-explain">Both agents are negative chronotropes/dromotropes; combining them additively risks bradycardia and AV block.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: RANOLAZINE -->
+  <section class="card" id="ranolazine">
+    <h2>7. Ranolazine <span class="badge badge-add">ADDITIONAL</span></h2>
+    <p>Late Na&#8314; current inhibitor — no "core" agent listed for this class, but ranolazine itself needs full mechanistic understanding per the lecture.</p>
+
+    <h3>Mechanism of Action</h3>
+    <ul>
+      <li>Inhibits the <strong>late sodium current (I<sub>Na</sub>)</strong> in cardiac myocytes &rarr; &darr; intracellular Na&#8314; accumulation &rarr; &darr; Ca&#178;&#8314; entry via the Na&#8314;/Ca&#178;&#8314; exchanger</li>
+      <li>Net effect: &darr; diastolic wall tension, improved ventricular relaxation, &darr; myocardial O&#8322; consumption</li>
+      <li><strong>Minimal effect on heart rate or blood pressure</strong> — mechanistically distinct from other antianginals</li>
+    </ul>
+
+    <h3>Therapeutic Use</h3>
+    <ul>
+      <li>Improves exercise tolerance and reduces angina frequency, independent of hemodynamic change</li>
+      <li><strong>Second-line therapy</strong> for chronic stable angina when first-line agents are inadequate/not tolerated</li>
+      <li>Particularly useful when HR/BP limit use of beta-blockers or CCBs</li>
+      <li>Often combined with beta-blockers, CCBs, or nitrates</li>
+    </ul>
+
+    <h3>Adverse Effects & Contraindications</h3>
+    <ul>
+      <li><strong>ADRs:</strong> dizziness, headache, nausea, constipation</li>
+      <li>Prolongs the <strong>QT interval</strong> (rarely associated with torsades)</li>
+      <li><strong>CI:</strong> pre-existing QT prolongation, hepatic impairment, concurrent strong CYP3A4 inhibitors</li>
+      <li><strong>PK/DI:</strong> metabolized by CYP3A4 — strong inhibitors &uarr; levels, inducers &darr; efficacy</li>
+    </ul>
+
+    <div class="quiz-mini-header">Quick Check — Ranolazine</div>
+    <div class="quiz-q">
+      <p class="prompt">Which feature makes ranolazine uniquely useful in a patient with symptomatic bradycardia who still has anginal symptoms?</p>
+      <button class="quiz-choice" data-correct="true">It has minimal effect on heart rate or blood pressure</button>
+      <button class="quiz-choice" data-correct="false">It is a potent negative chronotrope</button>
+      <button class="quiz-choice" data-correct="false">It reverses coronary vasospasm directly</button>
+      <button class="quiz-choice" data-correct="false">It has no CYP interactions</button>
+      <div class="quiz-explain">Because ranolazine works via the late sodium current rather than hemodynamics, it can be added for symptom control without further lowering HR or BP.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 -->
+  <section class="card" id="acutechronic">
+    <h2>8. Acute Relief vs Chronic Prophylaxis — Clinical Algorithm</h2>
+
+    <h3>Acute Symptom Relief</h3>
+    <ul>
+      <li><strong>Short-acting sublingual nitroglycerin: the gold standard</strong></li>
+      <li>Onset: 1&ndash;3 minutes</li>
+      <li>Mechanism: vasodilation &rarr; &darr; preload &rarr; rapid chest pain relief</li>
+      <li>Provides no long-term protection</li>
+    </ul>
+
+    <h3>Chronic Prophylaxis of Stable Angina</h3>
+    <ul>
+      <li><strong>First-line:</strong> beta-blockers (especially with HTN or prior MI)</li>
+      <li><strong>Alternatives:</strong> calcium channel blockers (non-DHP: &darr; HR/contractility; DHP: &darr; afterload)</li>
+      <li><strong>Adjunctive:</strong> long-acting nitrates (require 10&ndash;12 hr nitrate-free interval); ranolazine for persistent symptoms despite standard therapy</li>
+    </ul>
+
+    <h3>Variant (Prinzmetal) Angina</h3>
+    <ul>
+      <li>Coronary vessel spasm — not increased demand — drives ischemia</li>
+      <li><strong>Mainstays:</strong> DHP-CCBs and nitrates</li>
+      <li><strong>Beta-blockers contraindicated</strong> (risk of worsening spasm via unopposed alpha vasoconstriction)</li>
+    </ul>
+
+    <h3>Unstable Angina / ACS</h3>
+    <ul>
+      <li>Nitrates and beta-blockers may relieve ischemic symptoms</li>
+      <li>CCBs used selectively</li>
+      <li><strong>Cornerstone of therapy: antiplatelet & antithrombotic treatment</strong> to address the underlying thrombus — not just symptomatic antianginal therapy</li>
+    </ul>
+
+    <div class="pearl"><strong>Pearl:</strong> "Which drug, which angina" is a classic exam pattern — stable = beta-blocker first; variant = CCB/nitrate, no beta-blocker; unstable/ACS = antiplatelet/anticoagulant first, antianginals adjunctive.</div>
+  </section>
+
+  <!-- SECTION 9 -->
+  <section class="card" id="preventive">
+    <h2>9. Preventive & Adjunctive Interventions</h2>
+    <p>Goal: reduce risk of MI, cardiovascular death, and adverse remodeling in CAD — in addition to angina symptom relief.</p>
+
+    <h3>Lipid-Lowering Therapy (Statins)</h3>
+    <ul>
+      <li><strong>First-line for all CAD patients</strong></li>
+      <li>Inhibit HMG-CoA reductase &rarr; &darr; hepatic cholesterol synthesis, &uarr; LDL receptor expression &rarr; &darr; circulating LDL</li>
+      <li>Beyond lipid-lowering: stabilize plaques, improve endothelial function, &darr; vascular inflammation</li>
+      <li>Aggressive therapy &darr; MI, stroke, and CV death risk (primary & secondary prevention)</li>
+      <li>ADRs: myopathy, hepatotoxicity (uncommon); many are CYP3A4 substrates</li>
+    </ul>
+
+    <h3>Antiplatelet Therapy</h3>
+    <ul>
+      <li><strong>Aspirin</strong> (75&ndash;100 mg/day): irreversibly inhibits platelet COX-1 &rarr; &darr; thromboxane A2-mediated aggregation &rarr; &darr; CV events & mortality</li>
+      <li><strong>P2Y&#8321;&#8322; inhibitors</strong> (clopidogrel, prasugrel, ticagrelor): block ADP-mediated platelet activation; used with aspirin as <strong>DAPT</strong> after ACS or PCI</li>
+      <li>DAPT &darr; recurrent ischemic events, including stent thrombosis</li>
+    </ul>
+
+    <h3>Anticoagulants</h3>
+    <ul>
+      <li><strong>Acute ACS adjuncts:</strong> UFH, LMWH (enhance antithrombin, inhibit thrombin & factor Xa); fondaparinux (selective factor Xa inhibition); bivalirudin (direct thrombin inhibitor, used in select PCI settings)</li>
+      <li>Prevent thrombus propagation in UA/NSTEMI; monitor bleeding risk</li>
+      <li><strong>DOACs</strong> (rivaroxaban, apixaban): reserved for CAD with coexisting AFib or select post-ACS indications</li>
+    </ul>
+
+    <h3>ACE Inhibitors / ARBs</h3>
+    <ul>
+      <li>Block angiotensin II formation (ACEi) or its receptor (ARB) &rarr; &darr; afterload, attenuate remodeling, improve endothelial function</li>
+      <li>&darr; MI, stroke, CV death — especially beneficial with diabetes, prior MI, LV dysfunction, or CKD</li>
+      <li>ADRs: cough (ACEi), hyperkalemia; contraindicated in pregnancy and bilateral renal artery stenosis</li>
+    </ul>
+
+    <h3>Beta-Blockers (Cardioprotective Role)</h3>
+    <ul>
+      <li>&darr; HR & myocardial O&#8322; demand</li>
+      <li>Proven mortality benefit post-MI and in LV dysfunction</li>
+      <li>Recommended long-term unless contraindicated</li>
+    </ul>
+
+    <div class="pearl"><strong>Pearl:</strong> Statins + antiplatelets + anticoagulants (acute) + ACEi/ARB + beta-blockers form the evidence-based foundation of CAD management — this is the disease-modifying layer that sits on top of symptomatic antianginal therapy.</div>
+
+    <div class="quiz-mini-header">Quick Check — Preventive Therapy</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient post-MI with diabetes and mild CKD would derive particular benefit from which class, beyond statins and antiplatelets?</p>
+      <button class="quiz-choice" data-correct="false">Dihydropyridine CCB</button>
+      <button class="quiz-choice" data-correct="true">ACE inhibitor / ARB</button>
+      <button class="quiz-choice" data-correct="false">Ranolazine</button>
+      <button class="quiz-choice" data-correct="false">Long-acting nitrate</button>
+      <div class="quiz-explain">ACEi/ARBs are especially beneficial in diabetes, prior MI, LV dysfunction, or CKD, reducing MI, stroke, and CV death risk.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 10 -->
+  <section class="card" id="stress">
+    <h2>10. Pharmacologic Stress Testing</h2>
+    <p>Used in patients unable to exercise adequately, to evaluate coronary blood flow and detect ischemia. Two approaches: <strong>coronary vasodilation</strong> or <strong>increased myocardial O&#8322; demand</strong>.</p>
+
+    <h3>Coronary Vasodilators</h3>
+    <p><strong>Adenosine</strong> <span class="badge badge-core">CORE</span> &middot; Dipyridamole, Regadenoson <span class="badge badge-add">ADDITIONAL</span></p>
+    <ul>
+      <li><strong>MOA:</strong> A&#8322;A adenosine receptor agonism &rarr; &uarr; cAMP &rarr; coronary vasodilation. Healthy vessels dilate more than stenotic vessels &rarr; <strong>"coronary steal"</strong> unmasks ischemia on perfusion imaging</li>
+      <li><strong>Adenosine</strong> (CORE): extremely short half-life (&lt;10 sec), continuous IV infusion required</li>
+      <li><strong>Dipyridamole</strong> (Additional): inhibits adenosine uptake &rarr; &uarr; extracellular adenosine; longer half-life, less titratable</li>
+      <li><strong>Regadenoson</strong> (Additional): selective A&#8322;A agonist, half-life 2&ndash;4 min, allows convenient single IV bolus dosing, fewer off-target effects</li>
+      <li><strong>ADRs:</strong> flushing, chest discomfort, hypotension, AV block, bronchospasm</li>
+      <li><strong>CI:</strong> severe asthma/COPD, high-grade AV block, hypotension</li>
+    </ul>
+
+    <h3>Increased Oxygen Demand Agent</h3>
+    <p><strong>Dobutamine</strong> <span class="badge badge-core">CORE</span></p>
+    <ul>
+      <li><strong>MOA:</strong> &beta;&#8321;-adrenergic agonist &rarr; &uarr; HR & contractility &rarr; provokes ischemia in stenotic regions</li>
+      <li>Reserved for patients with contraindications to vasodilators (e.g., severe bronchospasm, high-grade AV block)</li>
+      <li><strong>ADRs:</strong> tachycardia, palpitations, angina, hypertension, arrhythmias</li>
+      <li>Toxicity managed primarily by reducing/stopping the infusion (short half-life, ~2 min); beta-blockers blunt its effect</li>
+    </ul>
+
+    <h3>Adenosine Antidotes</h3>
+    <p><strong>Theophylline, Caffeine</strong> <span class="badge badge-add">ADDITIONAL</span></p>
+    <ul>
+      <li>Competitive antagonists at adenosine receptors — reverse bradycardia, AV block, hypotension, bronchospasm from vasodilator stress agents</li>
+      <li>These methylxanthines can also blunt/reverse the intended test effect if given prematurely</li>
+    </ul>
+
+    <div class="pearl"><strong>Pearl:</strong> Vasodilators are preferred for most patients (regadenoson favored for convenient bolus dosing); dobutamine is the fallback when vasodilators are contraindicated. Methylxanthines are both a confound (blunt the test) and an antidote (reverse toxicity) — context matters.</div>
+
+    <div class="quiz-mini-header">Quick Check — Stress Testing</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient scheduled for adenosine stress testing has severe asthma. What is the best alternative agent?</p>
+      <button class="quiz-choice" data-correct="false">Regadenoson</button>
+      <button class="quiz-choice" data-correct="false">Dipyridamole</button>
+      <button class="quiz-choice" data-correct="true">Dobutamine</button>
+      <div class="quiz-explain">All A2A agonists (adenosine, regadenoson) and dipyridamole risk bronchospasm and are contraindicated/cautioned in severe asthma/COPD. Dobutamine, which works via a different mechanism (β1 agonism), is the appropriate alternative.</div>
+    </div>
+    <div class="quiz-q">
+      <p class="prompt">Which agent would reverse persistent hypotension and bronchospasm after an adenosine stress test?</p>
+      <button class="quiz-choice" data-correct="false">Regadenoson</button>
+      <button class="quiz-choice" data-correct="true">Theophylline</button>
+      <button class="quiz-choice" data-correct="false">Dobutamine</button>
+      <button class="quiz-choice" data-correct="false">Metoprolol</button>
+      <div class="quiz-explain">Theophylline (or caffeine) competitively antagonizes adenosine receptors, reversing its adverse hemodynamic and bronchospastic effects.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 11: SUMMARY TABLE -->
+  <section class="card" id="summary">
+    <h2>11. Angina Pharmacology Summary Table</h2>
+    <table>
+      <tr><th>Agent/Class</th><th>MOA</th><th>Clinical Use</th><th>Key ADRs/CI</th></tr>
+      <tr>
+        <td>Sublingual Nitroglycerin <span class="badge badge-core">CORE</span></td>
+        <td>NO donor &rarr; &uarr;cGMP &rarr; venodilation &gt; arterial</td>
+        <td>Acute angina relief</td>
+        <td>Headache, hypotension, reflex tachycardia; CI: PDE-5 inhibitors, hypotension</td>
+      </tr>
+      <tr>
+        <td>Isosorbide Di-/Mononitrate <span class="badge badge-add">ADDITIONAL</span></td>
+        <td>Same as above (active metabolite: mononitrate)</td>
+        <td>Chronic prophylaxis (± hydralazine in HFrEF for dinitrate)</td>
+        <td>Tolerance w/ continuous use; same CI as NTG</td>
+      </tr>
+      <tr>
+        <td>Metoprolol <span class="badge badge-core">CORE</span></td>
+        <td>&beta;&#8321;-antagonist &rarr; &darr;HR, &darr;contractility</td>
+        <td>Chronic prophylaxis, post-MI, ACS</td>
+        <td>Bradycardia, AV block, bronchospasm; CI: severe bradycardia, decompensated HF</td>
+      </tr>
+      <tr>
+        <td>Atenolol / Carvedilol <span class="badge badge-add">ADDITIONAL</span></td>
+        <td>&beta;-antagonism (carvedilol also &alpha;&#8321;)</td>
+        <td>Chronic prophylaxis; carvedilol in HFrEF</td>
+        <td>Class-level beta-blocker ADRs/CI</td>
+      </tr>
+      <tr>
+        <td>Amlodipine <span class="badge badge-core">CORE</span></td>
+        <td>L-type Ca&#178;&#8314; blockade (vascular &gt; cardiac)</td>
+        <td>Vasospastic angina (1st line); chronic angina; safest CCB in HFrEF</td>
+        <td>Peripheral edema, headache, hypotension</td>
+      </tr>
+      <tr>
+        <td>Nifedipine <span class="badge badge-add">ADDITIONAL</span></td>
+        <td>Same DHP mechanism</td>
+        <td>Vasospastic/chronic angina</td>
+        <td>IR form: reflex tachycardia, may worsen angina/HF</td>
+      </tr>
+      <tr>
+        <td>Verapamil / Diltiazem <span class="badge badge-core">CORE</span></td>
+        <td>L-type Ca&#178;&#8314; blockade (cardiac &gt; vascular)</td>
+        <td>Alt. to beta-blockers; rate control in AFib; NOT vasospastic angina</td>
+        <td>Bradycardia, AV block, constipation (verapamil); CI: severe LV dysfunction, AV block</td>
+      </tr>
+      <tr>
+        <td>Ranolazine <span class="badge badge-add">ADDITIONAL</span></td>
+        <td>Inhibits late Na&#8314; current &rarr; &darr;Ca&#178;&#8314; via Na/Ca exchanger</td>
+        <td>2nd-line for refractory chronic angina; minimal HR/BP effect</td>
+        <td>QT prolongation, dizziness, constipation; CI: hepatic impairment, strong CYP3A4 inhibitors</td>
+      </tr>
+      <tr>
+        <td>Adenosine <span class="badge badge-core">CORE</span></td>
+        <td>A&#8322;A agonist &rarr; &uarr;cAMP &rarr; coronary vasodilation</td>
+        <td>Pharmacologic stress testing</td>
+        <td>Flushing, hypotension, bronchospasm, AV block; CI: severe asthma/COPD</td>
+      </tr>
+      <tr>
+        <td>Dipyridamole / Regadenoson <span class="badge badge-add">ADDITIONAL</span></td>
+        <td>&uarr; extracellular adenosine / selective A&#8322;A agonist</td>
+        <td>Pharmacologic stress testing</td>
+        <td>Similar to adenosine; regadenoson has fewer off-target effects</td>
+      </tr>
+      <tr>
+        <td>Dobutamine <span class="badge badge-core">CORE</span></td>
+        <td>&beta;&#8321;-agonist &rarr; &uarr;HR & contractility</td>
+        <td>Stress testing when vasodilators contraindicated</td>
+        <td>Tachycardia, arrhythmias, angina, hypertension</td>
+      </tr>
+      <tr>
+        <td>Theophylline / Caffeine <span class="badge badge-add">ADDITIONAL</span></td>
+        <td>Competitive adenosine receptor antagonists</td>
+        <td>Reverse adenosine/dipyridamole/regadenoson toxicity</td>
+        <td>CNS stimulation, tachycardia, insomnia, tremor</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- SECTION 12 -->
+  <section class="card" id="takeaways">
+    <h2>12. High-Yield Clinical Takeaways</h2>
+    <ul>
+      <li><strong>Acute angina:</strong> sublingual nitroglycerin for rapid symptom relief</li>
+      <li><strong>Chronic angina:</strong> beta-blocker and/or CCB commonly used first-line; long-acting nitrates added based on HR, BP, comorbidities, and contraindications</li>
+      <li><strong>Variant angina:</strong> CCBs and nitrates; avoid beta-blockers</li>
+      <li><strong>Nitrate safety:</strong> PDE-5 inhibitor interaction + nitrate-free interval with chronic therapy</li>
+      <li><strong>CCBs:</strong> distinguish DHP vascular effects from non-DHP cardiac effects; avoid combinations that increase bradycardia/AV block risk</li>
+      <li><strong>Ranolazine:</strong> useful when additional symptom control is needed, especially when HR/BP limit other agents; watch for QT/CYP3A concerns</li>
+      <li><strong>Symptoms &ne; outcomes:</strong> most antianginal therapy controls symptoms only; separate risk-reduction therapies (statins, antiplatelets, ACEi/ARB, beta-blockers) address future CV events</li>
+      <li><strong>Stress testing:</strong> vasodilator agents vs dobutamine — know the basic mechanistic distinction and when each is used</li>
+    </ul>
+  </section>
+
+</div>
+
+<script>
+document.querySelectorAll('.quiz-q').forEach(function(q){
+  var choices = q.querySelectorAll('.quiz-choice');
+  var explain = q.querySelector('.quiz-explain');
+  choices.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(btn.classList.contains('disabled-parent')) return;
+      choices.forEach(function(b){
+        b.classList.add('disabled');
+        if(b.dataset.correct === 'true'){ b.classList.add('correct'); }
+      });
+      if(btn.dataset.correct !== 'true'){ btn.classList.add('incorrect'); }
+      explain.classList.add('show');
+    });
+  });
+});
+
+// scroll-spy for sidenav
+var sections = document.querySelectorAll('section.card');
+var navLinks = document.querySelectorAll('.sidenav-panel a');
+window.addEventListener('scroll', function(){
+  var pos = window.scrollY + 120;
+  sections.forEach(function(sec){
+    if(pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight){
+      navLinks.forEach(function(a){ a.classList.remove('active'); });
+      var link = document.querySelector('.sidenav-panel a[href="#'+sec.id+'"]');
+      if(link) link.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
