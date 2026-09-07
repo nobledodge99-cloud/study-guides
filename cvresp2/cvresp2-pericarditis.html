@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pericarditis — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ec;
+  --cream-card:#fffdf7;
+  --forest-dark:#2f5233;
+  --forest:#3f7d52;
+  --sage:#7fa47f;
+  --sage-light:#e4ede2;
+  --border:#d8cfb8;
+  --accent:#b5502f;
+  --text-main:#2a2a24;
+  --text-soft:#5b5a4f;
+  --correct:#2f7d4f;
+  --incorrect:#b5502f;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Lora',serif;background:var(--cream);color:var(--text-main);line-height:1.6;}
+.back-btn{position:fixed;top:16px;left:16px;z-index:200;background:var(--cream-card);border:1px solid var(--forest);color:var(--forest-dark);font-family:'IBM Plex Mono',monospace;font-size:13px;text-decoration:none;padding:8px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.back-btn:hover{background:var(--sage-light);}
+.pdf-btn{position:fixed;top:16px;right:16px;z-index:200;background:var(--forest-dark);border:1px solid var(--forest-dark);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;padding:8px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.pdf-btn:hover{background:var(--forest);}
+.sidenav-toggle{position:fixed;top:70px;right:0;z-index:200;background:var(--forest-dark);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;border:none;padding:14px 8px;writing-mode:vertical-rl;cursor:pointer;border-radius:6px 0 0 6px;}
+.sidenav-panel{position:fixed;top:0;right:-290px;width:280px;height:100%;background:var(--cream-card);border-left:1px solid var(--border);padding:70px 18px 18px 18px;overflow-y:auto;transition:right 0.25s ease;z-index:199;}
+.sidenav-panel.open{right:0;}
+.sidenav-panel a{display:block;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-main);text-decoration:none;padding:6px 8px;border-radius:4px;margin-bottom:2px;}
+.sidenav-panel a:hover, .sidenav-panel a.active{background:var(--sage-light);color:var(--forest-dark);}
+.header{text-align:center;padding:70px 20px 30px 20px;}
+.header h1{color:var(--forest-dark);font-size:2.2em;margin-bottom:6px;}
+.header .subtitle{font-family:'IBM Plex Mono',monospace;color:var(--text-soft);font-size:14px;}
+.container{max-width:900px;margin:0 auto;padding:0 20px 80px 20px;}
+.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:36px;}
+.toc h2{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:1px;color:var(--forest-dark);text-transform:uppercase;margin-top:0;}
+.toc ul{margin:0;padding-left:20px;}
+.toc li{margin-bottom:6px;}
+.toc a{color:var(--text-main);text-decoration:none;}
+.toc a:hover{color:var(--forest);text-decoration:underline;}
+section.card{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:28px 30px;margin-bottom:28px;}
+section.card h2{color:var(--forest-dark);border-bottom:2px solid var(--sage);padding-bottom:8px;font-size:1.5em;}
+section.card h3{color:var(--forest);font-size:1.15em;margin-top:24px;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9em;}
+th{background:var(--forest-dark);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.5px;text-transform:uppercase;padding:9px 10px;text-align:left;}
+td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--sage-light);}
+.pearl{background:var(--sage-light);border-left:4px solid var(--forest);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:0.95em;}
+.pearl strong{color:var(--forest-dark);}
+.case{background:#fdf8ee;border:1px dashed var(--accent);border-radius:8px;padding:14px 18px;margin:16px 0;}
+.case-label{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);font-weight:700;}
+.cascade{background:#fdfcf6;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-family:'IBM Plex Mono',monospace;font-size:0.85em;line-height:2;}
+.cascade .arrow{color:var(--forest);font-weight:700;}
+ul, ol{padding-left:22px;}
+li{margin-bottom:4px;}
+.quiz-mini-header{font-family:'IBM Plex Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--forest-dark);margin:26px 0 12px 0;border-top:1px solid var(--border);padding-top:18px;}
+.quiz-q{background:#fdfcf6;border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-bottom:16px;}
+.quiz-q p.prompt{font-weight:600;margin-top:0;}
+.quiz-choice{display:block;width:100%;text-align:left;background:var(--cream-card);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:6px;cursor:pointer;font-family:'Lora',serif;font-size:0.96em;color:var(--text-main);}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#e3f3e6;border-color:var(--correct);color:var(--correct);font-weight:600;}
+.quiz-choice.incorrect{background:#fbe7e3;border-color:var(--incorrect);color:var(--incorrect);font-weight:600;}
+.quiz-choice.disabled{cursor:default;}
+.quiz-explain{display:none;margin-top:10px;padding:10px 14px;background:var(--sage-light);border-radius:6px;font-size:0.92em;}
+.quiz-explain.show{display:block;}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="pdf-btn" onclick="window.print()">Download PDF</button>
+<button class="sidenav-toggle" onclick="document.getElementById('sidenav').classList.toggle('open')">SECTIONS</button>
+<div class="sidenav-panel" id="sidenav">
+  <a href="#anatomy">1. Anatomy & Innervation</a>
+  <a href="#patho">2. Pathophysiology Cascade</a>
+  <a href="#dx">3. Clinical Presentation & Diagnosis</a>
+  <a href="#ekg">4. Pericarditis vs. STEMI</a>
+  <a href="#etiology">5. Etiologies</a>
+  <a href="#spectrum">6. The Spectrum & Myopericarditis</a>
+  <a href="#workup">7. Workup & Risk Stratification</a>
+  <a href="#tamponade">8. Cardiac Tamponade</a>
+  <a href="#constrictive">9. Constrictive Pericarditis</a>
+  <a href="#treatment">10. Treatment</a>
+  <a href="#reasoning">11. Clinical Reasoning Framework</a>
+  <a href="#omm">12. OMM Connection</a>
+  <a href="#takeaways">13. High-Yield Takeaways</a>
+  <a href="#quickref">14. Quick-Reference Summary Table</a>
+</div>
+
+<div class="header">
+  <h1>Pericarditis</h1>
+  <div class="subtitle">From Inflammation to Tamponade &middot; Colter Boita, DO &middot; RVU-MCOM</div>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#anatomy">1. Anatomy & Innervation</a></li>
+      <li><a href="#patho">2. Pathophysiology Cascade — Injury to Shock</a></li>
+      <li><a href="#dx">3. Clinical Presentation & Diagnostic Criteria</a></li>
+      <li><a href="#ekg">4. Distinguishing Pericarditis from STEMI</a></li>
+      <li><a href="#etiology">5. Etiologies</a></li>
+      <li><a href="#spectrum">6. The Spectrum: Acute, Incessant, Chronic, Recurrent + Myopericarditis</a></li>
+      <li><a href="#workup">7. Diagnostic Workup & Risk Stratification</a></li>
+      <li><a href="#tamponade">8. Cardiac Tamponade</a></li>
+      <li><a href="#constrictive">9. Constrictive Pericarditis</a></li>
+      <li><a href="#treatment">10. Treatment</a></li>
+      <li><a href="#reasoning">11. Clinical Reasoning Framework</a></li>
+      <li><a href="#omm">12. OMM Connection</a></li>
+      <li><a href="#takeaways">13. High-Yield Takeaways</a></li>
+      <li><a href="#quickref">14. Quick-Reference Summary Table</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section class="card" id="anatomy">
+    <h2>1. Anatomy & Innervation</h2>
+    <p>The pericardium is a <strong>double-walled sac</strong> enclosing the heart. Understanding its layers explains both the pain pattern and the fluid dynamics of pericarditis.</p>
+    <ul>
+      <li><strong>Fibrous pericardium (outer):</strong> dense collagen/elastic fibers; anchored superiorly to the adventitia of the great vessels (aorta, PA, SVC) and inferiorly to the central tendon of the diaphragm</li>
+      <li><strong>Serous pericardium (inner):</strong> single layer of mesothelial cells forming two layers:
+        <ul>
+          <li><strong>Parietal layer</strong> — lines the inner surface of the fibrous pericardium</li>
+          <li><strong>Visceral layer (epicardium)</strong> — directly adherent to the heart surface (board pearl: visceral pericardium = epicardium, same structure, two names)</li>
+        </ul>
+      </li>
+      <li>Normal pericardial thickness: <strong>&lt;1 mm</strong> on pathology; <strong>&gt;2 mm</strong> is considered thickened on imaging (note: normal thickness is up to 4 mm on CMR and 2 mm on CT — imaging thresholds differ from pathology)</li>
+      <li>Two distinct peri-cardiac fat compartments: <strong>epicardial fat</strong> (between myocardium and visceral pericardium) vs. <strong>epipericardial fat</strong> (external to the parietal pericardium) — don't mistake either for pericardial fluid</li>
+    </ul>
+
+    <h3>Pericardial Cavity & Fluid</h3>
+    <ul>
+      <li>Potential space between visceral and parietal layers of the serous pericardium</li>
+      <li>Normally contains <strong>&lt;50 mL</strong> of serous fluid — an ultrafiltrate of plasma</li>
+      <li><strong>Functions:</strong> lubrication for frictionless cardiac motion; fixes the heart within the mediastinum; barrier against infection and contiguous tumor spread</li>
+      <li>Lymphatic drainage &rarr; anterior/posterior mediastinal, peribronchial, and tracheobronchial lymph nodes</li>
+    </ul>
+
+    <h3>Pericardial Sinuses (Anatomy Board Favorite)</h3>
+    <ul>
+      <li><strong>Transverse sinus:</strong> posterior to the aorta and pulmonary trunk, anterior to the SVC — surgically important for clamping the great vessels during cardiopulmonary bypass</li>
+      <li><strong>Oblique sinus:</strong> a blind-ended cul-de-sac posterior to the left atrium, bounded by pericardial reflections around the pulmonary veins</li>
+    </ul>
+
+    <h3>Blood Supply & Innervation — Why the Pain Refers Where It Does</h3>
+    <ul>
+      <li><strong>Arterial supply:</strong> pericardiophrenic artery (branch of internal thoracic artery), with contributions from bronchial and esophageal arteries</li>
+      <li><strong>Venous drainage:</strong> pericardiophrenic veins &rarr; brachiocephalic veins; also via the azygos system</li>
+      <li><strong>Sensory/somatic:</strong> <strong>phrenic nerve (C3&ndash;C5)</strong> supplies the parietal pericardium</li>
+      <li><strong>Parasympathetic:</strong> vagus nerve, left recurrent laryngeal nerve, esophageal plexus</li>
+      <li><strong>Sympathetic:</strong> stellate ganglion, first dorsal ganglion, cardiac plexuses</li>
+    </ul>
+    <div class="pearl"><strong>Key pearl:</strong> the <strong>visceral pericardium has NO pain sensitivity</strong>. All pericarditis pain arises from the inflamed <em>parietal</em> pericardium and travels via the <strong>phrenic nerve (C3&ndash;C5)</strong> — which is why pericardial pain classically refers to the <strong>trapezius ridge</strong> (same dermatome). This is a key distinguishing feature from myocardial ischemia, which refers to the left arm, jaw, or neck.</div>
+
+    <div class="quiz-mini-header">Quick Check — Anatomy</div>
+    <div class="quiz-q">
+      <p class="prompt">Why does pericarditis pain classically radiate to the trapezius ridge?</p>
+      <button class="quiz-choice" data-correct="false">The vagus nerve refers pain to the trapezius dermatome</button>
+      <button class="quiz-choice" data-correct="true">The phrenic nerve (C3–C5) innervates the parietal pericardium, which shares the same dermatome as the trapezius ridge</button>
+      <button class="quiz-choice" data-correct="false">The visceral pericardium directly innervates the trapezius muscle</button>
+      <button class="quiz-choice" data-correct="false">Referred pain occurs via the stellate ganglion only</button>
+      <div class="quiz-explain">The parietal pericardium (the pain-sensitive layer) is innervated by the phrenic nerve, C3–C5 — the same segments that supply the trapezius ridge dermatome, producing referred pain there.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="card" id="patho">
+    <h2>2. Pathophysiology Cascade — Injury to Shock</h2>
+    <div class="cascade">
+      PERICARDIAL INJURY <span class="arrow">&darr;</span><br>
+      INFLAMMATION <span class="arrow">&darr;</span><br>
+      &uarr; VASCULAR PERMEABILITY <span class="arrow">&rarr;</span> FLUID ACCUMULATION <span class="arrow">&rarr;</span> EFFUSION <span class="arrow">&rarr;</span> &uarr; INTRAPERICARDIAL PRESSURE <span class="arrow">&rarr;</span> &darr; CARDIAC FILLING <span class="arrow">&rarr;</span> &darr; PRELOAD <span class="arrow">&rarr;</span> &darr; STROKE VOLUME <span class="arrow">&rarr;</span> &darr; CARDIAC OUTPUT <span class="arrow">&rarr;</span> &darr; ARTERIAL BP <span class="arrow">&rarr;</span> COMPENSATION (SNS &rarr; RAAS) <span class="arrow">&rarr;</span> COMPENSATION FAILS <span class="arrow">&rarr;</span> SHOCK<br><br>
+      (parallel chronic branch:) INFLAMMATION <span class="arrow">&rarr;</span> FIBROSIS <span class="arrow">&rarr;</span> &darr; COMPLIANCE <span class="arrow">&rarr;</span> CONSTRICTION <span class="arrow">&rarr;</span> feeds back into &darr; CARDIAC FILLING
+    </div>
+
+    <h3>Mechanism of Pericardial Inflammation (the NLRP3 Pathway)</h3>
+    <ul>
+      <li>An insult (bacterial/viral infection, cardiac injury, immune derangement) injures pericardial mesothelial cells</li>
+      <li>Danger signals — <strong>PAMPs</strong> (pathogen components) or <strong>DAMPs</strong> (tissue-damage molecules) — activate <strong>Toll-like receptors</strong> on innate immune cells</li>
+      <li>This triggers <strong>NF-&kappa;B</strong> activation &rarr; transcription of pro-IL-1&beta; and NLRP3 inflammasome components</li>
+      <li>The <strong>NLRP3 inflammasome</strong> assembles and activates <strong>caspase-1</strong>, which cleaves pro-IL-1&beta; into active <strong>IL-1&beta;</strong></li>
+      <li>IL-1&beta; drives the inflammatory cascade: vasodilation, &uarr; vascular permeability, leukocyte recruitment (neutrophils/macrophages), and further cytokine release (IL-6, TNF-&alpha;) — in recurrent pericarditis this becomes a self-amplifying autoinflammatory loop</li>
+    </ul>
+    <div class="pearl"><strong>Cross-topic board pearl:</strong> this exact pathway — NLRP3 inflammasome &rarr; caspase-1 &rarr; IL-1&beta; — is the same mechanism as gout and familial Mediterranean fever. <strong>Colchicine</strong> inhibits tubulin polymerization, preventing inflammasome assembly; <strong>anakinra/rilonacept</strong> block IL-1 signaling downstream. Whether the question is about gout, FMF, or pericarditis, colchicine's mechanism is the same.</div>
+
+    <h3>Why Pain Is Positional and Pleuritic</h3>
+    <p>Movement of the inflamed parietal pericardium causes mechanical irritation; inflammatory mediators sensitize nociceptors. This is why the pain is sharp, worsens supine (more pericardial contact/stretch), and improves leaning forward.</p>
+
+    <h3>Fluid Accumulation — a Cross-System Starling Concept</h3>
+    <p>Endothelial damage &rarr; increased vascular permeability &rarr; plasma proteins and leukocytes escape the vasculature &rarr; increased interstitial/pericardial oncotic pressure &rarr; water follows &rarr; fluid accumulates. This is governed by the Starling equation and the same four general mechanisms produce edema/effusion in any organ system:</p>
+    <table>
+      <tr><th>Mechanism</th><th>Effect</th><th>Other Examples</th></tr>
+      <tr><td>&uarr; Capillary hydrostatic pressure</td><td>Pushes fluid into interstitium</td><td>Heart failure, venous obstruction</td></tr>
+      <tr><td>&darr; Plasma oncotic pressure (hypoalbuminemia)</td><td>Reduced fluid retention in vasculature</td><td>Nephrotic syndrome, cirrhosis, malnutrition</td></tr>
+      <tr><td>&uarr; Capillary permeability (endothelial junction disruption)</td><td>Protein leaks into interstitium, draws fluid</td><td>Inflammation, burns, sepsis</td></tr>
+      <tr><td>Lymphatic obstruction</td><td>Impaired clearance of interstitial fluid/protein</td><td>Malignancy, lymph node dissection, radiation, filariasis</td></tr>
+    </table>
+
+    <h3>Pericardial Compliance & the Tamponade Transition</h3>
+    <ul>
+      <li>A compliant pericardium accommodates added volume with little pressure rise — but as it stretches, tension rises progressively</li>
+      <li>Eventually a <strong>critical transition</strong> is reached: a small additional volume causes a <strong>large</strong> pressure increase</li>
+      <li><strong>Tamponade is not a distinct new process</strong> — it's simply the point at which accumulated pericardial fluid raises external pressure enough to interfere with cardiac filling</li>
+    </ul>
+
+    <h3>Why Increased Pericardial Pressure Impairs Filling</h3>
+    <p>Diastolic filling normally depends on venous pressure &gt; right atrial pressure. As pericardial pressure rises, it compresses the low-pressure cardiac chambers — the <strong>right-sided chambers are most vulnerable</strong> because their diastolic pressures are relatively low.</p>
+    <div class="cascade">
+      &uarr; pericardial pressure <span class="arrow">&rarr;</span> RA/RV compression <span class="arrow">&rarr;</span> &darr; venous return <span class="arrow">&rarr;</span> &darr; ventricular end-diastolic volume <span class="arrow">&rarr;</span> &darr; preload <span class="arrow">&rarr;</span> &darr; stroke volume <span class="arrow">&rarr;</span> &darr; cardiac output <span class="arrow">&rarr;</span> hypotension
+    </div>
+
+    <h3>Mechanism of Pulsus Paradoxus</h3>
+    <ul>
+      <li>Normal inspiration &rarr; &darr; intrathoracic pressure &rarr; &uarr; systemic venous return to the right heart</li>
+      <li>In tamponade, total cardiac volume is fixed by the tense pericardial fluid — so &uarr; RV filling on inspiration causes the <strong>interventricular septum to shift toward the LV</strong></li>
+      <li>This decreases LV filling &rarr; &darr; LV stroke volume &rarr; systolic BP falls during inspiration</li>
+      <li>This is <strong>exaggerated ventricular interdependence</strong> — the two ventricles compete for a fixed total space</li>
+    </ul>
+
+    <div class="quiz-mini-header">Quick Check — Pathophysiology</div>
+    <div class="quiz-q">
+      <p class="prompt">Colchicine's mechanism in pericarditis is best described as:</p>
+      <button class="quiz-choice" data-correct="false">Direct IL-1 receptor blockade</button>
+      <button class="quiz-choice" data-correct="true">Inhibition of tubulin polymerization, preventing NLRP3 inflammasome assembly and neutrophil chemotaxis</button>
+      <button class="quiz-choice" data-correct="false">COX inhibition</button>
+      <button class="quiz-choice" data-correct="false">NF-κB inhibition</button>
+      <div class="quiz-explain">Colchicine disrupts microtubules, which prevents inflammasome component aggregation and blocks neutrophil chemotaxis — the same mechanism that makes it effective in gout and familial Mediterranean fever.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="card" id="dx">
+    <h2>3. Clinical Presentation & Diagnostic Criteria</h2>
+    <p>Acute pericarditis is a <strong>clinical diagnosis</strong>. The classic teaching (and JAMA 2024 review) requires <strong>&ge;2 of 4</strong> findings; the <strong>2025 ACC Concise Clinical Guidance</strong> reframes chest pain as mandatory plus &ge;1 additional finding. Know both framings — "2 of 4" remains the most commonly tested version.</p>
+
+    <table>
+      <tr><th>Finding</th><th>Approx. Frequency</th><th>Description</th></tr>
+      <tr><td><strong>Chest pain</strong></td><td>~90%</td><td>Sharp, pleuritic, worse supine, improves leaning forward; may radiate to the trapezius ridge</td></tr>
+      <tr><td>ECG changes</td><td>~25&ndash;50%</td><td>New widespread ST-segment elevation with PR-segment depression</td></tr>
+      <tr><td>Pericardial effusion</td><td>~60%</td><td>New or worsening, most often small, on echocardiography</td></tr>
+      <tr><td>Pericardial friction rub</td><td>&lt;30%</td><td>High-pitched, may be transient, classically triphasic</td></tr>
+    </table>
+
+    <h3>Supportive Findings</h3>
+    <ul>
+      <li>Elevated inflammatory markers (ESR, CRP) — CRP elevated in ~78&ndash;90% of acute idiopathic/viral cases (defined as &gt;3 mg/L); a normal CRP may reflect early presentation (~34%) or prior NSAID/colchicine/steroid treatment (~50%)</li>
+      <li>Low-grade fever, fatigue, cough, dyspnea</li>
+      <li>Neutrophilic leukocytosis, elevated neutrophil-to-lymphocyte ratio (more likely with fever/fatigue)</li>
+      <li>Cardiac MRI: pericardial <strong>late gadolinium enhancement (LGE)</strong> reflects neovascularization/inflammation (normal pericardium is minimally vascular, so any contrast retention is abnormal) — must be interpreted with clinical context, since it can be present in ~44% of post-cardiac-surgery patients with no pericarditis symptoms</li>
+    </ul>
+    <div class="pearl"><strong>Recurrent pericarditis caveat:</strong> patients with <em>recurrent</em> pericarditis are less likely than those with a first episode to have characteristic ECG changes or a new/worsening effusion — don't require these for the diagnosis in a patient with a known history and typical pain plus elevated CRP.</div>
+
+    <h3>The Pericardial Friction Rub</h3>
+    <ul>
+      <li>Mechanism: inflammation &rarr; fibrin deposition + roughened surfaces &rarr; cardiac movement causes the inflamed surfaces to rub &rarr; sound</li>
+      <li><strong>Triphasic</strong> = 3 components (atrial systole, ventricular systole, ventricular diastole) — most specific pattern; can also be biphasic or monophasic</li>
+      <li>Described as high-pitched, scratchy, "like walking on fresh snow" or leather creaking</li>
+      <li>Best heard: <strong>left sternal border</strong>, patient <strong>leaning forward</strong>, at <strong>end-expiration</strong></li>
+      <li>To distinguish from a pleural rub: have the patient hold their breath — a pleural rub disappears, a pericardial rub persists (the heart keeps beating)</li>
+      <li>A triphasic rub is nearly pathognomonic for pericarditis, but <strong>disappears with large effusions</strong> (the heart floats away from the chest wall) — losing a known rub plus new hypotension should raise concern for tamponade</li>
+    </ul>
+
+    <div class="quiz-mini-header">Quick Check — Diagnosis</div>
+    <div class="quiz-q">
+      <p class="prompt">Which maneuver helps distinguish a pericardial friction rub from a pleural friction rub?</p>
+      <button class="quiz-choice" data-correct="false">Auscultating during deep inspiration only</button>
+      <button class="quiz-choice" data-correct="true">Having the patient hold their breath — a pericardial rub persists, a pleural rub disappears</button>
+      <button class="quiz-choice" data-correct="false">Listening at the apex instead of the left sternal border</button>
+      <button class="quiz-choice" data-correct="false">Checking for pulsus paradoxus</button>
+      <div class="quiz-explain">Since the heart keeps beating even with breath held, a pericardial rub persists; a pleural rub (dependent on lung movement) disappears with breath-holding.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="card" id="ekg">
+    <h2>4. Distinguishing Pericarditis from STEMI</h2>
+    <h3>The 4 ECG Stages of Pericarditis</h3>
+    <table>
+      <tr><th>Stage</th><th>Timing</th><th>Findings</th></tr>
+      <tr><td>1</td><td>Hours&ndash;days</td><td>Diffuse concave-up ST elevation + PR depression (except aVR and V1, which show ST depression + PR elevation — the "knuckle sign")</td></tr>
+      <tr><td>2</td><td>Days&ndash;weeks</td><td>ST segments normalize; T-wave flattening</td></tr>
+      <tr><td>3</td><td>Weeks</td><td>Diffuse T-wave inversions</td></tr>
+      <tr><td>4</td><td>Weeks&ndash;months</td><td>Gradual normalization</td></tr>
+    </table>
+    <p>Not all patients progress through all four stages — <strong>Stage 1 is by far the most tested.</strong></p>
+
+    <h3>Pericarditis vs. STEMI</h3>
+    <table>
+      <tr><th>Feature</th><th>Pericarditis</th><th>STEMI</th></tr>
+      <tr><td>ST morphology</td><td>Concave up ("smiley face")</td><td>Convex up ("tombstone") or straight</td></tr>
+      <tr><td>ST distribution</td><td>Diffuse (most leads)</td><td>Territorial (coronary distribution)</td></tr>
+      <tr><td>Reciprocal ST depression</td><td>Absent (except aVR, V1)</td><td>Present in opposing leads</td></tr>
+      <tr><td>PR segment</td><td>Depressed in most leads</td><td>Usually isoelectric</td></tr>
+      <tr><td>Q waves</td><td>Absent</td><td>May develop</td></tr>
+      <tr><td>T-wave inversion</td><td>After ST normalizes (Stage 3)</td><td>Concurrent with ST elevation</td></tr>
+      <tr><td>ST/T ratio in V6</td><td>&gt;0.25</td><td>Variable</td></tr>
+    </table>
+    <div class="pearl"><strong>If you remember nothing else:</strong> diffuse ST elevation, no reciprocal changes, PR depression = pericarditis. Territorial ST elevation with reciprocal depression = STEMI &rarr; urgent cardiac catheterization.</div>
+    <p>Other important considerations: distinguish pericarditis ECG changes from <strong>J-point elevation</strong> (early repolarization — also concave up, but with a notched/slurred, well-demarcated J point and no PR depression); compare with prior ECGs if available; pericarditis can trigger atrial fibrillation/flutter in ~4% of patients; and check <strong>cardiac troponin</strong> to evaluate for concomitant myocardial ischemia or myopericarditis.</p>
+
+    <div class="quiz-mini-header">Quick Check — ECG</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient has diffuse concave-up ST elevation in most leads, PR depression, and reciprocal changes only in aVR. This pattern is most consistent with:</p>
+      <button class="quiz-choice" data-correct="false">Anterior STEMI</button>
+      <button class="quiz-choice" data-correct="true">Acute pericarditis</button>
+      <button class="quiz-choice" data-correct="false">Inferior STEMI</button>
+      <button class="quiz-choice" data-correct="false">Left bundle branch block</button>
+      <div class="quiz-explain">Diffuse (not territorial) concave ST elevation with PR depression and no true reciprocal changes (aVR/V1 mirror changes don't count) is classic for pericarditis, not STEMI.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="card" id="etiology">
+    <h2>5. Etiologies</h2>
+    <h3>Geographic Overview</h3>
+    <ul>
+      <li><strong>Developed countries (North America, Western Europe):</strong> most cases idiopathic/presumed viral (~55% have no identified cause) — "idiopathic" likely represents undiagnosed viral infection or post-viral immune response</li>
+      <li><strong>Developing countries:</strong> <strong>tuberculosis</strong> is the #1 cause — accounts for 65&ndash;70% of pericardial effusions in parts of Africa, often with HIV co-infection</li>
+    </ul>
+
+    <h3>Infectious Causes</h3>
+    <ul>
+      <li><strong>Viral</strong> (most common in the developed world): <strong>Coxsackievirus B</strong> is the classic board answer (also classic for viral myocarditis); also echovirus, adenovirus, EBV, parvovirus B19, CMV, influenza, HIV</li>
+      <li><strong>Bacterial:</strong> Staphylococcus, Streptococcus, M. tuberculosis — <strong>purulent pericarditis is a surgical emergency</strong> (requires drainage, not antibiotics alone)</li>
+      <li><strong>Fungal:</strong> Histoplasma, Coccidioides, Aspergillus — mainly immunocompromised patients</li>
+      <li><strong>Parasitic:</strong> Echinococcus, Toxoplasma</li>
+    </ul>
+
+    <h3>Non-Infectious Causes</h3>
+    <ul>
+      <li><strong>Autoimmune/inflammatory:</strong> SLE (pericarditis in up to ~20% of SLE patients), RA, scleroderma, sarcoidosis, familial Mediterranean fever, Beh&ccedil;et syndrome, IBD (rheumatoid arthritis and systemic sclerosis more often cause an <em>asymptomatic</em> effusion [30&ndash;50%] rather than active pericarditis)</li>
+      <li><strong>Post-cardiac injury syndrome:</strong> weeks after MI (4&ndash;5%), cardiac surgery (20&ndash;30%), or ablation (~10%) — <strong>Dressler syndrome</strong> is the specific post-MI form</li>
+      <li><strong>Metabolic:</strong> uremia (uremic pericarditis — an indication for dialysis), hypothyroidism/myxedema</li>
+      <li><strong>Neoplastic:</strong> lung (~40%), breast (~25%), hematologic malignancies (~20%) — usually cause an effusion rather than classic pericarditis</li>
+      <li><strong>Radiation:</strong> mediastinal radiation for lymphoma or breast cancer</li>
+      <li><strong>Drug-induced:</strong> hydralazine, procainamide, isoniazid (drug-induced lupus), immune checkpoint inhibitors, doxorubicin; <strong>clozapine</strong> is a psychiatry-relevant cause worth remembering</li>
+    </ul>
+
+    <h3>Etiology by Clinical Setting</h3>
+    <table>
+      <tr><th>Setting</th><th>Most Common Cause</th><th>Key Associations</th></tr>
+      <tr><td>Developed countries</td><td>Idiopathic/viral</td><td>Often preceded by URI or GI illness</td></tr>
+      <tr><td>Developing countries</td><td>Tuberculosis</td><td>HIV co-infection increases risk</td></tr>
+      <tr><td>Post-cardiac surgery</td><td>Post-cardiac injury syndrome</td><td>20&ndash;30% after cardiac surgery</td></tr>
+      <tr><td>Immunocompromised</td><td>Fungal, TB, bacterial</td><td>Consider opportunistic infections</td></tr>
+      <tr><td>Cancer patients</td><td>Malignant effusion</td><td>Lung, breast, lymphoma most common</td></tr>
+      <tr><td>Dialysis patients</td><td>Uremic pericarditis</td><td>Indication to initiate/intensify dialysis</td></tr>
+    </table>
+    <div class="pearl"><strong>Three board pearls:</strong> Dressler syndrome = autoimmune pericarditis weeks post-MI (don't label post-op or post-ablation pericarditis as "Dressler" — that term is specifically post-MI). Uremic pericarditis = indication for dialysis. Drug-induced lupus (hydralazine, procainamide, isoniazid) can cause pericarditis.</div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="card" id="spectrum">
+    <h2>6. The Spectrum: Acute, Incessant, Chronic, Recurrent + Myopericarditis</h2>
+    <table>
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td><strong>Acute pericarditis</strong></td><td>Resolves within 4&ndash;6 weeks</td></tr>
+      <tr><td><strong>Incessant pericarditis</strong></td><td>Symptoms persist &ge;4&ndash;6 weeks but &lt;3 months, without remission</td></tr>
+      <tr><td><strong>Chronic pericarditis</strong></td><td>Symptoms &gt;3 months</td></tr>
+      <tr><td><strong>Recurrent pericarditis</strong></td><td>Relapse of symptoms after clinical remission of &ge;4&ndash;6 weeks</td></tr>
+    </table>
+    <ul>
+      <li>Recurrence occurs in <strong>15&ndash;30%</strong> after a first episode of idiopathic/viral pericarditis; of these, 25&ndash;50% have subsequent flares; up to <strong>50% recur again after a first recurrence</strong></li>
+      <li>Most recurrences occur within 3&ndash;6 months; recurrence beyond 12 months is unusual</li>
+      <li>Autoimmune-disease-associated pericarditis carries an ~88% recurrence risk over a median 35-month follow-up, vs. ~69% for idiopathic disease (roughly a 50% increased relative risk with autoimmune etiology)</li>
+    </ul>
+
+    <h3>Risk Factors for Recurrence</h3>
+    <ul>
+      <li>Lack of NSAID response</li>
+      <li>Early corticosteroid use (a risk factor, not protective, when used in the first episode)</li>
+      <li>Persistently elevated CRP — CRP remaining high after 1 week of therapy roughly doubles recurrence risk (hazard ratio ~2.4)</li>
+      <li>Severe pericardial late gadolinium enhancement (LGE) on CMR — associated with ~40% higher recurrence risk</li>
+      <li>Autoimmune etiology</li>
+    </ul>
+
+    <h3>Complications</h3>
+    <ul>
+      <li>Cardiac tamponade: <strong>&lt;3%</strong> in acute idiopathic pericarditis overall, but much higher with bacterial (~33%) or tuberculous (~20%) etiology</li>
+      <li>Constrictive pericarditis: <strong>&lt;0.5%</strong> after acute idiopathic pericarditis, but ~20% of patients with <em>incessant</em> pericarditis develop constriction</li>
+    </ul>
+
+    <h3>Myopericarditis vs. Perimyocarditis</h3>
+    <ul>
+      <li>~15&ndash;20% of pericarditis patients have some degree of myocardial involvement</li>
+      <li><strong>Myopericarditis</strong> = pericarditis-dominant, with troponin elevation</li>
+      <li><strong>Perimyocarditis</strong> = myocarditis-dominant, with pericardial involvement</li>
+      <li>The distinction matters for prognosis and exercise restriction (more prolonged with significant myocardial involvement)</li>
+      <li>Of patients with an elevated troponin, ~80% do <strong>not</strong> have LV dysfunction at presentation; of those who do, ~85% have LV recovery by 12 months</li>
+      <li><strong>An elevated troponin without LV dysfunction is not a negative prognostic marker</strong> — management is the same as for idiopathic/viral pericarditis</li>
+    </ul>
+    <div class="pearl"><strong>Board pearl:</strong> troponin elevation in pericarditis suggests myocardial involvement (myopericarditis); distinguish from STEMI by <strong>diffuse</strong> (not territorial) ECG changes and the <strong>absence of regional wall motion abnormalities</strong>.</div>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section class="card" id="workup">
+    <h2>7. Diagnostic Workup & Risk Stratification</h2>
+    <h3>Laboratory Assessment</h3>
+    <ul>
+      <li><strong>CRP/ESR:</strong> elevated in ~80&ndash;90% (inflammatory phenotype); CRP is used to guide treatment duration — don't stop therapy until it normalizes</li>
+      <li><strong>CBC:</strong> neutrophilic leukocytosis common</li>
+      <li><strong>Troponin:</strong> elevated in ~15% — indicates myocardial involvement (myopericarditis)</li>
+      <li><strong>BUN/Cr:</strong> rule out uremic pericarditis</li>
+      <li><strong>TSH:</strong> rule out hypothyroidism</li>
+      <li><strong>ANA/RF:</strong> only if other signs/symptoms suggest a systemic autoimmune disease — low-titer ANA is common and nonspecific in recurrent idiopathic pericarditis</li>
+      <li><strong>Blood cultures:</strong> if bacterial/purulent pericarditis suspected</li>
+      <li><strong>TB testing:</strong> for patients from/living in endemic areas, or other TB risk factors (unhoused, current/past incarceration, immunocompromised including HIV)</li>
+      <li><strong>Pericardiocentesis</strong> (with cell count, Gram stain/culture, cytology) is performed for overt/developing tamponade or suspected bacterial, tuberculous, or malignant effusion — cytology has <strong>low sensitivity</strong> for malignancy (~25% of "benign" cytology may still have an underlying neoplasm); the Light criteria (used for pleural fluid) should <strong>not</strong> be applied to pericardial fluid</li>
+    </ul>
+
+    <h3>Imaging</h3>
+    <ul>
+      <li><strong>Echocardiography (first-line):</strong> assesses effusion size/location/rate of accumulation, hemodynamic consequences (tamponade, constrictive physiology), and pericardial thickening</li>
+      <li><strong>Chest X-ray:</strong> "water bottle" silhouette with effusions &gt;300 mL; also evaluates for TB or malignancy; pericardial calcification (~20&ndash;40%, especially TB) suggests constriction</li>
+      <li><strong>Cardiac MRI (CMR):</strong> gold standard for characterizing pericardial <em>inflammation</em> — late gadolinium enhancement (neovascularization) and T2-STIR signal (edema); most useful for recurrent/complicated cases</li>
+      <li><strong>CT:</strong> best for pericardial <em>calcification</em>; used for procedural/surgical planning (pericardiocentesis approach, pericardial window, pericardiectomy); not indicated for initial assessment</li>
+    </ul>
+    <div class="pearl"><strong>Distinguishing pearl:</strong> the round circle of the descending aorta, seen posterior to the left atrium on echo, is a landmark distinguishing pericardial effusion (anterior to the descending aorta) from pleural effusion (posterior to it). Also distinguish anterior epicardial fat pad from true pericardial fluid.</div>
+
+    <h3>Risk Stratification — Who Needs Admission?</h3>
+    <p>Most patients are low-risk and managed as outpatients. High-risk features warranting hospitalization:</p>
+    <ul>
+      <li>High fever (&gt;38&deg;C)</li>
+      <li>Subacute onset (symptoms developing over days without a clear onset)</li>
+      <li>Large pericardial effusion (&gt;2.0 cm) or tamponade physiology</li>
+      <li>Failure to respond to NSAIDs within ~1 week</li>
+      <li>Elevated troponin (myopericarditis)</li>
+      <li>Immunosuppression</li>
+      <li>Oral anticoagulant use (increased hemorrhagic effusion risk)</li>
+      <li>Suspected malignancy</li>
+    </ul>
+
+    <div class="quiz-mini-header">Quick Check — Workup</div>
+    <div class="quiz-q">
+      <p class="prompt">Which imaging modality is the gold standard for characterizing active pericardial inflammation?</p>
+      <button class="quiz-choice" data-correct="false">Chest X-ray</button>
+      <button class="quiz-choice" data-correct="false">Echocardiography</button>
+      <button class="quiz-choice" data-correct="true">Cardiac MRI (late gadolinium enhancement / T2-STIR)</button>
+      <button class="quiz-choice" data-correct="false">CT</button>
+      <div class="quiz-explain">Echo is first-line for effusion/hemodynamics, but CMR is the gold standard for characterizing the degree of pericardial inflammation via LGE and T2 edema imaging.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 -->
+  <section class="card" id="tamponade">
+    <h2>8. Cardiac Tamponade</h2>
+    <h3>Pathophysiology</h3>
+    <ul>
+      <li>Fluid accumulates in the pericardial space &rarr; once pericardial reserve volume is exceeded, intrapericardial pressure rises <strong>sharply (exponentially, not linearly)</strong></li>
+      <li><strong>Rate of accumulation matters more than total volume:</strong> rapid accumulation of just <strong>150&ndash;200 mL</strong> can cause tamponade, while slow accumulation (e.g., malignant effusion) can accommodate <strong>&gt;1 L</strong> without hemodynamic compromise</li>
+      <li>Rising pericardial pressure &rarr; equalization of diastolic pressures across all chambers &rarr; impaired filling &rarr; &darr; stroke volume and cardiac output</li>
+      <li>Compensatory tachycardia initially maintains output before decompensation</li>
+    </ul>
+
+    <h3>Clinical Findings</h3>
+    <ul>
+      <li><strong>Beck's triad:</strong> hypotension, jugular venous distension, muffled/distant heart sounds</li>
+      <li><strong>Pulsus paradoxus:</strong> inspiratory drop in systolic BP &gt;10 mmHg — the <strong>most specific</strong> clinical sign (mechanism: exaggerated ventricular interdependence, see Section 2)</li>
+      <li><strong>Tachycardia</strong> is the <strong>most sensitive</strong> sign</li>
+      <li>JVP: elevated, with a prominent x descent but <strong>absent y descent</strong> (the heart can't fill in early diastole)</li>
+      <li>ECG: low voltage, <strong>electrical alternans</strong> (beat-to-beat QRS amplitude alternation from the heart swinging within the effusion)</li>
+      <li>Echo (most specific &rarr; least specific): <strong>diastolic RV collapse</strong> (most specific); RA inversion &gt;1/3 of the cardiac cycle; dilated IVC without respiratory variation; &gt;30% respiratory variation in mitral inflow velocity</li>
+    </ul>
+    <div class="pearl"><strong>Board pearl:</strong> Beck's triad + pulsus paradoxus + electrical alternans + diastolic RV collapse = classic tamponade presentation. A normal BP early in the course does <strong>not</strong> exclude tamponade — use the full hemodynamic pattern plus echo.</div>
+
+    <h3>Management</h3>
+    <ul>
+      <li><strong>Pericardiocentesis is definitive</strong> — echocardiography-guided preferred</li>
+      <li>Approaches: <strong>subxiphoid</strong> (most common in emergencies), apical, parasternal</li>
+      <li>IV fluid resuscitation increases preload — a <strong>temporizing</strong> measure only, not definitive treatment</li>
+      <li><strong>Avoid diuretics and vasodilators</strong> — both reduce preload and worsen hemodynamics</li>
+      <li>Surgical pericardial window for recurrent effusions</li>
+    </ul>
+
+    <div class="case">
+      <div class="case-label">Case Snapshot</div>
+      <p>A 55-year-old woman with metastatic breast cancer has progressive dyspnea. BP 82/60, HR 118, JVD, muffled heart sounds, pulsus paradoxus 18 mmHg. ECG shows low voltage and electrical alternans. Echo shows a large effusion with diastolic RV collapse. What is the most appropriate next step?</p>
+      <p><strong>Answer:</strong> Emergent pericardiocentesis. This is tamponade (Beck's triad + pulsus paradoxus + electrical alternans + diastolic RV collapse). Diuretics and vasodilators are contraindicated because they further reduce preload; IV fluids only temporize.</p>
+    </div>
+
+    <div class="quiz-mini-header">Quick Check — Tamponade</div>
+    <div class="quiz-q">
+      <p class="prompt">Which of the following is contraindicated in suspected cardiac tamponade?</p>
+      <button class="quiz-choice" data-correct="false">IV fluid resuscitation</button>
+      <button class="quiz-choice" data-correct="true">Diuretics and vasodilators</button>
+      <button class="quiz-choice" data-correct="false">Echo-guided pericardiocentesis</button>
+      <button class="quiz-choice" data-correct="false">Surgical pericardial window (for recurrent effusion)</button>
+      <div class="quiz-explain">Both diuretics and vasodilators reduce preload, which worsens hemodynamics in a heart that is already unable to fill adequately.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 9 -->
+  <section class="card" id="constrictive">
+    <h2>9. Constrictive Pericarditis</h2>
+    <h3>Pathophysiology</h3>
+    <p>A chronic consequence of pericardial inflammation: fibrosis (&plusmn; calcification) replaces the normal elastic pericardium, forming a <strong>rigid, noncompliant shell</strong>. This is the same TGF-&beta; &rarr; fibroblast &rarr; myofibroblast &rarr; collagen I/III deposition pathway seen across organs (see cross-organ fibrosis box below). Early rapid ventricular filling is actually preserved, but is then abruptly halted once the rigid pericardium is reached. Three key hemodynamic concepts:</p>
+    <ol>
+      <li><strong>Dissociation of intrathoracic and intracardiac pressure:</strong> normally, &darr; intrathoracic pressure on inspiration transmits to the cardiac chambers, maintaining the gradient driving LA&rarr;LV flow. The rigid pericardium blocks this transmission, so LV filling is impaired during inspiration &rarr; &darr; preload.</li>
+      <li><strong>Exaggerated ventricular interdependence:</strong> inspiration &uarr; RV venous return, but the RV can't expand outward (rigid shell) — so it expands inward, shifting the septum toward the LV and further limiting LV filling.</li>
+      <li><strong>Equalization of diastolic pressures:</strong> the rigid pericardium limits expansion of all four chambers, so RV and LV diastolic pressures become similar (resembles tamponade, but via a different mechanism — fixed rigid shell rather than compressive fluid).</li>
+    </ol>
+    <p>Net result: impaired diastolic filling &rarr; &darr; stroke volume &rarr; &darr; cardiac output, with blood backing up into the venous system &rarr; systemic venous congestion.</p>
+
+    <h3>Fibrosis: A Common Mechanism, Many Organs</h3>
+    <table>
+      <tr><th>Organ</th><th>Mechanism</th><th>Result</th></tr>
+      <tr><td>Pericardium</td><td>TGF-&beta; activates pericardial fibroblasts &rarr; collagen deposition</td><td>Constrictive pericarditis (Kussmaul sign, pericardial knock, right HF)</td></tr>
+      <tr><td>Myocardium</td><td>TGF-&beta; activates cardiac fibroblasts &rarr; collagen between cardiomyocytes</td><td>Restrictive physiology/diastolic HF (&darr; e&prime; on tissue Doppler)</td></tr>
+      <tr><td>Lung</td><td>TGF-&beta; activates pulmonary fibroblasts &rarr; alveolar interstitial collagen</td><td>Restrictive lung disease (&darr; compliance, &darr; TLC, &darr; FVC, preserved/&uarr; FEV&#8321;/FVC)</td></tr>
+      <tr><td>Liver</td><td>TGF-&beta; activates hepatic stellate cells &rarr; collagen in space of Disse</td><td>Cirrhosis (portal hypertension, ascites, varices)</td></tr>
+      <tr><td>Kidney</td><td>TGF-&beta; activates mesangial/interstitial fibroblasts &rarr; ECM/collagen in mesangium & GBM</td><td>Glomerulosclerosis (proteinuria, &darr; GFR — final common pathway of diabetic nephropathy)</td></tr>
+    </table>
+    <p>Shared mechanism: tissue injury &rarr; macrophage activation &rarr; TGF-&beta; activates fibroblasts, which differentiate into myofibroblasts and deposit type I/III collagen, while matrix metalloproteinases (which normally break down collagen) are suppressed. Compliant tissue becomes rigid.</p>
+
+    <h3>Clinical Findings</h3>
+    <ul>
+      <li>Presents as <strong>right-sided heart failure:</strong> elevated JVP, hepatomegaly, ascites (often disproportionate to peripheral edema), peripheral edema</li>
+      <li><strong>Kussmaul sign:</strong> paradoxical rise (or failure to decrease) in JVP with inspiration — relatively specific for constriction. Mechanism: the rigid pericardium prevents the RV from accommodating increased venous return on inspiration</li>
+      <li><strong>Pericardial knock:</strong> early diastolic sound (occurs in up to 47% of patients) at the abrupt cessation of ventricular filling when the expanding ventricle hits the rigid pericardium — often confused with S3, but occurs slightly earlier and is higher-pitched</li>
+      <li>JVP waveform: prominent x <em>and</em> rapid y descents (rapid y descent reflects the preserved early rapid filling phase, abruptly halted)</li>
+      <li>CXR: pericardial calcification in 20&ndash;40% (especially TB etiology)</li>
+    </ul>
+
+    <h3>Constrictive Pericarditis vs. Restrictive Cardiomyopathy (Classic Board Comparison)</h3>
+    <table>
+      <tr><th>Feature</th><th>Constrictive Pericarditis</th><th>Restrictive Cardiomyopathy</th></tr>
+      <tr><td>Extra heart sound</td><td>Pericardial knock</td><td>S3 or S4</td></tr>
+      <tr><td>Myocardial relaxation (tissue Doppler e&prime;)</td><td>Normal/elevated (myocardium itself is normal)</td><td>Reduced (myocardium is diseased)</td></tr>
+      <tr><td>Pericardial calcification</td><td>Favors constriction</td><td>Absent</td></tr>
+    </table>
+
+    <div class="pearl"><strong>Remember:</strong> in tamponade, systemic venous return increases with inspiration (enlarging the right heart and encroaching on the left); in constrictive pericarditis, systemic venous return does <strong>not</strong> increase normally with inspiration — the mechanism of reduced LV / increased RV volume in constriction is impaired LV filling from a lesser pulmonary-venous-to-LV pressure gradient, not a fluid-mediated compressive process.</div>
+
+    <div class="quiz-mini-header">Quick Check — Constrictive Pericarditis</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient has elevated JVP that paradoxically rises with inspiration, an early diastolic sound, and pericardial calcification on CT. Tissue Doppler shows a normal e′. This is most consistent with:</p>
+      <button class="quiz-choice" data-correct="true">Constrictive pericarditis</button>
+      <button class="quiz-choice" data-correct="false">Restrictive cardiomyopathy</button>
+      <button class="quiz-choice" data-correct="false">Cardiac tamponade</button>
+      <button class="quiz-choice" data-correct="false">Dilated cardiomyopathy</button>
+      <div class="quiz-explain">Kussmaul sign, pericardial knock, calcification, and a normal e′ (myocardium itself is fine) all point to constrictive pericarditis rather than restrictive cardiomyopathy (which would show a reduced e′) or tamponade (fluid-mediated, not a rigid shell).</div>
+    </div>
+  </section>
+
+  <!-- SECTION 10 -->
+  <section class="card" id="treatment">
+    <h2>10. Treatment</h2>
+    <h3>First-Line: NSAIDs + Colchicine (Dual Anti-Inflammatory Therapy)</h3>
+    <ul>
+      <li><strong>NSAID:</strong> ibuprofen 600&ndash;800 mg TID (or per JAMA review, 1600&ndash;2400 mg/d) or aspirin 650&ndash;1000 mg TID — aspirin preferred if concomitant CAD; taper after chest pain resolves and CRP normalizes (typically 1&ndash;2 weeks for a first episode; weeks to months for recurrence); add a PPI for gastric protection</li>
+      <li><strong>Colchicine:</strong> 0.5 mg BID (&gt;70 kg) or 0.5 mg once daily (&lt;70 kg); mechanism = inhibits tubulin polymerization &rarr; prevents NLRP3 inflammasome assembly and neutrophil chemotaxis
+        <ul>
+          <li><strong>3 months</strong> for a first (acute) episode</li>
+          <li><strong>&ge;6 months</strong> for a first recurrence</li>
+          <li>GI adverse effects (diarrhea ~23%, nausea, vomiting) necessitate dose reduction/cessation in ~10% of patients</li>
+        </ul>
+      </li>
+      <li>Exercise restriction: avoidance of vigorous exercise, often for up to 3 months (recurrences linked to exercise have been reported, though rigorous data are limited); one lecture source cites &ge;1 month with max HR &lt;100 bpm until remission</li>
+    </ul>
+
+    <h3>Colchicine Trial Evidence (Know the Pattern, Not Every Number)</h3>
+    <table>
+      <tr><th>Trial</th><th>Population</th><th>Colchicine vs. Placebo Recurrence</th><th>Absolute Risk Reduction</th></tr>
+      <tr><td>ICAP (n=240)</td><td>Acute pericarditis</td><td>16.7% vs. 37.5%</td><td>20.8%</td></tr>
+      <tr><td>COPPS-2 (n=360)</td><td>Post-cardiac-surgery prevention</td><td>19.4% vs. 29.4%</td><td>10.0%</td></tr>
+      <tr><td>CORP (n=120)</td><td>First recurrence</td><td>24% vs. 55%</td><td>31%</td></tr>
+      <tr><td>CORP-2 (n=240)</td><td>Multiple recurrences</td><td>21.6% vs. 42.5%</td><td>20.9%</td></tr>
+    </table>
+    <p>After cardiac surgery, a <strong>1-month</strong> course of colchicine (starting 48&ndash;72 hr pre-op) can be considered to prevent post-cardiac injury syndrome, though GI intolerance and drug interactions may limit use.</p>
+
+    <h3>Corticosteroids</h3>
+    <ul>
+      <li>No randomized trial data exist, but observational data show <strong>higher-dose</strong> corticosteroids (e.g., prednisone 1.0 mg/kg/day) are associated with <strong>increased recurrence risk</strong></li>
+      <li>Reserve for patients who don't improve with NSAIDs + colchicine, or who have contraindications/adverse outcomes with those agents</li>
+      <li>Dose: <strong>low-to-moderate</strong> — prednisone <strong>0.25&ndash;0.5 mg/kg/day</strong></li>
+      <li>Additional indications: underlying systemic autoimmune disease, post-cardiac-surgery symptoms unresponsive to colchicine, or contraindications to high-dose NSAIDs (moderate-severe kidney failure, anticoagulation, pregnancy after 20 weeks — low-dose prednisone + colchicine can be used throughout pregnancy)</li>
+      <li>Taper slowly: e.g., starting dose 15&ndash;25 mg &rarr; decrease 2.5 mg/day every 2&ndash;4 weeks; starting dose &lt;15 mg &rarr; decrease 1.25&ndash;2.5 mg/day every 2&ndash;6 weeks (can taper faster, ~8 weeks, if the patient is also on an IL-1 blocker)</li>
+      <li>Adverse effects: hypertension, fluid retention, hyperglycemia, osteoporosis, adrenal insufficiency, cushingoid appearance, psychiatric effects, peptic ulcer, infection risk, myopathy, glaucoma</li>
+      <li>Can be considered for <strong>tuberculous constrictive pericarditis</strong> specifically, though not recommended routinely for TB pericarditis</li>
+      <li>In severe renal impairment, colchicine is contraindicated — consider dialysis for uremic pericarditis</li>
+    </ul>
+
+    <h3>Interleukin-1 (IL-1) Blockers</h3>
+    <ul>
+      <li><strong>Anakinra</strong> and <strong>rilonacept</strong> are indicated for patients with <strong>multiple recurrent episodes</strong> who are colchicine-resistant or corticosteroid-dependent, particularly those with an <strong>autoinflammatory phenotype</strong> (CRP &gt;10 mg/L, the threshold used in clinical trials)</li>
+      <li><strong>Rilonacept</strong> is FDA-approved for treatment and prevention of recurrent pericarditis</li>
+      <li>Trial data: AIRTRIP (anakinra) — 90% recurrence after withdrawal vs. 18% who continued; RHAPSODY (rilonacept) — 74% recurrence after withdrawal vs. 6.7% who continued (median time to recurrence with placebo: 8.6 weeks)</li>
+      <li>Patients on corticosteroids can often transition to an IL-1 blocker and discontinue steroids relatively quickly (~7&ndash;8 weeks) — allowing a faster steroid taper (e.g., &darr;5 mg/week) than would otherwise be safe</li>
+      <li>Dosing: anakinra 1&ndash;2 mg/kg/day SC (max 100 mg/day); rilonacept 320 mg SC loading dose, then 160 mg SC weekly</li>
+      <li>Duration: at least 6&ndash;12 months, longer for multiple recurrent disease</li>
+      <li>Most common ADRs: injection site reactions (~33&ndash;71%, mostly mild/moderate) and upper respiratory tract infections (~20&ndash;48%, mostly mild/moderate)</li>
+    </ul>
+
+    <h3>Treatment by Recurrence Number (Figure 4 Framework)</h3>
+    <table>
+      <tr><th>Presentation</th><th>Treatment</th></tr>
+      <tr><td>Initial occurrence of acute pericarditis</td><td>High-dose NSAIDs until chest pain resolves and CRP normalizes + colchicine for 3 months</td></tr>
+      <tr><td>First recurrence</td><td>NSAIDs until chest pain resolves and inflammatory markers normalize + colchicine for &ge;6 months</td></tr>
+      <tr><td>Second recurrence</td><td>Add an IL-1 blocker (if idiopathic or post-cardiac injury syndrome, colchicine-resistant, with a history of CRP elevation) <em>or</em> low-to-moderate-dose prednisone (if underlying systemic autoimmune disease)</td></tr>
+    </table>
+
+    <h3>Special Situations</h3>
+    <ul>
+      <li><strong>Tuberculous pericarditis:</strong> antituberculosis therapy; corticosteroids considered for associated constrictive TB pericarditis</li>
+      <li><strong>Uremic pericarditis:</strong> dialysis (initiate or intensify)</li>
+      <li><strong>Purulent/bacterial pericarditis:</strong> IV antibiotics + surgical drainage — a medical/surgical emergency</li>
+      <li><strong>Autoimmune pericarditis:</strong> treat the underlying condition first; NSAIDs/colchicine used empirically in practice, though not well studied specifically for autoimmune-associated pericarditis (e.g., SLE)</li>
+      <li><strong>Post-cardiac injury syndrome:</strong> NSAIDs + colchicine as in idiopathic disease; perioperative colchicine prophylaxis may reduce incidence (COPPS-2)</li>
+    </ul>
+
+    <h3>Areas of Uncertainty</h3>
+    <ul>
+      <li>Optimal treatment for incessant pericarditis, a severe first recurrence, or effusive-constrictive pericarditis</li>
+      <li>Efficacy of pericarditis-specific therapies in autoimmune disease</li>
+      <li>Optimal treatment duration in multiple recurrent pericarditis (can last years)</li>
+      <li>Role of radical pericardiectomy in multiple recurrent pericarditis (retrospective data support it for refractory pain, but its role alongside current anti-inflammatory options is undefined)</li>
+    </ul>
+
+    <div class="quiz-mini-header">Quick Check — Treatment</div>
+    <div class="quiz-q">
+      <p class="prompt">A patient with idiopathic recurrent pericarditis has failed NSAIDs and colchicine, has a second recurrence, and has a history of CRP elevation (autoinflammatory phenotype). What is the preferred next step?</p>
+      <button class="quiz-choice" data-correct="false">High-dose prednisone (1 mg/kg/day)</button>
+      <button class="quiz-choice" data-correct="true">An IL-1 blocker (anakinra or rilonacept)</button>
+      <button class="quiz-choice" data-correct="false">Immediate pericardiectomy</button>
+      <button class="quiz-choice" data-correct="false">Switch to a different NSAID</button>
+      <div class="quiz-explain">For colchicine-resistant idiopathic (or post-cardiac injury syndrome) pericarditis with a CRP-elevation history, IL-1 blockers are preferred over corticosteroids to resolve active episodes and prevent recurrence.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 11 -->
+  <section class="card" id="reasoning">
+    <h2>11. Clinical Reasoning Framework</h2>
+    <table>
+      <tr><th>Presentation / Finding</th><th>Interpretation</th><th>Next Test</th><th>Action</th></tr>
+      <tr><td>Pleuritic + positional pain &plusmn; recent viral illness</td><td>Pericarditis pattern</td><td>ECG + CRP/ESR + exam</td><td>Confirm criteria; assess risk, treat</td></tr>
+      <tr><td>Friction rub OR diffuse ST elevation/PR depression OR new/worsening effusion</td><td>Supports acute pericarditis</td><td>Echo &rarr; effusion/filling</td><td>Uncomplicated acute pericarditis &rarr; NSAID/aspirin + colchicine + exercise restriction</td></tr>
+      <tr><td>Troponin elevation</td><td>Myocardial involvement</td><td>Echo/function &plusmn; further cardiac evaluation</td><td>Higher-risk assessment</td></tr>
+      <tr><td>Hypotension + JVD &plusmn; muffled sounds &plusmn; pulsus paradoxus</td><td>Tamponade physiology</td><td>Urgent echo</td><td>Drain</td></tr>
+      <tr><td>JVD + Kussmaul sign + systemic congestion &plusmn; pericardial knock</td><td>Constrictive physiology</td><td>Echo/CMR; CT for calcification</td><td>Evaluate fixed diastolic constraint</td></tr>
+      <tr><td>Known cause: TB / purulent / uremic / autoimmune</td><td>Etiology changes management</td><td>Targeted testing as indicated</td><td>Treat cause &rarr; anti-TB / antibiotics + drainage / dialysis / disease-directed therapy</td></tr>
+    </table>
+
+    <h3>Pericarditis vs. Other Cardiac Pathologies</h3>
+    <table>
+      <tr><th>Condition</th><th>Recognition Pattern</th><th>Key Distinguishing Finding</th><th>Diagnostic Next Step</th></tr>
+      <tr><td>Acute pericarditis</td><td>Sharp, pleuritic pain, worse supine, better leaning forward</td><td>Diffuse concave ST elevation &plusmn; PR depression; friction rub</td><td>ECG + inflammatory markers + echo</td></tr>
+      <tr><td>STEMI / acute MI</td><td>Pressure/heaviness, exertional or persistent, may radiate to arm/jaw</td><td>Territorial ST elevation &plusmn; reciprocal depression; rising troponin</td><td>Urgent cardiac catheterization &rarr; PCI</td></tr>
+      <tr><td>Myocarditis</td><td>Viral prodrome &rarr; chest pain, dyspnea, palpitations</td><td>Elevated troponin; may have LV dysfunction/arrhythmias</td><td>ECG + troponin + echo &rarr; cardiac MRI</td></tr>
+      <tr><td>Myopericarditis</td><td>Pericarditic pain + myocardial injury</td><td>Pericarditis pattern + elevated troponin</td><td>ECG + troponin + echo &rarr; MRI if indicated</td></tr>
+      <tr><td>Right-sided/RV heart failure</td><td>Systemic venous congestion &rarr; JVD &rarr; edema, hepatomegaly, ascites</td><td>RV systolic dysfunction; look for cause (RV infarct, pulm HTN, lung disease)</td><td>ECG + echo &rarr; assess RV function/cause</td></tr>
+      <tr><td>Cardiac tamponade</td><td>Effusion &rarr; impaired filling &rarr; &darr;SV/CO</td><td>JVD + hypotension + muffled sounds; pulsus paradoxus</td><td>Urgent echo &rarr; pericardiocentesis</td></tr>
+      <tr><td>Constrictive pericarditis</td><td>Chronic pericardial disease &rarr; impaired diastolic filling &rarr; venous congestion</td><td>Rigid pericardium + ventricular interdependence + Kussmaul/knock; systolic function often preserved</td><td>Echo &rarr; CT/MRI for pericardium</td></tr>
+      <tr><td>Aortic dissection</td><td>Sudden, maximal-at-onset chest/back pain</td><td>Pulse/BP differential, neuro deficit, acute AR may occur</td><td>Urgent CT angiography + surgery</td></tr>
+      <tr><td>Endocarditis</td><td>Fever + systemic illness &rarr; valvular infection</td><td>New murmur/regurgitation; embolic/immunologic findings</td><td>Blood cultures + echo</td></tr>
+    </table>
+
+    <h3>Key Take-Home Points</h3>
+    <ul>
+      <li>Pericarditis &rarr; pleuritic/positional pain; STEMI &rarr; territorial ischemic pattern</li>
+      <li>A complication changes the pathway: troponin = myocardial involvement; hypotension/JVD = think tamponade</li>
+      <li>Echo is first-line; CMR answers the inflammation/tissue-characterization question; CT is especially useful for calcification/anatomic detail</li>
+      <li>Uncomplicated acute pericarditis &rarr; NSAID/aspirin + colchicine + exercise restriction</li>
+      <li>Persistent inflammation can progress to a rigid pericardium &rarr; constrictive physiology</li>
+    </ul>
+
+    <h3>Common Pitfalls</h3>
+    <ul>
+      <li>ST elevation alone does not equal STEMI — decide diffuse vs. territorial first</li>
+      <li>A normal BP early does not exclude tamponade — use the full hemodynamic pattern + echo</li>
+      <li>Do not label postoperative/post-ablation pericarditis as "Dressler syndrome" (that term is specifically post-MI)</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 12 -->
+  <section class="card" id="omm">
+    <h2>12. OMM Connection: Why the Anatomy Matters</h2>
+    <ul>
+      <li>The parietal pericardium is innervated by the <strong>phrenic nerve (C3&ndash;C5)</strong> — this is why pericarditis pain refers to the <strong>trapezius ridge</strong> (same dermatome)</li>
+      <li>Sympathetic innervation: <strong>stellate ganglion</strong> and first dorsal ganglion</li>
+      <li>Parasympathetic supply: vagus and left recurrent laryngeal nerve; the visceral pericardium has no pain fibers</li>
+    </ul>
+
+    <h3>Viscerosomatic Reflexes</h3>
+    <ul>
+      <li>Cardiac visceral afferents travel with sympathetic fibers and synapse at <strong>T1&ndash;T5</strong> spinal cord segments</li>
+      <li>Myocardial ischemia produces increased paraspinal muscle tone localized to <strong>T2&ndash;T5 on the left</strong>, detectable by palpation — this response is abolished by sympathectomy, confirming the sympathetic afferent pathway</li>
+      <li>In pericarditis, expect somatic dysfunction in the <strong>upper thoracic segments (T1&ndash;T5)</strong> — tissue texture changes, tenderness, restricted motion</li>
+      <li><strong>Chapman reflex points for the heart:</strong> anterior — 2nd intercostal space near the sternum; posterior — between T2&ndash;T4 transverse processes</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 13 -->
+  <section class="card" id="takeaways">
+    <h2>13. High-Yield Takeaways</h2>
+    <ul>
+      <li>Pericardial pain &rarr; parietal pericardium &rarr; phrenic nerve &rarr; trapezius ridge referral</li>
+      <li>Coxsackievirus B = classic viral cause; TB = #1 cause in the developing world</li>
+      <li>Dressler syndrome = post-MI autoimmune pericarditis (weeks later)</li>
+      <li>ECG Stage 1: diffuse concave ST elevation + PR depression (no reciprocal changes = not STEMI)</li>
+      <li>Beck's triad (tamponade): hypotension, JVD, muffled heart sounds</li>
+      <li>Pulsus paradoxus = most specific sign of tamponade (&gt;10 mmHg inspiratory SBP drop); tachycardia = most sensitive</li>
+      <li>Electrical alternans = heart swinging in a large effusion</li>
+      <li>Kussmaul sign = JVP rises with inspiration (constrictive pericarditis)</li>
+      <li>Pericardial knock = early diastolic sound (constriction, not restriction)</li>
+      <li>Treatment: NSAIDs + colchicine (first-line); corticosteroids for failure/contraindication; IL-1 blockers for refractory recurrence</li>
+      <li>NLRP3 inflammasome &rarr; caspase-1 &rarr; IL-1&beta; = the molecular pathway (shared with gout, FMF)</li>
+    </ul>
+
+    <div class="quiz-mini-header">Board-Style Practice Questions</div>
+    <div class="quiz-q">
+      <p class="prompt">A 24-year-old man presents with sharp substernal chest pain that worsens supine and improves leaning forward. He had a URI last week. A scratchy triphasic sound is heard at the left sternal border. ECG shows diffuse concave-upward ST elevation and PR depression with PR elevation in aVR. What is the most likely diagnosis?</p>
+      <button class="quiz-choice" data-correct="false">Acute myocardial infarction</button>
+      <button class="quiz-choice" data-correct="true">Acute pericarditis</button>
+      <button class="quiz-choice" data-correct="false">Pulmonary embolism</button>
+      <button class="quiz-choice" data-correct="false">Aortic dissection</button>
+      <button class="quiz-choice" data-correct="false">Costochondritis</button>
+      <div class="quiz-explain">Positional pleuritic pain, a friction rub, and diffuse ST elevation with PR depression (no reciprocal changes, no Q waves) is classic acute pericarditis. The recent URI suggests a viral etiology. STEMI would show territorial ST changes with reciprocal depression.</div>
+    </div>
+    <div class="quiz-q">
+      <p class="prompt">A 62-year-old man who underwent CABG 3 weeks ago presents with fever, pleuritic chest pain, and malaise. Echo shows a moderate pericardial effusion. CRP is elevated. Troponin is normal. What is the most likely diagnosis?</p>
+      <button class="quiz-choice" data-correct="false">Surgical site infection</button>
+      <button class="quiz-choice" data-correct="true">Post-cardiac injury syndrome (Dressler-type physiology)</button>
+      <button class="quiz-choice" data-correct="false">Pulmonary embolism</button>
+      <button class="quiz-choice" data-correct="false">Acute graft occlusion</button>
+      <button class="quiz-choice" data-correct="false">Bacterial pericarditis</button>
+      <div class="quiz-explain">Post-cardiac injury syndrome is autoimmune-mediated pericarditis occurring weeks after cardiac surgery (or MI, when it is specifically termed Dressler syndrome). The latent period, pleuritic pain, fever, elevated CRP, and effusion are characteristic. First-line treatment is NSAIDs plus colchicine; corticosteroids increase recurrence risk.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 14 -->
+  <section class="card" id="quickref">
+    <h2>14. Quick-Reference Summary Table</h2>
+    <p>One-page condensation for last-minute review — pattern &rarr; mechanism &rarr; key finding &rarr; treatment.</p>
+
+    <table>
+      <tr><th>Topic</th><th>High-Yield Point</th></tr>
+      <tr><td><strong>Diagnosis (≥2 of 4)</strong></td><td>Pleuritic/positional chest pain (~90%) &middot; diffuse ST elevation + PR depression (~25–50%) &middot; new/worsening effusion (~60%) &middot; friction rub (&lt;30%)</td></tr>
+      <tr><td><strong>Pain referral</strong></td><td>Parietal pericardium (pain-sensitive) &rarr; phrenic nerve (C3–C5) &rarr; refers to trapezius ridge; visceral pericardium has no pain fibers</td></tr>
+      <tr><td><strong>Friction rub</strong></td><td>Triphasic, scratchy, best at left sternal border leaning forward/end-expiration; persists with breath-holding (unlike pleural rub); disappears with large effusion</td></tr>
+      <tr><td><strong>ECG Stage 1</strong></td><td>Diffuse concave-up ST elevation + PR depression; reciprocal changes only in aVR/V1 ("knuckle sign")</td></tr>
+      <tr><td><strong>Pericarditis vs. STEMI</strong></td><td>Concave/diffuse/no reciprocal changes vs. convex(tombstone)/territorial/reciprocal depression present</td></tr>
+      <tr><td><strong>Most common cause</strong></td><td>Developed world: idiopathic/viral (Coxsackievirus B classic) &middot; Developing world: tuberculosis</td></tr>
+      <tr><td><strong>Dressler syndrome</strong></td><td>Autoimmune pericarditis weeks <em>after MI specifically</em> (post-cardiac injury syndrome is the umbrella term for post-surgery/ablation too)</td></tr>
+      <tr><td><strong>Myopericarditis</strong></td><td>Troponin+ with pericarditis pattern, diffuse (not territorial) ECG changes, no wall motion abnormality — not a negative prognostic marker, managed the same</td></tr>
+      <tr><td><strong>Recurrence risk factors</strong></td><td>NSAID non-response, early corticosteroid use, persistently high CRP, severe LGE on CMR, autoimmune etiology</td></tr>
+      <tr><td><strong>Complication rates</strong></td><td>Tamponade &lt;3% (idiopathic) but ~33% bacterial/~20% TB &middot; Constriction &lt;0.5% (idiopathic) but ~20% after incessant pericarditis</td></tr>
+      <tr><td><strong>Imaging</strong></td><td>Echo = first-line (effusion/hemodynamics) &middot; CMR = gold standard for inflammation (LGE, T2-STIR) &middot; CT = best for calcification/surgical planning</td></tr>
+      <tr><td><strong>Admission triggers</strong></td><td>Fever &gt;38°C, subacute onset, large effusion/tamponade, NSAID failure at 1 wk, elevated troponin, immunosuppression, anticoagulant use</td></tr>
+      <tr><td><strong>Tamponade</strong></td><td>Beck's triad (hypotension, JVD, muffled sounds) + pulsus paradoxus (most specific) + tachycardia (most sensitive) + electrical alternans + diastolic RV collapse on echo (most specific echo finding) &rarr; rate of fluid accumulation matters more than volume (150–200 mL rapid can tamponade; &gt;1 L slow may not)</td></tr>
+      <tr><td><strong>Tamponade management</strong></td><td>Echo-guided pericardiocentesis (subxiphoid most common); avoid diuretics/vasodilators; IV fluids only temporize</td></tr>
+      <tr><td><strong>Constrictive pericarditis</strong></td><td>Kussmaul sign + pericardial knock + right-HF picture + preserved e′ on tissue Doppler (vs. reduced e′ in restrictive cardiomyopathy) + calcification on CT</td></tr>
+      <tr><td><strong>First-line treatment</strong></td><td>High-dose NSAID/aspirin (taper with symptom resolution + CRP normalization) + colchicine (3 mo first episode, ≥6 mo after recurrence) + exercise restriction</td></tr>
+      <tr><td><strong>Colchicine mechanism</strong></td><td>Inhibits tubulin polymerization → blocks NLRP3 inflammasome assembly & neutrophil chemotaxis (same mechanism as in gout/FMF)</td></tr>
+      <tr><td><strong>Corticosteroids</strong></td><td>Reserved for NSAID/colchicine failure or contraindication; low-to-moderate dose (prednisone 0.25–0.5 mg/kg/day); high-dose use is a recurrence risk factor</td></tr>
+      <tr><td><strong>IL-1 blockers</strong></td><td>Anakinra/rilonacept for colchicine-resistant or steroid-dependent multiple recurrences with elevated CRP (autoinflammatory phenotype); rilonacept FDA-approved</td></tr>
+      <tr><td><strong>Special-cause treatment</strong></td><td>TB → anti-TB therapy &middot; Uremic → dialysis &middot; Purulent → IV antibiotics + surgical drainage (emergency) &middot; Autoimmune → treat underlying disease</td></tr>
+      <tr><td><strong>Molecular pathway</strong></td><td>PAMPs/DAMPs → Toll-like receptor → NF-κB → NLRP3 inflammasome → caspase-1 → IL-1β → autoinflammatory cycle</td></tr>
+      <tr><td><strong>OMM correlate</strong></td><td>Viscerosomatic reflex at T1–T5 (sympathetic afferents); Chapman points for the heart: 2nd ICS anteriorly, T2–T4 transverse processes posteriorly</td></tr>
+    </table>
+  </section>
+
+</div>
+
+<script>
+document.querySelectorAll('.quiz-q').forEach(function(q){
+  var choices = q.querySelectorAll('.quiz-choice');
+  var explain = q.querySelector('.quiz-explain');
+  choices.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      choices.forEach(function(b){
+        b.classList.add('disabled');
+        if(b.dataset.correct === 'true'){ b.classList.add('correct'); }
+      });
+      if(btn.dataset.correct !== 'true'){ btn.classList.add('incorrect'); }
+      explain.classList.add('show');
+    });
+  });
+});
+
+var sections = document.querySelectorAll('section.card');
+var navLinks = document.querySelectorAll('.sidenav-panel a');
+window.addEventListener('scroll', function(){
+  var pos = window.scrollY + 120;
+  sections.forEach(function(sec){
+    if(pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight){
+      navLinks.forEach(function(a){ a.classList.remove('active'); });
+      var link = document.querySelector('.sidenav-panel a[href="#'+sec.id+'"]');
+      if(link) link.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
