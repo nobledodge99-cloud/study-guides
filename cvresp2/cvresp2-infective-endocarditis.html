@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infective Endocarditis &amp; NBTE — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ee;
+    --cream-card: #fffdf8;
+    --forest-dark: #1f3a2e;
+    --forest: #2f5541;
+    --sage: #7c9885;
+    --sage-light: #e4ecdf;
+    --border: #d8cfb8;
+    --accent: #c1622d;
+    --text-main: #262521;
+    --text-soft: #5c584f;
+    --correct: #2f6b3a;
+    --incorrect: #a5342a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Lora', serif;
+    background: var(--cream);
+    color: var(--text-main);
+    line-height: 1.65;
+  }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--cream-card);
+    border: 1.5px solid var(--forest);
+    color: var(--forest-dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(31,58,46,0.12);
+    transition: background 0.15s, color 0.15s;
+  }
+  .back-btn:hover { background: var(--forest-dark); color: var(--cream-card); }
+
+  .header {
+    background: linear-gradient(135deg, var(--forest-dark), var(--forest));
+    color: var(--cream-card);
+    padding: 64px 24px 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.3rem;
+    margin: 0 0 8px;
+    letter-spacing: 0.5px;
+  }
+  .header p.subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--sage-light);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 24px 100px;
+  }
+
+  nav.toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-bottom: 8px;
+  }
+  nav.toc h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest-dark);
+    margin-top: 0;
+  }
+  nav.toc ul {
+    columns: 2;
+    -webkit-columns: 2;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav.toc li { break-inside: avoid; margin-bottom: 6px; }
+  nav.toc a {
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    scroll-margin-top: 20px;
+  }
+  section.card h2 {
+    color: var(--forest-dark);
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  section.card h3 {
+    color: var(--forest);
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+  section.card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--sage-light);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--forest-dark);
+  }
+  tr:nth-child(even) td { background: #f5f1e6; }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--sage);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .pearl .pearl-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest-dark);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .flag {
+    background: #fbeee2;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .flag .flag-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .case {
+    background: #fbeee2;
+    border: 1px solid #e3c4a4;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .case-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .boards-flag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  code, .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* Quiz */
+  .quiz-mini-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest);
+    margin-bottom: 6px;
+    margin-top: 20px;
+  }
+  .quiz-q {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    background: #fffefb;
+  }
+  .quiz-q p.stem { font-weight: 600; margin-top: 4px; }
+  .quiz-choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-family: 'Lora', serif;
+    font-size: 0.96rem;
+    color: var(--text-main);
+    transition: background 0.15s;
+  }
+  .quiz-choice:hover { background: var(--sage-light); }
+  .quiz-choice.correct { background: #e2f0e3; border-color: var(--correct); color: var(--correct); font-weight: 600; }
+  .quiz-choice.incorrect { background: #f6e2e0; border-color: var(--incorrect); color: var(--incorrect); font-weight: 600; }
+  .quiz-choice[disabled] { cursor: default; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: var(--sage-light);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+
+  /* Side nav */
+  .sidenav-toggle {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: var(--forest-dark);
+    color: var(--cream-card);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 6px 0 0 6px;
+    padding: 12px 6px;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    z-index: 600;
+  }
+  .sidenav-panel {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 240px;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    box-shadow: -4px 0 12px rgba(0,0,0,0.08);
+    padding: 70px 18px 18px;
+    overflow-y: auto;
+    transition: right 0.25s ease;
+    z-index: 550;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--forest-dark);
+    margin-top: 0;
+  }
+  .sidenav-panel ul { list-style: none; padding: 0; margin: 0; }
+  .sidenav-panel li { margin-bottom: 10px; }
+  .sidenav-panel a {
+    text-decoration: none;
+    color: var(--text-soft);
+    font-size: 0.85rem;
+  }
+  .sidenav-panel a.active { color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <h3>Jump to</h3>
+  <ul id="sidenavList"></ul>
+</div>
+
+<div class="header">
+  <h1>Infective Endocarditis &amp; Nonbacterial Thrombotic Endocarditis</h1>
+  <p class="subtitle">Dr. Dennis Kinder, MD, FACP · Cardiovascular Pathology &amp; Clinical Reasoning</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ul>
+    <li><a href="#definition">1. What Is Infective Endocarditis?</a></li>
+    <li><a href="#patho">2. Pathophysiology</a></li>
+    <li><a href="#riskfactors">3. Risk Factors</a></li>
+    <li><a href="#etiology">4. Etiology by Clinical Setting</a></li>
+    <li><a href="#presentation">5. Clinical Presentation — Acute vs. Subacute</a></li>
+    <li><a href="#examfindings">6. Physical Exam Findings</a></li>
+    <li><a href="#embolic">7. Embolic &amp; Immune-Mediated Findings</a></li>
+    <li><a href="#diagnosis">8. Diagnostic Studies</a></li>
+    <li><a href="#duke">9. Modified Duke Criteria</a></li>
+    <li><a href="#valve">10. Valve Involvement</a></li>
+    <li><a href="#complications">11. Complications</a></li>
+    <li><a href="#prophylaxis">12. Prophylaxis</a></li>
+    <li><a href="#treatment">13. Treatment</a></li>
+    <li><a href="#nbte">14. Nonbacterial Thrombotic Endocarditis (NBTE)</a></li>
+    <li><a href="#comparison">15. IE vs. NBTE Comparison</a></li>
+    <li><a href="#cases">16. Case Connections</a></li>
+  </ul>
+</nav>
+<p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--text-soft); text-align:center; margin-top:0;">Each section below ends with a short "Check Your Understanding" quiz on that section's material.</p>
+
+<section class="card" id="definition">
+<h2>1. What Is Infective Endocarditis?</h2>
+<p><strong>Endocarditis</strong> is inflammation of the endocardium — clinically, this almost always means <strong>infection of a heart valve</strong>, usually bacterial. <strong>Infective endocarditis (IE)</strong> begins with injury to the endocardium (most often the valvular surface), most commonly from turbulent blood flow (a congenital or acquired valvular defect), an indwelling venous catheter, cardiac hardware (pacemakers, ICDs), or injected foreign material in people who inject drugs.</p>
+<h3>Acute vs. Subacute IE</h3>
+<table>
+<tr><th></th><th>Acute IE</th><th>Subacute IE</th></tr>
+<tr><td>Onset</td><td>Days to weeks — rapid, usually not subtle</td><td>Weeks to months — insidious</td></tr>
+<tr><td>Typical organism</td><td><em>Staphylococcus aureus</em></td><td>Viridans streptococci</td></tr>
+<tr><td>Valve substrate</td><td>Can colonize normal or damaged native valves</td><td>Usually damaged or structurally abnormal valves (e.g., bifid aortic valve)</td></tr>
+<tr><td>Course</td><td>Large vegetations, rapid valve destruction; can cause acute heart failure</td><td>Smaller vegetations, less destructive; most patients recover with treatment</td></tr>
+</table>
+<div class="flag">
+  <span class="flag-label">High yield</span>
+  <strong>Untreated IE is uniformly fatal.</strong> Even with appropriate treatment, IE still carries significant morbidity and mortality — acute IE (typically <em>S. aureus</em>) has a mortality rate around 50% despite treatment.
+</div>
+<h3>Classification by Valve</h3>
+<ul>
+  <li><strong>Native valve endocarditis</strong> — involves the patient's own valves (subdivided into acute vs. subacute by tempo, as above)</li>
+  <li><strong>Prosthetic valve endocarditis</strong> — infection of a surgically implanted valve</li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="def-q1">
+  <p class="stem">1. Which organism is classically associated with acute infective endocarditis?</p>
+  <button class="quiz-choice" data-correct="true"><em>Staphylococcus aureus</em></button>
+  <button class="quiz-choice" data-correct="false">Viridans streptococci</button>
+  <button class="quiz-choice" data-correct="false"><em>Streptococcus gallolyticus</em></button>
+  <button class="quiz-choice" data-correct="false"><em>Candida albicans</em></button>
+  <div class="quiz-explain"><strong>Correct: <em>S. aureus</em>.</strong> Its high virulence explains both the acute onset and the ability to colonize previously normal valves, producing large, rapidly destructive vegetations.</div>
+</div>
+<div class="quiz-q" id="def-q2">
+  <p class="stem">2. What is the natural course of untreated infective endocarditis?</p>
+  <button class="quiz-choice" data-correct="true">Uniformly fatal</button>
+  <button class="quiz-choice" data-correct="false">Usually self-limited</button>
+  <button class="quiz-choice" data-correct="false">Resolves without treatment in immunocompetent patients</button>
+  <button class="quiz-choice" data-correct="false">Fatal only in prosthetic valve cases</button>
+  <div class="quiz-explain"><strong>Correct: uniformly fatal if untreated.</strong> Even with modern antibiotic and surgical therapy, IE still carries substantial morbidity and mortality — this is why prompt diagnosis and treatment are emphasized so heavily.</div>
+</div>
+<div class="quiz-q" id="def-q3">
+  <p class="stem">3. A patient develops IE on a native, previously normal aortic valve, with rapid symptom onset over a few days. Which organism is most likely?</p>
+  <button class="quiz-choice" data-correct="true"><em>Staphylococcus aureus</em></button>
+  <button class="quiz-choice" data-correct="false">Viridans streptococci</button>
+  <button class="quiz-choice" data-correct="false"><em>Streptococcus sanguinis</em></button>
+  <button class="quiz-choice" data-correct="false">HACEK organisms</button>
+  <div class="quiz-explain"><strong>Correct: <em>S. aureus</em>.</strong> Unlike the viridans streptococci (which typically need a previously damaged valve and cause subacute disease), <em>S. aureus</em> is virulent enough to infect even a structurally normal valve and does so acutely.</div>
+</div>
+</section>
+
+<section class="card" id="patho">
+<h2>2. Pathophysiology</h2>
+<p>IE develops through a predictable sequence:</p>
+<ol>
+  <li><strong>Endothelial injury</strong> at a site of turbulent blood flow</li>
+  <li><strong>Aggregation of platelets, fibrin, and other coagulation molecules</strong> at the injury site, forming a <strong>sterile vegetation</strong> (a nonbacterial thrombotic lesion)</li>
+  <li><strong>Transient bacteremia</strong> seeds the sterile vegetation with organisms (from a dental procedure, IV drug injection, GI/GU procedure, etc.)</li>
+  <li><strong>Microbial proliferation and invasion</strong> of the endocardial surface</li>
+  <li><strong>Metastatic spread</strong> — infection/emboli disseminate to areas of high blood flow such as the kidneys, spleen, and brain</li>
+</ol>
+<div class="pearl">
+  <span class="pearl-label">Key concept</span>
+  Notice that a sterile platelet-fibrin vegetation forms <em>before</em> infection — this is the same substrate seen in nonbacterial thrombotic endocarditis (NBTE, Section 14). The difference between IE and NBTE is simply whether that sterile vegetation goes on to be seeded by bacteria during a bacteremic episode.
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="patho-q1">
+  <p class="stem">1. Put the steps of IE pathogenesis in order: (i) transient bacteremia, (ii) endothelial injury, (iii) microbial proliferation/invasion, (iv) sterile platelet-fibrin vegetation formation.</p>
+  <button class="quiz-choice" data-correct="true">ii &rarr; iv &rarr; i &rarr; iii</button>
+  <button class="quiz-choice" data-correct="false">i &rarr; ii &rarr; iii &rarr; iv</button>
+  <button class="quiz-choice" data-correct="false">iv &rarr; ii &rarr; iii &rarr; i</button>
+  <button class="quiz-choice" data-correct="false">iii &rarr; i &rarr; ii &rarr; iv</button>
+  <div class="quiz-explain"><strong>Correct order: endothelial injury &rarr; sterile vegetation &rarr; transient bacteremia (seeding) &rarr; microbial proliferation/invasion.</strong> Metastatic spread to high-flow organs (brain, spleen, kidney) follows last.</div>
+</div>
+<div class="quiz-q" id="patho-q2">
+  <p class="stem">2. What is the substrate that bacteria colonize to cause infective endocarditis?</p>
+  <button class="quiz-choice" data-correct="true">A sterile platelet-fibrin vegetation formed at a site of endothelial injury</button>
+  <button class="quiz-choice" data-correct="false">Calcified valve leaflet tissue itself</button>
+  <button class="quiz-choice" data-correct="false">Atherosclerotic plaque</button>
+  <button class="quiz-choice" data-correct="false">Pericardial fluid</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Endothelial injury from turbulent flow first produces a sterile thrombus (platelets + fibrin); a subsequent bacteremic episode seeds this thrombus with organisms, which then proliferate and invade.</div>
+</div>
+</section>
+
+<section class="card" id="riskfactors">
+<h2>3. Risk Factors</h2>
+<h3>Underlying Valvular Disease</h3>
+<ul>
+  <li>Rheumatic heart disease</li>
+  <li>Bicuspid aortic valve</li>
+  <li>Calcific or sclerotic aortic valve</li>
+  <li>Hypertrophic subaortic stenosis</li>
+  <li>Mitral valve prolapse</li>
+</ul>
+<div class="flag">
+  <span class="flag-label">High yield — shifting epidemiology</span>
+  <strong>Mitral valve prolapse has replaced rheumatic heart disease as the leading cause of valvular-disease-related endocarditis</strong> in the antibiotic era, since rheumatic heart disease itself has become far less common with widespread antibiotic treatment of streptococcal pharyngitis.
+</div>
+<h3>Congenital Disorders</h3>
+<ul>
+  <li>Ventricular septal defect</li>
+  <li>Tetralogy of Fallot</li>
+  <li>Coarctation of the aorta</li>
+  <li>Patent ductus arteriosus</li>
+</ul>
+<h3>Sources of Transient Bacteremia</h3>
+<ul>
+  <li>Dental procedures (including routine cleaning/brushing)</li>
+  <li>Upper respiratory procedures</li>
+  <li>Urologic procedures</li>
+  <li>Lower gastrointestinal procedures</li>
+  <li>Intravascular devices</li>
+  <li>IV drug use</li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="risk-q1">
+  <p class="stem">1. In the current antibiotic era, which condition is now the most common valvular substrate for endocarditis, having overtaken rheumatic heart disease?</p>
+  <button class="quiz-choice" data-correct="true">Mitral valve prolapse</button>
+  <button class="quiz-choice" data-correct="false">Bicuspid aortic valve</button>
+  <button class="quiz-choice" data-correct="false">Hypertrophic subaortic stenosis</button>
+  <button class="quiz-choice" data-correct="false">Calcific aortic stenosis</button>
+  <div class="quiz-explain"><strong>Correct: mitral valve prolapse.</strong> Rheumatic heart disease has declined substantially since streptococcal pharyngitis is now routinely treated with antibiotics, removing the antecedent rheumatic fever that used to damage valves.</div>
+</div>
+<div class="quiz-q" id="risk-q2">
+  <p class="stem">2. Which of the following is a congenital (rather than acquired/valvular) risk factor for endocarditis?</p>
+  <button class="quiz-choice" data-correct="true">Tetralogy of Fallot</button>
+  <button class="quiz-choice" data-correct="false">Mitral valve prolapse</button>
+  <button class="quiz-choice" data-correct="false">Calcific aortic valve</button>
+  <button class="quiz-choice" data-correct="false">Rheumatic heart disease</button>
+  <div class="quiz-explain"><strong>Correct: tetralogy of Fallot.</strong> The other three are acquired/degenerative valvular conditions; congenital risk factors also include VSD, coarctation of the aorta, and PDA.</div>
+</div>
+</section>
+
+<section class="card" id="etiology">
+<h2>4. Etiology by Clinical Setting</h2>
+<h3>Native Valve Endocarditis</h3>
+<ul>
+  <li><em>S. aureus</em>, viridans streptococci, enterococci</li>
+  <li><strong>HACEK organisms</strong> (<em>Haemophilus</em> species, <em>Aggregatibacter actinomycetemcomitans</em>, <em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em>, <em>Kingella kingae</em>) — normal mouth flora, fastidious and slow-growing</li>
+  <li>A small percentage: gram-negative organisms and fungi</li>
+</ul>
+<h3>Injection Drug Use</h3>
+<ul>
+  <li><em>S. aureus</em> causes <strong>~60% of cases</strong> in this population, and is responsible for <strong>80&ndash;90% of tricuspid valve</strong> IE specifically</li>
+  <li><em>Pseudomonas aeruginosa</em> is also notable in this group (contaminates water/injections)</li>
+</ul>
+<h3>Prosthetic Valve Endocarditis</h3>
+<table>
+<tr><th>Timing</th><th>Typical organisms</th></tr>
+<tr><td><strong>Early</strong> (first ~2 months post-op)</td><td>Coagulase-positive and coagulase-negative staphylococci, gram-negative organisms, fungi</td></tr>
+<tr><td><strong>Late</strong> (&gt;2 months post-op)</td><td>Streptococci, coagulase-positive and coagulase-negative staphylococci</td></tr>
+</table>
+<h3>Culture-Negative Endocarditis</h3>
+<p>Organisms that are difficult to grow on standard blood culture media:</p>
+<ul>
+  <li><em>Legionella</em></li>
+  <li><em>Bartonella</em> (including <em>Bartonella quintana</em>)</li>
+  <li><em>Abiotrophia</em></li>
+  <li><em>Tropheryma whipplei</em></li>
+  <li><em>Coxiella burnetii</em></li>
+  <li><em>Chlamydia psittaci</em> (psittacosis)</li>
+  <li><em>Brucella</em></li>
+  <li>Anaerobes</li>
+  <li>HACEK organisms</li>
+</ul>
+<div class="flag">
+  <span class="flag-label">Special-population associations to memorize</span>
+  <ul style="margin-bottom:0;">
+    <li><strong><em>S. gallolyticus</em> (formerly <em>S. bovis</em>)</strong> endocarditis &rarr; think <strong>occult colon cancer</strong></li>
+    <li><strong>HACEK organisms</strong> &rarr; culture-negative IE, often after <strong>dental procedures</strong> (normal oropharyngeal flora)</li>
+    <li><strong><em>Pseudomonas</em></strong> &rarr; think <strong>IV drug use</strong> (contaminated water/injections)</li>
+    <li><strong>Fungi (<em>Candida</em>, <em>Aspergillus</em>)</strong> &rarr; immunocompromised, IV drug use, or post-surgical patients</li>
+  </ul>
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="etio-q1">
+  <p class="stem">1. In a patient who injects drugs, which organism is responsible for the majority of tricuspid valve endocarditis?</p>
+  <button class="quiz-choice" data-correct="true"><em>Staphylococcus aureus</em></button>
+  <button class="quiz-choice" data-correct="false">Viridans streptococci</button>
+  <button class="quiz-choice" data-correct="false">HACEK organisms</button>
+  <button class="quiz-choice" data-correct="false"><em>Streptococcus gallolyticus</em></button>
+  <div class="quiz-explain"><strong>Correct: <em>S. aureus</em></strong>, accounting for ~60% of IE cases in people who inject drugs and 80&ndash;90% of tricuspid valve involvement specifically — direct skin-to-vein inoculation delivers it straight to the first valve encountered.</div>
+</div>
+<div class="quiz-q" id="etio-q2">
+  <p class="stem">2. A patient's blood cultures grow <em>Streptococcus gallolyticus</em>. What workup should this prompt?</p>
+  <button class="quiz-choice" data-correct="true">Colonoscopy to evaluate for occult colon cancer</button>
+  <button class="quiz-choice" data-correct="false">Dental examination</button>
+  <button class="quiz-choice" data-correct="false">HIV testing</button>
+  <button class="quiz-choice" data-correct="false">Rheumatologic autoantibody panel</button>
+  <div class="quiz-explain"><strong>Correct: colonoscopy.</strong> <em>S. gallolyticus</em> (formerly <em>S. bovis</em>) is gut flora that reaches the bloodstream through colonic mucosal disruption — most classically an occult colorectal malignancy.</div>
+</div>
+<div class="quiz-q" id="etio-q3">
+  <p class="stem">3. Which organisms are most likely in early (within 2 months of surgery) prosthetic valve endocarditis?</p>
+  <button class="quiz-choice" data-correct="true">Coagulase-positive and -negative staphylococci, gram-negatives, fungi</button>
+  <button class="quiz-choice" data-correct="false">Streptococci only</button>
+  <button class="quiz-choice" data-correct="false">Viridans streptococci and enterococci</button>
+  <button class="quiz-choice" data-correct="false">HACEK organisms exclusively</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Early prosthetic valve infections (first ~2 months) reflect perioperative/nosocomial contamination — staphylococci (both coagulase types), gram-negative rods, and fungi. Late infections (&gt;2 months) shift toward streptococci and staphylococci from routine bacteremic seeding.</div>
+</div>
+</section>
+
+<section class="card" id="presentation">
+<h2>5. Clinical Presentation — Acute vs. Subacute</h2>
+<table>
+<tr><th></th><th>Acute (days)</th><th>Subacute (weeks to months)</th></tr>
+<tr><td>Onset</td><td>Sudden high fever, life-threatening</td><td>Insidious</td></tr>
+<tr><td>Cardiovascular</td><td>Tachycardia, rapid heart valve damage</td><td>Maybe some tachycardia</td></tr>
+<tr><td>Constitutional</td><td>Fatigue</td><td>Fatigue, mild fever, weight loss, night sweats</td></tr>
+<tr><td>Hematologic</td><td>&mdash;</td><td>Anemia</td></tr>
+<tr><td>Organ involvement</td><td>Lungs (right-sided IE); other organs (left-sided IE)</td><td>Most commonly viridans streptococci, on previously damaged valves</td></tr>
+</table>
+<p>Across both patterns, <strong>fever is the most common symptom overall (present in ~90% of patients)</strong> but is nonspecific. A <strong>new heart murmur</strong> is the most common physical exam finding after fever (~85% of patients). Because IE often lacks localizing symptoms (no cough, dysuria, or rash to point to a source), it's a classic cause of <strong>fever of unknown origin</strong>.</p>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="pres-q1">
+  <p class="stem">1. What is the single most common symptom of infective endocarditis overall?</p>
+  <button class="quiz-choice" data-correct="true">Fever</button>
+  <button class="quiz-choice" data-correct="false">New heart murmur</button>
+  <button class="quiz-choice" data-correct="false">Weight loss</button>
+  <button class="quiz-choice" data-correct="false">Hematuria</button>
+  <div class="quiz-explain"><strong>Correct: fever</strong> (~90% of patients), though it's nonspecific. A new murmur is the most common exam finding (~85%), but fever is the more common overall symptom.</div>
+</div>
+<div class="quiz-q" id="pres-q2">
+  <p class="stem">2. A patient with subacute IE from viridans streptococci most likely has which valve substrate?</p>
+  <button class="quiz-choice" data-correct="true">A previously damaged or structurally abnormal valve</button>
+  <button class="quiz-choice" data-correct="false">A completely normal, undamaged native valve</button>
+  <button class="quiz-choice" data-correct="false">Always a prosthetic valve</button>
+  <button class="quiz-choice" data-correct="false">The pulmonic valve specifically</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Viridans streptococci are considerably less virulent than <em>S. aureus</em> and generally require a preexisting valvular abnormality to establish infection, producing the more insidious subacute course.</div>
+</div>
+<div class="quiz-q" id="pres-q3">
+  <p class="stem">3. Why is IE a classic cause of "fever of unknown origin"?</p>
+  <button class="quiz-choice" data-correct="true">It often presents with fever but without localizing symptoms pointing to a source</button>
+  <button class="quiz-choice" data-correct="false">It never causes fever</button>
+  <button class="quiz-choice" data-correct="false">It always presents with a productive cough</button>
+  <button class="quiz-choice" data-correct="false">It is diagnosed only at autopsy</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Unlike most febrile illnesses, IE frequently lacks a localizing clue (no dysuria, cough, or rash), so clinicians must specifically consider and test for it during a fever-of-unknown-origin workup.</div>
+</div>
+</section>
+
+<section class="card" id="examfindings">
+<h2>6. Physical Exam Findings</h2>
+<p>Classic findings occur in roughly <strong>25% of patients</strong> and take time to develop — they're less commonly seen now that treatment begins earlier.</p>
+<table>
+<tr><th>Finding</th><th>Description</th><th>Location</th><th>Mechanism</th></tr>
+<tr><td><strong>Petechiae</strong></td><td>Small red spots from capillary bleeding (small emboli)</td><td>Palate, conjunctiva, beneath fingernails</td><td>Microembolic</td></tr>
+<tr><td><strong>Splinter (subungual) hemorrhages</strong></td><td>Linear hemorrhages</td><td>Under the nails</td><td>Microembolic</td></tr>
+<tr><td><strong>Osler nodes</strong></td><td>Painful, violaceous, raised lesions</td><td>Fingers, toes, or feet</td><td><strong>Tender</strong> — immune complex deposition and/or microembolic phenomena</td></tr>
+<tr><td><strong>Janeway lesions</strong></td><td>Painless, erythematous, flat lesions</td><td>Palms and soles</td><td><strong>Nontender</strong> — microembolic hemorrhagic lesions</td></tr>
+<tr><td><strong>Roth spots</strong></td><td>Exudative retinal hemorrhages with a white center</td><td>Retina</td><td>Immune complex/microembolic</td></tr>
+</table>
+<div class="pearl">
+  <span class="pearl-label">Mnemonic — "Ow for Owsler nodes"</span>
+  Osler nodes and Janeway lesions look similar, but <strong>Osler nodes are painful ("Ow") and Janeway lesions are painless</strong> — use the pain to tell them apart. Osler nodes relate to immune complexes/microembolic phenomena, while Janeway lesions are purely microembolic hemorrhages.
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="exam-q1">
+  <p class="stem">1. A patient with IE has painful, violaceous, raised lesions on the finger pads. What are these called?</p>
+  <button class="quiz-choice" data-correct="true">Osler nodes</button>
+  <button class="quiz-choice" data-correct="false">Janeway lesions</button>
+  <button class="quiz-choice" data-correct="false">Roth spots</button>
+  <button class="quiz-choice" data-correct="false">Petechiae</button>
+  <div class="quiz-explain"><strong>Correct: Osler nodes.</strong> Remember "Ow for Owsler" — they're painful/tender, unlike the painless Janeway lesions.</div>
+</div>
+<div class="quiz-q" id="exam-q2">
+  <p class="stem">2. Painless, erythematous macules on the palms and soles of an IE patient are:</p>
+  <button class="quiz-choice" data-correct="true">Janeway lesions</button>
+  <button class="quiz-choice" data-correct="false">Osler nodes</button>
+  <button class="quiz-choice" data-correct="false">Roth spots</button>
+  <button class="quiz-choice" data-correct="false">Splinter hemorrhages</button>
+  <div class="quiz-explain"><strong>Correct: Janeway lesions.</strong> They're nontender microembolic hemorrhages, in contrast to the tender Osler nodes.</div>
+</div>
+<div class="quiz-q" id="exam-q3">
+  <p class="stem">3. A retinal exam shows hemorrhages with pale/white centers. This finding is called:</p>
+  <button class="quiz-choice" data-correct="true">Roth spots</button>
+  <button class="quiz-choice" data-correct="false">Cotton wool spots</button>
+  <button class="quiz-choice" data-correct="false">Janeway lesions</button>
+  <button class="quiz-choice" data-correct="false">Osler nodes</button>
+  <div class="quiz-explain"><strong>Correct: Roth spots.</strong> These are exudative retinal hemorrhages with a characteristic white/pale center, seen in IE among other conditions.</div>
+</div>
+</section>
+
+<section class="card" id="embolic">
+<h2>7. Embolic &amp; Immune-Mediated Findings</h2>
+<p>Beyond the classic skin/eye findings, IE can produce:</p>
+<ul>
+  <li><strong>Strokes and other major embolic events</strong> — occur in roughly 25% of patients, most often during the <strong>first week of antibiotic treatment</strong></li>
+  <li><strong>Hematuria and proteinuria</strong> — from renal emboli or immune-complex-mediated <strong>glomerulonephritis</strong></li>
+  <li><strong>Septic emboli</strong> to brain, spleen, kidney, and lung (especially with right-sided IE)</li>
+</ul>
+<div class="flag">
+  <span class="flag-label">Timing pearl</span>
+  Major embolic events cluster in the <strong>first week</strong> after starting antibiotics — don't be reassured that a patient is "improving" just because they've started treatment; embolic risk is still high early on.
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="emb-q1">
+  <p class="stem">1. Major embolic events in IE most commonly occur during which time period?</p>
+  <button class="quiz-choice" data-correct="true">The first week of antibiotic treatment</button>
+  <button class="quiz-choice" data-correct="false">Only after antibiotics are completed</button>
+  <button class="quiz-choice" data-correct="false">Only before any treatment is started</button>
+  <button class="quiz-choice" data-correct="false">Exclusively during surgery</button>
+  <div class="quiz-explain"><strong>Correct: the first week of antibiotic treatment.</strong> This is a key timing pearl — early treatment doesn't immediately eliminate embolic risk.</div>
+</div>
+<div class="quiz-q" id="emb-q2">
+  <p class="stem">2. Hematuria and proteinuria in a patient with IE most likely reflect:</p>
+  <button class="quiz-choice" data-correct="true">Renal emboli or immune-complex-mediated glomerulonephritis</button>
+  <button class="quiz-choice" data-correct="false">Direct bacterial infection of the bladder</button>
+  <button class="quiz-choice" data-correct="false">Medication-induced nephrotoxicity only</button>
+  <button class="quiz-choice" data-correct="false">Diabetic nephropathy</button>
+  <div class="quiz-explain"><strong>Correct.</strong> The kidney is a classic target organ for both septic/thrombotic emboli and immune-complex deposition in IE, producing hematuria/proteinuria and glomerulonephritis findings like red cell casts on urine microscopy.</div>
+</div>
+</section>
+
+<section class="card" id="diagnosis">
+<h2>8. Diagnostic Studies</h2>
+<h3>Blood Cultures</h3>
+<p><strong>Draw three sets of blood cultures before starting antibiotics.</strong> About <strong>5% of cases are culture-negative</strong>, most often because the patient already received antibiotics — if cultures are negative but suspicion remains high, consider holding antibiotics 2&ndash;3 days (if the patient's clinical status allows) and rechecking cultures. Most bacteria grow within 48 hours; HACEK organisms may take up to 5 days.</p>
+<h3>Echocardiography</h3>
+<table>
+<tr><th>Modality</th><th>Sensitivity</th><th>Notes</th></tr>
+<tr><td>Transthoracic echo (TTE)</td><td>55&ndash;65% (ScholarRx: ~75%)</td><td>First-line, noninvasive</td></tr>
+<tr><td>Transesophageal echo (TEE)</td><td>~90%</td><td>Best for valve ring abscesses and prosthetic valve disease; obtain if TTE is negative but suspicion remains high</td></tr>
+</table>
+
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="dx-q1">
+  <p class="stem">1. What is the correct sequence when infective endocarditis is suspected?</p>
+  <button class="quiz-choice" data-correct="true">Draw three sets of blood cultures, then start empiric antibiotics</button>
+  <button class="quiz-choice" data-correct="false">Start antibiotics immediately, then draw blood cultures</button>
+  <button class="quiz-choice" data-correct="false">Obtain echocardiography before any blood cultures</button>
+  <button class="quiz-choice" data-correct="false">Wait for fever to resolve before drawing cultures</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Blood cultures must be drawn before antibiotics are started; giving antibiotics first is a major cause of culture-negative results and can obscure the diagnosis.</div>
+</div>
+<div class="quiz-q" id="dx-q2">
+  <p class="stem">2. Which echocardiographic modality is preferred for detecting a valve ring abscess or evaluating a prosthetic valve?</p>
+  <button class="quiz-choice" data-correct="true">Transesophageal echocardiography (TEE)</button>
+  <button class="quiz-choice" data-correct="false">Transthoracic echocardiography (TTE)</button>
+  <button class="quiz-choice" data-correct="false">Doppler ultrasound of the carotids</button>
+  <button class="quiz-choice" data-correct="false">Cardiac MRI as first-line</button>
+  <div class="quiz-explain"><strong>Correct: TEE</strong>, with ~90% sensitivity versus TTE's 55&ndash;65% — TEE is specifically preferred for abscesses and prosthetic valve disease.</div>
+</div>
+<div class="quiz-q" id="dx-q3">
+  <p class="stem">3. Approximately what percentage of IE cases are culture-negative, and what is the most common reason?</p>
+  <button class="quiz-choice" data-correct="true">~5%, most often due to prior antibiotic exposure</button>
+  <button class="quiz-choice" data-correct="false">~50%, most often due to fungal etiology</button>
+  <button class="quiz-choice" data-correct="false">~25%, most often due to lab error</button>
+  <button class="quiz-choice" data-correct="false">~1%, most often due to viral etiology</button>
+  <div class="quiz-explain"><strong>Correct: ~5%,</strong> most commonly because the patient already received antibiotics before cultures were drawn. A smaller subset reflects genuinely fastidious/culture-negative organisms (HACEK, <em>Coxiella</em>, <em>Bartonella</em>, etc.).</div>
+</div>
+</section>
+
+<section class="card" id="duke">
+<h2>9. Modified Duke Criteria</h2>
+<p>The modified Duke criteria diagnose IE with roughly <strong>80% accuracy</strong>.</p>
+<h3>Major Criteria</h3>
+<ul>
+  <li>Two positive blood cultures (typical organisms)</li>
+  <li>Endocardial involvement on echocardiogram</li>
+  <li>Development of a new regurgitant murmur</li>
+</ul>
+<h3>Minor Criteria</h3>
+<ul>
+  <li>Presence of a predisposing condition</li>
+  <li>Fever &ge;38&deg;C</li>
+  <li><strong>Vascular phenomena</strong> — cutaneous hemorrhage, aneurysm, systemic emboli, pulmonary infarction</li>
+  <li><strong>Immunologic phenomena</strong> — glomerulonephritis, Osler nodes, Roth spots, rheumatoid factor</li>
+  <li>One positive blood culture (not meeting major criteria)</li>
+</ul>
+<h3>Interpreting the Criteria</h3>
+<table>
+<tr><th>Category</th><th>Requirement</th></tr>
+<tr><td><strong>Definite diagnosis</strong></td><td>2 major, <strong>OR</strong> 1 major + 3 minor, <strong>OR</strong> 5 minor</td></tr>
+<tr><td><strong>Possible diagnosis</strong></td><td>1 major + 1 minor, <strong>OR</strong> 3 minor</td></tr>
+<tr><td><strong>Rejected</strong></td><td>Firm alternative diagnosis; symptom resolution &le;4 days with antibiotics; no evidence at surgery or autopsy</td></tr>
+</table>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="duke-q1">
+  <p class="stem">1. A patient has two positive blood cultures and a new regurgitant murmur, with no other findings. What is the diagnostic category?</p>
+  <button class="quiz-choice" data-correct="true">Definite IE (2 major criteria)</button>
+  <button class="quiz-choice" data-correct="false">Possible IE</button>
+  <button class="quiz-choice" data-correct="false">Rejected</button>
+  <button class="quiz-choice" data-correct="false">Cannot be assessed without echocardiogram</button>
+  <div class="quiz-explain"><strong>Correct: definite IE.</strong> Two positive blood cultures and a new regurgitant murmur are each independent major criteria — two major criteria alone meet the threshold for a definite diagnosis.</div>
+</div>
+<div class="quiz-q" id="duke-q2">
+  <p class="stem">2. Which of the following is classified as a MAJOR Duke criterion, not a minor one?</p>
+  <button class="quiz-choice" data-correct="true">Endocardial involvement on echocardiogram</button>
+  <button class="quiz-choice" data-correct="false">Fever &ge;38&deg;C</button>
+  <button class="quiz-choice" data-correct="false">Osler nodes</button>
+  <button class="quiz-choice" data-correct="false">Rheumatoid factor</button>
+  <div class="quiz-explain"><strong>Correct: endocardial involvement on echo.</strong> The other three are minor criteria (fever, immunologic phenomena). The three major criteria are: 2 positive blood cultures, endocardial involvement on echo, and a new regurgitant murmur.</div>
+</div>
+<div class="quiz-q" id="duke-q3">
+  <p class="stem">3. A patient has 1 major and 1 minor Duke criterion. This is classified as:</p>
+  <button class="quiz-choice" data-correct="true">Possible IE</button>
+  <button class="quiz-choice" data-correct="false">Definite IE</button>
+  <button class="quiz-choice" data-correct="false">Rejected</button>
+  <button class="quiz-choice" data-correct="false">Requires biopsy to classify</button>
+  <div class="quiz-explain"><strong>Correct: possible IE.</strong> "Possible" requires 1 major + 1 minor, or 3 minor criteria — short of the "definite" thresholds (2 major; 1 major + 3 minor; or 5 minor).</div>
+</div>
+</section>
+
+<section class="card" id="valve">
+<h2>10. Valve Involvement</h2>
+<p>All four heart valves can be involved, but with different frequency depending on the pressure environment and clinical context:</p>
+<ul>
+  <li><strong>General population:</strong> the <strong>mitral valve</strong> is the most common site (mitral regurgitation is the most common valvular lesion overall)</li>
+  <li><strong>People who inject drugs:</strong> the <strong>tricuspid valve</strong> is the most frequently involved, since it's the first valve encountered by organisms injected into venous blood</li>
+</ul>
+<p>Tricuspid regurgitation from right-sided IE can cause a <strong>bounding jugular venous pulse during systole</strong>, as right ventricular contraction is transmitted back into the right atrium and jugular veins.</p>
+<div class="pearl">
+  <span class="pearl-label">Why left-sided valves are more often involved overall</span>
+  Higher intrachamber pressure on the left side creates high-pressure jet streams with adjacent low-flow eddies — ideal conditions for clot formation and subsequent bacterial colonization, and high-flow valves are also more prone to repeated mechanical damage.
+</div>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="valve-q1">
+  <p class="stem">1. In the general population, which valve is most commonly affected by IE?</p>
+  <button class="quiz-choice" data-correct="true">Mitral valve</button>
+  <button class="quiz-choice" data-correct="false">Tricuspid valve</button>
+  <button class="quiz-choice" data-correct="false">Pulmonic valve</button>
+  <button class="quiz-choice" data-correct="false">Aortic valve</button>
+  <div class="quiz-explain"><strong>Correct: mitral valve</strong> — mitral regurgitation is the most common valvular lesion in the general IE population, reflecting the higher pressures and turbulence on the left side of the heart.</div>
+</div>
+<div class="quiz-q" id="valve-q2">
+  <p class="stem">2. In a person who injects drugs, why is the tricuspid valve most often involved?</p>
+  <button class="quiz-choice" data-correct="true">It's the first valve encountered by organisms entering the venous circulation</button>
+  <button class="quiz-choice" data-correct="false">It has the highest intrachamber pressure in the heart</button>
+  <button class="quiz-choice" data-correct="false">It is structurally weaker than other valves</button>
+  <button class="quiz-choice" data-correct="false">It has no chordae tendineae to filter emboli</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Injected bacteria travel through the venous system and reach the right atrium/right ventricle first — the tricuspid valve — before any other valve, explaining the predominance of right-sided (tricuspid) IE in this population.</div>
+</div>
+</section>
+
+<section class="card" id="complications">
+<h2>11. Complications</h2>
+<ul>
+  <li><strong>Valve destruction</strong> and <strong>abscess formation</strong></li>
+  <li><strong>Conduction disturbances</strong> — especially with <strong>aortic valve</strong> IE, given its proximity to the AV node</li>
+  <li><strong>Aneurysm formation</strong> (e.g., mycotic aneurysm from septic emboli, seen on cerebral angiography)</li>
+  <li><strong>Embolization</strong> — brain (stroke), myocardium (MI), spleen, kidney</li>
+  <li><strong>Septic pulmonary emboli</strong> &rarr; pulmonary infarction, lung abscess (especially right-sided IE)</li>
+  <li><strong>Musculoskeletal:</strong> septic arthritis, osteomyelitis (deep bone pain; back pain if vertebral)</li>
+  <li><strong>Heart failure</strong> — the <strong>most common cause of death</strong> from IE, from acute valvular insufficiency due to vegetations/abscesses</li>
+</ul>
+<h3>Conduction Abnormalities (Aortic Valve IE)</h3>
+<p>Because the AV node sits adjacent to the aortic valve, aortic IE (especially with annular/perivalvular abscess) can produce a spectrum of AV block:</p>
+<table>
+<tr><th>EKG Finding</th><th>Description</th></tr>
+<tr><td>First-degree AV block</td><td>PR interval &gt;0.2 seconds, fixed</td></tr>
+<tr><td>Second-degree AV block, type I (Wenckebach/Mobitz I)</td><td>Progressively lengthening PR interval, then a dropped P wave</td></tr>
+<tr><td>Third-degree (complete) AV block</td><td>Complete AV dissociation — atria and ventricles beat independently</td></tr>
+</table>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="comp-q1">
+  <p class="stem">1. Why is aortic valve endocarditis more likely than mitral IE to cause AV conduction abnormalities?</p>
+  <button class="quiz-choice" data-correct="true">The aortic valve is anatomically adjacent to the AV node</button>
+  <button class="quiz-choice" data-correct="false">The aortic valve has thinner leaflets</button>
+  <button class="quiz-choice" data-correct="false">The aortic valve carries lower pressure than the mitral valve</button>
+  <button class="quiz-choice" data-correct="false">Aortic IE is always caused by more virulent organisms</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Perivalvular extension of infection (e.g., annular abscess) from the aortic valve can directly involve the nearby AV node and conduction system, producing progressive degrees of AV block.</div>
+</div>
+<div class="quiz-q" id="comp-q2">
+  <p class="stem">2. An EKG shows a progressively lengthening PR interval followed by a dropped QRS complex. This is:</p>
+  <button class="quiz-choice" data-correct="true">Second-degree AV block, type I (Wenckebach)</button>
+  <button class="quiz-choice" data-correct="false">First-degree AV block</button>
+  <button class="quiz-choice" data-correct="false">Third-degree (complete) AV block</button>
+  <button class="quiz-choice" data-correct="false">Normal sinus rhythm</button>
+  <div class="quiz-explain"><strong>Correct: Wenckebach (Mobitz I).</strong> The progressive PR prolongation followed by a dropped beat is its hallmark, distinct from the fixed prolonged PR of first-degree block and the complete dissociation of third-degree block.</div>
+</div>
+<div class="quiz-q" id="comp-q3">
+  <p class="stem">3. What is the most common cause of death from infective endocarditis?</p>
+  <button class="quiz-choice" data-correct="true">Heart failure from acute valvular insufficiency</button>
+  <button class="quiz-choice" data-correct="false">Septic pulmonary emboli</button>
+  <button class="quiz-choice" data-correct="false">Osteomyelitis</button>
+  <button class="quiz-choice" data-correct="false">Glomerulonephritis leading to renal failure</button>
+  <div class="quiz-explain"><strong>Correct: heart failure</strong>, arising from acute valvular insufficiency as vegetations and/or abscesses destroy or distort the valve.</div>
+</div>
+</section>
+
+<section class="card" id="prophylaxis">
+<h2>12. Prophylaxis</h2>
+<p>Antibiotic prophylaxis before procedures likely to cause transient bacteremia (dental procedures in particular) is reserved for <strong>high-risk groups</strong>:</p>
+<ul>
+  <li>History of previous endocarditis</li>
+  <li>Prosthetic cardiac valves</li>
+  <li>Certain congenital heart diseases:
+    <ul>
+      <li>Unrepaired cyanotic congenital heart disease</li>
+      <li>Repaired within the last 6 months of intervention</li>
+      <li>Repaired with residual defects</li>
+    </ul>
+  </li>
+  <li>Cardiac transplant patients who develop valvulopathy</li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="proph-q1">
+  <p class="stem">1. Which of the following patients should receive antibiotic prophylaxis before a dental procedure?</p>
+  <button class="quiz-choice" data-correct="true">A patient with a prosthetic aortic valve</button>
+  <button class="quiz-choice" data-correct="false">A patient with mild, asymptomatic mitral valve prolapse and no regurgitation</button>
+  <button class="quiz-choice" data-correct="false">A patient with a repaired VSD and no residual defect, more than 6 months post-op</button>
+  <button class="quiz-choice" data-correct="false">A patient with well-controlled hypertension</button>
+  <div class="quiz-explain"><strong>Correct: prosthetic valve.</strong> Prophylaxis is reserved for high-risk groups — prior IE, prosthetic valves, certain unrepaired/recently repaired/residual-defect congenital heart disease, and cardiac transplant recipients with valvulopathy — not for routine valve findings like uncomplicated MVP.</div>
+</div>
+<div class="quiz-q" id="proph-q2">
+  <p class="stem">2. A patient had a congenital heart defect surgically repaired 3 months ago with no residual defect. Regarding endocarditis prophylaxis before dental work, this patient:</p>
+  <button class="quiz-choice" data-correct="true">Still qualifies for prophylaxis (within 6 months of repair)</button>
+  <button class="quiz-choice" data-correct="false">No longer needs prophylaxis, since the repair is complete</button>
+  <button class="quiz-choice" data-correct="false">Never needed prophylaxis in the first place</button>
+  <button class="quiz-choice" data-correct="false">Needs prophylaxis indefinitely regardless of timing</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Repaired congenital heart disease still qualifies for prophylaxis within the first 6 months after intervention (the prosthetic material hasn't yet been endothelialized) — after that window, prophylaxis is only needed if a residual defect remains.</div>
+</div>
+</section>
+
+<section class="card" id="treatment">
+<h2>13. Treatment</h2>
+<h3>Empiric Antibiotic Therapy</h3>
+<p>Empiric coverage targets the most likely organisms: <strong>staphylococci, streptococci, and enterococci</strong>.</p>
+<div class="pearl">
+  <span class="pearl-label">Common empiric regimen</span>
+  <strong>Vancomycin</strong> 1 g IV every 12 hours <strong>with ceftriaxone</strong> 2 g IV daily, for a total duration of <strong>4&ndash;6 weeks</strong> — always tailor to the organism once blood cultures result.
+</div>
+<h3>Surgical Indications</h3>
+<ul>
+  <li>Acute heart failure unresponsive to medical therapy</li>
+  <li>Left-sided IE caused by <em>S. aureus</em>, fungi, or highly resistant organisms</li>
+  <li>Heart block, annular or aortic abscess</li>
+  <li>Persistent bacteremia lasting &gt;5&ndash;7 days despite appropriate antibiotics</li>
+  <li>Infected prosthetic valve</li>
+  <li>Large valvular vegetation</li>
+</ul>
+<h3>Anticoagulation</h3>
+<ul>
+  <li><strong>Contraindicated in native valve endocarditis</strong> — increases the risk of intracerebral hemorrhage (from hemorrhagic transformation of septic emboli)</li>
+  <li><strong>Prosthetic valve endocarditis:</strong> anticoagulation should be <strong>stopped during the septic phase</strong>, and stopped for <strong>two weeks</strong> following a CNS embolic event</li>
+</ul>
+<h3>Additional Considerations</h3>
+<ul>
+  <li>Organisms from oral flora (HACEK, viridans strep) &rarr; the patient should get a <strong>dental exam</strong></li>
+  <li><em>S. gallolyticus</em> &rarr; the patient should get a <strong>colonoscopy</strong></li>
+  <li>Infected prosthetic cardiac devices (pacemakers, ICDs) may need to be <strong>replaced</strong></li>
+</ul>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="tx-q1">
+  <p class="stem">1. A patient has native valve endocarditis and a recent embolic stroke. Should therapeutic anticoagulation be started?</p>
+  <button class="quiz-choice" data-correct="true">No — anticoagulation is generally contraindicated in native valve IE due to intracerebral hemorrhage risk</button>
+  <button class="quiz-choice" data-correct="false">Yes, immediately, to prevent further emboli</button>
+  <button class="quiz-choice" data-correct="false">Yes, but only with unfractionated heparin</button>
+  <button class="quiz-choice" data-correct="false">Only if the patient has a mechanical valve</button>
+  <div class="quiz-explain"><strong>Correct: no.</strong> Native valve IE with embolic stroke is a classic scenario where anticoagulation should be avoided or held — the risk of hemorrhagic transformation of a septic embolic infarct is too high.</div>
+</div>
+<div class="quiz-q" id="tx-q2">
+  <p class="stem">2. Which of the following is an indication for surgical intervention in IE?</p>
+  <button class="quiz-choice" data-correct="true">Persistent bacteremia lasting more than 5&ndash;7 days despite appropriate antibiotics</button>
+  <button class="quiz-choice" data-correct="false">A single positive blood culture at diagnosis</button>
+  <button class="quiz-choice" data-correct="false">Fever that resolves within 48 hours of starting antibiotics</button>
+  <button class="quiz-choice" data-correct="false">Mild, asymptomatic valvular thickening on echo</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Persistent bacteremia beyond 5&ndash;7 days despite proper antibiotic therapy suggests a source (abscess, undrained focus) that antibiotics alone won't clear, and is a standard surgical indication — along with refractory heart failure, heart block/abscess, resistant organisms, infected prosthetic valves, and large vegetations.</div>
+</div>
+<div class="quiz-q" id="tx-q3">
+  <p class="stem">3. What is a typical empiric antibiotic regimen and duration for suspected IE?</p>
+  <button class="quiz-choice" data-correct="true">Vancomycin + ceftriaxone for 4&ndash;6 weeks</button>
+  <button class="quiz-choice" data-correct="false">A single dose of oral amoxicillin</button>
+  <button class="quiz-choice" data-correct="false">Vancomycin alone for 7 days</button>
+  <button class="quiz-choice" data-correct="false">Ceftriaxone alone for 3 months</button>
+  <div class="quiz-explain"><strong>Correct: vancomycin + ceftriaxone, 4&ndash;6 weeks,</strong> covering the most likely empiric organisms (staphylococci, streptococci, enterococci) — narrowed once culture and sensitivity results are available.</div>
+</div>
+</section>
+
+<section class="card" id="nbte">
+<h2>14. Nonbacterial Thrombotic Endocarditis (NBTE)</h2>
+<p><strong>NBTE</strong> is endocarditis without infection — <strong>sterile</strong> vegetations form on heart valves, most often in patients with an underlying <strong>hypercoagulable state</strong>: malignancy, systemic lupus erythematosus (SLE), or antiphospholipid syndrome (APS).</p>
+<h3>Pathophysiology by Cause</h3>
+<ul>
+  <li><strong>Malignancy</strong> — activates the coagulation system; cancer cells produce procoagulant substances and cytokines that damage the endothelium</li>
+  <li><strong>SLE</strong> — mechanism not fully defined, but vegetations contain immune complexes and cellular debris; a subset of pathologists separate this out as <strong>Libman-Sacks endocarditis</strong> (not universally agreed upon as a distinct entity; sometimes the term is instead reserved for NBTE with especially large thrombi)</li>
+  <li><strong>APS</strong> — autoantibodies attack cell membranes, driving excess clot formation; can be idiopathic or associated with SLE or infections</li>
+</ul>
+<h3>Presentation</h3>
+<p>Patients are <strong>often asymptomatic</strong> — NBTE is frequently an incidental autopsy finding, since the sterile lesions rarely destroy the valve (unlike IE). When symptomatic, it's almost always because of <strong>thromboembolism</strong> (stroke/focal neurologic deficits, or dyspnea from pulmonary emboli), not from direct valve damage.</p>
+<h3>Gross Pathology</h3>
+<p>Vegetations range from small, rounded growths to large, warty <strong>verrucous vegetations</strong> (<em>verruca</em> = wart). They can occur on any valve, but SLE-associated vegetations favor the <strong>mitral and aortic valves</strong>, and can form on both sides of the valve leaflet.</p>
+<h3>Complications</h3>
+<p>Vegetations are loosely adherent and prone to <strong>embolization</strong> — most commonly to the <strong>brain</strong> (stroke), but also heart, kidney, and spleen. Rarely, inflammatory valvulitis impairs valve function enough to cause regurgitation.</p>
+<h3>Diagnosis</h3>
+<p><strong>Echocardiography</strong> is the best test to detect vegetations but <strong>cannot distinguish infectious from sterile vegetations</strong> — blood cultures must be drawn whenever a vegetation is seen. Three sets of blood cultures should be done to exclude IE; if SLE/APS is suspected, obtain ANA, anti-Smith, rheumatoid factor, anti-dsDNA, and an antiphospholipid antibody panel.</p>
+<h3>Treatment</h3>
+<p>Treat the underlying cause (malignancy, SLE, APS) when possible. Unless contraindicated, patients should be <strong>anticoagulated</strong> — heparin (unfractionated or LMWH), then transitioned to warfarin — to prevent emboli.</p>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="nbte-q1">
+  <p class="stem">1. What is the underlying condition present in most cases of NBTE?</p>
+  <button class="quiz-choice" data-correct="true">A hypercoagulable state</button>
+  <button class="quiz-choice" data-correct="false">Active bacteremia</button>
+  <button class="quiz-choice" data-correct="false">Rheumatic heart disease</button>
+  <button class="quiz-choice" data-correct="false">Fungal infection</button>
+  <div class="quiz-explain"><strong>Correct: a hypercoagulable state</strong> — classically malignancy, SLE, or antiphospholipid syndrome. NBTE vegetations are, by definition, sterile (no infectious organisms).</div>
+</div>
+<div class="quiz-q" id="nbte-q2">
+  <p class="stem">2. Why is NBTE most often diagnosed incidentally, sometimes only at autopsy?</p>
+  <button class="quiz-choice" data-correct="true">Because the sterile vegetations rarely destroy the valve, so most patients are asymptomatic</button>
+  <button class="quiz-choice" data-correct="false">Because NBTE never causes any complications</button>
+  <button class="quiz-choice" data-correct="false">Because echocardiography cannot detect NBTE vegetations</button>
+  <button class="quiz-choice" data-correct="false">Because NBTE only occurs in terminally ill patients</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Unlike infective endocarditis, NBTE's sterile vegetations rarely destroy the valve, so there's often no murmur or dysfunction to prompt a workup — when symptoms occur, they're usually from an embolic event rather than valve damage itself.</div>
+</div>
+<div class="quiz-q" id="nbte-q3">
+  <p class="stem">3. Why must blood cultures always be drawn when a vegetation is found on echocardiogram, even if NBTE is suspected?</p>
+  <button class="quiz-choice" data-correct="true">Echocardiography cannot distinguish infectious from sterile (NBTE) vegetations</button>
+  <button class="quiz-choice" data-correct="false">Blood cultures are needed to diagnose SLE</button>
+  <button class="quiz-choice" data-correct="false">Blood cultures replace the need for an echocardiogram</button>
+  <button class="quiz-choice" data-correct="false">NBTE always coexists with bacteremia</button>
+  <div class="quiz-explain"><strong>Correct.</strong> A vegetation looks the same on echo whether it's infected or sterile — cultures are the only way to rule infective endocarditis in or out, and not all IE patients have fever to otherwise raise suspicion.</div>
+</div>
+</section>
+
+<section class="card" id="comparison">
+<h2>15. IE vs. NBTE Comparison</h2>
+<table>
+<tr><th></th><th>Infective Endocarditis</th><th>Nonbacterial Thrombotic Endocarditis</th></tr>
+<tr><td>Vegetation content</td><td>Platelets, fibrin, <strong>and bacteria</strong></td><td>Platelets and fibrin only — <strong>sterile</strong></td></tr>
+<tr><td>Underlying substrate</td><td>Endothelial injury + bacteremia</td><td>Endothelial injury/hypercoagulable state, <strong>without</strong> infection</td></tr>
+<tr><td>Typical trigger</td><td>Turbulent flow + transient bacteremia (dental work, IVDU, GU/GI procedures)</td><td>Malignancy, SLE, antiphospholipid syndrome</td></tr>
+<tr><td>Valve destruction</td><td>Common — can be rapid and severe (especially <em>S. aureus</em>)</td><td>Rare — lesions are usually nondestructive</td></tr>
+<tr><td>Typical presentation</td><td>Fever, new murmur, systemic illness</td><td>Often asymptomatic; found incidentally or after an embolic event</td></tr>
+<tr><td>Diagnosis</td><td>Blood cultures + echo + modified Duke criteria</td><td>Echo + negative blood cultures + autoimmune/malignancy workup</td></tr>
+<tr><td>Treatment</td><td>Prolonged culture-directed antibiotics &plusmn; surgery</td><td>Treat underlying cause + anticoagulation</td></tr>
+</table>
+
+<p class="quiz-mini-header">Check Your Understanding</p>
+<div class="quiz-q" id="comp2-q1">
+  <p class="stem">1. What is the key difference in vegetation composition between IE and NBTE?</p>
+  <button class="quiz-choice" data-correct="true">IE vegetations contain bacteria in addition to platelets/fibrin; NBTE vegetations are sterile</button>
+  <button class="quiz-choice" data-correct="false">NBTE vegetations contain bacteria; IE vegetations do not</button>
+  <button class="quiz-choice" data-correct="false">Both are identical in composition and cannot be distinguished even by culture</button>
+  <button class="quiz-choice" data-correct="false">IE vegetations contain only fibrin, with no platelets</button>
+  <div class="quiz-explain"><strong>Correct.</strong> Both start from the same platelet-fibrin thrombus, but IE vegetations go on to be colonized by bacteria during a bacteremic episode, while NBTE vegetations remain sterile.</div>
+</div>
+<div class="quiz-q" id="comp2-q2">
+  <p class="stem">2. Which condition is more likely to remain asymptomatic until an embolic event occurs — IE or NBTE?</p>
+  <button class="quiz-choice" data-correct="true">NBTE</button>
+  <button class="quiz-choice" data-correct="false">IE</button>
+  <button class="quiz-choice" data-correct="false">Both are equally likely to be symptomatic from the start</button>
+  <button class="quiz-choice" data-correct="false">Neither — both always present with fever</button>
+  <div class="quiz-explain"><strong>Correct: NBTE.</strong> Its sterile, nondestructive vegetations rarely produce valve dysfunction, so patients often remain asymptomatic until a piece embolizes. IE, by contrast, usually declares itself with fever and systemic illness well before any embolic event.</div>
+</div>
+</section>
+
+<section class="card" id="cases">
+<h2>16. Case Connections</h2>
+<div class="case">
+<span class="case-label">Case 1 — Infective Endocarditis</span>
+JL, a 31-year-old male who injects drugs, presents with fever, chills, and anorexia for a week. Exam shows scarring/discoloration along several veins, temperature 38.4&deg;C, splinter hemorrhages on his fingernails, and a systolic murmur at the left lower sternal border that intensifies with deep inspiration.
+</div>
+<p><strong>Interpretation:</strong> A murmur that increases with inspiration is classic for a <strong>right-sided (tricuspid) murmur</strong> — inspiration increases venous return to the right heart, augmenting the murmur. Combined with IV drug use and splinter hemorrhages, this points strongly to <strong>tricuspid valve IE</strong>, most likely from <em>S. aureus</em>. Management: admit, draw blood cultures <em>before</em> starting empiric antibiotics, and arrange follow-up support (social work, outpatient drug counseling) given the underlying substance use driving his risk.</p>
+
+<div class="case">
+<span class="case-label">Case 2 — Nonbacterial Thrombotic Endocarditis</span>
+MB, a 46-year-old with SLE, presents with 2 days of left-flank pain followed by hematuria. Vitals are normal; exam reveals a new holosystolic murmur at the apex radiating to the axilla (a mitral regurgitation pattern).
+</div>
+<p><strong>Interpretation:</strong> A new murmur in a patient with SLE raises concern for NBTE (sometimes termed Libman-Sacks endocarditis in this context). A sterile vegetation has likely formed on her <strong>mitral valve</strong>, and a fragment has <strong>embolized to her kidney</strong>, explaining the flank pain and hematuria. An echocardiogram (plus blood cultures to exclude IE) confirms the diagnosis.</p>
+</section>
+
+</div>
+
+<script>
+  // Build side-nav from card sections
+  (function() {
+    var sections = document.querySelectorAll('section.card[id]');
+    var list = document.getElementById('sidenavList');
+    sections.forEach(function(sec) {
+      var heading = sec.querySelector('h2');
+      if (!heading) return;
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + sec.id;
+      a.textContent = heading.textContent;
+      a.dataset.target = sec.id;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    var toggle = document.getElementById('sidenavToggle');
+    var panel = document.getElementById('sidenavPanel');
+    toggle.addEventListener('click', function() {
+      panel.classList.toggle('open');
+    });
+
+    var navLinks = panel.querySelectorAll('a');
+    function onScroll() {
+      var scrollPos = window.scrollY + 100;
+      var current = null;
+      sections.forEach(function(sec) {
+        if (sec.offsetTop <= scrollPos) current = sec.id;
+      });
+      navLinks.forEach(function(a) {
+        a.classList.toggle('active', a.dataset.target === current);
+      });
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  })();
+
+  // Inline quiz logic
+  document.querySelectorAll('.quiz-q').forEach(function(q) {
+    var choices = q.querySelectorAll('.quiz-choice');
+    var explain = q.querySelector('.quiz-explain');
+    choices.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (btn.disabled) return;
+        choices.forEach(function(b) {
+          b.disabled = true;
+          if (b.dataset.correct === 'true') {
+            b.classList.add('correct');
+          } else if (b === btn) {
+            b.classList.add('incorrect');
+          }
+        });
+        explain.classList.add('show');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
