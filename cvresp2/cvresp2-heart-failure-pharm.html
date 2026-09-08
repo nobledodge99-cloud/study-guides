@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Drugs Used in Heart Failure | Study Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ee;
+  --cream-card:#fffdf8;
+  --forest-dark:#1f3d2b;
+  --forest:#2e5b3e;
+  --sage:#7fa383;
+  --sage-light:#e4ede2;
+  --border:#d8cfb8;
+  --accent:#bf5b3a;
+  --text-main:#2b2a25;
+  --text-soft:#5c584f;
+  --correct:#2e7d4f;
+  --incorrect:#b3402f;
+  --mono:'IBM Plex Mono', monospace;
+  --serif:'Lora', serif;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--text-main);
+  font-family:var(--serif);
+  line-height:1.6;
+}
+.back-btn{
+  position:fixed;
+  top:16px;
+  left:16px;
+  z-index:500;
+  background:var(--cream-card);
+  border:1.5px solid var(--forest);
+  color:var(--forest-dark);
+  font-family:var(--mono);
+  font-size:0.8rem;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:6px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+.back-btn:hover{background:var(--sage-light);}
+
+.header{
+  background:var(--forest-dark);
+  color:var(--cream);
+  padding:56px 20px 34px;
+  text-align:center;
+}
+.header .kicker{
+  font-family:var(--mono);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  font-size:0.78rem;
+  color:var(--sage);
+  margin:0 0 10px;
+}
+.header h1{
+  font-size:2.3rem;
+  margin:0 0 8px;
+}
+.header .sub{
+  font-size:1rem;
+  color:var(--sage-light);
+  font-style:italic;
+}
+
+.container{
+  max-width:900px;
+  margin:0 auto;
+  padding:34px 20px 90px;
+}
+
+.toc{
+  background:var(--cream-card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:22px 26px;
+  margin-bottom:34px;
+}
+.toc h2{
+  font-family:var(--mono);
+  font-size:0.95rem;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--forest-dark);
+  margin-top:0;
+}
+.toc ul{margin:0;padding-left:20px;}
+.toc li{margin-bottom:6px;}
+.toc a{color:var(--forest);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+section.card{
+  background:var(--cream-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:26px 28px;
+  margin-bottom:26px;
+  scroll-margin-top:24px;
+}
+section.card h2{
+  color:var(--forest-dark);
+  border-bottom:2px solid var(--sage);
+  padding-bottom:8px;
+  margin-top:0;
+}
+section.card h3{
+  color:var(--forest);
+  margin-bottom:6px;
+}
+section.card h4{
+  font-family:var(--mono);
+  font-size:0.85rem;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  color:var(--accent);
+  margin:16px 0 4px;
+}
+ul,ol{padding-left:22px;}
+li{margin-bottom:4px;}
+
+.badge{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:0.68rem;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  padding:2px 8px;
+  border-radius:20px;
+  margin-left:8px;
+  vertical-align:middle;
+}
+.badge-core{background:#f4dcd3;color:var(--accent);border:1px solid var(--accent);}
+.badge-class{background:var(--sage-light);color:var(--forest-dark);border:1px solid var(--sage);}
+.badge-adjunct{background:#ece3f2;color:#5b3a8a;border:1px solid #a488c9;}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:12px 0 18px;
+  font-size:0.92rem;
+  display:block;
+  overflow-x:auto;
+  white-space:normal;
+}
+table thead th{
+  font-family:var(--mono);
+  background:var(--forest-dark);
+  color:var(--cream);
+  padding:8px 10px;
+  text-align:left;
+  font-size:0.75rem;
+  text-transform:uppercase;
+  letter-spacing:0.03em;
+}
+table td{
+  border-bottom:1px solid var(--border);
+  padding:8px 10px;
+  vertical-align:top;
+}
+table tr:nth-child(even) td{background:var(--sage-light);}
+
+.pearl{
+  background:var(--sage-light);
+  border-left:4px solid var(--forest);
+  padding:12px 16px;
+  border-radius:0 8px 8px 0;
+  margin:14px 0;
+  font-size:0.95rem;
+}
+.pearl strong{color:var(--forest-dark);}
+
+.case{
+  background:#fff8ef;
+  border:1px solid var(--accent);
+  border-radius:8px;
+  padding:14px 18px;
+  margin:14px 0;
+}
+.case-label{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--accent);
+  font-weight:600;
+}
+
+.quiz-mini-header{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--forest-dark);
+  margin:22px 0 8px;
+  border-top:1px dashed var(--border);
+  padding-top:16px;
+}
+.quiz-q{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:14px 18px;
+  margin-bottom:14px;
+}
+.quiz-q p.stem{font-weight:600;margin:0 0 10px;}
+.quiz-choice{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:9px 12px;
+  margin-bottom:7px;
+  cursor:pointer;
+  font-family:var(--serif);
+  font-size:0.95rem;
+  color:var(--text-main);
+}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#dff0e2;border-color:var(--correct);color:var(--correct);font-weight:600;}
+.quiz-choice.incorrect{background:#fbe1dd;border-color:var(--incorrect);color:var(--incorrect);font-weight:600;}
+.quiz-choice.disabled{cursor:default;}
+.quiz-explain{
+  display:none;
+  margin-top:8px;
+  padding:10px 14px;
+  border-radius:6px;
+  background:var(--sage-light);
+  font-size:0.9rem;
+}
+.quiz-explain.show{display:block;}
+
+.sidenav-toggle{
+  position:fixed;
+  top:16px;
+  right:16px;
+  z-index:500;
+  background:var(--forest-dark);
+  color:var(--cream);
+  border:none;
+  font-family:var(--mono);
+  font-size:0.78rem;
+  padding:9px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
+.sidenav-panel{
+  position:fixed;
+  top:0;
+  right:-280px;
+  width:260px;
+  height:100%;
+  background:var(--cream-card);
+  border-left:1px solid var(--border);
+  padding:70px 18px 20px;
+  overflow-y:auto;
+  transition:right 0.25s ease;
+  z-index:499;
+}
+.sidenav-panel.open{right:0;}
+.sidenav-panel h3{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  text-transform:uppercase;
+  color:var(--forest-dark);
+  margin-top:0;
+}
+.sidenav-panel a{
+  display:block;
+  color:var(--text-soft);
+  text-decoration:none;
+  padding:6px 8px;
+  border-radius:5px;
+  font-size:0.88rem;
+  margin-bottom:2px;
+}
+.sidenav-panel a:hover, .sidenav-panel a.active{
+  background:var(--sage-light);
+  color:var(--forest-dark);
+}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">Sections &#9776;</button>
+<nav class="sidenav-panel" id="sidenavPanel">
+  <h3>Jump to Section</h3>
+  <a href="#overview">1. HF Overview</a>
+  <a href="#classification">2. Classification & Staging</a>
+  <a href="#pathophys">3. Pathophysiology</a>
+  <a href="#goals">4. Pharmacologic Goals & Strategy</a>
+  <a href="#inotropes">5. Positive Inotropes (Acute)</a>
+  <a href="#acute-vaso">6. Acute Vasodilators</a>
+  <a href="#acute-diuretic">7. Acute Diuretics & Tolvaptan</a>
+  <a href="#raas">8. RAAS Modulators (Chronic)</a>
+  <a href="#mra">9. Mineralocorticoid Receptor Antagonists</a>
+  <a href="#bb">10. Evidence-Based Beta Blockers</a>
+  <a href="#sglt2">11. SGLT2 Inhibitors</a>
+  <a href="#adjunctive">12. Chronic Adjunctive Agents</a>
+  <a href="#summary">13. Summary Tables</a>
+  <a href="#pearls">14. High-Yield Takeaways</a>
+</nav>
+
+<div class="header">
+  <p class="kicker">CV II &bull; Dr. Natalie Waterfall, PharmD</p>
+  <h1>Drugs Used in Heart Failure</h1>
+  <p class="sub">Overview &middot; Acute Decompensated HF &middot; Chronic HF Pharmacology</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#overview">1. Heart Failure Overview</a></li>
+<li><a href="#classification">2. Classification & Staging (HFrEF/HFpEF/HFmrEF, NYHA, ACC/AHA)</a></li>
+<li><a href="#pathophys">3. Pathophysiology & Neurohormonal Activation</a></li>
+<li><a href="#goals">4. Pharmacologic Goals & Disease-Modifying vs. Symptom-Relief Strategy</a></li>
+<li><a href="#inotropes">5. Positive Inotropic Agents (Acute) — Digoxin, Milrinone, Dobutamine, Other Inotropes/Pressors</a></li>
+<li><a href="#acute-vaso">6. Acute Vasodilators — Nitroprusside, Nitroglycerin, Hydralazine, Nesiritide</a></li>
+<li><a href="#acute-diuretic">7. Acute Diuretics & Vasopressin Receptor Antagonist (Tolvaptan)</a></li>
+<li><a href="#raas">8. RAAS Modulators (Chronic) — ACE Inhibitors, ARBs, ARNI</a></li>
+<li><a href="#mra">9. Mineralocorticoid Receptor Antagonists</a></li>
+<li><a href="#bb">10. Evidence-Based Beta Blockers</a></li>
+<li><a href="#sglt2">11. SGLT2 Inhibitors</a></li>
+<li><a href="#adjunctive">12. Chronic Secondary/Adjunctive Agents — Diuretics, Digoxin, Ivabradine, Hydralazine/ISDN, Vericiguat</a></li>
+<li><a href="#summary">13. Summary Tables (Acute & Chronic Agents, Stepwise Treatment)</a></li>
+<li><a href="#pearls">14. High-Yield Clinical Takeaways</a></li>
+</ul>
+</div>
+
+<section class="card" id="overview">
+<h2>1. Heart Failure Overview</h2>
+<h3>Definition</h3>
+<ul>
+<li>Heart failure (HF): the heart is unable to pump blood sufficiently to meet metabolic demands, or can do so only at elevated filling pressures.</li>
+<li>Driven by <strong>mechanical dysfunction</strong> and by <strong>maladaptive neurohormonal activation</strong> (RAAS and sympathetic nervous system).</li>
+</ul>
+<h3>Clinical Consequences</h3>
+<ul>
+<li><strong>Low cardiac output:</strong> fatigue, weakness, dizziness, exercise intolerance.</li>
+<li><strong>Elevated filling pressures:</strong> venous congestion → pulmonary edema, peripheral edema, ascites, GI congestion.</li>
+</ul>
+<div class="pearl"><strong>Pearl:</strong> Two mechanisms explain essentially every HF symptom — forward failure (low output) causes fatigue/dizziness, and backward failure (congestion) causes edema/dyspnea.</div>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient with heart failure reports fatigue, dizziness, and exercise intolerance but no edema or dyspnea. Which underlying mechanism best explains these symptoms?</p>
+<button class="quiz-choice" data-key="a">A) Elevated filling pressures causing venous congestion</button>
+<button class="quiz-choice" data-key="b">B) Pulmonary edema</button>
+<button class="quiz-choice" data-key="c">C) Low cardiac output causing impaired tissue perfusion</button>
+<button class="quiz-choice" data-key="d">D) Ascites from GI congestion</button>
+<div class="quiz-explain">Fatigue, weakness, dizziness, and exercise intolerance are classic "forward failure" symptoms from low cardiac output and impaired perfusion — distinct from the "backward failure" congestive symptoms (edema, dyspnea, ascites) caused by elevated filling pressures.</div>
+</div>
+</section>
+
+<section class="card" id="classification">
+<h2>2. Classification & Staging</h2>
+<h3>By Ejection Fraction</h3>
+<table>
+<thead><tr><th>Type</th><th>EF</th><th>Also Called</th><th>Key Features</th><th>Mortality Benefit From Drugs?</th></tr></thead>
+<tbody>
+<tr><td><strong>HFrEF</strong></td><td>&le;40%</td><td>Systolic HF</td><td>Impaired ventricular contractility; causes: ischemic heart disease, chronic HTN, cardiomyopathy</td><td>Yes — multiple drug classes</td></tr>
+<tr><td><strong>HFmrEF</strong></td><td>41–49%</td><td>Mid-range HF</td><td>Shares features of both HFrEF and HFpEF</td><td>Some HFrEF therapies may help</td></tr>
+<tr><td><strong>HFpEF</strong></td><td>&ge;50%</td><td>Diastolic HF</td><td>Impaired relaxation/filling; linked to aging, HTN, obesity, diabetes; more common in women</td><td>No proven mortality benefit; SGLT2i ↓ hospitalizations</td></tr>
+</tbody>
+</table>
+
+<h3>NYHA Functional Classification (symptom-based, can improve with treatment)</h3>
+<table>
+<thead><tr><th>Class</th><th>Activity Limitation</th><th>Symptoms</th></tr></thead>
+<tbody>
+<tr><td>I</td><td>None</td><td>Only with extraordinary exertion</td></tr>
+<tr><td>II</td><td>Mild</td><td>With ordinary activity</td></tr>
+<tr><td>III</td><td>Marked</td><td>With less than ordinary activity</td></tr>
+<tr><td>IV</td><td>Severe</td><td>At rest or with minimal exertion</td></tr>
+</tbody>
+</table>
+
+<h3>ACC/AHA Staging (disease trajectory, unidirectional)</h3>
+<table>
+<thead><tr><th>Stage</th><th>Description</th><th>Symptoms</th><th>Intervention</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>High risk, no structural disease</td><td>None</td><td>Risk factor management (HTN, diabetes, CAD, lifestyle)</td></tr>
+<tr><td>B</td><td>Structural heart disease, no symptoms</td><td>None</td><td>Guideline-directed therapy to prevent progression</td></tr>
+<tr><td>C</td><td>Structural disease + current/prior symptoms</td><td>Present</td><td>GDMT for symptom relief and survival; manage comorbidities</td></tr>
+<tr><td>D</td><td>Refractory HF</td><td>Severe, at rest</td><td>Advanced therapies: LVAD, transplant, palliative care</td></tr>
+</tbody>
+</table>
+<div class="pearl"><strong>Pearl:</strong> NYHA class reflects <em>current</em> functional status and is not one-directional; ACC/AHA stage describes lifetime disease trajectory and only moves forward. They're complementary, not interchangeable.</div>
+
+<h3>By Chronicity</h3>
+<ul>
+<li><strong>Chronic stable HF:</strong> persistent symptoms, generally well controlled with long-term meds; therapy targets symptom relief <em>and</em> survival.</li>
+<li><strong>Acute decompensated HF (ADHF):</strong> sudden worsening; precipitated by ischemia, arrhythmia, uncontrolled HTN, dietary indiscretion, nonadherence, or drugs with negative cardiac effects (e.g., NSAIDs, non-dihydropyridine CCBs). Requires rapid intervention to relieve congestion and stabilize hemodynamics — acute therapies rarely improve long-term prognosis.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient has an ejection fraction of 55% with symptoms of dyspnea on exertion. Which statement about this type of heart failure is correct?</p>
+<button class="quiz-choice" data-key="a">A) It is called HFrEF and multiple drug classes reduce mortality</button>
+<button class="quiz-choice" data-key="b">B) It is called HFpEF and no pharmacologic therapy has proven mortality benefit</button>
+<button class="quiz-choice" data-key="c">C) It is called HFmrEF and shares features of both reduced and preserved EF</button>
+<button class="quiz-choice" data-key="d">D) It requires urgent LVAD placement</button>
+<div class="quiz-explain">EF ≥50% = HFpEF (diastolic HF). No drug has proven a mortality benefit; management focuses on comorbidities (HTN, AF, diabetes) and symptom relief with diuretics. SGLT2 inhibitors reduce hospitalizations here but the strongest mortality data are in HFrEF.</div>
+</div>
+</section>
+
+<section class="card" id="pathophys">
+<h2>3. Pathophysiology & Neurohormonal Activation</h2>
+<h3>Hemodynamics</h3>
+<ul>
+<li>↓ Cardiac output → impaired tissue perfusion</li>
+<li>↑ Preload → elevated filling pressures</li>
+<li>↑ Afterload → additional workload on the heart</li>
+</ul>
+<h3>Sympathetic Nervous System</h3>
+<ul>
+<li>Baroreceptor reflex: ↓ CO and ↓ arterial pressure → sensed by carotid/aortic baroreceptors → ↑ heart rate, contractility, systemic vasoconstriction.</li>
+</ul>
+<h3>Renin–Angiotensin–Aldosterone System (RAAS)</h3>
+<ul>
+<li>↓ Renal perfusion → renin release → sodium/water retention, vasoconstriction (angiotensin II).</li>
+<li>Aldosterone → cardiac fibrosis and adverse remodeling.</li>
+</ul>
+<h3>Natriuretic Peptide System (ANP/BNP)</h3>
+<ul>
+<li>Counter-regulatory: promotes natriuresis, diuresis, vasodilation; opposes hypertrophy/fibrosis.</li>
+<li>Eventually overwhelmed by persistent SNS + RAAS activation.</li>
+</ul>
+<div class="pearl"><strong>The vicious cycle:</strong> declining cardiac function → more neurohormonal activation → pathological remodeling (hypertrophy, fibrosis, apoptosis) → further decline. This is exactly the cycle that ACEi/ARBs/ARNI, beta-blockers, and MRAs are designed to interrupt.</div>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">Which neurohormonal system, when chronically activated, most directly causes cardiac fibrosis and adverse ventricular remodeling via aldosterone?</p>
+<button class="quiz-choice" data-key="a">A) Natriuretic peptide system</button>
+<button class="quiz-choice" data-key="b">B) Baroreceptor reflex</button>
+<button class="quiz-choice" data-key="c">C) Renin-angiotensin-aldosterone system</button>
+<button class="quiz-choice" data-key="d">D) Parasympathetic nervous system</button>
+<div class="quiz-explain">Aldosterone (downstream of RAAS) promotes sodium/water retention plus cardiac and vascular fibrosis — this is why MRAs (spironolactone/eplerenone) provide independent mortality benefit even on top of ACEi/ARB therapy.</div>
+</div>
+</section>
+
+<section class="card" id="goals">
+<h2>4. Pharmacologic Goals & Strategy</h2>
+<table>
+<thead><tr><th>Setting</th><th>Primary Goals</th></tr></thead>
+<tbody>
+<tr><td>Acute Decompensated HF (ADHF)</td><td>Rapid relief of congestion; hemodynamic stabilization; prevention of organ hypoperfusion</td></tr>
+<tr><td>Chronic Stable HF</td><td>Long-term neurohormonal modulation; prevent disease progression; ↓ hospitalizations; ↑ survival</td></tr>
+</tbody>
+</table>
+
+<h3>Disease-Modifying vs. Symptom-Relief Agents</h3>
+<table>
+<thead><tr><th>Category</th><th>Examples</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td><strong>Disease-modifying</strong> (↑ survival)</td><td>ACEi/ARB/ARNI, beta-blockers, MRAs, SGLT2i</td><td>↓afterload, ↓fibrosis, ↓O₂ demand, favorable remodeling</td></tr>
+<tr><td><strong>Symptom-relief</strong> (↑ quality of life only)</td><td>Loop diuretics, vasodilators, positive inotropes, digoxin, ivabradine</td><td>↓preload/congestion, ↑contractility/stroke volume — no mortality benefit (inotropes may ↑ mortality with chronic use)</td></tr>
+</tbody>
+</table>
+<div class="pearl"><strong>High-yield distinction:</strong> Loop diuretics relieve congestion fast but do <em>not</em> alter survival. Don't confuse "makes the patient feel better" with "makes the patient live longer."</div>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">A patient with HFrEF asks why she still needs furosemide when she is already taking an ACE inhibitor, beta-blocker, MRA, and SGLT2 inhibitor. What is the best explanation?</p>
+<button class="quiz-choice" data-key="a">A) Furosemide relieves congestive symptoms but does not provide the disease-modifying mortality benefit her other medications do</button>
+<button class="quiz-choice" data-key="b">B) Furosemide is redundant and should be stopped</button>
+<button class="quiz-choice" data-key="c">C) Furosemide is the only agent proven to reduce mortality in HFrEF</button>
+<button class="quiz-choice" data-key="d">D) Furosemide replaces the need for beta-blockade</button>
+<div class="quiz-explain">Loop diuretics are symptom-relief agents — they reduce preload and relieve congestion but have no proven mortality benefit. The four foundational agents (RAAS-directed therapy, beta-blocker, MRA, SGLT2i) are the disease-modifying, survival-improving therapies.</div>
+</div>
+</section>
+
+<section class="card" id="inotropes">
+<h2>5. Positive Inotropic Agents (Acute Decompensated HF) <span class="badge badge-core">Core</span></h2>
+<p>Used primarily in ADHF with low cardiac output/hypoperfusion. ↑ Contractility → ↑ cardiac output, maintain perfusion, ↓ symptoms. <strong>Limitation:</strong> only short-term benefit; chronic use → ↑ arrhythmias, ↑ O₂ demand, ↓ survival.</p>
+
+<h3>Digoxin (Cardiac Glycoside) <span class="badge badge-class">Class-Level</span></h3>
+<h4>MOA</h4>
+<ul>
+<li>Reversibly inhibits Na⁺/K⁺-ATPase → ↑ intracellular Na⁺ → ↓ activity of Na⁺/Ca²⁺ exchanger → ↑ intracellular Ca²⁺ during systole → <strong>positive inotropy</strong>.</li>
+<li>↑ Vagal tone → slows AV nodal conduction, prolongs AV refractory period → <strong>negative dromotropic effect</strong> (rate control in AF).</li>
+</ul>
+<h4>Uses</h4>
+<ul>
+<li>Acute ADHF: <em>not</em> useful for rapid hemodynamic support (slow onset). Primary acute role = ventricular rate control in AF/AFL.</li>
+<li>Chronic HFrEF: ↓ hospitalizations and improves symptoms — <strong>no mortality benefit</strong>.</li>
+<li>Narrow therapeutic index.</li>
+</ul>
+<h4>ADRs</h4>
+<ul>
+<li>Arrhythmias (PVCs, AV block, atrial tachycardia with block), anorexia, nausea, vomiting, abdominal discomfort, confusion, visual disturbances (yellow/green vision, halos).</li>
+<li>Electrolyte imbalances — <strong>hypokalemia, hypomagnesemia, hypercalcemia</strong> — increase susceptibility to digoxin-induced arrhythmias.</li>
+</ul>
+<h4>PK / DI</h4>
+<ul>
+<li>Renally eliminated unchanged, half-life ~36–40 hr; renal impairment prolongs clearance and raises toxicity risk.</li>
+<li>DIs that raise digoxin levels: amiodarone, verapamil, quinidine, certain macrolides.</li>
+</ul>
+
+<h3>Milrinone (PDE-3 Inhibitor) <span class="badge badge-core">Core</span></h3>
+<h4>MOA</h4>
+<ul>
+<li>Selective PDE3 inhibition → ↑ cAMP.</li>
+<li>Cardiac myocytes: ↑ Ca²⁺ influx during systole → positive inotropy.</li>
+<li>Vascular smooth muscle: ↑ cAMP → vasodilation (arterial + venous).</li>
+</ul>
+<h4>Effects & Use</h4>
+<ul>
+<li>↓ Preload, ↓ afterload → ↑ stroke volume & CO; ↓ systemic & pulmonary vascular resistance.</li>
+<li>Use: ADHF with severe LV systolic dysfunction remaining symptomatic despite optimal therapy; bypasses beta-receptors, so useful in patients on beta-blockers.</li>
+</ul>
+<h4>ADRs / PK / DI</h4>
+<ul>
+<li>Hypotension, <strong>ventricular arrhythmias</strong>, headache, thrombocytopenia.</li>
+<li>Renal dose adjustment required (half-life ~3–6 hr).</li>
+<li>Caution with concomitant inotropes; no mortality benefit, and chronic/prolonged use increases mortality.</li>
+</ul>
+
+<h3>Dobutamine (β-Adrenergic Agonist) <span class="badge badge-core">Core</span></h3>
+<h4>MOA</h4>
+<ul>
+<li>↑ β₁ activity → ↑ cAMP & Ca²⁺ influx → ↑ contractility & stroke volume.</li>
+<li>Mild β₂ vasodilation + mild α₁ vasoconstriction → neutral/slightly ↓ SVR.</li>
+<li>↓ PA wedge pressure → ↓ congestion symptoms.</li>
+</ul>
+<h4>Uses</h4>
+<ul>
+<li>Short-term support in acute systolic HF & cardiogenic shock with <em>adequate</em> BP; perioperative support.</li>
+</ul>
+<h4>ADRs / Cautions / DI</h4>
+<ul>
+<li>Tachycardia, arrhythmias, ↑ myocardial O₂ demand, tachyphylaxis (with use beyond 48–72 hr).</li>
+<li>Avoid in hypertrophic obstructive cardiomyopathy or severe hypotension.</li>
+<li>Half-life ~2 min, IV infusion only. Beta-blockers (e.g., carvedilol) blunt its effect.</li>
+</ul>
+
+<h3>Other Inotropes/Pressors <span class="badge badge-class">Class-Level</span></h3>
+<table>
+<thead><tr><th>Drug</th><th>Role</th><th>Key Points</th></tr></thead>
+<tbody>
+<tr><td>Dopamine</td><td>Inotrope + vasopressor</td><td>Limited benefit, higher arrhythmia risk; low-dose "renal-protective" use no longer recommended</td></tr>
+<tr><td>Epinephrine</td><td>Potent inotrope + vasoconstrictor</td><td>High risk of tachyarrhythmia/ischemia; reserved for cardiogenic shock & cardiac arrest</td></tr>
+<tr><td>Norepinephrine</td><td>Vasopressor</td><td><strong>Preferred</strong> vasopressor in acute HF + hypotension; excessive afterload may occasionally worsen CO</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient with ADHF and evidence of low cardiac output and end-organ hypoperfusion, currently on a beta-blocker, needs short-term inotropic support. Which agent bypasses beta-receptors and is most appropriate?</p>
+<button class="quiz-choice" data-key="a">A) Digoxin</button>
+<button class="quiz-choice" data-key="b">B) Dobutamine</button>
+<button class="quiz-choice" data-key="c">C) Norepinephrine</button>
+<button class="quiz-choice" data-key="d">D) Milrinone</button>
+<div class="quiz-explain">Milrinone works via PDE3 inhibition (↑cAMP), completely independent of beta-adrenergic receptors, making it effective even in patients on beta-blockade — unlike dobutamine, whose effect is blunted by beta-blockers.</div>
+</div>
+
+<div class="quiz-q" data-answer="c">
+<p class="stem">Why is digoxin not useful for rapid hemodynamic stabilization in acute decompensated heart failure?</p>
+<button class="quiz-choice" data-key="a">A) It causes profound hypotension</button>
+<button class="quiz-choice" data-key="b">B) It has no positive inotropic effect</button>
+<button class="quiz-choice" data-key="c">C) It has a slow onset of action compared to IV catecholamines/PDE3 inhibitors</button>
+<button class="quiz-choice" data-key="d">D) It is contraindicated in all heart failure</button>
+<div class="quiz-explain">Digoxin's onset is too slow for rapid rescue in severe hypotension or cardiogenic shock. Its acute role is primarily ventricular rate control in patients with concomitant atrial fibrillation.</div>
+</div>
+</section>
+
+<section class="card" id="acute-vaso">
+<h2>6. Acute Vasodilators <span class="badge badge-core">Core</span></h2>
+<p>Reduce preload and/or afterload → ↓ ventricular filling pressures/wall stress → ↑ CO, relieve congestion, ↓ myocardial O₂ demand. Used in ADHF with adequate BP, often combined with diuretics or inotropes.</p>
+
+<h3>Nitroprusside</h3>
+<ul>
+<li><strong>MOA:</strong> balanced arterial + venous vasodilator; releases NO → ↑ cGMP → smooth muscle relaxation → ↓ preload & afterload.</li>
+<li><strong>Use:</strong> ADHF with ↑ SVR, especially when rapid afterload reduction is needed; severe pulmonary congestion.</li>
+<li><strong>ADRs:</strong> profound hypotension, reflex tachycardia, <strong>cyanide toxicity</strong>.</li>
+<li><strong>CI:</strong> inadequate cerebral/coronary perfusion.</li>
+<li><strong>PK:</strong> immediate onset, very short duration → continuous IV infusion with invasive hemodynamic monitoring.</li>
+</ul>
+
+<h3>Nitroglycerin</h3>
+<ul>
+<li><strong>MOA:</strong> metabolized to NO → ↑ cGMP → smooth muscle relaxation. Low dose = venodilation; high dose = venous + arterial dilation.</li>
+<li><strong>Effects:</strong> lower doses relieve pulmonary congestion/wall stress (↓ preload); higher doses improve coronary blood flow to ischemic regions.</li>
+<li><strong>Use:</strong> ADHF with high filling pressures (esp. with ischemia), hypertensive acute pulmonary edema.</li>
+<li><strong>ADRs:</strong> headache, flushing, hypotension, tolerance.</li>
+<li><strong>CI/DI:</strong> PDE5 inhibitors (e.g., sildenafil) → severe hypotension; additive hypotension with other vasodilators/alcohol.</li>
+</ul>
+
+<h3>Hydralazine</h3>
+<ul>
+<li><strong>MOA:</strong> direct arterial vasodilator → ↓ afterload → ↑ stroke volume & CO.</li>
+<li><strong>Role in ADHF:</strong> alternative to nitroprusside for afterload reduction. (Chronic role with isosorbide dinitrate covered in Section 12.)</li>
+<li><strong>ADRs:</strong> headache, flushing, reflex tachycardia, hypotension; chronic high-dose (&gt;200 mg/day) → lupus-like syndrome.</li>
+<li><strong>PK:</strong> hepatic acetylation — slow acetylators have higher ADR risk.</li>
+</ul>
+
+<h3>Nesiritide (Recombinant BNP)</h3>
+<ul>
+<li><strong>MOA:</strong> activates particulate guanylate cyclase receptors → ↑ cGMP → balanced venous + arterial dilation.</li>
+<li><strong>Effects:</strong> ↓ preload & afterload, ↓ PCWP, may improve dyspnea.</li>
+<li><strong>Limitations:</strong> used infrequently — safety concerns, no outcome benefit.</li>
+<li><strong>ADRs:</strong> hypotension (common, can be prolonged), worsened renal function.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Which acute vasodilator carries the greatest risk of cyanide toxicity with prolonged infusion?</p>
+<button class="quiz-choice" data-key="a">A) Nitroprusside</button>
+<button class="quiz-choice" data-key="b">B) Nitroglycerin</button>
+<button class="quiz-choice" data-key="c">C) Hydralazine</button>
+<button class="quiz-choice" data-key="d">D) Nesiritide</button>
+<div class="quiz-explain">Nitroprusside releases cyanide as a metabolic byproduct; prolonged infusion or renal/hepatic impairment increases the risk of cyanide accumulation and toxicity, requiring monitoring and limiting infusion duration.</div>
+</div>
+</section>
+
+<section class="card" id="acute-diuretic">
+<h2>7. Acute Diuretics & Vasopressin Receptor Antagonist</h2>
+<h3>Loop Diuretics (Furosemide, Bumetanide, Torsemide) <span class="badge badge-core">Core</span></h3>
+<h4>MOA</h4>
+<ul>
+<li>Block Na⁺–K⁺–2Cl⁻ symporter in the thick ascending limb → potent natriuresis & water excretion → ↓ intravascular volume/venous pressures → relieves pulmonary/systemic congestion.</li>
+</ul>
+<h4>Use</h4>
+<ul>
+<li><strong>First-line for ADHF with fluid overload.</strong> IV preferred (faster onset, bypasses variable oral absorption).</li>
+</ul>
+<h4>ADRs / DI</h4>
+<ul>
+<li>Electrolyte disturbances (K⁺, Mg²⁺), metabolic alkalosis, volume depletion, rare ototoxicity (high-dose/rapid infusion).</li>
+<li>DI: digoxin (↑ arrhythmia risk via hypokalemia), RAAS inhibitors (pre-renal AKI), NSAIDs (blunt diuretic response).</li>
+</ul>
+
+<h3>Tolvaptan (Vasopressin V₂-Receptor Antagonist) <span class="badge badge-class">Class-Level</span></h3>
+<h4>MOA</h4>
+<ul>
+<li>Selective V₂-antagonist → blocks vasopressin-mediated aquaporin-2 insertion in collecting ducts → <strong>aquaresis</strong> (free water excretion, minimal Na⁺/K⁺ loss).</li>
+</ul>
+<h4>Use</h4>
+<ul>
+<li>ADHF with <strong>hypervolemic hyponatremia</strong>. ↑ Serum Na⁺, ↓ fluid overload, relieves water-retention symptoms.</li>
+<li>Symptomatic/corrective only — <strong>no mortality or rehospitalization benefit</strong>.</li>
+</ul>
+<h4>ADRs</h4>
+<ul>
+<li>Intense thirst, dry mouth, dehydration risk.</li>
+<li>Overly rapid correction of hyponatremia → risk of <strong>osmotic demyelination syndrome</strong> — monitor serum Na⁺ closely.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient with ADHF and hypervolemic hyponatremia is started on tolvaptan. What is the most important safety concern to monitor for?</p>
+<button class="quiz-choice" data-key="a">A) Hyperkalemia</button>
+<button class="quiz-choice" data-key="b">B) Overly rapid correction of sodium leading to osmotic demyelination syndrome</button>
+<button class="quiz-choice" data-key="c">C) Cyanide toxicity</button>
+<button class="quiz-choice" data-key="d">D) Ototoxicity</button>
+<div class="quiz-explain">Tolvaptan causes aquaresis (free water excretion), which can raise serum sodium too quickly. Rapid correction risks osmotic demyelination syndrome, so serum sodium must be monitored closely during initiation.</div>
+</div>
+</section>
+
+<section class="card" id="raas">
+<h2>8. RAAS Modulators (Chronic HFrEF Foundational Therapy) <span class="badge badge-core">Core</span></h2>
+<p>Excessive RAAS activation drives vasoconstriction, Na⁺/H₂O retention, remodeling, and ↑ sympathetic tone. RAAS modulation improves symptoms, slows progression, and reduces morbidity/mortality.</p>
+
+<h3>ACE Inhibitors (Lisinopril; class: enalapril, captopril, ramipril <span class="badge badge-class">Class-Level</span>)</h3>
+<ul>
+<li><strong>MOA:</strong> inhibit conversion of angiotensin I → II → ↓ AT₁ stimulation → ↓ afterload (vasodilation), ↓ preload (↓ aldosterone-mediated Na⁺/H₂O retention), attenuate remodeling, prevent angiotensin II–mediated sympathetic activation, ↑ bradykinin → enhanced vasodilation.</li>
+<li><strong>Use:</strong> first-line in HFrEF NYHA I–IV → improve symptoms, ↓ hospitalizations, ↓ mortality.</li>
+<li><strong>ADRs:</strong> hypotension, hyperkalemia, renal dysfunction, dry cough, angioedema (rare).</li>
+<li><strong>CI:</strong> bilateral renal artery stenosis, pregnancy.</li>
+<li><strong>DI:</strong> potassium-sparing diuretics, NSAIDs.</li>
+</ul>
+
+<h3>ARBs (Valsartan; class: losartan, candesartan <span class="badge badge-class">Class-Level</span>)</h3>
+<ul>
+<li><strong>MOA:</strong> competitively block AT₁ receptor → prevent angiotensin II–mediated vasoconstriction, aldosterone release, remodeling.</li>
+<li>Morbidity/mortality benefit comparable to ACEi; lower risk of cough/angioedema (no bradykinin accumulation).</li>
+<li><strong>Use:</strong> alternative when ACEi not tolerated (cough, angioedema). <strong>Do not combine with ACEi</strong> — ↑ adverse events without survival benefit.</li>
+<li><strong>ADRs/CI/DI:</strong> same profile as ACEi (hypotension, hyperkalemia, renal dysfunction; bilateral RAS/pregnancy CI; caution with K⁺-sparing drugs/NSAIDs).</li>
+</ul>
+
+<h3>ARNI — Sacubitril/Valsartan</h3>
+<ul>
+<li><strong>MOA:</strong> neprilysin inhibition (sacubitril) → ↑ natriuretic peptides (ANP, BNP, CNP) → ↑ natriuresis, diuresis, vasodilation, antifibrotic effects; ARB component (valsartan) suppresses maladaptive RAAS.</li>
+<li><strong>Use:</strong> replaces ACEi/ARB in symptomatic NYHA II–III HFrEF despite optimal therapy; PARADIGM-HF showed superiority over enalapril for CV death/HF hospitalization.</li>
+<li><strong>ADRs:</strong> hypotension, hyperkalemia, renal dysfunction, angioedema risk.</li>
+<li><strong>CI:</strong> pregnancy, bilateral renal artery stenosis, prior angioedema.</li>
+<li><strong>Critical safety point: mandatory 36-hour washout from ACE inhibitors</strong> before starting an ARNI to minimize angioedema risk (both raise bradykinin).</li>
+<li><strong>DI:</strong> potassium-sparing drugs, NSAIDs.</li>
+</ul>
+<div class="pearl"><strong>Sequence pearl:</strong> ARNI preferred over ACEi/ARB when feasible and tolerated — it is now first-choice RAAS-directed therapy in symptomatic HFrEF, not just a step-up option.</div>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient with HFrEF is being transitioned from lisinopril to sacubitril/valsartan. What is required before starting the ARNI?</p>
+<button class="quiz-choice" data-key="a">A) No washout period is needed</button>
+<button class="quiz-choice" data-key="b">B) A 6-hour washout</button>
+<button class="quiz-choice" data-key="c">C) A 12-hour washout</button>
+<button class="quiz-choice" data-key="d">D) A 36-hour washout</button>
+<div class="quiz-explain">Both ACE inhibitors and ARNI increase bradykinin, so combining them (or switching without a washout) raises angioedema risk substantially. A mandatory 36-hour washout from ACE inhibitors is required before initiating an ARNI.</div>
+</div>
+</section>
+
+<section class="card" id="mra">
+<h2>9. Mineralocorticoid Receptor Antagonists (Spironolactone; class: eplerenone) <span class="badge badge-core">Core</span></h2>
+<h4>MOA</h4>
+<ul>
+<li>Competitively block aldosterone at mineralocorticoid receptors in the distal nephron → ↓ transcription of ENaCs & Na⁺/K⁺-ATPase → ↓ Na⁺ reabsorption, K⁺ retention.</li>
+<li>Counteract aldosterone's harmful CV effects: Na⁺/H₂O retention, K⁺/Mg²⁺ loss, sympathetic activation, impaired baroreceptor function, myocardial/vascular fibrosis.</li>
+</ul>
+<h4>Effects / Use</h4>
+<ul>
+<li>Modest natriuresis; ↓ morbidity & mortality, ↓ remodeling/fibrosis, ↓ hospitalizations, improved survival (spironolactone ~30% mortality reduction in severe HF trials).</li>
+<li>Indicated for symptomatic HFrEF already on GDMT (NYHA II–IV, LVEF ≤35%).</li>
+</ul>
+<h4>ADRs / CI</h4>
+<ul>
+<li>Hyperkalemia (can be life-threatening), hyperchloremic metabolic acidosis, endocrine effects (gynecomastia, menstrual irregularities, ↓ libido — spironolactone's nonselective steroid receptor binding; eplerenone is more selective).</li>
+<li><strong>CI:</strong> baseline hyperkalemia, severe renal impairment (GFR &lt;30), concurrent K⁺-sparing diuretics.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Which electrolyte abnormality is a primary safety concern with mineralocorticoid receptor antagonists, particularly when combined with an ACE inhibitor or ARB?</p>
+<button class="quiz-choice" data-key="a">A) Hyperkalemia</button>
+<button class="quiz-choice" data-key="b">B) Hypokalemia</button>
+<button class="quiz-choice" data-key="c">C) Hypercalcemia</button>
+<button class="quiz-choice" data-key="d">D) Hyponatremia</button>
+<div class="quiz-explain">MRAs are potassium-sparing; combined with RAAS inhibitors (which also raise potassium via reduced aldosterone), the risk of significant hyperkalemia rises substantially — close monitoring of potassium and renal function is essential.</div>
+</div>
+</section>
+
+<section class="card" id="bb">
+<h2>10. Evidence-Based Beta Blockers (Metoprolol succinate ER, Carvedilol, Bisoprolol) <span class="badge badge-core">Core</span></h2>
+<h4>MOA</h4>
+<ul>
+<li>Competitively block β-adrenergic receptors, blunting norepinephrine/epinephrine effects.</li>
+<li>β₁ blockade (heart): ↓ HR, ↓ contractility, ↓ AV conduction, prolongs diastole → improved coronary perfusion.</li>
+<li>β₁ blockade (JGA): ↓ renin release → dampens RAAS.</li>
+<li>Carvedilol: additional α₁ blockade → vasodilation.</li>
+</ul>
+<h4>Effects</h4>
+<ul>
+<li>↓ Myocardial O₂ demand; limits LV dilation and gradually ↑ EF; ↓ mortality & hospitalization; ↓ arrhythmia risk; enhances diastolic filling/perfusion; reverses maladaptive contractility/Ca²⁺ handling changes.</li>
+</ul>
+<h4>Use</h4>
+<ul>
+<li>All stable patients with symptomatic HFrEF and asymptomatic patients with LV dysfunction post-MI.</li>
+<li>Initiate only when <strong>euvolemic and hemodynamically stable</strong> — never start during acute decompensation. "Start low, go slow": ~1/8 target dose, double no more than every 2–4 weeks.</li>
+</ul>
+<h4>ADRs / CI</h4>
+<ul>
+<li>Bradycardia, hypotension, fatigue, early fluid retention, AV block, bronchospasm, peripheral vasoconstriction/cold extremities, worsening Raynaud's, mask hypoglycemia symptoms.</li>
+<li><strong>CI:</strong> acute decompensated HF, severe bradycardia, high-grade AV block without pacemaker, severe reactive airway disease.</li>
+<li><strong>Caution:</strong> abrupt withdrawal → rebound tachycardia, ischemia, MI — taper gradually.</li>
+<li><strong>DI:</strong> verapamil, diltiazem, other negative chronotropes (additive AV block/bradycardia).</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient is admitted with acute decompensated heart failure and volume overload. When is the appropriate time to initiate an evidence-based beta-blocker?</p>
+<button class="quiz-choice" data-key="a">A) Immediately upon admission to blunt sympathetic activation</button>
+<button class="quiz-choice" data-key="b">B) Only after the patient is euvolemic and hemodynamically stable</button>
+<button class="quiz-choice" data-key="c">C) Beta-blockers should never be used in patients who have ever had ADHF</button>
+<button class="quiz-choice" data-key="d">D) Immediately, but only at full target dose</button>
+<div class="quiz-explain">Beta-blockers should never be started during acute decompensation — they can acutely worsen contractility and cardiac output. Initiate only once the patient is euvolemic and hemodynamically stable, using a "start low, go slow" titration.</div>
+</div>
+</section>
+
+<section class="card" id="sglt2">
+<h2>11. SGLT2 Inhibitors (Dapagliflozin; class: empagliflozin) <span class="badge badge-core">Core</span></h2>
+<h4>MOA</h4>
+<ul>
+<li>Block SGLT2 in proximal tubule → ↓ glucose & sodium reabsorption → mild osmotic diuresis/natriuresis → ↓ plasma volume → ↓ preload & afterload.</li>
+</ul>
+<h4>Effects</h4>
+<ul>
+<li>Relieve congestion without significant electrolyte loss; ↓ cardiac fibrosis/inflammation; benefits occur <strong>regardless of diabetes status</strong> (renal, hemodynamic, metabolic mechanisms — myocardial SGLT2 expression is negligible).</li>
+</ul>
+<h4>Use</h4>
+<ul>
+<li>Foundational GDMT across the EF spectrum.</li>
+<li>HFrEF: ↓ hospitalization risk <em>and</em> mortality benefit.</li>
+<li>HFpEF/mildly reduced EF: strongest effect is ↓ hospitalizations (mortality benefit less consistent).</li>
+</ul>
+<h4>ADRs / CI / DI</h4>
+<ul>
+<li>Common: genital mycotic infections, UTIs, volume depletion/hypotension.</li>
+<li>Rare: AKI, euglycemic DKA (hold during prolonged fasting, severe illness, perioperatively).</li>
+<li><strong>CI:</strong> severe renal impairment (most guidelines: initiate at GFR ≥20).</li>
+<li>Caution in frail/volume-depleted patients; additive diuresis with loop/thiazide diuretics.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Question</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Which drug class provides mortality benefit in HFrEF independent of diabetes status, primarily via renal, hemodynamic, and metabolic mechanisms rather than glucose lowering?</p>
+<button class="quiz-choice" data-key="a">A) SGLT2 inhibitors</button>
+<button class="quiz-choice" data-key="b">B) Thiazide diuretics</button>
+<button class="quiz-choice" data-key="c">C) Loop diuretics</button>
+<button class="quiz-choice" data-key="d">D) Digoxin</button>
+<div class="quiz-explain">SGLT2 inhibitors reduce HF hospitalizations and mortality regardless of diabetes status. Myocardial SGLT2 expression is negligible, so benefit is thought to arise from mild osmotic diuresis/natriuresis, reduced fibrosis, and improved myocardial energetics.</div>
+</div>
+</section>
+
+<section class="card" id="adjunctive">
+<h2>12. Chronic Secondary/Adjunctive Agents <span class="badge badge-adjunct">Adjunctive</span></h2>
+<p>Do <strong>not</strong> replace the four foundational HFrEF therapies (RAAS-directed agent + beta-blocker + MRA + SGLT2i). Added for persistent symptoms or specific clinical scenarios. Goals: ↓ congestion, ↑ exercise tolerance, control HR, ↑ CO, prevent recurrent hospitalization.</p>
+
+<h3>Diuretics (Chronic Outpatient Use)</h3>
+<ul>
+<li>Symptom control only — not disease-modifying; overuse → volume depletion, hypotension, electrolyte disturbance, RAAS activation (worsens neurohormonal maladaptation).</li>
+<li><strong>Torsemide</strong> may be preferred for chronic outpatient use (longer half-life, more consistent oral absorption than furosemide).</li>
+<li><strong>Thiazide/thiazide-like diuretics</strong> (hydrochlorothiazide, <strong>metolazone</strong>): inhibit distal tubule Na⁺–Cl⁻ symporter; added to loop diuretics for loop-resistant edema. Metolazone retains efficacy even in reduced renal function. ADRs: electrolyte disturbances, volume depletion, orthostatic hypotension. DI: digoxin, antihypertensives, NSAIDs.</li>
+</ul>
+
+<h3>Digoxin (Chronic Role)</h3>
+<ul>
+<li>Reserved for patients symptomatic despite optimal GDMT (ACEi/ARB/ARNI + beta-blocker + MRA).</li>
+<li>↓ Hospitalizations and improves symptoms — <strong>no mortality benefit</strong>. Also used for rate control in concomitant AF/AFL.</li>
+</ul>
+
+<h3>Ivabradine (If/"Funny" Current Inhibitor)</h3>
+<ul>
+<li><strong>MOA:</strong> selectively inhibits the funny current (I<sub>f</sub>) in the SA node → ↓ HR without affecting contractility or AV conduction.</li>
+<li><strong>Use:</strong> chronic HFrEF, symptomatic despite maximally tolerated beta-blocker, sinus rhythm with resting HR ≥70 bpm.</li>
+<li>↓ Hospitalizations; <strong>no proven mortality benefit.</strong></li>
+<li><strong>ADRs:</strong> bradycardia, atrial fibrillation, transient visual phenomena (phosphenes).</li>
+<li><strong>CI:</strong> acute decompensated HF, severe hypotension, sick sinus syndrome/SA block, pacemaker dependence.</li>
+</ul>
+
+<h3>Vasodilators (Chronic)</h3>
+<ul>
+<li><strong>Long-acting nitrates</strong> (isosorbide mono/dinitrate): ↓ preload, relieve pulmonary congestion; adjunct for persistent dyspnea despite GDMT. Nitrate <em>monotherapy</em> does not improve survival.</li>
+<li><strong>Hydralazine + Isosorbide Dinitrate:</strong> arterial (hydralazine) + venous (isosorbide dinitrate) dilation → ↓ afterload & preload. Used when symptomatic despite standard therapy, or as an alternative when ACEi/ARB/ARNI are contraindicated. <strong>Reduces mortality and hospitalizations — strongest evidence in Black patients with HFrEF on optimal therapy.</strong></li>
+</ul>
+
+<h3>Vericiguat (Soluble Guanylate Cyclase Stimulator)</h3>
+<ul>
+<li><strong>MOA:</strong> oral sGC stimulator → enhances NO–cGMP pathway → vasodilation, ↓ myocardial stress.</li>
+<li><strong>Use:</strong> symptomatic chronic HFrEF with a recent hospitalization or need for IV diuretics despite optimized GDMT.</li>
+<li>↓ Hospitalizations; minimal effect on mortality.</li>
+<li><strong>ADRs:</strong> hypotension, anemia. <strong>DI:</strong> avoid with nitrates and PDE5 inhibitors (severe hypotension risk).</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient with HFrEF has a resting heart rate of 78 bpm and remains symptomatic despite being on the maximally tolerated dose of metoprolol succinate. She is in normal sinus rhythm. Which adjunctive agent specifically targets heart rate without affecting contractility?</p>
+<button class="quiz-choice" data-key="a">A) Digoxin</button>
+<button class="quiz-choice" data-key="b">B) Ivabradine</button>
+<button class="quiz-choice" data-key="c">C) Vericiguat</button>
+<button class="quiz-choice" data-key="d">D) Spironolactone</button>
+<div class="quiz-explain">Ivabradine selectively inhibits the If ("funny") current in the SA node, lowering heart rate without any negative inotropic effect — appropriate for a patient in sinus rhythm with HR ≥70 bpm despite maximal beta-blockade.</div>
+</div>
+
+<div class="quiz-q" data-answer="c">
+<p class="stem">Which combination therapy has shown the strongest mortality benefit specifically in Black patients with HFrEF already on optimal GDMT?</p>
+<button class="quiz-choice" data-key="a">A) ACE inhibitor + ARB</button>
+<button class="quiz-choice" data-key="b">B) Digoxin + loop diuretic</button>
+<button class="quiz-choice" data-key="c">C) Hydralazine + isosorbide dinitrate</button>
+<button class="quiz-choice" data-key="d">D) Ivabradine + beta-blocker</button>
+<div class="quiz-explain">The A-HeFT trial demonstrated that adding fixed-dose hydralazine/isosorbide dinitrate to standard therapy reduced mortality and hospitalizations in self-identified Black patients with HFrEF, providing both arterial and venous dilation.</div>
+</div>
+
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient with symptomatic HFrEF (LVEF 30%) was hospitalized for heart failure one month ago and remains symptomatic despite ARNI, beta-blocker, MRA, and SGLT2 inhibitor therapy. Which agent is specifically indicated in this scenario?</p>
+<button class="quiz-choice" data-key="a">A) Tolvaptan</button>
+<button class="quiz-choice" data-key="b">B) Nesiritide</button>
+<button class="quiz-choice" data-key="c">C) Milrinone</button>
+<button class="quiz-choice" data-key="d">D) Vericiguat</button>
+<div class="quiz-explain">Vericiguat, an oral soluble guanylate cyclase stimulator, is indicated for symptomatic chronic HFrEF with a recent hospitalization or need for IV diuretics despite optimized GDMT. It reduces hospitalizations with minimal mortality effect.</div>
+</div>
+</section>
+
+<section class="card" id="summary">
+<h2>13. Summary Tables</h2>
+
+<h3>Acute/Decompensated HF Agents</h3>
+<table>
+<thead><tr><th>Drug/Class</th><th>MOA</th><th>Primary Effect</th><th>Clinical Use</th><th>Key ADRs/Considerations</th></tr></thead>
+<tbody>
+<tr><td>Loop diuretics (furosemide, bumetanide, torsemide)</td><td>Inhibit Na⁺–K⁺–2Cl⁻ symporter</td><td>Rapid natriuresis/diuresis → ↓ preload</td><td>Relief of pulmonary/peripheral edema in ADHF</td><td>Electrolyte disturbances, volume depletion, hypotension, rare ototoxicity</td></tr>
+<tr><td>Vasodilators (nitroglycerin, nitroprusside, nesiritide)</td><td>↑ NO → smooth muscle relaxation</td><td>↓ preload &amp;/or afterload</td><td>Acute pulmonary edema, elevated filling pressures, HTN crisis</td><td>Hypotension, headache, reflex tachycardia, cyanide toxicity (nitroprusside)</td></tr>
+<tr><td>Inotropes (dobutamine, milrinone)</td><td>β₁ agonism or PDE3 inhibition → ↑ cAMP</td><td>↑ CO, short-term perfusion</td><td>Low-output HF, cardiogenic shock</td><td>Arrhythmias, hypotension; chronic use ↑ mortality</td></tr>
+<tr><td>Digoxin</td><td>Na⁺/K⁺-ATPase inhibition → ↑ intracellular Ca²⁺</td><td>↑ contractility, ↓ sympathetic tone</td><td>Rate control in AF with concomitant HF</td><td>Narrow therapeutic window; toxicity ↑ with hypokalemia, renal dysfunction</td></tr>
+</tbody>
+</table>
+
+<h3>Chronic HF Agents</h3>
+<table>
+<thead><tr><th>Category</th><th>Drug/Class</th><th>Mechanism/Effect</th><th>Clinical Use</th><th>Key ADRs/CI</th></tr></thead>
+<tbody>
+<tr><td rowspan="5">Primary/Mortality-Reducing</td><td>ACE inhibitors / ARBs</td><td>Inhibit RAAS → ↓afterload, ↓aldosterone</td><td>HFrEF, all symptomatic patients</td><td>Hyperkalemia, hypotension, renal impairment, CI in pregnancy</td></tr>
+<tr><td>ARNI (sacubitril/valsartan)</td><td>Neprilysin inhibitor + ARB → ↑natriuretic peptides</td><td>HFrEF NYHA II–IV</td><td>Hypotension, angioedema (36h ACEi washout)</td></tr>
+<tr><td>Beta-blockers (carvedilol, metoprolol succinate, bisoprolol)</td><td>↓Sympathetic activation → ↓HR, ↓remodeling</td><td>HFrEF, all stable patients</td><td>Bradycardia, hypotension; caution in asthma/COPD</td></tr>
+<tr><td>MRAs (spironolactone, eplerenone)</td><td>Block aldosterone → ↓fibrosis, natriuresis</td><td>NYHA II–IV, LVEF ≤35%</td><td>Hyperkalemia; gynecomastia (spironolactone)</td></tr>
+<tr><td>SGLT2 inhibitors (dapagliflozin, empagliflozin)</td><td>Inhibit renal SGLT2 → osmotic diuresis</td><td>HFrEF regardless of diabetes status</td><td>Mycotic infections, volume depletion, rare euglycemic DKA</td></tr>
+<tr><td rowspan="5">Secondary/Adjunctive</td><td>Diuretics (loop, thiazide, metolazone)</td><td>Natriuresis &amp; fluid removal</td><td>Symptom relief, edema control</td><td>Electrolyte disturbances, RAAS activation</td></tr>
+<tr><td>Digoxin</td><td>Na⁺/K⁺-ATPase inhibitor</td><td>Persistent symptoms, AF rate control</td><td>Arrhythmias, toxicity with hypokalemia</td></tr>
+<tr><td>Ivabradine</td><td>Selective I<sub>f</sub> inhibitor → ↓HR</td><td>Sinus rhythm, HR ≥70 despite β-blocker</td><td>Bradycardia, AF, phosphenes</td></tr>
+<tr><td>Hydralazine + Isosorbide Dinitrate</td><td>Arterial + venous dilation</td><td>Symptomatic HFrEF, esp. Black patients</td><td>Hypotension, headache, lupus-like syndrome</td></tr>
+<tr><td>Vericiguat</td><td>sGC stimulator → ↑cGMP</td><td>Recent decompensation despite GDMT</td><td>Hypotension, anemia; avoid with nitrates/PDE5i</td></tr>
+</tbody>
+</table>
+
+<h3>Stepwise Evidence-Based Treatment (ACC/AHA Stages)</h3>
+<ul>
+<li><strong>Stage A</strong> (high risk, no symptoms): risk factor reduction, manage HTN/diabetes/dyslipidemia.</li>
+<li><strong>Stage B</strong> (structural disease, no symptoms): ACEi (or ARB) in all patients; add beta-blocker in select patients.</li>
+<li><strong>Stage C</strong> (structural disease + symptoms): core therapy = ACEi/ARB/ARNI + beta-blocker + MRA + SGLT2i (ARNI preferred over ACEi/ARB when tolerated); consider fixed-dose hydralazine/ISDN in select patients; add-ons for persistent symptoms = ivabradine, digoxin, vericiguat; diuretics for symptom relief only.</li>
+<li><strong>Stage D</strong> (refractory): advanced therapies — LVAD, transplant, palliative care.</li>
+</ul>
+</section>
+
+<section class="card" id="pearls">
+<h2>14. High-Yield Clinical Takeaways</h2>
+<ul>
+<li><strong>HFrEF foundational therapy:</strong> ARNI preferred (ACEi/ARB if ARNI not feasible) + evidence-based beta-blocker + MRA + SGLT2i → reduce morbidity/mortality; initiate early as tolerated.</li>
+<li><strong>Congestion:</strong> loop diuretics rapidly relieve congestion but do not provide the disease-modifying mortality benefit of foundational therapy.</li>
+<li><strong>Acute decompensation:</strong> IV loop diuretics → congestion; IV vasodilators → selected patients with persistent congestion + adequate BP; dobutamine/milrinone → selected patients with low CO + end-organ hypoperfusion.</li>
+<li><strong>Digoxin:</strong> ↑ contractility + ↓ AV nodal conduction; reduces hospitalization but not mortality. Narrow therapeutic index — hypokalemia, hypomagnesemia, hypercalcemia, and renal impairment all raise toxicity risk.</li>
+<li><strong>Selected adjuncts:</strong> ivabradine → sinus rhythm, HR ≥70 despite max beta-blocker; hydralazine/ISDN → select HFrEF patients (esp. Black patients); vericiguat → recently worsening HFrEF.</li>
+<li><strong>Monitor:</strong> volume status, BP, HR, renal function, K⁺/Mg²⁺ — hyperkalemia with RAAS-directed therapy/MRAs; hypokalemia with loop/thiazide diuretics.</li>
+</ul>
+
+<div class="case">
+<span class="case-label">Clinical Vignette</span>
+<p>A 68-year-old man with HFrEF (EF 30%) on lisinopril, carvedilol, and spironolactone presents with worsening dyspnea and lower extremity edema. He is euvolemic on exam after IV diuresis, BP 118/74, HR 78. Which class should be added next to reduce his risk of hospitalization and death?</p>
+<p><em>Answer:</em> An SGLT2 inhibitor (e.g., dapagliflozin) — completing the four-pillar foundational regimen. Consider also transitioning his ACE inhibitor to an ARNI (with the required 36-hour washout) if he remains symptomatic in NYHA II–III.</p>
+</div>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.quiz-q').forEach(function(q){
+  var answer = q.getAttribute('data-answer');
+  var explain = q.querySelector('.quiz-explain');
+  var choices = q.querySelectorAll('.quiz-choice');
+  choices.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(btn.classList.contains('disabled')) return;
+      choices.forEach(function(b){ b.classList.add('disabled'); });
+      var key = btn.getAttribute('data-key');
+      if(key === answer){
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('incorrect');
+        choices.forEach(function(b){
+          if(b.getAttribute('data-key') === answer){ b.classList.add('correct'); }
+        });
+      }
+      explain.classList.add('show');
+    });
+  });
+});
+
+var toggleBtn = document.getElementById('sidenavToggle');
+var panel = document.getElementById('sidenavPanel');
+toggleBtn.addEventListener('click', function(){
+  panel.classList.toggle('open');
+});
+
+var navLinks = panel.querySelectorAll('a');
+var sections = document.querySelectorAll('section.card');
+window.addEventListener('scroll', function(){
+  var pos = window.scrollY + 120;
+  var current = '';
+  sections.forEach(function(sec){
+    if(sec.offsetTop <= pos){ current = sec.id; }
+  });
+  navLinks.forEach(function(link){
+    link.classList.remove('active');
+    if(link.getAttribute('href') === '#' + current){ link.classList.add('active'); }
+  });
+});
+</script>
+</body>
+</html>
