@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Atherosclerosis | Study Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ee; --cream-card:#fffdf8; --forest-dark:#1f3d2b; --forest:#2e5b3e;
+  --sage:#7fa383; --sage-light:#e4ede2; --border:#d8cfb8; --accent:#bf5b3a;
+  --text-main:#2b2a25; --text-soft:#5c584f; --correct:#2e7d4f; --incorrect:#b3402f;
+  --mono:'IBM Plex Mono', monospace; --serif:'Lora', serif;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--cream);color:var(--text-main);font-family:var(--serif);line-height:1.6;}
+.back-btn{position:fixed;top:16px;left:16px;z-index:500;background:var(--cream-card);border:1.5px solid var(--forest);color:var(--forest-dark);font-family:var(--mono);font-size:0.8rem;text-decoration:none;padding:8px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.back-btn:hover{background:var(--sage-light);}
+.header{background:var(--forest-dark);color:var(--cream);padding:56px 20px 34px;text-align:center;}
+.header .kicker{font-family:var(--mono);letter-spacing:0.12em;text-transform:uppercase;font-size:0.78rem;color:var(--sage);margin:0 0 10px;}
+.header h1{font-size:2.1rem;margin:0 0 8px;}
+.header .sub{font-size:1rem;color:var(--sage-light);font-style:italic;}
+.container{max-width:900px;margin:0 auto;padding:34px 20px 90px;}
+.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:22px 26px;margin-bottom:34px;}
+.toc h2{font-family:var(--mono);font-size:0.95rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--forest-dark);margin-top:0;}
+.toc ul{margin:0;padding-left:20px;}
+.toc li{margin-bottom:6px;}
+.toc a{color:var(--forest);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+section.card{background:var(--cream-card);border:1px solid var(--border);border-radius:12px;padding:26px 28px;margin-bottom:26px;scroll-margin-top:24px;}
+section.card h2{color:var(--forest-dark);border-bottom:2px solid var(--sage);padding-bottom:8px;margin-top:0;}
+section.card h3{color:var(--forest);margin-bottom:6px;}
+section.card h4{font-family:var(--mono);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--accent);margin:16px 0 4px;}
+ul,ol{padding-left:22px;} li{margin-bottom:4px;}
+table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:0.9rem;display:block;overflow-x:auto;white-space:normal;}
+table thead th{font-family:var(--mono);background:var(--forest-dark);color:var(--cream);padding:8px 10px;text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.03em;}
+table td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top;}
+table tr:nth-child(even) td{background:var(--sage-light);}
+.pearl{background:var(--sage-light);border-left:4px solid var(--forest);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:0.95rem;}
+.pearl strong{color:var(--forest-dark);}
+.case{background:#fff8ef;border:1px solid var(--accent);border-radius:8px;padding:14px 18px;margin:14px 0;}
+.case-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);font-weight:600;}
+.quiz-mini-header{font-family:var(--mono);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--forest-dark);margin:22px 0 8px;border-top:1px dashed var(--border);padding-top:16px;}
+.quiz-q{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:14px;}
+.quiz-q p.stem{font-weight:600;margin:0 0 10px;}
+.quiz-choice{display:block;width:100%;text-align:left;background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:7px;cursor:pointer;font-family:var(--serif);font-size:0.95rem;color:var(--text-main);}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#dff0e2;border-color:var(--correct);color:var(--correct);font-weight:600;}
+.quiz-choice.incorrect{background:#fbe1dd;border-color:var(--incorrect);color:var(--incorrect);font-weight:600;}
+.quiz-choice.disabled{cursor:default;}
+.quiz-explain{display:none;margin-top:8px;padding:10px 14px;border-radius:6px;background:var(--sage-light);font-size:0.9rem;}
+.quiz-explain.show{display:block;}
+.sidenav-toggle{position:fixed;top:16px;right:16px;z-index:500;background:var(--forest-dark);color:var(--cream);border:none;font-family:var(--mono);font-size:0.78rem;padding:9px 14px;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+.sidenav-panel{position:fixed;top:0;right:-280px;width:260px;height:100%;background:var(--cream-card);border-left:1px solid var(--border);padding:70px 18px 20px;overflow-y:auto;transition:right 0.25s ease;z-index:499;}
+.sidenav-panel.open{right:0;}
+.sidenav-panel h3{font-family:var(--mono);font-size:0.78rem;text-transform:uppercase;color:var(--forest-dark);margin-top:0;}
+.sidenav-panel a{display:block;color:var(--text-soft);text-decoration:none;padding:6px 8px;border-radius:5px;font-size:0.85rem;margin-bottom:2px;}
+.sidenav-panel a:hover, .sidenav-panel a.active{background:var(--sage-light);color:var(--forest-dark);}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">Sections &#9776;</button>
+<nav class="sidenav-panel" id="sidenavPanel">
+  <h3>Jump to Section</h3>
+  <a href="#definition">1. Definition & Overview</a>
+  <a href="#riskfactors">2. Risk Factors & Inflammation</a>
+  <a href="#plaque">3. Plaque Pathophysiology & Thrombosis</a>
+  <a href="#terms">4. Embolus vs. Thrombosis</a>
+  <a href="#cerebro">5. Cerebrovascular Disease</a>
+  <a href="#coronary">6. Coronary Atherosclerosis</a>
+  <a href="#taa">7. Thoracic Aortic Aneurysms & Dissection</a>
+  <a href="#aaa">8. Abdominal Aortic Aneurysms</a>
+  <a href="#mesenteric">9. Mesenteric Ischemia</a>
+  <a href="#renal">10. Renal Artery Stenosis</a>
+  <a href="#pad">11. Peripheral Arterial Disease</a>
+  <a href="#summary">12. High-Yield Summary Table</a>
+</nav>
+
+<div class="header">
+  <p class="kicker">Preeti Jois, MD, MBA, FACEP &bull; Assistant Professor, Emergency Medicine &bull; Co-Director, Military Medicine</p>
+  <h1>Atherosclerosis</h1>
+  <p class="sub">Definition, Risk Factors, and Sequelae Across the Arterial Tree</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#definition">1. Definition & Overview</a></li>
+<li><a href="#riskfactors">2. Risk Factors & Inflammatory Mechanisms</a></li>
+<li><a href="#plaque">3. Plaque Pathophysiology — Erosion vs. Rupture & Determinants of Thrombosis</a></li>
+<li><a href="#terms">4. Definitions — Embolus vs. Thrombosis</a></li>
+<li><a href="#cerebro">5. Cerebrovascular Disease</a></li>
+<li><a href="#coronary">6. Coronary Atherosclerosis</a></li>
+<li><a href="#taa">7. Thoracic Aortic Aneurysms & Dissection</a></li>
+<li><a href="#aaa">8. Abdominal Aortic Aneurysms</a></li>
+<li><a href="#mesenteric">9. Mesenteric Ischemia</a></li>
+<li><a href="#renal">10. Renal Artery Stenosis</a></li>
+<li><a href="#pad">11. Peripheral Arterial Disease</a></li>
+<li><a href="#summary">12. High-Yield Summary Table</a></li>
+</ul>
+</div>
+
+<section class="card" id="definition">
+<h2>1. Definition & Overview</h2>
+<ul>
+<li><strong>Atherosclerosis</strong> = plaque buildup (fatty deposits) in arteries — a form of <strong>arteriosclerosis</strong> ("hardening of the arteries").</li>
+<li>Deposits are composed of cholesterol, fatty substances, cellular waste products, calcium, and fibrin/clotting materials.</li>
+<li>As plaque builds up, vessel walls thicken, narrowing the arterial channel and reducing blood flow → ↓ oxygen and nutrient delivery to tissues.</li>
+<li>May partially or totally block large or medium arteries <strong>anywhere in the body</strong> — heart, brain, pelvis, legs, arms, or kidneys.</li>
+</ul>
+<div class="pearl"><strong>Big-picture theme:</strong> The same underlying disease process (endothelial injury → lipid deposition → inflammation → plaque → thrombosis) produces different clinical syndromes purely based on <em>which arterial bed</em> is affected — stroke/TIA (carotid/cerebral), ACS/angina (coronary), aneurysm/dissection (aorta), mesenteric ischemia (SMA/IMA/celiac), renovascular hypertension (renal), and claudication/limb ischemia (peripheral).</div>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">What best describes the composition of atherosclerotic plaque?</p>
+<button class="quiz-choice" data-key="a">A) Pure calcium deposits only</button>
+<button class="quiz-choice" data-key="b">B) Cholesterol, fatty substances, cellular waste products, calcium, and fibrin/clotting materials</button>
+<button class="quiz-choice" data-key="c">C) Only fibrin and platelets</button>
+<button class="quiz-choice" data-key="d">D) Uric acid crystals</button>
+<div class="quiz-explain">Atherosclerotic plaque is a mixture of cholesterol, fatty substances, cellular waste products, calcium, and fibrin/clotting materials — not a single substance.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">Atherosclerosis is best described as a subtype of which broader process?</p>
+<button class="quiz-choice" data-key="a">A) Vasculitis</button>
+<button class="quiz-choice" data-key="b">B) Venous thromboembolism</button>
+<button class="quiz-choice" data-key="c">C) Arteriosclerosis</button>
+<button class="quiz-choice" data-key="d">D) Lymphedema</button>
+<div class="quiz-explain">Atherosclerosis is a specific form of arteriosclerosis (a general term meaning hardening of the arteries), characterized by lipid-laden plaque formation.</div>
+</div>
+</section>
+
+<section class="card" id="riskfactors">
+<h2>2. Risk Factors & Inflammatory Mechanisms</h2>
+<h4>Traditional Risk Factors</h4>
+<ul><li>Smoking, dyslipidemia, hypertension, glucose intolerance/dysglycemia.</li></ul>
+<h4>Emerging Risk Factors</h4>
+<ul><li>Visceral/ectopic adipose tissue, periodontitis, local inflammatory conditions (e.g., rheumatologic disease), infection, and the body's microbiome.</li></ul>
+<h4>Mechanism</h4>
+<ul>
+<li>Risk factors elicit overexpression of <strong>proinflammatory cytokines</strong> (IL-1, TNF, IL-18, CD40L, MCP-1).</li>
+<li>This triggers a "messenger" cytokine, <strong>IL-6</strong>, which stimulates the liver to produce <strong>acute phase reactants</strong>: fibrinogen (precursor of clots) and PAI-1 (plasminogen activator inhibitor-1, blocks endogenous fibrinolysis) — both promote thrombus accumulation.</li>
+<li><strong>CRP</strong> (often measured as high-sensitivity CRP) and <strong>serum amyloid A (SAA)</strong> are acute phase reactants that serve as clinical biomarkers of inflammation.</li>
+</ul>
+<h4>Protective Lifestyle Factors</h4>
+<ul><li>Physical activity, diet rich in fruits/vegetables/nuts, oily fish (omega-3 fatty acids), moderate alcohol intake.</li></ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">Which two acute phase reactants directly promote thrombus accumulation when overproduced?</p>
+<button class="quiz-choice" data-key="a">A) CRP and SAA</button>
+<button class="quiz-choice" data-key="b">B) IL-1 and TNF</button>
+<button class="quiz-choice" data-key="c">C) Albumin and transferrin</button>
+<button class="quiz-choice" data-key="d">D) Fibrinogen and PAI-1</button>
+<div class="quiz-explain">Fibrinogen (the clot precursor) and PAI-1 (which blocks fibrinolysis) are the acute phase reactants that directly favor thrombus accumulation, while CRP and SAA are biomarkers of the inflammatory response rather than direct clot promoters.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Which cytokine acts as the key "messenger" linking peripheral inflammation to the hepatic acute phase response in atherosclerosis?</p>
+<button class="quiz-choice" data-key="a">A) IL-6</button>
+<button class="quiz-choice" data-key="b">B) IL-10</button>
+<button class="quiz-choice" data-key="c">C) TGF-beta</button>
+<button class="quiz-choice" data-key="d">D) Erythropoietin</button>
+<div class="quiz-explain">IL-6 is the "messenger" cytokine that travels to the liver and stimulates production of acute phase reactants like fibrinogen, PAI-1, CRP, and SAA.</div>
+</div>
+</section>
+
+<section class="card" id="plaque">
+<h2>3. Plaque Pathophysiology — Erosion vs. Rupture & Determinants of Thrombosis</h2>
+<h4>Thrombosis Due to Erosion ("White" Thrombus)</h4>
+<ul>
+<li>Fibrous cap is <strong>thick and intact.</strong></li>
+<li>Collagen trigger; platelet-rich "white" thrombus.</li>
+<li>Smooth muscle cells prominent; often sessile, nonocclusive; usually less remodeled outward; neutrophil extracellular traps (NETs) involved.</li>
+<li><strong>More frequently associated with non-STEMI.</strong></li>
+</ul>
+<h4>Thrombosis Due to Rupture ("Red" Thrombus)</h4>
+<ul>
+<li><strong>Thin fibrous cap with a fissure.</strong></li>
+<li>Tissue factor trigger (released by plaque macrophages); fibrin-rich "red" thrombus with a lipid core.</li>
+<li>Macrophages prominent; often occlusive; usually expansively remodeled.</li>
+<li><strong>More frequently causes STEMI.</strong></li>
+</ul>
+<h4>Determinants of Thrombosis</h4>
+<ul>
+<li><strong>Solid-state (plaque) determinants:</strong> tissue factor from macrophages, endothelial cell balance of pro-thrombotic vs. fibrinolytic properties (thrombomodulin, t-PA, u-PA, PAI-1).</li>
+<li><strong>Fluid-phase (blood) determinants:</strong> circulating fibrinogen, PAI-1, and circulating tissue factor microparticles — high levels favor thrombus accumulation.</li>
+</ul>
+<div class="pearl"><strong>Pearl:</strong> Because atherosclerosis affects the entire arterial tree, but risk factors like hypertension, smoking, and hyperlipidemia are systemic, plaque tends to develop preferentially at sites of <strong>disturbed flow or interrupted laminar shear stress</strong> — classically at <strong>branch points and bifurcations.</strong></div>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient presents with a STEMI. Which plaque disruption mechanism is more likely responsible?</p>
+<button class="quiz-choice" data-key="a">A) Erosion with an intact fibrous cap</button>
+<button class="quiz-choice" data-key="b">B) Collagen-triggered white thrombus</button>
+<button class="quiz-choice" data-key="c">C) Rupture with a thin, fissured fibrous cap and tissue-factor-triggered red thrombus</button>
+<button class="quiz-choice" data-key="d">D) Neither mechanism is associated with STEMI</button>
+<div class="quiz-explain">Rupture of a thin fibrous cap exposes tissue factor from macrophages, triggering a fibrin-rich "red" occlusive thrombus — the mechanism more frequently associated with STEMI. Erosion (intact cap, platelet-rich "white" thrombus) is more associated with non-STEMI.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">Why does atherosclerotic plaque preferentially develop at arterial branch points despite risk factors being systemic?</p>
+<button class="quiz-choice" data-key="a">A) Branch points have thicker vessel walls</button>
+<button class="quiz-choice" data-key="b">B) Branch points have disturbed flow and interrupted laminar shear stress</button>
+<button class="quiz-choice" data-key="c">C) Branch points have no endothelium</button>
+<button class="quiz-choice" data-key="d">D) Branch points are avascular</button>
+<div class="quiz-explain">Even though risk factors act systemically, regions with disturbed flow or loss of normal laminar shear stress — classically branch points — are selectively susceptible to atheroma formation.</div>
+</div>
+</section>
+
+<section class="card" id="terms">
+<h2>4. Definitions — Embolus vs. Thrombosis</h2>
+<table>
+<thead><tr><th>Term</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td><strong>Embolus</strong></td><td>Blood clot, air bubble, fat, or atherosclerotic debris that breaks away and is carried distally to lodge in a blood vessel. Most arterial emboli come from the heart — <strong>atrial fibrillation is the most common cause.</strong> Other causes: cardiac mural thrombus, diseased valves, thoracic aortic debris/thrombus.</td></tr>
+<tr><td><strong>Thrombosis</strong></td><td>Blood clot forming <em>in</em> a blood vessel. In atherosclerotic disease, the thrombus may form at the site of a <strong>critical stenosis.</strong></td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">What is the most common cause of arterial emboli originating from the heart?</p>
+<button class="quiz-choice" data-key="a">A) Atrial fibrillation</button>
+<button class="quiz-choice" data-key="b">B) Sinus bradycardia</button>
+<button class="quiz-choice" data-key="c">C) First degree AV block</button>
+<button class="quiz-choice" data-key="d">D) Premature atrial contractions</button>
+<div class="quiz-explain">Atrial fibrillation, with loss of coordinated atrial contraction and stasis (especially in the left atrial appendage), is the most common cardiac source of arterial emboli.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">How does a thrombosis differ conceptually from an embolus?</p>
+<button class="quiz-choice" data-key="a">A) A thrombosis always originates in the heart</button>
+<button class="quiz-choice" data-key="b">B) An embolus forms in place at a site of stenosis</button>
+<button class="quiz-choice" data-key="c">C) A thrombosis forms in place within a vessel, while an embolus breaks away and travels to lodge elsewhere</button>
+<button class="quiz-choice" data-key="d">D) There is no meaningful difference</button>
+<div class="quiz-explain">Thrombosis is clot formation in situ (often at a critical stenosis), whereas an embolus is material — clot, air, fat, or atherosclerotic debris — that breaks free and travels distally to lodge in another vessel.</div>
+</div>
+</section>
+
+<section class="card" id="cerebro">
+<h2>5. Cerebrovascular Disease</h2>
+<h4>Ischemic vs. Embolic</h4>
+<table>
+<thead><tr><th></th><th>Ischemic</th><th>Embolic</th></tr></thead>
+<tbody>
+<tr><td>Mechanism</td><td>Thrombotic, embolic, or hypoperfusion-related</td><td>Cardiac source (A-fib, valve replacement, recent MI with mural thrombus)</td></tr>
+<tr><td>Risk factors</td><td>Hypertension, diabetes, coronary atherosclerotic disease</td><td>Same cardiac risk factors as above</td></tr>
+<tr><td>Clinical clue</td><td>Transient neurologic deficits in the <strong>same</strong> vascular distribution suggest underlying vascular disease (thrombotic stroke)</td><td>Transient deficits involving <strong>different</strong> vascular distributions suggest embolism</td></tr>
+</tbody>
+</table>
+<h4>Anatomy</h4>
+<ul><li>Carotid arteries supply ~80% of cerebral blood flow; vertebral arteries (from the subclavian arteries) supply the remaining ~20%, joining to form the basilar artery and Circle of Willis.</li></ul>
+<h4>Pathophysiology & Classification of Stenosis</h4>
+<ul>
+<li>Plaques typically extend into the bifurcation; shear forces make plaques unstable, throwing atherosclerotic emboli.</li>
+<li><strong>Mild stenosis:</strong> &lt;50% luminal narrowing. <strong>Moderate:</strong> 50–69%. <strong>Severe:</strong> 70–99%.</li>
+</ul>
+<h4>Presentation</h4>
+<ul>
+<li><strong>Asymptomatic carotid bruit</strong> — heard on auscultation, no neurologic symptoms.</li>
+<li><strong>TIA:</strong> sudden focal neurologic deficit resolving completely within 24 hours; typically contralateral sensory/motor deficits or ipsilateral amaurosis fugax.</li>
+<li><strong>Stroke:</strong> acute neurologic deficit lasting &gt;24 hours.</li>
+</ul>
+<h4>Diagnosis</h4>
+<ul>
+<li><strong>Duplex ultrasonography</strong> — combines ultrasound + Doppler; used for screening/follow-up.</li>
+<li><strong>MRA</strong> — noninvasive; useful when iodinated contrast is contraindicated (AKI risk).</li>
+<li><strong>CTA</strong> — 3D images, comparable to conventional angiography, but requires iodinated contrast.</li>
+</ul>
+<h4>Treatment</h4>
+<ul>
+<li>Medical management for all: antithrombotic therapy (aspirin), statins for lipid control, BP/diabetes management, smoking cessation, increased physical activity. <strong>"Time is brain."</strong></li>
+<li>Mild stenosis (&lt;50%): medical management alone — no benefit from revascularization.</li>
+<li>Moderate-severe stenosis (≥50%): revascularize in addition to medical management — <strong>carotid endarterectomy</strong> or <strong>carotid stenting.</strong></li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient has recurrent transient neurologic deficits that always affect the same vascular distribution. What does this pattern suggest?</p>
+<button class="quiz-choice" data-key="a">A) Embolic stroke from atrial fibrillation</button>
+<button class="quiz-choice" data-key="b">B) Underlying vascular (thrombotic) disease at a fixed stenosis</button>
+<button class="quiz-choice" data-key="c">C) A cardiac mural thrombus</button>
+<button class="quiz-choice" data-key="d">D) Aortic dissection</button>
+<div class="quiz-explain">Deficits recurring in the same vascular territory point toward a fixed, underlying stenotic lesion (thrombotic mechanism), whereas deficits in varying distributions suggest embolism from a proximal source like the heart.</div>
+</div>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient has an asymptomatic carotid stenosis of 40% found incidentally. What is the most appropriate management?</p>
+<button class="quiz-choice" data-key="a">A) Immediate carotid endarterectomy</button>
+<button class="quiz-choice" data-key="b">B) Carotid stenting</button>
+<button class="quiz-choice" data-key="c">C) Emergency CTA and hospitalization</button>
+<button class="quiz-choice" data-key="d">D) Medical management alone (antiplatelet, statin, risk factor control) — no revascularization benefit below 50%</button>
+<div class="quiz-explain">Mild stenosis (<50%) does not benefit from revascularization procedures; medical management with antithrombotic therapy, statins, and risk factor control is appropriate. Revascularization is reserved for moderate-severe (≥50%) stenosis.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Which imaging modality is preferred for carotid disease evaluation when iodinated contrast is contraindicated due to renal impairment?</p>
+<button class="quiz-choice" data-key="a">A) MRA</button>
+<button class="quiz-choice" data-key="b">B) CTA</button>
+<button class="quiz-choice" data-key="c">C) Conventional catheter angiography</button>
+<button class="quiz-choice" data-key="d">D) Plain X-ray</button>
+<div class="quiz-explain">MRA is noninvasive and avoids iodinated contrast, making it preferable in patients at risk for contrast-induced acute kidney injury, whereas CTA requires iodinated contrast.</div>
+</div>
+</section>
+
+<section class="card" id="coronary">
+<h2>6. Coronary Atherosclerosis</h2>
+<h4>Vascular Endothelium — Normal Functions</h4>
+<ul><li>Local control of vascular tone, maintenance of an antithrombotic surface, control of inflammatory cell adhesion.</li></ul>
+<h4>Risk Factors</h4>
+<ul><li>High LDL, cigarette smoking, hypertension, diabetes mellitus — all damage endothelial function, leading to inappropriate vasoconstriction, luminal thrombus formation, and abnormal monocyte-platelet interactions.</li></ul>
+<h4>Distribution</h4>
+<ul><li>Develops at irregular rates across coronary segments; predilection for sites of <strong>increased turbulence</strong>, such as branch points.</li></ul>
+<h4>Hemodynamic Significance of Stenosis</h4>
+<table>
+<thead><tr><th>Degree of Stenosis</th><th>Clinical Significance</th></tr></thead>
+<tbody>
+<tr><td>~50% diameter reduction</td><td>Limits the ability to increase flow to meet increased myocardial demand → exertional angina</td></tr>
+<tr><td>~80% diameter reduction</td><td>Blood flow reduced even at rest; further minor decreases can significantly reduce flow → rest/minimal-exertion angina, signaling an impending event</td></tr>
+</tbody>
+</table>
+<h4>Acute Coronary Syndrome Mechanism</h4>
+<ul><li>Plaque rupture/erosion exposes contents to blood → platelet activation/aggregation + coagulation cascade activation (fibrin deposition) → thrombus traps RBCs → reduces coronary flow → myocardial ischemia/infarction.</li></ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient develops angina with minimal exertion, suggesting an impending cardiac event. What degree of coronary stenosis is most consistent with this presentation?</p>
+<button class="quiz-choice" data-key="a">A) 20%</button>
+<button class="quiz-choice" data-key="b">B) 40%</button>
+<button class="quiz-choice" data-key="c">C) ~80% or greater</button>
+<button class="quiz-choice" data-key="d">D) Stenosis severity has no relationship to symptoms</button>
+<div class="quiz-explain">Around 80% diameter reduction, resting blood flow is already reduced, so further minor decreases can critically reduce flow — producing angina at rest or with minimal exertion, a warning sign of an impending event.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">Which of the following is NOT a normal function of the vascular endothelium relevant to atherosclerosis prevention?</p>
+<button class="quiz-choice" data-key="a">A) Local control of vascular tone</button>
+<button class="quiz-choice" data-key="b">B) Promotion of platelet-monocyte adhesion</button>
+<button class="quiz-choice" data-key="c">C) Maintenance of an antithrombotic surface</button>
+<button class="quiz-choice" data-key="d">D) Control of inflammatory cell adhesion</button>
+<div class="quiz-explain">A healthy endothelium normally limits (not promotes) inflammatory cell and platelet adhesion. Endothelial damage from risk factors like smoking and hypertension leads to abnormal monocyte-platelet interactions instead.</div>
+</div>
+</section>
+
+<section class="card" id="taa">
+<h2>7. Thoracic Aortic Aneurysms & Dissection</h2>
+<h4>Risk Factors</h4>
+<ul>
+<li>Smoking (strongly associated with formation, expansion, <em>and</em> rupture), hypertension, hypercholesterolemia.</li>
+<li>Aneurysm at other sites (AAA, cerebral aneurysm), connective tissue disease (e.g., Marfan syndrome), family history of aortic dissection, aortic valve disease.</li>
+</ul>
+<h4>Symptoms</h4>
+<ul>
+<li>Often <strong>asymptomatic</strong>, discovered incidentally.</li>
+<li>Compression/distortion of adjacent structures: heart failure (aortic regurgitation from sinus dilatation), MI/ischemia (coronary compression), dysphagia (esophageal compression), <strong>hoarseness</strong> (left recurrent laryngeal/vagus nerve compression), hemidiaphragmatic paralysis (phrenic nerve), wheezing/cough/hemoptysis/dyspnea (tracheobronchial compression), SVC syndrome/thromboembolism (central vein compression), acute neurologic complaints (arch branch vessel compression).</li>
+<li>Thromboembolism (e.g., stroke as first presentation).</li>
+<li><strong>Dissection:</strong> back, chest, arm, or abdominal pain that may migrate; can cause acute MI or CVA depending on location.</li>
+<li><strong>Rupture:</strong> back/chest pain with hypotension or syncope.</li>
+</ul>
+<h4>Classification of Aortic Dissection</h4>
+<table>
+<thead><tr><th>System</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td rowspan="2">Stanford</td><td>Type A</td><td>Involves the ascending aorta (may progress to arch/thoracoabdominal)</td></tr>
+<tr><td>Type B</td><td>Descending thoracic/thoracoabdominal aorta, distal to left subclavian, <strong>without</strong> ascending aorta involvement</td></tr>
+<tr><td rowspan="4">DeBakey</td><td>Type I</td><td>Ascending aorta, arch, and descending aorta (may progress to abdominal aorta)</td></tr>
+<tr><td>Type II</td><td>Confined to the ascending aorta only</td></tr>
+<tr><td>Type IIIa</td><td>Descending thoracic aorta, distal to left subclavian, proximal to celiac artery</td></tr>
+<tr><td>Type IIIb</td><td>Thoracic and abdominal aorta, distal to left subclavian artery</td></tr>
+</tbody>
+</table>
+<h4>Management</h4>
+<ul>
+<li>Cardiovascular risk reduction: smoking cessation, BP control, lipid lowering.</li>
+<li><strong>Avoid fluoroquinolones</strong> — linked to increased risk of aortic dissection and aneurysm rupture.</li>
+<li>Aneurysm surveillance (20% of TAA patients also have an AAA).</li>
+<li>Surgical repair (open or endovascular) when indicated.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">A dissection originates in the ascending aorta and extends through the arch into the descending aorta. How is this classified in both the Stanford and DeBakey systems?</p>
+<button class="quiz-choice" data-key="a">A) Stanford Type A / DeBakey Type I</button>
+<button class="quiz-choice" data-key="b">B) Stanford Type B / DeBakey Type II</button>
+<button class="quiz-choice" data-key="c">C) Stanford Type A / DeBakey Type IIIa</button>
+<button class="quiz-choice" data-key="d">D) Stanford Type B / DeBakey Type IIIb</button>
+<div class="quiz-explain">Involvement of the ascending aorta makes this a Stanford Type A; since it originates in the ascending aorta and extends through the arch into the descending aorta, it is DeBakey Type I.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">Why should fluoroquinolone antibiotics generally be avoided in a patient with a known thoracic aortic aneurysm?</p>
+<button class="quiz-choice" data-key="a">A) They have no relevant interaction</button>
+<button class="quiz-choice" data-key="b">B) They cause hypertension, worsening aneurysm growth</button>
+<button class="quiz-choice" data-key="c">C) They have been linked to increased risk of aortic dissection and aneurysm rupture</button>
+<button class="quiz-choice" data-key="d">D) They are contraindicated only in AAA, not TAA</button>
+<div class="quiz-explain">Fluoroquinolones have been associated with an increased risk of aortic dissection and aneurysm rupture and should generally be avoided in patients with known aortic aneurysm.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient with a thoracic aortic aneurysm develops hoarseness. What is the most likely mechanism?</p>
+<button class="quiz-choice" data-key="a">A) Esophageal compression</button>
+<button class="quiz-choice" data-key="b">B) Compression of the left recurrent laryngeal or left vagus nerve</button>
+<button class="quiz-choice" data-key="c">C) Phrenic nerve compression</button>
+<button class="quiz-choice" data-key="d">D) SVC compression</button>
+<div class="quiz-explain">Hoarseness in a patient with TAA classically results from compression of the left recurrent laryngeal nerve or left vagus nerve as the aneurysm expands.</div>
+</div>
+</section>
+
+<section class="card" id="aaa">
+<h2>8. Abdominal Aortic Aneurysms</h2>
+<h4>Overview</h4>
+<ul>
+<li>Most commonly in the <strong>infrarenal aorta</strong>, may involve iliac vessels; a <strong>true aneurysm</strong> (degeneration/dilation of the full aortic wall).</li>
+<li>Aortic diameter &gt;3 cm = aneurysm; repair typically considered at <strong>≥5.5 cm</strong> (deciding point for surgical intervention).</li>
+<li>Usually due to atherosclerotic disease; also associated with age, male sex, smoking (major risk factor for accelerated growth/rupture), family history, hypertension, diabetes, COPD.</li>
+<li><strong>Rupture</strong> is the most feared complication — mortality ~75–80%.</li>
+</ul>
+<h4>Presentation</h4>
+<ul>
+<li><strong>Asymptomatic</strong> (most common) — found on exam, screening ultrasound, or incidental imaging. Palpation accuracy ranges from 29% (small aneurysms) to 75% (&gt;5 cm).</li>
+<li><strong>Symptomatic:</strong> back/flank/abdominal pain ± tender pulsatile mass; may be hemodynamically stable or unstable. <strong>Classic triad</strong> (abdominal pain + pulsatile mass + hypotension) seen in only ~1/3 of ruptures.</li>
+<li>May present with lower limb ischemia from embolization/thrombus.</li>
+<li><strong>Ecchymosis signs of rupture:</strong> flank (<strong>Grey-Turner sign</strong>), periumbilical (<strong>Cullen's sign</strong>), proximal thigh (<strong>Fox's sign</strong>), scrotum (<strong>Bryant's sign</strong>).</li>
+</ul>
+<h4>Diagnosis</h4>
+<ul>
+<li><strong>Ultrasound</strong> preferred for screening/asymptomatic patients and follow-up (sensitivity/specificity ~95/100%).</li>
+<li>Hemodynamically <strong>unstable</strong> + known aneurysm → emergent surgery (bedside US &gt;90% sensitive).</li>
+<li>Hemodynamically <strong>stable</strong> symptomatic patients → CT scan (CTA best for anatomic detail).</li>
+</ul>
+<h4>Treatment</h4>
+<ul>
+<li>Goal: prevent rupture. Risk of rupture: &lt;5 cm = 5–10%; &gt;5 cm = 30–40%. <strong>5.5 cm is the deciding point for surgical intervention.</strong></li>
+<li>Medical optimization: lipid lowering, smoking cessation, BP/diabetes control; surveillance with serial ultrasound (e.g., every 6 months).</li>
+<li><strong>Open repair:</strong> graft sewn in place — permanently obliterates the aneurysm, but risk of cardiac complications, emboli, and AKI (given the infrarenal location).</li>
+<li><strong>Endovascular repair (EVAR):</strong> percutaneous graft placement — less invasive, decreased operative time/blood loss; risks include endoleak (can cause continued expansion/rupture), graft migration, infection, distal thrombosis.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient with a ruptured AAA has ecchymosis around the umbilicus. What is this sign called?</p>
+<button class="quiz-choice" data-key="a">A) Grey-Turner sign</button>
+<button class="quiz-choice" data-key="b">B) Fox's sign</button>
+<button class="quiz-choice" data-key="c">C) Bryant's sign</button>
+<button class="quiz-choice" data-key="d">D) Cullen's sign</button>
+<div class="quiz-explain">Periumbilical ecchymosis is Cullen's sign. Flank ecchymosis is Grey-Turner sign, proximal thigh is Fox's sign, and scrotal ecchymosis is Bryant's sign — all associated with retroperitoneal hemorrhage from a ruptured AAA.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">At what aortic diameter is elective surgical repair of an AAA generally considered?</p>
+<button class="quiz-choice" data-key="a">A) 3 cm</button>
+<button class="quiz-choice" data-key="b">B) 5.5 cm</button>
+<button class="quiz-choice" data-key="c">C) 8 cm</button>
+<button class="quiz-choice" data-key="d">D) 2 cm</button>
+<div class="quiz-explain">While an aortic diameter >3 cm defines an aneurysm, 5.5 cm is the threshold at which the risk of rupture (30–40% for aneurysms >5cm) is felt to outweigh the risks of surgical repair.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">A patient with a known AAA presents hemodynamically unstable with severe abdominal pain. What is the most appropriate immediate step?</p>
+<button class="quiz-choice" data-key="a">A) Emergent surgery (bedside ultrasound can confirm, but should not delay operative management)</button>
+<button class="quiz-choice" data-key="b">B) Outpatient CTA scheduling</button>
+<button class="quiz-choice" data-key="c">C) Serial ultrasounds every 6 months</button>
+<button class="quiz-choice" data-key="d">D) Discharge with pain control</button>
+<div class="quiz-explain">A hemodynamically unstable patient with a known AAA diagnosis should go emergently to surgery; bedside ultrasound (>90% sensitive) can support the diagnosis without delaying definitive treatment.</div>
+</div>
+</section>
+
+<section class="card" id="mesenteric">
+<h2>9. Mesenteric Ischemia</h2>
+<h4>Overview</h4>
+<ul>
+<li>Occlusion of mesenteric vessels or systemic hypoperfusion; <strong>most common cause is arterial embolism.</strong></li>
+<li>May be acute (embolism) or chronic (partial vascular obstruction); rare in younger patients; median age ~70; mortality 60–80%.</li>
+<li>With chronic disease, ischemia may not occur unless <strong>2 of the 3</strong> main mesenteric arteries (celiac, SMA, IMA) are occluded, due to rich collateral flow (pancreaticoduodenal arteries, marginal artery of Drummond, hypogastric arteries). In acute disease (embolism), sudden occlusion of just <strong>one</strong> artery can cause ischemia in its distribution.</li>
+</ul>
+<h4>Chronic Mesenteric Ischemia</h4>
+<ul>
+<li>"Intestinal angina" — postprandial abdominal pain starting 15–30 min after eating, lasting up to 4 hours; "fear of eating" and weight loss.</li>
+<li>Nonspecific symptoms: nausea, vomiting, early satiety, diarrhea/constipation.</li>
+<li>History often includes other atherosclerotic disease (angina, prior TIA/CVA, claudication).</li>
+<li>Exam: diffuse, mild abdominal tenderness without rebound; occasional abdominal bruit.</li>
+<li>Diagnosis: <strong>CT angiography</strong> (preferred noninvasive initial test) + clinical suspicion.</li>
+</ul>
+<h4>Acute Mesenteric Ischemia</h4>
+<ul>
+<li>Classic finding: <strong>pain out of proportion to physical exam findings.</strong> May progress to peritonitis/shock.</li>
+<li>Diagnosis: CT angiography; clinical suspicion is key.</li>
+<li><strong>Treatment:</strong> medical resuscitation while confirming diagnosis and preparing for surgery — control pain, fluid resuscitate (improve splanchnic flow), <strong>avoid vasoconstrictors</strong> (worsen ischemia), broad-spectrum antibiotics for peritonitis.</li>
+<li>Surgery: open surgery with bowel resection if bowel is dead; endovascular treatment if viable — <strong>embolectomy</strong> for embolic disease, <strong>bypass graft</strong> for thrombotic disease (thrombotic disease may have an underlying severely stenotic vessel, so bypass rather than simple thrombectomy).</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">Why does chronic mesenteric ischemia typically require occlusion of at least 2 of the 3 main mesenteric arteries before symptoms develop?</p>
+<button class="quiz-choice" data-key="a">A) The bowel has no metabolic requirement for blood flow</button>
+<button class="quiz-choice" data-key="b">B) Chronic disease always affects all three arteries simultaneously</button>
+<button class="quiz-choice" data-key="c">C) Rich collateral circulation (pancreaticoduodenal arcade, marginal artery of Drummond, hypogastric arteries) compensates for single-vessel occlusion</button>
+<button class="quiz-choice" data-key="d">D) The SMA has no collateral supply</button>
+<div class="quiz-explain">Collateral pathways between the celiac, SMA, and IMA (via the pancreaticoduodenal arteries, marginal artery of Drummond, and hypogastric arteries) allow the bowel to tolerate chronic occlusion of a single mesenteric artery without ischemia.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">A patient with acute mesenteric ischemia has severe abdominal pain but a relatively benign abdominal exam. What is this classic finding called, and what should NOT be given during resuscitation?</p>
+<button class="quiz-choice" data-key="a">A) "Pain out of proportion to exam"; avoid vasoconstrictors</button>
+<button class="quiz-choice" data-key="b">B) "Silent abdomen"; avoid antibiotics</button>
+<button class="quiz-choice" data-key="c">C) "Rebound tenderness"; avoid fluids</button>
+<button class="quiz-choice" data-key="d">D) "Murphy's sign"; avoid opioids</button>
+<div class="quiz-explain">Pain out of proportion to physical exam findings is the classic presentation of acute mesenteric ischemia. Vasoconstrictors should be avoided during resuscitation because they worsen splanchnic hypoperfusion and ischemia.</div>
+</div>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient with acute mesenteric ischemia due to embolic occlusion of the SMA undergoes surgery. Which procedure is most appropriate for embolic (as opposed to thrombotic) disease?</p>
+<button class="quiz-choice" data-key="a">A) Bypass graft</button>
+<button class="quiz-choice" data-key="b">B) Carotid endarterectomy</button>
+<button class="quiz-choice" data-key="c">C) EVAR</button>
+<button class="quiz-choice" data-key="d">D) Embolectomy</button>
+<div class="quiz-explain">Embolectomy (removal of the embolus) is appropriate for embolic disease of the SMA. Thrombotic disease usually reflects an underlying severely stenotic vessel and is better treated with a bypass graft rather than simple thrombectomy.</div>
+</div>
+</section>
+
+<section class="card" id="renal">
+<h2>10. Renal Artery Stenosis</h2>
+<ul>
+<li>Atherosclerotic renal artery stenosis is common — affects ~7% of patients &gt;65 years old in sampled populations.</li>
+<li>Prevalence increases with age and in patients with other vascular disease (CAD, aortic/lower extremity disease).</li>
+<li>If untreated, progresses in nearly 50% of cases over 5 years, sometimes to total occlusion.</li>
+<li><strong>Treatment:</strong> blood pressure management and statin therapy to slow progression and improve outcomes.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">What is the mainstay of treatment for atherosclerotic renal artery stenosis to slow disease progression?</p>
+<button class="quiz-choice" data-key="a">A) Immediate revascularization in all patients</button>
+<button class="quiz-choice" data-key="b">B) Blood pressure management and statin therapy</button>
+<button class="quiz-choice" data-key="c">C) Anticoagulation alone</button>
+<button class="quiz-choice" data-key="d">D) Antibiotics</button>
+<div class="quiz-explain">Blood pressure control and statin therapy are the mainstays of managing atherosclerotic renal artery stenosis, aimed at slowing progression and improving clinical outcomes rather than routine revascularization.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">If left untreated, what proportion of atherosclerotic renal artery stenosis cases progress over a 5-year period?</p>
+<button class="quiz-choice" data-key="a">A) Less than 5%</button>
+<button class="quiz-choice" data-key="b">B) About 10%</button>
+<button class="quiz-choice" data-key="c">C) Almost 50%</button>
+<button class="quiz-choice" data-key="d">D) 100%</button>
+<div class="quiz-explain">Untreated atherosclerotic renal artery stenosis progresses in almost 50% of cases over 5 years, and can occasionally progress to total occlusion.</div>
+</div>
+</section>
+
+<section class="card" id="pad">
+<h2>11. Peripheral Arterial Disease</h2>
+<h4>Risk Factors</h4>
+<ul>
+<li>Smoking (relative risk ~2.72), hypertension, diabetes, hyperlipidemia, age.</li>
+<li>Ethnicity: higher incidence in African American patients than non-Hispanic white patients.</li>
+</ul>
+<h4>Chronic Signs & Symptoms</h4>
+<ul>
+<li>Leg pain when walking (claudication); muscle pain/cramping in calves or arms with exertion, relieved by rest; leg numbness/weakness; absent or weak pulses.</li>
+<li>Skin changes: shiny skin, color changes, slow-growing toenails, non-healing sores, hair loss; erectile dysfunction.</li>
+</ul>
+<h4>Acute Limb Ischemia — The 6 P's</h4>
+<table>
+<thead><tr><th>Sign</th><th>Mechanism</th></tr></thead>
+<tbody>
+<tr><td><strong>P</strong>ain</td><td>Sudden, severe</td></tr>
+<tr><td><strong>P</strong>allor</td><td>Pale appearance</td></tr>
+<tr><td><strong>P</strong>aresthesias</td><td>Ischemic nerves</td></tr>
+<tr><td><strong>P</strong>aralysis</td><td>Ischemic nerves/muscles</td></tr>
+<tr><td><strong>P</strong>ulseless</td><td>No pulse</td></tr>
+<tr><td><strong>P</strong>oikilothermia</td><td>Cold extremity</td></tr>
+</tbody>
+</table>
+<h4>Evaluation</h4>
+<ul>
+<li><strong>Ankle-Brachial Index (ABI)</strong> — first-line test; compares ankle vs. brachial systolic pressure.
+  <ul><li>Healthy: ABI ≥1.00</li><li>ABI &lt;0.90: may indicate PAD</li><li>ABI &lt;0.40: severe PAD</li></ul>
+</li>
+<li>Labs (cholesterol, triglycerides, glucose/A1c), 6-minute walking test, Doppler ultrasound, CTA, MRA, angiography.</li>
+</ul>
+<h4>Treatment of Limb Ischemia</h4>
+<ul>
+<li>Restore blood flow and prevent recurrent embolism/thrombosis: <strong>heparin</strong> (prevents clot extension/reocclusion); <strong>direct thrombin inhibitors</strong> if heparin-induced thrombocytopenia with thrombosis is a concern.</li>
+<li>Early surgical/vascular consultation; options include catheter-directed thrombolysis, percutaneous mechanical thromboembolectomy, percutaneous transluminal angioplasty/stenting, or open surgery (bypass grafting).</li>
+<li>Long-term: smoking cessation, structured exercise, antiplatelet agents, and <strong>cilostazol</strong> (PDE inhibitor — antiplatelet, vasodilator, inhibits vascular smooth muscle proliferation; <strong>contraindicated in heart failure</strong>).</li>
+</ul>
+<div class="pearl"><strong>Prognostic pearl:</strong> In patients with non-limb-threatening ischemia, the 5-year risk of amputation/tissue loss is &lt;5%, but the 5-year risk of <strong>death</strong> (usually from MI) is ~30% — PAD is as much a marker of systemic atherosclerotic burden as it is a limb problem.</div>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient's ABI is measured at 0.35. What does this indicate?</p>
+<button class="quiz-choice" data-key="a">A) Normal arterial perfusion</button>
+<button class="quiz-choice" data-key="b">B) Severe peripheral arterial disease</button>
+<button class="quiz-choice" data-key="c">C) Venous insufficiency</button>
+<button class="quiz-choice" data-key="d">D) Mild PAD only</button>
+<div class="quiz-explain">An ABI below 0.40 indicates severe PAD. An ABI ≥1.00 is healthy, and <0.90 suggests PAD in general, but this level is specifically in the severe range.</div>
+</div>
+<div class="quiz-q" data-answer="d">
+<p class="stem">Which of the following is NOT one of the classic "6 P's" of acute limb ischemia?</p>
+<button class="quiz-choice" data-key="a">A) Pallor</button>
+<button class="quiz-choice" data-key="b">B) Poikilothermia</button>
+<button class="quiz-choice" data-key="c">C) Paresthesias</button>
+<button class="quiz-choice" data-key="d">D) Polyuria</button>
+<div class="quiz-explain">The 6 P's of acute limb ischemia are pain, pallor, paresthesias, paralysis, pulselessness, and poikilothermia. Polyuria is unrelated.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">A patient with intermittent claudication asks about their long-term prognosis. What is the most accurate statement?</p>
+<button class="quiz-choice" data-key="a">A) The 5-year risk of death (usually from MI) is around 30%, while the risk of limb loss is under 5%</button>
+<button class="quiz-choice" data-key="b">B) The 5-year risk of amputation is 30%, with minimal mortality risk</button>
+<button class="quiz-choice" data-key="c">C) PAD carries no increased mortality risk</button>
+<button class="quiz-choice" data-key="d">D) Amputation is inevitable within 5 years</button>
+<div class="quiz-explain">In patients with non-limb-threatening ischemia, the 5-year risk of amputation or tissue loss is low (<5%), but the 5-year risk of death — usually from myocardial infarction — is substantial (~30%), reflecting PAD as a marker of systemic atherosclerosis.</div>
+</div>
+</section>
+
+<section class="card" id="summary">
+<h2>12. High-Yield Summary Table</h2>
+<table>
+<thead><tr><th>Arterial Bed</th><th>Acute Presentation</th><th>Chronic Presentation</th><th>Key Diagnostic Test</th><th>Key Treatment</th></tr></thead>
+<tbody>
+<tr><td>Carotid/cerebral</td><td>Stroke, TIA</td><td>Recurrent TIAs, vascular dementia, asymptomatic bruit</td><td>Duplex US; MRA/CTA</td><td>Antiplatelet/statin; endarterectomy or stenting if ≥50% stenosis</td></tr>
+<tr><td>Coronary</td><td>ACS (unstable angina, MI)</td><td>Stable angina, silent ischemia</td><td>EKG/troponin; angiography</td><td>Antiplatelet, statin, revascularization (PCI/CABG) as indicated</td></tr>
+<tr><td>Thoracic aorta</td><td>Aortic rupture, dissection</td><td>Aneurysm (often asymptomatic)</td><td>CTA; TTE/TEE</td><td>BP/lipid control, avoid fluoroquinolones, surgical repair if indicated</td></tr>
+<tr><td>Abdominal aorta</td><td>Rupture (pain, pulsatile mass, hypotension in ~1/3)</td><td>Aneurysm (often asymptomatic)</td><td>Ultrasound (screening); CTA if stable/symptomatic</td><td>Surveillance if <5.5 cm; open or endovascular repair at ≥5.5 cm or rupture</td></tr>
+<tr><td>Mesenteric</td><td>Acute mesenteric ischemia (pain out of proportion)</td><td>Chronic mesenteric ischemia ("intestinal angina," fear of eating)</td><td>CT angiography</td><td>Fluid resuscitation (avoid vasoconstrictors), embolectomy (embolic) or bypass (thrombotic)</td></tr>
+<tr><td>Renal</td><td>Renal artery occlusion (rare)</td><td>Renovascular hypertension, worsening renal function</td><td>Duplex US, MRA/CTA</td><td>BP control, statin therapy</td></tr>
+<tr><td>Peripheral (extremities)</td><td>Acute limb ischemia (6 P's)</td><td>Claudication, rest pain, skin changes, gangrene</td><td>ABI; Doppler US; CTA/MRA</td><td>Heparin/thrombin inhibitors, revascularization, cilostazol, antiplatelets, smoking cessation</td></tr>
+</tbody>
+</table>
+
+<div class="pearl"><strong>Overall framework:</strong> One disease (endothelial injury → lipid/inflammatory plaque → erosion or rupture → thrombosis or embolism), many faces. Systemic risk factors (smoking, hypertension, diabetes, dyslipidemia) drive plaque formation preferentially at branch points/turbulent flow throughout the arterial tree, and management — risk factor modification, antiplatelet/statin therapy, and targeted revascularization when critical thresholds are crossed — follows the same basic logic regardless of the vascular bed involved.</div>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.quiz-q').forEach(function(q){
+  var answer = q.getAttribute('data-answer');
+  var explain = q.querySelector('.quiz-explain');
+  var choices = q.querySelectorAll('.quiz-choice');
+  choices.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(btn.classList.contains('disabled')) return;
+      choices.forEach(function(b){ b.classList.add('disabled'); });
+      var key = btn.getAttribute('data-key');
+      if(key === answer){
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('incorrect');
+        choices.forEach(function(b){
+          if(b.getAttribute('data-key') === answer){ b.classList.add('correct'); }
+        });
+      }
+      explain.classList.add('show');
+    });
+  });
+});
+var toggleBtn = document.getElementById('sidenavToggle');
+var panel = document.getElementById('sidenavPanel');
+toggleBtn.addEventListener('click', function(){ panel.classList.toggle('open'); });
+var navLinks = panel.querySelectorAll('a');
+var sections = document.querySelectorAll('section.card');
+window.addEventListener('scroll', function(){
+  var pos = window.scrollY + 120;
+  var current = '';
+  sections.forEach(function(sec){ if(sec.offsetTop <= pos){ current = sec.id; } });
+  navLinks.forEach(function(link){
+    link.classList.remove('active');
+    if(link.getAttribute('href') === '#' + current){ link.classList.add('active'); }
+  });
+});
+</script>
+</body>
+</html>
