@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Clinical Diagnosis and Treatment of Arrhythmias | Study Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ee; --cream-card:#fffdf8; --forest-dark:#1f3d2b; --forest:#2e5b3e;
+  --sage:#7fa383; --sage-light:#e4ede2; --border:#d8cfb8; --accent:#bf5b3a;
+  --text-main:#2b2a25; --text-soft:#5c584f; --correct:#2e7d4f; --incorrect:#b3402f;
+  --mono:'IBM Plex Mono', monospace; --serif:'Lora', serif;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--cream);color:var(--text-main);font-family:var(--serif);line-height:1.6;}
+.back-btn{position:fixed;top:16px;left:16px;z-index:500;background:var(--cream-card);border:1.5px solid var(--forest);color:var(--forest-dark);font-family:var(--mono);font-size:0.8rem;text-decoration:none;padding:8px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.back-btn:hover{background:var(--sage-light);}
+.header{background:var(--forest-dark);color:var(--cream);padding:56px 20px 34px;text-align:center;}
+.header .kicker{font-family:var(--mono);letter-spacing:0.12em;text-transform:uppercase;font-size:0.78rem;color:var(--sage);margin:0 0 10px;}
+.header h1{font-size:2.1rem;margin:0 0 8px;}
+.header .sub{font-size:1rem;color:var(--sage-light);font-style:italic;}
+.container{max-width:900px;margin:0 auto;padding:34px 20px 90px;}
+.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:22px 26px;margin-bottom:34px;}
+.toc h2{font-family:var(--mono);font-size:0.95rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--forest-dark);margin-top:0;}
+.toc ul{margin:0;padding-left:20px;}
+.toc li{margin-bottom:6px;}
+.toc a{color:var(--forest);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+section.card{background:var(--cream-card);border:1px solid var(--border);border-radius:12px;padding:26px 28px;margin-bottom:26px;scroll-margin-top:24px;}
+section.card h2{color:var(--forest-dark);border-bottom:2px solid var(--sage);padding-bottom:8px;margin-top:0;}
+section.card h3{color:var(--forest);margin-bottom:6px;}
+section.card h4{font-family:var(--mono);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--accent);margin:16px 0 4px;}
+ul,ol{padding-left:22px;} li{margin-bottom:4px;}
+table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:0.9rem;display:block;overflow-x:auto;white-space:normal;}
+table thead th{font-family:var(--mono);background:var(--forest-dark);color:var(--cream);padding:8px 10px;text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.03em;}
+table td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top;}
+table tr:nth-child(even) td{background:var(--sage-light);}
+.pearl{background:var(--sage-light);border-left:4px solid var(--forest);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:0.95rem;}
+.pearl strong{color:var(--forest-dark);}
+.case{background:#fff8ef;border:1px solid var(--accent);border-radius:8px;padding:14px 18px;margin:14px 0;}
+.case-label{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);font-weight:600;}
+.quiz-mini-header{font-family:var(--mono);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--forest-dark);margin:22px 0 8px;border-top:1px dashed var(--border);padding-top:16px;}
+.quiz-q{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:14px;}
+.quiz-q p.stem{font-weight:600;margin:0 0 10px;}
+.quiz-choice{display:block;width:100%;text-align:left;background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:7px;cursor:pointer;font-family:var(--serif);font-size:0.95rem;color:var(--text-main);}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#dff0e2;border-color:var(--correct);color:var(--correct);font-weight:600;}
+.quiz-choice.incorrect{background:#fbe1dd;border-color:var(--incorrect);color:var(--incorrect);font-weight:600;}
+.quiz-choice.disabled{cursor:default;}
+.quiz-explain{display:none;margin-top:8px;padding:10px 14px;border-radius:6px;background:var(--sage-light);font-size:0.9rem;}
+.quiz-explain.show{display:block;}
+.sidenav-toggle{position:fixed;top:16px;right:16px;z-index:500;background:var(--forest-dark);color:var(--cream);border:none;font-family:var(--mono);font-size:0.78rem;padding:9px 14px;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+.sidenav-panel{position:fixed;top:0;right:-280px;width:260px;height:100%;background:var(--cream-card);border-left:1px solid var(--border);padding:70px 18px 20px;overflow-y:auto;transition:right 0.25s ease;z-index:499;}
+.sidenav-panel.open{right:0;}
+.sidenav-panel h3{font-family:var(--mono);font-size:0.78rem;text-transform:uppercase;color:var(--forest-dark);margin-top:0;}
+.sidenav-panel a{display:block;color:var(--text-soft);text-decoration:none;padding:6px 8px;border-radius:5px;font-size:0.85rem;margin-bottom:2px;}
+.sidenav-panel a:hover, .sidenav-panel a.active{background:var(--sage-light);color:var(--forest-dark);}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">Sections &#9776;</button>
+<nav class="sidenav-panel" id="sidenavPanel">
+  <h3>Jump to Section</h3>
+  <a href="#overview">1. Overview & Approach</a>
+  <a href="#palpitations">2. Palpitations</a>
+  <a href="#paroxysmal">3. Paroxysmal Tachycardia</a>
+  <a href="#afib-clinical">4. Atrial Fibrillation Basics</a>
+  <a href="#workup">5. Diagnostic Workup</a>
+  <a href="#afib-class">6. A-fib Classification & CHA₂DS₂-VASc</a>
+  <a href="#afib-tx">7. A-fib Treatment</a>
+  <a href="#anticoag">8. Anticoagulants</a>
+  <a href="#antiarrhythmics">9. Antiarrhythmic Drugs & Refractory A-fib</a>
+  <a href="#escape-premature">10. Escape Rhythms & Premature Beats</a>
+  <a href="#pvc">11. PVCs</a>
+  <a href="#pac">12. PACs</a>
+  <a href="#brady-avblock">13. Bradycardia & AV Blocks</a>
+  <a href="#pacemakers">14. Pacemakers</a>
+  <a href="#vtach">15. Ventricular Arrhythmias & ICDs</a>
+  <a href="#svt">16. Other SVTs (MAT, Flutter, AVNRT, AVRT, WPW)</a>
+  <a href="#summary">17. High-Yield Summary Table</a>
+</nav>
+
+<div class="header">
+  <p class="kicker">Dennis Kinder, MD, FACP &bull; Associate Professor of Internal Medicine</p>
+  <h1>Clinical Diagnosis and Treatment of Arrhythmias</h1>
+  <p class="sub">Recognition, Workup, and Management of Cardiac Arrhythmias</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#overview">1. Overview & Approach to Arrhythmias</a></li>
+<li><a href="#palpitations">2. Palpitations — Causes</a></li>
+<li><a href="#paroxysmal">3. Paroxysmal Tachycardia — Localizing the Focus</a></li>
+<li><a href="#afib-clinical">4. Atrial Fibrillation — Signs, Symptoms, EKG, Epidemiology & Risk Factors</a></li>
+<li><a href="#workup">5. Diagnostic Workup — Labs & Ambulatory Monitoring</a></li>
+<li><a href="#afib-class">6. A-fib Classification, Consequences & CHA₂DS₂-VASc Score</a></li>
+<li><a href="#afib-tx">7. A-fib Treatment — Unstable vs. Stable, Cardioversion vs. Defibrillation</a></li>
+<li><a href="#anticoag">8. Anticoagulants for Atrial Fibrillation</a></li>
+<li><a href="#antiarrhythmics">9. Antiarrhythmic Drugs & Refractory A-fib</a></li>
+<li><a href="#escape-premature">10. Escape Rhythms & Premature Beats — General Concepts</a></li>
+<li><a href="#pvc">11. Premature Ventricular Contractions (PVCs)</a></li>
+<li><a href="#pac">12. Premature Atrial Contractions (PACs)</a></li>
+<li><a href="#brady-avblock">13. Bradycardia, Tachy-Brady Syndrome & AV Blocks</a></li>
+<li><a href="#pacemakers">14. Pacemakers & Paced Rhythms</a></li>
+<li><a href="#vtach">15. Ventricular Arrhythmias & ICDs</a></li>
+<li><a href="#svt">16. Other Supraventricular Rhythms — Wandering Pacemaker, MAT, Flutter, AVNRT, AVRT, WPW</a></li>
+<li><a href="#summary">17. High-Yield Summary Table</a></li>
+</ul>
+</div>
+
+<section class="card" id="overview">
+<h2>1. Overview & Approach to Arrhythmias</h2>
+<p>Arrhythmias can manifest as early beats, bigeminal (grouped) beats, pauses, bradycardia, tachycardia, or chaotic rhythms.</p>
+
+<div class="case">
+<span class="case-label">Case 1</span>
+<p>A 59-year-old male with obesity and hypertension presents with palpitations for 3 hours, with similar short episodes over the past couple weeks, commonly early in the morning. No chest pain or dyspnea.</p>
+<p><strong>Vitals:</strong> P 132, RR 20, BP 148/90, T 98.8°F, SaO₂ 97% on RA.<br>
+<strong>Exam:</strong> Alert, anxious, no diaphoresis; heart irregularly irregular rate/rhythm, +S3, 3/6 systolic murmur best at apex; no JVD; small nontender thyroid; no peripheral edema; pulses 2+ and irregularly irregular in carotids, radials, DP; lungs clear.</p>
+<p><em>What test would you order next?</em> — A 12-lead EKG, which shows an undulating baseline with no distinct P waves: <strong>atrial fibrillation with rapid ventricular rate.</strong></p>
+</div>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient presents with an irregularly irregular pulse, no discernible P waves, and an undulating baseline on EKG. What is the most likely diagnosis?</p>
+<button class="quiz-choice" data-key="a">A) Atrial flutter</button>
+<button class="quiz-choice" data-key="b">B) Sinus tachycardia</button>
+<button class="quiz-choice" data-key="c">C) Atrial fibrillation with rapid ventricular rate</button>
+<button class="quiz-choice" data-key="d">D) Third degree AV block</button>
+<div class="quiz-explain">An irregularly irregular rhythm with an undulating baseline and no distinct P waves is the classic EKG description of atrial fibrillation. Atrial flutter instead shows a regular "sawtooth" pattern.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">Which physical exam finding in Case 1 is most specific for identifying the underlying rhythm before the EKG is obtained?</p>
+<button class="quiz-choice" data-key="a">A) 3/6 systolic murmur at the apex</button>
+<button class="quiz-choice" data-key="b">B) Irregularly irregular pulse</button>
+<button class="quiz-choice" data-key="c">C) Anxious appearance</button>
+<button class="quiz-choice" data-key="d">D) Small, nontender thyroid</button>
+<div class="quiz-explain">An irregularly irregular pulse on palpation is the classic bedside clue for atrial fibrillation, prompting EKG confirmation.</div>
+</div>
+</section>
+
+<section class="card" id="palpitations">
+<h2>2. Palpitations</h2>
+<p>A <strong>subjective</strong> symptom of a rapid or irregular heartbeat: fluttering, flip-flopping, pounding, sensation of skipped beats, lightheadedness, dizziness, chest/neck discomfort, dyspnea, exertional intolerance, near-syncope, or syncope.</p>
+<h4>Causes</h4>
+<table>
+<thead><tr><th>Category</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td>Cardiac</td><td>Arrhythmias, valvular disease, high-output states</td></tr>
+<tr><td>Metabolic/Endocrine</td><td>Hyperthyroidism, hypoglycemia, pheochromocytoma</td></tr>
+<tr><td>Substance use</td><td>Caffeine, cocaine, amphetamines, alcohol, nicotine</td></tr>
+<tr><td>Medications</td><td>Sympathomimetics, anticholinergics, vasodilators</td></tr>
+<tr><td>Psychiatric</td><td>Anxiety, panic disorder, somatization disorder</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">A patient reports palpitations and is found to have a low TSH. Which category of cause is most likely?</p>
+<button class="quiz-choice" data-key="a">A) Metabolic/endocrine (hyperthyroidism)</button>
+<button class="quiz-choice" data-key="b">B) Psychiatric</button>
+<button class="quiz-choice" data-key="c">C) Substance use</button>
+<button class="quiz-choice" data-key="d">D) Medication-induced</button>
+<div class="quiz-explain">Hyperthyroidism is a classic metabolic/endocrine cause of palpitations (along with hypoglycemia and pheochromocytoma) and should be screened for with a TSH.</div>
+</div>
+<div class="quiz-q" data-answer="d">
+<p class="stem">Which of the following medication classes is a recognized cause of palpitations?</p>
+<button class="quiz-choice" data-key="a">A) Statins</button>
+<button class="quiz-choice" data-key="b">B) Proton pump inhibitors</button>
+<button class="quiz-choice" data-key="c">C) SSRIs</button>
+<button class="quiz-choice" data-key="d">D) Sympathomimetics</button>
+<div class="quiz-explain">Sympathomimetics (e.g., decongestants, beta agonists), anticholinergics, and vasodilators are recognized medication causes of palpitations.</div>
+</div>
+</section>
+
+<section class="card" id="paroxysmal">
+<h2>3. Paroxysmal Tachycardia — Localizing the Focus</h2>
+<p><strong>Paroxysmal</strong> = sudden onset, comes and goes. An automaticity focus suddenly paces the heart at a rapid rate, usually <strong>150–250 bpm.</strong> Determine which of 3 levels holds the increased automaticity focus:</p>
+<table>
+<thead><tr><th>Focus Level</th><th>P Waves</th><th>QRS</th></tr></thead>
+<tbody>
+<tr><td>Atrial</td><td>Present</td><td>Narrow</td></tr>
+<tr><td>Junctional</td><td>Absent or inverted</td><td>Narrow</td></tr>
+<tr><td>Ventricular</td><td>Absent</td><td>Wide</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A rhythm strip shows a rate of 180 bpm with absent P waves and a wide QRS complex. Where is the automaticity focus?</p>
+<button class="quiz-choice" data-key="a">A) Atrial</button>
+<button class="quiz-choice" data-key="b">B) Ventricular</button>
+<button class="quiz-choice" data-key="c">C) Junctional</button>
+<button class="quiz-choice" data-key="d">D) Sinoatrial node</button>
+<div class="quiz-explain">Absent P waves with a wide QRS localizes the automaticity focus to the ventricle. Junctional foci also lack normal P waves (or show inverted P waves) but produce a narrow QRS.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A paroxysmal tachycardia shows a narrow QRS with inverted P waves. Where is the focus most likely located?</p>
+<button class="quiz-choice" data-key="a">A) Ventricular</button>
+<button class="quiz-choice" data-key="b">B) Sinus node</button>
+<button class="quiz-choice" data-key="c">C) Junctional</button>
+<button class="quiz-choice" data-key="d">D) Bundle of Kent</button>
+<div class="quiz-explain">Junctional foci produce absent or inverted P waves with a narrow QRS, since conduction still proceeds normally through the His-Purkinje system.</div>
+</div>
+</section>
+
+<section class="card" id="afib-clinical">
+<h2>4. Atrial Fibrillation — Signs, Symptoms, EKG, Epidemiology & Risk Factors</h2>
+<h4>Signs & Symptoms</h4>
+<ul>
+<li>Fatigue, irregular pulse.</li>
+<li>May have: rapid heart rate, hypotension, MI, tachycardia-induced myocardial dysfunction.</li>
+<li>~90% of patients have asymptomatic recurrent episodes lasting up to 48 hours.</li>
+</ul>
+<h4>EKG</h4>
+<ul><li>Irregularly irregular rhythm; fine or coarse atrial activity (no discrete P waves).</li></ul>
+<h4>Epidemiology</h4>
+<ul><li>Affects ~3% of adults; slightly more common in men; higher in older adults (~10% of adults &gt;85).</li></ul>
+<h4>Risk Factors</h4>
+<ul>
+<li>Subclinical atherosclerosis, increased left atrial size, mitral regurgitation, premature atrial contractions, pericarditis, subclinical hyperthyroidism.</li>
+<li>Alcohol (heavy use or withdrawal), NSAID use, corticosteroids.</li>
+<li>Obesity (10% weight loss significantly reduces A-fib recurrence), obstructive sleep apnea, pulmonary embolism, systolic hypertension, rheumatoid arthritis, parental history of A-fib.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">What percentage of adults are affected by atrial fibrillation, and how does prevalence change with age?</p>
+<button class="quiz-choice" data-key="a">A) ~3% overall, rising to ~10% in adults over 85</button>
+<button class="quiz-choice" data-key="b">B) ~30% overall, stable with age</button>
+<button class="quiz-choice" data-key="c">C) ~1% overall, decreasing with age</button>
+<button class="quiz-choice" data-key="d">D) ~15% overall, highest in young adults</button>
+<div class="quiz-explain">A-fib affects about 3% of adults overall, is slightly more common in men, and rises substantially with age, reaching roughly 10% in adults older than 85.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">Which lifestyle intervention has been shown to significantly reduce the recurrence of atrial fibrillation?</p>
+<button class="quiz-choice" data-key="a">A) Increased caffeine intake</button>
+<button class="quiz-choice" data-key="b">B) High-sodium diet</button>
+<button class="quiz-choice" data-key="c">C) 10% weight loss</button>
+<button class="quiz-choice" data-key="d">D) Bed rest</button>
+<div class="quiz-explain">A roughly 10% reduction in body weight has been shown (Pathak et al., LEGACY study) to significantly reduce recurrence of atrial fibrillation, making weight loss a first-line lifestyle intervention.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">Which of the following is NOT a recognized risk factor for atrial fibrillation?</p>
+<button class="quiz-choice" data-key="a">A) Obstructive sleep apnea</button>
+<button class="quiz-choice" data-key="b">B) Hypothyroidism</button>
+<button class="quiz-choice" data-key="c">C) Pulmonary embolism</button>
+<button class="quiz-choice" data-key="d">D) Rheumatoid arthritis</button>
+<div class="quiz-explain">Subclinical hyperthyroidism (not hypothyroidism) is a recognized risk factor for A-fib. OSA, PE, and rheumatoid arthritis are all also on the risk-factor list.</div>
+</div>
+</section>
+
+<section class="card" id="workup">
+<h2>5. Diagnostic Workup — Labs & Ambulatory Monitoring</h2>
+<h4>Initial Labs</h4>
+<table>
+<thead><tr><th>Test</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>TSH</td><td>Rule out thyroid disorders</td></tr>
+<tr><td>CMP</td><td>Electrolyte disorders, renal function</td></tr>
+<tr><td>CBC</td><td>Evaluate for anemia</td></tr>
+<tr><td>PT/PTT, INR</td><td>Check for coagulopathy</td></tr>
+<tr><td>BNP (NT-proBNP)</td><td>Evaluate for possible heart failure</td></tr>
+<tr><td>Echocardiogram (TTE ± TEE)</td><td>Structural and functional cardiac information</td></tr>
+<tr><td>Holter/Event monitor</td><td>If initial EKG not diagnostic</td></tr>
+<tr><td>Electrophysiology testing</td><td>Endocardial voltage mapping, biopsy, possible ablation</td></tr>
+</tbody>
+</table>
+<h4>Ambulatory EKG Monitoring</h4>
+<table>
+<thead><tr><th>Monitor</th><th>Duration</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>Holter monitor</td><td>24–48 hours</td><td>Continuous recording; daily symptoms or asymptomatic patients; monitors adequacy of rate control in A-fib</td></tr>
+<tr><td>Event monitor</td><td>2+ weeks</td><td>Patient-triggered recording; symptoms occurring less often than daily</td></tr>
+<tr><td>Loop monitor</td><td>Indefinite (implantable)</td><td>Very infrequent symptoms</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient reports palpitations occurring roughly once every 3 weeks, with a normal resting EKG in clinic. Which monitoring strategy is most appropriate?</p>
+<button class="quiz-choice" data-key="a">A) Repeat resting 12-lead EKG</button>
+<button class="quiz-choice" data-key="b">B) 24-hour Holter monitor</button>
+<button class="quiz-choice" data-key="c">C) Electrophysiology study</button>
+<button class="quiz-choice" data-key="d">D) Event monitor for 2+ weeks</button>
+<div class="quiz-explain">A Holter monitor only captures 24–48 hours and would likely miss symptoms occurring every few weeks. An event monitor, worn for 2+ weeks and triggered by the patient during symptoms, is better suited to infrequent episodes.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Which lab test is ordered specifically to evaluate for possible heart failure in a patient with new atrial fibrillation?</p>
+<button class="quiz-choice" data-key="a">A) BNP (NT-proBNP)</button>
+<button class="quiz-choice" data-key="b">B) TSH</button>
+<button class="quiz-choice" data-key="c">C) CBC</button>
+<button class="quiz-choice" data-key="d">D) PT/INR</button>
+<div class="quiz-explain">BNP (or NT-proBNP) is used to evaluate for heart failure, which is both a cause and a consequence of atrial fibrillation.</div>
+</div>
+</section>
+
+<section class="card" id="afib-class">
+<h2>6. A-fib Classification, Consequences & CHA₂DS₂-VASc Score</h2>
+<h4>Classification</h4>
+<table>
+<thead><tr><th>Type</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td>Paroxysmal</td><td>Terminates spontaneously or with intervention within 7 days of onset; recurs with variable frequency; similar stroke risk to chronic persistent A-fib</td></tr>
+<tr><td>Persistent</td><td>Fails to terminate within 7 days; often requires pharmacologic or electrical cardioversion</td></tr>
+<tr><td>Long-standing (chronic) persistent</td><td>Lasts more than 12 months</td></tr>
+<tr><td>Permanent</td><td>Joint patient-clinician decision to no longer pursue a rhythm control strategy</td></tr>
+</tbody>
+</table>
+<h4>Consequences</h4>
+<ul>
+<li><strong>Heart failure:</strong> ↓ cardiac output from decreased filling time and loss of atrial kick.</li>
+<li><strong>Myocardial ischemia.</strong></li>
+<li><strong>Thrombus formation → stroke</strong> (left atrial appendage is the common site). Risk of stroke ~5%/year in untreated A-fib, higher with additional risk factors.</li>
+</ul>
+<h4>CHA₂DS₂-VASc Score</h4>
+<p>Used to assess stroke risk and guide anticoagulation: <strong>C</strong>ongestive heart failure, <strong>H</strong>ypertension, <strong>A</strong>ge, <strong>D</strong>iabetes mellitus, prior <strong>S</strong>troke/TIA/thromboembolism, <strong>V</strong>ascular disease, <strong>A</strong>ge, <strong>S</strong>ex category.</p>
+<table>
+<thead><tr><th>CHA₂DS₂-VASc Score</th><th>Adjusted Stroke Rate (%/yr)</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0%</td></tr>
+<tr><td>1</td><td>1.3%</td></tr>
+<tr><td>2</td><td>2.2%</td></tr>
+<tr><td>3</td><td>3.2%</td></tr>
+<tr><td>4</td><td>4.0%</td></tr>
+<tr><td>5</td><td>6.7%</td></tr>
+<tr><td>6</td><td>9.8%</td></tr>
+<tr><td>7</td><td>9.6%</td></tr>
+<tr><td>8</td><td>6.7%</td></tr>
+<tr><td>9</td><td>15.2%</td></tr>
+</tbody>
+</table>
+<p><strong>Case 1's patient scored a 2</strong> on the CHA₂DS₂-VASc.</p>
+<h4>Score-Based Anticoagulation Recommendation</h4>
+<ul>
+<li>0 = no antithrombotic treatment</li>
+<li>1 = consider antithrombotic therapy (anticoagulation or antiplatelet)</li>
+<li>2+ = recommend anticoagulation</li>
+</ul>
+<div class="pearl"><strong>Pearl:</strong> Only about half of A-fib patients who qualify for oral anticoagulation actually receive it, and warfarin patients are within their INR target range only about half the time — a major gap in real-world stroke prevention.</div>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient has had atrial fibrillation continuously for 14 months, and the patient and clinician have not yet decided to abandon a rhythm-control strategy. How is this classified?</p>
+<button class="quiz-choice" data-key="a">A) Paroxysmal</button>
+<button class="quiz-choice" data-key="b">B) Persistent</button>
+<button class="quiz-choice" data-key="c">C) Long-standing (chronic) persistent</button>
+<button class="quiz-choice" data-key="d">D) Permanent</button>
+<div class="quiz-explain">A-fib lasting more than 12 months is classified as long-standing (chronic) persistent. "Permanent" specifically requires a joint decision to stop pursuing rhythm control, which hasn't occurred here.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient with atrial fibrillation has a CHA₂DS₂-VASc score of 2. What is the most appropriate anticoagulation recommendation?</p>
+<button class="quiz-choice" data-key="a">A) No antithrombotic treatment needed</button>
+<button class="quiz-choice" data-key="b">B) Anticoagulation is recommended</button>
+<button class="quiz-choice" data-key="c">C) Aspirin alone is sufficient and preferred</button>
+<button class="quiz-choice" data-key="d">D) Defer treatment until symptoms develop</button>
+<div class="quiz-explain">A CHA₂DS₂-VASc score of 2 or higher warrants anticoagulation, corresponding to an adjusted stroke rate of 2.2%/year in this scoring system.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Where does thrombus formation most commonly occur in atrial fibrillation, leading to stroke?</p>
+<button class="quiz-choice" data-key="a">A) Left atrial appendage</button>
+<button class="quiz-choice" data-key="b">B) Right ventricle</button>
+<button class="quiz-choice" data-key="c">C) Aortic root</button>
+<button class="quiz-choice" data-key="d">D) Coronary sinus</button>
+<div class="quiz-explain">The left atrial appendage is the classic site of stasis and thrombus formation in atrial fibrillation because of loss of coordinated atrial contraction.</div>
+</div>
+</section>
+
+<section class="card" id="afib-tx">
+<h2>7. A-fib Treatment — Unstable vs. Stable, Cardioversion vs. Defibrillation</h2>
+<h3>Hemodynamically Unstable Patient</h3>
+<ul>
+<li>Hospitalize.</li>
+<li>IV beta-blockers or calcium channel blockers for rate control.</li>
+<li><strong>Urgent synchronous electrical cardioversion</strong> if: severe hypotension/shock, pulmonary edema, or myocardial ischemia/infarction.</li>
+<li>High stroke risk with cardioversion if in A-fib &gt;48 hours without anticoagulation — but if unstable, there may be no choice.</li>
+</ul>
+<h3>Hemodynamically Stable Patient</h3>
+<ul>
+<li>Address underlying cause and lifestyle factors (weight loss, exercise); ~2/3 spontaneously convert to sinus rhythm within 24 hours of a first episode.</li>
+<li>Rate control mainstay: beta-blockers, calcium channel blockers, or digoxin.</li>
+<li>Start anticoagulation per CHA₂DS₂-VASc score.</li>
+<li><strong>Cardioversion</strong> (electrical or chemical) considered for: recent-onset (1st episode) A-fib, identifiable precipitating factor, or symptomatic patients despite rate control.</li>
+<li>If symptoms &gt;48 hours or unknown duration: anticoagulate for <strong>3 weeks before</strong> and a minimum of <strong>4 weeks after</strong> cardioversion to prevent thromboembolic stroke. A transesophageal echocardiogram (TEE) can rule out atrial thrombus and allow earlier cardioversion.</li>
+</ul>
+<h3>Cardioversion vs. Defibrillation</h3>
+<table>
+<thead><tr><th></th><th>Cardioversion</th><th>Defibrillation</th></tr></thead>
+<tbody>
+<tr><td>Timing of shock</td><td>Synchronized to QRS complex</td><td>Asynchronous, delivered randomly during cardiac cycle</td></tr>
+<tr><td>Used for</td><td>Most organized abnormal rhythms (e.g., A-fib, A-flutter)</td><td>Ventricular fibrillation</td></tr>
+<tr><td>Outcome note</td><td>Doesn't clearly improve exercise tolerance/QOL vs. rate control + anticoagulation alone in A-fib</td><td>Life-saving in V-fib (pulseless)</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A patient with new-onset atrial fibrillation of unknown duration is hemodynamically stable and desires cardioversion. What is the appropriate anticoagulation strategy?</p>
+<button class="quiz-choice" data-key="a">A) No anticoagulation needed if TEE is not available</button>
+<button class="quiz-choice" data-key="b">B) Anticoagulate for 1 week before and 1 week after</button>
+<button class="quiz-choice" data-key="c">C) Anticoagulate only after cardioversion</button>
+<button class="quiz-choice" data-key="d">D) Anticoagulate for 3 weeks before and at least 4 weeks after cardioversion (or use TEE to rule out thrombus for earlier cardioversion)</button>
+<div class="quiz-explain">For A-fib of unknown duration or >48 hours, standard practice is 3 weeks of anticoagulation before and a minimum of 4 weeks after cardioversion, unless a TEE excludes atrial thrombus, allowing earlier cardioversion.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient in atrial fibrillation develops pulmonary edema and hypotension. What is the most appropriate immediate management?</p>
+<button class="quiz-choice" data-key="a">A) Outpatient rate control and follow-up in one week</button>
+<button class="quiz-choice" data-key="b">B) Hospitalize and perform urgent synchronous electrical cardioversion</button>
+<button class="quiz-choice" data-key="c">C) Start warfarin and reassess in 3 weeks before considering cardioversion</button>
+<button class="quiz-choice" data-key="d">D) Defibrillation</button>
+<div class="quiz-explain">A hemodynamically unstable patient (pulmonary edema, hypotension) with A-fib requires hospitalization and urgent synchronous electrical cardioversion — waiting for anticoagulation is not appropriate when the patient is unstable.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">What key feature distinguishes defibrillation from cardioversion?</p>
+<button class="quiz-choice" data-key="a">A) Defibrillation delivers an asynchronous shock, not timed to the QRS complex</button>
+<button class="quiz-choice" data-key="b">B) Defibrillation is only used for atrial fibrillation</button>
+<button class="quiz-choice" data-key="c">C) Cardioversion is used for ventricular fibrillation</button>
+<button class="quiz-choice" data-key="d">D) There is no meaningful difference</button>
+<div class="quiz-explain">Defibrillation delivers an unsynchronized shock at a random point in the cardiac cycle and is used for ventricular fibrillation, whereas cardioversion is synchronized to the QRS and used for organized rhythms like A-fib.</div>
+</div>
+</section>
+
+<section class="card" id="anticoag">
+<h2>8. Anticoagulants for Atrial Fibrillation</h2>
+<table>
+<thead><tr><th>Drug(s)</th><th>Mechanism</th><th>Key Points</th></tr></thead>
+<tbody>
+<tr><td>Rivaroxaban, Apixaban, Edoxaban</td><td>Factor Xa inhibitors</td><td>No routine monitoring needed; expensive; reversal agents now available</td></tr>
+<tr><td>Dabigatran</td><td>Direct thrombin inhibitor</td><td>No routine monitoring; expensive; reversal agent available</td></tr>
+<tr><td>Warfarin</td><td>Vitamin K antagonist</td><td>"Gold standard"; requires routine INR monitoring (target 2–3); preferred for mechanical heart valves, moderate-severe mitral stenosis, advanced kidney disease; inexpensive; reversed with vitamin K</td></tr>
+</tbody>
+</table>
+<div class="pearl"><strong>Pearl:</strong> DOACs (dabigatran, rivaroxaban, apixaban, edoxaban) are preferred over warfarin in most patients with non-valvular A-fib due to no need for routine INR monitoring and fewer dietary restrictions — but they are more expensive, and warfarin remains preferred for mechanical valves, significant mitral stenosis, and advanced kidney disease.</div>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient with a mechanical mitral valve is diagnosed with atrial fibrillation. Which anticoagulant is preferred?</p>
+<button class="quiz-choice" data-key="a">A) Apixaban</button>
+<button class="quiz-choice" data-key="b">B) Dabigatran</button>
+<button class="quiz-choice" data-key="c">C) Warfarin</button>
+<button class="quiz-choice" data-key="d">D) Rivaroxaban</button>
+<div class="quiz-explain">Warfarin remains the preferred anticoagulant for patients with mechanical heart valves; DOACs are not indicated in this setting.</div>
+</div>
+<div class="quiz-q" data-answer="d">
+<p class="stem">What is a key advantage of DOACs (e.g., apixaban, dabigatran) over warfarin?</p>
+<button class="quiz-choice" data-key="a">A) They are less expensive</button>
+<button class="quiz-choice" data-key="b">B) They are preferred for mechanical heart valves</button>
+<button class="quiz-choice" data-key="c">C) They require more frequent monitoring for better control</button>
+<button class="quiz-choice" data-key="d">D) They do not require routine INR monitoring and have fewer dietary restrictions</button>
+<div class="quiz-explain">DOACs do not require routine coagulation monitoring and have fewer dietary interactions than warfarin, though they are more expensive and not preferred in mechanical valves or significant mitral stenosis.</div>
+</div>
+</section>
+
+<section class="card" id="antiarrhythmics">
+<h2>9. Antiarrhythmic Drugs & Refractory A-fib</h2>
+<h4>Rate Control</h4>
+<ul><li>Beta-blockers; calcium channel blockers (non-dihydropyridine, e.g., verapamil/diltiazem); digoxin.</li></ul>
+<h4>Rhythm Control</h4>
+<ul>
+<li><strong>Class IC</strong> (flecainide, propafenone): most commonly used class I agents; primarily treat atrial arrhythmias, usually with AV nodal blockers to prevent 1:1 conduction of atrial flutter. Toxicity → QRS widening. <strong>Contraindicated in ischemic or structural heart disease</strong> (risk of ventricular arrhythmias/death).</li>
+<li><strong>Class II</strong> (beta-blockers) and <strong>Class IV</strong> (non-dihydropyridine CCBs): inhibit arrhythmia induction and AV conduction, decreasing rate in SVT/atrial arrhythmias.</li>
+<li><strong>Class III</strong> (sotalol, dofetilide): treat atrial and ventricular arrhythmias; typically initiated inpatient with regular QTc monitoring; caution in kidney disease. Dofetilide is notorious for dangerous drug-drug interactions.</li>
+<li><strong>Amiodarone</strong> (Class III, multi-channel blocker): used for recurrent VT or A-fib; low proarrhythmic risk, but associated with thyroid, liver, lung, and eye toxicity plus neurologic side effects. Monitor thyroid/liver function every 6 months; annual pulmonary function tests and ophthalmic exams. Interacts with warfarin, statins, and digoxin.</li>
+<li><strong>Dofetilide</strong> (Class III): used in paroxysmal A-fib without overt heart failure.</li>
+<li><strong>Digoxin</strong> (excluded from Vaughan-Williams): positive inotrope that also ↑ vagal activity → lower resting HR; used for rate control in A-fib.</li>
+<li><strong>Adenosine</strong> (excluded from Vaughan-Williams): used acutely to interrupt AV conduction and terminate SVT; also helps diagnose the arrhythmia mechanism.</li>
+</ul>
+<div class="pearl"><strong>Caution:</strong> Flecainide/ibutilide are most effective for chemical cardioversion but only 30–50% effective overall, and some antiarrhythmics are pro-arrhythmic by prolonging the QT interval, risking Torsades de Pointes.</div>
+
+<h4>Refractory Atrial Fibrillation</h4>
+<p>Defined as persistent symptoms despite rate control that limit activity.</p>
+<ul>
+<li><strong>Catheter ablation</strong> of irritable foci (cryotherapy or radiofrequency) — successful ~70% of the time, minimally invasive.</li>
+<li><strong>Surgical ablation</strong> (Maze procedure).</li>
+<li><strong>Radiofrequency ablation of the AV node + permanent pacemaker</strong> — last resort.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="a">
+<p class="stem">A patient with a history of ischemic heart disease is being considered for rhythm control of atrial fibrillation. Which class of antiarrhythmic is contraindicated?</p>
+<button class="quiz-choice" data-key="a">A) Class IC (e.g., flecainide)</button>
+<button class="quiz-choice" data-key="b">B) Class II (beta-blockers)</button>
+<button class="quiz-choice" data-key="c">C) Digoxin</button>
+<button class="quiz-choice" data-key="d">D) Class IV (non-dihydropyridine CCBs)</button>
+<div class="quiz-explain">Class IC agents are contraindicated in patients with ischemic or structural heart disease because of the increased risk of promoting ventricular arrhythmias and death.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient on amiodarone for recurrent atrial fibrillation should be monitored regularly for which of the following?</p>
+<button class="quiz-choice" data-key="a">A) Serum digoxin level only</button>
+<button class="quiz-choice" data-key="b">B) Renal function only</button>
+<button class="quiz-choice" data-key="c">C) Thyroid and liver function every 6 months, plus annual pulmonary function tests and ophthalmic exams</button>
+<button class="quiz-choice" data-key="d">D) No monitoring is required</button>
+<div class="quiz-explain">Amiodarone carries thyroid, liver, lung, and eye toxicity risks, requiring thyroid/liver function tests every 6 months and annual pulmonary function testing and ophthalmic exams.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient with refractory atrial fibrillation despite rate control undergoes catheter ablation. What is the approximate success rate?</p>
+<button class="quiz-choice" data-key="a">A) 30%</button>
+<button class="quiz-choice" data-key="b">B) 70%</button>
+<button class="quiz-choice" data-key="c">C) 95%</button>
+<button class="quiz-choice" data-key="d">D) 10%</button>
+<div class="quiz-explain">Catheter ablation of irritable foci is successful approximately 70% of the time and is minimally invasive, making it a preferred option before considering AV node ablation with pacemaker placement.</div>
+</div>
+</section>
+
+<section class="card" id="escape-premature">
+<h2>10. Escape Rhythms & Premature Beats — General Concepts</h2>
+<h3>Escape Rhythms</h3>
+<p>Occur in response to a <strong>pause</strong> in sinus rhythm — a backup pacemaker rescues the heart.</p>
+<table>
+<thead><tr><th>Escape Rhythm</th><th>Rate (bpm)</th><th>EKG Appearance</th></tr></thead>
+<tbody>
+<tr><td>Atrial escape</td><td>60+</td><td>Pause, then change in P-wave morphology</td></tr>
+<tr><td>Junctional escape</td><td>40–60</td><td>Pause, then narrow-complex junctional beats</td></tr>
+<tr><td>Ventricular escape</td><td>20–40</td><td>Pause, then ventricular escape beat</td></tr>
+</tbody>
+</table>
+<h3>Premature Beats</h3>
+<ul>
+<li>An automaticity focus fires spontaneously, creating a beat <strong>earlier</strong> than expected (premature beat/contraction) — often looks different than other beats.</li>
+<li>A short pause typically follows a premature beat (due to prolonged repolarization) before the previous rhythm resumes.</li>
+<li>Can occur at any level below the SA node: atrial (PAC), junctional, or ventricular (PVC).</li>
+</ul>
+<div class="pearl"><strong>Escape vs. premature — the key distinction:</strong> In an <strong>escape</strong> beat, the pause comes <em>before</em> a different-looking beat (a backup pacemaker rescuing a pause). In a <strong>premature</strong> beat, the different-looking beat comes early, and the pause follows <em>after</em> it.</div>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">Which escape rhythm has the slowest intrinsic rate?</p>
+<button class="quiz-choice" data-key="a">A) Atrial escape (60+ bpm)</button>
+<button class="quiz-choice" data-key="b">B) Ventricular escape (20–40 bpm)</button>
+<button class="quiz-choice" data-key="c">C) Junctional escape (40–60 bpm)</button>
+<button class="quiz-choice" data-key="d">D) All escape rhythms have the same rate</button>
+<div class="quiz-explain">Ventricular escape rhythms are the slowest backup pacemakers (20–40 bpm), reflecting their location furthest down the conduction system from the SA node.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">What is the key distinguishing feature between an escape beat and a premature beat?</p>
+<button class="quiz-choice" data-key="a">A) Escape beats are always ventricular in origin</button>
+<button class="quiz-choice" data-key="b">B) Premature beats always have a normal P wave</button>
+<button class="quiz-choice" data-key="c">C) In an escape beat, the pause precedes the different-looking beat; in a premature beat, the pause follows it</button>
+<button class="quiz-choice" data-key="d">D) There is no meaningful difference</button>
+<div class="quiz-explain">Escape beats rescue a pause (pause first, then the rescuing beat), while premature beats occur early and are followed by a compensatory pause.</div>
+</div>
+</section>
+
+<section class="card" id="pvc">
+<h2>11. Premature Ventricular Contractions (PVCs)</h2>
+<p>Also called ventricular premature beats (VPBs) — isolated beats originating from ventricular tissue.</p>
+<h4>Symptoms</h4>
+<ul><li>Irregular heartbeat, "skipped" heartbeat.</li></ul>
+<h4>EKG</h4>
+<ul>
+<li>Wide QRS complexes (≥120 msec) with morphology differing from the patient's normal beats.</li>
+<li>Not preceded by a P wave; retrograde ventriculoatrial conduction may occur.</li>
+</ul>
+<h4>Consequences</h4>
+<ul>
+<li><strong>Usually none</strong> — 80% of healthy people have occasional PVCs.</li>
+<li>Sudden death may occur when PVCs are associated with heart disease or if they increase during exercise. <strong>PVC burden</strong> is the most important predictor.</li>
+</ul>
+<h4>Causes</h4>
+<table>
+<thead><tr><th>Category</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td>Associated conditions</td><td>Heart failure, MI, myocarditis, hypertension, LVH, hypertrophic cardiomyopathy, congenital heart disease, idiopathic VT, hypokalemia/hypomagnesemia, hypoxia (COPD, sleep apnea), endocrine disorders</td></tr>
+<tr><td>Medications</td><td>Digoxin, aminophylline, tricyclic antidepressants, sympathomimetics (decongestants, antihistamines, beta agonists)</td></tr>
+<tr><td>Substance use</td><td>Nicotine, alcohol, caffeine, cocaine, amphetamines</td></tr>
+</tbody>
+</table>
+<h4>Workup (High-Risk Patients)</h4>
+<ul><li>CMP + magnesium, CBC, BNP, TSH, drug screen if stimulant use suspected, Holter monitor (24–48 hr), exercise stress testing, echocardiogram or other testing for suspected associated conditions.</li></ul>
+<h4>Treatment</h4>
+<ul>
+<li>Avoid stimulants and alcohol.</li>
+<li>Reassurance if no structural/conduction abnormality and PVC burden &lt;10%.</li>
+<li>Manage comorbid conditions (including heart disease).</li>
+<li>Antiarrhythmics usually not required — beta-blockers if significantly symptomatic.</li>
+<li>Catheter ablation for refractory patients.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">A healthy 35-year-old with no cardiac history is found to have occasional PVCs on routine EKG and is asymptomatic. What is the most appropriate management?</p>
+<button class="quiz-choice" data-key="a">A) Start amiodarone</button>
+<button class="quiz-choice" data-key="b">B) Immediate catheter ablation</button>
+<button class="quiz-choice" data-key="c">C) Implantable cardioverter-defibrillator</button>
+<button class="quiz-choice" data-key="d">D) Reassurance, since 80% of healthy people have occasional PVCs</button>
+<div class="quiz-explain">Occasional PVCs are common in healthy individuals (80% prevalence) and are generally benign in the absence of structural heart disease or high PVC burden — reassurance is appropriate.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Which single factor is the most important predictor of adverse outcomes in patients with PVCs and underlying heart disease?</p>
+<button class="quiz-choice" data-key="a">A) PVC burden</button>
+<button class="quiz-choice" data-key="b">B) Patient age</button>
+<button class="quiz-choice" data-key="c">C) Caffeine intake</button>
+<button class="quiz-choice" data-key="d">D) QRS axis</button>
+<div class="quiz-explain">PVC burden (the proportion of total beats that are PVCs) is the most important predictor of risk, particularly when PVCs occur in the setting of underlying heart disease or increase during exercise.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">Which EKG feature is characteristic of a PVC?</p>
+<button class="quiz-choice" data-key="a">A) Narrow QRS preceded by a normal P wave</button>
+<button class="quiz-choice" data-key="b">B) Sawtooth baseline</button>
+<button class="quiz-choice" data-key="c">C) Wide QRS (≥120 msec) not preceded by a P wave</button>
+<button class="quiz-choice" data-key="d">D) Gradually lengthening PR interval</button>
+<div class="quiz-explain">PVCs show a wide QRS complex (≥120 msec) with a different morphology from the patient's normal beats and are not preceded by a P wave.</div>
+</div>
+</section>
+
+<section class="card" id="pac">
+<h2>12. Premature Atrial Contractions (PACs)</h2>
+<ul>
+<li>An automaticity atrial focus (not the SA node) fires a heartbeat earlier than expected.</li>
+<li>P′ wave contour, PR interval, and timing differ from a normal SA-node-generated beat.</li>
+<li>Conducted normally through the AV node and ventricles → <strong>narrow QRS.</strong></li>
+<li><strong>Generally benign.</strong></li>
+</ul>
+<table>
+<thead><tr><th>Feature</th><th>Finding</th></tr></thead>
+<tbody>
+<tr><td>Rate</td><td>Usually normal before the premature beat</td></tr>
+<tr><td>Regularity</td><td>Occasional irregular beat</td></tr>
+<tr><td>P waves</td><td>Premature P′ wave of altered shape</td></tr>
+<tr><td>PR interval</td><td>0.12–0.20 sec</td></tr>
+<tr><td>QRS duration</td><td>0.04–0.12 sec (narrow)</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A PAC has a narrow QRS despite arising from an ectopic atrial focus. Why?</p>
+<button class="quiz-choice" data-key="a">A) PACs bypass the AV node entirely</button>
+<button class="quiz-choice" data-key="b">B) The impulse is still conducted normally through the AV node and ventricles</button>
+<button class="quiz-choice" data-key="c">C) PACs always originate in the ventricle</button>
+<button class="quiz-choice" data-key="d">D) The QRS is actually wide in PACs</button>
+<div class="quiz-explain">Even though the P′ wave originates from an ectopic atrial focus rather than the SA node, conduction proceeds normally through the AV node and His-Purkinje system, producing a narrow QRS.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">What differentiates the P wave of a PAC from a normal sinus P wave?</p>
+<button class="quiz-choice" data-key="a">A) The PAC's P′ wave has an altered shape/contour compared to the normal sinus P wave</button>
+<button class="quiz-choice" data-key="b">B) The PAC has no P wave at all</button>
+<button class="quiz-choice" data-key="c">C) The PAC's P wave is always inverted</button>
+<button class="quiz-choice" data-key="d">D) There is no difference</button>
+<div class="quiz-explain">Because the PAC arises from an ectopic atrial focus rather than the SA node, its P′ wave morphology, PR interval, and timing differ from the normal sinus P wave.</div>
+</div>
+</section>
+
+<section class="card" id="brady-avblock">
+<h2>13. Bradycardia, Tachy-Brady Syndrome & AV Blocks</h2>
+<div class="case">
+<span class="case-label">Case 2</span>
+<p>An 80-year-old male with prior MI and heart failure is found on the floor after repeated syncope ("passing out"). EKG in the ED shows atrial fibrillation with rapid ventricular response alternating with severe bradycardia — each bradycardic episode triggers syncope. This is <strong>tachy-brady syndrome (sick sinus syndrome).</strong> He is treated with a temporary transvenous pacemaker with resolution of symptoms until a permanent pacemaker can be placed.</p>
+</div>
+<h4>Bradycardia</h4>
+<ul>
+<li>Defined as HR &lt;60; can be normal in healthy athletic persons or at rest/sleep.</li>
+<li>Concerning if symptomatic or HR &lt;40.</li>
+<li><strong>Causes:</strong> sinus node dysfunction, right coronary artery sclerosis, intracranial hypertension; medications (beta-blockers, CCBs, antiarrhythmics, digoxin); infections (Lyme disease); cardiac trauma (blunt force, catheters, surgery).</li>
+<li><strong>Workup:</strong> TSH, CMP, exercise treadmill test (assess chronotropic competence), Holter monitor.</li>
+</ul>
+<h4>AV Blocks</h4>
+<table>
+<thead><tr><th>Type</th><th>EKG Finding</th><th>Prognosis</th></tr></thead>
+<tbody>
+<tr><td>First degree</td><td>PR interval &gt;0.20 sec</td><td>↑ risk of A-fib and all-cause mortality</td></tr>
+<tr><td>Second degree, Mobitz I (Wenckebach)</td><td>Progressively lengthening PR interval until a P wave is not conducted (dropped QRS), then the cycle resets</td><td>Benign; improves with exercise/↑ sympathetic tone</td></tr>
+<tr><td>Second degree, Mobitz II</td><td>Fixed PR interval with intermittently dropped QRS (e.g., 3:1 conduction — 3 P waves per QRS)</td><td>High risk of progression to complete (3rd degree) block; block usually below the AV node</td></tr>
+<tr><td>Third degree (complete)</td><td>P waves march out completely independent of QRS complexes (AV dissociation)</td><td>Complete block at the AV node; causes severe bradycardia</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">An EKG shows P waves marching out completely independently of QRS complexes, with no relationship between the two. What is this rhythm?</p>
+<button class="quiz-choice" data-key="a">A) First degree AV block</button>
+<button class="quiz-choice" data-key="b">B) Mobitz type I</button>
+<button class="quiz-choice" data-key="c">C) Third degree (complete) AV block</button>
+<button class="quiz-choice" data-key="d">D) Mobitz type II</button>
+<div class="quiz-explain">Complete AV dissociation — P waves and QRS complexes marching out independently — is diagnostic of third degree (complete) heart block.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">An EKG shows progressively lengthening PR intervals until a QRS is dropped, then the pattern resets. Which AV block is this, and what is its typical prognosis?</p>
+<button class="quiz-choice" data-key="a">A) Mobitz type I (Wenckebach) — generally benign, improves with exercise</button>
+<button class="quiz-choice" data-key="b">B) Mobitz type II — high risk of progression to complete block</button>
+<button class="quiz-choice" data-key="c">C) Third degree block — requires immediate pacemaker</button>
+<button class="quiz-choice" data-key="d">D) First degree block — no clinical significance</button>
+<div class="quiz-explain">Progressive PR prolongation followed by a dropped beat is the classic pattern of Mobitz type I (Wenckebach) second-degree AV block, which generally has a benign prognosis and improves with increased sympathetic tone.</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">An elderly patient with alternating episodes of rapid atrial fibrillation and severe symptomatic bradycardia, with syncope during the bradycardic episodes, most likely has which condition?</p>
+<button class="quiz-choice" data-key="a">A) Wolff-Parkinson-White syndrome</button>
+<button class="quiz-choice" data-key="b">B) Tachy-brady syndrome (sick sinus syndrome)</button>
+<button class="quiz-choice" data-key="c">C) AVNRT</button>
+<button class="quiz-choice" data-key="d">D) First degree AV block</button>
+<div class="quiz-explain">Alternating tachyarrhythmia (often A-fib) with severe bradycardia, causing syncope during the slow phases, is the hallmark of tachy-brady (sick sinus) syndrome, often ultimately requiring pacemaker placement.</div>
+</div>
+</section>
+
+<section class="card" id="pacemakers">
+<h2>14. Pacemakers & Paced Rhythms</h2>
+<h4>Indications</h4>
+<ul>
+<li>Symptomatic bradycardia without a reversible cause.</li>
+<li>Asymptomatic bradycardia with significant pauses (&gt;3 seconds) or persistent HR &lt;40 bpm.</li>
+<li>Alternating bundle branch block.</li>
+<li>Atrial fibrillation with 5-second pauses.</li>
+<li>Second-degree Mobitz type II or third degree AV block.</li>
+</ul>
+<h4>Paced Rhythms</h4>
+<ul>
+<li>Sharp depolarization "spikes" on EKG — can be atrial, ventricular, or AV sequential pacers.</li>
+<li>Atrial paced rhythm: spike before each P wave.</li>
+<li>Ventricular paced rhythm: spike before each ventricular beat.</li>
+<li>AV sequential pacemaker: both an atrial spike and a ventricular spike.</li>
+<li>Paced ventricular beats are <strong>no longer diagnostic</strong> for findings like bundle branch block or myocardial infarction.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="d">
+<p class="stem">Which of the following is an indication for permanent pacemaker placement?</p>
+<button class="quiz-choice" data-key="a">A) First degree AV block in an asymptomatic patient</button>
+<button class="quiz-choice" data-key="b">B) Occasional PACs</button>
+<button class="quiz-choice" data-key="c">C) Mobitz type I block that improves with exercise</button>
+<button class="quiz-choice" data-key="d">D) Third degree AV block</button>
+<div class="quiz-explain">Third degree (complete) AV block is a clear indication for pacemaker placement, along with symptomatic bradycardia, significant pauses (>3 sec), persistent HR <40, alternating bundle branch block, and Mobitz type II block.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">Why can't a paced ventricular rhythm be used to diagnose a bundle branch block or myocardial infarction on EKG?</p>
+<button class="quiz-choice" data-key="a">A) The paced QRS morphology obscures the native conduction pattern needed to make those diagnoses</button>
+<button class="quiz-choice" data-key="b">B) Paced rhythms never show a QRS complex</button>
+<button class="quiz-choice" data-key="c">C) Pacemakers eliminate the risk of MI entirely</button>
+<button class="quiz-choice" data-key="d">D) Paced rhythms are always narrow complex</button>
+<div class="quiz-explain">Ventricular pacing produces a wide, paced QRS morphology (originating from the pacing lead rather than native conduction), which masks the EKG changes normally used to diagnose bundle branch block or MI.</div>
+</div>
+</section>
+
+<section class="card" id="vtach">
+<h2>15. Ventricular Arrhythmias & ICDs</h2>
+<h4>Ventricular Tachycardia (VT)</h4>
+<ul>
+<li>Coordinated contractions of ventricular origin; rapid rate reduces chamber filling time → ↓ cardiac output → can be fatal.</li>
+</ul>
+<h4>Ventricular Fibrillation (VF)</h4>
+<ul>
+<li>Ventricles vibrate without coordinated contraction — <strong>incompatible with life</strong>; patient is pulseless and requires immediate <strong>defibrillation.</strong></li>
+</ul>
+<h4>Torsades de Pointes</h4>
+<ul>
+<li>Possibly caused by 2 competing automaticity foci in different ventricular areas; occurs in patients with a <strong>prolonged QT interval</strong> (congenital, electrolyte disturbance, or medication-related).</li>
+</ul>
+<table>
+<thead><tr><th>Feature</th><th>Finding</th></tr></thead>
+<tbody>
+<tr><td>Rate</td><td>&gt;100 bpm (usually 250–350)</td></tr>
+<tr><td>Regularity</td><td>Irregular — "twisted streamer" look</td></tr>
+<tr><td>P waves</td><td>None</td></tr>
+<tr><td>PR interval</td><td>None</td></tr>
+<tr><td>QRS duration</td><td>&gt;0.12 sec</td></tr>
+</tbody>
+</table>
+<h4>Implantable Cardioverter-Defibrillator (ICD) Indications</h4>
+<ul>
+<li>Long QT syndrome.</li>
+<li>Ventricular arrhythmias (VT, VF, Torsades de Pointes).</li>
+<li>Hypertrophic cardiomyopathy.</li>
+<li>Brugada syndrome.</li>
+<li>Certain heart failure patients with reduced ejection fraction.</li>
+</ul>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A pulseless patient is found to be in ventricular fibrillation. What is the immediate treatment?</p>
+<button class="quiz-choice" data-key="a">A) Synchronized cardioversion</button>
+<button class="quiz-choice" data-key="b">B) IV amiodarone only, no shock needed</button>
+<button class="quiz-choice" data-key="c">C) Immediate (asynchronous) defibrillation</button>
+<button class="quiz-choice" data-key="d">D) Adenosine</button>
+<div class="quiz-explain">Ventricular fibrillation is incompatible with life and a pulseless patient requires immediate asynchronous defibrillation, not synchronized cardioversion (which requires an organized QRS to sync to).</div>
+</div>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient develops Torsades de Pointes. Which underlying abnormality is most classically associated with this rhythm?</p>
+<button class="quiz-choice" data-key="a">A) Shortened PR interval</button>
+<button class="quiz-choice" data-key="b">B) Prolonged QT interval</button>
+<button class="quiz-choice" data-key="c">C) First degree AV block</button>
+<button class="quiz-choice" data-key="d">D) Delta wave</button>
+<div class="quiz-explain">Torsades de Pointes occurs in the setting of a prolonged QT interval, which may be congenital, due to electrolyte disturbances, or medication-induced (including some antiarrhythmics).</div>
+</div>
+<div class="quiz-q" data-answer="d">
+<p class="stem">Which of the following is NOT a standard indication for ICD placement?</p>
+<button class="quiz-choice" data-key="a">A) Long QT syndrome</button>
+<button class="quiz-choice" data-key="b">B) Brugada syndrome</button>
+<button class="quiz-choice" data-key="c">C) Hypertrophic cardiomyopathy</button>
+<button class="quiz-choice" data-key="d">D) Isolated occasional PVCs in a healthy patient</button>
+<div class="quiz-explain">Occasional PVCs in an otherwise healthy patient are benign and do not warrant ICD placement. ICDs are reserved for long QT syndrome, malignant ventricular arrhythmias, hypertrophic cardiomyopathy, Brugada syndrome, and certain HFrEF patients.</div>
+</div>
+</section>
+
+<section class="card" id="svt">
+<h2>16. Other Supraventricular Rhythms — Wandering Pacemaker, MAT, Atrial Flutter, SVT, AVNRT, AVRT, WPW</h2>
+<h4>Wandering Atrial Pacemaker</h4>
+<p>Pacemaker activity produced by an atrial focus that changes from beat to beat, producing varying P′ wave morphology (needs ≥3 distinct P-wave morphologies).</p>
+<table>
+<thead><tr><th>Feature</th><th>Finding</th></tr></thead>
+<tbody>
+<tr><td>Rate</td><td>60–100 bpm</td></tr>
+<tr><td>Regularity</td><td>Irregular</td></tr>
+<tr><td>P waves</td><td>P′ wave shape varies</td></tr>
+<tr><td>PR interval</td><td>0.12–0.20 sec</td></tr>
+<tr><td>QRS duration</td><td>0.04–0.12 sec</td></tr>
+</tbody>
+</table>
+
+<h4>Multifocal Atrial Tachycardia (MAT)</h4>
+<p>Wandering atrial pacemaker that accelerates into the tachycardic range; associated with pulmonary disease (e.g., COPD). Requires ≥3 distinct P′ wave morphologies.</p>
+<table>
+<thead><tr><th>Feature</th><th>Finding</th></tr></thead>
+<tbody>
+<tr><td>Rate</td><td>&gt;100 bpm</td></tr>
+<tr><td>Regularity</td><td>Irregular</td></tr>
+<tr><td>P waves</td><td>P′ wave shape varies</td></tr>
+<tr><td>PR interval</td><td>0.12–0.20 sec (can be shortened)</td></tr>
+<tr><td>QRS duration</td><td>0.04–0.12 sec</td></tr>
+</tbody>
+</table>
+
+<h4>Atrial Flutter</h4>
+<p>An atrial focus produces rapid, identical depolarization "flutter" waves in a <strong>sawtooth</strong> pattern. Only 1 in a series of flutter waves is conducted through the AV node, usually in a predictable ratio (2:1, 3:1, 4:1). May be due to a reentry circuit.</p>
+<table>
+<thead><tr><th>Feature</th><th>Finding</th></tr></thead>
+<tbody>
+<tr><td>Rate</td><td>Variable (normal or fast)</td></tr>
+<tr><td>Regularity</td><td>Regular</td></tr>
+<tr><td>P waves</td><td>Flutter waves ("sawtooth" baseline)</td></tr>
+<tr><td>PR interval</td><td>None</td></tr>
+<tr><td>QRS duration</td><td>0.04–0.12 sec</td></tr>
+</tbody>
+</table>
+
+<h4>Supraventricular Tachycardia (SVT)</h4>
+<p>"Wastebasket" term for tachycardia originating from an automaticity focus above the ventricles (SA node, atria, AV node, bundle of His). Narrow QRS; P waves may be lost in preceding T waves. Commonly paroxysmal; may be due to congenital accessory conduction pathways.</p>
+<ul>
+<li><strong>Vagal maneuvers</strong> (Valsalva, carotid sinus massage) are first-line therapy to acutely restore sinus rhythm.</li>
+<li><strong>Adenosine</strong> can terminate SVT and simultaneously help diagnose the mechanism: AV-node-dependent tachycardias terminate with adenosine, while continued P waves during adenosine suggest atrial flutter/tachycardia (AV block is unmasked but the atrial rhythm continues).</li>
+</ul>
+
+<h4>AV Nodal Reentrant Tachycardia (AVNRT)</h4>
+<ul>
+<li>Two-thirds of SVT (excluding atrial flutter/fibrillation).</li>
+<li>Reentrant circuit within the AV node using both fast and slow pathways.</li>
+<li>Short RP interval with a retrograde P wave very close to the QRS.</li>
+<li>Terminated with vagal maneuvers or adenosine; prevented with beta-blockers or CCBs.</li>
+<li>Catheter ablation is highly successful but carries a 1% risk of AV node injury requiring pacemaker placement.</li>
+</ul>
+
+<h4>Atrioventricular Reciprocating Tachycardia (AVRT)</h4>
+<ul>
+<li>Accessory-pathway-mediated tachycardia, often with pre-excitation (delta wave) on EKG.</li>
+<li>Shortened PR interval; initial QRS is slurred (premature ventricular depolarization near the accessory pathway).</li>
+<li>Anterograde conduction over the AV node in 90–95% of cases → narrow complex QRS.</li>
+</ul>
+
+<h4>Wolff-Parkinson-White (WPW) Syndrome</h4>
+<p>Accessory pathway (bundle of Kent) bypasses the AV node → part of the ventricle depolarizes prematurely ("pre-excitation") → <strong>delta wave</strong> (upsloping of PR into the QRS). Can create dangerous paroxysmal reentrant tachycardia.</p>
+<table>
+<thead><tr><th>Feature</th><th>Finding</th></tr></thead>
+<tbody>
+<tr><td>Rate</td><td>Variable</td></tr>
+<tr><td>Regularity</td><td>Regular</td></tr>
+<tr><td>P waves</td><td>Normal</td></tr>
+<tr><td>PR interval</td><td>&lt;0.12 sec (shortened)</td></tr>
+<tr><td>QRS duration</td><td>&gt;0.1 sec (widened, delta wave)</td></tr>
+</tbody>
+</table>
+
+<p class="quiz-mini-header">Practice Questions</p>
+<div class="quiz-q" data-answer="b">
+<p class="stem">A patient with COPD develops an irregular tachycardia with at least 3 distinct P-wave morphologies. What is the most likely diagnosis?</p>
+<button class="quiz-choice" data-key="a">A) Atrial flutter</button>
+<button class="quiz-choice" data-key="b">B) Multifocal atrial tachycardia (MAT)</button>
+<button class="quiz-choice" data-key="c">C) AVNRT</button>
+<button class="quiz-choice" data-key="d">D) Wolff-Parkinson-White syndrome</button>
+<div class="quiz-explain">MAT is a wandering atrial pacemaker accelerated into a tachycardic rate, requiring ≥3 distinct P′ wave morphologies, and is classically associated with pulmonary disease such as COPD.</div>
+</div>
+<div class="quiz-q" data-answer="d">
+<p class="stem">An EKG shows a regular sawtooth baseline with a 3:1 atrial-to-ventricular conduction ratio. What is this rhythm?</p>
+<button class="quiz-choice" data-key="a">A) Atrial fibrillation</button>
+<button class="quiz-choice" data-key="b">B) MAT</button>
+<button class="quiz-choice" data-key="c">C) Wandering atrial pacemaker</button>
+<button class="quiz-choice" data-key="d">D) Atrial flutter</button>
+<div class="quiz-explain">A sawtooth baseline with a predictable conduction ratio (e.g., 2:1, 3:1, 4:1) is characteristic of atrial flutter, distinguishing it from the irregular, no-discrete-P-wave pattern of atrial fibrillation.</div>
+</div>
+<div class="quiz-q" data-answer="a">
+<p class="stem">During an SVT, adenosine is administered and the tachycardia terminates abruptly. What does this suggest about the mechanism?</p>
+<button class="quiz-choice" data-key="a">A) The tachycardia is AV-node-dependent (e.g., AVNRT or AVRT)</button>
+<button class="quiz-choice" data-key="b">B) The tachycardia is atrial flutter</button>
+<button class="quiz-choice" data-key="c">C) The tachycardia is ventricular in origin</button>
+<button class="quiz-choice" data-key="d">D) Adenosine has no diagnostic value in SVT</button>
+<div class="quiz-explain">Tachycardias that terminate with adenosine are typically AV-node-dependent (AVNRT, AVRT). If continued P waves/atrial activity persist despite AV block from adenosine, this points to atrial flutter or atrial tachycardia instead.</div>
+</div>
+<div class="quiz-q" data-answer="c">
+<p class="stem">A patient's EKG shows a shortened PR interval and a delta wave. Which diagnosis is most consistent with these findings?</p>
+<button class="quiz-choice" data-key="a">A) AVNRT</button>
+<button class="quiz-choice" data-key="b">B) Atrial flutter</button>
+<button class="quiz-choice" data-key="c">C) Wolff-Parkinson-White syndrome</button>
+<button class="quiz-choice" data-key="d">D) Third degree AV block</button>
+<div class="quiz-explain">A shortened PR interval with a delta wave (slurred upstroke of the QRS) is the classic EKG signature of WPW syndrome, caused by pre-excitation through the accessory bundle of Kent.</div>
+</div>
+</section>
+
+<section class="card" id="summary">
+<h2>17. High-Yield Summary Table</h2>
+<table>
+<thead><tr><th>Rhythm</th><th>Rate</th><th>Regularity</th><th>P Waves</th><th>QRS</th><th>Key Association / Treatment</th></tr></thead>
+<tbody>
+<tr><td>Atrial fibrillation</td><td>Variable, often rapid</td><td>Irregularly irregular</td><td>None (fine/coarse fibrillatory waves)</td><td>Narrow (unless aberrant)</td><td>CHA₂DS₂-VASc for anticoagulation; rate/rhythm control; DOACs preferred (warfarin for mechanical valves/mitral stenosis)</td></tr>
+<tr><td>Atrial flutter</td><td>Variable</td><td>Regular</td><td>Sawtooth flutter waves</td><td>Narrow</td><td>Predictable conduction ratio (2:1, 3:1, 4:1); often reentrant</td></tr>
+<tr><td>Wandering atrial pacemaker</td><td>60–100</td><td>Irregular</td><td>≥3 P′ morphologies</td><td>Narrow</td><td>Benign; if accelerates → MAT</td></tr>
+<tr><td>Multifocal atrial tachycardia</td><td>&gt;100</td><td>Irregular</td><td>≥3 P′ morphologies</td><td>Narrow</td><td>Associated with COPD/pulmonary disease</td></tr>
+<tr><td>PAC</td><td>Normal, with early beat</td><td>Occasional irregularity</td><td>Premature P′, altered shape</td><td>Narrow (0.04–0.12s)</td><td>Generally benign</td></tr>
+<tr><td>PVC</td><td>Normal, with early beat</td><td>Occasional irregularity</td><td>Absent before PVC</td><td>Wide (≥120 msec)</td><td>Benign if isolated; PVC burden predicts risk with heart disease</td></tr>
+<tr><td>AVNRT</td><td>150–250</td><td>Regular</td><td>Retrograde P very close to QRS (short RP)</td><td>Narrow</td><td>2/3 of SVT; terminate with vagal maneuvers/adenosine; ablation highly successful (1% AV node injury risk)</td></tr>
+<tr><td>AVRT / WPW</td><td>Variable</td><td>Regular</td><td>Normal (WPW) / may be retrograde</td><td>Widened with delta wave (WPW); narrow if antegrade via AV node</td><td>Accessory pathway (bundle of Kent in WPW); shortened PR</td></tr>
+<tr><td>Ventricular tachycardia</td><td>&gt;100</td><td>Regular (monomorphic)</td><td>None/dissociated</td><td>Wide</td><td>↓ filling time → ↓ CO; can be fatal</td></tr>
+<tr><td>Torsades de Pointes</td><td>250–350</td><td>Irregular ("twisted streamer")</td><td>None</td><td>&gt;0.12s, polymorphic</td><td>Prolonged QT interval (congenital, electrolyte, meds)</td></tr>
+<tr><td>Ventricular fibrillation</td><td>Chaotic</td><td>Chaotic</td><td>None</td><td>None (no organized complexes)</td><td>Incompatible with life; requires immediate defibrillation</td></tr>
+<tr><td>1st degree AV block</td><td>Normal</td><td>Regular</td><td>Normal, 1:1</td><td>Narrow</td><td>PR &gt;0.20 sec; ↑ risk of A-fib/mortality</td></tr>
+<tr><td>2nd degree, Mobitz I</td><td>Normal/slow</td><td>Irregular (grouped)</td><td>Progressive PR lengthening, then dropped QRS</td><td>Narrow</td><td>Benign; improves with exercise</td></tr>
+<tr><td>2nd degree, Mobitz II</td><td>Normal/slow</td><td>Irregular (fixed ratio, e.g. 3:1)</td><td>Fixed PR, intermittently non-conducted</td><td>Often wide</td><td>High risk of progression to 3rd degree block</td></tr>
+<tr><td>3rd degree AV block</td><td>Slow (escape rate)</td><td>Regular P-P and R-R, but dissociated from each other</td><td>Independent of QRS</td><td>Narrow or wide (escape focus)</td><td>Complete AV dissociation; pacemaker indicated</td></tr>
+</tbody>
+</table>
+
+<div class="pearl"><strong>Overall high-yield framework:</strong> Narrow QRS = supraventricular in origin (atrial, junctional, or AV-node dependent) unless aberrantly conducted. Wide QRS = think ventricular (or supraventricular with aberrancy/pre-excitation). Irregularly irregular with no discrete P waves = atrial fibrillation. Regular sawtooth = atrial flutter. Delta wave + short PR = WPW. Prolonged QT + polymorphic VT = Torsades de Pointes.</div>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.quiz-q').forEach(function(q){
+  var answer = q.getAttribute('data-answer');
+  var explain = q.querySelector('.quiz-explain');
+  var choices = q.querySelectorAll('.quiz-choice');
+  choices.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(btn.classList.contains('disabled')) return;
+      choices.forEach(function(b){ b.classList.add('disabled'); });
+      var key = btn.getAttribute('data-key');
+      if(key === answer){
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('incorrect');
+        choices.forEach(function(b){
+          if(b.getAttribute('data-key') === answer){ b.classList.add('correct'); }
+        });
+      }
+      explain.classList.add('show');
+    });
+  });
+});
+var toggleBtn = document.getElementById('sidenavToggle');
+var panel = document.getElementById('sidenavPanel');
+toggleBtn.addEventListener('click', function(){ panel.classList.toggle('open'); });
+var navLinks = panel.querySelectorAll('a');
+var sections = document.querySelectorAll('section.card');
+window.addEventListener('scroll', function(){
+  var pos = window.scrollY + 120;
+  var current = '';
+  sections.forEach(function(sec){ if(sec.offsetTop <= pos){ current = sec.id; } });
+  navLinks.forEach(function(link){
+    link.classList.remove('active');
+    if(link.getAttribute('href') === '#' + current){ link.classList.add('active'); }
+  });
+});
+</script>
+</body>
+</html>
