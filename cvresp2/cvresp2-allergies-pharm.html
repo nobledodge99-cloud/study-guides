@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antihistamines: Drugs for Rhinitis and Allergies — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f1e6; --cream-card: #fbf9f2; --forest-dark: #1f3d2c; --forest: #2f5741;
+    --sage: #7fa38c; --sage-light: #e4ede6; --border: #d8cfb8; --accent: #c0623a;
+    --text-main: #2a2a24; --text-soft: #5c5a4e; --correct: #2f5741; --incorrect: #a83e3e;
+    --core: #8a3b2b;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--cream); color:var(--text-main); font-family:'Lora',serif; line-height:1.6; }
+  .back-btn { position:fixed; top:16px; left:16px; z-index:1000; background:var(--cream-card); border:1.5px solid var(--forest);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; text-decoration:none;
+    padding:8px 14px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  .back-btn:hover { background:var(--sage-light); }
+  .header { background:var(--forest-dark); color:var(--cream); padding:48px 24px 32px; text-align:center; }
+  .header h1 { font-size:2.0rem; margin:0 0 8px; letter-spacing:.02em; }
+  .header .subtitle { font-family:'IBM Plex Mono',monospace; font-size:.85rem; color:var(--sage-light); opacity:.9; }
+  .header .tag { display:inline-block; margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:.7rem;
+    background:var(--accent); color:#fff; padding:4px 10px; border-radius:4px; letter-spacing:.05em; }
+  .container { max-width:880px; margin:0 auto; padding:32px 20px 100px; }
+  .toc { background:var(--cream-card); border:1px solid var(--border); border-radius:10px; padding:20px 24px; margin-bottom:32px; }
+  .toc h2 { font-family:'IBM Plex Mono',monospace; font-size:.95rem; text-transform:uppercase; letter-spacing:.05em; color:var(--forest-dark); margin-top:0; }
+  .toc ul { columns:2; column-gap:24px; padding-left:18px; margin:0; }
+  .toc li { margin-bottom:6px; break-inside:avoid; font-size:.92rem; }
+  .toc a { color:var(--forest); text-decoration:none; }
+  .toc a:hover { text-decoration:underline; }
+  section.card { background:var(--cream-card); border:1px solid var(--border); border-radius:10px; padding:24px 26px; margin-bottom:22px; scroll-margin-top:20px; }
+  section.card h2 { font-size:1.3rem; color:var(--forest-dark); border-bottom:2px solid var(--sage); padding-bottom:6px; margin-top:0; }
+  section.card h3 { font-size:1.02rem; color:var(--forest); margin:18px 0 8px; }
+  p { margin:8px 0; }
+  ul, ol { padding-left:22px; }
+  li { margin-bottom:4px; }
+  .eqn { font-family:'IBM Plex Mono',monospace; background:var(--sage-light); border-left:4px solid var(--forest);
+    padding:10px 14px; margin:10px 0; border-radius:4px; font-size:.95rem; font-weight:600; color:var(--forest-dark); }
+  .eqn small { display:block; font-family:'Lora',serif; font-weight:400; font-size:.82rem; color:var(--text-soft); margin-top:4px; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:.88rem; }
+  th, td { border:1px solid var(--border); padding:6px 10px; text-align:left; vertical-align:top; }
+  th { font-family:'IBM Plex Mono',monospace; font-size:.72rem; text-transform:uppercase; background:var(--forest-dark); color:var(--cream); }
+  tr:nth-child(even) td { background:rgba(127,163,140,.08); }
+  .pearl { background:var(--sage-light); border-left:4px solid var(--sage); padding:10px 14px; margin:12px 0; border-radius:4px; font-size:.9rem; }
+  .pearl strong { color:var(--forest-dark); font-family:'IBM Plex Mono',monospace; font-size:.75rem; text-transform:uppercase; }
+  .trap { background:#fbeee6; border-left:4px solid var(--accent); padding:10px 14px; margin:12px 0; border-radius:4px; font-size:.9rem; }
+  .trap strong { color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:.75rem; text-transform:uppercase; }
+  .quick-table td:first-child { font-weight:600; white-space:nowrap; }
+  .objectives { background:var(--sage-light); border:1px solid var(--sage); border-radius:8px; padding:16px 20px; margin-bottom:24px; font-size:.92rem; }
+  .objectives h3 { font-family:'IBM Plex Mono',monospace; font-size:.8rem; text-transform:uppercase; color:var(--forest-dark); margin:0 0 8px; }
+  .objectives ol { margin:0; padding-left:20px; }
+  .core-drug { background:#fdf1ee; border:1.5px solid var(--core); border-radius:8px; padding:12px 16px; margin:12px 0; }
+  .core-drug .drug-name { font-family:'IBM Plex Mono',monospace; font-size:.85rem; font-weight:700; color:var(--core);
+    text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; }
+  .core-drug p { font-size:.88rem; margin:4px 0; }
+  .core-badge { display:inline-block; background:var(--core); color:#fff; font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem; text-transform:uppercase; padding:2px 6px; border-radius:3px; margin-left:6px; vertical-align:middle; }
+  .brief-list { font-size:.87rem; color:var(--text-soft); background:rgba(0,0,0,.02); border-left:3px solid var(--border);
+    padding:8px 12px; margin:10px 0; border-radius:4px; }
+  .brief-list strong { color:var(--text-main); }
+  .quiz-q { background:#fff; border:1px solid var(--border); border-radius:8px; padding:16px 18px; margin:14px 0; }
+  .quiz-mini-header { font-family:'IBM Plex Mono',monospace; font-size:.7rem; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--accent); margin:0 0 8px; font-weight:600; }
+  .quiz-vignette { font-size:.92rem; margin-bottom:10px; }
+  .quiz-choice { display:block; width:100%; text-align:left; background:var(--cream); border:1px solid var(--border);
+    border-radius:6px; padding:8px 12px; margin:6px 0; font-family:'Lora',serif; font-size:.88rem; cursor:pointer;
+    color:var(--text-main); transition:background .15s; }
+  .quiz-choice:hover { background:var(--sage-light); }
+  .quiz-choice.correct { background:#dcece0; border-color:var(--correct); font-weight:600; }
+  .quiz-choice.incorrect { background:#f6dede; border-color:var(--incorrect); }
+  .quiz-choice.disabled { pointer-events:none; opacity:.75; }
+  .quiz-explain { display:none; margin-top:10px; padding:10px 12px; background:var(--sage-light); border-left:3px solid var(--forest);
+    border-radius:4px; font-size:.87rem; }
+  .quiz-explain.show { display:block; }
+  .summary-table th { font-size:.68rem; }
+  .summary-table td { font-size:.82rem; }
+  .sidenav-toggle { position:fixed; top:50%; right:0; transform:translateY(-50%); background:var(--forest-dark); color:var(--cream);
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.05em; border:none; padding:14px 6px;
+    border-radius:6px 0 0 6px; cursor:pointer; writing-mode:vertical-rl; z-index:999; }
+  .sidenav-panel { position:fixed; top:0; right:-280px; width:260px; height:100%; background:var(--cream-card);
+    border-left:1px solid var(--border); padding:60px 18px 20px; overflow-y:auto; transition:right .25s ease; z-index:998; }
+  .sidenav-panel.open { right:0; }
+  .sidenav-panel a { display:block; font-size:.82rem; color:var(--text-main); text-decoration:none; padding:6px 0; border-bottom:1px solid var(--border); }
+  .sidenav-panel a.active { color:var(--accent); font-weight:600; }
+  @media (max-width:600px) { .toc ul { columns:1; } }
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>Antihistamines: Drugs for Rhinitis and Allergies</h1>
+  <div class="subtitle">Dr. Jacquelyn Waller, PharmD, BCPS — CV/Resp II Pharmacology</div>
+  <span class="tag">PHARM · Core Drugs Highlighted</span>
+</div>
+
+<div class="container">
+
+  <div class="objectives">
+    <h3>Session Objectives</h3>
+    <ol>
+      <li>Differentiate between H1 and H2 receptors</li>
+      <li>Describe the tissue and organ system effects of histamine</li>
+      <li>Compare and contrast the pharmacological effects of H1 and H2 blocking agents</li>
+      <li>Discuss the adverse drug reactions, toxicity, and contraindications of the H1 and H2 antihistamines</li>
+      <li>List the common therapeutic uses of antihistamines</li>
+      <li>Classify agents into: decongestants, antitussives, expectorants, mucolytics</li>
+      <li>Apply the presented information to clinical scenarios and case studies</li>
+    </ol>
+  </div>
+
+  <div class="pearl"><strong>How to use this guide</strong> — Drugs in a <span class="core-badge">CORE</span> box are the ones Dr. Waller explicitly flagged (red text on her slides) as prototypes to know in depth. Everything else is listed for name recognition — know what class it belongs to and its one distinguishing fact, nothing more.</div>
+
+  <div class="toc">
+    <h2>Jump To</h2>
+    <ul id="tocList">
+      <li><a href="#histamine">1. Histamine Physiology</a></li>
+      <li><a href="#h1-first">2. H1 Antagonists — First-Generation</a></li>
+      <li><a href="#h1-second">3. H1 Antagonists — Second-Generation</a></li>
+      <li><a href="#therapeutic-use">4. Therapeutic Uses of Antihistamines</a></li>
+      <li><a href="#adrs">5. ADRs, Toxicity, Overdose &amp; DDIs</a></li>
+      <li><a href="#h2">6. H2 Receptor Antagonists</a></li>
+      <li><a href="#allergic-rhinitis">7. Allergic Rhinitis Management</a></li>
+      <li><a href="#decongestants">8. Decongestants</a></li>
+      <li><a href="#antitussives">9. Antitussives, Expectorants &amp; Mucolytics</a></li>
+      <li><a href="#lecture-cases">10. Lecture Knowledge Checks</a></li>
+      <li><a href="#summary">11. High-Yield Summary Table</a></li>
+    </ul>
+  </div>
+
+  <section class="card" id="histamine">
+    <h2>1. Histamine Physiology</h2>
+    <p>Histamine is a biologically active amine, nearly ubiquitously distributed, formed by <strong>decarboxylation of L-histidine</strong> (via histidine decarboxylase). Once formed, it is either stored or rapidly inactivated — very little is excreted unchanged.</p>
+    <h3>Storage</h3>
+    <ul>
+      <li>Most tissue histamine is sequestered in granules within <strong>mast cells and basophils</strong></li>
+      <li>Tissue histamine content tracks mast cell content — richest at sites of potential injury (nose, mouth, feet), internal body surfaces, and blood vessels</li>
+      <li><strong>Non-mast cell histamine:</strong> in the CNS, acts as a neurotransmitter (sleep/wake, appetite, learning/memory, thermoregulation, cardiovascular regulation) — no current drug targets exploit this. In the GI tract, stored/released from <strong>enterochromaffin-like (ECL) cells</strong> of the gastric fundus as a gastric acid secretagogue.</li>
+    </ul>
+    <h3>Release</h3>
+    <table class="quick-table">
+      <tr><td>Immunologic</td><td>IgE-mediated (type I immediate hypersensitivity); also IgG-/IgM-mediated reactions that activate complement</td></tr>
+      <tr><td>Drug/chemical-induced</td><td><strong>Morphine, tubocurarine, organic bases (e.g., antibiotics), radiocontrast dye, vancomycin</strong> — displace histamine from storage without requiring energy and without mast cell injury/degranulation</td></tr>
+      <tr><td>Physical</td><td>Mechanical or thermal injury (e.g., burns)</td></tr>
+    </table>
+    <div class="pearl"><strong>Clinical translation</strong> — A patient on morphine who develops hives/itching/flushing, or a patient having a vancomycin infusion reaction ("red man syndrome"), is experiencing direct histamine release/displacement — not necessarily a true IgE allergy.</div>
+
+    <h3>Receptor Subtypes (all G protein-coupled)</h3>
+    <table>
+      <tr><th>Receptor</th><th>G-Protein / 2nd Messenger</th><th>Distribution</th></tr>
+      <tr><td><strong>H1</strong></td><td>Gq → ↑ IP3, DAG</td><td>Smooth muscle, endothelium, brain</td></tr>
+      <tr><td><strong>H2</strong></td><td>Gs → ↑ cAMP</td><td>Gastric mucosa, cardiac muscle, mast cells, brain</td></tr>
+      <tr><td>H3</td><td>Gi → ↓ cAMP</td><td>Presynaptic auto-/heteroreceptors: brain, myenteric plexus</td></tr>
+      <tr><td>H4</td><td>Gi → ↓ cAMP</td><td>Eosinophils, neutrophils, CD4 T cells (chemoattractant role)</td></tr>
+    </table>
+    <div class="trap"><strong>Structural quirk worth remembering</strong> — H1 and H2 receptors are structurally more closely related to the <strong>muscarinic</strong> and <strong>5-HT1 (serotonin)</strong> receptors, respectively, than they are to each other.</div>
+
+    <h3>Tissue &amp; Organ System Effects</h3>
+    <ul>
+      <li><strong>Allergy/inflammation:</strong> urticaria, pruritus, allergic rhinitis, anaphylactic shock; local vasodilation and increased blood flow at sites of inflammation</li>
+      <li><strong>Cardiovascular:</strong> ↓ blood pressure (systolic and diastolic) with reflex ↑ heart rate; low-dose histamine → H1-mediated nitric oxide release; high-dose → H2-mediated cAMP-driven vasodilation. Capillary dilation, local edema (endothelial cells separate, allowing transudation of fluid/small proteins), flushing, warmth, headache.</li>
+      <li><strong>"Triple response"</strong> (intradermal histamine injection): <strong>(1) red spot</strong> — local vasodilation, seconds; <strong>(2) flare</strong> — axon reflex; <strong>(3) wheal</strong> — local edema, 1–2 minutes</li>
+      <li><strong>GI smooth muscle:</strong> contraction → diarrhea</li>
+      <li><strong>Bronchioles:</strong> constriction — not clinically striking in most people, but asthmatics are exquisitely sensitive (possibly hyperactive neural response)</li>
+      <li><strong>Exocrine:</strong> gastric acid secretion via H2 receptors</li>
+      <li><strong>Peripheral nerves:</strong> stimulates sensory endings → pain, itching, contributes to the flare/triple response</li>
+    </ul>
+    <h3>Therapeutic Use &amp; Toxicity of Histamine Itself</h3>
+    <p>Essentially none — rarely used as an aerosol for bronchial hyperreactivity testing (methacholine is now preferred). Toxicity/overdose effects are a direct extension of its physiology: flushing, hypotension, tachycardia, headache, urticaria, bronchoconstriction, GI upset.</p>
+
+    <div class="quiz-q" id="q1">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A patient receiving IV morphine for postoperative pain develops localized itching, flushing, and hives at the infusion site, without hypotension or airway compromise. Which mechanism best explains this reaction?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">A. Direct, non-immunologic displacement of histamine from mast cell stores</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. IgE cross-linking on mast cell surface receptors</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Complement activation via an IgG-mediated reaction</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Direct stimulation of H2 receptors on gastric parietal cells</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Activation of presynaptic H3 autoreceptors</div>
+      <div class="quiz-explain"><strong>Answer: A.</strong> Morphine (along with tubocurarine, certain antibiotics, and radiocontrast dye) can directly displace histamine from its bound intracellular form — a non-immunologic, energy-independent process that does not require mast cell injury or IgE involvement.</div>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A researcher injects histamine intradermally and observes a sequence of skin changes over several minutes. Which of the following correctly matches the wheal component of the "triple response" with its underlying mechanism?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Immediate red spot from direct capillary vasodilation</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">B. Local edema from endothelial cell separation and fluid transudation, appearing over 1–2 minutes</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Flare formation mediated by a spinal reflex arc</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Bronchoconstriction from direct airway smooth muscle H1 stimulation</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Gastric acid hypersecretion from H2 receptor activation</div>
+      <div class="quiz-explain"><strong>Answer: B.</strong> The wheal is the local edema component of the triple response, forming over 1–2 minutes as histamine causes endothelial cells to separate, allowing transudation of fluid and small proteins into the perivascular space. (The red spot is immediate/seconds, and the flare is mediated by an axon reflex, not a spinal reflex.)</div>
+    </div>
+  </section>
+
+  <section class="card" id="h1-first">
+    <h2>2. H1 Receptor Antagonists — First-Generation</h2>
+    <p>MOA (applies to all H1 blockers, both generations): reversible, competitive binding at the H1 receptor. Because histamine receptors show constitutive activity, these agents may actually function as <strong>inverse agonists</strong> rather than classic neutral antagonists. H1 blockers do <strong>not</strong> block gastric acid secretion or histamine release — that is H2 receptor territory.</p>
+    <p>First-generation agents cause significant sedation because they readily cross into the CNS and have prominent <strong>antimuscarinic (atropine-like)</strong> activity — this sedation is independent of H1 blockade itself.</p>
+
+    <div class="core-drug">
+      <div class="drug-name">Diphenhydramine (Benadryl) <span class="core-badge">Core</span></div>
+      <p>The prototypical sedating first-generation H1 blocker. Notable antimuscarinic effects (dry mouth, urinary retention, confusion in the elderly). Also has meaningful <strong>antinausea/antiemetic</strong> activity (motion sickness) and <strong>local anesthetic</strong> action (Na+ channel blockade) at higher-than-allergy doses. Used for insomnia (found in "PM" combination products), and given parenterally for acute dystonic reactions / antiparkinsonism effects related to antipsychotic use.</p>
+    </div>
+    <div class="core-drug">
+      <div class="drug-name">Chlorpheniramine <span class="core-badge">Core</span></div>
+      <p>Classic first-generation agent, sedating, prototype "name recognition" drug found in many OTC cold/allergy combination products.</p>
+    </div>
+    <div class="core-drug">
+      <div class="drug-name">Promethazine (Phenergan) <span class="core-badge">Core</span></div>
+      <p>Notable for <strong>additional α-adrenergic receptor blockade</strong> → added hypotension, dizziness, reflex tachycardia (a receptor activity that diphenhydramine/chlorpheniramine don't share to the same degree). Also has antiemetic and local anesthetic properties, similar to diphenhydramine.</p>
+    </div>
+    <div class="brief-list"><strong>Other first-generation agents (name recognition only):</strong> Brompheniramine, cyclizine, cyproheptadine, dimenhydrinate (Dramamine — motion sickness), hydroxyzine (active metabolite → cetirizine), meclizine (long-acting, motion sickness).</div>
+
+    <h3>Receptor Activity Beyond H1 Blockade</h3>
+    <table class="quick-table">
+      <tr><td>Antimuscarinic (anticholinergic)</td><td>Dry mouth, urinary retention, sinus tachycardia — worsened in elderly patients, especially with BPH</td></tr>
+      <tr><td>α-adrenergic blockade (promethazine)</td><td>Hypotension, dizziness, reflex tachycardia</td></tr>
+      <tr><td>Serotonin receptor inhibition</td><td>↑ appetite (some agents, e.g., cyproheptadine)</td></tr>
+    </table>
+    <div class="pearl"><strong>None of these block H2 receptors</strong> — that's why H1 blockers have no effect on gastric acid secretion, regardless of generation.</div>
+
+    <div class="quiz-q" id="q3">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A 78-year-old man with benign prostatic hyperplasia takes diphenhydramine nightly for insomnia. He presents with new confusion, dry mouth, and difficulty urinating. Which property of diphenhydramine most directly explains this presentation?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. H2 receptor antagonism</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. α1-adrenergic receptor blockade</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Serotonin receptor antagonism</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">D. Antimuscarinic (anticholinergic) activity</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Sodium channel blockade</div>
+      <div class="quiz-explain"><strong>Answer: D.</strong> Diphenhydramine's antimuscarinic activity produces dry mouth, urinary retention, and confusion — effects that are particularly hazardous in elderly patients and are worsened in men with BPH, where anticholinergic-induced urinary retention can become severe.</div>
+    </div>
+
+    <div class="quiz-q" id="q4">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A patient started on promethazine for nausea reports new dizziness and lightheadedness when standing. Which additional receptor activity of promethazine, beyond H1 blockade, best explains this symptom?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Muscarinic receptor blockade</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">B. α-adrenergic receptor blockade</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. H2 receptor blockade</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. 5-HT receptor blockade</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. β-adrenergic receptor blockade</div>
+      <div class="quiz-explain"><strong>Answer: B.</strong> Promethazine has notable α-adrenergic receptor blocking activity in addition to H1 blockade, producing orthostatic hypotension, dizziness, and reflex tachycardia — a distinguishing feature from other first-generation agents.</div>
+    </div>
+  </section>
+
+  <section class="card" id="h1-second">
+    <h2>3. H1 Receptor Antagonists — Second-Generation</h2>
+    <p>Second-generation agents are much less sedating because they are more hydrophilic and are substrates of <strong>P-glycoprotein</strong> (an efflux transporter at the blood-brain barrier) — they simply don't accumulate in the CNS the way first-generation agents do.</p>
+
+    <div class="core-drug">
+      <div class="drug-name">Cetirizine (Zyrtec) <span class="core-badge">Core</span></div>
+      <p>Active metabolite of <strong>hydroxyzine</strong>. Of the second-generation agents, it carries a relatively higher (though still low) risk of drowsiness compared to loratadine/fexofenadine.</p>
+    </div>
+    <div class="core-drug">
+      <div class="drug-name">Fexofenadine (Allegra) <span class="core-badge">Core</span></div>
+      <p>Active metabolite of <strong>terfenadine</strong> — the drug that replaced terfenadine after its 1998 withdrawal (see ADR/DDI section). One of the least sedating agents in the class, useful when daytime alertness matters.</p>
+    </div>
+    <div class="core-drug">
+      <div class="drug-name">Loratadine (Claritin) <span class="core-badge">Core</span></div>
+      <p>Metabolized to <strong>desloratadine</strong>. Along with fexofenadine, has the lowest risk of drowsiness among second-generation agents.</p>
+    </div>
+    <div class="core-drug">
+      <div class="drug-name">Desloratadine (Clarinex) <span class="core-badge">Core</span></div>
+      <p>The active metabolite of loratadine, also marketed as its own therapeutic entity.</p>
+    </div>
+    <div class="brief-list"><strong>Other second-generation agents:</strong> Azelastine (nasal spray formulation — see Allergic Rhinitis section), levocetirizine (Xyzal).</div>
+
+    <h3>Prodrug → Active Metabolite Relationships (High-Yield)</h3>
+    <table class="quick-table">
+      <tr><td>Hydroxyzine →</td><td><strong>Cetirizine</strong></td></tr>
+      <tr><td>Terfenadine →</td><td><strong>Fexofenadine</strong></td></tr>
+      <tr><td>Loratadine →</td><td><strong>Desloratadine</strong></td></tr>
+    </table>
+
+    <h3>Pharmacokinetics (Both Generations)</h3>
+    <ul>
+      <li>Rapidly absorbed orally</li>
+      <li>Metabolized in the liver; second-generation agents specifically via <strong>CYP3A4</strong></li>
+      <li>Duration of action typically 4–6 hours (meclizine and several second-generation agents are long-acting, 12–24 hours)</li>
+    </ul>
+    <div class="pearl"><strong>Relative sedation ranking</strong> — Among second-generation agents, cetirizine causes somewhat more drowsiness than loratadine or fexofenadine, which have the lowest sedation risk in the class — a relevant consideration for patients who need to stay alert (e.g., driving, operating machinery, certain jobs).</div>
+
+    <div class="quiz-q" id="q5">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A pharmacology exam asks students to match a prodrug to its clinically available active metabolite. Which pairing is correct?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Cetirizine → hydroxyzine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Desloratadine → fexofenadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Fexofenadine → loratadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Loratadine → cetirizine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">E. Terfenadine → fexofenadine</div>
+      <div class="quiz-explain"><strong>Answer: E.</strong> Terfenadine's active metabolite is fexofenadine, which replaced terfenadine on the market after terfenadine's 1998 withdrawal for causing torsades de pointes. (The other correct pairings run the opposite direction: hydroxyzine → cetirizine, loratadine → desloratadine.)</div>
+    </div>
+
+    <div class="quiz-q" id="q6">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A commercial airline pilot with seasonal allergies wants an antihistamine with the lowest possible risk of drowsiness so she can safely fly. Which of the following would be the most appropriate choice?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">A. Fexofenadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Diphenhydramine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Chlorpheniramine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Promethazine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Hydroxyzine</div>
+      <div class="quiz-explain"><strong>Answer: A.</strong> Fexofenadine (along with loratadine) has the lowest risk of sedation among the antihistamines, making it preferable when wakefulness and psychomotor performance are essential. All the other options are sedating first-generation agents.</div>
+    </div>
+  </section>
+
+  <section class="card" id="therapeutic-use">
+    <h2>4. Therapeutic Uses of Antihistamines</h2>
+    <table>
+      <tr><th>Indication</th><th>Preferred Agent(s)</th><th>Notes</th></tr>
+      <tr><td>Urticaria (hives)</td><td>First- or second-generation</td><td>First-line; most effective if given <em>before</em> exposure</td></tr>
+      <tr><td>Allergic rhinitis</td><td>Second-generation</td><td>Second-line after intranasal glucocorticoids (see Section 7)</td></tr>
+      <tr><td>Allergic conjunctivitis</td><td>Ophthalmic antihistamines</td><td>At least as effective as oral H1 antagonists</td></tr>
+      <tr><td>Atopic dermatitis</td><td>First-generation (e.g., diphenhydramine)</td><td>Sedating property is the actual therapeutic mechanism here — helps reduce awareness of itching and aids sleep; evidence base is weak overall</td></tr>
+      <tr><td>Anaphylaxis</td><td>Any, as adjunct</td><td><strong>Epinephrine remains first-line</strong>; antihistamines do NOT prevent/relieve airway obstruction, hypotension, shock, or death — never substitute for epinephrine</td></tr>
+      <tr><td>Motion sickness/nausea</td><td>Diphenhydramine, promethazine, dimenhydrinate, cyclizine, meclizine</td><td>Antiemetic activity independent of H1 blockade</td></tr>
+      <tr><td>Insomnia</td><td>First-generation (sedating)</td><td>Mechanism: sedation + antimuscarinic activity</td></tr>
+    </table>
+    <div class="trap"><strong>High-yield distinction</strong> — Antihistamines are <strong>ineffective in bronchial asthma</strong> because other mediators (leukotrienes, etc.) dominate that pathophysiology — do not reach for an antihistamine to treat wheezing/bronchospasm.</div>
+  </section>
+
+  <section class="card" id="adrs">
+    <h2>5. ADRs, Toxicity, Overdose &amp; Drug Interactions</h2>
+    <h3>Common ADRs</h3>
+    <ul>
+      <li><strong>Sedation</strong> and <strong>antimuscarinic effects</strong> — most common, much more prominent with first-generation agents (dry mouth, dry nasal passages, urinary retention)</li>
+      <li><strong>CNS:</strong> dizziness, tinnitus, nervousness, insomnia, fatigue, blurred vision</li>
+      <li><strong>Hypersensitivity reactions</strong> — relatively common with topical antihistamine formulations</li>
+    </ul>
+    <h3>Poisoning / Overdose</h3>
+    <ul>
+      <li><strong>Central effects:</strong> excitation (especially in children), hallucinations, ataxia, incoordination, convulsions</li>
+      <li><strong>Anticholinergic toxidrome:</strong> fixed and dilated pupils, flushed face, fever</li>
+      <li>Terminal: deepening coma with cardiorespiratory collapse and death</li>
+    </ul>
+    <div class="trap"><strong>Historical DDI case — know this story</strong> — Terfenadine (Seldane) and astemizole (Hismanal) were voluntarily withdrawn in 1998 after being linked to fatal <strong>torsades de pointes</strong> (QT prolongation). This occurred specifically when co-administered with drugs that inhibit their metabolism via <strong>CYP3A4</strong>, causing the parent drugs to accumulate. CYP3A4 inhibitors implicated: macrolide antibiotics, azole antifungals (e.g., fluconazole), HIV protease inhibitors (indinavir, ritonavir, saquinavir, nelfinavir), certain SSRIs (fluvoxamine, sertraline), zileuton, and grapefruit juice.</div>
+
+    <div class="quiz-q" id="q7">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A patient with severe atopic dermatitis and significant sleep disruption from itching is being considered for antihistamine therapy. Which agent would most appropriately address both the itching and the sleep disturbance, despite limited efficacy data for this indication overall?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Loratadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Fexofenadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">C. Diphenhydramine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Famotidine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Desloratadine</div>
+      <div class="quiz-explain"><strong>Answer: C.</strong> For atopic dermatitis, sedating first-generation agents like diphenhydramine are preferred specifically because the sedative property itself helps reduce nighttime awareness of itching and aids sleep — even though large randomized efficacy data for this specific use are limited.</div>
+    </div>
+
+    <div class="quiz-q" id="q8">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A patient taking an antihistamine for years is prescribed a macrolide antibiotic for a respiratory infection and subsequently develops syncope; ECG shows a markedly prolonged QT interval. This clinical scenario is most historically associated with which of the following now-withdrawn agents?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Diphenhydramine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Loratadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">C. Terfenadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Cetirizine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Azelastine</div>
+      <div class="quiz-explain"><strong>Answer: C.</strong> Terfenadine (along with astemizole) was withdrawn from the market in 1998 after being linked to fatal torsades de pointes when its CYP3A4 metabolism was inhibited by drugs such as macrolide antibiotics, causing toxic accumulation of the parent drug.</div>
+    </div>
+  </section>
+
+  <section class="card" id="h2">
+    <h2>6. H2 Receptor Antagonists</h2>
+    <p>Covered in depth in the GI System course — here, focus on <strong>name recognition</strong> and classification. Agents: <strong>cimetidine, famotidine, ranitidine</strong>.</p>
+    <ul>
+      <li><strong>MOA:</strong> competitive inhibition of H2 receptors on gastric parietal cells → inhibits gastric acid secretion. Highly selective for H2 — do not meaningfully block H1 receptors at normal doses.</li>
+      <li><strong>Therapeutic use:</strong> peptic ulcer disease, GERD</li>
+      <li><strong>PK:</strong> cleared via hepatic metabolism, glomerular filtration, and renal tubular secretion; short half-life (1–4 hours); dose-reduce in renal (and possibly severe hepatic) impairment</li>
+    </ul>
+    <div class="core-drug">
+      <div class="drug-name">Cimetidine</div>
+      <p>Unique ADRs: <strong>gynecomastia or impotence in men, galactorrhea in women</strong>. Most likely of the H2 blockers to cause mental status changes (confusion, hallucinations, agitation) — especially in elderly/ICU patients with renal or hepatic dysfunction. Also the most significant CYP inhibitor of the group (CYP1A2, 2C9, 2D6, 3A4) — cimetidine &gt;&gt;&gt; ranitidine; famotidine has negligible interactions. Watch for interactions with narrow-therapeutic-index drugs: theophylline, warfarin, phenytoin, lidocaine.</p>
+    </div>
+    <div class="pearl"><strong>The key distinguishing point for this course</strong> — H2 blockers are <strong>not</strong> effective H1 blockers, and vice versa: the two receptor subtypes are pharmacologically distinct despite both responding to the same endogenous ligand.</div>
+
+    <div class="quiz-q" id="q9">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A middle-aged man on long-term therapy for GERD develops bilateral breast tenderness and enlargement. Which drug is most likely responsible?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Famotidine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">B. Cimetidine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Loratadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Diphenhydramine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Ranitidine</div>
+      <div class="quiz-explain"><strong>Answer: B.</strong> Cimetidine is uniquely associated with antiandrogenic effects, including gynecomastia and impotence in men and galactorrhea in women — a distinguishing ADR not shared by the other H2 blockers.</div>
+    </div>
+  </section>
+
+  <section class="card" id="allergic-rhinitis">
+    <h2>7. Allergic Rhinitis Management</h2>
+    <p><strong>Seasonal allergic rhinitis (hay fever)</strong> results from allergen deposition on the nasal mucosa, triggering immediate hypersensitivity. Symptoms: sneezing, rhinorrhea, nasal obstruction, itching of eyes/nose/palate (also postnasal drip, cough, irritability, fatigue).</p>
+    <h3>Treatment Hierarchy</h3>
+    <ol>
+      <li><strong>Intranasal glucocorticoids</strong> (beclomethasone, budesonide, ciclesonide, flunisolide, fluticasone propionate/furoate, mometasone furoate) — <strong>first-line and most effective</strong> treatment overall</li>
+      <li><strong>Second-generation oral H1 antagonists</strong> (or intranasal azelastine) — preferred for mild-to-moderate symptoms; produce considerable, though incomplete, symptom relief (unlike in asthma, where antihistamines don't help)</li>
+      <li><strong>Intranasal cromolyn</strong> — mast cell stabilizer/prophylaxis; effective but must be dosed 3–4 times daily, which limits adherence</li>
+      <li><strong>Intranasal ipratropium</strong> (muscarinic antagonist) — can help reduce secretions/rhinorrhea specifically</li>
+      <li><strong>Nasal decongestants</strong> — for acute symptom relief only, never long-term (see Section 8)</li>
+    </ol>
+    <div class="pearl"><strong>Why glucocorticoids win</strong> — Like inhaled therapy for asthma, intranasal delivery targets the drug directly to the site of inflammation, making topical glucocorticoids extremely effective with a favorable safety profile compared to systemic options.</div>
+
+    <div class="quiz-q" id="q10">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A patient with moderate seasonal allergic rhinitis asks for the single most effective treatment option available. What should be recommended first-line?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Oral pseudoephedrine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Oral loratadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Intranasal cromolyn</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Intranasal ipratropium</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">E. Intranasal fluticasone</div>
+      <div class="quiz-explain"><strong>Answer: E.</strong> Intranasal glucocorticoids are the most effective treatment available for allergic rhinitis and are recommended first-line, ahead of oral or intranasal antihistamines, cromolyn, or ipratropium.</div>
+    </div>
+  </section>
+
+  <section class="card" id="decongestants">
+    <h2>8. Decongestants</h2>
+    <p><strong>MOA:</strong> α1-adrenergic receptor agonism → vasoconstriction → reduced mucosal edema and nasal congestion. Effective <em>only</em> for congestion — do not help sneezing, itching, or discharge.</p>
+
+    <div class="core-drug">
+      <div class="drug-name">Pseudoephedrine (Sudafed) <span class="core-badge">Core</span></div>
+      <p>Oral agent with α1, α2, and β agonist activity (broader than most other decongestants, which tend to be pure α1 agonists). Sale is legally restricted (behind-the-counter, quantity limits per day/month) due to diversion for methamphetamine synthesis.</p>
+    </div>
+    <div class="core-drug">
+      <div class="drug-name">Oxymetazoline (Afrin) <span class="core-badge">Core</span></div>
+      <p>Topical/intranasal spray. Also has α2-agonist activity — can cause hypotension similar to other centrally-acting α2 agonists (e.g., clonidine). <strong>Must be limited to &lt;48–72 hours (no more than 3 consecutive days)</strong> — longer use causes <strong>rebound congestion (rhinitis medicamentosa)</strong>.</p>
+    </div>
+    <div class="trap"><strong>Phenylephrine pearl</strong> — Restrictions on pseudoephedrine sales drove a surge in oral phenylephrine use, but FDA-mandated studies have shown <strong>oral phenylephrine is not more effective than placebo</strong> for nasal congestion — a genuinely high-yield, testable fact.</div>
+    <h3>ADRs &amp; Cautions</h3>
+    <p>Insomnia, excitability, headache, nervousness, palpitations, tachycardia, arrhythmia, hypertension, nausea, vomiting. <strong>Avoid/use caution in cardiovascular disease, hypertension, diabetes, hyperthyroidism</strong> given the sympathomimetic mechanism.</p>
+
+    <div class="quiz-q" id="q11">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A patient has been using an over-the-counter nasal spray for congestion every day for the past two weeks. He reports that his congestion is now worse than before he started using it, and it seems to return almost immediately after each dose wears off. What is the most likely explanation?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">A. Rhinitis medicamentosa from prolonged topical decongestant use</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Development of allergic rhinitis</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. New viral upper respiratory infection</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Tachyphylaxis to intranasal corticosteroids</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Anticholinergic rebound</div>
+      <div class="quiz-explain"><strong>Answer: A.</strong> Topical decongestants like oxymetazoline should not be used for more than 3 consecutive days; prolonged use leads to rebound congestion (rhinitis medicamentosa), where congestion worsens between doses.</div>
+    </div>
+
+    <div class="quiz-q" id="q12">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">Following new restrictions on pseudoephedrine sales, many patients switched to an over-the-counter oral alternative marketed for nasal congestion relief. Which statement about this alternative agent is most accurate?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. It is significantly more effective than pseudoephedrine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. It works via H1 receptor blockade</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">C. Oral phenylephrine is not more effective than placebo for nasal congestion</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. It is contraindicated in all patients regardless of cardiovascular status</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. It has no restrictions on sale due to abuse potential</div>
+      <div class="quiz-explain"><strong>Answer: C.</strong> FDA-mandated studies found that oral phenylephrine — the OTC alternative that surged in popularity after pseudoephedrine restrictions — is not more effective than placebo for relieving nasal congestion.</div>
+    </div>
+  </section>
+
+  <section class="card" id="antitussives">
+    <h2>9. Antitussives, Expectorants &amp; Mucolytics</h2>
+    <p>Cough is a nonspecific sign of airway irritation/inflammation mediated through vagal reflex pathways. <strong>Treating the underlying cause is preferred over symptomatic cough suppression</strong> whenever possible — many causes exist (airway hyperreactivity, smoking, infection, neoplasm, foreign body, postnasal drip, esophageal reflux). Overall, this drug category carries relatively weak evidence for efficacy.</p>
+
+    <h3>Antitussives</h3>
+    <div class="core-drug">
+      <div class="drug-name">Codeine <span class="core-badge">Core</span></div>
+      <p>Opioid antitussive — acts on opioid receptors in the medullary cough center (± peripheral action on cough receptors in proximal airways). <strong>Codeine is a prodrug, converted to morphine</strong> for its effects; pharmacogenomics of this conversion matters — poor metabolizers may get no benefit, ultra-rapid metabolizers are at higher risk of opioid toxicity. ADRs: sedation, constipation (typical opioid effects), plus CNS/GI/GU effects.</p>
+    </div>
+    <div class="core-drug">
+      <div class="drug-name">Dextromethorphan <span class="core-badge">Core</span></div>
+      <p>Structurally related to codeine but <strong>has no analgesic or addictive properties</strong>. Acts via sigma receptor stimulation (may also have some NMDA receptor antagonism and possible opioid receptor antagonism) — decreases cough receptor sensitivity and interrupts cough impulse transmission. Nearly as potent as codeine for cough suppression with fewer subjective/GI adverse effects; widely available OTC.</p>
+    </div>
+    <div class="brief-list"><strong>Benzonatate (Tessalon):</strong> non-opioid; local anesthetic/demulcent acting on pharyngeal nerve endings; for minor, transient cough.</div>
+
+    <h3>Expectorants &amp; Mucolytics</h3>
+    <div class="brief-list">
+      <p><strong>Guaifenesin</strong> — theoretical MOA is reducing mucus adhesiveness/surface tension to make a nonproductive cough more productive and less frequent; lacks convincing efficacy data.</p>
+      <p><strong>Acetylcysteine (Mucomyst)</strong> — effective mucolytic (opens disulfide bonds in mucoproteins) but causes airway irritation; <strong>not currently recommended</strong> in practice.</p>
+      <p><strong>Recombinant DNAse (dornase alfa, Pulmozyme)</strong> — nebulized for <strong>cystic fibrosis</strong>. A substantial portion of purulent CF secretions is extracellular DNA released from lysed inflammatory cells; this enzyme selectively cleaves that DNA, reducing mucus viscosity and improving airflow (also under investigation for COPD exacerbations).</p>
+    </div>
+
+    <div class="quiz-q" id="q13">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">A patient with cystic fibrosis has thick, purulent airway secretions that are difficult to clear. A nebulized enzyme is prescribed that selectively cleaves extracellular DNA released from lysed neutrophils in the sputum. Which drug is being described?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Guaifenesin</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Acetylcysteine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Benzonatate</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">D. Dornase alfa (recombinant DNAse)</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Dextromethorphan</div>
+      <div class="quiz-explain"><strong>Answer: D.</strong> Recombinant DNAse (dornase alfa) selectively cleaves the extracellular DNA that makes up a substantial portion of purulent CF secretions (released from lysed inflammatory cells), reducing mucus viscosity and improving airflow.</div>
+    </div>
+
+    <div class="quiz-q" id="q14">
+      <p class="quiz-mini-header">USMLE-Style Question</p>
+      <p class="quiz-vignette">Which of the following best describes a key pharmacologic advantage of dextromethorphan over codeine as an antitussive?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. It is a more potent cough suppressant overall</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. It requires hepatic bioactivation to an active metabolite</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">C. It lacks analgesic and addictive properties</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. It has superior efficacy proven in large randomized trials</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. It works by directly relaxing bronchial smooth muscle</div>
+      <div class="quiz-explain"><strong>Answer: C.</strong> Dextromethorphan is structurally related to codeine but lacks analgesic and addictive properties, making it available OTC and generally better tolerated, while remaining nearly as potent as codeine for cough suppression.</div>
+    </div>
+  </section>
+
+  <section class="card" id="lecture-cases">
+    <h2>10. Lecture Knowledge Checks</h2>
+    <p>These are the three cases Dr. Waller worked through directly in the lecture — good self-check before moving to the summary table.</p>
+
+    <div class="quiz-q" id="lc1">
+      <p class="quiz-mini-header">Lecture Case 1</p>
+      <p class="quiz-vignette">A 64-year-old man with benign prostatic hyperplasia presents with generalized itching that began after an afternoon of prolonged sun exposure, worse at night. Physical exam shows an enlarged prostate and no other evidence of disease. Which drug would be most appropriate?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Diphenhydramine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Famotidine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">C. Loratadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Theophylline</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Acetaminophen</div>
+      <div class="quiz-explain"><strong>Answer: C.</strong> This looks like a case for a sedating first-generation agent given the nighttime itching, but the BPH is the deciding factor: diphenhydramine's antimuscarinic activity would worsen urinary retention in a man with an enlarged prostate. A second-generation agent like loratadine treats the itching without that risk. Famotidine (an H2 blocker) doesn't address histamine-mediated itching, and acetaminophen/theophylline don't treat the underlying cause at all.</div>
+    </div>
+
+    <div class="quiz-q" id="lc2">
+      <p class="quiz-mini-header">Lecture Case 2</p>
+      <p class="quiz-vignette">A 48-year-old woman with allergic urticaria starts treatment with cetirizine. Decreased synthesis of which substance most likely mediates the drug's therapeutic effect?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Cyclic adenosine monophosphate</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">B. Cyclic guanosine monophosphate</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Cyclooxygenase-1</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Cyclooxygenase-2</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">E. Inositol triphosphate</div>
+      <div class="quiz-explain"><strong>Answer: E.</strong> Cetirizine is an H1 blocker, and H1 receptors are Gq-coupled, signaling through increased IP3 and DAG. Blocking this receptor decreases IP3 synthesis. (Gs-coupled receptors like H2 would work through cAMP instead; phosphodiesterase inhibitors or nitrates affect cGMP — a different pathway entirely.)</div>
+    </div>
+
+    <div class="quiz-q" id="lc3">
+      <p class="quiz-mini-header">Lecture Case 3</p>
+      <p class="quiz-vignette">A 2-year-old boy is brought to the ED with a temperature of 104°F, flushed and dry skin, and widely dilated pupils unresponsive to light. He is agitated and has a brief tonic-clonic convulsion. His mother reports he may have swallowed several tablets of her allergy medication. Which drug most likely caused this presentation?</p>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">A. Azelastine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,true)">B. Diphenhydramine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">C. Ibuprofen</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">D. Loratadine</div>
+      <div class="quiz-choice" onclick="checkAnswer(this,false)">E. Pseudoephedrine</div>
+      <div class="quiz-explain"><strong>Answer: B.</strong> This is a classic anticholinergic toxidrome (hyperthermia, flushed/dry skin, fixed dilated pupils, agitation, seizure) — consistent with diphenhydramine overdose given the stated "allergy medicine" context. Pseudoephedrine toxicity could also plausibly cause some overlapping sympathomimetic features (and was accepted as a reasonable alternative answer by the instructor), but the anticholinergic picture plus the specific mention of "allergy medicine" points most directly to diphenhydramine. Loratadine requires very high doses to produce significant toxicity, and ibuprofen (a COX inhibitor) doesn't fit this toxidrome at all.</div>
+    </div>
+  </section>
+
+  <section class="card" id="summary">
+    <h2>11. High-Yield Summary Table</h2>
+    <table class="summary-table">
+      <tr><th>Drug/Class</th><th>Key Fact</th></tr>
+      <tr><td>Histamine</td><td>From L-histidine via histidine decarboxylase; stored in mast cells/basophils; H1=Gq, H2=Gs, H3/H4=Gi</td></tr>
+      <tr><td>Triple response</td><td>Red spot (seconds) → flare (axon reflex) → wheal (edema, 1–2 min)</td></tr>
+      <tr><td>Diphenhydramine</td><td>1st-gen; sedating, antimuscarinic, antiemetic, local anesthetic; used for insomnia, dystonic reactions</td></tr>
+      <tr><td>Chlorpheniramine</td><td>1st-gen; classic OTC combination-product antihistamine</td></tr>
+      <tr><td>Promethazine</td><td>1st-gen; also α-blocker → hypotension; antiemetic, local anesthetic</td></tr>
+      <tr><td>Cetirizine</td><td>2nd-gen; active metabolite of hydroxyzine; slightly more sedating than loratadine/fexofenadine</td></tr>
+      <tr><td>Loratadine</td><td>2nd-gen; metabolized to desloratadine; low sedation</td></tr>
+      <tr><td>Desloratadine</td><td>2nd-gen; active metabolite of loratadine</td></tr>
+      <tr><td>Fexofenadine</td><td>2nd-gen; active metabolite of terfenadine; low sedation</td></tr>
+      <tr><td>Terfenadine/astemizole</td><td>Withdrawn 1998 — torsades from CYP3A4 drug interactions</td></tr>
+      <tr><td>Cimetidine</td><td>H2 blocker; gynecomastia/impotence/galactorrhea; major CYP inhibitor</td></tr>
+      <tr><td>Famotidine/ranitidine</td><td>H2 blockers; minimal drug interactions (famotidine especially)</td></tr>
+      <tr><td>Atopic dermatitis</td><td>1st-generation preferred (sedation aids itch/sleep)</td></tr>
+      <tr><td>Allergic rhinitis 1st-line</td><td>Intranasal glucocorticoids &gt; 2nd-gen antihistamines &gt; cromolyn/ipratropium/decongestants</td></tr>
+      <tr><td>Anaphylaxis</td><td>Epinephrine first-line; antihistamines adjunct only, never a substitute</td></tr>
+      <tr><td>Asthma</td><td>Antihistamines are NOT effective (other mediators dominate)</td></tr>
+      <tr><td>Pseudoephedrine</td><td>α1/α2/β agonist; sale-restricted (meth precursor)</td></tr>
+      <tr><td>Oxymetazoline</td><td>Topical α agonist (+ α2); &lt;3 days use or rebound congestion (rhinitis medicamentosa)</td></tr>
+      <tr><td>Phenylephrine (oral)</td><td>Not more effective than placebo for congestion</td></tr>
+      <tr><td>Codeine</td><td>Prodrug → morphine; opioid antitussive; pharmacogenomic variability</td></tr>
+      <tr><td>Dextromethorphan</td><td>No analgesic/addictive properties; sigma receptor; near-codeine potency for cough</td></tr>
+      <tr><td>Benzonatate</td><td>Local anesthetic on pharyngeal nerve endings; minor transient cough</td></tr>
+      <tr><td>Guaifenesin</td><td>Expectorant; weak evidence</td></tr>
+      <tr><td>Acetylcysteine</td><td>Mucolytic; causes irritation; not currently recommended</td></tr>
+      <tr><td>Dornase alfa (DNAse)</td><td>Cleaves extracellular DNA in CF sputum; nebulized; improves airflow</td></tr>
+    </table>
+  </section>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('sidenavToggle');
+  const panel = document.getElementById('sidenavPanel');
+  const sections = document.querySelectorAll('section.card');
+
+  panel.innerHTML = Array.from(sections).map(s => {
+    const h2 = s.querySelector('h2');
+    return `<a href="#${s.id}" data-id="${s.id}">${h2 ? h2.textContent : s.id}</a>`;
+  }).join('');
+
+  toggle.addEventListener('click', () => panel.classList.toggle('open'));
+  panel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => panel.classList.remove('open'));
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = panel.querySelector(`a[data-id="${entry.target.id}"]`);
+      if (entry.isIntersecting && link) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  function checkAnswer(el, isCorrect) {
+    const q = el.closest('.quiz-q');
+    if (q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    el.classList.add(isCorrect ? 'correct' : 'incorrect');
+    q.querySelectorAll('.quiz-choice').forEach(c => c.classList.add('disabled'));
+    q.querySelector('.quiz-explain').classList.add('show');
+  }
+</script>
+
+</body>
+</html>
