@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulmonary Function Tests — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f1e6;
+    --cream-card: #fbf9f2;
+    --forest-dark: #1f3d2c;
+    --forest: #2f5741;
+    --sage: #7fa38c;
+    --sage-light: #e4ede6;
+    --border: #d8cfb8;
+    --accent: #c0623a;
+    --text-main: #2a2a24;
+    --text-soft: #5c5a4e;
+    --correct: #2f5741;
+    --incorrect: #a83e3e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.6;
+  }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    background: var(--cream-card);
+    border: 1.5px solid var(--forest);
+    color: var(--forest-dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    background: var(--forest-dark);
+    color: var(--cream);
+    padding: 48px 24px 32px;
+    text-align: center;
+  }
+  .header h1 { font-size: 2.1rem; margin: 0 0 8px; letter-spacing: 0.02em; }
+  .header .subtitle { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--sage-light); opacity: 0.9; }
+  .header .tag {
+    display: inline-block; margin-top: 14px; font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; background: var(--accent); color: #fff; padding: 4px 10px;
+    border-radius: 4px; letter-spacing: 0.05em;
+  }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 32px 20px 100px; }
+
+  .toc {
+    background: var(--cream-card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 32px;
+  }
+  .toc h2 {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--forest-dark); margin-top: 0;
+  }
+  .toc ul { columns: 2; column-gap: 24px; padding-left: 18px; margin: 0; }
+  .toc li { margin-bottom: 6px; break-inside: avoid; font-size: 0.92rem; }
+  .toc a { color: var(--forest); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 24px 26px; margin-bottom: 22px; scroll-margin-top: 20px;
+  }
+  section.card h2 {
+    font-size: 1.3rem; color: var(--forest-dark); border-bottom: 2px solid var(--sage);
+    padding-bottom: 6px; margin-top: 0;
+  }
+  section.card h3 { font-size: 1.02rem; color: var(--forest); margin: 18px 0 8px; }
+  p { margin: 8px 0; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  .eqn {
+    font-family: 'IBM Plex Mono', monospace; background: var(--sage-light);
+    border-left: 4px solid var(--forest); padding: 10px 14px; margin: 10px 0;
+    border-radius: 4px; font-size: 0.95rem; font-weight: 600; color: var(--forest-dark);
+  }
+  .eqn small {
+    display: block; font-family: 'Lora', serif; font-weight: 400; font-size: 0.82rem;
+    color: var(--text-soft); margin-top: 4px;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
+  th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+  th {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase;
+    background: var(--forest-dark); color: var(--cream);
+  }
+  tr:nth-child(even) td { background: rgba(127,163,140,0.08); }
+
+  .pearl {
+    background: var(--sage-light); border-left: 4px solid var(--sage); padding: 10px 14px;
+    margin: 12px 0; border-radius: 4px; font-size: 0.9rem;
+  }
+  .pearl strong { color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; }
+
+  .trap {
+    background: #fbeee6; border-left: 4px solid var(--accent); padding: 10px 14px;
+    margin: 12px 0; border-radius: 4px; font-size: 0.9rem;
+  }
+  .trap strong { color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; }
+
+  .gap {
+    background: #f3e9e2; border-left: 4px solid #9b7653; padding: 10px 14px;
+    margin: 12px 0; border-radius: 4px; font-size: 0.9rem;
+  }
+  .gap strong { color: #7a5a3c; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; }
+
+  .quick-table td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .objectives {
+    background: var(--sage-light); border: 1px solid var(--sage); border-radius: 8px;
+    padding: 16px 20px; margin-bottom: 24px; font-size: 0.92rem;
+  }
+  .objectives h3 {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; text-transform: uppercase;
+    color: var(--forest-dark); margin: 0 0 8px;
+  }
+  .objectives ol { margin: 0; padding-left: 20px; }
+  .objectives .not-covered { color: var(--incorrect); font-style: italic; }
+
+  .sidenav-toggle {
+    position: fixed; top: 50%; right: 0; transform: translateY(-50%);
+    background: var(--forest-dark); color: var(--cream); font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.05em; border: none; padding: 14px 6px;
+    border-radius: 6px 0 0 6px; cursor: pointer; writing-mode: vertical-rl; z-index: 999;
+  }
+  .sidenav-panel {
+    position: fixed; top: 0; right: -280px; width: 260px; height: 100%;
+    background: var(--cream-card); border-left: 1px solid var(--border); padding: 60px 18px 20px;
+    overflow-y: auto; transition: right 0.25s ease; z-index: 998;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block; font-size: 0.82rem; color: var(--text-main); text-decoration: none;
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+  }
+  .sidenav-panel a.active { color: var(--accent); font-weight: 600; }
+
+  @media (max-width: 600px) { .toc ul { columns: 1; } }
+</style>
+</head>
+<body>
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>Pulmonary Function Tests</h1>
+  <div class="subtitle">Obstructive vs. Restrictive vs. Mixed Defects + Approach to Cough, Wheeze, Dyspnea, Hemoptysis</div>
+  <span class="tag">CVR II · High-Yield Condensed</span>
+</div>
+
+<div class="container">
+
+  <div class="objectives">
+    <h3>Session Objectives</h3>
+    <ol>
+      <li>Differentiate between obstructive, restrictive, and mixed diseases</li>
+      <li>Define tidal volume, residual volume, functional residual capacity, vital capacity, total lung capacity, inspiratory reserve volume, expiratory reserve volume, inspiratory capacity</li>
+      <li>Understand the general approach to management of dyspnea, cough, wheezing, hemoptysis</li>
+    </ol>
+  </div>
+
+  <div class="toc">
+    <h2>Jump To</h2>
+    <ul id="tocList">
+      <li><a href="#fastfacts">1. Fast Facts</a></li>
+      <li><a href="#volumes">2. Lung Volumes &amp; Capacities</a></li>
+      <li><a href="#testsused">3. Frequently Used Tests</a></li>
+      <li><a href="#obstruction">4. Obstruction — Interpretation</a></li>
+      <li><a href="#restriction">5. Restriction — Interpretation</a></li>
+      <li><a href="#mixed">6. Mixed Defects</a></li>
+      <li><a href="#flowloops">7. Flow-Volume Loops by Severity</a></li>
+      <li><a href="#gastransfer">8. Gas Transfer (DLCO)</a></li>
+      <li><a href="#pearls">9. Pearls &amp; Pitfalls</a></li>
+      <li><a href="#compare">10. Quick Comparison Table</a></li>
+      <li><a href="#examfindings">11. Exam Findings Quick Hits</a></li>
+      <li><a href="#cough">12. Approach to Cough</a></li>
+      <li><a href="#wheezing">13. Approach to Wheezing</a></li>
+      <li><a href="#dyspnea">14. Approach to Dyspnea</a></li>
+      <li><a href="#hemoptysis">15. Approach to Hemoptysis</a></li>
+    </ul>
+  </div>
+
+  <section class="card" id="fastfacts">
+    <h2>1. Fast Facts</h2>
+    <ul>
+      <li>Obstructive defect = <strong>FEV1/FVC ≤ 70%</strong></li>
+      <li>Restrictive defect = <strong>TLC ≤ 80% predicted</strong>; FEV1/FVC is normal or increased</li>
+      <li><strong>Post-bronchodilator FEV1 and age</strong> are the strongest mortality predictors in COPD</li>
+      <li><strong>DLCO &lt; 50% predicted</strong> predicts exercise oxygen desaturation</li>
+      <li>Asthmatic airways are <strong>1000× more sensitive</strong> to bronchoconstricting agents than normal airways</li>
+    </ul>
+  </section>
+
+  <section class="card" id="volumes">
+    <h2>2. Lung Volumes &amp; Capacities (Objective 2)</h2>
+    <h3>Basic Volumes (directly measured, not derived)</h3>
+    <table>
+      <tr><th>Volume</th><th>Definition</th></tr>
+      <tr><td>Tidal Volume (TV)</td><td>Air inspired or expired with each normal breath</td></tr>
+      <tr><td>Inspiratory Reserve Volume (IRV)</td><td>Max additional air inspired past the end of a normal inspiration</td></tr>
+      <tr><td>Expiratory Reserve Volume (ERV)</td><td>Max additional air expired past the end of a normal expiration</td></tr>
+      <tr><td>Residual Volume (RV)</td><td>Air remaining after maximal expiration — <strong>the only volume that cannot be measured by spirometry</strong></td></tr>
+    </table>
+    <h3>Capacities (sums of ≥2 volumes)</h3>
+    <table>
+      <tr><th>Capacity</th><th>Definition</th><th>Formula</th></tr>
+      <tr><td>Total Lung Capacity (TLC)</td><td>Volume in lungs at end of maximal inspiration</td><td>TLC = RV + IRV + TV + ERV</td></tr>
+      <tr><td>Vital Capacity (VC)</td><td>Max volume forcefully expelled after maximal inspiration</td><td>VC = IRV + TV + ERV = TLC − RV</td></tr>
+      <tr><td>Functional Residual Capacity (FRC)</td><td>Volume remaining after a <em>normal</em> expiration</td><td>FRC = RV + ERV</td></tr>
+      <tr><td>Inspiratory Capacity (IC)</td><td>Max volume inspired from end-expiratory position — least clinically significant of the four</td><td>IC = TV + IRV</td></tr>
+    </table>
+    <div class="pearl"><strong>RV measurement</strong> — Since RV can't be captured by spirometry, it (and anything containing it — FRC, TLC) requires one of: gas dilution (N2 washout, He dilution), body plethysmography, or radiographic measurement (CXR/CT).</div>
+  </section>
+
+  <section class="card" id="testsused">
+    <h2>3. Frequently Used Tests</h2>
+    <ul>
+      <li>A full PFT set = <strong>spirometry + helium lung volumes + DLCO</strong>; results are compared to predicted values based on height, age, sex, race</li>
+      <li><strong>Sniff test</strong> (fluoroscopy) — assesses diaphragmatic movement/strength</li>
+      <li><strong>Max inspiratory/expiratory pressure</strong> — patient inspires/expires against a closed valve to assess respiratory muscle strength</li>
+      <li><strong>Exercise cardiopulmonary testing</strong> — differentiates cardiac vs. pulmonary causes of dyspnea, assesses functional capacity</li>
+      <li><strong>Indications:</strong> evaluate dyspnea, evaluate known lung injury, monitor disease progression, assess response to therapy, preop risk assessment, prognostication</li>
+      <li>PFTs are <strong>not</strong> for routine screening of asymptomatic healthy patients (may have a role in smokers/at-risk populations for subclinical disease)</li>
+      <li>Daily spirometry is useful in managing acute asthma exacerbations</li>
+    </ul>
+  </section>
+
+  <section class="card" id="obstruction">
+    <h2>4. Obstruction — Interpretation</h2>
+    <div class="eqn">FEV1/FVC ≤ 70% → Obstructive defect</div>
+    <table>
+      <tr><th>Severity</th><th>FEV1 (% predicted)</th></tr>
+      <tr><td>Mild</td><td>≥ 80%</td></tr>
+      <tr><td>Moderate</td><td>50% – &lt;80%</td></tr>
+      <tr><td>Severe</td><td>30% – &lt;50%</td></tr>
+      <tr><td>Very Severe</td><td>&lt; 30%</td></tr>
+    </table>
+    <ul>
+      <li>TLC may be <strong>↑</strong> (hyperinflation); VC may be <strong>↓</strong> because RV is markedly enlarged (air trapping)</li>
+      <li>Flow-volume loop: <strong>concave</strong> expiratory limb, relatively normal inspiration</li>
+      <li>Common causes: COPD, asthma, cystic fibrosis, bronchiolitis obliterans</li>
+    </ul>
+    <h3>Bronchodilator Reversibility Testing</h3>
+    <div class="eqn">Positive = FEV1 or FVC ↑ ≥12% AND ≥200 mL absolute</div>
+    <p>Distinguishes reversible obstruction (asthma) from fixed obstruction (emphysema). Most bronchodilator-responders also improve clinically, but many non-responders in the lab still improve clinically — <strong>treatment decisions remain clinical</strong>, not purely PFT-driven.</p>
+    <h3>Methacholine Challenge Testing</h3>
+    <div class="eqn">Positive = FEV1 ↓ ≥20% from baseline</div>
+    <ul>
+      <li>Used when intermittent bronchospasm doesn't show up as a resting FEV1/FVC drop</li>
+      <li>Up to <strong>50% of people with allergic rhinitis</strong> (no asthma symptoms) have a positive test — positive ≠ asthma</li>
+      <li><strong>Negative predictive value ≈ 95%</strong> if no bronchodilators were used before testing</li>
+    </ul>
+    <h3>Flow-Volume Loops for Localization</h3>
+    <ul>
+      <li><strong>Extrathoracic</strong> obstruction → truncated/plateaued <em>inspiratory</em> limb</li>
+      <li><strong>Intrathoracic</strong> obstruction → truncated/plateaued <em>expiratory</em> limb</li>
+      <li>Comparing limb patterns differentiates <strong>fixed</strong> (both limbs plateaued) from <strong>variable</strong> obstruction</li>
+    </ul>
+    <div class="trap"><strong>Age trap</strong> — FEV1/FVC normally declines with age; normal elderly patients without obstruction may sit below 70–80%. In this setting, compare against the <em>predicted</em> ratio for age, not the flat 70% cutoff, to avoid over-calling obstruction.</div>
+  </section>
+
+  <section class="card" id="restriction">
+    <h2>5. Restriction — Interpretation</h2>
+    <div class="eqn">TLC &lt; 80% predicted → Restrictive defect</div>
+    <table>
+      <tr><th>Severity</th><th>TLC (% predicted)</th></tr>
+      <tr><td>Mild</td><td>65% – 80%</td></tr>
+      <tr><td>Moderate</td><td>50% – 65%</td></tr>
+      <tr><td>Severe</td><td>&lt; 50%</td></tr>
+    </table>
+    <h3>Using RV/FRC to suggest a cause</h3>
+    <table class="quick-table">
+      <tr><td>↓ FRC</td><td>Noncompliant lung OR chest wall pathology (morbid obesity, kyphoscoliosis)</td></tr>
+      <tr><td>RV normal</td><td>Chest wall disease</td></tr>
+      <tr><td>RV ↓</td><td>Parenchymal lung disease, large pleural effusion</td></tr>
+      <tr><td>RV ↑</td><td>Neuromuscular disease (e.g., ALS)</td></tr>
+      <tr><td>TLC, RV, FRC all ↓ proportionally</td><td>Parenchymal lung disease (e.g., interstitial lung disease)</td></tr>
+    </table>
+    <div class="trap"><strong>Board trap</strong> — A restrictive pattern with a <em>normal FRC</em> should raise suspicion for neuromuscular disease (RV mainly reflects airway closure, so it can rise even as VC falls from weak respiratory muscles, not shrinking lung tissue).</div>
+    <div class="pearl"><strong>Spirometry alone is not enough</strong> — reduced FEV1/FVC can occur with severe obstruction too (FRC rises so much it limits IC and reduces VC). A reduced FVC only <em>suggests</em> restriction; you need measured lung volumes (TLC) to confirm true restrictive physiology.</div>
+    <p>Flow-volume loop shape is largely preserved but <strong>scaled down</strong> (smaller overall curve); volume-time curve shows a rapid upslope to a smaller vital capacity.</p>
+    <p>Common causes: fibrosis, sarcoidosis, muscular disease, chest wall deformities.</p>
+  </section>
+
+  <section class="card" id="mixed">
+    <h2>6. Mixed Defects (Objective 1)</h2>
+    <ul>
+      <li><strong>Mixed obstructive + restrictive pattern</strong> = both criteria present simultaneously: FEV1/FVC ≤ 70% <em>and</em> TLC &lt; 80% predicted</li>
+      <li>Cannot be diagnosed by spirometry (FEV1/FVC) alone — lung volumes (TLC) must be measured to confirm the restrictive component is real and not just hyperinflation-driven pseudo-restriction from severe obstruction</li>
+    </ul>
+  </section>
+
+  <section class="card" id="flowloops">
+    <h2>7. Flow-Volume Loops by Severity</h2>
+    <h3>Obstructive progression</h3>
+    <ul>
+      <li><strong>Mild:</strong> curve descends faster than normal, mildly concave</li>
+      <li><strong>Moderate → Severe:</strong> peak becomes sharper, expiratory flow drops precipitously (dynamic airway collapse of diseased, more compressible conducting airways)</li>
+      <li>Volume-time curve: <strong>slower, gradual upslope</strong> to max volume (vs. rapid rise in normal) → corresponds to prolonged forced expiratory time on exam</li>
+    </ul>
+    <h3>Restrictive</h3>
+    <ul>
+      <li>Loop shape largely normal but <strong>uniformly smaller</strong></li>
+      <li>Volume-time curve: rapid upslope, but plateaus at a smaller vital capacity</li>
+    </ul>
+  </section>
+
+  <section class="card" id="gastransfer">
+    <h2>8. Gas Transfer (DLCO)</h2>
+    <p>CO has an essentially unlimited reservoir on hemoglobin, so the diffusion gradient depends only on alveolar CO pressure — DLCO therefore isolates <strong>resistance across the alveolar-capillary membrane</strong> as the rate-limiting factor.</p>
+    <table>
+      <tr><th>↓ DLCO</th><th>↑ DLCO</th></tr>
+      <tr><td>Interstitial lung disease (scarring → loss of alveolar architecture)</td><td>Polycythemia (↑ volume for CO diffusion)</td></tr>
+      <tr><td>Emphysema (↓ surface area)</td><td>Pulmonary hemorrhage (↑ extravascular blood volume)</td></tr>
+      <tr><td>CHF with pulmonary edema</td><td>Early CHF (↑ pulmonary blood volume)</td></tr>
+      <tr><td>Pulmonary hypertension</td><td>Left-to-right cardiac shunts</td></tr>
+      <tr><td>Pulmonary embolism</td><td></td></tr>
+    </table>
+  </section>
+
+  <section class="card" id="pearls">
+    <h2>9. Pearls &amp; Pitfalls</h2>
+    <ul>
+      <li>Abnormal PFTs in obese patients generally reflect <strong>intrinsic respiratory dysfunction</strong>, not just obesity — except in the morbidly obese</li>
+      <li><strong>Patient effort</strong> heavily affects PFT accuracy/reproducibility — patient must be alert and cooperative; examiner coaching improves test quality</li>
+      <li><strong>Reference values</strong> depend on age, gender, race, and especially height — correct reference selection is essential for valid interpretation</li>
+    </ul>
+  </section>
+
+  <section class="card" id="compare">
+    <h2>10. Quick Comparison Table</h2>
+    <table>
+      <tr><th></th><th>Obstructive</th><th>Restrictive</th></tr>
+      <tr><td>Primary problem</td><td>Difficulty getting air <em>out</em></td><td>Difficulty getting air <em>in</em></td></tr>
+      <tr><td>FEV1/FVC</td><td>↓ (≤70%)</td><td>Normal or ↑</td></tr>
+      <tr><td>VC</td><td>↓</td><td>↓</td></tr>
+      <tr><td>TLC</td><td>↑</td><td>↓ (&lt;80% predicted)</td></tr>
+      <tr><td>RV</td><td>↑</td><td>↓ (variable — see cause table above)</td></tr>
+      <tr><td>FRC</td><td>↑</td><td>↓ (variable)</td></tr>
+      <tr><td>Flow-volume loop</td><td>Concave expiratory limb, normal/large volume</td><td>Normal shape, scaled-down (smaller) loop</td></tr>
+      <tr><td>Examples</td><td>COPD (emphysema, chronic bronchitis), asthma, CF, bronchiolitis obliterans</td><td>Fibrosis, sarcoidosis, neuromuscular disease, chest wall deformities</td></tr>
+    </table>
+    <div class="pearl"><strong>One-line differentiator</strong> — Obstructive disease shrinks VC by <em>ballooning</em> TLC/RV/FRC (air trapping); restrictive disease shrinks VC by <em>shrinking</em> TLC/RV/FRC (less lung to fill). Mixed = both patterns confirmed on lung volumes.</div>
+  </section>
+
+  <section class="card" id="examfindings">
+    <h2>11. Exam Findings Quick Hits</h2>
+    <p>~20% of primary care visits are for respiratory symptoms — physical exam still does a lot of the diagnostic work before PFTs even happen.</p>
+    <table>
+      <tr><th>Auscultation Finding</th><th>Suggests</th></tr>
+      <tr><td>Bronchial breathing</td><td>Pneumonia, interstitial lung disease</td></tr>
+      <tr><td>Fine crackles (late inspiration)</td><td>Heart failure, ILD, alveolar filling</td></tr>
+      <tr><td>Coarse crackles (clear with cough)</td><td>Bronchitis</td></tr>
+      <tr><td>Wheeze (musical, expiratory ± inspiratory)</td><td>Asthma, COPD, bronchomalacia</td></tr>
+      <tr><td>Rhonchus (low-pitched, clears with cough)</td><td>Bronchitis, COPD</td></tr>
+      <tr><td>Stridor (audible without stethoscope)</td><td>Upper airway obstruction (laryngeal/tracheal)</td></tr>
+      <tr><td>Pleural friction rub</td><td>Pleural inflammation or tumor</td></tr>
+    </table>
+    <table class="quick-table">
+      <tr><td>↑ Tactile fremitus</td><td>Consolidation (pneumonia) — vibration conducts better</td></tr>
+      <tr><td>↓ Tactile fremitus</td><td>Pleural effusion</td></tr>
+      <tr><td>Egophony ("E"→"A")</td><td>Consolidation (pneumonia)</td></tr>
+      <tr><td>Cyanosis</td><td>Hypoxemia, usually PO2 &lt; 55 mmHg (also seen in methemoglobinemia)</td></tr>
+      <tr><td>Clubbing</td><td>Chronic hypoxemia (R→L shunt, chronic lung disease) or pleural-based disease (hypertrophic pulmonary osteoarthropathy)</td></tr>
+      <tr><td>Palpable liver in COPD</td><td>Often pseudo-hepatomegaly from a flattened, low diaphragm — not true liver enlargement</td></tr>
+    </table>
+    <p>Elevated JVP on inspection can indicate right heart failure from cor pulmonale; a loud P2 or tricuspid/pulmonic regurgitation murmur suggests pulmonary hypertension.</p>
+  </section>
+
+  <section class="card" id="cough">
+    <h2>12. Approach to Cough (Objective 3)</h2>
+    <p>Cough is the single most common respiratory complaint. Classify by duration first — it drives the differential.</p>
+    <table>
+      <tr><th>Duration</th><th>Definition</th><th>Common causes</th></tr>
+      <tr><td>Acute</td><td>&lt; 8 weeks</td><td>Common cold, acute bacterial sinusitis, pertussis, COPD exacerbation, allergic/irritant rhinitis (less common but important: PE, pneumonia, heart failure, aspiration)</td></tr>
+      <tr><td>Subacute</td><td>Follows acute onset, ongoing</td><td>Postinfectious cough (~30% bacterial: <em>H. influenzae, S. pneumoniae, B. pertussis</em>)</td></tr>
+      <tr><td>Chronic</td><td>&gt; 8 weeks</td><td>See below — 98% from 8 common conditions</td></tr>
+    </table>
+    <div class="pearl"><strong>The "big 3" of chronic cough</strong> — Upper airway cough syndrome (postnasal drip), asthma, and GERD account for the large majority of chronic cough in immunocompetent adults. Other common causes: chronic bronchitis/COPD, eosinophilic bronchitis, bronchiectasis, ACE-inhibitor use, postinfectious cough.</div>
+    <p><strong>Postinfectious cough:</strong> usually nonproductive, persists 3–8 weeks after a URI, normal CXR.</p>
+    <h3>Diagnosis</h3>
+    <ul>
+      <li>CXR in <strong>all</strong> patients with chronic cough</li>
+      <li>In current smokers or ACE-inhibitor users: hold further workup and reassess after ≥4 weeks of smoking cessation or drug discontinuation first</li>
+      <li>Further testing guided by history/exam: sinus imaging, methacholine challenge (asthma), barium esophagography/esophageal pH (GERD), bronchoscopy</li>
+      <li>If empiric treatment (e.g., antihistamine/decongestant for UACS, ICS for asthma, PPI for GERD) partially works, keep it — causes are often multiple</li>
+    </ul>
+    <div class="trap"><strong>Red flags requiring urgent workup</strong> — hemoptysis, smoker &gt;45 y/o with new/changed cough or voice change, heavy smoking history (≥30 pack-years, age 55–80), trouble swallowing, vomiting, recurrent pneumonia, abnormal exam/CXR.</div>
+    <h3>Treatment</h3>
+    <ul>
+      <li>Treating the specific identified cause succeeds in <strong>84–98%</strong> of cases — nonspecific cough suppression is rarely the right first move</li>
+      <li>Antitussives/mucolytics/decongestants have <strong>no strong evidence</strong> for acute cough from a URI</li>
+      <li>For refractory/unexplained chronic cough: gabapentin or pregabalin can help cough-specific quality of life; low-dose opioids (e.g., morphine) help cough in idiopathic pulmonary fibrosis</li>
+    </ul>
+  </section>
+
+  <section class="card" id="wheezing">
+    <h2>13. Approach to Wheezing (Objective 3)</h2>
+    <p>Wheeze = continuous musical sound &gt;80–100 msec from flow through critically narrowed, collapsible bronchi. Most classically associated with <strong>asthma</strong>, but has a broad differential.</p>
+    <table class="quick-table">
+      <tr><td>Upper airway causes</td><td>Vocal cord dysfunction, epiglottitis, retropharyngeal abscess, laryngotracheal injury (post-intubation), neoplasm, anaphylaxis</td></tr>
+      <tr><td>Lower airway causes</td><td>COPD, pulmonary edema, aspiration, PE, bronchiolitis, cystic fibrosis, carcinoid syndrome, bronchiectasis, endobronchial sarcoidosis, lymphangitic carcinomatosis, parasitic infection</td></tr>
+    </table>
+    <div class="trap"><strong>Asthma mimic</strong> — Vocal cord dysfunction (paradoxical vocal fold movement) can look just like asthma: no response to bronchodilators, stridor + wheeze together, extrathoracic variable obstruction on flow-volume loop, and confirmed by paradoxical vocal cord adduction on laryngoscopy. Can coexist with true asthma.</div>
+    <h3>Diagnosis — Flow-Volume Loop Localization</h3>
+    <p>Same logic as the obstruction section above — the shape tells you where the lesion sits:</p>
+    <ul>
+      <li><strong>Variable extrathoracic</strong> obstruction (e.g., vocal cord lesion) → flattened <em>inspiratory</em> limb</li>
+      <li><strong>Variable intrathoracic</strong> obstruction (e.g., tracheomalacia) → flattened <em>expiratory</em> limb</li>
+      <li><strong>Fixed</strong> obstruction (e.g., tracheal tumor) → both limbs flattened</li>
+      <li><strong>Small airway obstruction</strong> → concave expiratory limb (the classic obstructive lung disease pattern)</li>
+    </ul>
+    <h3>Treatment</h3>
+    <p>Treat the underlying cause — wheeze typically resolves completely or partially. Treating incidental, minimally symptomatic GERD does <strong>not</strong> improve wheezing.</p>
+  </section>
+
+  <section class="card" id="dyspnea">
+    <h2>14. Approach to Dyspnea (Objective 3)</h2>
+    <p>Dyspnea = the <em>unpleasant</em> sensation of difficult/labored breathing — exertion-appropriate breathlessness in a healthy person during exercise does not count.</p>
+    <h3>Acute dyspnea — rule out life-threats first</h3>
+    <ul>
+      <li>Pulmonary embolism, pulmonary edema, acute airway obstruction (anaphylaxis, foreign body), pneumothorax, pneumonia</li>
+    </ul>
+    <h3>Chronic dyspnea — broader differential</h3>
+    <ul>
+      <li>COPD, asthma, interstitial lung disease, heart failure, cardiomyopathy, GERD, hyperventilation syndrome</li>
+    </ul>
+    <h3>Mechanisms (useful framework)</h3>
+    <table class="quick-table">
+      <tr><td>↑ Respiratory drive — chemoreceptor</td><td>Hypoxemia, hypercapnia, metabolic acidosis, anemia, ↓ cardiac output</td></tr>
+      <tr><td>↑ Respiratory drive — pulmonary receptor</td><td>ILD, pleural effusion, PE/pulm. HTN, heart failure, mild asthma</td></tr>
+      <tr><td>↑ Respiratory drive — behavioral</td><td>Hyperventilation syndrome, anxiety/panic disorder</td></tr>
+      <tr><td>↑ Ventilatory pump effort</td><td>Muscle weakness (myasthenia gravis, Guillain-Barré), ↓ chest wall compliance (kyphoscoliosis, obesity), airflow obstruction (asthma, COPD)</td></tr>
+    </table>
+    <h3>Diagnosis — tiered workup</h3>
+    <table>
+      <tr><th>Level 1 (initial)</th><th>Level 2 (if unclear)</th><th>Level 3 (specialist)</th></tr>
+      <tr><td>CBC, metabolic panel, CXR, ECG, spirometry, pulse oximetry</td><td>Echo, BNP, full PFTs, ABG, HRCT, Holter, V/Q scan, exercise treadmill</td><td>Bronchoscopy, esophageal pH testing, lung biopsy, cardiac catheterization, CPET</td></tr>
+    </table>
+    <div class="pearl"><strong>BNP</strong> is the go-to test for distinguishing a cardiac vs. pulmonary cause of acute dyspnea when the picture is unclear.</div>
+    <h3>Treatment</h3>
+    <p>Confirm the cause by seeing which specific therapy resolves the dyspnea — multiple contributing conditions may need simultaneous treatment. For refractory dyspnea despite maximal treatment of underlying heart/lung disease, opioids can reduce air hunger.</p>
+  </section>
+
+  <section class="card" id="hemoptysis">
+    <h2>15. Approach to Hemoptysis (Objective 3)</h2>
+    <div class="eqn">Massive hemoptysis = ≥600 mL blood expectorated in 24–48 hours (~3–10% of cases)</div>
+    <div class="trap"><strong>Pseudohemoptysis</strong> — blood from the oral cavity, nares, pharynx, or from aspirated hematemesis can mimic true hemoptysis; distinguishing the source matters before working up the lungs.</div>
+    <h3>Frequency by category</h3>
+    <table class="quick-table">
+      <tr><td>Massive hemoptysis — most common causes</td><td>Infection (TB, bronchiectasis, lung abscess), cancer, aspergilloma, cystic fibrosis; iatrogenic: PA rupture (balloon catheterization), tracheoarterial fistula (tracheostomy)</td></tr>
+      <tr><td>Nonmassive hemoptysis — most common causes</td><td>Bronchitis (&gt;1/3), bronchogenic carcinoma (~1/5), TB (7%), pneumonia (5%), bronchiectasis (1%)</td></tr>
+      <tr><td>Idiopathic/central</td><td>2–32% of cases, most common in men 30–50 y/o; rarely reveals a source even with long follow-up</td></tr>
+    </table>
+    <p>Broad categories to keep in mind: cardiovascular (AVM, congenital heart disease, PE, mitral stenosis), pulmonary vascular, infection, rheumatologic (Goodpasture, GPA, SLE), drugs/toxins (anticoagulants, cocaine), trauma, iatrogenic (biopsy, catheter injury), tracheobronchial/airway disease, hematologic (coagulopathy, thrombocytopenia).</p>
+    <h3>Diagnosis</h3>
+    <ul>
+      <li>History: chronicity pattern is a clue — months-to-years of recurrent hemoptysis suggests bronchial adenoma/bronchiectasis; daily small-volume hemoptysis for weeks suggests bronchogenic carcinoma</li>
+      <li>Exam: telangiectasias (hereditary hemorrhagic telangiectasia), unilateral wheeze/crackles (localized mass), tachypnea/phlebitis/friction rub (PE)</li>
+      <li>Labs: CBC, urinalysis (hematuria → systemic disease like GPA/Goodpasture/SLE), coagulation studies</li>
+      <li>CXR first — but note it's <strong>normal in up to 30%</strong> of hemoptysis cases</li>
+      <li><strong>Bronchoscopy</strong> localizes bleeding in up to 93% (fiberoptic); best yield when done during or within 24 hours of active bleeding (drops to ~50% by 48 hours)</li>
+    </ul>
+    <h3>Treatment</h3>
+    <ul>
+      <li>Treat the underlying cause</li>
+      <li><strong>Bronchial artery embolization</strong> — emergency treatment for massive hemoptysis and for bronchiectasis-related bleeding</li>
+      <li><strong>Inhaled tranexamic acid</strong> — safe/effective for controlling nonmassive hemoptysis</li>
+    </ul>
+  </section>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('sidenavToggle');
+  const panel = document.getElementById('sidenavPanel');
+  const sections = document.querySelectorAll('section.card');
+
+  panel.innerHTML = Array.from(sections).map(s => {
+    const h2 = s.querySelector('h2');
+    return `<a href="#${s.id}" data-id="${s.id}">${h2.textContent}</a>`;
+  }).join('');
+
+  toggle.addEventListener('click', () => panel.classList.toggle('open'));
+  panel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => panel.classList.remove('open'));
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = panel.querySelector(`a[data-id="${entry.target.id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
