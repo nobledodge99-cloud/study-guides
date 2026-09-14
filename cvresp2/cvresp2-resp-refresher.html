@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVR Physiology Review — High-Yield Refresher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f1e6;
+    --cream-card: #fbf9f2;
+    --forest-dark: #1f3d2c;
+    --forest: #2f5741;
+    --sage: #7fa38c;
+    --sage-light: #e4ede6;
+    --border: #d8cfb8;
+    --accent: #c0623a;
+    --text-main: #2a2a24;
+    --text-soft: #5c5a4e;
+    --correct: #2f5741;
+    --incorrect: #a83e3e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Lora', serif;
+    line-height: 1.6;
+  }
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    background: var(--cream-card);
+    border: 1.5px solid var(--forest);
+    color: var(--forest-dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover { background: var(--sage-light); }
+
+  .header {
+    background: var(--forest-dark);
+    color: var(--cream);
+    padding: 48px 24px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.1rem;
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+  .header .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--sage-light);
+    opacity: 0.9;
+  }
+  .header .tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 100px;
+  }
+
+  .toc {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .toc h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--forest-dark);
+    margin-top: 0;
+  }
+  .toc ul { columns: 2; column-gap: 24px; padding-left: 18px; margin: 0; }
+  .toc li { margin-bottom: 6px; break-inside: avoid; font-size: 0.92rem; }
+  .toc a { color: var(--forest); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  section.card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 26px;
+    margin-bottom: 22px;
+    scroll-margin-top: 20px;
+  }
+  section.card h2 {
+    font-size: 1.3rem;
+    color: var(--forest-dark);
+    border-bottom: 2px solid var(--sage);
+    padding-bottom: 6px;
+    margin-top: 0;
+  }
+  section.card h3 {
+    font-size: 1.02rem;
+    color: var(--forest);
+    margin: 18px 0 8px;
+  }
+  p { margin: 8px 0; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  .eqn {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--sage-light);
+    border-left: 4px solid var(--forest);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--forest-dark);
+  }
+  .eqn small {
+    display: block;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    text-align: left;
+  }
+  th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    background: var(--forest-dark);
+    color: var(--cream);
+  }
+  tr:nth-child(even) td { background: rgba(127,163,140,0.08); }
+
+  .pearl {
+    background: var(--sage-light);
+    border-left: 4px solid var(--sage);
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  .pearl strong { color: var(--forest-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; }
+
+  .trap {
+    background: #fbeee6;
+    border-left: 4px solid var(--accent);
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  .trap strong { color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; }
+
+  .quick-table td:first-child { font-weight: 600; white-space: nowrap; }
+
+  /* side nav */
+  .sidenav-toggle {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: var(--forest-dark);
+    color: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    border: none;
+    padding: 14px 6px;
+    border-radius: 6px 0 0 6px;
+    cursor: pointer;
+    writing-mode: vertical-rl;
+    z-index: 999;
+  }
+  .sidenav-panel {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 260px;
+    height: 100%;
+    background: var(--cream-card);
+    border-left: 1px solid var(--border);
+    padding: 60px 18px 20px;
+    overflow-y: auto;
+    transition: right 0.25s ease;
+    z-index: 998;
+  }
+  .sidenav-panel.open { right: 0; }
+  .sidenav-panel a {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--text-main);
+    text-decoration: none;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidenav-panel a.active { color: var(--accent); font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .toc ul { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<button class="sidenav-toggle" id="sidenavToggle">SECTIONS</button>
+<div class="sidenav-panel" id="sidenavPanel"></div>
+
+<div class="header">
+  <h1>CVR Physiology Review</h1>
+  <div class="subtitle">Building on CVR I — Normal Physiology Refresher for CVR II</div>
+  <span class="tag">Dr. Coulton · High-Yield Condensed</span>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>Jump To</h2>
+    <ul id="tocList">
+      <li><a href="#volumes">1. Lung Volumes & Capacities</a></li>
+      <li><a href="#deadspace">2. Dead Space & Alveolar Ventilation</a></li>
+      <li><a href="#mechanics">3. Mechanics of Breathing</a></li>
+      <li><a href="#pressures">4. Pulmonary Pressures</a></li>
+      <li><a href="#compliance">5. Compliance, Laplace & Surfactant</a></li>
+      <li><a href="#resistance">6. Airflow & Airway Resistance</a></li>
+      <li><a href="#flowvol">7. Flow-Volume Loop & Equal Pressure Point</a></li>
+      <li><a href="#work">8. Work of Breathing</a></li>
+      <li><a href="#pvr">9. Pulmonary Vascular Resistance</a></li>
+      <li><a href="#gaslaws">10. Gas Laws (Boyle/Dalton/Henry/Fick)</a></li>
+      <li><a href="#aa">11. Alveolar Gas Eqn & A-a Gradient</a></li>
+      <li><a href="#vq">12. V/Q Ratio & Zones</a></li>
+      <li><a href="#pfts">13. Pulmonary Function Tests</a></li>
+      <li><a href="#o2transport">14. O2 Transport & Hb Curve</a></li>
+      <li><a href="#co2transport">15. CO2 Transport</a></li>
+      <li><a href="#stress">16. Exercise, Altitude, Decompression</a></li>
+      <li><a href="#fetal">17. Fetal Circulation</a></li>
+      <li><a href="#control">18. Control of Breathing</a></li>
+    </ul>
+  </div>
+
+  <section class="card" id="volumes">
+    <h2>1. Lung Volumes &amp; Capacities</h2>
+    <table>
+      <tr><th>Term</th><th>Definition</th><th>Normal</th></tr>
+      <tr><td>TV</td><td>Air per normal breath</td><td>~500 mL</td></tr>
+      <tr><td>IRV</td><td>Max extra inhaled past TV</td><td>~3,000 mL</td></tr>
+      <tr><td>ERV</td><td>Max extra exhaled past TV</td><td>~1,200 mL</td></tr>
+      <tr><td>RV</td><td>Air left after max exhalation</td><td>~1,300 mL</td></tr>
+      <tr><td>IC</td><td>TV + IRV (max inhale after normal exhale)</td><td>~3,500 mL</td></tr>
+      <tr><td>FRC</td><td>RV + ERV (air left after normal exhale)</td><td>~2,500 mL</td></tr>
+      <tr><td>VC</td><td>TV + IRV + ERV</td><td>~4,700 mL</td></tr>
+      <tr><td>TLC</td><td>VC + RV</td><td>~6,000 mL</td></tr>
+    </table>
+    <div class="pearl"><strong>Memory trick</strong> — RV can't be measured by spirometry (can't exhale it), so any capacity containing RV (FRC, TLC) needs plethysmography or gas dilution, not spirometry alone.</div>
+    <p><strong>Disease trend:</strong> FEV1/FVC ratio separates obstructive (↓ ratio) from restrictive (normal/↑ ratio, but ↓ TLC).</p>
+  </section>
+
+  <section class="card" id="deadspace">
+    <h2>2. Dead Space &amp; Alveolar Ventilation</h2>
+    <ul>
+      <li><strong>Anatomic dead space</strong> — conducting airways, no gas exchange, ~150 mL</li>
+      <li><strong>Alveolar dead space</strong> — ventilated but not perfused alveoli</li>
+      <li><strong>Physiologic dead space</strong> = anatomic + alveolar</li>
+    </ul>
+    <div class="eqn">V<sub>D</sub> = V<sub>T</sub> × (PaCO2 − PECO2) / PaCO2
+      <small>Bohr equation for physiologic dead space</small>
+    </div>
+    <div class="eqn">V̇<sub>A</sub> = (V<sub>T</sub> − V<sub>D</sub>) × RR
+      <small>Alveolar ventilation rate (mL/min)</small>
+    </div>
+  </section>
+
+  <section class="card" id="mechanics">
+    <h2>3. Mechanics of Breathing</h2>
+    <table class="quick-table">
+      <tr><td>Diaphragm</td><td>Prime mover; contracts → flattens → ↑ thoracic volume → ↓ pressure → air in</td></tr>
+      <tr><td>External intercostals</td><td>Inspiration — elevate ribs, widen thorax</td></tr>
+      <tr><td>Internal intercostals</td><td>Forced expiration — depress ribs, narrow thorax</td></tr>
+      <tr><td>Accessory (SCM, scalenes, abdominals)</td><td>Recruited with forced/heavy breathing (&gt;40 L/min)</td></tr>
+    </table>
+    <p>Flow = (P<sub>atm</sub> − P<sub>lung</sub>) / Resistance</p>
+  </section>
+
+  <section class="card" id="pressures">
+    <h2>4. Pulmonary Pressures</h2>
+    <table>
+      <tr><th>Pressure</th><th>Key point</th></tr>
+      <tr><td>Atmospheric</td><td>760 mmHg at sea level; reference for the others</td></tr>
+      <tr><td>Intra-alveolar</td><td>&lt; atm during inspiration, &gt; atm during expiration</td></tr>
+      <tr><td>Intrapleural</td><td>Always negative (rest = −4 mmHg); always &lt; intra-alveolar</td></tr>
+      <tr><td>Transpulmonary (P<sub>tp</sub>)</td><td>P<sub>alv</sub> − P<sub>ip</sub>; keeps lung expanded</td></tr>
+    </table>
+    <div class="trap"><strong>Board trap</strong> — Pneumothorax = loss of the airtight pleural space → intrapleural pressure equalizes with atmospheric → lung collapses (elastic recoil unopposed).</div>
+  </section>
+
+  <section class="card" id="compliance">
+    <h2>5. Compliance, Laplace &amp; Surfactant</h2>
+    <div class="eqn">Compliance = ΔV / ΔP<small>Ease of lung stretch. Greatest when deflated, least when fully inflated.</small></div>
+    <table class="quick-table">
+      <tr><td>↑ Compliance</td><td>Emphysema (thin, distensible — floppy lung, easy to inflate, hard to recoil)</td></tr>
+      <tr><td>↓ Compliance</td><td>Fibrosis, IRDS (stiff/thick — hard to inflate)</td></tr>
+    </table>
+    <div class="eqn">P = 2T / r <small>Law of Laplace — smaller alveolus (↓r) needs more pressure to stay open at equal tension → collapses into larger neighbor without surfactant</small></div>
+    <p><strong>Surfactant</strong> (Type II pneumocytes) lowers surface tension more in small alveoli than large ones, equalizing pressure and preventing collapse. Deficiency → IRDS in premature infants.</p>
+  </section>
+
+  <section class="card" id="resistance">
+    <h2>6. Airflow &amp; Airway Resistance</h2>
+    <div class="eqn">R = 8ηl / πr⁴ <small>Poiseuille — radius is the dominant variable; ½ radius → 16× resistance</small></div>
+    <ul>
+      <li><strong>Laminar</strong> flow in small distal airways (parallel arrangement, low velocity); <strong>turbulent</strong> in upper/large airways (Reynolds &gt; 2000)</li>
+      <li>Most resistance = <strong>medium-sized bronchi</strong>, NOT the smallest airways (parallel arrangement + ↓ velocity → &lt;20% of resistance from airways &lt;2mm)</li>
+      <li>↑ lung volume → ↑ airway caliber → ↓ resistance (traction effect)</li>
+    </ul>
+    <table class="quick-table">
+      <tr><td>Parasympathetic (vagal)</td><td>↑ airway resistance (bronchoconstriction)</td></tr>
+      <tr><td>Sympathetic (NE)</td><td>Inhibits constriction (bronchodilation)</td></tr>
+      <tr><td>Histamine, ACh, TXA2, PGF2, leukotrienes</td><td>Direct smooth muscle constriction</td></tr>
+    </table>
+  </section>
+
+  <section class="card" id="flowvol">
+    <h2>7. Flow-Volume Loop &amp; Equal Pressure Point</h2>
+    <ul>
+      <li>PFTs yield: FVC, peak expiratory flow rate (PEFR), expiratory flow rates</li>
+      <li><strong>Equal pressure point (EPP)</strong> — point where intra-airway pressure = surrounding pressure; downstream (toward mouth) airway compresses (dynamic compression)</li>
+      <li>As lung volume falls, EPP moves closer to alveoli (less elastic tethering)</li>
+      <li><strong>Obstructive disease</strong> → EPP shifts into small, cartilage-free airways → <strong>premature airway closure</strong></li>
+    </ul>
+    <div class="pearl"><strong>Loop shapes</strong> — Inspiratory-limb plateau = variable extrathoracic obstruction; expiratory-limb plateau = variable intrathoracic; both limbs flat = fixed obstruction (e.g., tracheal stenosis).</div>
+  </section>
+
+  <section class="card" id="work">
+    <h2>8. Work of Breathing</h2>
+    <div class="eqn">W = P × ΔV</div>
+    <table class="quick-table">
+      <tr><td>Restrictive (fibrosis)</td><td>↓ compliance → ↑ elastic work → shallow, rapid breathing</td></tr>
+      <tr><td>Obstructive (asthma/bronchitis)</td><td>↑ resistance → ↑ resistive work (esp. expiratory) → slow, deep breathing</td></tr>
+    </table>
+  </section>
+
+  <section class="card" id="pvr">
+    <h2>9. Pulmonary Vascular Resistance</h2>
+    <div class="eqn">PVR = (mean PA pressure − LA pressure) / cardiac output</div>
+    <ul>
+      <li>↑ pulmonary arterial pressure → ↓ PVR (capillary recruitment + distension)</li>
+      <li>PVR vs. lung volume is <strong>U-shaped</strong>: lowest at FRC, highest at TLC (alveolar vessel compression) and high at RV (extra-alveolar vessel tortuosity/collapse)</li>
+      <li><strong>Gravity zones:</strong> Zone 1 (apex) highest PVR/lowest flow; Zone 3 (base) lowest PVR/highest flow</li>
+    </ul>
+  </section>
+
+  <section class="card" id="gaslaws">
+    <h2>10. Gas Laws</h2>
+    <div class="eqn">Boyle: P₁V₁ = P₂V₂ <small>↑ volume → ↓ pressure (drives air flow)</small></div>
+    <div class="eqn">Ideal gas: PV = nRT</div>
+    <div class="eqn">Dalton: P<sub>x</sub> = P<sub>B</sub> × F <small>humidified: P<sub>x</sub> = (P<sub>B</sub> − 47) × F</small></div>
+    <div class="eqn">Henry: C<sub>x</sub> = P<sub>x</sub> × solubility <small>CO2 is 20× more soluble than O2 — equal exchange rates despite smaller pressure gradient</small></div>
+    <div class="eqn">Fick's diffusion: V̇<sub>x</sub> = D·A·ΔP / Δx</div>
+    <p><strong>DLCO changes:</strong> ↓ in emphysema (↓ surface area), fibrosis/edema (↑ membrane thickness), anemia (↓ Hb); ↑ during exercise (capillary recruitment).</p>
+  </section>
+
+  <section class="card" id="aa">
+    <h2>11. Alveolar Gas Equation &amp; A-a Gradient</h2>
+    <div class="eqn">P<sub>A</sub>O2 = (P<sub>atm</sub> − P<sub>H2O</sub>)(FiO2) − P<sub>a</sub>CO2 / 0.8
+      <small>P<sub>atm</sub>=760, P<sub>H2O</sub>=47, RQ≈0.8</small>
+    </div>
+    <div class="eqn">Normal A-a gradient ≈ (Age + 10) / 4 <small>↑ 5–7 for every 10% ↑ FiO2</small></div>
+  </section>
+
+  <section class="card" id="vq">
+    <h2>12. V/Q Ratio &amp; Gravity Zones</h2>
+    <table>
+      <tr><th>Zone</th><th>Ventilation</th><th>Perfusion</th><th>V/Q</th></tr>
+      <tr><td>1 (apex)</td><td>Lowest</td><td>Lowest</td><td>Highest (~3.3)</td></tr>
+      <tr><td>3 (base)</td><td>Highest</td><td>Highest</td><td>Lowest (~0.6)</td></tr>
+    </table>
+    <p>Overall lung average V/Q ≈ 0.8 (ideal = 1). Perfusion varies more than ventilation across zones (~10× base:apex vs ~3× for ventilation) → base has the lower ratio.</p>
+    <table class="quick-table">
+      <tr><td>Dead space (V/Q = ∞)</td><td>Ventilated, not perfused — e.g., PE</td></tr>
+      <tr><td>Shunt (V/Q = 0)</td><td>Perfused, not ventilated — right-to-left</td></tr>
+    </table>
+    <div class="pearl"><strong>Unique lung reflex</strong> — hypoxia causes local <em>vasoconstriction</em> (redirects blood away from poorly-ventilated areas) — opposite of the vasodilation seen in most other tissues.</div>
+  </section>
+
+  <section class="card" id="pfts">
+    <h2>13. Pulmonary Function Tests</h2>
+    <table class="quick-table">
+      <tr><td>Normal spirometry</td><td>FEV1/FVC &gt; 0.70, FEV1 &amp; FVC &gt; 80% predicted</td></tr>
+      <tr><td>Obstructive</td><td>FEV1/FVC &lt; 0.70 (asthma, COPD)</td></tr>
+      <tr><td>Restrictive</td><td>FEV1/FVC normal/↑, TLC &lt; 80% predicted (fibrosis) — needs lung volumes to confirm</td></tr>
+      <tr><td>Mixed</td><td>Both ratio &lt; 0.70 and TLC &lt; 80%</td></tr>
+      <tr><td>Bronchodilator response (+)</td><td>↑ FEV1 or FVC &gt;12% and &gt;200 mL → favors asthma over COPD</td></tr>
+      <tr><td>Methacholine challenge (+)</td><td>PD20 ≤ 8 mg/mL (≥20% drop in FEV1)</td></tr>
+    </table>
+    <p>Body plethysmography = gold standard for lung volumes (esp. heterogeneous obstruction like COPD/asthma), superior to gas dilution.</p>
+  </section>
+
+  <section class="card" id="o2transport">
+    <h2>14. O2 Transport &amp; Hemoglobin Curve</h2>
+    <ul>
+      <li>Hb = tetramer (α2β2), 4 O2-binding sites, cooperative binding (T-state → R-state)</li>
+      <li>O2 carrying capacity depends on <strong>Hb concentration</strong>, not PO2, once saturated</li>
+    </ul>
+    <div class="eqn">O2 content = (O2 binding capacity × %Sat) + dissolved O2</div>
+    <div class="eqn">O2 delivery = Cardiac Output × O2 content</div>
+    <p><strong>P50</strong> = PO2 at 50% saturation. ↑P50 = ↓affinity (right shift); ↓P50 = ↑affinity (left shift).</p>
+    <table>
+      <tr><th>Shifts RIGHT (↓ affinity, favors unloading)</th><th>Shifts LEFT (↑ affinity, favors loading)</th></tr>
+      <tr><td>↑ Temp, ↑ CO2, ↓ pH (Bohr), ↑ 2,3-BPG</td><td>↓ Temp, ↓ CO2, ↑ pH, ↓ 2,3-BPG, HbF, CO</td></tr>
+    </table>
+    <div class="trap"><strong>CO poisoning</strong> — CO binds Hb 250× more avidly than O2 → ↓ available sites AND left-shifts the curve for remaining sites → O2 that IS bound is harder to unload peripherally (double hit).</div>
+    <p><strong>Anemia:</strong> ↑ 2,3-BPG compensates with a right shift (favors unloading), but max O2 carrying capacity still ↓ (low Hb/hematocrit).</p>
+  </section>
+
+  <section class="card" id="co2transport">
+    <h2>15. CO2 Transport</h2>
+    <ul>
+      <li>3 forms: dissolved CO2, carbaminohemoglobin, <strong>bicarbonate (&gt;90%, dominant form)</strong></li>
+    </ul>
+    <div class="eqn">CO2 + H2O ⇌ H2CO3 ⇌ HCO3⁻ + H⁺ <small>catalyzed by carbonic anhydrase, reversible</small></div>
+    <div class="eqn">V̇<sub>A</sub> = (V̇CO2 × K) / P<sub>A</sub>CO2 <small>K = 863 mmHg; VA inversely proportional to PACO2</small></div>
+    <p><strong>Hyperventilation:</strong> ↓CO2 → ↓H⁺/HCO3⁻ → ↑pH (alkalosis) → left-shifts O2-Hb curve (↑ O2 binding, harder to unload).</p>
+  </section>
+
+  <section class="card" id="stress">
+    <h2>16. Respiration Under Stress</h2>
+    <h3>Exercise</h3>
+    <ul>
+      <li>↑ RR and TV → ↑ minute/alveolar ventilation; V̇A rises more steeply than cardiac output</li>
+      <li>Blood redistributed to mid/upper zones → ↓ regional V/Q mismatch, ↑ diffusion capacity</li>
+      <li><strong>Anaerobic threshold (AT):</strong> lactate production begins; VA/minute ventilation rise disproportionately to CO2 production beyond this point (buffering lactic acid)</li>
+    </ul>
+    <h3>Altitude &amp; Acclimatization</h3>
+    <ul>
+      <li>↓ atm pressure → ↓ PO2 → peripheral chemoreceptors trigger hyperventilation → respiratory alkalosis</li>
+      <li>Slower adaptations: ↑ 2,3-BPG (partially offsets alkalosis-driven left shift), <strong>polycythemia</strong> (EPO-driven, takes days–weeks)</li>
+    </ul>
+    <h3>Decompression Sickness</h3>
+    <ul>
+      <li>↑ ambient pressure (diving) → more N2 dissolves in blood/fat; rapid ascent → N2 bubbles out of solution → tissue/vascular injury ("the bends")</li>
+    </ul>
+  </section>
+
+  <section class="card" id="fetal">
+    <h2>17. Fetal Circulation</h2>
+    <ul>
+      <li>Placenta does gas exchange, not lungs — lungs are hypoxic/high-resistance in utero</li>
+      <li>4 key shunts: <strong>umbilical vessels, ductus venosus, foramen ovale, ductus arteriosus</strong> — all divert blood away from the lungs</li>
+      <li>Fetal circulation has <em>higher right-sided pressure</em> (opposite of adult)</li>
+      <li><strong>At birth:</strong> first breaths → ↑ O2 → pulmonary vasodilation → ↓ PVR → pressure reversal closes foramen ovale + constricts ductus arteriosus (→ ligamentum arteriosum)</li>
+      <li>HbF (α2γ2) has higher O2 affinity than HbA — 80% at birth, ~10% by 4 months</li>
+    </ul>
+  </section>
+
+  <section class="card" id="control">
+    <h2>18. Control of Breathing</h2>
+    <table class="quick-table">
+      <tr><td>Central chemoreceptors (medulla)</td><td>Most important minute-to-minute; sense CSF pH (via CO2 crossing BBB → H⁺); <strong>most potent driver overall</strong></td></tr>
+      <tr><td>Peripheral chemoreceptors (carotid/aortic bodies)</td><td>Sense arterial PO2 (respond strongly &lt;60 mmHg), PCO2, pH; via CN IX/X to medulla</td></tr>
+      <tr><td>Dorsal respiratory group (medulla)</td><td>Inspiratory center — basic rhythm, output via phrenic nerve</td></tr>
+      <tr><td>Ventral respiratory group (medulla)</td><td>Forced/active expiration, especially in exercise</td></tr>
+      <tr><td>Pneumotaxic center (pons)</td><td>Inhibits inspiration — fine-tunes rate</td></tr>
+      <tr><td>Apneustic center (pons)</td><td>Prolongs inspiration</td></tr>
+    </table>
+    <table class="quick-table">
+      <tr><td>Hering-Breuer reflex</td><td>Lung stretch → ↓ breathing rate (prevents overinflation)</td></tr>
+      <tr><td>Irritant receptors</td><td>Chemicals/dust/cold air → cough, bronchoconstriction</td></tr>
+      <tr><td>J receptors</td><td>Capillary engorgement/edema → shallow rapid breathing</td></tr>
+      <tr><td>Joint/muscle receptors</td><td>Limb movement → ↑ breathing rate (anticipatory, exercise)</td></tr>
+    </table>
+    <div class="trap"><strong>Board trap</strong> — CO2 (via CSF pH) is the dominant driver of ventilation under normal conditions; hypoxia only becomes a strong drive once PO2 drops below ~60 mmHg (relevant in COPD "hypoxic drive" patients).</div>
+  </section>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('sidenavToggle');
+  const panel = document.getElementById('sidenavPanel');
+  const sections = document.querySelectorAll('section.card');
+
+  panel.innerHTML = Array.from(sections).map(s => {
+    const h2 = s.querySelector('h2');
+    return `<a href="#${s.id}" data-id="${s.id}">${h2.textContent}</a>`;
+  }).join('');
+
+  toggle.addEventListener('click', () => panel.classList.toggle('open'));
+  panel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => panel.classList.remove('open'));
+  });
+
+  const navLinks = panel.querySelectorAll('a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = panel.querySelector(`a[data-id="${entry.target.id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
