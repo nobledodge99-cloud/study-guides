@@ -19,6 +19,7 @@
     --text-soft:#6b6357;
     --correct:#3f7a4f;
     --incorrect:#a33c2f;
+    --core:#8a3b2b;
   }
   *{box-sizing:border-box;}
   body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
@@ -85,6 +86,16 @@
   .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
   .pearl{ background:#fdf3ea; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; margin:14px 0; font-size:0.9rem; }
   .pearl b{ color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; }
+
+  .core-drug{ background:#fdf1ee; border:1.5px solid var(--core); border-radius:10px; padding:14px 18px; margin:14px 0; }
+  .core-drug .drug-name{ font-family:'IBM Plex Mono',monospace; font-size:0.85rem; font-weight:700; color:var(--core);
+    text-transform:uppercase; letter-spacing:0.03em; margin-bottom:6px; }
+  .core-drug p{ font-size:0.92rem; margin:4px 0; }
+  .core-badge{ display:inline-block; background:var(--core); color:#fff; font-family:'IBM Plex Mono',monospace;
+    font-size:0.62rem; text-transform:uppercase; padding:2px 7px; border-radius:4px; margin-left:7px; vertical-align:middle; letter-spacing:0.03em; }
+  .brief-list{ font-size:0.88rem; color:var(--text-soft); background:rgba(0,0,0,0.02); border-left:3px solid var(--border);
+    padding:9px 14px; margin:12px 0; border-radius:6px; }
+  .brief-list strong{ color:var(--text-main); }
 
   .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
   .table-scroll table{ margin:0 auto; min-width:560px; }
@@ -161,6 +172,8 @@
     <li><a href="#sec20">20. High-Yield Summary Tables</a></li>
   </ul>
 </div>
+
+<div class="callout" style="max-width:820px; margin:14px auto 0;"><b>How to use this guide:</b> drugs in a <span class="core-badge" style="margin-left:4px;">Core</span> box are the prototypes worth knowing in real depth &mdash; mechanism, adverse effects, monitoring, the specific comparisons that show up on exams. Everything else is listed for name recognition only: know what class it belongs to and its one distinguishing fact, nothing more.</div>
 
 
 <button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
@@ -272,6 +285,11 @@
 <section class="card" id="sec2">
 <h2>2. Aspirin: Mechanism, Dosing &amp; Clinical Use</h2>
 
+<div class="core-drug">
+<div class="drug-name">Aspirin <span class="core-badge">Core</span></div>
+<p>The oldest and most-used antiplatelet &mdash; <b>irreversibly</b> acetylates COX-1, an effect that lasts the platelet's entire ~7&ndash;10 day lifespan since platelets can't make new enzyme. The defining pharmacology point is <b>dose-dependent selectivity</b>: low dose (&le;100 mg) spares endothelial prostacyclin (favorable antiplatelet profile); higher dose hits COX-2 too (anti-inflammatory, but more GI risk). Backbone of secondary ASCVD prevention and DAPT.</p>
+</div>
+
 <h3>Mechanism</h3>
 <div class="callout">Aspirin <b>irreversibly acetylates a serine residue</b> in the active site of <b>COX-1</b> in platelets, permanently inactivating the enzyme and preventing conversion of arachidonic acid to prostaglandin H2 (the TxA2 precursor). Because platelets are <b>anucleate</b> and cannot synthesize new COX-1, this effect persists for the <b>lifespan of the platelet (~7&ndash;10 days)</b>.</div>
 
@@ -334,6 +352,15 @@
 </section>
 <section class="card" id="sec3">
 <h2>3. P2Y12 Inhibitors: Clopidogrel &amp; Prasugrel</h2>
+
+<div class="core-drug">
+<div class="drug-name">Clopidogrel <span class="core-badge">Core</span></div>
+<p>The prototype P2Y12 inhibitor and the workhorse of DAPT. <b>Prodrug requiring CYP2C19 activation</b> &mdash; the single fact that drives its highest-yield interaction (CYP2C19 inhibitors like omeprazole/esomeprazole blunt it) and its biggest limitation (poor metabolizers get less benefit).</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Prasugrel <span class="core-badge">Core</span></div>
+<p>More potent and more consistent than clopidogrel (activation isn't CYP2C19-dependent), at the cost of more bleeding. Know the three specific contraindications: prior stroke/TIA, age &ge;75, weight &lt;60 kg.</p>
+</div>
 
 <h3>Class Overview</h3>
 <div class="callout">P2Y12 inhibitors block the P2Y12 subtype of ADP receptors, preventing ADP-mediated activation of GPIIb/IIIa. This class includes <b>irreversible thienopyridines</b> (clopidogrel, prasugrel) and <b>reversible non-thienopyridines</b> (ticagrelor oral, cangrelor IV).</div>
@@ -401,6 +428,15 @@
 <section class="card" id="sec4">
 <h2>4. P2Y12 Inhibitors: Ticagrelor &amp; Cangrelor</h2>
 
+<div class="core-drug">
+<div class="drug-name">Ticagrelor <span class="core-badge">Core</span></div>
+<p>The oral, <b>reversible</b> P2Y12 inhibitor &mdash; direct-acting (no obligate activation step), superior to clopidogrel for CV death/MI. Reversibility is a double-edged sword: it's why <b>platelet transfusion doesn't reverse it</b> (circulating drug just inhibits the new platelets too). Unique ADRs: dyspnea, bradyarrhythmia (adenosine reuptake inhibition).</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Cangrelor <span class="core-badge">Core</span></div>
+<p>IV, reversible, ultra-short half-life (~3&ndash;6 min) for periprocedural PCI use. Key interaction: blocks clopidogrel/prasugrel's active metabolite from binding &mdash; give those <b>only after</b> stopping the infusion. Ticagrelor is the one oral agent that can overlap with it.</p>
+</div>
+
 <h3>Ticagrelor</h3>
 <div class="table-scroll">
 <table>
@@ -456,6 +492,16 @@
 </section>
 <section class="card" id="sec5">
 <h2>5. Glycoprotein IIb/IIIa Inhibitors</h2>
+
+<div class="core-drug">
+<div class="drug-name">Abciximab <span class="core-badge">Core</span></div>
+<p>Chimeric antibody fragment, <b>irreversible</b> &mdash; the "worst case" of the three for duration and risk: effect persists 24&ndash;48h despite a 30-min plasma half-life (prolonged receptor occupancy), highest thrombocytopenia risk, also binds the vitronectin receptor (off-target effects), and hypersensitivity risk on re-exposure.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Eptifibatide <span class="core-badge">Core</span></div>
+<p>Cyclic peptide from <b>rattlesnake venom</b>, reversible, renally cleared, does NOT bind vitronectin &mdash; lower thrombocytopenia risk than abciximab. The "safer, shorter" option.</p>
+</div>
+<div class="brief-list"><strong>Tirofiban (name recognition only):</strong> small non-peptide molecule, competitive/reversible, renally cleared &mdash; behaves like eptifibatide (lower thrombocytopenia risk than abciximab, short-acting).</div>
 
 <div class="callout">These potent <b>parenteral</b> agents block the <b>final common pathway</b> of platelet aggregation — preventing GPIIb/IIIa from binding fibrinogen (and vWF), regardless of the activating stimulus. Particularly effective in <b>high thrombus burden</b> settings, though use has declined with potent oral P2Y12 inhibitors available.</div>
 
@@ -523,6 +569,19 @@
 </section>
 <section class="card" id="sec6">
 <h2>6. Other Antiplatelets: PDE Inhibitors &amp; PAR-1 Antagonist</h2>
+
+<div class="core-drug">
+<div class="drug-name">Dipyridamole <span class="core-badge">Core</span></div>
+<p>PDE inhibitor that also blocks adenosine reuptake (&uarr;cAMP + vasodilation). <b>Ineffective as monotherapy</b> &mdash; only used combined: with aspirin (Aggrenox, non-cardioembolic stroke prevention) or with warfarin (mechanical valves).</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Cilostazol <span class="core-badge">Core</span></div>
+<p>Selective PDE3 inhibitor for <b>intermittent claudication</b> in PAD. The one contraindication to lock in: <b>heart failure of any severity</b> (increased mortality).</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Vorapaxar <span class="core-badge">Core</span></div>
+<p>First-in-class PAR-1 antagonist &mdash; blocks thrombin-mediated platelet activation. <b>Never</b> monotherapy, always added to aspirin/clopidogrel. Irreversible receptor binding gives it an antiplatelet effect lasting <b>up to 4 weeks</b> after stopping &mdash; the same "irreversible + long-lived receptor" logic as aspirin, taken further. Contraindicated with any history of stroke/TIA/ICH.</p>
+</div>
 
 <h3>Dipyridamole</h3>
 <div class="callout">A PDE inhibitor that <b>also blocks adenosine reuptake</b> — increasing extracellular adenosine and intracellular cAMP, which reduces platelet activation/aggregation and promotes vasodilation.</div>
@@ -662,6 +721,11 @@
 <section class="card" id="sec8">
 <h2>8. Unfractionated Heparin</h2>
 
+<div class="core-drug">
+<div class="drug-name">Unfractionated Heparin (UFH) <span class="core-badge">Core</span></div>
+<p>Binds antithrombin, potentiating inactivation of <b>both factor Xa and thrombin</b> &mdash; the long polysaccharide chains are what let it "bridge" antithrombin and thrombin simultaneously (the fact that explains why LMWH can't do the same). Short half-life, aPTT-monitored (target 1.5&ndash;2.5&times; baseline), rapidly reversed with protamine &mdash; the go-to choice whenever quick on/off control matters. Watch for HIT and, with prolonged use, osteopenia.</p>
+</div>
+
 <h3>Mechanism</h3>
 <div class="callout">Binds to <b>antithrombin</b>, inducing a conformational change that dramatically enhances antithrombin's ability to inactivate factor Xa <b>and</b> thrombin (factor IIa). Only about <b>1/3</b> of heparin molecules contain the specific <b>pentasaccharide sequence</b> needed for high-affinity antithrombin binding.</div>
 <div class="pearl"><b>Why UFH Inhibits Thrombin But LMWH Doesn't (As Well)</b> Inhibiting thrombin requires the heparin chain to be long enough to bind <b>both</b> antithrombin and thrombin simultaneously (a "bridging" interaction) — this requires the <b>longer</b> polysaccharide chains found in unfractionated heparin, not the shorter chains of LMWH.</div>
@@ -719,6 +783,16 @@
 </section>
 <section class="card" id="sec9">
 <h2>9. Low Molecular Weight Heparin &amp; Fondaparinux</h2>
+
+<div class="core-drug">
+<div class="drug-name">Enoxaparin <span class="core-badge">Core</span></div>
+<p>The prototype LMWH &mdash; shorter chains than UFH mean it can still hit factor Xa (retains the pentasaccharide) but largely <b>can't bridge to inhibit thrombin</b> &rarr; higher anti-Xa:anti-IIa ratio than UFH. Predictable PK, no routine monitoring needed (check anti-Xa in renal impairment/obesity/pregnancy), only <b>partially</b> reversed by protamine.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Fondaparinux <span class="core-badge">Core</span></div>
+<p>Synthetic pentasaccharide, pure indirect factor Xa inhibitor &mdash; too short to touch thrombin at all. Protamine has <b>zero</b> effect on it. Renally cleared (avoid CrCl &lt;30) but the payoff is a much lower HIT risk, making it usable even with a history of HIT.</p>
+</div>
+<div class="brief-list"><strong>Other LMWHs (name recognition only):</strong> Dalteparin, nadroparin, tinzaparin &mdash; same class/mechanism as enoxaparin, no distinguishing property beyond it.</div>
 
 <h3>Low Molecular Weight Heparin (LMWH)</h3>
 <div class="callout">Agents: <b>enoxaparin, dalteparin, nadroparin, tinzaparin</b>. Derived from UFH but consist of <b>shorter polysaccharide chains</b>. They retain the pentasaccharide region (inhibiting factor Xa) but are <b>less able to inhibit thrombin</b> (can't bridge both antithrombin and thrombin simultaneously) &rarr; <b>higher anti-Xa:anti-IIa ratio</b> than UFH, reflecting greater Xa selectivity.</div>
@@ -832,6 +906,15 @@
 <section class="card" id="sec11">
 <h2>11. Parenteral Direct Thrombin Inhibitors</h2>
 
+<div class="core-drug">
+<div class="drug-name">Bivalirudin <span class="core-badge">Core</span></div>
+<p><b>Bivalent</b> hirudin analog &mdash; binds both the active site and exosite of thrombin. IV, short half-life (~25 min), the go-to DTI for PCI (especially with/at risk for HIT) because its short duration allows tight procedural control.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Argatroban <span class="core-badge">Core</span></div>
+<p><b>Univalent</b>, active-site-only binder. <b>Hepatically metabolized</b> &mdash; the preferred DTI in renal impairment. The one trap to know cold: argatroban itself <b>prolongs the INR</b>, which can make the transition to warfarin genuinely misleading.</p>
+</div>
+
 <h3>Class Overview</h3>
 <div class="callout">Directly bind thrombin (factor IIa) and inhibit its activity. Unlike heparins, they <b>do not require antithrombin</b> as a cofactor and can inhibit <b>both free and clot-bound thrombin</b> — more consistent, predictable effects. Particularly useful in <b>HIT</b>, where heparin is contraindicated.</div>
 <div class="pearl"><b>Historical Note</b> The earliest DTI was <b>hirudin</b> (from medicinal leech saliva); its recombinant form, lepirudin, was discontinued due to antibody formation/anaphylaxis concerns — but it paved the way for today's agents.</div>
@@ -897,6 +980,11 @@
 <h2>12. DOACs: Dabigatran</h2>
 
 <div class="callout">Direct oral anticoagulants (DOACs) offer <b>oral administration, more predictable PK, fewer drug/dietary interactions, and less frequent monitoring</b> than warfarin. Two classes: oral direct thrombin inhibitors (dabigatran) and oral direct factor Xa inhibitors (apixaban, rivaroxaban, edoxaban).</div>
+
+<div class="core-drug">
+<div class="drug-name">Dabigatran <span class="core-badge">Core</span></div>
+<p>The only oral DTI &mdash; prodrug converted to a direct, reversible thrombin inhibitor. Renally eliminated (unchanged) &mdash; avoid CrCl &lt;30. Distinguishing facts: dyspepsia from its tartaric acid core, and a <b>specific</b> reversal agent, <b>idarucizumab</b>. Like all DOACs, contraindicated with mechanical heart valves.</p>
+</div>
 
 <h3>Dabigatran — Mechanism</h3>
 <div class="callout">A <b>low molecular weight prodrug</b>, rapidly converted by plasma/hepatic esterases to its active form, which binds <b>directly and reversibly</b> to the active site of thrombin. Like parenteral DTIs, inhibits <b>both free and fibrin-bound thrombin</b>, blocking thrombin-mediated activation of fibrinogen, factor XIII, and platelets.</div>
@@ -968,6 +1056,20 @@
 </section>
 <section class="card" id="sec13">
 <h2>13. DOACs: Factor Xa Inhibitors</h2>
+
+<div class="core-drug">
+<div class="drug-name">Apixaban <span class="core-badge">Core</span></div>
+<p>Twice daily. The DOAC to reach for in <b>higher bleeding-risk patients</b> &mdash; lowest GI bleeding risk of the three, preferred with a history of GI bleed.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Rivaroxaban <span class="core-badge">Core</span></div>
+<p>Once daily, <b>with the evening meal</b> (bioavailability). The only factor Xa inhibitor with its own approved combo: + low-dose aspirin for secondary prevention in chronic CAD/PAD.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Edoxaban <span class="core-badge">Core</span></div>
+<p>Once daily, minimally metabolized, excreted unchanged renally. The signature trap: <b>reduced efficacy if CrCl &gt;95</b> (too efficiently cleared) &mdash; the opposite problem from most renally-cleared drugs, which fail at low CrCl.</p>
+</div>
+<div class="callout" style="margin-top:0;">All three: reversed by <b>andexanet alfa</b> (FDA-approved for apixaban/rivaroxaban specifically); off-label 4F-PCC for any of them.</div>
 
 <h3>Mechanism</h3>
 <div class="callout">Apixaban, rivaroxaban, and edoxaban <b>selectively and directly inhibit factor Xa</b>, reducing thrombin generation, fibrin formation, and clot development. Unlike heparins, their anticoagulation is <b>independent of antithrombin</b>.</div>
@@ -1044,6 +1146,11 @@
 </section>
 <section class="card" id="sec14">
 <h2>14. Warfarin: Mechanism, Monitoring &amp; Bridging</h2>
+
+<div class="core-drug">
+<div class="drug-name">Warfarin <span class="core-badge">Core</span></div>
+<p>Still the anticoagulant of choice for mechanical heart valves and triple-positive antiphospholipid syndrome (DOACs are contraindicated in both). Inhibits VKORC1 &rarr; undercarboxylated, nonfunctional factors II/VII/IX/X + proteins C/S. The two things that make warfarin genuinely hard to manage: a <b>delayed onset</b> (driven by factor II's long half-life) and a <b>transient hypercoagulable window</b> right after starting (protein C falls fast while pro-coagulants persist) &mdash; together the reason for 5&ndash;7 days of heparin bridging in high-risk patients. INR-monitored (target 2&ndash;3, or 2.5&ndash;3.5 for mechanical valves).</p>
+</div>
 
 <h3>Mechanism</h3>
 <div class="callout">Inhibits <b>vitamin K epoxide reductase complex subunit 1 (VKORC1)</b>, the enzyme that regenerates reduced vitamin K from its epoxide form. Reduced vitamin K is a required cofactor for <b>gamma-carboxylation</b> of glutamate residues on factors <b>II, VII, IX, X</b>, as well as <b>protein C and protein S</b>. Inhibiting carboxylation produces <b>nonfunctional, undercarboxylated</b> clotting factors.</div>
@@ -1196,6 +1303,7 @@
 <div class="callout">Therapeutic fibrinolysis uses <b>pharmacologic doses</b> of exogenous recombinant plasminogen activators to <b>overwhelm</b> these endogenous inhibitory mechanisms and accelerate thrombus dissolution.</div>
 
 <h3>Older (Now Largely Obsolete) Agents</h3>
+<div class="brief-list"><strong>Streptokinase &amp; urokinase (name recognition only):</strong> both non-fibrin-specific (systemic bleeding risk); streptokinase is antigenic (allergic reactions, antibody-blunted efficacy on repeat use); both largely replaced by recombinant tPAs (Section 17) in high-income settings, though still used where cost/access limits newer agents.</div>
 <div class="table-scroll">
 <table>
 <tr><th>Agent</th><th>Mechanism</th><th>Key Limitation</th></tr>
@@ -1237,6 +1345,19 @@
 <h2>17. Modern Fibrinolytics: Alteplase, Reteplase, Tenecteplase</h2>
 
 <div class="callout">All three are <b>recombinant tissue plasminogen activators (rtPA)</b> that convert plasminogen to plasmin, degrading the fibrin matrix of clots.</div>
+
+<div class="core-drug">
+<div class="drug-name">Alteplase <span class="core-badge">Core</span></div>
+<p>Structurally <b>identical to endogenous human tPA</b> &mdash; the reference point for the other two. Very short half-life (~5 min) means it requires <b>continuous IV infusion</b>, unlike its bolus-dosed successors.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Reteplase <span class="core-badge">Core</span></div>
+<p>Truncated variant, longer half-life (~15&ndash;20 min) than alteplase &mdash; long enough for convenient <b>IV bolus</b> dosing.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Tenecteplase <span class="core-badge">Core</span></div>
+<p>Genetically modified for <b>increased fibrin specificity</b> and <b>PAI-1 resistance</b> &mdash; the most engineered of the three. Also bolus-dosed (~20&ndash;25 min half-life).</p>
+</div>
 
 <h3>Therapeutic Uses (Time-Sensitive Emergencies)</h3>
 <div class="table-scroll">
@@ -1302,6 +1423,16 @@
 <section class="card" id="sec18">
 <h2>18. Reversal Strategies: Warfarin, Heparin &amp; DOACs</h2>
 
+<div class="core-drug">
+<div class="drug-name">4-Factor PCC (4F-PCC) <span class="core-badge">Core</span></div>
+<p>The <b>preferred urgent warfarin reversal</b> agent &mdash; immediate hemostatic effect from concentrated factors II/VII/IX/X, without FFP's volume-overload risk. Also the go-to <b>off-label</b> option for factor Xa inhibitor bleeding &mdash; but note it works <b>nonspecifically</b> there (floods the system with factors rather than neutralizing the drug itself).</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Protamine Sulfate <span class="core-badge">Core</span></div>
+<p>Binds heparin directly (positively-charged polypeptide + negatively-charged heparin). <b>Full</b> reversal of UFH, only <b>partial</b> (~60&ndash;75%) of LMWH, and <b>zero</b> effect on fondaparinux &mdash; a clean three-way gradient worth memorizing as a set.</p>
+</div>
+<div class="brief-list"><strong>Vitamin K1 (name recognition only):</strong> restores warfarin-inhibited clotting factor synthesis, but takes 6&ndash;24h &mdash; too slow alone for acute bleeding; typically co-given with 4F-PCC to sustain the reversal.</div>
+
 <h3>Warfarin Reversal</h3>
 <div class="table-scroll">
 <table>
@@ -1363,6 +1494,16 @@
 </section>
 <section class="card" id="sec19">
 <h2>19. Reversal Strategies: Fibrinolytics &amp; Antiplatelets</h2>
+
+<div class="core-drug">
+<div class="drug-name">Tranexamic Acid <span class="core-badge">Core</span></div>
+<p>Lysine analog, competitively blocks plasminogen/plasmin binding to fibrin. The most-used antifibrinolytic by far &mdash; broad use in trauma/obstetrics/surgery, IV and oral, backed by mortality-reduction data in trauma (<b>CRASH-2 trial</b>) when given early.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Cryoprecipitate <span class="core-badge">Core</span></div>
+<p>Mechanistically distinct from the antifibrinolytics above &mdash; doesn't block fibrinolysis at all, just supplies <b>concentrated fibrinogen</b> to restore fibrin formation once fibrinogen is depleted. Particularly important in fibrinolytic-associated <b>intracranial hemorrhage</b>.</p>
+</div>
+<div class="brief-list"><strong>Aminocaproic acid (name recognition only):</strong> same lysine-analog mechanism as tranexamic acid, used less often &mdash; less robust trial data, shorter half-life, more side effects (hypotension, myopathy); a fallback if tranexamic acid isn't available.</div>
 
 <h3>Antifibrinolytic Agents (for Fibrinolytic-Associated Bleeding)</h3>
 <div class="callout"><b>Tranexamic acid</b> and <b>aminocaproic acid</b> are <b>lysine analogs</b> that competitively inhibit the binding of plasminogen/plasmin to fibrin, thereby preventing fibrin breakdown — used for bleeding from excessive fibrinolysis (post-thrombolytic therapy, surgery, trauma, bleeding disorders).</div>
