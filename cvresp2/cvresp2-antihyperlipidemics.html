@@ -19,6 +19,7 @@
     --text-soft:#6b6357;
     --correct:#3f7a4f;
     --incorrect:#a33c2f;
+    --core:#8a3b2b;
   }
   *{box-sizing:border-box;}
   body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
@@ -83,6 +84,16 @@
 
   .hi{ background:#fdf0d5; padding:1px 4px; border-radius:3px; }
   .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+
+  .core-drug{ background:#fdf1ee; border:1.5px solid var(--core); border-radius:10px; padding:14px 18px; margin:14px 0; }
+  .core-drug .drug-name{ font-family:'IBM Plex Mono',monospace; font-size:0.85rem; font-weight:700; color:var(--core);
+    text-transform:uppercase; letter-spacing:0.03em; margin-bottom:6px; }
+  .core-drug p{ font-size:0.92rem; margin:4px 0; }
+  .core-badge{ display:inline-block; background:var(--core); color:#fff; font-family:'IBM Plex Mono',monospace;
+    font-size:0.62rem; text-transform:uppercase; padding:2px 7px; border-radius:4px; margin-left:7px; vertical-align:middle; letter-spacing:0.03em; }
+  .brief-list{ font-size:0.88rem; color:var(--text-soft); background:rgba(0,0,0,0.02); border-left:3px solid var(--border);
+    padding:9px 14px; margin:12px 0; border-radius:6px; }
+  .brief-list strong{ color:var(--text-main); }
 
   .table-scroll{ width:100%; overflow-x:auto; margin:12px auto 18px; -webkit-overflow-scrolling:touch; border-radius:8px; }
   .table-scroll table{ margin:0 auto; min-width:560px; }
@@ -158,6 +169,8 @@
   </ul>
 </div>
 
+<div class="callout" style="max-width:820px; margin:14px auto 0;"><b>How to use this guide:</b> drugs in a <span class="core-badge" style="margin-left:4px;">Core</span> box are the ones worth knowing in real depth &mdash; mechanism, adverse effects, monitoring, drug interactions. Everything else is listed for name recognition only: know what class it belongs to and its one distinguishing fact, nothing more.</div>
+
 
 <button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
 <div class="sidenav-panel" id="sidenavPanel">
@@ -177,7 +190,6 @@
 </div>
 
 <div class="container">
-
 
 <section class="card" id="sec1">
 <h2>1. Lipid Physiology &amp; Lipoprotein Review</h2>
@@ -411,6 +423,20 @@
 
 <div class="callout">Statins are <b>first-line pharmacologic therapy</b> for dyslipidemia and the cornerstone of ASCVD risk reduction.</div>
 
+<div class="core-drug">
+<div class="drug-name">Atorvastatin &amp; Rosuvastatin <span class="core-badge">Core</span></div>
+<p>The two high-intensity, long-half-life statins &mdash; dosed <b>any time of day</b> (not tied to evening dosing like most statins), and the two used to define high-intensity therapy (atorvastatin 40&ndash;80 mg; rosuvastatin 20&ndash;40 mg). Rosuvastatin is <b>not significantly CYP3A4-metabolized</b>, making it a go-to choice when a patient needs a strong interacting drug (macrolide, azole antifungal) or has had myalgia on another statin.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Pravastatin <span class="core-badge">Core</span></div>
+<p>Like rosuvastatin, <b>not a CYP450 substrate</b> &mdash; the other go-to option for a patient who needs an interacting drug or has had prior statin-associated myalgia. Moderate-to-low intensity only.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Simvastatin <span class="core-badge">Core</span></div>
+<p>A <b>prodrug</b> (absorption enhanced by food) and a major <b>CYP3A4 substrate</b> &mdash; the statin most classically implicated in dangerous interactions with macrolides, azole antifungals, and gemfibrozil. Evening dosing (short half-life).</p>
+</div>
+<div class="brief-list"><strong>Other statins (name recognition only):</strong> Lovastatin (also a prodrug, CYP3A4 substrate), fluvastatin, pitavastatin (long half-life like atorvastatin/rosuvastatin &mdash; dosed any time).</div>
+
 <h3>Mechanism &amp; Effects</h3>
 <ul>
 <li>Competitive inhibitors of <b>HMG-CoA reductase</b>, the rate-limiting enzyme in hepatic cholesterol synthesis</li>
@@ -418,6 +444,7 @@
 <li>Pleiotropic effects: improve endothelial function, stabilize plaque, reduce vascular inflammation</li>
 <li>Reduce LDL-C by ~20&ndash;60%; also lower triglycerides and modestly raise HDL-C</li>
 </ul>
+
 
 <h3>Statin Intensity Classification</h3>
 <div class="table-scroll">
@@ -476,6 +503,11 @@
 </section>
 <section class="card" id="sec5">
 <h2>5. Cholesterol Absorption Inhibitor: Ezetimibe</h2>
+
+<div class="core-drug">
+<div class="drug-name">Ezetimibe <span class="core-badge">Core</span></div>
+<p>The only drug in its class &mdash; inhibits the <b>NPC1L1</b> transporter at the intestinal brush border, blocking cholesterol absorption. &darr;LDL-C ~18&ndash;20% as monotherapy. Complementary mechanism to statins (absorption vs. synthesis blockade) makes it the classic first add-on when a statin alone doesn't reach goal. No significant CYP450 interactions &mdash; one of the cleanest safety profiles in this entire drug list.</p>
+</div>
 
 <h3>Mechanism &amp; Effects</h3>
 <ul>
@@ -536,6 +568,15 @@
 </section>
 <section class="card" id="sec6">
 <h2>6. PCSK9-Targeted Therapies</h2>
+
+<div class="core-drug">
+<div class="drug-name">Alirocumab &amp; Evolocumab <span class="core-badge">Core</span></div>
+<p>Monoclonal antibodies against circulating PCSK9 &mdash; &darr;LDL-C 45&ndash;60% added to a statin, the biggest single-agent LDL-C drop in this entire guide short of the HoFH-specific agents. No myopathy, no hepatotoxicity, no CYP interactions. SC injection every 2 weeks or monthly. Reserved for FH or ASCVD not at goal on maximal statin &plusmn; ezetimibe &mdash; cost/injection burden keeps use targeted to high-risk patients.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Inclisiran <span class="core-badge">Core</span></div>
+<p>siRNA that silences hepatic PCSK9 <b>mRNA</b> (upstream of the antibodies' mechanism, which neutralize PCSK9 <b>protein</b>). The standout practical fact: SC dosing only <b>every 6 months</b>. &darr;LDL-C ~50%.</p>
+</div>
 
 <h3>PCSK9 Monoclonal Antibodies: Alirocumab &amp; Evolocumab</h3>
 <ul>
@@ -601,6 +642,11 @@
 <section class="card" id="sec7">
 <h2>7. ATP-Citrate Lyase Inhibitor: Bempedoic Acid</h2>
 
+<div class="core-drug">
+<div class="drug-name">Bempedoic Acid <span class="core-badge">Core</span></div>
+<p>The only drug in its class. Prodrug activated by <b>ACSVL1</b>, an enzyme expressed only in <b>liver, not muscle</b> &mdash; the single fact that explains its lower myopathy risk versus statins. Inhibits ATP-citrate lyase, one step upstream of HMG-CoA reductase, same downstream effect (&uarr;LDL receptors). Watch for hyperuricemia/tendon rupture. Oral, once daily; good statin-intolerant and add-on option.</p>
+</div>
+
 <h3>Mechanism</h3>
 <ul>
 <li>Oral prodrug activated in the <b>liver</b> by very long-chain acyl-CoA synthetase 1 (ACSVL1) into bempedoic acid-CoA, its active form</li>
@@ -656,6 +702,11 @@
 </section>
 <section class="card" id="sec8">
 <h2>8. Niacin</h2>
+
+<div class="core-drug">
+<div class="drug-name">Niacin <span class="core-badge">Core</span></div>
+<p>The <b>most potent HDL-raiser available</b> (up to 30&ndash;40%), works via GPR109A-mediated inhibition of adipose lipolysis &rarr; &darr;hepatic VLDL synthesis. The board-favorite twist: despite great lipid numbers, it showed <b>no added CV benefit with statins</b> &mdash; FDA pulled that combination indication in 2016. Flushing (PGD2-mediated, mitigated with aspirin pretreatment) is the classic adverse effect to recognize.</p>
+</div>
 
 <h3>Mechanism &amp; Effects</h3>
 <ul>
@@ -715,6 +766,15 @@
 <section class="card" id="sec9">
 <h2>9. Fibrates</h2>
 
+<div class="core-drug">
+<div class="drug-name">Fenofibrate <span class="core-badge">Core</span></div>
+<p>The <b>preferred fibrate</b> in essentially every clinical scenario, especially when a statin is on board &mdash; no significant interaction with statin metabolism. PPAR-&alpha; agonist; &darr;&darr;&darr;TG is the headline effect. First-line for severe hypertriglyceridemia/pancreatitis prevention.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Gemfibrozil <span class="core-badge">Core</span></div>
+<p>Core specifically because of what it does <b>wrong</b>: inhibits hepatic OATP1B1-mediated statin uptake and competes for glucuronidation &rarr; &uarr;statin levels &rarr; &uarr;rhabdomyolysis risk. <b>Avoid combining with statins</b> &mdash; this contrast with fenofibrate is one of the highest-yield drug-interaction facts in the whole guide.</p>
+</div>
+
 <h3>Mechanism &amp; Effects</h3>
 <ul>
 <li>Gemfibrozil and fenofibrate are <b>PPAR-&alpha; agonists</b> that modulate lipid metabolism</li>
@@ -772,6 +832,16 @@
 </section>
 <section class="card" id="sec10">
 <h2>10. Bile Acid Binding Resins</h2>
+
+<div class="core-drug">
+<div class="drug-name">Cholestyramine <span class="core-badge">Core</span></div>
+<p>The classic, oldest prototype resin &mdash; the one to picture for the mechanism (binds bile acids in the gut &rarr; &uarr;fecal excretion &rarr; &uarr;hepatic LDL receptors) and for the drug-interaction pattern (impairs absorption of warfarin, digoxin, levothyroxine, and most other statins &mdash; separate dosing by 1 hr before or 3&ndash;4 hrs after).</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Colesevelam <span class="core-badge">Core</span></div>
+<p>The newer, better-tolerated resin &mdash; does <b>not</b> significantly bind other oral drugs, making it the preferred choice in polypharmacy. Bonus: modestly improves glycemic control in T2DM via &uarr;GLP-1.</p>
+</div>
+<div class="brief-list"><strong>Other resin (name recognition only):</strong> Colestipol &mdash; same class, same mechanism, no distinguishing property beyond the two above.</div>
 
 <h3>Mechanism &amp; Effects</h3>
 <ul>
@@ -834,6 +904,20 @@
 </section>
 <section class="card" id="sec11">
 <h2>11. HoFH Agents &amp; Omega-3 Fatty Acids</h2>
+
+<div class="core-drug">
+<div class="drug-name">Lomitapide <span class="core-badge">Core</span></div>
+<p>Oral MTP inhibitor, HoFH-only, adjunct to max statin. The defining fact: <b>significant hepatotoxicity</b> requiring an FDA REMS program and regular LFT monitoring, plus a strict low-fat diet. CYP3A4-metabolized; embryotoxic.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Evinacumab <span class="core-badge">Core</span></div>
+<p>IV monoclonal antibody vs. ANGPTL3 (&uarr;LPL/endothelial lipase activity). The defining fact: works <b>independent of the LDL receptor</b>, which is exactly why it still works in HoFH patients with absent/defective receptors &mdash; the same conceptual niche as lomitapide, reached by a totally different mechanism. IV infusion every 4 weeks.</p>
+</div>
+<div class="core-drug">
+<div class="drug-name">Icosapent Ethyl <span class="core-badge">Core</span></div>
+<p>Purified <b>EPA-only</b> omega-3 &mdash; the specific formulation with demonstrated <b>cardiovascular benefit</b>, distinguishing it from generic OTC fish oil. Unlike DHA-containing products, does <b>not</b> raise LDL-C. Used for severe hypertriglyceridemia and in high-risk patients with persistent &uarr;TG on a statin.</p>
+</div>
+<div class="brief-list"><strong>Generic fish oil / DHA-containing omega-3 products (name recognition only):</strong> variable EPA/DHA content and dose; DHA component can modestly raise LDL-C &mdash; the key contrast with icosapent ethyl above.</div>
 
 <h3>Lomitapide (MTP Inhibitor)</h3>
 <ul>
