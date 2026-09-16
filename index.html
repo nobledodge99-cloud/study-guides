@@ -1,237 +1,980 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Locker Room</title>
+<title>OMSII Study Tools</title>
 <style>
-  :root{
-    --bg:#f7f5ef;
-    --card:#ffffff;
-    --ink:#1f2a24;
-    --ink-soft:#5b6a61;
-    --accent:#2f5d4c;
-    --accent-ink:#ffffff;
-    --line:#e2ddd0;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#15181a;
-      --card:#1f2427;
-      --ink:#eceae4;
-      --ink-soft:#a4ac9f;
-      --accent:#5fae8c;
-      --accent-ink:#0f1310;
-      --line:#31383a;
-    }
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.55;
-    font-size:18px;
-  }
-  .wrap{
-    max-width:640px;
-    margin:0 auto;
-    padding:48px 20px 60px;
-  }
-  header{
-    margin-bottom:32px;
-  }
-  h1{
-    font-family:Georgia,"Iowan Old Style",serif;
-    font-size:2.5rem;
-    margin:0 0 6px;
-    letter-spacing:-0.01em;
-  }
-  .tagline{
-    color:var(--ink-soft);
-    font-size:1.15rem;
-    margin:0;
-    max-width:46ch;
-  }
-  .card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:22px;
-    margin-bottom:20px;
-  }
-  .poll-card{
-    background:var(--accent);
-    color:var(--accent-ink);
-    border:none;
-  }
-  .poll-card h2{
-    font-size:1.35rem;
-    margin:0 0 6px;
-  }
-  .poll-card p{
-    margin:0 0 16px;
-    font-size:1rem;
-  }
-  .card.poll-card p{
-    color:#ffffff;
-  }
-  .poll-btn{
-    display:inline-block;
-    background:var(--accent-ink);
-    color:var(--accent);
-    text-decoration:none;
-    font-weight:700;
-    padding:13px 22px;
-    border-radius:9px;
-    font-size:1.05rem;
-  }
-  .card h2{
-    font-size:1.25rem;
-    margin:0 0 10px;
-  }
-  .card p, .card li{
-    color:var(--ink-soft);
-    font-size:1.05rem;
-  }
-  .card ol{
-    margin:0;
-    padding-left:20px;
-  }
-  .card li{
-    margin-bottom:6px;
-  }
-  .card li::marker{
-    color:var(--accent);
-    font-weight:700;
-  }
-  details.folder > summary{
-    font-size:1.2rem;
-    font-weight:700;
-    cursor:pointer;
-    list-style:none;
-  }
-  details.folder > summary::-webkit-details-marker{display:none;}
-  details.folder > summary::before{
-    content:"▸";
-    display:inline-block;
-    margin-right:8px;
-    color:var(--accent);
-    transition:transform 0.15s ease;
-  }
-  details.folder[open] > summary::before{
-    transform:rotate(90deg);
-  }
-  .folder-body{
-    margin-top:14px;
-    padding-left:6px;
-    border-left:2px solid var(--line);
-  }
-  details.subfolder{
-    margin:0 0 10px 14px;
-  }
-  details.subfolder > summary{
-    font-size:1.05rem;
-    font-weight:600;
-    cursor:pointer;
-    list-style:none;
-  }
-  details.subfolder > summary::-webkit-details-marker{display:none;}
-  details.subfolder > summary::before{
-    content:"▸";
-    display:inline-block;
-    margin-right:6px;
-    color:var(--ink-soft);
-    font-size:0.8rem;
-    transition:transform 0.15s ease;
-  }
-  details.subfolder[open] > summary::before{
-    transform:rotate(90deg);
-  }
-  .folder-empty{
-    color:var(--ink-soft);
-    font-size:0.98rem;
-    margin:8px 0 0 20px;
-  }
-  .folder-list{
-    list-style:disc;
-    margin:8px 0 0 20px;
-    padding-left:18px;
-  }
-  .folder-list li{
-    margin-bottom:5px;
-    font-size:0.98rem;
-  }
-  .folder-list a{
-    color:var(--accent);
-    font-weight:600;
-    text-decoration:none;
-  }
-  .folder-list a:hover{
-    text-decoration:underline;
-  }
-  footer{
-    color:var(--ink-soft);
-    font-size:0.8rem;
-    text-align:center;
-    margin-top:32px;
-  }
+:root{
+--ink:#1b2b26;
+--paper:#f7f5ef;
+--panel:#ffffff;
+--line:#dcd6c6;
+--accent:#3a6b5c;
+--accent-dim:#e7efe9;
+--mono: 'IBM Plex Mono', 'Courier New', monospace;
+--serif: 'Source Serif 4', Georgia, serif;
+}
+*{box-sizing:border-box;}
+body{
+margin:0;
+background:var(--paper);
+color:var(--ink);
+font-family:var(--serif);
+line-height:1.55;
+padding:0 0 80px 0;
+}
+header{
+border-bottom:3px solid var(--ink);
+padding:28px 24px 18px;
+max-width:900px;
+margin:0 auto;
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+flex-wrap:wrap;
+gap:12px;
+}
+header .kicker{
+font-family:var(--mono);
+font-size:0.8rem;
+letter-spacing:0.08em;
+text-transform:uppercase;
+color:var(--accent);
+margin:0 0 6px;
+}
+h1{
+margin:0;
+font-size:2rem;
+}
+.header-actions{
+display:flex;
+align-items:center;
+gap:8px;
+}
+#search-btn{
+font-family:var(--mono);
+font-size:0.85rem;
+background:var(--panel);
+color:var(--ink);
+border:1px solid var(--line);
+padding:10px 14px;
+border-radius:4px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:8px;
+}
+#search-btn:hover{ background:var(--accent-dim); }
+#search-btn kbd{
+font-family:var(--mono);
+font-size:0.72rem;
+background:var(--accent-dim);
+border:1px solid var(--line);
+border-radius:3px;
+padding:1px 5px;
+color:var(--accent);
+}
+#copy-btn{
+font-family:var(--mono);
+font-size:0.85rem;
+background:var(--accent);
+color:#fff;
+border:none;
+padding:10px 16px;
+border-radius:4px;
+cursor:pointer;
+}
+#copy-btn:hover{ opacity:0.9; }
+#copy-feedback{
+font-family:var(--mono);
+font-size:0.8rem;
+color:var(--accent);
+margin-left:8px;
+}
+main{
+max-width:900px;
+margin:32px auto;
+padding:0 24px;
+}
+
+/* ---- Announcement block ----
+   Sits above the course list. Style rules are here; the actual
+   message content is a separate HTML comment/block further down
+   in the body, marked "EDIT ME". */
+.announcement-block{
+display:flex;
+align-items:flex-start;
+gap:12px;
+background:var(--accent-dim);
+border:1px solid var(--line);
+border-left:4px solid var(--accent);
+border-radius:6px;
+padding:14px 18px;
+margin-bottom:20px;
+font-family:var(--serif);
+font-size:0.95rem;
+}
+.announcement-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--accent);
+margin-top:7px;
+flex-shrink:0;
+box-shadow:0 0 0 4px rgba(58,107,92,0.15);
+}
+.announcement-text strong{
+color:var(--accent);
+font-family:var(--mono);
+font-size:0.8rem;
+text-transform:uppercase;
+letter-spacing:0.04em;
+margin-right:6px;
+}
+
+.course-list{
+list-style:none;
+padding:0;
+margin:0;
+}
+.course-item{
+border:1px solid var(--line);
+background:var(--panel);
+border-radius:6px;
+margin-bottom:14px;
+overflow:hidden;
+}
+.course-toggle{
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 20px;
+background:none;
+border:none;
+font-family:var(--serif);
+font-size:1.1rem;
+color:var(--ink);
+cursor:pointer;
+text-align:left;
+}
+.course-toggle .chevron{
+font-family:var(--mono);
+color:var(--accent);
+transition:transform 0.2s ease;
+margin-left:12px;
+display:inline-block;
+}
+.course-toggle.open .chevron{
+transform:rotate(180deg);
+}
+.course-toggle.open{
+background:var(--accent-dim);
+}
+
+/* Click-driven (not hover-driven) dropdown */
+.guide-dropdown{
+list-style:none;
+margin:0;
+padding:0;
+max-height:0;
+overflow:hidden;
+transition:max-height 0.25s ease;
+}
+.guide-dropdown.open{
+max-height:2000px;
+overflow-y:auto;
+border-top:1px solid var(--line);
+}
+.guide-dropdown a{
+display:block;
+padding:14px 20px 14px 32px;
+text-decoration:none;
+color:var(--ink);
+font-size:1rem;
+border-bottom:1px solid var(--line);
+}
+.guide-dropdown li:last-child a, .guide-dropdown li:last-child .empty-note{ border-bottom:none; }
+.guide-dropdown a:hover{ background:var(--accent-dim); }
+.guide-dropdown .empty-note{
+display:block;
+padding:14px 20px 14px 32px;
+color:#8a8578;
+font-family:var(--mono);
+font-size:0.85rem;
+font-style:italic;
+border-bottom:1px solid var(--line);
+}
+
+/* ---- Nested (second-level) menu, e.g. MSK II -> Exam 1 -> guides ---- */
+.subcourse-item{
+border-bottom:1px solid var(--line);
+background:var(--accent-dim);
+}
+.guide-dropdown > .subcourse-item:last-child{
+border-bottom:none;
+}
+.subcourse-toggle{
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:13px 20px 13px 32px;
+background:none;
+border:none;
+font-family:var(--serif);
+font-size:1rem;
+color:var(--ink);
+cursor:pointer;
+text-align:left;
+}
+.subcourse-toggle .chevron{
+font-family:var(--mono);
+color:var(--accent);
+transition:transform 0.2s ease;
+margin-left:12px;
+display:inline-block;
+}
+.subcourse-toggle.open .chevron{
+transform:rotate(180deg);
+}
+.subcourse-toggle.open{
+background:var(--panel);
+}
+.sub-dropdown{
+list-style:none;
+margin:0;
+padding:0;
+max-height:0;
+overflow:hidden;
+transition:max-height 0.25s ease;
+background:var(--panel);
+}
+.sub-dropdown.open{
+max-height:2500px;
+overflow-y:auto;
+border-top:1px solid var(--line);
+}
+.sub-dropdown a{
+display:block;
+padding:12px 20px 12px 46px;
+text-decoration:none;
+color:var(--ink);
+font-size:0.95rem;
+border-bottom:1px solid var(--line);
+}
+.sub-dropdown li:last-child a, .sub-dropdown li:last-child .empty-note{ border-bottom:none; }
+.sub-dropdown a:hover{ background:var(--accent-dim); }
+.sub-dropdown .empty-note{
+display:block;
+padding:12px 20px 12px 46px;
+color:#8a8578;
+font-family:var(--mono);
+font-size:0.8rem;
+font-style:italic;
+border-bottom:1px solid var(--line);
+}
+
+/* ---- Third-level nested menu, e.g. OCS III & IV -> Exam 1 -> guides ---- */
+.subsubcourse-item{
+border-bottom:1px solid var(--line);
+background:var(--panel);
+}
+.sub-dropdown > .subsubcourse-item:last-child{
+border-bottom:none;
+}
+.subsubcourse-toggle{
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 20px 12px 46px;
+background:none;
+border:none;
+font-family:var(--serif);
+font-size:0.95rem;
+color:var(--ink);
+cursor:pointer;
+text-align:left;
+}
+.subsubcourse-toggle .chevron{
+font-family:var(--mono);
+color:var(--accent);
+transition:transform 0.2s ease;
+margin-left:12px;
+display:inline-block;
+}
+.subsubcourse-toggle.open .chevron{
+transform:rotate(180deg);
+}
+.subsubcourse-toggle.open{
+background:var(--accent-dim);
+}
+.subsub-dropdown{
+list-style:none;
+margin:0;
+padding:0;
+max-height:0;
+overflow:hidden;
+transition:max-height 0.25s ease;
+background:var(--panel);
+}
+.subsub-dropdown.open{
+max-height:2000px;
+overflow-y:auto;
+border-top:1px solid var(--line);
+}
+.subsub-dropdown a{
+display:block;
+padding:11px 20px 11px 60px;
+text-decoration:none;
+color:var(--ink);
+font-size:0.92rem;
+border-bottom:1px solid var(--line);
+}
+.subsub-dropdown li:last-child a, .subsub-dropdown li:last-child .empty-note{ border-bottom:none; }
+.subsub-dropdown a:hover{ background:var(--accent-dim); }
+.subsub-dropdown .empty-note{
+display:block;
+padding:11px 20px 11px 60px;
+color:#8a8578;
+font-family:var(--mono);
+font-size:0.78rem;
+font-style:italic;
+border-bottom:1px solid var(--line);
+}
+
+.placeholder{
+border:1px dashed var(--line);
+border-radius:6px;
+padding:18px 20px;color:#8a8578;
+font-family:var(--mono);
+}
+
+/* ---- Cross-guide search overlay ---- */
+#search-overlay{
+position:fixed; inset:0; z-index:900;
+background:rgba(27,43,38,0.35);
+display:none;
+align-items:flex-start;
+justify-content:center;
+padding:8vh 20px 20px;
+}
+#search-overlay.open{ display:flex; }
+#search-panel{
+width:100%; max-width:640px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:8px;
+box-shadow:0 12px 40px rgba(0,0,0,0.25);
+overflow:hidden;
+display:flex;
+flex-direction:column;
+max-height:76vh;
+}
+#search-input-row{
+display:flex; align-items:center; gap:10px;
+padding:14px 16px;
+border-bottom:1px solid var(--line);
+}
+#search-input-row .icon{ color:var(--accent); font-family:var(--mono); }
+#search-input{
+flex:1;
+border:none; outline:none;
+font-family:var(--serif);
+font-size:1.05rem;
+background:transparent;
+color:var(--ink);
+}
+#search-close{
+font-family:var(--mono);
+font-size:0.75rem;
+color:#8a8578;
+background:var(--accent-dim);
+border:1px solid var(--line);
+border-radius:4px;
+padding:4px 8px;
+cursor:pointer;
+}
+#search-status{
+font-family:var(--mono);
+font-size:0.78rem;
+color:#8a8578;
+padding:8px 16px;
+border-bottom:1px solid var(--line);
+}
+#search-results{
+overflow-y:auto;
+padding:6px 0;
+}
+.result-item{
+display:block;
+padding:12px 16px;
+text-decoration:none;
+color:var(--ink);
+border-bottom:1px solid var(--line);
+}
+.result-item:last-child{ border-bottom:none; }
+.result-item:hover, .result-item.active{ background:var(--accent-dim); }
+.result-page{
+font-family:var(--mono);
+font-size:0.72rem;
+letter-spacing:0.04em;
+text-transform:uppercase;
+color:var(--accent);
+margin-bottom:3px;
+}
+.result-heading{
+font-size:1rem;
+font-weight:600;
+margin-bottom:3px;
+}
+.result-snippet{
+font-size:0.88rem;
+color:#5c574c;
+}
+.result-snippet mark{
+background:#f4e2a1;
+color:inherit;
+border-radius:2px;
+padding:0 1px;
+}
+.search-empty{
+padding:24px 16px;
+color:#8a8578;
+font-family:var(--mono);
+font-size:0.85rem;
+text-align:center;
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>The Locker Room</h1>
-    <p class="tagline">Men committed to leading by example and holding each other accountable to God's calling.</p>
-  </header>
-
-  <div class="card poll-card">
-    <h2>🎥 Join the meeting</h2>
-    <p>Hop into our Discord video call.</p>
-    <a class="poll-btn" href="#">Join the meeting</a>
-  </div>
-
-  <div class="card poll-card">
-    <h2>📖 Pick the next book + meetup time</h2>
-    <p>Rank three book options and let us know what days/times work for you.</p>
-    <a class="poll-btn" href="new-book-survey.html">Go to the poll</a>
-  </div>
-
-  <div class="card">
-    <h2>Mission Statement</h2>
-    <p>Our mission statement is to audaciously live and lead by example. To utilize the unique giftings God has granted us to lead, influence, and encourage each other and the watching world towards God&rsquo;s divine will and way. We resolve to hold one another accountable, encourage growth and development, and challenge each other to be attentive and responsive to God&rsquo;s calling in each other&rsquo;s unique way. We aim to engage in fellowship in order to embolden ourselves and each other to more effectively go forth as credible witnesses and embody what a man of God is.</p>
-  </div>
-
-  <div class="card">
-    <h2>How it works</h2>
-    <ol>
-      <li>Vote in the poll above for the next book.</li>
-      <li>We'll lock in the book once the votes are in.</li>
-      <li>Show up ready to rock and roll at one of the meeting times we select.</li>
-      <li>Check below for the Meeting Notes if you can't make a week!</li>
-    </ol>
-  </div>
-
-  <div class="card">
-    <details class="folder">
-      <summary>📁 Meeting Notes</summary>
-      <div class="folder-body">
-        <details class="subfolder">
-          <summary>📄 Becoming a King</summary>
-          <ul class="folder-list">
-            <li><a href="meeting-notes/becoming-a-king/Foreword%20%2B%201st%20Chapter%20(7-21-24).pdf" target="_blank" rel="noopener">Foreward + 1st Chapter (7-21-24)</a></li>
-          </ul>
-        </details>
-        <details class="subfolder">
-          <summary>📄 Wild at Heart</summary>
-          <p class="folder-empty">No notes uploaded yet.</p>
-        </details>
-      </div>
-    </details>
-  </div>
-
-  <footer>The Locker Room</footer>
+<header>
+<div>
+<p class="kicker">Noble's Study Guides</p>
+<h1>OMSII Study Tools</h1>
 </div>
+<div class="header-actions">
+<button id="search-btn">Search all guides <kbd>Ctrl/&#8984; F</kbd></button>
+<button id="copy-btn">Copy site link</button>
+<span id="copy-feedback"></span>
+</div>
+</header>
+<main>
+
+<!--
+  ============================================================
+  EDIT ME — Announcements
+  To change what the green notification block below says,
+  just edit the text inside <div class="announcement-text">.
+  Change the bold word after <strong> for a short label
+  (e.g. "Update:", "Heads up:", "New:"), and put your message
+  after it. Nothing else on this block needs to change.
+  Delete the whole <div class="announcement-block">...</div>
+  if you want it gone for a while.
+  ============================================================
+-->
+<div class="announcement-block">
+<span class="announcement-dot"></span>
+<div class="announcement-text">
+<strong>Update:</strong> Great work on the OCS III Exam 1 - CV/Resp Guides will be up once they post the canvas!
+</div>
+</div>
+
+<ul class="course-list">
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> Self-Testing Engine </span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li><a href="quiz-instructions.html#manage">JSON file download and Instructions</a></li>
+<li><a href="quiz-engine.html">Noble's Super Sick Quiz Engine</a></li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> Noble's Useful Clinical Slop </span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li><a href="med-terms.html">Common Medical Terminology We ~Should~ Know</a></li>
+<li><a href="clinical slop/heart-sounds-cheat-sheet.html">Heart Sounds, Murmurs, and Gallops Cheat Sheet</a></li>
+<li><a href="clinical slop/labs.html">Noble's Little Something Extra - Quick Labs Review</a></li> 
+<li><a href="omm-techniques.html">Brief OMM Techniques Comparison</a></li>
+<li><a href="micro-memorization.html">Microbiology Memorization Tool (All da Buggies)</a></li>
+<li><a href="nerve-lesions.html">Common Nerve Lesions</a></li>
+<li><a href="chief-complaints.html">Top 10 Most Common Chief Complaints</a></li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> Foundations II </span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li><a href="foundations2/foundations2-pharm.html">Pharmacology Study Guide</a></li>
+<li><a href="foundations2/ans-pharm-study-bites.html">Konrad's ANS Pharm Study Bites</a></li>
+<li><a href="foundations2/foundations2-genetics.html">Genetics of Disease Study Guide</a></li>
+<li><a href="foundations2/scholarrx-ans-pharm.html">ScholarRx ANS Pharm Study Guide</a></li>
+<li><a href="foundations2/ans-pharm-red-drugs.html">ANS Pharm - Just the Red Drugs</a></li>
+<li><a href="foundations2/biostats-study-material.html">Biostats Study Material</a></li>
+<li><a href="foundations2/pediatrics-study-guide.html">Pediatrics Study Guide</a></li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> MSK II </span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>Exam 1</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
+<li><a href="msk2/msk2-joint-soft-tissue.html">Joint & Soft Tissue Pathology Study Guide</a></li>
+<li><a href="msk2/msk2-bone-cartilage.html">Bone & Cartilage Pathology Study Guide</a></li>
+<li><a href="msk2/msk2-skeletal-muscle-nerve.html">Skeletal Muscle & Peripheral Nerve Study Guide</a></li>
+<li><a href="msk2/msk2-rheumatic-pharm.html">Rheumatic Diseases Pharmacology Study Guide</a></li>
+<li><a href="msk2/msk2-nsaids-pharm.html">NSAIDs Pharmacology Study Guide</a></li>
+<li><a href="msk2/msk2-nmj-pharm.html">NMJ Pharmacology Study Guide</a></li>
+<li><a href="msk2/msk2-autoimmunities.html">Joint, Muscle, and Skin Autoimmunities Study Guide</a></li>
+<li><a href="msk2/msk2-IJA.html">Juvenile Idiopathic Arthritis Study Guide</a></li>
+<li><a href="msk2/msk2-Crystal-Diseases.html">Crystal Diseases Study Guide</a></li>
+</ul>
+</li>
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>Exam 2</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
+<li><a href="msk2/msk2-skin-pathology.html">Skin Pathology Parts 1-4 Study Guide</a></li>
+<li><a href="msk2/msk2-connective-tissue-pathology.html">Connective Tissue Pathology Parts 1-2 Study Guide</a></li>
+<li><a href="msk2/msk2-vasculitis.html">Vasculitis Study Guide</a></li>
+<li><a href="msk2/msk2-derm-pharm.html">Derm Pharmacology Study Guide</a></li>
+<li><a href="msk2/msk2-Sjögren's-RA-OA.html">Sjögren's, Rheumatoid Arthritis, and Osteoarthritis Study Guide</a></li> 
+<li><a href="msk2/msk2-ped-derm.html">Pediatric Dermatology Study Guide</a></li> 
+<li><a href="msk2/msk2-skin-path-algorithm.html">Skin Pathology Algorithm - Quick Review</a></li>
+<li><a href="msk2/msk2-connective-tissue-path-algorithm.html">Connective Tissue Pathology Algorithm - Quick Review</a></li> 
+</ul>
+</li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> OCS </span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>OCS I & II</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
+<li><a href="ocs1/omm-summary-tables.html">OMM Summary Tables</a></li>
+<li><a href="ocs1/oms1-competency-review.html">OMS1 Competency Review Guide</a></li>
+<li><a href="ocs1/omm-treatment-modalities-review.html">OMM Treatment Modalities Review Guide</a></li> 
+</ul>
+</li>
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>OCS III & IV</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
+<li class="subsubcourse-item">
+<button class="subsubcourse-toggle" aria-expanded="false">
+<span>Exam 1</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="subsub-dropdown">
+<li><a href="ocs III & IV/ocs3-oral-report.html">Oral Reporting</a></li> 
+<li><a href="ocs III & IV/ocs3-ME-FPR.html">Specific Muscle Energy Techniques & Facilitated Positional Release</a></li>
+<li><a href="ocs III & IV/ocs3-illness-scripts.html">Illness Scripts</a></li>
+<li><a href="ocs III & IV/ocs3-diagnosis-by-lab-results.html">Diagnosis by Lab Results</a></li> 
+<li><a href="ocs III & IV/ocs3-blt-lymph-still.html">BLT/LAS, Lymphatic Techniques & Still Technique Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-depression-anxiety-physical-activity.html">Depression/Anxiety and Physical Activity Study Guide</a></li> 
+<li><a href="ocs III & IV/ocs3-clinical-problem.html">How to Approach a Clinical Problem</a></li>
+<li><a href="ocs III & IV/ocs3-intro-chapmans-points.html">Introduction to Chapman's Points Study Guide</a></li> 
+<li><a href="ocs III & IV/ocs3-cv-exam.html">Abnormal Cardiovascular Exam Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-abnormal-respiratory-exam.html">Abnormal Respiratory Exam Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-oa-to-back-pain.html">Osteopathic Approach to Back Pain Parts 1 & 2 Study Guide</a></li> 
+<li><a href="ocs III & IV/ocs3-upper-respiratory.html">Osteopathic Approach to Upper Respiratory Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-lower-respiratory.html">Osteopathic Approach to Lower Respiratory Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-cardio.html">Osteopathic Approach to Cardiovascular Cases Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-obesity.html">The Overweight/Obesity Crisis & the Effect of Physical Activity</a></li>
+<li><a href="ocs III & IV/ocs3-integrated-exam.html">Integrated Osteopathic Exam Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-abnormal-heent-exam.html">Abnormal HEENT Exam Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-adiposity-based-chronic-disease.html">Adiposity-Based Chronic Disease Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-omm-integration.html">OMM Medical Integration Study Guide</a></li>
+<li><a href="ocs III & IV/ocs34-sp-encounters.html">PCM III & IV SP Encounter Expectations / Rubric</a></li>
+<li><a href="ocs III & IV/ocs3-rx-order-writing.html">Rx Order Writing Study Guide</a></li>
+<li><a href="ocs III & IV/ocs3-intro-telemed.html">Intro to Telemedicine</a></li>
+<li><a href="ocs III & IV/ocs3-jenks.html">Importance of Clinical Practice Guidelines</a></li>
+<li><a href="ocs III & IV/ocs3-finding-cpgs.html">Finding Clinical Practice Guidelines</a></li>
+</ul>
+</li>
+<li class="subsubcourse-item">
+<button class="subsubcourse-toggle" aria-expanded="false">
+<span>Exam 2</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="subsub-dropdown">
+<li><span class="empty-note">No guides yet</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="course-item">
+<button class="course-toggle" aria-expanded="false">
+<span> CV/Resp </span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="guide-dropdown">
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>Exam 1</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
+<li><a href="cvresp2-cardio-review.html">Cardiovascular Physiology — Abbreviated Review</a></li>
+<li><a href="cvresp2-lipids.html">Lipid and Fatty Acid Metabolism</a></li>
+<li><a href="cvresp2-blood-vessel-pathology.html">Pathology of Blood Vessels I & II</a></li>
+<li><a href="cvresp2-antihyperlipidemics.html">Antihyperlipidemics Study Guide</a></li>
+<li><a href="cvresp2-ekg.html">EKG Interpretation Study Guide</a></li>
+<li><a href="cvresp2-heart-path.html">Heart Pathology Parts 1-4 Study Guide</a></li> 
+<li><a href="cvresp2-asd-vsd-tof.html">ASD, VSD, Tetralogy of Fallot, and Other Congenital Heart Disease Study Guide</a></li>
+</ul>
+</li>
+<li class="subcourse-item">
+<button class="subcourse-toggle" aria-expanded="false">
+<span>Exam 2</span>
+<span class="chevron">&#9662;</span>
+</button>
+<ul class="sub-dropdown">
+<li><span class="empty-note">No guides yet</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="placeholder">More courses will appear here as they're added. Click a course name to see its guides.</p>
+</main>
+
+<!-- Cross-guide search overlay -->
+<div id="search-overlay">
+<div id="search-panel">
+<div id="search-input-row">
+<span class="icon">&#128269;</span>
+<input id="search-input" type="text" placeholder="Search every guide on this site&hellip;" autocomplete="off">
+<button id="search-close">Esc</button>
+</div>
+<div id="search-status"></div>
+<div id="search-results"></div>
+</div>
+</div>
+
+<script>
+const btn = document.getElementById('copy-btn');
+const feedback = document.getElementById('copy-feedback');
+btn.addEventListener('click', () => {
+navigator.clipboard.writeText(window.location.href).then(() => {
+feedback.textContent = 'Copied!';
+setTimeout(() => { feedback.textContent = ''; }, 2000);
+});
+});
+
+// Top-level course accordion (click to open/close, closes sibling courses)
+document.querySelectorAll('.course-toggle').forEach(toggle => {
+const dropdown = toggle.nextElementSibling;
+toggle.addEventListener('click', () => {
+const willOpen = !dropdown.classList.contains('open');
+
+// close any other open top-level dropdowns
+document.querySelectorAll('.guide-dropdown.open').forEach(d => {
+if (d !== dropdown) {
+d.classList.remove('open');
+d.previousElementSibling.classList.remove('open');
+d.previousElementSibling.setAttribute('aria-expanded', 'false');
+}
+});
+
+dropdown.classList.toggle('open', willOpen);
+toggle.classList.toggle('open', willOpen);
+toggle.setAttribute('aria-expanded', String(willOpen));
+});
+});
+
+// Nested sub-course accordion (e.g. Exam 1 / Exam 2 within MSK II, or OCS I & II / OCS III & IV within OCS)
+document.querySelectorAll('.subcourse-toggle').forEach(toggle => {
+const subDropdown = toggle.nextElementSibling;
+toggle.addEventListener('click', (e) => {
+e.stopPropagation(); // don't let this bubble up and toggle the parent course
+const willOpen = !subDropdown.classList.contains('open');
+
+// close sibling sub-dropdowns within the same parent course
+const parentList = toggle.closest('.guide-dropdown');
+parentList.querySelectorAll(':scope > .subcourse-item > .sub-dropdown.open').forEach(d => {
+if (d !== subDropdown) {
+d.classList.remove('open');
+d.previousElementSibling.classList.remove('open');
+d.previousElementSibling.setAttribute('aria-expanded', 'false');
+}
+});
+
+subDropdown.classList.toggle('open', willOpen);
+toggle.classList.toggle('open', willOpen);
+toggle.setAttribute('aria-expanded', String(willOpen));
+});
+});
+
+// Third-level sub-sub-course accordion (e.g. Exam 1 / Exam 2 within OCS III & IV)
+document.querySelectorAll('.subsubcourse-toggle').forEach(toggle => {
+const subSubDropdown = toggle.nextElementSibling;
+toggle.addEventListener('click', (e) => {
+e.stopPropagation(); // don't let this bubble up and toggle the parent subcourse/course
+
+const willOpen = !subSubDropdown.classList.contains('open');
+
+// close sibling subsub-dropdowns within the same parent subcourse
+const parentList = toggle.closest('.sub-dropdown');
+parentList.querySelectorAll(':scope > .subsubcourse-item > .subsub-dropdown.open').forEach(d => {
+if (d !== subSubDropdown) {
+d.classList.remove('open');
+d.previousElementSibling.classList.remove('open');
+d.previousElementSibling.setAttribute('aria-expanded', 'false');
+}
+});
+
+subSubDropdown.classList.toggle('open', willOpen);
+toggle.classList.toggle('open', willOpen);
+toggle.setAttribute('aria-expanded', String(willOpen));
+});
+});
+
+/* =========================================================
+   Cross-guide search
+   - Discovers every guide automatically from the <a href>
+     links already inside .guide-dropdown / .sub-dropdown /
+     .subsub-dropdown.
+   - Add a new guide the normal way (a new <li><a>) and it's
+     searchable next time the index runs — nothing else to
+     configure here.
+   ========================================================= */
+(function(){
+  const overlay = document.getElementById('search-overlay');
+  const panel = document.getElementById('search-panel');
+  const input = document.getElementById('search-input');
+  const statusEl = document.getElementById('search-status');
+  const resultsEl = document.getElementById('search-results');
+  const openBtn = document.getElementById('search-btn');
+  const closeBtn = document.getElementById('search-close');
+
+  let entries = null;        // built index, once ready
+  let indexPromise = null;   // in-flight build
+  let activeIndex = -1;
+
+  function discoverLinks(){
+    const anchors = Array.from(document.querySelectorAll('.guide-dropdown a[href], .sub-dropdown a[href], .subsub-dropdown a[href]'));
+    const seen = new Set();
+    const links = [];
+    anchors.forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('#')) return;
+      const bareHref = href.split('#')[0];
+      if (seen.has(bareHref)) return;
+      seen.add(bareHref);
+      links.push({ href: bareHref, label: a.textContent.trim() });
+    });
+    return links;
+  }
+
+  function stripText(el){
+    return (el.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  async function buildIndex(){
+    const links = discoverLinks();
+    const cacheKey = 'omsii-search-index-v1:' + links.map(l => l.href).sort().join(',');
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) return JSON.parse(cached);
+    } catch(e) {}
+
+    statusEl.textContent = 'Indexing ' + links.length + ' guides for the first time — this may take a moment&hellip;'.replace('&hellip;','...');
+    const built = [];
+
+    await Promise.all(links.map(async (link) => {
+      try {
+        const res = await fetch(link.href);
+        if (!res.ok) return;
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const pageTitle = (doc.querySelector('title')?.textContent || link.label).trim();
+        const sections = doc.querySelectorAll('section[id], article[id], div[id].topic, [id].part');
+
+        if (sections.length === 0) {
+          const text = stripText(doc.body || doc.documentElement).slice(0, 6000);
+          if (text) built.push({ page: link.href, pageTitle, anchor: '', heading: pageTitle, text });
+        } else {
+          sections.forEach(sec => {
+            const id = sec.id;
+            if (!id) return;
+            const headingEl = sec.querySelector('h1,h2,h3,h4') || sec;
+            let heading = stripText(headingEl).replace(/^[0-9]+\s*[\.\u00b7]?\s*/, '');
+            if (!heading) heading = pageTitle;
+            const text = stripText(sec).slice(0, 3000);
+            if (text.length > 15) built.push({ page: link.href, pageTitle, anchor: id, heading, text });
+          });
+        }
+      } catch(e) {
+        // same-origin fetch failed (e.g. file not deployed yet) — just skip it
+      }
+    }));
+
+    try { sessionStorage.setItem(cacheKey, JSON.stringify(built)); } catch(e) {}
+    return built;
+  }
+
+  function ensureIndex(){
+    if (!indexPromise) {
+      indexPromise = buildIndex().then(built => {
+        entries = built;
+        statusEl.textContent = entries.length
+          ? ('Searching ' + new Set(entries.map(e => e.page)).size + ' guides.')
+          : 'No guides found to search yet.';
+        return built;
+      });
+    }
+    return indexPromise;
+  }
+
+  function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function scoreEntry(entry, terms){
+    const heading = entry.heading.toLowerCase();
+    const pageTitle = entry.pageTitle.toLowerCase();
+    const text = entry.text.toLowerCase();
+    let score = 0;
+    for (const term of terms) {
+      if (!term) continue;
+      if (heading.startsWith(term)) score += 12;
+      else if (heading.includes(term)) score += 9;
+      if (pageTitle.includes(term)) score += 5;
+      if (text.includes(term)) score += 2;
+    }
+    return score;
+  }
+
+  function snippetFor(entry, terms){
+    const lowerText = entry.text.toLowerCase();
+    let idx = -1;
+    for (const term of terms) {
+      if (!term) continue;
+      const found = lowerText.indexOf(term);
+      if (found !== -1 && (idx === -1 || found < idx)) idx = found;
+    }
+    if (idx === -1) idx = 0;
+    const start = Math.max(0, idx - 60);
+    const end = Math.min(entry.text.length, idx + 140);
+    let snippet = (start > 0 ? '…' : '') + entry.text.slice(start, end) + (end < entry.text.length ? '…' : '');
+    terms.filter(Boolean).forEach(term => {
+      const re = new RegExp('(' + escapeRegex(term) + ')', 'ig');
+      snippet = snippet.replace(re, '<mark>$1</mark>');
+    });
+    return snippet;
+  }
+
+  function renderResults(list, terms){
+    resultsEl.innerHTML = '';
+    activeIndex = -1;
+    if (!list.length) {
+      resultsEl.innerHTML = '<div class="search-empty">No matches yet — try a different term.</div>';
+      return;
+    }
+    list.slice(0, 25).forEach((entry) => {
+      const a = document.createElement('a');
+      a.className = 'result-item';
+      a.href = entry.anchor ? (entry.page + '#' + entry.anchor) : entry.page;
+      a.innerHTML =
+        '<div class="result-page">' + entry.pageTitle + '</div>' +
+        '<div class="result-heading">' + entry.heading + '</div>' +
+        '<div class="result-snippet">' + snippetFor(entry, terms) + '</div>';
+      resultsEl.appendChild(a);
+    });
+  }
+
+  let debounceTimer = null;
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(runSearch, 120);
+  });
+
+  function runSearch(){
+    const q = input.value.trim().toLowerCase();
+    if (!entries) return;
+    if (!q) { resultsEl.innerHTML = ''; return; }
+    const terms = q.split(/\s+/).slice(0, 6);
+    const scored = entries
+      .map(e => ({ e, s: scoreEntry(e, terms) }))
+      .filter(x => x.s > 0)
+      .sort((a, b) => b.s - a.s)
+      .map(x => x.e);
+    renderResults(scored, terms);
+  }
+
+  function openSearch(){
+    overlay.classList.add('open');
+    input.value = '';
+    resultsEl.innerHTML = '';
+    statusEl.textContent = 'Loading guide index…';
+    input.focus();
+    ensureIndex().then(() => { if (input.value) runSearch(); });
+  }
+
+  function closeSearch(){
+    overlay.classList.remove('open');
+  }
+
+  openBtn.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSearch(); });
+
+  document.addEventListener('keydown', (e) => {
+    const isFindShortcut = (e.key === 'f' || e.key === 'F') && (e.ctrlKey || e.metaKey);
+    if (isFindShortcut) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? input.focus() : openSearch();
+      return;
+    }
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      closeSearch();
+      return;
+    }
+    if (overlay.classList.contains('open') && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      const items = Array.from(resultsEl.querySelectorAll('.result-item'));
+      if (!items.length) return;
+      e.preventDefault();
+      items[activeIndex]?.classList.remove('active');
+      activeIndex = e.key === 'ArrowDown'
+        ? Math.min(activeIndex + 1, items.length - 1)
+        : Math.max(activeIndex - 1, 0);
+      items[activeIndex].classList.add('active');
+      items[activeIndex].scrollIntoView({ block: 'nearest' });
+    }
+    if (overlay.classList.contains('open') && e.key === 'Enter' && activeIndex >= 0) {
+      const items = Array.from(resultsEl.querySelectorAll('.result-item'));
+      items[activeIndex]?.click();
+    }
+  });
+})();
+</script>
+<script data-goatcounter="https://nobledodge.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
