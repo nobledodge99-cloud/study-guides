@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exam 1 Master Pharm Guide — CVResp2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --core:#8a3b2b;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.7rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:880px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents > b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents > ul.toc-tree{ columns:2; margin:10px 0 0; padding-left:20px; column-gap:32px; }
+  .top-contents ul.toc-tree > li{ break-inside:avoid; margin-bottom:14px; font-size:0.92rem; }
+  .top-contents ul.toc-tree > li > a b{ color:var(--forest-dark); }
+  .top-contents li ul{ list-style:none; padding-left:14px; margin:6px 0 0; }
+  .top-contents li ul li{ margin-bottom:4px; font-size:0.85rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-250px; top:0; height:100vh; width:240px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:4px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.78rem; padding:5px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+  .sidenav-panel .cat-label{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; color:var(--accent); margin-top:10px; padding:0 8px; }
+
+  .container{ max-width:1150px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.15rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:22px 0 8px; letter-spacing:0.02em;
+  }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:10px auto 22px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0; min-width:980px; width:100%; }
+  table{ border-collapse:collapse; font-size:0.82rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.62rem; text-transform:uppercase; padding:8px 9px; text-align:left; border:1px solid var(--forest-dark);
+    letter-spacing:0.02em;
+  }
+  table td{ padding:8px 9px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+  table td.drug-name{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--core); white-space:nowrap; }
+  table td.stem{ font-style:italic; color:var(--text-soft); }
+
+  @media (max-width:800px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Exam 1 Master Pharm Guide</h1>
+  <p>CVResp2 &middot; Every CORE drug, one table per class &middot; Part 1: Antihyperlipidemics + Antiplatelets/Anticoagulants/Fibrinolytics &middot; Part 2: Angina + Heart Failure + Antiarrhythmics</p>
+</div>
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul class="toc-tree">
+    <li><a href="#antihyperlipidemics-guide"><b>Antihyperlipidemics</b></a>
+      <ul>
+        <li><a href="#statins">Statins</a></li>
+        <li><a href="#ezetimibe">Ezetimibe</a></li>
+        <li><a href="#pcsk9">PCSK9-Targeted Therapies</a></li>
+        <li><a href="#bempedoic">Bempedoic Acid</a></li>
+        <li><a href="#niacin">Niacin</a></li>
+        <li><a href="#fibrates">Fibrates</a></li>
+        <li><a href="#bas">Bile Acid Sequestrants</a></li>
+        <li><a href="#hofh">HoFH Agents & Omega-3</a></li>
+      </ul>
+    </li>
+    <li><a href="#apaf-guide"><b>Antiplatelets, Anticoagulants &amp; Fibrinolytics</b></a>
+      <ul>
+        <li><a href="#aspirin">Aspirin</a></li>
+        <li><a href="#p2y12">P2Y12 Inhibitors</a></li>
+        <li><a href="#gp2b3a">GPIIb/IIIa Inhibitors</a></li>
+        <li><a href="#pde-par1">PDE Inhibitors & PAR-1 Antagonist</a></li>
+        <li><a href="#heparins">Heparins & Fondaparinux</a></li>
+        <li><a href="#dti">Direct Thrombin Inhibitors (Parenteral)</a></li>
+        <li><a href="#doac-dti">Oral DTI: Dabigatran</a></li>
+        <li><a href="#doac-xa">Oral Factor Xa Inhibitors</a></li>
+        <li><a href="#warfarin">Warfarin</a></li>
+        <li><a href="#fibrinolytics">Fibrinolytics</a></li>
+        <li><a href="#reversal">Reversal Agents</a></li>
+      </ul>
+    </li>
+      <li><a href="#angina-guide"><b>Drugs Used to Treat Angina</b></a>
+      <ul>
+        <li><a href="#angina-nitrates">Organic Nitrates</a></li>
+        <li><a href="#angina-bb">Beta-Blockers</a></li>
+        <li><a href="#angina-ccb">Calcium Channel Blockers</a></li>
+        <li><a href="#angina-ranolazine">Ranolazine</a></li>
+        <li><a href="#angina-stress">Pharmacologic Stress Testing</a></li>
+      </ul>
+    </li>
+    <li><a href="#hf-guide"><b>Drugs Used in Heart Failure</b></a>
+      <ul>
+        <li><a href="#hf-inotropes">Positive Inotropes (Acute)</a></li>
+        <li><a href="#hf-vasodilators">Acute Vasodilators</a></li>
+        <li><a href="#hf-diuretics">Acute Diuretics &amp; Tolvaptan</a></li>
+        <li><a href="#hf-raas">RAAS Modulators (Chronic)</a></li>
+        <li><a href="#hf-mra">Mineralocorticoid Receptor Antagonists</a></li>
+        <li><a href="#hf-bb">Evidence-Based Beta-Blockers</a></li>
+        <li><a href="#hf-sglt2">SGLT2 Inhibitors</a></li>
+        <li><a href="#hf-adjunctive">Chronic Adjunctive Agents</a></li>
+      </ul>
+    </li>
+    <li><a href="#arrhythmias-guide"><b>Pharmacology of Antiarrhythmics</b></a>
+      <ul>
+        <li><a href="#arr-ia">Class IA</a></li>
+        <li><a href="#arr-ib">Class IB</a></li>
+        <li><a href="#arr-ic">Class IC</a></li>
+        <li><a href="#arr-ii">Class II</a></li>
+        <li><a href="#arr-iv">Class IV</a></li>
+        <li><a href="#arr-iii">Class III</a></li>
+        <li><a href="#arr-v">"Class V" / Misc.</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <div class="cat-label">Antihyperlipidemics</div>
+  <a href="#statins">Statins</a>
+  <a href="#ezetimibe">Ezetimibe</a>
+  <a href="#pcsk9">PCSK9 Therapies</a>
+  <a href="#bempedoic">Bempedoic Acid</a>
+  <a href="#niacin">Niacin</a>
+  <a href="#fibrates">Fibrates</a>
+  <a href="#bas">Bile Acid Sequestrants</a>
+  <a href="#hofh">HoFH & Omega-3</a>
+  <div class="cat-label">Antiplatelets</div>
+  <a href="#aspirin">Aspirin</a>
+  <a href="#p2y12">P2Y12 Inhibitors</a>
+  <a href="#gp2b3a">GPIIb/IIIa Inhibitors</a>
+  <a href="#pde-par1">PDE / PAR-1</a>
+  <div class="cat-label">Anticoagulants</div>
+  <a href="#heparins">Heparins & Fondaparinux</a>
+  <a href="#dti">Parenteral DTIs</a>
+  <a href="#doac-dti">Dabigatran</a>
+  <a href="#doac-xa">Oral Xa Inhibitors</a>
+  <a href="#warfarin">Warfarin</a>
+  <div class="cat-label">Fibrinolytics & Reversal</div>
+  <a href="#fibrinolytics">Fibrinolytics</a>
+  <a href="#reversal">Reversal Agents</a>
+  <div class="cat-label">Angina</div>
+  <a href="#angina-nitrates">Organic Nitrates</a>
+  <a href="#angina-bb">Beta-Blockers</a>
+  <a href="#angina-ccb">CCBs</a>
+  <a href="#angina-ranolazine">Ranolazine</a>
+  <a href="#angina-stress">Stress Testing</a>
+  <div class="cat-label">Heart Failure</div>
+  <a href="#hf-inotropes">Positive Inotropes</a>
+  <a href="#hf-vasodilators">Acute Vasodilators</a>
+  <a href="#hf-diuretics">Diuretics &amp; Tolvaptan</a>
+  <a href="#hf-raas">RAAS Modulators</a>
+  <a href="#hf-mra">MRAs</a>
+  <a href="#hf-bb">Evidence-Based BBs</a>
+  <a href="#hf-sglt2">SGLT2 Inhibitors</a>
+  <a href="#hf-adjunctive">Chronic Adjunctive</a>
+  <div class="cat-label">Antiarrhythmics</div>
+  <a href="#arr-ia">Class IA</a>
+  <a href="#arr-ib">Class IB</a>
+  <a href="#arr-ic">Class IC</a>
+  <a href="#arr-ii">Class II</a>
+  <a href="#arr-iv">Class IV</a>
+  <a href="#arr-iii">Class III</a>
+  <a href="#arr-v">"Class V" / Misc.</a>
+</div>
+
+<div class="container">
+
+<section class="card" id="antihyperlipidemics-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Antihyperlipidemics</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette centers on an abnormal lipid panel or long-term ASCVD risk reduction rather than an acute event &mdash; elevated LDL-C/triglycerides, HDL-C, a patient being started or titrated on lipid-lowering therapy, statin intolerance, familial hypercholesterolemia, or recurrent pancreatitis from severe hypertriglyceridemia.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "LDL-C," "lipid panel," "statin," "myalgia/myopathy" or "muscle aches" after starting a new drug, "xanthomas"/"xanthelasma," "family history of premature CAD/MI," "triglycerides &gt;500" or "&gt;1,000 mg/dL," "ASCVD risk," "HMG-CoA reductase," "PCSK9," "NPC1L1," "statin-intolerant," "recurrent pancreatitis," "homozygous/heterozygous FH."</div>
+</section>
+
+<section class="card" id="statins">
+<h2>Statins (HMG-CoA Reductase Inhibitors)</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Atorvastatin &amp; Rosuvastatin</td>
+<td>High-intensity therapy: clinical ASCVD or LDL-C &ge;190; 1&deg;/2&deg; ASCVD prevention</td>
+<td>High-intensity: atorva 40&ndash;80 mg; rosuva 20&ndash;40 mg. Long half-life &mdash; dosed <b>any time of day</b></td>
+<td>Pregnancy, active liver disease</td>
+<td>Myopathy&rarr;rhabdo, &uarr;LFTs, modest &uarr;diabetes risk</td>
+<td class="stem">"Dosed any time of day"; needs a macrolide/azole AND has had prior statin myalgia &rarr; rosuvastatin</td>
+<td>Rosuvastatin: <b>not</b> significant CYP3A4; Atorvastatin: <b>is</b> CYP3A4 substrate</td>
+</tr>
+<tr>
+<td class="drug-name">Pravastatin</td>
+<td>Patient needs an interacting drug or has had prior statin-associated myalgia; moderate-to-low intensity only</td>
+<td>Moderate: 40&ndash;80 mg; Low: 10&ndash;20 mg</td>
+<td>Pregnancy, active liver disease</td>
+<td>Myopathy (lower risk), &uarr;LFTs</td>
+<td class="stem">"Not a CYP450 substrate"; "prior statin-associated myalgia" needing a new statin</td>
+<td><b>Not</b> significantly CYP-metabolized</td>
+</tr>
+<tr>
+<td class="drug-name">Simvastatin</td>
+<td>Moderate/low-intensity statin therapy</td>
+<td>Moderate: 20&ndash;40 mg; Low: 10 mg. <b>Evening</b> dosing (short half-life)</td>
+<td>Pregnancy, active liver disease; strong CYP3A4 inhibitors, gemfibrozil</td>
+<td>Myopathy/rhabdomyolysis (highest interaction risk), &uarr;LFTs</td>
+<td class="stem">Started on macrolide/azole antifungal &rarr; myopathy; "prodrug"; absorption enhanced by food</td>
+<td><b>Prodrug</b>, major CYP3A4 substrate</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="ezetimibe">
+<h2>Cholesterol Absorption Inhibitor</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Ezetimibe</td>
+<td>Add-on to statin for additional LDL-C lowering; statin-intolerant patients (alone or + bempedoic acid)</td>
+<td>Once daily, with or without food; half-life ~22h</td>
+<td>Pregnancy/lactation as monotherapy; combo w/ statin in pregnancy not established</td>
+<td>Mild transaminase elevation; myopathy rare (&uarr; slightly when combined w/ statin or fibrate)</td>
+<td class="stem">"NPC1L1"; "no significant CYP450 interactions"; avoid combining with a bile acid sequestrant (&darr;absorption)</td>
+<td>No significant CYP450 interactions</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="pcsk9">
+<h2>PCSK9-Targeted Therapies</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Alirocumab &amp; Evolocumab</td>
+<td>HeFH/HoFH; established ASCVD not at goal on max statin &plusmn; ezetimibe</td>
+<td>SC injection every 2 weeks or monthly</td>
+<td>Pregnancy</td>
+<td>Injection site rxns, nasopharyngitis, influenza-like sx, rare hypersensitivity; rare unconfirmed neurocognitive effects</td>
+<td class="stem">"Monoclonal antibody vs. circulating PCSK9"; "no myopathy, no hepatotoxicity, no CYP interactions"</td>
+<td>Not CYP-metabolized (protein)</td>
+</tr>
+<tr>
+<td class="drug-name">Inclisiran</td>
+<td>HeFH or ASCVD needing more LDL-C lowering</td>
+<td>SC injection only <b>every 6 months</b></td>
+<td>Pregnancy</td>
+<td>Injection site rxns, bronchitis (rare)</td>
+<td class="stem">"siRNA"; "silences hepatic PCSK9 mRNA" (vs. antibodies which neutralize protein); "dosed twice yearly"</td>
+<td>No dose adjustment in mild-mod renal/hepatic impairment</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="bempedoic">
+<h2>ATP-Citrate Lyase Inhibitor</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Bempedoic Acid</td>
+<td>Statin-intolerant patients; add-on to statin (&plusmn; ezetimibe)</td>
+<td>Oral, once daily</td>
+<td>Pregnancy</td>
+<td>Hyperuricemia (&uarr;gout risk), tendon rupture, mild &uarr;CK/creatinine/LFTs</td>
+<td class="stem">"ACSVL1 expressed only in liver, not muscle" &rarr; explains lower myopathy risk; gout history + new lipid drug</td>
+<td>Prodrug activated by ACSVL1 (liver-specific); caution w/ high-dose simvastatin/rosuvastatin (&uarr;statin exposure)</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="niacin">
+<h2>Niacin</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Niacin</td>
+<td>Statin-intolerant with mixed hyperlipidemia or elevated Lp(a) &mdash; NOT routine statin adjunct</td>
+<td>Max 6 g/day; initiate low w/ meals, titrate gradually; pretreat w/ low-dose aspirin 30 min before dose</td>
+<td>None absolute; caution in peptic ulcer disease, hepatic dysfunction</td>
+<td>Flushing (PGD2-mediated), hepatotoxicity, hyperuricemia, hyperglycemia</td>
+<td class="stem">"Most potent HDL-raiser"; flushing mitigated by aspirin; "no added CV benefit with statins &mdash; 2016 FDA withdrawal"</td>
+<td>Monitor LFTs, fasting glucose, uric acid</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="fibrates">
+<h2>Fibrates</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Fenofibrate</td>
+<td>Severe hypertriglyceridemia/pancreatitis prevention; preferred fibrate when a statin is on board</td>
+<td>Absorbed more efficiently w/ food</td>
+<td>Pregnancy, children, gallbladder disease, significant hepatic/renal dysfunction</td>
+<td>Myopathy, gallstones, &uarr;LFTs; potentiates warfarin (displaces from albumin &rarr; monitor INR)</td>
+<td class="stem">"Preferred over gemfibrozil with a statin"; "no significant interaction with statin metabolism"</td>
+<td>Dose adjust in renal impairment</td>
+</tr>
+<tr>
+<td class="drug-name">Gemfibrozil</td>
+<td>Severe hypertriglyceridemia (avoid combining with statins)</td>
+<td>&mdash;</td>
+<td>Combination with statins; pregnancy, children, gallbladder disease</td>
+<td>&uarr;&uarr;Myopathy/rhabdomyolysis risk with statins, gallstones</td>
+<td class="stem">"Inhibits hepatic OATP1B1-mediated statin uptake"; "competes for glucuronidation"; "avoid with statins"</td>
+<td>Inhibits hepatic statin uptake (CYP-independent mechanism)</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="bas">
+<h2>Bile Acid Binding Resins</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Cholestyramine</td>
+<td>2nd-line; statin-intolerant, children, pregnant women</td>
+<td>Separate other oral meds by 1h before or 3&ndash;4h after</td>
+<td>Biliary obstruction, chronic constipation, diverticulitis, severe hypertriglyceridemia</td>
+<td>Constipation/GI upset; &darr;absorption of warfarin, digoxin, levothyroxine, most statins, fat-soluble vitamins; vitamin K deficiency &rarr; &uarr;INR</td>
+<td class="stem">"Impairs absorption of warfarin/digoxin/levothyroxine"; "no effect in homozygous FH"</td>
+<td>Not systemically absorbed</td>
+</tr>
+<tr>
+<td class="drug-name">Colesevelam</td>
+<td>Same as cholestyramine, preferred in polypharmacy</td>
+<td>&mdash;</td>
+<td>Same class CIs</td>
+<td>Better tolerated; does <b>not</b> bind other oral drugs; improves glycemic control in T2DM (&uarr;GLP-1)</td>
+<td class="stem">"Does not significantly bind concomitant oral agents"; "improves glycemic control"</td>
+<td>Not systemically absorbed</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hofh">
+<h2>HoFH Agents &amp; Omega-3 Fatty Acids</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Lomitapide</td>
+<td>HoFH only, adjunct to max statin</td>
+<td>Taken &ge;2h after food or on empty stomach; strict low-fat diet required</td>
+<td>Pregnancy (embryotoxic), strong CYP3A4 inhibitors</td>
+<td>Significant hepatotoxicity (requires FDA REMS + regular LFT monitoring), GI upset, hepatic steatosis</td>
+<td class="stem">"MTP inhibitor"; "FDA REMS program"; "strict low-fat diet"</td>
+<td>CYP3A4</td>
+</tr>
+<tr>
+<td class="drug-name">Evinacumab</td>
+<td>HoFH only, adjunct to maximal standard therapy</td>
+<td>IV infusion every 4 weeks</td>
+<td>Pregnancy</td>
+<td>Hypersensitivity, nasopharyngitis, influenza-like illness, dizziness, nausea</td>
+<td class="stem">"ANGPTL3 inhibitor"; "works independent of the LDL receptor" &rarr; still works in absent/defective receptors</td>
+<td>Nonspecific proteolysis; half-life ~17&ndash;25 days</td>
+</tr>
+<tr>
+<td class="drug-name">Icosapent Ethyl</td>
+<td>Severe hypertriglyceridemia; high-risk patients w/ persistent &uarr;TG on a statin</td>
+<td>4 g/day total, divided doses with food</td>
+<td>None major; caution with anticoagulants (bleeding)</td>
+<td>Nausea, dyspepsia, fishy aftertaste, arthralgia, slight &uarr;A-fib/flutter risk</td>
+<td class="stem">"EPA-only"; does <b>not</b> raise LDL-C (unlike DHA products); "demonstrated cardiovascular benefit"</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="apaf-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Antiplatelets, Anticoagulants &amp; Fibrinolytics</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette centers on clot formation, prevention, or dissolution rather than lipid management &mdash; ACS/PCI and stent thrombosis prevention, AFib or mechanical valve stroke prophylaxis, VTE (DVT/PE) treatment or prophylaxis, HIT, an acute thrombotic emergency (STEMI without timely PCI, acute ischemic stroke, massive PE), or a bleeding patient who needs anticoagulant/antiplatelet reversal.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "aPTT," "INR," "platelet count drop &gt;50%" or "day 5&ndash;10 after starting heparin," "DAPT," "post-PCI/stent," "mechanical heart valve," "atrial fibrillation," "bridging," "CrCl" (renal cutoffs), "reversal agent"/"life-threatening bleeding," "STEMI" or "PCI unavailable/delayed," "within 4.5 hours" (stroke), "tissue factor," "GPIIb/IIIa," "P2Y12," "COX-1," "thrombin," "factor Xa."</div>
+</section>
+
+<section class="card" id="aspirin">
+<h2>Aspirin</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Aspirin</td>
+<td>2&deg; ASCVD prevention (firmly established); DAPT (+ P2Y12 inhibitor, esp. post-PCI); 1&deg; prevention is nuanced/controversial</td>
+<td>Low dose &le;100 mg/day (antiplatelet); higher dose &ge;160&ndash;325 mg/day (anti-inflammatory)</td>
+<td>Children/adolescents with viral illness (Reye syndrome)</td>
+<td>GI irritation/bleeding, Reye syndrome, hypersensitivity/AERD (bronchospasm + nasal polyps)</td>
+<td class="stem">"Irreversibly acetylates COX-1"; "lasts platelet lifespan 7&ndash;10 days"; dose-dependent COX-1 vs. COX-1+2 selectivity</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="p2y12">
+<h2>P2Y12 Inhibitors</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Clopidogrel</td>
+<td>2&deg; prevention MI/stroke/PAD; DAPT (+ aspirin) in ACS, esp. post-PCI/stent</td>
+<td>Oral</td>
+<td>Active pathological bleeding</td>
+<td>Bleeding; rare TTP, neutropenia</td>
+<td class="stem">"Prodrug requiring CYP2C19 activation"; started on omeprazole/esomeprazole &rarr; blunted effect; "poor metabolizers"</td>
+<td>Prodrug, hepatic bioactivation via CYP2C19</td>
+</tr>
+<tr>
+<td class="drug-name">Prasugrel</td>
+<td>ACS undergoing PCI; more effective than clopidogrel at preventing stent thrombosis</td>
+<td>Oral</td>
+<td>History of stroke/TIA; age &ge;75; weight &lt;60 kg</td>
+<td>Increased major bleeding, incl. fatal hemorrhage</td>
+<td class="stem">Activated via esterases/multiple CYPs, minimal CYP2C19 dependence; "three specific contraindications"</td>
+<td>Esterases + multiple CYP enzymes</td>
+</tr>
+<tr>
+<td class="drug-name">Ticagrelor</td>
+<td>ACS managed medically or with PCI; superior to clopidogrel for CV death/MI</td>
+<td>Oral; rapid onset/offset</td>
+<td>History of intracranial hemorrhage, active bleeding, severe hepatic impairment</td>
+<td>Bleeding, transient dyspnea, bradyarrhythmias (adenosine reuptake inhibition)</td>
+<td class="stem">"Reversible" &rarr; platelet transfusion doesn't work; dyspnea/bradyarrhythmia is the tell</td>
+<td>Not activation-dependent; also CYP3A4 to active metabolite (DI w/ strong CYP3A4 inhibitors/inducers)</td>
+</tr>
+<tr>
+<td class="drug-name">Cangrelor</td>
+<td>PCI, in patients <b>not pretreated</b> with an oral P2Y12 inhibitor</td>
+<td>IV; half-life ~3&ndash;6 min; platelet function returns ~60 min after stopping</td>
+<td>&mdash;</td>
+<td>Bleeding</td>
+<td class="stem">"Ultra-short half-life"; blocks clopidogrel/prasugrel active metabolite &mdash; give those only after stopping infusion; "ticagrelor is the exception"</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="gp2b3a">
+<h2>GPIIb/IIIa Inhibitors</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Abciximab</td>
+<td>During PCI in patients at high risk for thrombotic complications</td>
+<td>IV bolus + continuous infusion; plasma half-life ~30 min but effect persists 24&ndash;48h</td>
+<td>&mdash;</td>
+<td>Bleeding, immune-mediated thrombocytopenia (highest of the three), hypersensitivity on re-administration</td>
+<td class="stem">"Chimeric antibody, irreversible"; "effect persists 24&ndash;48h despite short half-life"; "also binds vitronectin receptor"</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Eptifibatide</td>
+<td>NSTE-ACS and during PCI</td>
+<td>Double IV bolus + continuous infusion; half-life ~2.5h; recovery ~4&ndash;6h</td>
+<td>&mdash;</td>
+<td>Bleeding; thrombocytopenia (less than abciximab)</td>
+<td class="stem">"Rattlesnake venom"; "does NOT bind vitronectin receptor"; renally cleared</td>
+<td>Renally cleared, dose-adjust in renal impairment</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="pde-par1">
+<h2>PDE Inhibitors &amp; PAR-1 Antagonist</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Dipyridamole</td>
+<td>+ aspirin (Aggrenox) for 2&deg; prevention of non-cardioembolic ischemic stroke; + warfarin for mechanical prosthetic valves</td>
+<td>&mdash;</td>
+<td>Ineffective as monotherapy (not a true CI, but never used alone)</td>
+<td>Headache, hypotension, GI discomfort</td>
+<td class="stem">"Ineffective as monotherapy"; "blocks adenosine reuptake"; "Aggrenox"</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Cilostazol</td>
+<td>Intermittent claudication in PAD</td>
+<td>&mdash;</td>
+<td><b>Heart failure of any severity</b></td>
+<td>Headache, diarrhea, palpitations</td>
+<td class="stem">"Selective PDE3 inhibitor"; HF of any severity = the one CI to lock in</td>
+<td>CYP3A4 and CYP2C19</td>
+</tr>
+<tr>
+<td class="drug-name">Vorapaxar</td>
+<td>Added to aspirin and/or clopidogrel (never monotherapy) for prior MI or established PAD</td>
+<td>Oral; long terminal half-life</td>
+<td>History of stroke, TIA, or intracranial hemorrhage</td>
+<td>Bleeding, especially intracranial</td>
+<td class="stem">"First-in-class PAR-1 antagonist"; "irreversible &mdash; effect persists up to 4 weeks after stopping"; "never monotherapy"</td>
+<td>Primarily CYP3A4</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="heparins">
+<h2>Heparins &amp; Fondaparinux</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Unfractionated Heparin (UFH)</td>
+<td>VTE tx/prevention, ACS, perioperative anticoagulation (cardiac/vascular surgery)</td>
+<td>IV infusion or SC; half-life 30 min&ndash;2h; aPTT target 1.5&ndash;2.5&times; baseline</td>
+<td>Active bleeding, severe thrombocytopenia/HIT, certain neurosurgical/spinal procedures</td>
+<td>Bleeding, osteopenia/osteoporosis (prolonged use), HIT, hypersensitivity</td>
+<td class="stem">"Binds antithrombin, inactivates both Xa AND IIa"; "long chains bridge antithrombin+thrombin"; needs rapid reversal &rarr; protamine (full)</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Enoxaparin (LMWH)</td>
+<td>Outpatient VTE treatment; thromboprophylaxis after orthopedic surgery</td>
+<td>SC, once/twice daily; half-life ~4&ndash;6h; no routine monitoring (anti-Xa if renal impairment/obesity/pregnancy)</td>
+<td>None absolute; caution in renal impairment</td>
+<td>Bleeding (lower HIT risk than UFH)</td>
+<td class="stem">"Higher anti-Xa:anti-IIa ratio than UFH"; "shorter chains can't bridge to inhibit thrombin"; protamine only partially (60&ndash;75%) reverses</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Fondaparinux</td>
+<td>VTE prophylaxis (ortho/abdominal surgery); DVT/PE treatment</td>
+<td>SC once daily; half-life ~17h</td>
+<td>CrCl &lt;30 mL/min</td>
+<td>Bleeding</td>
+<td class="stem">"Synthetic pentasaccharide"; "too short to touch thrombin"; protamine has ZERO effect; safe with history of HIT</td>
+<td>Excreted unchanged renally</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="dti">
+<h2>Parenteral Direct Thrombin Inhibitors</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Bivalirudin</td>
+<td>Anticoagulation during PCI, especially with/at risk for HIT</td>
+<td>IV; half-life ~25 min</td>
+<td>&mdash;</td>
+<td>Bleeding</td>
+<td class="stem">"Bivalent hirudin analog"; binds both active site + exosite; short duration = tight procedural control</td>
+<td>Proteolytic degradation + some renal excretion</td>
+</tr>
+<tr>
+<td class="drug-name">Argatroban</td>
+<td>Treatment/prophylaxis of HIT; anticoagulation in HIT patients undergoing PCI</td>
+<td>IV; half-life ~45 min</td>
+<td>Caution in hepatic dysfunction</td>
+<td>Bleeding</td>
+<td class="stem">"Univalent, active-site only"; hepatically metabolized &rarr; preferred DTI in renal impairment; "prolongs the INR" (misleading warfarin transition)</td>
+<td>Hepatic</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="doac-dti">
+<h2>Oral Direct Thrombin Inhibitor</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Dabigatran</td>
+<td>Nonvalvular AFib stroke prevention; DVT/PE tx (after 5&ndash;10 days parenteral anticoagulation); VTE prophylaxis post-hip replacement</td>
+<td>Oral; rapid onset, peak 1&ndash;2h</td>
+<td>CrCl &lt;30 mL/min (avoid); mechanical heart valves; triple-positive antiphospholipid syndrome</td>
+<td>Dyspepsia (tartaric acid core); bleeding (lower ICH risk than warfarin, higher GI bleed risk esp. &gt;75yo)</td>
+<td class="stem">"Only oral DTI"; prodrug; "idarucizumab" is the specific reversal; P-gp substrate</td>
+<td>Primarily renal, unchanged</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="doac-xa">
+<h2>Oral Factor Xa Inhibitors</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Apixaban</td>
+<td>Nonvalvular AFib; VTE tx/2&deg; prevention; post-op prophylaxis (hip/knee)</td>
+<td>Twice daily</td>
+<td>Active major bleeding, severe hepatic impairment, mechanical heart valves</td>
+<td>Bleeding &mdash; <b>lowest GI bleeding risk</b> of the three factor Xa inhibitors</td>
+<td class="stem">"Preferred in higher bleeding-risk patients"; history of GI bleed &rarr; apixaban</td>
+<td>CYP3A4; renal + biliary/fecal elimination</td>
+</tr>
+<tr>
+<td class="drug-name">Rivaroxaban</td>
+<td>Nonvalvular AFib; VTE; chronic CAD/PAD (+ low-dose aspirin, uniquely approved combo); post-op prophylaxis</td>
+<td>Once daily, <b>with the evening meal</b> (bioavailability, esp. &ge;15 mg)</td>
+<td>Same DOAC class CIs</td>
+<td>Bleeding</td>
+<td class="stem">"With the evening meal"; only factor Xa inhibitor with its own approved aspirin combo</td>
+<td>CYP3A4/CYP2J2; renal + hepatic elimination</td>
+</tr>
+<tr>
+<td class="drug-name">Edoxaban</td>
+<td>Nonvalvular AFib; VTE</td>
+<td>Once daily</td>
+<td>CrCl &lt;15 mL/min (avoid); use alternative if CrCl &gt;95 mL/min (reduced efficacy)</td>
+<td>Bleeding</td>
+<td class="stem">"Minimally metabolized"; signature trap = reduced efficacy at CrCl &gt;95 (too efficiently cleared)</td>
+<td>Excreted unchanged, primarily renal</td>
+</tr>
+</table>
+</div>
+<div class="callout" style="margin-top:0;">All three reversed by <b>andexanet alfa</b> (FDA-approved for apixaban/rivaroxaban specifically); off-label 4F-PCC for any of them.</div>
+</section>
+
+<section class="card" id="warfarin">
+<h2>Warfarin</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Warfarin</td>
+<td>DVT/PE prevention/tx; AFib stroke prevention; anticoagulant of choice for <b>mechanical heart valves</b> and <b>triple-positive antiphospholipid syndrome</b> (DOACs contraindicated in both)</td>
+<td>Initiated 2&ndash;5 mg/day, adjusted by INR. Target INR 2&ndash;3 (standard) or 2.5&ndash;3.5 (mechanical valve/high risk). 5&ndash;7 days of heparin bridging in high-risk patients</td>
+<td>Pregnancy (teratogenic), active major bleeding, recent high-risk surgery, inability to adhere to INR monitoring</td>
+<td>Bleeding (can occur even at therapeutic INR), warfarin-induced skin necrosis (day 3&ndash;10), purple toe syndrome (cholesterol microembolization)</td>
+<td class="stem">"Inhibits VKORC1"; delayed onset (factor II half-life ~60&ndash;72h, longest); transient hypercoagulable window (protein C half-life ~8h, shortest) &rarr; explains bridging</td>
+<td>S-warfarin (more potent) via CYP2C9; R-warfarin via CYP1A2/CYP3A4; CYP2C9 *2/*3 and VKORC1 promoter polymorphisms affect dosing</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="fibrinolytics">
+<h2>Fibrinolytics (Recombinant tPAs)</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Alteplase</td>
+<td rowspan="3">STEMI (PCI unavailable/delayed); acute ischemic stroke (&le;4.5h of onset); massive PE with hemodynamic compromise</td>
+<td>Continuous IV infusion; half-life ~5 min</td>
+<td rowspan="3">Absolute: active internal bleeding, hx hemorrhagic stroke, recent intracranial/spinal surgery, severe uncontrolled HTN. Relative: recent major surgery, recent ischemic stroke, bleeding diatheses</td>
+<td rowspan="3">Bleeding &mdash; intracranial hemorrhage is the most feared; risk magnified with concurrent anticoagulants</td>
+<td class="stem">"Structurally identical to endogenous tPA"; very short half-life &rarr; requires continuous infusion</td>
+<td rowspan="3">Hepatic</td>
+</tr>
+<tr>
+<td class="drug-name">Reteplase</td>
+<td>IV bolus; half-life ~15&ndash;20 min</td>
+<td class="stem">"Truncated variant"; longer half-life allows convenient bolus dosing</td>
+</tr>
+<tr>
+<td class="drug-name">Tenecteplase</td>
+<td>IV bolus; half-life ~20&ndash;25 min</td>
+<td class="stem">"Genetically modified" for &uarr;fibrin specificity + PAI-1 resistance &mdash; most engineered of the three</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="reversal">
+<h2>Reversal Agents</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">4-Factor PCC</td>
+<td><b>Preferred</b> urgent warfarin reversal; off-label option for factor Xa inhibitor bleeding (nonspecific there)</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td class="stem">Contains factors II/VII/IX/X; immediate effect w/o FFP's volume-overload risk; "nonspecific" when used for Xa inhibitors</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Protamine Sulfate</td>
+<td>Heparin/LMWH reversal</td>
+<td>IV; reverses UFH within minutes</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td class="stem">Full reversal of UFH; only partial (~60&ndash;75%) of LMWH; ZERO effect on fondaparinux</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Tranexamic Acid</td>
+<td>Trauma, obstetric, and major surgical bleeding; fibrinolytic-associated bleeding</td>
+<td>IV and oral formulations</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td class="stem">"Lysine analog"; competitively blocks plasminogen/plasmin binding to fibrin; "CRASH-2 trial" mortality reduction in trauma when given early</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Cryoprecipitate</td>
+<td>Fibrinolytic-associated bleeding, particularly intracranial hemorrhage</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td class="stem">Does NOT block fibrinolysis; instead supplies concentrated fibrinogen to restore fibrin formation</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="angina-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Drugs Used to Treat Angina</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette centers on chest pain from myocardial ischemia rather than an evolving infarct &mdash; predictable exertional chest pain relieved by rest/nitroglycerin (stable angina), rest pain with transient ST-elevation that resolves and negative troponins (variant/Prinzmetal), angina in a woman or diabetic with a normal-appearing angiogram (microvascular), or choosing/adjusting antianginal therapy or a pharmacologic stress test.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "exertional chest pain relieved by rest," "chest pain at rest with transient ST-elevation," "troponin negative," "coronary vasospasm," "nitrate-free interval," "sublingual nitroglycerin," "PDE-5 inhibitor" + chest pain, "unable to exercise adequately" (stress testing), "coronary steal," "late sodium current," "minimal effect on heart rate or blood pressure."</div>
+</section>
+
+<section class="card" id="angina-nitrates">
+<h2>Organic Nitrates</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Nitroglycerin</td>
+<td>Acute angina relief (SL/spray &mdash; the gold standard, onset 1&ndash;3 min); oral SR/transdermal for chronic prophylaxis; coronary vasodilation useful in vasospastic angina; IV in acute HF</td>
+<td>SL/spray for acute attacks; oral sustained-release or transdermal for prevention; transdermal patches need a daily nitrate-free interval</td>
+<td>Concurrent PDE-5 inhibitors (profound hypotension), severe hypotension, shock, hypertrophic cardiomyopathy</td>
+<td>Headache (meningeal vessel dilation), dizziness, orthostatic hypotension, syncope, reflex tachycardia (esp. short-acting forms); tolerance/tachyphylaxis with continuous exposure</td>
+<td class="stem">Patient on sildenafil/tadalafil takes SL nitroglycerin for chest pain &rarr; life-threatening hypotension; prevent tolerance with a 10&ndash;12h nitrate-free interval (often overnight)</td>
+<td>Extensive first-pass metabolism &rarr; low oral bioavailability (hence SL/spray/transdermal routes preferred)</td>
+</tr>
+<tr>
+<td class="drug-name">Isosorbide Dinitrate</td>
+<td>Angina prophylaxis; combined with hydralazine for HFrEF (particularly in Black patients)</td>
+<td>Immediate-release: 4&ndash;6h duration; sustained-release forms last longer</td>
+<td>Same nitrate-class CIs (PDE-5 inhibitors, severe hypotension, shock, HCM)</td>
+<td>Tolerance with continuous use; headache, hypotension (class-level)</td>
+<td class="stem">Low oral bioavailability (~25%, first-pass); converted to isosorbide mononitrate, its active metabolite</td>
+<td>Hepatic first-pass; active metabolite = isosorbide mononitrate</td>
+</tr>
+<tr>
+<td class="drug-name">Isosorbide Mononitrate</td>
+<td>Used exclusively for chronic prophylaxis &mdash; not effective for acute relief</td>
+<td>Once/twice daily; extended-release forms give 12&ndash;24h coverage</td>
+<td>Same nitrate-class CIs</td>
+<td>Class-level nitrate ADRs; tolerance with continuous use</td>
+<td class="stem">"Used exclusively for chronic prophylaxis, not acute relief"; nearly complete oral bioavailability distinguishes it from the dinitrate</td>
+<td>Nearly complete oral bioavailability (already the active metabolite), long half-life</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="angina-bb">
+<h2>Beta-Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Metoprolol</td>
+<td>First-line chronic prophylaxis in stable angina (often combined with nitrates); improves survival post-MI and in chronic HFrEF; ineffective/may worsen vasospastic (Prinzmetal) angina</td>
+<td>&mdash;</td>
+<td>Severe bradycardia, AV block, acute decompensated HF, severe asthma/COPD (cardioselective agents may be used cautiously in mild/moderate bronchospasm)</td>
+<td>Bradycardia, fatigue, &darr;exercise tolerance, dizziness, sexual dysfunction; avoid abrupt withdrawal (rebound ischemia/MI)</td>
+<td class="stem">"First-line in stable angina"; contraindicated as monotherapy in variant angina (unopposed alpha-mediated vasoconstriction worsens spasm); prolongs diastole &rarr; more time for coronary filling</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Atenolol &amp; Carvedilol</td>
+<td>Chronic angina prophylaxis alternatives; carvedilol also used in HFrEF</td>
+<td>&mdash;</td>
+<td>Class-level beta-blocker CIs</td>
+<td>Class-level beta-blocker ADRs</td>
+<td class="stem">Metoprolol succinate, carvedilol, and bisoprolol are the agents with proven survival benefit specifically in HFrEF &mdash; know these three by name</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="angina-ccb">
+<h2>Calcium Channel Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Verapamil &amp; Diltiazem <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(Non-DHP)</span></td>
+<td>Alternative to beta-blockers in stable angina; rate control in AFib/flutter; NOT recommended in vasospastic angina (DHPs preferred)</td>
+<td>&mdash;</td>
+<td>Advanced AV block, severe LV dysfunction, acute decompensated HF</td>
+<td>Bradycardia, AV block, hypotension, constipation (particularly verapamil), can worsen HFrEF</td>
+<td class="stem">More pronounced cardiac (vs. vascular) effects &mdash; slow HR, &darr;contractility, prolong diastolic filling; additive bradycardia/AV block risk when combined with beta-blockers</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Amlodipine &amp; Nifedipine <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(DHP)</span></td>
+<td>First-line for vasospastic (Prinzmetal) angina; chronic stable angina when beta-blockers insufficient/contraindicated; often combined with nitrates</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>Headache, flushing, dizziness, peripheral edema; reflex tachycardia (especially immediate-release nifedipine, which may worsen angina/HF)</td>
+<td class="stem">Amlodipine = safest CCB choice in reduced ejection fraction (HF-neutral); potent arterial vasodilation relieves coronary vasospasm directly</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+<div class="callout" style="margin-top:0;">Both CCB subclasses relieve symptoms but neither improves long-term survival &mdash; agent selection depends on pathophysiology (rate control vs. vasospasm) and comorbidities (HFrEF favors amlodipine over non-DHPs).</div>
+</section>
+
+<section class="card" id="angina-ranolazine">
+<h2>Ranolazine</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Ranolazine</td>
+<td>Second-line therapy for chronic stable angina when first-line agents are inadequate/not tolerated; particularly useful when HR/BP limit use of beta-blockers or CCBs; often combined with beta-blockers, CCBs, or nitrates</td>
+<td>&mdash;</td>
+<td>Pre-existing QT prolongation, hepatic impairment, concurrent strong CYP3A4 inhibitors</td>
+<td>Dizziness, headache, nausea, constipation; prolongs the QT interval (rarely associated with TdP)</td>
+<td class="stem">Inhibits the late Na&#8314; current &rarr; &darr;intracellular Na&#8314; &rarr; &darr;Ca&sup2;&#8314; entry via the Na&#8314;/Ca&sup2;&#8314; exchanger; minimal effect on HR or BP is what makes it uniquely useful in a bradycardic patient with persistent symptoms</td>
+<td>CYP3A4 substrate &mdash; strong inhibitors &uarr;levels, inducers &darr;efficacy</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="angina-stress">
+<h2>Pharmacologic Stress Testing</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Adenosine</td>
+<td>Coronary vasodilator for patients unable to exercise adequately; healthy vessels dilate more than stenotic vessels &rarr; "coronary steal" unmasks ischemia on perfusion imaging</td>
+<td>Continuous IV infusion (extremely short half-life)</td>
+<td>Severe asthma/COPD, high-grade AV block, hypotension</td>
+<td>Flushing, chest discomfort, hypotension, AV block, bronchospasm</td>
+<td class="stem">A2A adenosine receptor agonism &rarr; &uarr;cAMP &rarr; coronary vasodilation; half-life &lt;10 sec requires continuous infusion</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Dipyridamole &amp; Regadenoson</td>
+<td>Alternative coronary vasodilators for stress testing</td>
+<td>Regadenoson: convenient single IV bolus (half-life 2&ndash;4 min)</td>
+<td>Same vasodilator-class CIs</td>
+<td>Similar to adenosine; regadenoson has fewer off-target effects</td>
+<td class="stem">Dipyridamole inhibits adenosine uptake (&uarr;extracellular adenosine); regadenoson is a selective A2A agonist &mdash; favored for convenient bolus dosing</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Dobutamine</td>
+<td>Increases myocardial O2 demand to provoke ischemia in stenotic regions; reserved for patients with contraindications to vasodilators (e.g., severe bronchospasm, high-grade AV block)</td>
+<td>Short half-life (~2 min) &mdash; toxicity managed by reducing/stopping the infusion</td>
+<td>&mdash;</td>
+<td>Tachycardia, palpitations, angina, hypertension, arrhythmias</td>
+<td class="stem">&beta;1-adrenergic agonist &rarr; &uarr;HR &amp; contractility; beta-blockers blunt its effect &mdash; the fallback agent when vasodilators are contraindicated</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Theophylline &amp; Caffeine</td>
+<td>Adenosine-receptor antagonists &mdash; reverse bradycardia, AV block, hypotension, or bronchospasm from vasodilator stress agents</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>CNS stimulation, tachycardia, insomnia, tremor</td>
+<td class="stem">Both a confound (blunt the intended vasodilator effect if given prematurely) and an antidote (reverse toxicity) &mdash; context matters</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Drugs Used in Heart Failure</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette centers on impaired cardiac pumping/filling &mdash; reduced or preserved ejection fraction with fatigue, dyspnea, or edema; a patient with acute decompensation needing rapid hemodynamic stabilization; or selecting/sequencing guideline-directed medical therapy (GDMT) for chronic HFrEF.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "ejection fraction," "NYHA class," "ACC/AHA stage," "JVD/peripheral edema/rales," "acute decompensated heart failure," "four-pillar therapy"/"GDMT," "euvolemic and hemodynamically stable" before starting a beta-blocker, "36-hour washout" (ARNI), "resting HR &ge;70 bpm despite maximal beta-blocker," "recent hospitalization despite optimal GDMT," "Black patient with HFrEF."</div>
+</section>
+
+<section class="card" id="hf-inotropes">
+<h2>Positive Inotropic Agents (Acute)</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Digoxin</td>
+<td>Not useful for rapid hemodynamic support in ADHF (slow onset) &mdash; primary acute role is ventricular rate control in AF/AFL; chronic HFrEF: &darr;hospitalizations and improves symptoms, no mortality benefit</td>
+<td>Narrow therapeutic index</td>
+<td>&mdash;</td>
+<td>Arrhythmias (PVCs, AV block, atrial tachycardia with block), anorexia/N/V/abdominal discomfort, confusion, visual disturbances (yellow/green vision, halos)</td>
+<td class="stem">Hypokalemia, hypomagnesemia, hypercalcemia increase susceptibility to toxicity; DIs that raise levels: amiodarone, verapamil, quinidine, certain macrolides</td>
+<td>Renally eliminated unchanged, half-life ~36&ndash;40h; renal impairment prolongs clearance and raises toxicity risk</td>
+</tr>
+<tr>
+<td class="drug-name">Milrinone</td>
+<td>ADHF with severe LV systolic dysfunction remaining symptomatic despite optimal therapy; bypasses beta-receptors, so useful in patients already on beta-blockers</td>
+<td>Renal dose adjustment required</td>
+<td>&mdash;</td>
+<td>Hypotension, ventricular arrhythmias, headache, thrombocytopenia; no mortality benefit &mdash; chronic/prolonged use increases mortality</td>
+<td class="stem">Selective PDE3 inhibition &rarr; &uarr;cAMP &rarr; positive inotropy + arterial/venous vasodilation (&darr;preload &amp; afterload)</td>
+<td>Half-life ~3&ndash;6h</td>
+</tr>
+<tr>
+<td class="drug-name">Dobutamine</td>
+<td>Short-term support in acute systolic HF &amp; cardiogenic shock with adequate BP; perioperative support</td>
+<td>IV infusion only</td>
+<td>Avoid in hypertrophic obstructive cardiomyopathy or severe hypotension</td>
+<td>Tachycardia, arrhythmias, &uarr;myocardial O2 demand, tachyphylaxis (with use beyond 48&ndash;72h)</td>
+<td class="stem">&uarr;&beta;1 activity &rarr; &uarr;cAMP/Ca&sup2;&#8314; influx &rarr; &uarr;contractility; mild &beta;2 vasodilation + mild &alpha;1 vasoconstriction &rarr; neutral/slightly &darr;SVR; beta-blockers (e.g., carvedilol) blunt its effect</td>
+<td>Half-life ~2 min</td>
+</tr>
+<tr>
+<td class="drug-name">Dopamine / Epinephrine / Norepinephrine</td>
+<td>Other inotropes/pressors: dopamine (limited benefit, higher arrhythmia risk), epinephrine (potent inotrope + vasoconstrictor, reserved for cardiogenic shock/cardiac arrest), norepinephrine (preferred vasopressor in acute HF + hypotension)</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>Tachyarrhythmia/ischemia risk (esp. epinephrine)</td>
+<td class="stem">Low-dose "renal-protective" dopamine is no longer recommended; norepinephrine's excessive afterload may occasionally worsen CO</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-vasodilators">
+<h2>Acute Vasodilators</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Nitroprusside</td>
+<td>ADHF with &uarr;SVR, especially when rapid afterload reduction is needed; severe pulmonary congestion</td>
+<td>Continuous IV infusion with invasive hemodynamic monitoring; immediate onset, very short duration</td>
+<td>Inadequate cerebral/coronary perfusion</td>
+<td>Profound hypotension, reflex tachycardia, cyanide toxicity</td>
+<td class="stem">Balanced arterial + venous vasodilator (releases NO &rarr; &uarr;cGMP); greatest cyanide toxicity risk with prolonged infusion</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Nitroglycerin</td>
+<td>ADHF with high filling pressures (especially with ischemia); hypertensive acute pulmonary edema</td>
+<td>Low dose = venodilation (&darr;preload); high dose = venous + arterial dilation, improves coronary blood flow</td>
+<td>&mdash;</td>
+<td>Headache, flushing, hypotension, tolerance</td>
+<td class="stem">CI/DI: PDE-5 inhibitors (severe hypotension); additive hypotension with other vasodilators/alcohol</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Hydralazine</td>
+<td>Alternative to nitroprusside for afterload reduction in ADHF</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>Headache, flushing, reflex tachycardia, hypotension; chronic high-dose (&gt;200 mg/day) &rarr; lupus-like syndrome</td>
+<td class="stem">Direct arterial vasodilator &rarr; &darr;afterload &rarr; &uarr;stroke volume &amp; CO; slow acetylators have higher ADR risk</td>
+<td>Hepatic acetylation</td>
+</tr>
+<tr>
+<td class="drug-name">Nesiritide</td>
+<td>Used infrequently &mdash; safety concerns, no outcome benefit</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>Hypotension (common, can be prolonged), worsened renal function</td>
+<td class="stem">Recombinant BNP; activates particulate guanylate cyclase receptors &rarr; &uarr;cGMP &rarr; balanced venous + arterial dilation</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-diuretics">
+<h2>Acute Diuretics &amp; Vasopressin Receptor Antagonist</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Furosemide, Bumetanide, Torsemide <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(Loop)</span></td>
+<td>First-line for ADHF with fluid overload; IV preferred (faster onset, bypasses variable oral absorption)</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>Electrolyte disturbances (K&#8314;, Mg&sup2;&#8314;), metabolic alkalosis, volume depletion, rare ototoxicity (high-dose/rapid infusion)</td>
+<td class="stem">Block the Na&#8314;&ndash;K&#8314;&ndash;2Cl&#8315; symporter in the thick ascending limb; DI with digoxin (&uarr;arrhythmia risk via hypokalemia), RAAS inhibitors (pre-renal AKI), NSAIDs (blunt diuretic response)</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Tolvaptan</td>
+<td>ADHF with hypervolemic hyponatremia; &uarr;serum Na&#8314;, &darr;fluid overload &mdash; symptomatic/corrective only, no mortality or rehospitalization benefit</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>Intense thirst, dry mouth, dehydration risk; overly rapid correction of hyponatremia &rarr; risk of osmotic demyelination syndrome</td>
+<td class="stem">Selective V2-receptor antagonist &rarr; blocks vasopressin-mediated aquaporin-2 insertion &rarr; aquaresis (free water excretion, minimal Na&#8314;/K&#8314; loss); monitor serum Na&#8314; closely</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-raas">
+<h2>RAAS Modulators (Chronic HFrEF Foundational Therapy)</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Lisinopril <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(ACEi)</span></td>
+<td>First-line in HFrEF NYHA I&ndash;IV &rarr; improves symptoms, &darr;hospitalizations, &darr;mortality</td>
+<td>&mdash;</td>
+<td>Bilateral renal artery stenosis, pregnancy</td>
+<td>Hypotension, hyperkalemia, renal dysfunction, dry cough, angioedema (rare)</td>
+<td class="stem">Inhibits angiotensin I&rarr;II conversion &rarr; &darr;afterload &amp; preload, attenuates remodeling, &uarr;bradykinin (explains the cough); DI: potassium-sparing diuretics, NSAIDs</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Valsartan <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(ARB)</span></td>
+<td>Alternative when ACEi not tolerated (cough, angioedema); do not combine with ACEi &mdash; &uarr;adverse events without survival benefit</td>
+<td>&mdash;</td>
+<td>Bilateral renal artery stenosis, pregnancy</td>
+<td>Same profile as ACEi (hypotension, hyperkalemia, renal dysfunction) but lower cough/angioedema risk (no bradykinin accumulation)</td>
+<td class="stem">Competitively blocks the AT1 receptor; morbidity/mortality benefit comparable to ACEi</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Sacubitril/Valsartan <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(ARNI)</span></td>
+<td>Replaces ACEi/ARB in symptomatic NYHA II&ndash;III HFrEF despite optimal therapy &mdash; preferred over ACEi/ARB when feasible/tolerated (PARADIGM-HF showed superiority over enalapril)</td>
+<td>Mandatory 36-hour washout from ACE inhibitors before starting (both raise bradykinin &mdash; angioedema risk)</td>
+<td>Pregnancy, bilateral renal artery stenosis, prior angioedema</td>
+<td>Hypotension, hyperkalemia, renal dysfunction, angioedema risk</td>
+<td class="stem">Neprilysin inhibition (sacubitril) &rarr; &uarr;natriuretic peptides; ARB component (valsartan) suppresses maladaptive RAAS; "36-hour washout" is the classic exam point</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-mra">
+<h2>Mineralocorticoid Receptor Antagonists</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Spironolactone <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(class: eplerenone)</span></td>
+<td>Indicated for symptomatic HFrEF already on GDMT (NYHA II&ndash;IV, LVEF &le;35%); &darr;morbidity &amp; mortality, &darr;remodeling/fibrosis, &darr;hospitalizations (~30% mortality reduction in severe HF trials)</td>
+<td>&mdash;</td>
+<td>Baseline hyperkalemia, severe renal impairment (GFR &lt;30), concurrent K&#8314;-sparing diuretics</td>
+<td>Hyperkalemia (can be life-threatening), hyperchloremic metabolic acidosis, endocrine effects (gynecomastia, menstrual irregularities, &darr;libido &mdash; spironolactone's nonselective steroid receptor binding; eplerenone more selective)</td>
+<td class="stem">Competitively blocks aldosterone at MRs in the distal nephron &rarr; &darr;Na&#8314; reabsorption, K&#8314; retention; counteracts aldosterone's fibrosis/remodeling effects</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-bb">
+<h2>Evidence-Based Beta-Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Metoprolol Succinate ER, Carvedilol, Bisoprolol</td>
+<td>All stable patients with symptomatic HFrEF and asymptomatic patients with LV dysfunction post-MI; limits LV dilation and gradually &uarr;EF; &darr;mortality &amp; hospitalization, &darr;arrhythmia risk</td>
+<td>Initiate only when euvolemic and hemodynamically stable &mdash; never start during acute decompensation. "Start low, go slow": ~1/8 target dose, double no more than every 2&ndash;4 weeks</td>
+<td>Acute decompensated HF, severe bradycardia, high-grade AV block without pacemaker, severe reactive airway disease</td>
+<td>Bradycardia, hypotension, fatigue, early fluid retention, AV block, bronchospasm, peripheral vasoconstriction/cold extremities, masks hypoglycemia symptoms</td>
+<td class="stem">Carvedilol adds &alpha;1 blockade (vasodilation); abrupt withdrawal &rarr; rebound tachycardia, ischemia, MI &mdash; taper gradually; DI: verapamil/diltiazem (additive AV block/bradycardia)</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-sglt2">
+<h2>SGLT2 Inhibitors</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Dapagliflozin <span style="font-weight:400; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-soft);">(class: empagliflozin)</span></td>
+<td>Foundational GDMT across the EF spectrum &mdash; HFrEF: &darr;hospitalization risk and mortality benefit; HFpEF/mildly reduced EF: strongest effect is &darr;hospitalizations. Benefits occur regardless of diabetes status</td>
+<td>&mdash;</td>
+<td>Severe renal impairment (most guidelines: initiate at GFR &ge;20)</td>
+<td>Genital mycotic infections, UTIs, volume depletion/hypotension; rare AKI, euglycemic DKA (hold during prolonged fasting, severe illness, perioperatively)</td>
+<td class="stem">Blocks SGLT2 in the proximal tubule &rarr; &darr;glucose &amp; Na&#8314; reabsorption &rarr; mild osmotic diuresis; myocardial SGLT2 expression is negligible &mdash; benefit is renal/hemodynamic/metabolic, not glucose-lowering</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="hf-adjunctive">
+<h2>Chronic Secondary/Adjunctive Agents</h2>
+<div class="callout" style="margin-top:0;">Do not replace the four foundational HFrEF therapies (RAAS-directed agent + beta-blocker + MRA + SGLT2i). Added for persistent symptoms or specific clinical scenarios.</div>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Diuretics (chronic outpatient)</td>
+<td>Symptom control only &mdash; not disease-modifying; thiazide/thiazide-like agents (HCTZ, metolazone) added to loop diuretics for loop-resistant edema</td>
+<td>Torsemide often preferred outpatient (longer half-life, more consistent oral absorption than furosemide)</td>
+<td>&mdash;</td>
+<td>Electrolyte disturbances, volume depletion, orthostatic hypotension; overuse &rarr; RAAS activation (worsens neurohormonal maladaptation)</td>
+<td class="stem">Metolazone retains efficacy even in reduced renal function</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Digoxin (chronic role)</td>
+<td>Reserved for patients symptomatic despite optimal GDMT (ACEi/ARB/ARNI + beta-blocker + MRA); also rate control in concomitant AF/AFL</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>See antiarrhythmics section &mdash; narrow therapeutic index</td>
+<td class="stem">&darr;Hospitalizations and improves symptoms &mdash; no mortality benefit</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Ivabradine</td>
+<td>Chronic HFrEF, symptomatic despite maximally tolerated beta-blocker, sinus rhythm with resting HR &ge;70 bpm; &darr;hospitalizations, no proven mortality benefit</td>
+<td>&mdash;</td>
+<td>Acute decompensated HF, severe hypotension, sick sinus syndrome/SA block, pacemaker dependence</td>
+<td>Bradycardia, atrial fibrillation, transient visual phenomena (phosphenes)</td>
+<td class="stem">Selectively inhibits the funny current (If) in the SA node &rarr; &darr;HR without affecting contractility or AV conduction</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Hydralazine + Isosorbide Dinitrate</td>
+<td>Used when symptomatic despite standard therapy, or as an alternative when ACEi/ARB/ARNI are contraindicated; reduces mortality and hospitalizations &mdash; strongest evidence in Black patients with HFrEF on optimal therapy</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>Class-level nitrate + hydralazine ADRs</td>
+<td class="stem">Arterial (hydralazine) + venous (isosorbide dinitrate) dilation &rarr; &darr;afterload &amp; preload</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Vericiguat</td>
+<td>Symptomatic chronic HFrEF with a recent hospitalization or need for IV diuretics despite optimized GDMT; &darr;hospitalizations, minimal effect on mortality</td>
+<td>&mdash;</td>
+<td>Avoid with nitrates and PDE-5 inhibitors (severe hypotension risk)</td>
+<td>Hypotension, anemia</td>
+<td class="stem">Oral sGC stimulator &rarr; enhances NO&ndash;cGMP pathway &rarr; vasodilation, &darr;myocardial stress</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="arrhythmias-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Pharmacology of Antiarrhythmics</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette centers on an abnormal cardiac rhythm &mdash; palpitations, an irregularly irregular pulse, a narrow- or wide-complex tachycardia, or a drug-induced ECG change (QRS widening, QT prolongation) &mdash; and asks you to choose rate control vs. rhythm control vs. acute termination, or to recognize a drug's proarrhythmic/toxicity risk.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "Vaughan-Williams class," "QRS widening," "QT prolongation," "Torsades de Pointes," "AV nodal reentry (AVNRT)," "WPW syndrome," "CAST trial"/history of MI, "requires inpatient/monitored initiation," "renally excreted, not metabolized," "loading dose," "half-life of weeks to months," "use-dependence."</div>
+</section>
+
+<section class="card" id="arr-ia">
+<h2>Class IA &mdash; Sodium Channel Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Procainamide</td>
+<td>Acute atrial and ventricular arrhythmias (IV, e.g., post-MI monomorphic VT if amiodarone/lidocaine unavailable)</td>
+<td>Monitor procainamide + NAPA levels, especially in renal impairment</td>
+<td>&mdash;</td>
+<td>Drug-induced lupus erythematosus (especially slow acetylators), hypotension, GI upset, agranulocytosis, rare hepatotoxicity, QT prolongation/TdP</td>
+<td class="stem">Blocks open-state Na&#8314; channels + nonspecific K&#8314; channels; active metabolite NAPA retains Class III (K&#8314;-blocking) activity and accumulates in renal dysfunction</td>
+<td>Renal (NAPA accumulates in renal dysfunction)</td>
+</tr>
+<tr>
+<td class="drug-name">Quinidine</td>
+<td>Atrial/ventricular arrhythmias &mdash; use has declined given safer alternatives</td>
+<td>&mdash;</td>
+<td>QT prolongation, heart block</td>
+<td>GI toxicity, cinchonism, immune reactions, TdP</td>
+<td class="stem">Alpha-blocking &amp; vagolytic activity can paradoxically enhance AV conduction (worsening ventricular response in atrial flutter) &mdash; often needs a co-administered AV nodal blocker; strong CYP2D6/P-gp inhibitor</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Disopyramide</td>
+<td>Ventricular arrhythmias with preserved systolic function</td>
+<td>&mdash;</td>
+<td>Heart failure, glaucoma</td>
+<td>Strong anticholinergic effects (dry mouth, constipation, urinary retention, blurred vision); negative inotrope &mdash; avoid in HF; QT prolongation/TdP</td>
+<td class="stem">Negative inotrope &mdash; the Class IA agent to avoid in heart failure</td>
+<td>Hepatic + renal clearance</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="arr-ib">
+<h2>Class IB &mdash; Sodium Channel Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Lidocaine</td>
+<td>Ventricular arrhythmias, particularly acute ischemic settings &mdash; used acutely for monomorphic VT or to prevent VF after cardioversion</td>
+<td>Bolus + infusion; adjust for HF/liver disease</td>
+<td>Significant conduction disease without pacemaker support</td>
+<td>Neurologic (tremor, confusion, slurred speech, paresthesia, seizures; nystagmus is an early toxicity sign)</td>
+<td class="stem">Preferentially binds open/inactivated Na&#8314; channels, especially in depolarized/ischemic tissue; main action on ventricular tissue &amp; Purkinje fibers, little atrial effect</td>
+<td>Extensive first-pass metabolism &rarr; IV only; short half-life (1&ndash;2h)</td>
+</tr>
+<tr>
+<td class="drug-name">Mexiletine</td>
+<td>Chronic suppression of ventricular arrhythmias</td>
+<td>&mdash;</td>
+<td>Cardiogenic shock, severe SA/AV disease without pacing</td>
+<td>GI symptoms, CNS effects</td>
+<td class="stem">Oral analog of lidocaine, resists first-pass metabolism; avoid in structural heart disease; CYP450 inducers lower levels</td>
+<td>Hepatic</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="arr-ic">
+<h2>Class IC &mdash; Sodium Channel Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Flecainide</td>
+<td>SVT in patients without structural heart disease; refractory VT; CPVT; some inherited channelopathies</td>
+<td>&mdash;</td>
+<td>History of MI or structural heart disease &mdash; classic exam point (CAST trial legacy)</td>
+<td>Blurred vision, dizziness, worsening HF; most serious concern is proarrhythmia; overdose &rarr; AV block, wide QRS, hemodynamic collapse (may respond to IV sodium bicarbonate)</td>
+<td class="stem">Strongest Na&#8314; channel blockade of Class I, very slow dissociation kinetics &rarr; marked conduction slowing even at normal rates; widens PR, QRS, and QT (unlike other Class I agents); blocks RyR2 (relevant to CPVT)</td>
+<td>Eliminated by kidney &amp; liver (CYP2D6)</td>
+</tr>
+<tr>
+<td class="drug-name">Propafenone</td>
+<td>AF/flutter/SVT without structural heart disease</td>
+<td>Dose-reduce in liver disease</td>
+<td>Structural heart disease, reduced EF</td>
+<td>Metallic taste, constipation, dizziness, can worsen arrhythmias</td>
+<td class="stem">Potent Na&#8314; blocker + weak beta-blocking activity</td>
+<td>Hepatic (CYP2D6)</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="arr-ii">
+<h2>Class II &mdash; Beta-Adrenergic Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Metoprolol</td>
+<td>Chronic rate control in AF and other SVTs; suppresses AV-nodal-dependent tachycardias (AVNRT, AVRT) and PVCs; beneficial post-MI and in congenital long QT syndrome. Does NOT terminate arrhythmias directly &mdash; rate control, not rhythm conversion</td>
+<td>&mdash;</td>
+<td>Severe bradycardia, 2nd/3rd-degree AV block (without pacemaker), acute decompensated HF, cardiogenic shock, severe bronchospastic disease</td>
+<td>Bradycardia, AV block, hypotension, fatigue</td>
+<td class="stem">&beta;1-antagonism at the AV node &rarr; &darr;phase 4 slope, &uarr;AV nodal refractoriness &rarr; &uarr;PR interval; CYP2D6-metabolized (SSRIs like fluoxetine/paroxetine &uarr;levels); DI with non-DHP CCBs &uarr;bradycardia/heart block risk</td>
+<td>CYP2D6</td>
+</tr>
+<tr>
+<td class="drug-name">Propranolol</td>
+<td>Rate control, HTN, post-MI</td>
+<td>&mdash;</td>
+<td>Asthma, severe bradycardia</td>
+<td>Bradycardia, bronchospasm, fatigue, CNS effects (nightmares, depression); blunts hypoglycemia awareness</td>
+<td class="stem">Nonselective (&beta;1 + &beta;2); highly lipophilic &rarr; significant CNS penetration</td>
+<td>Extensive first-pass (CYP1A2, CYP2D6)</td>
+</tr>
+<tr>
+<td class="drug-name">Esmolol</td>
+<td>Acute SVT, intraoperative tachycardia, hypertensive crisis with tachycardia</td>
+<td>IV only</td>
+<td>Severe bradycardia, heart block</td>
+<td>Hypotension, bradycardia</td>
+<td class="stem">&beta;1-selective, ultra-short acting &mdash; metabolized by RBC esterases, half-life ~9 min; hydrophilic &rarr; minimal CNS penetration; effects resolve quickly on discontinuation</td>
+<td>RBC esterases</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="arr-iv">
+<h2>Class IV &mdash; Calcium Channel Blockers</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Verapamil &amp; Diltiazem</td>
+<td>Rate control in SVT (AVNRT) and AF/flutter &mdash; IV for acute, oral for chronic management. Ineffective for ventricular arrhythmias and potentially harmful in wide-complex tachycardia of uncertain origin (especially with an accessory pathway)</td>
+<td>&mdash;</td>
+<td>Severe hypotension, 2nd/3rd-degree AV block (no pacemaker), sick sinus syndrome, acute decompensated HF</td>
+<td>Bradycardia, hypotension, AV block, peripheral edema, fatigue, dizziness; constipation particularly with verapamil</td>
+<td class="stem">High-yield CI: AFib + WPW syndrome &mdash; AV nodal blockade can enhance conduction through the accessory pathway, precipitating VF and hemodynamic collapse. Never use verapamil/diltiazem in AF + WPW. As CYP3A4 inhibitors, can raise levels of statins, cyclosporine, amiodarone, and digoxin</td>
+<td>Extensive first-pass hepatic metabolism (CYP3A4 substrates)</td>
+</tr>
+</table>
+</div>
+<div class="callout" style="margin-top:0;">Class II and Class IV agents share the same clinical niche &mdash; AV nodal rate control &mdash; but act through different mechanisms (beta blockade vs. direct Ca&sup2;&#8314; channel blockade). Combining them additively risks bradycardia/AV block.</div>
+</section>
+
+<section class="card" id="arr-iii">
+<h2>Class III &mdash; Potassium Channel Blockers</h2>
+<div class="callout" style="margin-top:0;">Shared mechanism: block cardiac K&#8314; channels (mainly phase 3 repolarization) &rarr; prolonged repolarization, &uarr;APD, &uarr;ERP &mdash; suppresses reentrant arrhythmias. Class-wide risk: proarrhythmia, especially Torsades de Pointes, worsened by hypokalemia, bradycardia, or other QT-prolonging drugs. Exception: amiodarone rarely induces TdP despite significant QT prolongation, likely due to its multichannel effects offsetting the risk.</div>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Amiodarone</td>
+<td>Broad spectrum &mdash; AF/SVT (rhythm &amp; rate control) and life-threatening VT/VF; favored in structural heart disease/HF (not shown to increase mortality here, unlike many other antiarrhythmics). Available IV (emergency) and oral (long-term)</td>
+<td>Requires a loading phase</td>
+<td>&mdash;</td>
+<td>Pulmonary toxicity (interstitial pneumonitis, fibrosis &mdash; can be fatal), thyroid dysfunction (hyper or hypo, from iodine content), hepatotoxicity, corneal microdeposits, photosensitivity with blue-gray skin discoloration, bradyarrhythmias; TdP is rare despite QT prolongation</td>
+<td class="stem">Multi-class activity: Class III (K&#8314; block, dominant), Class I (Na&#8314; block), Class II (noncompetitive beta-blockade), Class IV (mild Ca&sup2;&#8314; block); inhibits CYP3A4/2C9/P-gp &rarr; &uarr;digoxin and warfarin levels (reduce warfarin dose ~30&ndash;50%, monitor INR closely); routine monitoring: thyroid, liver, pulmonary function</td>
+<td>Highly lipophilic, huge Vd, very long/complex half-life (weeks to months); hepatic (CYP3A4, active metabolite)</td>
+</tr>
+<tr>
+<td class="drug-name">Sotalol</td>
+<td>Life-threatening VT, maintenance of sinus rhythm in AF/flutter, pediatric arrhythmias</td>
+<td>Initiation/dose escalation requires a monitored setting with continuous ECG and renal function assessment</td>
+<td>Baseline QTc &gt;450 ms, CrCl &lt;40 mL/min, overt HF, asthma</td>
+<td>TdP (dose-limiting, worsened by renal impairment, hypokalemia, bradycardia, other QT drugs); fatigue, bronchospasm, bradycardia (nonselective beta-blocker effects)</td>
+<td class="stem">Racemic mixture: Class II (L-enantiomer nonselective beta-blockade) + Class III (both enantiomers block delayed rectifier K&#8314;); nearly complete bioavailability, not metabolized &mdash; excreted unchanged renally, so renal function is a key safety determinant</td>
+<td>Excreted unchanged, renal</td>
+</tr>
+<tr>
+<td class="drug-name">Dofetilide</td>
+<td>Conversion to and maintenance of sinus rhythm in AF/flutter &mdash; valuable in structural heart disease/HF (does not increase mortality here)</td>
+<td>Must be initiated in a monitored inpatient setting for &ge;3 days with continuous ECG and renal monitoring; correct K&#8314;/Mg&sup2;&#8314; before starting</td>
+<td>Marked renal impairment, baseline QT prolongation, hypokalemia, bradycardia</td>
+<td>TdP (dose-dependent, worse with renal impairment, bradycardia, electrolyte disturbance)</td>
+<td class="stem">Pure Class III &mdash; selectively blocks IKr; no significant Na&#8314;, beta, or Ca&sup2;&#8314; activity; ~100% oral bioavailability, eliminated unchanged renally &mdash; dose based on CrCl; baseline QTc must be &lt;440&ndash;450 ms</td>
+<td>Excreted unchanged, renal</td>
+</tr>
+<tr>
+<td class="drug-name">Dronedarone</td>
+<td>Approved to reduce CV hospitalization risk in paroxysmal/persistent AF/flutter</td>
+<td>Take with food</td>
+<td>Symptomatic HF or permanent AF (black box &mdash; increased mortality)</td>
+<td>GI upset, bradycardia, QT prolongation, rare serious hepatotoxicity</td>
+<td class="stem">Non-iodinated amiodarone analog developed to reduce thyroid/pulmonary toxicity; less effective than amiodarone at maintaining sinus rhythm; DI: &uarr;digoxin, metoprolol, statin levels &mdash; avoid strong CYP3A4 inhibitors</td>
+<td>CYP3A4, CYP2D6, P-gp substrate/inhibitor</td>
+</tr>
+<tr>
+<td class="drug-name">Ibutilide</td>
+<td>Exclusively acute conversion of AF/flutter to sinus rhythm (not maintenance) &mdash; more effective in atrial flutter than AF</td>
+<td>IV only; requires continuous ECG monitoring for &ge;4 hours post-infusion or until QT returns to baseline</td>
+<td>Baseline QT prolongation, history of drug-induced TdP, marked electrolyte abnormalities</td>
+<td>TdP (~4&ndash;8%)</td>
+<td class="stem">Blocks IKr and uniquely activates a slow inward Na&#8314; current, prolonging phases 2 &amp; 3 (especially in atrial tissue); correct K&#8314;/Mg&sup2;&#8314; before administration</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section class="card" id="arr-v">
+<h2>"Class V" &mdash; Miscellaneous Agents</h2>
+<div class="table-scroll">
+<table>
+<tr><th style="width:11%">Drug</th><th style="width:19%">Use Scenario</th><th style="width:15%">Dosing</th><th style="width:13%">Contraindications</th><th style="width:15%">Adverse Effects</th><th style="width:17%">High-Yield Stem Clues</th><th style="width:10%">Metabolism</th></tr>
+<tr>
+<td class="drug-name">Adenosine</td>
+<td>First-line for acute termination of PSVT, particularly AVNRT; also used diagnostically to differentiate regular narrow-complex tachycardias</td>
+<td>Rapid IV bolus through a large/proximal vein + saline flush; initial dose 6 mg, may repeat 12 mg if ineffective within 1&ndash;2 min</td>
+<td>&mdash;</td>
+<td>Flushing, chest pressure, dyspnea, sense of impending doom, transient bradycardia/high-grade AV block (self-limited); rarely triggers AF or bronchospasm (caution in reactive airway disease)</td>
+<td class="stem">Activates A1 receptors (Gi-coupled) &rarr; opens inward-rectifying K&#8314; channels &amp; inhibits L-type Ca&sup2;&#8314; channels in the AV node &rarr; hyperpolarization + transient AV nodal block; blunted by methylxanthines, potentiated by dipyridamole</td>
+<td>Half-life &lt;10 seconds</td>
+</tr>
+<tr>
+<td class="drug-name">Digoxin</td>
+<td>Rate control in AF/flutter, particularly with concurrent HFrEF</td>
+<td>Requires monitoring of digoxin levels, renal function, and electrolytes</td>
+<td>&mdash;</td>
+<td>Narrow therapeutic index &mdash; toxicity signs: arrhythmias (PVCs, VT, various AV blocks), GI symptoms, visual disturbances (xanthopsia/yellow-green vision, blurred vision), neurologic symptoms (confusion, dizziness, weakness)</td>
+<td class="stem">MOA (indirect): &uarr;vagal tone &rarr; &uarr;AV nodal refractoriness &amp; &darr;conduction; MOA (direct, inotropic): inhibits Na&#8314;/K&#8314;-ATPase &rarr; &uarr;intracellular Na&#8314; &rarr; &darr;Na&#8314;/Ca&sup2;&#8314; exchanger activity &rarr; &uarr;intracellular Ca&sup2;&#8314;; risk factors for toxicity: hypokalemia, hypomagnesemia, renal impairment, P-gp inhibitor interactions (amiodarone, verapamil, quinidine)</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td class="drug-name">Magnesium Sulfate</td>
+<td>First-line treatment for TdP &mdash; give promptly, even before correcting underlying electrolytes or stopping the offending QT-prolonging drug; also used for digoxin-induced arrhythmias</td>
+<td>Administered IV over 15&ndash;20 minutes; may repeat</td>
+<td>&mdash;</td>
+<td>Hypotension, flushing, rarely respiratory depression or conduction abnormalities (especially with rapid infusion/high doses)</td>
+<td class="stem">Proposed mechanism: modulates Ca&sup2;&#8314;/K&#8314; channels, suppresses EADs, stabilizes cardiac membranes &mdash; effective even when serum Mg&sup2;&#8314; is normal; caution in significant renal impairment (renally excreted, can accumulate)</td>
+<td>&mdash;</td>
+</tr>
+</table>
+</div>
+</section>
+
+</div>
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+</script>
+
+</body>
+</html>
