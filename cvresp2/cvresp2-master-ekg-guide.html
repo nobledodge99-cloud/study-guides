@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Master EKG Guide — CVResp2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3d7a4f;
+    --incorrect:#a5433a;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.7rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:900px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents > b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents > ul.toc-tree{ columns:2; margin:10px 0 0; padding-left:20px; column-gap:32px; }
+  .top-contents ul.toc-tree > li{ break-inside:avoid; margin-bottom:12px; font-size:0.9rem; }
+  .top-contents ul.toc-tree > li > a b{ color:var(--forest-dark); }
+  .top-contents li ul{ list-style:none; padding-left:14px; margin:6px 0 0; }
+  .top-contents li ul li{ margin-bottom:3px; font-size:0.8rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-260px; top:0; height:100vh; width:250px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:3px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.76rem; padding:4px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+  .sidenav-panel .cat-label{ font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase; color:var(--accent); margin-top:10px; padding:0 8px; }
+
+  .container{ max-width:1150px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:22px 0 8px; letter-spacing:0.02em;
+  }
+  section.part-divider{
+    background:var(--forest-dark); color:var(--cream); text-align:center;
+    padding:22px 20px; border-radius:12px; margin:32px 0 22px;
+  }
+  section.part-divider h2{ border:none; color:var(--cream); font-size:1.3rem; margin:0; }
+  section.part-divider p{ color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.8rem; margin:8px 0 0; }
+
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl{ background:var(--sage-light); border-left:4px solid var(--forest); border-radius:6px; padding:10px 16px; margin:14px 0; font-size:0.88rem; }
+  .pearl b{ color:var(--forest-dark); }
+
+  .vignette{
+    background:#f5f0e2; border:1px solid var(--border); border-radius:10px;
+    padding:14px 18px; margin:12px 0; font-style:italic; font-size:0.92rem; color:var(--text-main);
+  }
+  .case-label{
+    font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase;
+    color:var(--accent); letter-spacing:0.05em; margin-bottom:4px; display:block;
+  }
+  .source-tag{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
+    text-transform:uppercase; color:var(--forest); background:var(--sage-light);
+    border:1px solid var(--sage); border-radius:20px; padding:2px 10px; margin-left:8px;
+    letter-spacing:0.03em; vertical-align:middle;
+  }
+
+  .figure{ text-align:center; margin:14px 0; }
+  .figure img{ max-width:100%; border:1px solid var(--border); border-radius:8px; background:#fff; }
+  .figure-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin:14px 0; }
+  .figure-row .figure{ flex:1 1 320px; max-width:480px; margin:0; }
+  .figure figcaption{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--text-soft); margin-top:6px; }
+
+  .facts-table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:0.86rem; }
+  .facts-table td{ padding:7px 10px; border:1px solid var(--border); vertical-align:top; }
+  .facts-table td.k{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; color:var(--forest); background:var(--sage-light); width:14%; white-space:nowrap; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:10px auto 22px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0; min-width:700px; width:100%; }
+  table{ border-collapse:collapse; font-size:0.82rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.62rem; text-transform:uppercase; padding:8px 9px; text-align:left; border:1px solid var(--forest-dark);
+    letter-spacing:0.02em;
+  }
+  table td{ padding:8px 9px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+
+  .subentry{ border-top:1px dashed var(--border); padding-top:16px; margin-top:16px; }
+  .subentry:first-of-type{ border-top:none; padding-top:0; margin-top:0; }
+
+  @media (max-width:800px){
+    .top-contents ul.toc-tree{ columns:1; }
+    section.card{ padding:20px 16px; }
+    .figure-row .figure{ flex:1 1 100%; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Master EKG Guide</h1>
+  <p>CVResp2 &middot; Every EKG from CIS I, CIS II, the Clinical Video Lecture &amp; Comprehensive CV Cases &middot; Rate &middot; Rhythm &middot; Identifiers &middot; Stem Clues</p>
+</div>
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul class="toc-tree">
+    <li><a href="#framework"><b>How to Read Every EKG</b></a></li>
+    <li><a href="#cis1-hub"><b>Part 1A &middot; CIS I Cases</b></a> (Dr. Kinder &mdash; 11 cases, 13 EKGs)
+      <ul>
+        <li><a href="#cis1-c1">Case 1 &ndash; Hyperkalemia (dialysis)</a></li>
+        <li><a href="#cis1-c2">Case 2 &ndash; Anterolateral STEMI</a></li>
+        <li><a href="#cis1-c3">Case 3 &ndash; WPW</a></li>
+        <li><a href="#cis1-c4">Case 4 &ndash; Atrial Fibrillation</a></li>
+        <li><a href="#cis1-c5">Case 5 &ndash; LVH with Strain</a></li>
+        <li><a href="#cis1-c6">Case 6 &ndash; 1&deg; AV Block</a></li>
+        <li><a href="#cis1-c7">Case 7 &ndash; Old Inferior MI</a></li>
+        <li><a href="#cis1-c8">Case 8 &ndash; Pentamidine/Prolonged QT</a></li>
+        <li><a href="#cis1-c9">Case 9 &ndash; Inferior MI + RV Infarct</a></li>
+        <li><a href="#cis1-c10">Case 10 &ndash; AV Sequential Pacing</a></li>
+        <li><a href="#cis1-c11">Case 11 &ndash; LBBB with LAE</a></li>
+      </ul>
+    </li>
+    <li><a href="#cis2-hub"><b>Part 1B &middot; CIS II Cases</b></a> (Dr. Kinder &mdash; 5 cases + 16 rapid-fire EKGs)
+      <ul>
+        <li><a href="#cis2-c1">Case 1 &ndash; Afib after road trip (+ S1Q3T3)</a></li>
+        <li><a href="#cis2-c2">Case 2 &ndash; Anterolateral MI</a></li>
+        <li><a href="#cis2-c3">Case 3 &ndash; Hyperkalemia/junctional tach</a></li>
+        <li><a href="#cis2-c4">Case 4 &ndash; Ventricular Fibrillation</a></li>
+        <li><a href="#cis2-c5">Case 5 &ndash; WPW</a></li>
+        <li><a href="#cis2-rapidfire">EKGs One&ndash;Sixteen (rapid fire)</a></li>
+      </ul>
+    </li>
+    <li><a href="#els-hub"><b>Part 1C &middot; Comprehensive CV Cases</b></a> (16 EKGs)
+      <ul>
+        <li><a href="#els-c1">Case 1 &ndash; Acute Pericarditis</a></li>
+        <li><a href="#els-c2">Case 2 &ndash; LVH / HOCM</a></li>
+        <li><a href="#els-c3">Case 3 &ndash; Dextrocardia/Situs Inversus</a></li>
+        <li><a href="#els-c4">Case 4 &ndash; Cocaine-induced MI</a></li>
+        <li><a href="#els-c5">Case 5 &ndash; Hypothermia/Osborn Waves</a></li>
+        <li><a href="#els-c6">Case 6 &ndash; Hypercalcemia</a></li>
+        <li><a href="#els-c7">Case 7 &ndash; Inferior MI (atypical)</a></li>
+        <li><a href="#els-c8">Case 8 &ndash; WPW + Afib (fatal)</a></li>
+        <li><a href="#els-i1">Posterior Wall MI</a></li>
+        <li><a href="#els-c9">Case 9 &ndash; Junctional Rhythm</a></li>
+        <li><a href="#els-c10">Case 10 &ndash; Runs of NSVT</a></li>
+        <li><a href="#els-c11">Case 11 &ndash; Ventricular Trigeminy</a></li>
+        <li><a href="#els-c12">Case 12 &ndash; Brugada Syndrome</a></li>
+        <li><a href="#els-c13">Case 13 &ndash; Hyperkalemia (lisinopril)</a></li>
+        <li><a href="#els-i2">AV Sequential Pacing</a></li>
+        <li><a href="#els-i3">3&deg; AV Block (unstable)</a></li>
+      </ul>
+    </li>
+    <li><a href="#atlas-hub"><b>Part 2 &middot; EKG Reference Atlas</b></a> (didactic lecture, by category)
+      <ul>
+        <li><a href="#atlas-sinus">Sinus Rhythms</a></li>
+        <li><a href="#atlas-atrial">Atrial Arrhythmias</a></li>
+        <li><a href="#atlas-junctional">Junctional Rhythms</a></li>
+        <li><a href="#atlas-svt">SVT / AVNRT / AVRT / WPW</a></li>
+        <li><a href="#atlas-ventricular">Ventricular Arrhythmias</a></li>
+        <li><a href="#atlas-bradyblock">Bradycardia &amp; AV Blocks</a></li>
+        <li><a href="#atlas-bbb">Bundle Branch Blocks</a></li>
+        <li><a href="#atlas-pacemakers">Pacemakers</a></li>
+        <li><a href="#atlas-ischemia">Ischemia &amp; Infarction</a></li>
+        <li><a href="#atlas-hypertrophy">Atrial Enlargement &amp; Hypertrophy</a></li>
+        <li><a href="#atlas-metabolic">Metabolic &amp; Other</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+  <a href="#framework">How to Read Every EKG</a>
+  <div class="cat-label">CIS I (11 cases)</div>
+  <a href="#cis1-c1">Case 1 Hyperkalemia</a>
+  <a href="#cis1-c2">Case 2 Anterolateral MI</a>
+  <a href="#cis1-c3">Case 3 WPW</a>
+  <a href="#cis1-c4">Case 4 Afib</a>
+  <a href="#cis1-c5">Case 5 LVH strain</a>
+  <a href="#cis1-c6">Case 6 1&deg; AVB</a>
+  <a href="#cis1-c7">Case 7 Old IWMI</a>
+  <a href="#cis1-c8">Case 8 Prolonged QT</a>
+  <a href="#cis1-c9">Case 9 Inferior/RV MI</a>
+  <a href="#cis1-c10">Case 10 AV paced</a>
+  <a href="#cis1-c11">Case 11 LBBB/LAE</a>
+  <div class="cat-label">CIS II</div>
+  <a href="#cis2-c1">Case 1 Afib/S1Q3T3</a>
+  <a href="#cis2-c2">Case 2 Anterolateral MI</a>
+  <a href="#cis2-c3">Case 3 HyperK</a>
+  <a href="#cis2-c4">Case 4 Vfib</a>
+  <a href="#cis2-c5">Case 5 WPW</a>
+  <a href="#cis2-rapidfire">EKGs 1&ndash;16</a>
+  <div class="cat-label">Comprehensive CV Cases</div>
+  <a href="#els-c1">1 Pericarditis</a>
+  <a href="#els-c2">2 LVH/HOCM</a>
+  <a href="#els-c3">3 Dextrocardia</a>
+  <a href="#els-c4">4 Cocaine MI</a>
+  <a href="#els-c5">5 Hypothermia</a>
+  <a href="#els-c6">6 Hypercalcemia</a>
+  <a href="#els-c7">7 Inferior MI</a>
+  <a href="#els-c8">8 WPW+Afib</a>
+  <a href="#els-i1">Posterior MI</a>
+  <a href="#els-c9">9 Junctional</a>
+  <a href="#els-c10">10 NSVT</a>
+  <a href="#els-c11">11 V. Trigeminy</a>
+  <a href="#els-c12">12 Brugada</a>
+  <a href="#els-c13">13 Hyperkalemia</a>
+  <a href="#els-i2">AV Sequential Pacing</a>
+  <a href="#els-i3">3&deg; AV Block</a>
+  <div class="cat-label">Reference Atlas</div>
+  <a href="#atlas-sinus">Sinus Rhythms</a>
+  <a href="#atlas-atrial">Atrial Arrhythmias</a>
+  <a href="#atlas-junctional">Junctional</a>
+  <a href="#atlas-svt">SVT/AVNRT/WPW</a>
+  <a href="#atlas-ventricular">Ventricular</a>
+  <a href="#atlas-bradyblock">Brady &amp; AV Blocks</a>
+  <a href="#atlas-bbb">Bundle Branch Blocks</a>
+  <a href="#atlas-pacemakers">Pacemakers</a>
+  <a href="#atlas-ischemia">Ischemia/MI</a>
+  <a href="#atlas-hypertrophy">Hypertrophy</a>
+  <a href="#atlas-metabolic">Metabolic/Other</a>
+</div>
+
+<div class="container">
+
+<section class="card" id="framework">
+<h2>How to Read Every EKG</h2>
+<div class="pearl"><b>The non-negotiable sequence:</b> RATE &rarr; RHYTHM &rarr; AXIS &rarr; INTERVALS/QRS &rarr; CONDUCTION &rarr; ST&ndash;T/QT &rarr; SYNTHESIS. Run this sequence even when the diagnosis looks obvious &mdash; it prevents anchoring and makes hard tracings manageable. First confirm calibration: paper speed 25&nbsp;mm/sec, voltage 10&nbsp;mm/mV.</div>
+
+<h3>Rate &amp; Rhythm</h3>
+<div class="table-scroll">
+<table>
+<tr><th style="width:16%">Question</th><th style="width:42%">What to look for</th><th>Clinical reasoning</th></tr>
+<tr><td class="drug-name">Rate</td><td>300 &divide; large boxes between R waves, or 1500 &divide; small boxes</td><td>Narrows the differential but does not name the rhythm</td></tr>
+<tr><td class="drug-name">Regularity</td><td>Regular, regularly irregular, or irregularly irregular?</td><td>Irregularly irregular strongly favors AFib; patterned irregularity suggests another mechanism</td></tr>
+<tr><td class="drug-name">P waves</td><td>Present? Normal morphology? One before every QRS? Multiple morphologies?</td><td>Tells you whether the atria are driving the ventricles</td></tr>
+<tr><td class="drug-name">QRS</td><td>Narrow or wide?</td><td>Narrow = activation via the His-Purkinje system; wide raises BBB, ventricular rhythm, pacing, or pre-excitation</td></tr>
+<tr><td class="drug-name">P:QRS relationship</td><td>Fixed PR? Progressive PR change? Dropped QRS? AV dissociation?</td><td>The key to distinguishing sinus rhythms from AV block and junctional/ventricular rhythms</td></tr>
+</table>
+</div>
+<div class="callout"><b>High-yield rhythm discrimination:</b> Afib = no organized P waves + irregularly irregular response. Atrial flutter = organized atrial activity, classic sawtooth. MAT = irregular rhythm, &ge;3 distinct P-wave morphologies, atrial rate &gt;100 (COPD/CHF context). SVT/AVNRT/AVRT = regular narrow-complex tachycardia, P waves hidden or retrograde (WPW = accessory pathway). VT = regular wide-complex tachycardia; AV dissociation, capture beats, or fusion beats strongly support it. Junctional rhythm = absent/inverted/retrograde P waves with a narrow QRS.</div>
+
+<h3>Axis &amp; Intervals</h3>
+<div class="facts-table" style="display:block;">
+<table class="facts-table"><tr><td class="k">Axis</td><td>Use leads I and aVF first. I+/aVF+ = normal. I+/aVF&minus; = leftward. I&minus;/aVF+ = rightward. Both negative = extreme axis.</td></tr>
+<tr><td class="k">PR</td><td>Prolonged &rarr; AV nodal delay. Short PR + delta wave + widened QRS &rarr; WPW.</td></tr>
+<tr><td class="k">QRS</td><td>&ge;0.12s = complete bundle-branch block or another cause of delayed ventricular activation.</td></tr>
+<tr><td class="k">QT/QTc</td><td>Prolonged repolarization creates torsades risk &mdash; always connect a long QT to medications, electrolytes, or congenital causes.</td></tr>
+</table>
+</div>
+<div class="pearl">Interpretation habit: don't stop at "left axis deviation" or "wide QRS." Ask what diagnosis explains it <i>in this patient</i>.</div>
+
+<h3>Conduction: AV Block vs. Bundle-Branch Block</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Pattern</th><th>ECG clue</th><th>Where/why it matters</th><th>Action-level meaning</th></tr>
+<tr><td class="drug-name">1&deg; AV block</td><td>PR &gt;0.20s; every P conducts</td><td>Delayed AV conduction</td><td>Recognize; significance depends on context</td></tr>
+<tr><td class="drug-name">Mobitz I (Wenckebach)</td><td>Progressive PR lengthening &rarr; dropped QRS</td><td>Usually AV nodal</td><td>Often transient/benign</td></tr>
+<tr><td class="drug-name">Mobitz II</td><td>Constant PR on conducted beats + sudden dropped QRS</td><td>Usually His-Purkinje; may have wide QRS</td><td>More dangerous; may progress to complete block</td></tr>
+<tr><td class="drug-name">3&deg; AV block</td><td>P waves and QRS complexes march independently</td><td>Complete AV dissociation</td><td>Unstable bradycardia risk; pacing often required</td></tr>
+<tr><td class="drug-name">RBBB</td><td>QRS &ge;0.12s; RSR&prime; in V1&ndash;V2; wide S in I/V6</td><td>Delayed RV activation</td><td>A conduction abnormality, not a rhythm</td></tr>
+<tr><td class="drug-name">LBBB</td><td>QRS &ge;0.12s; broad/notched R in I, aVL, V5&ndash;V6; negative V1</td><td>Delayed LV activation</td><td>Secondary ST-T changes can complicate ischemia interpretation</td></tr>
+</table>
+</div>
+<div class="pearl"><b>Clinical discriminator:</b> a dropped beat with progressive PR lengthening is Mobitz I. A dropped beat with unchanged PR intervals is Mobitz II. P waves marching independently through QRS complexes is complete heart block.</div>
+
+<h3>Ischemia &amp; Injury: Localize Before Naming the Artery</h3>
+<div class="callout">STEMI evolution: hyperacute T waves &rarr; J-point/ST elevation &rarr; more pronounced convex ST elevation &rarr; Q-wave/R-wave changes &rarr; T-wave inversion or normalization. ST elevation in &ge;2 contiguous leads = acute injury; ST depression/T inversion may support ischemia/NSTEMI in the right context. Inferior territory = II, III, aVF &mdash; inferior STEMI + AV block &rarr; think RCA (supplies the AV node). Posterior injury may appear as reciprocal anterior ST depression &mdash; don't call anterior ST depression "just ischemia" without considering posterior MI.</div>
+<div class="pearl"><b>Clinical reasoning rule:</b> symptoms + territory + conduction finding can be more diagnostic than any single ECG feature. Example: chest pressure + ST elevation II/III/aVF + complete AV block &rarr; inferior STEMI with RCA involvement.</div>
+
+<h3>Hypertrophy &amp; Chamber Enlargement</h3>
+<div class="callout">RVH: right axis deviation, tall R in V1 (R&gt;S), dominant S in V6, possible RV strain. LVH: Sokolow-Lyon voltage (S in V1 + R in V5/V6 &gt;35mm) plus supportive strain (ST depression/T inversion in left-sided leads). RAE (P pulmonale): pressure/volume overload &mdash; pulmonary HTN, chronic lung disease. LAE (P mitrale): mitral stenosis, LV dysfunction, mitral regurgitation, or other chronic left-sided loading.</div>
+
+<h3>Metabolic &amp; Drug Patterns: the EKG as a Physiologic Monitor</h3>
+<div class="table-scroll">
+<table>
+<tr><th style="width:20%">Context</th><th style="width:40%">Reasoning target</th><th>Why it matters</th></tr>
+<tr><td class="drug-name">Hyperkalemia</td><td>Recognize the progressive repolarization/conduction pattern, not a single isolated finding</td><td>Can evolve into lethal conduction and ventricular rhythms</td></tr>
+<tr><td class="drug-name">Hypokalemia</td><td>Repolarization abnormalities and increased arrhythmia susceptibility</td><td>Also potentiates digoxin toxicity</td></tr>
+<tr><td class="drug-name">Prolonged QT</td><td>Identify QT prolongation and connect it to torsades risk</td><td>Medication/electrolyte review becomes part of interpretation</td></tr>
+<tr><td class="drug-name">Digitalis effect/toxicity</td><td>Don't equate every digoxin-associated change with toxicity &mdash; integrate level, K&#8314;, symptoms, rhythm</td><td>Toxicity can produce multiple arrhythmias, including junctional rhythms</td></tr>
+<tr><td class="drug-name">Hypothermia</td><td>Recognize the J/Osborn wave in the appropriate clinical context</td><td>The tracing should point you back to the patient's temperature</td></tr>
+</table>
+</div>
+
+<h3>The 30-Second Oral Interpretation</h3>
+<div class="vignette">"Rate is ___. Rhythm is ___. Axis is ___. PR is ___; QRS is ___; QT/QTc is ___. There is/is not evidence of ___ conduction abnormality. ST-T changes are ___ in leads ___. Overall, this ECG is most consistent with ___, which in this patient suggests ___."</div>
+<div class="pearl"><b>Worked example:</b> "Rate is 72 beats/min. Rhythm is normal sinus. Axis is normal. PR is normal; QRS is narrow; QTc is not prolonged. There is no conduction abnormality. There is ST-segment elevation in II, III, and aVF with reciprocal depression in I and aVL. Overall, this ECG is most consistent with an acute inferior STEMI, which in this patient suggests an RCA culprit lesion."</div>
+
+<h3>Five Board-Style Reasoning Checkpoints</h3>
+<div class="callout">
+<b>1.</b> Older COPD patient, irregular narrow-complex tachycardia &mdash; before calling it AFib, inspect <b>P-wave morphology</b> (&ge;3 distinct morphologies + rate &gt;100 favors MAT).<br><br>
+<b>2.</b> Dropped QRS complexes &mdash; Wenckebach vs. Mobitz II is separated by whether the <b>PR interval progressively lengthens</b> before the dropped beat (Mobitz I) or stays constant (Mobitz II).<br><br>
+<b>3.</b> Regular wide-complex tachycardia &mdash; <b>AV dissociation, capture beats, or fusion beats</b> push you toward VT.<br><br>
+<b>4.</b> Chest pressure + ST elevation II/III/aVF + complete AV block &rarr; <b>inferior STEMI, most consistent with RCA involvement</b>.<br><br>
+<b>5.</b> Short PR + delta wave + widened QRS &rarr; <b>pre-excitation via an accessory pathway (WPW)</b>.
+</div>
+<div class="pearl"><b>Mastery target:</b> take an unfamiliar tracing through the same sequence every time, recognize the high-yield patterns, and use the vignette to decide what the ECG means clinically. Pattern recognition gets you the diagnosis; clinical reasoning gets you the point.</div>
+</section>
+
+<section class="part-divider" id="cis1-hub">
+<h2>Part 1 &middot; Case-Based EKGs</h2>
+<p>Real patient vignettes paired with their EKGs &mdash; CIS I, CIS II &amp; Comprehensive CV Cases</p>
+</section>
+<section class="card" id="cis1-c1">
+<h2>Case 1 &mdash; The Missed Dialysis<span class="source-tag">CIS I</span></h2>
+<div class="vignette">29 y/o female with diabetic ESRD on hemodialysis presents with nausea, lightheadedness, and weakness after missing 3 days of dialysis (skipped because of a head cold).</div>
+<figure class="figure"><img src="images/cis1_case1_ekg21.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>84 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus rhythm with 1&deg; AV block</td></tr><tr><td class="k">Axis</td><td>&minus;60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Peaked T waves + prolonged QT interval; PR interval prolonged</td></tr><tr><td class="k">Leads to Key In On</td><td>Precordial leads for peaked/tented T waves; any lead for the PR interval</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> "Missed dialysis" + ESRD + peaked T waves is a classic hyperkalemia setup &mdash; the 1&deg; AV block is an early conduction sign of rising K&#8314;.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Hyperkalemia from missed dialysis. Treat emergently: calcium gluconate (membrane stabilization), insulin/glucose and beta-2 agonists (shift K&#8314; intracellularly), potassium binders, and urgent dialysis to remove the potassium load.</div>
+</section>
+<section class="card" id="cis1-c2">
+<h2>Case 2 &mdash; Chest Pain Radiating to the Arm<span class="source-tag">CIS I</span></h2>
+<div class="vignette">41 y/o male with chest pain radiating to the left arm, dyspnea, and diaphoresis. Pulse 110, BP 90/50, S3 present, bibasilar crackles 50% up.</div>
+<figure class="figure"><img src="images/cis1_case2_edg13.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>114 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus tachycardia</td></tr><tr><td class="k">Axis</td><td>+30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>ST-segment elevation in I, aVL, V1&ndash;V6 with reciprocal changes in III and aVF</td></tr><tr><td class="k">Leads to Key In On</td><td>I, aVL, V1&ndash;V6 for the injury pattern; III/aVF for reciprocal depression</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> S3 + crackles + hypotension in the setting of an anterolateral STEMI = early cardiogenic pump failure.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Acute anterolateral MI (LAD territory). Reciprocal changes confirm it's a true injury pattern, not just diffuse ST change. Needs emergent revascularization.</div>
+</section>
+<section class="card" id="cis1-c3">
+<h2>Case 3 &mdash; The Racing Heart That Resolved<span class="source-tag">CIS I</span></h2>
+<div class="vignette">48 y/o female felt dizzy and took her own pulse at ~200; by the time she's evaluated she feels fine with a pulse of 68 and a normal exam.</div>
+<figure class="figure"><img src="images/cis1_case3_ekg2.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>72 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus</td></tr><tr><td class="k">Axis</td><td>&minus;60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Delta wave with short PR interval; Q waves in II, III, aVF represent WPW conduction, not infarction</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for the slurred delta-wave upstroke; inferior leads for the pseudo-infarct Q waves</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> A resting EKG can look completely normal-rate but still carry the diagnosis if you catch the delta wave &mdash; "felt her pulse at 200, now resolved" = paroxysmal tachycardia via an accessory pathway.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> WPW syndrome. The paroxysmal tachycardia she felt was likely AVRT using the Bundle of Kent. Definitive treatment is catheter ablation of the accessory pathway.</div>
+</section>
+<section class="card" id="cis1-c4">
+<h2>Case 4 &mdash; Heaving Sensation When Lying Down<span class="source-tag">CIS I</span></h2>
+<div class="vignette">73 y/o male with an intermittent "heaving sensation" in his chest for months, worse lying down. No syncope, chest pain, dyspnea, or diaphoresis.</div>
+<figure class="figure"><img src="images/cis1_case4_ekg7.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>114 bpm</td></tr><tr><td class="k">Rhythm</td><td>Atrial fibrillation</td></tr><tr><td class="k">Axis</td><td>+60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Absent P waves; nonspecific T-wave flattening; no infarction</td></tr><tr><td class="k">Leads to Key In On</td><td>Lead II or V1 rhythm strip for the irregularly irregular baseline and absent organized P waves</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Chronic, intermittent "heaving/fluttering" sensation with no other red flags is a classic benign-sounding presentation of AFib.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Atrial fibrillation. Assess rate control and thromboembolic risk (CHA&#8322;DS&#8322;-VASc) even in an asymptomatic-appearing patient.</div>
+</section>
+<section class="card" id="cis1-c5">
+<h2>Case 5 &mdash; Uncontrolled Hypertension for a Decade<span class="source-tag">CIS I</span></h2>
+<div class="vignette">64 y/o male with long-standing HTN (BP consistently 170/98) who hasn't taken his medication regularly because he can't afford it.</div>
+<figure class="figure"><img src="images/cis1_case5_ekg6.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>150 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus tachycardia</td></tr><tr><td class="k">Axis</td><td>+30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Left ventricular hypertrophy with strain pattern (ST depression/T inversion in left-sided leads); no infarction</td></tr><tr><td class="k">Leads to Key In On</td><td>V5&ndash;V6, I, aVL for the strain pattern; Sokolow-Lyon voltage (S in V1 + R in V5/V6)</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> A decade of uncontrolled, undertreated hypertension is the setup for chronic pressure-overload LVH with a strain pattern.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> LVH with strain from chronic uncontrolled hypertension. Reinforces the importance of affordable, adherent antihypertensive therapy to prevent this remodeling.</div>
+</section>
+<section class="card" id="cis1-c6">
+<h2>Case 6 &mdash; Fatigue After a Medication Switch<span class="source-tag">CIS I</span></h2>
+<div class="vignette">63 y/o male with 3 weeks of generalized fatigue and weakness after his BP medication was recently changed from chlorthalidone to atenolol.</div>
+<figure class="figure"><img src="images/cis1_case6_1stAVB.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>50 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus bradycardia</td></tr><tr><td class="k">Axis</td><td>0&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>1&deg; AV block (prolonged PR interval); no infarction</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for the PR interval measurement (&gt;0.20 sec)</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Fatigue + a recent switch to a beta-blocker (atenolol) explains both the sinus bradycardia and the AV nodal delay &mdash; beta-blockade slows both the SA and AV nodes.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Beta-blocker effect on the sinus and AV nodes. Isolated 1&deg; AV block does not require treatment by itself, but the symptomatic bradycardia here warrants reassessing the dose/necessity of the beta-blocker.</div>
+</section>
+<section class="card" id="cis1-c7">
+<h2>Case 7 &mdash; The Old "Heart Attack"<span class="source-tag">CIS I</span></h2>
+<div class="vignette">65 y/o male, new patient, reports a "heart attack" five years ago but has no records. You obtain a baseline EKG.</div>
+<figure class="figure"><img src="images/cis1_case7_oldIWMI.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>90 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus</td></tr><tr><td class="k">Axis</td><td>+60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Q waves in II, III, aVF consistent with an old inferior wall MI</td></tr><tr><td class="k">Leads to Key In On</td><td>II, III, aVF for pathologic Q waves (no acute ST changes)</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> "History of heart attack, no records" + Q waves without acute ST changes = confirm and risk-stratify, don't dismiss and don't treat as acute.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Old inferior MI. The correct next step is to risk-stratify this patient's coronary artery disease for stability (not admit for acute treatment, not dismiss the history, not assume he needs a pacemaker or antiarrhythmic).</div>
+</section>
+<section class="card" id="cis1-c8">
+<h2>Case 8 &mdash; Pentamidine and a Prolonged QT<span class="source-tag">CIS I</span></h2>
+<div class="vignette">48 y/o female admitted with hypoxia, diagnosed with PJP pneumonia, given two doses of pentamidine; a routine post-dose EKG is obtained.</div>
+<figure class="figure"><img src="images/cis1_case8_ekg22.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus tachycardia</td></tr><tr><td class="k">Axis</td><td>+30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>QT prolongation; no infarction</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for QT/QTc measurement</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Pentamidine is a classic drug cause of acquired QT prolongation &mdash; the major downstream risk being Torsades de Pointes, not the other listed arrhythmias (3&deg; block, Wenckebach, WPW, AFib).</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Drug-induced (pentamidine) QT prolongation. Monitor closely and correct any coexisting electrolyte abnormalities (K&#8314;, Mg&sup2;&#8314;) to reduce Torsades risk.</div>
+</section>
+<section class="card" id="cis1-c9">
+<h2>Case 9 &mdash; Gardening in the Heat<span class="source-tag">CIS I</span></h2>
+<div class="vignette">54 y/o woman with chest pain, nausea, vomiting, diaphoresis, and hypotension after pulling weeds in the sun 30 minutes earlier. History of poorly-controlled diabetes and hyperlipidemia.</div>
+<div class="figure-row"><figure class="figure"><img src="images/cis1_case9a_ekg5.jpeg" alt="" loading="lazy"><figcaption>Initial EKG</figcaption></figure><figure class="figure"><img src="images/cis1_case9b_rvinfarct.jpeg" alt="" loading="lazy"><figcaption>RV infarct EKG</figcaption></figure></div>
+<table class="facts-table"><tr><td class="k">Rate/Rhythm</td><td>See inferior MI + right-sided/RV infarct pattern</td></tr><tr><td class="k">Key Identifiers</td><td>Inferior MI pattern with right ventricular infarct involvement</td></tr><tr><td class="k">Leads to Key In On</td><td>II, III, aVF for the inferior injury; right-sided leads (V4R) to confirm RV infarct</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Inferior MI + hypotension (80/40) is the classic "nitrate-sensitive, preload-dependent" RV infarct combination.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> For the hypotension of an RV infarct: give IV fluid resuscitation, not nitrates/morphine/diuretics (these drop preload further and can cause severe hypotension in a preload-dependent right ventricle). For the associated arrhythmia risk in acute MI, beta-blockers are part of standard management once hemodynamically appropriate.</div>
+</section>
+<section class="card" id="cis1-c10">
+<h2>Case 10 &mdash; Chest Pressure with a Device<span class="source-tag">CIS I</span></h2>
+<div class="vignette">78 y/o male with retrosternal chest pressure, diaphoresis, and dyspnea.</div>
+<figure class="figure"><img src="images/cis1_case10_avpaced.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>75 bpm</td></tr><tr><td class="k">Rhythm</td><td>AV sequential (dual-chamber) paced rhythm</td></tr><tr><td class="k">Axis</td><td>+150&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Pacer spikes before both P wave and QRS; underlying ST/infarction status cannot be assessed</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for the paced spikes preceding both the P wave and QRS complex</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> A paced rhythm cannot be used to rule out ischemia by ST-segment criteria &mdash; the correct move for concerning chest pain is to pursue cardiac enzymes/troponin, not to reassure or blame musculoskeletal pain.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Ischemia cannot be excluded from this EKG because pacing obscures ST-segment interpretation. Admit for urgent evaluation of ischemic heart disease via cardiac biomarker analysis.</div>
+</section>
+<section class="card" id="cis1-c11">
+<h2>Case 11 &mdash; Chest Pressure with a Paradoxical Split S2<span class="source-tag">CIS I</span></h2>
+<div class="vignette">72 y/o male with 60 minutes of retrosternal chest pressure and diaphoresis. BP 120/68, pulse 100, and a paradoxically split S2 on exam.</div>
+<div class="figure-row"><figure class="figure"><img src="images/cis1_case11a_lbbblae.jpeg" alt="" loading="lazy"><figcaption>Initial EKG</figcaption></figure><figure class="figure"><img src="images/cis1_case11b_ekg15.jpeg" alt="" loading="lazy"><figcaption>Follow-up EKG</figcaption></figure></div>
+<table class="facts-table"><tr><td class="k">Rate</td><td>100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus tachycardia</td></tr><tr><td class="k">Axis</td><td>&minus;60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>LBBB (infarction cannot be determined in its presence); biphasic P wave in V1 with a deep negative deflection = left atrial enlargement</td></tr><tr><td class="k">Leads to Key In On</td><td>V1 for the biphasic P wave (LAE) and QS/rS morphology (LBBB); V5&ndash;V6, I, aVL for the broad/notched R wave of LBBB</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> A paradoxically split S2 (P2 before A2 during expiration) points to delayed aortic valve closure &mdash; classic causes are LBBB, aortic stenosis, HOCM, MI, or an RV pacemaker.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> New LBBB in the setting of acute chest pain should be treated as a possible MI equivalent; because LBBB obscures standard ST-criteria, use serial troponins and any available prior EKG for comparison to diagnose infarction.</div>
+</section><section class="part-divider" id="cis2-hub"><h2>Part 1B &middot; CIS II Cases</h2><p>Dr. Kinder &middot; 5 vignettes + 16 rapid-fire tracings</p></section>
+<section class="card" id="cis2-c1">
+<h2>Case 1 &mdash; Palpitations After a Cross-Country Drive<span class="source-tag">CIS II</span></h2>
+<div class="vignette">72 y/o male with 15-year history of well-controlled COPD, sudden palpitations and dyspnea the day after a cross-country drive (up to 14 hrs/day). EKG one year ago was normal.</div>
+<div class="figure-row"><figure class="figure"><img src="images/cis2_case1_afib.jpeg" alt="" loading="lazy"><figcaption>Presenting EKG</figcaption></figure><figure class="figure"><img src="images/cis2_case1_s1q3t3.jpeg" alt="" loading="lazy"><figcaption>S1Q3T3 reference pattern</figcaption></figure></div>
+<table class="facts-table"><tr><td class="k">Rate</td><td>80 bpm</td></tr><tr><td class="k">Rhythm</td><td>Atrial fibrillation</td></tr><tr><td class="k">Axis</td><td>+30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Absent P waves, irregularly irregular R-R; no infarction, no hypertrophy</td></tr><tr><td class="k">Leads to Key In On</td><td>Lead I for a prominent S wave, lead III for a Q wave + T-wave inversion (S1Q3T3) if PE is suspected</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Long car ride (prolonged immobility) + new-onset AFib-like presentation is a classic acute pulmonary embolism setup, not a COPD flare, MI, renal failure, or pericarditis.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> The S1Q3T3 pattern (prominent S in I, Q in III, inverted T in III) is a classic-but-insensitive sign of acute PE and right heart strain &mdash; know it as a pattern-recognition pearl, not a rule-out test.</div>
+</section>
+<section class="card" id="cis2-c2">
+<h2>Case 2 &mdash; 48 Hours of Chest Pain<span class="source-tag">CIS II</span></h2>
+<div class="vignette">46 y/o male, 2 pack/day smoker x 25 years, morbidly obese (350 lb) and diabetic, with 48 hours of chest pain. BP 96/62, pulse 80, crackles throughout.</div>
+<figure class="figure"><img src="images/cis2_case2_anterolateralMI.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>80 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus</td></tr><tr><td class="k">Axis</td><td>&minus;30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>ST changes in I, aVL, V1&ndash;4 (anterolateral MI) with reciprocal changes in II, III, aVF</td></tr><tr><td class="k">Leads to Key In On</td><td>I, aVL, V1&ndash;V4 for the injury pattern; II/III/aVF for reciprocal change</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> A 48-hour delay in presentation plus crackles/borderline hypotension signals a large anterolateral MI already producing pump failure.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Anterolateral MI (LAD territory) with evidence of early heart failure (crackles) &mdash; high-risk presentation given the delayed presentation.</div>
+</section>
+<section class="card" id="cis2-c3">
+<h2>Case 3 &mdash; Left Alone for the Weekend<span class="source-tag">CIS II</span></h2>
+<div class="vignette">83 y/o female with mild dementia, left home alone for the weekend, presents with nausea and lightheadedness. Takes lisinopril, furosemide, and a potassium supplement for CHF; can't recall her dosing.</div>
+<figure class="figure"><img src="images/cis2_case3_hyperK_junctionaltach.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Junctional tachycardia</td></tr><tr><td class="k">Axis</td><td>+120&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Absent P waves, extremely peaked T waves, prolonged QT &mdash; hyperkalemia</td></tr><tr><td class="k">Leads to Key In On</td><td>Precordial leads for tented/peaked T waves; absence of visible P waves</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Dementia + unsupervised access to an ACE inhibitor, a potassium supplement, and a diuretic is a recipe for dangerous hyperkalemia.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Immediately stop any potassium source first, then proceed with calcium (membrane stabilization), insulin/glucose and beta-2 agonists (intracellular shift), potassium binders, and diuretics as appropriate.</div>
+</section>
+<section class="card" id="cis2-c4">
+<h2>Case 4 &mdash; Found Down, Resuscitated<span class="source-tag">CIS II</span></h2>
+<div class="vignette">56 y/o male brought in by EMS after being found unresponsive in the field and successfully resuscitated by paramedics. He remains unresponsive though vitally stable now. This is his field EKG.</div>
+<figure class="figure"><img src="images/cis2_case4_vfib.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate/Rhythm</td><td>Ventricular fibrillation &mdash; chaotic, no organized QRS complexes</td></tr><tr><td class="k">Key Identifiers</td><td>No discernible P waves, QRS complexes, or T waves; fine/coarse chaotic baseline</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> "Found down" + successful resuscitation + a chaotic EKG with no organized complexes = VFib, not VT, Torsades, AFib, or SVT (all of which retain some organized complex).</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> VFib produces no cardiac output and requires immediate CPR and defibrillation; this patient's arrest was almost certainly this rhythm in the field.</div>
+</section>
+<section class="card" id="cis2-c5">
+<h2>Case 5 &mdash; Machine vs. Physician Interpretation<span class="source-tag">CIS II</span></h2>
+<div class="vignette">44 y/o male with dizziness and nausea. The machine reads the EKG as "LVH and old inferior wall MI" and you're asked to confirm or override.</div>
+<figure class="figure"><img src="images/cis2_case5_WPW_ekg19.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>110 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus tachycardia</td></tr><tr><td class="k">Axis</td><td>&minus;60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Delta wave with shortened PR interval = WPW; the machine's "LVH" and "inferior MI" reads are pseudo-findings from pre-excitation</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for the slurred delta-wave upstroke and short PR</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> This is the classic teaching point that automated EKG machine readings can be fooled by WPW's pseudo-infarction and voltage changes &mdash; always verify the computer read yourself.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> WPW produces a pseudo-infarct pattern in up to 70% of patients (negative delta waves mimicking Q waves, or prominent R waves in V1&ndash;3 mimicking posterior MI) and can inflate voltage criteria, mimicking LVH.</div>
+</section>
+<section class="card" id="cis2-rapidfire"><h2>EKGs One&ndash;Sixteen &mdash; Rapid Fire<span class="source-tag">CIS II</span></h2><div class="callout">Presented in the original deck without full vignettes &mdash; interpret each cold, then check against the read below.</div>
+<div class="subentry"><h3>EKG One &mdash; LBBB</h3>
+<figure class="figure"><img src="images/cis2_ekg1_LBBB.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>80 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus</td></tr><tr><td class="k">Axis</td><td>LAD</td></tr><tr><td class="k">Key Identifiers</td><td>Widened QRS in precordial leads; qS in V1, rs in V2, typical LBBB morphology V5&ndash;V6</td></tr><tr><td class="k">Leads to Key In On</td><td>V1&ndash;V2 and V5&ndash;V6</td></tr></table>
+<div class="pearl">Infarction cannot be assessed in the presence of LBBB.</div>
+</div>
+<div class="subentry"><h3>EKG Two &mdash; Wenckebach</h3>
+<figure class="figure"><img src="images/cis2_ekg2_wenckebach.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>66 bpm</td></tr><tr><td class="k">Rhythm</td><td>Mobitz I (Wenckebach)</td></tr><tr><td class="k">Axis</td><td>+60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>PR interval progressively lengthens until a beat is dropped; R-R shortens as PR lengthens</td></tr><tr><td class="k">Leads to Key In On</td><td>Any long rhythm strip to trend successive PR intervals</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Three &mdash; Ventricular Bigeminy</h3>
+<figure class="figure"><img src="images/cis2_ekg3_vbigeminy.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>75 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus with ventricular bigeminy</td></tr><tr><td class="k">Axis</td><td>+30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Every other beat is a wide, bizarre PVC</td></tr><tr><td class="k">Leads to Key In On</td><td>Rhythm strip pattern: normal-PVC-normal-PVC</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Four &mdash; RBBB with LAFB</h3>
+<figure class="figure"><img src="images/cis2_ekg4_RBBB_LAFB.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>80 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus</td></tr><tr><td class="k">Axis</td><td>&minus;60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Widened QRS with RSR&prime; in V1&ndash;3 (RBBB); LAD with qR in I/aVL and rS in II/III/aVF (LAFB)</td></tr><tr><td class="k">Leads to Key In On</td><td>V1&ndash;V3 for RBBB; I/aVL vs. II/III/aVF for the fascicular block axis</td></tr></table>
+<div class="pearl">A bifascicular block (RBBB + LAFB) &mdash; watch for progression toward complete heart block.</div>
+</div>
+<div class="subentry"><h3>EKG Five &mdash; Atrial Fibrillation</h3>
+<figure class="figure"><img src="images/cis2_ekg5_afib.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>150 bpm</td></tr><tr><td class="k">Rhythm</td><td>Atrial fibrillation</td></tr><tr><td class="k">Axis</td><td>+60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Absent P waves, narrow QRS, irregularly irregular rate</td></tr><tr><td class="k">Leads to Key In On</td><td>Any rhythm strip for the irregularly irregular baseline</td></tr></table>
+<div class="pearl">AFib with rapid ventricular response.</div>
+</div>
+<div class="subentry"><h3>EKG Six &mdash; Junctional Tachycardia</h3>
+<figure class="figure"><img src="images/cis2_ekg6_junctionaltach.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>120 bpm</td></tr><tr><td class="k">Rhythm</td><td>Junctional tachycardia</td></tr><tr><td class="k">Axis</td><td>+60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Inverted P waves (retrograde conduction) following the QRS; narrow QRS</td></tr><tr><td class="k">Leads to Key In On</td><td>Lead II or III for retrograde/inverted P waves after each QRS</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Seven &mdash; Left Atrial Enlargement</h3>
+<figure class="figure"><img src="images/cis2_ekg7_LAE.gif" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>50 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus bradycardia</td></tr><tr><td class="k">Axis</td><td>+90&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Biphasic P waves in V1&ndash;2 with a deep negative terminal deflection (LAE); nonspecific T-wave changes in II, III, aVF, V5&ndash;6</td></tr><tr><td class="k">Leads to Key In On</td><td>V1 for the biphasic/P-mitrale morphology</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Eight &mdash; 3&deg; AV Block + Massive Anterior MI</h3>
+<figure class="figure"><img src="images/cis2_ekg8_3rdAVB_anteriorMI.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>96 bpm</td></tr><tr><td class="k">Rhythm</td><td>3&deg; AV block (complete AV dissociation)</td></tr><tr><td class="k">Axis</td><td>&minus;60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>P waves and QRS complexes independent of one another; hyperacute ST elevation V1&ndash;5 (anterior MI)</td></tr><tr><td class="k">Leads to Key In On</td><td>V1&ndash;V5 for hyperacute STE; compare P-wave and QRS rates for dissociation</td></tr></table>
+<div class="pearl">Complete heart block complicating a massive anterior MI is a medical emergency &mdash; pacemaker plus emergent revascularization.</div>
+</div>
+<div class="subentry"><h3>EKG Nine &mdash; LVH with Strain</h3>
+<figure class="figure"><img src="images/cis2_ekg9_LVHstrain.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>60 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus</td></tr><tr><td class="k">Axis</td><td>30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>S in V1 + R in V5 &gt;35mm; inverted/asymmetric T waves (strain pattern); no infarction</td></tr><tr><td class="k">Leads to Key In On</td><td>V1 and V5 for voltage criteria; left-sided leads for strain</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Ten &mdash; SVT</h3>
+<figure class="figure"><img src="images/cis2_ekg10_PSVT.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>160 bpm</td></tr><tr><td class="k">Rhythm</td><td>SVT</td></tr><tr><td class="k">Axis</td><td>&minus;30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Narrow-complex tachycardia so fast that P waves cannot be confirmed present or absent</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead &mdash; note the narrow QRS despite the rapid rate</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Eleven &mdash; Acute Pericarditis</h3>
+<figure class="figure"><img src="images/cis2_ekg11_pericarditis.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus tachycardia</td></tr><tr><td class="k">Axis</td><td>+60&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Diffuse ST-segment elevation with the T wave off the baseline, PR-segment depression</td></tr><tr><td class="k">Leads to Key In On</td><td>Widespread leads for diffuse (not territorial) STE; PR depression</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Twelve &mdash; RBBB with LPFB</h3>
+<figure class="figure"><img src="images/cis2_ekg12_RBBB_LPFB.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus tachycardia</td></tr><tr><td class="k">Axis</td><td>+110&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Right axis deviation + S1Q3 pattern, plus RSR&prime; in V2 = RBBB with LPFB</td></tr><tr><td class="k">Leads to Key In On</td><td>V2 for RSR&prime;; I and III for the S1Q3 axis shift</td></tr></table>
+<div class="pearl">Another bifascicular block pattern; unopposed right-sided forces shift the axis rightward.</div>
+</div>
+<div class="subentry"><h3>EKG Thirteen &mdash; AV Sequential Paced</h3>
+<figure class="figure"><img src="images/cis2_ekg13_AVpaced.gif" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>80 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus &amp; ventricular paced</td></tr><tr><td class="k">Axis</td><td>LAD</td></tr><tr><td class="k">Key Identifiers</td><td>Paced rhythm; lead placement determines the resulting vectors, so little else can be interpreted</td></tr><tr><td class="k">Leads to Key In On</td><td>Look for the atrial sense generating a pacer spike before ventricular conduction</td></tr></table>
+<div class="pearl">Segments cannot be reliably interpreted for ischemia in a paced rhythm.</div>
+</div>
+<div class="subentry"><h3>EKG Fourteen &mdash; PACs</h3>
+<figure class="figure"><img src="images/cis2_ekg14_PACs.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>75 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus with premature atrial complexes</td></tr><tr><td class="k">Axis</td><td>&minus;30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>Regular P waves interrupted by early P waves of slightly different morphology</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead — compare P-wave morphology of the early beat to the sinus P wave</td></tr></table>
+</div>
+<div class="subentry"><h3>EKG Fifteen &mdash; Prolonged QT (Hypocalcemia)</h3>
+<figure class="figure"><img src="images/cis2_ekg15_hypoCa_prolongedQT.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>75 bpm</td></tr><tr><td class="k">Rhythm</td><td>Normal sinus</td></tr><tr><td class="k">Axis</td><td>+30&deg;</td></tr><tr><td class="k">Key Identifiers</td><td>QT segment prolonged (~60msec by the source read); possible U waves</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for QT measurement</td></tr></table>
+<div class="pearl">Hypocalcemia prolongs the QT interval (specifically the ST segment) — distinct from hypercalcemia, which shortens it.</div>
+</div>
+<div class="subentry"><h3>EKG Sixteen &mdash; Ventricular Tachycardia</h3>
+<figure class="figure"><img src="images/cis2_ekg16_vtach.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate/Rhythm</td><td>Ventricular tachycardia</td></tr><tr><td class="k">Key Identifiers</td><td>Wide-complex, regular tachycardia</td></tr></table>
+</div>
+</section><section class="part-divider" id="els-hub"><h2>Part 1C &middot; Comprehensive CV Cases</h2><p>Dr. Kinder &middot; 16 EKGs across 13 numbered cases + 3 unnumbered tracings</p></section>
+<section class="card" id="els-c1">
+<h2>Case 1 &mdash; Chest Pain That's Better Leaning Forward<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">33 y/o male with non-radiating substernal chest pain, improved leaning forward and worse lying supine, 2 weeks after a flu-like illness. Pericardial friction rub along the LSB, some JVD elevation. VS: BP 114/70, P 100, afebrile, SpO2 97%.</div>
+<figure class="figure"><img src="images/els_case1_pericarditis.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>~100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Sinus</td></tr><tr><td class="k">Key Identifiers</td><td>Diffuse ST-segment elevation throughout the EKG; aVR is inverted (PR depression pattern)</td></tr><tr><td class="k">Leads to Key In On</td><td>Widespread leads for diffuse (non-territorial) STE; aVR for reciprocal PR elevation/ST depression</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Positional pleuritic chest pain + friction rub + recent viral illness + diffuse (not localized) ST elevation = pericarditis, not MI.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Treat with NSAIDs (not tPA, IV fluids, beta-blockers, or PCI/stenting). Order an echocardiogram to evaluate for pericardial effusion/tamponade, which is the feared complication. Confirmatory exam finding: the pericardial friction rub.</div>
+</section>
+<section class="card" id="els-c2">
+<h2>Case 2 &mdash; Sports Physical with a Murmur<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">17 y/o male, asymptomatic with exercise, sports physical. Grade III/VI systolic murmur at the aortic listening post radiating up the neck that softens with squatting.</div>
+<figure class="figure"><img src="images/els_case2_lvh.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>LVH criteria: QRS &gt;35mm, left ventricular strain, left axis deviation</td></tr><tr><td class="k">Leads to Key In On</td><td>Precordial leads for voltage criteria and strain pattern</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> A murmur that gets SOFTER with squatting (increased venous return/preload, increased afterload) is dynamic outflow obstruction &mdash; hypertrophic (obstructive) cardiomyopathy, not fixed aortic stenosis (which would get louder or unchanged with reduced preload maneuvers... actually AS softens with squatting too, but the LVH-pattern EKG plus the murmur physiology here points to HOCM).</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Asymptomatic HOCM: no treatment restriction mandated outright, but needs echocardiogram and cardiology referral before clearing for competitive sports; risk-stratify for sudden cardiac death. Newer option: cardiac myosin inhibitors (e.g., mavacamten) for symptomatic obstructive HCM.</div>
+</section>
+<section class="card" id="els-c3">
+<h2>Case 3 &mdash; Appendicitis on the Wrong Side<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">23 y/o female with left lower quadrant rebound tenderness and a toxic appearance; pain began peri-umbilical and localized over "McBurney's point on the left." Surgeon is concerned about her EKG before taking her to the OR.</div>
+<figure class="figure"><img src="images/els_case3_dextrocardia_situsinversus.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>EKG complexes inverted relative to normal: lead I QRS negative, aVR QRS positive, precordial leads fail to show normal R-wave progression, P waves inverted</td></tr><tr><td class="k">Leads to Key In On</td><td>Lead I and aVR for the mirror-image inversion; V1&ndash;V6 for absent R-wave progression</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Left-sided "McBurney's point" appendicitis + a globally inverted-looking EKG = situs inversus (mirror-image organ arrangement), not cardiac pathology.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> This is a normal variant for this patient (dextrocardia with situs inversus) &mdash; clear her for surgery; the surgical diagnosis is appendicitis on the anatomically mirrored (left) side.</div>
+</section>
+<section class="card" id="els-c4">
+<h2>Case 4 &mdash; Chest Pain After Cocaine<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">20 y/o college student with retrosternal chest pain starting 20 minutes after snorting cocaine at a party. T 99.1, BP 184/120, P 122, R 21.</div>
+<figure class="figure"><img src="images/els_case4_cocaine_MI.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>ST-segment elevation consistent with myocardial infarction</td></tr><tr><td class="k">Leads to Key In On</td><td>Territorial leads matching the vessel involved by coronary vasospasm</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Young patient, severe hypertension/tachycardia, and STEMI-pattern changes shortly after cocaine use = cocaine-induced coronary vasospasm, not atherosclerotic MI.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Send to the cath lab; avoid pure beta-blockade (unopposed alpha stimulation can worsen vasospasm/hypertension). Treat with benzodiazepines, nitrates, and calcium channel blockers as first-line for cocaine-associated chest pain, alongside standard ACS workup.</div>
+</section>
+<section class="card" id="els-c5">
+<h2>Case 5 &mdash; Santa in the Cold<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">55 y/o male, dressed as Santa, found unresponsive after volunteering outside for 5 hours in December. BP 80/40, P 54, R 10, temp 86.2&deg;F.</div>
+<figure class="figure"><img src="images/els_case5_hypothermia_osborn.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>54 bpm (bradycardic)</td></tr><tr><td class="k">Rhythm</td><td>Sinus bradycardia</td></tr><tr><td class="k">Key Identifiers</td><td>Osborn (J) waves &mdash; an extra deflection at the end of the QRS complex; QT prolongation</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead, but Osborn waves are most prominent at the QRS-ST junction</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Prolonged cold exposure + hypotension/bradycardia + Osborn waves = hypothermia (core temp &lt;95&deg;F; ~80% of patients show Osborn waves as core temp approaches 86&deg;F).</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Treatment is core re-warming &mdash; not ACS therapy (morphine/O2/nitrates/aspirin), not an ICD, not an antiarrhythmic, and not tPA. Osborn waves resolve with rewarming.</div>
+</section>
+<section class="card" id="els-c6">
+<h2>Case 6 &mdash; Irritability, Kidney Stone, and a Neck Lump<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">54 y/o female with irritability, poor concentration, a recent kidney stone, a solid neck mass, and a 30 pack-year smoking history.</div>
+<figure class="figure"><img src="images/els_case6_hypercalcemia.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>Shortened QT interval</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for QT measurement (shortened, not prolonged)</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Neck mass + kidney stone + neuropsychiatric symptoms + a short QT = hypercalcemia from a PTH-secreting parathyroid tumor.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> High ionized calcium shortens the ST segment (and thus the QT interval) &mdash; the opposite EKG direction from hypocalcemia. The kidney stone and neck mass are downstream effects of the hypercalcemia/hyperparathyroidism.</div>
+</section>
+<section class="card" id="els-c7">
+<h2>Case 7 &mdash; Epigastric Pain in a Woman<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">58 y/o female with acute mid-upper gastric pain, nausea, and mild dyspnea for about an hour, unrelieved by Tums. No prior CV history; on estrogen/progesterone replacement. New III/VI holosystolic murmur over the mitral valve radiating to the axilla.</div>
+<figure class="figure"><img src="images/els_case7_inferiorMI.png" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>ST-segment and T-wave changes in II, III, and aVF</td></tr><tr><td class="k">Leads to Key In On</td><td>II, III, aVF for the inferior injury pattern</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> "Epigastric pain" in a woman is a well-known atypical MI presentation &mdash; always keep ischemia on the differential for atypical GI-sounding complaints, especially with a new murmur.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Acute inferior wall MI with a new murmur of mitral regurgitation from papillary muscle dysfunction (a mechanical complication of inferior MI). Pearl: always be suspicious of atypical MI presentations in women.</div>
+</section>
+<section class="card" id="els-c8">
+<h2>Case 8 &mdash; Diltiazem Given for Palpitations<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">30 y/o female with palpitations, given diltiazem in the ED which resolved her symptoms; she was discharged on oral diltiazem. She died days later.</div>
+<figure class="figure"><img src="images/els_case8_WPW_afib.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>Delta wave (pre-excitation) of WPW syndrome; no P waves (atrial fibrillation)</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for the delta wave; absence of organized P waves for concurrent AFib</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> This is the single highest-stakes WPW teaching point in the whole deck: WPW + atrial fibrillation treated with an AV nodal blocker (diltiazem, verapamil, beta-blockers, digoxin, or adenosine) can be fatal.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> AV nodal blockers block the heart's normal (protective, decremental) pathway and favor 1:1 conduction down the accessory pathway, which can degenerate AFib into ventricular fibrillation. Definitive treatment for WPW is catheter ablation of the accessory pathway.</div>
+</section>
+<section class="card" id="els-i1">
+<h2>Posterior Wall MI<span class="source-tag">Comprehensive CV Cases</span></h2>
+<figure class="figure"><img src="images/els_case8b_posteriorMI.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>Posterior MI classically shows tall R waves and ST depression in the anterior precordial leads (V1&ndash;V3) as a mirror-image reciprocal change</td></tr><tr><td class="k">Leads to Key In On</td><td>V1&ndash;V3 for reciprocal ST depression/tall R waves; consider posterior leads V7&ndash;V9 to confirm</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Anterior ST depression should always raise the question "could this be a posterior MI?" rather than being called routine anterior ischemia.</div>
+</section>
+<section class="card" id="els-c9">
+<h2>Case 9 &mdash; Dizziness in a Lifelong Smoker<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">50 y/o male with dizziness and a syncopal episode; smokes 2 packs/day for 30 years ("that's his medication").</div>
+<figure class="figure"><img src="images/els_case9_junctionalrhythm.gif" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>Flat baseline, no P waves, bradycardia &mdash; pacing from the AV node</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead — absence of P waves with a narrow, bradycardic QRS</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Symptomatic bradycardia (dizziness, syncope) from a junctional escape rhythm is a pacemaker indication, not a job for epinephrine, norepinephrine, amiodarone, or cardioversion.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Junctional rhythm with symptomatic bradycardia &rarr; pacemaker.</div>
+</section>
+<section class="card" id="els-c10">
+<h2>Case 10 &mdash; Palpitations and Lightheadedness<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">62 y/o male with palpitations and lightheadedness.</div>
+<figure class="figure"><img src="images/els_case10_NSVT.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>Runs or "salvos" of ventricular tachycardia</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead — look for a run of &ge;3 wide, bizarre QRS complexes self-terminating back to sinus rhythm</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Nonsustained VT (NSVT) presenting with palpitations/lightheadedness warrants antiarrhythmic risk-stratification.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Treatment options include amiodarone, sotalol, procainamide, or an AICD depending on the underlying substrate and risk of sudden cardiac death.</div>
+</section>
+<section class="card" id="els-c11">
+<h2>Case 11 &mdash; The Skipped Beat on a Routine Physical<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">72 y/o female for a routine physical, on atorvastatin only, normal vitals, with an occasional "skipped beat" heard on exam.</div>
+<figure class="figure"><img src="images/els_case11_vtrigeminy.gif" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>A PVC every third heartbeat (ventricular trigeminy)</td></tr><tr><td class="k">Leads to Key In On</td><td>Rhythm strip pattern: two normal sinus beats, then one PVC, repeating</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> An asymptomatic, incidentally found PVC pattern (even trigeminy) in a stable, asymptomatic patient does not automatically require antiarrhythmic therapy.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> No treatment needed &mdash; the patient is stable and asymptomatic. This contrasts with PVCs found in the setting of acute MI or structural heart disease, which carry more concern.</div>
+</section>
+<section class="card" id="els-c12">
+<h2>Case 12 &mdash; Collapse on the Football Field<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">17 y/o high school football player collapses on the field, found in ventricular tachycardia, defibrillated back to normal sinus rhythm.</div>
+<figure class="figure"><img src="images/els_case12_brugada.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>ST elevation in V1&ndash;V3 with a right-bundle-branch-block-like appearance</td></tr><tr><td class="k">Leads to Key In On</td><td>V1&ndash;V3 for the coved/saddleback ST elevation pattern</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> A young, otherwise healthy athlete who collapses in VT with this specific V1&ndash;V3 pattern is Brugada syndrome until proven otherwise (not hypokalemia, WPW, Torsades, or hypercalcemia).</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Brugada syndrome is a genetic (sodium channelopathy) condition causing dangerous arrhythmias. Genetic testing can help identify affected family members. Definitive management often involves ICD placement for those at risk of sudden cardiac death.</div>
+</section>
+<section class="card" id="els-c13">
+<h2>Case 13 &mdash; Repeated Doses from a Forgetful Patient<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">82 y/o female with early dementia, lives alone, repeatedly re-takes her lisinopril because she forgets she already took it. Presents with dizziness. BP 84/50, P 72, R 16.</div>
+<figure class="figure"><img src="images/els_case13_hyperkalemia.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>Peaked T waves from hyperkalemia (K&#8314; = 9.6 in this case) due to excess ACE-inhibitor dosing</td></tr><tr><td class="k">Leads to Key In On</td><td>Precordial leads for peaked/tented T waves</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Cognitive impairment + inadvertent repeated ACE-inhibitor dosing + hypotension + peaked T waves = severe iatrogenic hyperkalemia.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Same hyperkalemia algorithm: stabilize the myocardium (calcium), shift potassium intracellularly (insulin/glucose, beta-2 agonists), remove potassium (binders, dialysis if severe), and address the medication-safety issue at home.</div>
+</section>
+<section class="card" id="els-i2">
+<h2>AV Sequential Pacing<span class="source-tag">Comprehensive CV Cases</span></h2>
+<figure class="figure"><img src="images/els_avseqpacing.gif" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>Two small pacer spikes per cycle &mdash; one atrial spike, one ventricular spike</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead — look for the paired spikes immediately preceding the P wave and QRS</td></tr></table>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> A ventricular-paced beat mimics an LBBB pattern because the pacing lead sits in the right ventricle, so the right ventricle depolarizes first (just as it does with a native left bundle branch block).</div>
+</section>
+<section class="card" id="els-i3">
+<h2>3&deg; AV Block, Unstable<span class="source-tag">Comprehensive CV Cases</span></h2>
+<div class="vignette">72 y/o male who collapsed in a store, brought in confused and lethargic by paramedics. BP 70/50.</div>
+<figure class="figure"><img src="images/els_case_3rdAVB.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Key Identifiers</td><td>P waves are entirely independent of the QRS complexes (complete AV dissociation)</td></tr><tr><td class="k">Leads to Key In On</td><td>Compare the P-wave rate to the QRS rate — they march to their own, unrelated beats</td></tr></table>
+<div class="callout"><b>High-yield stem/vignette clues:</b> Hemodynamically unstable bradycardia (BP 70/50, confusion) with AV dissociation is complete heart block until proven otherwise.</div>
+<div class="pearl"><b>Clinical manifestations &amp; management:</b> Treatment is pacing (transcutaneous/transvenous as a bridge to permanent pacemaker).</div>
+</section><section class="part-divider" id="atlas-hub"><h2>Part 2 &middot; EKG Reference Atlas</h2><p>One core example per named rhythm/condition, from the didactic CV/Resp II Clinical lecture (Dr. Jois)</p></section>
+<section class="card" id="atlas-sinus"><h2>Sinus Rhythms</h2>
+<div class="subentry"><h3>Normal Sinus Rhythm, Sinus Tachycardia &amp; Sinus Bradycardia</h3>
+<figure class="figure"><img src="images/atlas_sinusrhythms_tachybrady.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>Tachycardia &gt;100 bpm; bradycardia &lt;60 bpm; normal 60&ndash;100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Regular; P wave before every QRS, normal morphology</td></tr><tr><td class="k">Identifiers</td><td>Upright P in II, inverted in aVR; PR 0.12&ndash;0.20s</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Any stem describing a regular rhythm with a normal-appearing P wave before every QRS just needs the rate to classify it.</div>
+<div class="pearl">Sinus tachycardia causes: sepsis, hypovolemia, PE, pain, fear, MI, hyperthyroidism, heart failure. Sinus bradycardia is normal in trained athletes and during sleep, but can reflect sick sinus syndrome, hypothyroidism, or drug effect (beta-blockers, digoxin).</div>
+</div>
+<div class="subentry"><h3>Sinus Bradycardia (isolated example)</h3>
+<figure class="figure"><img src="images/atlas_sinusbradycardia.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>&lt;60 bpm (this example: ~43 bpm)</td></tr><tr><td class="k">Rhythm</td><td>Regular sinus</td></tr><tr><td class="k">Identifiers</td><td>Normal P-QRS-T morphology, just slow</td></tr></table>
+<div class="pearl">Disorder of impulse formation from depression of sinus node activity.</div>
+</div>
+<div class="subentry"><h3>Normal Sinus Arrhythmia</h3>
+<figure class="figure"><img src="images/atlas_sinustach_causes.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rhythm</td><td>Cyclic variation in rate with respiration (speeds up with inspiration, slows with expiration)</td></tr><tr><td class="k">Identifiers</td><td>P-wave morphology and PR interval stay normal — only the R-R interval varies</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> A "phasic" irregularity that tracks the respiratory cycle (not truly irregular like AFib) is normal, especially in younger patients.</div>
+</div>
+</section><section class="card" id="atlas-atrial"><h2>Atrial Arrhythmias</h2>
+<div class="subentry"><h3>Atrial Flutter</h3>
+<figure class="figure"><img src="images/atlas_atrialflutter.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>Regular, steady — classically ~150 bpm ventricular</td></tr><tr><td class="k">Rhythm</td><td>Narrow QRS complexes, regular</td></tr><tr><td class="k">Identifiers</td><td>"Sawtooth" flutter-wave pattern in the baseline</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Sawtooth baseline in lead II or V1 at a suspiciously round ventricular rate (150, 100, 75) suggests flutter with fixed AV conduction (2:1, 3:1, 4:1 block).</div>
+<div class="pearl">Adenosine or calcium channel blockers slow AV conduction and can unmask the sawtooth pattern (adenosine has more diagnostic than therapeutic value here — it usually won't convert flutter).</div>
+</div>
+<div class="subentry"><h3>Atrial Fibrillation</h3>
+<figure class="figure"><img src="images/atlas_atrialfibrillation.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>Variable</td></tr><tr><td class="k">Rhythm</td><td>Irregularly irregular</td></tr><tr><td class="k">Identifiers</td><td>No organized/discrete P waves</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> "Irregularly irregular" is the single word pairing that should trigger AFib before anything else.</div>
+<div class="pearl">Risk factors: hypertension, heart failure, diabetes, advanced age, hyperthyroidism, structural heart disease. Management centers on rate/rhythm control plus thromboembolic risk stratification (anticoagulation).</div>
+</div>
+<div class="subentry"><h3>Multifocal Atrial Tachycardia (MAT)</h3>
+<figure class="figure"><img src="images/atlas_MAT.png" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>&gt;100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Chaotic/irregular — "wandering atrial pacemaker" at a faster rate</td></tr><tr><td class="k">Identifiers</td><td>&ge;3 distinct P-wave morphologies</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Elderly patient with COPD or CHF and an irregular tachycardia with multiple P-wave shapes = MAT; consider PE if MAT occurs outside a COPD/CHF context.</div>
+<div class="pearl">Rarely life-threatening. Consider theophylline toxicity as a cause. Treat with oxygen, magnesium, or verapamil; avoid beta-blockers if there's significant COPD.</div>
+</div>
+<div class="subentry"><h3>Premature Atrial Contraction (PAC)</h3>
+<figure class="figure"><img src="images/atlas_PAC.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rhythm</td><td>Underlying sinus rhythm interrupted by an early beat</td></tr><tr><td class="k">Identifiers</td><td>An early P wave with a different morphology than the sinus P wave, sometimes not conducted ("PAC with block")</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> An otherwise-normal rhythm with one oddly-shaped, early P wave here and there is a benign, extremely common PAC.</div>
+</div>
+</section><section class="card" id="atlas-junctional"><h2>Junctional Rhythms</h2>
+<div class="subentry"><h3>Premature Junctional Contraction (PJC)</h3>
+<figure class="figure"><img src="images/atlas_PJC.gif" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>An early, narrow QRS with no preceding P wave (or an inverted/retrograde P wave)</td></tr></table>
+</div>
+<div class="subentry"><h3>Junctional Rhythm (escape)</h3>
+<figure class="figure"><img src="images/atlas_junctionalrhythm.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>40&ndash;60 bpm intrinsic junctional escape rate</td></tr><tr><td class="k">Rhythm</td><td>Regular, narrow QRS</td></tr><tr><td class="k">Identifiers</td><td>P waves absent, or retrograde/inverted (axis reversed 180&deg; from normal — inverted in II, upright in aVR)</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> A slow, regular, narrow-complex rhythm with no visible P waves is junctional escape — the AV junction taking over when the sinus node fails or slows excessively.</div>
+</div>
+<div class="subentry"><h3>Accelerated Junctional Rhythm</h3>
+<figure class="figure"><img src="images/atlas_acceleratedjunctional.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>60&ndash;100 bpm (faster than the intrinsic junctional escape rate, but not "tachycardia")</td></tr><tr><td class="k">Identifiers</td><td>Same P-wave absence/retrograde pattern as junctional escape, just at a faster rate</td></tr></table>
+</div>
+</section>
+<section class="card" id="atlas-svt"><h2>SVT, AVNRT, AVRT &amp; WPW</h2>
+<div class="subentry"><h3>Supraventricular Tachycardia (SVT) — general</h3>
+<figure class="figure"><img src="images/atlas_SVT.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>Typically 150&ndash;250 bpm</td></tr><tr><td class="k">Rhythm</td><td>Regular, narrow QRS (absent aberrancy)</td></tr><tr><td class="k">Identifiers</td><td>P waves often hidden in or immediately after the QRS</td></tr></table>
+</div>
+<div class="subentry"><h3>Paroxysmal SVT (PSVT)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_PSVT.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_PSVT_ref.jpg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Rhythm</td><td>Abrupt onset of a rapid regular narrow-complex rhythm, then abrupt return to sinus</td></tr><tr><td class="k">Identifiers</td><td>Sudden start/stop ("paroxysmal") is itself a diagnostic clue</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> "Starts beating quickly, then stops and resumes normal sinus" is the classic PSVT description. Triggers: WPW, anemia, dehydration/fatigue, excess caffeine, pseudoephedrine, hyperthyroidism.</div>
+</div>
+<div class="subentry"><h3>AVNRT (AV Nodal Reentrant Tachycardia)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_AVNRT_1.jpg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_AVNRT_2.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Rate</td><td>150&ndash;250 bpm</td></tr><tr><td class="k">Rhythm</td><td>Regular, narrow QRS, driven by a reentrant circuit within the AV node</td></tr><tr><td class="k">Identifiers</td><td>Retrograde P waves in II/III, or a pseudo-R&prime; in V1 (superimposed retrograde P); P waves often buried in the QRS</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Sudden-onset, sudden-offset palpitations with dizziness/SOB in an otherwise normal heart, sometimes triggered by alcohol, coffee, stimulants, or excitement — the most common SVT in adults (~50%).</div>
+<div class="pearl">Onset and termination are abrupt, usually initiated by a premature supraventricular beat.</div>
+</div>
+<div class="subentry"><h3>AVRT (AV Reentrant Tachycardia)</h3>
+
+<table class="facts-table"><tr><td class="k">Mechanism</td><td>Anatomical reentry using an accessory pathway (Bundle of Kent)</td></tr><tr><td class="k">Identifiers</td><td>Orthodromic AVRT: anterograde via the AV node → regular narrow-complex rhythm (looks like AVNRT). Antidromic AVRT: anterograde via the accessory pathway → regular wide-complex rhythm that can mimic VT</td></tr><tr><td class="k">Rate</td><td>Regular, typically rapid</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> The most common SVT in children (~30%). Often triggered by a premature atrial or ventricular beat. On the surface EKG, orthodromic AVRT is difficult to distinguish from AVNRT — the diagnosis is usually made electrophysiologically.</div>
+<div class="pearl">Retrograde P waves with a long R-P interval support AVRT over AVNRT.</div>
+</div>
+<div class="subentry"><h3>Wolf-Parkinson-White (WPW)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_WPW_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_WPW_2_criteria.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>PR interval &lt;120ms; delta wave (slurred, slow initial QRS upstroke); QRS &gt;110ms; discordant ST-T changes; pseudoinfarction pattern in up to 70% of patients</td></tr><tr><td class="k">Leads to Key In On</td><td>Any lead for the slurred delta-wave upstroke; inferior/anterior leads for pseudo-Q-waves</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> A congenital accessory pathway (Bundle of Kent) that can degenerate into SVT, AFib, or AFlutter with aberrant/rapid conduction, and can mimic VT on the EKG.</div>
+<div class="pearl">AV-nodal blockers (adenosine, CCBs, beta-blockers, digoxin) are dangerous if WPW coexists with AFib/flutter — they favor 1:1 conduction down the accessory pathway and can precipitate VF. Definitive treatment is catheter ablation.</div>
+</div>
+</section><section class="card" id="atlas-ventricular"><h2>Ventricular Arrhythmias</h2>
+<div class="subentry"><h3>Premature Ventricular Contraction (PVC)</h3>
+<figure class="figure"><img src="images/atlas_PVC.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Wide, bizarre QRS (&ge;0.12s) not preceded by a premature P wave; usually followed by a compensatory pause</td></tr></table>
+<div class="pearl">Isolated PVCs in a normal heart are common and rarely require treatment. A PVC during acute MI is more concerning — it can trigger VT/VF.</div>
+</div>
+<div class="subentry"><h3>PVC Patterns — Bigeminy &amp; Trigeminy</h3>
+<figure class="figure"><img src="images/atlas_PVC_bigeminy_trigeminy.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Bigeminy = 1 sinus beat : 1 PVC, repeating. Trigeminy = 2 sinus beats : 1 PVC, repeating</td></tr></table>
+</div>
+<div class="subentry"><h3>Ventricular Tachycardia (VT)</h3>
+<figure class="figure"><img src="images/atlas_VT_labeled.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rate</td><td>&gt;120 bpm (usually 150&ndash;220)</td></tr><tr><td class="k">Rhythm</td><td>3 or more consecutive PVCs at a regular rate; wide QRS</td></tr><tr><td class="k">Identifiers</td><td>AV dissociation, fusion beats, capture beats when present</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> A regular, wide-complex tachycardia is VT until proven otherwise — don't assume it can't be VT just because the rate seems "too fast" or "too slow."</div>
+<div class="pearl">Classified as sustained (&gt;30s or symptomatic) vs. nonsustained (&lt;30s, asymptomatic), and monomorphic vs. polymorphic. Sustained VT or VT with hemodynamic instability is an emergency requiring immediate treatment.</div>
+</div>
+<div class="subentry"><h3>VT with Fusion &amp; Capture Beats</h3>
+<figure class="figure"><img src="images/atlas_VT_fusion_capture.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Fusion beat (Dressler's beat): a sinus impulse conducts normally at the same time as the ventricular impulse, producing a hybrid QRS morphology. Capture beat: the sinus impulse fully captures the ventricles, producing a completely normal-looking QRS amid the VT</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Fusion and capture beats are strong confirmatory evidence of VT (rather than SVT with aberrancy) when present.</div>
+</div>
+<div class="subentry"><h3>Nonsustained VT (NSVT)</h3>
+<figure class="figure"><img src="images/atlas_VT_nonsustained.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>A short run (&ge;3 beats) of VT lasting &lt;30 seconds, self-terminating, asymptomatic</td></tr></table>
+</div>
+<div class="subentry"><h3>Polymorphic VT</h3>
+<figure class="figure"><img src="images/atlas_polymorphicVT.png" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Rhythm</td><td>Usually irregular; unstable, with continuously varying QRS morphology</td></tr></table>
+<div class="pearl">Best treated with IV magnesium. A prolonged QT interval raises the risk of developing polymorphic VT — remove offending QT-prolonging drugs and correct K&#8314;/Ca&sup2;&#8314; imbalances.</div>
+</div>
+<div class="subentry"><h3>Torsades de Pointes</h3>
+<figure class="figure"><img src="images/atlas_torsades.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>A distinctive polymorphic VT where the QRS complexes gradually change amplitude and appear to twist/spiral around the isoelectric baseline</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Torsades is associated with a prolonged QT (congenital or acquired) — always distinguish it from garden-variety VT because management differs.</div>
+<div class="pearl">First-line treatment is IV magnesium sulfate, given promptly, even before a confirmed low magnesium level.</div>
+</div>
+<div class="subentry"><h3>Ventricular Fibrillation</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_vfib_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_vfib_2.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Fine or coarse zigzag pattern; no discernible P waves, QRS complexes, or T waves</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> The most frequently encountered arrhythmia in adults with sudden death.</div>
+<div class="pearl">No organized perfusion, no pulse. Requires immediate CPR and defibrillation — there is no pharmacologic substitute.</div>
+</div>
+<div class="subentry"><h3>Post-Defibrillation Rhythm / Accelerated Idioventricular Rhythm (AIVR)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_postdefib_AIVR.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_AIVR.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Rate</td><td>50&ndash;100 bpm</td></tr><tr><td class="k">Rhythm</td><td>Regular, wide QRS (a ventricular escape focus that has accelerated enough to drive the heart)</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> AIVR appearing after successful reperfusion (spontaneous or via PCI) of an occluded coronary artery is actually a reassuring "reperfusion arrhythmia," not a dangerous one.</div>
+<div class="pearl">Rarely sustained, does not progress to VFib, and rarely needs treatment. Below 50 bpm, drop the word "accelerated" and just call it idioventricular rhythm.</div>
+</div>
+</section><section class="card" id="atlas-bradyblock"><h2>Bradycardia &amp; AV Blocks</h2>
+<div class="callout">Bradyarrhythmias arise from either a disorder of impulse formation (depressed sinus node activity) or a disorder of conduction (a block somewhere in the system — sinus node, AV node/His bundle, or bundle branches).</div>
+<div class="subentry"><h3>1&deg; AV Block</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_1stAVB_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_1stAVB_2.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>PR interval &gt;0.2 sec; every P wave still conducts to a QRS (a "delay," not a true block)</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Common in normal hearts, especially during sleep; can also be an early sign of conduction-system disease, myocarditis, or drug toxicity (e.g., AV nodal blockers, Lyme disease).</div>
+<div class="pearl">Does not require treatment by itself (exception: Lyme carditis, which can progress rapidly).</div>
+</div>
+<div class="subentry"><h3>Mobitz I / Wenckebach (2&deg; AV Block)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_mobitzI_1.png" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_mobitzI_2.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Progressive PR lengthening with each beat until one P wave is not followed by a QRS (a "dropped beat"); R-R interval shortens as PR lengthens; usually a block within the AV node itself</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Usually transient and benign; rarely progresses to complete heart block and rarely needs a pacemaker unless the patient is symptomatic.</div>
+</div>
+<div class="subentry"><h3>Mobitz II (2&deg; AV Block)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_mobitzII_1.jpg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_mobitzII_2.png" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Constant PR interval on conducted beats, then a sudden dropped QRS with no warning lengthening; often a block below the AV node in the His-Purkinje system; may have a bundle-branch-block QRS pattern</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> "Dropped beat with unchanged PR intervals" = Mobitz II — the dangerous one.</div>
+<div class="pearl">More serious than Mobitz I: signifies underlying structural cardiac disease, can suddenly deteriorate into 3&deg; heart block, and requires a pacemaker.</div>
+</div>
+<div class="subentry"><h3>3&deg; (Complete) AV Block</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_3rdAVB_1.jpg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_3rdAVB_2.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_3rdAVB_3.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Complete AV dissociation — P waves and QRS complexes fire independently, each at their own intrinsic rate; ventricular rate slower than the atrial/sinus rate</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> P waves marching straight through, completely unrelated to the QRS complexes, is the single clearest complete-heart-block clue.</div>
+<div class="pearl">Ventricles fall back on an escape rhythm (~30&ndash;45 bpm). Leading cause is degenerative conduction-system disease; can also complicate acute MI. Virtually always requires a pacemaker — a true medical emergency.</div>
+</div>
+<div class="subentry"><h3>3&deg; AV Block — Paced Afterward</h3>
+<figure class="figure"><img src="images/atlas_3rdAVB_pacedafter.gif" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Regular pacer spikes restoring AV synchrony after complete heart block is diagnosed</td></tr></table>
+</div>
+</section><section class="card" id="atlas-bbb"><h2>Bundle Branch Blocks</h2>
+<div class="callout">Bundle branch blocks are conduction abnormalities, not rhythm disturbances. QRS 0.09&ndash;0.11s = incomplete BBB; &ge;0.12s = complete BBB.</div>
+<div class="subentry"><h3>RBBB vs. LBBB — Side-by-Side Comparison</h3>
+<figure class="figure"><img src="images/atlas_RBBBvsLBBB_compare.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Compares V1/V6 morphology for RBBB vs. LBBB against a normal QRS</td></tr></table>
+</div>
+<div class="subentry"><h3>Right Bundle Branch Block (RBBB)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_RBBB_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_RBBB_2_criteria.png" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>QRS &gt;0.12s; RSR&prime; ("rabbit ears") in V1&ndash;V2 with R&prime; larger than the initial R; wide reciprocal S waves in I, aVL, V5&ndash;V6; T wave opposite the terminal QRS deflection</td></tr><tr><td class="k">Leads to Key In On</td><td>V1&ndash;V2 for rabbit ears; I, aVL, V5&ndash;V6 for reciprocal wide S waves</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> "Rabbit ears" in V1 is the classic RBBB visual, though sometimes you'll only see a tall R wave rather than a true RSR&prime;.</div>
+</div>
+<div class="subentry"><h3>RBBB with Left Axis Deviation (Bifascicular Block)</h3>
+<figure class="figure"><img src="images/atlas_RBBB_LAD.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>RBBB pattern plus LAD from a concurrent left anterior fascicular block (LAFB): qR in I/aVL, rS in II/III/aVF</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> RBBB + a fascicular block = bifascicular block; watch for progression toward complete heart block.</div>
+</div>
+<div class="subentry"><h3>Left Bundle Branch Block (LBBB)</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_LBBB_1.png" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_LBBB_2.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>QRS &gt;0.12s; broad/notched ("monophasic") R wave in I, aVL, V5&ndash;V6; deep QS or rS in V1; absent septal Q waves in lateral leads; left axis deviation may be present</td></tr><tr><td class="k">Leads to Key In On</td><td>I, aVL, V5&ndash;V6 for the broad/notched R; V1 for the deep negative deflection</td></tr></table>
+<div class="pearl">LBBB obscures standard ST-elevation criteria for MI — infarction generally cannot be reliably assessed in its presence.</div>
+</div>
+<div class="subentry"><h3>LBBB Morphology Key (V1 vs. V6)</h3>
+<figure class="figure"><img src="images/atlas_LBBB_criteria.png" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>V1: rS or QS pattern. V6: broad, monophasic R wave</td></tr></table>
+</div>
+<div class="subentry"><h3>New LBBB with Tachycardia</h3>
+<figure class="figure"><img src="images/atlas_LBBB_tachycardia.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>LBBB morphology superimposed on a tachycardic rate</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> New LBBB with chest pain/tachycardia should be treated as a possible MI equivalent, since standard ST criteria are unreliable.</div>
+</div>
+</section>
+<section class="card" id="atlas-pacemakers"><h2>Pacemakers</h2>
+<div class="callout">Indications: 3&deg; AV block, sick sinus syndrome, AV/bundle-branch block complicating acute MI (often temporary), and recurrent VT (overdrive pacing).</div>
+<div class="subentry"><h3>Pacemaker Spike — General</h3>
+<figure class="figure"><img src="images/atlas_pacemakerEKG.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>A sharp vertical spike immediately preceding the paced chamber's depolarization</td></tr></table>
+</div>
+<div class="subentry"><h3>Atrial Pacing</h3>
+<figure class="figure"><img src="images/atlas_atrialpacing.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>A pacer spike followed by a P wave, then a normal PR interval and normal QRS (this example: atrial pacing with 1&deg; AV block)</td></tr></table>
+</div>
+<div class="subentry"><h3>Ventricular Pacing</h3>
+<figure class="figure"><img src="images/atlas_ventricularpacing.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>A pacer spike followed by a wide, bizarre QRS resembling a PVC — the lead sits in the RV, so the RV depolarizes first, generating an LBBB-like pattern</td></tr></table>
+</div>
+<div class="subentry"><h3>AV Sequential (Dual-Chamber) Pacing</h3>
+<figure class="figure"><img src="images/atlas_AVsequentialpacing.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Two spikes per cycle — one preceding the P wave, one preceding the wide QRS</td></tr></table>
+</div>
+</section><section class="card" id="atlas-ischemia"><h2>Ischemia &amp; Infarction</h2>
+<div class="subentry"><h3>STEMI — "Tombstone" ST Elevation</h3>
+<figure class="figure"><img src="images/atlas_STEMI_tombstone_1.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>ST segment bowed upward ("frown" shape), merging imperceptibly into the T wave — a monophasic current of injury</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> ST elevation in &ge;1mm in most leads (&ge;2mm in V2&ndash;V3 for men &ge;40, &ge;2.5mm for men &lt;40, &ge;1.5mm for women) across &ge;2 contiguous leads meets STEMI criteria.</div>
+<div class="pearl">A true emergency — the myocardium is starved of blood supply and needs emergent revascularization.</div>
+</div>
+<div class="subentry"><h3>STEMI Evolution Over Time</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_STEMI_evolution_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_STEMI_evolution_schematic.png" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Hyperacute T wave &rarr; J-point/ST elevation &rarr; more pronounced convex ST elevation &rarr; ST-T merge into one complex &rarr; ST returns to baseline with a new Q wave and loss of R-wave amplitude &rarr; T-wave inversion (or eventual normalization)</td></tr></table>
+</div>
+<div class="subentry"><h3>NSTEMI / Unstable Angina</h3>
+<figure class="figure"><img src="images/atlas_NSTEMI.jpg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>ST-segment depression and/or T-wave inversion — NOT elevation; new horizontal/downsloping ST depression &ge;0.5mm in 2 contiguous leads, and/or T inversion &gt;1mm with a prominent R wave or R/S ratio &gt;1</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> NSTEMI is actually more common than STEMI, involves less than full-thickness myocardium, and cannot be localized to one coronary territory the way a STEMI can.</div>
+<div class="pearl">Lower initial mortality than STEMI but higher risk of further infarction/mortality over time.</div>
+</div>
+</section>
+<section class="card" id="atlas-hypertrophy"><h2>Atrial Enlargement &amp; Ventricular Hypertrophy</h2>
+<div class="callout">Assess atrial enlargement in leads II (parallel to atrial current, most sensitive) and V1 (perpendicular, biphasic — separates right vs. left atrial components).</div>
+<div class="subentry"><h3>Right Atrial Enlargement (P Pulmonale)</h3>
+<figure class="figure"><img src="images/atlas_RAE.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Increased amplitude of the early (right atrial) portion of the P wave; P-wave duration stays normal; P-wave axis may shift rightward toward/beyond +90&deg;</td></tr></table>
+<div class="pearl">Causes: tricuspid regurgitation, pulmonary valve stenosis, pulmonary hypertension, cor pulmonale (chronic lung disease) — pressure or volume overload of the right atrium.</div>
+</div>
+<div class="subentry"><h3>Left Atrial Enlargement (P Mitrale)</h3>
+<figure class="figure"><img src="images/atlas_LAE.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Terminal (left atrial) portion of the P wave in V1 drops &ge;1mm below baseline and is &ge;0.04s (1 small box) wide</td></tr></table>
+<div class="pearl">Causes: mitral stenosis, LV dysfunction, mitral regurgitation, VSD — pressure or volume overload of the left atrium.</div>
+</div>
+<div class="subentry"><h3>Right Ventricular Hypertrophy (RVH)</h3>
+<figure class="figure"><img src="images/atlas_RVH.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Right axis deviation; narrow QRS; tall R in V1 (R&gt;S, &gt;7mm or R/S&gt;1); dominant S in V6 (&gt;7mm or R/S&lt;1); RV strain (T inversion/ST depression in V1&ndash;V3, II, III, aVF); RBBB or incomplete RBBB may coexist</td></tr></table>
+<div class="pearl">Most common causes: pulmonary disease and congenital heart disease.</div>
+</div>
+<div class="subentry"><h3>Left Ventricular Hypertrophy (LVH)</h3>
+<figure class="figure"><img src="images/atlas_LVH.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Sokolow-Lyon voltage criteria: S in V1 + R in V5 or V6 &gt;35mm; supportive non-voltage criteria: increased R-wave peak time &gt;50ms in V5/V6, ST depression + T inversion in left-sided leads (LV strain)</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Voltage criteria alone are not diagnostic — you need supportive non-voltage (strain) criteria to call true LVH rather than just "voltage criteria for LVH."</div>
+<div class="pearl">A major noninvasive marker of increased cardiovascular morbidity/mortality risk, including sudden cardiac death.</div>
+</div>
+</section>
+<section class="card" id="atlas-metabolic"><h2>Metabolic &amp; Other Manifestations</h2>
+<div class="subentry"><h3>Hypothermia — Osborn (J) Wave</h3>
+<figure class="figure"><img src="images/atlas_osbornwave.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>An abrupt extra deflection right at the J point (Osborn/J wave); sinus bradycardia; prolonged PR, QRS, and QT</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> ~80% of patients show an Osborn wave as core temperature approaches 86&deg;F. Can be mistaken for acute coronary syndrome given the dramatic ST elevation.</div>
+<div class="pearl">Treatment: warm the patient. Watch for muscle-tremor (shivering) artifact, which can mimic AFib/flutter.</div>
+</div>
+<div class="subentry"><h3>Hyperkalemia — Progressive Changes</h3>
+<figure class="figure"><img src="images/atlas_hyperkalemia_progression.png" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Mild-moderate: peaked/"tented" T waves. Moderate-severe: P-wave flattening, PR prolongation, QRS widening. Very severe: sine-wave pattern preceding asystole</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Recognize the progressive pattern, not just one isolated finding — hyperkalemia can evolve rapidly into lethal conduction and ventricular rhythms.</div>
+</div>
+<div class="subentry"><h3>Hypokalemia</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_hypokalemia_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_hypokalemia_2.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>ST-segment depression; flattened T wave with a prolonged-appearing QT; prominent U wave</td></tr></table>
+<div class="pearl">The EKG can be a better marker of serious toxicity than the serum K&#8314; level itself. Also potentiates digoxin toxicity.</div>
+</div>
+<div class="subentry"><h3>Prolonged QT / Torsades Risk</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_prolongedQT_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_prolongedQT_torsades.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>QT interval prolonged relative to the heart rate (QTc); risk of degeneration into polymorphic VT/Torsades</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Long QT can be congenital (ion channel mutations) or acquired (drugs — antiarrhythmics like sotalol/amiodarone/dofetilide/procainamide/quinidine are the most common culprits; also psychotropics like haloperidol; electrolyte disturbances: hypoK, hypoMg, hypoCa).</div>
+</div>
+<div class="subentry"><h3>Digitalis Effect</h3>
+<div class="figure-row"><figure class="figure"><img src="images/atlas_digitalis_1.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_digitalis_2.jpeg" alt="" loading="lazy"></figure><figure class="figure"><img src="images/atlas_digitalis_3.jpeg" alt="" loading="lazy"></figure></div>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Gradual, gently downsloping ("scooped") ST-segment depression merging almost imperceptibly from the preceding R wave, with flattened/inverted T waves</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> The gradual scooped downslope helps distinguish the digitalis effect from the more symmetric ST depression of ischemia — though this can be harder to separate from LVH-with-strain, especially since digoxin is sometimes used in HFrEF patients who also have LVH.</div>
+<div class="pearl">The digitalis "effect" (a therapeutic-level EKG signature) is not the same as digitalis toxicity — toxicity requires correlating level, potassium, symptoms, and rhythm (can include junctional rhythms, PVCs, AV block).</div>
+</div>
+<div class="subentry"><h3>Low QRS Voltage &amp; Electrical Alternans</h3>
+<figure class="figure"><img src="images/atlas_electricalalternans.jpeg" alt="" loading="lazy"></figure>
+<table class="facts-table"><tr><td class="k">Identifiers</td><td>Low QRS voltage + tachycardia + electrical alternans (consecutive, normally-conducted QRS complexes alternating in height) — the classic triad of massive pericardial effusion</td></tr></table>
+<div class="callout"><b>High-yield stem clues:</b> Electrical alternans occurs because the heart swings back and forth within a large fluid-filled pericardial sac.</div>
+</div>
+</section>
+</div>
+
+<script>
+const toggle = document.getElementById('sidenavToggle');
+const panel = document.getElementById('sidenavPanel');
+toggle.addEventListener('click', () => panel.classList.toggle('open'));
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+</script>
+
+</body>
+</html>
