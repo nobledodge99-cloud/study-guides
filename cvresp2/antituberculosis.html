@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antituberculosis Agents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --cream:#f7f2e7; --cream-card:#fffdf8; --forest-dark:#1f3d2c; --forest:#2f5d3f;
+  --sage:#7fa07f; --sage-light:#e4ecdf; --border:#d9d0ba; --accent:#c1622d;
+  --text-main:#2a2723; --text-soft:#5c574c; --correct:#2f7d4f; --incorrect:#b23a2f;
+  --core-red:#b3261e; --core-red-bg:#fbe4e2;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--cream); color:var(--text-main); font-family:'Lora',serif; line-height:1.6;}
+.back-btn{position:fixed; top:14px; left:14px; z-index:500; background:var(--cream-card); color:var(--forest-dark);
+  border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-family:'IBM Plex Mono',monospace;
+  font-size:0.8rem; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.back-btn:hover{background:var(--sage-light);}
+.header{padding:70px 24px 20px; text-align:center;}
+.header h1{font-size:2.1rem; color:var(--forest-dark); margin:0 0 6px;}
+.header .kicker{font-family:'IBM Plex Mono',monospace; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--accent); font-size:0.8rem; margin-bottom:10px;}
+.header .sub{color:var(--text-soft); font-size:0.95rem; max-width:720px; margin:0 auto;}
+.legend{max-width:720px; margin:16px auto 0; display:flex; gap:18px; justify-content:center; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:0.75rem;}
+.legend span.swatch{display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:middle;}
+.container{max-width:900px; margin:0 auto; padding:0 20px 100px;}
+.toc{background:var(--cream-card); border:1px solid var(--border); border-radius:12px; padding:20px 26px; margin:20px 0 36px;}
+.toc h2{font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--forest); margin-top:0;}
+.toc ul{margin:0; padding-left:22px; columns:2; column-gap:24px;}
+.toc li{margin-bottom:6px; break-inside:avoid;}
+.toc a{color:var(--text-main); text-decoration:none;}
+.toc a:hover{color:var(--accent);}
+section.card{background:var(--cream-card); border:1px solid var(--border); border-radius:14px;
+  padding:28px 30px; margin-bottom:26px; scroll-margin-top:20px;}
+section.card .kicker{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--accent); margin-bottom:4px;}
+section.card h2{color:var(--forest-dark); margin:0 0 14px; font-size:1.5rem;}
+section.card h3{color:var(--forest); font-size:1.1rem; margin:22px 0 8px;}
+section.card p{margin:10px 0;}
+section.card ul, section.card ol{padding-left:22px;}
+section.card li{margin-bottom:6px;}
+.table-wrap{overflow-x:auto; margin:16px 0;}
+table.data-table{border-collapse:collapse; width:100%; font-size:0.92rem;}
+table.data-table caption{text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+  text-transform:uppercase; letter-spacing:0.05em; color:var(--text-soft); margin-bottom:6px;}
+table.data-table th{background:var(--forest-dark); color:#fff; font-family:'IBM Plex Mono',monospace;
+  font-size:0.78rem; text-transform:uppercase; letter-spacing:0.03em; padding:9px 12px; text-align:left;}
+table.data-table td{padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:rgba(127,160,127,0.08);}
+.figure-row{display:flex; gap:16px; flex-wrap:wrap; margin:16px 0;}
+.figure{flex:1 1 260px; background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden;}
+.figure img{width:100%; display:block;}
+.figure figcaption{padding:10px 12px; font-size:0.82rem; color:var(--text-soft); font-family:'IBM Plex Mono',monospace;}
+.pearl{background:var(--sage-light); border-left:4px solid var(--sage); border-radius:8px; padding:14px 18px; margin:16px 0;}
+.pearl-label{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--forest-dark); margin-bottom:4px; font-weight:600;}
+.case{background:#fff; border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin:16px 0;}
+.case-label{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--accent); margin-bottom:4px; font-weight:600;}
+.quiz-block{margin-top:24px; padding-top:16px; border-top:1px dashed var(--border);}
+.quiz-mini-header{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--forest); margin-bottom:12px;}
+.quiz-q{background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:16px;}
+.quiz-q p.stem{margin:0 0 12px; font-weight:500;}
+.quiz-choice{display:block; width:100%; text-align:left; background:var(--cream); border:1px solid var(--border);
+  border-radius:8px; padding:10px 14px; margin-bottom:8px; cursor:pointer; font-family:'Lora',serif; font-size:0.95rem;
+  color:var(--text-main);}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#e3f3e6; border-color:var(--correct); color:var(--correct); font-weight:600;}
+.quiz-choice.incorrect{background:#fbe7e4; border-color:var(--incorrect); color:var(--incorrect);}
+.quiz-choice[disabled]{cursor:default;}
+.quiz-explain{display:none; background:var(--sage-light); border-radius:8px; padding:12px 14px; margin-top:8px; font-size:0.9rem;}
+.quiz-explain.show{display:block;}
+.sidenav-toggle{position:fixed; top:14px; right:14px; z-index:500; background:var(--forest-dark); color:#fff;
+  border:none; border-radius:8px; padding:8px 14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; cursor:pointer;}
+.sidenav-panel{position:fixed; top:58px; right:14px; z-index:499; background:var(--cream-card); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; width:250px; max-height:75vh; overflow-y:auto; display:none; box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+.sidenav-panel.open{display:block;}
+.sidenav-panel ul{list-style:none; margin:0; padding:0;}
+.sidenav-panel li{margin-bottom:4px;}
+.sidenav-panel a{display:block; padding:6px 8px; border-radius:6px; color:var(--text-main); text-decoration:none; font-size:0.88rem;}
+.sidenav-panel a:hover{background:var(--sage-light);}
+.sidenav-panel a.active{background:var(--forest-dark); color:#fff;}
+.badge{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.62rem; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.04em; padding:2px 7px; border-radius:5px; margin-left:6px; vertical-align:middle;}
+.badge-core{background:var(--core-red-bg); color:var(--core-red); border:1px solid var(--core-red);}
+.badge-additional{background:#eee7d8; color:var(--text-soft); border:1px solid var(--border);}
+.drug-list{margin:10px 0 10px; padding-left:0; list-style:none;}
+.drug-list li{margin-bottom:5px; padding-left:0;}
+.core-name{color:var(--core-red); font-weight:600;}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="sidenav-toggle" onclick="toggleSidenav()">Sections</button>
+<div class="sidenav-panel" id="sidenavPanel"><ul><li><a href="#tb-intro" data-target="tb-intro">1. Mycobacterial Biology, Epidemiology &amp; Transmission</a></li><li><a href="#isoniazid" data-target="isoniazid">2. Isoniazid (INH)</a></li><li><a href="#rifamycins" data-target="rifamycins">3. The Rifamycins &mdash; Rifampin, Rifabutin &amp; Rifapentine</a></li><li><a href="#pyrazinamide" data-target="pyrazinamide">4. Pyrazinamide (PZA)</a></li><li><a href="#ethambutol" data-target="ethambutol">5. Ethambutol (EMB)</a></li><li><a href="#streptomycin" data-target="streptomycin">6. Streptomycin &amp; the Injectable Agents</a></li><li><a href="#combo-rationale" data-target="combo-rationale">7. Combination Therapy Rationale, Resistance Math &amp; DOT</a></li><li><a href="#hepatitis-mgmt" data-target="hepatitis-mgmt">8. Drug-Induced Hepatitis &mdash; Recognition &amp; Restart Algorithm</a></li><li><a href="#regimens" data-target="regimens">9. Treatment Regimens &mdash; LTBI, Standard Active Disease &amp; the 2022 Four-Month Option</a></li><li><a href="#drug-resistant" data-target="drug-resistant">10. Drug-Resistant TB &mdash; Definitions &amp; Management Strategy (Conceptual)</a></li><li><a href="#special-pop" data-target="special-pop">11. Special Populations &mdash; HIV, Immunomodulating Drugs &amp; Pregnancy</a></li><li><a href="#atypical-leprosy" data-target="atypical-leprosy">12. Atypical Mycobacteria &amp; Leprosy Drugs (Conceptual Overview)</a></li><li><a href="#mechanisms" data-target="mechanisms">13. Mechanisms &amp; Adverse Effects At a Glance</a></li><li><a href="#high-yield-summary" data-target="high-yield-summary">14. High-Yield Summary &mdash; Core Drugs Only</a></li></ul></div>
+<div class="header">
+  <div class="kicker">CV/Resp II &middot; Pharmacology &middot; Dr. Jacquelyn Waller, Pharm.D., BCPS</div>
+  <h1>Antituberculosis Agents</h1>
+  <p class="sub">Tuberculosis and antimycobacterial drug pharmacology &mdash; built from Dr. Waller's lecture and notes packet, with her explicit exam emphasis (the core four, plus rifabutin/rifapentine/moxifloxacin) flagged throughout, and drug-resistant TB framed conceptually per her own instruction.</p>
+  <div class="legend">
+    <span><span class="swatch" style="background:#b3261e;"></span>Core (red-font) drug &mdash; primary exam emphasis</span>
+    <span><span class="swatch" style="background:#8a8272;"></span>Additional drug &mdash; mentioned, not specifically emphasized</span>
+  </div>
+</div>
+<div class="container">
+<div class="toc"><h2>Contents</h2><ul><li><a href="#tb-intro">1. Mycobacterial Biology, Epidemiology &amp; Transmission</a></li><li><a href="#isoniazid">2. Isoniazid (INH)</a></li><li><a href="#rifamycins">3. The Rifamycins &mdash; Rifampin, Rifabutin &amp; Rifapentine</a></li><li><a href="#pyrazinamide">4. Pyrazinamide (PZA)</a></li><li><a href="#ethambutol">5. Ethambutol (EMB)</a></li><li><a href="#streptomycin">6. Streptomycin &amp; the Injectable Agents</a></li><li><a href="#combo-rationale">7. Combination Therapy Rationale, Resistance Math &amp; DOT</a></li><li><a href="#hepatitis-mgmt">8. Drug-Induced Hepatitis &mdash; Recognition &amp; Restart Algorithm</a></li><li><a href="#regimens">9. Treatment Regimens &mdash; LTBI, Standard Active Disease &amp; the 2022 Four-Month Option</a></li><li><a href="#drug-resistant">10. Drug-Resistant TB &mdash; Definitions &amp; Management Strategy (Conceptual)</a></li><li><a href="#special-pop">11. Special Populations &mdash; HIV, Immunomodulating Drugs &amp; Pregnancy</a></li><li><a href="#atypical-leprosy">12. Atypical Mycobacteria &amp; Leprosy Drugs (Conceptual Overview)</a></li><li><a href="#mechanisms">13. Mechanisms &amp; Adverse Effects At a Glance</a></li><li><a href="#high-yield-summary">14. High-Yield Summary &mdash; Core Drugs Only</a></li></ul></div>
+<section class="card" id="tb-intro">
+<div class="kicker">Part 1 &middot; Introduction to TB</div>
+<h2>1. Mycobacterial Biology, Epidemiology &amp; Transmission</h2>
+
+<p>Dr. Waller's own framing for this unit: the <strong>top four drugs are <span class="core-name">isoniazid</span><span class="badge badge-core">Core</span>, <span class="core-name">rifampin</span><span class="badge badge-core">Core</span>, <span class="core-name">pyrazinamide</span><span class="badge badge-core">Core</span>, and <span class="core-name">ethambutol</span><span class="badge badge-core">Core</span></strong> &mdash; &ldquo;if these were the only drugs you had the bandwidth to study, this would be an excellent start.&rdquo; <span class="core-name">Rifabutin</span><span class="badge badge-core">Core</span> and <span class="core-name">rifapentine</span><span class="badge badge-core">Core</span> are her paired alternative-agent learning objective. Everything else (streptomycin, second-line agents, atypical mycobacteria drugs) is <strong>additional</strong> &mdash; recognize the category and strategy, don't memorize every regimen table.</p>
+<h3>Why the cell wall makes TB pharmacology unique</h3>
+<ul>
+<li><strong>Mycolic acids</strong> form a thick, waxy, hydrophobic outer layer &mdash; the target of isoniazid &mdash; that makes the organism acid-fast (retains carbol fuchsin dye despite acid-alcohol wash) and intrinsically impermeable to many antibiotics.</li>
+<li><strong>Arabinogalactan</strong> links the mycolic acid layer to peptidoglycan &mdash; the target of ethambutol.</li>
+<li>Native <strong>efflux pumps</strong> extrude drug before it can act, contributing to baseline resistance.</li>
+<li><strong>Very slow generation time</strong> (~22&ndash;24h vs. <em>E. coli</em>'s ~20 min) &rarr; slow-growing, dormant/persister populations that standard rapidly-bactericidal drugs don't fully clear &rarr; this is why TB regimens run for months, not days.</li>
+</ul>
+<h3>Epidemiology &amp; transmission</h3>
+<p><em>Mycobacterium tuberculosis</em> spreads via <strong>airborne droplet nuclei</strong> (cough, sneeze, speech) &mdash; small enough to stay suspended and reach the alveoli. Risk of transmission rises with closer/longer contact, higher bacillary burden (cavitary/smear-positive disease), and poor ventilation.</p>
+<h3>Outcomes after exposure</h3>
+<div class="table-wrap"><table class="data-table">
+<caption>What happens after inhaling M. tuberculosis</caption>
+<tr><th>Outcome</th><th>~Frequency</th><th>Key feature</th></tr>
+<tr><td>Immediate clearance</td><td>Minority</td><td>Innate/early immune response eliminates the organism</td></tr>
+<tr><td><strong>Latent TB infection (LTBI)</strong></td><td>Majority of infected</td><td>Contained by granuloma formation; positive TST/IGRA, asymptomatic, non-infectious, normal CXR</td></tr>
+<tr><td><strong>Primary progressive (active) disease</strong></td><td>~5&ndash;10% lifetime risk from LTBI (higher if immunocompromised, e.g., HIV)</td><td>Symptomatic, infectious if pulmonary/cavitary</td></tr>
+</table></div>
+<h3>Clinical presentation of active disease</h3>
+<p>Constitutional: fever, night sweats, weight loss, fatigue. Pulmonary: productive cough &gt;2&ndash;3 weeks, hemoptysis, chest pain. Extrapulmonary disease (lymphatic, skeletal/Pott's disease, meningeal, renal, miliary) is more common with immunosuppression.</p>
+<div class="pearl"><div class="pearl-label">The strategic takeaway</div>LTBI vs. active disease is the single most important branch point in this entire unit &mdash; it determines whether a patient needs one drug for months or several drugs in combination, and whether isolation/public health reporting apply.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q1">
+<p class="stem">Which structural feature of the mycobacterial cell wall is directly responsible for the organism's acid-fast staining property and is also the specific target of isoniazid?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Mycolic acids</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Arabinogalactan</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Peptidoglycan</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Lipoteichoic acid</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Beta-glucan</button>
+
+<div class="quiz-explain">Mycolic acids form the thick, waxy outer layer responsible for acid-fastness and are the specific biosynthetic target inhibited by isoniazid.</div>
+</div>
+<div class="quiz-q" id="q2">
+<p class="stem">A patient has a positive tuberculin skin test, no symptoms, a normal chest x-ray, and is not infectious to others. Which stage of TB infection does this describe?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Primary progressive disease</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Latent TB infection (LTBI)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Miliary tuberculosis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Multidrug-resistant TB</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Reactivation with cavitary disease</button>
+
+<div class="quiz-explain">Asymptomatic infection contained by the immune system, with a positive TST/IGRA but a normal chest x-ray and no infectiousness, defines latent TB infection.</div>
+</div>
+<div class="quiz-q" id="q3">
+<p class="stem">Why do standard TB regimens require months of therapy rather than the 1-2 week courses used for many acute bacterial infections?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. M. tuberculosis has no cell wall to target</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. All first-line TB drugs are bacteriostatic only</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. The organism's very slow generation time produces dormant/persister populations not rapidly cleared by bactericidal drugs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. TB is a viral infection requiring prolonged antiviral therapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Standard antibiotics cannot cross the alveolar membrane</button>
+
+<div class="quiz-explain">M. tuberculosis divides far more slowly than typical bacteria, leaving dormant/persister organisms that are not eliminated quickly — the biologic basis for multi-month combination therapy.</div>
+</div></div>
+</section>
+<section class="card" id="isoniazid">
+<div class="kicker">Part 2 &middot; First-Line Agent #1</div>
+<h2>2. Isoniazid (INH)</h2>
+
+<p><span class="core-name">Isoniazid</span><span class="badge badge-core">Core</span> is the backbone of both LTBI treatment and every active-disease regimen &mdash; the single most important drug in this unit.</p>
+<h3>Mechanism &amp; resistance</h3>
+<p>A prodrug activated by the mycobacterial catalase-peroxidase <strong>KatG</strong>; the activated form inhibits <strong>InhA</strong> (enoyl-ACP reductase), blocking <strong>mycolic acid synthesis</strong> &mdash; bactericidal against actively dividing organisms. Resistance arises chiefly from <em>katG</em> mutations (loss of activation) or <em>inhA</em> mutations (reduced drug binding).</p>
+<h3>Pharmacogenomics &mdash; the acetylator phenotype</h3>
+<p>INH is metabolized by hepatic <strong>N-acetyltransferase 2 (NAT2)</strong>, which is genetically polymorphic:</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Rapid vs. slow acetylators</caption>
+<tr><th>Phenotype</th><th>Drug handling</th><th>Clinical risk</th></tr>
+<tr><td><strong>Rapid acetylator</strong></td><td>Clears INH quickly</td><td>Risk of subtherapeutic levels, especially with weekly dosing or malabsorption &rarr; treatment failure/relapse</td></tr>
+<tr><td><strong>Slow acetylator</strong></td><td>Accumulates more parent drug and downstream Phase I metabolite</td><td>Higher risk of <strong>hepatotoxicity</strong>, via the hepatotoxic metabolite acetylhydrazine &mdash; risk compounded when rifampin (a CYP2E1 inducer) is co-administered</td></tr>
+</table></div>
+<h3>Key adverse effects</h3>
+<ul>
+<li><strong>Hepatotoxicity</strong> &mdash; the major dose-limiting toxicity; monitor LFTs, especially in slow acetylators, older patients, alcohol use, or with rifampin co-therapy.</li>
+<li><strong>Peripheral neuropathy</strong> &mdash; INH depletes pyridoxine (vitamin B6) by forming an inactive hydrazone complex; supplement B6 in patients at risk (malnutrition, diabetes, HIV, alcoholism, pregnancy) to prevent this.</li>
+<li>Drug-induced lupus-like syndrome (uncommon); mild CNS effects.</li>
+</ul>
+<div class="pearl"><div class="pearl-label">The exam-favorite pairing</div>INH depletes B6 &rarr; give pyridoxine to prevent peripheral neuropathy. Rifampin induces INH's own hepatotoxic pathway (CYP2E1) &rarr; the two core drugs interact with each other's toxicity profile, not just their own.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q4">
+<p class="stem">Isoniazid inhibits InhA (enoyl-ACP reductase) after activation by KatG. What cell wall component synthesis pathway does this block?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Peptidoglycan cross-linking</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Arabinogalactan polymerization</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Beta-glucan synthesis</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Mycolic acid synthesis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Lipoarabinomannan assembly</button>
+
+<div class="quiz-explain">Activated isoniazid inhibits InhA, a key enzyme in the mycolic acid biosynthetic pathway, which is the drug's bactericidal mechanism.</div>
+</div>
+<div class="quiz-q" id="q5">
+<p class="stem">A patient found to be a slow NAT2 acetylator is started on isoniazid plus rifampin for active TB. Why is this combination of patient and drug factors particularly concerning?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Slow acetylators clear isoniazid too quickly, risking treatment failure</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Rifampin has no relevant metabolic interaction with isoniazid</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. This combination specifically increases the risk of ototoxicity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Slow acetylators are protected from isoniazid-induced neuropathy</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Slow acetylation raises accumulation of isoniazid's hepatotoxic metabolite, and rifampin induces the same hepatotoxic pathway, compounding hepatotoxicity risk</button>
+
+<div class="quiz-explain">Slow acetylators accumulate more of isoniazid's hepatotoxic metabolite (via CYP2E1-mediated pathways), and rifampin further induces this pathway — together raising hepatotoxicity risk substantially.</div>
+</div>
+<div class="quiz-q" id="q6">
+<p class="stem">A patient with poor nutritional status started on isoniazid is also given pyridoxine (vitamin B6). What is the rationale for this co-administration?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Isoniazid depletes vitamin B6 by forming an inactive complex, and B6 deficiency causes peripheral neuropathy that this supplementation prevents</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Pyridoxine enhances isoniazid's antimycobacterial activity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Pyridoxine reverses isoniazid hepatotoxicity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. It is given to prevent isoniazid-induced ototoxicity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. It corrects isoniazid-induced folate deficiency</button>
+
+<div class="quiz-explain">Isoniazid binds and inactivates pyridoxine, and resulting B6 deficiency causes peripheral neuropathy — pyridoxine supplementation prevents this, particularly in patients at higher baseline risk.</div>
+</div></div>
+</section>
+<section class="card" id="rifamycins">
+<div class="kicker">Part 2 &middot; First-Line Agent #2 + Paired Alternatives</div>
+<h2>3. The Rifamycins &mdash; Rifampin, Rifabutin &amp; Rifapentine</h2>
+
+<p><span class="core-name">Rifampin</span><span class="badge badge-core">Core</span> is core drug #2. <span class="core-name">Rifabutin</span><span class="badge badge-core">Core</span> and <span class="core-name">rifapentine</span><span class="badge badge-core">Core</span> are the explicitly-flagged paired alternative agents &mdash; same family, same target, different pharmacokinetics.</p>
+<h3>Shared mechanism &amp; cross-resistance</h3>
+<p>All three bind the <strong>&beta;-subunit of bacterial RNA polymerase (rpoB)</strong>, blocking RNA transcription &mdash; bactericidal, including against slow/intermittently-dividing organisms (a key reason rifamycins shorten therapy duration). Because they share the identical binding site, <strong>resistance-conferring <em>rpoB</em> mutations confer complete cross-resistance across all three agents</strong> &mdash; resistance to one means resistance to all.</p>
+<h3>What differs: CYP450 induction potency</h3>
+<div class="table-wrap"><table class="data-table">
+<caption>Rifamycin comparison</caption>
+<tr><th>Agent</th><th>CYP450 induction</th><th>Notable use case</th><th>Signature toxicity</th></tr>
+<tr><td><span class="core-name">Rifampin</span><span class="badge badge-core">Core</span></td><td><strong>Strongest</strong> inducer (CYP3A4 and others)</td><td>Standard first-line backbone</td><td>Harmless orange discoloration of body fluids; hepatotoxicity; flu-like reaction</td></tr>
+<tr><td><span class="core-name">Rifabutin</span><span class="badge badge-core">Core</span></td><td><strong>Weakest</strong> inducer</td><td>Preferred over rifampin in patients on antiretroviral protease inhibitors/certain NNRTIs (less interaction with those drugs' metabolism)</td><td>Uveitis, neutropenia, orange discoloration</td></tr>
+<tr><td><span class="core-name">Rifapentine</span><span class="badge badge-core">Core</span></td><td>Strong inducer (intermediate/long half-life)</td><td>Long half-life enables <strong>once-weekly</strong> dosing; used in the 3-month once-weekly LTBI regimen and the CDC/WHO 4-month active-disease regimen</td><td>Similar to rifampin; orange discoloration, flu-like reaction</td></tr>
+</table></div>
+<div class="pearl"><div class="pearl-label">Why rifabutin exists</div>This is the recurring exam trap Dr. Waller flagged: rifampin's potent CYP450 induction can drop protease-inhibitor/NNRTI levels dangerously low in HIV patients. Rifabutin's much weaker induction makes it the substitutable rifamycin in that specific population — same antimycobacterial efficacy, safer drug interaction profile.</div>
+<h3>Other key adverse effects across the class</h3>
+<p>Hepatotoxicity (additive with isoniazid), GI upset, and a flu-like/hypersensitivity reaction with intermittent dosing. The orange-red discoloration of urine, tears, sweat, and contact lenses is harmless but should be anticipated for adherence counseling.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q7">
+<p class="stem">Rifampin, rifabutin, and rifapentine all bind the same molecular target. What is that target, and what does sharing it mean for resistance?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. 30S ribosomal subunit; resistance is agent-specific</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. RNA polymerase beta-subunit (rpoB); resistance-conferring mutations confer complete cross-resistance across all three</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. DNA gyrase; only fluoroquinolone cross-resistance occurs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Mycolic acid synthase; resistance requires separate mutations for each agent</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. 50S ribosomal subunit; partial cross-resistance only</button>
+
+<div class="quiz-explain">All three rifamycins bind rpoB (RNA polymerase beta-subunit); because the binding site is identical, an rpoB mutation conferring resistance to one confers resistance to all three.</div>
+</div>
+<div class="quiz-q" id="q8">
+<p class="stem">An HIV-positive patient on a protease inhibitor develops active TB. Why might rifabutin be selected over rifampin in this specific patient?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Rifabutin has a completely different mechanism, avoiding cross-resistance concerns</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Rifabutin is safer for renal function</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Rifabutin is a much weaker CYP450 inducer, reducing the risk of drastically lowering protease inhibitor levels</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Rifampin cannot treat TB in HIV patients under any circumstance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Rifabutin does not require combination therapy</button>
+
+<div class="quiz-explain">Rifampin's potent CYP450 induction can dangerously lower levels of protease inhibitors and some NNRTIs; rifabutin's much weaker induction makes it the preferred rifamycin substitute in patients on those antiretrovirals.</div>
+</div>
+<div class="quiz-q" id="q9">
+<p class="stem">A patient started on rifapentine as part of a once-weekly regimen is counseled about an expected, harmless side effect. What should the patient be told to anticipate?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Permanent hearing loss</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Irreversible peripheral neuropathy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Significant weight gain</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Orange-red discoloration of urine, tears, and sweat</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Photosensitivity requiring strict sun avoidance</button>
+
+<div class="quiz-explain">Rifamycins commonly cause harmless orange-red discoloration of body fluids (urine, tears, sweat) and can permanently stain soft contact lenses — an expected effect worth pre-counseling for adherence.</div>
+</div></div>
+</section>
+<section class="card" id="pyrazinamide">
+<div class="kicker">Part 2 &middot; First-Line Agent #3</div>
+<h2>4. Pyrazinamide (PZA)</h2>
+
+<p><span class="core-name">Pyrazinamide</span><span class="badge badge-core">Core</span> is core drug #3 &mdash; unique among the first-line agents for its activity against a population the others largely miss.</p>
+<h3>Mechanism &amp; resistance</h3>
+<p>A prodrug converted by mycobacterial <strong>pyrazinamidase (PncA)</strong> to its active form, pyrazinoic acid, which disrupts membrane function/energetics in an acidic environment. It is specifically active against <strong>semi-dormant, intracellular organisms living in the acidic milieu of macrophages/caseous lesions</strong> &mdash; a population the other first-line drugs don't reliably reach. This is why PZA is included only in the initial intensive phase (first 2 months) of standard therapy, not the continuation phase. Resistance is chiefly via <em>pncA</em> mutations (loss of activation).</p>
+<h3>Key adverse effects</h3>
+<ul>
+<li><strong>Hepatotoxicity</strong> &mdash; considered the <strong>most hepatotoxic</strong> of the first-line agents, which is why it is the drug omitted (or reintroduced last) when rebuilding a regimen after drug-induced hepatitis.</li>
+<li><strong>Hyperuricemia</strong> (competitive inhibition of urate excretion) &mdash; can precipitate gout flares; usually managed expectantly unless symptomatic.</li>
+<li>GI upset, photosensitivity, nonspecific arthralgias.</li>
+</ul>
+<div class="pearl"><div class="pearl-label">Match the drug to the niche</div>Isoniazid and rifampin are the broad bactericidal workhorses. Pyrazinamide's specific value is reaching the acidic, semi-dormant intracellular population — that's why it's front-loaded into the intensive phase rather than carried through the full course.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q10">
+<p class="stem">Pyrazinamide is included specifically during the initial 2-month intensive phase of standard TB therapy rather than the full treatment course. What is the pharmacologic rationale?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. It is the least hepatotoxic first-line agent and safe only short-term</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. It has no activity against M. tuberculosis after the first month</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. It must be stopped early to prevent ototoxicity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. It is only effective against extrapulmonary disease</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Its active metabolite specifically targets semi-dormant, intracellular organisms in the acidic environment of macrophages/caseous lesions, a population addressed early in therapy</button>
+
+<div class="quiz-explain">Pyrazinoic acid, the active metabolite, specifically targets semi-dormant organisms in the acidic intracellular environment — a niche addressed during the intensive phase, after which the drug is dropped from the continuation phase.</div>
+</div>
+<div class="quiz-q" id="q11">
+<p class="stem">A patient on standard 4-drug TB therapy develops significant hepatotoxicity. When first-line agents are sequentially reintroduced, which drug is typically reintroduced last (or omitted), and why?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Pyrazinamide, because it is considered the most hepatotoxic of the first-line agents</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Ethambutol, because it is the most hepatotoxic</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Rifampin, because it has no hepatotoxic potential</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Isoniazid, because it must always be given first</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Streptomycin, because it requires renal dosing</button>
+
+<div class="quiz-explain">Pyrazinamide is considered the most hepatotoxic first-line agent, so it is reintroduced last (or omitted entirely) when rebuilding a regimen after drug-induced hepatitis.</div>
+</div>
+<div class="quiz-q" id="q12">
+<p class="stem">A patient on pyrazinamide develops joint pain and is found to have an elevated uric acid level. What is the mechanism behind this adverse effect?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Pyrazinamide directly crystallizes in joint spaces</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Pyrazinamide competitively inhibits renal urate excretion</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Pyrazinamide increases uric acid production in the liver</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. This is an autoimmune reaction unrelated to uric acid handling</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Pyrazinamide causes renal failure, secondarily elevating uric acid</button>
+
+<div class="quiz-explain">Pyrazinamide (via its metabolite) competitively inhibits uric acid excretion by the kidney, producing hyperuricemia that can precipitate gout-like arthralgias.</div>
+</div></div>
+</section>
+<section class="card" id="ethambutol">
+<div class="kicker">Part 2 &middot; First-Line Agent #4</div>
+<h2>5. Ethambutol (EMB)</h2>
+
+<p><span class="core-name">Ethambutol</span><span class="badge badge-core">Core</span> rounds out the core four &mdash; primarily included empirically to protect against unrecognized resistance to the other agents.</p>
+<h3>Mechanism &amp; resistance</h3>
+<p>Inhibits <strong>arabinosyl transferases</strong>, blocking <strong>arabinogalactan</strong> synthesis in the cell wall &mdash; bacteriostatic. Because its only role in the standard regimen is to cover for possible resistance to isoniazid or rifampin until susceptibility results return, it can be dropped once full susceptibility to the other agents is confirmed. Resistance arises via mutations in the <em>embB</em> gene.</p>
+<h3>Key adverse effect &mdash; the one to know cold</h3>
+<p><strong>Optic neuritis</strong> (dose-related): decreased visual acuity, loss of red-green color discrimination, central/peripheral scotomas. Requires <strong>baseline and periodic visual acuity and color-vision testing</strong>, dose adjustment for renal impairment, and prompt discontinuation if symptoms develop (usually reversible if caught early). Use with caution in patients unable to reliably report visual changes (e.g., young children).</p>
+<div class="pearl"><div class="pearl-label">Why ethambutol is in the regimen at all</div>It isn't there for extra killing power on a susceptible organism — it's there as an empiric fourth agent so that if the isolate later turns out resistant to isoniazid or rifampin, at least two active drugs were still on board from day one. That's also why it's the first drug dropped once full susceptibility is confirmed.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q13">
+<p class="stem">A patient started on ethambutol reports difficulty distinguishing red from green and decreased visual acuity. What is the appropriate next step?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Continue ethambutol and reassess in 3 months</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Add pyridoxine to reverse the visual changes</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Discontinue ethambutol and evaluate for optic neuritis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Switch to a higher ethambutol dose to overcome resistance</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Reassure the patient that this is an expected, permanent effect</button>
+
+<div class="quiz-explain">Red-green color discrimination loss and decreased visual acuity are classic signs of ethambutol-induced optic neuritis; the drug should be stopped promptly, as early discontinuation improves the chance of reversibility.</div>
+</div>
+<div class="quiz-q" id="q14">
+<p class="stem">Ethambutol is included in the initial 4-drug empiric regimen for active TB even when isoniazid and rifampin are likely to be effective. What is the primary rationale for including it?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. It has the strongest bactericidal activity of the four core drugs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. It specifically targets the acidic intracellular mycobacterial population</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. It prevents nephrotoxicity from the other three agents</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. It provides empiric coverage in case the isolate is later found resistant to isoniazid or rifampin, and can be dropped once susceptibility is confirmed</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. It is required to prevent isoniazid-induced neuropathy</button>
+
+<div class="quiz-explain">Ethambutol's main role is empiric — ensuring at least two active drugs are on board if resistance to isoniazid or rifampin is later discovered; it is typically discontinued once full susceptibility is confirmed.</div>
+</div></div>
+</section>
+<section class="card" id="streptomycin">
+<div class="kicker">Part 2 &middot; First-Line-Adjacent, Not First-Line</div>
+<h2>6. Streptomycin &amp; the Injectable Agents</h2>
+
+<p>Streptomycin<span class="badge badge-additional">Additional</span> is often grouped with the first-line agents but, per Dr. Waller's explicit clarification, is <strong>not actually considered first-line</strong> &mdash; it's an injectable used selectively, most often for drug-resistant disease or when a first-line oral agent can't be used.</p>
+<h3>Mechanism &amp; use</h3>
+<p>An aminoglycoside: binds the <strong>30S ribosomal subunit</strong>, disrupting initiation and causing misreading of mRNA &mdash; bactericidal. Requires IM/IV administration (no oral bioavailability), which is itself a major practical limitation for months-long therapy.</p>
+<h3>Key adverse effects (class-typical for aminoglycosides)</h3>
+<ul>
+<li><strong>Ototoxicity</strong> (vestibular and/or cochlear, may be irreversible)</li>
+<li><strong>Nephrotoxicity</strong> (usually reversible)</li>
+<li>Neuromuscular blockade at high doses</li>
+</ul>
+<p>Other injectable second-line agents (kanamycin<span class="badge badge-additional">Additional</span>, amikacin<span class="badge badge-additional">Additional</span>, capreomycin<span class="badge badge-additional">Additional</span>) share this same toxicity profile and are reserved for drug-resistant disease &mdash; recognize the category rather than memorizing each one individually.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q15">
+<p class="stem">Streptomycin is frequently grouped with the classic first-line TB agents in review materials. According to the lecture's explicit clarification, how should streptomycin actually be classified?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. A true first-line oral agent used in every standard regimen</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. A drug reserved exclusively for latent TB infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. An agent with no role in TB treatment today</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. A first-line agent that has replaced ethambutol</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. An injectable agent that is not actually first-line, used selectively rather than routinely</button>
+
+<div class="quiz-explain">Despite often being lumped in with first-line agents, streptomycin is an injectable that is not truly first-line — it is used selectively, commonly for drug-resistant disease or when an oral first-line agent cannot be used.</div>
+</div>
+<div class="quiz-q" id="q16">
+<p class="stem">A patient on streptomycin develops progressive hearing loss. What is the underlying mechanistic class of this toxicity, and is it typically reversible?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Ototoxicity; may be irreversible</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Hepatotoxicity; fully reversible</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Optic neuritis; usually reversible</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Peripheral neuropathy; fully reversible</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Nephrotoxicity; always irreversible</button>
+
+<div class="quiz-explain">Streptomycin, like other aminoglycosides, carries a risk of ototoxicity (vestibular and/or cochlear) that can be permanent, distinguishing it from the generally reversible nephrotoxicity also seen with this class.</div>
+</div></div>
+</section>
+<section class="card" id="combo-rationale">
+<div class="kicker">Part 3 &middot; Clinical Pharmacology</div>
+<h2>7. Combination Therapy Rationale, Resistance Math &amp; DOT</h2>
+
+<h3>Why TB is never treated with a single active agent</h3>
+<p>Spontaneous resistance-conferring mutations arise in a mycobacterial population at a frequency of roughly <strong>1 in 10<sup>6</sup></strong> organisms for any single drug. A cavitary TB lesion can harbor <strong>10<sup>8</sup>&ndash;10<sup>10</sup></strong> organisms &mdash; meaning resistant mutants to any one drug are almost certainly already present before treatment starts. Combine <strong>two independently-acting active agents</strong>, and the probability that a single organism carries mutations conferring resistance to <strong>both</strong> drops to roughly <strong>1 in 10<sup>12</sup></strong> &mdash; below the total bacillary burden. This is the entire rationale for multi-drug therapy: it isn't about broader spectrum, it's about mathematically outrunning spontaneous resistance.</p>
+<div class="pearl"><div class="pearl-label">The number to remember</div>Single agent: ~1 in 10^6 resistant. Two active agents together: ~1 in 10^12 &mdash; this is why active TB disease always requires ≥2 drugs the organism is susceptible to, never monotherapy, even briefly.</div>
+<h3>Directly Observed Therapy (DOT)</h3>
+<p>A healthcare worker (or approved designee) watches the patient take each dose. Rationale: therapy runs months, adherence directly determines whether resistance emerges, and inconsistent dosing is one of the most common drivers of acquired drug resistance. DOT is standard of care for active TB in most public health programs, and intermittent (e.g., 3&times;/week or once-weekly with rifapentine-based regimens) dosing schedules were specifically designed to make DOT logistically feasible.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q17">
+<p class="stem">A cavitary TB lesion contains approximately 10^9 organisms. If the spontaneous resistance frequency to a single drug is about 1 in 10^6, why does treating with two independently-acting active drugs (each with the same 1 in 10^6 resistance frequency) prevent treatment failure from resistance?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Because the two drugs target the identical binding site</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Because the probability that a single organism carries resistance mutations to both drugs simultaneously drops to roughly 1 in 10^12, far below the bacillary burden</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Because combination therapy doubles each drug's individual potency</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Because two drugs always produce synergistic killing regardless of independent mutation rates</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Because resistant organisms cannot survive in combination regardless of mutation status</button>
+
+<div class="quiz-explain">Combining two drugs with independent resistance mechanisms multiplies the individual mutation frequencies (about 1 in 10^6 each), yielding roughly 1 in 10^12 — below the total organism burden, so essentially no organism is resistant to both.</div>
+</div>
+<div class="quiz-q" id="q18">
+<p class="stem">Why is directly observed therapy (DOT) considered standard of care for active TB treatment rather than simply prescribing self-administered pills?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. DOT is required because all TB drugs are only available as injectables</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. DOT eliminates the need for combination therapy</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Inconsistent adherence over the many months of therapy is a major driver of acquired drug resistance, and DOT ensures consistent dosing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. DOT is used only for latent TB infection, not active disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. DOT removes the need for any drug monitoring</button>
+
+<div class="quiz-explain">Because TB therapy runs for months and inconsistent adherence is a leading cause of acquired resistance, directly observing each dose helps ensure consistent treatment and protects against resistance emerging mid-course.</div>
+</div></div>
+</section>
+<section class="card" id="hepatitis-mgmt">
+<div class="kicker">Part 2/3 &middot; Managing a Shared First-Line Toxicity</div>
+<h2>8. Drug-Induced Hepatitis &mdash; Recognition &amp; Restart Algorithm</h2>
+
+<p>Isoniazid, rifampin, and pyrazinamide are all independently hepatotoxic, so this complication has to be managed as a class issue, not a single-drug issue.</p>
+<h3>Definition</h3>
+<p>Drug-induced hepatitis is generally defined as <strong>AST &ge;3&times; the upper limit of normal (ULN) with symptoms</strong> (nausea, vomiting, jaundice, abdominal pain) <strong>or AST &ge;5&times; ULN without symptoms</strong>.</p>
+<h3>Management algorithm</h3>
+<ol>
+<li><strong>Stop all first-line hepatotoxic agents</strong> (isoniazid, rifampin, pyrazinamide) immediately; a non-hepatotoxic agent (e.g., a fluoroquinolone plus/minus ethambutol, streptomycin) can bridge therapy in the interim so the patient isn't left untreated.</li>
+<li>Wait until AST falls to <strong>&lt;2&times; ULN</strong> and symptoms resolve.</li>
+<li><strong>Reintroduce sequentially, one drug at a time, about a week apart</strong>, in this order: <strong>rifampin &rarr; ethambutol &rarr; isoniazid</strong>. Pyrazinamide is usually reintroduced last, if at all, since it is considered the most hepatotoxic of the group.</li>
+<li>Whichever drug's reintroduction triggers a recurrence in LFTs is presumed the causative agent and is permanently omitted from the regimen going forward (with the rest of the regimen adjusted/extended accordingly).</li>
+</ol>
+<div class="pearl"><div class="pearl-label">Why rifampin goes back in first</div>Rifampin is generally the least hepatotoxic of the three implicated first-line drugs and is also the most valuable for shortening total treatment duration — so it's reintroduced first to preserve regimen efficacy while still testing tolerance stepwise.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q19">
+<p class="stem">A patient on standard 4-drug TB therapy develops AST 6x the upper limit of normal with no symptoms. What is the immediate next step?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Continue all four drugs and recheck labs in one month</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Stop only pyrazinamide and continue the rest</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Double the isoniazid dose to overcome resistance</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Stop all first-line hepatotoxic agents (isoniazid, rifampin, pyrazinamide) and consider a bridging non-hepatotoxic regimen</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Switch immediately to a bedaquiline-based regimen</button>
+
+<div class="quiz-explain">An asymptomatic AST ≥5x ULN meets the threshold for drug-induced hepatitis, requiring immediate discontinuation of all hepatotoxic first-line agents, with a non-hepatotoxic bridging regimen considered in the interim.</div>
+</div>
+<div class="quiz-q" id="q20">
+<p class="stem">After resolution of drug-induced hepatitis, first-line TB drugs are reintroduced sequentially about a week apart. What is the correct reintroduction order, and which drug is typically added last or omitted?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Isoniazid, then rifampin, then ethambutol; rifampin omitted last</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Pyrazinamide first, then isoniazid, then rifampin; ethambutol omitted</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. All four drugs restarted simultaneously at half dose</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Ethambutol only, with the others permanently discontinued</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Rifampin, then ethambutol, then isoniazid; pyrazinamide reintroduced last or omitted</button>
+
+<div class="quiz-explain">The standard sequential restart order is rifampin, then ethambutol, then isoniazid, each about a week apart, with pyrazinamide — considered the most hepatotoxic — reintroduced last or omitted entirely.</div>
+</div></div>
+</section>
+<section class="card" id="regimens">
+<div class="kicker">Part 3 &middot; Putting the Drugs Together</div>
+<h2>9. Treatment Regimens &mdash; LTBI, Standard Active Disease &amp; the 2022 Four-Month Option</h2>
+
+<h3>Latent TB infection (LTBI) &mdash; single active agent is sufficient</h3>
+<p>Because bacillary burden is low and the organism is dormant (not the high-burden, mixed-population scenario driving the combination-therapy math above), LTBI can be treated with one active drug:</p>
+<div class="table-wrap"><table class="data-table">
+<caption>LTBI regimen options</caption>
+<tr><th>Regimen</th><th>Duration</th><th>Notes</th></tr>
+<tr><td><span class="core-name">Isoniazid</span><span class="badge badge-core">Core</span> daily</td><td>6&ndash;9 months</td><td>Classic option; longest duration, lowest per-dose pill burden</td></tr>
+<tr><td><span class="core-name">Isoniazid</span><span class="badge badge-core">Core</span> + <span class="core-name">rifapentine</span><span class="badge badge-core">Core</span> once weekly</td><td>3 months (12 doses)</td><td>Shortest, DOT-friendly; preferred where available</td></tr>
+<tr><td><span class="core-name">Rifampin</span><span class="badge badge-core">Core</span> daily</td><td>4 months</td><td>Alternative when isoniazid can't be used</td></tr>
+</table></div>
+<h3>Standard active-disease regimen</h3>
+<p><strong>Intensive phase (2 months):</strong> isoniazid + rifampin + pyrazinamide + ethambutol (&ldquo;RIPE&rdquo;), daily or DOT-friendly intermittent dosing. <strong>Continuation phase (4 months):</strong> isoniazid + rifampin only, once pyrazinamide's job (acidic/intracellular population) is done and drug susceptibility is confirmed. <strong>Total: 6 months</strong> for fully-susceptible, uncomplicated pulmonary disease.</p>
+<h3>The CDC/WHO 2022 four-month regimen</h3>
+<p>A newer, shorter alternative for select drug-susceptible pulmonary TB: <strong>isoniazid + <span class="core-name">rifapentine</span><span class="badge badge-core">Core</span> + pyrazinamide + <span class="core-name">moxifloxacin</span><span class="badge badge-core">Core</span></strong> for 4 months total. Substituting rifapentine (more potent, longer-acting rifamycin) and adding moxifloxacin (a fluoroquinolone with potent bactericidal activity) allows the same efficacy in two fewer months &mdash; a direct payoff of the two drugs Dr. Waller flagged as the paired learning objective (rifapentine) and the added core agent (moxifloxacin) for this shortened option.</p>
+<div class="pearl"><div class="pearl-label">Don't confuse the two four-month regimens</div>LTBI's isoniazid+rifapentine 3-month (12-dose) regimen and the newer CDC/WHO 4-month *active-disease* regimen (isoniazid+rifapentine+pyrazinamide+moxifloxacin) both lean on rifapentine's long half-life, but they treat different disease states with different drug counts and durations — don't merge them into one fact.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q21">
+<p class="stem">A patient with a positive IGRA, no symptoms, and a normal chest x-ray is diagnosed with latent TB infection. Why is a single active agent (e.g., isoniazid) considered sufficient here, when active disease always requires combination therapy?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. The bacillary burden is low and the organism is dormant, so the resistance-emergence math driving combination therapy in high-burden active disease does not apply the same way</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. LTBI organisms are inherently more susceptible to all drugs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Isoniazid alone can never fail regardless of burden</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. LTBI is not actually caused by the same organism as active TB</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Combination therapy is reserved only for extrapulmonary disease</button>
+
+<div class="quiz-explain">LTBI involves a small, dormant bacillary population, unlike the large, actively dividing populations in active disease where spontaneous resistant mutants are essentially guaranteed to exist — so monotherapy is adequate for LTBI but not for active disease.</div>
+</div>
+<div class="quiz-q" id="q22">
+<p class="stem">A patient begins standard 6-month therapy for drug-susceptible pulmonary TB. After the 2-month intensive phase with four drugs, susceptibility is confirmed and the regimen is narrowed. Which two drugs continue for the remaining 4 months?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Ethambutol and pyrazinamide</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Isoniazid and rifampin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Pyrazinamide and streptomycin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Ethambutol and isoniazid</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Rifampin and pyrazinamide</button>
+
+<div class="quiz-explain">The continuation phase of standard therapy consists of isoniazid and rifampin alone, once pyrazinamide's role in the acidic/intracellular population is complete and ethambutol's empiric resistance coverage is no longer needed.</div>
+</div>
+<div class="quiz-q" id="q23">
+<p class="stem">The CDC/WHO 2022 four-month regimen for select drug-susceptible pulmonary TB substitutes and adds specific agents compared to the standard 6-month regimen. Which two drugs distinguish this shortened regimen?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Ethambutol substituted for pyrazinamide, plus streptomycin added</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Isoniazid removed entirely, plus linezolid added</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Rifapentine substituted for rifampin, plus moxifloxacin added</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Rifabutin substituted for rifampin, plus bedaquiline added</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Pyrazinamide removed, plus kanamycin added</button>
+
+<div class="quiz-explain">The 4-month regimen substitutes the longer-acting, more potent rifapentine for rifampin and adds moxifloxacin, a potent fluoroquinolone — together allowing the same treatment goal in two fewer months.</div>
+</div></div>
+</section>
+<section class="card" id="drug-resistant">
+<div class="kicker">Part 3 &middot; MDR/XDR</div>
+<h2>10. Drug-Resistant TB &mdash; Definitions &amp; Management Strategy (Conceptual)</h2>
+
+<p>Dr. Waller was explicit here: <strong>do not memorize the regimen-building table</strong> for drug-resistant TB &mdash; understand the overall management <strong>strategy</strong>.</p>
+<h3>Definitions</h3>
+<div class="table-wrap"><table class="data-table">
+<caption>Resistance categories</caption>
+<tr><th>Category</th><th>Definition</th></tr>
+<tr><td><strong>MDR-TB</strong></td><td>Resistant to at least isoniazid <strong>and</strong> rifampin</td></tr>
+<tr><td><strong>XDR-TB</strong></td><td>MDR-TB <strong>plus</strong> resistance to any fluoroquinolone <strong>and</strong> to at least one of bedaquiline or linezolid</td></tr>
+</table></div>
+<h3>The strategy, not the table</h3>
+<ul>
+<li>Build a regimen of <strong>&ge;4&ndash;5 likely-effective agents</strong> the organism has not been shown resistant to, drawn from progressively less-preferred groups (fluoroquinolones and newer agents like bedaquiline first; injectables and older second-line oral agents as later-line options).</li>
+<li><strong>Longer total duration</strong> than drug-susceptible disease (many months to well over a year, depending on regimen).</li>
+<li>Involve or refer to a <strong>TB specialist/public health program</strong> &mdash; these regimens are individualized, not protocol-driven off a single table.</li>
+<li>Second-line agents worth recognizing by category (not memorizing individually): later-generation fluoroquinolones (levofloxacin<span class="badge badge-additional">Additional</span>, moxifloxacin<span class="badge badge-additional">Additional</span> already core), injectables (kanamycin<span class="badge badge-additional">Additional</span>, amikacin<span class="badge badge-additional">Additional</span>, capreomycin<span class="badge badge-additional">Additional</span>), oral agents (ethionamide<span class="badge badge-additional">Additional</span>, cycloserine<span class="badge badge-additional">Additional</span>, PAS<span class="badge badge-additional">Additional</span>), and newer targeted agents (bedaquiline<span class="badge badge-additional">Additional</span>, linezolid<span class="badge badge-additional">Additional</span>).</li>
+</ul>
+<div class="pearl"><div class="pearl-label">What to actually take away</div>The exam-relevant fact isn't which specific second-line drug pairs with which resistance pattern — it's that MDR/XDR management means more drugs, longer duration, and specialist-level individualization, built from a shrinking menu of active options as resistance accumulates.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q24">
+<p class="stem">A patient's TB isolate is resistant to isoniazid and rifampin, but susceptible to fluoroquinolones, bedaquiline, and linezolid. How should this be classified?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Extensively drug-resistant TB (XDR-TB)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Fully drug-susceptible TB</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Rifampin-monoresistant TB only</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Multidrug-resistant TB (MDR-TB)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Latent TB infection</button>
+
+<div class="quiz-explain">Resistance to at least isoniazid and rifampin (without the additional fluoroquinolone plus bedaquiline/linezolid resistance required for XDR-TB) defines MDR-TB.</div>
+</div>
+<div class="quiz-q" id="q25">
+<p class="stem">Rather than memorizing a specific regimen-building table for drug-resistant TB, what is the more important conceptual takeaway about its management strategy?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. All drug-resistant TB is treated identically to drug-susceptible TB</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Drug-resistant TB never requires more than 2 drugs</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Only injectable agents can ever be used for MDR-TB</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Drug-resistant TB is managed with a single potent oral agent</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Management requires building an individualized regimen of several likely-effective agents, typically for a longer duration, often with specialist involvement</button>
+
+<div class="quiz-explain">The strategic principle — not a fixed table — is to assemble several (typically ≥4-5) likely-active agents from a hierarchy of drug classes, extend total duration, and individualize care, often with specialist or public health program involvement.</div>
+</div></div>
+</section>
+<section class="card" id="special-pop">
+<div class="kicker">Part 3 &middot; Clinical Pharmacology</div>
+<h2>11. Special Populations &mdash; HIV, Immunomodulating Drugs &amp; Pregnancy</h2>
+
+<h3>HIV co-infection</h3>
+<ul>
+<li>TB is more likely to progress from LTBI to active disease, and disease is more likely to be disseminated/extrapulmonary.</li>
+<li><strong>Rifamycin &ndash; antiretroviral drug interactions</strong> are the central management issue: rifampin's strong CYP450 induction can drop levels of protease inhibitors and some NNRTIs; <span class="core-name">rifabutin</span><span class="badge badge-core">Core</span>'s weaker induction is the preferred substitute in that setting (reinforcing the rifamycin comparison from Section 3).</li>
+<li>Timing of antiretroviral therapy initiation relative to TB therapy is individualized (generally started within weeks of TB treatment, sooner with lower CD4 counts), balancing immune reconstitution inflammatory syndrome (IRIS) risk against progression risk.</li>
+</ul>
+<h3>Immunomodulating drugs (biologics, especially TNF-&alpha; inhibitors)</h3>
+<p>TNF-&alpha; is essential for granuloma maintenance/containment of latent infection. Patients starting a TNF-&alpha; inhibitor (or other significant immunosuppression) are at markedly increased risk of <strong>reactivating LTBI</strong> to active disease &mdash; hence universal screening (TST/IGRA) <strong>before</strong> starting these agents, with LTBI treatment initiated first when positive.</p>
+<h3>Pregnancy</h3>
+<ul>
+<li>Active TB in pregnancy is treated &mdash; untreated disease poses greater risk to mother and fetus than treatment.</li>
+<li><strong>Standard regimen (isoniazid, rifampin, ethambutol) is generally considered safe</strong>; pyrazinamide's safety data in pregnancy is more limited and its use varies by guideline/region.</li>
+<li><strong>Streptomycin (and other aminoglycosides) is contraindicated</strong> &mdash; associated with fetal ototoxicity/congenital deafness.</li>
+<li>Pyridoxine supplementation with isoniazid is particularly emphasized in pregnancy.</li>
+</ul>
+<div class="pearl"><div class="pearl-label">The connective thread across all three populations</div>Each special population changes management for a *mechanistic* reason already covered elsewhere in this guide: CYP450 interactions (HIV/rifamycins), TNF-α's role in granuloma containment (immunomodulators → LTBI reactivation), and aminoglycoside fetal ototoxicity (pregnancy) — the populations aren't isolated facts, they're applications of mechanisms you already know.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q26">
+<p class="stem">A patient is about to start a TNF-alpha inhibitor for rheumatoid arthritis. Why is TB screening mandatory before initiating this therapy?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. TNF-alpha is required to maintain granulomas containing latent TB infection, and its inhibition risks reactivation to active disease</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. TNF-alpha inhibitors directly cause TB infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. TNF-alpha inhibitors are metabolized by the same pathway as isoniazid</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Screening is only needed if the patient has active pulmonary symptoms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. TNF-alpha inhibitors cure latent TB infection</button>
+
+<div class="quiz-explain">TNF-alpha helps maintain the granulomas that contain latent TB infection; inhibiting it removes that containment and substantially raises the risk of reactivation to active disease, making pre-treatment screening standard.</div>
+</div>
+<div class="quiz-q" id="q27">
+<p class="stem">A pregnant patient is diagnosed with active pulmonary TB. Which first-line-adjacent agent must specifically be avoided due to fetal risk?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Isoniazid</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Streptomycin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Rifampin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Ethambutol</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Pyridoxine</button>
+
+<div class="quiz-explain">Streptomycin and other aminoglycosides are contraindicated in pregnancy due to a well-documented risk of fetal ototoxicity/congenital deafness; isoniazid, rifampin, and ethambutol are generally considered safe.</div>
+</div>
+<div class="quiz-q" id="q28">
+<p class="stem">An HIV-positive patient on a protease inhibitor is diagnosed with active TB. What is the central pharmacologic concern in choosing the rifamycin component of therapy?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. All rifamycins are contraindicated in HIV patients</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Protease inhibitors increase rifampin's hepatotoxicity directly</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Rifampin's potent CYP450 induction can significantly lower protease inhibitor levels, making rifabutin (a weaker inducer) the preferred substitute</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Rifapentine is the only rifamycin safe in HIV patients</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. This interaction only matters for isoniazid, not the rifamycins</button>
+
+<div class="quiz-explain">Rifampin's strong CYP450 induction risks subtherapeutic protease inhibitor levels; rifabutin's much weaker induction preserves antiretroviral efficacy while still treating TB, making it the preferred substitute in this setting.</div>
+</div></div>
+</section>
+<section class="card" id="atypical-leprosy">
+<div class="kicker">Part 3 &middot; Brief, By Design</div>
+<h2>12. Atypical Mycobacteria &amp; Leprosy Drugs (Conceptual Overview)</h2>
+
+<p>Per Dr. Waller's explicit instruction, the atypical mycobacteria treatment table is <strong>not something to memorize</strong> &mdash; know that it exists as a distinct category and recognize the drugs by name.</p>
+<h3>Atypical (nontuberculous) mycobacteria</h3>
+<p><em>Mycobacterium avium</em> complex (MAC) and related species cause disease distinct from <em>M. tuberculosis</em> (often in structural lung disease or advanced immunosuppression, e.g., low-CD4 HIV). Treatment uses combination regimens built around a macrolide (azithromycin<span class="badge badge-additional">Additional</span> or clarithromycin<span class="badge badge-additional">Additional</span>) plus <span class="core-name">ethambutol</span><span class="badge badge-core">Core</span>, sometimes with rifabutin<span class="badge badge-additional">Additional</span> added &mdash; conceptually similar &ldquo;combine several active agents&rdquo; logic as TB itself, just with a different core backbone.</p>
+<h3>Leprosy (<em>Mycobacterium leprae</em>)</h3>
+<div class="table-wrap"><table class="data-table">
+<caption>Leprosy-specific agents (recognize by name/category only)</caption>
+<tr><th>Agent</th><th>Mechanism</th><th>Notable point</th></tr>
+<tr><td>Dapsone<span class="badge badge-additional">Additional</span></td><td>Folate pathway inhibition (similar logic to sulfonamides)</td><td>Combined with other agents; hemolysis risk in G6PD deficiency</td></tr>
+<tr><td>Clofazimine<span class="badge badge-additional">Additional</span></td><td>Binds mycobacterial DNA; also anti-inflammatory</td><td>Reddish-brown skin/bodily fluid discoloration</td></tr>
+</table></div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q29">
+<p class="stem">A patient with structural lung disease develops pulmonary infection with Mycobacterium avium complex (MAC). Which drug class forms the backbone of typical combination therapy, generally paired with ethambutol?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Aminoglycosides</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Fluoroquinolones</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Sulfonamides</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Macrolides (azithromycin or clarithromycin)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Echinocandins</button>
+
+<div class="quiz-explain">MAC disease is typically treated with a macrolide (azithromycin or clarithromycin) combined with ethambutol, sometimes with rifabutin added — a distinct regimen from standard M. tuberculosis therapy.</div>
+</div>
+<div class="quiz-q" id="q30">
+<p class="stem">A patient being treated for leprosy develops noticeable reddish-brown discoloration of the skin. Which agent is responsible, and is this expected?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Dapsone; this is an emergency requiring discontinuation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Rifampin; this indicates hepatotoxicity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Ethambutol; this indicates optic toxicity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Isoniazid; this indicates a hypersensitivity reaction</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Clofazimine; this is an expected, characteristic adverse effect</button>
+
+<div class="quiz-explain">Clofazimine characteristically causes reddish-brown discoloration of the skin and body fluids — an expected effect of the drug rather than a sign of toxicity requiring discontinuation.</div>
+</div></div>
+</section>
+<section class="card" id="mechanisms">
+<div class="kicker">Consolidation</div>
+<h2>13. Mechanisms &amp; Adverse Effects At a Glance</h2>
+<p style="margin-top:0;">One row per agent/category &mdash; the core four plus the paired rifamycins are the ones to know cold; the rest, know by category.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Mechanisms &amp; adverse effects, sorted</caption>
+<tr><th>Agent</th><th>Mechanism</th><th>Spectrum / Niche</th><th>Key ADR</th></tr>
+<tr><td><strong>Isoniazid</strong></td><td>Prodrug (KatG-activated) &rarr; inhibits InhA &rarr; blocks mycolic acid synthesis</td><td>Bactericidal, actively dividing organisms</td><td>Hepatotoxicity; peripheral neuropathy (give B6)</td></tr>
+<tr><td><strong>Rifampin</strong></td><td>Binds RNA polymerase &beta;-subunit (rpoB) &rarr; blocks transcription</td><td>Bactericidal, incl. slow/intermittent dividers</td><td>Hepatotoxicity; orange body-fluid discoloration; strongest CYP450 inducer</td></tr>
+<tr><td><strong>Rifabutin</strong></td><td>Same as rifampin (rpoB)</td><td>Same as rifampin; full cross-resistance</td><td>Uveitis, neutropenia; weakest CYP450 inducer &mdash; preferred with PIs/NNRTIs</td></tr>
+<tr><td><strong>Rifapentine</strong></td><td>Same as rifampin (rpoB)</td><td>Same as rifampin; long half-life &rarr; once-weekly dosing</td><td>Similar to rifampin; flu-like reaction with intermittent dosing</td></tr>
+<tr><td><strong>Pyrazinamide</strong></td><td>Prodrug (PncA-activated) &rarr; pyrazinoic acid disrupts membrane in acidic milieu</td><td>Semi-dormant, intracellular/acidic-niche organisms only</td><td>Most hepatotoxic first-line agent; hyperuricemia/gout</td></tr>
+<tr><td><strong>Ethambutol</strong></td><td>Inhibits arabinosyl transferases &rarr; blocks arabinogalactan synthesis</td><td>Bacteriostatic; empiric 4th-agent coverage</td><td>Optic neuritis (color vision, acuity) &mdash; monitor visual exams</td></tr>
+<tr><td><strong>Streptomycin</strong></td><td>Aminoglycoside; binds 30S, disrupts initiation/misreads mRNA</td><td>Bactericidal; injectable only, not true first-line</td><td>Ototoxicity (may be irreversible), nephrotoxicity</td></tr>
+<tr><td><strong>Moxifloxacin</strong></td><td>Inhibits DNA gyrase / topoisomerase IV</td><td>Potent bactericidal; key agent in the 4-month regimen</td><td>QT prolongation, tendinopathy, CNS effects</td></tr>
+<tr><td><strong>Ethionamide / Cycloserine / PAS (2nd-line oral)</strong></td><td>Ethionamide: blocks mycolic acid synthesis (InhA, different activation). Cycloserine: blocks peptidoglycan precursor synthesis. PAS: folate pathway</td><td>Drug-resistant TB, later-line</td><td>GI intolerance, neuropsychiatric effects (cycloserine)</td></tr>
+<tr><td><strong>Kanamycin / Amikacin / Capreomycin (2nd-line injectable)</strong></td><td>Protein synthesis inhibition (aminoglycoside-class mechanism/related)</td><td>Drug-resistant TB</td><td>Ototoxicity, nephrotoxicity (class-shared)</td></tr>
+<tr><td><strong>Bedaquiline</strong></td><td>Inhibits mycobacterial ATP synthase</td><td>Targeted agent for MDR/XDR-TB</td><td>QT prolongation, hepatotoxicity</td></tr>
+<tr><td><strong>Linezolid</strong></td><td>Binds 50S ribosomal P site, blocks initiation complex</td><td>MDR/XDR-TB component</td><td>Myelosuppression, peripheral/optic neuropathy with prolonged use</td></tr>
+<tr><td><strong>Dapsone</strong></td><td>Folate pathway inhibition</td><td>Leprosy</td><td>Hemolysis (G6PD deficiency)</td></tr>
+<tr><td><strong>Clofazimine</strong></td><td>Binds mycobacterial DNA; anti-inflammatory</td><td>Leprosy</td><td>Reddish-brown skin/fluid discoloration</td></tr>
+
+</table></div>
+
+</section>
+<section class="card" id="high-yield-summary">
+<div class="kicker">Final Review</div>
+<h2>14. High-Yield Summary &mdash; Core Drugs Only</h2>
+<p style="margin-top:0;">Only the seven drugs Dr. Waller highlighted in red font: the core four plus the rifabutin/rifapentine/moxifloxacin trio. Everything reviewed above (streptomycin, second-line agents, atypical mycobacteria/leprosy drugs) is fair game as "additional" but master this list first.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>High-yield recall &mdash; core (red-font) drugs only</caption>
+<tr><th>Drug</th><th>One-line role</th></tr>
+<tr><td><strong>Isoniazid</strong></td><td>Core first-line agent #1; mycolic acid synthesis inhibitor; hepatotoxicity + peripheral neuropathy (give B6); NAT2 acetylator phenotype matters.</td></tr>
+<tr><td><strong>Rifampin</strong></td><td>Core first-line agent #2; rpoB/RNA polymerase inhibitor; strongest CYP450 inducer; orange discoloration.</td></tr>
+<tr><td><strong>Pyrazinamide</strong></td><td>Core first-line agent #3; targets acidic/intracellular population; intensive phase only; most hepatotoxic first-line agent.</td></tr>
+<tr><td><strong>Ethambutol</strong></td><td>Core first-line agent #4; arabinogalactan synthesis inhibitor; empiric resistance coverage; optic neuritis (color vision).</td></tr>
+<tr><td><strong>Rifabutin</strong></td><td>Paired rifamycin alternative; weakest CYP450 inducer; preferred with HIV protease inhibitors/NNRTIs.</td></tr>
+<tr><td><strong>Rifapentine</strong></td><td>Paired rifamycin alternative; long half-life enables once-weekly LTBI regimen and the 4-month active-disease regimen.</td></tr>
+<tr><td><strong>Moxifloxacin</strong></td><td>Core agent in the CDC/WHO 2022 four-month active-disease regimen (with rifapentine); DNA gyrase/topoisomerase IV inhibitor.</td></tr>
+
+</table></div>
+
+</section>
+
+</div>
+<script>
+function toggleSidenav(){
+  document.getElementById('sidenavPanel').classList.toggle('open');
+}
+function answerQ(btn){
+  var q = btn.closest('.quiz-q');
+  if(q.dataset.answered) return;
+  q.dataset.answered = "true";
+  var choices = q.querySelectorAll('.quiz-choice');
+  choices.forEach(function(c){
+    c.disabled = true;
+    if(c.dataset.correct === "true"){ c.classList.add('correct'); }
+  });
+  if(btn.dataset.correct !== "true"){ btn.classList.add('incorrect'); }
+  q.querySelector('.quiz-explain').classList.add('show');
+}
+(function(){
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.card'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidenav-panel a'));
+  function onScroll(){
+    var best = null, bestTop = -Infinity;
+    sections.forEach(function(s){
+      var top = s.getBoundingClientRect().top;
+      if(top <= 120 && top > bestTop){ bestTop = top; best = s.id; }
+    });
+    links.forEach(function(l){
+      l.classList.toggle('active', l.dataset.target === best);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
