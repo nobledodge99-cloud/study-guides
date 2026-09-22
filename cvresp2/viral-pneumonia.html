@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viral Pneumonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --cream:#f7f2e7; --cream-card:#fffdf8; --forest-dark:#1f3d2c; --forest:#2f5d3f;
+  --sage:#7fa07f; --sage-light:#e4ecdf; --border:#d9d0ba; --accent:#c1622d;
+  --text-main:#2a2723; --text-soft:#5c574c; --correct:#2f7d4f; --incorrect:#b23a2f;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--cream); color:var(--text-main); font-family:'Lora',serif; line-height:1.6;}
+.back-btn{position:fixed; top:14px; left:14px; z-index:500; background:var(--cream-card); color:var(--forest-dark);
+  border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-family:'IBM Plex Mono',monospace;
+  font-size:0.8rem; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.back-btn:hover{background:var(--sage-light);}
+.header{padding:70px 24px 20px; text-align:center;}
+.header h1{font-size:2.1rem; color:var(--forest-dark); margin:0 0 6px;}
+.header .kicker{font-family:'IBM Plex Mono',monospace; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--accent); font-size:0.8rem; margin-bottom:10px;}
+.header .sub{color:var(--text-soft); font-size:0.95rem; max-width:720px; margin:0 auto;}
+.container{max-width:900px; margin:0 auto; padding:0 20px 100px;}
+.toc{background:var(--cream-card); border:1px solid var(--border); border-radius:12px; padding:20px 26px; margin:20px 0 36px;}
+.toc h2{font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--forest); margin-top:0;}
+.toc ul{margin:0; padding-left:22px; columns:2; column-gap:24px;}
+.toc li{margin-bottom:6px; break-inside:avoid;}
+.toc a{color:var(--text-main); text-decoration:none;}
+.toc a:hover{color:var(--accent);}
+section.card{background:var(--cream-card); border:1px solid var(--border); border-radius:14px;
+  padding:28px 30px; margin-bottom:26px; scroll-margin-top:20px;}
+section.card .kicker{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--accent); margin-bottom:4px;}
+section.card h2{color:var(--forest-dark); margin:0 0 14px; font-size:1.5rem;}
+section.card h3{color:var(--forest); font-size:1.1rem; margin:22px 0 8px;}
+section.card p{margin:10px 0;}
+section.card ul, section.card ol{padding-left:22px;}
+section.card li{margin-bottom:6px;}
+.table-wrap{overflow-x:auto; margin:16px 0;}
+table.data-table{border-collapse:collapse; width:100%; font-size:0.92rem;}
+table.data-table caption{text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+  text-transform:uppercase; letter-spacing:0.05em; color:var(--text-soft); margin-bottom:6px;}
+table.data-table th{background:var(--forest-dark); color:#fff; font-family:'IBM Plex Mono',monospace;
+  font-size:0.78rem; text-transform:uppercase; letter-spacing:0.03em; padding:9px 12px; text-align:left;}
+table.data-table td{padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:rgba(127,160,127,0.08);}
+.pearl{background:var(--sage-light); border-left:4px solid var(--sage); border-radius:8px; padding:14px 18px; margin:16px 0;}
+.pearl-label{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--forest-dark); margin-bottom:4px; font-weight:600;}
+.case{background:#fff; border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin:16px 0;}
+.case-label{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--accent); margin-bottom:4px; font-weight:600;}
+.quiz-block{margin-top:24px; padding-top:16px; border-top:1px dashed var(--border);}
+.quiz-mini-header{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--forest); margin-bottom:12px;}
+.quiz-q{background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:16px;}
+.quiz-q p.stem{margin:0 0 12px; font-weight:500;}
+.quiz-choice{display:block; width:100%; text-align:left; background:var(--cream); border:1px solid var(--border);
+  border-radius:8px; padding:10px 14px; margin-bottom:8px; cursor:pointer; font-family:'Lora',serif; font-size:0.95rem;
+  color:var(--text-main);}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#e3f3e6; border-color:var(--correct); color:var(--correct); font-weight:600;}
+.quiz-choice.incorrect{background:#fbe7e4; border-color:var(--incorrect); color:var(--incorrect);}
+.quiz-choice[disabled]{cursor:default;}
+.quiz-explain{display:none; background:var(--sage-light); border-radius:8px; padding:12px 14px; margin-top:8px; font-size:0.9rem;}
+.quiz-explain.show{display:block;}
+.sidenav-toggle{position:fixed; top:14px; right:14px; z-index:500; background:var(--forest-dark); color:#fff;
+  border:none; border-radius:8px; padding:8px 14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; cursor:pointer;}
+.sidenav-panel{position:fixed; top:58px; right:14px; z-index:499; background:var(--cream-card); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; width:250px; max-height:75vh; overflow-y:auto; display:none; box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+.sidenav-panel.open{display:block;}
+.sidenav-panel ul{list-style:none; margin:0; padding:0;}
+.sidenav-panel li{margin-bottom:4px;}
+.sidenav-panel a{display:block; padding:6px 8px; border-radius:6px; color:var(--text-main); text-decoration:none; font-size:0.88rem;}
+.sidenav-panel a:hover{background:var(--sage-light);}
+.sidenav-panel a.active{background:var(--forest-dark); color:#fff;}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="sidenav-toggle" onclick="toggleSidenav()">Sections</button>
+<div class="sidenav-panel" id="sidenavPanel"><ul><li><a href="#viral-vs-bacterial" data-target="viral-vs-bacterial">1. Viral vs. Bacterial Pneumonia &mdash; Contrasting Pathophysiology</a></li><li><a href="#extremes-of-age" data-target="extremes-of-age">2. Why Viral Pneumonia Hits the Very Young and Very Old Hardest</a></li><li><a href="#virus-overview" data-target="virus-overview">3. The Causative Agents &mdash; DNA vs. RNA Viruses</a></li><li><a href="#rhinovirus" data-target="rhinovirus">4. Rhinovirus &mdash; &ldquo;The Bad&rdquo;</a></li><li><a href="#paramyxoviruses" data-target="paramyxoviruses">5. The Paramyxoviruses &mdash; RSV, Parainfluenza &amp; Human Metapneumovirus</a></li><li><a href="#influenza" data-target="influenza">6. Influenza &mdash; &ldquo;A Real Bad Boy&rdquo;</a></li><li><a href="#coronavirus-history" data-target="coronavirus-history">7. Coronaviruses &mdash; From Nothing-Virus to Global Pandemic</a></li><li><a href="#sars-cov-2" data-target="sars-cov-2">8. SARS-CoV-2 &mdash; Pathogenesis, Clinical Course &amp; Treatment</a></li><li><a href="#symptom-comparison" data-target="symptom-comparison">9. Symptom Comparison &mdash; Allergies vs. Cold vs. Flu vs. COVID-19</a></li><li><a href="#viral-pcr" data-target="viral-pcr">10. Diagnostic Testing &mdash; Viral PCR Panels</a></li><li><a href="#high-yield-summary" data-target="high-yield-summary">11. High-Yield Summary</a></li></ul></div>
+<div class="header">
+  <div class="kicker">Clinical Sciences &middot; Dr. Jamie Riesberg, MD</div>
+  <h1>Viral Pneumonia</h1>
+  <p class="sub">Lower respiratory tract syndromes caused by viruses &mdash; contrasted with typical bacterial pneumonia, then broken down pathogen by pathogen from rhinovirus through influenza to the coronaviruses, closing with SARS-CoV-2 as the case study.</p>
+</div>
+<div class="container">
+<div class="toc"><h2>Contents</h2><ul><li><a href="#viral-vs-bacterial">1. Viral vs. Bacterial Pneumonia &mdash; Contrasting Pathophysiology</a></li><li><a href="#extremes-of-age">2. Why Viral Pneumonia Hits the Very Young and Very Old Hardest</a></li><li><a href="#virus-overview">3. The Causative Agents &mdash; DNA vs. RNA Viruses</a></li><li><a href="#rhinovirus">4. Rhinovirus &mdash; &ldquo;The Bad&rdquo;</a></li><li><a href="#paramyxoviruses">5. The Paramyxoviruses &mdash; RSV, Parainfluenza &amp; Human Metapneumovirus</a></li><li><a href="#influenza">6. Influenza &mdash; &ldquo;A Real Bad Boy&rdquo;</a></li><li><a href="#coronavirus-history">7. Coronaviruses &mdash; From Nothing-Virus to Global Pandemic</a></li><li><a href="#sars-cov-2">8. SARS-CoV-2 &mdash; Pathogenesis, Clinical Course &amp; Treatment</a></li><li><a href="#symptom-comparison">9. Symptom Comparison &mdash; Allergies vs. Cold vs. Flu vs. COVID-19</a></li><li><a href="#viral-pcr">10. Diagnostic Testing &mdash; Viral PCR Panels</a></li><li><a href="#high-yield-summary">11. High-Yield Summary</a></li></ul></div>
+<section class="card" id="viral-vs-bacterial">
+<div class="kicker">Part 1 &middot; The Core Distinction</div>
+<h2>1. Viral vs. Bacterial Pneumonia &mdash; Contrasting Pathophysiology</h2>
+
+<p>Same alveolar battlefield, two different immune scripts &mdash; and the script determines the presentation, the imaging, and the timeline.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Bacterial vs. viral pneumonia &mdash; the immune sequence</caption>
+<tr><th></th><th>Bacterial (e.g., pneumococcal)</th><th>Viral (e.g., SARS-CoV-2)</th></tr>
+<tr><td><strong>Key immune cell</strong></td><td>Neutrophils, macrophages</td><td>Lymphocytes</td></tr>
+<tr><td><strong>Sequence</strong></td><td>Bacteria grow in alveoli &rarr; capillaries open, neutrophils flood in &rarr; edema &rarr; macrophages clean up debris &rarr; resolution</td><td>Virus enters cells, replicates &rarr; infected cells destroyed as virus bursts out &rarr; lymphocytes sense/destroy infected cells; type I pneumocytes replaced by type II &rarr; hyaline membranes + fluid-filled alveoli</td></tr>
+<tr><td><strong>Sputum</strong></td><td>Productive, green/yellow (neutrophils + debris + dead bacteria)</td><td>Classically nonproductive</td></tr>
+<tr><td><strong>Imaging pattern</strong></td><td>Lobar <strong>consolidation</strong> (dense, well-demarcated opacity)</td><td>Patchy, <strong>interstitial</strong>/peri-hilar infiltrates (sporadic, branches out from the bronchioles, not a solid consolidated block)</td></tr>
+<tr><td><strong>Classic symptoms more likely</strong></td><td>Chest pain, rigors, heavy productive cough</td><td>Myalgias, headache, fatigue, nonproductive cough &mdash; lower probability of chest pain/rigors than bacterial</td></tr>
+</table></div>
+<h3>The pathology-level explanation</h3>
+<p>In bacterial pneumonia, opened capillaries and neutrophil influx cause <strong>edema</strong> that fills the alveolar space &mdash; a fairly compact, localized process that resolves once macrophages clear the debris. In viral pneumonia, infected pneumocytes die as virus bursts through the cell membrane; the resulting <strong>hyaline membranes</strong> (thick pink protein/debris bands lining the alveoli, seen together with type II pneumocyte proliferation and fluid-filled alveolar walls) are what thicken the alveolar-capillary interface and impair gas exchange &mdash; this is why viral pneumonia patients get short of breath even when the process looks patchier on imaging than a lobar bacterial consolidation.</p>
+<div class="pearl"><div class="pearl-label">The chest x-ray timing trap</div>Radiographic changes lag clinical resolution by 6-8 weeks in both bacterial and viral pneumonia. Never order a chest x-ray just to confirm a patient is improving or clearing their pneumonia — those changes will persist long after the patient feels better. The only reason to repeat a chest x-ray is if the patient is getting worse.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q1">
+<p class="stem">A chest x-ray shows a dense, well-demarcated area of consolidation in one lobe with air bronchograms, in a patient with a productive green cough and rigors. Which pathophysiologic process and pathogen category best fits this presentation?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Neutrophil-driven alveolar edema and consolidation; bacterial</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Lymphocyte-driven hyaline membrane formation; viral</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Type II pneumocyte hyperplasia with interstitial infiltrate; viral</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Eosinophilic infiltration; fungal</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Granuloma formation; mycobacterial</button>
+
+<div class="quiz-explain">Lobar consolidation with productive, purulent (green/yellow) sputum and rigors is the classic bacterial pattern — driven by neutrophil influx and alveolar edema, distinct from the lymphocyte/hyaline-membrane pattern of viral pneumonia.</div>
+</div>
+<div class="quiz-q" id="q2">
+<p class="stem">A patient recovering well clinically from pneumonia (afebrile, eating, ambulating normally) still has a hazy, incompletely resolved chest x-ray at the 2-week follow-up visit. What is the most appropriate next step?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Immediately escalate antibiotics since the x-ray hasn't cleared</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. No action needed — radiographic resolution lags clinical improvement by weeks and repeat imaging is not the way to judge treatment response</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Order a CT chest to look for treatment failure</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Repeat the chest x-ray every 2 days until it normalizes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Switch antibiotic classes based on the imaging alone</button>
+
+<div class="quiz-explain">Chest x-ray changes lag clinical improvement by roughly 6-8 weeks in both bacterial and viral pneumonia; imaging is not used to track response to treatment, and repeat imaging is reserved for patients who are clinically worsening.</div>
+</div>
+<div class="quiz-q" id="q3">
+<p class="stem">Which alveolar finding is characteristic of viral pneumonia's pathophysiology and directly contributes to impaired gas exchange by thickening the alveolar-capillary interface?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Neutrophilic abscess formation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Granulomatous caseation</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Hyaline membrane formation with type II pneumocyte proliferation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Eosinophilic infiltration</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Fibrinopurulent exudate with empyema</button>
+
+<div class="quiz-explain">Viral pneumonia is characterized by destruction of infected pneumocytes, hyaline membrane formation, and replacement of type I with type II pneumocytes — thickening the alveolar wall and impairing oxygen exchange.</div>
+</div></div>
+</section>
+<section class="card" id="extremes-of-age">
+<div class="kicker">Part 1 &middot; Host Factors</div>
+<h2>2. Why Viral Pneumonia Hits the Very Young and Very Old Hardest</h2>
+
+<p>Viral pneumonia classically presents more severely at the extremes of age &mdash; but the underlying immune explanation differs at each end.</p>
+<h3>Older patients &mdash; dysfunctional resident memory T cells</h3>
+<p>A mouse influenza study found that aged lungs accumulate <strong>intrinsically dysfunctional CD8+ tissue-resident memory (T<sub>RM</sub>) cells</strong>, driven by elevated <strong>TGF-&beta;</strong>. These dysfunctional T<sub>RM</sub> cells respond poorly to TCR stimulation and are weak antiviral effectors &mdash; yet they still drive <strong>persistent pulmonary inflammation and fibrosis</strong>, worsening morbidity/mortality even though they aren't clearing virus effectively. In short: more inflammation, less actual antiviral benefit.</p>
+<h3>Younger patients &mdash; immunologic immaturity</h3>
+<p>In children, the mechanism is simpler: the immune system either hasn't been challenged before (no prior exposure/memory response) or is not yet mature enough to mount a fully effective, well-regulated response.</p>
+<div class="pearl"><div class="pearl-label">Same outcome, different mechanism</div>Don't conflate the two explanations on an exam. Elderly = a specific dysfunctional CD8+ TRM/TGF-beta-driven inflammatory phenotype. Young children = immunologic immaturity/naivety. Both land in the same 'more severe disease at the extremes of age' bucket, but for different reasons.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q4">
+<p class="stem">A study of aged mice recovering from influenza pneumonia found elevated TGF-beta and accumulation of dysfunctional CD8+ tissue-resident memory cells. What is the net clinical effect of this finding?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Enhanced viral clearance with minimal inflammation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Complete absence of any T cell response</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Improved long-term lung function after recovery</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Weak antiviral effector function combined with persistent pulmonary inflammation and fibrosis, worsening morbidity and mortality</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Selective protection against reinfection with no inflammatory cost</button>
+
+<div class="quiz-explain">The dysfunctional CD8+ TRM cells in aged lungs are poor antiviral effectors but still drive ongoing inflammation and fibrosis — worse outcomes despite (or because of) an active but ineffective immune response.</div>
+</div>
+<div class="quiz-q" id="q5">
+<p class="stem">Why do young children also tend to have more severe presentations of viral pneumonia, despite not having the same dysfunctional CD8+ T-cell phenotype described in aged mice?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Children have excessive TGF-beta production identical to the elderly mechanism</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Children lack functioning neutrophils entirely</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Children universally lack ACE2 receptors</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Children have permanently absent lymphocyte populations</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Children's immune systems are either immunologically naive or not yet mature enough to mount a fully effective response</button>
+
+<div class="quiz-explain">In children, severity at the young end of the age spectrum is generally attributed to an immature or previously unchallenged immune system, a distinct mechanism from the dysfunctional T-cell-driven inflammation seen in aging.</div>
+</div></div>
+</section>
+<section class="card" id="virus-overview">
+<div class="kicker">Part 1 &middot; Classification</div>
+<h2>3. The Causative Agents &mdash; DNA vs. RNA Viruses</h2>
+
+<p>DNA viruses are the minority cause of lower respiratory tract infection (other than adenovirus); RNA viruses are the classic, high-impact group and the focus of the rest of this guide.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Viral causes of pneumonia by genome type</caption>
+<tr><th>Genome</th><th>Family / agent</th><th>Notes</th></tr>
+<tr><td rowspan="2"><strong>DNA</strong></td><td>Herpesviruses (HSV, VZV, CMV)</td><td>Treated with "the cyclovirs"; less common LRTI causes overall</td></tr>
+<tr><td>Adenovirus; (historically, smallpox)</td><td>Adenovirus is the more common DNA-virus LRTI cause; smallpox is eradicated</td></tr>
+<tr><td rowspan="5"><strong>RNA</strong></td><td>Picornavirus &mdash; Rhinovirus</td><td>Classic common cold agent</td></tr>
+<tr><td>Coronavirus</td><td>Common colds, MERS, SARS, COVID-19</td></tr>
+<tr><td>Orthomyxovirus &mdash; Influenza A and B</td><td>The classic "hits you like a truck" agent</td></tr>
+<tr><td>Paramyxovirus</td><td>Parainfluenza, RSV, measles, mumps, metapneumovirus</td></tr>
+<tr><td>Rare/high-mortality</td><td>Hantavirus, Ebola</td></tr>
+</table></div>
+<h3>Ranking by impact</h3>
+<p>Dr. Riesberg's own framing for the rest of this lecture: rank these agents by <strong>virulence, social impact, and long-term health consequences</strong> &mdash; virulence being a pathogen's ability to cause damage to a host. The tour runs from the &ldquo;bad&rdquo; (rhinovirus) to the &ldquo;ugly&rdquo; (coronaviruses), which is exactly the order the remaining sections follow.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q6">
+<p class="stem">Which family of DNA viruses is a more common cause of lower respiratory tract infection than the herpesvirus group (HSV, VZV, CMV)?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Adenovirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Orthomyxovirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Paramyxovirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Picornavirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Coronavirus</button>
+
+<div class="quiz-explain">Among DNA viruses, adenovirus is a more common cause of lower respiratory tract infection than the herpesvirus family, which is a less frequent cause overall.</div>
+</div>
+<div class="quiz-q" id="q7">
+<p class="stem">RSV, parainfluenza, measles, mumps, and human metapneumovirus all belong to which viral family?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Orthomyxovirus</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Paramyxovirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Picornavirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Coronavirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Adenovirus</button>
+
+<div class="quiz-explain">RSV, parainfluenza types 1-4, measles, mumps, and human metapneumovirus are all paramyxoviruses.</div>
+</div></div>
+</section>
+<section class="card" id="rhinovirus">
+<div class="kicker">Part 2 &middot; Ranking the Pathogens</div>
+<h2>4. Rhinovirus &mdash; &ldquo;The Bad&rdquo;</h2>
+
+<p>Exceptionally common, low virulence, but massively contagious.</p>
+<ul>
+<li><strong>Picornavirus</strong> &mdash; tiny, naked (non-enveloped), icosahedral, positive-sense RNA.</li>
+<li><strong>&gt;100 serotypes</strong> &mdash; too many to bother serotyping most of them clinically.</li>
+<li><strong>Small infectious dose</strong> needed &rarr; highly contagious, airborne due to small particle size.</li>
+<li>Accounts for <strong>1/3 to 1/2 of all upper respiratory infections</strong> every fall/winter (persists into summer too).</li>
+</ul>
+<h3>Clinical presentation</h3>
+<p>Matches allergic rhinitis &mdash; sore throat, runny nose, congestion &mdash; <strong>minus the itchy eyes</strong>. If itchy eyes are present, think allergy instead.</p>
+<p><strong>Treatment:</strong> supportive care only.</p>
+<div class="pearl"><div class="pearl-label">The one differentiator to remember</div>Rhinovirus symptoms mimic allergic rhinitis almost exactly — the presence or absence of itchy eyes is the practical bedside clue: itchy eyes point to allergy, their absence points to rhinovirus.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q8">
+<p class="stem">A patient presents with sore throat, runny nose, and congestion, but specifically denies any itchy eyes. Which diagnosis is favored by the absence of this particular symptom?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Allergic rhinitis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Influenza</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Rhinovirus infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. RSV bronchiolitis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Bacterial sinusitis</button>
+
+<div class="quiz-explain">Rhinovirus presents very similarly to allergic rhinitis, but classically without itchy eyes — a practical clue that favors viral rhinitis over an allergic cause.</div>
+</div>
+<div class="quiz-q" id="q9">
+<p class="stem">What structural and epidemiologic features of rhinovirus make it responsible for up to half of all upper respiratory infections each fall and winter?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. It is a large, enveloped DNA virus requiring a high infectious dose</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. It exclusively infects the lower respiratory tract</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. It has only a single serotype, aiding rapid population-wide immunity</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. It is a tiny, non-enveloped picornavirus that requires only a small infectious dose, aiding contagiousness</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. It requires direct blood contact for transmission</button>
+
+<div class="quiz-explain">Rhinovirus's small, non-enveloped icosahedral structure and low infectious dose make it highly contagious and airborne, contributing to its dominance among URIs each season.</div>
+</div></div>
+</section>
+<section class="card" id="paramyxoviruses">
+<div class="kicker">Part 2 &middot; Ranking the Pathogens</div>
+<h2>5. The Paramyxoviruses &mdash; RSV, Parainfluenza &amp; Human Metapneumovirus</h2>
+
+<p>Worse than rhinovirus mainly for its <strong>social impact</strong> &mdash; the pediatric presentations are dramatic and worrying for parents, even when the child is often clinically stable.</p>
+<h3>Presentation</h3>
+<ul>
+<li><strong>Young children:</strong> upper respiratory symptoms, but also lower tract disease (bronchiolitis, pneumonia). Classic finding: <strong>croup</strong> &mdash; a barking, seal-like cough with <strong>stridor</strong> (noisy inhalation/exhalation).</li>
+<li>Even when the child is doing "clinically okay," croup causes major sleep disturbance, irritability, and poor feeding &mdash; the disease burden is as much about disruption as danger.</li>
+<li><strong>Adults:</strong> generally just upper respiratory infection symptoms.</li>
+</ul>
+<h3>Treatment</h3>
+<p><strong>Ribavirin</strong> interferes with viral RNA synthesis and can slow symptoms &mdash; but is <strong>NOT indicated</strong> for an otherwise healthy, immunocompetent child with croup or another paramyxovirus infection. Primary treatment is <strong>supportive care</strong> (antipyretics, hydration).</p>
+<div class="pearl"><div class="pearl-label">The parent-reported 'cure' that isn't</div>Parents frequently report that a hot shower or a blast of cold air (e.g., the car ride to the ED) resolves their child's croup symptoms. There is no clinical evidence supporting this as treatment — it's a real, commonly reported phenomenon, but not something to recommend or rely on.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q10">
+<p class="stem">A toddler presents with a barking, seal-like cough and audible stridor on both inspiration and expiration, worse at night, with the parent otherwise describing the child as playful during the day. Which viral family is classically responsible for this presentation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Orthomyxovirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Picornavirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Coronavirus</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Adenovirus</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Paramyxovirus</button>
+
+<div class="quiz-explain">Croup — barking cough with stridor — is a classic presentation of paramyxovirus infections (RSV, parainfluenza, human metapneumovirus) in young children.</div>
+</div>
+<div class="quiz-q" id="q11">
+<p class="stem">A parent of an otherwise healthy, immunocompetent child with croup asks about prescribing ribavirin after reading about it online. What is the appropriate response?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Ribavirin is not indicated in an otherwise healthy, immunocompetent child — supportive care is the primary treatment</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Ribavirin is first-line and should be prescribed immediately</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Ribavirin is indicated only in adults with paramyxovirus infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Ribavirin should be combined with oseltamivir for synergistic effect</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Ribavirin is contraindicated in all pediatric patients regardless of immune status</button>
+
+<div class="quiz-explain">Although ribavirin does interfere with viral RNA synthesis and can slow symptoms, it is not indicated for otherwise healthy, immunocompetent children with croup or other paramyxovirus infections — supportive care remains primary treatment.</div>
+</div></div>
+</section>
+<section class="card" id="influenza">
+<div class="kicker">Part 2 &middot; Ranking the Pathogens</div>
+<h2>6. Influenza &mdash; &ldquo;A Real Bad Boy&rdquo;</h2>
+
+<h3>History &mdash; the 1918 pandemic</h3>
+<p>Started in Haskell County, Kansas in 1917, spread through a US Army training camp and then worldwide via WWI troop movements. Killed an estimated <strong>50 million people</strong>, with case-fatality rates <strong>&gt;2.5%</strong> (vs. &lt;0.1% for other flu pandemics). Unusually, it hit <strong>young, healthy adults</strong> hard (atypical for flu, which classically hits the very young/old) &mdash; largely because of <strong>bacterial co-infection/super-infection</strong> driving the high lethality.</p>
+<h3>Virology</h3>
+<p>Orthomyxovirus. Two key surface spikes: <strong>hemagglutinin (H)</strong> and <strong>neuraminidase (N)</strong> &mdash; these antigens <strong>shift and mutate annually</strong> (e.g., "H5N1" names the specific H and N subtypes), which is why the WHO has to make an annual "best guess" at which strains will predominate for that season's vaccine.</p>
+<h3>Clinical presentation</h3>
+<p>Sudden-onset cough, fever, URI symptoms, fatigue, joint/muscle aches, headache, sore throat &mdash; a true flu-like illness that "hits you like a truck," distinct from a common cold. Highly contagious &mdash; <strong>isolate symptomatic patients, quarantine exposed contacts.</strong></p>
+<h3>Why influenza is uniquely dangerous</h3>
+<p>Higher incidence of <strong>bacterial co-infection/super-infection</strong> with <em>Staph aureus</em>, <em>Strep pneumoniae</em>, or <em>H. influenzae</em> &mdash; this is what makes flu disease much more serious than most other respiratory viruses, and was the major driver of 1918 mortality.</p>
+<h3>Treatment &mdash; targeting neuraminidase</h3>
+<p>Oseltamivir (Tamiflu), zanamivir (Relenza), peramivir (Rapivab) &mdash; all attack the neuraminidase spike. Can shorten symptom duration/severity, and can be used as <strong>prophylaxis</strong> for exposed household contacts or higher-risk individuals. <strong>Most effective within the first 24 hours of symptom onset; largely ineffective after 48 hours</strong> for treating active symptoms (prophylactic use in contacts is a separate indication).</p>
+<h3>Flu shot myths</h3>
+<ul>
+<li><strong>&ldquo;The flu shot gave me the flu&rdquo;</strong> &mdash; false; it contains no live virus. The cytokine/inflammatory response to the antigen can feel like a mild, transient "mini-flu" (sore arm, feeling run-down for a day) &mdash; be upfront with patients about this rather than denying it happens.</li>
+<li><strong>&ldquo;I'm not putting foreign stuff in my body&rdquo;</strong> &mdash; the body already handles thousands of foreign substances daily (bacteria, fungi, pollens); the vaccine antigen is a drop in that bucket.</li>
+</ul>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 4 questions</div><div class="quiz-q" id="q12">
+<p class="stem">The 1918 influenza pandemic was unusual in that it caused severe disease and high mortality in young, otherwise healthy adults rather than the classic extremes of age. What was the primary driver of this atypically high lethality?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. A unique neuraminidase subtype that evaded all treatment</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Bacterial co-infection/super-infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Exclusive infection of the elderly population</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Complete absence of any immune response in young adults</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Contamination of the food and water supply</button>
+
+<div class="quiz-explain">The 1918 pandemic's high case-fatality rate (>2.5%) in young, healthy adults was largely attributed to bacterial co-infection and super-infection, a hallmark complication of severe influenza.</div>
+</div>
+<div class="quiz-q" id="q13">
+<p class="stem">A patient asks why a new flu vaccine formulation is needed every year, unlike some other vaccines. What is the underlying virologic reason?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Influenza has no surface antigens</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Influenza is a DNA virus with a stable genome</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. The hemagglutinin and neuraminidase surface antigens shift and mutate annually, requiring an updated 'best guess' formulation each season</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Prior year vaccines cause permanent immunity within days</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Influenza only infects children, requiring pediatric-specific reformulation</button>
+
+<div class="quiz-explain">Influenza's hemagglutinin (H) and neuraminidase (N) surface antigens undergo frequent antigenic shift and mutation, requiring the WHO to predict likely circulating strains and reformulate the vaccine annually.</div>
+</div>
+<div class="quiz-q" id="q14">
+<p class="stem">A patient presents 30 hours after the onset of classic flu symptoms. Which antiviral class is most appropriate, and how does timing affect its benefit?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Ribavirin; effective regardless of timing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. M2 channel blockers; most effective after 72 hours</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. No antiviral has any timing-dependent benefit in influenza</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Neuraminidase inhibitors (e.g., oseltamivir); most effective when started within about 48 hours, ideally the first 24</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Beta-lactams; timing is irrelevant since flu is bacterial</button>
+
+<div class="quiz-explain">Neuraminidase inhibitors (oseltamivir, zanamivir, peramivir) are most beneficial when started within the first 24-48 hours of symptom onset; after 48 hours, they offer little benefit for shortening the course of active illness.</div>
+</div>
+<div class="quiz-q" id="q15">
+<p class="stem">A patient declines the flu vaccine, stating it once gave them the flu. What is the most accurate explanation for what they likely experienced?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. They definitely had a severe allergic reaction requiring epinephrine</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. The vaccine contains live attenuated virus that caused mild infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. They were actually exposed to measles, not influenza</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. This is impossible and the patient is mistaken about all symptoms</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. The vaccine has no live virus; the cytokine/inflammatory response to the antigen can feel like a mild, transient 'mini-flu' with a sore arm and feeling run down</button>
+
+<div class="quiz-explain">Inactivated flu vaccines contain no live virus and cannot cause influenza; the immune/cytokine response to the antigen can produce transient, mild symptoms resembling a 'mini-flu,' which is worth acknowledging honestly with patients.</div>
+</div></div>
+</section>
+<section class="card" id="coronavirus-history">
+<div class="kicker">Part 2 &middot; Ranking the Pathogens (&ldquo;The Ugly&rdquo;)</div>
+<h2>7. Coronaviruses &mdash; From Nothing-Virus to Global Pandemic</h2>
+
+<p>Historically a low-interest family &mdash; responsible for only about 20% of common colds &mdash; until three successive emergences over less than two decades changed that completely.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>The three major coronavirus emergences</caption>
+<tr><th>Year / Name</th><th>Origin</th><th>Presentation</th><th>Mortality</th><th>Why it did/didn't spread globally</th></tr>
+<tr><td><strong>2002 &mdash; SARS</strong> (severe acute respiratory syndrome)</td><td>China</td><td>Severe clinical disease</td><td>~11%</td><td>High mortality/severity made cases easy to identify, isolate, and trace &mdash; contained relatively effectively</td></tr>
+<tr><td><strong>2012 &mdash; MERS</strong> (Middle East respiratory syndrome)</td><td>Saudi Arabia; zoonotic, camel-to-human</td><td>Fever, cough, pronounced shortness of breath</td><td>~35%</td><td>Extremely high mortality paradoxically <strong>limited</strong> global spread &mdash; most infected patients became severely ill and died quickly, curbing onward transmission</td></tr>
+<tr><td><strong>2019 &mdash; SARS-CoV-2 / COVID-19</strong></td><td>Wuhan, China</td><td>Highly variable, from asymptomatic to ARDS/death</td><td>Initial estimates 4&ndash;12%; stabilized around <strong>~2.5%</strong> by end of first year</td><td>Lower mortality + significant asymptomatic/mild transmission &rarr; much harder to contain, leading to a true global pandemic</td></tr>
+</table></div>
+<div class="pearl"><div class="pearl-label">A number worth memorizing</div>SARS-CoV-2's mortality rate stabilized around 2.5% during 2020 — the exact same case-fatality rate as the 1918 influenza pandemic. High mortality that kills patients quickly (like MERS's 35%) can actually limit a virus's global spread, while a lower, more survivable mortality rate paired with pre-symptomatic transmission (like COVID-19) is what allows a true pandemic.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q16">
+<p class="stem">MERS had a case-fatality rate around 35%, dramatically higher than SARS-CoV-2's roughly 2.5%. Yet MERS never became a global pandemic on the scale of COVID-19. What is the paradoxical explanation?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. MERS's extremely high mortality killed most infected patients quickly, limiting the time available for onward transmission and helping curb global spread</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. MERS was not actually contagious between humans at all</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. MERS only infected non-human hosts</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. A vaccine was immediately available for MERS</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. MERS-CoV cannot survive outside camels</button>
+
+<div class="quiz-explain">Counterintuitively, MERS's very high mortality rate limited its global spread, since severely ill and rapidly dying patients had less opportunity to transmit the virus widely compared to a virus with milder or delayed symptoms.</div>
+</div>
+<div class="quiz-q" id="q17">
+<p class="stem">Which coronavirus emergence was successfully contained largely because its high mortality and severe clinical presentation made cases easy to identify and isolate?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. SARS-CoV-2 in 2019</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. SARS in 2002</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. MERS in 2012</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. The common cold coronaviruses</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Seasonal coronavirus OC43</button>
+
+<div class="quiz-explain">2002 SARS caused severe, easily recognizable disease with high mortality, which allowed for relatively effective identification, isolation, and contact tracing that helped contain its spread.</div>
+</div></div>
+</section>
+<section class="card" id="sars-cov-2">
+<div class="kicker">Part 2 &middot; Case Study of a Virus Gone Bad</div>
+<h2>8. SARS-CoV-2 &mdash; Pathogenesis, Clinical Course &amp; Treatment</h2>
+
+<h3>Terminology</h3>
+<p><strong>COVID-19</strong> is the clinical syndrome; <strong>SARS-CoV-2</strong> is the causative agent &mdash; keep these distinct.</p>
+<h3>Pathogenesis</h3>
+<p>SARS-CoV-2 binds the <strong>ACE2 receptor</strong> (angiotensin converting enzyme 2), most heavily expressed on respiratory epithelium but present throughout the body in varying amounts (kidney, heart, GI tract). The virus internalizes and replicates, triggering an inflammatory reaction &mdash; early in the pandemic this sometimes escalated to fatal <strong>cytokine storms</strong>. Because ACE2 is expressed outside the lungs, SARS-CoV-2 caused unusually broad systemic effects: <strong>cardiac involvement and clotting abnormalities</strong> (including pulmonary emboli, both microvascular and macrovascular).</p>
+<div class="case"><div class="case-label">A cautionary case</div>An extremely fit Ironman triathlete developed COVID-19, was short of breath with a limited oxygen requirement for 5-7 days, and convalesced over about 8 weeks. On returning to training, he suffered a fatal massive MI with no family history of cardiac disease — postmortem autopsy revealed persisting inflammation, likely driving coronary thrombosis as a delayed consequence of the inflammatory cascade triggered by the infection.</div>
+<h3>Clinical course</h3>
+<ul>
+<li>Incubation ~5&ndash;7 days.</li>
+<li>Early/unique symptom: <strong>loss of taste and smell</strong> &mdash; distinctly associated with COVID-19 more than other respiratory viruses.</li>
+<li>~1/3 of hypoxic patients can be entirely asymptomatic &mdash; <strong>"happy hypoxia"</strong> (oxygen saturations in the mid-80s with no dyspnea).</li>
+<li>Can progress to <strong>ARDS</strong> and death, or remain mild.</li>
+<li>Other organ involvement: GI, kidney, heart, coagulation system, CNS &mdash; reflecting widespread ACE2 distribution.</li>
+<li><strong>Long COVID:</strong> persisting symptoms (fatigue prominent) in an estimated <strong>10&ndash;15%</strong> of patients; pathophysiology unclear but thought to involve persisting inflammatory mediators.</li>
+</ul>
+<h3>Treatment</h3>
+<p><strong>Remdesivir</strong>, <strong>molnupiravir</strong>, and <strong>nirmatrelvir + ritonavir (Paxlovid)</strong> were the major antivirals to reach approval, reducing severity, hospitalization risk, and in some populations mortality, especially in high-risk patients.</p>
+<h3>Vaccines &mdash; mRNA technology</h3>
+<p>A genuinely new technology: the mRNA vaccine uses the body's own cellular machinery to produce a viral antigen, which the immune system then responds to and clears. <strong>Myth to correct:</strong> the mRNA does not persist in the body &mdash; once the antigen is produced, the mRNA strand degrades, the immune response runs its course, and nothing but immune memory remains. Ongoing viral antigenic shift means vaccine efficacy will continue to be <strong>highly variable</strong> over time.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 4 questions</div><div class="quiz-q" id="q18">
+<p class="stem">A patient with COVID-19 has an oxygen saturation of 84% but reports no dyspnea and appears comfortable. What is this phenomenon called, and what does it illustrate about SARS-CoV-2?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Cytokine storm — a systemic inflammatory overreaction</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Long COVID — a persisting post-infectious syndrome</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Happy hypoxia — some patients can have significant hypoxemia with minimal or no perceived shortness of breath</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. ARDS — acute respiratory distress requiring ventilation</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Post-viral bronchospasm</button>
+
+<div class="quiz-explain">'Happy hypoxia' describes the unusual finding of significant hypoxemia (oxygen saturations in the 80s) without a corresponding sense of dyspnea, seen in a notable subset of COVID-19 patients.</div>
+</div>
+<div class="quiz-q" id="q19">
+<p class="stem">A patient asks whether the mRNA from their COVID-19 vaccine remains in their body indefinitely. What is the accurate response?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Yes, the mRNA integrates permanently into the patient's DNA</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Yes, but only in patients over 65</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. No, because the vaccine never actually enters any cells</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. No — once the mRNA produces the antigen and the immune response clears it, the mRNA itself degrades and does not persist; only immune memory remains</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Yes, the mRNA persists specifically in cardiac tissue</button>
+
+<div class="quiz-explain">mRNA vaccines use transient genetic material: once it directs production of the viral antigen, it is degraded by normal cellular processes, leaving behind only the immune system's memory response — the claim that it persists in the body is a myth.</div>
+</div>
+<div class="quiz-q" id="q20">
+<p class="stem">Why did SARS-CoV-2 produce clinically significant effects in organs outside the lungs, such as the heart, kidneys, and coagulation system?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. The virus has no receptor-specific tropism and infects cells randomly</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. These effects were entirely unrelated to the virus itself</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. SARS-CoV-2 exclusively targets bone marrow</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. This multi-organ pattern is unique to influenza, not coronaviruses</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. ACE2, the virus's entry receptor, is expressed throughout the body (not just respiratory epithelium), and the resulting inflammatory/coagulation cascade can affect multiple organ systems</button>
+
+<div class="quiz-explain">Because ACE2 is expressed in the heart, kidneys, GI tract, and vasculature in addition to the lungs, SARS-CoV-2 infection and its downstream inflammatory and coagulation effects were not confined to the respiratory tract.</div>
+</div>
+<div class="quiz-q" id="q21">
+<p class="stem">Nirmatrelvir/ritonavir (Paxlovid), remdesivir, and molnupiravir were developed as treatments for COVID-19. In general, what clinical benefit did these antivirals demonstrate, particularly in high-risk patients?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. They reduced severity of disease, risk of hospitalization, and in some populations mortality</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. They eliminated the need for vaccination entirely</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. They were shown to be effective only against long COVID symptoms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. They provided no measurable clinical benefit in any population</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. They functioned solely as prophylaxis, with no treatment benefit</button>
+
+<div class="quiz-explain">These antivirals were found to reduce disease severity, hospitalization risk, and — particularly in high-risk patients — mortality related to COVID-19.</div>
+</div></div>
+</section>
+<section class="card" id="symptom-comparison">
+<div class="kicker">Part 3 &middot; Bedside Differentiation</div>
+<h2>9. Symptom Comparison &mdash; Allergies vs. Cold vs. Flu vs. COVID-19</h2>
+
+<div class="table-wrap"><table class="data-table">
+<caption>Relative symptom frequency by cause</caption>
+<tr><th>Symptom</th><th>Allergies</th><th>Cold</th><th>Influenza</th><th>COVID-19</th></tr>
+<tr><td>Body aches</td><td>Never</td><td>Often</td><td>Often</td><td>Sometimes</td></tr>
+<tr><td>Cough</td><td>Sometimes</td><td>Often</td><td>Often</td><td>Often</td></tr>
+<tr><td>Diarrhea/GI</td><td>Rare</td><td>Rare</td><td>Sometimes</td><td>Sometimes</td></tr>
+<tr><td>Fatigue</td><td>Sometimes</td><td>Sometimes</td><td>Often</td><td>Often</td></tr>
+<tr><td>Fever/chills/shaking</td><td>Never</td><td>Rare</td><td>Often</td><td>Often</td></tr>
+<tr><td>Headache</td><td>Rare</td><td>Rare</td><td>Often</td><td>Sometimes</td></tr>
+<tr><td><strong>Loss of taste or smell</strong></td><td>Never</td><td>Never</td><td>Never</td><td><strong>Sometimes</strong></td></tr>
+<tr><td>Shortness of breath</td><td>Rare</td><td>Rare</td><td>Rare</td><td>Often</td></tr>
+<tr><td>Sneezing</td><td>Often</td><td>Often</td><td>Rare</td><td>Rare</td></tr>
+<tr><td>Sore throat</td><td>Rare</td><td>Often</td><td>Sometimes</td><td>Sometimes</td></tr>
+<tr><td>Stuffy nose</td><td>Often</td><td>Often</td><td>Sometimes</td><td>Rare</td></tr>
+</table></div>
+<div class="pearl"><div class="pearl-label">The two columns worth memorizing cold</div>Loss of taste/smell is 'never' for allergies, cold, AND influenza — it only shows up (and even then, only 'sometimes') with COVID-19. Shortness of breath is 'rare' everywhere except COVID-19, where it's 'often.' Cough itself is not discriminating (often across cold, flu, and COVID) — don't lean on cough alone to differentiate.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q22">
+<p class="stem">A patient reports new loss of sense of smell along with cough and fatigue. Based on relative symptom frequency across common respiratory illnesses, which diagnosis does this symptom most specifically point toward?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Allergic rhinitis</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. COVID-19</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. The common cold</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Influenza</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Bacterial sinusitis</button>
+
+<div class="quiz-explain">Loss of taste or smell is essentially never seen with allergies, the common cold, or influenza, but occurs 'sometimes' with COVID-19 — making it a relatively specific (though not universal) clue for that diagnosis.</div>
+</div>
+<div class="quiz-q" id="q23">
+<p class="stem">Which symptom is a poor discriminator among the common cold, influenza, and COVID-19 because it occurs 'often' in all three?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Loss of taste or smell</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Shortness of breath</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Cough</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Sneezing</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Stuffy nose</button>
+
+<div class="quiz-explain">Cough is frequently present in the common cold, influenza, and COVID-19 alike, making it a poor standalone discriminator between these diagnoses — unlike loss of taste/smell or shortness of breath, which show more differential patterns.</div>
+</div></div>
+</section>
+<section class="card" id="viral-pcr">
+<div class="kicker">Part 3 &middot; Testing &amp; Stewardship</div>
+<h2>10. Diagnostic Testing &mdash; Viral PCR Panels</h2>
+
+<p>Multiplex viral PCR panels (e.g., BioFire) replaced the old, slow, and often futile approach of trying to culture respiratory viruses (which don't grow nearly as readily as bacteria).</p>
+<h3>Advantages</h3>
+<ul>
+<li>Turnaround time as fast as <strong>45 minutes</strong>.</li>
+<li>Speciates among many common respiratory viruses (and some bacteria) in a single run.</li>
+<li>A genuinely useful <strong>antibiotic stewardship</strong> tool &mdash; confirming a viral etiology (e.g., rhinovirus, a "nothing" pathogen you can't treat) supports withholding unnecessary antibiotics, while identifying flu lets you actually prescribe a targeted antiviral.</li>
+<li>Many patients are simply reassured by finally knowing a specific cause for their symptoms.</li>
+</ul>
+<h3>Limitations</h3>
+<ul>
+<li>Somewhat expensive.</li>
+<li>Standard respiratory viral panels do <strong>not include SARS, MERS, or SARS-CoV-2</strong> &mdash; those require separate/dedicated testing.</li>
+<li><strong>Up to 15% of asymptomatic people</strong> can have a "colonizing" virus detected &mdash; a positive result doesn't automatically mean that virus is the cause of the patient's current symptoms.</li>
+<li>Significant rates of bacterial <strong>co-infection</strong> exist even when a virus is identified &mdash; a positive viral PCR doesn't rule out a concurrent bacterial process requiring treatment.</li>
+</ul>
+<div class="pearl"><div class="pearl-label">Don't over-trust a positive result</div>A positive viral PCR in an asymptomatic or minimally symptomatic patient may just reflect colonization (up to 15% of cases), not the actual cause of illness — and even a genuine, symptomatic viral infection doesn't exclude a bacterial co-infection that still needs antibiotics.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q24">
+<p class="stem">A multiplex respiratory viral PCR panel returns positive for coronavirus in an asymptomatic patient being tested for an unrelated reason. What is the most important limitation to keep in mind when interpreting this result?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. The test result is always a laboratory error in asymptomatic patients</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. This result definitively proves current active COVID-19 infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. The panel cannot detect coronaviruses under any circumstance</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Up to 15% of asymptomatic people can have a colonizing virus detected, so a positive result does not necessarily mean this virus is causing any illness</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. A positive result mandates immediate antiviral treatment regardless of symptoms</button>
+
+<div class="quiz-explain">Because up to 15% of asymptomatic individuals can have a detectable colonizing virus, a positive PCR result must be interpreted in the context of the patient's actual clinical presentation, not treated as automatic proof of causative infection.</div>
+</div>
+<div class="quiz-q" id="q25">
+<p class="stem">A clinician orders a standard multiplex respiratory viral PCR panel to evaluate a patient with severe pneumonia and suspects SARS-CoV-2. Why might this standard panel fail to identify the cause?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Multiplex viral panels cannot detect any RNA viruses</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. The panel only works in pediatric patients</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. PCR technology cannot detect coronaviruses in principle</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. The panel requires a blood sample rather than a nasopharyngeal swab</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Standard respiratory viral panels typically do not include SARS, MERS, or SARS-CoV-2, which require separate or dedicated testing</button>
+
+<div class="quiz-explain">Standard multiplex respiratory viral PCR panels commonly exclude SARS, MERS, and SARS-CoV-2, which require separate, dedicated testing to identify.</div>
+</div>
+<div class="quiz-q" id="q26">
+<p class="stem">How does rapid viral PCR testing support antibiotic stewardship in patients with respiratory symptoms?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. By confirming a viral etiology quickly, supporting the decision to withhold unnecessary antibiotics, while also potentially identifying treatable infections like influenza</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. By automatically prescribing antibiotics for any positive result</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. By eliminating the need for any further clinical judgment</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. By replacing the need for antiviral medications entirely</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. By definitively excluding all possible bacterial co-infection</button>
+
+<div class="quiz-explain">Rapid, specific viral identification helps clinicians confidently withhold antibiotics when a virus (not amenable to antibacterial treatment) is confirmed, while also flagging treatable viral infections like influenza — both of which support responsible antibiotic use.</div>
+</div></div>
+</section>
+<section class="card" id="high-yield-summary">
+<div class="kicker">Final Review</div>
+<h2>11. High-Yield Summary</h2>
+<p style="margin-top:0;">The condensed version of everything above — good for a final pass before the exam.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>High-yield recall — viral pneumonia &amp; lower respiratory viral syndromes</caption>
+<tr><th>Topic</th><th>Key point</th></tr>
+<tr><td><strong>Bacterial vs. viral pneumonia</strong></td><td>Bacterial: neutrophils, lobar consolidation, productive purulent sputum. Viral: lymphocytes, hyaline membranes, patchy interstitial infiltrate, nonproductive cough.</td></tr>
+<tr><td><strong>Chest x-ray timing rule</strong></td><td>Radiographic changes lag clinical improvement by 6-8 weeks — never use serial imaging to confirm resolution; only repeat if worsening.</td></tr>
+<tr><td><strong>Extremes of age</strong></td><td>Elderly: dysfunctional CD8+ TRM cells (TGF-beta driven) → inflammation without effective viral clearance. Children: immunologic immaturity/naivety.</td></tr>
+<tr><td><strong>Rhinovirus</strong></td><td>Picornavirus; mimics allergic rhinitis minus itchy eyes; supportive care only; 1/3-1/2 of seasonal URIs.</td></tr>
+<tr><td><strong>Paramyxoviruses (RSV, parainfluenza, hMPV)</strong></td><td>Croup — barking cough + stridor in young children; ribavirin NOT indicated in healthy/immunocompetent patients; supportive care is primary.</td></tr>
+<tr><td><strong>Influenza</strong></td><td>Orthomyxovirus; H/N surface antigens shift/mutate annually; sudden severe onset; bacterial super-infection drove 1918 mortality; neuraminidase inhibitors (oseltamivir, zanamivir, peramivir) most effective within 24-48h.</td></tr>
+<tr><td><strong>Coronaviruses</strong></td><td>SARS (2002, ~11% mortality, contained via severity), MERS (2012, ~35% mortality, limited spread due to rapid lethality), SARS-CoV-2 (2019, stabilized ~2.5% mortality, true pandemic due to milder/pre-symptomatic spread).</td></tr>
+<tr><td><strong>SARS-CoV-2 pathogenesis</strong></td><td>Binds ACE2 (respiratory epithelium + systemic); inflammatory cascade → cytokine storm, cardiac/clotting complications, 'happy hypoxia,' loss of taste/smell, long COVID (10-15%).</td></tr>
+<tr><td><strong>COVID-19 treatment/vaccines</strong></td><td>Remdesivir, molnupiravir, nirmatrelvir/ritonavir (Paxlovid) reduce severity/hospitalization/mortality; mRNA vaccines do not persist in the body — degrade after antigen production.</td></tr>
+<tr><td><strong>Symptom differentiator</strong></td><td>Loss of taste/smell — essentially unique to COVID-19 among these illnesses; shortness of breath 'often' only with COVID-19; cough is non-discriminating.</td></tr>
+<tr><td><strong>Viral PCR panels</strong></td><td>Fast (~45 min), good antibiotic-stewardship tool; does NOT include SARS/MERS/SARS-CoV-2; up to 15% colonizing-virus false-positive-for-cause rate; bacterial co-infection still possible.</td></tr>
+
+</table></div>
+
+</section>
+
+</div>
+<script>
+function toggleSidenav(){
+  document.getElementById('sidenavPanel').classList.toggle('open');
+}
+function answerQ(btn){
+  var q = btn.closest('.quiz-q');
+  if(q.dataset.answered) return;
+  q.dataset.answered = "true";
+  var choices = q.querySelectorAll('.quiz-choice');
+  choices.forEach(function(c){
+    c.disabled = true;
+    if(c.dataset.correct === "true"){ c.classList.add('correct'); }
+  });
+  if(btn.dataset.correct !== "true"){ btn.classList.add('incorrect'); }
+  q.querySelector('.quiz-explain').classList.add('show');
+}
+(function(){
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.card'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidenav-panel a'));
+  function onScroll(){
+    var best = null, bestTop = -Infinity;
+    sections.forEach(function(s){
+      var top = s.getBoundingClientRect().top;
+      if(top <= 120 && top > bestTop){ bestTop = top; best = s.id; }
+    });
+    links.forEach(function(l){
+      l.classList.toggle('active', l.dataset.target === best);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
