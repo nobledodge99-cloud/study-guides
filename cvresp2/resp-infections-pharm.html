@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drugs for Respiratory Infections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --cream:#f7f2e7; --cream-card:#fffdf8; --forest-dark:#1f3d2c; --forest:#2f5d3f;
+  --sage:#7fa07f; --sage-light:#e4ecdf; --border:#d9d0ba; --accent:#c1622d;
+  --text-main:#2a2723; --text-soft:#5c574c; --correct:#2f7d4f; --incorrect:#b23a2f;
+  --core-red:#b3261e; --core-red-bg:#fbe4e2;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--cream); color:var(--text-main); font-family:'Lora',serif; line-height:1.6;}
+.back-btn{position:fixed; top:14px; left:14px; z-index:500; background:var(--cream-card); color:var(--forest-dark);
+  border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-family:'IBM Plex Mono',monospace;
+  font-size:0.8rem; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.back-btn:hover{background:var(--sage-light);}
+.header{padding:70px 24px 20px; text-align:center;}
+.header h1{font-size:2.1rem; color:var(--forest-dark); margin:0 0 6px;}
+.header .kicker{font-family:'IBM Plex Mono',monospace; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--accent); font-size:0.8rem; margin-bottom:10px;}
+.header .sub{color:var(--text-soft); font-size:0.95rem; max-width:720px; margin:0 auto;}
+.legend{max-width:720px; margin:16px auto 0; display:flex; gap:18px; justify-content:center; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:0.75rem;}
+.legend span.swatch{display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:middle;}
+.container{max-width:900px; margin:0 auto; padding:0 20px 100px;}
+.toc{background:var(--cream-card); border:1px solid var(--border); border-radius:12px; padding:20px 26px; margin:20px 0 36px;}
+.toc h2{font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--forest); margin-top:0;}
+.toc ul{margin:0; padding-left:22px; columns:2; column-gap:24px;}
+.toc li{margin-bottom:6px; break-inside:avoid;}
+.toc a{color:var(--text-main); text-decoration:none;}
+.toc a:hover{color:var(--accent);}
+section.card{background:var(--cream-card); border:1px solid var(--border); border-radius:14px;
+  padding:28px 30px; margin-bottom:26px; scroll-margin-top:20px;}
+section.card .kicker{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--accent); margin-bottom:4px;}
+section.card h2{color:var(--forest-dark); margin:0 0 14px; font-size:1.5rem;}
+section.card h3{color:var(--forest); font-size:1.1rem; margin:22px 0 8px;}
+section.card p{margin:10px 0;}
+section.card ul, section.card ol{padding-left:22px;}
+section.card li{margin-bottom:6px;}
+.table-wrap{overflow-x:auto; margin:16px 0;}
+table.data-table{border-collapse:collapse; width:100%; font-size:0.92rem;}
+table.data-table caption{text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+  text-transform:uppercase; letter-spacing:0.05em; color:var(--text-soft); margin-bottom:6px;}
+table.data-table th{background:var(--forest-dark); color:#fff; font-family:'IBM Plex Mono',monospace;
+  font-size:0.78rem; text-transform:uppercase; letter-spacing:0.03em; padding:9px 12px; text-align:left;}
+table.data-table td{padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
+table.data-table tr:nth-child(even) td{background:rgba(127,160,127,0.08);}
+.figure-row{display:flex; gap:16px; flex-wrap:wrap; margin:16px 0;}
+.figure{flex:1 1 260px; background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden;}
+.figure img{width:100%; display:block;}
+.figure figcaption{padding:10px 12px; font-size:0.82rem; color:var(--text-soft); font-family:'IBM Plex Mono',monospace;}
+.pearl{background:var(--sage-light); border-left:4px solid var(--sage); border-radius:8px; padding:14px 18px; margin:16px 0;}
+.pearl-label{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--forest-dark); margin-bottom:4px; font-weight:600;}
+.case{background:#fff; border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin:16px 0;}
+.case-label{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--accent); margin-bottom:4px; font-weight:600;}
+.quiz-block{margin-top:24px; padding-top:16px; border-top:1px dashed var(--border);}
+.quiz-mini-header{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--forest); margin-bottom:12px;}
+.quiz-q{background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:16px;}
+.quiz-q p.stem{margin:0 0 12px; font-weight:500;}
+.quiz-choice{display:block; width:100%; text-align:left; background:var(--cream); border:1px solid var(--border);
+  border-radius:8px; padding:10px 14px; margin-bottom:8px; cursor:pointer; font-family:'Lora',serif; font-size:0.95rem;
+  color:var(--text-main);}
+.quiz-choice:hover{background:var(--sage-light);}
+.quiz-choice.correct{background:#e3f3e6; border-color:var(--correct); color:var(--correct); font-weight:600;}
+.quiz-choice.incorrect{background:#fbe7e4; border-color:var(--incorrect); color:var(--incorrect);}
+.quiz-choice[disabled]{cursor:default;}
+.quiz-explain{display:none; background:var(--sage-light); border-radius:8px; padding:12px 14px; margin-top:8px; font-size:0.9rem;}
+.quiz-explain.show{display:block;}
+.sidenav-toggle{position:fixed; top:14px; right:14px; z-index:500; background:var(--forest-dark); color:#fff;
+  border:none; border-radius:8px; padding:8px 14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; cursor:pointer;}
+.sidenav-panel{position:fixed; top:58px; right:14px; z-index:499; background:var(--cream-card); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; width:250px; max-height:75vh; overflow-y:auto; display:none; box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+.sidenav-panel.open{display:block;}
+.sidenav-panel ul{list-style:none; margin:0; padding:0;}
+.sidenav-panel li{margin-bottom:4px;}
+.sidenav-panel a{display:block; padding:6px 8px; border-radius:6px; color:var(--text-main); text-decoration:none; font-size:0.88rem;}
+.sidenav-panel a:hover{background:var(--sage-light);}
+.sidenav-panel a.active{background:var(--forest-dark); color:#fff;}
+.badge{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.62rem; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.04em; padding:2px 7px; border-radius:5px; margin-left:6px; vertical-align:middle;}
+.badge-core{background:var(--core-red-bg); color:var(--core-red); border:1px solid var(--core-red);}
+.badge-additional{background:#eee7d8; color:var(--text-soft); border:1px solid var(--border);}
+.drug-list{margin:10px 0 10px; padding-left:0; list-style:none;}
+.drug-list li{margin-bottom:5px; padding-left:0;}
+.core-name{color:var(--core-red); font-weight:600;}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<button class="sidenav-toggle" onclick="toggleSidenav()">Sections</button>
+<div class="sidenav-panel" id="sidenavPanel"><ul><li><a href="#cap-severity" data-target="cap-severity">1. CAP &mdash; Severity Assessment &amp; Site-of-Care</a></li><li><a href="#cap-etiology" data-target="cap-etiology">2. CAP &mdash; Etiology &amp; Drug-Resistant <em>S. pneumoniae</em></a></li><li><a href="#cap-therapy" data-target="cap-therapy">3. CAP &mdash; Empiric Therapy Ladder &amp; Duration</a></li><li><a href="#hap-vap" data-target="hap-vap">4. Hospital-Acquired &amp; Ventilator-Associated Pneumonia</a></li><li><a href="#definitive" data-target="definitive">5. Pathogen-Directed (Definitive) Therapy</a></li><li><a href="#bronchitis" data-target="bronchitis">6. Acute/Chronic Bronchitis &amp; Bronchiolitis</a></li><li><a href="#influenza" data-target="influenza">7. Influenza &mdash; Virology &amp; Antiviral Pharmacology</a></li><li><a href="#covid" data-target="covid">8. COVID-19 Antiviral Pharmacology</a></li><li><a href="#other-antivirals" data-target="other-antivirals">9. Other Antivirals &mdash; RSV, HSV/VZV &amp; CMV</a></li><li><a href="#antifungals" data-target="antifungals">10. Antifungal Pharmacology</a></li><li><a href="#mechanisms" data-target="mechanisms">11. Mechanisms &amp; Adverse Effects At a Glance</a></li><li><a href="#high-yield-summary" data-target="high-yield-summary">12. High-Yield Summary &mdash; Core Drugs Only</a></li></ul></div>
+<div class="header">
+  <div class="kicker">CV/Resp II &middot; Pharmacology &middot; Dr. Jacquelyn Waller, Pharm.D., BCPS</div>
+  <h1>Drugs for Respiratory Infections</h1>
+  <p class="sub">CAP, HAP/VAP, and pathogen-directed therapy, then influenza, COVID-19, and antifungal pharmacology &mdash; built from Dr. Waller's lecture and notes packet, with her exam emphasis (red-font drugs) flagged throughout.</p>
+  <div class="legend">
+    <span><span class="swatch" style="background:#b3261e;"></span>Core (red-font) drug &mdash; primary exam emphasis</span>
+    <span><span class="swatch" style="background:#8a8272;"></span>Additional drug &mdash; mentioned, not specifically emphasized</span>
+  </div>
+</div>
+<div class="container">
+<div class="toc"><h2>Contents</h2><ul><li><a href="#cap-severity">1. CAP &mdash; Severity Assessment &amp; Site-of-Care</a></li><li><a href="#cap-etiology">2. CAP &mdash; Etiology &amp; Drug-Resistant <em>S. pneumoniae</em></a></li><li><a href="#cap-therapy">3. CAP &mdash; Empiric Therapy Ladder &amp; Duration</a></li><li><a href="#hap-vap">4. Hospital-Acquired &amp; Ventilator-Associated Pneumonia</a></li><li><a href="#definitive">5. Pathogen-Directed (Definitive) Therapy</a></li><li><a href="#bronchitis">6. Acute/Chronic Bronchitis &amp; Bronchiolitis</a></li><li><a href="#influenza">7. Influenza &mdash; Virology &amp; Antiviral Pharmacology</a></li><li><a href="#covid">8. COVID-19 Antiviral Pharmacology</a></li><li><a href="#other-antivirals">9. Other Antivirals &mdash; RSV, HSV/VZV &amp; CMV</a></li><li><a href="#antifungals">10. Antifungal Pharmacology</a></li><li><a href="#mechanisms">11. Mechanisms &amp; Adverse Effects At a Glance</a></li><li><a href="#high-yield-summary">12. High-Yield Summary &mdash; Core Drugs Only</a></li></ul></div>
+<section class="card" id="cap-severity">
+<div class="kicker">Part 1 &middot; Community-Acquired Pneumonia</div>
+<h2>1. CAP &mdash; Severity Assessment &amp; Site-of-Care</h2>
+
+<p>The single costliest decision in CAP is <strong>outpatient vs. inpatient</strong> &mdash; hospitalization costs ~25&times; more, and outpatient treatment gets patients back to normal life faster while avoiding hospital-acquired risks (thromboembolism, superinfection). Severity scores support &mdash; but don't override &mdash; clinical judgment (e.g., a borderline score plus poor access to care may still warrant a short observation admission).</p>
+<h3>CURB-65 (1 point each)</h3>
+<ul>
+<li><strong>C</strong>onfusion &middot; <strong>U</strong>rea (BUN) elevated &middot; <strong>R</strong>espiratory rate &ge;30 &middot; <strong>B</strong>lood pressure low (SBP &lt;90 or DBP &le;60) &middot; age &ge;<strong>65</strong></li>
+</ul>
+<div class="table-wrap"><table class="data-table">
+<caption>CURB-65 score &rarr; disposition</caption>
+<tr><th>Score</th><th>30-day mortality</th><th>Disposition</th></tr>
+<tr><td>0&ndash;1</td><td>~2.1%</td><td>Outpatient</td></tr>
+<tr><td>1 (borderline)</td><td>&mdash;</td><td>Bridges outpatient/admission &mdash; depends which criterion was met</td></tr>
+<tr><td>&ge;3</td><td>Rising sharply</td><td>Usually ICU</td></tr>
+</table></div>
+<p>The <strong>Pneumonia Severity Index (PSI)</strong> uses more variables (including demographics) and better captures patients safe for outpatient therapy without raising mortality risk. Risk classes I&ndash;II &rarr; outpatient; III is borderline; IV&ndash;V &rarr; admit.</p>
+<h3>Severe CAP &rarr; ICU</h3>
+<ul>
+<li><strong>Major criteria (either one = ICU):</strong> septic shock needing vasopressors, or respiratory failure needing mechanical ventilation.</li>
+<li><strong>Minor criteria (&ge;3 = ICU):</strong> RR &ge;30, confusion, elevated BUN, hypotension, leukopenia, thrombocytopenia, hypothermia, multilobar infiltrates.</li>
+</ul>
+<h3>Diagnosis &amp; cultures</h3>
+<p>Diagnosis = clinical findings (cough, fever, sputum, chest pain) <strong>plus</strong> an infiltrate on CXR; if imaging is negative but suspicion is high, still start empiric antibiotics. Don't chase serial CXRs to judge response &mdash; radiographic improvement lags clinical improvement. Outpatient cultures rarely change management (results return too late); blood/sputum cultures <strong>are</strong> recommended for all inpatients, especially if covering MRSA or <em>Pseudomonas</em>.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q1">
+<p class="stem">A 70-year-old man presents with cough, fever, and a new infiltrate on chest x-ray. He has a respiratory rate of 32/min, new confusion, and a systolic BP of 85 mmHg. Using CURB-65, what disposition is most appropriate?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Admission, likely to the ICU given a CURB-65 score of 4</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Outpatient with a macrolide</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Discharge with close follow-up in 48 hours</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Outpatient with a respiratory fluoroquinolone</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Observation unit only, no antibiotics yet</button>
+
+<div class="quiz-explain">He scores points for confusion, respiratory rate ≥30, low blood pressure, and age ≥65 — a CURB-65 of 4, indicating severe disease warranting hospital/ICU admission.</div>
+</div>
+<div class="quiz-q" id="q2">
+<p class="stem">A patient with community-acquired pneumonia is being treated empirically. Serial chest x-rays are obtained every 2 days to confirm the antibiotic is working, but the patient is otherwise improving clinically (afebrile, eating, ambulating). Why is this imaging strategy not recommended?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Chest x-rays cannot detect pneumonia at all</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Radiographic resolution lags behind clinical improvement, so serial films do not reflect treatment response</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. CXR is contraindicated once antibiotics are started</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Only CT scans can be used to follow CAP</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Serial films are needed only in outpatients, not inpatients</button>
+
+<div class="quiz-explain">Radiographic clearing lags well behind clinical improvement in CAP, so serial chest x-rays are not used to track antibiotic response — clinical status is the guide, and repeat imaging is reserved for patients who worsen or fail to improve as expected.</div>
+</div>
+<div class="quiz-q" id="q3">
+<p class="stem">A hospitalized patient with CAP has a respiratory rate of 32, new confusion, and a platelet count of 85,000. No vasopressors or mechanical ventilation are required. Based on IDSA/ATS minor severity criteria, how many of the listed minor criteria does this patient meet, and what does this suggest?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. One; outpatient therapy is appropriate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Two; general ward admission is sufficient</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Three; ICU admission should be considered</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Zero; these are not minor severity criteria</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Four; this indicates septic shock</button>
+
+<div class="quiz-explain">Elevated respiratory rate (≥30), new confusion, and thrombocytopenia are three minor severity criteria; meeting ≥3 minor criteria supports ICU-level care even without a major criterion (vasopressors or mechanical ventilation).</div>
+</div></div>
+</section>
+<section class="card" id="cap-etiology">
+<div class="kicker">Part 1 &middot; Community-Acquired Pneumonia</div>
+<h2>2. CAP &mdash; Etiology &amp; Drug-Resistant <em>S. pneumoniae</em></h2>
+
+<div class="table-wrap"><table class="data-table">
+<caption>Typical CAP pathogens by site of care</caption>
+<tr><th>Outpatient</th><th>Hospitalized, non-ICU</th><th>ICU</th></tr>
+<tr><td><em>S. pneumoniae</em>, <em>Mycoplasma</em>, <em>H. influenzae</em>, <em>Chlamydophila</em>, respiratory viruses</td><td><em>S. pneumoniae</em>, <em>Mycoplasma</em>, <em>C. pneumoniae</em>, <em>H. influenzae</em>, <em>Legionella</em>, aspiration, viruses</td><td><em>S. pneumoniae</em>, <em>S. aureus</em>, <em>Legionella</em>, gram-negative bacilli, <em>H. influenzae</em></td></tr>
+</table></div>
+<h3>Modifiers that change the likely pathogen</h3>
+<ul>
+<li>Underlying bronchopulmonary disease &rarr; <em>H. influenzae</em>, <em>Moraxella catarrhalis</em> (+ <em>S. aureus</em> during an influenza outbreak)</li>
+<li>Chronic oral steroids, alcoholism, frequent antibiotic use &rarr; Enterobacteriaceae, <em>Pseudomonas aeruginosa</em></li>
+<li>Aspiration (seizure, altered consciousness, poor dentition) &rarr; anaerobes</li>
+<li>Influenza is the dominant viral cause; endemic fungi (<em>Histoplasma</em>, <em>Coccidioides</em>, <em>Blastomyces</em>) matter only with a matching travel/exposure history</li>
+</ul>
+<h3>Drug-resistant <em>S. pneumoniae</em> (DRSP) risk factors</h3>
+<p><strong>&beta;-lactam, macrolide, or fluoroquinolone use in the past 3 months</strong> is the single biggest flag &mdash; and it drives which class you avoid, not just which you add. Also: age &lt;2 or &gt;65, alcoholism, comorbidities, immunosuppression, daycare exposure.</p>
+<div class="pearl"><div class="pearl-label">The recurring exam trap</div>Recent antibiotic exposure to any class (even for an unrelated infection, e.g., a fluoroquinolone for a UTI) raises DRSP risk and should push you to a *different* class for the current CAP episode.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q4">
+<p class="stem">A patient with COPD who was recently hospitalized on chronic oral corticosteroids develops CAP. Which organism group should be specifically considered that would not be a top concern in a previously healthy outpatient?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Mycoplasma pneumoniae</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Respiratory viruses only</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Chlamydophila pneumoniae</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Enterobacteriaceae and Pseudomonas aeruginosa</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Legionella exclusively</button>
+
+<div class="quiz-explain">Chronic oral steroid use, underlying bronchopulmonary disease, and frequent antibiotic exposure raise the likelihood of gram-negative organisms including Enterobacteriaceae and Pseudomonas aeruginosa.</div>
+</div>
+<div class="quiz-q" id="q5">
+<p class="stem">A patient treated with a fluoroquinolone for a urinary tract infection two months ago now presents with CAP. Why is this history relevant to antibiotic selection for the current pneumonia?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. It has no bearing since the prior infection was unrelated to the respiratory tract</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. It confirms the patient has an anaerobic lung infection</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. It indicates the patient needs prophylactic antifungal therapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. It means only IV therapy can be used</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Recent fluoroquinolone exposure — for any indication — raises risk of drug-resistant S. pneumoniae, favoring a different antibiotic class now</button>
+
+<div class="quiz-explain">Recent exposure to a beta-lactam, macrolide, or fluoroquinolone — for any infection, not just a respiratory one — is a risk factor for drug-resistant S. pneumoniae and should steer the current regimen toward a different antibiotic class.</div>
+</div>
+<div class="quiz-q" id="q6">
+<p class="stem">A patient aspirates gastric contents during a seizure and subsequently develops pneumonia with poor dentition noted on exam. Which class of organisms is the classic concern in this aspiration scenario?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Anaerobes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Atypical intracellular organisms</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Endemic fungi</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Respiratory viruses</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Aerobic gram-negative bacilli exclusively</button>
+
+<div class="quiz-explain">Classic aspiration pneumonia, especially with poor dentition or esophageal motility issues, raises concern for anaerobic oropharyngeal flora.</div>
+</div></div>
+</section>
+<section class="card" id="cap-therapy">
+<div class="kicker">Part 1 &middot; Community-Acquired Pneumonia</div>
+<h2>3. CAP &mdash; Empiric Therapy Ladder &amp; Duration</h2>
+
+<p>The regimens build on the same blocks &mdash; a &beta;-lactam, a macrolide, or a respiratory fluoroquinolone &mdash; simply escalating in agent, dose, and route as severity rises.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>CAP empiric therapy by site of care (2019 ATS/IDSA)</caption>
+<tr><th>Setting</th><th>Regimen</th></tr>
+<tr><td><strong>Outpatient, healthy</strong><br>(no comorbidities/DRSP/MRSA/<em>Pseudomonas</em> risk)</td><td><span class="core-name">Amoxicillin</span><span class="badge badge-core">Core</span> PO &mdash;OR&mdash; <span class="core-name">doxycycline</span><span class="badge badge-core">Core</span> PO &mdash;OR&mdash; a macrolide PO (<span class="core-name">azithromycin</span><span class="badge badge-core">Core</span>; only if local pneumococcal macrolide resistance &lt;25%)</td></tr>
+<tr><td><strong>Outpatient, comorbidities or DRSP risk</strong></td><td>Respiratory fluoroquinolone PO (<span class="core-name">levofloxacin</span><span class="badge badge-core">Core</span>, moxifloxacin<span class="badge badge-additional">Additional</span>) &mdash;OR&mdash; high-dose amoxicillin/amoxicillin-clavulanate<span class="badge badge-additional">Additional</span> PO <strong>plus</strong> a macrolide PO</td></tr>
+<tr><td><strong>Nonsevere inpatient</strong></td><td>Respiratory FQ IV/PO &mdash;OR&mdash; &beta;-lactam IV (ampicillin-sulbactam<span class="badge badge-additional">Additional</span>, cefotaxime<span class="badge badge-additional">Additional</span>, <span class="core-name">ceftriaxone</span><span class="badge badge-core">Core</span>, ceftaroline<span class="badge badge-additional">Additional</span>) <strong>plus</strong> macrolide IV</td></tr>
+<tr><td><strong>Severe inpatient (ICU)</strong></td><td>&beta;-lactam IV (same list) <strong>plus</strong> <span class="core-name">azithromycin</span><span class="badge badge-core">Core</span> IV &mdash;OR&mdash; &beta;-lactam IV <strong>plus</strong> respiratory FQ</td></tr>
+</table></div>
+<p>Macrolide-containing regimens are generally preferred for severe CAP over fluoroquinolone-only regimens, partly for the macrolide's immunomodulatory effect and partly because fluoroquinolones carry a higher risk of <em>C. difficile</em> and downstream resistance in colonizing organisms. A history of &beta;-lactam allergy pushes you toward the respiratory-FQ arm instead.</p>
+<h3>Adding MRSA / <em>Pseudomonas</em> coverage</h3>
+<p>Only add if there's a specific risk factor: prior isolation of the organism (especially respiratory) or recent hospitalization with parenteral antibiotic exposure.</p>
+<ul>
+<li><strong><em>Pseudomonas</em>:</strong> antipseudomonal &beta;-lactam (<span class="core-name">piperacillin-tazobactam</span><span class="badge badge-core">Core</span>, <span class="core-name">cefepime</span><span class="badge badge-core">Core</span>, <span class="core-name">ceftazidime</span><span class="badge badge-core">Core</span>, imipenem<span class="badge badge-additional">Additional</span>, <span class="core-name">meropenem</span><span class="badge badge-core">Core</span>, aztreonam<span class="badge badge-additional">Additional</span>) &mdash; add <span class="core-name">ciprofloxacin</span><span class="badge badge-core">Core</span> or an aminoglycoside (<span class="core-name">gentamicin</span><span class="badge badge-core">Core</span>) for double coverage if indicated.</li>
+<li><strong>MRSA:</strong> <span class="core-name">vancomycin</span><span class="badge badge-core">Core</span> or <span class="core-name">linezolid</span><span class="badge badge-core">Core</span>.</li>
+</ul>
+<h3>Duration</h3>
+<p>Minimum <strong>5 days</strong> (most patients get 7&ndash;10). Stop once afebrile 48&ndash;72h, hemodynamically stable, eating, and mentating normally. Confirmed/suspected MRSA or <em>Pseudomonas</em> &rarr; treat 7 days.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q7">
+<p class="stem">A previously healthy 40-year-old with no comorbidities is diagnosed with mild CAP as an outpatient, with no recent antibiotic exposure. Which regimen is guideline-recommended?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Vancomycin plus piperacillin-tazobactam</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Amoxicillin, doxycycline, or a macrolide as monotherapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. A carbapenem alone</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. A respiratory fluoroquinolone plus a macrolide</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Linezolid plus azithromycin</button>
+
+<div class="quiz-explain">For previously healthy outpatients without comorbidities or resistance risk factors, monotherapy with amoxicillin, doxycycline, or a macrolide (if local resistance is low) is recommended.</div>
+</div>
+<div class="quiz-q" id="q8">
+<p class="stem">A patient is admitted to the ICU with severe CAP. Which combination is guideline-preferred, and why is it often favored over a fluoroquinolone-only approach?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. An aminoglycoside alone; it covers all likely pathogens</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Doxycycline monotherapy; it is better tolerated</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. A beta-lactam plus a macrolide; the macrolide's immunomodulatory effect and lower risk of C. difficile compared to fluoroquinolone monotherapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Vancomycin alone; MRSA is presumed in all ICU CAP</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. A respiratory fluoroquinolone alone; it has the broadest possible spectrum</button>
+
+<div class="quiz-explain">A beta-lactam plus an advanced macrolide (e.g., azithromycin) is generally preferred for severe CAP, partly for the macrolide's immunomodulatory benefit and because fluoroquinolones carry a higher risk of C. difficile and resistance in colonizing flora.</div>
+</div>
+<div class="quiz-q" id="q9">
+<p class="stem">A patient with CAP has a prior respiratory isolation of Pseudomonas aeruginosa. Which antibiotic addition is most appropriate to ensure adequate empiric coverage?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Azithromycin alone</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Doxycycline</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Amoxicillin-clavulanate</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. An antipseudomonal beta-lactam such as piperacillin-tazobactam or cefepime</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Clindamycin</button>
+
+<div class="quiz-explain">Prior isolation of Pseudomonas, especially from the respiratory tract, is a specific risk factor that should prompt addition of an antipseudomonal beta-lactam (e.g., piperacillin-tazobactam, cefepime, ceftazidime, imipenem, meropenem, or aztreonam).</div>
+</div></div>
+</section>
+<section class="card" id="hap-vap">
+<div class="kicker">Part 2 &middot; HAP/VAP</div>
+<h2>4. Hospital-Acquired &amp; Ventilator-Associated Pneumonia</h2>
+
+<p><strong>HAP</strong> develops &ge;48h after admission; <strong>VAP</strong> develops &ge;48&ndash;72h after intubation. &ldquo;Healthcare-associated pneumonia (HCAP)&rdquo; was <strong>removed</strong> from the 2016 guidelines &mdash; simple healthcare contact alone doesn't predict multidrug-resistant (MDR) risk as well as specific validated risk factors do.</p>
+<h3>Common pathogens</h3>
+<p>Aerobic gram-negatives (<em>E. coli</em>, <em>Klebsiella</em>, <em>Enterobacter</em>, <em>Pseudomonas</em>, <em>Acinetobacter</em>), gram-positive cocci (<em>S. aureus</em> incl. MRSA), and oropharyngeal flora. Infections are often polymicrobial.</p>
+<h3>Use the local antibiogram</h3>
+<p>Local susceptibility data should guide empiric choice &mdash; the 2016 guidelines specifically push this to <strong>reduce unnecessary dual gram-negative and empiric MRSA coverage</strong>, minimizing harm and resistance pressure rather than reflexively broadening.</p>
+<h3>Do not memorize every risk factor &mdash; know the logic</h3>
+<div class="table-wrap"><table class="data-table">
+<caption>General empiric strategy for VAP/HAP</caption>
+<tr><th>Risk profile</th><th>Strategy</th></tr>
+<tr><td>No MDR risk factors</td><td><strong>One</strong> agent with good gram-negative/<em>Pseudomonas</em> coverage: <span class="core-name">piperacillin-tazobactam</span><span class="badge badge-core">Core</span>, <span class="core-name">cefepime</span><span class="badge badge-core">Core</span>, imipenem<span class="badge badge-additional">Additional</span>, <span class="core-name">meropenem</span><span class="badge badge-core">Core</span>, or <span class="core-name">levofloxacin</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td>MDR risk factors present (e.g., recent IV antibiotics, septic shock, &ge;5 days hospitalization, high local resistance rates)</td><td><strong>Two</strong> agents against <em>Pseudomonas</em> (an antipseudomonal &beta;-lactam <strong>plus</strong> either an antipseudomonal FQ, an aminoglycoside, or polymyxin/colistin<span class="badge badge-additional">Additional</span>) <strong>plus one</strong> MRSA agent (<span class="core-name">linezolid</span><span class="badge badge-core">Core</span> or <span class="core-name">vancomycin</span><span class="badge badge-core">Core</span>) if MRSA risk is also present</td></tr>
+<tr><td>MRSA risk only (no MDR-<em>Pseudomonas</em> risk)</td><td>One antipseudomonal agent <strong>plus</strong> one MRSA agent</td></tr>
+</table></div>
+<p>Risk factors worth recognizing rather than memorizing: recent (90-day) IV antibiotic use, septic shock at diagnosis, structural lung disease, a unit where &gt;10&ndash;20% of relevant isolates are resistant (or resistance rates are simply unknown).</p>
+<h3>Duration</h3>
+<p>7 days for both HAP and VAP, adjusted for clinical/radiographic/lab trajectory.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q10">
+<p class="stem">Which classification, previously used to flag community patients at risk for resistant pathogens based on healthcare contact alone, was removed from the 2016 HAP/VAP guidelines?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Community-acquired pneumonia (CAP)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Ventilator-associated pneumonia (VAP)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Hospital-acquired pneumonia (HAP)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Aspiration pneumonia</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Healthcare-associated pneumonia (HCAP)</button>
+
+<div class="quiz-explain">Healthcare-associated pneumonia (HCAP) was removed from the 2016 guidelines because healthcare contact alone was found to be a poor predictor of multidrug-resistant pathogen risk compared to specific validated risk factors.</div>
+</div>
+<div class="quiz-q" id="q11">
+<p class="stem">A patient develops VAP with no risk factors for multidrug-resistant organisms. Which empiric approach is appropriate?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Monotherapy with a single agent providing good gram-negative/Pseudomonas coverage (e.g., piperacillin-tazobactam or cefepime)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Two antipseudomonal agents plus vancomycin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Triple therapy with an aminoglycoside, a beta-lactam, and linezolid</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. No antibiotics until cultures return</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Oral doxycycline alone</button>
+
+<div class="quiz-explain">Without MDR risk factors, a single antipseudomonal agent (piperacillin-tazobactam, cefepime, imipenem, meropenem, or levofloxacin) is sufficient — routine dual gram-negative and empiric MRSA coverage should be avoided.</div>
+</div>
+<div class="quiz-q" id="q12">
+<p class="stem">A hospital's antibiogram shows that 25% of Pseudomonas isolates in the ICU are resistant to the antibiotic being considered for empiric HAP monotherapy. What is the recommended approach for a patient with HAP in this unit?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Continue monotherapy since 25% resistance is still low</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Use two agents with activity against Pseudomonas rather than monotherapy</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Switch to an oral macrolide</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Add an antifungal empirically</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Discontinue all antibiotics pending cultures</button>
+
+<div class="quiz-explain">A unit resistance rate above roughly 10% to an agent being considered for monotherapy is itself a risk factor favoring two-agent antipseudomonal coverage rather than single-agent empiric therapy.</div>
+</div></div>
+</section>
+<section class="card" id="definitive">
+<div class="kicker">Part 2 &middot; Once the Organism Is Known</div>
+<h2>5. Pathogen-Directed (Definitive) Therapy</h2>
+
+<p>Once culture and susceptibility results return, narrow to the most targeted agent. Recognize the <strong>mechanism</strong> (cell wall inhibitor + protein synthesis inhibitor, etc.) rather than memorizing every drug name &mdash; exam questions are framed around basic pharmacology, not brand recall.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Definitive therapy by organism (condensed)</caption>
+<tr><th>Organism</th><th>Preferred</th></tr>
+<tr><td><em>S. pneumoniae</em>, penicillin-susceptible</td><td>Penicillin G or <span class="core-name">amoxicillin</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td><em>S. pneumoniae</em>, penicillin-resistant</td><td>Based on susceptibility &mdash; cefotaxime<span class="badge badge-additional">Additional</span>/<span class="core-name">ceftriaxone</span><span class="badge badge-core">Core</span>, <span class="core-name">vancomycin</span><span class="badge badge-core">Core</span>, <span class="core-name">linezolid</span><span class="badge badge-core">Core</span>, or high-dose amoxicillin</td></tr>
+<tr><td><em>H. influenzae</em>, non-&beta;-lactamase</td><td><span class="core-name">Amoxicillin</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td><em>H. influenzae</em>, &beta;-lactamase producing</td><td>2nd/3rd-gen cephalosporin or <span class="core-name">amoxicillin-clavulanate</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td>Atypicals (<em>Mycoplasma</em>, <em>Chlamydophila</em>)</td><td>Macrolide or <span class="core-name">doxycycline</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td><em>Legionella</em></td><td>Respiratory fluoroquinolone or <span class="core-name">azithromycin</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td>Enterobacteriaceae</td><td>3rd-gen cephalosporin or carbapenem</td></tr>
+<tr><td><em>Pseudomonas aeruginosa</em></td><td>Antipseudomonal &beta;-lactam <strong>plus</strong> (<span class="core-name">ciprofloxacin</span><span class="badge badge-core">Core</span>/<span class="core-name">levofloxacin</span><span class="badge badge-core">Core</span> or an aminoglycoside)</td></tr>
+<tr><td><em>S. aureus</em>, methicillin-susceptible</td><td>Antistaphylococcal penicillin (nafcillin<span class="badge badge-additional">Additional</span>)</td></tr>
+<tr><td><em>S. aureus</em>, MRSA</td><td><span class="core-name">Vancomycin</span><span class="badge badge-core">Core</span> or <span class="core-name">linezolid</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td>Anaerobes (aspiration)</td><td>&beta;-lactam/&beta;-lactamase inhibitor or <span class="core-name">clindamycin</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td><em>Pneumocystis</em></td><td><span class="core-name">Sulfamethoxazole/trimethoprim</span><span class="badge badge-core">Core</span></td></tr>
+<tr><td><em>Bordetella pertussis</em></td><td>Macrolide</td></tr>
+<tr><td>Endemic fungi (<em>Histoplasma</em>, <em>Blastomyces</em>, <em>Coccidioides</em>)</td><td>Azole (<span class="core-name">fluconazole</span><span class="badge badge-core">Core</span> or itraconazole<span class="badge badge-additional">Additional</span>)</td></tr>
+</table></div>
+<div class="pearl"><div class="pearl-label">Drug-first vs. pathogen-first</div>This table flips the earlier empiric-therapy tables around: instead of starting from the antibiotic and asking what it covers, you start from the known organism and ask which mechanism/class targets it. Both views test the same underlying facts.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q13">
+<p class="stem">A sputum culture confirms methicillin-susceptible Staphylococcus aureus as the cause of a patient's pneumonia, previously treated empirically with vancomycin. What is the most appropriate definitive therapy?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Continue vancomycin indefinitely</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Switch to linezolid</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Switch to an antistaphylococcal penicillin such as nafcillin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Add an aminoglycoside</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Switch to a respiratory fluoroquinolone</button>
+
+<div class="quiz-explain">Once methicillin susceptibility is confirmed, therapy should be narrowed to an antistaphylococcal penicillin like nafcillin, the more targeted, narrower-spectrum option compared to vancomycin.</div>
+</div>
+<div class="quiz-q" id="q14">
+<p class="stem">A patient with confirmed Legionella pneumonia is being started on definitive therapy. Which two drug classes are appropriate choices?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Aminoglycosides or tetracyclines</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Antistaphylococcal penicillins or vancomycin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Sulfonamides or clindamycin</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Respiratory fluoroquinolones or macrolides (e.g., azithromycin)</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Echinocandins or azoles</button>
+
+<div class="quiz-explain">Legionella pneumonia is classically treated with a respiratory fluoroquinolone or a macrolide such as azithromycin, both of which achieve good intracellular penetration.</div>
+</div>
+<div class="quiz-q" id="q15">
+<p class="stem">A patient with confirmed Pneumocystis pneumonia needs definitive therapy. Which agent is the drug of choice?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Clindamycin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Vancomycin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Doxycycline</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Linezolid</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Sulfamethoxazole/trimethoprim</button>
+
+<div class="quiz-explain">Sulfamethoxazole/trimethoprim is the drug of choice for Pneumocystis jirovecii pneumonia, an association that becomes especially important in HIV/AIDS patients.</div>
+</div></div>
+</section>
+<section class="card" id="bronchitis">
+<div class="kicker">Part 3 &middot; Other Lower Respiratory Infections</div>
+<h2>6. Acute/Chronic Bronchitis &amp; Bronchiolitis</h2>
+
+<h3>Acute bronchitis</h3>
+<p>Usually viral (rhinovirus, coronavirus, influenza, adenovirus). <strong>Routine antibiotics are not recommended.</strong> Consider antibiotics (azithromycin<span class="badge badge-additional">Additional</span> or levofloxacin<span class="badge badge-additional">Additional</span>) only if secondary bacterial infection is suspected &mdash; persistent fever/symptoms beyond 4&ndash;6 days, or a predisposed patient (elderly, immunocompromised). During an influenza outbreak, consider early antiviral therapy instead.</p>
+<h3>Chronic bronchitis / acute exacerbation of COPD (AECB)</h3>
+<p>Antibiotics help when &ge;2 of 3 cardinal symptoms are present: increased dyspnea, increased sputum volume, purulent sputum.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>AECB classification &amp; empiric therapy</caption>
+<tr><th>Class</th><th>Definition</th><th>1st-line</th></tr>
+<tr><td><strong>Simple</strong></td><td>No risk factors</td><td>Macrolide, cephalosporin<span class="badge badge-additional">Additional</span>, or TMP-SMX</td></tr>
+<tr><td><strong>Complicated</strong></td><td>&ge;1 risk factor (age &ge;65, severe COPD, &ge;2 exacerbations/yr, recent hospitalization, comorbidities)</td><td><span class="core-name">Amoxicillin-clavulanate</span><span class="badge badge-core">Core</span> or a respiratory fluoroquinolone (avoid ciprofloxacin unless <em>Pseudomonas</em> risk)</td></tr>
+<tr><td><strong>Severe complicated</strong></td><td>Complicated criteria + hospitalization; <em>Pseudomonas</em> risk (chronic colonization, very severe COPD, bronchiectasis, recent broad-spectrum antibiotics)</td><td>No <em>Pseudomonas</em> risk: <span class="core-name">levofloxacin</span><span class="badge badge-core">Core</span>/moxifloxacin<span class="badge badge-additional">Additional</span>/<span class="core-name">ceftriaxone</span><span class="badge badge-core">Core</span>. <em>Pseudomonas</em> risk: <span class="core-name">cefepime</span><span class="badge badge-core">Core</span>/<span class="core-name">ceftazidime</span><span class="badge badge-core">Core</span>/<span class="core-name">piperacillin-tazobactam</span><span class="badge badge-core">Core</span></td></tr>
+</table></div>
+<h3>Bronchiolitis (infants)</h3>
+<p><strong>RSV</strong> causes up to 75% of cases (parainfluenza, adenovirus, influenza account for the rest; bacteria are a minor secondary cause). Most healthy infants are managed as outpatients with supportive care. Severe disease with respiratory failure/dehydration needs admission; aerosolized ribavirin<span class="badge badge-additional">Additional</span> may be considered but is limited by toxicity/variable efficacy. High-risk infants (prematurity, bronchopulmonary dysplasia, congenital heart disease) may receive palivizumab<span class="badge badge-additional">Additional</span> <strong>prophylaxis</strong> &mdash; a monoclonal antibody, not a treatment.</p>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q16">
+<p class="stem">A healthy young adult presents with a 3-day history of cough and mild fever, no underlying lung disease. Chest exam is unremarkable. What is the recommended management for suspected acute bronchitis?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Symptomatic/supportive care without routine antibiotics</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Immediate azithromycin</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. A respiratory fluoroquinolone</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Amoxicillin-clavulanate</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Hospitalization for IV antibiotics</button>
+
+<div class="quiz-explain">Acute bronchitis is usually viral, and routine antibiotic use is not recommended; supportive care (reassurance, antipyretics) is first-line unless secondary bacterial infection or a high-risk feature is present.</div>
+</div>
+<div class="quiz-q" id="q17">
+<p class="stem">A COPD patient with severe airflow limitation (FEV1 <40%), 3 exacerbations in the past year, and known chronic Pseudomonas colonization develops an acute exacerbation requiring hospitalization. Which empiric regimen best fits this severe complicated presentation?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Azithromycin monotherapy</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Cefepime, ceftazidime, or piperacillin-tazobactam</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. TMP-SMX alone</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. A macrolide alone</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Amoxicillin monotherapy</button>
+
+<div class="quiz-explain">Severe complicated AECB with Pseudomonas risk factors (chronic colonization, severe COPD) requires an antipseudomonal agent such as cefepime, ceftazidime, or piperacillin-tazobactam.</div>
+</div>
+<div class="quiz-q" id="q18">
+<p class="stem">A premature infant with bronchopulmonary dysplasia is being considered for an agent to reduce the risk of severe RSV disease before any infection occurs. Which agent is appropriate, and is it treatment or prophylaxis?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Ribavirin; treatment</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Oseltamivir; treatment</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. Palivizumab; prophylaxis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Amoxicillin; prophylaxis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Azithromycin; treatment</button>
+
+<div class="quiz-explain">Palivizumab is a monoclonal antibody used as prophylaxis (not treatment) against RSV in high-risk infants such as those born prematurely or with bronchopulmonary dysplasia or congenital heart disease.</div>
+</div></div>
+</section>
+<section class="card" id="influenza">
+<div class="kicker">Part 4 &middot; Influenza &amp; COVID-19</div>
+<h2>7. Influenza &mdash; Virology &amp; Antiviral Pharmacology</h2>
+
+<p>Influenza spreads via respiratory droplets/aerosols and fomites; incubation 1&ndash;4 days. Viral shedding starts just before symptoms, peaks ~24&ndash;48h, and is mostly gone by day 5&ndash;10 (longer in older/immunocompromised patients). Classic presentation: abrupt fever, nonproductive cough, myalgia.</p>
+<p>Hemagglutinin binds sialic acid on respiratory epithelium to initiate infection; after replication, neuraminidase cleaves sialic acid to release progeny virions &mdash; this cleavage step, not attachment, is what the neuraminidase inhibitors block.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Anti-influenza agents</caption>
+<tr><th>Class / Agent</th><th>MOA</th><th>Notes</th></tr>
+<tr><td><strong>Neuraminidase inhibitors</strong><br><span class="core-name">Oseltamivir</span><span class="badge badge-core">Core</span> (PO), <span class="core-name">zanamivir</span><span class="badge badge-core">Core</span> (inhaled), peramivir<span class="badge badge-additional">Additional</span> (IV)</td><td>Sialic acid analogs; block neuraminidase-mediated release of progeny virions</td><td>Oseltamivir: GI upset, rare neuropsychiatric events (mostly pediatric). Zanamivir: bronchospasm &mdash; avoid in underlying airway disease.</td></tr>
+<tr><td><span class="core-name">Baloxavir</span><span class="badge badge-core">Core</span> (PO, single dose)</td><td>Inhibits the endonuclease activity of the viral polymerase acidic (PA) protein, blocking capped-primer formation for viral RNA synthesis</td><td>Active against strains resistant to other antivirals. Main ADR: diarrhea.</td></tr>
+<tr><td>Amantadine, rimantadine<span class="badge badge-additional">Additional</span> (M2 blockers)</td><td>Block the M2 proton channel, preventing viral uncoating</td><td>Influenza A only; <strong>no longer recommended</strong> due to high resistance rates.</td></tr>
+</table></div>
+<p><strong>Timing:</strong> most effective within 48h of symptom onset, though severe disease may still warrant treatment later. <strong>Prophylaxis</strong> (before infection) is an option for high-risk contacts or long-term care outbreaks.</p>
+<div class="pearl"><div class="pearl-label">Watch for the confusion trap</div>Neuraminidase inhibitors structurally resemble sialic acid, which sounds like it should block *attachment* — but attachment is already done by the time these drugs act. They block *release* of newly made virus by preventing neuraminidase from cleaving sialic acid off the host cell.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q19">
+<p class="stem">A patient is started on oseltamivir for influenza. What is the mechanism by which this drug limits viral spread within the respiratory tract?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Blocking the M2 proton channel to prevent uncoating</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Inhibiting the viral polymerase acidic protein's endonuclease activity</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Preventing hemagglutinin from binding sialic acid receptors</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Inhibiting neuraminidase, preventing cleavage of sialic acid and release of progeny virions from infected cells</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Directly degrading viral RNA</button>
+
+<div class="quiz-explain">Oseltamivir is a sialic acid analog that inhibits neuraminidase, preventing the enzyme from cleaving sialic acid residues that anchor newly formed virions to the infected cell — blocking their release, not their initial attachment.</div>
+</div>
+<div class="quiz-q" id="q20">
+<p class="stem">A patient with asthma is diagnosed with influenza. Which neuraminidase inhibitor should generally be avoided due to a risk of bronchospasm and decreased pulmonary function?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Baloxavir</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Peramivir</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Oseltamivir</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Amantadine</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. Zanamivir</button>
+
+<div class="quiz-explain">Zanamivir is administered by inhalation and carries a risk of bronchospasm and decreased pulmonary function, so it is generally avoided in patients with underlying airway disease such as asthma or COPD.</div>
+</div>
+<div class="quiz-q" id="q21">
+<p class="stem">Amantadine and rimantadine were once used for influenza A treatment and prophylaxis. Why are they no longer recommended?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. High rates of resistance have made them ineffective</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. They are only available as IV formulations</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. They have no activity against influenza A</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. They cause fatal anaphylaxis in most patients</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. They were withdrawn for hepatotoxicity</button>
+
+<div class="quiz-explain">M2 channel blockers like amantadine and rimantadine are no longer recommended for influenza A due to high rates of resistance that have developed over time.</div>
+</div></div>
+</section>
+<section class="card" id="covid">
+<div class="kicker">Part 4 &middot; Influenza &amp; COVID-19</div>
+<h2>8. COVID-19 Antiviral Pharmacology</h2>
+
+<div class="table-wrap"><table class="data-table">
+<caption>SARS-CoV-2 antivirals</caption>
+<tr><th>Agent</th><th>MOA</th><th>Use</th><th>ADRs</th></tr>
+<tr><td><span class="core-name">Remdesivir</span><span class="badge badge-core">Core</span> (IV)</td><td>Adenosine nucleotide analog; triphosphorylated intracellularly, incorporated into viral RNA &rarr; delayed chain termination, inhibits RNA-dependent RNA polymerase</td><td>Hospitalized patients on supplemental O2, not yet on high-flow/ventilation; reduces time to recovery</td><td>Nausea, constipation, hypokalemia, headache, elevated LFTs</td></tr>
+<tr><td><span class="core-name">Nirmatrelvir/ritonavir</span><span class="badge badge-core">Core</span> (Paxlovid, PO)</td><td>Nirmatrelvir inhibits the SARS-CoV-2 main protease (M<sup>pro</sup>), blocking polyprotein processing/replication. <strong>Ritonavir has no antiviral activity here</strong> &mdash; it's a pharmacokinetic booster that inhibits nirmatrelvir's metabolism, raising its levels</td><td>Mild&ndash;moderate COVID-19, high risk of progression; PO twice daily &times; 5 days; reduces hospitalization/death</td><td>Dysgeusia (altered/metallic taste), diarrhea, hypertension, myalgia</td></tr>
+</table></div>
+<div class="pearl"><div class="pearl-label">Ritonavir's job here is not antiviral</div>This is a repeated exam trap: ritonavir is included purely as a CYP450 inhibitor to boost nirmatrelvir concentrations, the same 'booster' strategy used with some antiretrovirals &mdash; it does not itself act against SARS-CoV-2.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q22">
+<p class="stem">A hospitalized COVID-19 patient requiring supplemental oxygen (but not mechanical ventilation) is started on an IV antiviral that gets incorporated into viral RNA, causing delayed chain termination. Which drug is this?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Nirmatrelvir</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. Remdesivir</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Ritonavir</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Baloxavir</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Oseltamivir</button>
+
+<div class="quiz-explain">Remdesivir is an adenosine nucleotide analog that, after intracellular triphosphorylation, is incorporated into viral RNA and causes delayed chain termination, inhibiting the SARS-CoV-2 RNA-dependent RNA polymerase.</div>
+</div>
+<div class="quiz-q" id="q23">
+<p class="stem">A patient at high risk for severe COVID-19 is prescribed Paxlovid (nirmatrelvir-ritonavir). What is the specific role of ritonavir in this combination?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. It directly inhibits the SARS-CoV-2 main protease alongside nirmatrelvir</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. It has independent antiviral activity against SARS-CoV-2 RNA polymerase</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. It functions purely as a pharmacokinetic enhancer, inhibiting nirmatrelvir's metabolism to raise its serum concentration</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. It reduces nirmatrelvir-associated dysgeusia</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. It replaces nirmatrelvir in patients with renal impairment</button>
+
+<div class="quiz-explain">Ritonavir contributes no antiviral activity against SARS-CoV-2 in this combination — it acts solely as a pharmacokinetic booster, inhibiting the metabolism of nirmatrelvir to maintain therapeutic drug levels.</div>
+</div></div>
+</section>
+<section class="card" id="other-antivirals">
+<div class="kicker">Part 4 &middot; Supplementary Antivirals</div>
+<h2>9. Other Antivirals &mdash; RSV, HSV/VZV &amp; CMV</h2>
+
+<p>These agents are largely supplementary (none are the red-font focus), but recognize the mechanism pattern &mdash; most are nucleoside/nucleotide analogs terminating viral DNA synthesis.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Supplementary antivirals by target virus</caption>
+<tr><th>Virus</th><th>Agent(s)</th><th>MOA</th><th>Key point</th></tr>
+<tr><td>RSV</td><td>Ribavirin<span class="badge badge-additional">Additional</span> (aerosol)</td><td>Guanosine analog; inhibits guanosine triphosphate synthesis and viral mRNA capping</td><td>Teratogenic/embryotoxic; toxic to healthcare workers; efficacy inconsistent &rarr; not routinely recommended</td></tr>
+<tr><td>RSV (prophylaxis)</td><td>Palivizumab<span class="badge badge-additional">Additional</span> (IM)</td><td>Humanized monoclonal antibody neutralizing the RSV F protein</td><td>Prophylaxis only, not treatment; for high-risk infants</td></tr>
+<tr><td>HSV / VZV</td><td>Acyclovir, valacyclovir<span class="badge badge-additional">Additional</span></td><td>Guanosine analogs activated by <strong>viral</strong> thymidine kinase (selectivity); terminate DNA chain elongation</td><td>Valacyclovir is the prodrug of acyclovir, better oral bioavailability</td></tr>
+<tr><td>CMV</td><td>Ganciclovir, valganciclovir<span class="badge badge-additional">Additional</span></td><td>Acyclic guanosine analog; terminates DNA elongation after triphosphorylation</td><td>Myelosuppression is the dose-limiting toxicity</td></tr>
+</table></div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 2 questions</div><div class="quiz-q" id="q24">
+<p class="stem">A patient with genital herpes is prescribed valacyclovir. Why does this class of antiviral achieve selective toxicity against HSV-infected cells rather than uninfected human cells?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. It is a protease inhibitor selective for viral enzymes</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. It blocks the viral M2 channel</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. It inhibits neuraminidase, which is absent in human cells</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">D. Activation requires a viral (not host) thymidine kinase for the first phosphorylation step</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. It is selectively taken up by infected cells via a viral-specific transporter</button>
+
+<div class="quiz-explain">Acyclovir/valacyclovir require an initial phosphorylation step catalyzed by viral thymidine kinase, which is far more efficient at activating these drugs than host cell enzymes — providing selective toxicity toward infected cells.</div>
+</div>
+<div class="quiz-q" id="q25">
+<p class="stem">A patient receiving ganciclovir for CMV retinitis develops significant bone marrow suppression. What is the mechanistic basis for choosing ganciclovir at all, given this toxicity?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. Ganciclovir has no mechanism related to DNA synthesis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. It works by inhibiting the CMV envelope glycoprotein</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. It blocks CMV attachment to host cells</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. It is a monoclonal antibody against CMV</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">E. As an acyclic guanosine analog, it terminates viral DNA chain elongation after triphosphorylation, targeting viral replication</button>
+
+<div class="quiz-explain">Ganciclovir is an acyclic guanosine analog that, once triphosphorylated, inhibits CMV DNA polymerase and terminates DNA chain elongation — myelosuppression is its main dose-limiting adverse effect despite this targeted mechanism.</div>
+</div></div>
+</section>
+<section class="card" id="antifungals">
+<div class="kicker">Part 5 &middot; Antifungals</div>
+<h2>10. Antifungal Pharmacology</h2>
+
+<p>Fungi are eukaryotic with a rigid cell wall (&beta;-glucans) and ergosterol (not cholesterol) in their membrane &mdash; these differences are the selective-toxicity targets. Most fungal infections are opportunistic, not primary.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Antifungal classes</caption>
+<tr><th>Class / Agent</th><th>MOA</th><th>Spectrum / Use</th><th>ADRs</th></tr>
+<tr><td><strong>Azoles</strong><br><span class="core-name">Fluconazole</span><span class="badge badge-core">Core</span>, <span class="core-name">voriconazole</span><span class="badge badge-core">Core</span>, itraconazole<span class="badge badge-additional">Additional</span></td><td>Inhibit fungal CYP450 (lanosterol 14&alpha;-demethylase) &rarr; &darr; ergosterol synthesis</td><td>Wide: <em>Candida</em>, blastomycosis, coccidioidomycosis, histoplasmosis; voriconazole/itraconazole also cover <em>Aspergillus</em></td><td>GI upset, LFT abnormalities; voriconazole adds visual changes/photosensitivity; <strong>major CYP450 drug interactions</strong> across the class</td></tr>
+<tr><td><span class="core-name">Amphotericin B</span><span class="badge badge-core">Core</span> (IV)</td><td>Binds ergosterol directly, forms membrane pores &rarr; leakage of cell contents</td><td>Broadest spectrum; reserved for severe/life-threatening infections</td><td>Infusion reactions (fever, chills, vomiting, headache &mdash; "ampho-terrible"); cumulative nephrotoxicity</td></tr>
+<tr><td><strong>Echinocandins</strong><br>Caspofungin, micafungin<span class="badge badge-additional">Additional</span> (IV)</td><td>Inhibit &beta;(1,3)-glucan synthase &rarr; disrupt fungal cell wall</td><td><em>Candida</em>, <em>Aspergillus</em></td><td>Minor GI, flushing &mdash; generally well tolerated</td></tr>
+</table></div>
+<div class="pearl"><div class="pearl-label">Match the target to the drug</div>Cell membrane target (ergosterol) → azoles and amphotericin B. Cell wall target (β-glucan) → echinocandins. This mirrors the antibacterial cell-wall-vs-membrane logic from the prior session.</div>
+
+<div class="quiz-block"><div class="quiz-mini-header">Check yourself &mdash; 3 questions</div><div class="quiz-q" id="q26">
+<p class="stem">A patient with invasive aspergillosis is treated with voriconazole. What is the mechanism of action of this drug?</p>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">A. Inhibition of fungal CYP450 (lanosterol 14-alpha-demethylase), reducing ergosterol synthesis</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. Inhibition of beta(1,3)-glucan synthase</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. Direct binding to ergosterol, forming membrane pores</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. Inhibition of fungal RNA polymerase</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Disruption of fungal DNA topoisomerase</button>
+
+<div class="quiz-explain">Azoles like voriconazole inhibit the fungal cytochrome P450 enzyme lanosterol 14-alpha-demethylase, reducing ergosterol production and compromising the fungal cell membrane.</div>
+</div>
+<div class="quiz-q" id="q27">
+<p class="stem">A patient with a life-threatening systemic fungal infection is started on amphotericin B despite its significant toxicity. What justifies choosing this agent over other options?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. It has no adverse effects</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">B. It has the broadest spectrum of antifungal activity, useful when infection is severe/life-threatening</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">C. It is the only oral antifungal available</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. It lacks nephrotoxic potential</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. It selectively spares Candida species</button>
+
+<div class="quiz-explain">Amphotericin B has the broadest spectrum of any antifungal and is generally reserved for severe or life-threatening infections specifically because its toxicity (infusion reactions, cumulative nephrotoxicity) limits routine use.</div>
+</div>
+<div class="quiz-q" id="q28">
+<p class="stem">Caspofungin is used to treat invasive candidiasis. Which fungal structure does this echinocandin target, distinguishing its mechanism from the azoles?</p>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">A. The fungal cell membrane ergosterol</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">B. The fungal ribosome</button>
+<button class="quiz-choice" data-correct="true" onclick="answerQ(this)">C. The fungal cell wall beta(1,3)-glucan</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">D. The fungal mitochondrial membrane</button>
+<button class="quiz-choice" data-correct="false" onclick="answerQ(this)">E. Fungal DNA gyrase</button>
+
+<div class="quiz-explain">Echinocandins like caspofungin inhibit beta(1,3)-glucan synthase, disrupting fungal cell wall synthesis — a distinct target from the ergosterol-focused mechanism of the azoles and amphotericin B.</div>
+</div></div>
+</section>
+<section class="card" id="mechanisms">
+<div class="kicker">Consolidation</div>
+<h2>11. Mechanisms &amp; Adverse Effects At a Glance</h2>
+<p style="margin-top:0;">One row per class &mdash; mirrors Dr. Waller's own condensed mechanism/ADR review slides.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>Mechanisms &amp; adverse effects, sorted</caption>
+<tr><th>Class</th><th>Mechanism</th><th>Spectrum</th><th>Key ADR</th></tr>
+<tr><td><strong>&beta;-Lactams (penicillins, cephalosporins, carbapenems, monobactam)</strong></td><td>Inhibit PBP transpeptidation &rarr; blocks peptidoglycan cross-linking</td><td>Gram-positive &plusmn; gram-negative, by generation/class</td><td>Hypersensitivity/anaphylaxis, GI upset</td></tr>
+<tr><td><strong>Vancomycin</strong></td><td>Binds D-Ala-D-Ala, blocks cell wall cross-linking (not a PBP)</td><td>Gram-positive incl. MRSA; no gram-negative</td><td>Infusion reaction (histamine, not allergy), nephro-/ototoxicity</td></tr>
+<tr><td><strong>Fluoroquinolones</strong></td><td>Inhibit DNA gyrase / topoisomerase IV</td><td>Broad gram-negative + Pseudomonas; "respiratory" agents add Streptococcus</td><td>Achilles tendon rupture, QT, CNS effects</td></tr>
+<tr><td><strong>Aminoglycosides</strong></td><td>Bind 30S, disrupt initiation &rarr; misread mRNA</td><td>Aerobic gram-negative; synergy with cell-wall agents for gram-positive</td><td>Nephro-/ototoxicity, neuromuscular blockade</td></tr>
+<tr><td><strong>Tetracyclines</strong></td><td>Bind 30S, block aminoacyl-tRNA at A site</td><td>Broad + atypicals/rickettsiae</td><td>Photosensitivity, tooth discoloration (avoid in pregnancy/children)</td></tr>
+<tr><td><strong>Macrolides</strong></td><td>Bind 50S, block translocation</td><td>Gram-positive + atypicals; modest gram-negative</td><td>QT prolongation, GI, CYP3A4 interactions</td></tr>
+<tr><td><strong>Clindamycin</strong></td><td>Binds 50S (site = macrolides), blocks translocation</td><td>Gram-positive, anaerobes</td><td>C. difficile / pseudomembranous colitis</td></tr>
+<tr><td><strong>Linezolid</strong></td><td>Binds 50S P site, blocks initiation complex</td><td>Gram-positive incl. VRE/MRSA</td><td>Myelosuppression, serotonin syndrome with SSRIs</td></tr>
+<tr><td><strong>Lefamulin</strong></td><td>Binds 50S, blocks tRNA binding</td><td>CAP pathogens incl. atypicals</td><td>Avoid in pregnancy</td></tr>
+<tr><td><strong>Sulfonamides/trimethoprim</strong></td><td>Sequential folate pathway block (dihydropteroate synthase + reductase)</td><td>Broad; PCP prophylaxis</td><td>Stevens-Johnson, potentiates warfarin</td></tr>
+<tr><td><strong>Neuraminidase inhibitors</strong></td><td>Block neuraminidase-mediated viral release</td><td>Influenza A/B</td><td>GI upset; zanamivir &rarr; bronchospasm</td></tr>
+<tr><td><strong>Baloxavir</strong></td><td>Inhibits viral PA endonuclease</td><td>Influenza A/B incl. resistant strains</td><td>Diarrhea</td></tr>
+<tr><td><strong>Remdesivir</strong></td><td>RNA chain terminator (RdRp inhibitor)</td><td>SARS-CoV-2, hospitalized on O2</td><td>Hypokalemia, LFT elevation</td></tr>
+<tr><td><strong>Nirmatrelvir/ritonavir</strong></td><td>Mpro protease inhibitor + PK booster (ritonavir = no antiviral activity)</td><td>SARS-CoV-2, high-risk outpatients</td><td>Dysgeusia, diarrhea</td></tr>
+<tr><td><strong>Azoles</strong></td><td>Inhibit fungal CYP450 (14&alpha;-demethylase) &rarr; &darr;ergosterol</td><td>Broad fungal incl. Aspergillus (vori/itra)</td><td>CYP450 drug interactions, LFTs</td></tr>
+<tr><td><strong>Amphotericin B</strong></td><td>Binds ergosterol &rarr; membrane pores</td><td>Broadest antifungal spectrum</td><td>Infusion reactions, nephrotoxicity</td></tr>
+<tr><td><strong>Echinocandins</strong></td><td>Inhibit &beta;(1,3)-glucan synthase</td><td>Candida, Aspergillus</td><td>Well tolerated; minor GI</td></tr>
+
+</table></div>
+
+</section>
+<section class="card" id="high-yield-summary">
+<div class="kicker">Final Review</div>
+<h2>12. High-Yield Summary &mdash; Core Drugs Only</h2>
+<p style="margin-top:0;">Only the drugs Dr. Waller highlighted in red font. Everything reviewed above (including "additional" agents) is fair game, but master this list first.</p>
+<div class="table-wrap"><table class="data-table">
+<caption>High-yield recall &mdash; core (red-font) drugs only</caption>
+<tr><th>Drug</th><th>One-line role</th></tr>
+<tr><td><strong>Amoxicillin</strong></td><td>1st-line outpatient CAP (healthy, no risk factors).</td></tr>
+<tr><td><strong>Ampicillin-sulbactam / Amoxicillin-clavulanate</strong></td><td>&beta;-lactam backbone for inpatient CAP / complicated AECB.</td></tr>
+<tr><td><strong>Piperacillin-tazobactam</strong></td><td>Antipseudomonal &beta;-lactam; HAP/VAP monotherapy option or combo backbone.</td></tr>
+<tr><td><strong>Ceftriaxone</strong></td><td>Inpatient CAP &beta;-lactam of choice (non-antipseudomonal).</td></tr>
+<tr><td><strong>Ceftazidime / Cefepime</strong></td><td>Antipseudomonal cephalosporins for HAP/VAP/severe AECB with Pseudomonas risk.</td></tr>
+<tr><td><strong>Meropenem / Ertapenem</strong></td><td>Carbapenem options, esp. HAP/VAP or ESBL producers.</td></tr>
+<tr><td><strong>Vancomycin</strong></td><td>MRSA coverage in CAP/HAP/VAP when risk factors present.</td></tr>
+<tr><td><strong>Ciprofloxacin</strong></td><td>Best anti-Pseudomonas fluoroquinolone; add-on for double gram-negative coverage.</td></tr>
+<tr><td><strong>Levofloxacin</strong></td><td>Respiratory fluoroquinolone monotherapy across CAP severities and HAP/VAP.</td></tr>
+<tr><td><strong>Gentamicin</strong></td><td>Aminoglycoside option for double antipseudomonal coverage.</td></tr>
+<tr><td><strong>Doxycycline</strong></td><td>Outpatient CAP monotherapy alternative; atypical coverage.</td></tr>
+<tr><td><strong>Azithromycin</strong></td><td>Macrolide backbone across the entire CAP ladder (esp. severe CAP + &beta;-lactam).</td></tr>
+<tr><td><strong>Clindamycin</strong></td><td>Anaerobic/aspiration coverage alternative to &beta;-lactam/inhibitor combos.</td></tr>
+<tr><td><strong>Linezolid</strong></td><td>MRSA alternative to vancomycin in CAP/HAP/VAP.</td></tr>
+<tr><td><strong>Lefamulin</strong></td><td>CAP-specific agent incl. atypical coverage.</td></tr>
+<tr><td><strong>Sulfamethoxazole/trimethoprim</strong></td><td>Drug of choice for Pneumocystis pneumonia.</td></tr>
+<tr><td><strong>Oseltamivir</strong></td><td>First-line oral influenza treatment/prophylaxis.</td></tr>
+<tr><td><strong>Zanamivir</strong></td><td>Inhaled influenza option; avoid with airway disease.</td></tr>
+<tr><td><strong>Baloxavir</strong></td><td>Single-dose oral influenza option; active vs. resistant strains.</td></tr>
+<tr><td><strong>Remdesivir</strong></td><td>IV COVID-19 antiviral for hospitalized patients on supplemental O2.</td></tr>
+<tr><td><strong>Nirmatrelvir/ritonavir (Paxlovid)</strong></td><td>Oral COVID-19 antiviral for high-risk outpatients.</td></tr>
+<tr><td><strong>Fluconazole / Voriconazole</strong></td><td>Azole antifungals covering endemic fungi (+Aspergillus for voriconazole).</td></tr>
+<tr><td><strong>Amphotericin B</strong></td><td>Broadest-spectrum antifungal, reserved for severe/life-threatening infection.</td></tr>
+
+</table></div>
+
+</section>
+
+</div>
+<script>
+function toggleSidenav(){
+  document.getElementById('sidenavPanel').classList.toggle('open');
+}
+function answerQ(btn){
+  var q = btn.closest('.quiz-q');
+  if(q.dataset.answered) return;
+  q.dataset.answered = "true";
+  var choices = q.querySelectorAll('.quiz-choice');
+  choices.forEach(function(c){
+    c.disabled = true;
+    if(c.dataset.correct === "true"){ c.classList.add('correct'); }
+  });
+  if(btn.dataset.correct !== "true"){ btn.classList.add('incorrect'); }
+  q.querySelector('.quiz-explain').classList.add('show');
+}
+(function(){
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.card'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidenav-panel a'));
+  function onScroll(){
+    var best = null, bestTop = -Infinity;
+    sections.forEach(function(s){
+      var top = s.getBoundingClientRect().top;
+      if(top <= 120 && top > bestTop){ bestTop = top; best = s.id; }
+    });
+    links.forEach(function(l){
+      l.classList.toggle('active', l.dataset.target === best);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
