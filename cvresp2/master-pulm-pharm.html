@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam 2 Master Pharm Guide — CVResp2 (Core Agents)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --core:#8a3b2b;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.7rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:880px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents > b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents > ul.toc-tree{ columns:2; margin:10px 0 0; padding-left:20px; column-gap:32px; }
+  .top-contents ul.toc-tree > li{ break-inside:avoid; margin-bottom:14px; font-size:0.92rem; }
+  .top-contents ul.toc-tree > li > a b{ color:var(--forest-dark); }
+  .top-contents li ul{ list-style:none; padding-left:14px; margin:6px 0 0; }
+  .top-contents li ul li{ margin-bottom:4px; font-size:0.85rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-250px; top:0; height:100vh; width:240px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:4px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.78rem; padding:5px 8px; border-radius:6px; }
+  .sidenav-panel a:hover{ background:var(--sage-light); }
+  .sidenav-panel .cat-label{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; color:var(--accent); margin-top:10px; padding:0 8px; }
+
+  .container{ max-width:1150px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.15rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:22px 0 8px; letter-spacing:0.02em;
+  }
+  .callout{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+
+  .table-scroll{ width:100%; overflow-x:auto; margin:10px auto 22px; -webkit-overflow-scrolling:touch; border-radius:8px; }
+  .table-scroll table{ margin:0; min-width:1180px; width:100%; }
+  table{ border-collapse:collapse; font-size:0.82rem; background:var(--cream-card); }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.62rem; text-transform:uppercase; padding:8px 9px; text-align:left; border:1px solid var(--forest-dark);
+    letter-spacing:0.02em;
+  }
+  table td{ padding:8px 9px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+  table td.drug-name{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--core); white-space:nowrap; }
+  table td.stem{ font-style:italic; color:var(--text-soft); }
+  table td.moa{ color:var(--forest-dark); }
+  .name-rec{ font-size:0.85rem; color:var(--text-soft); margin:8px 0 4px; }
+  .name-rec b{ color:var(--forest-dark); }
+
+  @media (max-width:800px){
+    .top-contents ul{ columns:1; }
+    section.card{ padding:20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Exam 2 Master Pharm Guide</h1>
+  <p>CVResp2 &middot; Every CORE (red-font) drug, one table per class &middot; Antihistamines &middot; Overview of Antimicrobial Agents &middot; Drugs for Respiratory Infections &middot; Tuberculosis &amp; Antimycobacterial Drugs &middot; HIV/AIDS</p>
+</div>
+
+<div class="top-contents">
+  <b>Contents</b>
+  
+<ul class="toc-tree">
+  <li><a href="#antihistamines-guide"><b>Antihistamines &amp; Drugs for Rhinitis/Allergies</b></a>
+    <ul>
+      <li><a href="#h1-first-gen">H1 &mdash; First Generation</a></li>
+      <li><a href="#h1-second-gen">H1 &mdash; Second Generation</a></li>
+      <li><a href="#h2-antagonist">H2 Antagonist</a></li>
+      <li><a href="#decongestants">Decongestants</a></li>
+      <li><a href="#antitussives">Antitussives</a></li>
+    </ul>
+  </li>
+  <li><a href="#antimicrobials-guide"><b>Overview of Antimicrobial Agents</b></a>
+    <ul>
+      <li><a href="#penicillins-core">Aminopenicillins/Antipseudomonal Penicillin</a></li>
+      <li><a href="#bli-combos">&beta;-Lactamase Inhibitor Combos</a></li>
+      <li><a href="#cephalosporins-core">Cephalosporins (3rd/4th Gen)</a></li>
+      <li><a href="#carbapenems-core">Carbapenems</a></li>
+      <li><a href="#glycopeptide-core">Glycopeptide</a></li>
+      <li><a href="#aminoglycoside-core">Aminoglycoside</a></li>
+      <li><a href="#tetracycline-core">Tetracycline</a></li>
+      <li><a href="#macrolide-core">Macrolide</a></li>
+      <li><a href="#lincosamide-core">Lincosamide</a></li>
+      <li><a href="#oxazolidinone-core">Oxazolidinone</a></li>
+      <li><a href="#pleuromutilin-core">Pleuromutilin</a></li>
+      <li><a href="#fluoroquinolones-core">Fluoroquinolones</a></li>
+      <li><a href="#sulfa-core">Sulfonamide/Trimethoprim</a></li>
+    </ul>
+  </li>
+  <li><a href="#resp-infections-guide"><b>Drugs for Respiratory Infections</b></a>
+    <ul>
+      <li><a href="#antivirals-influenza">Antivirals &mdash; Influenza</a></li>
+      <li><a href="#antivirals-covid">Antivirals &mdash; COVID-19</a></li>
+      <li><a href="#antifungals-core">Antifungals</a></li>
+    </ul>
+  </li>
+  <li><a href="#tb-guide"><b>Tuberculosis &amp; Antimycobacterial Drugs</b></a>
+    <ul>
+      <li><a href="#tb-first-line">First-Line Agents</a></li>
+      <li><a href="#tb-alt-line">Alternative/Second-Line Core Agents</a></li>
+    </ul>
+  </li>
+  <li><a href="#hiv-guide"><b>Pharmacologic Agents for HIV/AIDS</b></a>
+    <ul>
+      <li><a href="#hiv-nrti">NRTIs</a></li>
+      <li><a href="#hiv-nnrti">NNRTI</a></li>
+      <li><a href="#hiv-pi">Protease Inhibitors</a></li>
+      <li><a href="#hiv-insti">Integrase Strand Transfer Inhibitors</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel">
+<div class="cat-label">Antihistamines</div>
+<a href="#h1-first-gen">H1 First-Gen</a>
+<a href="#h1-second-gen">H1 Second-Gen</a>
+<a href="#h2-antagonist">H2 Antagonist</a>
+<a href="#decongestants">Decongestants</a>
+<a href="#antitussives">Antitussives</a>
+<div class="cat-label">Antimicrobials Overview</div>
+<a href="#penicillins-core">Penicillins</a>
+<a href="#bli-combos">BL Inhibitor Combos</a>
+<a href="#cephalosporins-core">Cephalosporins</a>
+<a href="#carbapenems-core">Carbapenems</a>
+<a href="#glycopeptide-core">Glycopeptide</a>
+<a href="#aminoglycoside-core">Aminoglycoside</a>
+<a href="#tetracycline-core">Tetracycline</a>
+<a href="#macrolide-core">Macrolide</a>
+<a href="#lincosamide-core">Lincosamide</a>
+<a href="#oxazolidinone-core">Oxazolidinone</a>
+<a href="#pleuromutilin-core">Pleuromutilin</a>
+<a href="#fluoroquinolones-core">Fluoroquinolones</a>
+<a href="#sulfa-core">Sulfa/Trimethoprim</a>
+<div class="cat-label">Respiratory Infections</div>
+<a href="#antivirals-influenza">Influenza Antivirals</a>
+<a href="#antivirals-covid">COVID-19 Antivirals</a>
+<a href="#antifungals-core">Antifungals</a>
+<div class="cat-label">Tuberculosis</div>
+<a href="#tb-first-line">First-Line TB</a>
+<a href="#tb-alt-line">Alt/Second-Line TB</a>
+<div class="cat-label">HIV/AIDS</div>
+<a href="#hiv-nrti">NRTIs</a>
+<a href="#hiv-nnrti">NNRTI</a>
+<a href="#hiv-pi">Protease Inhibitors</a>
+<a href="#hiv-insti">INSTIs</a>
+</div>
+
+<div class="container">
+
+
+<section class="card" id="antihistamines-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Antihistamines &amp; Drugs for Rhinitis and Allergies</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette centers on allergic rhinitis, urticaria, motion sickness/vomiting given as a sedating antihistamine, an anaphylaxis/allergic-reaction adjunct, peptic ulcer/GERD history with an old H2 blocker, a common-cold/URI patient asking for a decongestant, or a cough suppressant question &mdash; especially any question testing first- vs. second-generation antihistamine sedation/anticholinergic burden.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "sedation," "drowsiness," "dry mouth/blurred vision/urinary retention" (anticholinergic triad), "non-sedating," "once daily," "rebound congestion" after &gt;3 days, "motion sickness," "hives/urticaria," "H1 receptor," "H2 receptor," "antitussive," "cough suppressant," "opioid-derived cough medicine."</div>
+</section>
+
+
+<section class="card" id="h1-first-gen">
+<h2>H1 Antihistamines &mdash; First Generation</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Diphenhydramine</td>
+<td>OTC allergic rhinitis/urticaria; sleep aid; adjunct for anaphylaxis/allergic reactions; antiemetic for motion sickness; extrapyramidal symptom (EPS) rescue</td>
+<td>25&ndash;50 mg PO/IV/IM q4&ndash;6h (max ~300 mg/day)</td>
+<td>Narrow-angle glaucoma, symptomatic BPH/urinary retention, neonates</td>
+<td>Marked sedation, anticholinergic effects (dry mouth, blurred vision, urinary retention, constipation), paradoxical excitation in children, additive CNS depression with alcohol/opioids</td>
+<td class="moa">First-generation H1 receptor inverse agonist; also has significant antimuscarinic, antiserotonergic, and local anesthetic activity; crosses the blood-brain barrier freely &rarr; sedation</td>
+<td class="stem">"most sedating," used as a sleep aid, EPS rescue drug in a patient on an antipsychotic, given IV for a transfusion/contrast reaction</td>
+<td>Hepatic (CYP2D6)</td>
+</tr><tr>
+<td class="drug-name">Chlorpheniramine</td>
+<td>OTC allergic rhinitis/urticaria in combination cold products; alternative first-gen antihistamine with somewhat less sedation than diphenhydramine</td>
+<td>4 mg PO q4&ndash;6h (max 24 mg/day)</td>
+<td>Narrow-angle glaucoma, symptomatic BPH, MAOI use, neonates</td>
+<td>Sedation (less than diphenhydramine), anticholinergic effects, paradoxical CNS stimulation in children</td>
+<td class="moa">First-generation H1 receptor inverse agonist with antimuscarinic activity; crosses blood-brain barrier</td>
+<td class="stem">Ingredient in multi-symptom combination cold/allergy products; "less sedating than diphenhydramine but still first-generation"</td>
+<td>Hepatic</td>
+</tr><tr>
+<td class="drug-name">Promethazine</td>
+<td>Antiemetic/antivertigo (motion sickness, post-op nausea), adjunct sedation, allergic reactions</td>
+<td>12.5&ndash;25 mg PO/IM/IV/PR q4&ndash;6h prn</td>
+<td>Children &lt;2 years (risk of fatal respiratory depression), narrow-angle glaucoma, severe CNS depression</td>
+<td>Marked sedation, anticholinergic effects, extrapyramidal symptoms, severe tissue injury/gangrene with IV extravasation, black-box respiratory depression in young children</td>
+<td class="moa">First-generation H1 antagonist with strong central antimuscarinic and dopamine (D2) receptor blocking activity &rarr; antiemetic and antipsychotic-like effects</td>
+<td class="stem">"black-box warning in children &lt;2," IV tissue necrosis if extravasated, used for hyperemesis/motion sickness</td>
+<td>Hepatic</td>
+</tr></table></div></section>
+
+<section class="card" id="h1-second-gen">
+<h2>H1 Antihistamines &mdash; Second Generation</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Cetirizine</td>
+<td>Once-daily allergic rhinitis/chronic urticaria when a little sedation is acceptable</td>
+<td>10 mg PO once daily</td>
+<td>None absolute; caution in renal impairment (dose reduce)</td>
+<td>Mild sedation (more than other 2nd-gen agents, hence sometimes called the "least non-sedating" of the class)</td>
+<td class="moa">Second-generation H1 receptor antagonist; minimal penetration of the blood-brain barrier compared with first-generation agents &rarr; far less sedation</td>
+<td class="stem">"once daily," "some mild drowsiness" distinguishing it from fexofenadine/loratadine</td>
+<td>Renal (largely unchanged)</td>
+</tr><tr>
+<td class="drug-name">Fexofenadine</td>
+<td>Truly non-sedating once-daily allergic rhinitis/chronic urticaria, preferred when zero sedation needed (pilots, students studying, etc.)</td>
+<td>60 mg PO twice daily or 180 mg once daily</td>
+<td>None absolute</td>
+<td>Essentially none at recommended doses; headache</td>
+<td class="moa">Second-generation H1 receptor antagonist; does not cross blood-brain barrier &rarr; no sedation; avoid taking with fruit juices (grapefruit/orange/apple) which impair absorption via OATP transporters</td>
+<td class="stem">"non-sedating," "no drowsiness," fruit-juice/antacid interaction lowering absorption</td>
+<td>Minimal hepatic; mostly excreted unchanged</td>
+</tr><tr>
+<td class="drug-name">Loratadine</td>
+<td>OTC once-daily non-sedating allergic rhinitis/chronic urticaria</td>
+<td>10 mg PO once daily</td>
+<td>None absolute</td>
+<td>Minimal sedation/headache at recommended doses</td>
+<td class="moa">Second-generation H1 receptor antagonist with low CNS penetration; metabolized to active metabolite desloratadine</td>
+<td class="stem">"non-sedating," common OTC once-daily choice</td>
+<td>Hepatic (CYP3A4/2D6) &rarr; active metabolite desloratadine</td>
+</tr><tr>
+<td class="drug-name">Desloratadine</td>
+<td>Once-daily non-sedating allergic rhinitis/chronic urticaria (active metabolite of loratadine)</td>
+<td>5 mg PO once daily</td>
+<td>None absolute</td>
+<td>Minimal sedation/headache</td>
+<td class="moa">Second-generation H1 receptor antagonist; active metabolite of loratadine with low CNS penetration</td>
+<td class="stem">"active metabolite of loratadine"</td>
+<td>Hepatic</td>
+</tr></table></div></section>
+
+<section class="card" id="h2-antagonist">
+<h2>H2 Receptor Antagonist</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Cimetidine</td>
+<td>Historical prototype H2 blocker for PUD/GERD; now rarely first-line due to drug interactions/antiandrogenic effects</td>
+<td>300 mg PO/IV q6h or 800 mg at bedtime</td>
+<td>Use caution with other CYP450 substrates (narrow therapeutic index drugs, e.g., warfarin, phenytoin, theophylline)</td>
+<td>Gynecomastia, impotence/antiandrogenic effects (unique to cimetidine among H2 blockers), confusion in the elderly, potent CYP450 inhibitor</td>
+<td class="moa">Reversible antagonist of the H2 receptor on gastric parietal cells &rarr; decreases histamine-mediated gastric acid secretion</td>
+<td class="stem">"strong CYP450 inhibitor," "antiandrogenic (gynecomastia)" &mdash; distinguishes cimetidine from famotidine on exams</td>
+<td>Hepatic (potent CYP450 inhibitor; renal excretion of parent drug)</td>
+</tr></table></div><div class="name-rec"><b>Name-recognition only (not CORE):</b> famotidine, ranitidine (H2 blockers); azelastine, levocetirizine (2nd-gen H1); brompheniramine, cyclizine, cyproheptadine, dimenhydrinate, hydroxyzine, meclizine (1st-gen H1); terfenadine/astemizole (withdrawn 1998 for QT-prolonging drug interactions with macrolides/azoles &mdash; classic historical DDI vignette).</div></section>
+
+<section class="card" id="decongestants">
+<h2>Decongestants</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Pseudoephedrine</td>
+<td>Oral decongestant for nasal/sinus congestion (allergic rhinitis, common cold)</td>
+<td>60 mg PO q4&ndash;6h (max 240 mg/day)</td>
+<td>Uncontrolled hypertension, MAOI use, severe coronary artery disease, urinary retention/BPH</td>
+<td>Hypertension, tachycardia/palpitations, CNS stimulation (insomnia, nervousness), behind-the-counter due to methamphetamine precursor status</td>
+<td class="moa">Indirect-acting sympathomimetic; alpha-1 agonist activity on nasal mucosa vasculature &rarr; vasoconstriction &rarr; decreased nasal blood flow/edema</td>
+<td class="stem">"behind-the-counter," raises BP/HR, used short-term for congestion (contrast with topical oxymetazoline)</td>
+<td>Hepatic + renal (largely excreted unchanged in urine)</td>
+</tr><tr>
+<td class="drug-name">Oxymetazoline</td>
+<td>Topical/intranasal decongestant for short-term relief of nasal congestion</td>
+<td>2&ndash;3 sprays per nostril q10&ndash;12h; limit use to &le;3 days</td>
+<td>Use &gt;3 days (risk of rebound congestion), narrow-angle glaucoma</td>
+<td>Rhinitis medicamentosa (rebound congestion) with prolonged use, local irritation, systemic absorption causing hypertension in high doses</td>
+<td class="moa">Direct-acting alpha-adrenergic (alpha-1/alpha-2) agonist on nasal mucosa &rarr; vasoconstriction, decreased mucosal swelling</td>
+<td class="stem">"rebound congestion" or "rhinitis medicamentosa" after use beyond 3 days is the classic stem</td>
+<td>Minimal systemic; local action</td>
+</tr></table></div></section>
+
+<section class="card" id="antitussives">
+<h2>Antitussives</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Codeine</td>
+<td>Antitussive for cough suppression (also used for mild-moderate pain)</td>
+<td>10&ndash;20 mg PO q4&ndash;6h prn (antitussive dosing lower than analgesic dosing)</td>
+<td>Children &lt;12 years, breastfeeding, CYP2D6 ultra-rapid metabolizers, concurrent CNS depressants</td>
+<td>Sedation, constipation, respiratory depression, physical dependence, CYP2D6 ultra-rapid metabolizer &rarr; excess morphine conversion (fatal in children)</td>
+<td class="moa">Opioid mu-receptor agonist prodrug; centrally suppresses the medullary cough center; also converted to morphine via CYP2D6</td>
+<td class="stem">"opioid-derived cough suppressant," CYP2D6 ultra-rapid metabolizer causing overdose in a breastfed infant</td>
+<td>Hepatic (CYP2D6 &rarr; morphine)</td>
+</tr><tr>
+<td class="drug-name">Dextromethorphan</td>
+<td>OTC antitussive for cough suppression (non-opioid, non-analgesic)</td>
+<td>10&ndash;20 mg PO q4h or 30 mg q6&ndash;8h prn (max 120 mg/day)</td>
+<td>MAOI use (risk of serotonin syndrome), concurrent serotonergic drugs (SSRIs)</td>
+<td>Serotonin syndrome with MAOIs/SSRIs, dissociative/hallucinogenic effects and abuse potential at high doses, mild CNS depression</td>
+<td class="moa">Dextrorotatory analog of levorphanol; centrally acting NMDA receptor antagonist and sigma-1 agonist that suppresses the medullary cough center without significant opioid/analgesic activity</td>
+<td class="stem">"non-opioid antitussive," "OTC cough medicine," serotonin syndrome when combined with an SSRI/MAOI, recreational abuse ("robotripping")</td>
+<td>Hepatic (CYP2D6)</td>
+</tr></table></div></section>
+
+
+<section class="card" id="antimicrobials-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Overview of Antimicrobial Agents (Core Agents)</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette asks you to choose/identify an antibiotic by mechanism, spectrum, or a class-defining adverse effect/contraindication &mdash; independent of a specific respiratory diagnosis. Think general antibiotic pharmacology: MOA/resistance mechanism questions, matching a drug to its ADR (red-man syndrome, Achilles tendon rupture, nephro/ototoxicity, tooth discoloration), or picking empiric coverage based on spectrum (MRSA vs. Pseudomonas vs. anaerobes).</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "penicillin-binding protein," "transpeptidation/cell wall cross-linking," "beta-lactamase," "time-dependent vs. concentration-dependent killing," "30S vs. 50S ribosomal subunit," "DNA gyrase/topoisomerase IV," "MRSA coverage," "Pseudomonas coverage," "red-man syndrome," "Achilles tendon rupture," "ototoxicity/nephrotoxicity," "tooth discoloration in children," "disulfiram-like reaction," "serotonin syndrome" (linezolid).</div>
+</section>
+
+
+<section class="card" id="penicillins-core">
+<h2>Aminopenicillins &amp; Antipseudomonal Penicillin</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Ampicillin &amp; Amoxicillin</td>
+<td>Extended-spectrum coverage for otitis media, sinusitis, upper respiratory infections, enterococcal infections, <i>Listeria</i>; ampicillin IV for meningitis coverage of <i>Listeria</i>/enterococci</td>
+<td>Amoxicillin 500 mg&ndash;1 g PO q8&ndash;12h; Ampicillin 1&ndash;2 g IV q4&ndash;6h</td>
+<td>Penicillin allergy</td>
+<td>Hypersensitivity/anaphylaxis (0.7&ndash;10%), GI upset (nausea, diarrhea), pseudomembranous colitis</td>
+<td class="moa">Beta-lactam; binds penicillin-binding proteins (PBPs) &rarr; inhibits transpeptidation (cross-linking of peptidoglycan cell wall) &rarr; cell lysis. Extended gram-negative spectrum (<i>H. influenzae, E. coli, P. mirabilis</i>) plus <i>Listeria</i>, enterococci, anaerobes vs. natural penicillins</td>
+<td class="stem">"amoxicillin PLUS a macrolide" is preferred outpatient CAP regimen for DRSP risk; ampicillin for <i>Listeria</i> meningitis in neonates/elderly</td>
+<td>Renal (ampicillin removed by hemodialysis)</td>
+</tr><tr>
+<td class="drug-name">Piperacillin (+/&minus; tazobactam)</td>
+<td>Antipseudomonal penicillin for serious gram-negative infections, hospital-acquired pneumonia, immunocompromised patients, burns, empiric HAP/VAP with <i>Pseudomonas</i> risk</td>
+<td>3.375&ndash;4.5 g IV q6&ndash;8h, often as extended infusion for time-dependent killing</td>
+<td>Penicillin allergy</td>
+<td>Hypersensitivity, GI upset; combination with tazobactam otherwise similar to other beta-lactams</td>
+<td class="moa">Beta-lactam; inhibits PBP-mediated transpeptidation. Antipseudomonal spectrum extended to <i>Pseudomonas aeruginosa</i>, <i>Enterobacter</i>, <i>Proteus</i>; piperacillin superior for <i>Pseudomonas</i>. Tazobactam is a beta-lactamase inhibitor that protects piperacillin from hydrolysis</td>
+<td class="stem">"antipseudomonal beta-lactam" in HAP/VAP empiric regimens; given as extended infusion for time-dependent killing</td>
+<td>Renal</td>
+</tr></table></div></section>
+
+<section class="card" id="bli-combos">
+<h2>&beta;-Lactamase Inhibitor Combinations</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Ampicillin-sulbactam</td>
+<td>Polymicrobial infections with beta-lactamase-producing organisms (intra-abdominal, aspiration pneumonia)</td>
+<td>1.5&ndash;3 g IV q6h</td>
+<td>Penicillin allergy</td>
+<td>Hypersensitivity, GI upset, diarrhea</td>
+<td class="moa">Sulbactam irreversibly inhibits many bacterial beta-lactamases, protecting ampicillin from hydrolysis and extending its spectrum to beta-lactamase-producing organisms</td>
+<td class="stem">Used as the IV beta-lactam of choice in nonsevere/severe inpatient CAP regimens (PLUS a macrolide)</td>
+<td>Renal</td>
+</tr><tr>
+<td class="drug-name">Amoxicillin-clavulanic acid</td>
+<td>Outpatient oral option for beta-lactamase-producing respiratory pathogens (<i>H. influenzae</i>, complicated bronchitis)</td>
+<td>875/125 mg PO q12h (high-dose amoxicillin component for DRSP coverage)</td>
+<td>Penicillin allergy, history of amoxicillin-clavulanate-associated cholestatic hepatitis</td>
+<td>GI upset (diarrhea especially), hypersensitivity, rare hepatotoxicity</td>
+<td class="moa">Clavulanic acid irreversibly inhibits bacterial beta-lactamases, protecting amoxicillin from hydrolysis and restoring activity against beta-lactamase-producing <i>H. influenzae</i>/<i>M. catarrhalis</i></td>
+<td class="stem">Preferred oral beta-lactam for complicated chronic bronchitis exacerbations and outpatients with DRSP risk factors</td>
+<td>Hepatic/renal</td>
+</tr><tr>
+<td class="drug-name">Piperacillin-tazobactam</td>
+<td>Broad empiric coverage for HAP/VAP, febrile neutropenia, intra-abdominal infections, and any severe infection needing antipseudomonal + anaerobic coverage</td>
+<td>3.375&ndash;4.5 g IV q6&ndash;8h, extended infusion often used</td>
+<td>Penicillin allergy</td>
+<td>Hypersensitivity, GI upset, diarrhea</td>
+<td class="moa">Tazobactam irreversibly inhibits bacterial beta-lactamases, extending piperacillin's activity to beta-lactamase-producing organisms; retains antipseudomonal + anaerobic activity</td>
+<td class="stem">First-line antipseudomonal beta-lactam in empiric VAP/HAP regimens for patients with MDR risk factors</td>
+<td>Renal</td>
+</tr></table></div></section>
+
+<section class="card" id="cephalosporins-core">
+<h2>Cephalosporins (3rd &amp; 4th Generation)</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Ceftriaxone</td>
+<td>Drug of choice for empiric severe/nonsevere inpatient CAP (PLUS a macrolide/FQ), gonorrhea (all forms), meningitis, serious gram-negative infections</td>
+<td>1&ndash;2 g IV/IM once or twice daily (twice daily for meningitis)</td>
+<td>Penicillin/cephalosporin allergy (~1% cross-reactivity), neonates receiving IV calcium (precipitation risk)</td>
+<td>Hypersensitivity, biliary sludging/pseudolithiasis, diarrhea</td>
+<td class="moa">Third-generation cephalosporin; binds PBPs &rarr; inhibits transpeptidation. Good gram-negative coverage (<i>Klebsiella, Enterobacter, Proteus, Serratia, Haemophilus</i>); drug of choice for gonorrhea; half excreted in bile, half in urine</td>
+<td class="stem">"DOC for gonorrhea," "meningitis coverage," standard beta-lactam backbone of every CAP regimen</td>
+<td>Hepatic (bile) + renal</td>
+</tr><tr>
+<td class="drug-name">Ceftazidime</td>
+<td>Serious gram-negative infections with <i>Pseudomonas</i> coverage; option in HAP/VAP and severe complicated bronchitis with <i>Pseudomonas</i> risk factors</td>
+<td>1&ndash;2 g IV/IM q8h</td>
+<td>Penicillin/cephalosporin allergy</td>
+<td>Hypersensitivity, GI upset, seizures at high doses in renal impairment</td>
+<td class="moa">Third-generation cephalosporin uniquely extended to cover <i>Pseudomonas aeruginosa</i> among the 3rd-generation agents; PBP transpeptidation inhibitor</td>
+<td class="stem">"covers Pseudomonas" is the defining stem word distinguishing ceftazidime from ceftriaxone</td>
+<td>Renal (not hepatically metabolized)</td>
+</tr><tr>
+<td class="drug-name">Cefepime</td>
+<td>Empiric therapy of nosocomial infections/HAP-VAP requiring broad gram-positive AND gram-negative (including <i>Pseudomonas</i>) coverage</td>
+<td>1&ndash;2 g IV q8&ndash;12h</td>
+<td>Penicillin/cephalosporin allergy, dose-adjust in renal impairment (neurotoxicity/seizures if not adjusted)</td>
+<td>Hypersensitivity, neurotoxicity/encephalopathy &amp; seizures (especially in renal failure with inadequate dose adjustment), GI upset</td>
+<td class="moa">Fourth-generation cephalosporin; stable against hydrolysis by many beta-lactamases; extended spectrum beyond 3rd-gen to cover both gram-positives and gram-negatives including <i>Pseudomonas</i></td>
+<td class="stem">"4th-generation," covers both gram-positive AND Pseudomonas; used empirically in febrile neutropenia and HAP/VAP</td>
+<td>Renal (100% renal excretion &mdash; adjust dose)</td>
+</tr></table></div></section>
+
+<section class="card" id="carbapenems-core">
+<h2>Carbapenems</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Meropenem</td>
+<td>Broad-spectrum coverage for resistant infections (gram-positive/-negative, anaerobes), HAP/VAP with MDR risk, intra-abdominal infections</td>
+<td>1&ndash;2 g IV q8h</td>
+<td>Carbapenem/beta-lactam allergy; caution &mdash; lowers seizure threshold, use carefully with history of seizure disorder</td>
+<td>Nausea/vomiting (1&ndash;20%), seizures (1.5%, lower risk than imipenem), hypersensitivity</td>
+<td class="moa">Beta-lactam; binds PBPs &rarr; inhibits peptidoglycan cross-linking. Very broad aerobic + anaerobic gram-positive/-negative coverage including <i>Pseudomonas</i> and <i>Acinetobacter</i>; does not require cilastatin co-administration (unlike imipenem)</td>
+<td class="stem">"broadest-spectrum beta-lactam," reserved for MDR gram-negative infections, does NOT need cilastatin</td>
+<td>Renal (not sensitive to dehydropeptidase)</td>
+</tr><tr>
+<td class="drug-name">Ertapenem</td>
+<td>Once-daily carbapenem for susceptible resistant infections, outpatient parenteral therapy given long half-life</td>
+<td>1 g IV/IM once daily</td>
+<td>Carbapenem/beta-lactam allergy</td>
+<td>Nausea/vomiting, seizures (lower risk than imipenem/meropenem), hypersensitivity</td>
+<td class="moa">Beta-lactam; PBP-mediated inhibition of cross-linking; longer half-life allows once-daily dosing; inferior to meropenem/imipenem against <i>Pseudomonas</i> and <i>Acinetobacter</i></td>
+<td class="stem">"once-daily carbapenem," but NOT reliable against Pseudomonas/Acinetobacter &mdash; a common trap answer</td>
+<td>Renal</td>
+</tr></table></div></section>
+
+<section class="card" id="glycopeptide-core">
+<h2>Glycopeptide</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Vancomycin</td>
+<td>MRSA coverage (pneumonia, SSTI, bacteremia, endocarditis), empiric therapy when MRSA risk factors present, oral for <i>C. difficile</i> colitis</td>
+<td>15&ndash;20 mg/kg IV q8&ndash;12h (trough-guided, target 15&ndash;20 for severe infections); PO 125 mg q6h for <i>C. difficile</i> (not absorbed systemically)</td>
+<td>None absolute IV; never give IM</td>
+<td>Infusion-related "red-man syndrome" (flushing, tachycardia, hypotension &mdash; direct mast-cell histamine release, NOT a true allergy) with rapid infusion, ototoxicity, nephrotoxicity (33% with trough &gt;20)</td>
+<td class="moa">Glycopeptide; inhibits cell wall synthesis by binding with high affinity to the D-alanyl-D-alanine terminus of peptidoglycan precursors, blocking transglycosylation/cross-linking. Too large to cross the outer membrane of gram-negatives &rarr; gram-positive only (including MRSA)</td>
+<td class="stem">"red-man syndrome" from infusing too fast (slow the infusion, it is NOT a true allergy), MRSA coverage agent, monitor trough levels</td>
+<td>Renal (90% via glomerular filtration; accumulates in renal failure &mdash; dose adjust)</td>
+</tr></table></div></section>
+
+<section class="card" id="aminoglycoside-core">
+<h2>Aminoglycoside</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Gentamicin</td>
+<td>Synergistic gram-negative/gram-positive coverage combined with a cell-wall active agent (endocarditis synergy), <i>Pseudomonas</i> coverage in HAP/VAP</td>
+<td>5&ndash;7 mg/kg IV once daily (extended-interval) or 1&ndash;2.5 mg/kg q8h divided; peak/trough monitoring</td>
+<td>Renal impairment (dose-adjust), myasthenia gravis, concurrent nephrotoxic/ototoxic drugs</td>
+<td>Ototoxicity (up to 25%), nephrotoxicity (8&ndash;26%), neuromuscular blockade/apnea</td>
+<td class="moa">Concentration-dependent bactericidal; binds the 30S ribosomal subunit &rarr; interferes with initiation of protein synthesis and causes misreading of mRNA &rarr; aberrant/nonfunctional proteins</td>
+<td class="stem">"concentration-dependent killing," peak/trough monitoring, ototoxicity/nephrotoxicity pairing, synergy with a beta-lactam or vancomycin for enterococcal/staphylococcal endocarditis</td>
+<td>Renal (glomerular filtration; not hepatically metabolized)</td>
+</tr></table></div></section>
+
+<section class="card" id="tetracycline-core">
+<h2>Tetracycline</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Doxycycline</td>
+<td>First-line outpatient CAP (previously healthy, no comorbidities), atypical coverage (<i>Mycoplasma, Chlamydia, Legionella</i>), Rocky Mountain spotted fever, Lyme disease</td>
+<td>100 mg PO/IV twice daily</td>
+<td>Pregnancy, children &lt;8 years (permanent tooth discoloration/enamel hypoplasia)</td>
+<td>GI distress, photosensitivity, teeth discoloration in children, esophagitis if taken without water, <i>C. difficile</i> superinfection</td>
+<td class="moa">Bacteriostatic; binds the 30S ribosomal subunit &rarr; blocks binding of aminoacyl-tRNA to the mRNA-ribosome acceptor (A) site &rarr; halts protein synthesis. Broad spectrum covering atypicals (<i>Mycoplasma, Chlamydia, Legionella, Rickettsia</i>)</td>
+<td class="stem">"first-line outpatient CAP" alternative to amoxicillin/macrolide, contraindicated in pregnancy/young children, atypical coverage</td>
+<td>Hepatic/biliary (no renal adjustment needed, unlike other tetracyclines)</td>
+</tr></table></div></section>
+
+<section class="card" id="macrolide-core">
+<h2>Macrolide</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Azithromycin</td>
+<td>Outpatient/inpatient CAP (added to a beta-lactam for atypical coverage), pertussis, otitis media/sinusitis, chlamydia</td>
+<td>500 mg PO/IV day 1, then 250 mg daily x4 days (Z-pak); or 500 mg IV daily inpatient</td>
+<td>Known macrolide hypersensitivity, congenital/acquired QT prolongation</td>
+<td>GI upset (epigastric distress), hepatotoxicity, arrhythmia/QT prolongation; fewer CYP-mediated DDIs than other macrolides</td>
+<td class="moa">Bacteriostatic; binds the 50S ribosomal subunit &rarr; inhibits translocation during protein synthesis. Broad respiratory coverage including atypicals (<i>Mycoplasma, Chlamydiophila, Legionella</i>)</td>
+<td class="stem">"macrolide added to a beta-lactam" in nonsevere/severe inpatient CAP; QT prolongation stem; atypical pneumonia coverage</td>
+<td>Hepatic (biliary excretion is the major route; long tissue t&frac12; 40&ndash;68h)</td>
+</tr></table></div></section>
+
+<section class="card" id="lincosamide-core">
+<h2>Lincosamide</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Clindamycin</td>
+<td>Anaerobic lung abscess/aspiration pneumonia, necrotizing SSTIs, penicillin-allergic alternative for streptococcal/anaerobic coverage</td>
+<td>600&ndash;900 mg IV q8h or 300&ndash;450 mg PO q6&ndash;8h</td>
+<td>History of pseudomembranous colitis/<i>C. difficile</i></td>
+<td>GI diarrhea (2&ndash;20%), pseudomembranous colitis (0.01&ndash;10%, one of the classic <i>C. difficile</i>-inducing drugs), skin rash (10%)</td>
+<td class="moa">Binds the 50S ribosomal subunit &rarr; inhibits translocation (same binding site as macrolides &rarr; cross-resistance). Covers pneumococci, <i>S. pyogenes</i>, MSSA, and anaerobes including <i>B. fragilis</i></td>
+<td class="stem">"classic cause of C. difficile / pseudomembranous colitis," aspiration pneumonia/anaerobic lung abscess coverage</td>
+<td>Hepatic (dose-adjust in hepatic failure)</td>
+</tr></table></div></section>
+
+<section class="card" id="oxazolidinone-core">
+<h2>Oxazolidinone</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Linezolid</td>
+<td>MRSA pneumonia/SSTI, VRE infections, alternative MRSA-coverage agent in HAP/VAP when vancomycin not preferred</td>
+<td>600 mg PO/IV q12h</td>
+<td>Concurrent MAOIs, uncontrolled hypertension/pheochromocytoma, caution with serotonergic drugs</td>
+<td>Myelosuppression (thrombocytopenia, anemia &mdash; especially with use &gt;2 weeks), serotonin syndrome with SSRIs (weak MAO inhibitor), optic/peripheral neuropathy with prolonged use, minor GI complaints</td>
+<td class="moa">Binds the 50S ribosomal subunit &rarr; blocks formation of the initiation complex for protein synthesis (unique early-step mechanism &rarr; no cross-resistance with other protein synthesis inhibitors). Excellent MRSA/VRE coverage</td>
+<td class="stem">"MRSA pneumonia," "serotonin syndrome" when combined with an SSRI, bone marrow suppression with prolonged use, alternative to vancomycin</td>
+<td>Nonrenal, nonhepatic (spontaneous oxidation) &mdash; well absorbed orally, 100% bioavailability</td>
+</tr></table></div></section>
+
+<section class="card" id="pleuromutilin-core">
+<h2>Pleuromutilin</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Lefamulin</td>
+<td>CAP treatment alternative covering typical and atypical lower respiratory pathogens</td>
+<td>600 mg PO q12h or 150 mg IV q12h</td>
+<td>Pregnancy (possible congenital malformations), QT-prolonging drug combinations</td>
+<td>Infusion-site reactions (IV), GI nausea/diarrhea (oral), QT prolongation</td>
+<td class="moa">Binds the 50S ribosomal subunit at a unique site, closing the binding pocket around the drug and preventing tRNA from binding appropriately &rarr; bactericidal. Covers <i>S. pneumoniae, H. influenzae</i>, and atypicals (<i>Legionella, Mycoplasma, Chlamydophila</i>)</td>
+<td class="stem">"newer CAP agent," covers atypicals, avoid in pregnancy</td>
+<td>Hepatic (CYP3A4)</td>
+</tr></table></div></section>
+
+<section class="card" id="fluoroquinolones-core">
+<h2>Fluoroquinolones</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Ciprofloxacin</td>
+<td>Most potent FQ against <i>Pseudomonas</i>; UTI, traveler's diarrhea, anthrax, diabetic foot infections &mdash; weaker Streptococcus/respiratory coverage than "respiratory" FQs</td>
+<td>400 mg IV or 500&ndash;750 mg PO q12h</td>
+<td>Children &lt;18 years (relative), history of tendon rupture/myasthenia gravis, QT prolongation</td>
+<td>GI upset (3&ndash;17%), CNS effects (headache, dizziness, rare hallucinations), photosensitivity, Achilles tendon rupture, QT prolongation</td>
+<td class="moa">Bactericidal, concentration-dependent; targets bacterial DNA gyrase and topoisomerase IV &rarr; prevents relaxation of positive supercoils needed for replication/transcription</td>
+<td class="stem">"most active FQ against Pseudomonas," but weakest against Streptococcus &mdash; not a "respiratory" FQ</td>
+<td>Renal (dose adjust in renal impairment)</td>
+</tr><tr>
+<td class="drug-name">Levofloxacin</td>
+<td>"Respiratory fluoroquinolone" monotherapy or combination for CAP/complicated bronchitis, covers <i>Streptococcus</i> plus atypicals and some <i>Pseudomonas</i> activity</td>
+<td>500&ndash;750 mg PO/IV once daily</td>
+<td>Children &lt;18 years (relative), tendon disorders, QT prolongation, myasthenia gravis</td>
+<td>GI upset, CNS effects, photosensitivity, Achilles tendon rupture, QT prolongation, tendinitis risk higher in elderly/steroid users</td>
+<td class="moa">Bactericidal, concentration-dependent; inhibits DNA gyrase/topoisomerase IV; classified as a "respiratory fluoroquinolone" with reliable <i>S. pneumoniae</i> coverage unlike ciprofloxacin</td>
+<td class="stem">"respiratory fluoroquinolone" monotherapy option for CAP; Achilles tendon rupture stem in an elderly patient on prednisone</td>
+<td>Renal</td>
+</tr></table></div></section>
+
+<section class="card" id="sulfa-core">
+<h2>Sulfonamide/Trimethoprim</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Sulfamethoxazole/Trimethoprim (TMP-SMX)</td>
+<td>UTI, <i>Pneumocystis jirovecii</i> pneumonia (PJP) treatment/prophylaxis, MRSA SSTI alternative, traveler's diarrhea; alternative (not first-line) for simple chronic bronchitis</td>
+<td>1 DS tablet (800/160 mg) PO q12h; higher weight-based dosing for PJP treatment</td>
+<td>Sulfa allergy, pregnancy near term (kernicterus risk), infants &lt;2 months, megaloblastic anemia from folate deficiency</td>
+<td>Allergic skin rash (including Stevens-Johnson syndrome), nausea/vomiting, CNS (headache, depression), photosensitivity, hyperkalemia, potentiates warfarin</td>
+<td class="moa">Sulfamethoxazole competitively inhibits dihydropteroate synthase (blocks PABA incorporation into folic acid); trimethoprim inhibits dihydrofolate reductase &mdash; sequential blockade of the same folate synthesis pathway &rarr; synergistic bacteriostatic/bactericidal effect</td>
+<td class="stem">"sequential blockade of folate synthesis," first-line PJP prophylaxis/treatment in AIDS, Stevens-Johnson syndrome stem, potentiates warfarin</td>
+<td>Renal (both components; adjust in renal impairment)</td>
+</tr></table></div></section>
+
+
+<section class="card" id="resp-infections-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Drugs for Bacterial, Viral, and Opportunistic Respiratory Infections</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette is a specific respiratory infection syndrome &mdash; community-acquired, hospital-acquired, or ventilator-associated pneumonia; influenza; COVID-19; or an opportunistic fungal pneumonia &mdash; and is asking you to pick the empiric regimen or the antiviral/antifungal, not just identify a drug's isolated MOA.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "outpatient, previously healthy," "risk factors for DRSP," "nonsevere vs. severe inpatient pneumonia," "MRSA/Pseudomonas risk factors," "neuraminidase inhibitor," "within 48 hours of symptom onset" (influenza antivirals), "hospitalized COVID-19 patient not requiring high-flow oxygen" (remdesivir), "mild-to-moderate COVID-19 at high risk of progression" (nirmatrelvir/ritonavir), "broadest-spectrum antifungal but very toxic" (amphotericin B).</div>
+</section>
+<div class="name-rec"><b>Core antibacterial agents for pneumonia are the SAME core drugs already tabled in the Overview of Antimicrobial Agents section above</b> (ampicillin, amoxicillin, amoxicillin-clavulanate, ampicillin-sulbactam, piperacillin-tazobactam, ceftriaxone, ceftazidime, cefepime, meropenem, ertapenem, vancomycin, gentamicin, doxycycline, azithromycin, clindamycin, linezolid, lefamulin, ciprofloxacin, levofloxacin, sulfamethoxazole-trimethoprim) &mdash; see that section for their full detail. Empiric CAP regimen skeleton: <b>outpatient healthy</b> = amoxicillin OR doxycycline OR a macrolide; <b>outpatient with comorbidities/DRSP risk</b> = respiratory FQ OR (beta-lactam + macrolide); <b>nonsevere inpatient</b> = respiratory FQ OR (beta-lactam IV + macrolide); <b>severe inpatient</b> = beta-lactam IV + azithromycin IV OR beta-lactam IV + respiratory FQ; add vancomycin/linezolid for MRSA risk and an antipseudomonal beta-lactam + FQ/aminoglycoside for <i>Pseudomonas</i> risk.</div>
+
+<section class="card" id="antivirals-influenza">
+<h2>Antivirals &mdash; Influenza</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Oseltamivir</td>
+<td>Influenza A/B treatment (within 48h of symptom onset) and household/institutional prophylaxis</td>
+<td>75 mg PO twice daily x5 days (treatment); 75 mg once daily (prophylaxis)</td>
+<td>None absolute; adjust dose in renal impairment</td>
+<td>Nausea, vomiting, headache, neuropsychiatric effects (rare)</td>
+<td class="moa">Neuraminidase inhibitor; analog of sialic acid that blocks the viral neuraminidase enzyme, preventing release/spread of progeny influenza virus from infected cells</td>
+<td class="stem">"within 48 hours of symptom onset," oral prodrug activated by hepatic esterases, first-line influenza antiviral</td>
+<td>Hepatic (esterase activation) + renal excretion</td>
+</tr><tr>
+<td class="drug-name">Baloxavir</td>
+<td>Single-dose oral treatment of influenza A/B (alternative to oseltamivir)</td>
+<td>Single oral dose (weight-based)</td>
+<td>Pregnancy (limited data), concurrent dairy/calcium-fortified products or antacids reduce absorption</td>
+<td>Diarrhea, nasopharyngitis</td>
+<td class="moa">Inhibits the endonuclease activity of the viral polymerase acidic (PA) protein &rarr; blocks viral RNA transcription/replication (novel mechanism, distinct from neuraminidase inhibitors)</td>
+<td class="stem">"single-dose" oral influenza antiviral, novel polymerase acidic (cap-dependent endonuclease) inhibitor</td>
+<td>Hepatic (UGT1A3 major, CYP3A4 minor)</td>
+</tr></table></div></section>
+
+<section class="card" id="antivirals-covid">
+<h2>Antivirals &mdash; SARS-CoV-2 (COVID-19)</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Remdesivir</td>
+<td>Hospitalized COVID-19 patients (most benefit in those NOT requiring high-flow O2/ventilatory support); reduces time to recovery</td>
+<td>IV daily x5&ndash;10 days</td>
+<td>Severe hepatic impairment (relative), eGFR &lt;30 (relative)</td>
+<td>Nausea, constipation, hypokalemia, headache, elevated liver enzymes (AST/ALT), acute respiratory failure</td>
+<td class="moa">Adenosine nucleotide analog prodrug; triphosphorylated intracellularly and incorporated into the viral RNA chain, causing delayed chain termination and inhibiting viral RNA-dependent RNA polymerase</td>
+<td class="stem">"hospitalized COVID patient not yet on high-flow oxygen," IV-only, elevated liver enzymes</td>
+<td>Intracellular activation; renal excretion</td>
+</tr><tr>
+<td class="drug-name">Nirmatrelvir/Ritonavir (Paxlovid)</td>
+<td>Mild-to-moderate COVID-19 in outpatients at high risk of progression to severe disease; started early in illness</td>
+<td>Oral twice daily x5 days</td>
+<td>Severe hepatic/renal impairment, many drug-drug interactions via ritonavir (CYP3A4 inhibition)</td>
+<td>Dysgeusia (altered taste), diarrhea, hypertension, myalgia</td>
+<td class="moa">Nirmatrelvir inhibits the SARS-CoV-2 main protease (M<sup>pro</sup>), blocking cleavage of viral polyprotein precursors and halting viral replication; ritonavir contributes NO antiviral activity of its own &mdash; it is a pharmacokinetic "booster" that inhibits CYP3A4 to raise nirmatrelvir levels</td>
+<td class="stem">"ritonavir-boosted" = pharmacokinetic enhancer, not an active antiviral itself; outpatient oral COVID-19 treatment at high risk of progression</td>
+<td>Hepatic (CYP3A4; ritonavir boosts nirmatrelvir exposure)</td>
+</tr></table></div></section>
+
+<section class="card" id="antifungals-core">
+<h2>Antifungals</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Fluconazole</td>
+<td>Candida infections, cryptococcal disease, step-down/maintenance therapy for coccidioidomycosis/histoplasmosis</td>
+<td>100&ndash;400 mg PO/IV once daily depending on indication</td>
+<td>Concurrent QT-prolonging drugs, pregnancy (high-dose teratogenic)</td>
+<td>Minor GI upset, LFT abnormalities, QT prolongation; significant CYP450 drug-drug interactions</td>
+<td class="moa">Azole; inhibits fungal cytochrome P450 (lanosterol 14-alpha-demethylase) &rarr; decreased ergosterol production &rarr; disrupted fungal cell membrane. Water soluble with excellent CSF penetration and high (~96%) oral bioavailability</td>
+<td class="stem">"good CSF penetration" distinguishes it from itraconazole/voriconazole; used for cryptococcal meningitis step-down therapy</td>
+<td>Hepatic (CYP450 inhibitor itself &mdash; watch for DDIs); largely renal excretion of unchanged drug</td>
+</tr><tr>
+<td class="drug-name">Voriconazole</td>
+<td>Invasive aspergillosis (drug of choice), broad mold/yeast coverage</td>
+<td>6 mg/kg IV q12h x2 doses, then 4 mg/kg IV q12h (or weight-based PO)</td>
+<td>Concurrent CYP3A4 substrates with narrow therapeutic index, pregnancy</td>
+<td>Visual changes (common, transient), photosensitivity, hepatotoxicity, hallucinations at high levels</td>
+<td class="moa">Azole; inhibits fungal CYP450-dependent ergosterol synthesis; extended spectrum against <i>Aspergillus</i> compared with fluconazole</td>
+<td class="stem">"visual changes/photosensitivity" and "drug of choice for invasive aspergillosis" are the classic stems</td>
+<td>Hepatic (CYP2C19 strong substrate/inhibitor &mdash; genetically variable metabolism)</td>
+</tr><tr>
+<td class="drug-name">Amphotericin B</td>
+<td>Life-threatening/severe invasive fungal infections (broadest spectrum of any antifungal) when azoles/echinocandins are inadequate</td>
+<td>IV, lipid formulation dosing preferred to reduce nephrotoxicity</td>
+<td>Use caution in pre-existing renal disease (nephrotoxic); pregnancy generally acceptable if infection is life-threatening</td>
+<td>Infusion-related reactions (fever, chills, rigors &mdash; "shake and bake"), cumulative nephrotoxicity, hypokalemia/hypomagnesemia</td>
+<td class="moa">Binds ergosterol in the fungal cell membrane, forming pores that increase membrane permeability and cause cell death (also has some affinity for human cholesterol, explaining toxicity)</td>
+<td class="stem">"broadest-spectrum antifungal but very toxic," "shake and bake" infusion reaction, reserved for life-threatening infections</td>
+<td>Poorly absorbed PO; not significantly metabolized; very long t&frac12; (~15 days), low CSF penetration</td>
+</tr></table></div></section>
+
+
+<section class="card" id="tb-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Tuberculosis and Antimycobacterial Drugs</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette involves latent or active TB (cavitary lung disease, chronic cough, night sweats, weight loss, a positive PPD/IGRA), a multidrug TB regimen question, or a classic TB-drug adverse effect (hepatotoxicity, optic neuritis, hyperuricemia, orange body fluids, peripheral neuropathy reversed by pyridoxine).</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "RIPE" (rifampin, isoniazid, pyrazinamide, ethambutol), "2-month intensive phase + 4-7 month continuation phase," "directly observed therapy (DOT)," "peripheral neuropathy reversed by pyridoxine (vitamin B6)," "red-green color blindness/optic neuritis," "hyperuricemia/gout flare," "orange-red body fluids," "fast vs. slow acetylator (NAT2)," "strong CYP450 inducer," "rifabutin substituted in HIV patients on a protease inhibitor."</div>
+</section>
+
+
+<section class="card" id="tb-first-line">
+<h2>First-Line Agents for Active Tuberculosis</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Isoniazid (INH)</td>
+<td>Most active single drug against susceptible TB; part of all first-line active TB regimens; monotherapy for latent TB infection (LTBI)</td>
+<td>5 mg/kg (up to 300 mg) PO once daily; give with pyridoxine (B6) to prevent neuropathy</td>
+<td>Prior INH-induced hepatitis or serious reaction to INH</td>
+<td>Hepatotoxicity/hepatitis (most common serious ADR, risk increases with age/alcohol use), peripheral neuropathy (from relative pyridoxine/B6 deficiency &mdash; worse in slow acetylators), CNS toxicity (memory loss, psychosis, seizures) at high doses, drug-induced lupus</td>
+<td class="moa">Prodrug activated by mycobacterial catalase-peroxidase (KatG); forms a covalent complex that inhibits mycolic acid synthesis (essential component of the mycobacterial cell wall)</td>
+<td class="stem">"peripheral neuropathy reversed/prevented by pyridoxine (B6)," fast vs. slow acetylator (NAT2) genetic polymorphism, most hepatotoxic single first-line drug along with pyrazinamide</td>
+<td>Hepatic: Phase II N-acetylation (NAT2 &mdash; genetically determined fast vs. slow acetylator status) then hepatic P450 Phase I; renal excretion</td>
+</tr><tr>
+<td class="drug-name">Rifampin (RIF)</td>
+<td>Co-administered with INH (+pyrazinamide/ethambutol) as backbone of active TB therapy; also meningococcal/H. influenzae carriage prophylaxis, staphylococcal carriage</td>
+<td>10 mg/kg (up to 600 mg) PO once daily</td>
+<td>Use extreme caution with HIV protease inhibitors (dramatically reduces PI levels via CYP3A4 induction)</td>
+<td>Harmless red/orange discoloration of body fluids (urine, tears, sweat, contact lenses), hepatotoxicity (less common than INH), flu-like syndrome if dosed &lt;2x/week, GI disturbances, thrombocytopenia</td>
+<td class="moa">Binds the beta-subunit of bacterial DNA-dependent RNA polymerase &rarr; inhibits RNA synthesis (bactericidal for mycobacteria; does not bind human RNA polymerase)</td>
+<td class="stem">"red/orange body fluids," most potent CYP450 inducer of the rifamycins &mdash; avoid/adjust with HIV protease inhibitors</td>
+<td>Hepatic; enterohepatic recirculation; strong CYP450 inducer (1A2, 2C9, 2C19, 2D6, 3A4)</td>
+</tr><tr>
+<td class="drug-name">Pyrazinamide (PZA)</td>
+<td>Added to INH/rifampin for the first 2 months of therapy &mdash; allows total treatment duration to shrink from 9 to 6 months</td>
+<td>25 mg/kg PO once daily during the 2-month intensive phase</td>
+<td>Severe liver disease, gout, pregnancy (not routinely used in the U.S. due to limited safety data, though WHO considers it safe)</td>
+<td>Hepatotoxicity (1&ndash;5%, probably the MOST hepatotoxic first-line agent), hyperuricemia (may provoke gouty arthritis), GI upset, most common cause of drug-induced rash among the first-line agents</td>
+<td class="moa">Exact mechanism/target unknown; taken up and converted to active pyrazinoic acid by mycobacterial pyrazinamidase; disrupts mycobacterial cell membrane synthesis/transport; only active at acidic pH (inside macrophage phagosomes)</td>
+<td class="stem">"only active drug limited to the first 2 months," hyperuricemia/gout flare, most hepatotoxic first-line agent, avoided in pregnancy/gout/severe liver disease</td>
+<td>Hepatic (parent drug); renally cleared metabolites &mdash; adjust in renal impairment</td>
+</tr><tr>
+<td class="drug-name">Ethambutol (EMB)</td>
+<td>Added to the initial 4-drug regimen (INH + rifampin + pyrazinamide + ethambutol) until drug susceptibility is known; can be dropped once susceptibility confirmed</td>
+<td>15&ndash;25 mg/kg PO once daily</td>
+<td>Young children unable to be monitored for visual acuity/color vision changes</td>
+<td>Retrobulbar/optic neuritis &rarr; loss of visual acuity and red-green color blindness (dose-dependent, the classic serious ADR)</td>
+<td class="moa">Inhibits mycobacterial arabinosyl transferases (embCAB operon) &rarr; blocks arabinogalactan synthesis, an essential mycobacterial cell wall component</td>
+<td class="stem">"red-green color blindness" or "optic/retrobulbar neuritis" is the signature stem; the drug that can be dropped once susceptibility to INH/rifampin is confirmed</td>
+<td>Renal (dose-adjust in renal impairment); crosses BBB only with meningeal inflammation</td>
+</tr><tr>
+<td class="drug-name">Rifapentine (RPT)</td>
+<td>Newer 4-month regimen (high-dose rifapentine + moxifloxacin + isoniazid + pyrazinamide) for drug-susceptible pulmonary TB; also once-weekly INH/rifapentine x12 weeks for LTBI</td>
+<td>Weight-based, once or twice weekly depending on regimen/phase</td>
+<td>Same as rifampin (rifamycin class hypersensitivity)</td>
+<td>Similar to rifampin (hepatotoxicity, discolored body fluids), toxicity profile overall similar to rifampin</td>
+<td class="moa">Long-acting rifamycin analog; binds bacterial RNA polymerase beta-subunit &rarr; inhibits RNA synthesis; complete cross-resistance with rifampin (same rpoB-based resistance mechanism)</td>
+<td class="stem">"4-month regimen" (RPT + MOX + INH + PZA) as a non-inferior alternative to the traditional 6-month RIPE regimen in patients &ge;12 years, drug-susceptible, no contraindications</td>
+<td>Hepatic; also a strong CYP450 inducer (induces CYP3A4 similarly to rifampin)</td>
+</tr></table></div></section>
+
+<section class="card" id="tb-alt-line">
+<h2>Alternative/Second-Line Core Agents</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Moxifloxacin</td>
+<td>Component of the newer 4-month TB regimen (RPT/MOX/INH/PZA); alternative for INH-resistant TB or drug-induced hepatic dysfunction (well tolerated in hepatotoxicity)</td>
+<td>400 mg PO/IV once daily</td>
+<td>Tendon disorders, QT prolongation, myasthenia gravis</td>
+<td>GI/CNS disturbances (usually well tolerated), tendinitis/tendon rupture (less common than with other FQs), QT prolongation</td>
+<td class="moa">Fluoroquinolone; blocks bacterial DNA gyrase and topoisomerase IV &rarr; inhibits DNA replication; active against <i>M. tuberculosis</i> and atypical mycobacteria</td>
+<td class="stem">"fluoroquinolone well tolerated in patients with drug-induced hepatic dysfunction," backbone of the 4-month TB regimen and empiric MDR-TB regimens</td>
+<td>Hepatic metabolism (unlike most FQs, does not require renal dose adjustment)</td>
+</tr><tr>
+<td class="drug-name">Rifabutin</td>
+<td>Substituted for rifampin in HIV-infected patients on a protease inhibitor or NNRTI (less potent CYP450 inducer/inhibitor than rifampin); also active against <i>M. avium</i> complex</td>
+<td>150&ndash;300 mg PO once daily (adjusted based on concurrent ART)</td>
+<td>Same rifamycin-class hypersensitivity/cross-resistance as rifampin</td>
+<td>Similar to rifampin but less hepatotoxic overall; uveitis at higher doses (especially with concurrent CYP3A4 inhibitors), orange discoloration of body fluids/skin</td>
+<td class="moa">Rifamycin derivative; binds bacterial RNA polymerase beta-subunit &rarr; inhibits RNA synthesis; complete cross-resistance with rifampin (same rpoB mutation basis) but is a substrate/weaker inducer of CYP3A4 than rifampin</td>
+<td class="stem">"substituted for rifampin in a patient on a protease inhibitor" is the defining HIV-TB coinfection stem; least potent CYP450 inducer of the rifamycins</td>
+<td>Hepatic; substrate AND weak inducer of CYP3A4 (dose may need adjustment based on co-administered PI/NNRTI)</td>
+</tr></table></div></section>
+
+
+<section class="card" id="hiv-guide">
+<h2 style="border-bottom:none; margin-bottom:0;">Pharmacologic Agents for HIV/AIDS</h2>
+<div class="callout" style="margin-top:10px;"><b>When to reach for this section:</b> the vignette involves a newly diagnosed or treatment-experienced HIV patient, antiretroviral therapy (ART) regimen selection, a class-specific antiretroviral adverse effect, pre-/post-exposure prophylaxis, or ART use in pregnancy.</div>
+<div class="callout"><b>High-yield stem words/phrases:</b> "test for HLA-B*5701 before starting" (abacavir), "mitochondrial toxicity/lactic acidosis" (NRTIs), "many drug-drug interactions via CYP3A4" (NNRTIs/PIs), "ritonavir boosting," "lipodystrophy/insulin resistance" (PIs), "neuropsychiatric effects/vivid dreams" (efavirenz), "well tolerated, few interactions" (INSTIs), "two NRTIs plus a third agent" as the standard ART backbone, "HIV RNA undetectable (&lt;20&ndash;75 copies/mL)."</div>
+</section>
+
+
+<section class="card" id="hiv-nrti">
+<h2>Nucleoside/Nucleotide Reverse Transcriptase Inhibitors (NRTIs)</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Abacavir</td>
+<td>Backbone NRTI in initial ART regimens (e.g., abacavir/lamivudine); must confirm HLA-B*5701-negative first</td>
+<td>600 mg PO once daily (as part of fixed-dose combination)</td>
+<td>HLA-B*5701-positive (high risk of severe hypersensitivity reaction), hepatic impairment (Child-Pugh B/C)</td>
+<td>Hypersensitivity reaction (fever, rash, GI/respiratory symptoms &mdash; can be fatal on rechallenge), nausea, possible increased risk of myocardial infarction; avoid alcohol</td>
+<td class="moa">Nucleoside analog; competitively inhibits HIV-1 reverse transcriptase and is incorporated into viral DNA, causing chain termination; requires intracellular phosphorylation for activation</td>
+<td class="stem">"test for HLA-B*5701 before starting" is the defining stem; hypersensitivity reaction that worsens with each subsequent dose</td>
+<td>Not renally dependent for elimination (unlike most NRTIs); hepatic (alcohol dehydrogenase/glucuronidation)</td>
+</tr><tr>
+<td class="drug-name">Emtricitabine</td>
+<td>Preferred NRTI backbone component (with tenofovir) in nearly all recommended initial ART regimens; also part of PrEP/PEP regimens</td>
+<td>200 mg PO once daily (as part of fixed-dose combination)</td>
+<td>Avoid concurrent lamivudine (redundant/antagonistic, same resistance profile)</td>
+<td>Headache, diarrhea, nausea, rash, hyperpigmentation (skin/nails &mdash; distinguishing ADR)</td>
+<td class="moa">Nucleoside analog reverse transcriptase inhibitor; low affinity for human mitochondrial DNA polymerase-gamma &rarr; lower risk of mitochondrial toxicity than older NRTIs</td>
+<td class="stem">"hyperpigmentation" is the classic distinguishing stem; standard backbone partner with tenofovir in almost every initial regimen</td>
+<td>Minimal hepatic metabolism; primarily renal excretion</td>
+</tr><tr>
+<td class="drug-name">Lamivudine</td>
+<td>Backbone NRTI (paired with abacavir or dolutegravir in 2-drug regimens); also active against hepatitis B</td>
+<td>300 mg PO once daily (as part of fixed-dose combination)</td>
+<td>Avoid concurrent emtricitabine</td>
+<td>Nausea, headache, dizziness, fatigue &mdash; generally very well tolerated</td>
+<td class="moa">Nucleoside analog reverse transcriptase inhibitor; low affinity for DNA polymerase-gamma &rarr; low mitochondrial toxicity risk; also inhibits HBV polymerase</td>
+<td class="stem">Dual HIV/HBV activity; component of dolutegravir/lamivudine 2-drug regimen (DTG/3TC)</td>
+<td>Minimal hepatic metabolism; renal excretion</td>
+</tr><tr>
+<td class="drug-name">Tenofovir Disoproxil Fumarate (TDF)</td>
+<td>Preferred NRTI backbone (with emtricitabine) in initial ART and oral PrEP/PEP; most-studied PrEP regimen</td>
+<td>300 mg PO once daily (as part of fixed-dose combination)</td>
+<td>Severe renal impairment, concurrent nephrotoxic drugs</td>
+<td>Nephrotoxicity/renal insufficiency, bone loss/decreased bone mineral density, GI upset, headache</td>
+<td class="moa">Nucleotide (not nucleoside) analog reverse transcriptase inhibitor; incorporated into viral DNA causing chain termination; does not require the first phosphorylation step nucleosides need</td>
+<td class="stem">"most studied PrEP regimen" (with emtricitabine = Truvada); renal toxicity/bone loss distinguishes it from the newer TAF prodrug</td>
+<td>Minimal hepatic metabolism; renal elimination (dose-adjust for renal function)</td>
+</tr><tr>
+<td class="drug-name">Tenofovir Alafenamide (TAF)</td>
+<td>Newer tenofovir prodrug preferred over TDF when renal/bone toxicity risk is a concern; component of many single-tablet regimens (e.g., bictegravir/TAF/FTC)</td>
+<td>25 mg PO once daily (as part of fixed-dose combination)</td>
+<td>Severe renal impairment</td>
+<td>Increased creatinine, proteinuria, bone loss (less than TDF), GI upset, headache</td>
+<td class="moa">Prodrug of tenofovir; achieves similar antiviral efficacy at ~1/10th the dose of TDF by more efficient intracellular delivery to lymphoid cells &rarr; lower plasma tenofovir levels &rarr; less renal/bone toxicity than TDF</td>
+<td class="stem">"preferred when there is concern about renal or bone-associated adverse effects" vs. TDF</td>
+<td>Renal elimination; avoid inducers of P-glycoprotein (rifampin, St. John's wort, phenytoin) which lower TAF levels</td>
+</tr></table></div></section>
+
+<section class="card" id="hiv-nnrti">
+<h2>Non-Nucleoside Reverse Transcriptase Inhibitor (NNRTI)</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Efavirenz</td>
+<td>NNRTI-based initial regimen option (efavirenz/tenofovir/emtricitabine); historically avoided in first trimester, but WHO/US/UK no longer restrict its use</td>
+<td>600 mg PO once daily at bedtime, empty stomach</td>
+<td>Caution/avoid concurrent strong CYP3A4 inducers/inhibitors; use caution in pregnancy planning discussions (teratogenic in primates)</td>
+<td>Neuropsychiatric symptoms (vivid dreams, dizziness, impaired concentration &mdash; classic and dose-limiting), rash, elevated liver enzymes, headache, nausea</td>
+<td class="moa">Binds HIV-1 reverse transcriptase at a site distinct from NRTIs, allosterically inhibiting RNA- and DNA-dependent DNA polymerase activity; does not require phosphorylation and does not compete with nucleosides</td>
+<td class="stem">"vivid dreams / neuropsychiatric symptoms," dosed at bedtime on an empty stomach to minimize CNS effects, extensive CYP450 drug interactions</td>
+<td>Hepatic (CYP450 &mdash; mixed inducer/inhibitor, notably of its own metabolism)</td>
+</tr></table></div></section>
+
+<section class="card" id="hiv-pi">
+<h2>Protease Inhibitors (PIs)</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Atazanavir</td>
+<td>PI-based regimen (atazanavir/cobicistat or /ritonavir plus tenofovir/emtricitabine)</td>
+<td>300 mg PO once daily with a booster (cobicistat or ritonavir), taken with food</td>
+<td>Avoid concomitant acid-reducing agents (antacids/PPIs/H2 blockers &mdash; impair absorption); severe hepatic impairment</td>
+<td>Indirect hyperbilirubinemia (benign, Gilbert's-like &mdash; unconjugated jaundice), nausea, rash, PROLONGED PR INTERVAL (unique among PIs), diarrhea</td>
+<td class="moa">Competitively inhibits HIV-1 protease, preventing cleavage of the Gag-Pol polyprotein precursor into mature structural and enzymatic proteins &rarr; noninfectious, immature viral particles</td>
+<td class="stem">"benign indirect/unconjugated hyperbilirubinemia" and "prolonged PR interval" are the atazanavir-specific stems</td>
+<td>Hepatic (CYP3A4 substrate &mdash; extensive drug interactions)</td>
+</tr><tr>
+<td class="drug-name">Darunavir</td>
+<td>Preferred PI-based regimen (darunavir/cobicistat or /ritonavir plus tenofovir/emtricitabine); used empirically pending INSTI resistance testing in patients who received cabotegravir PrEP</td>
+<td>800 mg PO once daily with a booster, taken with food</td>
+<td>Sulfa allergy (contains a sulfonamide moiety), severe hepatic impairment</td>
+<td>Diarrhea, headache, nausea, rash, hyperlipidemia, elevated liver enzymes, elevated serum amylase</td>
+<td class="moa">Competitively inhibits HIV-1 protease &rarr; prevents maturation of Gag-Pol polyprotein into functional viral proteins &rarr; immature, noninfectious virions</td>
+<td class="stem">"avoid in patients with a sulfa allergy" is the darunavir-specific trap; preferred PI for the initial regimen pending genotype results after CAB-LA PrEP</td>
+<td>Hepatic (CYP3A4 substrate; boosted with ritonavir or cobicistat)</td>
+</tr><tr>
+<td class="drug-name">Lopinavir/Ritonavir</td>
+<td>Fixed-dose PI/booster combination; alternative PI-based regimen when other boosted PIs are not preferred</td>
+<td>400/100 mg PO twice daily (with food)</td>
+<td>Severe hepatic impairment, many CYP3A4-mediated drug interactions</td>
+<td>Diarrhea, nausea, hypertriglyceridemia, elevated liver enzymes, hypercholesterolemia</td>
+<td class="moa">Lopinavir competitively inhibits HIV-1 protease; co-formulated with low-dose ritonavir, which has minimal independent antiviral activity but potently inhibits CYP3A4 to boost lopinavir plasma levels/half-life</td>
+<td class="stem">Classic example of a fixed-dose "boosted PI" combination product</td>
+<td>Hepatic (CYP3A4; ritonavir boosts lopinavir exposure)</td>
+</tr><tr>
+<td class="drug-name">Ritonavir</td>
+<td>Used exclusively at low dose as a pharmacokinetic "booster" for other protease inhibitors (and for nirmatrelvir in Paxlovid) &mdash; not used at full dose as a standalone antiretroviral anymore</td>
+<td>100 mg PO once or twice daily as a booster (dose-escalated over 7&ndash;10 days if used therapeutically)</td>
+<td>Avoid drugs that increase QT interval, avoid garlic capsules, severe hepatic insufficiency</td>
+<td>Nausea, diarrhea, abdominal pain, dyspepsia, rash</td>
+<td class="moa">"Ritonavir boosting": ritonavir is itself an HIV protease inhibitor, but at low doses its clinically dominant effect is potent inhibition of CYP3A4, which raises the plasma concentration and prolongs the half-life of a co-administered protease inhibitor, allowing lower/less frequent dosing of that companion drug</td>
+<td class="stem">"ritonavir boosting" definition is a favorite direct exam question; think of ritonavir as the pharmacokinetic enhancer, not the active drug, whenever paired with another PI or with nirmatrelvir</td>
+<td>Hepatic (CYP3A4 substrate AND potent inhibitor of its own metabolism)</td>
+</tr></table></div></section>
+
+<section class="card" id="hiv-insti">
+<h2>HIV Integrase Strand Transfer Inhibitors (INSTIs)</h2>
+<div class="table-scroll"><table><tr><th style="width:9%">Drug</th><th style="width:16%">Use Scenario</th><th style="width:13%">Dosing</th><th style="width:11%">Contraindications</th><th style="width:13%">Adverse Effects</th><th style="width:15%">Mechanism of Action</th><th style="width:14%">High-Yield Stem Clues</th><th style="width:9%">Metabolism</th></tr><tr>
+<td class="drug-name">Bictegravir</td>
+<td>First-line preferred INSTI-based regimen for most people with HIV, as the single-tablet bictegravir/tenofovir alafenamide/emtricitabine (BIC/TAF/FTC)</td>
+<td>50 mg PO once daily (as part of fixed-dose combination)</td>
+<td>Separate dosing from antacids/polyvalent cation supplements by &ge;2 hours</td>
+<td>Nausea, diarrhea, headache, rash, increased total bilirubin and serum creatinine (benign, does not reflect true renal impairment)</td>
+<td class="moa">Binds HIV integrase, preventing strand transfer/integration of reverse-transcribed viral DNA into the host cell chromosome</td>
+<td class="stem">"preferred first-line single-tablet regimen," well tolerated, minimal drug interactions relative to PIs/NNRTIs</td>
+<td>Hepatic (CYP3A4/UGT1A1); low potential for clinically significant DDIs but reduced levels with strong enzyme inducers (e.g., rifampin)</td>
+</tr><tr>
+<td class="drug-name">Dolutegravir</td>
+<td>Preferred INSTI-based regimen (dolutegravir plus tenofovir/emtricitabine or lamivudine; also dolutegravir/lamivudine 2-drug regimen); preferred throughout pregnancy and for those trying to conceive</td>
+<td>50 mg PO once daily (as part of fixed-dose combination)</td>
+<td>Separate dosing from antacids/polyvalent cations by &ge;2h; avoid carbamazepine, dofetilide, and other agents per footnote interactions</td>
+<td>Insomnia, headache, hypersensitivity reaction, elevated liver enzymes</td>
+<td class="moa">Binds HIV integrase, blocking strand transfer and preventing incorporation of proviral DNA into the host genome</td>
+<td class="stem">"preferred INSTI in pregnancy/trying to conceive" (small, now-discounted neural tube defect signal from Botswana data); "must be HLA-B*5701 negative" applies to its ABC/3TC combination partner, not dolutegravir itself</td>
+<td>Hepatic (UGT1A1 primarily, some CYP3A4); low DDI potential but reduced levels with strong inducers (rifampin requires dose adjustment)</td>
+</tr></table></div></section>
+
+</div>
+<footer style="text-align:center; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--text-soft); padding:10px 20px 40px;">Study guide compiled from Dr. Jacquelyn Waller's CVResp2 pharmacology lecture notes &middot; CORE (red-font) drugs only &middot; for educational review use</footer>
+<script>
+document.getElementById('sidenavToggle').addEventListener('click', function(){
+  document.getElementById('sidenavPanel').classList.toggle('open');
+});
+</script>
+</body>
+</html>
