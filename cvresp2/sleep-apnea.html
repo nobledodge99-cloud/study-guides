@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Apnea — Condensed High-Yield Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --cream-card:#fffdf8;
+    --forest-dark:#1f3d2c;
+    --forest:#2f5540;
+    --sage:#7c9885;
+    --sage-light:#e8efe6;
+    --border:#d9d0bd;
+    --accent:#b5602f;
+    --text-main:#2b2620;
+    --text-soft:#6b6357;
+    --correct:#3f7a52;
+    --incorrect:#a4423a;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Lora',serif; background:var(--cream); color:var(--text-main); line-height:1.6; }
+  .back-btn{
+    position:fixed; top:18px; left:18px; z-index:70;
+    background:var(--cream-card); border:1px solid var(--border);
+    color:var(--forest-dark); font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; text-decoration:none; padding:8px 14px;
+    border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .back-btn:hover{ background:var(--sage-light); }
+
+  .header{ background:var(--forest-dark); color:var(--cream); padding:56px 24px 30px; text-align:center; }
+  .header h1{ font-size:1.7rem; margin:0 0 8px; font-weight:700; }
+  .header p{ margin:0; color:var(--sage-light); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+
+  .top-contents{
+    max-width:820px; margin:26px auto 0; background:var(--cream-card);
+    border:1px solid var(--border); border-radius:10px; padding:18px 26px;
+  }
+  .top-contents > b{ font-family:'IBM Plex Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--forest); }
+  .top-contents ul{ list-style:none; padding-left:6px; margin:10px 0 0; }
+  .top-contents li{ margin-bottom:6px; font-size:0.92rem; }
+  .top-contents a{ color:var(--text-main); text-decoration:none; }
+  .top-contents a:hover{ color:var(--accent); text-decoration:underline; }
+
+  .sidenav-toggle{
+    position:fixed; right:0; top:140px; z-index:70;
+    background:var(--forest); color:var(--cream); border:none;
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    padding:10px 10px; writing-mode:vertical-rl; cursor:pointer;
+    border-radius:8px 0 0 8px;
+  }
+  .sidenav-panel{
+    position:fixed; right:-250px; top:0; height:100vh; width:240px;
+    background:var(--cream-card); border-left:1px solid var(--border);
+    box-shadow:-2px 0 8px rgba(0,0,0,0.08); z-index:69;
+    padding:80px 18px 18px; transition:right 0.25s ease;
+    display:flex; flex-direction:column; gap:4px; overflow-y:auto;
+  }
+  .sidenav-panel.open{ right:0; }
+  .sidenav-panel a{ color:var(--forest-dark); text-decoration:none; font-size:0.78rem; padding:5px 8px; border-radius:6px; }
+  .sidenav-panel a:hover, .sidenav-panel a.active{ background:var(--sage-light); }
+
+  .container{ max-width:980px; margin:0 auto; padding:20px 20px 80px; }
+
+  section.card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:12px; padding:26px 30px; margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.card h2{
+    font-family:'IBM Plex Mono',monospace; font-size:1.15rem; color:var(--forest-dark);
+    border-bottom:2px solid var(--sage); padding-bottom:8px; margin-top:0;
+  }
+  section.card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; text-transform:uppercase;
+    color:var(--accent); margin:22px 0 8px; letter-spacing:0.02em;
+  }
+  .callout, .pearl{ background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:12px 18px; margin:14px 0; font-size:0.9rem; }
+  .pearl b.pearl-label{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; color:var(--forest); letter-spacing:0.03em; }
+
+  .case{ background:#f5f0e5; border:1px solid var(--border); border-radius:10px; padding:14px 18px; margin:14px 0; font-size:0.92rem; }
+  .case-label{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; color:var(--accent); letter-spacing:0.03em; display:block; margin-bottom:6px; }
+
+  table{ border-collapse:collapse; font-size:0.85rem; background:var(--cream-card); width:100%; margin:10px 0 20px; }
+  table th{
+    background:var(--forest); color:var(--cream); font-family:'IBM Plex Mono',monospace;
+    font-size:0.65rem; text-transform:uppercase; padding:8px 10px; text-align:left; border:1px solid var(--forest-dark);
+    letter-spacing:0.02em;
+  }
+  table td{ padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  table tr:nth-child(even) td{ background:#f5f0e5; }
+  .table-scroll{ width:100%; overflow-x:auto; border-radius:8px; }
+
+  .quiz-q{ background:#fffaf0; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin:18px 0 0; }
+  .quiz-mini-header{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; color:var(--forest); letter-spacing:0.03em; margin-bottom:8px; }
+  .quiz-stem{ margin-bottom:10px; }
+  .quiz-choice{
+    display:block; width:100%; text-align:left; background:var(--cream-card); border:1px solid var(--border);
+    border-radius:8px; padding:9px 14px; margin:6px 0; cursor:pointer; font-family:'Lora',serif; font-size:0.9rem; color:var(--text-main);
+  }
+  .quiz-choice:hover{ background:var(--sage-light); }
+  .quiz-choice.correct{ background:var(--correct); color:#fff; border-color:var(--correct); }
+  .quiz-choice.incorrect{ background:var(--incorrect); color:#fff; border-color:var(--incorrect); }
+  .quiz-choice.disabled{ cursor:default; }
+  .quiz-choice.disabled:hover{ background:inherit; }
+  .quiz-explain{ display:none; margin-top:10px; padding:10px 14px; background:var(--sage-light); border:1px solid var(--sage); border-radius:8px; font-size:0.87rem; }
+  .quiz-explain.show{ display:block; }
+
+  @media (max-width:800px){
+    section.card{ padding:20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+
+<div class="header">
+  <h1>Sleep Apnea &mdash; Condensed High-Yield Review</h1>
+  <p>CIS &middot; Dennis Kinder, MD &middot; built from the CIS Sleep Apneas slide deck + the Sleep Apnea Clinical Reasoning Companion case</p>
+</div>
+
+<div class="top-contents">
+  <b>Contents</b>
+  <ul>
+<li><a href="#the-case">1. The Case &amp; Framing</a></li>
+<li><a href="#ddx-somnolence">2. Differential Dx of EDS</a></li>
+<li><a href="#osa-risk">3. OSA Risk Factors &amp; Exam</a></li>
+<li><a href="#csa-risk">4. CSA Risk Factors &amp; Mechanism</a></li>
+<li><a href="#screening">5. Screening Tools</a></li>
+<li><a href="#diagnosis">6. Diagnosis &amp; AHI</a></li>
+<li><a href="#psg-patterns">7. PSG Patterns</a></li>
+<li><a href="#pathophys">8. Pathophysiology &amp; Complications</a></li>
+<li><a href="#osa-vs-csa">9. OSA vs. CSA Comparison</a></li>
+<li><a href="#tx-osa">10. Treatment of OSA</a></li>
+<li><a href="#tx-csa">11. Treatment of CSA</a></li>
+<li><a href="#high-yield-summary">High-Yield Summary Table</a></li>
+</ul>
+</div>
+
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel"><a href="#the-case">1. The Case &amp; Framing</a>
+<a href="#ddx-somnolence">2. Differential Dx of EDS</a>
+<a href="#osa-risk">3. OSA Risk Factors &amp; Exam</a>
+<a href="#csa-risk">4. CSA Risk Factors &amp; Mechanism</a>
+<a href="#screening">5. Screening Tools</a>
+<a href="#diagnosis">6. Diagnosis &amp; AHI</a>
+<a href="#psg-patterns">7. PSG Patterns</a>
+<a href="#pathophys">8. Pathophysiology &amp; Complications</a>
+<a href="#osa-vs-csa">9. OSA vs. CSA Comparison</a>
+<a href="#tx-osa">10. Treatment of OSA</a>
+<a href="#tx-csa">11. Treatment of CSA</a>
+<a href="#high-yield-summary">High-Yield Summary Table</a></div>
+
+<div class="container">
+
+
+<section class="card" id="the-case">
+<h2>1. The Case &amp; Framing the Problem</h2>
+<div class="case"><span class="case-label">Case Stem &mdash; TJ</span>
+55-year-old commercial (DOT) truck driver, BMI 34.3, HTN, heart failure, prior hypertensive stroke. Pulls over to rest during his route; 20-lb weight gain over one year; loud snoring (bothers bed partner, not him); morning headache and dry mouth; father had OSA and died of MI. Labs: HCO&#8323; 33, Hgb 19/Hct 57%, BNP 68, TSH normal.</div>
+<p>The task is never just "diagnose OSA." Excessive daytime sleepiness (EDS) in a patient with cardiovascular disease must be worked up broadly enough to catch <b>central sleep apnea (CSA)</b>, <b>obesity hypoventilation syndrome (OHS)</b>, and sustained hypoventilation hiding underneath an apparent OSA picture &mdash; because these change the test you order and the therapy you can safely use.</p>
+<div class="pearl"><b class="pearl-label">Safety First</b> A patient who cannot reliably stay awake at the wheel needs immediate counseling to stop safety-sensitive driving <i>before</i> any test result comes back &mdash; this is a "first, do no harm" action item independent of the final diagnosis.</div>
+<div class="quiz-q" id="q1">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A 55-year-old commercial truck driver reports pulling over during routes because he cannot stay awake. He has obesity, heart failure, and a prior stroke. His workup for sleep apnea has not yet been completed. What is the most appropriate immediate action?</div>
+<button class="quiz-choice" onclick="answerQuiz('q1', 0, 2)">Order attended polysomnography and reassess in 2 weeks</button>
+<button class="quiz-choice" onclick="answerQuiz('q1', 1, 2)">Prescribe a stimulant to manage daytime sleepiness while testing is pending</button>
+<button class="quiz-choice" onclick="answerQuiz('q1', 2, 2)">Counsel the patient to stop commercial driving until his sleepiness is evaluated and effectively treated</button>
+<button class="quiz-choice" onclick="answerQuiz('q1', 3, 2)">Reassure the patient that snoring alone does not require treatment</button>
+<button class="quiz-choice" onclick="answerQuiz('q1', 4, 2)">Refer directly to bariatric surgery for his obesity</button>
+
+<div class="quiz-explain"><b>Answer: Counsel the patient to stop commercial driving until his sleepiness is evaluated and effectively treated.</b> Safety takes priority over diagnostic completeness. A patient who cannot reliably remain awake while driving poses an immediate risk to himself and the public and should be counseled to stop safety-sensitive activity now, in parallel with (not instead of) starting the diagnostic workup. Applicable occupational/DOT reporting requirements should also be followed.</div>
+</div></section>
+
+<section class="card" id="ddx-somnolence">
+<h2>2. Differential Diagnosis of Excessive Daytime Somnolence</h2>
+<div class="table-scroll"><table>
+<tr><th>Category</th><th>Supporting Clues</th><th>Key Discriminating Test</th></tr>
+<tr><td><b>Obstructive sleep apnea</b></td><td>Loud snoring, witnessed apneas/gasping, obesity, crowded airway, large neck, morning headache, HTN</td><td>PSG/HSAT: airflow absent, respiratory <b>effort continues</b></td></tr>
+<tr><td><b>Central sleep apnea</b></td><td>Heart failure, prior stroke, opioid use, renal failure, high altitude, periodic breathing</td><td>PSG: airflow AND effort <b>both stop</b></td></tr>
+<tr><td><b>Obesity hypoventilation syndrome</b></td><td>Obesity, &uarr;serum bicarbonate, daytime hypercapnia/hypoxemia, pulmonary HTN</td><td>Awake PaCO&#8322; &ge; 45 mmHg after excluding other causes</td></tr>
+<tr><td><b>Insufficient/disrupted sleep</b></td><td>Short sleep opportunity, shift work, insomnia, restless legs/PLMs</td><td>Sleep diary/schedule review; PSG if another disorder suspected</td></tr>
+<tr><td><b>Medical/psychiatric cause</b></td><td>Hypothyroidism, anemia, heart failure, pulmonary disease, depression, medication effect</td><td>Targeted exam/labs (TSH, CBC, BNP) by pretest probability</td></tr>
+<tr><td><b>Central hypersomnolence (narcolepsy)</b></td><td>Sleep attacks, cataplexy, sleep paralysis, hallucinations, sleepiness despite adequate sleep</td><td>PSG followed by MSLT</td></tr>
+</table></div>
+<div class="pearl"><b class="pearl-label">Reasoning Caution</b> A normal TSH makes hypothyroidism less likely but does not, by itself, exclude or explain the rest of the differential &mdash; don't let one negative test end the workup.</div>
+<div class="quiz-q" id="q2">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A 55-year-old man with obesity and heart failure has daytime sleepiness, loud snoring, and morning headache. TSH is normal and there is no history of cataplexy or sleep paralysis. Which diagnosis remains best supported by this picture?</div>
+<button class="quiz-choice" onclick="answerQuiz('q2', 0, 2)">Narcolepsy</button>
+<button class="quiz-choice" onclick="answerQuiz('q2', 1, 2)">Primary hypothyroidism</button>
+<button class="quiz-choice" onclick="answerQuiz('q2', 2, 2)">Obstructive sleep apnea, though central or mixed apnea must still be excluded given his cardiac history</button>
+<button class="quiz-choice" onclick="answerQuiz('q2', 3, 2)">Major depressive disorder as the sole cause</button>
+<button class="quiz-choice" onclick="answerQuiz('q2', 4, 2)">Idiopathic hypersomnia</button>
+
+<div class="quiz-explain"><b>Answer: Obstructive sleep apnea, though central or mixed apnea must still be excluded given his cardiac history.</b> The snoring, obesity, and morning headache point toward OSA, but his heart failure and stroke history keep central and mixed apnea on the differential until polysomnography characterizes the events. Narcolepsy is excluded by the absence of cataplexy/sleep paralysis, and a normal TSH argues against hypothyroidism as the driver.</div>
+</div></section>
+
+<section class="card" id="osa-risk">
+<h2>3. OSA Risk Factors &amp; Physical Exam</h2>
+<div class="table-scroll"><table>
+<tr><th>Risk Factor</th><th>High-Yield Detail</th></tr>
+<tr><td>Obesity</td><td>Responsible for ~41% of all OSA, ~58% of moderate-severe OSA; every 10% weight <b>gain</b> &rarr; 6-fold &uarr; risk of clinically significant OSA. Obesity is <b>not</b> a significant risk factor for CSA.</td></tr>
+<tr><td>Neck circumference</td><td>&gt;17 in (men), &gt;16 in (women)</td></tr>
+<tr><td>Airway crowding</td><td>Modified Mallampati grade 3 or 4 &mdash; each grade increase roughly <b>doubles</b> OSA risk and severity</td></tr>
+<tr><td>Craniofacial</td><td>Retrognathia (severe overbite), macroglossia, tonsillar hypertrophy, elongated uvula, high/arched palate, nasal obstruction</td></tr>
+<tr><td>Demographics</td><td>Male sex, family history</td></tr>
+<tr><td>Substances</td><td>Alcohol/sedatives (relax pharyngeal dilators), smoking</td></tr>
+<tr><td>Comorbidities</td><td>Treatment-resistant HTN, CHF, atrial fibrillation, stroke, T2DM, PCOS, chronic lung disease &mdash; many of these are also <b>consequences</b> of OSA, creating a worsening cycle</td></tr>
+</table></div>
+<div class="pearl"><b class="pearl-label">Exam Pearl</b> An oropharynx where the uvula cannot be visualized (obscured by the tongue) is a bedside proxy for airway crowding/high Mallampati grade &mdash; exactly what TJ has.</div>
+<div class="quiz-q" id="q3">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">On exam, a patient's tongue obscures visualization of the uvula and his neck is described as "thick" on inspection. Which additional history finding would most specifically raise concern for treatment-resistant OSA rather than simple snoring?</div>
+<button class="quiz-choice" onclick="answerQuiz('q3', 0, 1)">Occasional caffeine use in the afternoon</button>
+<button class="quiz-choice" onclick="answerQuiz('q3', 1, 1)">A neck circumference of 17.5 inches with a 10% weight gain over the past year</button>
+<button class="quiz-choice" onclick="answerQuiz('q3', 2, 1)">A single beer with dinner most nights</button>
+<button class="quiz-choice" onclick="answerQuiz('q3', 3, 1)">A normal Modified Mallampati grade 1 exam</button>
+<button class="quiz-choice" onclick="answerQuiz('q3', 4, 1)">Reports of good sleep quality with no daytime fatigue</button>
+
+<div class="quiz-explain"><b>Answer: A neck circumference of 17.5 inches with a 10% weight gain over the past year.</b> A neck circumference above 17 inches in a man combined with recent weight gain (a 10% weight gain predicts roughly a 6-fold increase in OSA risk) is the option most specific for significant OSA risk. A normal Mallampati grade and reassuring sleep history argue against it.</div>
+</div></section>
+
+<section class="card" id="csa-risk">
+<h2>4. Central Sleep Apnea: Risk Factors &amp; Mechanism</h2>
+<ul>
+<li><b>Rare</b> compared to OSA; incidence rises with age. Occurs more often during <b>NREM</b> sleep. Women are less susceptible and require a larger magnitude of hypocapnia to trigger an event.</li>
+<li>Most commonly driven by <b>hyperventilation lowering PaCO&#8322;</b> below the individual's apneic threshold &rarr; central apnea. Enhanced CO&#8322; chemosensitivity during sleep raises "loop gain" &rarr; ventilatory instability &rarr; CSA (classic in Cheyne-Stokes breathing of heart failure).</li>
+<li>Can also result from <b>persistent hypoventilation</b> not driven by low PaCO&#8322; &mdash; e.g., encephalitis, polio, or respiratory-suppressant drugs (opioids).</li>
+<li>Associated conditions: <b>atrial fibrillation, heart failure, ischemic stroke, spinal cord injury, renal failure, chronic opioid use</b> &mdash; almost always encountered in <b>hospitalized</b> patients rather than outpatients.</li>
+</ul>
+<div class="quiz-q" id="q4">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A hospitalized patient with heart failure with reduced ejection fraction develops a periodic breathing pattern with cycles of hyperpnea and apnea overnight. What is the primary physiologic driver of his central apnea?</div>
+<button class="quiz-choice" onclick="answerQuiz('q4', 0, 2)">Pharyngeal soft tissue collapse during inspiration</button>
+<button class="quiz-choice" onclick="answerQuiz('q4', 1, 2)">Chronic upper airway inflammation</button>
+<button class="quiz-choice" onclick="answerQuiz('q4', 2, 2)">Heightened chemosensitivity to CO2 causing hyperventilation that drives PaCO2 below the apneic threshold</button>
+<button class="quiz-choice" onclick="answerQuiz('q4', 3, 2)">Obesity-related reduction in chest wall compliance</button>
+<button class="quiz-choice" onclick="answerQuiz('q4', 4, 2)">Nasal obstruction from turbinate hypertrophy</button>
+
+<div class="quiz-explain"><b>Answer: Heightened chemosensitivity to CO2 causing hyperventilation that drives PaCO2 below the apneic threshold.</b> Cheyne-Stokes breathing in heart failure results from high "loop gain": an oversensitive ventilatory response to CO2 causes hyperventilation that drives PaCO2 below the apneic threshold, triggering a central apnea, followed by CO2 accumulation that restarts hyperventilation — a self-perpetuating cycle. Options describing airway obstruction belong to OSA, not CSA.</div>
+</div></section>
+
+<section class="card" id="screening">
+<h2>5. Screening Tools (Do Not Diagnose OSA)</h2>
+<div class="table-scroll"><table>
+<tr><th>Tool</th><th>What It Measures</th><th>High-Yield Detail</th></tr>
+<tr><td>STOP-BANG</td><td>Composite OSA probability</td><td>Developed for the <b>preoperative</b> setting; ~84% sensitivity at score &ge;3; high sensitivity at low thresholds but limited specificity</td></tr>
+<tr><td>Berlin Questionnaire</td><td>OSA probability</td><td>~86% sensitivity for predicting presence of OSA</td></tr>
+<tr><td>Epworth Sleepiness Scale</td><td>Subjective sleepiness only</td><td>Required by most insurers as part of the sleep history before a sleep study is covered; does <b>not</b> distinguish OSA from other causes of sleepiness</td></tr>
+</table></div>
+<div class="pearl"><b class="pearl-label">Symptom Sensitivity/Specificity</b> Snoring has the <b>highest sensitivity</b> for OSA; choking/gasping is more <b>specific</b> for moderate-to-severe disease.</div>
+<div class="pearl"><b class="pearl-label">Who to screen</b> Ask every adult about sleep satisfaction; screen further if dissatisfied/daytime-sleepy, in high-risk occupations (commercial drivers, transit operators), or after a sleepiness-related crash/near-miss.</div>
+<div class="quiz-q" id="q5">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A 48-year-old man is being evaluated the morning of an elective surgery. The anesthesia team wants a quick tool, validated for the preoperative setting, to estimate his risk of undiagnosed OSA before intubation. Which tool is most appropriate?</div>
+<button class="quiz-choice" onclick="answerQuiz('q5', 0, 1)">Epworth Sleepiness Scale</button>
+<button class="quiz-choice" onclick="answerQuiz('q5', 1, 1)">STOP-BANG questionnaire</button>
+<button class="quiz-choice" onclick="answerQuiz('q5', 2, 1)">Modified Mallampati score alone</button>
+<button class="quiz-choice" onclick="answerQuiz('q5', 3, 1)">Berlin Questionnaire</button>
+<button class="quiz-choice" onclick="answerQuiz('q5', 4, 1)">Apnea-Hypopnea Index</button>
+
+<div class="quiz-explain"><b>Answer: STOP-BANG questionnaire.</b> STOP-BANG was specifically developed and validated to assess OSA risk in the preoperative setting (score ≥3 carries ~84% sensitivity). The Berlin Questionnaire and Epworth Scale are validated screening tools but not preoperative-specific, Mallampati grade is an airway exam finding rather than a full screening instrument, and AHI is a polysomnographic diagnostic metric, not a screening tool.</div>
+</div></section>
+
+<section class="card" id="diagnosis">
+<h2>6. Choosing &amp; Interpreting the Sleep Study</h2>
+<div class="table-scroll"><table>
+<tr><th>Testing Option</th><th>Best Fit</th><th>Limitations</th></tr>
+<tr><td>Home sleep apnea test (HSAT)</td><td>Uncomplicated adult, high pretest probability of moderate-severe OSA</td><td>Limited evaluation of sleep stages, arousals, CSA, or hypoventilation; a negative/inadequate study may still need PSG</td></tr>
+<tr><td>Attended polysomnography (PSG)</td><td>Significant cardiorespiratory disease, prior stroke, suspected hypoventilation, opioid use, severe insomnia, possible CSA, or nondiagnostic HSAT &mdash; <b>gold standard</b> overall</td><td>More resource-intensive; measures EEG, EOG, ECG, chin/leg EMG, respiratory effort, airflow, SpO&#8322;, end-tidal CO&#8322;</td></tr>
+</table></div>
+<h3>Definitions</h3>
+<ul>
+<li><b>Apnea</b>: cessation of airflow &ge; 10 seconds.</li>
+<li><b>Hypopnea</b>: reduced airflow &ge; 10 seconds <b>plus</b> a 3% (or, per some payers, 4%) oxyhemoglobin desaturation <b>or</b> an arousal.</li>
+<li><b>AHI (apnea-hypopnea index)</b>: mild 5&ndash;14.9/hr, moderate 15&ndash;29.9/hr, severe &ge;30/hr &mdash; interpret alongside symptoms, desaturation burden, sleep stage, and body position, not in isolation.</li>
+</ul>
+<div class="pearl"><b class="pearl-label">Case Application</b> TJ's heart failure, prior stroke, and possible sustained hypoventilation (bicarbonate 33) make him a poor candidate for a routine HSAT &mdash; he needs attended PSG.</div>
+<div class="quiz-q" id="q6">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A patient with heart failure with reduced ejection fraction and a prior ischemic stroke is being evaluated for suspected sleep apnea. Which diagnostic test is most appropriate as the initial study?</div>
+<button class="quiz-choice" onclick="answerQuiz('q6', 0, 1)">Home sleep apnea test</button>
+<button class="quiz-choice" onclick="answerQuiz('q6', 1, 1)">Attended polysomnography</button>
+<button class="quiz-choice" onclick="answerQuiz('q6', 2, 1)">Epworth Sleepiness Scale alone</button>
+<button class="quiz-choice" onclick="answerQuiz('q6', 3, 1)">Overnight pulse oximetry alone</button>
+<button class="quiz-choice" onclick="answerQuiz('q6', 4, 1)">Arterial blood gas during wakefulness alone</button>
+
+<div class="quiz-explain"><b>Answer: Attended polysomnography.</b> Significant cardiorespiratory disease and a prior stroke raise concern for central or mixed apnea and possible hypoventilation — situations an HSAT cannot adequately characterize. Attended PSG measures respiratory effort, airflow, oxygenation, cardiac rhythm, and sleep architecture, making it the appropriate initial study in a complicated patient like this.</div>
+</div></section>
+
+<section class="card" id="psg-patterns">
+<h2>7. Reading the Tracing: Obstructive vs. Central vs. Mixed</h2>
+<div class="table-scroll"><table>
+<tr><th>Pattern</th><th>Airflow</th><th>Respiratory Effort</th><th>Interpretation</th></tr>
+<tr><td>Obstructive apnea</td><td>Absent</td><td><b>Continues</b>, often paradoxical</td><td>Upper airway obstruction against a closed airway</td></tr>
+<tr><td>Central apnea</td><td>Absent</td><td><b>Absent</b></td><td>Transient loss of central ventilatory output</td></tr>
+<tr><td>Mixed apnea</td><td>Absent</td><td>Absent initially, then <b>resumes</b></td><td>Central onset followed by obstructive physiology</td></tr>
+<tr><td>Hypopnea</td><td>Reduced &ge;10s</td><td>Variable</td><td>Requires associated desaturation or arousal to score</td></tr>
+</table></div>
+<div class="pearl"><b class="pearl-label">Sensor Pearl</b> A thermistor detects airflow by temperature change (cool = inhale, warm = exhale); a nasal pressure transducer (NPT) is more sensitive to the subtle airflow drops that define hypopneas.</div>
+<div class="quiz-q" id="q7">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">On a polysomnogram, an event shows complete absence of airflow for 22 seconds. Respiratory effort belts show no effort for the first several seconds of the event, but effort resumes before the event ends. How should this event be classified?</div>
+<button class="quiz-choice" onclick="answerQuiz('q7', 0, 2)">Obstructive apnea</button>
+<button class="quiz-choice" onclick="answerQuiz('q7', 1, 2)">Central apnea</button>
+<button class="quiz-choice" onclick="answerQuiz('q7', 2, 2)">Mixed apnea</button>
+<button class="quiz-choice" onclick="answerQuiz('q7', 3, 2)">Hypopnea</button>
+<button class="quiz-choice" onclick="answerQuiz('q7', 4, 2)">Normal breathing artifact</button>
+
+<div class="quiz-explain"><b>Answer: Mixed apnea.</b> A mixed apnea begins with absent respiratory effort (the central component) and ends with effort resuming while airflow is still absent (the obstructive component). Pure obstructive apnea shows continuous effort throughout; pure central apnea shows absent effort throughout; a hypopnea shows reduced, not absent, airflow.</div>
+</div></section>
+
+<section class="card" id="pathophys">
+<h2>8. Pathophysiology &amp; Systemic Complications</h2>
+<div class="table-scroll"><table>
+<tr><th>Repeated Event</th><th>Immediate Response</th><th>Long-Term Consequence</th></tr>
+<tr><td>Hypoxemia + rising PaCO&#8322;</td><td>Chemoreceptor activation &rarr; arousal</td><td>Sleep fragmentation, morning headache, impaired concentration</td></tr>
+<tr><td>Hypoxemia + arousal</td><td>Sympathetic surge &rarr; vasoconstriction</td><td>Systemic hypertension, &uarr;cardiovascular stress</td></tr>
+<tr><td>Alveolar hypoxia</td><td>Hypoxic pulmonary vasoconstriction</td><td>Pulmonary vascular remodeling &rarr; <b>pulmonary hypertension</b> &rarr; right heart strain/cor pulmonale</td></tr>
+<tr><td>Chronic hypoxemia</td><td>&uarr;Renal erythropoietin</td><td><b>Secondary erythrocytosis/polycythemia</b> &rarr; &uarr;viscosity (marked erythrocytosis still needs broader workup, not automatic attribution to OSA)</td></tr>
+</table></div>
+<ul>
+<li><b>Morning headache</b>: nocturnal hypercapnia causes cerebral <b>vasodilation</b> (carotid bodies are far more sensitive to PaCO&#8322; than PaO&#8322; near-normal range) &rarr; headache on waking.</li>
+<li><b>Nocturia</b>: &uarr;RV afterload from pulmonary HTN/polycythemia &rarr; &uarr;atrial volume &rarr; &uarr;ANP secretion (natriuresis) + suppressed ADH &rarr; &uarr;urine volume overnight.</li>
+<li><b>EKG/exam findings of chronic OSA</b>: right axis deviation, RVH strain pattern, cor pulmonale; metabolic alkalosis is a renal <b>compensation</b> for chronic respiratory acidosis (&uarr;HCO&#8323; reabsorption in response to chronically elevated PaCO&#8322;).</li>
+<li><b>Acute apneic event acid-base</b>: PaCO&#8322; rises/pH falls transiently during each apnea; persistent <b>daytime</b> hypercapnia with renal bicarbonate retention suggests chronic hypoventilation (e.g., OHS), not just uncomplicated nocturnal OSA.</li>
+</ul>
+<div class="quiz-q" id="q8">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A patient with long-standing severe OSA is found to have an elevated hematocrit, right axis deviation and RVH on ECG, and an elevated serum bicarbonate. Which mechanism best explains the elevated bicarbonate?</div>
+<button class="quiz-choice" onclick="answerQuiz('q8', 0, 1)">Primary metabolic alkalosis from vomiting</button>
+<button class="quiz-choice" onclick="answerQuiz('q8', 1, 1)">Renal compensation for chronic respiratory acidosis from nocturnal hypercapnia</button>
+<button class="quiz-choice" onclick="answerQuiz('q8', 2, 1)">Direct effect of chronic hypoxemia on erythropoietin</button>
+<button class="quiz-choice" onclick="answerQuiz('q8', 3, 1)">A side effect of loop diuretic use only</button>
+<button class="quiz-choice" onclick="answerQuiz('q8', 4, 1)">Acute respiratory alkalosis from hyperventilation</button>
+
+<div class="quiz-explain"><b>Answer: Renal compensation for chronic respiratory acidosis from nocturnal hypercapnia.</b> Repeated nocturnal hypercapnic events raise PaCO2, and the kidney compensates over time by increasing bicarbonate reabsorption, producing a compensatory metabolic alkalosis (elevated serum bicarbonate) that reflects chronic respiratory acidosis. A loop diuretic can independently raise bicarbonate but is a distractor here, not the core physiologic mechanism being tested.</div>
+</div></section>
+
+<section class="card" id="osa-vs-csa">
+<h2>9. OSA vs. CSA &mdash; Master Comparison</h2>
+<div class="table-scroll"><table>
+<tr><th>Feature</th><th>OSA</th><th>CSA</th></tr>
+<tr><td>Mechanism</td><td>Recurrent upper airway obstruction</td><td>Decreased central respiratory drive</td></tr>
+<tr><td>Primary cause</td><td>Pharyngeal soft-tissue collapse</td><td>Brainstem respiratory control instability</td></tr>
+<tr><td>Typical patient</td><td>Middle-aged, male, obese, thick neck, family history</td><td>Older adult; heart failure, AFib, stroke, opioids</td></tr>
+<tr><td>Snoring</td><td>Common, loud, nightly</td><td>Uncommon</td></tr>
+<tr><td>PSG effort pattern</td><td>Effort present, airflow absent</td><td>Effort AND airflow absent</td></tr>
+<tr><td>Key complications</td><td>Systemic HTN, pulmonary HTN, polycythemia, right heart strain, cognitive impairment</td><td>Heart failure progression, arrhythmias, Cheyne-Stokes breathing</td></tr>
+<tr><td>Core pathophysiology</td><td>Hypoxia/hypercapnia &rarr; &uarr;sympathetic tone &rarr; vasoconstriction</td><td>Hypocapnia &rarr; &darr;ventilatory drive &rarr; periodic breathing</td></tr>
+<tr><td>First-line therapy</td><td>CPAP, weight loss, oral appliance, surgery if refractory</td><td>Treat underlying cause; BiPAP, O&#8322;, adaptive servo-ventilation (caution in HFrEF)</td></tr>
+<tr><td>Prognosis</td><td>Often reversible with CPAP/weight loss</td><td>Depends on the underlying condition</td></tr>
+</table></div>
+<div class="pearl"><b class="pearl-label">One-Line Mnemonic</b> OSA = <b>O</b>bstruction/<b>O</b>besity/<b>O</b>bvious snoring/Hypercapnia-driven. CSA = <b>C</b>entral drive/<b>C</b>ardiac disease/hypo<b>C</b>apnia-driven.</div>
+<div class="quiz-q" id="q9">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">Which single feature, if present on polysomnography, most reliably differentiates central sleep apnea from obstructive sleep apnea?</div>
+<button class="quiz-choice" onclick="answerQuiz('q9', 0, 2)">Apnea-hypopnea index above 30 events/hour</button>
+<button class="quiz-choice" onclick="answerQuiz('q9', 1, 2)">Presence of daytime somnolence</button>
+<button class="quiz-choice" onclick="answerQuiz('q9', 2, 2)">Absence of respiratory effort during the apneic event</button>
+<button class="quiz-choice" onclick="answerQuiz('q9', 3, 2)">Presence of loud snoring on room recording</button>
+<button class="quiz-choice" onclick="answerQuiz('q9', 4, 2)">An elevated serum bicarbonate</button>
+
+<div class="quiz-explain"><b>Answer: Absence of respiratory effort during the apneic event.</b> Both OSA and CSA can produce a high AHI and daytime somnolence, and bicarbonate elevation reflects chronic hypoventilation rather than distinguishing event type. The one feature that cleanly separates the two is respiratory effort: it persists in OSA (obstruction against a closed airway) and is absent in CSA (no central drive to breathe).</div>
+</div></section>
+
+<section class="card" id="tx-osa">
+<h2>10. Treatment of OSA</h2>
+<h3>CPAP &mdash; First-Line</h3>
+<p>Continuous positive airway pressure splints the airway open, pneumatically. Benefits: &darr;AHI, &darr;daytime sleepiness, improved oxygen desaturation, &darr;diurnal/nocturnal BP, &darr;pulmonary artery pressure, improved sleep efficiency/quality of life/executive function.</p>
+<div class="table-scroll"><table>
+<tr><th>Adherence Barrier</th><th>Fix</th></tr>
+<tr><td>Mask discomfort/skin irritation/claustrophobia</td><td>Try different mask types; good mask/skin hygiene</td></tr>
+<tr><td>Nasal/throat dryness</td><td>Add heated humidification</td></tr>
+<tr><td>Pressure intolerance</td><td>Adjust pressure or taper start; consider APAP (auto-titrating)</td></tr>
+<tr><td>Machine noise</td><td>Quieter machine; ear plugs</td></tr>
+<tr><td>Cost</td><td>Work with insurance; CBT can support both patient and partner adjustment</td></tr>
+</table></div>
+<p><b>CMS compliance definition:</b> &ge;4 hours/night on &ge;70% of nights over a 30-day period within the first 90 days of therapy &mdash; assess compliance before declaring CPAP a failure or switching therapy.</p>
+<h3>Other Options</h3>
+<ul>
+<li><b>Bilevel PAP (BiPAP)</b> if CPAP pressure alone is insufficient; <b>APAP</b> auto-adjusts across a pressure range.</li>
+<li><b>Supplemental O&#8322;</b> is adjunctive only (comorbid low O&#8322;), never primary OSA therapy.</li>
+<li><b>Weight loss</b>: helpful in essentially any overweight/obese OSA patient; <b>not</b> helpful for CSA in a normal/underweight patient. 10% weight loss &rarr; ~26% &darr;severity; 9/10 mild-OSA patients who lose 15% of body weight achieve remission.</li>
+<li><b>GLP-1 receptor agonists / tirzepatide</b>: tirzepatide has an FDA indication specifically for moderate-severe OSA with obesity, alongside diet/exercise.</li>
+<li><b>Oral mandibular advancement device</b>: reasonable for mild-moderate OSA or CPAP intolerance; easier adherence for some patients.</li>
+<li><b>Surgery (last resort)</b>: uvulopalatopharyngoplasty (fewer than half have durable long-term symptom reduction), tracheostomy, hypoglossal nerve stimulator &mdash; reserved for anatomic obstruction or PAP failure, not simply for CPAP-intolerance symptoms that can otherwise be managed.</li>
+</ul>
+<div class="quiz-q" id="q10">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A patient with moderate OSA has been on CPAP for 6 weeks but reports using it only 2-3 nights per week for about 2 hours each night due to nasal dryness and mask discomfort. What is the most appropriate next step?</div>
+<button class="quiz-choice" onclick="answerQuiz('q10', 0, 2)">Discontinue CPAP and proceed directly to uvulopalatopharyngoplasty</button>
+<button class="quiz-choice" onclick="answerQuiz('q10', 1, 2)">Declare CPAP a treatment failure and switch to a hypoglossal nerve stimulator</button>
+<button class="quiz-choice" onclick="answerQuiz('q10', 2, 2)">Address the modifiable adherence barriers (try heated humidification, refit the mask) before concluding CPAP has failed</button>
+<button class="quiz-choice" onclick="answerQuiz('q10', 3, 2)">Add supplemental oxygen as the primary therapy instead of CPAP</button>
+<button class="quiz-choice" onclick="answerQuiz('q10', 4, 2)">Increase the CPAP pressure setting without addressing the mask/dryness complaints</button>
+
+<div class="quiz-explain"><b>Answer: Address the modifiable adherence barriers (try heated humidification, refit the mask) before concluding CPAP has failed.</b> His usage (2-3 nights/week, ~2 hours/night) falls short of the CMS adherence threshold (≥4 hours/night on ≥70% of nights), but the barriers described — nasal dryness and mask discomfort — are classic modifiable adherence problems. These should be addressed (humidification, mask refitting, behavioral support) before CPAP is labeled a failure or the patient is escalated to surgery.</div>
+</div></section>
+
+<section class="card" id="tx-csa">
+<h2>11. Treatment of CSA</h2>
+<p>CSA management is dictated by the <b>underlying cause</b> &mdash; there is no single default therapy the way CPAP is default for OSA.</p>
+<div class="table-scroll"><table>
+<tr><th>CSA Syndrome</th><th>Mechanism</th><th>Therapy</th></tr>
+<tr><td>Sleep transition apnea</td><td>CO&#8322; fluctuation during sleep-wake transitions</td><td>Reassurance; occasionally hypnotics or O&#8322;</td></tr>
+<tr><td>Chronic narcotic therapy</td><td>Loss of central drive</td><td>Reduce narcotic dose; consider PAP device</td></tr>
+<tr><td>Cheyne-Stokes breathing</td><td>High loop gain from robust chemosensitivity/ventilatory drive (heart failure)</td><td>Optimize HF medical therapy; consider PAP device</td></tr>
+<tr><td>Idiopathic central apnea</td><td>Unknown</td><td>Supportive; bilevel PAP; consider ventilatory stimulants</td></tr>
+<tr><td>Treatment-emergent ("complex") apnea</td><td>Lower airway resistance at CPAP initiation improves CO&#8322; excretion efficiency</td><td>Reassurance &mdash; generally resolves spontaneously</td></tr>
+<tr><td>Sleep hypoventilation syndromes</td><td>&darr;Drive with loss of wakefulness stimulus + &darr;accessory muscle activity in REM</td><td>Noninvasive ventilation</td></tr>
+</table></div>
+<div class="pearl"><b class="pearl-label">Heart Failure Caution</b> Do not select advanced PAP therapy (e.g., adaptive servo-ventilation) for CSA without first knowing the heart failure phenotype and ejection fraction &mdash; therapy choice requires individualized specialist assessment (ASV has shown harm in some HFrEF populations).</div>
+<div class="quiz-q" id="q11">
+<div class="quiz-mini-header">USMLE-Style Check</div>
+<div class="quiz-stem">A patient with heart failure with reduced ejection fraction is found to have predominant Cheyne-Stokes breathing with central apneas on polysomnography. Which statement about management is most accurate?</div>
+<button class="quiz-choice" onclick="answerQuiz('q11', 0, 2)">Adaptive servo-ventilation should be started immediately regardless of ejection fraction</button>
+<button class="quiz-choice" onclick="answerQuiz('q11', 1, 2)">Weight loss is the first-line therapy for his central sleep apnea</button>
+<button class="quiz-choice" onclick="answerQuiz('q11', 2, 2)">Management should focus on optimizing heart failure therapy, with advanced PAP selection individualized to his ejection fraction and specialist input</button>
+<button class="quiz-choice" onclick="answerQuiz('q11', 3, 2)">Supplemental oxygen alone reliably eliminates Cheyne-Stokes breathing in this population</button>
+<button class="quiz-choice" onclick="answerQuiz('q11', 4, 2)">CPAP is contraindicated in all patients with central sleep apnea</button>
+
+<div class="quiz-explain"><b>Answer: Management should focus on optimizing heart failure therapy, with advanced PAP selection individualized to his ejection fraction and specialist input.</b> CSA related to heart failure is treated first by optimizing the underlying cardiac disease. Advanced PAP options (including adaptive servo-ventilation) can help but must be individualized to the heart failure phenotype and ejection fraction, since ASV has been associated with harm in certain HFrEF populations — it is not a one-size-fits-all first step. Weight loss is not an effective CSA therapy in a non-obese patient with heart failure-driven CSA.</div>
+</div></section>
+
+<section class="card" id="high-yield-summary">
+<h2>High-Yield Summary Table</h2>
+<div class="table-scroll"><table>
+<tr><th>Topic</th><th>Key Point</th></tr>
+<tr><td>OSA mechanism</td><td>Recurrent pharyngeal collapse during sleep &mdash; airflow absent, respiratory effort <b>continues</b></td></tr>
+<tr><td>CSA mechanism</td><td>Impaired/unstable central ventilatory drive &mdash; airflow AND effort both <b>absent</b></td></tr>
+<tr><td>Mixed apnea</td><td>Starts central (no effort) &rarr; ends obstructive (effort resumes) while airflow stays absent</td></tr>
+<tr><td>Apnea definition</td><td>Airflow cessation &ge;10 seconds</td></tr>
+<tr><td>Hypopnea definition</td><td>&darr;Airflow &ge;10 sec + 3&ndash;4% desaturation or arousal</td></tr>
+<tr><td>AHI severity</td><td>Mild 5&ndash;14.9/hr &middot; Moderate 15&ndash;29.9/hr &middot; Severe &ge;30/hr</td></tr>
+<tr><td>Most sensitive symptom</td><td>Snoring; choking/gasping is more specific for moderate-severe disease</td></tr>
+<tr><td>Screening tools</td><td>STOP-BANG (preop, ~84% sens @&ge;3) &middot; Berlin (~86% sens) &middot; Epworth (sleepiness only, insurance-required, doesn't distinguish cause)</td></tr>
+<tr><td>Gold-standard test</td><td>Attended polysomnography (EEG/EOG/ECG/EMG/effort/airflow/SpO&#8322;/EtCO&#8322;)</td></tr>
+<tr><td>HSAT appropriate for</td><td>Uncomplicated adult, high pretest probability of moderate-severe OSA only</td></tr>
+<tr><td>OSA top risk factors</td><td>Obesity (41% of all OSA), thick neck, Mallampati 3&ndash;4, male sex, retrognathia, family history</td></tr>
+<tr><td>CSA top risk factors</td><td>Heart failure, AFib, stroke, chronic opioids, renal failure &mdash; usually inpatient/ICU population</td></tr>
+<tr><td>Morning headache mechanism</td><td>Nocturnal hypercapnia &rarr; cerebral vasodilation</td></tr>
+<tr><td>Polycythemia mechanism</td><td>Chronic hypoxemia &rarr; &uarr;renal erythropoietin &rarr; &uarr;RBC mass/viscosity</td></tr>
+<tr><td>Pulmonary HTN mechanism</td><td>Hypoxic pulmonary vasoconstriction &rarr; vascular remodeling &rarr; cor pulmonale/RVH</td></tr>
+<tr><td>Elevated bicarbonate mechanism</td><td>Renal compensation for chronic nocturnal hypercapnia/respiratory acidosis</td></tr>
+<tr><td>Nocturia mechanism</td><td>&uarr;RV afterload &rarr; &uarr;atrial volume &rarr; &uarr;ANP + &darr;ADH</td></tr>
+<tr><td>OSA first-line therapy</td><td>CPAP &mdash; &darr;AHI, &darr;BP, &darr;PA pressure, improved cognition/QOL</td></tr>
+<tr><td>CPAP adherence (CMS)</td><td>&ge;4 hr/night on &ge;70% of nights over 30 days, within first 90 days</td></tr>
+<tr><td>Weight loss effect</td><td>10% loss &rarr; ~26% &darr;severity; 15% loss &rarr; remission in ~9/10 mild-OSA patients; not helpful for CSA in non-obese patients</td></tr>
+<tr><td>FDA-approved medication</td><td>Tirzepatide &mdash; specific indication for moderate-severe OSA with obesity (with diet/exercise)</td></tr>
+<tr><td>CSA treatment principle</td><td>Treat the underlying cause first; individualize advanced PAP (e.g., ASV) to heart failure phenotype/EF &mdash; never a default</td></tr>
+<tr><td>Safety action</td><td>Counsel to stop safety-sensitive driving/activity immediately whenever alertness cannot be reliably maintained, independent of final diagnosis</td></tr>
+</table></div>
+</section>
+
+
+</div>
+<footer style="text-align:center; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--text-soft); padding:10px 20px 40px;">Built from Dr. Dennis Kinder's CIS Sleep Apnea lecture and the Sleep Apnea Clinical Reasoning Companion &middot; for educational review use</footer>
+<script>
+document.getElementById('sidenavToggle').addEventListener('click', function(){
+  document.getElementById('sidenavPanel').classList.toggle('open');
+});
+
+function answerQuiz(qid, chosenIdx, correctIdx){
+  var q = document.getElementById(qid);
+  var choices = q.querySelectorAll('.quiz-choice');
+  if (choices[0].classList.contains('disabled')) return; // already answered
+  choices.forEach(function(c, i){
+    c.classList.add('disabled');
+    if (i === correctIdx) c.classList.add('correct');
+    else if (i === chosenIdx) c.classList.add('incorrect');
+  });
+  q.querySelector('.quiz-explain').classList.add('show');
+}
+
+// scroll-spy for sidenav
+var sections = document.querySelectorAll('section.card[id]');
+var navLinks = document.querySelectorAll('.sidenav-panel a');
+function onScroll(){
+  var currentId = null;
+  sections.forEach(function(s){
+    var rect = s.getBoundingClientRect();
+    if (rect.top <= 140) currentId = s.id;
+  });
+  navLinks.forEach(function(a){
+    a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+</script>
+</body>
+</html>
