@@ -35,6 +35,9 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem;}
 table th{background:var(--forest-dark);color:#fff;text-align:left;padding:8px 10px;font-family:'IBM Plex Mono',monospace;font-size:.76rem;}
 table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
 table tr:nth-child(even) td{background:var(--sage-light);}
+.table-scroll{width:100%;overflow-x:auto;margin:14px 0;border-radius:8px;-webkit-overflow-scrolling:touch;}
+.table-scroll table{margin:0;min-width:1500px;}
+.table-scroll td.dz{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--forest-dark);white-space:normal;min-width:170px;}
 .pearl{background:#fdf2e4;border-left:4px solid var(--accent);border-radius:6px;padding:10px 14px;margin:14px 0;font-size:.93rem;}
 .pearl-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
 .case{background:var(--sage-light);border-left:4px solid var(--forest);border-radius:6px;padding:10px 14px;margin:14px 0;font-size:.93rem;}
@@ -75,7 +78,7 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <a href="#eosinophilic">Eosinophilic dz</a>
 <a href="#silicosis">Silicosis</a>
 <a href="#asbestosis">Asbestosis</a>
-<a href="#quiz">Quiz</a>
+<a href="#compare">Compare (12 axes)</a>
 <a href="#summary">Summary</a>
 </div>
 
@@ -112,7 +115,7 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <li><a href="#asbestosis">Asbestosis</a></li>
 <li><a href="#beryllium">Beryllium disease</a></li>
 <li><a href="#mesothelioma">Mesothelioma</a></li>
-<li><a href="#quiz">Practice questions</a></li>
+<li><a href="#compare">Comparison table (12 axes)</a></li>
 <li><a href="#summary"><strong>Master summary table</strong></a></li>
 </ul></nav>
 
@@ -154,6 +157,39 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <div class="pearl"><span class="pearl-label">Clinical pearl</span>Hypersensitivity pneumonitis is immune-mediated — an antigen + antibody complex drives the inflammation. Contrast this with byssinosis below, which needs no sensitization at all.</div>
 <h3 class="sub-h">Byssinosis (organic dust, non-immune)</h3>
 <p>Caused by inhalation of <strong>cotton, flax, or hemp dust</strong>. Unlike hypersensitivity pneumonitis, byssinosis is <strong>not immune-mediated</strong> — no sensitization is needed. Early: occasional chest tightness. Late: regular chest tightness by the end of Monday (the classic "Monday fever"/textile-mill pattern, reflecting re-exposure after a weekend away from the mill).</p>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q4">
+      <div class="quiz-mini-header">Exam-style question</div>
+      <div class="quiz-stem">A dairy farmer develops recurrent episodes of dyspnea and cough after working with moldy hay, with symptoms improving on weekends away from the farm. Which mechanism underlies this presentation?</div>
+      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">A</span><span class="quiz-optext">Non-immune mediated reaction requiring no prior sensitization</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">B</span><span class="quiz-optext">Direct fibrotic reaction to inhaled crystalline silica</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">C</span><span class="quiz-optext">Neoplastic transformation of alveolar macrophages</span>
+        </div><div class="quiz-choice" data-correct="true">
+          <span class="quiz-letter">D</span><span class="quiz-optext">An antigen-antibody immune complex reaction to thermophilic actinomycetes</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">E</span><span class="quiz-optext">Anti-GBM antibody-mediated injury</span>
+        </div></div>
+      <div class="quiz-explain"><strong>Explanation:</strong> Farmer's lung is a classic hypersensitivity pneumonitis, an immune-mediated (antigen + antibody complex) reaction to thermophilic actinomycetes in moldy hay — distinct from byssinosis, which requires no immune sensitization.</div>
+    </div><div class="quiz-q" id="q5">
+      <div class="quiz-mini-header">Exam-style question</div>
+      <div class="quiz-stem">A textile mill worker notices chest tightness that is mild early in the work week but becomes pronounced by the end of every Monday, improving over the weekend. No immune sensitization is required for this process. What is the diagnosis?</div>
+      <div class="quiz-choices"><div class="quiz-choice" data-correct="true">
+          <span class="quiz-letter">A</span><span class="quiz-optext">Byssinosis</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">B</span><span class="quiz-optext">Farmer's lung</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">C</span><span class="quiz-optext">Silicosis</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">D</span><span class="quiz-optext">Bird fancier's lung</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">E</span><span class="quiz-optext">Berylliosis</span>
+        </div></div>
+      <div class="quiz-explain"><strong>Explanation:</strong> Byssinosis, from cotton/flax/hemp dust exposure, is not immune-mediated (no sensitization needed) and classically causes chest tightness that worsens by the end of Monday after a weekend away from exposure.</div>
+    </div></div>
 </section>
 
 <section class="card" id="pneumoconiosis">
@@ -173,6 +209,24 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <tr><td><strong>Methotrexate</strong></td><td>Can cause pneumonitis; also relevant as a treatment for rheumatoid arthritis that can itself be a cause of lung disease (see Category 2)</td></tr>
 </table>
 <div class="pearl"><span class="pearl-label">Clinical pearl</span>Amiodarone lung toxicity tracks with cumulative dose (>400mg/day, months of exposure); nitrofurantoin has both a hypersensitivity-type acute/subacute presentation and a separate chronic, lifetime-cumulative-dose-related form — don't lump them into one mechanism.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q6">
+      <div class="quiz-mini-header">Exam-style question</div>
+      <div class="quiz-stem">A patient on amiodarone for 8 months at a dose of 400mg/day develops progressive dyspnea and restrictive lung findings. Which feature of her regimen is most directly implicated in the risk of amiodarone-induced lung toxicity?</div>
+      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">A</span><span class="quiz-optext">The specific brand of amiodarone used</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">B</span><span class="quiz-optext">Total dose per single administration only</span>
+        </div><div class="quiz-choice" data-correct="true">
+          <span class="quiz-letter">C</span><span class="quiz-optext">High cumulative dose and duration of therapy over months</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">D</span><span class="quiz-optext">Concurrent use of montelukast</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">E</span><span class="quiz-optext">Recent discontinuation of corticosteroids</span>
+        </div></div>
+      <div class="quiz-explain"><strong>Explanation:</strong> Amiodarone lung toxicity risk relates to high cumulative dose (doses >400mg/day) and duration of therapy over months — a dose-and-duration-dependent phenomenon.</div>
+    </div></div>
 </section>
 
 <section class="part-title"><h2>Category 2 — Secondary to Connective Tissue (Collagen Vascular) Disease</h2></section>
@@ -187,6 +241,24 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <tr><td>Lupus (SLE)</td><td>Can cause ILD (part of the collagen vascular category)</td></tr>
 </table>
 <div class="pearl"><span class="pearl-label">Clinical pearl</span>An RA pleural effusion with a very low glucose mimics empyema biochemically — but the clinical context (known RA, chronicity) should point you to a rheumatoid effusion instead of infection.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q7">
+      <div class="quiz-mini-header">Exam-style question</div>
+      <div class="quiz-stem">A patient with known rheumatoid arthritis develops a pleural effusion. Thoracentesis reveals an exudative effusion with a very low glucose level, initially raising concern for empyema, but cultures are negative. What is the most likely explanation?</div>
+      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">A</span><span class="quiz-optext">Occult tuberculosis</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">B</span><span class="quiz-optext">Goodpasture syndrome</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">C</span><span class="quiz-optext">Chronic beryllium disease</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">D</span><span class="quiz-optext">Mesothelioma</span>
+        </div><div class="quiz-choice" data-correct="true">
+          <span class="quiz-letter">E</span><span class="quiz-optext">A rheumatoid pleural effusion, which classically has very low glucose</span>
+        </div></div>
+      <div class="quiz-explain"><strong>Explanation:</strong> Rheumatoid arthritis-associated pleural effusions classically have a very low glucose level, a finding otherwise mostly seen in empyema — a well-known diagnostic mimicker in RA patients with negative cultures.</div>
+    </div></div>
 </section>
 
 <section class="part-title"><h2>Category 3 — Idiopathic Interstitial Pneumonias</h2></section>
@@ -201,6 +273,24 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <tr><td>Prognosis</td><td><strong>50% mortality at 3 years</strong></td></tr>
 </table>
 <div class="pearl"><span class="pearl-label">Clinical pearl</span>IPF is the disease in this whole topic most classically associated with clubbing — remember the common-findings rule: clubbing in an ILD points you toward IPF (or, more broadly, malignancy).</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q1">
+      <div class="quiz-mini-header">Exam-style question</div>
+      <div class="quiz-stem">A 62-year-old presents with progressive dyspnea and digital clubbing. DLCO is markedly reduced, and CXR shows bibasilar reticulonodular opacities with a honeycomb pattern. No extrapulmonary findings are present. What is the most likely diagnosis?</div>
+      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">A</span><span class="quiz-optext">Cryptogenic organizing pneumonia</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">B</span><span class="quiz-optext">Acute interstitial pneumonia</span>
+        </div><div class="quiz-choice" data-correct="true">
+          <span class="quiz-letter">C</span><span class="quiz-optext">Idiopathic pulmonary fibrosis</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">D</span><span class="quiz-optext">Sarcoidosis</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">E</span><span class="quiz-optext">Hypersensitivity pneumonitis</span>
+        </div></div>
+      <div class="quiz-explain"><strong>Explanation:</strong> Bibasilar honeycomb reticulonodular disease, low DLCO, digital clubbing, and the absence of extrapulmonary signs (a diagnosis of exclusion) are classic for IPF — the ILD most associated with clubbing.</div>
+    </div></div>
 </section>
 
 <section class="card" id="nsip">
@@ -220,6 +310,24 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <tr><td>Other</td><td>Usually initially diagnosed as pneumonia — the tell is that it <strong>fails several courses of antibiotics</strong></td></tr>
 </table>
 <div class="pearl"><span class="pearl-label">Clinical pearl</span>COP is the ILD that most looks like pneumonia clinically (fever, patchy infiltrates) — the clue that it isn't infectious pneumonia is failure of multiple antibiotic courses plus migratory infiltrates.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q2">
+      <div class="quiz-mini-header">Exam-style question</div>
+      <div class="quiz-stem">A patient initially treated for community-acquired pneumonia fails three courses of antibiotics. Repeat imaging shows patchy, migratory infiltrates, and the patient has a low-grade fever. Lung biopsy shows Masson bodies. What is the diagnosis and expected response to treatment?</div>
+      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">A</span><span class="quiz-optext">Idiopathic pulmonary fibrosis; poor response to any therapy</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">B</span><span class="quiz-optext">Acute interstitial pneumonia; 60% mortality regardless of treatment</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">C</span><span class="quiz-optext">Desquamative interstitial pneumonia; requires smoking cessation only</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">D</span><span class="quiz-optext">Lymphocytic interstitial pneumonia; treat only if symptomatic</span>
+        </div><div class="quiz-choice" data-correct="true">
+          <span class="quiz-letter">E</span><span class="quiz-optext">Cryptogenic organizing pneumonia; responds well to a slow steroid taper over 6 months</span>
+        </div></div>
+      <div class="quiz-explain"><strong>Explanation:</strong> Masson bodies, fever, migratory patchy infiltrates, and failure of antibiotics for presumed pneumonia are classic for cryptogenic organizing pneumonia, which mostly responds well to corticosteroids tapered slowly over about 6 months.</div>
+    </div></div>
 </section>
 
 <section class="card" id="rbild">
@@ -248,6 +356,24 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <tr><td>Treatment</td><td>Supportive; corticosteroids often used, but usefulness not established; lung transplant. <strong>60% die in the first 6 months</strong> (median survival ~1½ months) — survivors usually regain lung function completely</td></tr>
 </table>
 <div class="pearl"><span class="pearl-label">Clinical pearl</span>AIP is the ILD to think of when a patient develops an ARDS-like picture with diffuse alveolar damage and no identifiable cause — its all-or-nothing course (rapid death vs. complete recovery) is unusual among ILDs.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q3">
+      <div class="quiz-mini-header">Exam-style question</div>
+      <div class="quiz-stem">A 45-year-old heavy smoker develops an ARDS-like picture with rapid respiratory decline. Biopsy shows diffuse alveolar damage. She has no prior lung disease. What is the expected outcome if she survives the acute illness?</div>
+      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">A</span><span class="quiz-optext">Progressive decline to death within 3 years, similar to IPF</span>
+        </div><div class="quiz-choice" data-correct="true">
+          <span class="quiz-letter">B</span><span class="quiz-optext">Complete recovery of lung function</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">C</span><span class="quiz-optext">Conversion to chronic beryllium disease</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">D</span><span class="quiz-optext">Permanent restrictive defect requiring long-term oxygen</span>
+        </div><div class="quiz-choice" data-correct="false">
+          <span class="quiz-letter">E</span><span class="quiz-optext">Development of Caplan syndrome</span>
+        </div></div>
+      <div class="quiz-explain"><strong>Explanation:</strong> Acute interstitial pneumonia (Hamman-Rich syndrome) has an extreme, almost bimodal course: about 60% die within the first 6 months, but survivors usually regain lung function completely — smoking is notably NOT a risk factor for AIP itself.</div>
+    </div></div>
 </section>
 
 <section class="card" id="lip">
@@ -320,226 +446,9 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <tr><td>Treatment</td><td>Plasmapheresis; nephrectomy if pulmonary hemorrhage is severe</td></tr>
 </table>
 <div class="pearl"><span class="pearl-label">Clinical pearl</span>Goodpasture vs. Wegener's: both cause pulmonary-renal syndromes with hemoptysis, but Goodpasture has NO nasal/sinus involvement and is anti-GBM positive, while Wegener's has upper airway disease and is C-ANCA positive.</div>
-</section>
 
-<section class="card" id="eosinophilic">
-<h2 class="sec-h">Eosinophilic lung diseases</h2>
-<p>Eosinophilic pneumonia comes in <strong>3 types</strong>. Eosinophilic lung disease can also be caused by parasitic infections — always rule out parasites.</p>
-<h3 class="sub-h">Acute eosinophilic pneumonia</h3>
-<p>Rapid onset with fever. CXR looks like ARDS. Treatment: corticosteroids.</p>
-<h3 class="sub-h">Chronic eosinophilic pneumonia</h3>
-<p>Middle-aged women; <strong>50% have asthma</strong>. CXR: infiltrates described as the "<strong>photonegative of pulmonary edema</strong>" (peripheral rather than central infiltrates). Labs: high ESR. Bronchoalveolar lavage shows eosinophils. Treatment: corticosteroids — relapses are common.</p>
-<h3 class="sub-h">Acute bronchopulmonary aspergillosis (ABPA)</h3>
-<p>An <strong>allergic</strong> reaction to Aspergillus — bronchiectasis comes first, then Aspergillus moves in and the body becomes sensitized (Type I and Type III/immune-complex response). Signs: brownish sputum. CXR: recurrent infiltrates, "<strong>tram-track</strong>" bronchial markings. Labs: very high IgE. Treatment: long-term corticosteroids — counterintuitive, since Aspergillus itself is non-invasive here and this is fundamentally an allergic reaction; adding itraconazole can help.</p>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>Chronic eosinophilic pneumonia's 'photonegative of pulmonary edema' pattern — peripheral infiltrates sparing the central lung, the reverse of cardiogenic pulmonary edema's central/perihilar pattern — is one of the single most test-favorite radiographic descriptions in this whole topic.</div>
-</section>
-
-<section class="card" id="plch">
-<h2 class="sec-h">Pulmonary Langerhans cell histiocytosis (eosinophilic granuloma)</h2>
-<table><tr><th>Domain</th><th>Findings</th></tr>
-<tr><td>Etiology/pathophysiology</td><td>Risk factors: smoking, male sex; increased lung volume — <strong>one of the only ILDs that is non-restrictive</strong></td></tr>
-<tr><td>Signs/symptoms</td><td>10% present with pneumothorax; posterior pituitary involvement → lytic bone lesions, <strong>diabetes insipidus</strong></td></tr>
-<tr><td>Diagnosis</td><td>Small cystic spaces in the upper lung zones; Langerhans cells on BAL; <strong>Birbeck granules</strong> on electron microscopy ("little tennis rackets")</td></tr>
-<tr><td>Treatment</td><td>Stop smoking; corticosteroids can be considered but have limited success</td></tr>
-</table>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>PLCH breaks the 'ILD = restrictive' rule — it has increased lung volume and is one of the only non-restrictive ILDs. Combine that with cystic upper-lobe disease, smoking history, and pneumothorax risk, and it should stand out from the rest of the group.</div>
-</section>
-
-<section class="card" id="iph-pap">
-<h2 class="sec-h">Idiopathic pulmonary hemosiderosis &amp; pulmonary alveolar proteinosis</h2>
-<h3 class="sub-h">Idiopathic pulmonary hemosiderosis</h3>
-<table><tr><th>Domain</th><th>Findings</th></tr>
-<tr><td>Etiology/pathophysiology</td><td>Macrophages filled with hemosiderin (a blood breakdown byproduct); <strong>does not affect the kidneys</strong> (distinguishing it from Goodpasture)</td></tr>
-<tr><td>Diagnosis</td><td><strong>Increased DLCO</strong> — hemoglobin deposited in the interstitium takes up inhaled CO during testing, but this does not mean diffusion is actually better; iron-deficiency anemia</td></tr>
-</table>
-<h3 class="sub-h">Pulmonary alveolar proteinosis</h3>
-<table><tr><th>Domain</th><th>Findings</th></tr>
-<tr><td>Etiology/pathophysiology</td><td>Lungs fill up with defective alveolar macrophages, causing a buildup of surfactant (phosphatidylcholine) that interferes with gas exchange</td></tr>
-<tr><td>Diagnosis</td><td>CXR: "<strong>crazy-paving</strong>" pattern — not specific for this disease; open lung biopsy</td></tr>
-<tr><td>Treatment</td><td><strong>Whole lung lavage</strong></td></tr>
-</table>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>Idiopathic pulmonary hemosiderosis is one of the rare causes of an INCREASED DLCO (from CO uptake by interstitial hemoglobin) rather than the decreased DLCO typical of most ILDs — a useful outlier to remember.</div>
-</section>
-
-<section class="card" id="lam">
-<h2 class="sec-h">Lymphangioleiomyomatosis (LAM)</h2>
-<table><tr><th>Domain</th><th>Findings</th></tr>
-<tr><td>Etiology/pathophysiology</td><td>Proliferation of smooth muscle throughout the lung</td></tr>
-<tr><td>Signs/symptoms</td><td><strong>Pre-menopausal women</strong>; spontaneous pneumothorax</td></tr>
-<tr><td>Diagnosis</td><td>Honeycombing throughout the lung ("lungs look like Swiss cheese"); many nodules and cysts; <strong>chylous pleural effusions</strong></td></tr>
-<tr><td>Treatment</td><td><strong>Lung transplantation is the only hope</strong> — disease can recur in the transplanted lung</td></tr>
-</table>
-</section>
-
-<section class="part-title"><h2>Pneumoconioses — Detailed (Inorganic Dust Diseases)</h2></section>
-
-<section class="card" id="silicosis">
-<h2 class="sec-h">Silicosis</h2>
-<p>A fibrotic lung disease from inhaling <strong>crystalline silica</strong>, usually as quartz. <strong>Industries at risk:</strong> mining, tunneling, excavating, quarrying, stonework, foundries, sandblasting, ceramics, and (more recently) denim jean manufacturing (sandblasting for a "stressed" look).</p>
-<h3 class="sub-h">Clinical forms</h3>
-<table><tr><th>Form</th><th>Timing &amp; features</th></tr>
-<tr><td>Chronic silicosis</td><td><strong>Most common form</strong> — occurs ≥20 years after exposure. Hallmark pathology: the <strong>silicotic nodule</strong> — whorled hyalinized collagen fibers with a peripheral zone of dust-laden macrophages. May be asymptomatic or have dyspnea; productive cough is common</td></tr>
-<tr><td>Accelerated silicosis</td><td>Nodules develop after 3-10 years of exposure; progressive course</td></tr>
-<tr><td>Acute silicosis (silicoproteinosis)</td><td>Develops 6 months-2 years after <strong>massive</strong> exposure; dyspnea, cough, weight loss, rapid progression to respiratory failure and death; pathology is an <strong>alveolar filling process</strong></td></tr>
-<tr><td>Progressive massive fibrosis</td><td>Lesions ≥1cm (often larger), usually upper lobes; leads to respiratory failure, cor pulmonale, weight loss, and death</td></tr>
-</table>
-<h3 class="sub-h">Associated diseases</h3>
-<p><strong>Tuberculosis</strong> (increased risk), COPD/chronic bronchitis, collagen vascular disease (RA and scleroderma increased), and increased lung cancer risk.</p>
-<p><strong>Chest x-ray:</strong> symmetric nodular pattern in the upper lobes; hilar adenopathy with <strong>eggshell calcification</strong> is strongly suggestive; PMF shows coalescence of nodules into larger masses; acute silicosis shows an air-space/interstitial pattern.</p>
-<p><strong>PFT:</strong> normal early in chronic silicosis, later a mixed obstructive/restrictive pattern. <strong>Diagnosis:</strong> exposure history + characteristic x-ray changes. <strong>Management:</strong> irreversible — avoid further exposure, TB testing, smoking cessation; consider lung transplant in acute/accelerated silicosis.</p>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>Eggshell calcification of hilar lymph nodes is essentially pathognomonic for silicosis (and can also occur in sarcoidosis, but is classically taught as the silicosis finding) — a favorite chest x-ray descriptor.</div>
-</section>
-
-<section class="card" id="cwp">
-<h2 class="sec-h">Coal worker's pneumoconiosis (CWP)</h2>
-<p>Results from deposition of <strong>coal dust</strong> in the lung. Risk increases with intensity of exposure and carbon content — <strong>anthracite is most toxic</strong>. <strong>Underground miners</strong> are at higher risk than surface miners.</p>
-<p><strong>Pathology:</strong> the "coal macule" — macrophages laden with coal dust within the walls of respiratory bronchioles and adjacent alveoli; coal nodules; progressive massive fibrosis may occur. <strong>Clinical presentation:</strong> usually no symptoms/signs; can have bronchitis symptoms; may progress to PMF.</p>
-<h3 class="sub-h">Associated diseases</h3>
-<p>Silicosis is also common in coal workers; scleroderma and rheumatoid nodules are increased. <strong>Caplan syndrome:</strong> rheumatoid arthritis with large cavitary pulmonary nodules, associated with both silicosis and coal worker's pneumoconiosis. TB is <strong>not</strong> increased unless silicosis is also present; lung cancer risk is <strong>not</strong> increased (unlike silicosis).</p>
-<p><strong>Chest x-ray:</strong> resembles silicosis — small rounded opacities; can progress to PMF with nodules 0.5-5cm. <strong>PFT:</strong> normal early, often obstructive later (coal dust causes emphysema), restriction if fibrosis present. <strong>Diagnosis:</strong> coal dust exposure + CXR. <strong>Management:</strong> avoid exposure, stop smoking.</p>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>Silicosis and CWP look alike on imaging and both can progress to PMF, but they diverge on associated risks: silicosis increases TB and lung cancer risk; CWP does not increase either unless silicosis co-exists. Caplan syndrome (RA + cavitary nodules) is shared by both.</div>
-</section>
-
-<section class="card" id="asbestosis">
-<h2 class="sec-h">Asbestosis</h2>
-<p>Chronic fibrotic ILD from prolonged inhalation of <strong>asbestos fibers</strong>. A 20-year latency between exposure and disease is common. <strong>Industries at risk:</strong> mining, milling, and transportation of asbestos; building demolition; brake lining; shipbuilding; insulation; fireproofing. (Asbestos use in construction was banned in the 1980s.)</p>
-<p><strong>Pathology:</strong> ferruginous bodies / asbestos bodies, found in sputum or BAL fluid. <strong>Symptoms:</strong> dyspnea, dry cough, chest tightness/pain. <strong>Signs:</strong> inspiratory basal crackles, clubbing.</p>
-<h3 class="sub-h">Associated diseases</h3>
-<table><tr><th>Disease</th><th>Key facts</th></tr>
-<tr><td>Mesothelioma</td><td>30-40 year latency; <strong>incurable</strong>; 9-18 month survival</td></tr>
-<tr><td>Lung cancer</td><td>Risk 4-6x higher</td></tr>
-<tr><td>Pleural effusion</td><td>Usually small, exudative, blood-stained, contains leukocytes; most clear spontaneously</td></tr>
-</table>
-<p><strong>Chest x-ray:</strong> pleural plaques; pleural effusion with a 10-15 year latency; pleural thickening; rounded atelectasis with a "<strong>comet tail</strong>" sign; lower lobe and subpleural disease predominate. <strong>PFT:</strong> restrictive pattern, may see obstruction.</p>
-<p><strong>Diagnosis</strong> (exposure + lag time are essential, the rest confirmatory): (1) reliable history of asbestos exposure, (2) appropriate lag time between exposure and disease, (3) lung fibrosis on CXR/CT, (4) restrictive PFT, (5) bilateral inspiratory crackles, (6) clubbing of fingers/toes. <strong>Management:</strong> no effective treatment — avoid exposure, stop smoking, lung transplant.</p>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>Asbestosis is the pneumoconiosis with the most 'named findings' to keep straight: ferruginous/asbestos bodies (pathology), comet-tail sign (rounded atelectasis on imaging), and its own uniquely long-latency malignant complication, mesothelioma.</div>
-</section>
-
-<section class="card" id="beryllium">
-<h2 class="sec-h">Beryllium disease (berylliosis)</h2>
-<p><strong>Industries at risk:</strong> aerospace, electronics, ceramics, metal, nuclear, telecommunications, tool and die, welding.</p>
-<h3 class="sub-h">Clinical presentations</h3>
-<table><tr><th>Form</th><th>Features</th></tr>
-<tr><td>Acute toxic pneumonitis</td><td>High exposure → hypersensitivity response, now rare due to better recognition of beryllium-associated disease; symptoms: cough, chest pain; signs: blood-tinged sputum and crackles</td></tr>
-<tr><td>Chronic beryllium disease</td><td>Clinical features similar to <strong>sarcoidosis</strong>, ranging from asymptomatic to severe granulomatous restrictive lung disease; dyspnea, cough, chest pain, weight loss, fatigue, arthralgias, crackles; onset ≥20 years after exposure</td></tr>
-</table>
-<p><strong>Chest x-ray:</strong> enlarged hilar/mediastinal lymph nodes, and/or multiple lung nodules; later stages show patchy fibrosis, hyperinflation, and honeycombing. <strong>PFT:</strong> restriction.</p>
-<p><strong>Diagnosis:</strong> documented beryllium exposure + evidence of lung disease + a positive <strong>BeLPT (beryllium lymphocyte proliferation test)</strong> performed on blood or BAL fluid. <strong>Management:</strong> avoid further exposure, stop smoking, steroids.</p>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>Chronic beryllium disease is a sarcoidosis mimicker at every level — granulomatous, restrictive, hilar adenopathy — which is exactly why an occupational/beryllium exposure history must be asked of every patient being worked up for sarcoidosis. The BeLPT is what separates the two.</div>
-</section>
-
-<section class="card" id="mesothelioma">
-<h2 class="sec-h">Mesothelioma</h2>
-<p>A malignant tumor of the pleura most classically linked to <strong>asbestos exposure</strong>, with a very long <strong>30-40 year latency</strong> between exposure and disease. Once diagnosed, it is <strong>incurable</strong>, with a survival of only <strong>9-18 months</strong>.</p>
-<div class="pearl"><span class="pearl-label">Clinical pearl</span>Mesothelioma's defining features are its extraordinarily long latency after asbestos exposure and its uniformly poor prognosis — contrast this with asbestos-related lung cancer, whose risk is 'only' 4-6x higher rather than near-universally fatal on diagnosis.</div>
-</section>
-
-<section class="card" id="quiz"><h2 class="sec-h">Practice questions</h2><div class="quiz-block"><div class="quiz-q" id="q1">
-      <div class="quiz-mini-header">Exam-style question</div>
-      <div class="quiz-stem">A 62-year-old presents with progressive dyspnea and digital clubbing. DLCO is markedly reduced, and CXR shows bibasilar reticulonodular opacities with a honeycomb pattern. No extrapulmonary findings are present. What is the most likely diagnosis?</div>
-      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">A</span><span class="quiz-optext">Cryptogenic organizing pneumonia</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">B</span><span class="quiz-optext">Acute interstitial pneumonia</span>
-        </div><div class="quiz-choice" data-correct="true">
-          <span class="quiz-letter">C</span><span class="quiz-optext">Idiopathic pulmonary fibrosis</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">D</span><span class="quiz-optext">Sarcoidosis</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">E</span><span class="quiz-optext">Hypersensitivity pneumonitis</span>
-        </div></div>
-      <div class="quiz-explain"><strong>Explanation:</strong> Bibasilar honeycomb reticulonodular disease, low DLCO, digital clubbing, and the absence of extrapulmonary signs (a diagnosis of exclusion) are classic for IPF — the ILD most associated with clubbing.</div>
-    </div><div class="quiz-q" id="q2">
-      <div class="quiz-mini-header">Exam-style question</div>
-      <div class="quiz-stem">A patient initially treated for community-acquired pneumonia fails three courses of antibiotics. Repeat imaging shows patchy, migratory infiltrates, and the patient has a low-grade fever. Lung biopsy shows Masson bodies. What is the diagnosis and expected response to treatment?</div>
-      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">A</span><span class="quiz-optext">Idiopathic pulmonary fibrosis; poor response to any therapy</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">B</span><span class="quiz-optext">Acute interstitial pneumonia; 60% mortality regardless of treatment</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">C</span><span class="quiz-optext">Desquamative interstitial pneumonia; requires smoking cessation only</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">D</span><span class="quiz-optext">Lymphocytic interstitial pneumonia; treat only if symptomatic</span>
-        </div><div class="quiz-choice" data-correct="true">
-          <span class="quiz-letter">E</span><span class="quiz-optext">Cryptogenic organizing pneumonia; responds well to a slow steroid taper over 6 months</span>
-        </div></div>
-      <div class="quiz-explain"><strong>Explanation:</strong> Masson bodies, fever, migratory patchy infiltrates, and failure of antibiotics for presumed pneumonia are classic for cryptogenic organizing pneumonia, which mostly responds well to corticosteroids tapered slowly over about 6 months.</div>
-    </div><div class="quiz-q" id="q3">
-      <div class="quiz-mini-header">Exam-style question</div>
-      <div class="quiz-stem">A 45-year-old heavy smoker develops an ARDS-like picture with rapid respiratory decline. Biopsy shows diffuse alveolar damage. She has no prior lung disease. What is the expected outcome if she survives the acute illness?</div>
-      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">A</span><span class="quiz-optext">Progressive decline to death within 3 years, similar to IPF</span>
-        </div><div class="quiz-choice" data-correct="true">
-          <span class="quiz-letter">B</span><span class="quiz-optext">Complete recovery of lung function</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">C</span><span class="quiz-optext">Conversion to chronic beryllium disease</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">D</span><span class="quiz-optext">Permanent restrictive defect requiring long-term oxygen</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">E</span><span class="quiz-optext">Development of Caplan syndrome</span>
-        </div></div>
-      <div class="quiz-explain"><strong>Explanation:</strong> Acute interstitial pneumonia (Hamman-Rich syndrome) has an extreme, almost bimodal course: about 60% die within the first 6 months, but survivors usually regain lung function completely — smoking is notably NOT a risk factor for AIP itself.</div>
-    </div><div class="quiz-q" id="q4">
-      <div class="quiz-mini-header">Exam-style question</div>
-      <div class="quiz-stem">A dairy farmer develops recurrent episodes of dyspnea and cough after working with moldy hay, with symptoms improving on weekends away from the farm. Which mechanism underlies this presentation?</div>
-      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">A</span><span class="quiz-optext">Non-immune mediated reaction requiring no prior sensitization</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">B</span><span class="quiz-optext">Direct fibrotic reaction to inhaled crystalline silica</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">C</span><span class="quiz-optext">Neoplastic transformation of alveolar macrophages</span>
-        </div><div class="quiz-choice" data-correct="true">
-          <span class="quiz-letter">D</span><span class="quiz-optext">An antigen-antibody immune complex reaction to thermophilic actinomycetes</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">E</span><span class="quiz-optext">Anti-GBM antibody-mediated injury</span>
-        </div></div>
-      <div class="quiz-explain"><strong>Explanation:</strong> Farmer's lung is a classic hypersensitivity pneumonitis, an immune-mediated (antigen + antibody complex) reaction to thermophilic actinomycetes in moldy hay — distinct from byssinosis, which requires no immune sensitization.</div>
-    </div><div class="quiz-q" id="q5">
-      <div class="quiz-mini-header">Exam-style question</div>
-      <div class="quiz-stem">A textile mill worker notices chest tightness that is mild early in the work week but becomes pronounced by the end of every Monday, improving over the weekend. No immune sensitization is required for this process. What is the diagnosis?</div>
-      <div class="quiz-choices"><div class="quiz-choice" data-correct="true">
-          <span class="quiz-letter">A</span><span class="quiz-optext">Byssinosis</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">B</span><span class="quiz-optext">Farmer's lung</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">C</span><span class="quiz-optext">Silicosis</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">D</span><span class="quiz-optext">Bird fancier's lung</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">E</span><span class="quiz-optext">Berylliosis</span>
-        </div></div>
-      <div class="quiz-explain"><strong>Explanation:</strong> Byssinosis, from cotton/flax/hemp dust exposure, is not immune-mediated (no sensitization needed) and classically causes chest tightness that worsens by the end of Monday after a weekend away from exposure.</div>
-    </div><div class="quiz-q" id="q6">
-      <div class="quiz-mini-header">Exam-style question</div>
-      <div class="quiz-stem">A patient on amiodarone for 8 months at a dose of 400mg/day develops progressive dyspnea and restrictive lung findings. Which feature of her regimen is most directly implicated in the risk of amiodarone-induced lung toxicity?</div>
-      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">A</span><span class="quiz-optext">The specific brand of amiodarone used</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">B</span><span class="quiz-optext">Total dose per single administration only</span>
-        </div><div class="quiz-choice" data-correct="true">
-          <span class="quiz-letter">C</span><span class="quiz-optext">High cumulative dose and duration of therapy over months</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">D</span><span class="quiz-optext">Concurrent use of montelukast</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">E</span><span class="quiz-optext">Recent discontinuation of corticosteroids</span>
-        </div></div>
-      <div class="quiz-explain"><strong>Explanation:</strong> Amiodarone lung toxicity risk relates to high cumulative dose (doses >400mg/day) and duration of therapy over months — a dose-and-duration-dependent phenomenon.</div>
-    </div><div class="quiz-q" id="q7">
-      <div class="quiz-mini-header">Exam-style question</div>
-      <div class="quiz-stem">A patient with known rheumatoid arthritis develops a pleural effusion. Thoracentesis reveals an exudative effusion with a very low glucose level, initially raising concern for empyema, but cultures are negative. What is the most likely explanation?</div>
-      <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">A</span><span class="quiz-optext">Occult tuberculosis</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">B</span><span class="quiz-optext">Goodpasture syndrome</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">C</span><span class="quiz-optext">Chronic beryllium disease</span>
-        </div><div class="quiz-choice" data-correct="false">
-          <span class="quiz-letter">D</span><span class="quiz-optext">Mesothelioma</span>
-        </div><div class="quiz-choice" data-correct="true">
-          <span class="quiz-letter">E</span><span class="quiz-optext">A rheumatoid pleural effusion, which classically has very low glucose</span>
-        </div></div>
-      <div class="quiz-explain"><strong>Explanation:</strong> Rheumatoid arthritis-associated pleural effusions classically have a very low glucose level, a finding otherwise mostly seen in empyema — a well-known diagnostic mimicker in RA patients with negative cultures.</div>
-    </div><div class="quiz-q" id="q8">
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q8">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A 55-year-old man presents with hemoptysis, sinus congestion, and rapidly progressive renal failure. C-ANCA is positive. Which biopsy site is most appropriate to confirm the diagnosis?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -584,7 +493,22 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Idiopathic pulmonary hemosiderosis</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Goodpasture syndrome causes a pulmonary-renal syndrome with anti-GBM antibodies and, critically, no nasal/sinus involvement — distinguishing it from Wegener's, which has upper airway disease and is C-ANCA positive.</div>
-    </div><div class="quiz-q" id="q11">
+    </div></div>
+</section>
+
+<section class="card" id="eosinophilic">
+<h2 class="sec-h">Eosinophilic lung diseases</h2>
+<p>Eosinophilic pneumonia comes in <strong>3 types</strong>. Eosinophilic lung disease can also be caused by parasitic infections — always rule out parasites.</p>
+<h3 class="sub-h">Acute eosinophilic pneumonia</h3>
+<p>Rapid onset with fever. CXR looks like ARDS. Treatment: corticosteroids.</p>
+<h3 class="sub-h">Chronic eosinophilic pneumonia</h3>
+<p>Middle-aged women; <strong>50% have asthma</strong>. CXR: infiltrates described as the "<strong>photonegative of pulmonary edema</strong>" (peripheral rather than central infiltrates). Labs: high ESR. Bronchoalveolar lavage shows eosinophils. Treatment: corticosteroids — relapses are common.</p>
+<h3 class="sub-h">Acute bronchopulmonary aspergillosis (ABPA)</h3>
+<p>An <strong>allergic</strong> reaction to Aspergillus — bronchiectasis comes first, then Aspergillus moves in and the body becomes sensitized (Type I and Type III/immune-complex response). Signs: brownish sputum. CXR: recurrent infiltrates, "<strong>tram-track</strong>" bronchial markings. Labs: very high IgE. Treatment: long-term corticosteroids — counterintuitive, since Aspergillus itself is non-invasive here and this is fundamentally an allergic reaction; adding itraconazole can help.</p>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>Chronic eosinophilic pneumonia's 'photonegative of pulmonary edema' pattern — peripheral infiltrates sparing the central lung, the reverse of cardiogenic pulmonary edema's central/perihilar pattern — is one of the single most test-favorite radiographic descriptions in this whole topic.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q11">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A middle-aged woman with a history of asthma presents with dyspnea and cough. Chest x-ray shows peripheral infiltrates sparing the central lung fields, described as the 'photonegative of pulmonary edema.' ESR is elevated and BAL shows eosinophils. What is the diagnosis?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -614,7 +538,21 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Long-term corticosteroids, with itraconazole added for benefit</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Allergic bronchopulmonary aspergillosis is fundamentally an allergic (Type I/III) reaction to Aspergillus colonizing pre-existing bronchiectasis, so despite the organism being non-invasive, treatment is long-term corticosteroids, with itraconazole as an adjunct.</div>
-    </div><div class="quiz-q" id="q13">
+    </div></div>
+</section>
+
+<section class="card" id="plch">
+<h2 class="sec-h">Pulmonary Langerhans cell histiocytosis (eosinophilic granuloma)</h2>
+<table><tr><th>Domain</th><th>Findings</th></tr>
+<tr><td>Etiology/pathophysiology</td><td>Risk factors: smoking, male sex; increased lung volume — <strong>one of the only ILDs that is non-restrictive</strong></td></tr>
+<tr><td>Signs/symptoms</td><td>10% present with pneumothorax; posterior pituitary involvement → lytic bone lesions, <strong>diabetes insipidus</strong></td></tr>
+<tr><td>Diagnosis</td><td>Small cystic spaces in the upper lung zones; Langerhans cells on BAL; <strong>Birbeck granules</strong> on electron microscopy ("little tennis rackets")</td></tr>
+<tr><td>Treatment</td><td>Stop smoking; corticosteroids can be considered but have limited success</td></tr>
+</table>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>PLCH breaks the 'ILD = restrictive' rule — it has increased lung volume and is one of the only non-restrictive ILDs. Combine that with cystic upper-lobe disease, smoking history, and pneumothorax risk, and it should stand out from the rest of the group.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q13">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A 28-year-old male smoker presents with a spontaneous pneumothorax. Workup reveals small cystic spaces in the upper lung zones with an INCREASED total lung volume (not restrictive), diabetes insipidus, and lytic bone lesions. Electron microscopy of a lung biopsy shows characteristic 'tennis racket' structures. What is the diagnosis?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -629,7 +567,26 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Asbestosis</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Pulmonary Langerhans cell histiocytosis is one of the few non-restrictive ILDs (increased lung volume), occurs in young smoking males, presents with pneumothorax and posterior pituitary involvement (diabetes insipidus, lytic bone lesions), and shows Birbeck granules ('tennis rackets') on EM.</div>
-    </div><div class="quiz-q" id="q14">
+    </div></div>
+</section>
+
+<section class="card" id="iph-pap">
+<h2 class="sec-h">Idiopathic pulmonary hemosiderosis &amp; pulmonary alveolar proteinosis</h2>
+<h3 class="sub-h">Idiopathic pulmonary hemosiderosis</h3>
+<table><tr><th>Domain</th><th>Findings</th></tr>
+<tr><td>Etiology/pathophysiology</td><td>Macrophages filled with hemosiderin (a blood breakdown byproduct); <strong>does not affect the kidneys</strong> (distinguishing it from Goodpasture)</td></tr>
+<tr><td>Diagnosis</td><td><strong>Increased DLCO</strong> — hemoglobin deposited in the interstitium takes up inhaled CO during testing, but this does not mean diffusion is actually better; iron-deficiency anemia</td></tr>
+</table>
+<h3 class="sub-h">Pulmonary alveolar proteinosis</h3>
+<table><tr><th>Domain</th><th>Findings</th></tr>
+<tr><td>Etiology/pathophysiology</td><td>Lungs fill up with defective alveolar macrophages, causing a buildup of surfactant (phosphatidylcholine) that interferes with gas exchange</td></tr>
+<tr><td>Diagnosis</td><td>CXR: "<strong>crazy-paving</strong>" pattern — not specific for this disease; open lung biopsy</td></tr>
+<tr><td>Treatment</td><td><strong>Whole lung lavage</strong></td></tr>
+</table>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>Idiopathic pulmonary hemosiderosis is one of the rare causes of an INCREASED DLCO (from CO uptake by interstitial hemoglobin) rather than the decreased DLCO typical of most ILDs — a useful outlier to remember.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q14">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A patient with a chronic productive cough undergoes CXR showing a 'crazy-paving' pattern. Lung biopsy reveals alveoli filled with a lipid-protein material (surfactant/phosphatidylcholine) due to defective alveolar macrophages. What is the most effective treatment?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -644,7 +601,20 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Avoidance of beryllium exposure</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Pulmonary alveolar proteinosis results from defective alveolar macrophages allowing a surfactant (phosphatidylcholine) buildup that interferes with gas exchange; the standard treatment is whole lung lavage.</div>
-    </div><div class="quiz-q" id="q15">
+    </div></div>
+</section>
+
+<section class="card" id="lam">
+<h2 class="sec-h">Lymphangioleiomyomatosis (LAM)</h2>
+<table><tr><th>Domain</th><th>Findings</th></tr>
+<tr><td>Etiology/pathophysiology</td><td>Proliferation of smooth muscle throughout the lung</td></tr>
+<tr><td>Signs/symptoms</td><td><strong>Pre-menopausal women</strong>; spontaneous pneumothorax</td></tr>
+<tr><td>Diagnosis</td><td>Honeycombing throughout the lung ("lungs look like Swiss cheese"); many nodules and cysts; <strong>chylous pleural effusions</strong></td></tr>
+<tr><td>Treatment</td><td><strong>Lung transplantation is the only hope</strong> — disease can recur in the transplanted lung</td></tr>
+</table>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q15">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A 34-year-old premenopausal woman presents with a spontaneous pneumothorax and a chylous pleural effusion. Imaging shows diffuse honeycombing described as making the lungs look like 'Swiss cheese,' with numerous cysts and nodules. What is the only definitive treatment?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="true">
@@ -659,7 +629,29 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Avoidance of beryllium exposure</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Lymphangioleiomyomatosis (proliferation of smooth muscle throughout the lung) affects premenopausal women with spontaneous pneumothorax and chylous effusions; lung transplantation is the only definitive option, though LAM can recur in the transplanted lung.</div>
-    </div><div class="quiz-q" id="q16">
+    </div></div>
+</section>
+
+<section class="part-title"><h2>Pneumoconioses — Detailed (Inorganic Dust Diseases)</h2></section>
+
+<section class="card" id="silicosis">
+<h2 class="sec-h">Silicosis</h2>
+<p>A fibrotic lung disease from inhaling <strong>crystalline silica</strong>, usually as quartz. <strong>Industries at risk:</strong> mining, tunneling, excavating, quarrying, stonework, foundries, sandblasting, ceramics, and (more recently) denim jean manufacturing (sandblasting for a "stressed" look).</p>
+<h3 class="sub-h">Clinical forms</h3>
+<table><tr><th>Form</th><th>Timing &amp; features</th></tr>
+<tr><td>Chronic silicosis</td><td><strong>Most common form</strong> — occurs ≥20 years after exposure. Hallmark pathology: the <strong>silicotic nodule</strong> — whorled hyalinized collagen fibers with a peripheral zone of dust-laden macrophages. May be asymptomatic or have dyspnea; productive cough is common</td></tr>
+<tr><td>Accelerated silicosis</td><td>Nodules develop after 3-10 years of exposure; progressive course</td></tr>
+<tr><td>Acute silicosis (silicoproteinosis)</td><td>Develops 6 months-2 years after <strong>massive</strong> exposure; dyspnea, cough, weight loss, rapid progression to respiratory failure and death; pathology is an <strong>alveolar filling process</strong></td></tr>
+<tr><td>Progressive massive fibrosis</td><td>Lesions ≥1cm (often larger), usually upper lobes; leads to respiratory failure, cor pulmonale, weight loss, and death</td></tr>
+</table>
+<h3 class="sub-h">Associated diseases</h3>
+<p><strong>Tuberculosis</strong> (increased risk), COPD/chronic bronchitis, collagen vascular disease (RA and scleroderma increased), and increased lung cancer risk.</p>
+<p><strong>Chest x-ray:</strong> symmetric nodular pattern in the upper lobes; hilar adenopathy with <strong>eggshell calcification</strong> is strongly suggestive; PMF shows coalescence of nodules into larger masses; acute silicosis shows an air-space/interstitial pattern.</p>
+<p><strong>PFT:</strong> normal early in chronic silicosis, later a mixed obstructive/restrictive pattern. <strong>Diagnosis:</strong> exposure history + characteristic x-ray changes. <strong>Management:</strong> irreversible — avoid further exposure, TB testing, smoking cessation; consider lung transplant in acute/accelerated silicosis.</p>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>Eggshell calcification of hilar lymph nodes is essentially pathognomonic for silicosis (and can also occur in sarcoidosis, but is classically taught as the silicosis finding) — a favorite chest x-ray descriptor.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q16">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A denim-manufacturing worker involved in sandblasting for 20+ years presents with dyspnea and a productive cough. CXR shows a symmetric nodular pattern in the upper lobes with hilar lymph node calcification described as 'eggshell.' What is the most likely diagnosis and an associated infectious risk?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -674,7 +666,20 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Byssinosis; increased risk of bronchitis only</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Chronic silicosis (≥20 years after exposure, e.g., sandblasting in denim manufacturing) shows upper-lobe nodules with eggshell hilar calcification and carries an increased risk of tuberculosis — unlike coal worker's pneumoconiosis, where TB risk is not increased unless silicosis co-exists.</div>
-    </div><div class="quiz-q" id="q17">
+    </div></div>
+</section>
+
+<section class="card" id="cwp">
+<h2 class="sec-h">Coal worker's pneumoconiosis (CWP)</h2>
+<p>Results from deposition of <strong>coal dust</strong> in the lung. Risk increases with intensity of exposure and carbon content — <strong>anthracite is most toxic</strong>. <strong>Underground miners</strong> are at higher risk than surface miners.</p>
+<p><strong>Pathology:</strong> the "coal macule" — macrophages laden with coal dust within the walls of respiratory bronchioles and adjacent alveoli; coal nodules; progressive massive fibrosis may occur. <strong>Clinical presentation:</strong> usually no symptoms/signs; can have bronchitis symptoms; may progress to PMF.</p>
+<h3 class="sub-h">Associated diseases</h3>
+<p>Silicosis is also common in coal workers; scleroderma and rheumatoid nodules are increased. <strong>Caplan syndrome:</strong> rheumatoid arthritis with large cavitary pulmonary nodules, associated with both silicosis and coal worker's pneumoconiosis. TB is <strong>not</strong> increased unless silicosis is also present; lung cancer risk is <strong>not</strong> increased (unlike silicosis).</p>
+<p><strong>Chest x-ray:</strong> resembles silicosis — small rounded opacities; can progress to PMF with nodules 0.5-5cm. <strong>PFT:</strong> normal early, often obstructive later (coal dust causes emphysema), restriction if fibrosis present. <strong>Diagnosis:</strong> coal dust exposure + CXR. <strong>Management:</strong> avoid exposure, stop smoking.</p>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>Silicosis and CWP look alike on imaging and both can progress to PMF, but they diverge on associated risks: silicosis increases TB and lung cancer risk; CWP does not increase either unless silicosis co-exists. Caplan syndrome (RA + cavitary nodules) is shared by both.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q17">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">An underground coal miner with longstanding rheumatoid arthritis develops several large cavitary pulmonary nodules on chest imaging. What is this combination called, and is his tuberculosis risk increased from coal dust exposure alone?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -689,7 +694,25 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Caplan syndrome; no, TB is not increased by coal worker's pneumoconiosis alone unless silicosis also present</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Caplan syndrome is rheumatoid arthritis with large cavitary pulmonary nodules, associated with both silicosis and coal worker's pneumoconiosis; coal worker's pneumoconiosis alone does not increase TB risk unless silicosis is also present.</div>
-    </div><div class="quiz-q" id="q18">
+    </div></div>
+</section>
+
+<section class="card" id="asbestosis">
+<h2 class="sec-h">Asbestosis</h2>
+<p>Chronic fibrotic ILD from prolonged inhalation of <strong>asbestos fibers</strong>. A 20-year latency between exposure and disease is common. <strong>Industries at risk:</strong> mining, milling, and transportation of asbestos; building demolition; brake lining; shipbuilding; insulation; fireproofing. (Asbestos use in construction was banned in the 1980s.)</p>
+<p><strong>Pathology:</strong> ferruginous bodies / asbestos bodies, found in sputum or BAL fluid. <strong>Symptoms:</strong> dyspnea, dry cough, chest tightness/pain. <strong>Signs:</strong> inspiratory basal crackles, clubbing.</p>
+<h3 class="sub-h">Associated diseases</h3>
+<table><tr><th>Disease</th><th>Key facts</th></tr>
+<tr><td>Mesothelioma</td><td>30-40 year latency; <strong>incurable</strong>; 9-18 month survival</td></tr>
+<tr><td>Lung cancer</td><td>Risk 4-6x higher</td></tr>
+<tr><td>Pleural effusion</td><td>Usually small, exudative, blood-stained, contains leukocytes; most clear spontaneously</td></tr>
+</table>
+<p><strong>Chest x-ray:</strong> pleural plaques; pleural effusion with a 10-15 year latency; pleural thickening; rounded atelectasis with a "<strong>comet tail</strong>" sign; lower lobe and subpleural disease predominate. <strong>PFT:</strong> restrictive pattern, may see obstruction.</p>
+<p><strong>Diagnosis</strong> (exposure + lag time are essential, the rest confirmatory): (1) reliable history of asbestos exposure, (2) appropriate lag time between exposure and disease, (3) lung fibrosis on CXR/CT, (4) restrictive PFT, (5) bilateral inspiratory crackles, (6) clubbing of fingers/toes. <strong>Management:</strong> no effective treatment — avoid exposure, stop smoking, lung transplant.</p>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>Asbestosis is the pneumoconiosis with the most 'named findings' to keep straight: ferruginous/asbestos bodies (pathology), comet-tail sign (rounded atelectasis on imaging), and its own uniquely long-latency malignant complication, mesothelioma.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q18">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A shipyard worker with a 25-year latency since asbestos exposure presents with dyspnea, dry cough, bilateral inspiratory basal crackles, and clubbing. Imaging shows pleural plaques and a rounded area of atelectasis with a 'comet tail' sign. Sputum shows ferruginous bodies. Which malignancy carries the longest latency period in this condition?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -704,7 +727,23 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Cutaneous squamous cell carcinoma</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> While asbestos exposure increases lung cancer risk 4-6x, mesothelioma has an even longer latency (30-40 years) and, once diagnosed, is incurable with only 9-18 month survival.</div>
-    </div><div class="quiz-q" id="q19">
+    </div></div>
+</section>
+
+<section class="card" id="beryllium">
+<h2 class="sec-h">Beryllium disease (berylliosis)</h2>
+<p><strong>Industries at risk:</strong> aerospace, electronics, ceramics, metal, nuclear, telecommunications, tool and die, welding.</p>
+<h3 class="sub-h">Clinical presentations</h3>
+<table><tr><th>Form</th><th>Features</th></tr>
+<tr><td>Acute toxic pneumonitis</td><td>High exposure → hypersensitivity response, now rare due to better recognition of beryllium-associated disease; symptoms: cough, chest pain; signs: blood-tinged sputum and crackles</td></tr>
+<tr><td>Chronic beryllium disease</td><td>Clinical features similar to <strong>sarcoidosis</strong>, ranging from asymptomatic to severe granulomatous restrictive lung disease; dyspnea, cough, chest pain, weight loss, fatigue, arthralgias, crackles; onset ≥20 years after exposure</td></tr>
+</table>
+<p><strong>Chest x-ray:</strong> enlarged hilar/mediastinal lymph nodes, and/or multiple lung nodules; later stages show patchy fibrosis, hyperinflation, and honeycombing. <strong>PFT:</strong> restriction.</p>
+<p><strong>Diagnosis:</strong> documented beryllium exposure + evidence of lung disease + a positive <strong>BeLPT (beryllium lymphocyte proliferation test)</strong> performed on blood or BAL fluid. <strong>Management:</strong> avoid further exposure, stop smoking, steroids.</p>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>Chronic beryllium disease is a sarcoidosis mimicker at every level — granulomatous, restrictive, hilar adenopathy — which is exactly why an occupational/beryllium exposure history must be asked of every patient being worked up for sarcoidosis. The BeLPT is what separates the two.</div>
+
+<h3 class="sub-h">Check yourself</h3>
+<div class="quiz-block"><div class="quiz-q" id="q19">
       <div class="quiz-mini-header">Exam-style question</div>
       <div class="quiz-stem">A welder with 22 years of occupational exposure develops a granulomatous restrictive lung disease with hilar and mediastinal lymphadenopathy that closely resembles sarcoidosis. Which test specifically distinguishes this occupational disease from sarcoidosis?</div>
       <div class="quiz-choices"><div class="quiz-choice" data-correct="false">
@@ -719,7 +758,111 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
           <span class="quiz-letter">E</span><span class="quiz-optext">Anti-GBM antibody</span>
         </div></div>
       <div class="quiz-explain"><strong>Explanation:</strong> Chronic beryllium disease is a clinical and radiographic mimicker of sarcoidosis; the beryllium lymphocyte proliferation test (BeLPT) on blood or BAL fluid, combined with a documented beryllium exposure history, is what distinguishes it.</div>
-    </div></div></section>
+    </div></div>
+</section>
+
+<section class="card" id="mesothelioma">
+<h2 class="sec-h">Mesothelioma</h2>
+<p>A malignant tumor of the pleura most classically linked to <strong>asbestos exposure</strong>, with a very long <strong>30-40 year latency</strong> between exposure and disease. Once diagnosed, it is <strong>incurable</strong>, with a survival of only <strong>9-18 months</strong>.</p>
+<div class="pearl"><span class="pearl-label">Clinical pearl</span>Mesothelioma's defining features are its extraordinarily long latency after asbestos exposure and its uniformly poor prognosis — contrast this with asbestos-related lung cancer, whose risk is 'only' 4-6x higher rather than near-universally fatal on diagnosis.</div>
+</section>
+
+<section class="card" id="compare">
+<h2 class="sec-h">Comparison table — 12 axes across all ILDs</h2>
+<p style="font-size:.9rem;">Dr. Kinder's own suggested study strategy for this topic: build a table comparing every process across the same set of axes, since the diseases in this guide are otherwise easy to blur together. "&mdash;" means the guide does not specify that feature for the disease.</p>
+<div class="table-scroll"><table style="font-size:.78rem;"><tr>
+<th>Disease</th><th>Eosinophilia</th><th>Fever</th><th>Smoking</th><th>Treatment</th><th>Age/Demographics</th><th>Time Course</th><th>Kidney Involvement</th><th>Imaging</th><th>BAL Helpful</th><th>Pneumothorax</th><th>DLCO</th><th>Exposure History</th>
+</tr>
+<tr>
+<td class="dz">Hypersensitivity pneumonitis</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>Steroids help symptoms (acute), not disease course</td><td>&mdash;</td><td>Acute, subacute, or chronic forms</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; organic antigens (moldy hay, birds, AC systems, isocyanates); immune-mediated (Ag-Ab complex)</td>
+</tr>
+<tr>
+<td class="dz">Byssinosis</td><td>No</td><td>No true fever ("Monday fever" = chest tightness)</td><td>&mdash;</td><td>Avoid exposure</td><td>&mdash;</td><td>Chronic; worse by end of Monday, improves over weekend</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; cotton/flax/hemp dust; NOT immune-mediated (no sensitization needed)</td>
+</tr>
+<tr>
+<td class="dz">Drug-induced (amiodarone/nitrofurantoin/MTX)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>Stop offending drug</td><td>&mdash;</td><td>Amiodarone: dose+duration dependent; nitrofurantoin: acute/subacute (hypersensitivity-like) or chronic (lifetime dose)</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; medication exposure (amiodarone &gt;400mg/day, nitrofurantoin, methotrexate)</td>
+</tr>
+<tr>
+<td class="dz">Systemic sclerosis (scleroderma)-associated ILD</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>Fibrosis; severe pulmonary HTN from arterial intimal thickening</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; autoimmune (SCL-70 antibody, CREST); increased bronchogenic carcinoma risk</td>
+</tr>
+<tr>
+<td class="dz">Rheumatoid arthritis-associated ILD</td><td>No</td><td>No</td><td>&mdash;</td><td>Treat underlying RA (its own therapy, e.g. MTX/gold, can itself cause lung disease)</td><td>&mdash;</td><td>Chronic (~1/3 of RA patients)</td><td>No</td><td>Necrobiotic nodules, upper lung zones</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td>No &mdash; autoimmune; low-glucose pleural effusion mimics empyema</td>
+</tr>
+<tr>
+<td class="dz">Mixed connective tissue disease</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td>No &mdash; autoimmune (anti-RNP antibody); lung involvement in 75%</td>
+</tr>
+<tr>
+<td class="dz">Idiopathic pulmonary fibrosis (IPF)</td><td>No</td><td>No (no extrapulmonary signs)</td><td>&mdash;</td><td>No good options; pirfenidone/nintedanib slow FVC decline (don't reverse disease)</td><td>&mdash;</td><td>Chronic, progressive; 50% mortality at 3 years</td><td>No</td><td>Diffuse reticulonodular, bibasilar, honeycomb</td><td>Open lung biopsy usually needed instead</td><td>No</td><td><b>Low</b></td><td>No &mdash; diagnosis of exclusion; clubbing present (most classic ILD for it)</td>
+</tr>
+<tr>
+<td class="dz">Nonspecific interstitial pneumonia (NSIP)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>Bibasilar ground glass or reticular</td><td>Lung biopsy often needed instead</td><td>No</td><td>&mdash;</td><td>No &mdash; wide range of possible causes ("non-specific")</td>
+</tr>
+<tr>
+<td class="dz">Cryptogenic organizing pneumonia (COP)</td><td>No</td><td><b>Yes</b></td><td>&mdash;</td><td>Steroids, tapered over ~6 months; some spontaneous recovery</td><td>&mdash;</td><td>Progresses faster than most ILDs</td><td>No</td><td>Diffuse, patchy, migratory infiltrates; Masson bodies on pathology</td><td>Open lung biopsy usually needed instead</td><td>No</td><td>&mdash;</td><td>No &mdash; initially mistaken for pneumonia; tell is failure of antibiotics</td>
+</tr>
+<tr>
+<td class="dz">RB-ILD</td><td>&mdash;</td><td>&mdash;</td><td><b>Strong association</b></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>Upper lobes; centrilobular ground-glass nodules; bronchial wall thickening, NO fibrosis</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; smoking; may be same disease spectrum as DIP</td>
+</tr>
+<tr>
+<td class="dz">Desquamative interstitial pneumonia (DIP)</td><td>&mdash;</td><td>&mdash;</td><td><b>&gt;80% smokers</b></td><td>Variable success with corticosteroids/immunosuppressants</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>Alveolar macrophages fill airspaces</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; smoking; may be same disease spectrum as RB-ILD</td>
+</tr>
+<tr>
+<td class="dz">Acute interstitial pneumonia (AIP, Hamman-Rich)</td><td>&mdash;</td><td>Can have fever</td><td><b>NOT associated</b></td><td>Supportive; steroids of unclear benefit; lung transplant</td><td>Middle age or older</td><td>Most acute of all ILDs; 60% die in first 6 months (median survival ~1.5 months); survivors regain full lung function</td><td>No</td><td>ARDS picture; diffuse alveolar damage</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td>No &mdash; rare, idiopathic</td>
+</tr>
+<tr>
+<td class="dz">Lymphocytic interstitial pneumonia (LIP)</td><td>&mdash;</td><td><b>Yes</b></td><td>&mdash;</td><td>None if asymptomatic; steroids sometimes help; ART if HIV-associated</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td>Lung biopsy needed instead; lymphocytosis</td><td>No</td><td>&mdash;</td><td>No &mdash; associated with EBV/HIV (infectious, not environmental); can be autoimmune</td>
+</tr>
+<tr>
+<td class="dz">Sarcoidosis</td><td>&mdash;</td><td>Rare (&lt;5% with fever/weight loss/jaundice)</td><td>Not a risk factor</td><td>Only if symptomatic (~75% recover without steroids); prednisone 20&ndash;40mg x3 months if needed</td><td>40&ndash;60 years; more common in Black Americans and in women</td><td>Chronic, variable; spontaneous remission in 50% at 3 years</td><td><b>Yes</b> &mdash; hypercalcemia/hypercalciuria &rarr; nephrolithiasis/nephrocalcinosis (10&ndash;14%)</td><td>Bilateral hilar &plusmn; parenchymal infiltrates (CXR stages 0&ndash;4)</td><td><b>Yes</b> &mdash; lymphocytosis, elevated CD4/CD8 (not diagnostic)</td><td>&mdash;</td><td><b>Decreased</b></td><td>No &mdash; idiopathic granulomatous disease; ACE elevated but nonspecific</td>
+</tr>
+<tr>
+<td class="dz">Granulomatosis with polyangiitis (Wegener's)</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>High-dose steroids + cyclophosphamide</td><td>&mdash;</td><td>&mdash;</td><td><b>Yes</b> &mdash; renal involvement, rapidly progressive</td><td>&mdash;</td><td>Biopsy lung/nasal mucosa preferred, NOT kidney</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; C-ANCA positive; upper respiratory/sinus involvement, hemoptysis</td>
+</tr>
+<tr>
+<td class="dz">Churg-Strauss / EGPA</td><td><b>Yes</b></td><td>&mdash;</td><td>&mdash;</td><td>Stop the LTRA; mepolizumab</td><td>&mdash;</td><td>Unmasked when steroids withdrawn in an asthmatic on an LTRA</td><td>&mdash;</td><td>CXR infiltrates</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; asthma + leukotriene receptor antagonist association</td>
+</tr>
+<tr>
+<td class="dz">Goodpasture syndrome</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>Plasmapheresis; nephrectomy if severe pulmonary hemorrhage</td><td>More common in males</td><td>Rapid presentation</td><td><b>Yes</b> &mdash; lung AND kidney involvement, anti-GBM</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; anti-GBM antibodies; NO nasal symptoms (unlike Wegener's)</td>
+</tr>
+<tr>
+<td class="dz">Acute eosinophilic pneumonia</td><td><b>Yes</b></td><td><b>Yes</b>, rapid onset</td><td>&mdash;</td><td>Corticosteroids</td><td>&mdash;</td><td>Rapid onset</td><td>No</td><td>CXR looks like ARDS</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No</td>
+</tr>
+<tr>
+<td class="dz">Chronic eosinophilic pneumonia</td><td><b>Yes</b></td><td>&mdash;</td><td>&mdash;</td><td>Corticosteroids; relapses common</td><td>Middle-aged women; 50% have asthma</td><td>Chronic/subacute</td><td>No</td><td>"Photonegative of pulmonary edema" &mdash; peripheral infiltrates, central sparing</td><td><b>Yes</b> &mdash; eosinophils on BAL; high ESR</td><td>&mdash;</td><td>&mdash;</td><td>No</td>
+</tr>
+<tr>
+<td class="dz">Allergic bronchopulmonary aspergillosis (ABPA)</td><td>Very high IgE (allergic reaction)</td><td>&mdash;</td><td>&mdash;</td><td>Long-term corticosteroids + itraconazole</td><td>&mdash;</td><td>Recurrent infiltrates</td><td>No</td><td>"Tram-track" bronchial markings; recurrent infiltrates</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; requires pre-existing bronchiectasis + Aspergillus colonization; brownish sputum</td>
+</tr>
+<tr>
+<td class="dz">Pulmonary Langerhans cell histiocytosis (PLCH)</td><td>&mdash;</td><td>&mdash;</td><td><b>Risk factor (+ male sex)</b></td><td>Stop smoking; steroids have limited success</td><td>Young; male predominance</td><td>&mdash;</td><td>No</td><td>Small cystic spaces, upper lung zones; <b>increased</b> lung volume (non-restrictive, unlike most ILDs)</td><td><b>Yes</b> &mdash; Langerhans cells on BAL; Birbeck granules on EM</td><td><b>Yes</b> &mdash; 10% present with pneumothorax</td><td>&mdash;</td><td><b>Yes</b> &mdash; smoking; also posterior pituitary involvement (DI, lytic bone lesions)</td>
+</tr>
+<tr>
+<td class="dz">Idiopathic pulmonary hemosiderosis</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>No</b> &mdash; explicitly spares the kidneys (distinguishes from Goodpasture)</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td><b>Increased</b> (outlier &mdash; CO taken up by interstitial hemoglobin)</td><td>No &mdash; idiopathic; iron-deficiency anemia</td>
+</tr>
+<tr>
+<td class="dz">Pulmonary alveolar proteinosis (PAP)</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>Whole lung lavage</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>"Crazy-paving" pattern (not specific)</td><td>Open lung biopsy needed instead</td><td>No</td><td>&mdash;</td><td>No &mdash; defective alveolar macrophages, surfactant buildup</td>
+</tr>
+<tr>
+<td class="dz">Lymphangioleiomyomatosis (LAM)</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>Lung transplant only definitive option (can recur in the new lung)</td><td>Premenopausal women</td><td>&mdash;</td><td>No</td><td>Honeycombing throughout lung ("Swiss cheese"); many nodules/cysts; chylous pleural effusions</td><td>&mdash;</td><td><b>Yes</b> &mdash; spontaneous pneumothorax</td><td>&mdash;</td><td>No &mdash; smooth muscle proliferation throughout lung</td>
+</tr>
+<tr>
+<td class="dz">Silicosis</td><td>No</td><td>No</td><td>Cessation part of management (not a direct cause)</td><td>Irreversible &mdash; avoid exposure, TB testing, smoking cessation; transplant in acute/accelerated forms</td><td>&mdash;</td><td>Chronic (&ge;20yr), accelerated (3&ndash;10yr), or acute (6mo&ndash;2yr) forms</td><td>No</td><td>Symmetric nodular pattern, upper lobes; eggshell hilar calcification; PMF</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>Yes</b> &mdash; crystalline silica (mining, sandblasting, foundries, etc.); increased TB &amp; lung cancer risk</td>
+</tr>
+<tr>
+<td class="dz">Coal worker's pneumoconiosis</td><td>No</td><td>No</td><td>Cessation part of management</td><td>Avoid exposure, stop smoking</td><td>&mdash;</td><td>Chronic</td><td>No</td><td>Resembles silicosis; small rounded opacities; PMF (0.5&ndash;5cm nodules)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>Yes</b> &mdash; coal dust (anthracite most toxic); TB/lung cancer NOT increased unless silicosis co-exists</td>
+</tr>
+<tr>
+<td class="dz">Asbestosis</td><td>No</td><td>No</td><td>Cessation part of management</td><td>No effective treatment &mdash; avoid exposure, stop smoking, transplant</td><td>&mdash;</td><td>Chronic; ~20-year latency</td><td>No</td><td>Pleural plaques/thickening, effusion (10&ndash;15yr latency), comet-tail sign; lower lobe/subpleural</td><td>Ferruginous/asbestos bodies in sputum or BAL</td><td>&mdash;</td><td>&mdash;</td><td><b>Yes</b> &mdash; asbestos fibers (mining, shipbuilding, insulation, etc.); mesothelioma &amp; 4&ndash;6x lung cancer risk</td>
+</tr>
+<tr>
+<td class="dz">Beryllium disease (berylliosis)</td><td>&mdash;</td><td>&mdash;</td><td>Cessation part of management</td><td>Avoid exposure, stop smoking, steroids</td><td>&mdash;</td><td>Acute (high exposure) vs. chronic (&ge;20yr latency, sarcoidosis mimicker)</td><td>No</td><td>Enlarged hilar/mediastinal nodes, lung nodules; later fibrosis, hyperinflation, honeycombing</td><td><b>Yes</b> &mdash; BeLPT performed on blood or BAL fluid</td><td>&mdash;</td><td>&mdash;</td><td><b>Yes</b> &mdash; beryllium (aerospace, electronics, welding, etc.)</td>
+</tr>
+<tr>
+<td class="dz">Mesothelioma</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>Incurable</td><td>&mdash;</td><td>30&ndash;40yr latency after asbestos exposure; 9&ndash;18mo survival once diagnosed</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>Yes</b> &mdash; asbestos</td>
+</tr>
+</table></div>
+</section>
+
 
 <section class="card" id="summary">
 <h2 class="sec-h">Master summary table</h2>
