@@ -38,6 +38,12 @@ table tr:nth-child(even) td{background:var(--sage-light);}
 .table-scroll{width:100%;overflow-x:auto;margin:14px 0;border-radius:8px;-webkit-overflow-scrolling:touch;}
 .table-scroll table{margin:0;min-width:1500px;}
 .table-scroll td.dz{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--forest-dark);white-space:normal;min-width:170px;}
+table.cmp-table{font-size:.86rem;min-width:1600px;}
+table.cmp-table th,table.cmp-table td{min-width:150px;}
+table.cmp-table th:first-child,table.cmp-table td.dz{position:sticky;left:0;z-index:2;box-shadow:2px 0 4px rgba(0,0,0,.08);}
+table.cmp-table th:first-child{background:var(--forest-dark);z-index:3;}
+table.cmp-table tr:nth-child(odd) td.dz{background:var(--cream-card);}
+table.cmp-table tr:nth-child(even) td.dz{background:var(--sage-light);}
 .pearl{background:#fdf2e4;border-left:4px solid var(--accent);border-radius:6px;padding:10px 14px;margin:14px 0;font-size:.93rem;}
 .pearl-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
 .case{background:var(--sage-light);border-left:4px solid var(--forest);border-radius:6px;padding:10px 14px;margin:14px 0;font-size:.93rem;}
@@ -769,8 +775,10 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 
 <section class="card" id="compare">
 <h2 class="sec-h">Comparison table — 12 axes across all ILDs</h2>
-<p style="font-size:.9rem;">Dr. Kinder's own suggested study strategy for this topic: build a table comparing every process across the same set of axes, since the diseases in this guide are otherwise easy to blur together. "&mdash;" means the guide does not specify that feature for the disease.</p>
-<div class="table-scroll"><table style="font-size:.78rem;"><tr>
+<p style="font-size:.9rem;">Dr. Kinder's own suggested study strategy for this topic: build a table comparing every process across the same set of axes, since the diseases in this guide are otherwise easy to blur together. Split here into the same 4 categories (plus the pneumoconioses, detailed in their own section) used throughout the guide, so each table stays a manageable size. "&mdash;" means the guide does not specify that feature for the disease. Drag/scroll each table sideways to see every column &mdash; the disease name stays pinned on the left as you scroll.</p>
+
+<h3 class="sub-h">Category 1 — Exposure-Related ILDs</h3>
+<div class="table-scroll"><table class="cmp-table"><tr>
 <th>Disease</th><th>Eosinophilia</th><th>Fever</th><th>Smoking</th><th>Treatment</th><th>Age/Demographics</th><th>Time Course</th><th>Kidney Involvement</th><th>Imaging</th><th>BAL Helpful</th><th>Pneumothorax</th><th>DLCO</th><th>Exposure History</th>
 </tr>
 <tr>
@@ -780,7 +788,16 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <td class="dz">Byssinosis</td><td>No</td><td>No true fever ("Monday fever" = chest tightness)</td><td>&mdash;</td><td>Avoid exposure</td><td>&mdash;</td><td>Chronic; worse by end of Monday, improves over weekend</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; cotton/flax/hemp dust; NOT immune-mediated (no sensitization needed)</td>
 </tr>
 <tr>
+<td class="dz">Radiation pneumonitis (RILI)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>Follows thoracic radiation exposure</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; thoracic radiation exposure</td>
+</tr>
+<tr>
 <td class="dz">Drug-induced (amiodarone/nitrofurantoin/MTX)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>Stop offending drug</td><td>&mdash;</td><td>Amiodarone: dose+duration dependent; nitrofurantoin: acute/subacute (hypersensitivity-like) or chronic (lifetime dose)</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td><b>Yes</b> &mdash; medication exposure (amiodarone &gt;400mg/day, nitrofurantoin, methotrexate)</td>
+</tr>
+</table></div>
+
+<h3 class="sub-h">Category 2 — Secondary to Connective Tissue (Collagen Vascular) Disease</h3>
+<div class="table-scroll"><table class="cmp-table"><tr>
+<th>Disease</th><th>Eosinophilia</th><th>Fever</th><th>Smoking</th><th>Treatment</th><th>Age/Demographics</th><th>Time Course</th><th>Kidney Involvement</th><th>Imaging</th><th>BAL Helpful</th><th>Pneumothorax</th><th>DLCO</th><th>Exposure History</th>
 </tr>
 <tr>
 <td class="dz">Systemic sclerosis (scleroderma)-associated ILD</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>Fibrosis; severe pulmonary HTN from arterial intimal thickening</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; autoimmune (SCL-70 antibody, CREST); increased bronchogenic carcinoma risk</td>
@@ -790,6 +807,18 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 </tr>
 <tr>
 <td class="dz">Mixed connective tissue disease</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td>No &mdash; autoimmune (anti-RNP antibody); lung involvement in 75%</td>
+</tr>
+<tr>
+<td class="dz">Polymyositis-dermatomyositis</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; autoimmune (guide notes it can cause ILD, without further detail)</td>
+</tr>
+<tr>
+<td class="dz">Lupus (SLE)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No &mdash; autoimmune (guide notes it can cause ILD, without further detail)</td>
+</tr>
+</table></div>
+
+<h3 class="sub-h">Category 3 — Idiopathic Interstitial Pneumonias</h3>
+<div class="table-scroll"><table class="cmp-table"><tr>
+<th>Disease</th><th>Eosinophilia</th><th>Fever</th><th>Smoking</th><th>Treatment</th><th>Age/Demographics</th><th>Time Course</th><th>Kidney Involvement</th><th>Imaging</th><th>BAL Helpful</th><th>Pneumothorax</th><th>DLCO</th><th>Exposure History</th>
 </tr>
 <tr>
 <td class="dz">Idiopathic pulmonary fibrosis (IPF)</td><td>No</td><td>No (no extrapulmonary signs)</td><td>&mdash;</td><td>No good options; pirfenidone/nintedanib slow FVC decline (don't reverse disease)</td><td>&mdash;</td><td>Chronic, progressive; 50% mortality at 3 years</td><td>No</td><td>Diffuse reticulonodular, bibasilar, honeycomb</td><td>Open lung biopsy usually needed instead</td><td>No</td><td><b>Low</b></td><td>No &mdash; diagnosis of exclusion; clubbing present (most classic ILD for it)</td>
@@ -811,6 +840,12 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 </tr>
 <tr>
 <td class="dz">Lymphocytic interstitial pneumonia (LIP)</td><td>&mdash;</td><td><b>Yes</b></td><td>&mdash;</td><td>None if asymptomatic; steroids sometimes help; ART if HIV-associated</td><td>&mdash;</td><td>&mdash;</td><td>No</td><td>&mdash;</td><td>Lung biopsy needed instead; lymphocytosis</td><td>No</td><td>&mdash;</td><td>No &mdash; associated with EBV/HIV (infectious, not environmental); can be autoimmune</td>
+</tr>
+</table></div>
+
+<h3 class="sub-h">Category 4 — Miscellaneous</h3>
+<div class="table-scroll"><table class="cmp-table"><tr>
+<th>Disease</th><th>Eosinophilia</th><th>Fever</th><th>Smoking</th><th>Treatment</th><th>Age/Demographics</th><th>Time Course</th><th>Kidney Involvement</th><th>Imaging</th><th>BAL Helpful</th><th>Pneumothorax</th><th>DLCO</th><th>Exposure History</th>
 </tr>
 <tr>
 <td class="dz">Sarcoidosis</td><td>&mdash;</td><td>Rare (&lt;5% with fever/weight loss/jaundice)</td><td>Not a risk factor</td><td>Only if symptomatic (~75% recover without steroids); prednisone 20&ndash;40mg x3 months if needed</td><td>40&ndash;60 years; more common in Black Americans and in women</td><td>Chronic, variable; spontaneous remission in 50% at 3 years</td><td><b>Yes</b> &mdash; hypercalcemia/hypercalciuria &rarr; nephrolithiasis/nephrocalcinosis (10&ndash;14%)</td><td>Bilateral hilar &plusmn; parenchymal infiltrates (CXR stages 0&ndash;4)</td><td><b>Yes</b> &mdash; lymphocytosis, elevated CD4/CD8 (not diagnostic)</td><td>&mdash;</td><td><b>Decreased</b></td><td>No &mdash; idiopathic granulomatous disease; ACE elevated but nonspecific</td>
@@ -845,6 +880,12 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 <tr>
 <td class="dz">Lymphangioleiomyomatosis (LAM)</td><td>No</td><td>&mdash;</td><td>&mdash;</td><td>Lung transplant only definitive option (can recur in the new lung)</td><td>Premenopausal women</td><td>&mdash;</td><td>No</td><td>Honeycombing throughout lung ("Swiss cheese"); many nodules/cysts; chylous pleural effusions</td><td>&mdash;</td><td><b>Yes</b> &mdash; spontaneous pneumothorax</td><td>&mdash;</td><td>No &mdash; smooth muscle proliferation throughout lung</td>
 </tr>
+</table></div>
+
+<h3 class="sub-h">Pneumoconioses (detailed section)</h3>
+<div class="table-scroll"><table class="cmp-table"><tr>
+<th>Disease</th><th>Eosinophilia</th><th>Fever</th><th>Smoking</th><th>Treatment</th><th>Age/Demographics</th><th>Time Course</th><th>Kidney Involvement</th><th>Imaging</th><th>BAL Helpful</th><th>Pneumothorax</th><th>DLCO</th><th>Exposure History</th>
+</tr>
 <tr>
 <td class="dz">Silicosis</td><td>No</td><td>No</td><td>Cessation part of management (not a direct cause)</td><td>Irreversible &mdash; avoid exposure, TB testing, smoking cessation; transplant in acute/accelerated forms</td><td>&mdash;</td><td>Chronic (&ge;20yr), accelerated (3&ndash;10yr), or acute (6mo&ndash;2yr) forms</td><td>No</td><td>Symmetric nodular pattern, upper lobes; eggshell hilar calcification; PMF</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>Yes</b> &mdash; crystalline silica (mining, sandblasting, foundries, etc.); increased TB &amp; lung cancer risk</td>
 </tr>
@@ -862,6 +903,7 @@ footer{text-align:center;padding:30px;font-size:.8rem;color:var(--text-soft);}
 </tr>
 </table></div>
 </section>
+
 
 
 <section class="card" id="summary">
