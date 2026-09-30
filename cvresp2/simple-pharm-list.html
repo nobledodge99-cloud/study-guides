@@ -1,0 +1,167 @@
+<title>Exam 2 Drug List</title>
+<style>
+/* layout: single scrolling page, categories stacked as cards, each card a 2-col label/value list that collapses to 1 col on phone */
+:root{
+  --bg:#faf7f0; --card:#ffffff; --border:#e3ddc9; --text:#2b2e26; --text-soft:#6b6f5f;
+  --forest:#3f6b4a; --forest-dark:#2c4d34; --accent:#b5651d;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1d17; --card:#242720; --border:#3a3e33; --text:#ece8db; --text-soft:#a3a795;
+    --forest:#7fae8c; --forest-dark:#9cc7a7; --accent:#e0925a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b1d17; --card:#242720; --border:#3a3e33; --text:#ece8db; --text-soft:#a3a795;
+  --forest:#7fae8c; --forest-dark:#9cc7a7; --accent:#e0925a;
+  color-scheme: dark;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  padding:28px 16px 40px;
+}
+.wrap{max-width:900px;margin:0 auto;padding-top:38px;}
+h1{
+  font-family:'Lora',serif; font-size:1.7rem; margin:0 0 4px; color:var(--forest-dark);
+}
+.sub{color:var(--text-soft); font-size:.92rem; margin:0 0 24px;}
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+@media (max-width:640px){.grid{grid-template-columns:1fr;}}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:10px;
+  padding:16px 18px; min-width:0;
+}
+.card h2{
+  font-family:'Lora',serif; font-size:1.02rem; color:var(--forest); margin:0 0 10px;
+  border-bottom:2px solid var(--border); padding-bottom:6px;
+}
+.grp{margin:12px 0 4px;}
+.grp:first-of-type{margin-top:0;}
+.grp-label{
+  font-family:'IBM Plex Mono',monospace; font-size:.68rem; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--accent); margin:0 0 4px;
+}
+.row{
+  display:flex; justify-content:space-between; gap:10px; padding:3px 0;
+  font-size:.87rem; border-bottom:1px dashed var(--border);
+}
+.row:last-child{border-bottom:none;}
+.row .drug{font-weight:600;}
+.row .class{color:var(--text-soft); text-align:right;}
+footer{text-align:center; color:var(--text-soft); font-size:.78rem; margin-top:28px;}
+.back-btn{position:fixed;top:14px;left:14px;background:var(--forest-dark);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;z-index:50;}
+</style>
+
+<a href="../index.html" class="back-btn">← Back to Study Guides</a>
+
+<div class="wrap">
+<h1>Exam 2 Master Pharm Guide — Drug List</h1>
+<p class="sub">Every CORE drug in the guide, grouped by category and labeled with its class. Quick-reference only — full details are in the master guide.</p>
+
+<div class="grid">
+
+<div class="card">
+<h2>Antihistamines &amp; Rhinitis/Allergy</h2>
+<div class="row"><span class="drug">Diphenhydramine</span><span class="class">H1 antihistamine, 1st gen</span></div>
+<div class="row"><span class="drug">Chlorpheniramine</span><span class="class">H1 antihistamine, 1st gen</span></div>
+<div class="row"><span class="drug">Promethazine</span><span class="class">H1 antihistamine, 1st gen</span></div>
+<div class="row"><span class="drug">Cetirizine</span><span class="class">H1 antihistamine, 2nd gen</span></div>
+<div class="row"><span class="drug">Fexofenadine</span><span class="class">H1 antihistamine, 2nd gen</span></div>
+<div class="row"><span class="drug">Loratadine</span><span class="class">H1 antihistamine, 2nd gen</span></div>
+<div class="row"><span class="drug">Desloratadine</span><span class="class">H1 antihistamine, 2nd gen</span></div>
+<div class="row"><span class="drug">Cimetidine</span><span class="class">H2 receptor antagonist</span></div>
+<div class="row"><span class="drug">Pseudoephedrine</span><span class="class">Decongestant</span></div>
+<div class="row"><span class="drug">Oxymetazoline</span><span class="class">Decongestant</span></div>
+<div class="row"><span class="drug">Codeine</span><span class="class">Antitussive</span></div>
+<div class="row"><span class="drug">Dextromethorphan</span><span class="class">Antitussive</span></div>
+</div>
+
+<div class="card">
+<h2>Antimicrobials</h2>
+<div class="row"><span class="drug">Ampicillin &amp; Amoxicillin</span><span class="class">Aminopenicillin</span></div>
+<div class="row"><span class="drug">Piperacillin (&plusmn; tazobactam)</span><span class="class">Antipseudomonal penicillin</span></div>
+<div class="row"><span class="drug">Ampicillin-sulbactam</span><span class="class">&beta;-lactam/&beta;-lactamase inhibitor</span></div>
+<div class="row"><span class="drug">Amoxicillin-clavulanate</span><span class="class">&beta;-lactam/&beta;-lactamase inhibitor</span></div>
+<div class="row"><span class="drug">Piperacillin-tazobactam</span><span class="class">&beta;-lactam/&beta;-lactamase inhibitor</span></div>
+<div class="row"><span class="drug">Ceftriaxone</span><span class="class">Cephalosporin, 3rd gen</span></div>
+<div class="row"><span class="drug">Ceftazidime</span><span class="class">Cephalosporin, 3rd gen</span></div>
+<div class="row"><span class="drug">Cefepime</span><span class="class">Cephalosporin, 4th gen</span></div>
+<div class="row"><span class="drug">Meropenem</span><span class="class">Carbapenem</span></div>
+<div class="row"><span class="drug">Ertapenem</span><span class="class">Carbapenem</span></div>
+<div class="row"><span class="drug">Vancomycin</span><span class="class">Glycopeptide</span></div>
+<div class="row"><span class="drug">Gentamicin</span><span class="class">Aminoglycoside</span></div>
+<div class="row"><span class="drug">Doxycycline</span><span class="class">Tetracycline</span></div>
+<div class="row"><span class="drug">Azithromycin</span><span class="class">Macrolide</span></div>
+<div class="row"><span class="drug">Clindamycin</span><span class="class">Lincosamide</span></div>
+<div class="row"><span class="drug">Linezolid</span><span class="class">Oxazolidinone</span></div>
+<div class="row"><span class="drug">Lefamulin</span><span class="class">Pleuromutilin</span></div>
+<div class="row"><span class="drug">Ciprofloxacin</span><span class="class">Fluoroquinolone</span></div>
+<div class="row"><span class="drug">Levofloxacin</span><span class="class">Fluoroquinolone</span></div>
+<div class="row"><span class="drug">TMP-SMX</span><span class="class">Sulfonamide/folate inhibitor</span></div>
+</div>
+
+<div class="card">
+<h2>Respiratory Infections — Antivirals &amp; Antifungals</h2>
+<div class="row"><span class="drug">Oseltamivir</span><span class="class">Antiviral, influenza</span></div>
+<div class="row"><span class="drug">Baloxavir</span><span class="class">Antiviral, influenza</span></div>
+<div class="row"><span class="drug">Remdesivir</span><span class="class">Antiviral, SARS-CoV-2</span></div>
+<div class="row"><span class="drug">Nirmatrelvir/Ritonavir</span><span class="class">Antiviral, SARS-CoV-2</span></div>
+<div class="row"><span class="drug">Fluconazole</span><span class="class">Antifungal, azole</span></div>
+<div class="row"><span class="drug">Voriconazole</span><span class="class">Antifungal, azole</span></div>
+<div class="row"><span class="drug">Amphotericin B</span><span class="class">Antifungal, polyene</span></div>
+</div>
+
+<div class="card">
+<h2>Tuberculosis</h2>
+<div class="row"><span class="drug">Isoniazid (INH)</span><span class="class">First-line TB agent</span></div>
+<div class="row"><span class="drug">Rifampin (RIF)</span><span class="class">First-line TB agent</span></div>
+<div class="row"><span class="drug">Pyrazinamide (PZA)</span><span class="class">First-line TB agent</span></div>
+<div class="row"><span class="drug">Ethambutol (EMB)</span><span class="class">First-line TB agent</span></div>
+<div class="row"><span class="drug">Rifapentine (RPT)</span><span class="class">First-line TB agent</span></div>
+<div class="row"><span class="drug">Moxifloxacin</span><span class="class">2nd-line TB agent</span></div>
+<div class="row"><span class="drug">Rifabutin</span><span class="class">2nd-line TB agent</span></div>
+</div>
+
+<div class="card">
+<h2>HIV/AIDS</h2>
+<div class="row"><span class="drug">Abacavir</span><span class="class">NRTI</span></div>
+<div class="row"><span class="drug">Emtricitabine</span><span class="class">NRTI</span></div>
+<div class="row"><span class="drug">Lamivudine</span><span class="class">NRTI</span></div>
+<div class="row"><span class="drug">Tenofovir DF (TDF)</span><span class="class">NRTI</span></div>
+<div class="row"><span class="drug">Tenofovir AF (TAF)</span><span class="class">NRTI</span></div>
+<div class="row"><span class="drug">Efavirenz</span><span class="class">NNRTI</span></div>
+<div class="row"><span class="drug">Atazanavir</span><span class="class">Protease inhibitor</span></div>
+<div class="row"><span class="drug">Darunavir</span><span class="class">Protease inhibitor</span></div>
+<div class="row"><span class="drug">Lopinavir/Ritonavir</span><span class="class">Protease inhibitor</span></div>
+<div class="row"><span class="drug">Ritonavir</span><span class="class">Protease inhibitor (booster)</span></div>
+<div class="row"><span class="drug">Bictegravir</span><span class="class">Integrase inhibitor</span></div>
+<div class="row"><span class="drug">Dolutegravir</span><span class="class">Integrase inhibitor</span></div>
+</div>
+
+<div class="card">
+<h2>Asthma &amp; COPD</h2>
+<div class="row"><span class="drug">Albuterol</span><span class="class">SABA</span></div>
+<div class="row"><span class="drug">Salmeterol</span><span class="class">LABA</span></div>
+<div class="row"><span class="drug">Formoterol</span><span class="class">LABA</span></div>
+<div class="row"><span class="drug">Ipratropium</span><span class="class">SAMA</span></div>
+<div class="row"><span class="drug">Tiotropium</span><span class="class">LAMA</span></div>
+<div class="row"><span class="drug">Theophylline</span><span class="class">Methylxanthine</span></div>
+<div class="row"><span class="drug">Roflumilast</span><span class="class">PDE4 inhibitor</span></div>
+<div class="row"><span class="drug">Budesonide</span><span class="class">Inhaled corticosteroid</span></div>
+<div class="row"><span class="drug">Fluticasone</span><span class="class">Inhaled corticosteroid</span></div>
+<div class="row"><span class="drug">Methylprednisolone</span><span class="class">Systemic corticosteroid</span></div>
+<div class="row"><span class="drug">Prednisone</span><span class="class">Systemic corticosteroid</span></div>
+<div class="row"><span class="drug">Montelukast</span><span class="class">Leukotriene receptor antagonist</span></div>
+<div class="row"><span class="drug">Omalizumab</span><span class="class">Anti-IgE biologic</span></div>
+<div class="row"><span class="drug">Benralizumab</span><span class="class">Anti-IL-5 biologic</span></div>
+<div class="row"><span class="drug">Mepolizumab</span><span class="class">Anti-IL-5 biologic</span></div>
+<div class="row"><span class="drug">Reslizumab</span><span class="class">Anti-IL-5 biologic</span></div>
+</div>
+
+</div>
+
+<footer>74 CORE drugs shown &middot; full mechanism/dosing/adverse-effect detail is in the master guide</footer>
+</div>
