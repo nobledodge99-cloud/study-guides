@@ -97,6 +97,10 @@
   table td.drug-name{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--core); white-space:nowrap; }
   table td.stem{ font-style:italic; color:var(--text-soft); }
   table td.moa{ color:var(--forest-dark); }
+  table th:first-child, table td.drug-name{ position:sticky; left:0; z-index:2; box-shadow:2px 0 4px rgba(0,0,0,.12); }
+  table th:first-child{ z-index:3; }
+  table tr:nth-child(odd) td.drug-name{ background:var(--cream-card); }
+  table tr:nth-child(even) td.drug-name{ background:#f5f0e5; }
   .name-rec{ font-size:0.85rem; color:var(--text-soft); margin:8px 0 4px; }
   .name-rec b{ color:var(--forest-dark); }
 
