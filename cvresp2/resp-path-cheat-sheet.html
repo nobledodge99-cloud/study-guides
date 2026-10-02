@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Respiratory Pathology — Bucket Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f1e6; --cream-card:#fffdf8; --forest-dark:#1f3d2e; --forest:#2f5d43;
+  --sage:#7ba384; --sage-light:#e4ecdf; --border:#d8cfb8; --accent:#b3562a;
+  --text-main:#26291f; --text-soft:#5a5f4f;
+  --obs:#2b5a8c; --obs-light:#e3ecf4;
+  --rst:#b3562a; --rst-light:#fbeee2;
+  --neo:#6b3fa0; --neo-light:#eee6f6;
+  --aty:#2f8a7a; --aty-light:#e2f3ef;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Lora',Georgia,serif;background:var(--cream);color:var(--text-main);line-height:1.5;}
+h1,h2,h3,h4{font-family:'IBM Plex Mono',monospace;color:var(--forest-dark);letter-spacing:.02em;}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px 70px;}
+header.hero{background:linear-gradient(135deg,var(--forest-dark),var(--forest));color:#f6f1e6;padding:46px 20px 30px;text-align:center;}
+header.hero h1{color:#fff;font-size:1.7rem;margin:0 0 6px;}
+header.hero p{color:#dfe9de;font-family:'Lora',serif;font-size:.98rem;margin:4px 0;}
+header.hero .src{font-size:.8rem;color:#b9d0bb;margin-top:10px;font-family:'IBM Plex Mono',monospace;}
+nav.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;margin:24px 0;padding:14px 18px;font-size:.88rem;}
+nav.toc h2{font-size:.92rem;margin:0 0 8px;}
+nav.toc .toc-row{display:flex;flex-wrap:wrap;gap:6px 16px;}
+nav.toc a{color:var(--forest);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;}
+nav.toc a:hover{text-decoration:underline;}
+
+.bucket{border-radius:14px;margin:30px 0;overflow:hidden;border:1px solid var(--border);}
+.bucket-head{padding:18px 22px;color:#fff;}
+.bucket-head h2{color:#fff;margin:0 0 4px;font-size:1.25rem;}
+.bucket-head .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;opacity:.85;text-transform:uppercase;letter-spacing:.07em;}
+.bucket-body{background:var(--cream-card);padding:16px 22px 22px;}
+.bucket-hy{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 18px;}
+@media(max-width:620px){.bucket-hy{grid-template-columns:1fr;}}
+.hy-box{border-radius:8px;padding:10px 13px;font-size:.84rem;}
+.hy-box b.hy-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+.obs .bucket-head{background:var(--obs);} .obs .hy-box{background:var(--obs-light);color:#1b3a57;} .obs .hy-box b{color:var(--obs);}
+.rst .bucket-head{background:var(--rst);} .rst .hy-box{background:var(--rst-light);color:#6e331a;} .rst .hy-box b{color:var(--rst);}
+.neo .bucket-head{background:var(--neo);} .neo .hy-box{background:var(--neo-light);color:#452869;} .neo .hy-box b{color:var(--neo);}
+.aty .bucket-head{background:var(--aty);} .aty .hy-box{background:var(--aty-light);color:#1c5349;} .aty .hy-box b{color:var(--aty);}
+
+.subbucket{border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:12px 16px 14px;background:#fffefb;}
+.subbucket h3{font-size:.95rem;margin:0 0 2px;}
+.obs .subbucket h3{color:var(--obs);} .rst .subbucket h3{color:var(--rst);} .neo .subbucket h3{color:var(--neo);} .aty .subbucket h3{color:var(--aty);}
+.sub-note{font-size:.82rem;color:var(--text-soft);margin:0 0 10px;font-style:italic;}
+
+.dz-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:700px){.dz-grid{grid-template-columns:1fr;}}
+.dz-card{background:var(--sage-light);border-radius:7px;padding:8px 11px;font-size:.84rem;}
+.obs .dz-card{background:var(--obs-light);} .rst .dz-card{background:var(--rst-light);} .neo .dz-card{background:var(--neo-light);} .aty .dz-card{background:var(--aty-light);}
+.dz-name{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.8rem;color:var(--forest-dark);display:block;margin-bottom:2px;}
+.dz-ids{font-size:.81rem;}
+.dz-ids b{color:var(--text-main);}
+
+.spectrum{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.82rem;margin:6px 0;}
+.spectrum .step{background:#fff;border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;max-width:100%;}
+.spectrum .arrow{color:var(--text-soft);}
+
+.pearl{background:#fdf2e4;border-left:4px solid var(--accent);border-radius:6px;padding:9px 13px;margin:12px 0;font-size:.86rem;}
+.pearl-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+.back-btn{position:fixed;top:14px;left:14px;background:var(--forest-dark);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;z-index:50;}
+footer{text-align:center;padding:26px;font-size:.78rem;color:var(--text-soft);}
+.master-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0;}
+.master-table th{background:var(--forest-dark);color:#fff;padding:6px 9px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.7rem;}
+.master-table td{padding:6px 9px;border-bottom:1px solid var(--border);}
+.master-table tr:nth-child(even) td{background:var(--sage-light);}
+
+.sidenav-toggle{position:fixed;top:14px;right:14px;background:var(--forest);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;cursor:pointer;z-index:50;}
+.sidenav-panel{position:fixed;top:56px;right:14px;background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:14px;max-height:78vh;overflow-y:auto;width:250px;display:none;z-index:49;box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.sidenav-panel.open{display:block;}
+.sidenav-panel h4{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin:12px 0 4px;}
+.sidenav-panel h4:first-child{margin-top:0;}
+.sidenav-panel a{display:block;font-size:.82rem;color:var(--text-main);text-decoration:none;padding:4px 6px;border-radius:5px;}
+.sidenav-panel a:hover{background:var(--sage-light);}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">← Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">Sections ☰</button>
+<div class="sidenav-panel" id="sidenavPanel">
+<h4>Obstructive</h4>
+<a href="#obs-chronic-bronchitis">Chronic Bronchitis</a>
+<a href="#obs-emphysema">Emphysema (+ AAT)</a>
+<a href="#obs-asthma">Asthma</a>
+<a href="#obs-bronchiectasis-cf">Bronchiectasis &amp; CF</a>
+<h4>Restrictive</h4>
+<a href="#rst-fibrosing">Fibrosing / IIPs</a>
+<a href="#rst-collagen">Collagen Vascular Disease</a>
+<a href="#rst-pneumoconioses">Pneumoconioses</a>
+<a href="#rst-granulomatous">Granulomatous Disease</a>
+<a href="#rst-vasculitis">Pulmonary Vasculitis</a>
+<a href="#rst-eosinophilic">Eosinophilic Disease</a>
+<a href="#rst-smoking">Smoking-Related Spectrum</a>
+<a href="#rst-drug-other">Drug/Therapy-Related &amp; Other</a>
+<h4>Neoplasm</h4>
+<a href="#neo-carcinomas">The Four Primary Carcinomas</a>
+<a href="#neo-precursor">Precursor Lesions</a>
+<a href="#neo-neuroendocrine">Neuroendocrine Spectrum</a>
+<a href="#neo-other-tumors">Other Lung Tumors</a>
+<a href="#neo-mediastinal">Mediastinal Tumors</a>
+<a href="#neo-mesothelioma">Pleural Neoplasm — Mesothelioma</a>
+<h4>Atypical</h4>
+<a href="#aty-congenital">Congenital Anomalies</a>
+<a href="#aty-atelectasis">Atelectasis</a>
+<a href="#aty-edema-ards">Pulmonary Edema &amp; ARDS</a>
+<a href="#aty-effusion">Pleural Effusion</a>
+<a href="#aty-pneumothorax">Pneumothorax</a>
+<a href="#aty-vascular">Vascular Pathology</a>
+<h4>Reference</h4>
+<a href="#reference">Imaging &amp; Lab Quick-Reference</a>
+</div>
+
+
+<header class="hero">
+<h1>Respiratory Pathology — Bucket Cheat Sheet</h1>
+<p>Obstructive · Restrictive · Neoplasm · Atypical</p>
+<p style="font-size:.88rem;">Core pathology built from Dr. Walter L. Kemp, MD, PhD's full lecture series (Obstructive, Restrictive, Neoplasia &amp; Pleura, Vascular Disorders)</p>
+<p style="font-size:.82rem;">Reinforced with high-yield clinical/imaging/lab buzzwords from Dr. Dennis Kinder, MD, FACP's COPD &amp; Asthma, CF &amp; Bronchiectasis, and ILD/Sarcoidosis/Pneumoconiosis guides, plus the Lower Respiratory Radiology guide</p>
+<p class="src">Quick-reference organizational guide — not a replacement for the full study guides</p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc"><h2>Jump to a bucket</h2>
+<div class="toc-row">
+<a href="#obstructive">🫁 Obstructive</a>
+<a href="#restrictive">🧵 Restrictive</a>
+<a href="#neoplasm">🧬 Neoplasm</a>
+<a href="#atypical">❓ Atypical</a>
+<a href="#reference">📎 Imaging &amp; Lab Reference</a>
+</div>
+</nav>
+
+<div class="pearl"><span class="pearl-label">How to use this</span>
+Every disease you've covered fits in one of these four buckets. Each bucket starts with its own basic mechanism + high-yield labs/buzzwords — know that cold, and most of the specific diseases underneath become "exceptions/flavors" of that one idea rather than isolated facts.</div>
+
+<!-- ================= OBSTRUCTIVE ================= -->
+<section class="bucket obs" id="obstructive">
+<div class="bucket-head">
+<span class="tag">Bucket 1</span>
+<h2>Obstructive Lung Disease</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Can <b>fill</b> the lungs fine but can't <b>empty</b> them — airway narrowing / collapse / mucus / loss of recoil traps air distally.</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>FEV1/FVC &lt; 0.7</b> (FVC preserved, FEV1 ↓↓). Buzzwords: "pink puffer" (emphysema) vs "blue bloater" (chronic bronchitis).</div>
+</div>
+
+<div class="subbucket" id="obs-chronic-bronchitis">
+<h3>Chronic Bronchitis</h3>
+<p class="sub-note">Mucus-hypersecretion problem — clinical diagnosis, not histologic</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Chronic Bronchitis</span><span class="dz-ids">Productive cough <b>≥3mo x 2yr</b>. Goblet cell hyperplasia/hypertrophy, ↑<b>Reid index</b>, ciliary damage. <b>Blue bloater</b> — cyanosis, common infections, <b>common</b> cor pulmonale.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="obs-emphysema">
+<h3>Emphysema (+ AAT deficiency)</h3>
+<p class="sub-note">Tissue-destruction problem — irreversible airspace enlargement, <b>no fibrosis</b>, loss of elastic recoil → dynamic airway collapse on exhale. "Pink puffer," rare cor pulmonale. <b>GOLD stage I–IV</b> by FEV1% predicted (all stages FEV1/FVC&lt;70%). CXR: hyperinflation, flattened diaphragms, ↑retrosternal space, bullae — but can be <b>completely normal</b> in mild-moderate disease.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Centriacinar</span><span class="dz-ids"><b>Smoking</b>. Resp. bronchioles only. <b>Upper lobes</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Panacinar</span><span class="dz-ids"><b>AAT deficiency</b>. Entire acinus. <b>Lower lobes/bases</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Paraseptal (distal)</span><span class="dz-ids">Pleural surface → <b>bullae</b> → young males, spontaneous pneumothorax.</span></div>
+<div class="dz-card"><span class="dz-name">Irregular</span><span class="dz-ids">Adjacent to scarring; variable distribution.</span></div>
+<div class="dz-card"><span class="dz-name">α1-Antitrypsin Deficiency</span><span class="dz-ids"><b>PiZZ</b> genotype. Panacinar/lower-lobe emphysema + <b>cirrhosis</b> (misfolded protein trapped in hepatocytes). Only setting with pure emphysema, no bronchitis, if non-smoker.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="obs-asthma">
+<h3>Asthma</h3>
+<p class="sub-note">Episodic, <b>reversible</b> bronchoconstriction from hyper-reactive airways — eosinophil-rich in both forms</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Atopic Asthma</span><span class="dz-ids">IgE/<b>TH2</b>-mediated (IL-4/IL-13→IgE+mucin, IL-5→eosinophils). FHx of allergy common. Allergens/foods.</span></div>
+<div class="dz-card"><span class="dz-name">Non-atopic Asthma</span><span class="dz-ids">No IgE sensitization. Viral illness, pollutants, cold, exercise, aspirin (↓prostaglandin).</span></div>
+<div class="dz-card"><span class="dz-name">Pathology (both)</span><span class="dz-ids"><b>Curschmann spirals</b> (mucus plugs), <b>Charcot-Leyden crystals</b> (eosinophil MBP), smooth muscle hyperplasia, sub-basement-membrane fibrosis. <b>Labs</b>: peripheral/sputum eosinophilia + ↑IgE (vs. COPD's neutrophil-predominant pattern).</span></div>
+<div class="dz-card"><span class="dz-name">Status Asthmaticus</span><span class="dz-ids">Severe exacerbation — breathe in, can't breathe out → life-threatening hyperinflation.</span></div>
+<div class="dz-card"><span class="dz-name">Samter's Triad (AERD)</span><span class="dz-ids">Asthma + ASA/NSAID sensitivity + nasal polyps. NSAID shunts arachidonic acid → leukotriene pathway → severe bronchospasm.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="obs-bronchiectasis-cf">
+<h3>Bronchiectasis &amp; Cystic Fibrosis</h3>
+<p class="sub-note">Obstruction + infection cycle → permanent airway damage</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Bronchiectasis</span><span class="dz-ids"><b>Permanent</b> dilation of bronchi/bronchioles. <b>Fetid sputum</b>, hemoptysis. Causes: CF, Kartagener/PCD, severe infection, obstruction. Complications: cor pulmonale, <b>amyloidosis</b>. <b>HRCT</b>: no bronchial tapering, bronchi visible in peripheral 1cm, lumen diameter &gt; adjacent artery ("signet ring"). <b>Lobe → likely cause</b>: upper lobe = CF, lower lobe = aspiration, RML/lingula = MAI, central = ABPA.</span></div>
+<div class="dz-card"><span class="dz-name">Cystic Fibrosis</span><span class="dz-ids"><b>CFTR</b> loss → ↑ENaC → dehydrated viscous secretions (airway/pancreas/gut); sweat duct = opposite (↓Cl⁻/Na⁺ reabsorption) → <b>salty sweat test</b>. Meconium ileus, <i>Pseudomonas</i> pneumonia, male infertility, biliary cirrhosis. <b>ΔF508</b> (~70% of alleles) = Class II mutation — misfolded CFTR never reaches the cell surface. Sweat test uses <b>pilocarpine iontophoresis</b> to stimulate sweat for Cl⁻ measurement.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= RESTRICTIVE ================= -->
+<section class="bucket rst" id="restrictive">
+<div class="bucket-head">
+<span class="tag">Bucket 2</span>
+<h2>Restrictive Lung Disease</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Scarring (usually) impairs <b>filling and emptying equally</b> — fibrosis is the shared histologic theme (exception: PAP = filling, not scarring).</div>
+<div class="hy-box"><b class="hy-label">High yield</b>↓FEV1 <b>and</b> ↓FVC → <b>normal ratio</b>. Key mediator <b>TGF-β</b>. Gross: cobblestone pleura, honeycomb change. Complication: pulm HTN → cor pulmonale.</div>
+</div>
+
+<div class="subbucket" id="rst-fibrosing">
+<h3>Fibrosing / Idiopathic Interstitial Pneumonias</h3>
+<p class="sub-note">The single fact that explains the whole group: <b>UIP = different-age lesions; NSIP = same-age lesions</b></p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">UIP / IPF</span><span class="dz-ids">M&gt;F, &gt;50y, smoking-assoc. <b>Temporal heterogeneity</b> — fibroblastic foci (in <b>septa</b>) + chronic fibrosis side by side. <b>Subpleural</b> onset. Telomerase/MUC5B/surfactant gene mutations. Worse prognosis. <b>DLCO low</b>; CXR bibasilar <b>honeycomb</b>/reticulonodular. <b>Clubbing</b> — IPF is the ILD most classically tied to it.</span></div>
+<div class="dz-card"><span class="dz-name">NSIP</span><span class="dz-ids">Non-smoking females, 6th decade. Autoimmune (esp. <b>RA</b>). Lesions all <b>same age</b>. Better prognosis than UIP. Imaging: <b>bibasilar ground-glass or reticular</b> changes.</span></div>
+<div class="dz-card"><span class="dz-name">COP (old: BOOP)</span><span class="dz-ids">No identifiable cause. <b>Masson bodies</b> — plugs <b>within airspaces</b> (vs. UIP's septal foci). Looks like pneumonia but <b>fails multiple antibiotic courses</b>; patchy, <b>migratory</b> infiltrates — the clinical tell.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="rst-collagen">
+<h3>Collagen Vascular Disease-Associated</h3>
+<p class="sub-note">Autoimmune disease → serositis — pleuritis/effusion common to all three</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Rheumatoid Arthritis</span><span class="dz-ids">Pleuritis, pneumonitis/fibrosis, <b>rheumatoid nodules</b>. <b>Caplan syndrome</b> = RA nodules + coal exposure. <b>Necrobiotic nodules</b> (upper zones); pleural effusion with <b>very low glucose</b> — mimics empyema.</span></div>
+<div class="dz-card"><span class="dz-name">Systemic Sclerosis</span><span class="dz-ids">Pleuritis + <b>NSIP pattern</b>. <b>SCL-70 antibody</b>; CREST syndrome; arterial intimal thickening → severe pulm HTN; ↑bronchogenic CA risk.</span></div>
+<div class="dz-card"><span class="dz-name">SLE</span><span class="dz-ids">Pleuritis/effusions, mild-severe pneumonitis.</span></div>
+<div class="dz-card"><span class="dz-name">Mixed Connective Tissue Disease</span><span class="dz-ids"><b>Anti-RNP</b> antibody. Lung involvement in <b>75%</b> of patients.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="rst-pneumoconioses">
+<h3>Pneumoconioses</h3>
+<p class="sub-note">Inorganic/organic particle exposure — ask occupation/hobbies. Cancer risk differs: coal = none, silica &amp; asbestos = increased</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Coal Worker's Pneumoconiosis</span><span class="dz-ids">"<b>Coal macule</b>" (dust-laden macrophages in bronchiolar walls). <b>Anthracite</b> most toxic; underground &gt; surface miners. Anthracosis (pigment only) → simple (small nodules) → complicated/PMF. <b>No ↑cancer risk</b>. + RA = Caplan syndrome (large cavitary nodules).</span></div>
+<div class="dz-card"><span class="dz-name">Silicosis</span><span class="dz-ids">Sandblasting/mining. <b>Upper lobe, subpleural</b>. Whorled <b>silicotic nodules</b> (hyalinized collagen). Hilar <b>"eggshell" calcification</b> — near-pathognomonic. Chronic (≥20y)/accelerated (3-10y)/acute (6mo-2y, alveolar filling) forms. <b>↑cancer</b> + <b>↑TB risk</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Asbestosis</span><span class="dz-ids">Mining/insulation/shipyard. <b>Ferruginous bodies</b>. Honeycomb change; rounded atelectasis w/ <b>"comet tail" sign</b>. <b>↑cancer</b> (bronchogenic CA + mesothelioma). Chrysotile (curved, common, less damaging) vs <b>amphibole</b> (straight, drives disease). ~50x risk w/ smoking (synergistic).</span></div>
+<div class="dz-card"><span class="dz-name">Pleural Plaques</span><span class="dz-ids">Marker of asbestos <b>exposure</b> (not asbestosis itself) — no ferruginous bodies, don't themselves cause disease.</span></div>
+<div class="dz-card"><span class="dz-name">Beryllium</span><span class="dz-ids"><b>Non-caseating granulomas</b> — sarcoid mimicker. <b>BeLPT</b> (beryllium lymphocyte proliferation test, blood/BAL) is what distinguishes it from sarcoid.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="rst-granulomatous">
+<h3>Granulomatous Disease</h3>
+<p class="sub-note">Sarcoid granulomas = crisp/well-formed (TH1); HP granulomas = ill-defined/peribronchiolar</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Sarcoidosis</span><span class="dz-ids">Unknown etiology, <b>TH1</b>-driven. <b>Non-caseating granulomas</b>, Schaumann/asteroid bodies. Hilar lymphadenopathy. <b>↑ACE</b>, hypercalcemia (macrophage vit-D activation). Erythema nodosum (<b>no</b> granulomas). Mikulicz syndrome (eye+parotid). <b>Löfgren syndrome</b> — erythema nodosum + arthritis + bilateral hilar nodes, pathognomonic, favorable prognosis. CXR <b>stages 0–4</b> (0 = normal → 4 = fibrosis/honeycomb). Erythema nodosum biopsy is <b>not useful</b> — no granulomas in the lesion itself. ACE ↑ in 60% but nonspecific. Neuro: CN <b>VII, II, VIII</b> most affected. Death mostly from <b>cardiac arrhythmia</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Hypersensitivity Pneumonitis</span><span class="dz-ids">Inhaled organic antigen — Farmer's lung, pigeon/bird breeder's lung, humidifier lung, air conditioner lung, isocyanate-induced. Ill-defined <b>peribronchiolar</b> granulomas, ↑CD4/CD8. Acute = fever + restrictive PFTs; chronic = progressive dyspnea/↓TLC.</span></div>
+<div class="dz-card"><span class="dz-name">Byssinosis</span><span class="dz-ids">Cotton/flax/hemp dust. <b>NOT immune-mediated</b> (contrast w/ HP) — no sensitization needed. Chest tightness worst by <b>end of Monday</b> ("Monday fever"), improves over the weekend.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="rst-vasculitis">
+<h3>Pulmonary Vasculitis</h3>
+<p class="sub-note">Lung-kidney syndromes — distinguish by nasal/sinus involvement and antibody</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Granulomatosis w/ Polyangiitis (Wegener's)</span><span class="dz-ids"><b>C-ANCA</b>+. Upper airway/sinus disease + renal involvement + hemoptysis. Biopsy <b>lung/nasal mucosa</b>, NOT kidney.</span></div>
+<div class="dz-card"><span class="dz-name">Eosinophilic GPA (Churg-Strauss)</span><span class="dz-ids">Asthma + eosinophilia + necrotizing vasculitis — classically <b>unmasked</b> when steroids are withdrawn in an asthmatic started on a leukotriene receptor antagonist.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="rst-eosinophilic">
+<h3>Eosinophilic Disease</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Löffler Syndrome</span><span class="dz-ids">Migrating helminth larvae (<i>Strongyloides</i>). Transient, self-limited.</span></div>
+<div class="dz-card"><span class="dz-name">Allergic Bronchopulmonary Aspergillosis</span><span class="dz-ids">Allergic (Type I/III) reaction to <i>Aspergillus</i> in pre-existing bronchiectasis. Brownish sputum. CXR: <b>"tram-track"</b> bronchial markings. Very high <b>IgE</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Acute Eosinophilic Pneumonia</span><span class="dz-ids">Rapid fever/dyspnea/<b>respiratory failure</b>. BAL eosinophilia. Histology = <b>diffuse alveolar damage</b>; CXR <b>mimics ARDS</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Chronic Eosinophilic Pneumonia</span><span class="dz-ids">Diagnosis of <b>exclusion</b>. Middle-aged women, 50% w/ asthma. CXR: <b>"photonegative of pulmonary edema"</b> — peripheral infiltrates, central sparing. High ESR.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="rst-smoking">
+<h3>Smoking-Related Spectrum</h3>
+<p class="sub-note">Same exposure, increasing severity</p>
+<div class="spectrum">
+<span class="step">Anthracosis (pigment only)</span><span class="arrow">→</span>
+<span class="step">Resp. bronchiolitis / RB-ILD (pigment + early fibrosis; upper lobes, centrilobular ground-glass nodules, <b>no fibrosis</b>)</span><span class="arrow">→</span>
+<span class="step">DIP (diffuse macrophage filling; &gt;80% smokers)</span>
+</div>
+</div>
+
+<div class="subbucket" id="rst-drug-other">
+<h3>Drug/Therapy-Related &amp; Other</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Amiodarone</span><span class="dz-ids"><b>Most common</b> drug-related cause at autopsy. Risk tracks with <b>cumulative dose</b> (&gt;400mg/day) + duration (months).</span></div>
+<div class="dz-card"><span class="dz-name">Radiation / Bleomycin / Busulfan</span><span class="dz-ids">Direct tissue damage → scarring.</span></div>
+<div class="dz-card"><span class="dz-name">Nitrofurantoin / Methotrexate</span><span class="dz-ids"><b>Nitrofurantoin</b>: acute/subacute (hypersensitivity-like) or chronic (lifetime cumulative dose) forms. <b>Methotrexate</b>: also an RA treatment that can itself cause lung disease.</span></div>
+<div class="dz-card"><span class="dz-name">Musculoskeletal (kyphoscoliosis)</span><span class="dz-ids">Chest-wall mechanics restrict breathing with <b>structurally normal</b> lung parenchyma.</span></div>
+<div class="dz-card"><span class="dz-name">Pulmonary Langerhans Cell Histiocytosis</span><span class="dz-ids">Young smoking males. One of the only <b>non-restrictive</b> ILDs (↑lung volume). <b>Birbeck granules</b> ("tennis rackets") on EM. Posterior pituitary → <b>diabetes insipidus</b> + lytic bone lesions. 10% present with pneumothorax.</span></div>
+<div class="dz-card"><span class="dz-name">Pulmonary Alveolar Proteinosis</span><span class="dz-ids"><b>GM-CSF</b> defect (autoimmune most common). Surfactant fills airspaces — <b>granular/textured</b> (vs. smooth edema). Gelatinous sputum. CXR: <b>"crazy-paving"</b> pattern (not specific). 2° causes: silicosis.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= NEOPLASM ================= -->
+<section class="bucket neo" id="neoplasm">
+<div class="bucket-head">
+<span class="tag">Bucket 3</span>
+<h2>Neoplasm</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>4 primary carcinomas (squamous, adeno, small cell, large cell) + a neuroendocrine spectrum + mediastinal/pleural tumors. All 4 carcinomas spread <b>lymphatically</b> (sarcomas spread hematogenously).</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>Central</b>: squamous, small cell. <b>Peripheral</b>: adenocarcinoma. <b>Virchow node</b> = L supraclavicular. Old framework: SCLC (stop surgery, always mets) vs NSCLC.</div>
+</div>
+
+<div class="subbucket" id="neo-carcinomas">
+<h3>The Four Primary Carcinomas</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Squamous Cell Carcinoma</span><span class="dz-ids"><b>Central</b>, cavitates. <b>Keratin pearls</b>, intercellular bridges. <b>PTH-rP</b> → hypercalcemia. <b>TP53</b> (most common), FGFR1. Strong smoking assoc.</span></div>
+<div class="dz-card"><span class="dz-name">Adenocarcinoma</span><span class="dz-ids"><b>Peripheral</b>. Glandular formation. DIC, <b>Trousseau syndrome</b>. <b>EGFR, ALK</b> (targetable), ROS1/HER2/c-MET. <b>Not</b> strongly smoking-linked; most common overall, esp. young non-smokers.</span></div>
+<div class="dz-card"><span class="dz-name">Small Cell Carcinoma</span><span class="dz-ids">Neuroendocrine. Often central. High N:C ratio + <b>nuclear molding</b>. <b>ACTH</b> (Cushing), <b>SIADH</b>. ↑RB mutations, ↓KRAS vs NSCLC. Chromogranin/synaptophysin/CD56+. <b>Most aggressive</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Large Cell Carcinoma</span><span class="dz-ids">Diagnosis of <b>exclusion</b> — no squamous/glandular/neuroendocrine features.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="neo-precursor">
+<h3>Precursor Lesions</h3>
+<p class="sub-note">Lack invasion — that's what separates them from true carcinoma</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Squamous Dysplasia / CIS</span><span class="dz-ids">Smoke → metaplasia → dysplasia → CIS (no basement membrane invasion).</span></div>
+<div class="dz-card"><span class="dz-name">Atypical Adenomatous Hyperplasia</span><span class="dz-ids">Glandular architecture, atypical but not carcinoma.</span></div>
+<div class="dz-card"><span class="dz-name">Adenocarcinoma In Situ (AIS)</span><span class="dz-ids"><b>Lepidic growth</b> along normal septa, <b>no fibrosis</b>, no invasion. Caution: can hide an invasive focus elsewhere.</span></div>
+<div class="dz-card"><span class="dz-name">DIPNECH</span><span class="dz-ids">Possible precursor to small cell carcinoma &amp; carcinoid.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="neo-neuroendocrine">
+<h3>Neuroendocrine Spectrum</h3>
+<div class="spectrum">
+<span class="step">Typical carcinoid (salt-&amp;-pepper chromatin, bland, &lt;40y, collar-button lesion, ± MEN)</span><span class="arrow">→</span>
+<span class="step">Atypical carcinoid</span><span class="arrow">→</span>
+<span class="step">Large cell neuroendocrine CA</span><span class="arrow">→</span>
+<span class="step">Small cell CA (most aggressive)</span>
+</div>
+</div>
+
+<div class="subbucket" id="neo-other-tumors">
+<h3>Other Lung Tumors</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Hamartoma</span><span class="dz-ids">Benign but <b>clonal</b>. Cartilage+fat+fibrous+vessels. Classic <b>incidental</b> imaging finding.</span></div>
+<div class="dz-card"><span class="dz-name">LAM</span><span class="dz-ids"><b>Young females</b>. <b>TSC2</b> loss-of-function. Smooth muscle + melanocytic markers. Emphysema-like change — honeycombing described as lungs looking like <b>"Swiss cheese"</b>; <b>chylous pleural effusions</b>; spontaneous pneumothorax.</span></div>
+<div class="dz-card"><span class="dz-name">Inflammatory Myofibroblastic Tumor</span><span class="dz-ids"><b>Children</b>. Can carry <b>ALK</b> alteration.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="neo-mediastinal">
+<h3>Mediastinal Tumors — by Location</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Anterior</span><span class="dz-ids">Thymoma (± myasthenia gravis), teratoma, lymphoma, thyroid/parathyroid, metastatic.</span></div>
+<div class="dz-card"><span class="dz-name">Middle</span><span class="dz-ids">Bronchogenic cyst, pericardial cyst, lymphoma.</span></div>
+<div class="dz-card"><span class="dz-name">Posterior</span><span class="dz-ids">Neurogenic (schwannoma — sympathetic chain), lymphoma, metastatic, gastroenteric hernia.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="neo-mesothelioma">
+<h3>Pleural Neoplasm — Mesothelioma</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Mesothelioma</span><span class="dz-ids"><b>Asbestos</b> "until proven otherwise." <b>BAP1</b> mutation. <b>Encases</b> the lung (not a discrete mass). Epithelial / sarcomatous / <b>biphasic</b>. Needs special IHC stains to confirm.</span></div>
+</div>
+</div>
+
+<div class="pearl"><span class="pearl-label">Paraneoplastic pairings</span>Squamous → PTH-rP (hypercalcemia). Small cell → ACTH (Cushing) + ADH (SIADH), also Lambert-Eaton. Adenocarcinoma → hypercoagulable (DIC, Trousseau). Pancoast (apical) tumor → Horner syndrome and/or SVC syndrome.</div>
+</div>
+</section>
+
+<!-- ================= ATYPICAL ================= -->
+<section class="bucket aty" id="atypical">
+<div class="bucket-head">
+<span class="tag">Bucket 4</span>
+<h2>Atypical / Other</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Doesn't fit an obstructive/restrictive PFT pattern or a tumor — developmental anomalies, acute collapse/fluid/air processes, and primary pleural-space disease.</div>
+<div class="hy-box"><b class="hy-label">High yield</b>Think mechanically: what's blocking, compressing, filling, or leaking — the mechanism basically names the disease.</div>
+</div>
+
+<div class="subbucket" id="aty-congenital">
+<h3>Congenital Anomalies</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Pulmonary Hypoplasia</span><span class="dz-ids">Never reaches normal size (≠ atrophy, which shrinks after reaching normal size).</span></div>
+<div class="dz-card"><span class="dz-name">Foregut Cysts</span><span class="dz-ids">Epithelium reveals origin: respiratory (bronchogenic), squamous (esophageal), GI-type (enteric).</span></div>
+<div class="dz-card"><span class="dz-name">Pulmonary Sequestration</span><span class="dz-ids">Connected to aorta/branches, <b>no airway connection</b>. Extralobar = usually asymptomatic. Intralobar = pneumonia/bronchiectasis risk.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-atelectasis">
+<h3>Atelectasis</h3>
+<p class="sub-note">Collapse from within / without / can't-fill-at-all</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Resorptive</span><span class="dz-ids">Airway blockage (tumor, mucous plug, foreign body) — trapped air resorbed, nothing refills. Mediastinum shifts <b>toward</b> the collapse.</span></div>
+<div class="dz-card"><span class="dz-name">Compressive</span><span class="dz-ids">Pneumothorax, hemothorax, effusion — external compression. Mediastinum shifts <b>away</b> from the involved lung.</span></div>
+<div class="dz-card"><span class="dz-name">Contraction</span><span class="dz-ids">Scarring/ILD prevents filling in the first place.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-edema-ards">
+<h3>Pulmonary Edema &amp; ARDS</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Hemodynamic Edema</span><span class="dz-ids">↑Hydrostatic (L heart failure, volume overload) or ↓oncotic (hypoalbuminemia, nephrotic syndrome, liver disease). Homogeneous, pale eosinophilic fluid. CXR: <b>Kerley A/B/C lines</b> (interstitial edema). Chronic → "<b>heart failure cells</b>" (hemosiderin-laden macrophages, Prussian blue+); gross <b>brown induration</b>.</span></div>
+<div class="dz-card"><span class="dz-name">ARDS / Diffuse Alveolar Damage</span><span class="dz-ids"><b>Non-cardiogenic</b> edema. Neutrophil-mediated injury → <b>hyaline membranes</b>. Abrupt hypoxemia + bilateral infiltrates, poor response to ventilation. Initial CXR can be <b>normal in the first 24h</b>. No cause found = <b>acute interstitial pneumonia</b> (Hamman-Rich) — smoking is <b>not</b> a risk factor; ~59y avg age; resp failure after ~3wk of illness; bimodal course (60% die within 6mo vs. survivors regain full lung function).</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-effusion">
+<h3>Pleural Effusion</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Transudate (hydrothorax)</span><span class="dz-ids">CHF, volume overload — easily resorbed, least likely to scar.</span></div>
+<div class="dz-card"><span class="dz-name">Exudate</span><span class="dz-ids">Infection, neoplasm, pulmonary infarction — fibrinous/purulent = most likely to organize into adhesions.</span></div>
+<div class="dz-card"><span class="dz-name">Chylothorax</span><span class="dz-ids">Thoracic duct/lymphatic obstruction.</span></div>
+<div class="dz-card"><span class="dz-name">Hemorrhagic Effusion</span><span class="dz-ids">Raises concern for <b>malignancy</b>.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-pneumothorax">
+<h3>Pneumothorax</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Tension Pneumothorax</span><span class="dz-ids"><b>Ball-and-valve</b> mechanism — air in, can't get out. Life-threatening; needs urgent decompression.</span></div>
+<div class="dz-card"><span class="dz-name">Non-Tension / Spontaneous</span><span class="dz-ids">Ruptured bleb/bulla — classically <b>young males</b>; or 2° to trauma.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-vascular">
+<h3>Vascular Pathology</h3>
+<p class="sub-note">Thrombus (stays put) vs. embolus (travels) — <b>Virchow's triad</b>: endothelial injury + stasis + hypercoagulability</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Pulmonary Thromboembolism</span><span class="dz-ids">Source: deep leg veins &gt;&gt; pelvic &gt; upper extremity. <b>Peripheral</b>: wedge infarct, pleuritic pain — not very lethal itself but a <b>warning sign</b> for a future one. <b>Massive/saddle</b> (≥60% obstruction): sudden death. <b>Lines of Zahn</b> (platelet/fibrin + RBC bands) — more arterial. Organizing/recanalized clot → chronic thromboembolic pulm HTN.</span></div>
+<div class="dz-card"><span class="dz-name">Fat / Bone Marrow Emboli</span><span class="dz-ids"><b>Fat embolism syndrome</b>: long bone fracture, pancreatitis → mental status change + dyspnea + petechiae. <b>Bone marrow emboli</b>: CPR/rib fracture, or bone infarct (sickle cell) — hematopoietic cells + adipose, no fracture needed.</span></div>
+<div class="dz-card"><span class="dz-name">Amniotic Fluid Embolism</span><span class="dz-ids">Peripartum. <b>Anucleate squamous cells</b> + mucin (<b>Alcian blue</b>+, not Congo red). High maternal mortality, DIC.</span></div>
+<div class="dz-card"><span class="dz-name">Septic / Cholesterol / Other Emboli</span><span class="dz-ids"><b>Septic</b> — from endocarditis, neutrophils around bacterial colonies. <b>Cholesterol</b> — plaque rupture, needle-shaped clefts. <b>Tumor</b> — renal cell &amp; hepatocellular CA invade vessels directly. <b>Paradoxical</b> — venous embolus crosses PFO/ASD to systemic side. <b>Air</b> — ~100mL tolerated on right; one bubble on left can infarct.</span></div>
+<div class="dz-card"><span class="dz-name">Pulmonary Hypertension</span><span class="dz-ids">5 categories: arterial (idiopathic), <b>left heart disease</b> (e.g., mitral stenosis), lung disease/hypoxia, <b>chronic thromboembolic</b>, unclear (OSA, autoimmune). 2° pulm artery atherosclerosis. <b>Plexiform lesion</b> (classic, often not actually seen) → RVH → cor pulmonale.</span></div>
+<div class="dz-card"><span class="dz-name">Diffuse Pulmonary Hemorrhage</span><span class="dz-ids"><b>Goodpasture syndrome</b> — anti-GBM vs. α3 chain of type IV collagen, lung + kidney, <b>no nasal/sinus symptoms</b> (vs. GPA/Wegener's). <b>GPA</b> also causes it. <b>Idiopathic pulmonary hemosiderosis</b> — hemosiderin-laden macrophages, spares the kidney (vs. Goodpasture), <b>increased DLCO</b> (outlier — CO taken up by interstitial Hgb). <b>Prematurity</b> — distinct, non-immune neonatal cause.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="subbucket" id="reference" style="margin-top:28px;">
+<h3 style="color:var(--forest);">Imaging &amp; Lab Quick-Reference</h3>
+<p class="sub-note">The same buzzword/pattern, collected across all four buckets</p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Imaging buzzwords</span><span class="dz-ids"><b>Honeycombing</b> — UIP/IPF, asbestosis, end-stage ILD. <b>Ground-glass</b> — NSIP, RB-ILD, HP, acute processes. <b>Eggshell calcification</b> — silicosis (also sarcoid). <b>Comet-tail sign</b> — asbestosis (rounded atelectasis). <b>Crazy-paving</b> — PAP. <b>Tram-track</b> — ABPA. <b>Signet ring</b> — bronchiectasis (HRCT). <b>Kerley B lines</b> — interstitial edema. <b>"Photonegative of pulmonary edema"</b> — chronic eosinophilic PNA. <b>"Swiss cheese" lung</b> — LAM. <b>Collar-button lesion</b> — carcinoid. <b>"Cannonball" lesions</b> — hematogenous mets.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Lab / marker glossary</span><span class="dz-ids"><b>ACE</b> — sarcoid (↑60%, nonspecific). <b>IgE</b> — asthma, markedly higher in ABPA. <b>Eosinophilia</b> — asthma, ABPA, Churg-Strauss, Löffler, eosinophilic pneumonias. <b>C-ANCA</b> — Wegener's/GPA. <b>Anti-GBM</b> — Goodpasture. <b>BeLPT</b> — berylliosis. <b>SCL-70</b> — scleroderma. <b>Anti-RNP</b> — MCTD. <b>Sweat chloride</b> — CF. <b>D-dimer</b> — PE (good negative predictive value only). <b>DLCO ↑</b> — idiopathic pulmonary hemosiderosis (outlier); <b>DLCO ↓</b> — most ILDs, sarcoid, IPF.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Lobe / segment localization</span><span class="dz-ids"><b>Apical</b> — TB. <b>Right lower lobe</b> — aspiration (gravity + wide/vertical R main bronchus). <b>Upper lobe</b> — CF bronchiectasis, centriacinar emphysema, silicosis. <b>Lower lobe</b> — aspiration bronchiectasis, panacinar emphysema, asbestosis (+subpleural), UIP/IPF (+subpleural). <b>RML/lingula</b> — MAI infection. <b>Central (peribronchial)</b> — ABPA.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Mediastinal shift (atelectasis)</span><span class="dz-ids">Resorptive/obstructive → shifts <b>toward</b> the collapsed lung (volume loss pulls it in). Compressive (pneumothorax/effusion) → shifts <b>away</b> from the involved side (added pressure pushes it out).</span></div>
+</div>
+</div>
+
+<div class="pearl"><span class="pearl-label">Cross-bucket reminders</span>
+Same exposure, different buckets: <b>silica</b> → silicosis (restrictive) <i>and</i> PAP <i>and</i> ↑TB. <b>Smoking</b> → chronic bronchitis + emphysema (obstructive), DIP spectrum (restrictive), squamous/small cell CA (neoplasm). <b>Asbestos</b> → asbestosis (restrictive) + mesothelioma + bronchogenic CA (neoplasm), synergistic with smoking (~50x). Always get an exposure/occupation history — it does real diagnostic work across all four buckets.</div>
+
+</div>
+
+<footer>Bucketed respiratory pathology cheat sheet — quick-reference organizational tool. See the full lecture-based study guides for complete detail.</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('sidenavToggle');
+  var panel = document.getElementById('sidenavPanel');
+  if(!btn || !panel) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    panel.classList.toggle('open');
+  });
+  panel.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){ panel.classList.remove('open'); }
+  });
+  document.addEventListener('click', function(e){
+    if(!panel.contains(e.target) && e.target !== btn){ panel.classList.remove('open'); }
+  });
+})();
+</script>
+</body>
+</html>
