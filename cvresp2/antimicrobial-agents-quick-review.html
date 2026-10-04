@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antimicrobial Agents — Mechanism &amp; Quick-Reference Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f1e6; --cream-card:#fffdf8; --forest-dark:#1f3d2e; --forest:#2f5d43;
+  --sage:#7ba384; --sage-light:#e4ecdf; --border:#d8cfb8; --accent:#b3562a;
+  --text-main:#26291f; --text-soft:#5a5f4f;
+  --steel:#3d5a73; --steel-light:#e5edf1; --steel-mid:#c7d8e2;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Lora',Georgia,serif;background:var(--cream);color:var(--text-main);line-height:1.5;}
+h1,h2,h3,h4{font-family:'IBM Plex Mono',monospace;color:var(--forest-dark);letter-spacing:.02em;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px 70px;}
+header.hero{background:linear-gradient(135deg,var(--forest-dark),var(--forest));color:#f6f1e6;padding:46px 20px 30px;text-align:center;}
+header.hero h1{color:#fff;font-size:1.6rem;margin:0 0 6px;}
+header.hero p{color:#dfe9de;font-family:'Lora',serif;font-size:.95rem;margin:4px 0;}
+header.hero .src{font-size:.78rem;color:#b9d0bb;margin-top:10px;font-family:'IBM Plex Mono',monospace;}
+
+.back-btn{position:fixed;top:14px;left:14px;background:var(--forest-dark);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;z-index:50;}
+
+.pearl{background:#fdf2e4;border-left:4px solid var(--accent);border-radius:6px;padding:9px 13px;margin:22px 0;font-size:.86rem;}
+.pearl-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+section.panel{background:var(--cream-card);border:1px solid var(--border);border-radius:14px;padding:24px 26px;margin:26px 0;}
+section.panel h2{font-size:1.05rem;margin:0 0 4px;color:var(--forest-dark);}
+section.panel .sub{font-size:.82rem;color:var(--text-soft);font-style:italic;margin:0 0 16px;}
+
+/* ---- diagram ---- */
+.diagram-wrap{overflow-x:auto;}
+.diagram-wrap svg{display:block;margin:0 auto;max-width:100%;}
+.dbox-title{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.03em;}
+.dbox-drug{font-family:'Lora',serif;font-size:11.5px;}
+.legend-note{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-soft);text-align:center;margin-top:6px;}
+
+/* ---- scholarRx-style table ---- */
+.rx-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.86rem;}
+.rx-table col.col-drug{width:21%;}
+.rx-table col.col-mech{width:44%;}
+.rx-table col.col-ae{width:35%;}
+.rx-table thead th{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--steel);text-align:left;padding:6px 10px;border-bottom:2px solid var(--steel);background:transparent;
+}
+.rx-table .grp-row td{
+  background:var(--steel-mid);color:var(--forest-dark);font-family:'IBM Plex Mono',monospace;
+  font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;
+}
+.rx-table td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+.rx-table tr.drug-row:nth-child(odd) td{background:var(--steel-light);}
+.rx-table td.drug-name{font-weight:700;color:var(--text-main);}
+.rx-table td.drug-name .cls-tag{display:block;font-weight:400;font-size:.74rem;color:var(--text-soft);font-style:italic;margin-top:2px;}
+.rx-table b.hl{color:var(--accent);}
+
+footer{text-align:center;padding:26px;font-size:.78rem;color:var(--text-soft);}
+
+@media(max-width:700px){
+  .rx-table{font-size:.78rem;}
+  .rx-table col.col-drug{width:26%;}
+  .rx-table col.col-mech{width:40%;}
+  .rx-table col.col-ae{width:34%;}
+  section.panel{padding:18px 14px;}
+}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">← Back to Study Guides</a>
+
+<header class="hero">
+<h1>Antimicrobial Agents</h1>
+<p>Mechanism of Action &middot; Quick-Reference Table</p>
+<p class="src">Built ScholarRx-style from your antimicrobial drug list — cell-wall, protein-synthesis, DNA, and folate-pathway targets</p>
+</header>
+
+<div class="wrap">
+
+<div class="pearl"><span class="pearl-label">How to use this</span>
+Start with the diagram to anchor <i>where</i> each class hits the bacterial cell, then use the table for the drug-level mechanism and adverse-effect detail. The table is grouped the same way the diagram is — by target site, not alphabetically.</div>
+
+<section class="panel">
+<h2>Mechanism of Action — Where Each Class Hits the Bacterial Cell</h2>
+<p class="sub">Five target sites: cell wall, the two ribosomal subunits, DNA gyrase/topoisomerase IV, and the folate synthesis pathway</p>
+<div class="diagram-wrap">
+<svg viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ===== Bacterial cell cross-section ===== -->
+  <!-- cell wall -->
+  <rect x="300" y="140" width="360" height="360" rx="130" fill="#fbeee2" stroke="#b3562a" stroke-width="4" stroke-dasharray="2 5"/>
+  <!-- cell membrane -->
+  <rect x="320" y="160" width="320" height="320" rx="112" fill="#fffdf8" stroke="#2f5d43" stroke-width="3"/>
+  <text x="480" y="134" text-anchor="middle" class="dbox-title" fill="#b3562a">CELL WALL (peptidoglycan)</text>
+
+  <!-- DNA coil (bottom-left of cell interior) -->
+  <g transform="translate(355,400)">
+    <path d="M0,0 C15,-25 35,25 50,0 C65,-25 85,25 100,0" fill="none" stroke="#8c2f2f" stroke-width="4"/>
+    <path d="M0,16 C15,-9 35,41 50,16 C65,-9 85,41 100,16" fill="none" stroke="#8c2f2f" stroke-width="4" opacity=".55"/>
+  </g>
+  <text x="405" y="455" text-anchor="middle" class="dbox-title" fill="#8c2f2f" font-size="10">DNA</text>
+
+  <!-- Ribosome: 50S (top) + 30S (bottom) -->
+  <g transform="translate(560,295)">
+    <ellipse cx="0" cy="0" rx="42" ry="26" fill="#dcebe3" stroke="#2f8a5a" stroke-width="3"/>
+    <text x="0" y="5" text-anchor="middle" class="dbox-title" fill="#1c5c3a" font-size="12">50S</text>
+  </g>
+  <g transform="translate(560,348)">
+    <ellipse cx="0" cy="0" rx="36" ry="22" fill="#fde8d4" stroke="#c07a2b" stroke-width="3"/>
+    <text x="0" y="5" text-anchor="middle" class="dbox-title" fill="#8a4f13" font-size="12">30S</text>
+  </g>
+  <text x="560" y="392" text-anchor="middle" class="dbox-title" fill="#5a5f4f" font-size="10">RIBOSOME</text>
+
+  <!-- Folate pathway mini-diagram -->
+  <g transform="translate(360,195)">
+    <rect x="0" y="-13" width="62" height="24" rx="6" fill="#fff" stroke="#3d5a73" stroke-width="1.5"/>
+    <text x="31" y="4" text-anchor="middle" font-size="10" class="dbox-drug" fill="#3d5a73">PABA</text>
+    <line x1="62" y1="-1" x2="92" y2="-1" stroke="#3d5a73" stroke-width="2"/>
+    <text x="77" y="-9" text-anchor="middle" font-size="13" fill="#8c2f2f">⊣</text>
+    <rect x="92" y="-13" width="62" height="24" rx="6" fill="#fff" stroke="#3d5a73" stroke-width="1.5"/>
+    <text x="123" y="4" text-anchor="middle" font-size="10" class="dbox-drug" fill="#3d5a73">DHF</text>
+    <line x1="154" y1="-1" x2="184" y2="-1" stroke="#3d5a73" stroke-width="2"/>
+    <text x="169" y="-9" text-anchor="middle" font-size="13" fill="#8c2f2f">⊣</text>
+    <rect x="184" y="-13" width="62" height="24" rx="6" fill="#fff" stroke="#3d5a73" stroke-width="1.5"/>
+    <text x="215" y="4" text-anchor="middle" font-size="10" class="dbox-drug" fill="#3d5a73">THF</text>
+  </g>
+  <text x="480" y="177" text-anchor="middle" class="dbox-title" fill="#3d5a73" font-size="10">FOLATE SYNTHESIS PATHWAY</text>
+
+  <!-- ===== Label boxes ===== -->
+
+  <!-- Cell wall box (top-left) -->
+  <g transform="translate(20,20)">
+    <rect width="250" height="112" rx="8" fill="#fbeee2" stroke="#b3562a" stroke-width="2"/>
+    <text x="12" y="20" class="dbox-title" fill="#8a3719">CELL WALL SYNTHESIS</text>
+    <text x="12" y="40" class="dbox-drug" fill="#26291f">Penicillins &amp; combos</text>
+    <text x="12" y="56" class="dbox-drug" fill="#26291f">Cephalosporins</text>
+    <text x="12" y="72" class="dbox-drug" fill="#26291f">Carbapenems</text>
+    <text x="12" y="88" class="dbox-drug" fill="#26291f">Vancomycin</text>
+  </g>
+  <path d="M270,70 C290,90 300,110 300,160" fill="none" stroke="#b3562a" stroke-width="2.5"/>
+  <text x="295" y="128" font-size="16" fill="#b3562a">⊣</text>
+
+  <!-- 50S box (top-right) -->
+  <g transform="translate(700,20)">
+    <rect width="240" height="128" rx="8" fill="#dcebe3" stroke="#2f8a5a" stroke-width="2"/>
+    <text x="12" y="20" class="dbox-title" fill="#1c5c3a">50S RIBOSOMAL SUBUNIT</text>
+    <text x="12" y="40" class="dbox-drug" fill="#26291f">Macrolides (azithromycin)</text>
+    <text x="12" y="56" class="dbox-drug" fill="#26291f">Clindamycin (lincosamide)</text>
+    <text x="12" y="72" class="dbox-drug" fill="#26291f">Linezolid (oxazolidinone)</text>
+    <text x="12" y="88" class="dbox-drug" fill="#26291f">Lefamulin (pleuromutilin)</text>
+  </g>
+  <path d="M700,90 C660,110 625,170 602,295" fill="none" stroke="#2f8a5a" stroke-width="2.5"/>
+  <text x="608" y="250" font-size="16" fill="#2f8a5a">⊣</text>
+
+  <!-- 30S box (right, lower) -->
+  <g transform="translate(700,420)">
+    <rect width="240" height="78" rx="8" fill="#fde8d4" stroke="#c07a2b" stroke-width="2"/>
+    <text x="12" y="20" class="dbox-title" fill="#8a4f13">30S RIBOSOMAL SUBUNIT</text>
+    <text x="12" y="40" class="dbox-drug" fill="#26291f">Aminoglycosides (gentamicin)</text>
+    <text x="12" y="56" class="dbox-drug" fill="#26291f">Tetracyclines (doxycycline)</text>
+  </g>
+  <path d="M700,445 C650,420 615,390 598,350" fill="none" stroke="#c07a2b" stroke-width="2.5"/>
+  <text x="608" y="400" font-size="16" fill="#c07a2b">⊣</text>
+
+  <!-- DNA gyrase box (bottom-left) -->
+  <g transform="translate(20,440)">
+    <rect width="250" height="78" rx="8" fill="#f3e0e0" stroke="#8c2f2f" stroke-width="2"/>
+    <text x="12" y="20" class="dbox-title" fill="#7a2626">DNA GYRASE / TOPO IV</text>
+    <text x="12" y="40" class="dbox-drug" fill="#26291f">Fluoroquinolones</text>
+    <text x="12" y="56" class="dbox-drug" fill="#26291f">(ciprofloxacin, levofloxacin)</text>
+  </g>
+  <path d="M270,465 C320,450 360,440 378,420" fill="none" stroke="#8c2f2f" stroke-width="2.5"/>
+  <text x="358" y="432" font-size="16" fill="#8c2f2f">⊣</text>
+
+  <!-- Folate box (bottom-center) -->
+  <g transform="translate(340,540)">
+    <rect width="280" height="78" rx="8" fill="#e5edf1" stroke="#3d5a73" stroke-width="2"/>
+    <text x="12" y="20" class="dbox-title" fill="#2b4357">FOLATE SYNTHESIS</text>
+    <text x="12" y="40" class="dbox-drug" fill="#26291f">Sulfamethoxazole blocks PABA→DHF</text>
+    <text x="12" y="56" class="dbox-drug" fill="#26291f">Trimethoprim blocks DHF→THF</text>
+  </g>
+  <path d="M480,540 C480,480 480,420 480,221" fill="none" stroke="#3d5a73" stroke-width="2.5"/>
+  <text x="472" y="460" font-size="16" fill="#3d5a73">⊣</text>
+
+</svg>
+</div>
+<p class="legend-note">⊣ = site of inhibition</p>
+</section>
+
+<section class="panel">
+<h2>Quick-Reference Table</h2>
+<p class="sub">Grouped by target site, matching the diagram above</p>
+
+<table class="rx-table">
+<colgroup><col class="col-drug"><col class="col-mech"><col class="col-ae"></colgroup>
+<thead><tr><th>Drug</th><th>Mechanism</th><th>Adverse Effects</th></tr></thead>
+<tbody>
+
+<tr class="grp-row"><td colspan="3">Cell Wall Synthesis — Penicillins</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Ampicillin &amp; Amoxicillin<span class="cls-tag">Aminopenicillin</span></td>
+<td>Bind <b>penicillin-binding proteins (PBPs)</b> and block the <b>transpeptidase</b> cross-linking of peptidoglycan → bactericidal. Extended gram-negative reach beyond natural penicillin (<i>H. influenzae</i>, <i>E. coli</i>, <i>Listeria</i>, enterococci).</td>
+<td>Hypersensitivity/anaphylaxis; <b class="hl">classic non-allergic rash</b> when given to a patient with mono/EBV; diarrhea, <i>C. difficile</i> colitis.</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Piperacillin (± tazobactam)<span class="cls-tag">Antipseudomonal penicillin</span></td>
+<td>Same <b>PBP/transpeptidase</b> inhibition, extended to cover <i>Pseudomonas</i> and other resistant gram-negatives. Tazobactam = <b>β-lactamase inhibitor</b>, protects the ring from bacterial β-lactamases.</td>
+<td>Hypersensitivity, interstitial nephritis, hypokalemia (Na⁺ load), platelet dysfunction/bleeding at high doses.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">Cell Wall Synthesis — β-Lactam/β-Lactamase Inhibitor Combinations</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Ampicillin-sulbactam</td>
+<td>Ampicillin + sulbactam (β-lactamase inhibitor) — restores activity against β-lactamase-producing organisms (many <i>Staph</i>, <i>H. influenzae</i>, anaerobes). Good empiric choice for polymicrobial wounds/bites.</td>
+<td>Same as ampicillin; diarrhea is more prominent with the combination.</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Amoxicillin-clavulanate</td>
+<td>Oral amoxicillin + clavulanate; same <b>β-lactamase inhibitor</b> protection logic — otitis media, sinusitis, animal bites.</td>
+<td>GI upset/diarrhea is the most common complaint (clavulanate-driven); rare hepatotoxicity.</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Piperacillin-tazobactam</td>
+<td>Broadest of the three — antipseudomonal penicillin + <b>β-lactamase inhibitor</b>; standard broad empiric gram-negative/anaerobic coverage.</td>
+<td>Same as piperacillin above.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">Cell Wall Synthesis — Cephalosporins</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Ceftriaxone<span class="cls-tag">3rd generation</span></td>
+<td><b>PBP</b> inhibition/cell-wall synthesis block; excellent CNS penetration (meningitis), broad gram-negative + some gram-positive coverage. <b class="hl">No</b> <i>Pseudomonas</i>, <b class="hl">no</b> enterococcus, <b class="hl">no</b> MRSA.</td>
+<td>Biliary sludging/pseudolithiasis; displaces bilirubin (avoid in neonates — kernicterus risk); hypersensitivity.</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Ceftazidime<span class="cls-tag">3rd generation</span></td>
+<td>Same mechanism, antipseudomonal 3rd-gen cephalosporin.</td>
+<td>Nephrotoxicity, hypersensitivity, neurotoxicity/seizures (especially with renal impairment).</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Cefepime<span class="cls-tag">4th generation</span></td>
+<td>Same mechanism, broadest cephalosporin — gram-negatives + <i>Pseudomonas</i> + good gram-positive coverage.</td>
+<td>Neurotoxicity/encephalopathy (especially with renal impairment and under-dose adjustment), hypersensitivity.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">Cell Wall Synthesis — Carbapenems</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Meropenem</td>
+<td><b>PBP</b> inhibition; very broad spectrum (gram +/-, anaerobes); stable to most β-lactamases (not all carbapenemases).</td>
+<td>Seizures (less than imipenem), GI upset, hypersensitivity (low but real cross-reactivity with penicillin allergy).</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Ertapenem</td>
+<td>Same mechanism; notably weaker against <i>Pseudomonas</i>/<i>Acinetobacter</i> than meropenem — once-daily dosing.</td>
+<td>Similar profile; lower seizure risk than imipenem.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">Cell Wall Synthesis — Glycopeptide</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Vancomycin</td>
+<td>Binds the <b>D-Ala-D-Ala</b> terminus of peptidoglycan precursors, blocking <b>transglycosylation</b>/cross-linking — a <b class="hl">different site</b> than the β-lactams. Gram-positive only (incl. MRSA; oral form for <i>C. difficile</i>).</td>
+<td>Nephrotoxicity, ototoxicity, <b class="hl">"red man syndrome"</b> (histamine-mediated infusion reaction, not a true allergy), thrombophlebitis.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">30S Ribosomal Subunit</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Gentamicin<span class="cls-tag">Aminoglycoside</span></td>
+<td>Binds the <b>30S subunit</b>, irreversibly blocking the <b>initiation complex</b> and causing misreading → bactericidal. Requires O2-dependent uptake (ineffective vs. anaerobes); synergistic with cell-wall agents for enterococcal/streptococcal endocarditis.</td>
+<td>Nephrotoxicity, ototoxicity (vestibular &amp; cochlear), neuromuscular blockade (avoid in myasthenia gravis).</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Doxycycline<span class="cls-tag">Tetracycline</span></td>
+<td>Binds the <b>30S subunit</b>, blocking <b>aminoacyl-tRNA</b> binding → bacteriostatic. Broad coverage incl. atypicals (<i>Mycoplasma</i>, <i>Chlamydia</i>, <i>Rickettsia</i>) and Lyme disease.</td>
+<td>Photosensitivity, GI upset, tooth discoloration/bone growth inhibition (contraindicated in children &amp; pregnancy), esophagitis if taken without water.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">50S Ribosomal Subunit</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Azithromycin<span class="cls-tag">Macrolide</span></td>
+<td>Binds the <b>50S subunit</b> (23S rRNA), blocking <b>translocation</b> → bacteriostatic. Strong atypical coverage.</td>
+<td>GI upset, QT prolongation/torsades, reversible ototoxicity at high dose.</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Clindamycin<span class="cls-tag">Lincosamide</span></td>
+<td>Binds the <b>50S subunit</b>, blocking <b>peptide-bond formation</b>/translocation. Strong anaerobic + toxin-suppression activity (necrotizing fasciitis, toxic shock syndrome).</td>
+<td><b class="hl">Classic high-risk drug for <i>C. difficile</i> colitis</b>, GI upset, rash.</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Linezolid<span class="cls-tag">Oxazolidinone</span></td>
+<td>Binds the <b>50S subunit</b> (23S rRNA), blocking formation of the <b>initiation complex</b>. Covers resistant gram-positives (MRSA, VRE).</td>
+<td>Serotonin syndrome (weak MAO inhibitor — avoid with SSRIs/SNRIs), thrombocytopenia/myelosuppression, peripheral/optic neuropathy (prolonged use).</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Lefamulin<span class="cls-tag">Pleuromutilin</span></td>
+<td>Binds the <b>50S subunit's peptidyl transferase center</b> — a newer class, approved for community-acquired pneumonia.</td>
+<td>GI upset (diarrhea, nausea), QT prolongation, transaminase elevation; avoid in pregnancy.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">DNA Gyrase / Topoisomerase IV</td></tr>
+<tr class="drug-row">
+<td class="drug-name">Ciprofloxacin<span class="cls-tag">Fluoroquinolone</span></td>
+<td>Inhibits bacterial <b>DNA gyrase</b> (gram-negative) and <b>topoisomerase IV</b>, blocking DNA replication. Strong gram-negative + <i>Pseudomonas</i> coverage.</td>
+<td>Tendinopathy/Achilles rupture, QT prolongation, CNS effects (seizures, confusion), cartilage damage in children (avoid), photosensitivity, dysglycemia.</td>
+</tr>
+<tr class="drug-row">
+<td class="drug-name">Levofloxacin<span class="cls-tag">Fluoroquinolone</span></td>
+<td>Same mechanism; broader gram-positive/atypical ("respiratory quinolone") coverage than ciprofloxacin.</td>
+<td>Same class effects as ciprofloxacin.</td>
+</tr>
+
+<tr class="grp-row"><td colspan="3">Folate Synthesis</td></tr>
+<tr class="drug-row">
+<td class="drug-name">TMP-SMX<span class="cls-tag">Sulfonamide/folate inhibitor</span></td>
+<td>Sulfamethoxazole blocks <b>dihydropteroate synthase</b> (PABA→dihydrofolate); trimethoprim blocks <b>dihydrofolate reductase</b> (dihydrofolate→tetrahydrofolate) — sequential blockade of the same pathway, synergistic. Used for UTI, PJP treatment/prophylaxis, MRSA skin infections.</td>
+<td>Hyperkalemia, hypersensitivity (Stevens-Johnson/TEN risk), myelosuppression (megaloblastic-type anemia via folate inhibition), kernicterus in neonates (avoid late pregnancy/breastfeeding), hemolysis in G6PD deficiency.</td>
+</tr>
+
+</tbody>
+</table>
+</section>
+
+</div>
+
+<footer>Antimicrobial agents reference — mechanism diagram + quick-reference table. Not a substitute for the full pharmacology lecture material.</footer>
+
+</body>
+</html>
