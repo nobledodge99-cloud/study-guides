@@ -1,0 +1,43 @@
+<svg viewBox="0 0 820 600" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+<rect width="820" height="600" fill="#fffdf8"/>
+<text x="40" y="30" font-size="15" font-weight="700" fill="#2b2620">Standard 12-Lead Layout, Colored by Coronary Territory</text>
+<rect x="40" y="60" width="150" height="100" rx="8" fill="#e8b9b9" stroke="#fffdf8" stroke-width="3"/>
+<text x="115.0" y="118.0" font-size="24" font-weight="700" fill="#a33c2f" text-anchor="middle">I</text>
+<rect x="202" y="60" width="150" height="100" rx="8" fill="#e5e0d5" stroke="#fffdf8" stroke-width="3"/>
+<text x="277.0" y="118.0" font-size="24" font-weight="700" fill="#8a8578" text-anchor="middle">aVR</text>
+<rect x="364" y="60" width="150" height="100" rx="8" fill="#c9d9c0" stroke="#fffdf8" stroke-width="3"/>
+<text x="439.0" y="118.0" font-size="24" font-weight="700" fill="#3f6b2f" text-anchor="middle">V1</text>
+<rect x="526" y="60" width="150" height="100" rx="8" fill="#a8c9d9" stroke="#fffdf8" stroke-width="3"/>
+<text x="601.0" y="118.0" font-size="24" font-weight="700" fill="#2f5a7a" text-anchor="middle">V4</text>
+<rect x="40" y="172" width="150" height="100" rx="8" fill="#f0d68a" stroke="#fffdf8" stroke-width="3"/>
+<text x="115.0" y="230.0" font-size="24" font-weight="700" fill="#8a6a1f" text-anchor="middle">II</text>
+<rect x="202" y="172" width="150" height="100" rx="8" fill="#e8b9b9" stroke="#fffdf8" stroke-width="3"/>
+<text x="277.0" y="230.0" font-size="24" font-weight="700" fill="#a33c2f" text-anchor="middle">aVL</text>
+<rect x="364" y="172" width="150" height="100" rx="8" fill="#c9d9c0" stroke="#fffdf8" stroke-width="3"/>
+<text x="439.0" y="230.0" font-size="24" font-weight="700" fill="#3f6b2f" text-anchor="middle">V2</text>
+<rect x="526" y="172" width="150" height="100" rx="8" fill="#e8b9b9" stroke="#fffdf8" stroke-width="3"/>
+<text x="601.0" y="230.0" font-size="24" font-weight="700" fill="#a33c2f" text-anchor="middle">V5</text>
+<rect x="40" y="284" width="150" height="100" rx="8" fill="#f0d68a" stroke="#fffdf8" stroke-width="3"/>
+<text x="115.0" y="342.0" font-size="24" font-weight="700" fill="#8a6a1f" text-anchor="middle">III</text>
+<rect x="202" y="284" width="150" height="100" rx="8" fill="#f0d68a" stroke="#fffdf8" stroke-width="3"/>
+<text x="277.0" y="342.0" font-size="24" font-weight="700" fill="#8a6a1f" text-anchor="middle">aVF</text>
+<rect x="364" y="284" width="150" height="100" rx="8" fill="#a8c9d9" stroke="#fffdf8" stroke-width="3"/>
+<text x="439.0" y="342.0" font-size="24" font-weight="700" fill="#2f5a7a" text-anchor="middle">V3</text>
+<rect x="526" y="284" width="150" height="100" rx="8" fill="#e8b9b9" stroke="#fffdf8" stroke-width="3"/>
+<text x="601.0" y="342.0" font-size="24" font-weight="700" fill="#a33c2f" text-anchor="middle">V6</text>
+<rect x="40" y="426" width="20" height="20" rx="4" fill="#c9d9c0"/>
+<text x="68" y="441" font-size="13.5" font-weight="700" fill="#2b2620">Septal (V1–V2)</text>
+<text x="68" y="460" font-size="12" fill="#3f6b2f" font-weight="700">&#8594; LAD (septal perforators)</text>
+<rect x="420" y="426" width="20" height="20" rx="4" fill="#a8c9d9"/>
+<text x="448" y="441" font-size="13.5" font-weight="700" fill="#2b2620">Anterior (V3–V4)</text>
+<text x="448" y="460" font-size="12" fill="#2f5a7a" font-weight="700">&#8594; LAD</text>
+<rect x="40" y="481" width="20" height="20" rx="4" fill="#e8b9b9"/>
+<text x="68" y="496" font-size="13.5" font-weight="700" fill="#2b2620">Lateral (I, aVL, V5–V6)</text>
+<text x="68" y="515" font-size="12" fill="#a33c2f" font-weight="700">&#8594; LCx (or diagonal branches of LAD)</text>
+<rect x="420" y="481" width="20" height="20" rx="4" fill="#f0d68a"/>
+<text x="448" y="496" font-size="13.5" font-weight="700" fill="#2b2620">Inferior (II, III, aVF)</text>
+<text x="448" y="515" font-size="12" fill="#8a6a1f" font-weight="700">&#8594; RCA (or LCx if left-dominant)</text>
+<rect x="40" y="545" width="18" height="18" rx="4" fill="#e5e0d5"/>
+<text x="66" y="559" font-size="12.5" fill="#6b6357">aVR (gray): no specific LV wall; helps distinguish left main/proximal LAD occlusion patterns</text>
+<text x="40" y="586" font-size="12.5" fill="#6b6357">Example: ST elevation in I, aVL, V2&#8211;V6 (anterolateral) &#8594; reciprocal ST depression in III, aVF</text>
+</svg>
