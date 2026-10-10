@@ -615,6 +615,59 @@
     .row-split { flex-direction: column; align-items: stretch; }
     .actions-row .btn-primary, .actions-row .btn-secondary { width: 100%; }
   }
+
+  /* ---------- Cumulative review additions ---------- */
+  #app { padding-top: 68px; } /* keeps the fixed back button from covering the title */
+  .summary-card { display:flex; align-items:center; justify-content:space-between; gap:14px 22px; flex-wrap:wrap; }
+  .summary-stats { display:flex; gap:26px; flex-wrap:wrap; }
+  .summary-note { width:100%; margin:-4px 0 0; font-size:0.8rem; color:var(--muted); }
+  .filter-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:16px; }
+  .filter-row label { display:flex; flex-direction:column; gap:4px; font-family:'IBM Plex Mono',monospace; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--muted); min-width:0; }
+  select.sel { font-family:'Lora',serif; font-size:0.86rem; padding:8px 9px; border:1.5px solid var(--border); border-radius:7px; background:var(--cream); color:var(--ink); max-width:100%; text-transform:none; letter-spacing:0; }
+  select.sel:focus { outline:none; border-color:var(--forest); }
+  .seg { display:inline-flex; border:1.5px solid var(--forest); border-radius:7px; overflow:hidden; }
+  .seg button { background:var(--surface); border:none; padding:7px 13px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--forest-dark); cursor:pointer; }
+  .seg button.on { background:var(--forest-dark); color:var(--surface); }
+  .chip-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .chip-row .lbl { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-right:4px; }
+  .chip { font-family:'IBM Plex Mono',monospace; font-size:0.72rem; border:1px solid var(--border); background:var(--cream); color:var(--forest-dark); border-radius:14px; padding:3px 11px; cursor:pointer; }
+  .chip:hover, .chip.on { border-color:var(--forest); background:var(--forest-light); }
+  .block-label { grid-column:1 / -1; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.09em; margin-top:8px; }
+  .block-label:first-child { margin-top:0; }
+  .tbl-wrap { overflow-x:auto; }
+  table.data { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  table.data th { text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--forest-dark); background:var(--forest-light); padding:8px 10px; border-bottom:1px solid var(--border); white-space:nowrap; }
+  table.data td { padding:9px 10px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  table.data tr:last-child td { border-bottom:none; }
+  table.data td.num, table.data th.num { text-align:right; font-family:'IBM Plex Mono',monospace; white-space:nowrap; }
+  table.data td.muted { color:var(--muted); }
+  .badge { font-family:'IBM Plex Mono',monospace; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.05em; border-radius:10px; padding:2px 8px; white-space:nowrap; border:1px solid; }
+  .badge.ok { color:var(--forest-dark); background:var(--forest-light); border-color:var(--forest); }
+  .badge.warn { color:var(--gold); background:#f6eedb; border-color:var(--gold); }
+  .badge.bad { color:var(--brick); background:var(--brick-light); border-color:var(--brick); }
+  .meter { position:relative; height:9px; min-width:90px; background:var(--border); border-radius:5px; }
+  .meter .fill { height:100%; background:var(--forest); border-radius:5px; }
+  .meter .tick { position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--brick); }
+  .meter-cell { display:flex; align-items:center; gap:8px; min-width:150px; }
+  .meter-cell .meter { flex:1; }
+  .meter-cell .pct { font-family:'IBM Plex Mono',monospace; font-size:0.74rem; width:40px; text-align:right; color:var(--muted); }
+  .legend { font-size:0.78rem; color:var(--muted); margin:10px 0 0; line-height:1.55; }
+  .legend .sw { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
+  .day-chart { display:flex; align-items:flex-end; gap:6px; height:100px; margin-top:6px; }
+  .day-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; height:100%; min-width:0; }
+  .day-bar { width:100%; background:var(--forest); border-radius:3px 3px 0 0; min-height:2px; }
+  .day-n { font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted); }
+  .day-lbl { font-family:'IBM Plex Mono',monospace; font-size:0.58rem; color:var(--muted); }
+  .mini-btn { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--forest-dark); background:var(--surface); border:1.5px solid var(--forest); border-radius:6px; padding:4px 10px; cursor:pointer; white-space:nowrap; }
+  .mini-btn:hover { background:var(--forest-light); }
+  details.map-editor { margin-top:4px; }
+  details.map-editor summary { cursor:pointer; color:var(--forest); font-family:'IBM Plex Mono',monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.06em; }
+  details.map-editor select.sel { padding:4px 6px; font-size:0.78rem; background:var(--surface); }
+.guide-link { margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; }
+  .guide-link a { color:var(--forest-dark); font-weight:600; }
+  .mini-link { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--forest-dark); margin-left:6px; text-decoration:underline; text-underline-offset:3px; }
+  .badge.ref { color:var(--muted); background:var(--cream); border-color:var(--border); }
+  tr.grp td { background:var(--forest-light); font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--forest-dark); padding:6px 10px; }
 </style>
 </head>
 <body>
@@ -626,6 +679,595 @@
   'use strict';
 
   const STORAGE_KEY = 'question-bank';
+
+  const PROGRESS_KEY = 'question-progress-v1';
+  const OVERRIDE_KEY = 'topic-map-overrides-v1';
+  const INTERVAL_DAYS = [0, 3, 7, 14, 30, 60]; // Leitner box -> days until the question is due again
+
+  // NBOME COMLEX-USA Blueprint (rev. Feb 2025) — Level 1 test-specification percentages, as published.
+  const SYSTEMS = [
+    ['wellness', 'Community Health & Wellness', 12],
+    ['dev',      'Human Development, Reproduction & Sexuality', 5],
+    ['endo',     'Endocrine System & Metabolism', 5],
+    ['nerv',     'Nervous System & Mental Health', 10],
+    ['msk',      'Musculoskeletal System', 13],
+    ['gu',       'Genitourinary/Renal System & Breasts', 5],
+    ['gi',       'Gastrointestinal System & Nutritional Health', 10],
+    ['circ',     'Circulatory & Hematologic Systems', 10],
+    ['resp',     'Respiratory System', 10],
+    ['integ',    'Integumentary System', 5]
+  ];
+  const SYSTEM_EXTRA = [['x', 'Cross-cutting (no single system)'], ['unmapped', 'Unmapped']];
+  const DOMAINS = [
+    [1, 'Osteopathic Principles, Practice & Manipulative Treatment', 12],
+    [2, 'Osteopathic Patient Care & Procedural Skills', 6],
+    [3, 'Application of Knowledge for Osteopathic Medical Practice', 60],
+    [4, 'Practice-Based Learning & Improvement', 4],
+    [5, 'Interpersonal & Communication Skills', 3],
+    [6, 'Professionalism', 3],
+    [7, 'Systems-Based Practice', 2]
+  ];
+  const DISCIPLINES = ['Pathology', 'Pharmacology', 'Physiology', 'Microbiology/Immunology', 'Clinical Medicine',
+                       'OMM/OPP', 'Clinical Skills', 'Biochemistry/Genetics', 'Behavioral/Biostats/Ethics'];
+  const BLOCK_ORDER = ['MSK II · Exam 1', 'MSK II · Exam 2', 'OCS III · Exam 1', 'CV/Resp II · Exam 1', 'CV/Resp II · Exam 2'];
+  const GUIDES = [["clinical slop/med-terms.html", "Common Medical Terminology We ~Should~ Know", "Clinical Slop", 1], ["clinical slop/heart-sounds-cheat-sheet.html", "Heart Sounds, Murmurs, and Gallops Cheat Sheet", "Clinical Slop", 1], ["clinical slop/labs.html", "Noble's Little Something Extra - Quick Labs Review", "Clinical Slop", 1], ["clinical slop/omm-techniques.html", "Brief OMM Techniques Comparison", "Clinical Slop", 1], ["clinical slop/micro-memorization.html", "Microbiology Memorization Tool (All da Buggies)", "Clinical Slop", 1], ["clinical slop/nerve-lesions.html", "Common Nerve Lesions", "Clinical Slop", 1], ["clinical slop/chief-complaints.html", "Top 10 Most Common Chief Complaints", "Clinical Slop", 1], ["foundations2/foundations2-pharm.html", "Pharmacology", "Foundations II", 0], ["foundations2/ans-pharm-study-bites.html", "Konrad's ANS Pharm Study Bites", "Foundations II", 1], ["foundations2/foundations2-genetics.html", "Genetics of Disease", "Foundations II", 0], ["foundations2/scholarrx-ans-pharm.html", "ScholarRx ANS Pharm", "Foundations II", 0], ["foundations2/ans-pharm-red-drugs.html", "ANS Pharm - Just the Red Drugs", "Foundations II", 1], ["foundations2/biostats-study-material.html", "Biostats Study Material", "Foundations II", 0], ["foundations2/pediatrics-study-guide.html", "Pediatrics", "Foundations II", 0], ["msk2/msk2-joint-soft-tissue.html", "Joint & Soft Tissue Pathology", "MSK II · Exam 1", 0], ["msk2/msk2-bone-cartilage.html", "Bone & Cartilage Pathology", "MSK II · Exam 1", 0], ["msk2/msk2-skeletal-muscle-nerve.html", "Skeletal Muscle & Peripheral Nerve", "MSK II · Exam 1", 0], ["msk2/msk2-rheumatic-pharm.html", "Rheumatic Diseases Pharmacology", "MSK II · Exam 1", 0], ["msk2/msk2-nsaids-pharm.html", "NSAIDs Pharmacology", "MSK II · Exam 1", 0], ["msk2/msk2-nmj-pharm.html", "NMJ Pharmacology", "MSK II · Exam 1", 0], ["msk2/msk2-autoimmunities.html", "Joint, Muscle, and Skin Autoimmunities", "MSK II · Exam 1", 0], ["msk2/msk2-IJA.html", "Juvenile Idiopathic Arthritis", "MSK II · Exam 1", 0], ["msk2/msk2-Crystal-Diseases.html", "Crystal Diseases", "MSK II · Exam 1", 0], ["msk2/msk2-skin-pathology.html", "Skin Pathology Parts 1-4", "MSK II · Exam 2", 0], ["msk2/msk2-connective-tissue-pathology.html", "Connective Tissue Pathology Parts 1-2", "MSK II · Exam 2", 0], ["msk2/msk2-vasculitis.html", "Vasculitis", "MSK II · Exam 2", 0], ["msk2/msk2-derm-pharm.html", "Derm Pharmacology", "MSK II · Exam 2", 0], ["msk2/msk2-Sjögren's-RA-OA.html", "Sjögren's, Rheumatoid Arthritis, and Osteoarthritis", "MSK II · Exam 2", 0], ["msk2/msk2-ped-derm.html", "Pediatric Dermatology", "MSK II · Exam 2", 0], ["msk2/msk2-skin-path-algorithm.html", "Skin Pathology Algorithm - Quick Review", "MSK II · Exam 2", 1], ["msk2/msk2-connective-tissue-path-algorithm.html", "Connective Tissue Pathology Algorithm - Quick Review", "MSK II · Exam 2", 1], ["ocs I & II/omm-summary-tables.html", "OMM Summary Tables", "OCS I & II", 0], ["ocs I & II/oms1-competency-review.html", "OMS1 Competency Review Guide", "OCS I & II", 0], ["ocs I & II/omm-treatment-modalities-review.html", "OMM Treatment Modalities Review Guide", "OCS I & II", 0], ["ocs III & IV/ocs3-oral-report.html", "Oral Reporting", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-ME-FPR.html", "Specific Muscle Energy Techniques & Facilitated Positional Release", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-illness-scripts.html", "Illness Scripts", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-diagnosis-by-lab-results.html", "Diagnosis by Lab Results", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-blt-lymph-still.html", "BLT/LAS, Lymphatic Techniques & Still Technique", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-depression-anxiety-physical-activity.html", "Depression/Anxiety and Physical Activity", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-clinical-problem.html", "How to Approach a Clinical Problem", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-intro-chapmans-points.html", "Introduction to Chapman's Points", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-cv-exam.html", "Abnormal Cardiovascular Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-abnormal-respiratory-exam.html", "Abnormal Respiratory Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-oa-to-back-pain.html", "Osteopathic Approach to Back Pain Parts 1 & 2", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-upper-respiratory.html", "Osteopathic Approach to Upper Respiratory", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-lower-respiratory.html", "Osteopathic Approach to Lower Respiratory", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-cardio.html", "Osteopathic Approach to Cardiovascular Cases", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-obesity.html", "The Overweight/Obesity Crisis & the Effect of Physical Activity", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-integrated-exam.html", "Integrated Osteopathic Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-abnormal-heent-exam.html", "Abnormal HEENT Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-adiposity-based-chronic-disease.html", "Adiposity-Based Chronic Disease", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-omm-integration.html", "OMM Medical Integration", "OCS III · Exam 1", 0], ["ocs III & IV/ocs34-sp-encounters.html", "PCM III & IV SP Encounter Expectations / Rubric", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-rx-order-writing.html", "Rx Order Writing", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-intro-telemed.html", "Intro to Telemedicine", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-jenks.html", "Importance of Clinical Practice Guidelines", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-finding-cpgs.html", "Finding Clinical Practice Guidelines", "OCS III · Exam 1", 0], ["cvresp2/cvresp2-cardio-review.html", "Cardiovascular Physiology — Abbreviated Review", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-lipids.html", "Lipid and Fatty Acid Metabolism", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-blood-vessel-pathology.html", "Pathology of Blood Vessels I & II", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-antihyperlipidemics.html", "Antihyperlipidemics", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-ekg.html", "EKG Interpretation", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-ekg-extended", "Noble and Claude's EKG Diagnostic Guide", "CV/Resp II · Exam 1", 1], ["cvresp2/cvresp2-heart-path.html", "Heart Pathology Parts 1-4", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-asd-vsd-tof.html", "ASD, VSD, Tetralogy of Fallot, and Other Congenital Heart Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-valvular.html", "Aortic, Mitral & Other Valve Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-lab-testing.html", "Laboratory Testing in Cardiovascular Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-cvpharm.html", "Antiplatelets, Anticoagulants & Fibrinolytics Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-cardiac-imaging.html", "Cardiac Imaging", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-ischemic-heart-disease.html", "Ischemic Heart Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-shock.html", "Shock", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-infective-endocarditis.html", "Infective Endocarditis & Nonbacterial Thrombotic Endocarditis", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-drugs-angina.html", "Angina Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-antiarrhythmics.html", "Antiarrhythmics Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-pericarditis.html", "Pericarditis", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-heart-failure-pharm.html", "Heart Failure Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-arrhythmias.html", "Clinical Diagnosis and Treatment of Arrhythmias", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-atherosclerosis.html", "Atherosclerosis", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-master-pharm-guide.html", "Master Pharm Guide for Exam 1 (only core drugs)", "CV/Resp II · Exam 1", 1], ["cvresp2/cvresp2-master-ekg-guide.html", "Master EKG Guide - All EKG's from lecture and ELS's", "CV/Resp II · Exam 1", 1], ["cvresp2/cvresp2-resp-refresher.html", "Resp Physiology Refresher Guide", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-pulm-fnx-test.html", "Pulmonary Functions Test and Dyspnea Guide", "CV/Resp II · Exam 2", 0], ["cvresp2/sleep-apnea.html", "Sleep Apnea ELS", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-upper-resp-path.html", "Upper Respiratory Tract Pathology", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-allergies-pharm.html", "Antihistamines: Drugs for Rhinitis and Allergies", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-lower-resp-path.html", "Lower Respiratory Pathology/Radiology", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-neoplasia.html", "Resp Neoplasia & Pleura", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-copd.html", "COPD and Other Disorders", "CV/Resp II · Exam 2", 0], ["cvresp2/restrictive-lung-disease.html", "Restrictive Lung Disease", "CV/Resp II · Exam 2", 0], ["cvresp2/vascular-disorders.html", "Vascular Disorders", "CV/Resp II · Exam 2", 0], ["cvresp2/antimicrobial-agents.html", "Antimicrobial Agents Pharm", "CV/Resp II · Exam 2", 0], ["cvresp2/resp-infections-pharm.html", "Respiratory Infections Pharm", "CV/Resp II · Exam 2", 0], ["cvresp2/antituberculosis.html", "Antituberculosis Pharm", "CV/Resp II · Exam 2", 0], ["cvresp2/viral-pneumonia.html", "Viral Pneumonia", "CV/Resp II · Exam 2", 0], ["cvresp2/transplantation.html", "Infections and Transplantation", "CV/Resp II · Exam 2", 0], ["cvresp2/peds-asthma-wheeze.html", "Pediatric Wheeze & Asthma", "CV/Resp II · Exam 2", 0], ["cvresp2/peds-cough.html", "Pediatric Chronic Cough", "CV/Resp II · Exam 2", 0], ["cvresp2/interstitial-lung-disease.html", "Interstitial Lung Disease", "CV/Resp II · Exam 2", 0], ["cvresp2/copd-asthma.html", "COPD and Asthma", "CV/Resp II · Exam 2", 0], ["cvresp2/cystic-fibrosis.html", "Cystic Fibrosis and Bronchiectasis", "CV/Resp II · Exam 2", 0], ["cvresp2/copd-asthma-pharm.html", "Pharmacotherapy of Asthma and COPD", "CV/Resp II · Exam 2", 0], ["cvresp2/hiv-pharm.html", "Pharmacologic Agents for HIV/AIDS", "CV/Resp II · Exam 2", 0], ["cvresp2/blood-gases.html", "Blood Gases and Respiratory Disorders", "CV/Resp II · Exam 2", 0], ["cvresp2/pulm-embolism.html", "Pulmonary Embolism", "CV/Resp II · Exam 2", 0], ["cvresp2/resp-imaging.html", "Imaging of the Respiratory Tract", "CV/Resp II · Exam 2", 0], ["cvresp2/master-pulm-pharm.html", "Master Respiratory Pharm Guide", "CV/Resp II · Exam 2", 1], ["cvresp2/simple-pharm-list.html", "Simple Pharm List (more for mental organization)", "CV/Resp II · Exam 2", 1], ["cvresp2/antimicrobial-agents-quick-review.html", "First Aid Style Antimicrobial Pharm Table", "CV/Resp II · Exam 2", 1], ["cvresp2/resp-path-cheat-sheet.html", "Respiratory Pathology - Cheat Sheet", "CV/Resp II · Exam 2", 1], ["cvresp2/resp-ekg-review.html", "Relevant Respiratory Related EKG's", "CV/Resp II · Exam 2", 1], ["cvresp2/kinder-lectures.html", "All of Kinder's Lectures Condensed into a Cheat Sheet", "CV/Resp II · Exam 2", 1]]; // [href, title, group, isReference]
+  const TOPIC_GUIDE = {
+ "Bone and Cartilage Pathology": "msk2/msk2-bone-cartilage.html",
+ "Crystal Diseases": "msk2/msk2-Crystal-Diseases.html",
+ "Joint & Soft Tissue Pathology": "msk2/msk2-joint-soft-tissue.html",
+ "Joint Muscle Skin Autoimmunity": "msk2/msk2-autoimmunities.html",
+ "Juvenile Idiopathic Arthritis": "msk2/msk2-IJA.html",
+ "NMJ Pharm": "msk2/msk2-nmj-pharm.html",
+ "NSAIDs": "msk2/msk2-nsaids-pharm.html",
+ "Rheumatic Pharm": "msk2/msk2-rheumatic-pharm.html",
+ "Skeletal Muscle & Peripheral Nerve": "msk2/msk2-skeletal-muscle-nerve.html",
+ "Connective Tissue Diseases": "msk2/msk2-connective-tissue-pathology.html",
+ "Dermatology Pharmacology": "msk2/msk2-derm-pharm.html",
+ "Pediatric Dermatology": "msk2/msk2-ped-derm.html",
+ "Sjogren's, Rheumatoid Arthritis & Osteoarthritis": "msk2/msk2-Sjögren's-RA-OA.html",
+ "Skin Pathology": "msk2/msk2-skin-pathology.html",
+ "Vasculitis": "msk2/msk2-vasculitis.html",
+ "Abnormal Cardiovascular Exam": "ocs III & IV/ocs3-cv-exam.html",
+ "Abnormal HEENT Exam": "ocs III & IV/ocs3-abnormal-heent-exam.html",
+ "Abnormal Respiratory Exam": "ocs III & IV/ocs3-abnormal-respiratory-exam.html",
+ "Adiposity-Based Chronic Disease (ABCD)": "ocs III & IV/ocs3-adiposity-based-chronic-disease.html",
+ "Balanced Ligamentous Tension / Ligamentous Articular Strain": "ocs III & IV/ocs3-blt-lymph-still.html",
+ "Depression/Anxiety and Physical Activity": "ocs III & IV/ocs3-depression-anxiety-physical-activity.html",
+ "Diagnosis by Lab Result": "ocs III & IV/ocs3-diagnosis-by-lab-results.html",
+ "Giving Oral Report": "ocs III & IV/ocs3-oral-report.html",
+ "How to Approach a Clinical Problem": "ocs III & IV/ocs3-clinical-problem.html",
+ "Illness Scripts": "ocs III & IV/ocs3-illness-scripts.html",
+ "Integrated Osteopathic Exam": "ocs III & IV/ocs3-integrated-exam.html",
+ "Intro to Chapman's Points": "ocs III & IV/ocs3-intro-chapmans-points.html",
+ "Medical Integration: The ABCS Approach": "ocs III & IV/ocs3-omm-integration.html",
+ "Osteopathic Approach to Back Pain": "ocs III & IV/ocs3-oa-to-back-pain.html",
+ "Osteopathic Approach to Cardiovascular Cases": "ocs III & IV/ocs3-cardio.html",
+ "Osteopathic Approach to Lower Respiratory": "ocs III & IV/ocs3-lower-respiratory.html",
+ "Osteopathic Approach to Upper Respiratory Cases": "ocs III & IV/ocs3-upper-respiratory.html",
+ "Rx Order Writing": "ocs III & IV/ocs3-rx-order-writing.html",
+ "Specific Muscle Energy Techniques & FPR": "ocs III & IV/ocs3-ME-FPR.html",
+ "The Overweight/Obesity Crisis & the Effect of Physical Activity": "ocs III & IV/ocs3-obesity.html",
+ "ASD, VSD, Tetralogy of Fallot & Congenital Heart Disease": "cvresp2/cvresp2-asd-vsd-tof.html",
+ "Antihyperlipidemics": "cvresp2/cvresp2-antihyperlipidemics.html",
+ "Antiplatelets, Anticoagulants & Fibrinolytics": "cvresp2/cvresp2-cvpharm.html",
+ "Aortic, Mitral & Other Valve Disease": "cvresp2/cvresp2-valvular.html",
+ "Atherosclerosis": "cvresp2/cvresp2-atherosclerosis.html",
+ "Cardiac Imaging": "cvresp2/cvresp2-cardiac-imaging.html",
+ "Cardiovascular Physiology": "cvresp2/cvresp2-cardio-review.html",
+ "Clinical Diagnosis and Treatment of Arrhythmias": "cvresp2/cvresp2-arrhythmias.html",
+ "Drugs Used in Heart Failure": "cvresp2/cvresp2-heart-failure-pharm.html",
+ "Drugs Used to Treat Angina": "cvresp2/cvresp2-drugs-angina.html",
+ "EKG Interpretation": "cvresp2/cvresp2-ekg.html",
+ "Infective Endocarditis & NBTE": "cvresp2/cvresp2-infective-endocarditis.html",
+ "Ischemic Heart Disease": "cvresp2/cvresp2-ischemic-heart-disease.html",
+ "Laboratory Testing in Cardiovascular Disease": "cvresp2/cvresp2-lab-testing.html",
+ "Lipid and Fatty Acid Metabolism": "cvresp2/cvresp2-lipids.html",
+ "Pathology of Blood Vessels": "cvresp2/cvresp2-blood-vessel-pathology.html",
+ "Pathology of the Heart": "cvresp2/cvresp2-heart-path.html",
+ "Pericarditis": "cvresp2/cvresp2-pericarditis.html",
+ "Pharmacology of Antiarrhythmics": "cvresp2/cvresp2-antiarrhythmics.html",
+ "Shock": "cvresp2/cvresp2-shock.html",
+ "Antihistamines & Drugs for Rhinitis/Allergies": "cvresp2/cvresp2-allergies-pharm.html",
+ "Antituberculosis Agents": "cvresp2/antituberculosis.html",
+ "Blood Gases and Respiratory Disorders": "cvresp2/blood-gases.html",
+ "COPD & Asthma (Pathology)": "cvresp2/copd-asthma.html",
+ "COPD & Other Disorders": "cvresp2/cvresp2-copd.html",
+ "Cystic Fibrosis & Bronchiectasis": "cvresp2/cystic-fibrosis.html",
+ "Drugs for Respiratory Infections (Bacterial, Viral, Fungal)": "cvresp2/resp-infections-pharm.html",
+ "Imaging of the Respiratory Tract": "cvresp2/resp-imaging.html",
+ "Infections & Transplantation": "cvresp2/transplantation.html",
+ "Interstitial Lung Disease, Sarcoidosis & Pneumoconiosis": "cvresp2/interstitial-lung-disease.html",
+ "Lower Respiratory Pathology & Radiology": "cvresp2/cvresp2-lower-resp-path.html",
+ "Neoplasia & Pleura": "cvresp2/cvresp2-neoplasia.html",
+ "Overview of Antimicrobial Agents": "cvresp2/antimicrobial-agents.html",
+ "Pediatric Chronic Cough": "cvresp2/peds-cough.html",
+ "Pediatric Wheeze & Asthma": "cvresp2/peds-asthma-wheeze.html",
+ "Pharmacologic Agents for HIV/AIDS": "cvresp2/hiv-pharm.html",
+ "Pulmonary Embolism (Clinical)": "cvresp2/pulm-embolism.html",
+ "Pulmonary Function Tests": "cvresp2/cvresp2-pulm-fnx-test.html",
+ "Restrictive Lung Disease": "cvresp2/restrictive-lung-disease.html",
+ "Restrictive Pulmonary Disorders": "cvresp2/restrictive-lung-disease.html",
+ "Sleep Apnea": "cvresp2/sleep-apnea.html",
+ "Upper Respiratory Tract Pathology": "cvresp2/cvresp2-upper-resp-path.html",
+ "Vascular Disorders (Pulmonary)": "cvresp2/vascular-disorders.html",
+ "Viral Pneumonia": "cvresp2/viral-pneumonia.html"
+};
+  const TOPIC_MAP = {
+  "Bone and Cartilage Pathology": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Crystal Diseases": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Joint & Soft Tissue Pathology": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Joint Muscle Skin Autoimmunity": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Microbiology/Immunology",
+    "domain": 3
+  },
+  "Juvenile Idiopathic Arthritis": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "NMJ Pharm": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "NSAIDs": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Rheumatic Pharm": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Skeletal Muscle & Peripheral Nerve": {
+    "block": "MSK II · Exam 1",
+    "system": "msk",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Connective Tissue Diseases": {
+    "block": "MSK II · Exam 2",
+    "system": "msk",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Dermatology Pharmacology": {
+    "block": "MSK II · Exam 2",
+    "system": "integ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Pediatric Dermatology": {
+    "block": "MSK II · Exam 2",
+    "system": "integ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Sjogren's, Rheumatoid Arthritis & Osteoarthritis": {
+    "block": "MSK II · Exam 2",
+    "system": "msk",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Skin Pathology": {
+    "block": "MSK II · Exam 2",
+    "system": "integ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Vasculitis": {
+    "block": "MSK II · Exam 2",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Abnormal Cardiovascular Exam": {
+    "block": "OCS III · Exam 1",
+    "system": "circ",
+    "discipline": "Clinical Skills",
+    "domain": 2
+  },
+  "Abnormal HEENT Exam": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "Clinical Skills",
+    "domain": 2
+  },
+  "Abnormal Respiratory Exam": {
+    "block": "OCS III · Exam 1",
+    "system": "resp",
+    "discipline": "Clinical Skills",
+    "domain": 2
+  },
+  "Adiposity-Based Chronic Disease (ABCD)": {
+    "block": "OCS III · Exam 1",
+    "system": "endo",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Balanced Ligamentous Tension / Ligamentous Articular Strain": {
+    "block": "OCS III · Exam 1",
+    "system": "msk",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "Depression/Anxiety and Physical Activity": {
+    "block": "OCS III · Exam 1",
+    "system": "nerv",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Diagnosis by Lab Result": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Giving Oral Report": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "Clinical Skills",
+    "domain": 5
+  },
+  "How to Approach a Clinical Problem": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "Clinical Skills",
+    "domain": 3
+  },
+  "Illness Scripts": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "Clinical Skills",
+    "domain": 3
+  },
+  "Integrated Osteopathic Exam": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "OMM/OPP",
+    "domain": 2
+  },
+  "Intro to Chapman's Points": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "Medical Integration: The ABCS Approach": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "Osteopathic Approach to Back Pain": {
+    "block": "OCS III · Exam 1",
+    "system": "msk",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "Osteopathic Approach to Cardiovascular Cases": {
+    "block": "OCS III · Exam 1",
+    "system": "circ",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "Osteopathic Approach to Lower Respiratory": {
+    "block": "OCS III · Exam 1",
+    "system": "resp",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "Osteopathic Approach to Upper Respiratory Cases": {
+    "block": "OCS III · Exam 1",
+    "system": "resp",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "Rx Order Writing": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "Clinical Skills",
+    "domain": 2
+  },
+  "Specific Muscle Energy Techniques & FPR": {
+    "block": "OCS III · Exam 1",
+    "system": "x",
+    "discipline": "OMM/OPP",
+    "domain": 1
+  },
+  "The Overweight/Obesity Crisis & the Effect of Physical Activity": {
+    "block": "OCS III · Exam 1",
+    "system": "wellness",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "ASD, VSD, Tetralogy of Fallot & Congenital Heart Disease": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Antihyperlipidemics": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Antiplatelets, Anticoagulants & Fibrinolytics": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Aortic, Mitral & Other Valve Disease": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Atherosclerosis": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Cardiac Imaging": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Cardiovascular Physiology": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Physiology",
+    "domain": 3
+  },
+  "Clinical Diagnosis and Treatment of Arrhythmias": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Drugs Used in Heart Failure": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Drugs Used to Treat Angina": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "EKG Interpretation": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Infective Endocarditis & NBTE": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Ischemic Heart Disease": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Laboratory Testing in Cardiovascular Disease": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Lipid and Fatty Acid Metabolism": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "endo",
+    "discipline": "Biochemistry/Genetics",
+    "domain": 3
+  },
+  "Pathology of Blood Vessels": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Pathology of the Heart": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Pericarditis": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Pharmacology of Antiarrhythmics": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Shock": {
+    "block": "CV/Resp II · Exam 1",
+    "system": "circ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Antihistamines & Drugs for Rhinitis/Allergies": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Antituberculosis Agents": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Blood Gases and Respiratory Disorders": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Physiology",
+    "domain": 3
+  },
+  "COPD & Asthma (Pathology)": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "COPD & Other Disorders": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Cystic Fibrosis & Bronchiectasis": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Drugs for Respiratory Infections (Bacterial, Viral, Fungal)": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Imaging of the Respiratory Tract": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Infections & Transplantation": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "x",
+    "discipline": "Microbiology/Immunology",
+    "domain": 3
+  },
+  "Interstitial Lung Disease, Sarcoidosis & Pneumoconiosis": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Lower Respiratory Pathology & Radiology": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Neoplasia & Pleura": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Overview of Antimicrobial Agents": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "x",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Pediatric Chronic Cough": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Pediatric Wheeze & Asthma": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Pharmacologic Agents for HIV/AIDS": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "x",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Pulmonary Embolism (Clinical)": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Pulmonary Function Tests": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Physiology",
+    "domain": 3
+  },
+  "Restrictive Lung Disease": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Restrictive Pulmonary Disorders": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Sleep Apnea": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Upper Respiratory Tract Pathology": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Vascular Disorders (Pulmonary)": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Viral Pneumonia": {
+    "block": "CV/Resp II · Exam 2",
+    "system": "resp",
+    "discipline": "Microbiology/Immunology",
+    "domain": 3
+  }
+};
 
   const SEED_QUESTIONS = [
     {
@@ -691,7 +1333,7 @@
   ];
 
   let bank = [];
-  let view = (window.location.hash === '#manage') ? 'manage' : 'home'; // home | quiz | results | manage
+  let view = ({ '#manage': 'manage', '#progress': 'progress', '#blueprint': 'blueprint' })[window.location.hash] || 'home'; // home | quiz | results | manage | progress | blueprint
   let selectedTopics = new Set();
   let quizCount = 10;
   let shuffleOn = true;
@@ -709,6 +1351,15 @@
   let expandedTopics = new Set();
   let expandedReview = new Set();
   let storageAvailable = true; // set by checkStorageAvailability() before first load
+
+  let progress = {};   // questionId -> { n, c, last, ok, box, due }
+  let days = {};       // 'YYYY-MM-DD' -> [answered, correct]
+  let overrides = {};  // topic -> { system, discipline, domain }
+  let fBlock = 'all', fSystem = 'all', fDiscipline = 'all', fStatus = 'all', fGuide = 'all';
+  let gapOnly = false;
+  let strategy = 'random'; // random | smart
+  let mapOpen = false;
+  let progStatus = null;
 
   const app = document.getElementById('app');
 
@@ -742,22 +1393,27 @@
 
     if (!storageAvailable) {
       bank = SEED_QUESTIONS.slice();
+      normalizeBank();
       selectedTopics = new Set(getTopics());
       render();
       return;
     }
 
+    loadProgress();
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         bank = JSON.parse(raw);
+        if (normalizeBank()) await saveBank();
       } else {
         bank = SEED_QUESTIONS.slice();
+        normalizeBank();
         await saveBank();
       }
     } catch (e) {
       // Corrupted stored value, or storage failed after all despite the probe passing
       bank = SEED_QUESTIONS.slice();
+      normalizeBank();
       try { await saveBank(); } catch (e2) { /* non-fatal */ }
     }
     selectedTopics = new Set(getTopics());
@@ -935,7 +1591,8 @@
     incoming.forEach((q, idx) => {
       const err = validateQuestion(q);
       if (err) { errors.push('Item ' + (idx + 1) + ': ' + err); return; }
-      if (!q.id) q.id = uid(slug(q.topic));
+      q.id = qid(q); // content-based id: re-importing a file never duplicates questions or loses progress
+      if (!q.block && sourceLabel) { const mm = /^(.*?)\s*Question Bank\.json$/i.exec(sourceLabel); if (mm) q.block = mm[1]; }
       const existingIdx = bank.findIndex(b => b.id === q.id);
       if (existingIdx >= 0) { bank[existingIdx] = q; updated++; }
       else { bank.push(q); added++; }
@@ -964,23 +1621,62 @@
     if (selectedTopics.has(t)) selectedTopics.delete(t); else selectedTopics.add(t);
     render();
   }
-  function selectAllTopics() { selectedTopics = new Set(getTopics()); render(); }
-  function selectNoneTopics() { selectedTopics = new Set(); render(); }
+  function selectAllTopics() { visibleTopics().forEach(t => selectedTopics.add(t)); render(); }
+  function selectNoneTopics() { visibleTopics().forEach(t => selectedTopics.delete(t)); render(); }
 
   function availableCount() {
-    return bank.filter(q => selectedTopics.has(q.topic)).length;
+    return filteredPool().length;
   }
 
-  function startQuiz() {
-    const pool = bank.filter(q => selectedTopics.has(q.topic));
-    const n = Math.min(quizCount, pool.length);
-    quizQuestions = (shuffleOn ? shuffleArr(pool) : pool).slice(0, n);
+  function launch(qs) {
+    quizQuestions = qs;
     quizIndex = 0;
     quizAnswers = [];
     selectedOptionThisQ = null;
     locked = false;
     view = 'quiz';
     render();
+    window.scrollTo(0, 0);
+  }
+
+  function startQuiz() {
+    const pool = filteredPool();
+    const n = Math.min(quizCount, pool.length);
+    const picked = strategy === 'smart' ? smartOrder(pool) : (shuffleOn ? shuffleArr(pool) : pool);
+    const chosen = picked.slice(0, n);
+    launch(shuffleOn ? shuffleArr(chosen) : chosen);
+  }
+
+  // Priority: due for review (oldest first) -> never seen -> not yet due (soonest first)
+  function smartOrder(pool) {
+    const t0 = Date.now();
+    const due = [], fresh = [], rest = [];
+    pool.forEach(q => {
+      const p = progress[q.id];
+      if (!p) fresh.push(q); else if (p.due <= t0) due.push(q); else rest.push(q);
+    });
+    due.sort((x, y) => progress[x.id].due - progress[y.id].due);
+    rest.sort((x, y) => progress[x.id].due - progress[y.id].due);
+    return due.concat(shuffleArr(fresh), rest);
+  }
+
+  function startSmartAll(n) {
+    if (!bank.length) return;
+    launch(shuffleArr(smartOrder(bank).slice(0, n)));
+  }
+  function startDue() {
+    const t0 = Date.now();
+    const pool = bank.filter(q => progress[q.id] && progress[q.id].due <= t0)
+                     .sort((x, y) => progress[x.id].due - progress[y.id].due).slice(0, 25);
+    if (pool.length) launch(shuffleArr(pool));
+  }
+  function startMissedAll() {
+    const pool = bank.filter(q => progress[q.id] && !progress[q.id].ok);
+    if (pool.length) launch(shuffleArr(pool).slice(0, 50));
+  }
+  function startTopic(topic) {
+    const pool = bank.filter(q => q.topic === topic);
+    if (pool.length) launch(shuffleArr(smartOrder(pool).slice(0, 10)));
   }
 
   function retryMissed() {
@@ -1006,6 +1702,7 @@
     const q = quizQuestions[quizIndex];
     const correct = selectedOptionThisQ === q.correctIndex;
     quizAnswers.push({ qId: q.id, chosenIndex: selectedOptionThisQ, correct });
+    recordAttempt(q, correct);
     locked = true;
     render();
   }
@@ -1111,6 +1808,8 @@
     else if (view === 'quiz') app.appendChild(renderQuiz());
     else if (view === 'results') app.appendChild(renderResults());
     else if (view === 'manage') app.appendChild(renderManage());
+    else if (view === 'progress') app.appendChild(renderProgress());
+    else if (view === 'blueprint') app.appendChild(renderBlueprint());
     attachHandlers();
   }
 
@@ -1119,7 +1818,7 @@
       <div class="card" style="border-color: var(--brick); background: var(--brick-light);">
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brick); font-weight: 600; margin-bottom: 6px;">Progress will not be saved</div>
         <div style="font-size: 0.9rem; color: var(--ink); line-height: 1.5;">
-          This browser isn't letting the quiz engine save data — anything you import now will disappear if you close or reload this tab. This can happen when a file is opened directly from disk (no <span class="mono">http://</span> in the address bar), or in some private-browsing modes.
+          This browser isn't letting the quiz engine save data — anything you import now, and your progress, will disappear if you close or reload this tab. This can happen when a file is opened directly from disk (no <span class="mono">http://</span> in the address bar), or in some private-browsing modes.
           <br><br>
           <strong>Workaround:</strong> after importing, go to Manage Bank and click <strong>Export Bank (JSON)</strong> to save a backup file. Next time you open this page, import that exported file again — it's the same as re-doing the drag-and-drop, just a bit more often than you'd like.
         </div>
@@ -1138,10 +1837,12 @@
       <header class="top">
         <div class="brand">
           <h1>Quiz Engine</h1>
-          <div class="tag">Vignette-style question bank</div>
+          <div class="tag">Vignette-style question bank · cumulative review</div>
         </div>
         <nav class="tabs">
           <button data-nav="home" class="${view === 'home' || view === 'quiz' || view === 'results' ? 'active' : ''}">New Quiz</button>
+          <button data-nav="progress" class="${view === 'progress' ? 'active' : ''}">Progress</button>
+          <button data-nav="blueprint" class="${view === 'blueprint' ? 'active' : ''}">Blueprint</button>
           <button data-nav="manage" class="${view === 'manage' ? 'active' : ''}">Manage Bank</button>
         </nav>
       </header>
@@ -1163,14 +1864,54 @@
       `);
     }
 
+    const t0 = Date.now();
+    let due = 0, missed = 0, unseen = 0;
+    bank.forEach(q => {
+      const p = progress[q.id];
+      if (!p) unseen++; else { if (p.due <= t0) due++; if (!p.ok) missed++; }
+    });
+
     const wrap = el(`<div></div>`);
+    wrap.appendChild(el(`
+      <div class="card summary-card">
+        <div class="summary-stats">
+          <div class="stat"><div class="num">${due}</div><div class="lbl">Due for review</div></div>
+          <div class="stat"><div class="num">${missed}</div><div class="lbl">Last answer missed</div></div>
+          <div class="stat"><div class="num">${unseen}</div><div class="lbl">Not yet seen</div></div>
+          <div class="stat"><div class="num">${bank.length}</div><div class="lbl">In bank</div></div>
+        </div>
+        <button class="btn-primary" id="smart-all">Smart review · ${Math.min(25, bank.length)}</button>
+        <div class="summary-note">Smart review pulls due and missed questions first, then new ones, across every block you've imported.</div>
+      </div>
+    `));
+
+    const blocks = presentBlocks();
+    const sysKeys = Array.from(new Set(bank.map(q => topicMeta(q.topic, q).system)));
+    const discKeys = Array.from(new Set(bank.map(q => topicMeta(q.topic, q).discipline)));
+    const sysList = SYSTEMS.concat(SYSTEM_EXTRA).filter(s => sysKeys.includes(s[0]));
+    const optHtml = (pairs, cur) => pairs.map(p => `<option value="${escAttr(p[0])}" ${p[0] === cur ? 'selected' : ''}>${esc(p[1])}</option>`).join('');
+
     const card = el(`
       <div class="card">
         <h2>Build a quiz</h2>
-        <div class="sub">Select which topics to pull from, then choose how many questions.</div>
+        <div class="sub">Filter the pool by block, system, discipline or status, pick topics, then choose how many questions.</div>
+        <div class="filter-row">
+          <label>Block<select class="sel" id="f-block">${optHtml([['all', 'All blocks']].concat(blocks.map(b => [b, b])), fBlock)}</select></label>
+          <label>System<select class="sel" id="f-system">${optHtml([['all', 'All systems']].concat(sysList.map(s => [s[0], s[1]])), fSystem)}</select></label>
+          <label>Discipline<select class="sel" id="f-disc">${optHtml([['all', 'All disciplines']].concat(DISCIPLINES.concat(['unmapped']).filter(d => discKeys.includes(d)).map(d => [d, d])), fDiscipline)}</select></label>
+          <label>Study guide<select class="sel" id="f-guide">${optHtml([['all', 'All guides']].concat(guidesWithQuestions().map(g => [g[0], g[1]])), fGuide)}</select></label>
+          <label>Status<select class="sel" id="f-status">${optHtml([['all', 'Any'], ['unseen', 'Not yet seen'], ['missed', 'Last answer missed'], ['due', 'Due for review']], fStatus)}</select></label>
+        </div>
+        <div class="toggle-row" style="margin-bottom:16px;">
+          <span>Order</span>
+          <div class="seg">
+            <button data-strategy="random" class="${strategy === 'random' ? 'on' : ''}">Random</button>
+            <button data-strategy="smart" class="${strategy === 'smart' ? 'on' : ''}">Smart priority</button>
+          </div>
+        </div>
         <div class="link-row">
-          <button class="link-btn" id="sel-all">Select all</button>
-          <button class="link-btn" id="sel-none">Select none</button>
+          <button class="link-btn" id="sel-all">Select all shown</button>
+          <button class="link-btn" id="sel-none">Select none shown</button>
         </div>
         <div class="topic-grid" id="topic-grid"></div>
         <div class="row-split">
@@ -1185,24 +1926,38 @@
             <div class="toggle ${shuffleOn ? 'on' : ''}" id="shuffle-toggle"><div class="knob"></div></div>
           </div>
         </div>
+        <div class="chip-row"><span class="lbl">Quick count</span>${[10, 25, 50, 100].map(n => `<button class="chip ${quizCount === n ? 'on' : ''}" data-count="${n}">${n}</button>`).join('')}</div>
         <div style="margin-top:20px;">
           <button class="btn-primary" id="start-quiz" ${availableCount() === 0 ? 'disabled' : ''}>Start Quiz</button>
         </div>
       </div>
     `);
+
     const grid = card.querySelector('#topic-grid');
-    topics.forEach(t => {
-      const checked = selectedTopics.has(t);
-      grid.appendChild(el(`
-        <div class="topic-item ${checked ? 'checked' : ''}" data-topic="${esc(t)}">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="box"></span>
-            <span class="name">${esc(t)}</span>
+    const cnt = poolCounts();
+    const firstQ = {};
+    bank.forEach(q => { if (!firstQ[q.topic]) firstQ[q.topic] = q; });
+    const shown = topics.filter(tp => cnt[tp] > 0);
+    const byBlock = {};
+    shown.forEach(tp => { const b = topicMeta(tp, firstQ[tp]).block; (byBlock[b] = byBlock[b] || []).push(tp); });
+    const multi = Object.keys(byBlock).length > 1;
+    presentBlocks().forEach(b => {
+      if (!byBlock[b]) return;
+      if (multi) grid.appendChild(el(`<div class="block-label">${esc(b)}</div>`));
+      byBlock[b].forEach(tp => {
+        const checked = selectedTopics.has(tp);
+        grid.appendChild(el(`
+          <div class="topic-item ${checked ? 'checked' : ''}" data-topic="${escAttr(tp)}">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="box"></span>
+              <span class="name">${esc(tp)}</span>
+            </div>
+            <span class="count">${cnt[tp]}</span>
           </div>
-          <span class="count">${countForTopic(t)}</span>
-        </div>
-      `));
+        `));
+      });
     });
+    if (!shown.length) grid.appendChild(el(`<div class="empty" style="grid-column:1/-1;padding:18px;">No questions match these filters.</div>`));
     wrap.appendChild(card);
     return wrap;
   }
@@ -1251,6 +2006,7 @@
         <div class="explain-box">
           <span class="head">${wasCorrect ? 'Correct' : 'Incorrect'} — Explanation</span>
           ${esc(q.explanation)}
+          ${guideLinkHtml(q.topic)}
         </div>
       `));
       card.querySelector('#action-slot').appendChild(el(`
@@ -1331,7 +2087,7 @@
                   return `<div class="${cls}"><div class="bubble">${String.fromCharCode(65 + oi)}</div><div class="opt-text">${esc(opt)}</div></div>`;
                 }).join('')}
               </div>
-              <div class="explain-box"><span class="head">Explanation</span>${esc(q.explanation)}</div>
+              <div class="explain-box"><span class="head">Explanation</span>${esc(q.explanation)}${guideLinkHtml(q.topic)}</div>
             </div>` : ''}
           </div>
         `);
@@ -1455,7 +2211,7 @@
     app.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('click', () => {
       const target = b.getAttribute('data-nav');
       if (target === 'manage') goManage();
-      else { view = 'home'; render(); }
+      else { view = target; render(); }
     }));
 
     const selAll = app.querySelector('#sel-all');
@@ -1536,6 +2292,486 @@
 
     const clearAllBtn = app.querySelector('#clear-all');
     if (clearAllBtn) clearAllBtn.addEventListener('click', clearAllQuestions);
+    attachHandlers2();
+  }
+
+
+  /* ---------------- Cumulative review: ids, meta, progress ---------------- */
+
+  function fnv(str) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h;
+  }
+  function qid(q) {
+    return 'q' + fnv(q.topic + '|' + q.vignette).toString(36) + fnv(q.vignette.split('').reverse().join('')).toString(36).slice(0, 3);
+  }
+  // Re-keys every question by content and collapses exact duplicates (e.g. a file imported twice by the old engine).
+  function normalizeBank() {
+    const map = new Map();
+    let changed = false;
+    bank.forEach(q => {
+      const id = qid(q);
+      if (q.id !== id) { q.id = id; changed = true; }
+      if (map.has(id)) changed = true;
+      map.set(id, q);
+    });
+    bank = Array.from(map.values());
+    return changed;
+  }
+  function escAttr(s) { return esc(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+
+  function topicMeta(topic, q) {
+    const base = TOPIC_MAP[topic] || {};
+    const ov = overrides[topic] || {};
+    return {
+      block: base.block || (q && q.block) || 'Other / unassigned',
+      system: ov.system || base.system || 'unmapped',
+      discipline: ov.discipline || base.discipline || 'unmapped',
+      domain: ov.domain || base.domain || 0
+    };
+  }
+  function sysLabel(k) {
+    const f = SYSTEMS.concat(SYSTEM_EXTRA).find(s => s[0] === k);
+    return f ? f[1] : k;
+  }
+  function presentBlocks() {
+    const set = new Set(bank.map(q => topicMeta(q.topic, q).block));
+    const known = BLOCK_ORDER.filter(b => set.has(b));
+    const other = Array.from(set).filter(b => !BLOCK_ORDER.includes(b)).sort();
+    return known.concat(other);
+  }
+
+  function passesStatic(q) {
+    const m = topicMeta(q.topic, q);
+    if (fBlock !== 'all' && m.block !== fBlock) return false;
+    if (fSystem !== 'all' && m.system !== fSystem) return false;
+    if (fDiscipline !== 'all' && m.discipline !== fDiscipline) return false;
+    if (fGuide !== 'all' && TOPIC_GUIDE[q.topic] !== fGuide) return false;
+    return true;
+  }
+  function passesStatus(q) {
+    if (fStatus === 'all') return true;
+    const p = progress[q.id];
+    if (fStatus === 'unseen') return !p;
+    if (fStatus === 'missed') return !!p && !p.ok;
+    if (fStatus === 'due') return !!p && p.due <= Date.now();
+    return true;
+  }
+  function poolCounts() {
+    const c = {};
+    bank.forEach(q => { if (passesStatic(q) && passesStatus(q)) c[q.topic] = (c[q.topic] || 0) + 1; });
+    return c;
+  }
+  function visibleTopics() {
+    const c = poolCounts();
+    return getTopics().filter(tp => c[tp] > 0);
+  }
+  function filteredPool() {
+    return bank.filter(q => selectedTopics.has(q.topic) && passesStatic(q) && passesStatus(q));
+  }
+
+  function loadProgress() {
+    try {
+      const r = localStorage.getItem(PROGRESS_KEY);
+      if (r) { const d = JSON.parse(r); progress = d.progress || {}; days = d.days || {}; }
+    } catch (e) { progress = {}; days = {}; }
+    try {
+      const r = localStorage.getItem(OVERRIDE_KEY);
+      if (r) overrides = JSON.parse(r) || {};
+    } catch (e) { overrides = {}; }
+  }
+  function saveProgress() {
+    if (!storageAvailable) return;
+    try { localStorage.setItem(PROGRESS_KEY, JSON.stringify({ progress: progress, days: days })); }
+    catch (e) { console.error('Progress save failed', e); }
+  }
+  function saveOverrides() {
+    if (!storageAvailable) return;
+    try { localStorage.setItem(OVERRIDE_KEY, JSON.stringify(overrides)); }
+    catch (e) { console.error('Override save failed', e); }
+  }
+  function dayKey(ts) {
+    const d = new Date(ts);
+    const p = n => (n < 10 ? '0' : '') + n;
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+  }
+  // Leitner boxes: a miss drops the question to box 0 (due immediately); each correct answer moves it up a box.
+  function recordAttempt(q, correct) {
+    const t0 = Date.now();
+    const p = progress[q.id] || { n: 0, c: 0, box: 0 };
+    p.n++;
+    if (correct) p.c++;
+    p.last = t0;
+    p.ok = correct;
+    p.box = correct ? Math.min(5, (p.box || 0) + 1) : 0;
+    p.due = t0 + INTERVAL_DAYS[p.box] * 86400000;
+    progress[q.id] = p;
+    const k = dayKey(t0);
+    const d = days[k] || [0, 0];
+    d[0]++; if (correct) d[1]++;
+    days[k] = d;
+    saveProgress();
+  }
+
+  function exportProgress() {
+    const blob = new Blob([JSON.stringify({ version: 1, progress: progress, days: days, overrides: overrides }, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'quiz-progress-backup.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+  function importProgressText(text) {
+    try {
+      const cleaned = sanitizeJsonText(text).cleaned;
+      const d = JSON.parse(cleaned);
+      if (!d || typeof d.progress !== 'object') throw new Error('not a progress backup');
+      let merged = 0;
+      Object.keys(d.progress).forEach(id => {
+        const inc = d.progress[id];
+        if (!progress[id] || (inc.last || 0) > (progress[id].last || 0)) { progress[id] = inc; merged++; }
+      });
+      Object.keys(d.days || {}).forEach(k => {
+        const inc = d.days[k];
+        if (!days[k] || inc[0] > days[k][0]) days[k] = inc;
+      });
+      Object.keys(d.overrides || {}).forEach(tp => { if (!overrides[tp]) overrides[tp] = d.overrides[tp]; });
+      saveProgress(); saveOverrides();
+      progStatus = { ok: true, msg: 'Merged ' + merged + ' question record(s) from the backup (newer attempt wins).' };
+    } catch (e) {
+      progStatus = { ok: false, msg: 'Could not read that file as a progress backup: ' + e.message };
+    }
+    render();
+  }
+  function resetProgress() {
+    if (!confirm('Erase ALL progress (attempts, due dates, daily history)? Your question bank is not affected.')) return;
+    if (!confirm('Really erase progress? This cannot be undone — export a backup first if unsure.')) return;
+    progress = {}; days = {};
+    saveProgress();
+    progStatus = { ok: true, msg: 'Progress erased.' };
+    render();
+  }
+
+  /* ---------------- Progress tab ---------------- */
+
+  function accPct(c, n) { return n ? Math.round(c / n * 100) : null; }
+
+  function renderProgress() {
+    const wrap = el(`<div></div>`);
+    const t0 = Date.now();
+    let seen = 0, n = 0, c = 0, due = 0, missed = 0;
+    const topicAgg = {}, sysAgg = {}, discAgg = {};
+    const add = (o, k, p) => { const a = o[k] || (o[k] = { n: 0, c: 0, q: 0 }); a.n += p.n; a.c += p.c; a.q++; };
+    bank.forEach(q => {
+      const p = progress[q.id];
+      if (!p) return;
+      seen++; n += p.n; c += p.c;
+      if (p.due <= t0) due++;
+      if (!p.ok) missed++;
+      const m = topicMeta(q.topic, q);
+      add(topicAgg, q.topic, p); add(sysAgg, m.system, p); add(discAgg, m.discipline, p);
+    });
+
+    const firstQ = {};
+    bank.forEach(q => { if (!firstQ[q.topic]) firstQ[q.topic] = q; });
+
+    const top = el(`
+      <div class="card">
+        <h2>Your progress</h2>
+        <div class="sub">Everything is tracked per question, across every block in your bank.</div>
+        <div class="stat-strip">
+          <div class="stat"><div class="num">${seen}<span style="font-size:0.9rem;color:var(--muted);"> / ${bank.length}</span></div><div class="lbl">Questions seen</div></div>
+          <div class="stat"><div class="num">${n ? accPct(c, n) + '%' : '—'}</div><div class="lbl">Accuracy (${n} attempts)</div></div>
+          <div class="stat"><div class="num">${due}</div><div class="lbl">Due now</div></div>
+          <div class="stat"><div class="num">${missed}</div><div class="lbl">Last answer missed</div></div>
+        </div>
+        <div class="actions-row" style="margin-top:0;">
+          <button class="btn-primary" id="start-due" ${due ? '' : 'disabled'}>Review due now${due ? ' (' + Math.min(25, due) + ')' : ''}</button>
+          <button class="btn-secondary" id="start-missed" ${missed ? '' : 'disabled'}>Quiz my missed${missed ? ' (' + Math.min(50, missed) + ')' : ''}</button>
+        </div>
+      </div>
+    `);
+    wrap.appendChild(top);
+
+    if (!n) {
+      wrap.appendChild(el(`<div class="card"><div class="empty"><div class="glyph">◎</div><h3>No attempts yet</h3><p>Take a quiz and your weak topics, system breakdown and review queue show up here.</p></div></div>`));
+    } else {
+      // weak topics
+      const weak = Object.keys(topicAgg).filter(k => topicAgg[k].n >= 3)
+        .sort((a, b) => (topicAgg[a].c / topicAgg[a].n) - (topicAgg[b].c / topicAgg[b].n)).slice(0, 12);
+      const weakCard = el(`<div class="card"><h2>Weakest topics</h2><div class="sub">Lowest accuracy first, topics with at least 3 attempts. “Quiz” builds a 10-question smart set from that topic.</div><div class="tbl-wrap"><table class="data"><thead><tr><th>Topic</th><th>Block</th><th>Accuracy</th><th class="num">Right / tries</th><th></th></tr></thead><tbody id="weak-body"></tbody></table></div></div>`);
+      const wb = weakCard.querySelector('#weak-body');
+      if (!weak.length) wb.appendChild(el(`<tr><td colspan="5" class="muted">Not enough attempts per topic yet — keep going.</td></tr>`));
+      weak.forEach(k => {
+        const a = topicAgg[k]; const pct = accPct(a.c, a.n);
+        wb.appendChild(el(`<tr>
+          <td>${esc(k)}</td>
+          <td class="muted">${esc(topicMeta(k, firstQ[k]).block)}</td>
+          <td><div class="meter-cell"><div class="meter"><div class="fill" style="width:${pct}%;${pct < 60 ? 'background:var(--brick);' : ''}"></div></div><span class="pct">${pct}%</span></div></td>
+          <td class="num">${a.c}/${a.n}</td>
+          <td style="white-space:nowrap;"><button class="mini-btn" data-quiz-topic="${escAttr(k)}">Quiz</button> ${guideMini(k)}</td>
+        </tr>`));
+      });
+      wrap.appendChild(weakCard);
+
+      // by system / discipline
+      const breakdown = (title, agg, labelFn) => {
+        const keys = Object.keys(agg).sort((a, b) => (agg[a].c / agg[a].n) - (agg[b].c / agg[b].n));
+        const card = el(`<div class="card"><h2>${title}</h2><div class="tbl-wrap"><table class="data"><thead><tr><th>Name</th><th>Accuracy</th><th class="num">Right / tries</th><th class="num">Questions seen</th></tr></thead><tbody></tbody></table></div></div>`);
+        const body = card.querySelector('tbody');
+        keys.forEach(k => {
+          const a = agg[k]; const pct = accPct(a.c, a.n);
+          body.appendChild(el(`<tr><td>${esc(labelFn(k))}</td><td><div class="meter-cell"><div class="meter"><div class="fill" style="width:${pct}%;${pct < 60 ? 'background:var(--brick);' : ''}"></div></div><span class="pct">${pct}%</span></div></td><td class="num">${a.c}/${a.n}</td><td class="num">${a.q}</td></tr>`));
+        });
+        return card;
+      };
+      wrap.appendChild(breakdown('By system', sysAgg, sysLabel));
+      wrap.appendChild(breakdown('By discipline', discAgg, k => k === 'unmapped' ? 'Unmapped' : k));
+
+      // last 14 days
+      const keys = [];
+      for (let i = 13; i >= 0; i--) keys.push(dayKey(t0 - i * 86400000));
+      const maxN = Math.max(1, ...keys.map(k => (days[k] || [0])[0]));
+      const chart = el(`<div class="card"><h2>Last 14 days</h2><div class="sub">Questions answered per day.</div><div class="day-chart" id="day-chart"></div></div>`);
+      const dc = chart.querySelector('#day-chart');
+      keys.forEach(k => {
+        const d = days[k] || [0, 0];
+        const label = k.slice(5).replace('-', '/');
+        dc.appendChild(el(`<div class="day-col" title="${k}: ${d[0]} answered, ${d[0] ? accPct(d[1], d[0]) : 0}% correct"><span class="day-n">${d[0] || ''}</span><div class="day-bar" style="height:${Math.round(d[0] / maxN * 70)}px;${d[0] ? '' : 'background:var(--border);'}"></div><span class="day-lbl">${label}</span></div>`));
+      });
+      wrap.appendChild(chart);
+    }
+
+    wrap.appendChild(el(`
+      <div class="card">
+        <h2>Backup &amp; transfer</h2>
+        <div class="sub">Progress lives in this browser only. Export it to back it up or move it to another device, then import it there (the newer attempt wins per question).</div>
+        <div class="actions-row" style="margin-top:0;">
+          <button class="btn-secondary" id="prog-export">Export progress</button>
+          <button class="btn-secondary" id="prog-import">Import progress</button>
+          <input type="file" id="prog-file" accept=".json,application/json" style="display:none;">
+        </div>
+        ${progStatus ? `<div class="import-status ${progStatus.ok ? 'ok' : 'err'}">${esc(progStatus.msg)}</div>` : ''}
+        <div class="danger-zone"><div class="warn">Erase all attempts, due dates and daily history. Questions stay.</div><button class="btn-danger" id="prog-reset">Reset progress</button></div>
+      </div>
+    `));
+    return wrap;
+  }
+
+  /* ---------------- Blueprint tab ---------------- */
+
+  function renderBlueprint() {
+    const wrap = el(`<div></div>`);
+    const sAgg = {}, dAgg = {};
+    bank.forEach(q => {
+      const m = topicMeta(q.topic, q);
+      const p = progress[q.id];
+      [[sAgg, m.system], [dAgg, m.domain]].forEach(pair => {
+        const o = pair[0], k = pair[1];
+        const a = o[k] || (o[k] = { q: 0, seen: 0, n: 0, c: 0 });
+        a.q++;
+        if (p) { a.seen++; a.n += p.n; a.c += p.c; }
+      });
+    });
+    const blank = { q: 0, seen: 0, n: 0, c: 0 };
+
+    wrap.appendChild(el(`
+      <div class="card">
+        <h2>COMLEX Level 1 blueprint coverage</h2>
+        <div class="sub">Level 1 test-specification percentages from the NBOME COMLEX-USA Blueprint (rev. Feb 2025), set against what your bank covers and how you're doing on it.</div>
+        <p class="legend">
+          <span class="sw" style="background:var(--forest);"></span>bar = your share of system-mapped questions &nbsp;
+          <span class="sw" style="background:var(--brick);width:3px;"></span>tick = the exam's target % (percentages are as published and don't sum to 100).
+          Topic → system mapping is my best fit and is editable at the bottom of this page. Cross-cutting topics (clinical skills, OMM principles, antimicrobials) don't belong to one system.
+        </p>
+      </div>
+    `));
+
+    // Dimension 2
+    const mappedTotal = SYSTEMS.reduce((s, r) => s + (sAgg[r[0]] || blank).q, 0);
+    const shares = SYSTEMS.map(r => mappedTotal ? (sAgg[r[0]] || blank).q / mappedTotal * 100 : 0);
+    const scale = Math.max(15, ...shares, ...SYSTEMS.map(r => r[2])) * 1.08;
+    const d2 = el(`<div class="card"><h2>Dimension 2 — Clinical presentations</h2><div class="sub">${mappedTotal} of ${bank.length} questions map to a single system.</div><div class="tbl-wrap"><table class="data"><thead><tr><th>Presentation</th><th class="num">Exam %</th><th>Your bank</th><th class="num">Qs</th><th class="num">Seen</th><th class="num">Acc.</th><th>Status</th></tr></thead><tbody></tbody></table></div></div>`);
+    const d2b = d2.querySelector('tbody');
+    SYSTEMS.forEach((r, i) => {
+      const a = sAgg[r[0]] || blank;
+      const share = shares[i];
+      let badge;
+      if (a.q === 0) badge = '<span class="badge bad">No questions yet</span>';
+      else if (share < r[2] * 0.5) badge = '<span class="badge warn">Thin</span>';
+      else badge = '<span class="badge ok">Covered</span>';
+      const acc = a.n ? accPct(a.c, a.n) + '%' : '—';
+      d2b.appendChild(el(`<tr>
+        <td>${esc(r[1])}</td>
+        <td class="num">${r[2]}%</td>
+        <td><div class="meter-cell"><div class="meter"><div class="fill" style="width:${share / scale * 100}%"></div><div class="tick" style="left:${r[2] / scale * 100}%"></div></div><span class="pct">${Math.round(share)}%</span></div></td>
+        <td class="num">${a.q}</td>
+        <td class="num">${a.seen}</td>
+        <td class="num">${acc}</td>
+        <td>${badge}</td>
+      </tr>`));
+    });
+    ['x', 'unmapped'].forEach(k => {
+      const a = sAgg[k];
+      if (!a) return;
+      d2b.appendChild(el(`<tr><td class="muted">${esc(sysLabel(k))}</td><td class="num muted">—</td><td class="muted">not counted above</td><td class="num">${a.q}</td><td class="num">${a.seen}</td><td class="num">${a.n ? accPct(a.c, a.n) + '%' : '—'}</td><td></td></tr>`));
+    });
+    wrap.appendChild(d2);
+
+    // Dimension 1
+    const domTotal = DOMAINS.reduce((s, r) => s + (dAgg[r[0]] || blank).q, 0);
+    const dShares = DOMAINS.map(r => domTotal ? (dAgg[r[0]] || blank).q / domTotal * 100 : 0);
+    const dScale = Math.max(15, ...dShares, ...DOMAINS.map(r => r[2])) * 1.08;
+    const d1 = el(`<div class="card"><h2>Dimension 1 — Competency domains</h2><div class="sub">Approximate: each topic is assigned one domain (OMM topics → 1, exam/skills topics → 2, most science and clinical-knowledge topics → 3). Domains 4–7 are mostly tested through vignettes your science blocks don't cover yet.</div><div class="tbl-wrap"><table class="data"><thead><tr><th>Domain</th><th class="num">Exam %</th><th>Your bank</th><th class="num">Qs</th><th class="num">Seen</th><th class="num">Acc.</th></tr></thead><tbody></tbody></table></div></div>`);
+    const d1b = d1.querySelector('tbody');
+    DOMAINS.forEach((r, i) => {
+      const a = dAgg[r[0]] || blank;
+      d1b.appendChild(el(`<tr>
+        <td>${r[0]}. ${esc(r[1])}</td>
+        <td class="num">${r[2]}%</td>
+        <td><div class="meter-cell"><div class="meter"><div class="fill" style="width:${dShares[i] / dScale * 100}%"></div><div class="tick" style="left:${r[2] / dScale * 100}%"></div></div><span class="pct">${Math.round(dShares[i])}%</span></div></td>
+        <td class="num">${a.q}</td><td class="num">${a.seen}</td><td class="num">${a.n ? accPct(a.c, a.n) + '%' : '—'}</td>
+      </tr>`));
+    });
+    if (dAgg[0]) d1b.appendChild(el(`<tr><td class="muted">Unmapped</td><td class="num muted">—</td><td class="muted">not counted above</td><td class="num">${dAgg[0].q}</td><td class="num">${dAgg[0].seen}</td><td class="num">${dAgg[0].n ? accPct(dAgg[0].c, dAgg[0].n) + '%' : '—'}</td></tr>`));
+    wrap.appendChild(d1);
+
+    wrap.appendChild(guideCoverageCard());
+
+    // mapping editor
+    const topics = getTopics();
+    const firstQ = {};
+    bank.forEach(q => { if (!firstQ[q.topic]) firstQ[q.topic] = q; });
+    const order = presentBlocks();
+    topics.sort((a, b) => {
+      const ba = order.indexOf(topicMeta(a, firstQ[a]).block), bb = order.indexOf(topicMeta(b, firstQ[b]).block);
+      return ba - bb || a.localeCompare(b);
+    });
+    const unmappedCount = topics.filter(tp => topicMeta(tp, firstQ[tp]).system === 'unmapped').length;
+    const sysOpts = (cur) => SYSTEMS.concat(SYSTEM_EXTRA).map(s => `<option value="${s[0]}" ${s[0] === cur ? 'selected' : ''}>${esc(s[1])}</option>`).join('');
+    const discOpts = (cur) => DISCIPLINES.concat(['unmapped']).map(d => `<option value="${escAttr(d)}" ${d === cur ? 'selected' : ''}>${d === 'unmapped' ? 'Unmapped' : esc(d)}</option>`).join('');
+    const domOpts = (cur) => [[0, 'Unmapped']].concat(DOMAINS.map(d => [d[0], d[0] + '. ' + d[1]])).map(d => `<option value="${d[0]}" ${d[0] === cur ? 'selected' : ''}>${esc(d[1])}</option>`).join('');
+    const editor = el(`
+      <div class="card">
+        <h2>Topic mapping</h2>
+        <div class="sub">${unmappedCount ? `<strong style="color:var(--brick);">${unmappedCount} topic(s) are unmapped</strong> — assign them below so they count toward coverage. ` : ''}Changes apply instantly and are saved in this browser.</div>
+        <details class="map-editor" id="map-details" ${mapOpen || unmappedCount ? 'open' : ''}>
+          <summary>Edit mapping (${topics.length} topics)</summary>
+          <div class="tbl-wrap" style="margin-top:10px;"><table class="data"><thead><tr><th>Topic</th><th>System</th><th>Discipline</th><th>Domain</th></tr></thead><tbody id="map-body"></tbody></table></div>
+        </details>
+      </div>
+    `);
+    const mb = editor.querySelector('#map-body');
+    topics.forEach(tp => {
+      const m = topicMeta(tp, firstQ[tp]);
+      mb.appendChild(el(`<tr>
+        <td>${esc(tp)}<div class="sub-tag mono" style="font-size:0.66rem;color:var(--muted);">${esc(m.block)}</div></td>
+        <td><select class="sel" data-ov="system" data-topic="${escAttr(tp)}">${sysOpts(m.system)}</select></td>
+        <td><select class="sel" data-ov="discipline" data-topic="${escAttr(tp)}">${discOpts(m.discipline)}</select></td>
+        <td><select class="sel" data-ov="domain" data-topic="${escAttr(tp)}">${domOpts(m.domain)}</select></td>
+      </tr>`));
+    });
+    wrap.appendChild(editor);
+    return wrap;
+  }
+
+  /* ---------------- Extra event handlers ---------------- */
+
+  function attachHandlers2() {
+    const bind = (sel, ev, fn) => { const e = app.querySelector(sel); if (e) e.addEventListener(ev, fn); };
+    bind('#f-block', 'change', e => { fBlock = e.target.value; render(); });
+    bind('#f-system', 'change', e => { fSystem = e.target.value; render(); });
+    bind('#f-disc', 'change', e => { fDiscipline = e.target.value; render(); });
+    bind('#f-status', 'change', e => { fStatus = e.target.value; render(); });
+    bind('#f-guide', 'change', e => { fGuide = e.target.value; render(); });
+    bind('#gap-only', 'change', e => { gapOnly = e.target.checked; render(); });
+    app.querySelectorAll('[data-strategy]').forEach(b => b.addEventListener('click', () => { strategy = b.getAttribute('data-strategy'); render(); }));
+    app.querySelectorAll('[data-count]').forEach(b => b.addEventListener('click', () => { quizCount = parseInt(b.getAttribute('data-count'), 10); render(); }));
+    bind('#smart-all', 'click', () => startSmartAll(25));
+    bind('#start-due', 'click', startDue);
+    bind('#start-missed', 'click', startMissedAll);
+    app.querySelectorAll('[data-quiz-topic]').forEach(b => b.addEventListener('click', () => startTopic(b.getAttribute('data-quiz-topic'))));
+    bind('#prog-export', 'click', exportProgress);
+    bind('#prog-import', 'click', () => { const f = app.querySelector('#prog-file'); if (f) f.click(); });
+    bind('#prog-file', 'change', e => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => importProgressText(String(ev.target.result));
+      reader.readAsText(file);
+    });
+    bind('#prog-reset', 'click', resetProgress);
+    bind('#map-details', 'toggle', e => { mapOpen = e.target.open; });
+    app.querySelectorAll('select[data-ov]').forEach(s => s.addEventListener('change', () => {
+      const tp = s.getAttribute('data-topic'), field = s.getAttribute('data-ov');
+      const ov = overrides[tp] || (overrides[tp] = {});
+      ov[field] = field === 'domain' ? parseInt(s.value, 10) : s.value;
+      saveOverrides();
+      mapOpen = true;
+      render();
+    }));
+  }
+
+
+  /* ---------------- Study-guide links & coverage ---------------- */
+  function guideHref(h) { return h.split('/').map(encodeURIComponent).join('/'); }
+  function guideFor(topic) {
+    const h = TOPIC_GUIDE[topic];
+    if (!h) return null;
+    const g = GUIDES.find(x => x[0] === h);
+    return g ? { href: guideHref(h), title: g[1] } : null;
+  }
+  function guideLinkHtml(topic) {
+    const g = guideFor(topic);
+    return g ? `<div class="guide-link"><a href="${escAttr(g.href)}" target="_blank" rel="noopener">Review in guide: ${esc(g.title)} ↗</a></div>` : '';
+  }
+  function guideMini(topic) {
+    const g = guideFor(topic);
+    return g ? `<a class="mini-link" href="${escAttr(g.href)}" target="_blank" rel="noopener">Guide ↗</a>` : '';
+  }
+  function guidesWithQuestions() {
+    const have = new Set(bank.map(q => TOPIC_GUIDE[q.topic]).filter(Boolean));
+    return GUIDES.filter(g => have.has(g[0]));
+  }
+  function guideCoverageCard() {
+    const agg = {};
+    bank.forEach(q => {
+      const h = TOPIC_GUIDE[q.topic];
+      if (!h) return;
+      const a = agg[h] || (agg[h] = { q: 0, seen: 0, n: 0, c: 0 });
+      a.q++;
+      const p = progress[q.id];
+      if (p) { a.seen++; a.n += p.n; a.c += p.c; }
+    });
+    const lecture = GUIDES.filter(g => !g[3]);
+    const covered = lecture.filter(g => agg[g[0]]).length;
+    const noGuide = Array.from(new Set(bank.filter(q => !TOPIC_GUIDE[q.topic]).map(q => q.topic)));
+    const card = el(`
+      <div class="card">
+        <h2>Study-guide coverage</h2>
+        <div class="sub"><strong>${covered} of ${lecture.length}</strong> lecture guides have questions in your bank. Cheat sheets, master tables and tools are listed as references and don't need their own questions.${noGuide.length ? ` ${noGuide.length} topic(s) aren't linked to a guide yet: ${esc(noGuide.join(', '))}.` : ''}</div>
+        <label class="toggle-row" style="margin-bottom:12px;cursor:pointer;"><input type="checkbox" id="gap-only" ${gapOnly ? 'checked' : ''}> <span>Only show lecture guides with no questions yet</span></label>
+        <div class="tbl-wrap"><table class="data"><thead><tr><th>Guide</th><th class="num">Qs</th><th class="num">Seen</th><th class="num">Acc.</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+      </div>`);
+    const body = card.querySelector('tbody');
+    let lastGroup = null, shown = 0;
+    GUIDES.forEach(g => {
+      const a = agg[g[0]] || { q: 0, seen: 0, n: 0, c: 0 };
+      if (gapOnly && (g[3] || a.q)) return;
+      if (g[2] !== lastGroup) { body.appendChild(el(`<tr class="grp"><td colspan="5">${esc(g[2])}</td></tr>`)); lastGroup = g[2]; }
+      let badge;
+      if (a.q) badge = '<span class="badge ok">Has questions</span>';
+      else if (g[3]) badge = '<span class="badge ref">Reference</span>';
+      else badge = '<span class="badge bad">No questions yet</span>';
+      body.appendChild(el(`<tr>
+        <td><a href="${escAttr(guideHref(g[0]))}" target="_blank" rel="noopener" style="color:var(--forest-dark);">${esc(g[1])}</a></td>
+        <td class="num">${a.q || '—'}</td><td class="num">${a.q ? a.seen : '—'}</td><td class="num">${a.n ? accPct(a.c, a.n) + '%' : '—'}</td><td>${badge}</td>
+      </tr>`));
+      shown++;
+    });
+    if (!shown) body.appendChild(el(`<tr><td colspan="5" class="muted">Every lecture guide has questions.</td></tr>`));
+    return card;
   }
 
   loadBank();
