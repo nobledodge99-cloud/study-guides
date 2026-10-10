@@ -1388,8 +1388,103 @@
     }
   }
 
+  /* ---------------- Storage: IndexedDB (large) with localStorage fallback ----------------
+     IndexedDB comfortably holds hundreds of MB, so the question bank can grow without limit.
+     Existing localStorage data is migrated automatically the first time this version opens. */
+  const store = { backend: 'none', db: null, persisted: null };
+
+  function idbOpen() {
+    return new Promise((resolve, reject) => {
+      const r = indexedDB.open('quiz-engine', 1);
+      r.onupgradeneeded = () => { r.result.createObjectStore('kv'); };
+      r.onsuccess = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+      r.onblocked = () => reject(new Error('blocked'));
+    });
+  }
+  function idbGet(k) {
+    return new Promise((resolve, reject) => {
+      const rq = store.db.transaction('kv', 'readonly').objectStore('kv').get(k);
+      rq.onsuccess = () => resolve(rq.result);
+      rq.onerror = () => reject(rq.error);
+    });
+  }
+  function idbSet(k, v) {
+    return new Promise((resolve, reject) => {
+      const tx = store.db.transaction('kv', 'readwrite');
+      tx.objectStore('kv').put(v, k);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error || new Error('aborted'));
+    });
+  }
+  function idbDel(k) {
+    return new Promise((resolve, reject) => {
+      const tx = store.db.transaction('kv', 'readwrite');
+      tx.objectStore('kv').delete(k);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function initStore() {
+    try {
+      if (window.indexedDB) {
+        store.db = await idbOpen();
+        await idbSet('__probe__', '1');
+        const v = await idbGet('__probe__');
+        await idbDel('__probe__');
+        if (v === '1') {
+          store.backend = 'idb';
+          try { if (navigator.storage && navigator.storage.persist) store.persisted = await navigator.storage.persist(); } catch (e) {}
+          return;
+        }
+      }
+    } catch (e) { /* fall through to localStorage */ }
+    store.backend = checkStorageAvailability() ? 'ls' : 'none';
+  }
+  async function kvGet(k) {
+    if (store.backend === 'idb') return idbGet(k);
+    if (store.backend === 'ls') { const raw = localStorage.getItem(k); return raw == null ? undefined : JSON.parse(raw); }
+    return undefined;
+  }
+  async function kvSet(k, v) {
+    if (store.backend === 'idb') return idbSet(k, v);
+    if (store.backend === 'ls') {
+      const payload = JSON.stringify(v);
+      localStorage.setItem(k, payload);
+      if (localStorage.getItem(k) !== payload) throw new Error('localStorage write did not persist');
+    }
+  }
+  function lsRead(k) {
+    try { const raw = localStorage.getItem(k); return raw == null ? undefined : JSON.parse(raw); } catch (e) { return undefined; }
+  }
+  // One-time move of data written by earlier versions (localStorage) into IndexedDB.
+  async function migrateFromLocalStorage() {
+    if (store.backend !== 'idb') return;
+    for (const k of [STORAGE_KEY, PROGRESS_KEY, OVERRIDE_KEY]) {
+      try {
+        const old = lsRead(k);
+        if (old === undefined) continue;
+        const existing = await idbGet(k);
+        if (existing === undefined) {
+          await idbSet(k, old);
+          const back = await idbGet(k);
+          if (back === undefined) continue; // verification failed — keep the localStorage copy
+        } else if (k === STORAGE_KEY && Array.isArray(old) && Array.isArray(existing)) {
+          // both exist (e.g. new build opened once before migration): union; normalizeBank dedupes
+          await idbSet(k, existing.concat(old));
+        } else {
+          continue; // keep the localStorage copy rather than risk discarding it
+        }
+        localStorage.removeItem(k);
+      } catch (e) { console.error('Migration failed for', k, e); }
+    }
+  }
+
   async function loadBank() {
-    storageAvailable = checkStorageAvailability();
+    await initStore();
+    storageAvailable = store.backend !== 'none';
 
     if (!storageAvailable) {
       bank = SEED_QUESTIONS.slice();
@@ -1399,11 +1494,12 @@
       return;
     }
 
-    loadProgress();
+    await migrateFromLocalStorage();
+    await loadProgress();
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        bank = JSON.parse(raw);
+      const saved = await kvGet(STORAGE_KEY);
+      if (Array.isArray(saved)) {
+        bank = saved;
         if (normalizeBank()) await saveBank();
       } else {
         bank = SEED_QUESTIONS.slice();
@@ -1411,7 +1507,7 @@
         await saveBank();
       }
     } catch (e) {
-      // Corrupted stored value, or storage failed after all despite the probe passing
+      console.error('Bank load failed', e);
       bank = SEED_QUESTIONS.slice();
       normalizeBank();
       try { await saveBank(); } catch (e2) { /* non-fatal */ }
@@ -1421,16 +1517,9 @@
   }
 
   async function saveBank() {
-    if (!storageAvailable) return; // don't pretend to save when we already know it won't work
+    if (!storageAvailable) return;
     try {
-      const payload = JSON.stringify(bank);
-      localStorage.setItem(STORAGE_KEY, payload);
-      // Verify the write actually landed — some browsers accept the call but
-      // silently cap/ignore it (e.g. quota exceeded in certain private modes).
-      const confirmRead = localStorage.getItem(STORAGE_KEY);
-      if (confirmRead !== payload) {
-        storageAvailable = false;
-      }
+      await kvSet(STORAGE_KEY, bank);
     } catch (e) {
       console.error('Storage save failed', e);
       storageAvailable = false;
@@ -1811,6 +1900,7 @@
     else if (view === 'progress') app.appendChild(renderProgress());
     else if (view === 'blueprint') app.appendChild(renderBlueprint());
     attachHandlers();
+    if (view === 'manage') updateStoreInfo();
   }
 
   function renderStorageWarning() {
@@ -2112,6 +2202,7 @@
     const strip = statsCard.querySelector('#stat-strip');
     strip.appendChild(el(`<div class="stat"><div class="num">${bank.length}</div><div class="lbl">Total Questions</div></div>`));
     strip.appendChild(el(`<div class="stat"><div class="num">${topics.length}</div><div class="lbl">Topics</div></div>`));
+    statsCard.appendChild(el(`<div id="store-info" class="mono" style="font-size:0.72rem;color:var(--muted);margin-top:-6px;"></div>`));
     wrap.appendChild(statsCard);
 
     const importCard = el(`
@@ -2371,26 +2462,23 @@
     return bank.filter(q => selectedTopics.has(q.topic) && passesStatic(q) && passesStatus(q));
   }
 
-  function loadProgress() {
+  async function loadProgress() {
     try {
-      const r = localStorage.getItem(PROGRESS_KEY);
-      if (r) { const d = JSON.parse(r); progress = d.progress || {}; days = d.days || {}; }
+      const d = await kvGet(PROGRESS_KEY);
+      if (d) { progress = d.progress || {}; days = d.days || {}; }
     } catch (e) { progress = {}; days = {}; }
     try {
-      const r = localStorage.getItem(OVERRIDE_KEY);
-      if (r) overrides = JSON.parse(r) || {};
+      const o = await kvGet(OVERRIDE_KEY);
+      if (o) overrides = o;
     } catch (e) { overrides = {}; }
   }
-  function saveProgress() {
+  let writeChain = Promise.resolve();
+  function queueWrite(key, getValue) {
     if (!storageAvailable) return;
-    try { localStorage.setItem(PROGRESS_KEY, JSON.stringify({ progress: progress, days: days })); }
-    catch (e) { console.error('Progress save failed', e); }
+    writeChain = writeChain.then(() => kvSet(key, getValue())).catch(e => { console.error('Save failed for ' + key, e); });
   }
-  function saveOverrides() {
-    if (!storageAvailable) return;
-    try { localStorage.setItem(OVERRIDE_KEY, JSON.stringify(overrides)); }
-    catch (e) { console.error('Override save failed', e); }
-  }
+  function saveProgress() { queueWrite(PROGRESS_KEY, () => ({ progress: progress, days: days })); }
+  function saveOverrides() { queueWrite(OVERRIDE_KEY, () => overrides); }
   function dayKey(ts) {
     const d = new Date(ts);
     const p = n => (n < 10 ? '0' : '') + n;
@@ -2772,6 +2860,25 @@
     });
     if (!shown) body.appendChild(el(`<tr><td colspan="5" class="muted">Every lecture guide has questions.</td></tr>`));
     return card;
+  }
+
+
+  async function updateStoreInfo() {
+    const e = document.getElementById('store-info');
+    if (!e) return;
+    const where = store.backend === 'idb' ? 'IndexedDB' : store.backend === 'ls' ? 'localStorage (5 MB limit)' : 'not saving';
+    let txt = 'Storage: ' + where;
+    try {
+      if (navigator.storage && navigator.storage.estimate) {
+        const est = await navigator.storage.estimate();
+        const mb = n => (n / 1048576).toFixed(1);
+        txt += ' · using ' + mb(est.usage || 0) + ' MB of ~' + mb(est.quota || 0) + ' MB available';
+      }
+    } catch (err) {}
+    if (store.persisted === true) txt += ' · protected from automatic cleanup';
+    else if (store.persisted === false) txt += ' · browser may clear it under disk pressure (export a backup now and then)';
+    const el2 = document.getElementById('store-info');
+    if (el2) el2.textContent = txt;
   }
 
   loadBank();
