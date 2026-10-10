@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Competency Testing Materials</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--cream:#fdfbf3;--cream-2:#f7f1e0;--ink:#2c2c24;--ink-soft:#5c5a4a;--green-deep:#3b5d43;--green:#5e8461;--green-light:#a9c2a0;--line:#d8cfb4;--highlight:#f4e2a8;--pos:#8a2f2f;--warn:#9a6a14;--card-shadow:0 2px 10px rgba(44,44,36,.08);--serif:'Lora','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono','SFMono-Regular',Consolas,Menlo,monospace}
+*{box-sizing:border-box}html{background:var(--cream)}html,body{min-height:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:60px 18px 100px}
+header{border-bottom:2px solid var(--green-deep);padding-bottom:16px;margin-bottom:22px}
+header h1{font-family:var(--serif);font-size:1.9rem;margin:0 0 8px;color:var(--green-deep)}
+header p{margin:0 0 6px;color:var(--ink-soft);font-size:.95rem}
+.back-btn{position:absolute;top:14px;left:14px;z-index:1000;font-size:.78rem;font-weight:600;color:var(--green-deep);text-decoration:none;border:1.5px solid var(--green-deep);padding:7px 13px;border-radius:8px;background:var(--cream);box-shadow:var(--card-shadow)}
+.back-btn:hover{background:var(--green-light)}
+.card{background:#fffdf7;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:var(--card-shadow);scroll-margin-top:90px}
+.card h2{font-family:var(--serif);color:var(--green-deep);margin:0 0 6px;font-size:1.4rem;border-bottom:2px solid var(--green-light);padding-bottom:8px}
+.card h3{font-family:var(--serif);font-size:1.12rem;margin:18px 0 6px}
+.card h4{color:var(--green-deep);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 5px}
+.card p,.card li{font-size:.92rem}.card ul,.card ol{margin:6px 0;padding-left:22px}.card li{margin-bottom:4px}
+.sub{color:var(--ink-soft);font-size:.85rem;font-style:italic;margin:0 0 12px}
+nav.jump{position:sticky;top:0;z-index:50;background:var(--cream);padding:8px 0 10px;border-bottom:1px solid var(--line);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:14px;border:1.3px solid var(--green);color:var(--green-deep);text-decoration:none;background:var(--cream-2);cursor:pointer}
+.pill:hover,.pill.on{background:var(--green-light)}
+.btn{font-family:var(--sans);font-weight:600;font-size:.82rem;padding:8px 15px;border-radius:18px;border:1.5px solid var(--green-deep);background:var(--cream);color:var(--green-deep);cursor:pointer}
+.btn:hover{background:var(--green-light)}.btn.solid{background:var(--green-deep);color:#fff}.btn.solid:hover{background:var(--green)}
+.btn[disabled]{opacity:.45;cursor:default}
+table.t{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.86rem}
+table.t th{text-align:left;background:var(--cream-2);color:var(--green-deep);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:2px solid var(--green-deep)}
+table.t td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl-scroll{overflow-x:auto}
+.box{border:1.5px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0;background:var(--cream)}
+.box.green{border-color:var(--green);background:var(--cream-2)}
+.box.warn{border-color:#d9b25a;background:#fbf3dc}
+.box.red{border-color:#c98a8a;background:#f9ecec}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:10px;background:var(--green-light);color:var(--green-deep);margin-right:4px}
+.tag.v{background:#f4e2a8;color:#6d4f08}
+.say{font-family:var(--serif);font-style:italic;border-left:3px solid var(--green);padding:4px 12px;margin:8px 0;background:var(--cream-2);border-radius:0 8px 8px 0;font-size:.9rem}
+.timer{font-family:var(--mono);font-size:2rem;color:var(--green-deep);font-weight:600}
+.timer.low{color:var(--pos)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.verify{font-size:.78rem;color:var(--warn)}
+footer{text-align:center;color:var(--ink-soft);font-size:.78rem;margin-top:36px}
+details{border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;background:var(--cream)}
+details>summary{cursor:pointer;font-weight:600;color:var(--green-deep);font-size:.92rem}
+details[open]>summary{margin-bottom:6px}
+@media print{.back-btn,nav.jump,.btn{display:none!important}.card{box-shadow:none;break-inside:avoid}}
+</style></head><body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<div class="wrap">
+<header>
+<h1>Competency Testing Materials</h1>
+<p>OCS III end-of-semester competency: PCM (10 min), OMM (10 min) and Ultrasound (5 min). Everyone is tested on both days: Ultrasound one day, PCM + OMM the other (Nov 11–12).</p>
+</header>
+
+<section class="card">
+<div class="grid3">
+<div class="box green" style="text-align:center"><div class="sub" style="margin:0">Days until Nov 11</div><div class="timer" id="d11">—</div></div>
+<div class="box green" style="text-align:center"><div class="sub" style="margin:0">Days until Nov 12</div><div class="timer" id="d12">—</div></div>
+<div class="box green" style="text-align:center"><div class="sub" style="margin:0">Plan progress</div><div class="timer" id="prog">0%</div></div>
+</div>
+</section>
+
+<section class="card">
+<h2>The three stations</h2>
+<div class="grid3">
+<div class="box"><h3 style="margin-top:0">PCM</h3><p>Chief complaint → focused exam → special tests → assessment → plan. 12 possible complaints.</p><p><a class="btn solid" style="text-decoration:none;display:inline-block" href="pcm-drill.html">PCM drill (24 cases)</a></p></div>
+<div class="box"><h3 style="margin-top:0">OMM</h3><p>Assigned region + technique: indication, contraindications, diagnose, treat, reassess. ME, MFR/ST, HVLA, counterstrain.</p><p><a class="btn solid" style="text-decoration:none;display:inline-block" href="omm-competency.html">OMM scripts</a></p></div>
+<div class="box"><h3 style="margin-top:0">Ultrasound</h3><p>One of five B-mode images in 5 minutes: PLAX, A4C, lung sliding, biceps tendon, patellar tendon.</p><p><a class="btn solid" style="text-decoration:none;display:inline-block" href="ultrasound-competency.html">US stations</a></p></div>
+</div>
+</section>
+
+<section class="card">
+<h2>Draw a full mock</h2>
+<p class="sub">One random assignment for each station. Run each one on its own page with its timer.</p>
+<button class="btn solid" id="mock">Draw all three</button>
+<div id="mockOut" class="box" style="display:none"></div>
+</section>
+
+<section class="card">
+<h2>Study plan (Oct 9 → Nov 10)</h2>
+<p class="sub">Check things off; your progress is saved in this browser.</p>
+<div id="plan"></div>
+</section>
+
+<section class="card">
+<h2>Existing guides that feed these stations</h2>
+<ul>
+<li><a href="../ocs I & II/oms1-competency-review.html">Competency Exam PMI &amp; OMM with Special Tests</a>: system-exam checklists, every special test, ME/HVLA setups, counterstrain table</li>
+<li><a href="../ocs I & II/omm-treatment-modalities-review.html">Review of Osteopathic Treatment Modalities</a>: steps and contraindications for ST, MFR, ME, CS, HVLA</li>
+<li><a href="../ocs I & II/omm-summary-tables.html">OMM Summary Tables from OMS1</a>: diagnosis and mechanics reference</li>
+<li><a href="../ocs III & IV/ocs3-ME-FPR.html">Specific Muscle Energy &amp; FPR</a> · <a href="../clinical slop/omm-techniques.html">Brief OMM Techniques Comparison</a> · <a href="../ocs III & IV/ocs3-omm-integration.html">OMM Integration</a></li>
+<li><a href="../ocs III & IV/ocs3-integrated-exam.html">Integrated exam</a> · <a href="../ocs III & IV/ocs3-abnormal-respiratory-exam.html">Abnormal respiratory exam</a> · <a href="../ocs III & IV/ocs3-cv-exam.html">CV exam</a> · <a href="../ocs III & IV/ocs3-abnormal-heent-exam.html">HEENT exam</a></li>
+<li><a href="../clinical slop/chief-complaints.html">Top 50 Chief Complaints master guide</a> · <a href="../ocs III & IV/ocs3-clinical-problem.html">How to approach a clinical problem</a> · <a href="../ocs III & IV/ocs3-oa-to-back-pain.html">OA to back pain</a></li>
+</ul>
+</section>
+<footer>Competency Testing Materials · Practice cases are original teaching examples; verify technique details against your course syllabus and lab handouts.</footer>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const days=d=>{const t=new Date(d+'T00:00:00');const n=new Date();n.setHours(0,0,0,0);return Math.round((t-n)/864e5)};
+const dd=x=>x>=0?x:'done';
+$('#d11').textContent=dd(days('2026-11-11'));$('#d12').textContent=dd(days('2026-11-12'));
+const PLAN=[
+['Week 1 · Oct 9–15',['PCM: cough, sore throat, dizziness, earache (2 drills/day, timed)','OMM: diagnose + treat ME for cervical, thoracic, lumbar, sacrum, pelvis, ribs (say it aloud)','US: PLAX and A4C, practice in open lab; learn the marker/orientation','Print the Special Tests section of the OMS1 competency guide']],
+['Week 2 · Oct 16–22',['PCM: knee pain, chest pain, gout, palpitations','OMM: MFR/soft tissue: cervical, thoracic, thoracic inlet, respiratory diaphragm, lumbar, pelvis','US: lung sliding (real time) + one repeat of PLAX/A4C','Quiz yourself on the diagnosis flashcards']],
+['Week 3 · Oct 23–29',['PCM: shortness of breath, low back pain, blurry vision (medications), abdominal pain','OMM: HVLA (simulated; cervical set-up only) + the 7 required counterstrain points','US: biceps tendon (transverse) + patellar tendon (longitudinal)','Mock exams with a partner: 10 min PCM + 10 min OMM']],
+['Week 4 · Oct 30–Nov 5',['Daily random mock: one PCM, one OMM, one US scan with timers','Redo your weakest 3 complaints and 3 techniques','Check the contraindication lines for each technique','Ask faculty/lab about anything marked "verify"']],
+['Final days · Nov 6–10',['Full timed mock of all 3 stations','Charge the Butterfly; plan which device you will use','Confirm which day is US and which is PCM + OMM; sleep, food, schedule','Light review only the night before']]
+];
+let st={};try{st=JSON.parse(localStorage.getItem('comp-plan-v1')||'{}')}catch(e){}
+function save(){try{localStorage.setItem('comp-plan-v1',JSON.stringify(st))}catch(e){}}
+let total=0;
+$('#plan').innerHTML=PLAN.map((w,i)=>`<details ${i<1?'open':''}><summary>${w[0]}</summary><ul style="list-style:none;padding-left:4px">${w[1].map((t,j)=>{total++;return `<li><label><input type="checkbox" data-k="${i}-${j}" ${st[i+'-'+j]?'checked':''}> ${t}</label></li>`}).join('')}</ul></details>`).join('');
+function prog(){const n=Object.values(st).filter(Boolean).length;$('#prog').textContent=Math.round(100*n/total)+'%'}
+document.addEventListener('change',e=>{const k=e.target.dataset.k;if(k===undefined)return;st[k]=e.target.checked;save();prog()});prog();
+const CC=['Cough','Sore throat','Dizziness','Earache','Knee pain','Chest pain','Gout','Palpitations','Shortness of breath','Lower back pain','Blurry vision (medications)','Abdominal pain'];
+const OMM=[['Muscle energy','Cervical spine'],['Muscle energy','Thoracic spine'],['Muscle energy','Lumbar spine'],['Muscle energy','Sacrum'],['Muscle energy','Pelvis'],['Muscle energy','Ribs 1–12'],['MFR/soft tissue','Cervical region'],['MFR/soft tissue','Thoracic region'],['MFR/soft tissue','Thoracic inlet release'],['MFR/soft tissue','Respiratory diaphragm release'],['MFR/soft tissue','Lumbar region'],['MFR/soft tissue','Pelvis'],['HVLA (simulated)','Cervical spine (set-up only)'],['HVLA (simulated)','Thoracic spine'],['HVLA (simulated)','Lumbar spine'],['HVLA (simulated)','Pelvis'],['HVLA (simulated)','Upper extremity'],['HVLA (simulated)','Lower extremity'],['Counterstrain','Cervical, anterior + posterior'],['Counterstrain','Thoracic, anterior + posterior'],['Counterstrain','Lumbar, anterior + posterior'],['Counterstrain','Pelvis, anterior + posterior'],['Counterstrain','Piriformis'],['Counterstrain','Psoas'],['Counterstrain','Supraspinatus'],['Counterstrain','Subscapularis'],['Counterstrain','Medial meniscus'],['Counterstrain','Lateral meniscus'],['Counterstrain','Levator scapulae']];
+const US=['Parasternal long axis','Apical 4-chamber','Lung sliding','Biceps tendon (transverse)','Patellar tendon (longitudinal)'];
+const r=a=>a[Math.floor(Math.random()*a.length)];
+$('#mock').onclick=()=>{const o=r(OMM);$('#mockOut').style.display='block';$('#mockOut').innerHTML=`<p><span class="tag">PCM</span><b>${r(CC)}</b> · 10 min · <a href="pcm-drill.html">open drill</a></p><p><span class="tag">OMM</span><b>${o[1]} — ${o[0]}</b> · 10 min · <a href="omm-competency.html">open scripts</a></p><p><span class="tag">US</span><b>${r(US)}</b> · 5 min · <a href="ultrasound-competency.html">open stations</a></p>`};
+</script>
+
+</body></html>

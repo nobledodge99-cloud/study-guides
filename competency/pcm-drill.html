@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>PCM Competency Drill</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--cream:#fdfbf3;--cream-2:#f7f1e0;--ink:#2c2c24;--ink-soft:#5c5a4a;--green-deep:#3b5d43;--green:#5e8461;--green-light:#a9c2a0;--line:#d8cfb4;--highlight:#f4e2a8;--pos:#8a2f2f;--warn:#9a6a14;--card-shadow:0 2px 10px rgba(44,44,36,.08);--serif:'Lora','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono','SFMono-Regular',Consolas,Menlo,monospace}
+*{box-sizing:border-box}html{background:var(--cream)}html,body{min-height:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:60px 18px 100px}
+header{border-bottom:2px solid var(--green-deep);padding-bottom:16px;margin-bottom:22px}
+header h1{font-family:var(--serif);font-size:1.9rem;margin:0 0 8px;color:var(--green-deep)}
+header p{margin:0 0 6px;color:var(--ink-soft);font-size:.95rem}
+.back-btn{position:absolute;top:14px;left:14px;z-index:1000;font-size:.78rem;font-weight:600;color:var(--green-deep);text-decoration:none;border:1.5px solid var(--green-deep);padding:7px 13px;border-radius:8px;background:var(--cream);box-shadow:var(--card-shadow)}
+.back-btn:hover{background:var(--green-light)}
+.card{background:#fffdf7;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:var(--card-shadow);scroll-margin-top:90px}
+.card h2{font-family:var(--serif);color:var(--green-deep);margin:0 0 6px;font-size:1.4rem;border-bottom:2px solid var(--green-light);padding-bottom:8px}
+.card h3{font-family:var(--serif);font-size:1.12rem;margin:18px 0 6px}
+.card h4{color:var(--green-deep);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 5px}
+.card p,.card li{font-size:.92rem}.card ul,.card ol{margin:6px 0;padding-left:22px}.card li{margin-bottom:4px}
+.sub{color:var(--ink-soft);font-size:.85rem;font-style:italic;margin:0 0 12px}
+nav.jump{position:sticky;top:0;z-index:50;background:var(--cream);padding:8px 0 10px;border-bottom:1px solid var(--line);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:14px;border:1.3px solid var(--green);color:var(--green-deep);text-decoration:none;background:var(--cream-2);cursor:pointer}
+.pill:hover,.pill.on{background:var(--green-light)}
+.btn{font-family:var(--sans);font-weight:600;font-size:.82rem;padding:8px 15px;border-radius:18px;border:1.5px solid var(--green-deep);background:var(--cream);color:var(--green-deep);cursor:pointer}
+.btn:hover{background:var(--green-light)}.btn.solid{background:var(--green-deep);color:#fff}.btn.solid:hover{background:var(--green)}
+.btn[disabled]{opacity:.45;cursor:default}
+table.t{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.86rem}
+table.t th{text-align:left;background:var(--cream-2);color:var(--green-deep);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:2px solid var(--green-deep)}
+table.t td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl-scroll{overflow-x:auto}
+.box{border:1.5px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0;background:var(--cream)}
+.box.green{border-color:var(--green);background:var(--cream-2)}
+.box.warn{border-color:#d9b25a;background:#fbf3dc}
+.box.red{border-color:#c98a8a;background:#f9ecec}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:10px;background:var(--green-light);color:var(--green-deep);margin-right:4px}
+.tag.v{background:#f4e2a8;color:#6d4f08}
+.say{font-family:var(--serif);font-style:italic;border-left:3px solid var(--green);padding:4px 12px;margin:8px 0;background:var(--cream-2);border-radius:0 8px 8px 0;font-size:.9rem}
+.timer{font-family:var(--mono);font-size:2rem;color:var(--green-deep);font-weight:600}
+.timer.low{color:var(--pos)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.verify{font-size:.78rem;color:var(--warn)}
+footer{text-align:center;color:var(--ink-soft);font-size:.78rem;margin-top:36px}
+details{border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;background:var(--cream)}
+details>summary{cursor:pointer;font-weight:600;color:var(--green-deep);font-size:.92rem}
+details[open]>summary{margin-bottom:6px}
+@media print{.back-btn,nav.jump,.btn{display:none!important}.card{box-shadow:none;break-inside:avoid}}
+</style></head><body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<div class="wrap">
+<header>
+<h1>PCM Competency Drill</h1>
+<p>OCS III · 10 minutes · chief complaint → focused exam → special tests → assessment → plan. Findings are hidden until you "perform" them, just like the findings cards on exam day.</p>
+</header>
+
+<nav class="jump"><a class="pill" href="#how">How it's graded</a><a class="pill" href="#practice">Practice a case</a><a class="pill" href="#study">Study sheets (all 12)</a><a class="pill" href="#template">Say-it templates</a></nav>
+
+<section class="card" id="how">
+<h2>What the station wants</h2>
+<p class="sub">From the course overview and the faculty email.</p>
+<div class="grid2">
+<div class="box green"><b>You get</b><ul><li>A chief complaint + supporting clinical information (vitals, short history). No list of exams.</li><li>A findings card for every system exam or special test you choose to perform.</li></ul></div>
+<div class="box green"><b>You do (10 minutes)</b><ol><li>Select and perform a <b>focused, systematic</b> exam, verbalizing as you go</li><li>Indicated special tests, then interpret</li><li>Brief assessment</li><li>Prioritized plan</li></ol></div>
+</div>
+<div class="box warn"><b>Rules that cost points</b><ul><li><b>If you don't say it, it didn't happen.</b> Verbalize every maneuver.</li><li>Don't perform everything. Choose tests that answer a question and say what that question is.</li><li>Assessment is synthesis, not a list: leading dx + supporting findings + why it beats the alternatives + alternatives and why they're less likely.</li><li>Plan: workup, treatment/medication, patient education, follow-up, return precautions. Prioritize and give the rationale.</li></ul></div>
+<h4>Pacing (aim for)</h4>
+<table class="t"><tr><th>0:00–1:00</th><th>1:00–6:00</th><th>6:00–8:00</th><th>8:00–10:00</th></tr><tr><td>Introduce, hand hygiene, consent/privacy, repeat the complaint, state your top 3 diagnoses and which systems you'll examine</td><td>Exam + special tests, verbalizing each; update your list when a card comes back</td><td>Assessment</td><td>Plan + return precautions + patient education</td></tr></table>
+<p class="verify">Practice cases below are written by me from standard presentations. Your faculty's findings cards will differ in detail. Use them for the process, not to memorize answers. Special-test technique and positive findings are in your <a href="../ocs I & II/oms1-competency-review.html">Competency Exam PMI &amp; OMM with Special Tests</a> guide.</p>
+</section>
+
+<section class="card" id="practice">
+<h2>Practice a case</h2>
+<p class="sub">Pick a complaint (or random). The diagnosis is hidden.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px">
+<select id="cc" style="padding:8px;border-radius:8px;border:1.5px solid var(--green);font-size:.9rem;background:#fff"></select>
+<button class="btn solid" id="newcase">New case</button>
+<button class="btn" id="randcase">Random complaint</button>
+<span class="timer" id="timer">10:00</span>
+<button class="btn" id="tstart">Start</button><button class="btn" id="treset">Reset</button>
+</div>
+<div id="caseBox" class="box" style="display:none"></div>
+<div id="work" style="display:none">
+<h4>1. Systems: click to perform, then read the card</h4>
+<div id="sysBtns" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+<h4>2. Special tests / diagnostics</h4>
+<div id="testBtns"></div>
+<h4>Findings cards received</h4>
+<div id="log"></div>
+<h4>3. Your assessment &amp; plan (optional, type or say it aloud)</h4>
+<textarea id="mine" rows="5" style="width:100%;padding:10px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:.9rem" placeholder="Leading diagnosis, supporting findings, why it beats the alternatives, alternatives, plan…"></textarea>
+<div style="margin-top:10px"><button class="btn solid" id="reveal">Reveal model answer</button></div>
+<div id="answer"></div>
+</div>
+</section>
+
+<section class="card" id="study">
+<h2>Study sheets</h2>
+<p class="sub">Approach, ideal exam, and model assessment/plan for all 24 cases. Open one at a time.</p>
+<div id="studyList"></div>
+</section>
+
+<section class="card" id="template">
+<h2>Say-it templates</h2>
+<h4>Opening</h4>
+<div class="say">"Hi, I'm Noble, one of the medical students. May I examine you today? [Hand hygiene.] I understand you're here for ___. Based on that, my main considerations are ___, ___, and ___, so I'll examine the ___ and ___ systems."</div>
+<h4>While examining</h4>
+<div class="say">"I'm inspecting for ___. I'm palpating the ___ for ___. I'm testing ___ to rule in or out ___."</div>
+<h4>After each card</h4>
+<div class="say">"This finding supports ___ and makes ___ less likely, so next I'll ___."</div>
+<h4>Assessment</h4>
+<div class="say">"My leading diagnosis is ___. Supporting this: ___, ___, and ___. I favor it over ___ because ___. Less likely are ___ because ___ and ___ because ___."</div>
+<h4>Plan</h4>
+<div class="say">"First, ___ (workup/disposition). For treatment, ___. I would educate on ___. Follow up in ___. Return or go to the ED for ___."</div>
+<h4>Every plan includes</h4>
+<ul><li>Workup/imaging/labs with the reason</li><li>Treatment or medication (name + class + one safety point)</li><li>Patient education</li><li>Follow-up interval</li><li>Return precautions / safety net</li></ul>
+</section>
+<footer>Competency Testing Materials · PCM drill · Practice cases are original teaching examples.</footer>
+</div>
+<script>
+const SYSTEMS=[['gen','General / Vitals'],['heent','HEENT (eyes, ears, nose, mouth)'],['lymph','Lymph & Thyroid'],['lung','Lung'],['cv','Cardiovascular'],['abd','Abdominal'],['neuro','Neuro (cerebellar, CN, PNS)'],['spine','MSK – Neck / Back'],['le','MSK – Lower extremity'],['ue','MSK – Upper extremity']];
+const TESTS=[
+['Neuro / HEENT',['Weber','Rinne','Peripheral fields','LOL / AMEN','Ankle clonus','Babinski','Axial compression','Pupillary light reflex','Amsler grid','Dix-Hallpike','Head impulse / HINTS','Orthostatic vitals']],
+['Cardiopulmonary / Abdominal',['Rovsing','Murphy','McBurney point','Lloyd (CVAT)','Egophony','Bronchophony','Whispered pectoriloquy','Tactile fremitus','Liver span','Diaphragmatic excursion','Valsalva / squat-stand','Spleen palpation','Hepatojugular reflux']],
+['Shoulder / Upper ext',['Empty can','Drop arm','Neer','Hawkins','Speed','Yergason','Phalen','Tinel','Finkelstein']],
+['Hip / Back / Knee / Ankle',['FABER','FADIR','Thomas','Trendelenburg','Straight leg raise','Anterior drawer (knee)','Posterior drawer (knee)','Lachman','Thessaly','McMurray','Valgus / varus stress','Homan']],
+['Diagnostics you could order / mention',['ECG','Rapid strep / Centor','Monospot / CBC','Arthrocentesis','Spirometry','Chest wall palpation','Fingerstick glucose','Pulse oximetry']]
+];
+const D=[
+{id:'cough',name:'Cough',sc:[
+{stem:'58-year-old man, 30 pack-year smoker, 5 days of productive cough with yellow-green sputum, fever and right-sided pleuritic chest pain.',v:'T 38.9 °C · HR 104 · RR 22 · BP 128/78 · SpO2 92% RA',
+f:{gen:'Ill-appearing, mildly tachypneic, no accessory muscle use, speaks in full sentences.',heent:'Dry mucous membranes. Oropharynx clear. No sinus tenderness.',lung:'Inspection: decreased right chest expansion. Palpation: increased tactile fremitus R base. Percussion: dull over RLL. Auscultation: coarse crackles and bronchial breath sounds R posterior base; left clear.',cv:'Tachycardic, regular, no murmur, no rub.',lymph:'No cervical adenopathy; thyroid normal.'},
+t:{'Tactile fremitus':'Increased over R lower posterior chest','Egophony':'Positive R base ("E" sounds like "A")','Bronchophony':'Increased clarity R base','Whispered pectoriloquy':'Positive R base','Diaphragmatic excursion':'Decreased on right (≈2 cm)','Pulse oximetry':'92% RA'},
+ideal:{s:['gen','lung','cv','heent'],t:['Tactile fremitus','Egophony','Bronchophony','Whispered pectoriloquy']},
+a:{dx:'Community-acquired pneumonia, right lower lobe',supp:['Fever, productive cough, pleuritic pain','Focal crackles + bronchial breath sounds R base','Dullness, ↑ fremitus, + egophony/bronchophony/whispered pectoriloquy = consolidation','Tachycardia, tachypnea, borderline SpO2'],why:'Every consolidation sign points to the same lobe, with fever and a short acute course. Bronchitis would not give focal dull percussion or ↑ fremitus.',alts:[['Acute bronchitis','No consolidation signs; usually afebrile with normal SpO2'],['Pleural effusion','Would be dull with DECREASED fremitus and decreased breath sounds; here fremitus is increased'],['Pulmonary embolism','Pleuritic pain but no consolidation signs; consider if hypoxia out of proportion, leg swelling, risk factors'],['Heart failure','Bilateral crackles, JVD, edema, S3 are absent'],['Lung cancer / TB','Subacute-chronic course; keep in mind in a smoker, follow up imaging if it does not clear']]},
+plan:['Chest X-ray PA/lateral to confirm; CBC, BMP; pulse oximetry','Severity: CURB-65 / PSI to decide outpatient vs admit. SpO2 92% with comorbidity = low threshold to observe/admit','If outpatient: amoxicillin ± macrolide, or doxycycline (comorbidity-based; follow your syllabus guideline)','Fluids, antipyretic, rest; smoking cessation; pneumococcal/influenza vaccines','Re-check in 48–72 h; repeat CXR in 6–8 weeks (smoker, age >50)','Return precautions: worse dyspnea, SpO2 <90%, confusion, cannot keep fluids, fever >72 h on antibiotics','OMT adjunct (rib raising, thoracic pump) once afebrile/appropriate']},
+{stem:'24-year-old woman with 3 weeks of dry cough, worse at night and with cold air or exercise. Occasional wheeze. History of eczema and seasonal allergies.',v:'T 36.9 °C · HR 78 · RR 16 · BP 112/70 · SpO2 98% RA',
+f:{gen:'Comfortable, speaking in full sentences.',heent:'Pale, boggy nasal turbinates with clear rhinorrhea; cobblestoning of posterior pharynx; TMs normal.',lung:'Symmetric expansion, normal percussion. End-expiratory wheezes diffusely, prolonged expiratory phase. No crackles.',cv:'Normal.',lymph:'No adenopathy.'},
+t:{'Tactile fremitus':'Symmetric, normal','Egophony':'Negative','Bronchophony':'Normal (muffled)','Whispered pectoriloquy':'Negative','Pulse oximetry':'98% RA','Spirometry':'FEV1/FVC reduced; FEV1 improves ≥12% and ≥200 mL after bronchodilator'},
+ideal:{s:['gen','heent','lung','cv'],t:['Egophony','Tactile fremitus','Spirometry']},
+a:{dx:'Asthma (cough-predominant) with allergic rhinitis',supp:['Nocturnal/exertional/cold-air triggered cough','Diffuse expiratory wheeze with prolonged expiration','Atopy: eczema, rhinitis, boggy turbinates','Afebrile, normal SpO2, no focal findings'],why:'Variable, trigger-related symptoms with diffuse wheeze and atopic background fit asthma; no fever or consolidation argues against infection.',alts:[['Pneumonia','Afebrile, no focal crackles, egophony negative'],['Upper airway cough syndrome','Likely coexists (cobblestoning, rhinorrhea) but does not explain wheeze'],['GERD cough','Consider if no response to asthma/rhinitis therapy; no reflux history'],['Post-viral cough','Wheeze + atopy + triggers favor asthma'],['Heart failure / ACE-inhibitor cough','No JVD/edema; not on ACE inhibitor']]},
+plan:['Spirometry with bronchodilator response','SABA as needed (albuterol); start controller (low-dose ICS or ICS-formoterol per guideline)','Intranasal steroid + antihistamine for rhinitis; trigger avoidance','Asthma action plan, inhaler technique, peak-flow/symptom diary','Follow-up 2–4 weeks to reassess control','Return precautions: dyspnea at rest, rescue inhaler needed more than q4h, cannot speak full sentences, blue lips']}
+],approach:{s:'General → HEENT (nose/throat) → Lung (all 4 inspection items, palpate, percuss, auscultate, special lung tests) → CV. Add lymph if infectious.',tip:'Always add the consolidation set after you hear a focal crackle: tactile fremitus, egophony, bronchophony, whispered pectoriloquy.'}},
+
+{id:'sore',name:'Sore throat',sc:[
+{stem:'19-year-old college student with 2 days of severe sore throat, fever and pain with swallowing. No cough or runny nose.',v:'T 38.6 °C · HR 96 · RR 16 · BP 118/74 · SpO2 99%',
+f:{gen:'Mildly uncomfortable, handling secretions, voice not muffled.',heent:'Tonsils enlarged and erythematous with white exudate; palatal petechiae; uvula midline; no trismus; TMs normal; nasal mucosa normal.',lymph:'Tender anterior cervical lymphadenopathy bilaterally. No posterior chain nodes. Thyroid normal.',lung:'Clear.',abd:'Soft, non-tender, spleen not palpable.'},
+t:{'Rapid strep / Centor':'Fever + tonsillar exudate + tender anterior nodes + no cough = Centor 4 (age 15–44 adds 0). Rapid antigen: POSITIVE','Spleen palpation':'Not palpable'},
+ideal:{s:['gen','heent','lymph','lung','abd'],t:['Rapid strep / Centor']},
+a:{dx:'Group A streptococcal pharyngitis',supp:['Centor 4/4: fever, exudate, tender anterior cervical nodes, no cough','Palatal petechiae','Rapid antigen positive'],why:'Full Centor picture without cough or coryza, confirmed by testing.',alts:[['Viral pharyngitis','Usually cough, rhinorrhea, conjunctivitis; no exudate/tender anterior nodes'],['Infectious mononucleosis','Posterior nodes, marked fatigue, splenomegaly: none here'],['Peritonsillar abscess','Would see trismus, muffled "hot potato" voice, uvular deviation'],['Epiglottitis','Drooling, tripod, toxic, stridor: absent']]},
+plan:['Rapid antigen (culture if negative in a child); confirm diagnosis','Penicillin V or amoxicillin 10 days (cephalexin/clindamycin/azithromycin if penicillin-allergic)','Acetaminophen/NSAID, fluids, salt-water gargles','May return to school/work after 12–24 h of antibiotics','Complete the full course (prevents rheumatic fever)','Return precautions: drooling, cannot swallow saliva, trismus, neck stiffness, difficulty breathing, rash, no improvement in 48–72 h']},
+{stem:'20-year-old woman with 7 days of sore throat, extreme fatigue, low-grade fevers and "swollen glands."',v:'T 38.1 °C · HR 92 · RR 16 · BP 110/68 · SpO2 99%',
+f:{gen:'Fatigued appearing, otherwise comfortable.',heent:'Tonsils enlarged with exudate, palatal petechiae, no uvular deviation, no trismus.',lymph:'Enlarged tender POSTERIOR and anterior cervical nodes (symmetric, mobile). Thyroid normal.',abd:'Soft. Mild LUQ tenderness; spleen tip palpable on gentle deep inspiration. No hepatomegaly noted.',lung:'Clear.'},
+t:{'Rapid strep / Centor':'Rapid antigen NEGATIVE','Monospot / CBC':'Heterophile positive; lymphocytosis with >10% atypical lymphocytes','Spleen palpation':'Tip palpable, mildly tender, gentle only'},
+ideal:{s:['gen','heent','lymph','abd','lung'],t:['Rapid strep / Centor','Monospot / CBC','Spleen palpation']},
+a:{dx:'Infectious mononucleosis (EBV)',supp:['Prolonged sore throat with marked fatigue','Posterior + anterior cervical lymphadenopathy','Splenomegaly','Atypical lymphocytes, positive heterophile, negative strep'],why:'Posterior chain nodes, splenomegaly and fatigue are classic and are not explained by strep.',alts:[['Strep pharyngitis','Negative rapid antigen; posterior nodes and spleen unexplained'],['CMV / acute HIV','Similar picture; heterophile-negative mono-like illness → CMV/HIV testing'],['Viral pharyngitis','No splenomegaly or atypical lymphocytes'],['Peritonsillar abscess','No trismus or uvular deviation']]},
+plan:['Monospot (may be falsely negative in week 1) + CBC with differential; consider EBV serology','Supportive: fluids, rest, analgesics, hydrate','No contact sports or heavy lifting for ~3–4 weeks and until cleared (splenic rupture risk)','Avoid amoxicillin/ampicillin (rash)','Steroids only for airway compromise/severe complications','Follow-up 1–2 weeks','Return precautions: left upper abdominal or left shoulder pain, trouble breathing/swallowing, severe headache, jaundice']}
+],approach:{s:'General → HEENT (mouth/throat, ears, nose) → Lymph & thyroid → Lung → Abdominal (spleen) if mono is on the list.',tip:'Say the Centor items out loud as you find them. Gentle spleen palpation only.'}},
+
+{id:'dizzy',name:'Dizziness',sc:[
+{stem:'62-year-old woman with brief episodes (<1 minute) of the room spinning when rolling over in bed or looking up. Nausea during episodes. No hearing loss, tinnitus, headache, weakness or speech change.',v:'T 36.8 °C · HR 74 · BP 132/80 (no orthostatic drop) · SpO2 98%',
+f:{gen:'Comfortable between episodes.',heent:'TMs and canals normal. Hearing grossly intact (finger rub).',neuro:'CN II–XII intact. Finger-to-nose, heel-shin normal. Romberg negative, no pronator drift. Gait normal, tandem normal.',cv:'Regular, no murmur, no carotid bruit.'},
+t:{'Dix-Hallpike':'Right ear down: latency ~3 s, upbeating-torsional nystagmus toward the right ear with vertigo for ~30 s that fatigues on repeat. Left side negative','Head impulse / HINTS':'Normal head impulse; no spontaneous nystagmus','Orthostatic vitals':'Negative','Fingerstick glucose':'96 mg/dL'},
+ideal:{s:['gen','heent','neuro','cv'],t:['Dix-Hallpike','Orthostatic vitals','Head impulse / HINTS']},
+a:{dx:'Benign paroxysmal positional vertigo, right posterior canal',supp:['Brief positional spinning vertigo','Positive right Dix-Hallpike with latent, fatiguing, torsional upbeat nystagmus','Normal neuro exam and hearing'],why:'Positional trigger, short duration, characteristic nystagmus, and no central or auditory signs.',alts:[['Vestibular neuritis','Constant vertigo for days, abnormal head impulse'],['Ménière disease','Episodes of 20 min–hours with hearing loss, tinnitus, fullness'],['Posterior circulation stroke / TIA','No ataxia, dysmetria, diplopia or dysarthria; nystagmus here is peripheral-type'],['Orthostatic hypotension','Presyncope on standing, orthostatics negative'],['Medication effect / arrhythmia','Regular rhythm, no culprit medications']]},
+plan:['Epley maneuver in clinic (right posterior canal), then home exercises','Educate that it is benign; avoid sleeping on the right side initially if symptomatic','Avoid chronic vestibular suppressants (short meclizine course only for severe nausea)','Fall precautions','Follow-up 1–2 weeks to repeat Dix-Hallpike','Return precautions: new double vision, slurred speech, weakness/numbness, severe headache, inability to walk, hearing loss → ED']},
+{stem:'68-year-old man with hypertension and diabetes, sudden onset constant vertigo with vomiting, headache and inability to walk. Began 2 hours ago.',v:'T 37.0 °C · HR 88 · BP 178/96 · SpO2 97% · Glucose 148',
+f:{gen:'Vomiting, cannot sit up without support, uncomfortable.',heent:'Ears normal. Pupils equal and reactive. Horizontal nystagmus that CHANGES direction with gaze.',neuro:'Right-sided dysmetria on finger-to-nose and heel-shin; marked truncal ataxia (falls to the right when sitting); unable to stand/walk unassisted; CN otherwise intact; strength and sensation normal.',cv:'Irregularly irregular rhythm.',lung:'Clear.'},
+t:{'Head impulse / HINTS':'Normal head impulse (no corrective saccade) + direction-changing nystagmus + skew deviation = CENTRAL pattern','Dix-Hallpike':'Do not rely on it; spontaneous nystagmus already present','Fingerstick glucose':'148 mg/dL','ECG':'Atrial fibrillation, no ST changes'},
+ideal:{s:['gen','heent','neuro','cv'],t:['Head impulse / HINTS','Fingerstick glucose','ECG']},
+a:{dx:'Acute posterior circulation (cerebellar) stroke',supp:['Abrupt continuous vertigo with vomiting and headache','Central HINTS: normal head impulse, direction-changing nystagmus, skew','Ipsilateral dysmetria and truncal ataxia, cannot walk','Vascular risk factors; new atrial fibrillation'],why:'Severe truncal ataxia and a central HINTS pattern with embolic risk (AF) mean this is central until proven otherwise.',alts:[['Vestibular neuritis','Abnormal head impulse, unidirectional nystagmus, can walk with difficulty; no ataxia/dysmetria'],['BPPV','Positional, brief episodes'],['Cerebellar hemorrhage','Same exam; must be excluded with CT'],['Ménière / labyrinthitis','Hearing symptoms, no central signs'],['Hypoglycemia / intoxication','Glucose normal, no ingestion']]},
+plan:['Activate stroke pathway: EMS/ED now, note last-known-well time','Stat non-contrast head CT (hemorrhage); MRI with DWI (CT misses posterior fossa); CTA/MRA head and neck','Glucose, ECG/telemetry, CBC, BMP, coags, troponin; NIHSS','Thrombolysis/thrombectomy eligibility; permissive hypertension unless lysis candidate','Admit: neurology, swallow screen, antiplatelet/anticoagulation plan for AF, statin','NPO, aspiration and fall precautions, monitor for posterior fossa edema/hydrocephalus']}
+],approach:{s:'General (vitals, orthostatics) → HEENT (ears, eyes, nystagmus) → Neuro (cerebellar, Romberg/pronator drift, gait, CN) → CV (rhythm, carotids).',tip:'Decide peripheral vs central early. Gait + cerebellar testing is what separates them.'}},
+
+{id:'ear',name:'Earache',sc:[
+{stem:'4-year-old boy with right ear pulling, fever and irritability for 2 days after a cold. Poor sleep.',v:'T 38.7 °C · HR 118 · RR 24 · SpO2 99%',
+f:{gen:'Fussy but consolable, well hydrated.',heent:'RIGHT TM bulging, erythematous, opaque with loss of landmarks; decreased mobility on pneumatic otoscopy. Left TM normal. Canals normal; NO pain with tragal pressure or ear tug. No mastoid tenderness or swelling. Rhinorrhea; throat mildly erythematous.',lymph:'Small shotty anterior cervical nodes.'},
+t:{'Rinne':'Not reliably testable at this age','Weber':'Not reliably testable at this age'},
+ideal:{s:['gen','heent','lymph'],t:[]},
+a:{dx:'Acute otitis media, right',supp:['Fever, otalgia/ear pulling after URI','Bulging erythematous opaque TM with decreased mobility','No pain with ear tug (canal is not the source)'],why:'A bulging, immobile TM with acute symptoms is diagnostic.',alts:[['Otitis externa','Ear tug/tragal pain and canal edema, not present here'],['Otitis media with effusion','Effusion without acute inflammation or pain'],['Mastoiditis','Postauricular swelling/erythema, protruding ear: absent'],['Referred pain (dental, pharyngitis, TMJ)','Normal oral/dental exam, TMs abnormal']]},
+plan:['Analgesia: acetaminophen or ibuprofen','Amoxicillin high dose (80–90 mg/kg/day divided BID) for ~7 days at age 4, or observation 48–72 h for mild unilateral disease with reliable follow-up','Re-examine in 48–72 h if not improving → second-line (amoxicillin-clavulanate)','Prevention: vaccines up to date, avoid smoke exposure','Return precautions: postauricular swelling/redness, high persistent fever, neck stiffness, lethargy']},
+{stem:'34-year-old man, recreational swimmer, with 3 days of right ear pain that is worse when he touches or pulls the ear. Itching, muffled hearing, no fever.',v:'T 36.9 °C · HR 72 · BP 124/78',
+f:{gen:'Comfortable at rest, winces when ear is touched.',heent:'Pain on tragal pressure and pinna tug. Right canal erythematous and edematous with white-gray debris; TM only partly seen but appears normal and mobile. No mastoid tenderness. No periauricular cellulitis. Left ear normal. Throat clear.'},
+t:{'Weber':'Lateralizes to the RIGHT (affected) ear','Rinne':'Right: bone conduction > air conduction (abnormal) due to canal swelling = conductive pattern; left normal'},
+ideal:{s:['gen','heent'],t:['Weber','Rinne']},
+a:{dx:'Acute otitis externa, right',supp:['Pain with tragal pressure and pinna tug','Erythematous edematous canal with debris','Water exposure, itching','Conductive pattern: Weber to affected ear, bone > air'],why:'Movement of the pinna reproduces the pain, and the inflammation is in the canal with a normal TM.',alts:[['Acute otitis media','Bulging/opaque immobile TM, ear tug not painful'],['Malignant (necrotizing) otitis externa','Diabetic or immunocompromised, severe night pain, granulation tissue'],['Furuncle / fungal otitis externa','Localized pustule or fungal hyphae/black spores'],['Cerumen / foreign body / TM perforation','Visible on otoscopy']]},
+plan:['Clean/debride canal; wick if too edematous','Topical antibiotic ± steroid drops (e.g., ciprofloxacin-dexamethasone or ofloxacin) for ~7 days; non-ototoxic if TM not fully seen','Pain control; keep ear dry; no cotton swabs','Follow-up 48–72 h if not improving','Return precautions: fever, spreading redness, severe pain, facial weakness, diabetes with worsening pain (rule out malignant OE)']}
+],approach:{s:'General → HEENT: ear tug and tragal pressure FIRST, then otoscopy (brace hand, verbalize canal and TM), Weber/Rinne → nose and mouth → lymph.',tip:'Verbalize external auditory canal and tympanic membrane findings; the guide counts what you say.'}},
+
+{id:'knee',name:'Knee pain',sc:[
+{stem:'24-year-old soccer player with medial knee pain, catching and a feeling of locking since a twisting injury 2 weeks ago. Mild swelling.',v:'Afebrile · HR 70 · BP 120/74',
+f:{gen:'Walks with mild limp.',le:'Inspection: small effusion, no erythema. Palpation: medial joint line tenderness. ROM: lacks last ~10° of extension (springy block). Quadriceps bulk symmetric. Hip and ankle normal. Neurovascular intact (DP pulse 2+, sensation normal).'},
+t:{'McMurray':'Medial (valgus + ER tibia → extension): pain and palpable click POSITIVE. Lateral negative','Thessaly':'Medial joint-line pain and catching: POSITIVE','Lachman':'Negative, firm endpoint','Anterior drawer (knee)':'<2 cm, negative','Posterior drawer (knee)':'Negative','Valgus / varus stress':'Stable'},
+ideal:{s:['gen','le'],t:['McMurray','Thessaly','Lachman','Anterior drawer (knee)','Posterior drawer (knee)','Valgus / varus stress']},
+a:{dx:'Medial meniscus tear',supp:['Twisting mechanism, mechanical symptoms','Joint-line tenderness, extension block','Positive McMurray and Thessaly (medial)','Ligaments stable'],why:'Mechanical symptoms with positive meniscal tests and negative ligament tests localize the lesion to the meniscus.',alts:[['ACL tear','Pop, rapid swelling, positive Lachman/drawer'],['MCL sprain','Valgus laxity, tenderness at the ligament, not the joint line'],['Patellofemoral pain / patellar tendinopathy','Anterior pain with stairs, normal meniscal tests'],['Osteoarthritis','Older, no acute twist'],['Septic arthritis / fracture','No fever, can bear weight; Ottawa rules negative']]},
+plan:['Weight-bearing knee X-rays (Ottawa knee rules) to exclude fracture','MRI knee if persistent mechanical symptoms','RICE, NSAIDs, activity modification, physical therapy','Orthopedic referral for true locked knee (urgent) or failure of conservative treatment','Return precautions: locked knee, hot swollen joint with fever, calf swelling or pain']},
+{stem:'19-year-old basketball player who landed awkwardly, felt a "pop," and had immediate swelling. Knee gave way afterwards.',v:'Afebrile · HR 88 · BP 118/72',
+f:{gen:'Using crutches, in pain.',le:'Large effusion (hemarthrosis) within hours. Diffuse tenderness, no point tenderness over fibular head, patella or tibial tuberosity. ROM limited to ~20–90° by pain/effusion. Neurovascular intact.'},
+t:{'Lachman':'POSITIVE: increased anterior tibial translation with soft endpoint','Anterior drawer (knee)':'POSITIVE: >2 cm anterior translation','Posterior drawer (knee)':'Negative','McMurray':'Limited by effusion and pain, equivocal','Thessaly':'Not tolerated','Valgus / varus stress':'Stable at 0° and 30°'},
+ideal:{s:['gen','le'],t:['Lachman','Anterior drawer (knee)','Posterior drawer (knee)','Valgus / varus stress']},
+a:{dx:'Anterior cruciate ligament tear',supp:['Non-contact pivot/landing, audible pop, giving way','Rapid hemarthrosis','Positive Lachman (most sensitive) and anterior drawer','PCL and collaterals intact'],why:'The mechanism, early bloody effusion and anterior instability on two tests make ACL the leading diagnosis.',alts:[['Meniscal tear','Often coexists; mechanical symptoms, joint line pain'],['PCL / MCL injury','Posterior drawer / valgus laxity negative'],['Patellar dislocation','Lateral apprehension, patellar tenderness'],['Tibial plateau / avulsion fracture','Ottawa criteria; X-ray'],['Septic arthritis','No fever or systemic illness']]},
+plan:['X-ray to exclude fracture (Ottawa rules); MRI to confirm and assess associated injuries','Protect: brace, crutches, ice, elevation, NSAIDs','Early physical therapy (range of motion, quadriceps)','Orthopedic/sports medicine referral for reconstruction decision','Return precautions: calf pain/swelling (DVT), numb or cold foot, fever']}
+],approach:{s:'General (gait) → Knee: inspection, palpation, ROM (F/E) → ligament tests → meniscal tests → check hip above and ankle below → neurovascular.',tip:'Do the ligament tests before the meniscal tests, then say what each finding rules in or out.'}},
+
+{id:'chest',name:'Chest pain',sc:[
+{stem:'58-year-old man with hypertension, 40 pack-year smoking history, with 30 minutes of crushing substernal pressure radiating to the left arm and jaw with sweating and nausea. Pain is ongoing.',v:'T 36.9 °C · HR 96 · RR 20 · BP 150/92 (equal in both arms) · SpO2 96%',
+f:{gen:'Anxious, diaphoretic, pale.',cv:'Regular, S4 present, no murmur or rub. JVP normal. Radial and femoral pulses symmetric.',lung:'Clear bilaterally.',spine:'Chest wall NOT tender; pain not reproduced by palpation or movement.',le:'No edema, no calf tenderness.',abd:'Soft, non-tender.'},
+t:{'ECG':'ST elevation II, III, aVF with reciprocal changes in I/aVL','Chest wall palpation':'Does not reproduce pain','Pulse oximetry':'96% RA'},
+ideal:{s:['gen','cv','lung','spine','le'],t:['ECG','Chest wall palpation']},
+a:{dx:'Acute coronary syndrome: inferior STEMI',supp:['Typical exertion-independent pressure with radiation and autonomic symptoms','Risk factors: age, HTN, smoking','S4, diaphoresis','ECG with inferior ST elevation; chest wall non-tender'],why:'Classic ischemic history and objective ECG changes make ACS most likely; nothing on exam suggests a non-cardiac source.',alts:[['Aortic dissection','Tearing, sudden maximal; BP/pulse differential: arms equal here'],['Pulmonary embolism','Pleuritic, tachycardia, hypoxia, calf findings: absent'],['Pericarditis','Pleuritic, positional, rub, diffuse ST elevation with PR depression'],['Pneumothorax','Unequal breath sounds, hyperresonance'],['GERD / esophageal spasm','Diagnosis of exclusion with ECG normal'],['Costochondritis','Reproducible tenderness: absent']]},
+plan:['Immediate 12-lead ECG (<10 min) and activate EMS/ED; do not delay transfer','Aspirin 324 mg chewed (no contraindication); IV access, continuous monitoring','Nitroglycerin SL if no hypotension/RV infarct/PDE-5 inhibitor; oxygen only if SpO2 <90%','Troponin; emergent cath lab PCI (door-to-balloon ≤90 min) or fibrinolysis if PCI unavailable','Anticoagulation, P2Y12 inhibitor, beta-blocker, high-intensity statin per ACS protocol','Education: smoking cessation, risk-factor control, cardiac rehab after discharge']},
+{stem:'22-year-old man with 3 days of sharp left chest pain, worse with deep breaths, certain movements and pressing on the chest. Started after a new weight-lifting program. No dyspnea, cough or fever.',v:'T 36.8 °C · HR 72 · RR 14 · BP 118/72 · SpO2 99%',
+f:{gen:'Comfortable, speaks full sentences.',cv:'Regular, no murmur, no rub. Pulses normal.',lung:'Clear, symmetric breath sounds, resonant.',spine:'Reproducible tenderness over left 3rd–4th costochondral junctions; thoracic spine restrictions and rib tenderness T4–T5 on the left.',le:'No calf swelling or tenderness.',abd:'Normal.'},
+t:{'ECG':'Normal sinus rhythm, no ST/PR changes','Chest wall palpation':'Reproduces his pain exactly','Pulse oximetry':'99% RA'},
+ideal:{s:['gen','cv','lung','spine','le'],t:['Chest wall palpation','ECG']},
+a:{dx:'Musculoskeletal chest wall pain / costochondritis',supp:['Pain reproduced exactly by chest wall palpation','Pleuritic/positional component after new exertion','Normal vitals, lung and cardiac exam, normal ECG','Low pretest probability for ACS, PE'],why:'Reproducible local tenderness plus normal cardiac exam and ECG in a young low-risk patient. Reproducibility alone does not exclude ACS, so the ECG matters.',alts:[['Pericarditis','Rub, relief leaning forward, ECG changes'],['Pulmonary embolism','Tachycardia, hypoxia, risk factors'],['Pneumothorax','Tall thin young male: check for decreased breath sounds/hyperresonance (normal here)'],['Acute coronary syndrome','Very low pretest probability; ECG normal'],['Pleurisy/pneumonia','No fever/cough; lungs clear'],['GERD','No burning/postprandial pattern']]},
+plan:['ECG (done) and consider CXR if any abnormal exam','Reassure; NSAIDs, heat, activity modification','OMT for rib and thoracic somatic dysfunction','Follow-up 1–2 weeks if not improving','Return precautions: exertional pressure, dyspnea, syncope, fever, pain not reproducible by touch']}
+],approach:{s:'General (appearance, vitals) → CV (all 5 areas, rub, JVP, pulses) → Lung → Chest wall palpation / MSK → LE for DVT signs.',tip:'Palpate the chest wall and say that reproducibility does not exclude ACS. Mention ECG and troponin in the plan either way.'}},
+
+{id:'gout',name:'Gout (acute monoarthritis)',sc:[
+{stem:'52-year-old man with obesity and hypertension on hydrochlorothiazide, who drinks beer on weekends, woke with severe right great toe pain, redness and swelling. Cannot tolerate the bed sheet touching it.',v:'T 37.8 °C · HR 88 · BP 144/90',
+f:{gen:'Uncomfortable, low-grade fever.',le:'Right first MTP joint: warm, erythematous, swollen, exquisitely tender, ROM markedly limited. Ankle, knee and other joints normal. No wound or tophi. DP pulse intact.',ue:'No joint involvement; no tophi at olecranon or helix.',cv:'Normal.'},
+t:{'Arthrocentesis':'Cloudy fluid, WBC ~20,000 (neutrophils), needle-shaped negatively birefringent crystals, Gram stain/culture negative','Fingerstick glucose':'110 mg/dL'},
+ideal:{s:['gen','le','ue'],t:['Arthrocentesis']},
+a:{dx:'Acute gout (podagra), first MTP',supp:['Rapid-onset monoarticular pain at the first MTP','Risk factors: male, obesity, alcohol (beer), thiazide','Warm red swollen exquisitely tender joint','Negatively birefringent needle crystals'],why:'Classic site, risk factors and crystal analysis. Infection is excluded by negative Gram stain/culture.',alts:[['Septic arthritis','Must be excluded if febrile/ill; arthrocentesis resolves it'],['Pseudogout (CPPD)','Knee/wrist, rhomboid positively birefringent crystals, chondrocalcinosis'],['Cellulitis','No joint effusion/ROM preserved'],['Trauma / fracture','No injury'],['Reactive or psoriatic arthritis','Other joints, enthesitis, GU/GI illness']]},
+plan:['Treat flare: NSAID (indomethacin or naproxen) or colchicine, or short prednisone course if NSAID/colchicine contraindicated','Arthrocentesis if there is any diagnostic doubt','Labs: serum urate (can be normal during flare), creatinine, CBC','Address triggers: reduce beer/alcohol, purine-rich foods, fructose; weight loss; consider swapping hydrochlorothiazide (e.g., for losartan)','Urate-lowering therapy (allopurinol) after flare resolves if ≥2 flares/year, tophi, CKD or stones','Follow-up 1–2 weeks. Return precautions: fever/chills, multiple joints, spreading redness']},
+{stem:'60-year-old man with a history of gout, 2 days of right knee swelling and pain, fever and chills. Cannot bear weight.',v:'T 38.9 °C · HR 112 · BP 126/76',
+f:{gen:'Ill-appearing, shivering.',le:'Right knee: warm, erythematous, large effusion; severe pain with ANY passive ROM; unable to bear weight. No wound seen. Hip and ankle normal.',cv:'Tachycardic, no new murmur.'},
+t:{'Arthrocentesis':'Turbid fluid, WBC 75,000 (92% neutrophils), Gram stain: gram-positive cocci in clusters; crystals may coexist','Fingerstick glucose':'210 mg/dL'},
+ideal:{s:['gen','le','cv'],t:['Arthrocentesis']},
+a:{dx:'Septic arthritis, right knee (until proven otherwise)',supp:['Fever, chills, tachycardia','Hot swollen knee with pain on any passive motion and inability to bear weight','Synovial WBC >50,000 with gram-positive cocci'],why:'Systemic signs plus severe pain on passive motion; a gout history does not exclude infection and the Gram stain confirms it.',alts:[['Gout flare','Can coexist; do not anchor on prior history'],['Pseudogout','Crystals, less systemic toxicity'],['Hemarthrosis / trauma','Injury history'],['Reactive/Lyme arthritis','Subacute, extra-articular features']]},
+plan:['Urgent arthrocentesis BEFORE antibiotics; blood cultures; CBC, ESR/CRP, lactate','Empiric IV antibiotics covering MRSA (e.g., vancomycin) plus gram-negative coverage as indicated','Orthopedic consultation for joint drainage/washout; admit','X-ray; hold colchicine/steroids until infection treated','Control glucose; monitor for sepsis']}
+],approach:{s:'General (fever?) → Joint: inspection, palpation (warmth, effusion), active/passive ROM, neurovascular → check adjacent joints and other joints.',tip:'Always say septic arthritis out loud as the alternative you must not miss, and explain how arthrocentesis answers it.'}},
+
+{id:'palp',name:'Palpitations',sc:[
+{stem:'67-year-old man with hypertension, 6 hours of "racing, irregular" heartbeat with mild shortness of breath and lightheadedness. No chest pain or syncope.',v:'T 36.9 °C · HR 128 (irregular) · RR 18 · BP 138/84 · SpO2 97%',
+f:{gen:'Anxious, alert, no distress.',cv:'Irregularly irregular rhythm, variable intensity S1, no murmur or S3; JVP not elevated; radial pulse rate lower than apical rate (pulse deficit).',lung:'Clear bilaterally.',lymph:'Thyroid normal size, no nodules, no bruit.',le:'No edema.',neuro:'Alert, no focal deficit.'},
+t:{'ECG':'Atrial fibrillation with rapid ventricular response, no acute ST changes','Pulse oximetry':'97% RA'},
+ideal:{s:['gen','cv','lung','lymph','le'],t:['ECG']},
+a:{dx:'New-onset atrial fibrillation with rapid ventricular response',supp:['Irregularly irregular rhythm with pulse deficit','ECG without P waves, irregular RR','Age and hypertension'],why:'Rhythm exam and ECG confirm it; he is hemodynamically stable.',alts:[['Atrial flutter / SVT','Regular rhythm'],['Sinus tachycardia (anxiety, fever, anemia, hyperthyroid, PE)','Regular; look for cause'],['Frequent PACs/PVCs','Brief, ECG would show ectopy'],['Hyperthyroidism','Check TSH; thyroid exam normal'],['ACS / PE / heart failure','No chest pain, hypoxia or JVD']]},
+plan:['Assess stability: hypotension, chest pain, HF, altered mental status → synchronized cardioversion','If stable: rate control (beta-blocker or diltiazem); consider rhythm control','TSH, BMP/Mg, CBC, troponin if indicated; echocardiogram','CHA2DS2-VASc 2 (age 65–74, HTN) → start oral anticoagulation (DOAC)','ED/urgent cardiology; counsel on stroke symptoms (FAST)','Reduce alcohol/stimulants, treat sleep apnea']},
+{stem:'28-year-old woman with 1 month of palpitations, weight loss despite a good appetite, heat intolerance, anxiety and loose stools.',v:'T 37.3 °C · HR 112 (regular) · RR 16 · BP 132/68',
+f:{gen:'Thin, restless, warm moist skin.',heent:'Lid retraction and lid lag; mild proptosis; no conjunctival injection.',lymph:'Diffusely enlarged, smooth, non-tender thyroid with a bruit. No nodules; no cervical adenopathy. Trachea midline.',cv:'Tachycardic and regular, hyperdynamic precordium, soft systolic flow murmur.',neuro:'Fine tremor with outstretched hands; brisk reflexes (3+).',lung:'Clear.'},
+t:{'ECG':'Sinus tachycardia 112','Pulse oximetry':'99% RA'},
+ideal:{s:['gen','heent','lymph','cv','neuro'],t:['ECG']},
+a:{dx:'Hyperthyroidism, most likely Graves disease',supp:['Weight loss with increased appetite, heat intolerance, loose stools','Sinus tachycardia, tremor, brisk reflexes, warm moist skin','Diffuse goiter with bruit; lid lag/proptosis'],why:'Systemic hypermetabolic features with a diffusely enlarged gland, bruit and eye findings are specific for Graves.',alts:[['Anxiety / panic','Does not cause goiter, weight loss, bruit'],['Atrial fibrillation / SVT','Regular sinus rhythm on ECG'],['Subacute thyroiditis','Tender gland, recent viral illness'],['Toxic nodule / multinodular goiter','Nodular gland'],['Pheochromocytoma / stimulant use','Paroxysmal hypertension; no goiter'],['Pregnancy','Check hCG']]},
+plan:['TSH (suppressed), free T4 ± T3, TSI/TRAb; hCG; ECG','Beta-blocker (propranolol/atenolol) for symptoms','Endocrinology referral; antithyroid drug (methimazole; PTU in first trimester) vs radioiodine vs surgery','Screen for eye disease; avoid iodine/smoking','Follow-up labs 4–6 weeks; return precautions: chest pain, syncope, fever with confusion (thyroid storm)']}
+],approach:{s:'General → CV (rate, rhythm, murmur, pulses, JVP) → Lymph & thyroid → Lung → Neuro (tremor, reflexes) → HEENT (eyes).',tip:'Palpate the radial pulse for at least 30 seconds and say regular vs irregular.'}},
+
+{id:'sob',name:'Shortness of breath',sc:[
+{stem:'70-year-old man with a 50 pack-year smoking history and worsening dyspnea, cough, and more purulent sputum for 3 days.',v:'T 37.4 °C · HR 108 · RR 26 · BP 142/86 · SpO2 88% RA',
+f:{gen:'Tripod position, pursed-lip breathing, speaks in short phrases.',lung:'Barrel chest, accessory muscle use. Hyperresonant percussion bilaterally. Decreased breath sounds with diffuse expiratory wheezes and prolonged expiration. Decreased tactile fremitus. No focal crackles.',cv:'Tachycardic regular, distant heart sounds. No JVD, no S3.',le:'No edema or calf tenderness.',abd:'Normal.'},
+t:{'Diaphragmatic excursion':'Reduced (<2 cm)','Tactile fremitus':'Decreased bilaterally','Egophony':'Negative','Pulse oximetry':'88% RA'},
+ideal:{s:['gen','lung','cv','le'],t:['Tactile fremitus','Diaphragmatic excursion','Pulse oximetry']},
+a:{dx:'Acute exacerbation of COPD',supp:['Heavy smoking history','Increased dyspnea, sputum volume and purulence','Barrel chest, hyperresonance, wheezes, prolonged expiration, ↓ excursion','Hypoxemia'],why:'Hyperinflation signs and wheeze with a classic exacerbation triad (dyspnea, sputum volume, purulence).',alts:[['Heart failure exacerbation','JVD, S3, crackles, edema: absent'],['Pneumonia','Focal consolidation signs absent; check CXR'],['Pulmonary embolism','Consider if no better explanation; calves normal'],['Pneumothorax','Hyperresonance would be unilateral with absent breath sounds'],['Asthma','Older age, smoking, fixed obstruction'],['ACS / anemia','Check ECG, CBC']]},
+plan:['Titrate O2 to SpO2 88–92%; ABG/VBG for hypercapnia; CXR, ECG, CBC, BMP, BNP','Bronchodilators: albuterol ± ipratropium nebs','Systemic steroid (prednisone 40 mg × 5 days)','Antibiotic if ↑ purulence + dyspnea/volume (doxycycline, amoxicillin-clavulanate or azithromycin)','Non-invasive ventilation for acidosis/fatigue; admit given hypoxemia and distress','Before discharge: inhaler technique, smoking cessation, vaccines, pulmonary rehab, early follow-up']},
+{stem:'72-year-old woman with prior MI and hypertension, 2 weeks of orthopnea, waking at night gasping, leg swelling and 8 lb weight gain.',v:'T 36.8 °C · HR 98 · RR 24 · BP 148/90 · SpO2 91% RA',
+f:{gen:'Sitting upright, mild distress.',cv:'JVP elevated (~12 cm). Displaced laterally PMI. S3 gallop. Holosystolic apical murmur radiating to the axilla. Hepatojugular reflux positive.',lung:'Bibasilar crackles; dullness and decreased breath sounds at the right base. Tactile fremitus decreased at the right base.',abd:'Hepatomegaly, tender liver edge; ascites not clear.',le:'2+ pitting edema to the knees bilaterally; calves symmetric and non-tender.'},
+t:{'Hepatojugular reflux':'Positive','Tactile fremitus':'Decreased at right base','Egophony':'Negative','Pulse oximetry':'91% RA','ECG':'Old inferior Q waves, LVH, sinus tachycardia'},
+ideal:{s:['gen','cv','lung','abd','le'],t:['Hepatojugular reflux','Tactile fremitus']},
+a:{dx:'Acute decompensated heart failure (reduced EF likely)',supp:['Orthopnea, PND, edema, weight gain','JVD, hepatojugular reflux, S3, displaced PMI','Bibasilar crackles + right pleural effusion','Prior MI and hypertension'],why:'Biventricular congestion with S3 and JVD in a patient with ischemic history.',alts:[['COPD exacerbation','No smoking history/wheeze/hyperinflation'],['Pneumonia','No fever or focal consolidation (egophony negative)'],['Pulmonary embolism','Bilateral edema, JVD point to heart; calves normal'],['Nephrotic/renal failure, cirrhosis','Other volume-overload causes; check labs'],['ACS / arrhythmia as trigger','Check ECG, troponin']]},
+plan:['ECG, BNP/NT-proBNP, troponin, BMP, CBC, CXR, echocardiogram','IV loop diuretic, upright positioning, O2 if hypoxic; strict I/O and daily weights','Identify precipitant: ischemia, arrhythmia, medication non-adherence, infection, dietary salt','Start/optimize GDMT when stable: ACEi/ARB/ARNI, beta-blocker, MRA, SGLT2 inhibitor','Sodium restriction, fluid guidance, vaccines','Follow-up within 7 days of discharge']}
+],approach:{s:'General (position, work of breathing) → Lung (inspection, palpation, percussion, ausc., fremitus/excursion) → CV (JVP, S3, murmur) → Abdominal (liver) → LE (edema, calves).',tip:'Separate lung from heart: wheeze/hyperinflation vs JVD/S3/edema/crackles.'}},
+
+{id:'back',name:'Lower back pain',sc:[
+{stem:'44-year-old man with sudden low back pain after lifting a heavy box, radiating down the back of the left leg to the foot with tingling. Worse with sitting and coughing. No bowel/bladder change, saddle numbness, fever or weight loss.',v:'Afebrile · HR 78 · BP 130/82',
+f:{gen:'Shifts position often, stands with a slight antalgic lean.',spine:'Left paraspinal spasm. Tenderness L5–S1. Lumbar flexion limited by leg pain. No midline step-off.',le:'Plantarflexion strength 4/5 on left; ankle dorsiflexion and knee extension 5/5. Decreased sensation lateral foot/sole on the left (S1). Patellar reflex 2+ bilaterally, left Achilles 1+. Hip ROM normal.',neuro:'Normal tone, no clonus, downgoing toes. Perineal sensation intact.'},
+t:{'Straight leg raise':'Left POSITIVE at ~40°: reproduces pain down posterior leg. Right negative','Babinski':'Downgoing (normal)','Ankle clonus':'Absent','FABER':'Negative','Trendelenburg':'Negative','Lloyd (CVAT)':'Negative'},
+ideal:{s:['gen','spine','le','neuro'],t:['Straight leg raise','Babinski','Ankle clonus','FABER']},
+a:{dx:'Lumbar radiculopathy (S1) from L5–S1 disc herniation',supp:['Lifting onset with posterior leg radiation and paresthesia','Positive SLR','S1 findings: weak plantarflexion, lateral foot sensory loss, ↓ Achilles reflex','No red flags'],why:'Dermatomal and myotomal S1 deficits with positive SLR localize a root lesion; no upper motor neuron or cauda equina signs.',alts:[['Mechanical low back pain / strain','No radicular signs, negative SLR'],['Cauda equina syndrome (can\'t miss)','Saddle anesthesia, retention, bilateral leg weakness: absent'],['Spinal stenosis','Older, neurogenic claudication relieved by flexion'],['Piriformis syndrome / SI dysfunction','No neuro deficit; FABER/provocation differ'],['Fracture / infection / malignancy','Trauma, fever, cancer, weight loss: none']]},
+plan:['No imaging initially (no red flags); MRI if red flags, progressive deficit or no improvement in ~6 weeks','NSAIDs, heat, stay active; short-term muscle relaxant if spasm','PT and OMT (soft tissue, MFR, ME); HVLA is relatively contraindicated with acute radiculopathy','Referral for epidural steroid injection/surgery if persistent or progressive','Return precautions: saddle numbness, urinary retention/incontinence, bilateral leg weakness, foot drop, fever']},
+{stem:'35-year-old office worker with 5 days of dull low back pain after gardening. No leg pain, numbness or weakness. Better with movement, stiff in the morning. No red flags.',v:'Afebrile · HR 70 · BP 118/72',
+f:{gen:'Walks normally, comfortable.',spine:'Bilateral lumbar paraspinal hypertonicity L3–L5, restricted extension and right sidebending. No midline tenderness. Pelvis level.',le:'Strength 5/5, sensation intact L2–S1, patellar and Achilles reflexes 2+ symmetric. Hip ROM full and painless.',neuro:'Normal.'},
+t:{'Straight leg raise':'Negative bilaterally','FABER':'Negative','Trendelenburg':'Negative','Lloyd (CVAT)':'Negative','Babinski':'Downgoing'},
+ideal:{s:['gen','spine','le','neuro'],t:['Straight leg raise','FABER','Lloyd (CVAT)']},
+a:{dx:'Acute non-specific mechanical low back pain (lumbar strain) with somatic dysfunction',supp:['Clear mechanical trigger, improves with movement','Paraspinal hypertonicity and restricted motion','Negative SLR, normal neuro exam, no red flags'],why:'No radicular, visceral or red-flag features and a clear musculoskeletal pattern.',alts:[['Lumbar radiculopathy','Negative SLR, no dermatomal deficits'],['SI joint dysfunction','FABER/provocation tests negative'],['Piriformis syndrome / hip pathology','Hip ROM normal'],['Pyelonephritis / kidney stone','CVAT negative, no fever or urinary symptoms'],['Fracture/infection/malignancy/cauda equina','No red flags']]},
+plan:['Reassure; stay active; avoid bed rest','Acetaminophen/NSAID, heat','OMT: soft tissue/MFR/muscle energy (HVLA acceptable if no contraindication)','PT/core exercises; ergonomic and lifting advice','Follow-up 4–6 weeks if not improving; imaging only for red flags','Return precautions: leg weakness, saddle numbness, bladder/bowel change, fever, night pain']}
+],approach:{s:'General (gait, posture) → Back: inspection, palpation, ROM (F/E/SB/Rot) → LE neuro (strength, dermatomes L2–S1, reflexes) → hip → special tests (SLR, FABER).',tip:'Say the red flags you screened for: cauda equina, fever, cancer history, trauma, weight loss.'}},
+
+{id:'vision',name:'Blurry vision (medications)',sc:[
+{stem:'74-year-old man with BPH who takes oxybutynin and diphenhydramine nightly for sleep and bladder urgency. New blurred near vision, dry mouth, constipation and difficulty urinating.',v:'T 37.2 °C · HR 104 · BP 130/80 · glucose 104',
+f:{gen:'Alert, oriented, mildly flushed.',heent:'Pupils 6 mm bilaterally, sluggishly reactive to light; extraocular movements full; no conjunctival injection; fundi normal; mucous membranes dry; skin dry and warm.',cv:'Tachycardic, regular.',abd:'Suprapubic fullness (distended bladder), hypoactive bowel sounds.',neuro:'LOL intact; no focal deficit.'},
+t:{'Pupillary light reflex':'Dilated, sluggish bilaterally; no relative afferent pupillary defect','Peripheral fields':'Full','Amsler grid':'Normal','Fingerstick glucose':'104 mg/dL','LOL / AMEN':'Alert and oriented ×3; no deficit'},
+ideal:{s:['gen','heent','cv','abd','neuro'],t:['Pupillary light reflex','Peripheral fields','Fingerstick glucose']},
+a:{dx:'Anticholinergic adverse effect (oxybutynin + diphenhydramine): cycloplegia/mydriasis',supp:['Two strongly anticholinergic drugs','Dilated sluggish pupils, blurred near vision','Dry mouth/skin, tachycardia, constipation, urinary retention'],why:'A cluster of peripheral anticholinergic signs explains the blurred near vision and fits the drug list.',alts:[['Acute angle-closure glaucoma','Painful red eye, halos, fixed mid-dilated pupil; anticholinergics can precipitate it, so measure IOP/refer'],['Hyperglycemia / diabetic eye disease','Glucose normal'],['Cataract / presbyopia / macular degeneration','No anticholinergic features; central distortion would be seen'],['Optic neuritis','Pain with eye movement, afferent defect'],['Stroke/TIA','No field cut or focal deficit']]},
+plan:['Medication reconciliation including OTC and sleep aids','Stop diphenhydramine (Beers criteria); switch/deprescribe oxybutynin (e.g., β3-agonist for urgency)','Post-void residual/bladder scan and treat retention if present; bowel regimen','Eye exam with IOP and angle assessment (ophthalmology) to exclude angle-closure risk','BMP, glucose, ECG (tachycardia)','Return precautions: eye pain, halos, headache with vomiting, urinary retention, confusion']},
+{stem:'61-year-old woman with rheumatoid arthritis on hydroxychloroquine 400 mg daily for 9 years (weight 52 kg) with gradual blurry central vision and trouble reading. Letters "go missing."',v:'Afebrile · HR 76 · BP 124/74',
+f:{gen:'Comfortable.',heent:'Visual acuity 20/40 OU. Pupils equal, round, reactive; no afferent defect. EOM full. Eyes not red or painful. Fundoscopy: bull\'s-eye perifoveal pigment changes bilaterally; no disc edema; no cataract.',ue:'Mild MCP swelling bilaterally (RA).'},
+t:{'Amsler grid':'Central distortion/scotomas OU','Peripheral fields':'Full','Pupillary light reflex':'Normal, no afferent defect','Fingerstick glucose':'98 mg/dL'},
+ideal:{s:['gen','heent','ue'],t:['Amsler grid','Pupillary light reflex','Peripheral fields']},
+a:{dx:'Hydroxychloroquine retinopathy (toxic maculopathy)',supp:['Hydroxychloroquine >5 years at ~7.7 mg/kg/day (above the 5 mg/kg actual-weight limit)','Painless bilateral central vision loss','Bull\'s-eye maculopathy and central scotomas'],why:'Duration and dose are the major risk factors, and the macular findings fit; no pain or afferent defect argues against optic neuritis.',alts:[['Age-related macular degeneration','Drusen/neovascularization; check fundus and OCT'],['Diabetic macular edema / central serous chorioretinopathy','No diabetes; different appearance'],['Optic neuritis','Pain on movement, afferent defect'],['Other drug toxicity (amiodarone, ethambutol, tamoxifen)','Not on these medications'],['Cataract / glaucoma','Normal lens and pressure']]},
+plan:['Urgent ophthalmology: SD-OCT, automated visual fields (10-2), fundus autofluorescence','Coordinate with rheumatology to stop or reduce hydroxychloroquine (damage can progress after stopping); keep ≤5 mg/kg/day in future','Alternative DMARD plan for RA','Baseline exam and annual screening after 5 years of use for anyone on hydroxychloroquine','Driving and fall safety; Amsler grid at home','Return precautions: sudden vision loss, flashes/floaters, pain']}
+],approach:{s:'General → HEENT: visual acuity, pupils (direct/indirect), EOM, fields, fundoscopy → cardiovascular/abdominal clues for drug effects → neuro screen.',tip:'Start with a full medication list including OTC, eye drops, supplements. Name the drug, the mechanism and the exact exam finding.'}},
+
+{id:'abd',name:'Abdominal pain',sc:[
+{stem:'19-year-old man with 12 hours of periumbilical pain that migrated to the right lower quadrant, nausea, anorexia and a low-grade fever.',v:'T 38.1 °C · HR 100 · BP 122/76',
+f:{gen:'Lies still, pain with movement.',abd:'Inspection normal. Auscultation: normoactive bowel sounds. Light palpation: RLQ guarding. Deep: tenderness at McBurney point with rebound. No hepatosplenomegaly, no pulsatile mass. No CVA tenderness.',lung:'Clear.',cv:'Tachycardic regular.'},
+t:{'Rovsing':'POSITIVE: LLQ pressure/withdrawal causes RLQ pain','McBurney point':'Positive: deep tenderness one-third from ASIS to umbilicus','Murphy':'Negative','Lloyd (CVAT)':'Negative'},
+ideal:{s:['gen','abd','cv'],t:['McBurney point','Rovsing','Murphy','Lloyd (CVAT)']},
+a:{dx:'Acute appendicitis',supp:['Periumbilical pain migrating to RLQ with anorexia, nausea, fever','RLQ guarding, rebound and McBurney tenderness','Positive Rovsing'],why:'Classic migration plus focal peritoneal signs in the RLQ.',alts:[['Mesenteric adenitis / gastroenteritis','Diffuse, diarrhea; no focal peritoneal signs'],['Crohn disease / terminal ileitis','Chronic diarrhea, weight loss'],['Nephrolithiasis / pyelonephritis','CVAT negative, no hematuria or urinary symptoms'],['Testicular torsion / epididymitis','Examine the testes in a young male'],['Ovarian torsion / ectopic pregnancy','Female patients: hCG, pelvic exam, ultrasound'],['Diverticulitis / Meckel','Older age / other pattern']]},
+plan:['NPO, IV fluids, analgesia, antiemetic','CBC, CRP, UA; hCG in females','Imaging: CT abdomen/pelvis with contrast (or ultrasound in children/pregnancy) if diagnosis is not clinically certain','Surgical consult for appendectomy; preoperative antibiotics','Return precautions (if sent home before evaluation): worsening pain, vomiting, sudden relief then fever (perforation)']},
+{stem:'44-year-old obese woman with 6 hours of right upper abdominal pain after a fatty meal, radiating to the right shoulder blade, with nausea and fever.',v:'T 38.4 °C · HR 102 · BP 130/80',
+f:{gen:'Uncomfortable, still.',heent:'Sclerae anicteric.',abd:'Normal inspection. RUQ tenderness with voluntary guarding, no rebound elsewhere. Bowel sounds normal. Liver edge not enlarged. No pulsatile mass. No CVAT.',lung:'Right base clear.',cv:'Tachycardic regular.'},
+t:{'Murphy':'POSITIVE: inspiratory arrest on RUQ palpation','Rovsing':'Negative','McBurney point':'Not tender','Lloyd (CVAT)':'Negative','Liver span':'Normal (~10 cm)','Fingerstick glucose':'118 mg/dL'},
+ideal:{s:['gen','heent','abd','lung','cv'],t:['Murphy','Liver span','Lloyd (CVAT)','McBurney point']},
+a:{dx:'Acute calculous cholecystitis',supp:['RUQ pain after a fatty meal radiating to the scapula','Fever, tachycardia, nausea','Positive Murphy sign, RUQ guarding','Risk factors: female, obese, 40s'],why:'Persistent RUQ pain with fever and a positive Murphy sign separates cholecystitis from simple biliary colic.',alts:[['Biliary colic','No fever or Murphy sign; pain <6 h, resolves'],['Choledocholithiasis / cholangitis','Jaundice, dark urine, rigors (Charcot triad)'],['Acute pancreatitis','Epigastric pain to back, ↑ lipase'],['Peptic ulcer / GERD','Epigastric, relation to meals/antacids'],['Pyelonephritis / kidney stone','CVAT negative'],['Hepatitis / liver abscess','Hepatomegaly, jaundice'],['Right lower lobe pneumonia / inferior MI','Lung clear; ECG if any doubt']]},
+plan:['NPO, IV fluids, analgesia, antiemetic','CBC, CMP (LFTs/bilirubin), lipase, UA, hCG','RUQ ultrasound first line (stones, wall >3 mm, pericholecystic fluid, sonographic Murphy); HIDA if equivocal','Antibiotics; early surgical consult for laparoscopic cholecystectomy','Admit; education on fatty foods, weight loss after recovery']}
+],approach:{s:'General → Abdominal in order: inspection, auscultation (all 4 quadrants + aorta), percussion/Lloyd, light then deep palpation, liver/spleen/aorta → special tests (Murphy, Rovsing, McBurney) → add lung/CV/GU as the differential demands.',tip:'Ask the patient to point to the pain, and examine that quadrant last.'}}
+];
+
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let cur=null,seen=[],seenT=[];
+const sysName=Object.fromEntries(SYSTEMS);
+D.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.name;$('#cc').appendChild(o)});
+function newCase(id){
+  const c=D.find(x=>x.id===(id||$('#cc').value));$('#cc').value=c.id;
+  const i=Math.floor(Math.random()*c.sc.length);cur={c,s:c.sc[i]};seen=[];seenT=[];
+  $('#caseBox').style.display='block';$('#work').style.display='block';
+  $('#caseBox').innerHTML=`<span class="tag">Chief complaint</span><b>${esc(c.name)}</b><p>${esc(cur.s.stem)}</p><p style="font-family:var(--mono);font-size:.82rem"><b>Vitals:</b> ${esc(cur.s.v)}</p>`;
+  $('#log').innerHTML='<p class="sub">Nothing performed yet.</p>';$('#answer').innerHTML='';$('#mine').value='';
+  $('#sysBtns').innerHTML=SYSTEMS.map(([k,n])=>`<button class="btn" data-sys="${k}">${esc(n)}</button>`).join('');
+  $('#testBtns').innerHTML=TESTS.map(([g,ts])=>`<div class="sub" style="margin:6px 0 3px">${esc(g)}</div><div style="display:flex;flex-wrap:wrap;gap:6px">${ts.map(t=>`<button class="btn" data-test="${esc(t)}" style="font-weight:500;font-size:.78rem;padding:5px 11px">${esc(t)}</button>`).join('')}</div>`).join('');
+  resetTimer();
+}
+function addLog(h){if($('#log').querySelector('.sub'))$('#log').innerHTML='';const d=document.createElement('div');d.className='box';d.innerHTML=h;$('#log').appendChild(d)}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||!cur)return;
+  if(b.dataset.sys){const k=b.dataset.sys;if(seen.includes(k))return;seen.push(k);b.classList.add('solid');
+    const f=cur.s.f[k];addLog(`<span class="tag">${esc(sysName[k])}</span> ${f?esc(f):'Unremarkable. No findings of note on this system.'}`)}
+  if(b.dataset.test){const k=b.dataset.test;if(seenT.includes(k))return;seenT.push(k);b.classList.add('solid');
+    const r=cur.s.t[k];addLog(`<span class="tag v">${esc(k)}</span> ${r?esc(r):'Negative / normal / not contributory for this case.'}`)}
+});
+$('#newcase').onclick=()=>newCase();
+$('#randcase').onclick=()=>newCase(D[Math.floor(Math.random()*D.length)].id);
+function caseHTML(c,s){
+  const a=s.a;
+  return `<div class="box green"><b>${esc(a.dx)}</b><p>${esc(s.stem)}</p><p style="font-family:var(--mono);font-size:.8rem">${esc(s.v)}</p>
+<h4>Ideal exam</h4><p><b>Systems:</b> ${s.ideal.s.map(k=>esc(sysName[k])).join(' · ')}<br><b>Tests:</b> ${s.ideal.t.length?s.ideal.t.map(esc).join(' · '):'Rely on exam/observation'}</p>
+<h4>Key findings</h4><ul>${Object.entries(s.f).map(([k,v])=>`<li><b>${esc(sysName[k])}:</b> ${esc(v)}</li>`).join('')}${Object.entries(s.t).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('')}</ul>
+<h4>Assessment</h4><p><b>Supporting:</b></p><ul>${a.supp.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p><b>Why this one:</b> ${esc(a.why)}</p>
+<p><b>Alternatives (less likely because):</b></p><ul>${a.alts.map(x=>`<li><b>${esc(x[0])}:</b> ${esc(x[1])}</li>`).join('')}</ul>
+<h4>Plan</h4><ul>${s.plan.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`}
+$('#reveal').onclick=()=>{
+  const s=cur.s,id=s.ideal;
+  const did=seen.filter(k=>id.s.includes(k)),missed=id.s.filter(k=>!seen.includes(k)),extra=seen.filter(k=>!id.s.includes(k));
+  const td=seenT.filter(k=>id.t.includes(k)),tm=id.t.filter(k=>!seenT.includes(k)),te=seenT.filter(k=>!id.t.includes(k));
+  const L=(a,m)=>a.length?a.map(k=>esc(m?m[k]:k)).join(', '):'none';
+  $('#answer').innerHTML=`<div class="box"><h4 style="margin-top:0">How your exam compared</h4>
+<p><b>Systems you hit that matter:</b> ${L(did,sysName)}<br><b>Systems you skipped:</b> ${L(missed,sysName)}<br><b>Extra systems (fine if you had a reason):</b> ${L(extra,sysName)}</p>
+<p><b>Key tests you did:</b> ${L(td)}<br><b>Key tests you skipped:</b> ${L(tm)}<br><b>Extra tests:</b> ${L(te)}</p></div>`+caseHTML(cur.c,s);
+};
+// timer
+let tt=null,left=600;
+function paint(){const m=Math.floor(left/60),s=left%60;$('#timer').textContent=m+':'+String(s).padStart(2,'0');$('#timer').classList.toggle('low',left<=120)}
+function resetTimer(){clearInterval(tt);tt=null;left=600;paint();$('#tstart').textContent='Start'}
+$('#tstart').onclick=()=>{if(tt){clearInterval(tt);tt=null;$('#tstart').textContent='Resume';return}
+  $('#tstart').textContent='Pause';tt=setInterval(()=>{left--;paint();if(left<=0){clearInterval(tt);tt=null;$('#timer').textContent='0:00'}},1000)};
+$('#treset').onclick=resetTimer;
+// study
+$('#studyList').innerHTML=D.map(c=>`<details><summary>${esc(c.name)}</summary><div class="box green"><p><b>Approach:</b> ${esc(c.approach.s)}</p><p><b>Tip:</b> ${esc(c.approach.tip)}</p></div>${c.sc.map((s,i)=>`<h4>Case ${String.fromCharCode(65+i)}</h4>${caseHTML(c,s)}`).join('')}</details>`).join('');
+newCase('cough');$('#caseBox').style.display='none';$('#work').style.display='none';
+</script>
+
+</body></html>

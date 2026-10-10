@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>OMM Competency Scripts</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--cream:#fdfbf3;--cream-2:#f7f1e0;--ink:#2c2c24;--ink-soft:#5c5a4a;--green-deep:#3b5d43;--green:#5e8461;--green-light:#a9c2a0;--line:#d8cfb4;--highlight:#f4e2a8;--pos:#8a2f2f;--warn:#9a6a14;--card-shadow:0 2px 10px rgba(44,44,36,.08);--serif:'Lora','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono','SFMono-Regular',Consolas,Menlo,monospace}
+*{box-sizing:border-box}html{background:var(--cream)}html,body{min-height:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:60px 18px 100px}
+header{border-bottom:2px solid var(--green-deep);padding-bottom:16px;margin-bottom:22px}
+header h1{font-family:var(--serif);font-size:1.9rem;margin:0 0 8px;color:var(--green-deep)}
+header p{margin:0 0 6px;color:var(--ink-soft);font-size:.95rem}
+.back-btn{position:absolute;top:14px;left:14px;z-index:1000;font-size:.78rem;font-weight:600;color:var(--green-deep);text-decoration:none;border:1.5px solid var(--green-deep);padding:7px 13px;border-radius:8px;background:var(--cream);box-shadow:var(--card-shadow)}
+.back-btn:hover{background:var(--green-light)}
+.card{background:#fffdf7;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:var(--card-shadow);scroll-margin-top:90px}
+.card h2{font-family:var(--serif);color:var(--green-deep);margin:0 0 6px;font-size:1.4rem;border-bottom:2px solid var(--green-light);padding-bottom:8px}
+.card h3{font-family:var(--serif);font-size:1.12rem;margin:18px 0 6px}
+.card h4{color:var(--green-deep);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 5px}
+.card p,.card li{font-size:.92rem}.card ul,.card ol{margin:6px 0;padding-left:22px}.card li{margin-bottom:4px}
+.sub{color:var(--ink-soft);font-size:.85rem;font-style:italic;margin:0 0 12px}
+nav.jump{position:sticky;top:0;z-index:50;background:var(--cream);padding:8px 0 10px;border-bottom:1px solid var(--line);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:14px;border:1.3px solid var(--green);color:var(--green-deep);text-decoration:none;background:var(--cream-2);cursor:pointer}
+.pill:hover,.pill.on{background:var(--green-light)}
+.btn{font-family:var(--sans);font-weight:600;font-size:.82rem;padding:8px 15px;border-radius:18px;border:1.5px solid var(--green-deep);background:var(--cream);color:var(--green-deep);cursor:pointer}
+.btn:hover{background:var(--green-light)}.btn.solid{background:var(--green-deep);color:#fff}.btn.solid:hover{background:var(--green)}
+.btn[disabled]{opacity:.45;cursor:default}
+table.t{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.86rem}
+table.t th{text-align:left;background:var(--cream-2);color:var(--green-deep);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:2px solid var(--green-deep)}
+table.t td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl-scroll{overflow-x:auto}
+.box{border:1.5px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0;background:var(--cream)}
+.box.green{border-color:var(--green);background:var(--cream-2)}
+.box.warn{border-color:#d9b25a;background:#fbf3dc}
+.box.red{border-color:#c98a8a;background:#f9ecec}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:10px;background:var(--green-light);color:var(--green-deep);margin-right:4px}
+.tag.v{background:#f4e2a8;color:#6d4f08}
+.say{font-family:var(--serif);font-style:italic;border-left:3px solid var(--green);padding:4px 12px;margin:8px 0;background:var(--cream-2);border-radius:0 8px 8px 0;font-size:.9rem}
+.timer{font-family:var(--mono);font-size:2rem;color:var(--green-deep);font-weight:600}
+.timer.low{color:var(--pos)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.verify{font-size:.78rem;color:var(--warn)}
+footer{text-align:center;color:var(--ink-soft);font-size:.78rem;margin-top:36px}
+details{border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;background:var(--cream)}
+details>summary{cursor:pointer;font-weight:600;color:var(--green-deep);font-size:.92rem}
+details[open]>summary{margin-bottom:6px}
+@media print{.back-btn,nav.jump,.btn{display:none!important}.card{box-shadow:none;break-inside:avoid}}
+</style></head><body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<div class="wrap">
+<header>
+<h1>OMM Competency Scripts</h1>
+<p>OCS III · 10 minutes · assigned region + technique. Indication → contraindications → diagnose → grader confirms → treat → grader reassesses. Verbalize everything.</p>
+</header>
+<nav class="jump"><a class="pill" href="#flow">Station flow</a><a class="pill" href="#dx">Diagnosis primer</a><a class="pill" href="#tech">Techniques by region</a><a class="pill" href="#cs">Counterstrain points</a><a class="pill" href="#lines">Lines to say</a><a class="pill" href="#draw">Draw a station</a><a class="pill" href="#cards">Dx flashcards</a></nav>
+
+<section class="card" id="flow">
+<h2>Station flow &amp; time budget</h2>
+<p class="sub">Official order from the Canvas overview, plus the extra expectations in the faculty email (justify your choice, verbalize, say what you hope to accomplish).</p>
+<table class="t"><tr><th>Time</th><th>Step</th><th>What to say / do</th></tr>
+<tr><td>0:00–1:00</td><td>Introduce · indication · contraindication screen</td><td>Consent, hand hygiene. "This patient has somatic dysfunction of ___. ___ is indicated because ___." Ask the screening questions out loud.</td></tr>
+<tr><td>1:00–4:00</td><td>Diagnose the region</td><td>Palpate and say the PART findings (Asymmetry, Restriction, Tissue texture, Tenderness) to a full diagnosis.</td></tr>
+<tr><td>~4:00</td><td>Grader confirms</td><td>Accept the correction calmly and TREAT THE CONFIRMED DIAGNOSIS. Say "Thank you, I'll treat ___."</td></tr>
+<tr><td>4:00–8:30</td><td>Treat</td><td>State the goal ("I am using ___ to restore ___"). Set up, verbalize each step. Simulate the HVLA thrust.</td></tr>
+<tr><td>8:30–10:00</td><td>Reassess · post-treatment</td><td>Say what you re-test and what you found (or what you'd do next). Give post-treatment instructions.</td></tr></table>
+<div class="box warn"><b>Heads up on the contraindication step.</b> The Canvas list puts "screen for contraindications" BEFORE the diagnosis; the faculty email puts it after. Safest: state your indication and screen early (before touching), then briefly re-confirm once the diagnosis is confirmed.</div>
+<p class="verify">Color key: <span class="tag">guide</span> steps come from your uploaded OMS1 competency guide and Dr. Coleman's modalities review. <span class="tag v">verify</span> marks steps that are NOT in your uploaded guides. They are standard OPP-style steps; replace with your lab handout.</p>
+</section>
+
+<section class="card" id="dx">
+<h2>Diagnosis primer</h2>
+<p class="sub">A complete somatic dysfunction diagnosis is "region + position of ease" (and the motion restriction is the opposite).</p>
+<h4>PART: say these as you palpate</h4>
+<ul><li><b>A</b>symmetry: "The left transverse process of T4 is more posterior than the right."</li><li><b>R</b>estriction of motion: "T4 resists right rotation and left sidebending with a firm endpoint."</li><li><b>T</b>issue texture: "There is paraspinal hypertonicity and a bogginess/warmth."</li><li><b>T</b>enderness: "The patient reports tenderness over ___."</li></ul>
+<div class="say">"I am palpating the transverse processes of T4. The left transverse process is more posterior and the right is more anterior. T4 has restricted motion into right rotation and left sidebending with a firm endpoint. That is T4 FRSR (flexed, rotated right, sidebent right)." <span class="verify">(Example from the faculty email, shown in their style.)</span></div>
+<div class="grid2">
+<div class="box green"><b>Type II (single segment)</b><p>Named for the position of EASE. Rotation and sidebending to the SAME side.</p><p>FRS: stuck OPEN on the side of rot/SB, restricted into extension, TP asymmetry more apparent in FLEXION.</p><p>ERS: stuck CLOSED, restricted into flexion, TP asymmetry more apparent in EXTENSION.</p></div>
+<div class="box green"><b>Type I (group, neutral)</b><p>3+ segments, SB and rotation to OPPOSITE sides, named "N SL RR" (neutral, sidebent left, rotated right).</p><b>Ribs</b><p>Inhaled rib = restricted EXHALATION (key rib = lowest of the group). Exhaled rib = restricted INHALATION (key rib = highest).</p></div>
+<div class="box green"><b>Innominate / pelvis</b><p>Anterior: ASIS inferior, PSIS superior. Posterior: ASIS superior, PSIS inferior. Superior shear: whole innominate higher. Inflare/outflare: ASIS toward/away from umbilicus.</p></div>
+<div class="box green"><b>Sacrum</b><p>"L on L" = left rotation on a left oblique axis (forward torsion). First letter = rotation, second = axis. Same letters = forward ("Up, Up, Up"); different letters = backward ("Down, Up, Down").</p></div>
+</div>
+</section>
+
+<section class="card" id="tech">
+<h2>Techniques by assigned region</h2>
+<p class="sub">Pick the assigned technique. Each region shows setup steps, plus the contraindications and a ready-made justification line.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px" id="tabs"></div>
+<div id="techBody"></div>
+</section>
+
+<section class="card" id="cs">
+<h2>Counterstrain: required points &amp; regions</h2>
+<p class="sub">Two points are randomly assigned in your OMS1 guide. Your OCS III list requires the seven below.</p>
+<div class="box green"><b>Steps (indirect, passive)</b><ol><li>Locate the tender point; get consent</li><li>Baseline 10/10 (press hard enough to blanch the nail)</li><li>Ease to monitoring pressure, keep the finger on the point until the end</li><li>Find the position of comfort: ≥70% reduction (ideally 0, at most 2–3/10)</li><li>Patient fully relaxed; hold <b>90 seconds</b> monitoring tissue change</li><li>Slowly return to neutral, keeping contact; recheck tenderness</li></ol></div>
+<div class="tbl-scroll"><table class="t"><tr><th>Required point</th><th>Location</th><th>Position of ease</th></tr><tbody id="csreq"></tbody></table></div>
+<h4>Regional competencies (anterior and posterior points)</h4>
+<div class="tbl-scroll"><table class="t"><tr><th>Region</th><th>Points / rule</th></tr><tbody id="csreg"></tbody></table></div>
+</section>
+
+<section class="card" id="lines">
+<h2>Lines to say</h2>
+<h4>Indication</h4>
+<div class="say">"The patient has ___ with asymmetry, restricted motion and tissue texture change at ___. Osteopathic manipulation is indicated to restore motion, reduce hypertonicity and improve function."</div>
+<h4>Contraindication screen (ask out loud)</h4>
+<div class="say">"Any recent trauma, fracture, surgery or hardware in this area? History of cancer, osteoporosis, blood thinners or bleeding disorders? Any numbness, tingling, weakness, dizziness or vision changes? Are you pregnant? Any pacemaker or other implanted device? Is any area open or infected? And do I have your permission to treat?"</div>
+<h4>Justify, specific to the technique</h4>
+<div id="whyLines"></div>
+<h4>Factors that change your approach</h4>
+<div class="say">"Although I could use muscle energy, the patient has significant hypertonicity that may limit participation. I would consider soft tissue/myofascial treatment first to reduce tone, then muscle energy."</div>
+<h4>Reassess: improved</h4>
+<div class="say">"On reassessment there is improved motion in all three planes, decreased tissue texture abnormality and improved symmetry of the transverse processes."</div>
+<h4>Reassess: no change</h4>
+<div class="say">"There is no significant change in the somatic dysfunction. I would reassess my diagnosis and consider another modality: for example, add soft tissue/MFR first, or use an indirect technique if the barrier is guarded."</div>
+<h4>Post-treatment instructions</h4>
+<div class="say">"You may feel mild soreness for 24 to 48 hours. Stay hydrated, keep moving gently, avoid heavy lifting or strenuous activity today, and use heat or ice if sore. Tell me or call if you have new numbness, weakness, dizziness, worsening pain or any unexpected symptoms. We'll reassess at your next visit."</div>
+</section>
+
+<section class="card" id="draw">
+<h2>Draw a station</h2>
+<p class="sub">Random assignment with a 10:00 timer and the six official steps.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+<button class="btn solid" id="drawBtn">Draw</button><span class="timer" id="otimer">10:00</span><button class="btn" id="ostart">Start</button><button class="btn" id="oreset">Reset</button></div>
+<div id="drawn" class="box" style="display:none"></div>
+</section>
+
+<section class="card" id="cards">
+<h2>Diagnosis flashcards (Type II)</h2>
+<p class="sub">Name it, then check the restriction, motion test and what to engage for muscle energy.</p>
+<button class="btn solid" id="newcard">New card</button> <button class="btn" id="flip">Show answer</button>
+<div id="card" class="box" style="margin-top:10px"></div>
+</section>
+<footer>Competency Testing Materials · OMM scripts · Technique steps adapted from your OMS1 Competency guide; "verify" items are standard OPP steps not in your uploaded guides.</footer>
+</div>
+<script>
+// src: 'guide' = adapted from your OMS1 Competency guide / Coleman review; 'gen' = standard OPP steps NOT in your uploaded guides (verify against your lab manual)
+const TECH={
+ME:{name:'Muscle Energy',cls:'Direct · Active',
+ abs:['Lack of consent','Patient unable to follow commands/contract (unconscious, severe cognitive impairment)'],
+ rel:['Acute muscle/tendon tear, infection or hematoma in involved muscle','Fracture or dislocation of involved joint','Cervical instability (rheumatologic)','Undiagnosed joint swelling','Severe osteoporosis','Neoplasm in the area','Acute severe pain limiting contraction'],
+ why:'Muscle energy is appropriate because the patient can cooperate and actively contract, there is a clear restrictive barrier, and I found no contraindication. It restores motion through post-isometric relaxation without a thrust.',
+ core:'Move to the feather edge of the restrictive barrier → patient pushes toward ease against matched counterforce 3–5 s → relax 1–2 s → re-engage the new barrier → repeat 3–5× → return to neutral → reassess.',
+ regions:{
+ 'Cervical':[{n:'Supine cervical ME',src:'guide',s:['Patient supine, you at the head. Index fingers on the articular pillars of the dysfunctional segment; middle fingers monitor the segment below','Bring the head/neck into the COMPLETE OPPOSITE of the diagnosis (e.g., FRSL → extend, rotate right, sidebend right) to the feather edge','Patient brings the head back toward center and resists 3–5 s; relax 1–2 s','Re-engage the new feather edge; repeat 3–5×; return to neutral and reassess']}],
+ 'Thoracic':[{n:'Seated thoracic ME (T3 and above)',src:'guide',s:['Patient seated. Cephalad hand on top of the head, caudal hand monitors the transverse processes','Position the head/neck into the feather edge of the barrier (flexion/extension, rotation, sidebending)','Patient brings the head back to center and resists 3–5 s; relax 1–2 s','Re-engage; repeat 3–5×; return to neutral and reassess']},{n:'Thoracic ME, T4 and below (seated, same as lumbar)',src:'guide',s:['Patient seated with arms overlapped; sit on the side of the direct barrier facing away from the physician','Cephalad hand reaches around and rests on the opposite shoulder to control motion','Caudal hand monitors the transverse processes as you move to the feather edge in all planes','Patient brings the trunk/head back toward center and resists 3–5 s; relax 1–2 s; repeat 3–5×; return to neutral and reassess']}],
+ 'Lumbar':[{n:'Seated lumbar ME',src:'guide',s:['Patient seated with arms overlapped, sitting on the side of the direct barrier facing away','Cephalad hand over the opposite shoulder; caudal hand monitors transverse processes while you engage the feather edge','Patient pushes back toward center and resists 3–5 s; relax 1–2 s; repeat 3–5×; return to neutral and reassess']},{n:'Side-lying lumbar ME',src:'guide',s:['Patient lies on the side of the diagnosis (ease side); stand facing the patient','Cephalad hand pulls lumbar spine toward you for extension, or brings knees toward you for flexion, until the segment moves','"Do-si-do" the cephalad hand to rotate the patient; caudal hand monitors rotation at the transverse processes','Patient gently pushes shoulder into your hand (or per the barrier), resist 3–5 s; relax 1–2 s; re-engage; repeat 3–5×; return to neutral and reassess']}],
+ 'Sacrum':[
+ {n:'L on L sacral torsion (Up, Up, Up)',src:'guide',s:['Side-lying with LEFT side up (axis up)','Caudal hand monitors R sacral base; cephalad hand rotates trunk to the left (face up)','Switch: cephalad hand monitors R sacral base; caudal hand flexes thighs/pelvis until posterior motion is felt at the R sacral base; lift ankles toward the ceiling to the feather edge (physician force up)','Patient brings ankles down toward the table; resist 3–5 s; relax 1–2 s; re-engage; repeat 3–5×; return to neutral and reassess']},
+ {n:'R on R sacral torsion (Up, Up, Up)',src:'guide',s:['Side-lying with RIGHT side up (axis up)','Caudal hand monitors L sacral base; cephalad hand rotates trunk right until L5 begins to rotate right (face up)','Switch monitoring to cephalad hand on L sacral base; caudal hand flexes thighs/pelvis until posterior motion at the L sacral base; lift ankles to the feather edge (force up)','Patient brings ankles down; resist 3–5 s; relax 1–2 s; repeat 3–5×; return to neutral and reassess']},
+ {n:'R on L sacral torsion (Down, Up, Down)',src:'guide',s:['Side-lying with RIGHT side up (L axis down)','Caudal hand monitors R sacral base; cephalad hand pulls the patient\'s arm anterior and caudal, inducing right rotation and left sidebending (patient face up)','Switch: cephalad hand monitors R sacral base; caudal hand EXTENDS thighs/pelvis until anterior motion at R sacral base; bring top leg off the table, bent, to the feather edge (force down)','Patient brings knee/ankle up toward the ceiling; resist 3–5 s; relax 1–2 s; repeat 3–5×; return to neutral and reassess']},
+ {n:'L on R sacral torsion (Down, Up, Down)',src:'guide',s:['Side-lying with LEFT side up (R axis down)','Caudal hand monitors L sacral base; cephalad hand pulls arm anterior and caudal, inducing left rotation and right sidebending (face up)','Switch: cephalad hand monitors L sacral base; caudal hand extends thighs/pelvis until anterior motion at L sacral base; top leg off the table, bent, to the feather edge (force down)','Patient brings knee/ankle up; resist 3–5 s; relax 1–2 s; repeat 3–5×; return to neutral and reassess']},
+ {n:'Memory aid',src:'guide',s:['Forward torsions (L on L, R on R): "Up, Up, Up": side-lying with the oblique-axis side UP; flexion; force up','Backward torsions (R on L, L on R): "Down, Up, Down": axis side DOWN; extension; force down','The first letter is the side of rotation, the second letter is the side of the axis']}],
+ 'Pelvis':[
+ {n:'Posterior rotated innominate',src:'guide',s:['Supine, stand on the dysfunctional side facing the feet','Patient moves to the table edge so the SI joint is off the edge; the leg drops off','Cephalad hand on the contralateral ASIS to stabilize; caudal hand extends the thigh to the feather edge','Patient gently lifts thigh toward the ceiling into your hand; resist 3–5 s; relax 1–2 s; repeat 3–5×; return and reassess']},
+ {n:'Anterior rotated innominate',src:'guide',s:['Supine, stand on the dysfunctional side','Cephalad hand flexes the hip to the feather edge (posteriorly rotating the innominate); caudal hand contacts the ischial tuberosity and pulls it inferiorly','Patient gently pushes the knee into your hand; resist 3–5 s; relax 1–2 s; repeat 3–5×; return and reassess']},
+ {n:'Superior innominate shear',src:'guide',s:['Supine; stand at the foot of the table','Abduct and internally rotate the leg to localize to the SI joint; apply traction to the feather edge','Patient gently hikes the hip toward the shoulder; resist 3–5 s; relax 1–2 s; repeat 3–5×; return and reassess']},
+ {n:'Innominate inflare',src:'guide',s:['Supine, stand on the dysfunctional side; patient flexes knee, foot flat','Cephalad hand on the contralateral ASIS; caudal hand pulls the knee laterally (hip external rotation) to the feather edge','Patient gently pushes the knee medially; resist 3–5 s; relax 1–2 s; repeat 3–5×; return and reassess']},
+ {n:'Innominate outflare (by mirror image of inflare)',src:'gen',s:['Supine; patient flexes knee, foot flat; cephalad hand on the contralateral ASIS','Caudal hand brings the knee MEDIALLY (hip internal rotation) to the feather edge','Patient gently pushes the knee laterally; resist 3–5 s; relax 1–2 s; repeat 3–5×; return and reassess']},
+ {n:'Superior pubic shear',src:'guide',s:['Supine; patient moves to the table edge with the SI joint still on the table and the leg off the table','Cephalad hand on the contralateral ASIS; caudal hand abducts and extends the thigh to the feather edge','Patient gently lifts the thigh anterior and medial; resist 3–5 s; relax 1–2 s; repeat 3–5×; return and reassess']}],
+ 'Ribs 1–12':[
+ {n:'Inhaled ribs 2–4 (key rib = lowest, rib 4)',src:'guide',s:['Supine. Cephalad hand on the anterosuperior surface of rib 4 pushing inferiorly; caudal hand pulls the inferior surface of rib 4 superiorly to the feather edge','Patient exhales maximally and holds; induce inferior motion of the anterior rib/superior motion of the posterior rib','Patient inhales while you resist superior motion of the anterior rib; repeat 3–5×; return and reassess']},
+ {n:'Inhaled ribs 4–10 (key rib 10)',src:'guide',s:['Caudal hand contacts the superolateral surface of rib 10 pushing inferiorly to the feather edge','Cephalad hand flexes and sidebends the patient toward the dysfunction','Patient exhales maximally and holds; induce inferior motion of lateral rib 10','Patient inhales as you resist superior motion of rib 10; repeat 3–5×; return and reassess']},
+ {n:'Exhaled ribs 3–5 or 6–10 (key rib = highest, 3 or 6)',src:'guide',s:['Cephalad hand abducts the patient\'s arm to the feather edge','Caudal hand monitors the superior-posterior aspect of rib 3 (or 6) and provides inferior traction to the feather edge','Patient inhales maximally and holds; induce inferior motion of the posterior rib','Patient adducts the arm trying to bring the elbow to the opposite hip; repeat 3–5×; return and reassess']},
+ {n:'Rib 1 (exhaled) and ribs 11–12',src:'gen',s:['Not in your uploaded guides. Typical OPP teaching: Rib 1 = scalene muscles; ribs 11–12 = quadratus lumborum/diaphragm','Ask for your lab handout; I will drop the exact steps in','General ME frame still applies: feather edge → patient resists 3–5 s → relax → repeat 3–5× → reassess']}],
+ }},
+
+MFR:{name:'Myofascial Release & Soft Tissue',cls:'MFR: mixed · passive. Soft tissue: direct · passive',
+ abs:['Lack of consent'],
+ rel:['Infection, hematoma or tear of involved muscle','Fracture or dislocation','Open wound or recent surgery/laceration site','Soft tissue/bony infection or abscess; nearby DVT','Coagulopathy','Neoplasm in the area','Aortic aneurysm (abdominal work)'],
+ why:'MFR/soft tissue is appropriate because the dysfunction involves fascia and muscle with texture change, the patient is passive, and there are no contraindications. It reduces tissue tension and improves motion.',
+ core:'Engage/load the tissue ("melt, meld, sink in") → direct MFR: take all 3 planes into the barrier and hold / indirect MFR: take to the point of balance/ease and hold → FOLLOW the tissue until motion stops (breathe in/out if it stalls) → return to neutral → reassess. Soft tissue: kneading (perpendicular), linear stretch (parallel), direct inhibition (sustained pressure).',
+ regions:{
+ 'Cervical region':[{n:'Cervical MFR / soft tissue (supine)',src:'gen',s:['Patient supine, you at the head. Cradle the occiput and cervical paraspinals with finger pads','Soft tissue: kneading/linear stretch of paraspinals and suboccipitals; direct inhibition of suboccipitals','MFR: engage the tissue and test flexion/extension, sidebending, rotation and translation; direct = hold into the barrier, indirect = hold at ease','Follow the release until motion stops; return to neutral; reassess ROM and tissue texture']}],
+ 'Thoracic region':[{n:'Thoracic MFR / soft tissue (prone or seated)',src:'gen',s:['Patient prone (or seated); size the contact to the region (palms/finger pads over paraspinals)','Soft tissue: kneading across the paraspinals, linear stretch along them, direct inhibition of hypertonic bands','MFR: place hands on the region, engage and test fascial motion in all planes; hold at the barrier or ease; follow until release','Return to neutral and reassess']}],
+ 'Thoracic inlet release':[{n:'Thoracic inlet release',src:'gen',s:['Patient supine (or seated). The inlet = T1, first ribs, manubrium and clavicles. It is a horizontal fascial restriction to lymph','One hand posterior under T1–T4/upper ribs, the other anterior over the manubrium/medial clavicles','Engage and assess the "tube" in rotation, sidebending, flexion/extension and translation; direct or indirect','Hold and follow the release with the patient\'s breathing; return to neutral; reassess motion and symmetry','Contraindications also include untreated cancer and active infection (lymphatic principles)']}],
+ 'Respiratory diaphragm release':[{n:'Respiratory diaphragm release (doming)',src:'gen',s:['Patient supine, knees may be bent. Place hands bilaterally along the lower ribs/costal margin, fingers contacting under the margin','Assess and take the tissue toward the restriction; during EXHALATION follow the ribs inferomedially','During INHALATION resist/hold your position; repeat several breaths, taking up slack each exhale','When release is felt, return to neutral; reassess rib excursion and tissue tension','Avoid with recent abdominal/thoracic surgery; careful with hiatal hernia or abdominal pain']}],
+ 'Lumbar region':[{n:'Lumbar MFR / soft tissue (prone or lateral recumbent)',src:'gen',s:['Prone or side-lying; match the contact size to the area (palms/forearm over the lumbar paraspinals)','Soft tissue: kneading, linear stretch, direct inhibition','MFR: cross-hand release of the thoracolumbar fascia: one hand cephalad, one hand caudal, engage and follow in all planes','Return to neutral; reassess']}],
+ 'Pelvis':[{n:'Pelvis MFR / soft tissue',src:'gen',s:['Prone or supine; hands over sacrum and ilia, or one hand under the sacrum and one over the pubic/ASIS region','Engage the tissue, test in all planes, hold direct or indirect, follow release','Soft tissue to gluteals/piriformis/sacrotuberous and sacrospinous areas as needed','Return to neutral; reassess motion and symmetry']}]}},
+
+HVLA:{name:'HVLA (simulated thrust)',cls:'Direct · Passive',
+ abs:['Fracture, dislocation, joint instability (including upper cervical instability)','Vertebrobasilar/carotid pathology','Myelopathy, cauda equina, spinal cord pathology','Acute local inflammatory arthritis; joint infection','Malignancy of bone/soft tissue in the area','Joint fusion; Klippel-Feil; Down syndrome; Chiari','Lack of consent'],
+ rel:['Acute disc herniation/radiculopathy','Osteopenia/osteoporosis, spondylolisthesis, hypermobility','Anticoagulation','Implanted devices/hardware (pacemaker, spinal cord stimulator, pumps)','Acute whiplash, severe spasm'],
+ why:'HVLA is appropriate because this is an articular somatic dysfunction with a firm, distinct restrictive barrier, there are no absolute contraindications, and I want to restore joint motion with a short quick thrust. (If tissue is hypertonic, I may prepare with soft tissue/MFR/ME first.)',
+ core:'Find a firm articular barrier → take it in as many planes as possible, comfortable → follow the barrier with breath, deep breath in, then on exhalation take up slack → short quick thrust through the barrier (SIMULATE at competency; no wind-up) → return to neutral → reassess. NEVER repeat a thrust on the same segment.',
+ regions:{
+ 'Cervical spine (set-up only)':[{n:'Supine cervical HVLA',src:'guide',s:['Localize: index fingers on the articular pillars of the diagnosis; middle fingers monitor the segment below','ROTATIONAL: barrier in flexion or extension + rotation; EASE in sidebending','Deep breath; on exhalation follow the barrier; (thrust anterior and superior; SET-UP ONLY at competency, do not thrust)','TRANSLATIONAL: barrier in flexion or extension + sidebending; EASE in rotation; thrust would be lateral to medial','Return to neutral; reassess']}],
+ 'Thoracic spine':[{n:'Supine thoracic HVLA',src:'guide',s:['Patient supine, arms crossed (arm on the side of the diagnosis/ease on top); stand on the side OPPOSITE the diagnosis','Cephalad hand pulls the patient into flexion and sidebending into the barrier','Caudal hand thenar eminence posterior to the transverse process; flex, rotate into the barrier and sidebend into the barrier','Deep breath; on exhalation follow the barrier; (thrust short and quick posteriorly: simulate); return to neutral; reassess']}],
+ 'Lumbar spine':[{n:'Lateral recumbent lumbar HVLA',src:'guide',s:['Patient lies on the side of the diagnosis (ease); stand facing the patient','Cephalad hand monitors the transverse process at the level','Caudal hand flexes the legs (flexed dysfunction) or upper body (extended) until motion is felt at the monitored level','Caudal hand now monitors rotation while the cephalad hand do-si-dos the arm to bring them into rotation','Top leg flexed with foot in the popliteal space; brace the leg with your leg; center of gravity over your contacts','Deep breath; on exhalation follow the barrier; (thrust anterior and superior: simulate); return to neutral; reassess']}],
+ 'Pelvis':[{n:'Pelvis HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides. Ask for your lab handout; I will replace this','Frame: patient lateral recumbent or supine; diagnose the barrier (e.g., innominate/SI), engage it in all planes with your contact on the ilium/ischium/sacrum, deep breath, follow on exhalation, simulated thrust, reassess','Contraindications: pregnancy, SI/hip arthritis flare, fracture, device, osteoporosis']}],
+ 'Upper extremity':[{n:'Upper extremity HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides (your guide only lists UE muscle energy: clavicle, ulna, radial head)','Frame: identify the joint and firm barrier (e.g., radial head, clavicle, carpal), stabilize proximal bone, take distal bone into the barrier in all planes, short quick thrust (simulated), reassess','Check for fracture/instability, neurovascular status first']}],
+ 'Lower extremity':[{n:'Anterior talus HVLA',src:'guide',s:['Patient supine; stand at the foot of the table','5th digits on the anterior/superior talus, fingers interlaced over the dorsum of the foot, thumbs on the sole providing dorsiflexion to the barrier; slight inversion/eversion localizes; lean back for traction','Deep breath; on exhalation follow the barrier; (thrust inferior and posterior in a "J" motion: simulate); return to neutral; reassess'],}]}},
+
+CS:{name:'Counterstrain',cls:'Indirect · Passive',
+ abs:['Lack of consent','New neurological or vascular symptoms provoked by the position','Position exacerbates potentially life-threatening symptoms'],
+ rel:['Patient cannot relax/cooperate','Upper cervical hyperrotation/extension with vertebral artery disease, instability, dens malformation, severe osteoporosis','Fracture/dislocation of joints needed for positioning','Severe acute rheumatologic flare','Apprehension about the position'],
+ why:'Counterstrain is appropriate because there is a tender point with an associated acute or chronic strain, the patient can relax, and I can find a position of comfort. It is indirect and gentle, so it suits a tender, guarded area.',
+ core:'Find the tender point → rate 10/10 (press hard enough to blanch your nail) → ease pressure to just monitoring, DO NOT MOVE YOUR FINGER → position to reduce tenderness to ≤3/10 (≥70% drop; ideally 0) → hold 90 s monitoring tissue change → slowly return to neutral keeping contact → recheck tenderness.',
+ regions:{}}
+};
+const CSREQ=[
+{p:'Piriformis',l:'Within the triangle formed by the lateral sacrum, the inferior lateral angle (ILA) and the greater trochanter (mid-buttock)',pos:'Prone or supine; FLEX, ABDUCT and EXTERNALLY ROTATE the lower extremity; fine-tune until ≤3/10',src:'guide'},
+{p:'Psoas',l:'Two-thirds of the way from the ASIS to the umbilicus (deep to the abdominal wall)',pos:'Supine/hips flexed; FLEX the hips, SIDEBEND toward and ROTATE toward the tender side',src:'guide'},
+{p:'Supraspinatus',l:'Muscle belly superior to the spine of the scapula',pos:'EXTERNALLY ROTATE, ABDUCT and FLEX the arm',src:'guide'},
+{p:'Subscapularis',l:'Anterolateral border of the scapula (the axilla)',pos:'INTERNALLY ROTATE the arm with the shoulder extended',src:'guide'},
+{p:'Medial meniscus',l:'Anteromedial aspect of the medial joint line',pos:'Supine, knee moderately flexed (rest the leg on yours); slightly ADDUCT the leg; fine-tune with tibial IR/ER',src:'guide'},
+{p:'Lateral meniscus',l:'Lateral aspect of the lateral joint line',pos:'Supine, knee moderately flexed; slightly ABDUCT the leg; fine-tune with tibial IR/ER',src:'guide'},
+{p:'Levator scapulae',l:'Superior angle of the scapula (insertion of the muscle)',pos:'Not in your uploaded guides. Standard approach: shorten the muscle: neck slight flexion/SIDEBEND and ROTATION toward the tender side with the scapula elevated (shrug) until ≤3/10. Verify with your lab handout',src:'gen'}
+];
+const CSREG=[
+['Cervical (anterior)','AC1: transverse process of C1/mandible → RA · AC2–6: transverse processes C2–6 → FSARA · AC7: lateral SC joint (SCM attachment) → FSTAR · AC8: medial sternal head/manubrium → FSARA','guide'],
+['Cervical (posterior)','PC1 → ESARA (from your guide). Other posterior cervical points: extension plus sidebend/rotation per your lab table','guide'],
+['Thoracic (anterior)','AT1–6: midline along the sternum at the vertebral level → FLEXION','guide'],
+['Lumbar (anterior)','AT7–9: lateral to midline in rectus abdominis · AT10: ¼ way umbilicus→pubic tubercle · AT11: midway · AT12: anterior iliac crest in the midaxillary line → FSTAR (AT7–12)','guide'],
+['Pelvis (anterior)','AL1: medial to ASIS → FSTAR · AL2: medial to AIIS → FSART · AL3: lateral to AIIS → FSART · AL4: inferior to AIIS → FSART · AL5: pubic tubercle → FSARA','guide'],
+['Pelvis (posterior)','Upper pole L5: superior medial PSIS → extend and adduct the hip, fine-tune IR/ER','guide'],
+['Posterior thoracic/lumbar pattern','General rule: ANTERIOR points → FLEXION; POSTERIOR points → EXTENSION; then fine-tune sidebending/rotation (often toward the side of tenderness for lateral/transverse-process points, away for midline spinous-process points). Your guide table does not list individual posterior points; use your lab table for exact positions','gen']
+];
+const NOM={
+ ERS:'Type II dysfunction is named for the position of EASE (e.g., FRSR = Flexed, Rotated Right, Sidebent Right). Restriction = the opposite (extension, left rotation, left sidebending).',
+ FRS:'F dysfunction: the facet on the side of rotation/sidebending is stuck OPEN; restricted into extension. Posterior transverse process is more prominent on the side of rotation and is MORE apparent in FLEXION.',
+ EXT:'E dysfunction: the facet on the side of rotation/sidebending is stuck CLOSED; restricted into flexion. Posterior TP more prominent in EXTENSION.',
+ T1:'Type I (neutral, group): 3 or more segments, sidebending and rotation to OPPOSITE sides (Fryette Law 1), named "N SL RR" (neutral, sidebent left, rotated right). Restriction is in the opposite directions.',
+ RIB:'Rib dysfunctions are named for the direction the rib is stuck: INHALED rib = restricted exhalation (key rib = LOWEST of the group). EXHALED rib = restricted inhalation (key rib = HIGHEST of the group).',
+ SAC:'Sacral torsion: "L on L" = left rotation on a left oblique axis (a forward torsion). First letter = direction of rotation, second = the oblique axis. Same letters (L on L, R on R) = forward torsion (flexion); different letters (R on L, L on R) = backward torsion (extension).',
+ INN:'Innominate: ANTERIOR rotation: ASIS inferior, PSIS superior (standing flexion test positive on that side). POSTERIOR rotation: ASIS superior, PSIS inferior. Superior shear: whole innominate (ASIS and PSIS and pubic tubercle) higher. Inflare/outflare: ASIS closer to/farther from the umbilicus.'
+};
+
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tag=s=>s==='guide'?'<span class="tag">guide</span>':'<span class="tag v">verify</span>';
+let curTech='ME';
+function renderTabs(){$('#tabs').innerHTML=Object.entries(TECH).map(([k,t])=>`<button class="pill ${k===curTech?'on':''}" data-t="${k}">${esc(t.name)}</button>`).join('')}
+function renderTech(){
+  const t=TECH[curTech];
+  let h=`<div class="box green"><b>${esc(t.name)}</b> · ${esc(t.cls)}<p>${esc(t.core)}</p></div>
+<div class="say">${esc(t.why)}</div>
+<div class="grid2"><div class="box red"><b>Absolute</b><ul>${t.abs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div class="box warn"><b>Relative</b><ul>${t.rel.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`;
+  if(curTech==='CS'){h+=`<p>See the <a href="#cs">Counterstrain section below</a> for points and positions.</p>`}
+  else h+=Object.entries(t.regions).map(([r,items])=>`<details><summary>${esc(r)}</summary>${items.map(i=>`<div class="box"><b>${esc(i.n)}</b> ${tag(i.src)}<ol>${i.s.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`).join('')}</details>`).join('');
+  $('#techBody').innerHTML=h;
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){curTech=b.dataset.t;renderTabs();renderTech()}});
+renderTabs();renderTech();
+$('#csreq').innerHTML=CSREQ.map(c=>`<tr><td><b>${esc(c.p)}</b> ${tag(c.src)}</td><td>${esc(c.l)}</td><td>${esc(c.pos)}</td></tr>`).join('');
+$('#csreg').innerHTML=CSREG.map(r=>`<tr><td><b>${esc(r[0])}</b> ${tag(r[2])}</td><td>${esc(r[1])}</td></tr>`).join('');
+$('#whyLines').innerHTML=Object.entries(TECH).map(([k,t])=>`<div class="say"><b>${esc(t.name)}:</b> "${esc(t.why)}"</div>`).join('');
+// draw
+const ASSIGN=[];
+['Cervical spine','Thoracic spine','Lumbar spine','Sacrum','Pelvis','Ribs 1–12'].forEach(r=>ASSIGN.push(['ME',r.replace(' spine','').replace('Ribs 1–12','Ribs 1–12')]));
+['Cervical region','Thoracic region','Thoracic inlet release','Respiratory diaphragm release','Lumbar region','Pelvis'].forEach(r=>ASSIGN.push(['MFR',r]));
+['Cervical spine (set-up only)','Thoracic spine','Lumbar spine','Pelvis','Upper extremity','Lower extremity'].forEach(r=>ASSIGN.push(['HVLA',r]));
+['Cervical spine','Thoracic spine','Lumbar spine','Pelvis'].forEach(r=>ASSIGN.push(['CS',r+' (anterior and posterior points)']));
+CSREQ.forEach(c=>ASSIGN.push(['CS',c.p+' (required point)']));
+$('#drawBtn').onclick=()=>{
+  const [k,r]=ASSIGN[Math.floor(Math.random()*ASSIGN.length)];const t=TECH[k];
+  const key=Object.keys(t.regions).find(x=>r.startsWith(x)||x.startsWith(r.split(' ')[0]));
+  const reg=key?t.regions[key]:null;
+  $('#drawn').style.display='block';
+  $('#drawn').innerHTML=`<span class="tag">Assigned</span><b>${esc(r)} — ${esc(t.name)}</b>
+<ol><li>State the indication</li><li>Screen for contraindications (${k==='HVLA'?'absolute list is longest, say it':'say the key ones'})</li><li>Diagnose the region (PART → full diagnosis)</li><li>Grader confirms: adjust to the confirmed diagnosis</li><li>Treat: ${esc(t.core)}</li><li>Reassess and give post-treatment instructions</li></ol>
+${k==='HVLA'?'<p class="verify">HVLA: simulate the thrust; say what you would do. Cervical HVLA is set-up only.</p>':''}
+<div class="say">${esc(t.why)}</div>${reg?`<details><summary>Setup steps</summary>${reg.map(i=>`<b>${esc(i.n)}</b> ${tag(i.src)}<ol>${i.s.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`).join('')}</details>`:'<p class="sub">See the Counterstrain section for positions.</p>'}`;
+  resetO();
+};
+let ot=null,ol=600;
+function paintO(){const m=Math.floor(ol/60),s=ol%60;$('#otimer').textContent=m+':'+String(s).padStart(2,'0');$('#otimer').classList.toggle('low',ol<=120)}
+function resetO(){clearInterval(ot);ot=null;ol=600;paintO();$('#ostart').textContent='Start'}
+$('#ostart').onclick=()=>{if(ot){clearInterval(ot);ot=null;$('#ostart').textContent='Resume';return}$('#ostart').textContent='Pause';ot=setInterval(()=>{ol--;paintO();if(ol<=0){clearInterval(ot);ot=null}},1000)};
+$('#oreset').onclick=resetO;
+// flashcards
+const SEG=['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12','L1','L2','L3','L4','L5'];
+const OPP={F:'E',E:'F',L:'R',R:'L'};
+const N={F:'flexed',E:'extended',L:'left',R:'right'};
+let card=null,shown=false;
+function mk(){
+  const seg=SEG[Math.floor(Math.random()*SEG.length)],ft=Math.random()<.5?'F':'E',sd=Math.random()<.5?'L':'R',o=OPP[sd],kind=Math.random()<.5;
+  const dx=`${seg} ${ft}RS${sd}`;
+  const tpSide=N[sd],motion=ft==='F'?'extension':'flexion',tpTest=ft==='F'?'flexion':'extension';
+  const stem=kind?`Name it: ${seg} is restricted in ${motion}, ${N[o]} rotation and ${N[o]} sidebending, and the ${tpSide} transverse process is more posterior and MORE apparent in ${tpTest}.`:`Diagnosis: ${dx}. What is restricted, where is the posterior TP, and what do you engage for muscle energy?`;
+  const ans=kind?`${dx} (${ft==='F'?'flexed':'extended'}, rotated ${N[sd]}, sidebent ${N[sd]}). Named for the position of ease.`:`Position of ease = ${ft==='F'?'flexion':'extension'}, ${N[sd]} rotation, ${N[sd]} sidebending. RESTRICTED into ${motion}, ${N[o]} rotation, ${N[o]} sidebending. Posterior TP: ${tpSide}, more apparent in ${tpTest}. ME: engage the feather edge of the barrier (${motion}, ${N[o]} rotation, ${N[o]} sidebending); patient pushes back toward ease (${ft==='F'?'flexion':'extension'}, ${N[sd]} rotation/SB) against your counterforce 3–5 s, repeat 3–5×.`;
+  card={stem,ans};shown=false;paintCard();
+}
+function paintCard(){$('#card').innerHTML=`<p><b>${esc(card.stem)}</b></p>${shown?`<p>${esc(card.ans)}</p>`:''}`;$('#flip').textContent=shown?'Hide answer':'Show answer'}
+$('#newcard').onclick=mk;$('#flip').onclick=()=>{shown=!shown;paintCard()};mk();
+</script>
+
+</body></html>

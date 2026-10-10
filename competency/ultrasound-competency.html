@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Ultrasound Competency</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--cream:#fdfbf3;--cream-2:#f7f1e0;--ink:#2c2c24;--ink-soft:#5c5a4a;--green-deep:#3b5d43;--green:#5e8461;--green-light:#a9c2a0;--line:#d8cfb4;--highlight:#f4e2a8;--pos:#8a2f2f;--warn:#9a6a14;--card-shadow:0 2px 10px rgba(44,44,36,.08);--serif:'Lora','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono','SFMono-Regular',Consolas,Menlo,monospace}
+*{box-sizing:border-box}html{background:var(--cream)}html,body{min-height:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:60px 18px 100px}
+header{border-bottom:2px solid var(--green-deep);padding-bottom:16px;margin-bottom:22px}
+header h1{font-family:var(--serif);font-size:1.9rem;margin:0 0 8px;color:var(--green-deep)}
+header p{margin:0 0 6px;color:var(--ink-soft);font-size:.95rem}
+.back-btn{position:absolute;top:14px;left:14px;z-index:1000;font-size:.78rem;font-weight:600;color:var(--green-deep);text-decoration:none;border:1.5px solid var(--green-deep);padding:7px 13px;border-radius:8px;background:var(--cream);box-shadow:var(--card-shadow)}
+.back-btn:hover{background:var(--green-light)}
+.card{background:#fffdf7;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:var(--card-shadow);scroll-margin-top:90px}
+.card h2{font-family:var(--serif);color:var(--green-deep);margin:0 0 6px;font-size:1.4rem;border-bottom:2px solid var(--green-light);padding-bottom:8px}
+.card h3{font-family:var(--serif);font-size:1.12rem;margin:18px 0 6px}
+.card h4{color:var(--green-deep);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 5px}
+.card p,.card li{font-size:.92rem}.card ul,.card ol{margin:6px 0;padding-left:22px}.card li{margin-bottom:4px}
+.sub{color:var(--ink-soft);font-size:.85rem;font-style:italic;margin:0 0 12px}
+nav.jump{position:sticky;top:0;z-index:50;background:var(--cream);padding:8px 0 10px;border-bottom:1px solid var(--line);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:14px;border:1.3px solid var(--green);color:var(--green-deep);text-decoration:none;background:var(--cream-2);cursor:pointer}
+.pill:hover,.pill.on{background:var(--green-light)}
+.btn{font-family:var(--sans);font-weight:600;font-size:.82rem;padding:8px 15px;border-radius:18px;border:1.5px solid var(--green-deep);background:var(--cream);color:var(--green-deep);cursor:pointer}
+.btn:hover{background:var(--green-light)}.btn.solid{background:var(--green-deep);color:#fff}.btn.solid:hover{background:var(--green)}
+.btn[disabled]{opacity:.45;cursor:default}
+table.t{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.86rem}
+table.t th{text-align:left;background:var(--cream-2);color:var(--green-deep);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:2px solid var(--green-deep)}
+table.t td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl-scroll{overflow-x:auto}
+.box{border:1.5px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0;background:var(--cream)}
+.box.green{border-color:var(--green);background:var(--cream-2)}
+.box.warn{border-color:#d9b25a;background:#fbf3dc}
+.box.red{border-color:#c98a8a;background:#f9ecec}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:10px;background:var(--green-light);color:var(--green-deep);margin-right:4px}
+.tag.v{background:#f4e2a8;color:#6d4f08}
+.say{font-family:var(--serif);font-style:italic;border-left:3px solid var(--green);padding:4px 12px;margin:8px 0;background:var(--cream-2);border-radius:0 8px 8px 0;font-size:.9rem}
+.timer{font-family:var(--mono);font-size:2rem;color:var(--green-deep);font-weight:600}
+.timer.low{color:var(--pos)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.verify{font-size:.78rem;color:var(--warn)}
+footer{text-align:center;color:var(--ink-soft);font-size:.78rem;margin-top:36px}
+details{border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;background:var(--cream)}
+details>summary{cursor:pointer;font-weight:600;color:var(--green-deep);font-size:.92rem}
+details[open]>summary{margin-bottom:6px}
+@media print{.back-btn,nav.jump,.btn{display:none!important}.card{box-shadow:none;break-inside:avoid}}
+</style></head><body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<div class="wrap">
+<header>
+<h1>Ultrasound Competency</h1>
+<p>OCS III · 5 minutes · you are assigned ONE of five B-mode images and acquire it with no prompting. Butterfly or Mindray.</p>
+</header>
+<nav class="jump"><a class="pill" href="#rules">Rules &amp; scoring</a><a class="pill" href="#scans">The 5 scans</a><a class="pill" href="#devices">Device cheat sheets</a><a class="pill" href="#drill">5-minute drill</a><a class="pill" href="#know">Normal vs abnormal</a></nav>
+
+<section class="card" id="rules">
+<h2>Station rules</h2>
+<div class="grid2">
+<div class="box green"><b>The five images (B-mode)</b><ol><li>Parasternal long axis (PLAX) of the heart</li><li>Apical 4-chamber (A4C) of the heart</li><li>Lung sliding, anterior chest</li><li>Biceps tendon, transverse plane</li><li>Patellar tendon, longitudinal plane</li></ol></div>
+<div class="box green"><b>Logistics</b><ul><li>One image, 5 minutes, no prompting</li><li>Show a frozen image OR real-time scanning</li><li>Butterfly (bring it fully charged) or the Mindray</li><li>The 2-minute silent grading period follows, with both students silent</li></ul></div>
+</div>
+<div class="box warn"><b>Image is graded on 5 things</b><ol><li><b>Correct machine pre-setting and transducer selection</b> (Mindray: pick the right probe and exam preset)</li><li><b>Correct transducer placement and orientation</b></li><li><b>Correct anatomy</b> on the screen</li><li><b>Correct gain</b></li><li><b>Correct depth</b></li></ol></div>
+<p class="verify">Not on this list: the manual's other competency scans (knee lateral transverse, shoulder posterior, carotid IMT, LVEF, abdominal aorta, popliteal vein, gallstones, kidney, eFAST). The course overview replaced them with these five. If your faculty email or syllabus still lists others, tell me.</p>
+<div class="box"><b>Pre-flight checklist (do before the clock matters)</b><ul><li>Butterfly: charged, logged in, probe connected, correct preset loaded</li><li>Gel, towel, patient position set, sleeves up, probe cleaned</li><li>Tap the probe and confirm the marker dot on the screen so you know which side is which</li><li>Say what you are doing: "I'm selecting the cardiac preset with the phased-array probe…"</li></ul></div>
+</section>
+
+<section class="card" id="scans">
+<h2>The 5 scans</h2>
+<p class="sub">Open one. Each lists preset, position, orientation, what must be on screen, depth/gain and the usual mistakes.</p>
+<div id="scanList"></div>
+<p class="verify">Probe placement and orientation below follow standard teaching and your US manual's figures. Marker conventions (screen left vs right) can differ by preset (cardiac vs abdominal); always tap the probe to verify and follow what your US lab taught.</p>
+</section>
+
+<section class="card" id="devices">
+<h2>Device cheat sheets</h2>
+<h3>Mindray MX7 (from the Quick Reference Guide)</h3>
+<table class="t"><tr><th>Goal</th><th>Do this</th></tr>
+<tr><td>New patient</td><td>Tap <b>Info</b> on the touch menu, fill in basic information</td></tr>
+<tr><td>Choose probe and preset</td><td>Tap <b>Probe</b> on the touch menu, select the transducer and exam mode (cardiac / lung / MSK as appropriate)</td></tr>
+<tr><td>B-mode and gain</td><td>Press <b>B</b>; rotate the <b>Gain</b> knob. Tap left/right of a parameter or use the multi-function knob to adjust image parameters</td></tr>
+<tr><td>Depth</td><td><b>Depth</b> up/down keys</td></tr>
+<tr><td>M-mode (optional)</td><td>Press <b>M</b> (e.g., lung seashore sign)</td></tr>
+<tr><td>Freeze / save</td><td><b>Freeze</b> key; <b>Save</b> key saves a frame or cine</td></tr>
+<tr><td>Review / end</td><td><b>Review</b> shows saved images; <b>End</b> ends the exam</td></tr></table>
+<h3>Butterfly iQ app (generic; your version may differ)</h3>
+<ul><li>Select the preset first: <b>Cardiac</b> (PLAX/A4C), <b>Lung</b>, <b>MSK</b> (tendons)</li><li>Depth and gain controls are on the live-imaging screen; adjust before freezing</li><li>Freeze/pause and save buttons capture the image; use cine if you want to show motion or lung sliding</li><li>Practice once on your own device so the menu locations are automatic</li></ul>
+<p class="verify">The Butterfly instructions are generic because your uploaded materials only include the Mindray guide. Send the Butterfly course notes if you want them tailored.</p>
+</section>
+
+<section class="card" id="drill">
+<h2>5-minute drill</h2>
+<p class="sub">Draw a scan, then run the timer. The prompts match the phases of a good attempt.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn solid" id="drawUS">Draw a scan</button><span class="timer" id="utimer">5:00</span><button class="btn" id="ustart">Start</button><button class="btn" id="ureset">Reset</button></div>
+<div id="udraw" class="box" style="display:none"></div>
+<div id="phase" class="say" style="display:none"></div>
+<table class="t"><tr><th>0:00–0:30</th><th>0:30–3:00</th><th>3:00–4:00</th><th>4:00–5:00</th></tr><tr><td>Pick probe + preset, gel, position patient, say it</td><td>Acquire: land the window, align, fine-tune</td><td>Optimize depth + gain, freeze/clear image</td><td>Present: label the structures out loud, say orientation</td></tr></table>
+</section>
+
+<section class="card" id="know">
+<h2>Normal vs abnormal (from your US manual)</h2>
+<ul>
+<li><b>PLAX:</b> LV diameter at the mitral valve level. <b>LVEF = (LVD diastole − LVD systole) / LVD diastole.</b> Normal LV wall and septum thickness &lt; 12 mm; 14 mm wall + 13 mm septum with SOB and 20 yrs of HTN = LV hypertrophy; small pericardial effusion may coexist.</li>
+<li><b>Lung:</b> Normal lung shows A-lines (horizontal reverberation) and lung sliding (pleural movement with breathing). B-lines are vertical comet-tail lines. On M-mode, normal = <b>seashore sign</b>; pneumothorax = lung sliding gone and a <b>barcode (stratosphere) sign</b>.</li>
+<li><b>Tendons:</b> Tendinopathy appears as a thickened, hypoechoic tendon (acute inflammation/edema) compared with normal. Avoid <b>anisotropy</b>: keep the beam perpendicular to the tendon fibers, or a normal tendon will look falsely dark.</li>
+<li><b>Aortic valve insufficiency (cardiac color Doppler):</b> diastolic regurgitation jet; useful context for A4C/PLAX.</li>
+</ul>
+</section>
+<footer>Competency Testing Materials · Ultrasound · Built from the OMS II Ultrasound Lab Manual, Mindray MX7 Quick Reference Guide and the Competency Exams Overview.</footer>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const S=[
+{k:'plax',n:'Parasternal long axis (PLAX)',probe:'Phased-array (cardiac) probe, CARDIAC preset (Mindray: Probe → phased array → cardiac; Butterfly: Cardiac preset)',pos:'Patient in left lateral decubitus (~30–45°) with the left arm raised above the head; you on the patient\'s right/left side with the machine in front of you',pl:'Left parasternal border, 3rd–4th intercostal space. Probe perpendicular to the chest wall',mk:'Marker toward the patient\'s RIGHT shoulder (about 10 o\'clock)',tgt:['Right ventricle at the top (anterior)','Interventricular septum and LV with posterior wall','Mitral valve with anterior and posterior leaflets','Left atrium and aortic root/valve with LVOT','Septum and anterior aortic wall roughly in line (LV not foreshortened); descending aorta behind the LA is a bonus'],dg:'Depth about 14–18 cm so the posterior LV wall, LA and descending aorta are not cut off. Gain so blood is black, myocardium mid-gray, pericardium bright',err:[['Foreshortened or off-axis LV','Slide up or down one interspace, rotate slightly until the aortic root and septum line up'],['Rib shadows / poor window','Move one interspace, have the patient exhale and hold breath, apply more gel/pressure'],['Image flipped or wrong preset','Check marker dot, and make sure you are in the cardiac preset, not abdominal'],['Depth too shallow','Increase depth until the full LV and LA are visible']],say:'"I\'m using the phased-array probe with the cardiac preset. Patient is in left lateral decubitus. I\'m placing the probe at the left parasternal 3rd–4th intercostal space with the marker toward the right shoulder. On screen I can see the RV, septum, LV, mitral valve leaflets, left atrium and aortic root. Depth is ___ and gain is optimized."'},
+{k:'a4c',n:'Apical 4-chamber (A4C)',probe:'Phased-array (cardiac) probe, CARDIAC preset',pos:'Left lateral decubitus, left arm raised; apex pushed toward the probe',pl:'At the cardiac apex (PMI), about the 5th intercostal space, anterior axillary line. Beam aimed toward the right shoulder',mk:'Marker toward the patient\'s LEFT (about 3 o\'clock, toward the bed/left axilla)',tgt:['Apex at the top, atria at the bottom','All four chambers visible with the septum running vertically','Mitral and tricuspid valves, with the crux (where the septum meets the AV valves) visible','LV (longest possible, not a short stubby ellipse) and RV about two-thirds the LV size','Interatrial septum visible; no aortic root (that would be an apical 5-chamber)'],dg:'Depth about 16–18 cm so the atria are fully seen. Gain adjusted until chambers are black and walls visible',err:[['Foreshortened LV (looks short and round)','Slide the probe lower/laterally one interspace and aim more toward the right shoulder'],['Rib shadow cutting the image','Move one interspace, or exhale-hold'],['Atria cut off at the bottom','Increase depth'],['Aortic root appears (5-chamber)','Tilt the probe back (posteriorly) until it disappears'],['Septum not vertical, only 2–3 chambers','Rotate the probe a few degrees to bring in all four']],say:'"Cardiac preset, phased-array probe. Left lateral decubitus. Probe at the apex, 5th intercostal space, marker toward the patient\'s left. I can see all four chambers, mitral and tricuspid valves, the septum and the crux. Depth ___, gain optimized."'},
+{k:'lung',n:'Lung sliding (anterior chest)',probe:'Linear (high-frequency) probe with the LUNG preset on Butterfly/Mindray. A phased-array/curvilinear probe also works, but the pleural line is sharpest with linear',pos:'Patient supine or semi-recumbent; breathing normally',pl:'Anterior chest, 2nd–3rd intercostal space, mid-clavicular line. Probe longitudinal (perpendicular to the ribs)',mk:'Marker toward the patient\'s HEAD',tgt:['Two rib shadows with the pleural line between them ("bat sign")','Pleural line = bright horizontal line just deep to the ribs','Lung sliding: to-and-fro shimmering of the pleural line with breathing (SHOW THIS IN REAL TIME; a freeze cannot show sliding)','A-lines: horizontal reverberation lines below the pleural line at equal spacing'],dg:'Shallow depth, about 4–7 cm, with the pleural line in the upper third of the image. Gain moderate so the pleural line is crisp and not blown out',err:[['Probe parallel to the ribs (no bat sign)','Rotate until the probe is across the ribs'],['Cannot see sliding','Ask the patient to breathe deeply, reduce depth, tilt slightly; try M-mode to prove "seashore"'],['Depth too deep','Reduce depth so the pleural line is large'],['Too much gain/ mid-image artifacts','Lower gain']],say:'"I\'m using the lung preset with the linear probe at the 2nd–3rd intercostal space, mid-clavicular line, marker toward the head. I see the bat sign, a bright pleural line with lung sliding in real time, and A-lines. Depth ___, gain optimized."'},
+{k:'bicep',n:'Biceps tendon, transverse',probe:'Linear high-frequency probe, MSK preset',pos:'Patient seated facing you, arm at side, elbow flexed 90°, forearm supinated resting palm-up on the thigh (slight external rotation opens the groove)',pl:'Anterior shoulder over the bicipital (intertubercular) groove. Probe PERPENDICULAR to the tendon\'s long axis (transverse)',mk:'Marker toward the patient\'s LATERAL/right side (follow your lab convention and verify on screen)',tgt:['Bright humeral cortex with the groove between lesser tuberosity (medial) and greater tuberosity (lateral)','Long head of the biceps tendon: round/oval hyperechoic structure with fibrillar texture inside the groove','Deltoid superficial, transverse humeral ligament as the roof of the groove','Tendon centered on the screen and brightest (not dark)'],dg:'Depth about 3–4 cm with the tendon centered. Gain so the tendon is bright with visible fibrillar pattern',err:[['Tendon looks dark (anisotropy)','Tilt/"heel-toe" the probe until it is perpendicular and bright'],['Probe too lateral/medial, on a tuberosity','Slide to the groove between the two tuberosities'],['Cannot find it','Start distally at the muscle belly and follow it up the groove, or externally rotate the arm'],['Depth too deep','Reduce depth so the groove fills the screen']],say:'"MSK preset with the linear probe. Patient seated, elbow flexed to 90°, forearm supinated. I\'m placing the probe transversely over the bicipital groove with the marker toward the lateral side. The biceps long head tendon is the bright oval structure in the groove between the lesser and greater tuberosities. Depth ___, gain optimized, anisotropy avoided."'},
+{k:'patella',n:'Patellar tendon, longitudinal',probe:'Linear high-frequency probe, MSK preset',pos:'Patient supine with the knee slightly flexed (~20–30°) and supported with a towel, or seated with knee flexed',pl:'Over the anterior knee: probe along the long axis of the tendon, from the inferior pole of the patella down to the tibial tuberosity',mk:'Marker toward the patient\'s HEAD (proximal, the patella end on the screen\'s marker side)',tgt:['Patella (proximal) and tibial tuberosity (distal) both visible as bright bony cortex','Patellar tendon as a continuous hyperechoic fibrillar band between them','Infrapatellar (Hoffa) fat pad deep to the tendon','Tendon fibers straight and bright (not dark from anisotropy)'],dg:'Depth about 2–3 cm. Gain so fibers are clear; tendon in the middle of the image',err:[['Tendon dark in parts (anisotropy)','Keep the probe perpendicular; use heel-toe rocking to brighten it'],['Image off-axis (only part of tendon)','Rotate until both patella and tuberosity are in view'],['Not enough gel on bony prominence','Add gel; stand-off if needed'],['Depth too deep','Reduce depth to 2–3 cm']],say:'"MSK preset with the linear probe. Knee slightly flexed on a towel. I\'m scanning longitudinally along the patellar tendon with the marker proximal. I can see the inferior pole of the patella, the tendon as a continuous bright fibrillar band, the tibial tuberosity, and the fat pad deep. Depth ___, gain optimized."'}
+];
+$('#scanList').innerHTML=S.map(s=>`<details><summary>${esc(s.n)}</summary>
+<div class="grid2"><div class="box green"><b>Set-up</b><p><span class="tag">Probe</span>${esc(s.probe)}</p><p><span class="tag">Patient</span>${esc(s.pos)}</p><p><span class="tag">Placement</span>${esc(s.pl)}</p><p><span class="tag">Marker</span>${esc(s.mk)}</p><p><span class="tag">Depth / gain</span>${esc(s.dg)}</p></div>
+<div class="box green"><b>Must be on screen</b><ul>${s.tgt.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
+<h4>Common problems</h4><table class="t"><tr><th>Problem</th><th>Fix</th></tr>${s.err.map(e=>`<tr><td>${esc(e[0])}</td><td>${esc(e[1])}</td></tr>`).join('')}</table>
+<h4>Say it</h4><div class="say">${esc(s.say)}</div></details>`).join('');
+let ut=null,ul=300,cur=null;
+const PH=[[300,'0:00–0:30 · Pick the probe and preset, set gel and patient, and SAY it.'],[270,'0:30–3:00 · Acquire: get the window, align, tilt/rotate, confirm marker.'],[120,'3:00–4:00 · Optimize depth and gain, then freeze (except lung sliding: stay real-time).'],[60,'4:00–5:00 · Present: label each structure out loud; state orientation, depth and gain.']];
+function paintU(){const m=Math.floor(ul/60),s=ul%60;$('#utimer').textContent=m+':'+String(s).padStart(2,'0');$('#utimer').classList.toggle('low',ul<=60);
+  const p=PH.filter(x=>ul<=x[0]).slice(-1)[0]||PH[0];if(cur){$('#phase').style.display='block';$('#phase').textContent=p[1]}}
+function resetU(){clearInterval(ut);ut=null;ul=300;paintU();$('#ustart').textContent='Start'}
+$('#drawUS').onclick=()=>{cur=S[Math.floor(Math.random()*S.length)];$('#udraw').style.display='block';
+  $('#udraw').innerHTML=`<span class="tag">Assigned</span><b>${esc(cur.n)}</b><p>${esc(cur.probe)}</p><p class="sub">Tap the scan card above for placement, orientation and what must be on screen.</p>`;resetU()};
+$('#ustart').onclick=()=>{if(ut){clearInterval(ut);ut=null;$('#ustart').textContent='Resume';return}$('#ustart').textContent='Pause';ut=setInterval(()=>{ul--;paintU();if(ul<=0){clearInterval(ut);ut=null}},1000)};
+$('#ureset').onclick=resetU;
+</script>
+
+</body></html>
