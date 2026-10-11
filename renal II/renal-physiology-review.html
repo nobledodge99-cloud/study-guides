@@ -60,6 +60,7 @@
   .quiz-explain{display:none;margin-top:8px;font-size:.88rem;background:var(--sage-light);border-left:3px solid var(--forest);padding:8px 12px;border-radius:4px;}
   details.ans{margin:8px 0;border:1px solid var(--border);border-radius:8px;padding:6px 12px;background:#fffefb;}
   details.ans summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--forest);}
+  .practice{border-top:2px dashed var(--sage);margin-top:24px;padding-top:4px}
   .score{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--forest-dark);}
   @media (max-width:700px){.two-col{grid-template-columns:1fr;}.top-contents ul{columns:1;}section.card{padding:20px 16px;}.header{padding-top:64px;}.header h1{font-size:1.45rem;}}
 </style>
@@ -86,21 +87,20 @@
     <li><a href="#sec-bp">8. BP, RAAS, TGF &amp; Heart Failure</a></li>
     <li><a href="#sec-mic">9. Micturition</a></li>
     <li><a href="#sec-ab">10. Acid-Base Physiology</a></li>
-    <li><a href="#sec-quiz">11. Self-Check Quiz</a></li>
-    <li><a href="#sec-summary">12. Final High-Yield Table</a></li>
+    <li><a href="#sec-summary">11. Final High-Yield Table</a></li>
   </ul>
 </div>
 
 <button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
 <div class="sidenav-panel" id="sidenavPanel">
-  <a href="#sec-numbers">0. Numbers</a><a href="#sec-fluids">1. Body Fluids</a><a href="#sec-gfr">2. RBF &amp; GFR</a><a href="#sec-transport">3. Transport</a><a href="#sec-na">4. Na &amp; Diuretics</a><a href="#sec-k">5. Potassium</a><a href="#sec-water">6. Water &amp; ADH</a><a href="#sec-ca">7. Ca / PO4 / Mg</a><a href="#sec-bp">8. BP &amp; HF</a><a href="#sec-mic">9. Micturition</a><a href="#sec-ab">10. Acid-Base</a><a href="#sec-quiz">11. Quiz</a><a href="#sec-summary">12. Summary</a>
+  <a href="#sec-numbers">0. Numbers</a><a href="#sec-fluids">1. Body Fluids</a><a href="#sec-gfr">2. RBF &amp; GFR</a><a href="#sec-transport">3. Transport</a><a href="#sec-na">4. Na &amp; Diuretics</a><a href="#sec-k">5. Potassium</a><a href="#sec-water">6. Water &amp; ADH</a><a href="#sec-ca">7. Ca / PO4 / Mg</a><a href="#sec-bp">8. BP &amp; HF</a><a href="#sec-mic">9. Micturition</a><a href="#sec-ab">10. Acid-Base</a><a href="#sec-summary">11. Summary</a>
 </div>
 
 <div class="container">
 
 <div class="callout warn" style="margin-top:0">
 <b class="lbl">Read this first &mdash; source corrections</b>
-Dr. Coulton's refresher PDF has a few statements that are wrong or garbled. This guide uses the corrected version and marks each spot with <span class="tag">corrected</span>. Points I added that are not in the PDFs are marked <span class="tag">beyond source</span>. The one to watch: the PDF says hyperosmolarity in diabetes causes <i>hypo</i>kalemia &mdash; it shifts K&#8314; <i>out</i> of cells (hyper&shy;kalemia, even though total body K&#8314; is low). Full list at the bottom of &sect;12.
+Dr. Coulton's refresher PDF has a few statements that are wrong or garbled. This guide uses the corrected version and marks each spot with <span class="tag">corrected</span>. Points I added that are not in the PDFs are marked <span class="tag">beyond source</span>. The one to watch: the PDF says hyperosmolarity in diabetes causes <i>hypo</i>kalemia &mdash; it shifts K&#8314; <i>out</i> of cells (hyper&shy;kalemia, even though total body K&#8314; is low). Full list at the bottom of &sect;11.
 </div>
 
 <section class="card" id="sec-numbers">
@@ -467,14 +467,8 @@ Dr. Coulton's refresher PDF has a few statements that are wrong or garbled. This
 <div class="callout"><b class="lbl">Spend less time on (per Dr. Coulton's priorities)</b>Davenport diagrams, buffer logarithmic derivations, total daily acid-production numbers, individual ammonia transporters, hepatic nitrogen accounting.</div>
 </section>
 
-<section class="card" id="sec-quiz">
-<h2>11. Self-Check Quiz</h2>
-<p class="score" id="qscore">Click an answer to see the explanation. Score: 0 / 0</p>
-<div id="quizHost"></div>
-</section>
-
 <section class="card" id="sec-summary">
-<h2>12. Final High-Yield Table</h2>
+<h2>11. Final High-Yield Table</h2>
 <div class="tw"><table>
 <tr><th>Concept</th><th>One-liner</th></tr>
 <tr><td>Volume vs osmolarity</td><td>Isotonic loss/gain stays in ECF. Free-water/solute changes shift ICF. SIADH = hyposmotic expansion; DI and desert = hyperosmotic contraction; adrenal insufficiency = hyposmotic contraction.</td></tr>
@@ -513,35 +507,39 @@ Dr. Coulton's refresher PDF has a few statements that are wrong or garbled. This
 
 <script>
 const QS=[
-{q:"A person eats a large bag of salty chips. Compared with baseline, what happens?",c:["ECF volume up, ECF osmolarity up, ICF volume down","ECF volume up, osmolarity unchanged, ICF unchanged","ECF volume down, osmolarity up, ICF down","ECF volume up, osmolarity down, ICF up"],a:0,e:"Hyperosmotic expansion: added solute raises ECF osmolarity, pulls water out of cells (ICF falls) and expands ECF."},
-{q:"Which change raises GFR and filtration fraction while lowering RPF?",c:["Afferent constriction","Efferent constriction","Increased plasma protein","Ureteral obstruction"],a:1,e:"Efferent constriction raises P<sub>GC</sub> (GFR up) and reduces flow (RPF down), so FF goes up. Afferent constriction lowers both GFR and RPF with FF unchanged."},
-{q:"Which marker slightly overestimates GFR because it is also secreted?",c:["Inulin","PAH","Creatinine","Glucose"],a:2,e:"Creatinine is freely filtered and slightly secreted. Inulin is the gold standard; PAH measures RPF."},
-{q:"A patient has glucosuria at a plasma glucose of 250 mg/dL. What best explains this?",c:["Tmax of every nephron has been reached","Glucose threshold (~200) exceeded due to carrier splay before Tmax","SGLT2 is overactive","GLUT2 is blocked"],a:1,e:"Threshold (~200 mg/dL) is where glucose first appears; Tmax (~350 mg/dL) is reached later when all carriers are saturated."},
-{q:"A patient on a thiazide has hypokalemia and hypercalcemia. Why does Ca²⁺ rise?",c:["Thiazides block NKCC2","Thiazides increase Ca²⁺ reabsorption in the DCT","Thiazides inhibit PTH","Thiazides inhibit ENaC"],a:1,e:"Blocking NCC increases Ca²⁺ reabsorption (opposite of loop diuretics). Hypokalemia comes from more Na⁺ delivery to principal cells."},
-{q:"Hypotension, hypokalemia, metabolic alkalosis, hypomagnesemia and LOW urinary calcium. Which defect?",c:["NKCC2 (Bartter)","NCC (Gitelman)","ENaC gain-of-function (Liddle)","Aldosterone excess only"],a:1,e:"Gitelman mimics chronic thiazide use: NCC defect, low urine Ca and low Mg. Bartter has high urine Ca."},
-{q:"A patient with uncontrolled type 1 diabetes has serum K⁺ 5.8 despite total-body K⁺ depletion. Which mechanisms contribute?",c:["Insulin lack, hyperosmolarity, and acidemia","Insulin excess and alkalemia","β2 agonist effect","Aldosterone excess"],a:0,e:"All three shift K⁺ out of cells. Osmotic diuresis depletes total-body K⁺."},
-{q:"Which segment is impermeable to water and reabsorbs NaCl via NKCC2, creating the 'single effect'?",c:["Thin descending limb","Thick ascending limb","Proximal tubule","Inner medullary collecting duct"],a:1,e:"TAL pumps NaCl out without water, diluting tubular fluid and building the medullary gradient."},
-{q:"Hyponatremia, concentrated urine, euvolemia after a head injury. What explains it?",c:["Central DI","Nephrogenic DI","SIADH","Primary polydipsia"],a:2,e:"Autonomous ADH → water retention (ECF up, osmolarity down) with inappropriately concentrated urine."},
-{q:"A person is given a high-dose Ang II infusion. What happens to GFR?",c:["Rises because efferent constricts","May fall because afferent also constricts","Unchanged, autoregulation is perfect","Rises due to PGE2"],a:1,e:"At moderate levels the efferent constricts more (GFR kept). At high levels afferent constriction dominates and GFR falls."},
-{q:"A patient with decompensated heart failure keeps retaining fluid. Why doesn't RAAS shut off?",c:["Cardiac output never reaches ~5 L/min","Aldosterone is low","ANP is too high","Renal tubules are damaged"],a:0,e:"RAAS turns off only when CO is restored. In decompensated HF it never is, so edema keeps worsening."},
-{q:"Which receptor relaxes the detrusor during bladder filling?",c:["M3","β3","α1","Nicotinic"],a:1,e:"Sympathetic β3 relaxes the detrusor; α1 contracts the internal sphincter; M3 (pelvic nerve) contracts the detrusor."},
-{q:"After a T6 spinal cord transection and recovery from spinal shock, what bladder results?",c:["Atonic bladder","Automatic bladder","Uninhibited neurogenic bladder","Normal micturition"],a:1,e:"Lesion above the sacral cord leaves the sacral reflex intact but without cortical control: automatic bladder."},
-{q:"pH 7.29, PaCO₂ 30, HCO₃⁻ 14, Na 140, Cl 114. Best interpretation?",c:["Metabolic acidosis, high gap","Metabolic acidosis, normal gap, appropriate respiratory compensation","Respiratory alkalosis","Mixed metabolic acidosis and respiratory acidosis"],a:1,e:"AG = 12, normal. PaCO₂ 30 matches Winter's (29 ± 2)."},
-{q:"Secreted H⁺ combines with filtered HCO₃⁻ in the PCT. What is accomplished?",c:["Net acid excretion","Reclamation of filtered bicarbonate","Generation of new bicarbonate","Ammonium excretion"],a:1,e:"This recycles existing HCO₃⁻. New HCO₃⁻ requires excretion of H⁺ as titratable acid or NH₄⁺."},
-{q:"Which urinary buffer can increase dramatically (~10x) during chronic acidosis?",c:["Phosphate","Creatinine","Ammonium","Citrate"],a:2,e:"NH₄⁺ production is upregulated (glutaminase, PEPCK). Phosphate supply is fixed."},
-{q:"Which cell secretes HCO₃⁻ into the urine using pendrin?",c:["α-intercalated cell","β-intercalated cell","Principal cell","Proximal tubule cell"],a:1,e:"β-intercalated cells are the 'flipped' cell: apical pendrin (Cl⁻/HCO₃⁻), basolateral V-ATPase."},
-{q:"A patient with vomiting has pH 7.49, HCO₃⁻ 35. Which best maintains the alkalosis?",c:["Volume and chloride depletion","Low aldosterone","Excess ammonium","High PaCO₂ only"],a:0,e:"Volume contraction and Cl⁻ depletion keep H⁺ secretion and HCO₃⁻ reclamation high. Saline corrects it."}
+{s:"sec-fluids",q:"A person eats a large bag of salty chips. Compared with baseline, what happens?",c:["ECF volume up, ECF osmolarity up, ICF volume down","ECF volume up, osmolarity unchanged, ICF unchanged","ECF volume down, osmolarity up, ICF down","ECF volume up, osmolarity down, ICF up"],a:0,e:"Hyperosmotic expansion: added solute raises ECF osmolarity, pulls water out of cells (ICF falls) and expands ECF."},
+{s:"sec-gfr",q:"Which change raises GFR and filtration fraction while lowering RPF?",c:["Afferent constriction","Efferent constriction","Increased plasma protein","Ureteral obstruction"],a:1,e:"Efferent constriction raises P<sub>GC</sub> (GFR up) and reduces flow (RPF down), so FF goes up. Afferent constriction lowers both GFR and RPF with FF unchanged."},
+{s:"sec-gfr",q:"Which marker slightly overestimates GFR because it is also secreted?",c:["Inulin","PAH","Creatinine","Glucose"],a:2,e:"Creatinine is freely filtered and slightly secreted. Inulin is the gold standard; PAH measures RPF."},
+{s:"sec-transport",q:"A patient has glucosuria at a plasma glucose of 250 mg/dL. What best explains this?",c:["Tmax of every nephron has been reached","Glucose threshold (~200) exceeded due to carrier splay before Tmax","SGLT2 is overactive","GLUT2 is blocked"],a:1,e:"Threshold (~200 mg/dL) is where glucose first appears; Tmax (~350 mg/dL) is reached later when all carriers are saturated."},
+{s:"sec-na",q:"A patient on a thiazide has hypokalemia and hypercalcemia. Why does Ca²⁺ rise?",c:["Thiazides block NKCC2","Thiazides increase Ca²⁺ reabsorption in the DCT","Thiazides inhibit PTH","Thiazides inhibit ENaC"],a:1,e:"Blocking NCC increases Ca²⁺ reabsorption (opposite of loop diuretics). Hypokalemia comes from more Na⁺ delivery to principal cells."},
+{s:"sec-na",q:"Hypotension, hypokalemia, metabolic alkalosis, hypomagnesemia and LOW urinary calcium. Which defect?",c:["NKCC2 (Bartter)","NCC (Gitelman)","ENaC gain-of-function (Liddle)","Aldosterone excess only"],a:1,e:"Gitelman mimics chronic thiazide use: NCC defect, low urine Ca and low Mg. Bartter has high urine Ca."},
+{s:"sec-k",q:"A patient with uncontrolled type 1 diabetes has serum K⁺ 5.8 despite total-body K⁺ depletion. Which mechanisms contribute?",c:["Insulin lack, hyperosmolarity, and acidemia","Insulin excess and alkalemia","β2 agonist effect","Aldosterone excess"],a:0,e:"All three shift K⁺ out of cells. Osmotic diuresis depletes total-body K⁺."},
+{s:"sec-water",q:"Which segment is impermeable to water and reabsorbs NaCl via NKCC2, creating the 'single effect'?",c:["Thin descending limb","Thick ascending limb","Proximal tubule","Inner medullary collecting duct"],a:1,e:"TAL pumps NaCl out without water, diluting tubular fluid and building the medullary gradient."},
+{s:"sec-water",q:"Hyponatremia, concentrated urine, euvolemia after a head injury. What explains it?",c:["Central DI","Nephrogenic DI","SIADH","Primary polydipsia"],a:2,e:"Autonomous ADH → water retention (ECF up, osmolarity down) with inappropriately concentrated urine."},
+{s:"sec-bp",q:"A person is given a high-dose Ang II infusion. What happens to GFR?",c:["Rises because efferent constricts","May fall because afferent also constricts","Unchanged, autoregulation is perfect","Rises due to PGE2"],a:1,e:"At moderate levels the efferent constricts more (GFR kept). At high levels afferent constriction dominates and GFR falls."},
+{s:"sec-bp",q:"A patient with decompensated heart failure keeps retaining fluid. Why doesn't RAAS shut off?",c:["Cardiac output never reaches ~5 L/min","Aldosterone is low","ANP is too high","Renal tubules are damaged"],a:0,e:"RAAS turns off only when CO is restored. In decompensated HF it never is, so edema keeps worsening."},
+{s:"sec-mic",q:"Which receptor relaxes the detrusor during bladder filling?",c:["M3","β3","α1","Nicotinic"],a:1,e:"Sympathetic β3 relaxes the detrusor; α1 contracts the internal sphincter; M3 (pelvic nerve) contracts the detrusor."},
+{s:"sec-mic",q:"After a T6 spinal cord transection and recovery from spinal shock, what bladder results?",c:["Atonic bladder","Automatic bladder","Uninhibited neurogenic bladder","Normal micturition"],a:1,e:"Lesion above the sacral cord leaves the sacral reflex intact but without cortical control: automatic bladder."},
+{s:"sec-ab",q:"pH 7.29, PaCO₂ 30, HCO₃⁻ 14, Na 140, Cl 114. Best interpretation?",c:["Metabolic acidosis, high gap","Metabolic acidosis, normal gap, appropriate respiratory compensation","Respiratory alkalosis","Mixed metabolic acidosis and respiratory acidosis"],a:1,e:"AG = 12, normal. PaCO₂ 30 matches Winter's (29 ± 2)."},
+{s:"sec-ab",q:"Secreted H⁺ combines with filtered HCO₃⁻ in the PCT. What is accomplished?",c:["Net acid excretion","Reclamation of filtered bicarbonate","Generation of new bicarbonate","Ammonium excretion"],a:1,e:"This recycles existing HCO₃⁻. New HCO₃⁻ requires excretion of H⁺ as titratable acid or NH₄⁺."},
+{s:"sec-ab",q:"Which urinary buffer can increase dramatically (~10x) during chronic acidosis?",c:["Phosphate","Creatinine","Ammonium","Citrate"],a:2,e:"NH₄⁺ production is upregulated (glutaminase, PEPCK). Phosphate supply is fixed."},
+{s:"sec-ab",q:"Which cell secretes HCO₃⁻ into the urine using pendrin?",c:["α-intercalated cell","β-intercalated cell","Principal cell","Proximal tubule cell"],a:1,e:"β-intercalated cells are the 'flipped' cell: apical pendrin (Cl⁻/HCO₃⁻), basolateral V-ATPase."},
+{s:"sec-ab",q:"A patient with vomiting has pH 7.49, HCO₃⁻ 35. Which best maintains the alkalosis?",c:["Volume and chloride depletion","Low aldosterone","Excess ammonium","High PaCO₂ only"],a:0,e:"Volume contraction and Cl⁻ depletion keep H⁺ secretion and HCO₃⁻ reclamation high. Saline corrects it."}
 ];
 (function(){
- const host=document.getElementById('quizHost');let done=0,ok=0;
- QS.forEach((o,i)=>{
+ QS.forEach((o)=>{
+  const sec=document.getElementById(o.s); if(!sec)return;
+  let host=sec.querySelector('.practice');
+  if(!host){host=document.createElement('div');host.className='practice';host.dataset.done=0;host.dataset.ok=0;host.dataset.n=0;
+   host.innerHTML='<h3>Check yourself</h3><p class="score">Click an answer to see the explanation.</p>';sec.appendChild(host);}
+  host.dataset.n=+host.dataset.n+1;const num=host.dataset.n;
   const d=document.createElement('div');d.className='quiz-q';
-  d.innerHTML='<div class="quiz-mini-header">Question '+(i+1)+'</div><p>'+o.q+'</p>';
+  d.innerHTML='<div class="quiz-mini-header">Practice '+num+'</div><p>'+o.q+'</p>';
   const ex=document.createElement('div');ex.className='quiz-explain';ex.innerHTML=o.e;
   o.c.forEach((t,j)=>{const b=document.createElement('button');b.className='quiz-choice';b.innerHTML=t;
    b.onclick=()=>{[...d.querySelectorAll('.quiz-choice')].forEach((x,k)=>{x.disabled=true;if(k===o.a)x.classList.add('correct');});
-    if(j!==o.a)b.classList.add('incorrect');done++;if(j===o.a)ok++;ex.style.display='block';
-    document.getElementById('qscore').textContent='Score: '+ok+' / '+done+' of '+QS.length;};
+    if(j!==o.a)b.classList.add('incorrect');host.dataset.done=+host.dataset.done+1;if(j===o.a)host.dataset.ok=+host.dataset.ok+1;ex.style.display='block';
+    host.querySelector('.score').textContent='Score: '+host.dataset.ok+' / '+host.dataset.done+' of '+host.dataset.n;};
    d.appendChild(b);});
   d.appendChild(ex);host.appendChild(d);});
 })();
