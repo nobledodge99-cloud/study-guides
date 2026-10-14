@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renal Pathology — Bucket Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f1e6; --cream-card:#fffdf8; --forest-dark:#1f3d2e; --forest:#2f5d43;
+  --sage:#7ba384; --sage-light:#e4ecdf; --border:#d8cfb8; --accent:#b3562a;
+  --text-main:#26291f; --text-soft:#5a5f4f;
+  --obs:#2b5a8c; --obs-light:#e3ecf4;
+  --rst:#b3562a; --rst-light:#fbeee2;
+  --neo:#6b3fa0; --neo-light:#eee6f6;
+  --aty:#2f8a7a; --aty-light:#e2f3ef;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Lora',Georgia,serif;background:var(--cream);color:var(--text-main);line-height:1.5;}
+h1,h2,h3,h4{font-family:'IBM Plex Mono',monospace;color:var(--forest-dark);letter-spacing:.02em;}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px 70px;}
+header.hero{background:linear-gradient(135deg,var(--forest-dark),var(--forest));color:#f6f1e6;padding:46px 20px 30px;text-align:center;}
+header.hero h1{color:#fff;font-size:1.7rem;margin:0 0 6px;}
+header.hero p{color:#dfe9de;font-family:'Lora',serif;font-size:.98rem;margin:4px 0;}
+header.hero .src{font-size:.8rem;color:#b9d0bb;margin-top:10px;font-family:'IBM Plex Mono',monospace;}
+nav.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;margin:24px 0;padding:14px 18px;font-size:.88rem;}
+nav.toc h2{font-size:.92rem;margin:0 0 8px;}
+nav.toc .toc-row{display:flex;flex-wrap:wrap;gap:6px 16px;}
+nav.toc a{color:var(--forest);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;}
+nav.toc a:hover{text-decoration:underline;}
+
+.bucket{border-radius:14px;margin:30px 0;overflow:hidden;border:1px solid var(--border);}
+.bucket-head{padding:18px 22px;color:#fff;}
+.bucket-head h2{color:#fff;margin:0 0 4px;font-size:1.25rem;}
+.bucket-head .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;opacity:.85;text-transform:uppercase;letter-spacing:.07em;}
+.bucket-body{background:var(--cream-card);padding:16px 22px 22px;}
+.bucket-hy{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 18px;}
+@media(max-width:620px){.bucket-hy{grid-template-columns:1fr;}}
+.hy-box{border-radius:8px;padding:10px 13px;font-size:.84rem;}
+.hy-box b.hy-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+.obs .bucket-head{background:var(--obs);} .obs .hy-box{background:var(--obs-light);color:#1b3a57;} .obs .hy-box b{color:var(--obs);}
+.rst .bucket-head{background:var(--rst);} .rst .hy-box{background:var(--rst-light);color:#6e331a;} .rst .hy-box b{color:var(--rst);}
+.neo .bucket-head{background:var(--neo);} .neo .hy-box{background:var(--neo-light);color:#452869;} .neo .hy-box b{color:var(--neo);}
+.aty .bucket-head{background:var(--aty);} .aty .hy-box{background:var(--aty-light);color:#1c5349;} .aty .hy-box b{color:var(--aty);}
+
+.subbucket{border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:12px 16px 14px;background:#fffefb;}
+.subbucket h3{font-size:.95rem;margin:0 0 2px;}
+.obs .subbucket h3{color:var(--obs);} .rst .subbucket h3{color:var(--rst);} .neo .subbucket h3{color:var(--neo);} .aty .subbucket h3{color:var(--aty);}
+.sub-note{font-size:.82rem;color:var(--text-soft);margin:0 0 10px;font-style:italic;}
+
+.dz-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:700px){.dz-grid{grid-template-columns:1fr;}}
+.dz-card{background:var(--sage-light);border-radius:7px;padding:8px 11px;font-size:.84rem;}
+.obs .dz-card{background:var(--obs-light);} .rst .dz-card{background:var(--rst-light);} .neo .dz-card{background:var(--neo-light);} .aty .dz-card{background:var(--aty-light);}
+.dz-name{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.8rem;color:var(--forest-dark);display:block;margin-bottom:2px;}
+.dz-ids{font-size:.81rem;}
+.dz-ids b{color:var(--text-main);}
+
+.spectrum{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.82rem;margin:6px 0;}
+.spectrum .step{background:#fff;border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;max-width:100%;}
+.spectrum .arrow{color:var(--text-soft);}
+
+.pearl{background:#fdf2e4;border-left:4px solid var(--accent);border-radius:6px;padding:9px 13px;margin:12px 0;font-size:.86rem;}
+.pearl-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+.back-btn{position:fixed;top:14px;left:14px;background:var(--forest-dark);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;z-index:50;}
+footer{text-align:center;padding:26px;font-size:.78rem;color:var(--text-soft);}
+.master-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0;}
+.master-table th{background:var(--forest-dark);color:#fff;padding:6px 9px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.7rem;}
+.master-table td{padding:6px 9px;border-bottom:1px solid var(--border);}
+.master-table tr:nth-child(even) td{background:var(--sage-light);}
+
+.sidenav-toggle{position:fixed;top:14px;right:14px;background:var(--forest);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;cursor:pointer;z-index:50;}
+.sidenav-panel{position:fixed;top:56px;right:14px;background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:14px;max-height:78vh;overflow-y:auto;width:250px;display:none;z-index:49;box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.sidenav-panel.open{display:block;}
+.sidenav-panel h4{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin:12px 0 4px;}
+.sidenav-panel h4:first-child{margin-top:0;}
+.sidenav-panel a{display:block;font-size:.82rem;color:var(--text-main);text-decoration:none;padding:4px 6px;border-radius:5px;}
+.sidenav-panel a:hover{background:var(--sage-light);}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">← Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">Sections ☰</button>
+<div class="sidenav-panel" id="sidenavPanel">
+<h4>Nephrotic</h4>
+<a href="#neph-primary">Three Primary Causes</a>
+<a href="#neph-secondary">Secondary Causes</a>
+<a href="#neph-compare">Decoder</a>
+<h4>Nephritic &amp; RPGN</h4>
+<a href="#nephr-decoder">IF / Complement Decoder</a>
+<a href="#nephr-immune">Immune-Complex</a>
+<a href="#nephr-rpgn">RPGN / Crescents</a>
+<a href="#nephr-anca">ANCA Vasculitis</a>
+<h4>Congenital / Pediatric</h4>
+<a href="#ped-dev">Developmental Anomalies</a>
+<a href="#ped-cystic">Cystic &amp; Hereditary</a>
+<a href="#ped-obstruct">Obstruction &amp; Reflux</a>
+<a href="#ped-glom">Pediatric Glomerular</a>
+<h4>Atypical / Other</h4>
+<a href="#aty-tubulo">Tubulointerstitial</a>
+<a href="#aty-chronic">CKD &amp; End-Stage</a>
+<a href="#aty-vasc">Vascular &amp; Mass</a>
+<a href="#aty-tubule">Tubular &amp; Acid-Base</a>
+<h4>Reference</h4>
+<a href="#reference-ua">Urinalysis</a>
+<a href="#reference-labs">Labs</a>
+<a href="#reference-img">Imaging</a>
+<a href="#exam-reference">Physical Exam</a>
+<a href="#master">Master Table</a>
+</div>
+
+<header class="hero">
+<h1>Renal Pathology — Bucket Cheat Sheet</h1>
+<p>Nephrotic · Nephritic · Congenital / Pediatric · Atypical / Other</p>
+<p style="font-size:.88rem;">Built from the Renal II guides: Kemp (glomerular pathogenesis, nephrotic/nephritic, cystic/congenital), Nash (immunologic disorders), Poston (RPGN, chronic GN), Smith (neonatal), plus histology, physiology/acid-base, urinalysis/labs and imaging</p>
+<p class="src">Quick-reference organizational guide — not a replacement for the full study guides</p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc"><h2>Jump to a bucket</h2>
+<div class="toc-row">
+<a href="#nephrotic">💧 Nephrotic</a>
+<a href="#nephritic">🔥 Nephritic</a>
+<a href="#pediatric">👶 Congenital / Pediatric</a>
+<a href="#atypical">❓ Atypical / Other</a>
+<a href="#reference-ua">🧪 Urinalysis</a>
+<a href="#reference-labs">🔬 Labs</a>
+<a href="#reference-img">🩻 Imaging</a>
+<a href="#exam-reference">🩺 Exam Findings</a>
+<a href="#master">📋 Master Table</a>
+</div>
+</nav>
+
+<div class="pearl"><span class="pearl-label">How to use this</span>
+Start every stem with the same three questions: <b>(1) protein or blood?</b> (&gt;3.5 g + edema = nephrotic; hematuria + red blood cell (RBC) casts + hypertension (HTN) = nephritic), <b>(2) age?</b> (child vs adult shifts the differential), and <b>(3) what do immunofluorescence (IF) and complement say?</b> (linear / granular / negative; low vs normal complement component 3 (C3)). Anything that doesn't fit lands in Atypical.</div>
+
+<section class="bucket obs" id="nephrotic">
+<div class="bucket-head">
+<span class="tag">Bucket 1</span>
+<h2>Nephrotic Syndrome</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>The glomerular <b>filter leaks</b> (podocyte / slit diaphragm / charge barrier failure) but the body doesn't "sense" it — protein pours out with <b>no inflammation</b>. Albumin goes first (smallest, anionic) → ↓oncotic pressure → edema; liver ramps up lipoproteins → hyperlipidemia.</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>&gt;3.5 g/24 h</b> proteinuria + <b>albumin &lt;3.5 g/dL</b> + edema (generalized, <b>periorbital</b>) + hyperlipidemia + <b>lipiduria</b> (oval fat bodies, Maltese crosses). Usually <b>no</b> RBC casts, no HTN, no acute kidney injury (AKI). Complications: <b>thrombosis</b> (urinary antithrombin loss — renal vein, pulmonary embolism (PE)), <b>infection</b> (immunoglobulin G (IgG) loss), hyperlipidemia.</div>
+</div>
+<div class="subbucket" id="neph-primary">
+<h3>The Three Primary Causes — Know the light microscopy (LM) / IF / electron microscopy (EM) Fingerprint</h3>
+<p class="sub-note">Primary = disease starts in the kidney. All three: <b>no inflammatory infiltrate</b>.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Minimal Change Disease</span><span class="dz-ids"><b>Children</b> (most common cause by far). LM <b>normal</b>, IF <b>negative</b>, EM <b>foot-process effacement</b> only. <b>Selective</b> proteinuria (albumin). <b>Steroid-responsive</b> → rarely biopsied in kids. T-cell factor injures podocytes; <b>Hodgkin lymphoma, thymoma</b> in adults.</span></div>
+<div class="dz-card"><span class="dz-name">Focal segmental glomerulosclerosis (FSGS)</span><span class="dz-ids"><b>Adults</b>; Black patients; human immunodeficiency virus (HIV), heroin, obesity, sickle cell, <b>Apolipoprotein L1 (APOL1)</b>. LM: <b>segmental scar in some glomeruli</b> (focal + segmental; trichrome +). IF/EM: <b>no immune deposits</b>. <b>Non-selective</b>; hematuria 25–75%, HTN 30–50%. <b>Steroid-resistant</b> → the usual biopsy result in a child who fails steroids. <b>Soluble urokinase plasminogen activator receptor (suPAR)</b> elevated ~⅔. <b>Collapsing variant</b> (HIV/heroin) = worst prognosis.</span></div>
+<div class="dz-card"><span class="dz-name">Membranous Nephropathy</span><span class="dz-ids"><b>Adults</b>. <b>Anti-PLA2R</b> (70–85%). LM: <b>thick "wire loop" capillaries</b>; silver stain <b>spikes</b>. IF: <b>granular IgG + C3</b>, capillary-loop pattern. EM: <b>subepithelial</b> deposits with new membrane growing between them. <b>No inflammation</b> (subepithelial = quiet; complement/C5b-9 injury). Highest <b>renal vein thrombosis / PE</b> risk.</span></div>
+<div class="dz-card"><span class="dz-name">Secondary Membranous</span><span class="dz-ids">Think of it when a nephrotic patient has a <b>neoplasm or new drug</b>. <b>Hepatitis B virus (HBV), hepatitis C virus (HCV), syphilis</b>; <b>melanoma, lung and colon cancer</b>; <b>Systemic lupus erythematosus (SLE) (class V)</b>; <b>gold, mercury</b>; <b>penicillamine, captopril, nonsteroidal anti-inflammatory drugs (NSAIDs)</b> (not penicillin). Order hepatitis serologies.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="neph-secondary">
+<h3>Secondary Nephrotic Causes</h3>
+<p class="sub-note">The systemic disease is the clue — find it.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Diabetic Glomerulosclerosis</span><span class="dz-ids">Top secondary cause; diabetes mellitus (DM) ≈ <b>44%</b> of new end-stage renal disease (ESRD). Glycation + oxidative injury → matrix. LM: <b>Kimmelstiel-Wilson nodules</b> (pink, acellular; <b>trichrome blue</b>), diffuse mesangial sclerosis, glomerular basement membrane (GBM)/tubular basement membrane (TBM) thickening, <b>afferent + efferent</b> arteriolar hyalinosis. <b>Microalbuminuria first</b> (albumin-to-creatinine ratio (ACR) 30–300; &gt;300 overt). Hyperfiltration (afferent ↑, efferent ↓) early → <b>Angiotensin-converting enzyme inhibitors (ACEi) and angiotensin receptor blockers (ARB)</b> protect.</span></div>
+<div class="dz-card"><span class="dz-name">Renal Amyloidosis</span><span class="dz-ids">Mimics diabetic nodules but <b>not</b> trichrome-blue → <b>Congo red, apple-green birefringence</b>. <b>Light-chain amyloidosis (AL)</b> (most common in the United States; plasma-cell disease) vs <b>Reactive amyloidosis (AA)</b> (chronic inflammation — rheumatoid arthritis (RA), tuberculosis (TB)). Enlarged <b>waxy</b> kidney. Type by IF/mass spec.</span></div>
+<div class="dz-card"><span class="dz-name">Lupus Nephritis — Class V</span><span class="dz-ids">Membranous pattern: nephrotic, subepithelial deposits, silver spikes. (Full classes in Nephritic bucket.) Anti-double-stranded DNA (anti-dsDNA), anti-Smith, low C3 and complement component 4 (C4).</span></div>
+<div class="dz-card"><span class="dz-name">Membranoproliferative glomerulonephritis (MPGN) (Membranoproliferative)</span><span class="dz-ids">Overlap — <b>nephrotic or nephritic</b>. <b>Subendothelial</b> deposits → lots of inflammation, lobular/"tram-track" proliferation. <b>Low complement</b>. Secondary to HBV/HCV, cryoglobulins. <b>Dense deposit disease</b> = C3 only, dense ribbon in GBM, alternative-pathway dysregulation (C3 nephritic factor).</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="neph-compare">
+<h3>Side-by-Side Decoder</h3>
+<p class="sub-note">Three questions answer most stems: age, steroid response, what's on IF/EM.</p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Child, no blood, steroid-sensitive</span><span class="dz-ids">Minimal change. Normal LM, neg IF, effaced foot processes.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Child, steroid-resistant</span><span class="dz-ids">FSGS (segmental sclerosis, neg IF).</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Adult, "wire loops" / spikes / subepithelial</span><span class="dz-ids">Membranous — look for phospholipase A2 receptor (PLA2R) or a 2° cause.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Diabetic with nodules</span><span class="dz-ids">Trichrome blue = diabetes. Congo red + = amyloid.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Subendothelial + low C3 + "tram-track"</span><span class="dz-ids">MPGN (can be nephritic).</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Deposit location → inflammation</span><span class="dz-ids"><b>Subendothelial = inflammatory</b> (MPGN, lupus III/IV). <b>Subepithelial = quiet</b> (membranous). Post-infectious glomerulonephritis (GN) has both → inflammation.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bucket rst" id="nephritic">
+<div class="bucket-head">
+<span class="tag">Bucket 2</span>
+<h2>Nephritic Syndrome &amp; Rapidly Progressive Glomerulonephritis (RPGN)</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Glomerular <b>inflammation</b> (immune complexes, anti-GBM antibody, or anti-neutrophil cytoplasmic antibody (ANCA)-driven injury) → damaged capillaries leak <b>blood</b>, glomerular filtration rate (GFR) falls, body clamps down (HTN, oliguria) so <b>less protein</b> is lost. RPGN is the far end of the same spectrum with <b>crescents</b>.</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>Hematuria</b> (cola/tea urine; <b>dysmorphic RBCs, RBC casts</b>) + <b>HTN</b> + oliguria/azotemia + edema + proteinuria <b>&lt;3.5 g/24 h</b>. Creatinine climbing over <b>days–weeks</b> = RPGN. <b>IF pattern + complement</b> = your diagnostic decoder: <b>linear</b> = anti-GBM only; <b>granular</b> = immune complex; <b>negative</b> = pauci-immune (ANCA).</div>
+</div>
+<div class="subbucket" id="nephr-decoder">
+<h3>IF / Complement Decoder</h3>
+<p class="sub-note">Do this first: pattern → complement → serology.</p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Linear IgG</span><span class="dz-ids"><b>Anti-GBM</b> (Goodpasture) — the <i>only</i> linear disease. C3 normal.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Granular + LOW C3</span><span class="dz-ids"><b>Post-streptococcal glomerulonephritis (PSGN)</b>, <b>SLE</b>, <b>MPGN</b> (and cryoglobulinemia). Positive antinuclear antibody (ANA) → SLE; recent strep → PSGN.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Granular + NORMAL C3</span><span class="dz-ids"><b>Immunoglobulin A (IgA) nephropathy / Henoch-Schönlein purpura (HSP)</b> (mesangial IgA).</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Negative (pauci-immune)</span><span class="dz-ids"><b>ANCA vasculitis</b> (granulomatosis with polyangiitis (GPA), microscopic polyangiitis (MPA), eosinophilic granulomatosis with polyangiitis (EGPA)); acute interstitial nephritis (AIN) is also IF-negative but tubulointerstitial.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Normal complement list</span><span class="dz-ids">IgA nephropathy (IgAN), Goodpasture, polyarteritis nodosa (PAN), idiopathic RPGN, ANCA disease, AIN.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Low complement list</span><span class="dz-ids">SLE, post-infectious GN, MPGN.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="nephr-immune">
+<h3>Immune-Complex Nephritis (Type III)</h3>
+<p class="sub-note">Complexes (circulating or planted) lodge in glomerular capillaries → complement → neutrophils (NETosis).</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Post-Streptococcal GN</span><span class="dz-ids">Foreign (strep) antigen → <b>not autoimmune</b>. <b>1–3 wk</b> after pharyngitis (<b>~6 wk</b> after skin infection). Cola urine, periorbital edema, HTN. <b>↑antistreptolysin O (ASO), ↑anti-deoxyribonuclease B (anti-DNase B)</b>, <b>low C3</b> (recovers in 8–12 wk). LM: neutrophil-rich hypercellular tufts. EM: <b>subepithelial humps</b>. IF: granular, "starry sky." Kids recover with supportive care.</span></div>
+<div class="dz-card"><span class="dz-name">IgA Nephropathy (Berger)</span><span class="dz-ids">Most common primary GN worldwide. Gross hematuria <b>1–3 days</b> after upper respiratory infection (URI)/gastrointestinal (GI) infection ("synpharyngitic"), recurrent. <b>Galactose-deficient IgA1</b> → anti-IgA IgG → complexes. <b>Normal C3</b>. LM: mesangial proliferation (&gt;3–4 cells/area). IF: <b>mesangial IgA ± C3</b>. Celiac association. Most mild; some → chronic kidney disease (CKD).</span></div>
+<div class="dz-card"><span class="dz-name">IgA Vasculitis (HSP)</span><span class="dz-ids">Systemic IgA: <b>palpable purpura (legs/buttocks), abdominal pain, arthritis/arthralgia</b> + nephritis. IgA in vessels/mesangium. Kids; post-infection.</span></div>
+<div class="dz-card"><span class="dz-name">Lupus Nephritis (International Society of Nephrology/Renal Pathology Society classes)</span><span class="dz-ids">ANA (sensitive), <b>anti-dsDNA, anti-Smith</b> (specific), <b>low C3/C4</b>; American College of Rheumatology criteria: 4 of 11; malar rash spares nasolabial folds. <b>I</b> minimal mesangial · <b>II</b> mesangial proliferative · <b>III</b> focal (&lt;50%) · <b>IV</b> <b>diffuse (&gt;50%)</b> — most common/severe: wire loops, subendothelial deposits, <b>full-house IF</b> (IgG, IgA, immunoglobulin M (IgM), C3, C1q) · <b>V</b> membranous (nephrotic) · <b>VI</b> &gt;90% sclerosed. ≥10% reach ESRD.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="nephr-rpgn">
+<h3>RPGN — Crescentic Glomerulonephritis</h3>
+<p class="sub-note">Creatinine rising over weeks to months with active sediment. <b>Crescents</b> = proliferating parietal epithelial cells + macrophages + <b>fibrin</b> (Jones silver: GBM breaks).</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Anti-GBM / Goodpasture (10–15%)</span><span class="dz-ids">Type II. Ab to <b>α3 chain of type IV collagen</b> (non-collagenous domain, NC1). <b>Linear IgG</b>; C3 normal. Lung + kidney: <b>hemoptysis + RPGN</b> (~50% alveolar hemorrhage); young men (smokers) + older adults. <b>Plasmapheresis</b> + steroids + cyclophosphamide. (Alport = α5, inherited.)</span></div>
+<div class="dz-card"><span class="dz-name">Immune-Complex RPGN (25–30%)</span><span class="dz-ids">Granular IF. PSGN, lupus (IV), IgAN, HSP. Treat the underlying disease.</span></div>
+<div class="dz-card"><span class="dz-name">Pauci-Immune (40–50%)</span><span class="dz-ids"><b>Negative IF</b>; <b>ANCA+ in 80–90%</b>. Capillaritis, necrotizing GN, neutrophil extracellular traps (NETs) + alternative complement. Small-vessel vasculitis (below).</span></div>
+<div class="dz-card"><span class="dz-name">Prognosis</span><span class="dz-ids">&gt;50% of glomeruli <b>normal</b>/focal lesion → &gt;90% recovery at 5 yr. &gt;50% <b>globally sclerosed</b> → &lt;25%. Active crescents are treatable; scar is not.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="nephr-anca">
+<h3>ANCA-Associated Vasculitis</h3>
+<p class="sub-note">Small-vessel, pauci-immune. Know the antibody and the clinical tag.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">GPA (Wegener)</span><span class="dz-ids"><b>c-ANCA / proteinase 3 (PR3)</b>. <b>Upper airway</b> (sinusitis, nasal crusting/saddle nose) + <b>lung nodules/cavities</b> + GN (~80% renal). <b>Necrotizing granulomas</b> — the feature that separates it from MPA.</span></div>
+<div class="dz-card"><span class="dz-name">Microscopic Polyangiitis</span><span class="dz-ids"><b>p-ANCA / myeloperoxidase (MPO)</b>. Renal in ~<b>90%</b>; <b>no granulomas</b>; leukocytoclastic vasculitis, purpura, mononeuritis, pulmonary capillaritis.</span></div>
+<div class="dz-card"><span class="dz-name">EGPA (Churg-Strauss)</span><span class="dz-ids"><b>Asthma + eosinophilia</b> + mononeuritis multiplex; ANCA+ in &lt;50%; renal ~45%.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bucket neo" id="pediatric">
+<div class="bucket-head">
+<span class="tag">Bucket 3</span>
+<h2>Congenital &amp; Pediatric Renal Disease</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Errors of <b>kidney development</b> (bud ↔ metanephric mesenchyme induction, migration, drainage) or <b>inherited tubule/GBM genes</b>. <b>Congenital anomalies of the kidney and urinary tract (CAKUT)</b> = 1–3 per 500 births and <b>40–50% of pediatric CKD</b>.</div>
+<div class="hy-box"><b class="hy-label">High yield</b>Fetal urine → amniotic fluid → lung development: <b>bilateral</b> renal failure = <b>oligohydramnios → pulmonary hypoplasia + Potter facies</b> (needs <i>bilateral</i> disease). Embryology: pronephros → mesonephros → <b>metanephros</b> (final kidney). Know <b>agenesis vs aplasia vs hypoplasia vs dysplasia</b>.</div>
+</div>
+<div class="subbucket" id="ped-dev">
+<h3>Developmental Anomalies</h3>
+<p class="sub-note">Absent, small, abnormal, or misplaced.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Renal Agenesis</span><span class="dz-ids"><b>Unilateral</b> 1:1,000–3,000 (M&gt;F, left&gt;right) — healthy but needs lifelong blood pressure (BP), urinalysis and ultrasound monitoring (solitary kidney hyperfilters). <b>Bilateral</b> 1:7,000–10,000 → <b>Potter sequence</b>, incompatible with life. Aplasia = rudimentary remnant.</span></div>
+<div class="dz-card"><span class="dz-name">Hypoplasia vs Dysplasia</span><span class="dz-ids"><b>Hypoplasia</b> = small but <b>normally organized</b>. <b>Dysplasia</b> = disorganized: primitive ducts with fibromuscular collars, <b>cartilage</b>. ~50% have other urinary anomalies; bilateral → neonatal acidosis, Na wasting, high Cr.</span></div>
+<div class="dz-card"><span class="dz-name">Multicystic Dysplastic Kidney</span><span class="dz-ids">Non-communicating cysts, no functioning parenchyma. <b>Most common congenital solitary kidney</b>; ~60% involute by age 10. Contralateral kidney normal.</span></div>
+<div class="dz-card"><span class="dz-name">Horseshoe &amp; Pelvic Kidney</span><span class="dz-ids"><b>Horseshoe</b> (fused lower poles) — trapped under the <b>inferior mesenteric artery</b>; <b>Turner syndrome</b>, trisomies; urinary tract infection (UTI), stones, obstruction. <b>Pelvic</b> kidney = failed ascent.</span></div>
+<div class="dz-card"><span class="dz-name">Duplicated Collecting System</span><span class="dz-ids">F&gt;M (&lt;1%). Upper-pole ureter inserts ectopically → <b>continuous incontinence in girls</b> + recurrent UTI; lower pole refluxes. Trisomy 18/13 spectrum: renal anomalies common.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="ped-cystic">
+<h3>Cystic &amp; Hereditary Tubular Disease</h3>
+<p class="sub-note">Name the gene, the cyst pattern, and the extra-renal hook.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Autosomal dominant polycystic kidney disease (ADPKD)</span><span class="dz-ids"><b>PKD1</b> (chr 16, ~85%) &gt; PKD2. Adults 30–50; ~5% of ESRD. Kidneys up to 1–3 kg, <b>&gt;50 cysts</b> (cortex + medulla). <b>Berry aneurysm → subarachnoid hemorrhage (SAH)</b>, HTN, hematuria, hepatic cysts, mitral valve prolapse (MVP). 50% inheritance.</span></div>
+<div class="dz-card"><span class="dz-name">Autosomal recessive polycystic kidney disease (ARPKD)</span><span class="dz-ids"><b>PKHD1 / fibrocystin</b>. Neonate: huge echogenic kidneys, <b>radial fusiform collecting-duct cysts</b>, smooth surface, <b>congenital hepatic fibrosis</b>, Potter-like picture, HTN, ESRD in childhood. Siblings affected, parents healthy.</span></div>
+<div class="dz-card"><span class="dz-name">Nephronophthisis</span><span class="dz-ids">Small kidneys with <b>corticomedullary cysts</b>; polyuria/polydipsia (concentrating defect), anemia; <b>most common genetic cause of pediatric ESRD</b>; retinitis pigmentosa associations. Hard to biopsy.</span></div>
+<div class="dz-card"><span class="dz-name">Autosomal dominant tubulointerstitial kidney disease (ADTKD) (MUC1/UMOD/REN)</span><span class="dz-ids">Bland sediment, slowly progressive CKD, <b>gout/hyperuricemia</b>, family history; small kidneys. <b>Medullary sponge kidney</b> = "paintbrush" ducts, stones, normal function (innocuous).</span></div>
+<div class="dz-card"><span class="dz-name">Alport Syndrome</span><span class="dz-ids"><b>X-linked α5 chain of type IV collagen</b>. Hematuria → ESRD (males); <b>sensorineural deafness</b>, <b>anterior lenticonus / cataracts</b>. EM: <b>basket-weave GBM</b>. (Fabry = α-galactosidase A.)</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="ped-obstruct">
+<h3>Obstruction &amp; Reflux</h3>
+<p class="sub-note">Prenatal hydronephrosis: 50–75% transient; 10–30% ureteropelvic junction (UPJ) obstruction or vesicoureteral reflux (VUR).</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">UPJ Obstruction</span><span class="dz-ids">Most common cause of pathologic neonatal hydronephrosis: <b>dilated pelvis/calyces, normal ureter</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Posterior Urethral Valves</span><span class="dz-ids"><b>Males</b>: distended bladder, bilateral hydronephrosis, oligohydramnios, weak stream; <b>dilated posterior urethra on voiding cystourethrogram (VCUG)</b>. Prune belly = absent abdominal wall muscle + cryptorchidism + urinary dilation.</span></div>
+<div class="dz-card"><span class="dz-name">Vesicoureteral Reflux</span><span class="dz-ids">Primary (short intramural ureter) vs secondary. <b>First febrile UTI → renal ultrasound ± VCUG</b>. Recurrent pyelonephritis → <b>scarring (dimercaptosuccinic acid, DMSA, scan) → HTN, CKD</b>. Prophylaxis vs surgery by grade.</span></div>
+<div class="dz-card"><span class="dz-name">Postnatal Work-Up</span><span class="dz-ids">Repeat ultrasound at <b>2–3 days</b> (early oliguria hides dilation). <b>Society for Fetal Urology (SFU) grade 0–4</b>. Antenatal hydronephrosis, febrile UTI in infants → imaging.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="ped-glom">
+<h3>Pediatric Glomerular Disease (Cross-Reference)</h3>
+<p class="sub-note">The classic childhood stems.</p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Nephrotic child</span><span class="dz-ids"><b>Minimal change</b> (steroids) → FSGS if resistant.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Nephritic child after sore throat/skin infection</span><span class="dz-ids"><b>PSGN</b> — low C3, ↑ASO.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Hematuria after URI + normal C3</span><span class="dz-ids"><b>IgA nephropathy / HSP</b> if purpura.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Hematuria + deafness + family history</span><span class="dz-ids"><b>Alport</b>.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bucket aty" id="atypical">
+<div class="bucket-head">
+<span class="tag">Bucket 4</span>
+<h2>Atypical / Other</h2>
+</div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Kidney disease that is <b>not a glomerular nephrotic/nephritic picture</b>: <b>tubulointerstitial</b> injury, plasma-cell disease, obstruction, vascular, chronic scarring, and the tubular/acid-base physiology that goes with them.</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>AIN</b>: new drug + fever/rash/eosinophilia, sterile pyuria, white blood cell (WBC) casts, IF-negative. <b>Myeloma kidney</b>: dipstick-<i>negative</i> protein. <b>CKD</b> = damage or estimated glomerular filtration rate (eGFR) &lt;60 for &gt;3 months; DM + HTN cause ~72% of new ESRD (GN ~8%). End-stage kidney: shrunken (~40 g vs ~150 g), granular — origin often unknowable.</div>
+</div>
+<div class="subbucket" id="aty-tubulo">
+<h3>Tubulointerstitial Disease</h3>
+<p class="sub-note">Rising creatinine <b>without</b> RBC casts.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Acute Interstitial Nephritis</span><span class="dz-ids">Type IV (T-cell; Th1, CD8, interferon-γ, interleukin-2, interleukin-17 and tumor necrosis factor). Drugs: <b>NSAIDs, β-lactams, proton pump inhibitors (PPIs), sulfonamides, diuretics</b>; also infections, sarcoid, SLE. Delayed onset after first exposure. <b>Rash/fever/eosinophilia</b> (minority), <b>sterile pyuria, WBC casts, eosinophiluria</b>. IF negative, <b>C3 normal</b>. Stop the drug ± steroids; chronic → fibrosis.</span></div>
+<div class="dz-card"><span class="dz-name">Light-Chain Cast Nephropathy</span><span class="dz-ids">Most common renal lesion in myeloma. Light chains + <b>Tamm-Horsfall protein</b> plug distal tubules → AKI. Precipitants: dehydration, hypercalcemia, NSAIDs, contrast. Up to 50% impaired renal function, ~10% dialysis.</span></div>
+<div class="dz-card"><span class="dz-name">Multiple Myeloma Clues</span><span class="dz-ids"><b>CRAB</b>: hypercalcemia, renal failure, anemia, bone lesions (<b>punched-out</b> skull). serum protein electrophoresis (SPEP) <b>M-spike</b> → immunofixation (e.g., IgG-κ). Infections from suppressed normal Ig. Dipstick misses light chains → <b>urine protein electrophoresis / sulfosalicylic acid</b>.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-chronic">
+<h3>Chronic Kidney Disease &amp; End-Stage</h3>
+<p class="sub-note"></p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">CKD Stages (eGFR)</span><span class="dz-ids"><b>1</b> &gt;90 · <b>2</b> 60–89 · <b>3</b> 30–59 · <b>4</b> 15–29 · <b>5</b> &lt;15 mL/min/1.73 m². Must persist &gt;3 months.</span></div>
+<div class="dz-card"><span class="dz-name">Causes of New ESRD</span><span class="dz-ids"><b>DM ~44%</b>, <b>HTN ~28%</b>, GN ~8%. Chronic GN is a label for end-stage scarring: both kidneys symmetrically small, granular surface, thin cortex, ± acquired cysts.</span></div>
+<div class="dz-card"><span class="dz-name">Acquired Cystic Disease</span><span class="dz-ids">Long-term dialysis → small kidneys with multiple cysts → <b>renal cell carcinoma risk</b>. (Simple cortical cysts: benign, thin-walled, no renal cell carcinoma (RCC) risk.)</span></div>
+<div class="dz-card"><span class="dz-name">Hydronephrosis</span><span class="dz-ids">Dilated calyces/pelvis with thinned cortex from obstruction — <b>not</b> a cystic disease. Stone, UPJ/posterior urethral valves (PUV), benign prostatic hyperplasia (BPH), tumor.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-vasc">
+<h3>Renal Vascular &amp; Mass</h3>
+<p class="sub-note">Imaging-driven.</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Fibromuscular Dysplasia</span><span class="dz-ids">Young woman, resistant HTN, <b>"string of beads"</b> on computed tomography angiography (CTA).</span></div>
+<div class="dz-card"><span class="dz-name">Renal Infarct</span><span class="dz-ids">Embolus (AF) → <b>wedge-shaped</b> non-enhancing defect, flank pain, hematuria, ↑lactate dehydrogenase (LDH).</span></div>
+<div class="dz-card"><span class="dz-name">Acute Pyelonephritis</span><span class="dz-ids">Fever + flank pain + pyuria/<b>WBC casts</b>; contrast computed tomography (CT) <b>wedge-shaped hypo-enhancement</b> (infection) — infarct has no inflammation.</span></div>
+<div class="dz-card"><span class="dz-name">Solid Renal Mass</span><span class="dz-ids">Enhancing mass on contrast CT/magnetic resonance imaging (MRI) → <b>renal cell carcinoma</b> until proven otherwise; painless hematuria in older adults → CT urography + cystoscopy.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="aty-tubule">
+<h3>Tubular &amp; Acid-Base Pearls</h3>
+<p class="sub-note"></p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Diuretic Sites</span><span class="dz-ids"><b>Loop</b> (furosemide) — Na-K-2Cl cotransporter (NKCC2), thick ascending limb (dissipates the medullary gradient). <b>Thiazide</b> — Na-Cl cotransporter (NCC), distal convoluted tubule (DCT) (↓Ca excretion). <b>Amiloride</b> — epithelial sodium channel (ENaC); <b>spironolactone</b> — aldosterone receptor (both K-sparing). <b>Acetazolamide</b> — carbonic anhydrase (proximal).</span></div>
+<div class="dz-card"><span class="dz-name">Anion Gap</span><span class="dz-ids">Anion gap (AG) = Na − (Cl + HCO3); normal ≈ 8–12. <b>High AG</b> (MUDPILES): methanol, uremia, diabetic ketoacidosis (DKA), propylene glycol, isoniazid/iron, lactate, ethylene glycol, salicylates. <b>Normal AG</b>: diarrhea, renal tubular acidosis (RTA), saline loading. Toxic alcohols → osmolar gap.</span></div>
+<div class="dz-card"><span class="dz-name">Renal Tubular Acidosis</span><span class="dz-ids"><b>Type 1</b> (distal; ↓H+ secretion): urine pH &gt;5.5, ↓K, stones. <b>Type 2</b> (proximal; HCO3 wasting, Fanconi). <b>Type 4</b> (hypoaldosteronism): ↑K. All normal-gap.</span></div>
+<div class="dz-card"><span class="dz-name">Potassium Shifts</span><span class="dz-ids">Insulin deficiency, hyperosmolarity, acidemia → K+ out of cells. β-agonists, insulin → K+ in. Acidemia ≈ ↑K; alkalemia ≈ ↓K.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="pearl"><span class="pearl-label">Cross-bucket reminders</span>
+<b>Lupus</b> lives in both nephrotic (class V) and nephritic (III/IV). <b>MPGN</b> can be either. <b>IgAN</b> is the common thread in kids and young adults (hematuria after infection). <b>Diabetes</b> = nephrotic + the top cause of ESRD. <b>Subendothelial deposits = inflammation (nephritic); subepithelial = quiet (nephrotic).</b> Linear IF = anti-GBM only.</div>
+
+<div class="subbucket" id="reference-ua">
+<h3>Urinalysis &amp; Sediment Quick-Reference</h3>
+<p class="sub-note"></p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">RBC casts / dysmorphic RBCs / acanthocytes</span><span class="dz-ids"><b>Glomerular bleeding</b> = nephritic (blood leaks into Bowman space and is molded in the tubule). A bladder/kidney tumor does <b>not</b> make RBC casts.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">WBC casts</span><span class="dz-ids"><b>Pyelonephritis</b> or <b>AIN</b> (tubulointerstitial). Eosinophiluria + sterile pyuria → AIN.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Fatty casts / oval fat bodies / Maltese crosses</span><span class="dz-ids"><b>Nephrotic</b> lipiduria.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Muddy-brown granular casts</span><span class="dz-ids"><b>Acute tubular necrosis (ATN)</b>. <b>Waxy</b> casts = advanced CKD. <b>Hyaline</b> casts = concentrated/prerenal, nonspecific.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Dipstick pitfalls</span><span class="dz-ids">Detects albumin (&gt;30 mg/dL) — <b>misses light chains</b> (use urine protein electrophoresis (UPEP)/sulfosalicylic acid). Ketone pad reads <b>acetoacetate</b>, not β-hydroxybutyrate. <b>Nitrite</b> negative with Enterococcus. Hematuria dipstick + no RBCs on microscopy → myoglobin/hemoglobin.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Quantifying protein</span><span class="dz-ids">Spot <b>ACR</b> (30–300 micro; &gt;300 macro) / <b>Protein-to-creatinine ratio (PCR)</b>; 24-h urine 3.5 g = nephrotic. Heavier dipstick protein → more likely glomerular.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Urine collection</span><span class="dz-ids">Infants: <b>catheter or suprapubic</b>, never a bag/diaper sample. Adults: clean-catch midstream; heavy squamous cells = contaminated.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Concentration / pH</span><span class="dz-ids">Fixed isosthenuria → tubular damage/CKD. <b>Alkaline urine + normal-gap acidosis</b> → distal RTA or urease (Proteus) infection.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="reference-labs">
+<h3>Serology &amp; Lab Quick-Reference</h3>
+<p class="sub-note"></p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Serologies</span><span class="dz-ids"><b>Anti-GBM</b> → Goodpasture. <b>c-ANCA/PR3</b> → GPA. <b>p-ANCA/MPO</b> → MPA. <b>ANA, anti-dsDNA, anti-Smith</b> → SLE. <b>Anti-PLA2R</b> → membranous. <b>suPAR</b> → FSGS. <b>ASO, anti-deoxyribonuclease B (anti-DNase B)</b> → PSGN. <b>SPEP/immunofixation</b> → myeloma/AL.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Complement</span><span class="dz-ids"><b>Low C3</b>: PSGN, SLE (also low C4), MPGN. <b>Normal</b>: IgAN, Goodpasture, ANCA, AIN, idiopathic RPGN.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Creatinine / eGFR</span><span class="dz-ids">Low muscle mass (cachexia) → "normal" Cr hides low GFR; high muscle mass → ↑Cr without ↓GFR. eGFR/CKD stage best from repeat values.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Blood urea nitrogen (BUN):Cr</span><span class="dz-ids">&gt;20:1 prerenal, GI bleed (digested blood raises urea), high protein. Low urea with liver failure.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Nephrotic panel</span><span class="dz-ids">Albumin &lt;3.5 g/dL, ↑cholesterol/triglycerides, proteinuria &gt;3.5 g. Hepatitis B/C, HIV, ANA, glucose/hemoglobin A1c when 2° causes suspected.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">When to biopsy</span><span class="dz-ids">If it will change management, disease is severe, treatment-resistant or <b>steroid-resistant</b>. Not in a typical steroid-responsive child.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="reference-img">
+<h3>Imaging Quick-Reference</h3>
+<p class="sub-note"></p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">First-line choices</span><span class="dz-ids"><b>Stone</b>: non-contrast CT (ultrasound in pregnancy/children). <b>Hematuria (upper tract)</b>: CT urography ± cystoscopy. <b>Solid mass</b>: contrast CT/MRI. <b>Hydronephrosis/obstruction</b>: ultrasound. <b>Reflux/PUV</b>: VCUG. <b>Scarring/split function</b>: DMSA / renal scintigraphy.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Pattern recognition</span><span class="dz-ids"><b>ADPKD</b>: huge bilateral kidneys, innumerable cysts. <b>ARPKD</b>: large echogenic kidneys. <b>CKD</b>: small echogenic kidneys. <b>Hydronephrosis</b>: dilated calyces/pelvis. <b>Pyelonephritis</b>: wedge hypo-enhancement. <b>Infarct</b>: wedge non-enhancing. <b>Fibromuscular dysplasia (FMD)</b>: string of beads. <b>Horseshoe</b>: fused lower poles.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Contrast safety</span><span class="dz-ids">Check renal function before iodinated contrast — contrast can worsen kidney injury. CT phases: arterial ~15–25 s, nephrographic ~70–100 s, excretory/delayed ≥ several minutes.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="exam-reference">
+<h3>Physical Exam Quick-Reference</h3>
+<p class="sub-note">Bedside findings tied back to the diseases above.</p>
+<div class="dz-grid">
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Edema</span><span class="dz-ids"><b>Periorbital/facial</b> (worse in the morning) and pitting leg edema, ascites → nephrotic (loose eyelid tissue fills first); also seen in PSGN. Different from heart failure (legs, jugular venous distension (JVD), S3).</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Blood pressure</span><span class="dz-ids"><b>HTN</b> → nephritic, FSGS, ADPKD, ARPKD, FMD, reflux scarring. Normal BP favors minimal change.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Skin</span><span class="dz-ids"><b>Malar rash</b> (spares nasolabial folds) → SLE. <b>Palpable purpura</b> on legs/buttocks → HSP/IgA vasculitis, MPA. <b>Rash + fever</b> after new drug → AIN. Atopic dermatitis / impetigo → PSGN history.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Lungs / ear, nose and throat (ENT)</span><span class="dz-ids"><b>Hemoptysis</b> → Goodpasture, GPA. <b>Sinusitis, saddle nose, nasal crusting</b> → GPA. <b>Asthma</b> → EGPA.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Abdomen / flanks</span><span class="dz-ids"><b>Bilateral flank masses</b> → ADPKD, ARPKD. Distended bladder (newborn) → PUV. Absent abdominal wall muscle → prune belly. <b>Bruit</b> over renal artery → renovascular HTN.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Eyes / ears</span><span class="dz-ids"><b>Sensorineural deafness, lenticonus/cataract</b> → Alport. Retinitis pigmentosa → nephronophthisis. Hypertensive retinopathy in CKD.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Newborn</span><span class="dz-ids"><b>Potter facies</b> (flat nose, low-set ears), limb deformities, respiratory distress → bilateral agenesis/ARPKD. Single umbilical artery → renal anomaly screen. Turner stigmata → horseshoe kidney.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Uremia / CKD</span><span class="dz-ids">Pallor, uremic frost, <b>asterixis</b>, pericardial friction rub, Kussmaul breathing (acidosis), pruritus.</span></div>
+<div class="dz-card" style="background:var(--sage-light);"><span class="dz-name">Urine appearance</span><span class="dz-ids">Cola/tea → glomerular (PSGN, IgAN, Goodpasture). <b>Frothy</b> → heavy proteinuria. Bone pain/back pain + AKI → myeloma.</span></div>
+</div>
+</div>
+
+<div class="subbucket" id="master" style="margin-top:20px;"><h3 style="color:var(--forest);">High-Yield Master Table</h3><div class="tw" style="overflow-x:auto;"><table class="master-table"><tr><th>Disease</th><th>Bucket</th><th>Key hook</th><th>LM</th><th>IF</th><th>EM</th></tr><tr><td>Minimal change</td><td>Nephrotic</td><td>Child; steroid-sensitive</td><td>Normal</td><td>Neg</td><td>Foot-process effacement</td></tr><tr><td>FSGS</td><td>Nephrotic</td><td>Steroid-resistant; HIV/heroin collapsing; suPAR</td><td>Segmental scar</td><td>Neg</td><td>No complexes</td></tr><tr><td>Membranous</td><td>Nephrotic</td><td>Anti-PLA2R; HBV/HCV; captopril</td><td>Wire loops; silver spikes</td><td>Granular IgG/C3</td><td>Subepithelial</td></tr><tr><td>Diabetic</td><td>Nephrotic</td><td>Kimmelstiel-Wilson; trichrome +</td><td>Nodular sclerosis</td><td>—</td><td>—</td></tr><tr><td>Amyloid</td><td>Nephrotic</td><td>Congo red apple-green</td><td>Waxy kidney</td><td>—</td><td>Fibrils</td></tr><tr><td>MPGN</td><td>Both</td><td>Low C3; subendothelial</td><td>Lobular, tram-track</td><td>Granular</td><td>Subendothelial</td></tr><tr><td>PSGN</td><td>Nephritic</td><td>↑ASO, low C3, 1–3 wk after strep</td><td>Neutrophil-rich</td><td>Granular</td><td>Subepithelial humps</td></tr><tr><td>IgA nephropathy</td><td>Nephritic</td><td>1–3 d after URI; normal C3</td><td>Mesangial proliferation</td><td>Mesangial IgA</td><td>Mesangial deposit</td></tr><tr><td>Lupus IV</td><td>Nephritic</td><td>ANA/double-stranded DNA (dsDNA)/Smith; low C3/C4</td><td>Wire loops</td><td>Full-house</td><td>Subendothelial</td></tr><tr><td>Goodpasture</td><td>RPGN</td><td>Hemoptysis; α3 collagen IV</td><td>Crescents</td><td>LINEAR IgG</td><td>No complexes</td></tr><tr><td>GPA / MPA / EGPA</td><td>RPGN</td><td>c-ANCA PR3 / p-ANCA MPO / asthma</td><td>Crescents ± granuloma</td><td>Negative</td><td>—</td></tr><tr><td>Alport</td><td>Pediatric</td><td>X-linked α5; deafness, lenticonus</td><td>—</td><td>—</td><td>Basket-weave GBM</td></tr><tr><td>ADPKD / ARPKD</td><td>Pediatric</td><td>PKD1 (berry aneurysm) / PKHD1 (hepatic fibrosis)</td><td>Cysts</td><td>—</td><td>—</td></tr><tr><td>AIN</td><td>Atypical</td><td>New drug; sterile pyuria; WBC casts</td><td>Interstitial infiltrate</td><td>Negative</td><td>—</td></tr><tr><td>Cast nephropathy</td><td>Atypical</td><td>Myeloma; dipstick-neg protein</td><td>Casts + Tamm-Horsfall</td><td>—</td><td>—</td></tr></table></div></div>
+
+</div>
+<footer>Bucketed renal pathology cheat sheet — quick-reference organizational tool. See the full Renal II study guides for complete detail.</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('sidenavToggle');
+  var panel = document.getElementById('sidenavPanel');
+  if(!btn || !panel) return;
+  btn.addEventListener('click', function(e){ e.stopPropagation(); panel.classList.toggle('open'); });
+  panel.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ panel.classList.remove('open'); } });
+  document.addEventListener('click', function(e){ if(!panel.contains(e.target) && e.target !== btn){ panel.classList.remove('open'); } });
+})();
+</script>
+</body>
+</html>
