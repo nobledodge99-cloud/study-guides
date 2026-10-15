@@ -446,6 +446,11 @@ font-family:var(--mono);
 font-size:0.85rem;
 text-align:center;
 }
+
+#search-scope{display:flex;flex-wrap:wrap;gap:6px;padding:8px 16px;border-bottom:1px solid var(--line);}
+.scope-chip{font-family:var(--mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.03em;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;}
+.scope-chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.result-course{font-family:var(--mono);font-size:0.66rem;color:#8a8578;margin-bottom:2px;}
 </style>
 </head>
 <body>
@@ -477,7 +482,7 @@ text-align:center;
 <div class="announcement-block">
 <span class="announcement-dot"></span>
 <div class="announcement-text">
-<strong>Update:</strong>New resources in Noble's Clinical Slop (COMLEX 1 Prep/Organization - pretty sick stuff), Competency Exam :( (not sick), and Renal II - Exam 1.  
+<strong>Update:</strong>The Quiz Engine has been updated to be able to hold all the JSON banks for continuous review/progress updates. Additionally, an "Image Atlas" has been added to the Clinical Slop folder where you can locate whatever image you would like that we've covered... more updates to follow. 
 </div>
 </div>
 
@@ -498,7 +503,6 @@ text-align:center;
 <span class="chevron">&#9662;</span>
 </button>
 <ul class="guide-dropdown">
-<li><a href="clinical slop/comlex-level1-checklist.html">COMLEX Level 1 Blueprint Checklist and Gap Finder</a></li>
 <li><a href="clinical slop/med-terms.html">Common Medical Terminology We ~Should~ Know</a></li>
 <li><a href="clinical slop/heart-sounds-cheat-sheet.html">Heart Sounds, Murmurs, and Gallops Cheat Sheet</a></li>
 <li><a href="clinical slop/labs.html">Noble's Little Something Extra - Quick Labs Review</a></li> 
@@ -508,6 +512,7 @@ text-align:center;
 <li><a href="clinical slop/chief-complaints.html">Top 10 Most Common Chief Complaints</a></li>
 <li><a href="clinical slop/image-atlas.html">Image Atlas — Name the Finding</a></li>
 <li><a href="clinical slop/master-tables.html">Master Tables — Drugs and Diseases (Filterable)</a></li>
+<li><a href="clinical slop/comlex-level1-checklist.html">COMLEX Level 1 Blueprint Checklist and Gap Finder</a></li>
 </ul>
 </li>
 <li class="course-item">
@@ -663,7 +668,7 @@ text-align:center;
 <li><a href="cvresp2/cvresp2-blood-vessel-pathology.html">Pathology of Blood Vessels I & II</a></li>
 <li><a href="cvresp2/cvresp2-antihyperlipidemics.html">Antihyperlipidemics Study Guide</a></li>
 <li><a href="cvresp2/cvresp2-ekg.html">EKG Interpretation Study Guide</a></li>
-<li><a href="cvresp2/cvresp2-ekg-extended">Noble and Claude's EKG Diagnostic Guide</a></li>
+<li><a href="cvresp2/cvresp2-ekg-extended.html">Noble and Claude's EKG Diagnostic Guide</a></li>
 <li><a href="cvresp2/cvresp2-heart-path.html">Heart Pathology Parts 1-4 Study Guide</a></li> 
 <li><a href="cvresp2/cvresp2-asd-vsd-tof.html">ASD, VSD, Tetralogy of Fallot, and Other Congenital Heart Disease Study Guide</a></li>
 <li><a href="cvresp2/cvresp2-valvular.html">Aortic, Mitral & Other Valve Disease Study Guide</a></li>
@@ -772,6 +777,7 @@ text-align:center;
 <input id="search-input" type="text" placeholder="Search every guide on this site&hellip;" autocomplete="off">
 <button id="search-close">Esc</button>
 </div>
+<div id="search-scope"></div>
 <div id="search-status"></div>
 <div id="search-results"></div>
 </div>
@@ -856,212 +862,212 @@ toggle.setAttribute('aria-expanded', String(willOpen));
 });
 
 /* =========================================================
-   Cross-guide search
-   - Discovers every guide automatically from the <a href>
-     links already inside .guide-dropdown / .sub-dropdown /
-     .subsub-dropdown.
-   - Add a new guide the normal way (a new <li><a>) and it's
-     searchable next time the index runs — nothing else to
-     configure here.
+   Cross-guide search (v2)
+   - Discovers every guide from the <a href> links in the
+     course dropdowns, and remembers which course/exam each
+     link sits under so results can be filtered by course.
+   - Indexes each section (or the whole page if it has no
+     sections) with its full text.
+   - Multi-word searches require ALL words; if nothing matches
+     them all, partial matches are shown and labelled.
    ========================================================= */
 (function(){
   const overlay = document.getElementById('search-overlay');
-  const panel = document.getElementById('search-panel');
   const input = document.getElementById('search-input');
   const statusEl = document.getElementById('search-status');
   const resultsEl = document.getElementById('search-results');
+  const scopeEl = document.getElementById('search-scope');
   const openBtn = document.getElementById('search-btn');
   const closeBtn = document.getElementById('search-close');
 
-  let entries = null;        // built index, once ready
-  let indexPromise = null;   // in-flight build
-  let activeIndex = -1;
+  let entries = null, indexPromise = null, activeIndex = -1, scope = 'All';
+  let failed = [];
+
+  function labelOf(el){ const s = el && el.querySelector(':scope > span'); return s ? s.textContent.trim() : ''; }
 
   function discoverLinks(){
     const anchors = Array.from(document.querySelectorAll('.guide-dropdown a[href], .sub-dropdown a[href], .subsub-dropdown a[href]'));
-    const seen = new Set();
-    const links = [];
+    const seen = new Set(), links = [];
     anchors.forEach(a => {
       const href = a.getAttribute('href');
       if (!href || href.startsWith('http') || href.startsWith('#')) return;
       const bareHref = href.split('#')[0];
       if (seen.has(bareHref)) return;
       seen.add(bareHref);
-      links.push({ href: bareHref, label: a.textContent.trim() });
+      const item = a.closest('.course-item');
+      const course = labelOf(item && item.querySelector(':scope > .course-toggle')) || 'Other';
+      const subs = [];
+      const sub = a.closest('.subcourse-item'); if (sub) subs.push(labelOf(sub.querySelector(':scope > .subcourse-toggle')));
+      const subsub = a.closest('.subsubcourse-item'); if (subsub) subs.push(labelOf(subsub.querySelector(':scope > .subsubcourse-toggle')));
+      links.push({ href: bareHref, label: a.textContent.trim(), course, path: [course].concat(subs.filter(Boolean)).join(' › ') });
     });
     return links;
   }
 
-  function stripText(el){
-    return (el.textContent || '').replace(/\s+/g, ' ').trim();
-  }
+  function stripText(el){ return (el.textContent || '').replace(/\s+/g, ' ').trim(); }
 
   async function buildIndex(){
     const links = discoverLinks();
-    const cacheKey = 'omsii-search-index-v1:' + links.map(l => l.href).sort().join(',');
+    const cacheKey = 'omsii-search-index-v2:' + links.map(l => l.href).sort().join(',');
     try {
       const cached = sessionStorage.getItem(cacheKey);
-      if (cached) return JSON.parse(cached);
+      if (cached) { const c = JSON.parse(cached); failed = c.failed || []; return c.built; }
     } catch(e) {}
 
-    statusEl.textContent = 'Indexing ' + links.length + ' guides for the first time — this may take a moment&hellip;'.replace('&hellip;','...');
+    statusEl.textContent = 'Indexing ' + links.length + ' guides for the first time, this may take a moment...';
     const built = [];
+    failed = [];
 
     await Promise.all(links.map(async (link) => {
       try {
-        const res = await fetch(link.href);
-        if (!res.ok) return;
+        const res = await fetch(encodeURI(decodeURI(link.href)));
+        if (!res.ok) { failed.push(link.label); return; }
         const html = await res.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
+        doc.querySelectorAll('script,style,nav').forEach(n => n.remove());
         const pageTitle = (doc.querySelector('title')?.textContent || link.label).trim();
+        const base = { page: link.href, pageTitle, course: link.course, path: link.path };
         const sections = doc.querySelectorAll('section[id], article[id], div[id].topic, [id].part');
 
         if (sections.length === 0) {
-          const text = stripText(doc.body || doc.documentElement).slice(0, 6000);
-          if (text) built.push({ page: link.href, pageTitle, anchor: '', heading: pageTitle, text });
+          const text = stripText(doc.body || doc.documentElement).slice(0, 40000);
+          if (text) built.push(Object.assign({ anchor: '', heading: pageTitle, text }, base));
         } else {
           sections.forEach(sec => {
-            const id = sec.id;
-            if (!id) return;
+            const id = sec.id; if (!id) return;
             const headingEl = sec.querySelector('h1,h2,h3,h4') || sec;
-            let heading = stripText(headingEl).replace(/^[0-9]+\s*[\.\u00b7]?\s*/, '');
+            let heading = stripText(headingEl).replace(/^[0-9]+\s*[\.·]?\s*/, '').slice(0, 160);
             if (!heading) heading = pageTitle;
-            const text = stripText(sec).slice(0, 3000);
-            if (text.length > 15) built.push({ page: link.href, pageTitle, anchor: id, heading, text });
+            const text = stripText(sec).slice(0, 12000);
+            if (text.length > 15) built.push(Object.assign({ anchor: id, heading, text }, base));
           });
         }
-      } catch(e) {
-        // same-origin fetch failed (e.g. file not deployed yet) — just skip it
-      }
+      } catch(e) { failed.push(link.label); }
     }));
 
-    try { sessionStorage.setItem(cacheKey, JSON.stringify(built)); } catch(e) {}
+    try { sessionStorage.setItem(cacheKey, JSON.stringify({ built, failed })); } catch(e) {}
     return built;
   }
 
   function ensureIndex(){
     if (!indexPromise) {
       indexPromise = buildIndex().then(built => {
-        entries = built;
-        statusEl.textContent = entries.length
-          ? ('Searching ' + new Set(entries.map(e => e.page)).size + ' guides.')
-          : 'No guides found to search yet.';
-        return built;
+        entries = built.map(e => Object.assign(e, { lh: e.heading.toLowerCase(), lt: e.pageTitle.toLowerCase(), lc: e.path.toLowerCase(), lx: e.text.toLowerCase() }));
+        const pages = new Set(entries.map(e => e.page)).size;
+        statusEl.textContent = entries.length ? ('Searching ' + pages + ' guides.' + (failed.length ? ' ' + failed.length + ' could not be loaded: ' + failed.slice(0,3).join(', ') + (failed.length > 3 ? '...' : '') : '')) : 'No guides found to search yet.';
+        buildScopeChips();
+        return entries;
       });
     }
     return indexPromise;
   }
 
-  function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function buildScopeChips(){
+    const courses = ['All'].concat(Array.from(new Set(entries.map(e => e.course))));
+    scopeEl.innerHTML = '';
+    courses.forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'scope-chip' + (c === scope ? ' active' : '');
+      b.textContent = c;
+      b.addEventListener('click', () => { scope = c; buildScopeChips(); runSearch(); input.focus(); });
+      scopeEl.appendChild(b);
+    });
+  }
 
-  function scoreEntry(entry, terms){
-    const heading = entry.heading.toLowerCase();
-    const pageTitle = entry.pageTitle.toLowerCase();
-    const text = entry.text.toLowerCase();
-    let score = 0;
-    for (const term of terms) {
-      if (!term) continue;
-      if (heading.startsWith(term)) score += 12;
-      else if (heading.includes(term)) score += 9;
-      if (pageTitle.includes(term)) score += 5;
-      if (text.includes(term)) score += 2;
+  function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // a term matches as written, or without a trailing "s" (casts -> cast)
+  function variants(term){ const v = [term]; if (term.length > 3 && term.endsWith('s')) v.push(term.slice(0, -1)); return v; }
+  function countIn(hay, term){ let n = 0, i = 0; while ((i = hay.indexOf(term, i)) !== -1) { n++; i += term.length; if (n >= 8) break; } return n; }
+
+  function scoreTerm(e, term){
+    let best = 0;
+    for (const t of variants(term)) {
+      let sc = 0;
+      if (e.lh.startsWith(t)) sc += 12; else if (e.lh.includes(t)) sc += 9;
+      if (e.lt.includes(t)) sc += 5;
+      if (e.lc.includes(t)) sc += 3;
+      const n = countIn(e.lx, t); sc += Math.min(n, 6) * 2;
+      best = Math.max(best, sc);
     }
-    return score;
+    return best;
+  }
+
+  function search(terms){
+    const pool = entries.filter(e => scope === 'All' || e.course === scope);
+    const scoredAll = pool.map(e => { const per = terms.map(t => scoreTerm(e, t)); return { e, per, s: per.reduce((a,b)=>a+b,0) }; });
+    let hits = scoredAll.filter(x => x.per.every(p => p > 0));
+    let partial = false;
+    if (!hits.length && terms.length > 1) { hits = scoredAll.filter(x => x.s > 0); partial = true; }
+    hits.sort((a, b) => b.s - a.s);
+    // at most 3 sections per guide so one guide cannot flood the list
+    const perPage = {}, out = [];
+    for (const h of hits) { perPage[h.e.page] = (perPage[h.e.page] || 0) + 1; if (perPage[h.e.page] <= 3) out.push(h.e); if (out.length >= 40) break; }
+    return { out, partial, total: hits.length };
   }
 
   function snippetFor(entry, terms){
-    const lowerText = entry.text.toLowerCase();
-    let idx = -1;
-    for (const term of terms) {
-      if (!term) continue;
-      const found = lowerText.indexOf(term);
-      if (found !== -1 && (idx === -1 || found < idx)) idx = found;
-    }
+    const lower = entry.lx; let idx = -1;
+    const all = terms.flatMap(variants);
+    for (const t of all) { const f = lower.indexOf(t); if (f !== -1 && (idx === -1 || f < idx)) idx = f; }
     if (idx === -1) idx = 0;
-    const start = Math.max(0, idx - 60);
-    const end = Math.min(entry.text.length, idx + 140);
-    let snippet = (start > 0 ? '…' : '') + entry.text.slice(start, end) + (end < entry.text.length ? '…' : '');
-    terms.filter(Boolean).forEach(term => {
-      const re = new RegExp('(' + escapeRegex(term) + ')', 'ig');
-      snippet = snippet.replace(re, '<mark>$1</mark>');
-    });
-    return snippet;
+    const start = Math.max(0, idx - 60), end = Math.min(entry.text.length, idx + 140);
+    let snip = escapeHtml((start > 0 ? '…' : '') + entry.text.slice(start, end) + (end < entry.text.length ? '…' : ''));
+    all.forEach(t => { snip = snip.replace(new RegExp('(' + escapeRegex(escapeHtml(t)) + ')', 'ig'), '<mark>$1</mark>'); });
+    return snip;
   }
 
-  function renderResults(list, terms){
-    resultsEl.innerHTML = '';
-    activeIndex = -1;
-    if (!list.length) {
-      resultsEl.innerHTML = '<div class="search-empty">No matches yet — try a different term.</div>';
-      return;
-    }
-    list.slice(0, 25).forEach((entry) => {
+  function renderResults(res, terms){
+    resultsEl.innerHTML = ''; activeIndex = -1;
+    if (!res.out.length) { resultsEl.innerHTML = '<div class="search-empty">No matches' + (scope !== 'All' ? ' in ' + escapeHtml(scope) : '') + '. Try fewer or different words' + (scope !== 'All' ? ', or switch to All' : '') + '.</div>'; return; }
+    if (res.partial) { const n = document.createElement('div'); n.className = 'search-empty'; n.style.padding = '10px 16px'; n.textContent = 'No section has all of those words. Showing partial matches.'; resultsEl.appendChild(n); }
+    res.out.forEach(entry => {
       const a = document.createElement('a');
       a.className = 'result-item';
       a.href = entry.anchor ? (entry.page + '#' + entry.anchor) : entry.page;
-      a.innerHTML =
-        '<div class="result-page">' + entry.pageTitle + '</div>' +
-        '<div class="result-heading">' + entry.heading + '</div>' +
+      a.innerHTML = '<div class="result-course">' + escapeHtml(entry.path) + '</div>' +
+        '<div class="result-page">' + escapeHtml(entry.pageTitle) + '</div>' +
+        '<div class="result-heading">' + escapeHtml(entry.heading) + '</div>' +
         '<div class="result-snippet">' + snippetFor(entry, terms) + '</div>';
       resultsEl.appendChild(a);
     });
   }
 
   let debounceTimer = null;
-  input.addEventListener('input', () => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(runSearch, 120);
-  });
+  input.addEventListener('input', () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runSearch, 120); });
 
   function runSearch(){
     const q = input.value.trim().toLowerCase();
     if (!entries) return;
     if (!q) { resultsEl.innerHTML = ''; return; }
     const terms = q.split(/\s+/).slice(0, 6);
-    const scored = entries
-      .map(e => ({ e, s: scoreEntry(e, terms) }))
-      .filter(x => x.s > 0)
-      .sort((a, b) => b.s - a.s)
-      .map(x => x.e);
-    renderResults(scored, terms);
+    renderResults(search(terms), terms);
   }
 
   function openSearch(){
     overlay.classList.add('open');
-    input.value = '';
-    resultsEl.innerHTML = '';
+    input.value = ''; resultsEl.innerHTML = '';
     statusEl.textContent = 'Loading guide index…';
     input.focus();
     ensureIndex().then(() => { if (input.value) runSearch(); });
   }
-
-  function closeSearch(){
-    overlay.classList.remove('open');
-  }
+  function closeSearch(){ overlay.classList.remove('open'); }
 
   openBtn.addEventListener('click', openSearch);
   closeBtn.addEventListener('click', closeSearch);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSearch(); });
 
   document.addEventListener('keydown', (e) => {
-    const isFindShortcut = (e.key === 'f' || e.key === 'F') && (e.ctrlKey || e.metaKey);
-    if (isFindShortcut) {
-      e.preventDefault();
-      overlay.classList.contains('open') ? input.focus() : openSearch();
-      return;
-    }
-    if (e.key === 'Escape' && overlay.classList.contains('open')) {
-      closeSearch();
-      return;
-    }
+    const isFind = (e.key === 'f' || e.key === 'F') && (e.ctrlKey || e.metaKey);
+    if (isFind) { e.preventDefault(); overlay.classList.contains('open') ? input.focus() : openSearch(); return; }
+    if (e.key === 'Escape' && overlay.classList.contains('open')) { closeSearch(); return; }
     if (overlay.classList.contains('open') && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
       const items = Array.from(resultsEl.querySelectorAll('.result-item'));
       if (!items.length) return;
       e.preventDefault();
       items[activeIndex]?.classList.remove('active');
-      activeIndex = e.key === 'ArrowDown'
-        ? Math.min(activeIndex + 1, items.length - 1)
-        : Math.max(activeIndex - 1, 0);
+      activeIndex = e.key === 'ArrowDown' ? Math.min(activeIndex + 1, items.length - 1) : Math.max(activeIndex - 1, 0);
       items[activeIndex].classList.add('active');
       items[activeIndex].scrollIntoView({ block: 'nearest' });
     }
