@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renal II Exam 1 Cheat Sheet: Structure to Disease</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#faf6ee;--card:#fffdf8;--fd:#1f3d2c;--f:#2f5540;--sage:#7c9885;--sl:#e8efe6;--b:#d9d0bd;--ac:#b5602f;--t:#2b2620;--ts:#6b6357;--red:#a8352d;--gold:#faf1d9;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Lora',serif;background:var(--cream);color:var(--t);line-height:1.5}
+.back-btn{position:absolute;top:18px;left:18px;z-index:70;background:var(--card);border:1px solid var(--b);color:var(--fd);font-family:'IBM Plex Mono',monospace;font-size:.78rem;text-decoration:none;padding:7px 12px;border-radius:8px}
+.back-btn:hover{background:var(--sl)}
+.header{background:var(--fd);color:var(--cream);padding:58px 24px 24px;text-align:center}
+.header h1{margin:0 0 8px;font-size:1.8rem}
+.header p{margin:0 auto;max-width:800px;color:var(--sl);font-family:'IBM Plex Mono',monospace;font-size:.78rem}
+.tabs{display:flex;justify-content:center;gap:2px;background:var(--f);flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.tab-btn{font-family:'IBM Plex Mono',monospace;font-size:.74rem;text-transform:uppercase;background:none;border:none;color:var(--sl);padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent}
+.tab-btn.active{color:#fff;border-bottom-color:var(--ac)}
+.panel{display:none}.panel.active{display:block}
+.wrap{max-width:1500px;margin:0 auto;padding:18px 16px 80px}
+.toolbar{background:var(--cream);padding:6px 0 10px;border-bottom:1px solid var(--b)}
+input[type=search]{width:100%;padding:11px 15px;font:1rem 'Lora',serif;border:1px solid var(--b);border-radius:10px;background:var(--card)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;align-items:center}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;background:var(--card);border:1px solid var(--b);color:var(--fd);padding:5px 11px;border-radius:999px;cursor:pointer}
+.chip.active{background:var(--f);color:var(--cream);border-color:var(--f)}
+.lab{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--ts);text-transform:uppercase}
+.count{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--ts);margin:10px 2px}
+h2{font-size:1.25rem;color:var(--fd);margin:22px 0 6px}
+h2:first-child{margin-top:4px}
+.sub{color:var(--ts);font-size:.88rem;margin:0 0 10px}
+table{border-collapse:collapse;width:100%;table-layout:fixed;background:var(--card);font-size:.84rem;margin-bottom:6px}
+th{position:sticky;top:41px;z-index:5;box-shadow:0 -40px 0 var(--cream);background:var(--f);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;text-align:left;padding:9px 10px}
+td{border-bottom:1px solid var(--b);padding:9px 10px;vertical-align:top;overflow-wrap:anywhere}
+tr:nth-child(even) td{background:#fbf8f0}
+td.n{font-weight:700;color:var(--fd)}
+td.n small{display:block;font-weight:400;font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--ts);text-transform:uppercase;margin-top:3px}
+b.k{color:var(--red)}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;background:var(--sl);border:1px solid var(--sage);border-radius:5px;padding:1px 6px;margin:2px 3px 0 0;color:var(--fd)}
+.callout{background:var(--sl);border:1px solid var(--sage);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.88rem}
+.gold{background:var(--gold);border-color:#c9a23f}
+mark{background:#f6e3a6}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.step{background:var(--card);border:1px solid var(--b);border-radius:12px;padding:14px 16px}
+.step h3{margin:0 0 6px;font-size:1rem;color:var(--fd)}
+.step .q{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ac);text-transform:uppercase}
+.step ul{margin:6px 0 0;padding-left:18px;font-size:.88rem}
+.step li{margin:3px 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vs>div{background:var(--card);border:1px solid var(--b);border-radius:12px;padding:12px 16px}
+.vs h3{margin:0 0 6px;color:var(--fd)}
+.vs ul{margin:0;padding-left:18px;font-size:.88rem}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:3px 22px;font-size:.84rem}
+.kg b{font-family:'IBM Plex Mono',monospace;color:var(--fd)}
+#np{padding-top:0}
+@media(max-width:700px){
+ .vs{grid-template-columns:1fr}
+ table,thead,tbody,tr,td{display:block}
+ thead{display:none}
+ tr{background:var(--card);border:1px solid var(--b);border-radius:10px;margin:10px 0;padding:6px 4px}
+ tr:nth-child(even) td{background:none}
+ td{border:none;padding:5px 10px}
+ td[data-l]::before{content:attr(data-l);display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--ts)}
+ td.n{font-size:1rem}
+ .tab-btn{padding:10px 9px;font-size:.66rem}
+ table{table-layout:auto}
+}
+
+details.dr{background:var(--card);border:1px solid var(--b);border-radius:10px;margin:8px 0;padding:0}
+details.dr summary{cursor:pointer;padding:10px 14px;font-size:.9rem;color:var(--fd);font-weight:600}
+details.dr .ans{padding:2px 14px 12px;font-size:.9rem;border-top:1px dashed var(--b)}
+.star{color:var(--ac);font-weight:700;cursor:help}
+table{margin-bottom:14px}
+th{top:var(--tabh,41px)}
+</style>
+</head>
+<body>
+<a class="back-btn" href="../index.html">← Back to Study Guides</a>
+<div class="header"><h1>Renal II Exam 1 Cheat Sheet</h1><p>Normal structure and function → what breaks → what the patient shows. Filtration barrier and podocytes, tubule handling, GFR and clearance, renal pH. Built from Dr. Stapley's histology review, Dr. Coulton's physiology and acid-base guides, and the Bootcamp renal slides. ※ = added teaching point, not on the course slides.</p></div>
+<div class="tabs" id="tabs"></div>
+<div id="panels"></div>
+
+<script>
+const AB={
+GBM:"glomerular basement membrane",LM:"light microscopy",IF:"immunofluorescence",EM:"electron microscopy",RBC:"red blood cell",WBC:"white blood cell",HTN:"hypertension",AKI:"acute kidney injury",CKD:"chronic kidney disease",ESRD:"end-stage renal disease",GN:"glomerulonephritis",PSGN:"post-streptococcal glomerulonephritis",RPGN:"rapidly progressive glomerulonephritis",MPGN:"membranoproliferative glomerulonephritis",DDD:"dense deposit disease",MCD:"minimal change disease",FSGS:"focal segmental glomerulosclerosis",IgA:"immunoglobulin A",IgG:"immunoglobulin G",IgM:"immunoglobulin M",IgAN:"IgA nephropathy",HSP:"Henoch-Schönlein purpura",SLE:"systemic lupus erythematosus",ANA:"antinuclear antibody",dsDNA:"double-stranded DNA",C3:"complement component 3",C4:"complement component 4",C1q:"complement component 1q",ASO:"antistreptolysin O",ANCA:"anti-neutrophil cytoplasmic antibody","c-ANCA":"cytoplasmic ANCA","p-ANCA":"perinuclear ANCA",PR3:"proteinase 3",MPO:"myeloperoxidase",GPA:"granulomatosis with polyangiitis",MPA:"microscopic polyangiitis",EGPA:"eosinophilic granulomatosis with polyangiitis",PLA2R:"phospholipase A2 receptor",suPAR:"soluble urokinase plasminogen activator receptor",APOL1:"apolipoprotein L1",HIV:"human immunodeficiency virus",HBV:"hepatitis B virus",HCV:"hepatitis C virus",NSAID:"nonsteroidal anti-inflammatory drug",NSAIDs:"nonsteroidal anti-inflammatory drugs",ACEi:"angiotensin-converting enzyme inhibitor",ARB:"angiotensin receptor blocker",DM:"diabetes mellitus",AL:"light-chain amyloidosis",AA:"reactive amyloidosis",SAA:"serum amyloid A",ATN:"acute tubular necrosis",AIN:"acute interstitial nephritis",FENa:"fractional excretion of sodium",BUN:"blood urea nitrogen",Cr:"creatinine",UOsm:"urine osmolality",ADPKD:"autosomal dominant polycystic kidney disease",ARPKD:"autosomal recessive polycystic kidney disease",ADTKD:"autosomal dominant tubulointerstitial kidney disease",MCDK:"multicystic dysplastic kidney",PKD1:"polycystic kidney disease 1 gene",PKHD1:"polycystic kidney and hepatic disease 1 gene",UMOD:"uromodulin gene",MVP:"mitral valve prolapse",SAH:"subarachnoid hemorrhage",VHL:"von Hippel-Lindau",RCC:"renal cell carcinoma",EPO:"erythropoietin",PTH:"parathyroid hormone",CT:"computed tomography",VCUG:"voiding cystourethrogram",PUV:"posterior urethral valves",VUR:"vesicoureteral reflux",UTI:"urinary tract infection",XGP:"xanthogranulomatous pyelonephritis",WAGR:"Wilms tumor, aniridia, genitourinary anomalies, intellectual disability",WT1:"Wilms tumor 1 gene",RTA:"renal tubular acidosis",DIC:"disseminated intravascular coagulation",CK:"creatine kinase",eGFR:"estimated glomerular filtration rate",UACR:"urine albumin-to-creatinine ratio",MAP:"mean arterial pressure",CXR:"chest x-ray",PPI:"proton pump inhibitor",SPEP:"serum protein electrophoresis",UPEP:"urine protein electrophoresis",HUS:"hemolytic uremic syndrome",TTP:"thrombotic thrombocytopenic purpura",TMA:"thrombotic microangiopathy",PAS:"periodic acid–Schiff",TAL:"thick ascending limb",PCT:"proximal convoluted tubule",BPH:"benign prostatic hyperplasia",Hgb:"hemoglobin",Hct:"hematocrit",BP:"blood pressure",HR:"heart rate",IV:"intravenous",URI:"upper respiratory infection",AML:"angiomyolipoma",HPF:"high-power field",ECG:"electrocardiogram",COL4A5:"collagen type IV alpha-5 gene",GFR:"glomerular filtration rate",ADH:"antidiuretic hormone",TSC:"tuberous sclerosis complex",LDH:"lactate dehydrogenase",PT:"prothrombin time",INR:"international normalized ratio",HCO3:"bicarbonate",SGLT2:"sodium-glucose cotransporter 2",ICU:"intensive care unit",CRAB:"hypercalcemia, renal failure, anemia, bone lesions",PAN:"polyarteritis nodosa",NETs:"neutrophil extracellular traps",ESR:"erythrocyte sedimentation rate",PTT:"partial thromboplastin time",CVA:"costovertebral angle",CMV:"cytomegalovirus",RAAS:"renin-angiotensin-aldosterone system",TIN:"tubulointerstitial nephritis",NaCl:"sodium chloride",MRI:"magnetic resonance imaging",DMSA:"dimercaptosuccinic acid",UPJ:"ureteropelvic junction",DCT:"distal convoluted tubule",CAKUT:"congenital anomalies of the kidney and urinary tract",ILD:"interstitial lung disease",TNF:"tumor necrosis factor",PCP:"Pneumocystis pneumonia",VEGF:"vascular endothelial growth factor",CD4:"cluster of differentiation 4",ARDS:"acute respiratory distress syndrome",PE:"pulmonary embolism",DVT:"deep vein thrombosis",CBC:"complete blood count",UA:"urinalysis",BMP:"basic metabolic panel",ATIII:"antithrombin III",ECHO:"echocardiogram",AST:"aspartate aminotransferase",ALT:"alanine aminotransferase",CRP:"C-reactive protein",MCV:"mean corpuscular volume",HbA1c:"hemoglobin A1c",UPCR:"urine protein-to-creatinine ratio",MRA:"magnetic resonance angiography",NSTEMI:"non-ST-elevation myocardial infarction",SpO2:"oxygen saturation",COL4A3:"collagen type IV alpha-3 gene",GI:"gastrointestinal",ACTH:"adrenocorticotropic hormone",IVC:"inferior vena cava",NKCC2:"sodium-potassium-2-chloride cotransporter",NCC:"sodium-chloride cotransporter",ENaC:"epithelial sodium channel"
+};
+const _tok=/\[\[([^\]]+)\]\]/g;
+function expand(html,seen){return html.replace(_tok,(m,k)=>{if(!(k in AB))return k; if(seen.has(k))return k; seen.add(k); return AB[k]+" ("+k+")";});}
+
+const T=s=>s; // plain
+const D={};
+Object.assign(AB,{RPF:"renal plasma flow",RBF:"renal blood flow",FF:"filtration fraction",PAH:"para-aminohippuric acid",TGF:"tubuloglomerular feedback",PTH:"parathyroid hormone",ECF:"extracellular fluid",ICF:"intracellular fluid",AG:"anion gap",RTA:"renal tubular acidosis",NHE3:"sodium-hydrogen exchanger 3",NBC1:"sodium-bicarbonate cotransporter 1",CAI:"carbonic anhydrase inhibitor",AQP2:"aquaporin 2",ROMK:"renal outer medullary potassium channel",SGLT1:"sodium-glucose cotransporter 1",GLUT2:"glucose transporter 2",ANP:"atrial natriuretic peptide",BNP:"brain natriuretic peptide",SIADH:"syndrome of inappropriate antidiuretic hormone secretion",DI:"diabetes insipidus",DKA:"diabetic ketoacidosis",HF:"heart failure",JG:"juxtaglomerular",CCD:"cortical collecting duct",IMCD:"inner medullary collecting duct",ATP:"adenosine triphosphate",cAMP:"cyclic adenosine monophosphate",Ang:"angiotensin",BUN:"blood urea nitrogen",FENa:"fractional excretion of sodium",ABG:"arterial blood gas",CNS:"central nervous system",COPD:"chronic obstructive pulmonary disease",ATN:"acute tubular necrosis",AIN:"acute interstitial nephritis",ATPase:"adenosine triphosphatase",TMP:"trimethoprim",EPO:"erythropoietin",ACE:"angiotensin-converting enzyme",ADPKD:"autosomal dominant polycystic kidney disease",H:"hydrogen",NH:"ammonia"});
+delete AB.H; delete AB.NH;
+function tbl(id,cols,widths,rows,opt){opt=opt||{};
+ let h='<table id="'+id+'"><thead><tr>'+cols.map((c,i)=>'<th style="width:'+widths[i]+'%">'+c+'</th>').join('')+'</tr></thead><tbody>';
+ rows.forEach(r=>{h+='<tr>';
+  r.forEach((c,i)=>{ if(i===0){const p=c.split('|');h+='<td class="n" data-l="'+cols[0].replace(/\[\[([^\]]+)\]\]/g,'$1')+'">'+p[0]+(p[1]?'<small>'+p[1]+'</small>':'')+'</td>';}
+   else h+='<td data-l="'+cols[i].replace(/&amp;/g,'&').replace(/\[\[([^\]]+)\]\]/g,'$1')+'">'+c+'</td>';});
+  h+='</tr>';});
+ return h+'</tbody></table>';}
+function step(q,h,items){return '<div class="step"><div class="q">'+q+'</div><h3>'+h+'</h3><ul>'+items.map(i=>'<li>'+i+'</li>').join('')+'</ul></div>';}
+function drill(q,a){return '<details class="dr"><summary>'+q+'</summary><div class="ans">'+a+'</div></details>';}
+const STAR='<span class="star" title="Standard teaching point added by me; not on the course slides. Check it against your lecture notes.">※</span>';
+const PANELS=[];
+
+// ============ START HERE
+PANELS.push({id:'start',label:'Start here',html:()=>`
+<div class="callout gold"><b>The email's one question, for every disease or finding:</b> “What normal structure or function has been disrupted, and how does that explain the patient's findings?” This sheet is built that way. Each tab gives you the <b>normal</b> first, then what <b>breaks</b>, then what you <b>see</b>. The last tab (<b>Disrupted → finding</b>) is the same idea as one searchable table across the diseases from the pathology differentiator.</div>
+<div class="callout"><b>${STAR} marks a standard teaching point I added that is not on the course slides or study guides.</b> Everything unmarked comes from Dr. Stapley's histology review, Dr. Coulton's physiology and acid-base guides, or the Bootcamp renal slides. Per the email, most questions come from the pathology, immunology and clinical lectures, so use this sheet for the <i>why</i> behind those lectures.</div>
+<div class="steps">
+${step('Focus 1','Filtration barrier &amp; podocytes',[
+'Barrier, blood → urine: <b>fenestrated endothelium → glomerular basement membrane ([[GBM]]) → podocyte foot processes with slit diaphragm</b>.',
+'Size cutoffs: <b>&lt;15 Å</b> free · <b>15–42 Å</b> charge-dependent · <b>&gt;42 Å</b> not filtered.',
+'[[GBM]] is <b>negatively charged</b> (heparan sulfate) → anions (albumin) repelled. Lose charge → <b>albuminuria</b> (minimal change disease).',
+'Lose podocyte/slit/size integrity → heavy, less selective proteinuria → <b>nephrotic</b> syndrome.',
+'Inflamed, ruptured capillary wall → red cells leak → <b>nephritic</b>.'])}
+${step('Focus 2','Tubular reabsorption &amp; secretion',[
+'Sodium: <b>[[PCT]] ~67% · [[TAL]] ~25% · [[DCT]] ~5% · cortical collecting duct ~3%</b>; &lt;1% is excreted.',
+'Every diuretic and tubular syndrome is a transporter: <b>[[NKCC2]]</b> (loops, Bartter), <b>[[NCC]]</b> (thiazides, Gitelman), <b>[[ENaC]]</b> (amiloride, Liddle).',
+'Volume vs osmolarity: <b>isotonic changes stay in [[ECF]]</b>; free water or solute shifts move water across cells.',
+'[[ADH]] → V2 → aquaporin 2 → water back; it also builds the <b>~1200 mOsm/L</b> medullary gradient.'])}
+${step('Focus 3','[[GFR]], [[RPF]] &amp; clearance',[
+'<b>[[GFR]] = K<sub>f</sub> × [(P<sub>GC</sub> − P<sub>BS</sub>) − (π<sub>GC</sub> − π<sub>BS</sub>)]</b>',
+'<b>[[FF]] = [[GFR]]/[[RPF]] ≈ 0.2</b> · <b>[[RPF]] = clearance of [[PAH]]</b> · <b>inulin = true [[GFR]]</b>.',
+'Clearance: <b>C = U × V / P</b>. C &gt; [[GFR]] → net secretion; C &lt; [[GFR]] → net reabsorption.',
+'Afferent constriction ↓[[GFR]]; efferent constriction ↑[[GFR]]; obstruction ↑P<sub>BS</sub> → ↓[[GFR]].'])}
+${step('Focus 4','Renal pH regulation',[
+'Normal: pH <b>7.35–7.45</b> · pCO₂ <b>~40</b> · HCO₃⁻ <b>~24</b> · anion gap <b>8–12</b>.',
+'Kidney job 1: <b>reclaim filtered HCO₃⁻</b> ([[PCT]] ~80%). Job 2: <b>make new HCO₃⁻</b> by excreting H⁺ on phosphate or <b>NH₄⁺</b>.',
+'α-intercalated cells <b>secrete H⁺</b>; β-intercalated cells secrete HCO₃⁻.',
+'High-gap acidosis = unmeasured acid; normal-gap = lost HCO₃⁻ or can’t make new HCO₃⁻ ([[RTA]], diarrhea).'])}
+</div>
+<h2>Fast ladder for any renal stem</h2>
+<p class="sub">Say these four sentences out loud when you hit a clinical vignette.</p>
+<ol style="font-size:.92rem;margin:0;padding-left:22px">
+<li><b>Where</b> is the problem: glomerulus (barrier), tubule (transport), interstitium, vessel, or plumbing (ureter/bladder)?</li>
+<li><b>What normal job</b> does that piece do (filter by size and charge, reclaim [[Na]], concentrate, secrete H⁺, drain)?</li>
+<li><b>What number or sediment</b> must change if that job fails (protein, red cell casts, [[BUN]]/creatinine, K⁺, pH, urine osmolality)?</li>
+<li><b>Which disease</b> from the lectures fits that pattern?</li></ol>`});
+
+// ============ BARRIER
+PANELS.push({id:'barrier',label:'Barrier &amp; podocytes',html:()=>`
+<h2>The filtration barrier, layer by layer</h2>
+<p class="sub">Dr. Stapley: capillary side → basement membrane → podocyte side. Three layers filter by <b>size</b>; the basement membrane adds <b>charge</b>.</p>
+${tbl('t-barrier',['Layer','What it is','Blocks by','If it is injured → what you see','Where it shows up'],[14,20,12,30,24],[
+['Fenestrated endothelium|blood side','Capillary wall with gaps (fenestrae).','Size: keeps cells and large molecules in.','Endothelial injury and microthrombi → cells and protein cross; platelet consumption; ↓[[GFR]].','Thrombotic microangiopathy ([[HUS]], [[TTP]]); endothelial injury in lupus ([[SLE]]) and [[PSGN]].'],
+['Glomerular basement membrane|middle, dark line on EM','Collagen type IV mesh with negative charge from heparan sulfate (three bands: lamina rara interna, lamina densa, lamina rara externa).','<b>Size (collagen) + charge (negative)</b>.','<b>Charge lost</b> → albumin (anion) leaks → <b>selective albuminuria</b>. <b>Structure lost</b> (collagen defect or antibody attack) → hematuria and falling [[GFR]].','Charge: [[MCD]] (guide), diabetic thickening. Structure: <b>Alport</b> (type IV collagen, [[COL4A5]]), <b>anti-[[GBM]]</b> (antibody to type IV collagen).'],
+['Podocyte foot processes + slit diaphragm|urinary side','Interdigitating foot processes; slits bridged by slit diaphragms (<b>nephrin</b>).','Size: the last filter before Bowman space.','<b>Foot-process effacement</b> (flattening) or podocyte loss → protein pours through → <b>nephrotic-range proteinuria</b>, edema.','[[MCD]] (effacement, normal light microscopy), [[FSGS]] (podocyte loss → segmental scar), membranous (deposits under the podocyte; anti-[[PLA2R]]).'],
+['Mesangial cells|inside the tuft','Support the capillary loops; contractile (angiotensin II contracts them → ↓K<sub>f</sub>).','Not a filter; regulate surface area and [[GFR]].','Immune deposits in mesangium → mesangial expansion → hematuria with infections.','[[IgAN]]; diabetic glomerulosclerosis (nodules).'],
+['Bowman capsule|parietal layer','Simple squamous wall around the glomerulus; collects ultrafiltrate.','—','Severe injury → fibrin and proliferation of parietal cells form <b>crescents</b> → rapid loss of [[GFR]].','[[RPGN]]: anti-[[GBM]], pauci-immune ([[ANCA]]), immune-complex.']
+])}
+<div class="callout"><b>Size and charge in one line:</b> molecules <b>&lt;15 Å</b> filter freely, <b>15–42 Å</b> filter depending on charge, <b>&gt;42 Å</b> do not filter. At the same radius <b>cations &gt; neutral &gt; anions</b>. Albumin is large and negative, so it sits on the charge-dependent edge: lose the negative charge and albumin leaks first. ${STAR}</div>
+
+<h2>Proteinuria: which part broke?</h2>
+${tbl('t-prot',['Type','What broke','Protein lost','Clue','Examples'],[13,22,18,24,23],[
+['Glomerular, selective|charge barrier','Negative charge of the [[GBM]] and podocyte surface; size barrier still intact.','Mostly <b>albumin</b>.','Heavy proteinuria, normal light microscopy, effacement on EM, steroid-responsive.','[[MCD]]'],
+['Glomerular, non-selective|size barrier','Slit diaphragm, podocytes or [[GBM]] structure damaged.','Albumin <b>plus larger proteins</b> (e.g. [[IgG]]).','Poor steroid response, segmental scar or thick [[GBM]], often with hematuria or hypertension.','[[FSGS]], membranous, diabetic nephropathy, nephritic diseases'],
+['Overflow|tubule normal','Filtered load of a small protein exceeds what the [[PCT]] can reabsorb.','<b>Light chains</b> (Bence Jones).','<b>Dipstick negative</b> (detects albumin) but total protein high → [[UPEP]]/[[SPEP]].','Multiple myeloma'],
+['Tubular|reabsorption fails','[[PCT]] cannot reclaim the small proteins that are normally filtered.','Small proteins (β2-microglobulin) ${STAR}.','Usually modest (&lt;2 g/day) ${STAR}; often with glucosuria, phosphaturia, bicarbonate loss.','Fanconi syndrome, [[ATN]], [[AIN]]']
+])}
+
+<h2>Nephrotic vs nephritic, said in barrier terms</h2>
+<div class="vs">
+<div><h3>Nephrotic = barrier leaks protein</h3><ul>
+<li>Podocyte / charge defect, little inflammation.</li>
+<li>Protein <b>&gt;3.5 g/24 h</b>, low serum albumin, <b>edema</b>, hyperlipidemia, lipiduria (fatty casts, oval fat bodies).</li>
+<li>Also lose antithrombin III ([[ATIII]]) → clots; lose [[IgG]] → infections.</li>
+<li>[[GFR]] often preserved early.</li></ul></div>
+<div><h3>Nephritic = capillary wall inflamed and broken</h3><ul>
+<li>Immune injury; neutrophils and complement punch holes in the wall.</li>
+<li><b>Red cells</b> cross → dysmorphic red cells, <b>red cell casts</b>.</li>
+<li>Inflamed tuft → ↓[[GFR]] → Na and water retained → <b>hypertension</b>, oliguria.</li>
+<li>Protein usually &lt;3.5 g/24 h. Lupus, [[MPGN]] and [[FSGS]] can overlap.</li></ul></div></div>
+
+<h2>Why does protein loss cause edema? (Starling forces)</h2>
+${tbl('t-starling',['Situation','Starling term that changes','Result'],[26,34,40],[
+['Nephrotic syndrome','↓ plasma oncotic pressure (albumin lost in urine) → less force holding fluid in capillaries.','Fluid moves to interstitium: periorbital then dependent edema. Kidney also retains Na (↓effective volume → [[RAAS]]), which adds to it ${STAR}.'],
+['Heart failure','↑ capillary hydrostatic pressure, plus [[RAAS]]-driven Na and water retention until cardiac output reaches ~5 L/min.','Edema; in decompensated failure the retention never switches off.'],
+['Nephritic syndrome','↓[[GFR]] → Na and water retained; oncotic pressure is not the main problem.','Hypertension and fluid overload more than massive edema.'],
+['Cirrhosis ${STAR}','↓ albumin made by liver → ↓ oncotic pressure.','Edema and ascites; protein loss is not in the urine.']
+])}`});
+
+// ============ HISTOLOGY
+PANELS.push({id:'histo',label:'Histology ID',search:1,html:()=>`
+<h2>Dr. Stapley's 15 structures, plus what goes wrong</h2>
+<p class="sub">Identify clue (from the slide) → job → the disease link that the pathology lectures care about.</p>
+${tbl('t-histo',['Structure','Identify by','Does','When disrupted'],[15,27,24,34],[
+['Renal cortex|outer','Renal corpuscles + convoluted tubules.','Filtration and most reabsorption.','Glomerular disease and [[PCT]] injury ([[ATN]]) live here.'],
+['Renal medulla|inner','Straight tubules + collecting ducts; paler, striated.','Concentrates urine.','Medullary injury → cannot concentrate (polyuria, dilute urine); papillary necrosis ${STAR}.'],
+['Renal corpuscle|cortex only','Glomerulus + Bowman capsule.','Where filtration first occurs.','Nephritic and nephrotic diseases.'],
+['Glomerulus','Tuft of fenestrated capillaries, podocytes, mesangial cells.','Makes the ultrafiltrate.','Proteinuria, hematuria, ↓[[GFR]] (see Barrier tab).'],
+['Bowman capsule','Simple squamous wall; space around the tuft.','Collects ultrafiltrate; starts the nephron.','Crescents in [[RPGN]].'],
+['Fenestrated capillaries|EM','Gaps in the endothelium.','Size barrier.','Endothelial injury ([[HUS]], [[TTP]]).'],
+['Glomerular basement membrane|EM','Dark middle line (collagen type IV, negative charge).','Size + charge barrier.','Alport, anti-[[GBM]] disease, loss of charge → albuminuria.'],
+['Podocytes|EM','Foot processes on the outer surface; slits.','Final size filter.','Effacement/loss → nephrotic proteinuria ([[MCD]], [[FSGS]]).'],
+['Proximal convoluted tubule|H&amp;E, EM','<b>Star-shaped, fuzzy lumen</b> (brush border, many microvilli).','~70% of reabsorption: water, glucose, amino acids, ions, HCO₃⁻.','[[ATN]] (brush border lost, muddy brown casts); Fanconi syndrome (glucose, amino acids, phosphate, HCO₃⁻ lost; type 2 [[RTA]]).'],
+['Distal convoluted tubule|H&amp;E, EM','<b>Smoother lumen</b>, few microvilli.','Na, Cl, bicarbonate; responds to aldosterone, [[PTH]] and [[ADH]].','Thiazide site ([[NCC]]); Gitelman; [[PTH]] controls Ca here.'],
+['Macula densa|DCT touching glomerulus','<b>Crowded nuclei</b> (the “dense spot”).','Senses NaCl in the filtrate; tunes renin release and filtration.','[[TGF]] loop; loop diuretics blunt it ${STAR}.'],
+['Juxtaglomerular (JG) cells ${STAR}|afferent arteriole','Modified smooth muscle next to the macula densa.','Release <b>renin</b>.','Low perfusion → ↑renin → angiotensin II → efferent constriction; [[ACEi]]/[[ARB]] target this axis.'],
+['Thin segment|loop of Henle','Simple squamous, empty lumen (capillaries contain red cells).','Descending: water. Ascending: Na and Cl.','Part of the countercurrent system; washout → dilute urine.'],
+['Collecting duct','<b>Distinct cell borders.</b>','Na and water ([[ADH]], aldosterone); acid-base handling.','Principal cells: [[ENaC]] (Liddle), [[AQP2]] (nephrogenic [[DI]]). Intercalated cells: H⁺ secretion ([[RTA]] type 1). Note: the slide says “reabsorbs H⁺”; physiologically the intercalated cells <b>secrete</b> H⁺.'],
+['Ureter','Transitional epithelium, star-shaped lumen, muscularis, adventitia.','Peristalsis moves urine to the bladder.','Obstruction (stone, tumor) → hydronephrosis → ↑P<sub>BS</sub> → ↓[[GFR]] (post-renal [[AKI]]).'],
+['Bladder','Transitional epithelium; much wider; <b>three unorganized muscle layers</b>.','Stores urine.','Outlet obstruction or neurogenic bladder → retention, overflow, hydronephrosis.'],
+['Interstitium|new in Renal II','Fibroblasts (collagen), macrophages (debris), lymphocytes (adaptive immunity).','Supports nephrons and vessels.','[[AIN]]: inflammatory cells infiltrate (white cell casts, drug reaction). Chronic injury → interstitial fibrosis → [[CKD]].']
+],{})}
+<div class="callout gold"><b>Fast contrasts.</b> <b>PCT vs DCT:</b> fuzzy star vs smooth lumen. <b>Thin limb vs capillary:</b> empty lumen vs red cells. <b>Collecting duct:</b> visible cell borders. <b>Ureter vs bladder:</b> narrow star lumen vs wide wall with three unorganized muscle layers. <b>Cortex vs medulla:</b> corpuscles + convoluted tubules vs straight tubules + collecting ducts.</div>`});
+
+// ============ GFR
+PANELS.push({id:'gfr',label:'GFR, RPF &amp; clearance',html:()=>`
+<h2>Formulas to know cold</h2>
+${tbl('t-form',['Quantity','Formula','What to remember'],[20,32,48],[
+['[[GFR]]','K<sub>f</sub> × [(P<sub>GC</sub> − P<sub>BS</sub>) − (π<sub>GC</sub> − π<sub>BS</sub>)]','P<sub>GC</sub> = glomerular capillary hydrostatic pressure; P<sub>BS</sub> = Bowman space hydrostatic pressure; π = oncotic pressure; K<sub>f</sub> = filtration coefficient (permeability × surface area). π<sub>BS</sub> ≈ 0. Normal [[GFR]] ~120 mL/min ${STAR}; sustained &lt;60 = [[CKD]] range.'],
+['Clearance','C<sub>x</sub> = U<sub>x</sub> × V / P<sub>x</sub>','U = urine concentration, V = urine flow (mL/min), P = plasma concentration. Units: mL/min.'],
+['Filtered load / excretion','Filtered = [[GFR]] × P<sub>x</sub> · Excreted = V × U<sub>x</sub>','Reabsorption (or secretion) = filtered − excreted.'],
+['[[RPF]]','= C<sub>[[PAH]]</sub>','[[PAH]] is filtered <b>and secreted</b>, so almost all is cleared in one pass.'],
+['[[RBF]]','= [[RPF]] / (1 − [[Hct]])','[[RBF]] ≈ 25% of cardiac output.'],
+['[[FF]]','= [[GFR]] / [[RPF]] ≈ 0.20','About a fifth of plasma entering the glomerulus is filtered.']
+])}
+<h2>Markers: what does the clearance tell you?</h2>
+${tbl('t-mark',['Marker','Handling','Clearance equals…'],[18,44,38],[
+['Inulin','Freely filtered, not reabsorbed, not secreted, inert.','<b>True [[GFR]]</b> (gold standard).'],
+['Creatinine','Freely filtered, <b>slightly secreted</b>.','Slightly <b>overestimates</b> [[GFR]]; convenient because it is endogenous. Plasma creatinine rises as [[GFR]] falls (inverse curve).'],
+['[[PAH]]','Filtered + secreted; nearly completely cleared.','<b>[[RPF]]</b>.'],
+['Glucose','Filtered, fully reabsorbed (until threshold).','Zero at normal glucose: C &lt; [[GFR]] (net reabsorbed).'],
+['Urea','Filtered, partly reabsorbed (~50% in [[PCT]]).','&lt; [[GFR]]; changes with volume status ([[BUN]] ↑ in prerenal states ${STAR}).']
+])}
+<div class="callout"><b>Rule:</b> clearance &gt; [[GFR]] → net <b>secretion</b>; clearance &lt; [[GFR]] → net <b>reabsorption</b>; equal → neither. When asked “[[GFR]] fell by half,” expect plasma creatinine to roughly double at steady state ${STAR}.</div>
+
+<h2>What changes [[GFR]]? (know this table cold)</h2>
+${tbl('t-chg',['Change','[[RPF]]','[[GFR]]','[[FF]]','Why / clinical example'],[24,9,9,9,49],[
+['Afferent constriction','↓','↓','no change','Less flow in and lower P<sub>GC</sub>. [[NSAID]]s (prostaglandins normally dilate the afferent); sympathetic surge.'],
+['Efferent constriction','↓','↑','↑','Backs up pressure in the tuft. Angiotensin II. Preserves [[GFR]] in volume depletion.'],
+['Afferent dilation','↑','↑','no change','Prostaglandins, [[ANP]].'],
+['Efferent dilation','↑','↓','↓','[[ACEi]]/[[ARB]] ${STAR}. Lower [[GFR]] in a volume-depleted or renal-artery-stenosis patient.'],
+['↑ plasma protein (↑π<sub>GC</sub>)','no change','↓','↓','More oncotic force opposing filtration.'],
+['↓ plasma protein','no change','↑','↑','Less opposing force (e.g. nephrotic syndrome raises filtration pressure but destroys the barrier).'],
+['Ureteral obstruction (↑P<sub>BS</sub>)','no change','↓','↓','Stone, [[BPH]], tumor: post-renal [[AKI]].'],
+['Dehydration','↓↓↓','↓','↑','Angiotensin II constricts the efferent arteriole to protect [[GFR]] while flow falls.'],
+['Fewer functioning nephrons / ↓K<sub>f</sub> ${STAR}','↓','↓','varies','Loss of surface area in [[CKD]] or inflamed glomeruli.']
+])}
+<div class="callout"><b>Why [[NSAID]]s + [[ACEi]]/[[ARB]] drugs hurt a dehydrated patient:</b> angiotensin II constricts the <b>efferent</b> arteriole and prostaglandins dilate the <b>afferent</b> arteriole to hold [[GFR]] up. An [[NSAID]] removes the afferent dilation; an [[ACEi]]/[[ARB]] removes the efferent constriction. Both lower P<sub>GC</sub> → [[GFR]] falls. Add a diuretic and you get the “triple whammy” ${STAR}.</div>
+
+<h2>Autoregulation and tubuloglomerular feedback</h2>
+<div class="steps">
+${step('Fast','Myogenic response',['Afferent arteriole contracts when stretched.','Keeps [[RBF]] and [[GFR]] roughly constant when mean arterial pressure is ~80–180 mmHg.','Fails below that range (shock) → [[GFR]] falls with pressure.'])}
+${step('Slower','[[TGF]] (negative feedback)',['↑[[GFR]] → ↑NaCl delivered to the macula densa.','Taken up by [[NKCC2]] → ↑intracellular Ca → [[ATP]] released → converted to <b>adenosine</b> (A1 receptor).','Afferent arteriole constricts → [[GFR]] falls back.','Low NaCl delivery → renin release and afferent dilation.'])}
+${step('Hormones','What each does to the arterioles',['<b>Angiotensin II:</b> efferent &gt; afferent constriction; low-moderate levels maintain [[GFR]], very high levels constrict the afferent too and [[GFR]] falls; also contracts mesangial cells.','<b>[[ANP]]:</b> dilates afferent, ↓renin, natriuresis.','<b>Prostaglandins:</b> dilate afferent; protect [[GFR]] in hypovolemia.','<b>Catecholamines / [[ADH]]:</b> vasoconstrict.'])}
+</div>
+
+<h2>Link to [[AKI]]</h2>
+${tbl('t-aki',['Type','Problem in Starling terms','Clue'],[18,46,36],[
+['Prerenal','↓ renal perfusion → ↓P<sub>GC</sub> ([[RPF]] ↓). Tubules still work: avid Na and water reabsorption.','Bland/hyaline casts, [[BUN]]/creatinine ↑, urine Na low (fractional excretion of sodium &lt;1%).'],
+['Intrinsic (e.g. [[ATN]], glomerular, interstitial)','Barrier, tubule or interstitium itself damaged. In [[ATN]], tubular debris blocks flow and sloughed cells let filtrate leak back.','Muddy brown granular casts ([[ATN]]); red cell casts (nephritic); white cell casts ([[AIN]]).'],
+['Postrenal','Obstruction → ↑P<sub>BS</sub> opposes filtration.','Hydronephrosis on imaging; both kidneys or a solitary kidney.']
+])}
+<h2>Practice: identify, then explain</h2>
+${drill('1. U<sub>creatinine</sub> 120 mg/dL, urine flow 1 mL/min, P<sub>creatinine</sub> 1 mg/dL. What is the clearance, and what does it estimate?','C = (120 × 1) / 1 = <b>120 mL/min</b>. It estimates [[GFR]] (slightly high because some creatinine is secreted).')}
+${drill('2. A drug’s clearance is 200 mL/min while [[GFR]] is 120 mL/min. Reabsorbed or secreted?','<b>Net secreted</b>: more is cleared than the filter can account for.')}
+${drill('3. Dehydrated patient, blood pressure low, [[GFR]] holding near normal. Which arteriole is doing the work and which drug would break it?','Angiotensin II constricts the <b>efferent</b> arteriole. An [[ACEi]]/[[ARB]] removes it and [[GFR]] falls.')}
+${drill('4. Prostate enlargement and bilateral hydronephrosis. Which Starling term changed?','↑ Bowman space hydrostatic pressure (P<sub>BS</sub>), so net filtration pressure and [[GFR]] fall, and [[FF]] falls.')}
+${drill('5. Nephrotic syndrome with low albumin: does plasma oncotic pressure in the glomerulus rise or fall, and what does that do to filtration pressure?','Oncotic pressure <b>falls</b>, so the force opposing filtration is lower. The barrier is leaky, so this does not mean healthy filtration; the same drop in oncotic pressure drives the edema.')}`});
+
+// ============ TUBULE SEGMENTS
+PANELS.push({id:'tubule',label:'Tubule: Na &amp; diuretics',html:()=>`
+<h2>Segment by segment</h2>
+<p class="sub">Basolateral Na⁺/K⁺-[[ATPase]] drives nearly all apical reabsorption. Order of Na reabsorption: <b>[[PCT]] &gt; [[TAL]] &gt; [[DCT]] &gt; [[CCD]]</b>.</p>
+${tbl('t-seg',['Segment','Na reabsorbed','Apical transporter / permeability','Drug / syndrome','If disrupted → finding'],[15,10,25,20,30],[
+['[[PCT]]','~67%','[[NHE3]] and Na-coupled glucose, amino acids, phosphate, lactate. Late: mostly NaCl. Water follows (isosmotic). Angiotensin II ↑[[NHE3]].','[[CAI]] (acetazolamide). Fanconi syndrome.','[[CAI]]: HCO₃⁻, Na, water lost → normal-gap acidosis. Fanconi: glucose, amino acids, phosphate, HCO₃⁻ in urine.'],
+['Thin descending limb','—','Water-permeable, no NaCl. Urea secreted in.','—','Gradient washout → dilute urine.'],
+['[[TAL]]','~25%','<b>[[NKCC2]]</b>; water-impermeable (the “single effect”). Lumen-positive voltage pulls Ca, Mg and K through the paracellular path.','Loop diuretics (furosemide). <b>Bartter</b>.','Hypokalemia, metabolic alkalosis, <b>hypercalciuria</b>, Mg wasting; ↓ concentrating ability; macula densa also blocked → ↑renin ${STAR}.'],
+['Early [[DCT]]','~5%','<b>[[NCC]]</b>.','Thiazides. <b>Gitelman</b>.','Hypokalemia, metabolic alkalosis, <b>hypocalciuria</b>, hypomagnesemia.'],
+['Late DCT / [[CCD]] principal cells','~3%','<b>[[ENaC]]</b> (aldosterone ↑ENaC, Na⁺/K⁺-[[ATPase]], [[ROMK]]).','Amiloride (blocks ENaC); spironolactone (blocks aldosterone). <b>Liddle</b> (ENaC gain of function).','K⁺-sparers: hyperkalemia, mild acidosis. Liddle: hypertension, hypokalemia, alkalosis, <b>low renin and low aldosterone</b>.'],
+['α-intercalated cell','small','Apical V-[[ATPase]] and H⁺/K⁺-[[ATPase]] secrete H⁺; basolateral Cl⁻/HCO₃⁻ exchanger (anion exchanger 1).','[[RTA]] type 1','Cannot acidify urine (pH &gt;5.5), stones, hypokalemia.'],
+['β-intercalated cell','small','Pendrin (Cl⁻/HCO₃⁻ exchanger) secretes HCO₃⁻.','—','Alkalosis → secrete HCO₃⁻.'],
+['[[IMCD]]','—','[[ADH]] ↑urea transporter UT-A1 → urea recycling builds the medullary gradient.','—','Low urea → weaker gradient.']
+])}
+<div class="callout"><b>Aldosterone acts on principal cells of the late DCT/CCD</b> (not the thick ascending limb). Net: Na⁺ kept, K⁺ and H⁺ lost.</div>
+
+<h2>Why diuretics change K⁺, H⁺ and Ca²⁺</h2>
+${tbl('t-diur',['Diuretic','Site','K⁺','Acid-base','Ca²⁺ / Mg²⁺','Reason'],[14,11,10,15,18,32],[
+['Carbonic anhydrase inhibitor|acetazolamide','[[PCT]]','↓ (some)','<b>Metabolic acidosis</b> (normal gap)','—','Less HCO₃⁻ reclaimed; HCO₃⁻, Na and water lost.'],
+['Loop|furosemide','[[TAL]] ([[NKCC2]])','↓','<b>Metabolic alkalosis</b>','Ca↓ reabsorption (calciuric), Mg wasted','More Na and flow reach principal cells → more [[ENaC]] Na entry → more K⁺ out through [[ROMK]]; volume loss ↑aldosterone.'],
+['Thiazide','Early [[DCT]] ([[NCC]])','↓','<b>Metabolic alkalosis</b>','Ca↑ reabsorption (hypocalciuria, can cause hypercalcemia; used for stones)','Same distal mechanism as loops.'],
+['K⁺-sparing|amiloride / spironolactone','[[CCD]]','<b>↑ (hyperkalemia)</b>','Mild acidosis (↓H⁺ secretion)','—','Block [[ENaC]] or aldosterone → less K⁺ and H⁺ secretion.']
+])}
+
+<h2>Glucose and urea</h2>
+<div class="steps">
+${step('Glucose','Saturable transport',['[[PCT]]: <b>SGLT2</b> (early, most), <b>[[SGLT1]]</b> (late) apical; <b>[[GLUT2]]</b> basolateral. ~99% reabsorbed.','<b>Threshold ~200 mg/dL</b> (glucose first appears in urine) comes before <b>Tmax ~350 mg/dL</b> (all carriers saturated); the gap is “splay.”','Diabetes: hyperglycemia → glucosuria → <b>osmotic diuresis</b> (polyuria, thirst, volume loss). Mannitol acts the same way.','[[SGLT2]] inhibitors block the carrier → glucosuria ${STAR}.'])}
+${step('Urea','Passive, recycled',['~50% reabsorbed in [[PCT]] by diffusion; secreted into thin descending limb.','Cortical/outer medullary collecting duct: [[ADH]] raises water permeability but not urea permeability → urea concentrates in the lumen.','Inner medullary collecting duct: [[ADH]] ↑UT-A1 → urea leaves → <b>urea recycling</b> adds to the gradient.','Do not memorize the guide’s “70% reabsorbed, 40% excreted”; the mechanism is the point.'])}
+</div>`});
+
+// ============ WATER / VOLUME
+PANELS.push({id:'water',label:'Water, volume &amp; osmolarity',html:()=>`
+<h2>[[ADH]] and urine concentration</h2>
+<div class="steps">
+${step('[[ADH]]','Three actions',['<b>V2 (vasopressin 2) receptor → cyclic adenosine monophosphate:</b> inserts <b>[[AQP2]]</b> into apical membrane of late DCT and collecting duct principal cells → water reabsorbed.','↑ <b>[[NKCC2]]</b> in the thick ascending limb → stronger single effect → bigger gradient.','↑ <b>UT-A1</b> in the inner medullary collecting duct only → urea recycling.'])}
+${step('Countercurrent','How ~1200 mOsm/L forms',['<b>Multiplication (loop of Henle):</b> NaCl pumped out of the water-impermeable [[TAL]] (the single effect).','<b>Urea recycling</b> in [[IMCD]] adds to the inner-medullary gradient.','<b>Vasa recta</b> (hairpin capillaries) preserve the gradient; they do not create it.','Washout: ↑medullary blood flow, loop diuretics, low urea → dilute urine ${STAR}.'])}
+${step('Thirst','Water deprivation vs drinking',['Deprivation: ↑plasma osmolarity (2–3%) → hypothalamic osmoreceptors → thirst + [[ADH]] → small, concentrated urine.','Drinking: the reverse → large, dilute urine.'])}
+</div>
+<h2>[[SIADH]] vs diabetes insipidus</h2>
+${tbl('t-di',['','[[SIADH]]','Central [[DI]]','Nephrogenic [[DI]]'],[16,28,28,28],[
+['Defect','Excess/autonomous [[ADH]] (head injury, lung tumor).','No [[ADH]] released from posterior pituitary.','Kidney does not respond ([[ADH]] receptor V2 / [[AQP2]]).'],
+['Urine','Concentrated, low volume.','Large volume (up to ~15 L/day), dilute.','Large volume, dilute.'],
+['Plasma osmolarity / Na','↓ (dilutional)','↑','↑'],
+['ECF / ICF volume','↑ / ↑ (hyposmotic expansion)','↓ / ↓ (hyperosmotic contraction)','↓ / ↓ (hyperosmotic contraction)'],
+['Clue','Euvolemic hyponatremia; feedback inhibition fails.','Desmopressin <b>corrects</b> urine osmolality.','Desmopressin <b>does not</b> correct it. Lithium, hypercalcemia ${STAR}.']
+])}
+
+<h2>The six volume disturbances</h2>
+<p class="sub">Rule: water follows osmolarity. Isotonic gain or loss stays in [[ECF]]; free water or solute moves water in or out of cells.</p>
+${tbl('t-six',['Scenario','[[ECF]] volume','[[ECF]] osmolarity','[[ICF]] volume'],[43,19,19,19],[
+['Diarrhea (isosmotic loss)','↓','no change','no change'],
+['Water deprivation / sweat (hyperosmotic contraction)','↓','↑','↓'],
+['Adrenal insufficiency (low aldosterone, hyposmotic contraction)','↓','↓','↑'],
+['Isotonic NaCl infusion','↑','no change','no change'],
+['High NaCl intake (hyperosmotic expansion)','↑','↑','↓'],
+['[[SIADH]] (hyposmotic expansion)','↑','↓','↑']
+])}
+${tbl('t-iv',['IV fluid','Tonicity','Where it goes / use'],[30,18,52],[
+['0.9% NaCl, lactated Ringer','Isotonic','↑[[ECF]] only; raises blood pressure without changing cell volume.'],
+['0.45% NaCl, 5% dextrose (once metabolized)','Hypotonic','Water shifts into cells; treats cellular dehydration; depletes circulating volume.'],
+['3% or 7.5% NaCl','Hypertonic','Pulls water out of cells into [[ECF]].'],
+['Albumin, dextran, starch','Oncotic','Expand plasma by oncotic drag; 4–5% albumin when interstitial edema is a risk.']
+])}
+<p class="sub">Plasma osmolarity ≈ 290 (use 300) mOsm/L. Calculated = 2 × Na + glucose/18 + [[BUN]]/2.8. Osmolal gap = measured − calculated; &gt;10 suggests unmeasured solute (toxic alcohols).</p>
+
+<h2>[[RAAS]], natriuretic peptides and heart failure</h2>
+<div class="steps">
+${step('Long-term blood pressure','= ECF volume = tubular Na handling',['↑Na and water → ↑[[ECF]] → ↑venous return → ↑cardiac output → ↑blood pressure; the kidney corrects by <b>pressure natriuresis</b>.','Low volume/pressure: sympathetics + low distal NaCl → renin ([[JG]] cells) → angiotensin I → ([[ACE]]) angiotensin II.','Angiotensin II: ↑[[NHE3]], ↑aldosterone, ↑[[ADH]], thirst, efferent constriction.','High volume: [[ANP]]/[[BNP]] from stretched atria/ventricles.'])}
+${step('Heart failure','The kidney’s role',['Low cardiac output → sympathetics → [[RAAS]] retention → ↑mean systemic filling pressure → ↑venous return → ↑cardiac output.','[[RAAS]] turns off only when cardiac output returns to ~5 L/min.','<b>Compensated:</b> reaches 5 L/min; retention stops. <b>Decompensated:</b> never reaches 5 L/min → keeps retaining → edema → worse failure.','Treatment: diuretics, Na/water restriction, [[ACEi]], digitalis (inhibits Na⁺/K⁺-[[ATPase]] → ↑intracellular Ca → ↑contractility).'])}
+</div>`});
+
+// ============ K / Ca / PO4 / Mg
+PANELS.push({id:'ions',label:'K, Ca, PO₄, Mg',html:()=>`
+<h2>Potassium</h2>
+<p class="sub">98% of K⁺ is inside cells. Serum K⁺ changes by <b>shifts</b> (internal balance) or by <b>kidney handling</b> (external balance).</p>
+${tbl('t-kshift',['Moves K⁺ INTO cells (↓ serum K⁺)','Moves K⁺ OUT of cells (↑ serum K⁺)'],[50,50],[
+['Insulin (↑Na⁺/K⁺-[[ATPase]])','Insulin deficiency'],
+['β2 agonists','β-blockers; α agonists'],
+['Alkalemia (H⁺ leaves cells, K⁺ enters)','Acute acidemia (H⁺ enters, K⁺ leaves)'],
+['—','<b>Hyperosmolarity</b> (water leaves cells, K⁺ follows)'],
+['—','Exercise; cell lysis ${STAR}']
+])}
+<div class="callout"><b>Uncontrolled diabetes:</b> insulin lack + hyperosmolarity + acidosis all push K⁺ <b>out</b> of cells, so serum K⁺ is high at presentation even though osmotic diuresis has depleted total-body K⁺. (The course handout says hypokalemia; the study guide corrects it.)</div>
+<div class="steps">
+${step('Kidney','External balance',['Freely filtered; [[PCT]] ~70% (paracellular), [[TAL]] ~20% ([[NKCC2]]); fine-tuning only in the [[DCT]]/collecting duct.','Principal cells <b>secrete</b> K⁺ through [[ROMK]]: driven by aldosterone, high plasma K⁺, ↑distal flow, ↑distal Na delivery, alkalosis.','α-intercalated cells reabsorb K⁺ (H⁺/K⁺-[[ATPase]]) on a low-K diet.','Acidosis lowers K⁺ secretion; alkalosis raises it.'])}
+</div>
+
+<h2>Calcium, phosphate, magnesium</h2>
+${tbl('t-cpm',['','Calcium','Phosphate','Magnesium'],[16,28,28,28],[
+['Filtered','Only the ~60% not protein-bound (50% free, 40% protein-bound in plasma).','~90% (non-protein-bound).','~80%.'],
+['[[PCT]]','~67%, tied to Na (mostly paracellular).','~75–80% via Na-phosphate cotransporter (saturable, Tmax).','~25%.'],
+['[[TAL]]','~25%; half paracellular (needs lumen-positive voltage), half transcellular ([[PTH]]).','—','<b>~60%, major site</b>; paracellular.'],
+['[[DCT]]','~8%, active transcellular, <b>[[PTH]]-stimulated</b>.','—','~5%.'],
+['Excreted','&lt;1%.','~15% (serves as urinary buffer).','~10%.'],
+['Loop diuretic','↓Ca reabsorption (↑excretion).','—','Mg wasting.'],
+['Thiazide','↑Ca reabsorption (↓excretion).','—','—']
+])}
+<div class="callout gold"><b>[[PTH]]:</b> ↑bone Ca release · ↑renal Ca reabsorption (DCT/TAL) · <b>↓phosphate reabsorption in the PCT</b> (phosphaturia) · ↑1α-hydroxylase → active vitamin D (calcitriol). Calcitriol ↑Ca and phosphate absorption and feeds back to ↓[[PTH]].<br><b>[[CKD]] link ${STAR}:</b> failing kidney makes less calcitriol and retains phosphate → hypocalcemia → ↑[[PTH]] (secondary hyperparathyroidism); the “mineral and bone disorder” of [[CKD]].</div>
+<div class="callout">Acidosis → less Ca bound to albumin → ↑ionized Ca²⁺. Alkalosis does the reverse (↓ionized Ca → tetany).</div>`});
+
+// ============ ACID-BASE
+PANELS.push({id:'ab',label:'Acid-base',html:()=>`
+<h2>Three numbers and the approach</h2>
+${tbl('t-nums',['Measure','Normal','Meaning'],[20,24,56],[
+['pH','7.35–7.45','&lt;7.35 acidemia; &gt;7.45 alkalemia. (Acidosis / alkalosis name the process.)'],
+['pCO₂','~40 mmHg','Respiratory component.'],
+['HCO₃⁻','~24 mEq/L','Metabolic component.'],
+['[[AG]]','Na⁺ − (Cl⁻ + HCO₃⁻) = 8–12','Only for metabolic acidosis.']
+])}
+<div class="callout"><b>Bootcamp’s steps:</b> (1) pH: acidemia or alkalemia? (2) HCO₃⁻ and pCO₂ above or below normal? (3) Which one explains the pH (primary disorder)? (4) If metabolic acidosis, calculate the [[AG]]. (5) Is the other variable compensating? (6) Find the cause. (7) Check for a mixed disorder. <b>Compensation never overshoots.</b></div>
+${tbl('t-comp',['Disorder','Primary','Compensation','Examples'],[18,14,32,36],[
+['Metabolic acidosis','↓HCO₃⁻','Hyperventilation → ↓pCO₂ (minutes–hours).','Diarrhea, [[RTA]], [[CKD]], ketoacidosis, lactic acidosis, toxins.'],
+['Metabolic alkalosis','↑HCO₃⁻','Hypoventilation → ↑pCO₂ (limited).','Vomiting, diuretics, volume contraction, Cl⁻ depletion.'],
+['Respiratory acidosis','↑pCO₂','Kidney ↑acid excretion + ↑HCO₃⁻ generation (days).','Hypoventilation: opioids, [[COPD]], neuromuscular weakness.'],
+['Respiratory alkalosis','↓pCO₂','Kidney ↓acid excretion, ↓HCO₃⁻ reclaim.','Anxiety, pain, pulmonary embolism, altitude, early salicylates.']
+])}
+<p class="sub"><b>Winter’s formula:</b> expected pCO₂ = 1.5 × HCO₃⁻ + 8 ± 2. A pCO₂ outside the range means a second (respiratory) disorder.</p>
+
+<h2>What the kidney does: two jobs</h2>
+${tbl('t-jobs',['Job','How','Net'],[20,56,24],[
+['1. Reclaim filtered HCO₃⁻|~4,400 mEq/day','[[PCT]] ~80%, [[TAL]] 10–15%, rest [[DCT]]/collecting duct. Apical <b>[[NHE3]]</b> secretes H⁺ → H⁺ + filtered HCO₃⁻ → H₂CO₃ → (luminal carbonic anhydrase IV) CO₂ + H₂O → CO₂ diffuses in → (cell carbonic anhydrase II) HCO₃⁻ + H⁺ → HCO₃⁻ leaves basolaterally via <b>[[NBC1]]</b>.','Prevents loss of base. <b>No net acid excreted.</b>'],
+['2. Make NEW HCO₃⁻','Excrete H⁺ buffered by <b>phosphate</b> (titratable acid) or <b>NH₄⁺</b>; the HCO₃⁻ made in the cell returns to blood.','Replaces HCO₃⁻ used buffering the daily fixed-acid load. Net acid excretion = titratable acid + NH₄⁺ − HCO₃⁻ excreted.']
+])}
+<div class="steps">
+${step('Buffers in urine','Phosphate vs ammonium',['<b>Phosphate (titratable acid):</b> fixed supply (~35–40 mEq/day left after [[PCT]] reabsorption). Not adjustable.','<b>NH₄⁺ (the adaptable buffer):</b> liver sends glutamine → [[PCT]] glutaminase → NH₄⁺ into lumen → <b>1 new HCO₃⁻ per NH₄⁺</b>.','Acidosis ↑glutaminase and phosphoenolpyruvate carboxykinase (PEPCK) → NH₄⁺ excretion rises from ~30–50 to <b>~500 mEq/day</b> over days.','Urine pH alone does not measure acid excretion.','<b>Urine anion gap</b> (Na + K − Cl) ${STAR}: negative = lots of NH₄⁺ (diarrhea); positive/near zero = impaired NH₄⁺ ([[RTA]]).'])}
+${step('Intercalated cells','Late DCT / cortical collecting duct',['<b>α-intercalated:</b> secretes H⁺ (V-[[ATPase]], H⁺/K⁺-[[ATPase]]), returns HCO₃⁻ to blood (acidosis). Only ~5% of H⁺ secretion but the steepest gradient (urine pH ~4.5). V-[[ATPase]] ↑ by aldosterone.','<b>β-intercalated:</b> secretes HCO₃⁻ via pendrin (alkalosis).','Direction first, transporters second.'])}
+</div>
+
+<h2>Anion gap: which acidosis?</h2>
+${tbl('t-ag',['Pattern','Why','Causes (Bootcamp)'],[18,24,58],[
+['<b>High gap</b>','Unmeasured anions pile up; Cl⁻ is not the counter-ion.','Methanol (vision changes), uremia ([[CKD]]), [[DKA]], propylene glycol (no visual symptoms, CNS depression), iron/isoniazid, lactic acidosis, ethylene glycol (sweet breath, calcium oxalate stones), salicylates.'],
+['<b>Normal gap</b> (hyperchloremic)','HCO₃⁻ is lost and Cl⁻ rises.','Diarrhea (HCO₃⁻ loss), [[RTA]], acetazolamide (↓HCO₃⁻ reabsorption), spironolactone and Addison disease (↓H⁺ secretion), saline (hyperchloremia), hyperalimentation.']
+])}
+<h2>Renal tubular acidosis</h2>
+${tbl('t-rta',['Type','Defect','K⁺','Urine pH','Clues / causes','Treatment'],[12,24,8,14,28,14],[
+['Type 1|distal','↓H⁺ secretion in distal tubule → ↓new HCO₃⁻ → normal-gap acidosis.','↓','&gt;5.5 (alkaline)','Nephrolithiasis, rickets/osteoporosis. Sjögren syndrome, rheumatoid arthritis, [[SLE]], amphotericin B.','Sodium bicarbonate.'],
+['Type 2|proximal','[[PCT]] cannot reabsorb HCO₃⁻ → bicarbonaturia → normal-gap acidosis.','↓','&lt;5.5 once below threshold; &gt;5.5 if HCO₃⁻ above threshold','Hypophosphatemic rickets. Fanconi, multiple myeloma, heavy metals, acetazolamide, topiramate.','Sodium bicarbonate, potassium citrate.'],
+['Type 4|hyperkalemic','↓Aldosterone or aldosterone resistance → hyperkalemia → ↓NH₃ made in [[PCT]] → ↓NH₄⁺ excretion.','<b>↑</b>','&lt;5.5','Hyporeninemic hypoaldosteronism (diabetic nephropathy), Addison, K⁺-sparing diuretics, [[TMP]]-sulfamethoxazole.','Fludrocortisone, furosemide.']
+])}
+<h2>Clinical links</h2>
+<ul style="font-size:.9rem;margin:0;padding-left:20px">
+<li><b>Diarrhea:</b> HCO₃⁻ lost in stool → normal-gap metabolic acidosis; kidney ↑NH₄⁺; lungs hyperventilate.</li>
+<li><b>Vomiting:</b> gastric HCl lost → metabolic alkalosis. Volume contraction + Cl⁻ depletion <b>maintain</b> it (↑[[NHE3]], ↑[[RAAS]], ↑H⁺ secretion, HCO₃⁻ reclaimed). Chloride-responsive (urine Cl⁻ low) → treat with saline. Hyperaldosteronism is chloride-resistant.</li>
+<li><b>Loop/thiazide diuretics:</b> metabolic alkalosis (carbonic anhydrase inhibitors and K⁺-sparing diuretics do not).</li>
+<li><b>Failing kidney:</b> cannot make enough NH₄⁺ → metabolic acidosis (high gap in advanced [[CKD]]).</li>
+<li><b>K⁺ link:</b> alkalemia → hypokalemia; acute acidemia → hyperkalemia.</li>
+<li><b>Respiratory acidosis in chronic hypoventilation:</b> HCO₃⁻ rises over days from renal compensation.</li></ul>
+
+<h2>Practice: identify, then explain</h2>
+${drill('1. pH 7.31, HCO₃⁻ 28, pCO₂ 48 (Bootcamp example 1).','Acidemia with high pCO₂ → <b>respiratory acidosis</b>. HCO₃⁻ above 24 = renal compensation (suggests it has been present for days).')}
+${drill('2. pH 7.25, HCO₃⁻ 11, pCO₂ 24 (Bootcamp example 2).','<b>Metabolic acidosis.</b> Winter: 1.5 × 11 + 8 = 24.5 ± 2 → expected pCO₂ 22.5–26.5; actual 24 = appropriate compensation.')}
+${drill('3. pH 7.15, HCO₃⁻ 9, pCO₂ 38 (Bootcamp example 3).','<b>Metabolic acidosis</b> with <b>inadequate respiratory compensation</b>. Expected pCO₂ = 1.5 × 9 + 8 = 21.5 ± 2; actual 38 is too high → superimposed respiratory acidosis (mixed).')}
+${drill('4. 55-year-old with diabetes, [[CKD]], [[HTN]]; nausea, abdominal pain, confusion. pH 7.27, pCO₂ 25, Na 138, K 4.9, Cl 110, HCO₃⁻ 10.','[[AG]] = 138 − 110 − 10 = <b>18 (high)</b>. Winter: 1.5 × 10 + 8 = 23 ± 2, actual 25 is appropriate. High-gap acidosis in a patient with [[CKD]] → <b>uremia</b> (Bootcamp answer).')}
+${drill('5. Several days of diarrhea: pH 7.29, pCO₂ 30, HCO₃⁻ 14, Na 140, Cl 114.','[[AG]] = 140 − 128 = 12 → <b>normal-gap</b> metabolic acidosis. Winter: 29 ± 2, so 30 is appropriate compensation.')}
+${drill('6. H⁺ secreted into the lumen combines with filtered HCO₃⁻ and a HCO₃⁻ returns to blood. Reclamation or new HCO₃⁻?','<b>Reclamation</b> of filtered HCO₃⁻; no net acid excreted.')}
+${drill('7. H⁺ excreted on phosphate, with a HCO₃⁻ returned to blood.','Net acid excretion with <b>new HCO₃⁻</b>, replacing base used buffering acid.')}`});
+
+// ============ MASTER
+PANELS.push({id:'master',label:'Disrupted → finding',search:1,html:()=>`
+<h2>The email’s question as a table</h2>
+<p class="sub">Search by disease, structure, or finding (e.g. “podocyte”, “K⁺”, “muddy”). Disease names match the pathology differentiator.</p>
+${tbl('t-master',['Disease / finding','Normal structure or function','What is disrupted','How that explains the patient','Key clue'],[14,19,22,28,17],[
+['[[MCD]]|nephrotic','Podocyte foot processes + negatively charged [[GBM]] keep albumin out.','Foot-process effacement; charge barrier lost.','Selective albuminuria → low albumin → edema, hyperlipidemia.','Normal light microscopy, effacement on EM, steroid-responsive (children).'],
+['[[FSGS]]|nephrotic','Podocytes maintain slit diaphragm and cover the capillary.','Podocyte injury and loss → segmental scar.','Non-selective heavy proteinuria; poor steroid response; may have [[HTN]].','Segmental sclerosis; [[HIV]], [[APOL1]], heroin ${STAR}.'],
+['Membranous nephropathy|nephrotic','[[GBM]] + podocyte surface form a clean outer layer.','Immune complexes deposit <b>under</b> the podocyte; [[GBM]] thickens.','Leaky barrier → nephrotic syndrome; clots (loses [[ATIII]]).','Anti-[[PLA2R]]; spike-and-dome.'],
+['Diabetic nephropathy|nephrotic','Normal [[GBM]] charge and mesangium; normal afferent/efferent balance.','[[GBM]] thickening, mesangial expansion, efferent hyaline arteriolosclerosis.','Albuminuria → nephrotic; ↑P<sub>GC</sub> (efferent) causes hyperfiltration early, scarring later.','Kimmelstiel-Wilson nodules; [[ACEi]]/[[ARB]] help.'],
+['[[PSGN]]|nephritic','Fenestrated endothelium + [[GBM]] keep red cells in.','Subepithelial immune deposits, complement, neutrophils → capillary wall injury.','Red cells cross; ↓[[GFR]] → Na/water retained → [[HTN]], edema, cola urine.','Low C3, humps on EM.'],
+['[[IgAN]]|nephritic','Mesangium supports capillary loops.','Mesangial IgA deposits.','Hematuria after infection.','Mesangial IgA on [[IF]].'],
+['Anti-[[GBM]] disease|nephritic, rapidly progressive','Type IV collagen in [[GBM]] (lungs and kidney).','Antibody attacks the collagen; crescents.','Rapid ↓[[GFR]], hematuria; lung hemorrhage.','Linear [[IgG]] on [[IF]].'],
+['Alport syndrome','Type IV collagen in [[GBM]], cochlea, eye.','Collagen defect ([[COL4A5]] / [[COL4A3]]).','Hematuria, progressive loss of [[GFR]], hearing loss.','“Basket-weave” [[GBM]] on EM.'],
+['Nephrotic edema, hyperlipidemia, clots, infections','Plasma proteins stay in blood.','Albumin, [[ATIII]] and [[IgG]] lost in urine.','↓oncotic pressure → edema; liver makes more lipoprotein; clotting/infection risk.','Fatty casts, oval fat bodies.'],
+['[[ADPKD]] ${STAR}','Normal tubules and a single-layer epithelium.','Cysts replace tubules; cysts compress normal tissue.','Concentrating defect, flank pain, hematuria, [[HTN]] (renin), ↓[[GFR]] over time.','Bilateral enlarged cystic kidneys.'],
+['[[ATN]]|intrinsic [[AKI]]','[[PCT]]/[[TAL]] epithelium reabsorbs Na and water and is metabolically very active.','Ischemic or toxic death of tubular cells; debris plugs tubules; filtrate leaks back; [[TGF]] constricts the afferent.','↓[[GFR]], cannot concentrate or reclaim Na (urine Na high, [[FENa]] &gt;2% ${STAR}).','Muddy brown granular casts.'],
+['[[AIN]]','Interstitium supports tubules; few cells.','Inflammatory infiltrate (often drug reaction).','Tubular dysfunction + ↓[[GFR]]; white cell casts, fever/rash.','[[NSAID]]s, antibiotics, [[PPI]].'],
+['Prerenal [[AKI]]','Adequate renal perfusion → P<sub>GC</sub>.','↓Flow → ↓P<sub>GC</sub>; tubules respond by retaining Na and water.','↓[[GFR]] with concentrated urine, low urine Na, [[BUN]]/creatinine ↑.','Hyaline casts; fix the volume.'],
+['Postrenal [[AKI]]','Ureter and bladder drain urine freely.','Obstruction ↑P<sub>BS</sub>.','↓[[GFR]], [[FF]] ↓; hydronephrosis.','Stones, [[BPH]], tumors.'],
+['[[CKD]]','Enough nephrons to filter, excrete acid and K⁺, make [[EPO]] and calcitriol.','Loss of nephron mass.','↓[[GFR]]; metabolic acidosis (↓NH₄⁺); hyperkalemia; anemia; mineral and bone disorder; [[HTN]].','Waxy/broad casts, small scarred kidneys.'],
+['Fanconi syndrome|type 2 [[RTA]]','[[PCT]] reclaims glucose, amino acids, phosphate, HCO₃⁻.','Global [[PCT]] transport failure.','Glucosuria with normal glucose, aminoaciduria, phosphaturia (rickets), bicarbonaturia (acidosis).','Myeloma, heavy metals, drugs.'],
+['[[RTA]] type 1','α-intercalated cells secrete H⁺ → acid urine, new HCO₃⁻.','Distal H⁺ secretion fails.','Normal-gap acidosis, urine pH &gt;5.5, ↓K⁺, stones.','Sjögren, amphotericin B.'],
+['[[RTA]] type 4','Aldosterone drives K⁺ secretion; K⁺ ↓ammoniagenesis.','↓Aldosterone or resistance.','Hyperkalemia suppresses NH₃ production → ↓NH₄⁺ → acidosis.','Diabetes, K⁺-sparing diuretics.'],
+['Diabetes mellitus: glucosuria','Glucose reclaimed by SGLT2 up to Tmax.','Filtered load exceeds Tmax.','Osmotic diuresis: polyuria, ↓volume; hyperosmolarity shifts K⁺ out.','Glucose &gt;~200 in urine.'],
+['Loop diuretics / Bartter','[[NKCC2]] reclaims NaCl and drives Ca/Mg/K reabsorption.','[[NKCC2]] blocked or defective.','Salt wasting, hypokalemia, metabolic alkalosis, hypercalciuria.','Low BP, ↑renin.'],
+['Thiazides / Gitelman','[[NCC]] reclaims NaCl; Ca reabsorbed in [[DCT]].','[[NCC]] blocked or defective.','Hypokalemia, alkalosis, hypocalciuria, hypomagnesemia.','Stones respond.'],
+['K⁺-sparing diuretics / Liddle','[[ENaC]] and aldosterone control distal Na and K⁺ secretion.','Blocked ([[ENaC]]/aldosterone) vs over-active ([[ENaC]], Liddle).','Hyperkalemia vs [[HTN]] + hypokalemia + alkalosis with low renin and aldosterone.','Amiloride treats Liddle.'],
+['[[SIADH]]','[[ADH]] responds to osmolarity.','Autonomous [[ADH]].','Water retained: hyponatremia, concentrated urine, euvolemic.','Head injury, lung tumor.'],
+['Central [[DI]]','Posterior pituitary releases [[ADH]].','No [[ADH]].','Dilute polyuria, hypernatremia.','Desmopressin corrects.'],
+['Nephrogenic [[DI]]','Collecting duct responds via V2/[[AQP2]].','Receptor/channel failure.','Dilute polyuria despite [[ADH]].','Lithium, hypercalcemia ${STAR}.'],
+['Adrenal insufficiency','Aldosterone retains Na, excretes K⁺ and H⁺.','Low aldosterone.','Salt wasting, hyperkalemia, normal-gap acidosis, hyposmotic contraction.','Addison disease.'],
+['Vomiting|metabolic alkalosis','Stomach HCl, kidney balances volume and Cl⁻.','Loss of H⁺, Cl⁻, volume.','Volume contraction ↑aldosterone, ↑[[NHE3]] → HCO₃⁻ kept; ↑pH, ↓K⁺.','Urine Cl⁻ low; responds to saline.'],
+['Diarrhea|normal-gap acidosis','Gut HCO₃⁻ absorbed.','HCO₃⁻ lost in stool.','Low HCO₃⁻, Cl⁻ rises, compensatory hyperventilation.','Negative urine anion gap.'],
+['ACE inhibitor / NSAID [[AKI]]','Efferent constriction and afferent dilation hold [[GFR]].','One or both removed.','P<sub>GC</sub> falls in a volume-depleted patient.','Rising creatinine after starting the drug.'],
+['Heart failure','Cardiac output delivers renal perfusion; [[RAAS]] shuts off at ~5 L/min.','Output too low.','[[RAAS]] keeps retaining Na and water → edema.','Edema, orthopnea.'],
+['Hyperparathyroidism ${STAR}','[[PTH]] ↑Ca reabsorption, ↓phosphate reabsorption.','Excess [[PTH]].','Hypercalcemia, phosphaturia, stones.','↑Ca, ↓phosphate.'],
+['Neurogenic bladder','Pelvic parasympathetic (S2–S4) contracts detrusor; hypogastric stores; pudendal controls external sphincter.','Sacral cord/nerve injury vs cord injury above sacrum vs loss of cortical inhibition.','Atonic (areflexic): overflow incontinence. Automatic: reflex voiding, no control. Uninhibited: frequent uncontrolled voiding.','Tabes dorsalis, cauda equina.']
+])}`});
+
+PANELS.push({id:'abbr',label:'Abbreviation key',html:()=>`<h2>Abbreviation key</h2><p class="sub">Every abbreviation is spelled out at first use in each tab. This is the full list.</p><div class="kg">`+Object.keys(AB).sort((a,b)=>a.localeCompare(b)).map(k=>'<div><b>'+k+'</b> — '+AB[k]+'</div>').join('')+'</div>'});
+
+// ---------- mount
+const tabs=document.getElementById('tabs'),pan=document.getElementById('panels');
+PANELS.forEach((p,i)=>{
+ const b=document.createElement('button');b.className='tab-btn'+(i?'':' active');b.innerHTML=p.label;b.dataset.t=p.id;tabs.appendChild(b);
+ const d=document.createElement('div');d.className='panel'+(i?'':' active');d.id='p-'+p.id;
+ const seen=new Set();
+ const tool=p.search?'<div class="toolbar"><input type="search" placeholder="Search this tab…" data-for="'+p.id+'"></div><div class="count" id="cnt-'+p.id+'"></div>':'';
+ let hh=p.html().split('${STAR}').join(STAR);if(p.id!=='abbr'){hh=hh.replace(/(>|^)([^<]+)/g,(m,a,t)=>a+t.replace(/(?<!\[\[)\b(c-ANCA|p-ANCA|(?!(?:IV|AL|AA|III|II)\b)[A-Za-z0-9]*[A-Z][A-Za-z0-9]*)\b(?!\]\])/g,w=>(w in AB)?'[['+w+']]':w));}
+ d.innerHTML='<div class="wrap">'+tool+expand(hh,seen)+'</div>';
+ pan.appendChild(d);});
+tabs.addEventListener('click',e=>{const b=e.target.closest('.tab-btn');if(!b)return;
+ document.querySelectorAll('.tab-btn').forEach(x=>x.classList.toggle('active',x===b));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id==='p-'+b.dataset.t));window.scrollTo(0,0);});
+function applyFilter(id){const p=document.getElementById('p-'+id);const q=(p.querySelector('input[type=search]')||{value:''}).value.toLowerCase().trim();let n=0,t=0;
+ p.querySelectorAll('tbody tr').forEach(tr=>{t++;const ok=!q||tr.textContent.toLowerCase().includes(q);tr.style.display=ok?'':'none';if(ok)n++;});
+ const c=document.getElementById('cnt-'+id);if(c)c.textContent=n+' of '+t+' rows';}
+document.querySelectorAll('input[type=search]').forEach(i=>{i.addEventListener('input',()=>applyFilter(i.dataset.for));applyFilter(i.dataset.for);});
+function setTabH(){document.documentElement.style.setProperty('--tabh',tabs.offsetHeight+'px');}
+setTabH();addEventListener('resize',setTabH);
+
+</script>
+</body>
+</html>
