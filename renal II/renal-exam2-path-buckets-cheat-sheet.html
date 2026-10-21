@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Renal II Exam 2 — Pathology Bucket Cheat Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f1e6; --cream-card:#fffdf8; --forest-dark:#1f3d2e; --forest:#2f5d43;
+  --sage:#7ba384; --sage-light:#e4ecdf; --border:#d8cfb8; --accent:#b3562a;
+  --text-main:#26291f; --text-soft:#5a5f4f;
+  --obs:#2b5a8c; --obs-light:#e3ecf4;
+  --rst:#b3562a; --rst-light:#fbeee2;
+  --neo:#6b3fa0; --neo-light:#eee6f6;
+  --aty:#2f8a7a; --aty-light:#e2f3ef;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Lora',Georgia,serif;background:var(--cream);color:var(--text-main);line-height:1.5;}
+h1,h2,h3,h4{font-family:'IBM Plex Mono',monospace;color:var(--forest-dark);letter-spacing:.02em;}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px 70px;}
+header.hero{background:linear-gradient(135deg,var(--forest-dark),var(--forest));color:#f6f1e6;padding:46px 20px 30px;text-align:center;}
+header.hero h1{color:#fff;font-size:1.7rem;margin:0 0 6px;}
+header.hero p{color:#dfe9de;font-family:'Lora',serif;font-size:.98rem;margin:4px 0;}
+header.hero .src{font-size:.8rem;color:#b9d0bb;margin-top:10px;font-family:'IBM Plex Mono',monospace;}
+nav.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;margin:24px 0;padding:14px 18px;font-size:.88rem;}
+nav.toc h2{font-size:.92rem;margin:0 0 8px;}
+nav.toc .toc-row{display:flex;flex-wrap:wrap;gap:6px 16px;}
+nav.toc a{color:var(--forest);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;}
+nav.toc a:hover{text-decoration:underline;}
+
+.bucket{border-radius:14px;margin:30px 0;overflow:hidden;border:1px solid var(--border);}
+.bucket-head{padding:18px 22px;color:#fff;}
+.bucket-head h2{color:#fff;margin:0 0 4px;font-size:1.25rem;}
+.bucket-head .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;opacity:.85;text-transform:uppercase;letter-spacing:.07em;}
+.bucket-body{background:var(--cream-card);padding:16px 22px 22px;}
+.bucket-hy{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 18px;}
+@media(max-width:620px){.bucket-hy{grid-template-columns:1fr;}}
+.hy-box{border-radius:8px;padding:10px 13px;font-size:.84rem;}
+.hy-box b.hy-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+
+.subbucket{border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:12px 16px 14px;background:#fffefb;}
+.subbucket h3{font-size:.95rem;margin:0 0 2px;}
+.sub-note{font-size:.82rem;color:var(--text-soft);margin:0 0 10px;font-style:italic;}
+
+.dz-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:700px){.dz-grid{grid-template-columns:1fr;}}
+.dz-card{background:var(--sage-light);border-radius:7px;padding:8px 11px;font-size:.84rem;}
+.dz-name{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.8rem;color:var(--forest-dark);display:block;margin-bottom:2px;}
+.dz-ids{font-size:.81rem;}
+.dz-ids b{color:var(--text-main);}
+
+.spectrum{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.82rem;margin:6px 0;}
+.spectrum .step{background:#fff;border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;max-width:100%;}
+.spectrum .arrow{color:var(--text-soft);}
+
+.pearl{background:#fdf2e4;border-left:4px solid var(--accent);border-radius:6px;padding:9px 13px;margin:12px 0;font-size:.86rem;}
+.pearl-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+.back-btn{position:fixed;top:14px;left:14px;background:var(--forest-dark);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;z-index:50;}
+footer{text-align:center;padding:26px;font-size:.78rem;color:var(--text-soft);}
+.master-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0;}
+.master-table th{background:var(--forest-dark);color:#fff;padding:6px 9px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.7rem;}
+.master-table td{padding:6px 9px;border-bottom:1px solid var(--border);}
+.master-table tr:nth-child(even) td{background:var(--sage-light);}
+
+.sidenav-toggle{position:fixed;top:14px;right:14px;background:var(--forest);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;cursor:pointer;z-index:50;}
+.sidenav-panel{position:fixed;top:56px;right:14px;background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:14px;max-height:78vh;overflow-y:auto;width:250px;display:none;z-index:49;box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.sidenav-panel.open{display:block;}
+.sidenav-panel h4{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin:12px 0 4px;}
+.sidenav-panel h4:first-child{margin-top:0;}
+.sidenav-panel a{display:block;font-size:.82rem;color:var(--text-main);text-decoration:none;padding:4px 6px;border-radius:5px;}
+.sidenav-panel a:hover{background:var(--sage-light);}
+.c1 .bucket-head{background:#2b5a8c;} .c1 .hy-box{background:#e3ecf4;color:#1b3a57;} .c1 .hy-box b.hy-label{color:#2b5a8c;} .c1 .subbucket h3{color:#2b5a8c;} .c1 .dz-card{background:#e3ecf4;}
+.c2 .bucket-head{background:#6b3fa0;} .c2 .hy-box{background:#eee6f6;color:#452869;} .c2 .hy-box b.hy-label{color:#6b3fa0;} .c2 .subbucket h3{color:#6b3fa0;} .c2 .dz-card{background:#eee6f6;}
+.c3 .bucket-head{background:#b3562a;} .c3 .hy-box{background:#fbeee2;color:#6e331a;} .c3 .hy-box b.hy-label{color:#b3562a;} .c3 .subbucket h3{color:#b3562a;} .c3 .dz-card{background:#fbeee2;}
+.c4 .bucket-head{background:#a23b5a;} .c4 .hy-box{background:#f8e4ea;color:#5d1f33;} .c4 .hy-box b.hy-label{color:#a23b5a;} .c4 .subbucket h3{color:#a23b5a;} .c4 .dz-card{background:#f8e4ea;}
+.c5 .bucket-head{background:#2f8a7a;} .c5 .hy-box{background:#e2f3ef;color:#1c5349;} .c5 .hy-box b.hy-label{color:#2f8a7a;} .c5 .subbucket h3{color:#2f8a7a;} .c5 .dz-card{background:#e2f3ef;}
+.c6 .bucket-head{background:#7a5c1e;} .c6 .hy-box{background:#f4ecd6;color:#4d3a10;} .c6 .hy-box b.hy-label{color:#7a5c1e;} .c6 .subbucket h3{color:#7a5c1e;} .c6 .dz-card{background:#f4ecd6;}
+.c7 .bucket-head{background:#3f6b2f;} .c7 .hy-box{background:#e6f0df;color:#26421c;} .c7 .hy-box b.hy-label{color:#3f6b2f;} .c7 .subbucket h3{color:#3f6b2f;} .c7 .dz-card{background:#e6f0df;}
+.c8 .bucket-head{background:#4a4f8f;} .c8 .hy-box{background:#e6e8f6;color:#2b2e5c;} .c8 .hy-box b.hy-label{color:#4a4f8f;} .c8 .subbucket h3{color:#4a4f8f;} .c8 .dz-card{background:#e6e8f6;}
+.hero-sub{font-size:.82rem;}
+.gloss{font-size:.8rem;columns:2;column-gap:24px;} @media(max-width:620px){.gloss{columns:1;}}
+.rule{border-left:3px solid var(--accent);padding:2px 10px;margin:4px 0;font-size:.82rem;}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-btn">← Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">Sections ☰</button>
+<div class="sidenav-panel" id="sidenavPanel">
+<h4>1. Lower Urinary Tract (Ureter &amp; Bladder)</h4>
+<a href="#lut-obs">Ureteral &amp; Obstructive Lesions</a>
+<a href="#lut-cys">Cystitis Spectrum</a>
+<a href="#lut-meta">Metaplasias</a>
+<a href="#lut-ca">Bladder Carcinoma</a>
+<h4>2. Renal Tumors</h4>
+<a href="#rt-ben">Benign Renal Tumors</a>
+<a href="#rt-rcc">Renal Cell Carcinoma (RCC) Subtypes</a>
+<a href="#rt-ped">Pediatric &amp; Pelvic</a>
+<h4>3. Renal Vascular Disease, TMA &amp; Vasculitis</h4>
+<a href="#rv-neph">Nephrosclerosis &amp; Ischemia</a>
+<a href="#rv-ras">Renal Artery Stenosis &amp; Salt-Handling Syndromes</a>
+<a href="#rv-tma">Thrombotic Microangiopathy (TMA)</a>
+<a href="#rv-vas">ANCA &amp; Other Vasculitis</a>
+<h4>4. Hypertension &amp; Secondary Causes</h4>
+<a href="#htn-dx">Diagnosis &amp; Patterns</a>
+<a href="#htn-organ">Organ Damage &amp; Crisis</a>
+<a href="#htn-sec">Secondary Hypertension Clues</a>
+<h4>5. AKI, Obstruction &amp; Stones</h4>
+<a href="#aki-cat">AKI by Category</a>
+<a href="#aki-mgmt">Workup &amp; Management (Dr. Bell)</a>
+<a href="#aki-stone">Nephrolithiasis</a>
+<h4>6. CKD &amp; Its Complications</h4>
+<a href="#ckd-sys">Complications</a>
+<a href="#ckd-cyst">Cystic &amp; Hereditary</a>
+<a href="#ckd-rrt">Dialysis &amp; Renal Dosing</a>
+<h4>7. Sodium, Water &amp; Electrolytes</h4>
+<a href="#na-hyper">Hypernatremia</a>
+<a href="#na-hypo">Hyponatremia (<135)</a>
+<a href="#na-k">Potassium, Magnesium, Phosphorus</a>
+<h4>8. Acid–Base Disorders</h4>
+<a href="#ab-hag">High Anion Gap Acidosis (MUDPILES / GOLDMARK)</a>
+<a href="#ab-nag">Normal Anion Gap Acidosis &amp; RTA</a>
+<a href="#ab-alk">Metabolic Alkalosis</a>
+<a href="#ab-comp">Compensation Quick Rules</a>
+<h4>Reference</h4><a href="#gloss">Abbreviations</a>
+</div>
+<header class="hero">
+<h1>Renal II Exam 2 — Pathology Bucket Cheat Sheet</h1>
+<p>Lower Tract · Tumors · Vascular · Hypertension · AKI &amp; Stones · CKD · Sodium &amp; Electrolytes · Acid–Base</p>
+<p class="hero-sub">Built from Dr. Kemp (pathology), Dr. Bell (AKI &amp; stones), Dr. Dietrich (CKD), Dr. Riesberg (sodium &amp; electrolytes) and Dr. Kinder (hypertension &amp; acid–base). Imaging, labs and key values are folded into each bucket.</p>
+<p class="src">Quick-reference organizational guide — not a replacement for the full study guides</p>
+</header>
+<div class="wrap">
+<nav class="toc"><h2>Jump to a bucket</h2><div class="toc-row">
+<a href="#lut">1. Lower Urinary Tract (Ureter &amp; Bladder)</a>
+<a href="#rt">2. Renal Tumors</a>
+<a href="#rv">3. Renal Vascular Disease, TMA &amp; Vasculitis</a>
+<a href="#htn">4. Hypertension &amp; Secondary Causes</a>
+<a href="#aki">5. AKI, Obstruction &amp; Stones</a>
+<a href="#ckd">6. CKD &amp; Its Complications</a>
+<a href="#na">7. Sodium, Water &amp; Electrolytes</a>
+<a href="#ab">8. Acid–Base Disorders</a>
+</div></nav>
+<div class="pearl"><span class="pearl-label">How to use this</span>
+Each bucket opens with its own mechanism and the high-yield numbers/buzzwords. Know those cold and the diseases underneath become variations on one idea. Imaging, lab and urine findings sit <b>inside</b> the disease they diagnose, not in a separate section.</div>
+<section class="bucket c1" id="lut">
+<div class="bucket-head"><span class="tag">Bucket 1</span><h2>Lower Urinary Tract (Ureter &amp; Bladder)</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Disease of the <b>conduit and reservoir</b> — obstruction, infection/inflammation, then metaplasia → neoplasia. Think: <i>what irritates the urothelium?</i></div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>Urothelial carcinoma</b> = 95–97% of bladder cancer. Squamous cell = <b>schistosomiasis / chronic Foley (catheter)</b>. Cystitis: <b>no white blood cell (WBC) casts</b> (that's pyelonephritis).</div>
+</div>
+<div class="subbucket" id="lut-obs">
+<h3>Ureteral &amp; Obstructive Lesions</h3>
+<p class="sub-note">Hydronephrosis risk — look for the upstream kidney</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">UPJ obstruction</span><span class="dz-ids">Most common congenital cause of hydronephrosis in infants/children; ureteropelvic junction (UPJ). Imaging: dilated renal pelvis, normal ureter. Ultrasound first.</span></div>
+<div class="dz-card"><span class="dz-name">Retroperitoneal fibrosis</span><span class="dz-ids">Fibrous encasement of ureters (medial deviation on imaging) → obstruction. Idiopathic (IgG4 link), drugs, malignancy.</span></div>
+<div class="dz-card"><span class="dz-name">Diverticula</span><span class="dz-ids">Outpouching of bladder wall; urine stasis → <b>recurrent infection, stones, carcinoma</b> risk.</span></div>
+</div>
+</div>
+<div class="subbucket" id="lut-cys">
+<h3>Cystitis Spectrum</h3>
+<p class="sub-note">Know the organism / trigger / histology hook for each</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Bacterial cystitis</span><span class="dz-ids"><b>E. coli ~90%</b>. Dysuria, frequency, urgency. Urinalysis (UA): <b>pyuria + bacteriuria</b>; leukocyte esterase/nitrite. <b>No WBC casts</b> (casts = upper tract).</span></div>
+<div class="dz-card"><span class="dz-name">Hemorrhagic cystitis</span><span class="dz-ids"><b>Cyclophosphamide</b> (toxic metabolite <b>acrolein</b>) or <b>adenovirus</b>; hematuria. Prevent with mesna/hydration.</span></div>
+<div class="dz-card"><span class="dz-name">Interstitial cystitis</span><span class="dz-ids">Chronic suprapubic pain with filling, relieved by voiding; sterile urine; <b>Hunner ulcers</b>; mast cells.</span></div>
+<div class="dz-card"><span class="dz-name">Malakoplakia</span><span class="dz-ids">Chronic bacterial (E. coli) infection, defective macrophage killing; soft yellow plaques. <b>Michaelis–Gutmann bodies</b> (calcified, targetoid).</span></div>
+<div class="dz-card"><span class="dz-name">Polypoid cystitis</span><span class="dz-ids">Edematous polyps from irritation (catheter) — benign mimic of carcinoma.</span></div>
+</div>
+</div>
+<div class="subbucket" id="lut-meta">
+<h3>Metaplasias</h3>
+<p class="sub-note">Chronic irritation → change of epithelium (precursor to neoplasia)</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Cystitis cystica / glandularis</span><span class="dz-ids">Nests of urothelium (cystica) or glandular/intestinal-type (glandularis) in lamina propria; intestinal type → adenocarcinoma risk.</span></div>
+<div class="dz-card"><span class="dz-name">Squamous metaplasia</span><span class="dz-ids">Chronic irritation (stones, <b>Foley</b>, <b>Schistosoma haematobium</b>) → squamous cell carcinoma.</span></div>
+<div class="dz-card"><span class="dz-name">Nephrogenic metaplasia</span><span class="dz-ids">Tubule-like proliferation after injury/surgery; benign mimic.</span></div>
+</div>
+</div>
+<div class="subbucket" id="lut-ca">
+<h3>Bladder Carcinoma</h3>
+<p class="sub-note">Hematuria (painless) in older smoker = urothelial until proven otherwise</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Urothelial carcinoma</span><span class="dz-ids"><b>95–97%</b>. Risks: <b>smoking, aniline dyes, cyclophosphamide, phenacetin</b>. Low-grade papillary: <b>9p/9q</b> loss (FGFR3). High-grade/CIS: <b>TP53</b>. <b>Painless gross hematuria</b>. Carcinoma in situ (CIS) progresses <b>50–75%</b>. Treatment: TURBT ± <b>BCG</b> (bacillus Calmette–Guérin) intravesical.</span></div>
+<div class="dz-card"><span class="dz-name">Squamous cell carcinoma</span><span class="dz-ids"><b>Schistosomiasis</b> (Egypt) or <b>chronic Foley/stones</b>; keratinizing; usually advanced at diagnosis.</span></div>
+<div class="dz-card"><span class="dz-name">Adenocarcinoma</span><span class="dz-ids">Urachal remnant (dome) or glandularis; rare.</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bucket c2" id="rt">
+<div class="bucket-head"><span class="tag">Bucket 2</span><h2>Renal Tumors</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Mostly <b>tubular epithelium</b> (adults) vs <b>embryonal/blastemal</b> (kids). Syndrome-driven genes: VHL, MET, WT1.</div>
+<div class="hy-box"><b class="hy-label">High yield</b>Classic RCC triad: <b>flank pain + hematuria + palpable mass</b> (only ~10%). <b>Paraneoplastic</b>: EPO (polycythemia), PTHrP (hypercalcemia), renin (HTN), ACTH. RCC invades the <b>renal vein / IVC</b>.</div>
+</div>
+<div class="subbucket" id="rt-ben">
+<h3>Benign Renal Tumors</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Angiomyolipoma</span><span class="dz-ids">Blood vessels + smooth muscle + fat; <b>tuberous sclerosis (TSC)</b>; HMB-45/<b>desmin+</b>. Imaging: fat density on CT. Bleeding risk if >4 cm.</span></div>
+<div class="dz-card"><span class="dz-name">Oncocytoma</span><span class="dz-ids">Mahogany-brown with <b>central scar</b> on gross/CT; eosinophilic mitochondria-rich cells; <b>loss of chromosomes 1, 14, Y</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Papillary adenoma</span><span class="dz-ids"><5 mm, incidental, autopsy finding.</span></div>
+<div class="dz-card"><span class="dz-name">Medullary fibroma / Mesoblastic nephroma</span><span class="dz-ids">Fibroma = incidental. <b>Mesoblastic nephroma</b> = most common renal tumor in <b>infants <3 mo</b>.</span></div>
+<div class="dz-card"><span class="dz-name">JG cell tumor (reninoma)</span><span class="dz-ids">Renin-secreting → <b>hypertension + hypokalemia</b> (secondary hyperaldosteronism).</span></div>
+</div>
+</div>
+<div class="subbucket" id="rt-rcc">
+<h3>Renal Cell Carcinoma (RCC) Subtypes</h3>
+<p class="sub-note">Genetics + gross/histology hook</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Clear cell (70–80%)</span><span class="dz-ids"><b>VHL loss, 3p25</b>; polygonal clear cells (lipid/glycogen), golden-yellow with hemorrhage; sporadic or von Hippel–Lindau (VHL) disease.</span></div>
+<div class="dz-card"><span class="dz-name">Papillary (10–15%)</span><span class="dz-ids"><b>MET (7q31)</b>, trisomy 7/17; psammoma bodies, foamy macrophages; <b>often multifocal/bilateral</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Chromophobe (5%)</span><span class="dz-ids">Chromosome losses; perinuclear halo; <b>Hale's colloidal iron +</b>; best prognosis. Birt–Hogg–Dubé.</span></div>
+<div class="dz-card"><span class="dz-name">Collecting duct / Medullary</span><span class="dz-ids">Medullary: young Black pts with <b>sickle cell trait</b>; aggressive. Collecting duct: Bellini ducts, poor outcome.</span></div>
+<div class="dz-card"><span class="dz-name">Staging</span><span class="dz-ids">Tumor (T) stage: <b>≤7 cm = T1</b>, >7 cm = T2; perirenal/renal vein extension = T3; adrenal/beyond Gerota = T4.</span></div>
+</div>
+</div>
+<div class="subbucket" id="rt-ped">
+<h3>Pediatric &amp; Pelvic</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Wilms tumor (nephroblastoma)</span><span class="dz-ids">Peak age <b>2–5 yr</b>; triphasic (blastema, epithelial, stromal). <b>WT1</b> (11p13). Syndromes: <b>WAGR</b> (Wilms, aniridia, genitourinary anomalies, retardation), <b>Denys–Drash</b> (WT1; gonadal dysgenesis + early nephropathy), <b>Beckwith–Wiedemann</b> (11p15; macroglossia, hemihypertrophy). <b>Anaplasia (TP53)</b> = poor prognosis.</span></div>
+<div class="dz-card"><span class="dz-name">Renal pelvis urothelial carcinoma</span><span class="dz-ids">Same biology as bladder urothelial; <b>analgesic (phenacetin) nephropathy</b>, smoking; hematuria + hydronephrosis.</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bucket c3" id="rv">
+<div class="bucket-head"><span class="tag">Bucket 3</span><h2>Renal Vascular Disease, TMA &amp; Vasculitis</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Anything that narrows or injures the <b>renal vasculature</b> → ischemia, hypertension or glomerular injury.</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>Arteriolar</b> nephrosclerosis = hyaline (benign) vs <b>hyperplastic ('onion-skin')</b> in malignant HTN. <b>TTP</b> = ADAMTS13; <b>HUS</b> = Shiga toxin/factor H; <b>PT/PTT normal</b> in both. <b>c-ANCA = PR3 = GPA; p-ANCA = MPO = MPA</b>.</div>
+</div>
+<div class="subbucket" id="rv-neph">
+<h3>Nephrosclerosis &amp; Ischemia</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Arterial nephrosclerosis</span><span class="dz-ids">Atherosclerosis/intimal thickening of larger arteries → <b>fine granular surface</b>, scarring.</span></div>
+<div class="dz-card"><span class="dz-name">Benign arteriolar</span><span class="dz-ids"><b>Hyaline arteriolosclerosis</b> (HTN, diabetes) → symmetrically shrunken, finely granular kidneys.</span></div>
+<div class="dz-card"><span class="dz-name">Malignant HTN</span><span class="dz-ids"><b>Hyperplastic arteriolitis (onion-skin)</b>, fibrinoid necrosis; <b>flea-bitten</b> kidney; BP >180/120 + organ damage.</span></div>
+<div class="dz-card"><span class="dz-name">Atheroembolism</span><span class="dz-ids">Cholesterol clefts after aortic catheterization; livedo reticularis, eosinophilia, ↑ creatinine weeks later.</span></div>
+<div class="dz-card"><span class="dz-name">Diffuse cortical necrosis</span><span class="dz-ids">Septic shock/obstetric catastrophe (abruption); DIC; patchy → diffuse cortical infarct.</span></div>
+</div>
+</div>
+<div class="subbucket" id="rv-ras">
+<h3>Renal Artery Stenosis &amp; Salt-Handling Syndromes</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Atherosclerotic RAS</span><span class="dz-ids">Older men; proximal; abdominal bruit; <b>creatinine rises after ACE inhibitor/ARB</b> (bilateral). Imaging: duplex, CT/MR angiography. Kidney on affected side <b>shrinks</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Fibromuscular dysplasia (FMD)</span><span class="dz-ids"><b>Young women</b>; mid-distal artery; <b>'string of beads'</b> on angiography; angioplasty works well.</span></div>
+<div class="dz-card"><span class="dz-name">Bartter</span><span class="dz-ids">Loop (NKCC2) defect → <b>hypokalemia, metabolic alkalosis, hypercalciuria</b>; mimics loop diuretic.</span></div>
+<div class="dz-card"><span class="dz-name">Gitelman</span><span class="dz-ids">Thiazide (NCC) defect → hypokalemia, <b>hypomagnesemia, hypocalciuria</b>; mimics thiazide.</span></div>
+<div class="dz-card"><span class="dz-name">Liddle</span><span class="dz-ids">ENaC gain-of-function → <b>HTN, hypokalemia, alkalosis, low renin/aldosterone</b>; treat with amiloride.</span></div>
+</div>
+</div>
+<div class="subbucket" id="rv-tma">
+<h3>Thrombotic Microangiopathy (TMA)</h3>
+<p class="sub-note">Microangiopathic hemolytic anemia + low platelets + organ injury</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">TTP</span><span class="dz-ids"><b>ADAMTS13</b> deficiency/antibody; <b>fever, neuro, renal, anemia, thrombocytopenia (FAT RN)</b>; schistocytes; <b>PT/PTT normal</b>.</span></div>
+<div class="dz-card"><span class="dz-name">HUS</span><span class="dz-ids">Kids; <b>Shiga toxin (E. coli O157:H7)</b> — bloody diarrhea then AKI; atypical HUS = <b>complement factor H</b>.</span></div>
+</div>
+</div>
+<div class="subbucket" id="rv-vas">
+<h3>ANCA &amp; Other Vasculitis</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">GPA (Wegener)</span><span class="dz-ids"><b>c-ANCA / PR3</b>; upper airway + lung + <b>rapidly progressive GN (RPGN)</b>; <b>granulomas</b>.</span></div>
+<div class="dz-card"><span class="dz-name">MPA</span><span class="dz-ids"><b>p-ANCA / MPO</b>; kidney + lung capillaritis; <b>no granulomas</b>.</span></div>
+<div class="dz-card"><span class="dz-name">EGPA</span><span class="dz-ids">Asthma + eosinophilia + p-ANCA; granulomas.</span></div>
+<div class="dz-card"><span class="dz-name">PAN</span><span class="dz-ids">Medium-vessel; <b>not ANCA+</b>; hepatitis B; spares lung; renal microaneurysms.</span></div>
+<div class="dz-card"><span class="dz-name">IgA vasculitis (HSP)</span><span class="dz-ids">Kids; palpable purpura, abdominal pain, arthralgia, nephritis.</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bucket c4" id="htn">
+<div class="bucket-head"><span class="tag">Bucket 4</span><h2>Hypertension &amp; Secondary Causes</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Clinical thinking (Dr. Kinder): classify the BP, confirm out of office, then ask <i>is there a secondary cause?</i> Clues drive the workup.</div>
+<div class="hy-box"><b class="hy-label">High yield</b>Categories: normal <120/80; elevated 120–129/<80; <b>stage 1 130–139/80–89</b>; <b>stage 2 ≥140/90</b>; <b>crisis ≥180/≥120</b> — with organ damage = <b>emergency</b>. Goal <b><130/80</b>. <b>ABPM</b> = gold standard.</div>
+</div>
+<div class="subbucket" id="htn-dx">
+<h3>Diagnosis &amp; Patterns</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Measurement</span><span class="dz-ids">Both arms (diff >20 → investigate); ≥2 readings on ≥2 occasions; <b>orthostatic</b> BP in elderly/diabetic.</span></div>
+<div class="dz-card"><span class="dz-name">ABPM normals</span><span class="dz-ids">24 h <130/80; day <135/85; <b>night <120/70</b>. <b>Dipper</b> ≥10% drop; non-dipper; <b>reverse dipper</b>. Nighttime HTN = strongest predictor.</span></div>
+<div class="dz-card"><span class="dz-name">White-coat vs masked</span><span class="dz-ids">White-coat: office high, home <b><125/75</b> (no treatment). <b>Masked</b>: office normal, home high — <b>same risk as sustained</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Treat threshold</span><span class="dz-ids">Stage 2 → drugs. Stage 1 → drugs if <b>PREVENT 10-yr CVD ≥7.5%</b>, CVD, CKD, diabetes.</span></div>
+<div class="dz-card"><span class="dz-name">uACR</span><span class="dz-ids"><30 normal; 30–300 elevated; <b>>300 severe</b>. Baseline labs: CBC, CMP, lipids, UA, ECG (LVH), TSH.</span></div>
+</div>
+</div>
+<div class="subbucket" id="htn-organ">
+<h3>Organ Damage &amp; Crisis</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Retinopathy</span><span class="dz-ids">AV nicking, <b>copper wiring</b>, <b>cotton-wool spots</b>, flame hemorrhages, <b>papilledema</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Brain / heart / kidney</span><span class="dz-ids">Lacunar stroke (thalamus, basal ganglia), ICH; LVH → diastolic dysfunction; nephrosclerosis → CKD, albuminuria.</span></div>
+<div class="dz-card"><span class="dz-name">Emergency</span><span class="dz-ids">Chest pain, confusion, dyspnea, seizure, AKI → ICU, IV agents. Think <b>dissection, eclampsia, pheochromocytoma, stroke, pulmonary edema</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Asymptomatic severe</span><span class="dz-ids">Restart oral meds; follow up ~2 weeks; no rapid lowering.</span></div>
+</div>
+</div>
+<div class="subbucket" id="htn-sec">
+<h3>Secondary Hypertension Clues</h3>
+<p class="sub-note">~5% of HTN; bimodal (children, >65)</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Suspect when</span><span class="dz-ids">Age <b><25 or >65</b>; <b>≥3 drugs</b> (resistant); bruit; unprovoked <b>hypokalemia</b>; severe initial HTN.</span></div>
+<div class="dz-card"><span class="dz-name">Renal artery stenosis</span><span class="dz-ids">Bruit, <b>flash pulmonary edema</b>, ↑ Cr after ACE inhibitor. <b>FMD</b>: young woman, string of beads.</span></div>
+<div class="dz-card"><span class="dz-name">Primary aldosteronism (Conn)</span><span class="dz-ids">Adenoma 70%, hyperplasia 25%. <b>Hypokalemia</b>, ↑ aldosterone/renin ratio <b>>20</b>; adrenal CT; adrenal vein sampling.</span></div>
+<div class="dz-card"><span class="dz-name">Pheochromocytoma</span><span class="dz-ids">Spells: <b>tachycardia, sweat, headache, pallor</b>; plasma <b>free metanephrines</b>; CT; <b>α-block before β-block</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Cushing</span><span class="dz-ids">Moon facies, striae, buffalo hump; late-night salivary cortisol / dexamethasone suppression.</span></div>
+<div class="dz-card"><span class="dz-name">Coarctation</span><span class="dz-ids"><b>Brachial-femoral delay</b>, rib notching on CXR, bicuspid aortic valve.</span></div>
+<div class="dz-card"><span class="dz-name">OSA / drugs / thyroid</span><span class="dz-ids">OSA = snoring, non-dipping. NSAIDs, OCPs, decongestants, cyclosporine, VEGF inhibitors. Hypothyroid = <b>diastolic</b> HTN.</span></div>
+<div class="dz-card"><span class="dz-name">CKD</span><span class="dz-ids">High Cr, proteinuria/hematuria, small kidneys.</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bucket c5" id="aki">
+<div class="bucket-head"><span class="tag">Bucket 5</span><h2>AKI, Obstruction &amp; Stones</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Abrupt fall in GFR: <b>pre-renal</b> (perfusion), <b>intrinsic</b> (tubule, glomerulus, interstitium, vessel), <b>post-renal</b> (obstruction).</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>KDIGO</b> (Kidney Disease: Improving Global Outcomes): ↑Cr ≥0.3 in 48 h, ≥1.5× baseline in 7 d, or urine <0.5 mL/kg/h × 6 h. Pre-renal: <b>BUN:Cr >20, FENa <1%, FEUrea <35%</b>; ATN: <b>FENa >2%, muddy brown casts</b>.</div>
+</div>
+<div class="subbucket" id="aki-cat">
+<h3>AKI by Category</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Pre-renal</span><span class="dz-ids">Hypovolemia, ↓ cardiac output, NSAID/ACE inhibitor/ARB. <b>Bland sediment/hyaline casts</b>; urine osm >500; UNa <20.</span></div>
+<div class="dz-card"><span class="dz-name">ATN</span><span class="dz-ids">Ischemic or <b>nephrotoxic</b> (aminoglycosides, contrast, cisplatin, <b>ethylene glycol → calcium oxalate</b>). <b>Muddy brown (granular) casts</b>, FENa >2%; isosthenuria.</span></div>
+<div class="dz-card"><span class="dz-name">Interstitial nephritis</span><span class="dz-ids">Drug (75%) — <b>WBC casts, eosinophils</b>, rash, fever, pyuria.</span></div>
+<div class="dz-card"><span class="dz-name">Glomerular</span><span class="dz-ids"><b>RBC casts</b>, dysmorphic RBCs (nephritic).</span></div>
+<div class="dz-card"><span class="dz-name">Post-renal</span><span class="dz-ids">Bilateral/single functional kidney; BPH, stones, tumor. <b>Ultrasound</b> shows hydronephrosis (only imaging needed; kidneys <8 cm = chronic).</span></div>
+</div>
+</div>
+<div class="subbucket" id="aki-mgmt">
+<h3>Workup &amp; Management (Dr. Bell)</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Approach</span><span class="dz-ids">History, medication review, volume exam, UA/sediment, urine lytes, <b>bladder scan/ultrasound</b>. Stop nephrotoxins.</span></div>
+<div class="dz-card"><span class="dz-name">Management</span><span class="dz-ids">Crystalloids if hypovolemic; <b>norepinephrine, MAP >65</b> in shock; avoid contrast; treat hyperkalemia.</span></div>
+</div>
+</div>
+<div class="subbucket" id="aki-stone">
+<h3>Nephrolithiasis</h3>
+<p class="sub-note">Stone type by pH, crystal shape and imaging</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Calcium oxalate / phosphate (80%)</span><span class="dz-ids">Radio-opaque; <b>hypercalciuria</b>; oxalate <b>envelope</b> crystals. Dumbbell/envelope; low citrate.</span></div>
+<div class="dz-card"><span class="dz-name">Struvite (~10%)</span><span class="dz-ids"><b>Urease</b> organisms (Proteus) → <b>alkaline urine</b>, <b>staghorn</b>, <b>coffin-lid</b> crystals.</span></div>
+<div class="dz-card"><span class="dz-name">Uric acid (6–7%)</span><span class="dz-ids"><b>Radiolucent</b>; <b>acid urine</b> (pH <5.5); gout, high cell turnover; rhomboid crystals; alkalinize urine.</span></div>
+<div class="dz-card"><span class="dz-name">Cystine (1%)</span><span class="dz-ids">AR COLA transporter defect; <b>hexagonal</b> crystals; positive cyanide-nitroprusside.</span></div>
+<div class="dz-card"><span class="dz-name">Imaging &amp; management</span><span class="dz-ids"><b>Non-contrast CT = gold standard</b>; ultrasound in pregnancy/kids. <5 mm pass; 5–10 mm tamsulosin/observe; <b>ESWL (extracorporeal shock wave lithotripsy) 10–25 mm</b>. Admit for <b>infection + obstruction</b>, AKI, uncontrolled pain.</span></div>
+<div class="dz-card"><span class="dz-name">Hydronephrosis</span><span class="dz-ids">Dilated calyces/pelvis from obstruction (stone, BPH, tumor, UPJ); late → cortical atrophy.</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bucket c6" id="ckd">
+<div class="bucket-head"><span class="tag">Bucket 6</span><h2>CKD &amp; Its Complications</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Irreversible nephron loss → everything the kidney does fails: <b>filtration, acid/K handling, EPO, vitamin D, platelet function.</b></div>
+<div class="hy-box"><b class="hy-label">High yield</b>CKD = <b>GFR <60 or markers of injury ≥3 months</b>. eGFR stages: G1 ≥90, G2 60–89, G3a 45–59, G3b 30–44, G4 15–29, <b>G5 <15</b>. <b>BUN:Cr >20</b> suggests prerenal contribution.</div>
+</div>
+<div class="subbucket" id="ckd-sys">
+<h3>Complications</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Uremia</span><span class="dz-ids">Pericarditis (<b>friction rub</b>), encephalopathy, asterixis, pruritus, <b>platelet dysfunction</b> → <b>desmopressin (DDAVP)</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Anemia</span><span class="dz-ids">↓ EPO — normocytic normochromic; treat with ESA after iron repletion.</span></div>
+<div class="dz-card"><span class="dz-name">MBD (mineral–bone)</span><span class="dz-ids">↓ calcitriol, <b>↑ FGF23, ↑ phosphate</b>, ↓ Ca → <b>secondary hyperparathyroidism</b> → <b>osteitis fibrosa cystica</b>. Don't give D2/D3 early; RANKL.</span></div>
+<div class="dz-card"><span class="dz-name">Metabolic acidosis</span><span class="dz-ids">↓ NH₄⁺ → low HCO₃⁻; bone buffering; treat with bicarbonate.</span></div>
+<div class="dz-card"><span class="dz-name">Hyperkalemia</span><span class="dz-ids">ECG: <b>peaked T → PR ↑ → QRS widening → sine wave</b>. <b>C-BIG-K</b> (calcium, bicarbonate, insulin, glucose, kayexalate).</span></div>
+<div class="dz-card"><span class="dz-name">Dialysis indications</span><span class="dz-ids"><b>AEIOU</b>: acidosis, electrolytes, intoxication (lithium, methanol, aspirin, ethylene glycol), overload, uremia.</span></div>
+</div>
+</div>
+<div class="subbucket" id="ckd-cyst">
+<h3>Cystic &amp; Hereditary</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">ADPKD</span><span class="dz-ids"><b>PKD1/PKD2</b>; HTN, flank pain, hematuria, <b>berry aneurysm</b>, hepatic cysts, mitral valve prolapse (MVP); bilateral enlarged cystic kidneys on ultrasound.</span></div>
+<div class="dz-card"><span class="dz-name">ARPKD</span><span class="dz-ids"><b>PKHD1</b>; infants — Potter sequence, hepatic fibrosis, <b>'sponge' kidneys</b>.</span></div>
+<div class="dz-card"><span class="dz-name">TSC / VHL</span><span class="dz-ids">TSC: angiomyolipoma, RCC 2–3%; VHL: <b>RCC ~70%</b>, hemangioblastoma.</span></div>
+<div class="dz-card"><span class="dz-name">Interstitial nephritis (chronic)</span><span class="dz-ids">Analgesic/ drug, reflux; papillary necrosis; <b>WBC casts</b>, sterile pyuria.</span></div>
+</div>
+</div>
+<div class="subbucket" id="ckd-rrt">
+<h3>Dialysis &amp; Renal Dosing</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Modalities</span><span class="dz-ids">HD (hemodialysis), PD (peritoneal), CRRT (continuous) for unstable pts.</span></div>
+<div class="dz-card"><span class="dz-name">Dose adjust</span><span class="dz-ids">Metformin (lactic acidosis), gabapentin, morphine metabolites.</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bucket c7" id="na">
+<div class="bucket-head"><span class="tag">Bucket 7</span><h2>Sodium, Water &amp; Electrolytes</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Sodium problems are <b>water problems</b>. Step 1: serum osmolality → Step 2: volume status → Step 3: urine Na/osm.</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>Correct Na no faster than 10–12 mEq/L/24 h</b> — overshoot → <b>osmotic demyelination (central pontine myelinolysis)</b>. Normal Na 136–144; serum osm 275–295; <b>glucose: Na ↓ ~2.4 per 100 mg/dL</b>.</div>
+</div>
+<div class="subbucket" id="na-hyper">
+<h3>Hypernatremia</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Dehydration</span><span class="dz-ids">Pure water loss; cells shrink. Fluid: <b>D5W</b>. ECF depletion → isotonic saline.</span></div>
+<div class="dz-card"><span class="dz-name">Diabetes insipidus</span><span class="dz-ids">Central (ADH deficiency; responds to desmopressin) vs nephrogenic (no response). Polyuria >3 L/day.</span></div>
+</div>
+</div>
+<div class="subbucket" id="na-hypo">
+<h3>Hyponatremia (<135)</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Pseudo</span><span class="dz-ids">Normal osm: myeloma, hyperlipidemia.</span></div>
+<div class="dz-card"><span class="dz-name">Hypertonic</span><span class="dz-ids">Osm >295: hyperglycemia, mannitol.</span></div>
+<div class="dz-card"><span class="dz-name">Hypotonic — hypovolemic</span><span class="dz-ids">UNa <20: vomiting, diarrhea; UNa >20: <b>diuretics (thiazide!)</b>, Addison, cerebral salt wasting.</span></div>
+<div class="dz-card"><span class="dz-name">Hypotonic — euvolemic</span><span class="dz-ids"><b>SIADH</b> (urine osm >200; UNa >20), hypothyroidism, <b>psychogenic polydipsia / beer potomania</b> (urine osm <100).</span></div>
+<div class="dz-card"><span class="dz-name">Hypotonic — hypervolemic</span><span class="dz-ids">CHF, cirrhosis, nephrotic syndrome (UNa <10); renal failure (UNa >20).</span></div>
+<div class="dz-card"><span class="dz-name">Treat</span><span class="dz-ids">Hypovolemic → saline; SIADH → fluid restriction; hypervolemic → diurese.</span></div>
+</div>
+</div>
+<div class="subbucket" id="na-k">
+<h3>Potassium, Magnesium, Phosphorus</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Hypokalemia</span><span class="dz-ids">GI loss or renal (<b>diuretics, RTA I/II, Liddle/Bartter/Gitelman</b>). 24-h urine K <15 → extrarenal. <b>Replete Mg first</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Hyperkalemia</span><span class="dz-ids">ECG first (<b>peaked T</b>). Drugs: ACE inhibitor/ARB, spironolactone, TMP-SMX, heparin, NSAIDs. Type 4 RTA.</span></div>
+<div class="dz-card"><span class="dz-name">Magnesium</span><span class="dz-ids">Low Mg → refractory hypoK/hypoCa. FEMg >0.5% = renal wasting. High Mg: loss of <b>deep tendon reflexes</b>; treat with calcium gluconate.</span></div>
+<div class="dz-card"><span class="dz-name">Phosphorus</span><span class="dz-ids">Fanconi = proximal tubule defect. Hyperphosphatemia: CKD, rhabdomyolysis; binders.</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bucket c8" id="ab">
+<div class="bucket-head"><span class="tag">Bucket 8</span><h2>Acid–Base Disorders</h2></div>
+<div class="bucket-body">
+<div class="bucket-hy">
+<div class="hy-box"><b class="hy-label">Mechanism</b>Stepwise: <b>pH → primary process → compensation → anion gap → Δ–Δ ratio</b>. Compensation outside the expected range = a second disorder.</div>
+<div class="hy-box"><b class="hy-label">High yield</b><b>Winters: pCO₂ = 1.5(HCO₃) + 8.</b> <b>Anion gap = Na − (Cl + HCO₃)</b>, normal ~12. <b>Δ–Δ <1 = + non-gap; 1–2 pure; >2 = + metabolic alkalosis.</b> <b>Urine anion gap</b>: negative = GI loss; positive = RTA.</div>
+</div>
+<div class="subbucket" id="ab-hag">
+<h3>High Anion Gap Acidosis (MUDPILES / GOLDMARK)</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">DKA / alcoholic ketoacidosis</span><span class="dz-ids">β-hydroxybutyrate, acetoacetate; glucose high (DKA) or low-normal (alcoholic).</span></div>
+<div class="dz-card"><span class="dz-name">Methanol</span><span class="dz-ids">Formic acid — <b>blindness</b>; high osmolal gap.</span></div>
+<div class="dz-card"><span class="dz-name">Ethylene glycol</span><span class="dz-ids">Oxalic acid — <b>urine oxalate crystals</b>, AKI.</span></div>
+<div class="dz-card"><span class="dz-name">Salicylates</span><span class="dz-ids">Mixed <b>respiratory alkalosis + AG acidosis</b>; tinnitus.</span></div>
+<div class="dz-card"><span class="dz-name">Lactic</span><span class="dz-ids">L-lactate: sepsis/shock; metformin; D-lactate: short bowel.</span></div>
+<div class="dz-card"><span class="dz-name">Uremia</span><span class="dz-ids">Low GFR can't excrete acid. <b>Osmolal gap</b> = measured − calculated (>10 = toxic alcohol).</span></div>
+</div>
+</div>
+<div class="subbucket" id="ab-nag">
+<h3>Normal Anion Gap Acidosis &amp; RTA</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Diarrhea</span><span class="dz-ids">Negative UAG; low-normal K; urine pH <5.5.</span></div>
+<div class="dz-card"><span class="dz-name">Type 1 (distal)</span><span class="dz-ids">Positive UAG, <b>hypokalemia</b>, urine pH >5.5, <b>stones</b>; Sjögren, amphotericin B, lithium.</span></div>
+<div class="dz-card"><span class="dz-name">Type 2 (proximal)</span><span class="dz-ids">Negative UAG, hypokalemia; <b>Fanconi</b>; HCO₃ ~12–14; myeloma, acetazolamide.</span></div>
+<div class="dz-card"><span class="dz-name">Type 4</span><span class="dz-ids">Positive UAG, <b>hyperkalemia</b>; aldosterone deficiency/resistance (diabetes, ACE inhibitors, heparin).</span></div>
+</div>
+</div>
+<div class="subbucket" id="ab-alk">
+<h3>Metabolic Alkalosis</h3>
+<p class="sub-note">Urine chloride splits it</p>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Chloride-responsive (UCl <10–15)</span><span class="dz-ids">Vomiting, NG suction, loop diuretics — <b>saline</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Chloride-resistant (UCl >15–20)</span><span class="dz-ids">Hyperaldosteronism, CAH (11β/17α-hydroxylase), Bartter, Gitelman, Liddle — HTN with hypoK in the aldosterone/Liddle group.</span></div>
+</div>
+</div>
+<div class="subbucket" id="ab-comp">
+<h3>Compensation Quick Rules</h3>
+<div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Respiratory</span><span class="dz-ids">Acute acidosis: HCO₃ ↑1 per 10 pCO₂; chronic ↑4. Acute alkalosis ↓2; chronic ↓5.</span></div>
+<div class="dz-card"><span class="dz-name">Metabolic alkalosis</span><span class="dz-ids">pCO₂ = 0.7 × HCO₃ + 20.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bucket c1" id="gloss"><div class="bucket-head"><span class="tag">Reference</span><h2>Abbreviations</h2></div><div class="bucket-body"><div class="gloss"><div><b>ABPM</b> — ambulatory blood pressure monitoring</div><div><b>ADPKD / ARPKD</b> — autosomal dominant / recessive polycystic kidney disease</div><div><b>AKI</b> — acute kidney injury</div><div><b>ANCA</b> — anti-neutrophil cytoplasmic antibody</div><div><b>BCG</b> — bacillus Calmette–Guérin</div><div><b>CIS</b> — carcinoma in situ</div><div><b>CKD</b> — chronic kidney disease</div><div><b>CRRT</b> — continuous renal replacement therapy</div><div><b>ESWL</b> — extracorporeal shock wave lithotripsy</div><div><b>FENa / FEUrea</b> — fractional excretion of sodium / urea</div><div><b>FMD</b> — fibromuscular dysplasia</div><div><b>GPA / MPA / EGPA / PAN</b> — granulomatosis with polyangiitis / microscopic polyangiitis / eosinophilic GPA / polyarteritis nodosa</div><div><b>HUS / TTP</b> — hemolytic uremic syndrome / thrombotic thrombocytopenic purpura</div><div><b>MBD</b> — mineral and bone disorder</div><div><b>PREVENT</b> — AHA/ACC cardiovascular risk calculator (replaces ASCVD estimator)</div><div><b>RAS</b> — renal artery stenosis</div><div><b>RCC</b> — renal cell carcinoma</div><div><b>RTA</b> — renal tubular acidosis</div><div><b>SIADH</b> — syndrome of inappropriate antidiuretic hormone</div><div><b>TMA</b> — thrombotic microangiopathy</div><div><b>UAG</b> — urine anion gap</div><div><b>UPJ</b> — ureteropelvic junction</div><div><b>VHL</b> — von Hippel–Lindau</div></div></div></section>
+<footer>Renal II · Exam 2 · Pathology Bucket Cheat Sheet</footer>
+</div>
+<script>
+(function(){var b=document.getElementById('sidenavToggle'),p=document.getElementById('sidenavPanel');if(!b||!p)return;
+b.addEventListener('click',function(e){e.stopPropagation();p.classList.toggle('open');});
+p.addEventListener('click',function(e){if(e.target.tagName==='A')p.classList.remove('open');});
+document.addEventListener('click',function(e){if(!p.contains(e.target)&&e.target!==b)p.classList.remove('open');});})();
+</script>
+</body></html>
