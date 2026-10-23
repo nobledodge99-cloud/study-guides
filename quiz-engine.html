@@ -709,7 +709,7 @@
   ];
   const DISCIPLINES = ['Pathology', 'Pharmacology', 'Physiology', 'Microbiology/Immunology', 'Clinical Medicine',
                        'OMM/OPP', 'Clinical Skills', 'Biochemistry/Genetics', 'Behavioral/Biostats/Ethics'];
-  const BLOCK_ORDER = ['MSK II · Exam 1', 'MSK II · Exam 2', 'OCS III · Exam 1', 'CV/Resp II · Exam 1', 'CV/Resp II · Exam 2'];
+  const BLOCK_ORDER = ['MSK II · Exam 1', 'MSK II · Exam 2', 'OCS III · Exam 1', 'CV/Resp II · Exam 1', 'CV/Resp II · Exam 2', 'Renal II · Exam 1', 'Renal II · Exam 2'];
   const GUIDES = [["clinical slop/med-terms.html", "Common Medical Terminology We ~Should~ Know", "Clinical Slop", 1], ["clinical slop/heart-sounds-cheat-sheet.html", "Heart Sounds, Murmurs, and Gallops Cheat Sheet", "Clinical Slop", 1], ["clinical slop/labs.html", "Noble's Little Something Extra - Quick Labs Review", "Clinical Slop", 1], ["clinical slop/omm-techniques.html", "Brief OMM Techniques Comparison", "Clinical Slop", 1], ["clinical slop/micro-memorization.html", "Microbiology Memorization Tool (All da Buggies)", "Clinical Slop", 1], ["clinical slop/nerve-lesions.html", "Common Nerve Lesions", "Clinical Slop", 1], ["clinical slop/chief-complaints.html", "Top 10 Most Common Chief Complaints", "Clinical Slop", 1], ["foundations2/foundations2-pharm.html", "Pharmacology", "Foundations II", 0], ["foundations2/ans-pharm-study-bites.html", "Konrad's ANS Pharm Study Bites", "Foundations II", 1], ["foundations2/foundations2-genetics.html", "Genetics of Disease", "Foundations II", 0], ["foundations2/scholarrx-ans-pharm.html", "ScholarRx ANS Pharm", "Foundations II", 0], ["foundations2/ans-pharm-red-drugs.html", "ANS Pharm - Just the Red Drugs", "Foundations II", 1], ["foundations2/biostats-study-material.html", "Biostats Study Material", "Foundations II", 0], ["foundations2/pediatrics-study-guide.html", "Pediatrics", "Foundations II", 0], ["msk2/msk2-joint-soft-tissue.html", "Joint & Soft Tissue Pathology", "MSK II · Exam 1", 0], ["msk2/msk2-bone-cartilage.html", "Bone & Cartilage Pathology", "MSK II · Exam 1", 0], ["msk2/msk2-skeletal-muscle-nerve.html", "Skeletal Muscle & Peripheral Nerve", "MSK II · Exam 1", 0], ["msk2/msk2-rheumatic-pharm.html", "Rheumatic Diseases Pharmacology", "MSK II · Exam 1", 0], ["msk2/msk2-nsaids-pharm.html", "NSAIDs Pharmacology", "MSK II · Exam 1", 0], ["msk2/msk2-nmj-pharm.html", "NMJ Pharmacology", "MSK II · Exam 1", 0], ["msk2/msk2-autoimmunities.html", "Joint, Muscle, and Skin Autoimmunities", "MSK II · Exam 1", 0], ["msk2/msk2-IJA.html", "Juvenile Idiopathic Arthritis", "MSK II · Exam 1", 0], ["msk2/msk2-Crystal-Diseases.html", "Crystal Diseases", "MSK II · Exam 1", 0], ["msk2/msk2-skin-pathology.html", "Skin Pathology Parts 1-4", "MSK II · Exam 2", 0], ["msk2/msk2-connective-tissue-pathology.html", "Connective Tissue Pathology Parts 1-2", "MSK II · Exam 2", 0], ["msk2/msk2-vasculitis.html", "Vasculitis", "MSK II · Exam 2", 0], ["msk2/msk2-derm-pharm.html", "Derm Pharmacology", "MSK II · Exam 2", 0], ["msk2/msk2-Sjögren's-RA-OA.html", "Sjögren's, Rheumatoid Arthritis, and Osteoarthritis", "MSK II · Exam 2", 0], ["msk2/msk2-ped-derm.html", "Pediatric Dermatology", "MSK II · Exam 2", 0], ["msk2/msk2-skin-path-algorithm.html", "Skin Pathology Algorithm - Quick Review", "MSK II · Exam 2", 1], ["msk2/msk2-connective-tissue-path-algorithm.html", "Connective Tissue Pathology Algorithm - Quick Review", "MSK II · Exam 2", 1], ["ocs I & II/omm-summary-tables.html", "OMM Summary Tables", "OCS I & II", 0], ["ocs I & II/oms1-competency-review.html", "OMS1 Competency Review Guide", "OCS I & II", 0], ["ocs I & II/omm-treatment-modalities-review.html", "OMM Treatment Modalities Review Guide", "OCS I & II", 0], ["ocs III & IV/ocs3-oral-report.html", "Oral Reporting", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-ME-FPR.html", "Specific Muscle Energy Techniques & Facilitated Positional Release", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-illness-scripts.html", "Illness Scripts", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-diagnosis-by-lab-results.html", "Diagnosis by Lab Results", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-blt-lymph-still.html", "BLT/LAS, Lymphatic Techniques & Still Technique", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-depression-anxiety-physical-activity.html", "Depression/Anxiety and Physical Activity", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-clinical-problem.html", "How to Approach a Clinical Problem", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-intro-chapmans-points.html", "Introduction to Chapman's Points", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-cv-exam.html", "Abnormal Cardiovascular Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-abnormal-respiratory-exam.html", "Abnormal Respiratory Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-oa-to-back-pain.html", "Osteopathic Approach to Back Pain Parts 1 & 2", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-upper-respiratory.html", "Osteopathic Approach to Upper Respiratory", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-lower-respiratory.html", "Osteopathic Approach to Lower Respiratory", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-cardio.html", "Osteopathic Approach to Cardiovascular Cases", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-obesity.html", "The Overweight/Obesity Crisis & the Effect of Physical Activity", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-integrated-exam.html", "Integrated Osteopathic Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-abnormal-heent-exam.html", "Abnormal HEENT Exam", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-adiposity-based-chronic-disease.html", "Adiposity-Based Chronic Disease", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-omm-integration.html", "OMM Medical Integration", "OCS III · Exam 1", 0], ["ocs III & IV/ocs34-sp-encounters.html", "PCM III & IV SP Encounter Expectations / Rubric", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-rx-order-writing.html", "Rx Order Writing", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-intro-telemed.html", "Intro to Telemedicine", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-jenks.html", "Importance of Clinical Practice Guidelines", "OCS III · Exam 1", 0], ["ocs III & IV/ocs3-finding-cpgs.html", "Finding Clinical Practice Guidelines", "OCS III · Exam 1", 0], ["cvresp2/cvresp2-cardio-review.html", "Cardiovascular Physiology — Abbreviated Review", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-lipids.html", "Lipid and Fatty Acid Metabolism", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-blood-vessel-pathology.html", "Pathology of Blood Vessels I & II", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-antihyperlipidemics.html", "Antihyperlipidemics", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-ekg.html", "EKG Interpretation", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-ekg-extended", "Noble and Claude's EKG Diagnostic Guide", "CV/Resp II · Exam 1", 1], ["cvresp2/cvresp2-heart-path.html", "Heart Pathology Parts 1-4", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-asd-vsd-tof.html", "ASD, VSD, Tetralogy of Fallot, and Other Congenital Heart Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-valvular.html", "Aortic, Mitral & Other Valve Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-lab-testing.html", "Laboratory Testing in Cardiovascular Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-cvpharm.html", "Antiplatelets, Anticoagulants & Fibrinolytics Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-cardiac-imaging.html", "Cardiac Imaging", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-ischemic-heart-disease.html", "Ischemic Heart Disease", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-shock.html", "Shock", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-infective-endocarditis.html", "Infective Endocarditis & Nonbacterial Thrombotic Endocarditis", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-drugs-angina.html", "Angina Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-antiarrhythmics.html", "Antiarrhythmics Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-pericarditis.html", "Pericarditis", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-heart-failure-pharm.html", "Heart Failure Pharm", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-arrhythmias.html", "Clinical Diagnosis and Treatment of Arrhythmias", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-atherosclerosis.html", "Atherosclerosis", "CV/Resp II · Exam 1", 0], ["cvresp2/cvresp2-master-pharm-guide.html", "Master Pharm Guide for Exam 1 (only core drugs)", "CV/Resp II · Exam 1", 1], ["cvresp2/cvresp2-master-ekg-guide.html", "Master EKG Guide - All EKG's from lecture and ELS's", "CV/Resp II · Exam 1", 1], ["cvresp2/cvresp2-resp-refresher.html", "Resp Physiology Refresher Guide", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-pulm-fnx-test.html", "Pulmonary Functions Test and Dyspnea Guide", "CV/Resp II · Exam 2", 0], ["cvresp2/sleep-apnea.html", "Sleep Apnea ELS", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-upper-resp-path.html", "Upper Respiratory Tract Pathology", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-allergies-pharm.html", "Antihistamines: Drugs for Rhinitis and Allergies", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-lower-resp-path.html", "Lower Respiratory Pathology/Radiology", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-neoplasia.html", "Resp Neoplasia & Pleura", "CV/Resp II · Exam 2", 0], ["cvresp2/cvresp2-copd.html", "COPD and Other Disorders", "CV/Resp II · Exam 2", 0], ["cvresp2/restrictive-lung-disease.html", "Restrictive Lung Disease", "CV/Resp II · Exam 2", 0], ["cvresp2/vascular-disorders.html", "Vascular Disorders", "CV/Resp II · Exam 2", 0], ["cvresp2/antimicrobial-agents.html", "Antimicrobial Agents Pharm", "CV/Resp II · Exam 2", 0], ["cvresp2/resp-infections-pharm.html", "Respiratory Infections Pharm", "CV/Resp II · Exam 2", 0], ["cvresp2/antituberculosis.html", "Antituberculosis Pharm", "CV/Resp II · Exam 2", 0], ["cvresp2/viral-pneumonia.html", "Viral Pneumonia", "CV/Resp II · Exam 2", 0], ["cvresp2/transplantation.html", "Infections and Transplantation", "CV/Resp II · Exam 2", 0], ["cvresp2/peds-asthma-wheeze.html", "Pediatric Wheeze & Asthma", "CV/Resp II · Exam 2", 0], ["cvresp2/peds-cough.html", "Pediatric Chronic Cough", "CV/Resp II · Exam 2", 0], ["cvresp2/interstitial-lung-disease.html", "Interstitial Lung Disease", "CV/Resp II · Exam 2", 0], ["cvresp2/copd-asthma.html", "COPD and Asthma", "CV/Resp II · Exam 2", 0], ["cvresp2/cystic-fibrosis.html", "Cystic Fibrosis and Bronchiectasis", "CV/Resp II · Exam 2", 0], ["cvresp2/copd-asthma-pharm.html", "Pharmacotherapy of Asthma and COPD", "CV/Resp II · Exam 2", 0], ["cvresp2/hiv-pharm.html", "Pharmacologic Agents for HIV/AIDS", "CV/Resp II · Exam 2", 0], ["cvresp2/blood-gases.html", "Blood Gases and Respiratory Disorders", "CV/Resp II · Exam 2", 0], ["cvresp2/pulm-embolism.html", "Pulmonary Embolism", "CV/Resp II · Exam 2", 0], ["cvresp2/resp-imaging.html", "Imaging of the Respiratory Tract", "CV/Resp II · Exam 2", 0], ["cvresp2/master-pulm-pharm.html", "Master Respiratory Pharm Guide", "CV/Resp II · Exam 2", 1], ["cvresp2/simple-pharm-list.html", "Simple Pharm List (more for mental organization)", "CV/Resp II · Exam 2", 1], ["cvresp2/antimicrobial-agents-quick-review.html", "First Aid Style Antimicrobial Pharm Table", "CV/Resp II · Exam 2", 1], ["cvresp2/resp-path-cheat-sheet.html", "Respiratory Pathology - Cheat Sheet", "CV/Resp II · Exam 2", 1], ["cvresp2/resp-ekg-review.html", "Relevant Respiratory Related EKG's", "CV/Resp II · Exam 2", 1], ["cvresp2/kinder-lectures.html", "All of Kinder's Lectures Condensed into a Cheat Sheet", "CV/Resp II · Exam 2", 1]]; // [href, title, group, isReference]
   const TOPIC_GUIDE = {
  "Bone and Cartilage Pathology": "msk2/msk2-bone-cartilage.html",
@@ -790,7 +790,32 @@
  "Sleep Apnea": "cvresp2/sleep-apnea.html",
  "Upper Respiratory Tract Pathology": "cvresp2/cvresp2-upper-resp-path.html",
  "Vascular Disorders (Pulmonary)": "cvresp2/vascular-disorders.html",
- "Viral Pneumonia": "cvresp2/viral-pneumonia.html"
+ "Viral Pneumonia": "cvresp2/viral-pneumonia.html",
+ "Renal Physiology and Acid-Base": "renal II/renal-physiology-review.html",
+ "Renal Histology": "renal II/renal-histo-review.html",
+ "Renal Labs and Urinalysis": "renal II/renal-labs-urinalysis.html",
+ "Renal Imaging": "renal II/renal-imaging.html",
+ "Pathogenesis of Glomerular Clinicopathologic Syndromes": "renal II/glomerular-path.html",
+ "Nephrotic and Nephritic Syndromes": "renal II/nephrotic-nephritic.html",
+ "Immunologic Disorders of the Kidney": "renal II/renal-immunologic-disorders.html",
+ "Chronic Glomerulonephritis and Systemic Disease Lesions": "renal II/chronic-gn.html",
+ "Rapidly Progressive Glomerulonephritis": "renal II/glomerulonephritis.html",
+ "Cystic and Congenital Diseases of the Kidney": "renal II/cystic-congenital.html",
+ "Neonatal Renal Disorders": "renal II/neonatal-renal-disorders.html",
+ "Lower Urinary Tract Disorders": "renal II/lower-urinary-tract-disorders.html",
+ "Renal Neoplasia": "renal II/renal-neoplasia.html",
+ "Renal Vascular Disease": "renal II/renal-vascular-disease.html",
+ "Acute Kidney Injury & Nephrolithiasis (Pathology)": "renal II/acute-kidney-injury.html",
+ "AKI & Nephrolithiasis (Clinical Approach)": "renal II/AKI-clinical.html",
+ "Chronic Kidney Disease": "renal II/chronic-kidney-disease.html",
+ "Hyponatremia & Electrolyte Disorders": "renal II/hyponatremia-electrolyte-disorders.html",
+ "Pharmacotherapy of CKD: Progression & Complications": "renal II/pharmacotherapy-of-ckd.html",
+ "Hypertension": "renal II/renal-hypertension.html",
+ "Acid-Base Disorders & Arterial Blood Gases": "renal II/acid-base-disorders.html",
+ "Clinical Pharmacology of Antihypertensive Agents": "renal II/antihypertensive-clinical-pharmacology.html",
+ "Diuretics": "renal II/diuretics-pharm.html",
+ "RAAS Modulators": "renal II/RAAS-modulators.html",
+ "Sympathoplegics & Vasodilators": "renal II/sympathoplegics-vasodilators.html"
 };
   const TOPIC_MAP = {
   "Bone and Cartilage Pathology": {
@@ -1265,6 +1290,162 @@
     "block": "CV/Resp II · Exam 2",
     "system": "resp",
     "discipline": "Microbiology/Immunology",
+    "domain": 3
+  },
+  "Renal Physiology and Acid-Base": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Physiology",
+    "domain": 3
+  },
+  "Renal Histology": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Renal Labs and Urinalysis": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Renal Imaging": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Pathogenesis of Glomerular Clinicopathologic Syndromes": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Nephrotic and Nephritic Syndromes": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Immunologic Disorders of the Kidney": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Microbiology/Immunology",
+    "domain": 3
+  },
+  "Chronic Glomerulonephritis and Systemic Disease Lesions": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Rapidly Progressive Glomerulonephritis": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Cystic and Congenital Diseases of the Kidney": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Neonatal Renal Disorders": {
+    "block": "Renal II \u00b7 Exam 1",
+    "system": "gu",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Lower Urinary Tract Disorders": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Renal Neoplasia": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Renal Vascular Disease": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "Acute Kidney Injury & Nephrolithiasis (Pathology)": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Pathology",
+    "domain": 3
+  },
+  "AKI & Nephrolithiasis (Clinical Approach)": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Chronic Kidney Disease": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Hyponatremia & Electrolyte Disorders": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Physiology",
+    "domain": 3
+  },
+  "Pharmacotherapy of CKD: Progression & Complications": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Hypertension": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "circ",
+    "discipline": "Clinical Medicine",
+    "domain": 3
+  },
+  "Acid-Base Disorders & Arterial Blood Gases": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Physiology",
+    "domain": 3
+  },
+  "Clinical Pharmacology of Antihypertensive Agents": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Diuretics": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "gu",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "RAAS Modulators": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Sympathoplegics & Vasodilators": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "circ",
+    "discipline": "Pharmacology",
+    "domain": 3
+  },
+  "Instructor-Style Mixed Questions": {
+    "block": "Renal II \u00b7 Exam 2",
+    "system": "x",
+    "discipline": "Clinical Medicine",
     "domain": 3
   }
 };
