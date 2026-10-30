@@ -50,7 +50,7 @@ mark{background:#fff3a0}
 @keyframes pop2{0%{transform:scale(0)}70%{transform:scale(1.4)}100%{transform:scale(1)}}
 </style></head><body>
 <a class="back-btn" href="../index.html">← Back to Study Guides</a>
-<header><h1>Antihypertensive Drug Map</h1><p>Dr. Waterfall's BP-determinants diagram and diuretic nephron map · click a drug to see where it works</p></header>
+<header><h1 id="ttl">Antihypertensive Drug Map</h1><p id="dsc"></p></header>
 <div class="tabs"><button class="tab on" id="b1">Antihypertensive map</button><button class="tab" id="b2">Diuretics on the nephron</button><button class="tab" id="b3">RAAS modulators</button></div>
 <div class="wrap" id="tab1">
 <div class="panel side" id="side"></div>
@@ -315,7 +315,7 @@ function pick(n,c,btn){document.querySelectorAll('#side2 .chip').forEach(functio
  document.getElementById('info2').innerHTML='<h2>'+n+'</h2><div class="sub">'+c.c+' · '+c.site+'</div><dl><dt>Mechanism</dt><dd>'+c.mo+'</dd><dt>Uses</dt><dd>'+c.uses+'</dd><dt>Adverse effects</dt><dd>'+c.adv+'</dd><dt>Lab pattern</dt><dd>'+c.lab+'</dd></dl>';}
 })();
 
-document.getElementById("b1").onclick=function(){tab(1)};document.getElementById("b2").onclick=function(){tab(2)};document.getElementById("b3").onclick=function(){tab(3)};function tab(n){for(var i=1;i<=3;i++){document.getElementById("tab"+i).style.display=i==n?"":"none";document.getElementById("b"+i).classList.toggle("on",i==n)}}</script>
+document.getElementById("b1").onclick=function(){tab(1)};document.getElementById("b2").onclick=function(){tab(2)};document.getElementById("b3").onclick=function(){tab(3)};var T=[["Antihypertensive Drug Map","Dr. Waterfall's BP-determinants diagram · click a drug to see where it works"],["Diuretics on the Nephron","Click a diuretic to see where it acts on the nephron and what is excreted or retained"],["RAAS Modulators","Click a RAAS drug to see which step it blocks and what rises or falls"]];function tab(n){document.getElementById("ttl").textContent=T[n-1][0];document.getElementById("dsc").textContent=T[n-1][1];document.title=T[n-1][0];for(var i=1;i<=3;i++){document.getElementById("tab"+i).style.display=i==n?"":"none";document.getElementById("b"+i).classList.toggle("on",i==n)}}tab(1);</script>
 <script>(function(){
 var ns='http://www.w3.org/2000/svg',sv=document.getElementById('rsvg');
 function E(t,a,p){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);(p||sv).appendChild(e);return e}
