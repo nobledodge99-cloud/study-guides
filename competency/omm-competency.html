@@ -95,9 +95,9 @@ details[open]>summary{margin-bottom:6px}
 <section class="card" id="lines">
 <h2>Lines to say</h2>
 <h4>Indication</h4>
-<div class="say">"The patient has ___ with asymmetry, restricted motion and tissue texture change at ___. Osteopathic manipulation is indicated to restore motion, reduce hypertonicity and improve function."</div>
+<div class="say">"The patient has somatic dysfunction of ___ (asymmetry, restricted motion, tissue texture change). ___ is indicated to restore motion and function."</div>
 <h4>Contraindication screen (ask out loud)</h4>
-<div class="say">"Any recent trauma, fracture, surgery or hardware in this area? History of cancer, osteoporosis, blood thinners or bleeding disorders? Any numbness, tingling, weakness, dizziness or vision changes? Are you pregnant? Any pacemaker or other implanted device? Is any area open or infected? And do I have your permission to treat?"</div>
+<div class="say">"Any recent trauma, fracture or surgery here? Blood thinners or bleeding problems? Cancer or osteoporosis? Numbness, weakness or dizziness? Open skin or infection? Any implanted device? Are you pregnant? May I have your permission to treat?"</div>
 <h4>Justify, specific to the technique</h4>
 <div id="whyLines"></div>
 <h4>Factors that change your approach</h4>
@@ -130,9 +130,9 @@ details[open]>summary{margin-bottom:6px}
 // src: 'guide' = adapted from your OMS1 Competency guide / Coleman review; 'gen' = standard OPP steps NOT in your uploaded guides (verify against your lab manual)
 const TECH={
 ME:{name:'Muscle Energy',cls:'Direct · Active',
- abs:['Lack of consent','Patient unable to follow commands/contract (unconscious, severe cognitive impairment)'],
- rel:['Acute muscle/tendon tear, infection or hematoma in involved muscle','Fracture or dislocation of involved joint','Cervical instability (rheumatologic)','Undiagnosed joint swelling','Severe osteoporosis','Neoplasm in the area','Acute severe pain limiting contraction'],
- why:'Muscle energy is appropriate because the patient can cooperate and actively contract, there is a clear restrictive barrier, and I found no contraindication. It restores motion through post-isometric relaxation without a thrust.',
+ abs:['Lack of consent','Patient cannot cooperate or contract'],
+ rel:['Fracture or dislocation of the involved joint','Acute muscle or tendon tear','Cervical instability'],
+ why:'Indicated because the patient can cooperate and contract, there is a clear restrictive barrier, and I found no contraindication. It restores motion by post-isometric relaxation, with no thrust.',
  core:'Move to the feather edge of the restrictive barrier → patient pushes toward ease against matched counterforce 3–5 s → relax 1–2 s → re-engage the new barrier → repeat 3–5× → return to neutral → reassess.',
  regions:{
  'Cervical':[{n:'Supine cervical ME',src:'guide',s:['Patient supine, you at the head. Index fingers on the articular pillars of the dysfunctional segment; middle fingers monitor the segment below','Bring the head/neck into the COMPLETE OPPOSITE of the diagnosis (e.g., FRSL → extend, rotate right, sidebend right) to the feather edge','Patient brings the head back toward center and resists 3–5 s; relax 1–2 s','Re-engage the new feather edge; repeat 3–5×; return to neutral and reassess']}],
@@ -160,8 +160,8 @@ ME:{name:'Muscle Energy',cls:'Direct · Active',
 
 MFR:{name:'Myofascial Release & Soft Tissue',cls:'MFR: mixed · passive. Soft tissue: direct · passive',
  abs:['Lack of consent'],
- rel:['Infection, hematoma or tear of involved muscle','Fracture or dislocation','Open wound or recent surgery/laceration site','Soft tissue/bony infection or abscess; nearby DVT','Coagulopathy','Neoplasm in the area','Aortic aneurysm (abdominal work)'],
- why:'MFR/soft tissue is appropriate because the dysfunction involves fascia and muscle with texture change, the patient is passive, and there are no contraindications. It reduces tissue tension and improves motion.',
+ rel:['Fracture or dislocation','Infection or open wound','Clotting problem or deep vein thrombosis nearby'],
+ why:'Indicated because the dysfunction involves fascia and muscle with texture change, the patient is passive, and I found no contraindication. It reduces tissue tension and improves motion.',
  core:'Engage/load the tissue ("melt, meld, sink in") → direct MFR: take all 3 planes into the barrier and hold / indirect MFR: take to the point of balance/ease and hold → FOLLOW the tissue until motion stops (breathe in/out if it stalls) → return to neutral → reassess. Soft tissue: kneading (perpendicular), linear stretch (parallel), direct inhibition (sustained pressure).',
  regions:{
  'Cervical region':[{n:'Cervical MFR / soft tissue (supine)',src:'gen',s:['Patient supine, you at the head. Cradle the occiput and cervical paraspinals with finger pads','Soft tissue: kneading/linear stretch of paraspinals and suboccipitals; direct inhibition of suboccipitals','MFR: engage the tissue and test flexion/extension, sidebending, rotation and translation; direct = hold into the barrier, indirect = hold at ease','Follow the release until motion stops; return to neutral; reassess ROM and tissue texture']}],
@@ -172,9 +172,9 @@ MFR:{name:'Myofascial Release & Soft Tissue',cls:'MFR: mixed · passive. Soft ti
  'Pelvis':[{n:'Pelvis MFR / soft tissue',src:'gen',s:['Prone or supine; hands over sacrum and ilia, or one hand under the sacrum and one over the pubic/ASIS region','Engage the tissue, test in all planes, hold direct or indirect, follow release','Soft tissue to gluteals/piriformis/sacrotuberous and sacrospinous areas as needed','Return to neutral; reassess motion and symmetry']}]}},
 
 HVLA:{name:'HVLA (simulated thrust)',cls:'Direct · Passive',
- abs:['Fracture, dislocation, joint instability (including upper cervical instability)','Vertebrobasilar/carotid pathology','Myelopathy, cauda equina, spinal cord pathology','Acute local inflammatory arthritis; joint infection','Malignancy of bone/soft tissue in the area','Joint fusion; Klippel-Feil; Down syndrome; Chiari','Lack of consent'],
- rel:['Acute disc herniation/radiculopathy','Osteopenia/osteoporosis, spondylolisthesis, hypermobility','Anticoagulation','Implanted devices/hardware (pacemaker, spinal cord stimulator, pumps)','Acute whiplash, severe spasm'],
- why:'HVLA is appropriate because this is an articular somatic dysfunction with a firm, distinct restrictive barrier, there are no absolute contraindications, and I want to restore joint motion with a short quick thrust. (If tissue is hypertonic, I may prepare with soft tissue/MFR/ME first.)',
+ abs:['Lack of consent','Fracture, dislocation or joint instability','Vertebrobasilar/carotid or spinal cord pathology','Infection or malignancy in the area'],
+ rel:['Osteoporosis or hypermobility','Anticoagulation','Acute disc herniation/radiculopathy'],
+ why:'Indicated because this is an articular dysfunction with a firm, distinct barrier and I found no absolute contraindication. It restores joint motion with a short, quick thrust.',
  core:'Find a firm articular barrier → take it in as many planes as possible, comfortable → follow the barrier with breath, deep breath in, then on exhalation take up slack → short quick thrust through the barrier (SIMULATE at competency; no wind-up) → return to neutral → reassess. NEVER repeat a thrust on the same segment.',
  regions:{
  'Cervical spine (set-up only)':[{n:'Supine cervical HVLA',src:'guide',s:['Localize: index fingers on the articular pillars of the diagnosis; middle fingers monitor the segment below','ROTATIONAL: barrier in flexion or extension + rotation; EASE in sidebending','Deep breath; on exhalation follow the barrier; (thrust anterior and superior; SET-UP ONLY at competency, do not thrust)','TRANSLATIONAL: barrier in flexion or extension + sidebending; EASE in rotation; thrust would be lateral to medial','Return to neutral; reassess']}],
@@ -185,9 +185,9 @@ HVLA:{name:'HVLA (simulated thrust)',cls:'Direct · Passive',
  'Lower extremity':[{n:'Anterior talus HVLA',src:'guide',s:['Patient supine; stand at the foot of the table','5th digits on the anterior/superior talus, fingers interlaced over the dorsum of the foot, thumbs on the sole providing dorsiflexion to the barrier; slight inversion/eversion localizes; lean back for traction','Deep breath; on exhalation follow the barrier; (thrust inferior and posterior in a "J" motion: simulate); return to neutral; reassess'],}]}},
 
 CS:{name:'Counterstrain',cls:'Indirect · Passive',
- abs:['Lack of consent','New neurological or vascular symptoms provoked by the position','Position exacerbates potentially life-threatening symptoms'],
- rel:['Patient cannot relax/cooperate','Upper cervical hyperrotation/extension with vertebral artery disease, instability, dens malformation, severe osteoporosis','Fracture/dislocation of joints needed for positioning','Severe acute rheumatologic flare','Apprehension about the position'],
- why:'Counterstrain is appropriate because there is a tender point with an associated acute or chronic strain, the patient can relax, and I can find a position of comfort. It is indirect and gentle, so it suits a tender, guarded area.',
+ abs:['Lack of consent','New neurological or vascular symptoms provoked by the position'],
+ rel:['Patient cannot relax','Upper cervical positioning with vertebral artery disease or instability'],
+ why:'Indicated because there is a tender point with an associated strain, the patient can relax, and I can find a position of comfort. It is gentle and indirect.',
  core:'Find the tender point → rate 10/10 (press hard enough to blanch your nail) → ease pressure to just monitoring, DO NOT MOVE YOUR FINGER → position to reduce tenderness to ≤3/10 (≥70% drop; ideally 0) → hold 90 s monitoring tissue change → slowly return to neutral keeping contact → recheck tenderness.',
  regions:{}}
 };
@@ -251,7 +251,7 @@ $('#drawBtn').onclick=()=>{
   const reg=key?t.regions[key]:null;
   $('#drawn').style.display='block';
   $('#drawn').innerHTML=`<span class="tag">Assigned</span><b>${esc(r)} — ${esc(t.name)}</b>
-<ol><li>State the indication</li><li>Screen for contraindications (${k==='HVLA'?'absolute list is longest, say it':'say the key ones'})</li><li>Diagnose the region (PART → full diagnosis)</li><li>Grader confirms: adjust to the confirmed diagnosis</li><li>Treat: ${esc(t.core)}</li><li>Reassess and give post-treatment instructions</li></ol>
+<ol><li>State the indication</li><li>Screen for contraindications (say the key ones)</li><li>Diagnose the region (PART → full diagnosis)</li><li>Grader confirms: adjust to the confirmed diagnosis</li><li>Treat: ${esc(t.core)}</li><li>Reassess and give post-treatment instructions</li></ol>
 ${k==='HVLA'?'<p class="verify">HVLA: simulate the thrust; say what you would do. Cervical HVLA is set-up only.</p>':''}
 <div class="say">${esc(t.why)}</div>${reg?`<details><summary>Setup steps</summary>${reg.map(i=>`<b>${esc(i.n)}</b> ${tag(i.src)}<ol>${i.s.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`).join('')}</details>`:'<p class="sub">See the Counterstrain section for positions.</p>'}`;
   resetO();
