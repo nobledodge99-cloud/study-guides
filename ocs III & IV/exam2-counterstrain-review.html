@@ -61,6 +61,11 @@
   details.ans{margin:8px 0;border:1px solid var(--border);border-radius:8px;padding:6px 12px;background:#fffefb;}
   details.ans summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--forest);}
   .practice{border-top:2px dashed var(--sage);margin-top:24px;padding-top:4px}
+  details.practice>summary{cursor:pointer;list-style:none;font-family:'IBM Plex Mono',monospace;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--forest);padding:10px 0;font-weight:600}
+  details.practice>summary::-webkit-details-marker{display:none}
+  details.practice>summary::before{content:'\25b8 ';display:inline-block}
+  details.practice[open]>summary::before{content:'\25be '}
+  details.practice>summary .pc{font-weight:400;color:#6b6b60}
   .score{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--forest-dark);}
   @media (max-width:700px){.two-col{grid-template-columns:1fr;}.top-contents ul{columns:1;}section.card{padding:20px 16px;}.header{padding-top:64px;}.header h1{font-size:1.45rem;}}
 .rd{color:#b3261e;font-weight:600}
@@ -143,9 +148,9 @@ const QS=[{"s": "sec-over", "q": "Which spinal levels are the primary sites for 
  QS.forEach((o)=>{
   const sec=document.getElementById(o.s); if(!sec)return;
   let host=sec.querySelector('.practice');
-  if(!host){host=document.createElement('div');host.className='practice';host.dataset.done=0;host.dataset.ok=0;host.dataset.n=0;
-   host.innerHTML='<h3>Check yourself</h3><p class="score">Click an answer to see the explanation.</p>';sec.appendChild(host);}
-  host.dataset.n=+host.dataset.n+1;const num=host.dataset.n;
+  if(!host){host=document.createElement('details');host.className='practice';host.dataset.done=0;host.dataset.ok=0;host.dataset.n=0;
+   host.innerHTML='<summary>Check yourself <span class="pc"></span></summary><p class="score">Click an answer to see the explanation.</p>';sec.appendChild(host);}
+  host.dataset.n=+host.dataset.n+1;const num=host.dataset.n;host.querySelector('.pc').textContent='\u00b7 '+num+(num==1?' question':' questions');
   const d=document.createElement('div');d.className='quiz-q';
   d.innerHTML='<div class="quiz-mini-header">Practice '+num+'</div><p>'+o.q+'</p>';
   const ex=document.createElement('div');ex.className='quiz-explain';ex.innerHTML=o.e;
