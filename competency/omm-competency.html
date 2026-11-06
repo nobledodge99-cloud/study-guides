@@ -85,7 +85,7 @@ details[open]>summary{margin-bottom:6px}
 
 <section class="card" id="cs">
 <h2>Counterstrain: required points &amp; regions</h2>
-<p class="sub">Two points are randomly assigned in your OMS1 guide. Your OCS III list requires the seven below.</p>
+<p class="sub">Two points are randomly assigned in your OMS1 guide. Your OCS III list requires the six below.</p>
 <div class="box green"><b>Steps (indirect, passive)</b><ol><li>Locate the tender point; get consent</li><li>Baseline 10/10 (press hard enough to blanch the nail)</li><li>Ease to monitoring pressure, keep the finger on the point until the end</li><li>Find the position of comfort: ≥70% reduction (ideally 0, at most 2–3/10)</li><li>Patient fully relaxed; hold <b>90 seconds</b> monitoring tissue change</li><li>Slowly return to neutral, keeping contact; recheck tenderness</li></ol></div>
 <div class="tbl-scroll"><table class="t"><tr><th>Required point</th><th>Location</th><th>Position of ease</th></tr><tbody id="csreq"></tbody></table></div>
 <h4>Regional competencies (anterior and posterior points)</h4>
@@ -181,8 +181,8 @@ HVLA:{name:'HVLA (simulated thrust)',cls:'Direct · Passive',
  'Thoracic spine':[{n:'Supine thoracic HVLA',src:'guide',s:['Patient supine, arms crossed (arm on the side of the diagnosis/ease on top); stand on the side OPPOSITE the diagnosis','Cephalad hand pulls the patient into flexion and sidebending into the barrier','Caudal hand thenar eminence posterior to the transverse process; flex, rotate into the barrier and sidebend into the barrier','Deep breath; on exhalation follow the barrier; (thrust short and quick posteriorly: simulate); return to neutral; reassess']}],
  'Lumbar spine':[{n:'Lateral recumbent lumbar HVLA',src:'guide',s:['Patient lies on the side of the diagnosis (ease); stand facing the patient','Cephalad hand monitors the transverse process at the level','Caudal hand flexes the legs (flexed dysfunction) or upper body (extended) until motion is felt at the monitored level','Caudal hand now monitors rotation while the cephalad hand do-si-dos the arm to bring them into rotation','Top leg flexed with foot in the popliteal space; brace the leg with your leg; center of gravity over your contacts','Deep breath; on exhalation follow the barrier; (thrust anterior and superior: simulate); return to neutral; reassess']}],
  'Pelvis':[{n:'Pelvis HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides. Ask for your lab handout; I will replace this','Frame: patient lateral recumbent or supine; diagnose the barrier (e.g., innominate/SI), engage it in all planes with your contact on the ilium/ischium/sacrum, deep breath, follow on exhalation, simulated thrust, reassess','Contraindications: pregnancy, SI/hip arthritis flare, fracture, device, osteoporosis']}],
- 'Upper extremity':[{n:'Upper extremity HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides (your guide only lists UE muscle energy: clavicle, ulna, radial head)','Frame: identify the joint and firm barrier (e.g., radial head, clavicle, carpal), stabilize proximal bone, take distal bone into the barrier in all planes, short quick thrust (simulated), reassess','Check for fracture/instability, neurovascular status first']}],
- 'Lower extremity':[{n:'Anterior talus HVLA',src:'guide',s:['Patient supine; stand at the foot of the table','5th digits on the anterior/superior talus, fingers interlaced over the dorsum of the foot, thumbs on the sole providing dorsiflexion to the barrier; slight inversion/eversion localizes; lean back for traction','Deep breath; on exhalation follow the barrier; (thrust inferior and posterior in a "J" motion: simulate); return to neutral; reassess'],}]}},
+ 'Radial head (upper extremity)':[{n:'Posterior radial head HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides (they list only radial head muscle energy). Verify against your lab handout','Check for fracture/instability and neurovascular status first; patient seated or supine, elbow flexed','Posterior radial head (restricted supination): thumb on the posterior radial head as fulcrum, other hand holds the wrist/forearm; SUPINATE to the barrier','Deep breath; on exhalation take out slack and give a short, quick thrust (SIMULATE) with the thumb anterior-directed; reassess pronation/supination']},{n:'Anterior radial head HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides. Verify against your lab handout','Thumb on the anterior radial head as fulcrum; PRONATE the forearm to the barrier','Deep breath; on exhalation short quick thrust (SIMULATE) with the thumb posterior-directed; reassess']}],
+ 'Fibula (lower extremity)':[{n:'Anterior fibular head HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides (they list only fibular head muscle energy). Verify against your lab handout','Patient supine, knee flexed with the foot on the table; contact the anterior fibular head with the thenar eminence or thumb, other hand on the lateral malleolus','Engage the barrier by drawing the lateral malleolus anteriorly (supinate the ankle); take out slack','Deep breath; on exhalation short quick thrust (SIMULATE) posteromedial through the fibular head; reassess ankle and knee motion']},{n:'Posterior fibular head HVLA (generic frame)',src:'gen',s:['NOT in your uploaded guides. Verify against your lab handout','Contact the posterior fibular head; engage the barrier by moving the lateral malleolus posteriorly (pronate the ankle)','Deep breath; on exhalation short quick thrust (SIMULATE) anterolateral through the fibular head; reassess']}]}},
 
 CS:{name:'Counterstrain',cls:'Indirect · Passive',
  abs:['Lack of consent','New neurological or vascular symptoms provoked by the position'],
@@ -197,7 +197,6 @@ const CSREQ=[
 {p:'Supraspinatus',l:'Muscle belly superior to the spine of the scapula',pos:'EXTERNALLY ROTATE, ABDUCT and FLEX the arm',src:'guide'},
 {p:'Subscapularis',l:'Anterolateral border of the scapula (the axilla)',pos:'INTERNALLY ROTATE the arm with the shoulder extended',src:'guide'},
 {p:'Medial meniscus',l:'Anteromedial aspect of the medial joint line',pos:'Supine, knee moderately flexed (rest the leg on yours); slightly ADDUCT the leg; fine-tune with tibial IR/ER',src:'guide'},
-{p:'Lateral meniscus',l:'Lateral aspect of the lateral joint line',pos:'Supine, knee moderately flexed; slightly ABDUCT the leg; fine-tune with tibial IR/ER',src:'guide'},
 {p:'Levator scapulae',l:'Superior angle of the scapula (insertion of the muscle)',pos:'Not in your uploaded guides. Standard approach: shorten the muscle: neck slight flexion/SIDEBEND and ROTATION toward the tender side with the scapula elevated (shrug) until ≤3/10. Verify with your lab handout',src:'gen'}
 ];
 const CSREG=[
@@ -205,8 +204,6 @@ const CSREG=[
 ['Cervical (posterior)','PC1 → ESARA (from your guide). Other posterior cervical points: extension plus sidebend/rotation per your lab table','guide'],
 ['Thoracic (anterior)','AT1–6: midline along the sternum at the vertebral level → FLEXION','guide'],
 ['Lumbar (anterior)','AT7–9: lateral to midline in rectus abdominis · AT10: ¼ way umbilicus→pubic tubercle · AT11: midway · AT12: anterior iliac crest in the midaxillary line → FSTAR (AT7–12)','guide'],
-['Pelvis (anterior)','AL1: medial to ASIS → FSTAR · AL2: medial to AIIS → FSART · AL3: lateral to AIIS → FSART · AL4: inferior to AIIS → FSART · AL5: pubic tubercle → FSARA','guide'],
-['Pelvis (posterior)','Upper pole L5: superior medial PSIS → extend and adduct the hip, fine-tune IR/ER','guide'],
 ['Posterior thoracic/lumbar pattern','General rule: ANTERIOR points → FLEXION; POSTERIOR points → EXTENSION; then fine-tune sidebending/rotation (often toward the side of tenderness for lateral/transverse-process points, away for midline spinous-process points). Your guide table does not list individual posterior points; use your lab table for exact positions','gen']
 ];
 const NOM={
@@ -242,8 +239,8 @@ $('#whyLines').innerHTML=Object.entries(TECH).map(([k,t])=>`<div class="say"><b>
 const ASSIGN=[];
 ['Cervical spine','Thoracic spine','Lumbar spine','Sacrum','Pelvis','Ribs 1–12'].forEach(r=>ASSIGN.push(['ME',r.replace(' spine','').replace('Ribs 1–12','Ribs 1–12')]));
 ['Cervical region','Thoracic region','Thoracic inlet release','Respiratory diaphragm release','Lumbar region','Pelvis'].forEach(r=>ASSIGN.push(['MFR',r]));
-['Cervical spine (set-up only)','Thoracic spine','Lumbar spine','Pelvis','Upper extremity','Lower extremity'].forEach(r=>ASSIGN.push(['HVLA',r]));
-['Cervical spine','Thoracic spine','Lumbar spine','Pelvis'].forEach(r=>ASSIGN.push(['CS',r+' (anterior and posterior points)']));
+['Cervical spine (set-up only)','Thoracic spine','Lumbar spine','Pelvis','Radial head (upper extremity)','Fibula (lower extremity)'].forEach(r=>ASSIGN.push(['HVLA',r]));
+['Cervical spine','Thoracic spine','Lumbar spine'].forEach(r=>ASSIGN.push(['CS',r+' (anterior and posterior points)']));
 CSREQ.forEach(c=>ASSIGN.push(['CS',c.p+' (required point)']));
 $('#drawBtn').onclick=()=>{
   const [k,r]=ASSIGN[Math.floor(Math.random()*ASSIGN.length)];const t=TECH[k];
