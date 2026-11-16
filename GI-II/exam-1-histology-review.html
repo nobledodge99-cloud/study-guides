@@ -331,7 +331,7 @@ function draw(){
  chips.querySelectorAll('.fc-chip').forEach(b=>b.onclick=()=>{lec=b.dataset.l;onlyMiss=false;build();});
  if(!deck.length){card.className='fc-card';card.innerHTML='<div class="fc-lab">Nothing here</div>No cards in this view.';document.getElementById('fcProg').textContent='';return;}
  const c=deck[i];card.className='fc-card'+(back?' back':'');
- card.innerHTML='<div class="fc-lab">'+c.l+' &middot; '+(back?'answer':'prompt')+'</div>'+(back?c.b:c.f);
+ card.innerHTML='<div class="fc-lab">'+c.l+' &middot; '+(back?'answer':'prompt')+'</div><div class="fc-body">'+(back?c.b:c.f)+'</div>';
  const g=Object.keys(got).length,m=Object.keys(miss).length;
  document.getElementById('fcProg').textContent=(i+1)+' / '+deck.length+'  ·  got '+g+' · missed '+m;
 }
