@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GI II Exam 1 — Pathology Bucket Cheat Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f1e6; --cream-card:#fffdf8; --forest-dark:#1f3d2e; --forest:#2f5d43;
+  --sage:#7ba384; --sage-light:#e4ecdf; --border:#d8cfb8; --accent:#b3562a;
+  --text-main:#26291f; --text-soft:#5a5f4f;
+  --obs:#2b5a8c; --obs-light:#e3ecf4;
+  --rst:#b3562a; --rst-light:#fbeee2;
+  --neo:#6b3fa0; --neo-light:#eee6f6;
+  --aty:#2f8a7a; --aty-light:#e2f3ef;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Lora',Georgia,serif;background:var(--cream);color:var(--text-main);line-height:1.5;}
+h1,h2,h3,h4{font-family:'IBM Plex Mono',monospace;color:var(--forest-dark);letter-spacing:.02em;}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px 70px;}
+header.hero{background:linear-gradient(135deg,var(--forest-dark),var(--forest));color:#f6f1e6;padding:46px 20px 30px;text-align:center;}
+header.hero h1{color:#fff;font-size:1.7rem;margin:0 0 6px;}
+header.hero p{color:#dfe9de;font-family:'Lora',serif;font-size:.98rem;margin:4px 0;}
+header.hero .src{font-size:.8rem;color:#b9d0bb;margin-top:10px;font-family:'IBM Plex Mono',monospace;}
+nav.toc{background:var(--cream-card);border:1px solid var(--border);border-radius:10px;margin:24px 0;padding:14px 18px;font-size:.88rem;}
+nav.toc h2{font-size:.92rem;margin:0 0 8px;}
+nav.toc .toc-row{display:flex;flex-wrap:wrap;gap:6px 16px;}
+nav.toc a{color:var(--forest);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;}
+nav.toc a:hover{text-decoration:underline;}
+
+.bucket{border-radius:14px;margin:30px 0;overflow:hidden;border:1px solid var(--border);}
+.bucket-head{padding:18px 22px;color:#fff;}
+.bucket-head h2{color:#fff;margin:0 0 4px;font-size:1.25rem;}
+.bucket-head .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;opacity:.85;text-transform:uppercase;letter-spacing:.07em;}
+.bucket-body{background:var(--cream-card);padding:16px 22px 22px;}
+.bucket-hy{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 18px;}
+@media(max-width:620px){.bucket-hy{grid-template-columns:1fr;}}
+.hy-box{border-radius:8px;padding:10px 13px;font-size:.84rem;}
+.hy-box b.hy-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+
+.subbucket{border:1px solid var(--border);border-radius:10px;margin:14px 0;padding:12px 16px 14px;background:#fffefb;}
+.subbucket h3{font-size:.95rem;margin:0 0 2px;}
+.sub-note{font-size:.82rem;color:var(--text-soft);margin:0 0 10px;font-style:italic;}
+
+.dz-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:700px){.dz-grid{grid-template-columns:1fr;}}
+.dz-card{background:var(--sage-light);border-radius:7px;padding:8px 11px;font-size:.84rem;}
+.dz-name{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.8rem;color:var(--forest-dark);display:block;margin-bottom:2px;}
+.dz-ids{font-size:.81rem;}
+.dz-ids b{color:var(--text-main);}
+
+.spectrum{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.82rem;margin:6px 0;}
+.spectrum .step{background:#fff;border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;max-width:100%;}
+.spectrum .arrow{color:var(--text-soft);}
+
+.pearl{background:#fdf2e4;border-left:4px solid var(--accent);border-radius:6px;padding:9px 13px;margin:12px 0;font-size:.86rem;}
+.pearl-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+
+.back-btn{position:fixed;top:14px;left:14px;background:var(--forest-dark);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;z-index:50;}
+footer{text-align:center;padding:26px;font-size:.78rem;color:var(--text-soft);}
+.master-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0;}
+.master-table th{background:var(--forest-dark);color:#fff;padding:6px 9px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.7rem;}
+.master-table td{padding:6px 9px;border-bottom:1px solid var(--border);}
+.master-table tr:nth-child(even) td{background:var(--sage-light);}
+
+.sidenav-toggle{position:fixed;top:14px;right:14px;background:var(--forest);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;cursor:pointer;z-index:50;}
+.sidenav-panel{position:fixed;top:56px;right:14px;background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:14px;max-height:78vh;overflow-y:auto;width:250px;display:none;z-index:49;box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.sidenav-panel.open{display:block;}
+.sidenav-panel h4{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin:12px 0 4px;}
+.sidenav-panel h4:first-child{margin-top:0;}
+.sidenav-panel a{display:block;font-size:.82rem;color:var(--text-main);text-decoration:none;padding:4px 6px;border-radius:5px;}
+.sidenav-panel a:hover{background:var(--sage-light);}
+.c1 .bucket-head{background:#2b5a8c;} .c1 .hy-box{background:#e3ecf4;color:#1b3a57;} .c1 .hy-box b.hy-label{color:#2b5a8c;} .c1 .subbucket h3{color:#2b5a8c;} .c1 .dz-card{background:#e3ecf4;}
+.c2 .bucket-head{background:#6b3fa0;} .c2 .hy-box{background:#eee6f6;color:#452869;} .c2 .hy-box b.hy-label{color:#6b3fa0;} .c2 .subbucket h3{color:#6b3fa0;} .c2 .dz-card{background:#eee6f6;}
+.c3 .bucket-head{background:#b3562a;} .c3 .hy-box{background:#fbeee2;color:#6e331a;} .c3 .hy-box b.hy-label{color:#b3562a;} .c3 .subbucket h3{color:#b3562a;} .c3 .dz-card{background:#fbeee2;}
+.c4 .bucket-head{background:#a23b5a;} .c4 .hy-box{background:#f8e4ea;color:#5d1f33;} .c4 .hy-box b.hy-label{color:#a23b5a;} .c4 .subbucket h3{color:#a23b5a;} .c4 .dz-card{background:#f8e4ea;}
+.c5 .bucket-head{background:#2f8a7a;} .c5 .hy-box{background:#e2f3ef;color:#1c5349;} .c5 .hy-box b.hy-label{color:#2f8a7a;} .c5 .subbucket h3{color:#2f8a7a;} .c5 .dz-card{background:#e2f3ef;}
+.c6 .bucket-head{background:#7a5c1e;} .c6 .hy-box{background:#f4ecd6;color:#4d3a10;} .c6 .hy-box b.hy-label{color:#7a5c1e;} .c6 .subbucket h3{color:#7a5c1e;} .c6 .dz-card{background:#f4ecd6;}
+.c7 .bucket-head{background:#3f6b2f;} .c7 .hy-box{background:#e6f0df;color:#26421c;} .c7 .hy-box b.hy-label{color:#3f6b2f;} .c7 .subbucket h3{color:#3f6b2f;} .c7 .dz-card{background:#e6f0df;}
+.c8 .bucket-head{background:#4a4f8f;} .c8 .hy-box{background:#e6e8f6;color:#2b2e5c;} .c8 .hy-box b.hy-label{color:#4a4f8f;} .c8 .subbucket h3{color:#4a4f8f;} .c8 .dz-card{background:#e6e8f6;}
+.hero-sub{font-size:.82rem;}
+.gloss{font-size:.8rem;columns:2;column-gap:24px;} @media(max-width:620px){.gloss{columns:1;}}
+.rule{border-left:3px solid var(--accent);padding:2px 10px;margin:4px 0;font-size:.82rem;}
+</style>
+</head>
+
+<body>
+<a href="../index.html" class="back-btn">← Back to Study Guides</a>
+<button class="sidenav-toggle" id="sidenavToggle">Sections ☰</button>
+<div class="sidenav-panel" id="sidenavPanel">
+<h4>1. Oral Cavity &amp; Salivary Glands</h4>
+<a href="#oral-inf">Dental, Inflammatory &amp; Infectious Lesions</a>
+<a href="#oral-pre">Premalignant Lesions &amp; SCC</a>
+<a href="#oral-sg">Salivary Glands</a>
+<h4>2. Esophagus</h4>
+<a href="#eso-struct">Structural &amp; Motility</a>
+<a href="#eso-inj">Injury, Varices &amp; Esophagitis</a>
+<a href="#eso-neo">Barrett Esophagus &amp; Neoplasia</a>
+<h4>3. Stomach</h4>
+<a href="#sto-gast">Gastritis &amp; Stress Ulcers</a>
+<a href="#sto-pud">Peptic Ulcer Disease &amp; Other Structural Disorders</a>
+<a href="#sto-neo">Gastric Neoplasia</a>
+<h4>4. Liver: Failure, Hepatitis, Metabolic &amp; Vascular</h4>
+<a href="#liv-fail">Liver Failure &amp; Cirrhosis</a>
+<a href="#liv-vir">Viral Hepatitis (A–E)</a>
+<a href="#liv-met">Autoimmune, Steatotic &amp; Inherited</a>
+<a href="#liv-circ">Circulatory Disorders</a>
+<a href="#liv-lab">Lab Pattern Recognition</a>
+<h4>5. Bile: Bilirubin, Cholestasis, Ducts &amp; Gallbladder</h4>
+<a href="#bil-bili">Bilirubin &amp; Jaundice</a>
+<a href="#bil-duct">Bile Duct Disease</a>
+<a href="#bil-gb">Gallstones &amp; Gallbladder</a>
+<h4>6. Liver &amp; Biliary Tumors</h4>
+<a href="#tum-ben">Non-neoplastic &amp; Benign</a>
+<a href="#tum-mal">Malignant Tumors</a>
+<h4>7. Pancreas</h4>
+<a href="#pan-cong">Congenital &amp; Cystic Fibrosis</a>
+<a href="#pan-itis">Pancreatitis</a>
+<a href="#pan-neo">Cysts &amp; Neoplasms</a>
+<h4>8. Immune-Mediated GI Disorders</h4>
+<a href="#imm-main">Disease Comparison</a>
+<h4>Reference</h4><a href="#gloss">Abbreviations</a></div>
+<header class="hero"><h1>GI II Exam 1 — Pathology Bucket Cheat Sheet</h1><p>Oral Cavity · Esophagus · Stomach · Liver · Bile &amp; Gallbladder · Liver Tumors · Pancreas · Immune GI</p><p class="hero-sub">Built from Dr. McCuen (pathology), Dr. Nash (immune disorders), and the clinical lectures (Kinder, Bell, hepatitis, biliary, pancreatic carcinoma). Imaging, labs and key values are folded into each bucket.</p><p class="src">Quick-reference organizational guide — not a replacement for the full study guides</p></header><div class="wrap"><nav class="toc"><h2>Jump to a bucket</h2><div class="toc-row">
+<a href="#oral">1. Oral Cavity &amp; Salivary Glands</a>
+<a href="#eso">2. Esophagus</a>
+<a href="#sto">3. Stomach</a>
+<a href="#liv">4. Liver: Failure, Hepatitis, Metabolic &amp; Vascular</a>
+<a href="#bil">5. Bile: Bilirubin, Cholestasis, Ducts &amp; Gallbladder</a>
+<a href="#tum">6. Liver &amp; Biliary Tumors</a>
+<a href="#pan">7. Pancreas</a>
+<a href="#imm">8. Immune-Mediated GI Disorders</a>
+</div></nav><div class="pearl"><span class="pearl-label">How to use this</span>Each bucket opens with its own mechanism and the high-yield buzzwords. Know those cold and the diseases underneath become variations on one idea. Imaging, lab and histology findings sit <b>inside</b> the disease they diagnose.</div>
+<section class="bucket c1" id="oral"><div class="bucket-head"><span class="tag">Bucket 1</span><h2>Oral Cavity &amp; Salivary Glands</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Mouth = the entry point: <b>plaque and infection</b>, <b>immune and reactive lesions</b>, <b>premalignant white/red patches</b>, then <b>squamous cell carcinoma (SCC)</b> (mucosa) vs <b>salivary tumors</b> (glands). Ask: what is the stimulus (tobacco/alcohol vs human papillomavirus (HPV) vs immune) and what does the lesion do when scraped?</div><div class="hy-box"><b class="hy-label">High yield</b><b>Does it scrape off?</b> Thrush yes; leukoplakia, hairy leukoplakia, hyperplastic candidiasis no. <b>Erythroplakia ~90% dysplasia</b>. <b>Non-HPV SCC</b> = oral cavity, tobacco/alcohol, field cancerization, poor prognosis; <b>HPV SCC</b> = oropharynx, p16+, basaloid, better prognosis. Salivary tumors: <b>smaller gland = more likely malignant</b>.</div></div>
+<div class="subbucket" id="oral-inf"><h3>Dental, Inflammatory &amp; Infectious Lesions</h3><p class="sub-note">Know the organism / trigger / buzzword</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Dental caries</span><span class="dz-ids"><b>Streptococcus mutans</b> ferments sugar → acid → demineralization (enamel → dentin → pulp → abscess). Prevent with hygiene + fluoride.</span></div>
+<div class="dz-card"><span class="dz-name">Periodontal disease</span><span class="dz-ids">Plaque → tartar → <b>gingivitis</b> → <b>periodontitis</b> (loose teeth). Systemic spread: infective endocarditis, brain abscess.</span></div>
+<div class="dz-card"><span class="dz-name">Aphthous ulcer (canker sore)</span><span class="dz-ids">Shallow ulcer, fibrinopurulent base, <b>red halo</b>; non-keratinized mucosa; not viral. Celiac, IBD, Behçet. Heals 7–10 days.</span></div>
+<div class="dz-card"><span class="dz-name">Herpes simplex virus 1 (HSV-1)</span><span class="dz-ids">Gingivostomatitis (age 2–4); recurs at the <b>same site</b> (latent in ganglia; <b>herpes labialis</b>). <b>Tzanck</b>: multinucleated keratinocytes + intranuclear inclusions.</span></div>
+<div class="dz-card"><span class="dz-name">Oral candidiasis</span><span class="dz-ids"><b>Pseudomembranous (thrush)</b> scrapes off; erythematous = flat red; hyperplastic = white plaque that does <b>not</b> scrape; angular cheilitis. HIV, antibiotics, chemotherapy, diabetes.</span></div>
+<div class="dz-card"><span class="dz-name">Lichen planus</span><span class="dz-ids"><b>Wickham striae</b> (white lines, inner cheek); age 50–60; associated with hepatitis C.</span></div>
+<div class="dz-card"><span class="dz-name">Pemphigus vulgaris</span><span class="dz-ids">IgG vs <b>desmoglein 1 and 3</b> → acantholysis; oral erosions (more DSG3) vs skin blisters.</span></div>
+<div class="dz-card"><span class="dz-name">Reactive lesions</span><span class="dz-ids">Irritation fibroma (bite line); <b>pyogenic granuloma</b> (vascular, pregnancy); peripheral ossifying fibroma; peripheral giant cell granuloma (multinucleated giant cells).</span></div>
+</div></div>
+<div class="subbucket" id="oral-pre"><h3>Premalignant Lesions &amp; SCC</h3><p class="sub-note">Red vs white vs HPV vs not</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Leukoplakia</span><span class="dz-ids">White, <b>does not scrape</b>; tobacco/alcohol; <b>5–25% dysplasia</b>; hyperkeratosis ± dysplasia. Biopsy.</span></div>
+<div class="dz-card"><span class="dz-name">Hairy leukoplakia</span><span class="dz-ids">Lateral tongue; <b>Epstein-Barr virus (EBV)</b>, immunosuppressed (80% HIV); <b>benign</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Erythroplakia</span><span class="dz-ids">Red, velvety; <b>~90% dysplasia</b>; high transformation risk. Mixed = erythroleukoplakia.</span></div>
+<div class="dz-card"><span class="dz-name">Non-HPV SCC</span><span class="dz-ids"><b>Oral cavity</b> (tongue, floor of mouth, lip). Tobacco + alcohol (synergistic), betel quid. <b>TP53, RB</b> mutations; ulcerated, indurated; <b>keratinizing, keratin pearls</b>; <b>field cancerization</b>; poor prognosis.</span></div>
+<div class="dz-card"><span class="dz-name">HPV-associated SCC</span><span class="dz-ids"><b>Oropharynx</b> (tonsil, tongue base). HPV <b>E6/E7</b>; <b>E7 binds RB</b> → constitutive E2F → <b>p16 overexpression</b>; no precursor lesion; <b>nonkeratinizing, basaloid</b>; early cervical node metastasis; better prognosis.</span></div>
+<div class="dz-card"><span class="dz-name">Odontogenic lesions</span><span class="dz-ids"><b>Dentigerous cyst</b> (crown of unerupted tooth); <b>radicular cyst</b> (apex, most common); <b>odontoma</b> (most common tumor, tooth material); <b>ameloblastoma</b> (cystic epithelial tumor).</span></div>
+</div></div>
+<div class="subbucket" id="oral-sg"><h3>Salivary Glands</h3><p class="sub-note">Rule: parotid 65–80% mostly benign; sublingual/minor 70–90% malignant</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Xerostomia</span><span class="dz-ids"><b>Sjögren</b> (anti-SSA, anti-SSB; dry eyes + mouth), head/neck radiation, <b>medications (most common)</b>. Caries, candidiasis.</span></div>
+<div class="dz-card"><span class="dz-name">Sialadenitis</span><span class="dz-ids"><b>Mucocele</b> (lower lip, blue; floor of mouth = <b>ranula</b>); <b>sialolithiasis</b> (stone, unilateral, S. aureus); <b>mumps</b> (paramyxovirus; orchitis, pancreatitis, meningitis).</span></div>
+<div class="dz-card"><span class="dz-name">Pleomorphic adenoma</span><span class="dz-ids">Benign; <b>most common</b> salivary tumor, parotid. <b>PLAG1</b> (or HMGA2). Triphasic (epithelial, myoepithelial, chondromyxoid stroma); pseudopods → <b>recurrence</b>; rare carcinoma ex pleomorphic adenoma (risk rises with duration).</span></div>
+<div class="dz-card"><span class="dz-name">Warthin tumor</span><span class="dz-ids">Benign; parotid; <b>smoking, bilateral/multifocal</b>; <b>oncocytes + lymphoid stroma</b> with cystic spaces.</span></div>
+<div class="dz-card"><span class="dz-name">Mucoepidermoid carcinoma</span><span class="dz-ids"><b>Most common malignant</b>; mucinous + epidermoid + intermediate cells; <b>CRTC1::MAML2</b>; more solid = higher grade.</span></div>
+<div class="dz-card"><span class="dz-name">Adenoid cystic carcinoma</span><span class="dz-ids"><b>Minor glands</b> (50%); <b>MYB::NF1B</b>; <b>cribriform</b>/tubular/solid; <b>perineural invasion</b>; late lung metastasis.</span></div>
+</div></div>
+</div></section>
+<section class="bucket c2" id="eso"><div class="bucket-head"><span class="tag">Bucket 2</span><h2>Esophagus</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Dysphagia has four roots: <b>structural</b> (atresia, webs, rings, diverticula), <b>motility</b> (achalasia), <b>inflammation</b> (esophagitis) and <b>neoplasia</b>. The central story is GERD → Barrett → adenocarcinoma vs carcinogen → squamous cell carcinoma.</div><div class="hy-box"><b class="hy-label">High yield</b><b>Zenker</b> = proximal, most common. <b>Achalasia</b> = lost inhibitory myenteric neurons, <b>bird-beak</b>, Chagas. <b>Plummer-Vinson</b> = iron-deficiency anemia + web. <b>Barrett</b> = intestinal metaplasia with <b>goblet cells</b>. <b>Adenocarcinoma = distal/GE junction; SCC = middle, global leader</b>.</div></div>
+<div class="subbucket" id="eso-struct"><h3>Structural &amp; Motility</h3><p class="sub-note">Barium swallow clues</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Atresia / tracheoesophageal fistula</span><span class="dz-ids">Atresia = disconnected lumen (regurgitation, feeding intolerance); fistula = esophagus–trachea connection (<b>aspiration</b>, choking).</span></div>
+<div class="dz-card"><span class="dz-name">Diverticula</span><span class="dz-ids">All three layers outpouch. <b>Zenker</b> (proximal, elderly, halitosis, regurgitation); midesophageal (traction, TB); epiphrenic (distal, hiatal hernia).</span></div>
+<div class="dz-card"><span class="dz-name">Hiatal hernia</span><span class="dz-ids"><b>Sliding (95%)</b> → GERD; paraesophageal → strangulation, surgery.</span></div>
+<div class="dz-card"><span class="dz-name">Webs vs Schatzki ring</span><span class="dz-ids">Web: upper, semicircumferential, <b>Plummer-Vinson</b> (iron-deficiency anemia, middle-aged women). Ring: lower, circumferential, <b>hiatal hernia</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Achalasia</span><span class="dz-ids">Incomplete lower esophageal sphincter (LES) relaxation + aperistalsis; loss of <b>inhibitory</b> myenteric neurons. Secondary: <b>Chagas</b> (Trypanosoma cruzi), malignancy. <b>Bird-beak</b> on barium. Botulinum toxin temporary; surgery curative. ↑ SCC risk.</span></div>
+</div></div>
+<div class="subbucket" id="eso-inj"><h3>Injury, Varices &amp; Esophagitis</h3><p class="sub-note">Compare by appearance + organism</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Mallory-Weiss vs Boerhaave</span><span class="dz-ids">Mallory-Weiss = <b>mucosal longitudinal</b> tear (retching, alcohol; hematemesis, self-limited). Boerhaave = <b>transmural</b> rupture → mediastinitis, emergency.</span></div>
+<div class="dz-card"><span class="dz-name">Esophageal varices</span><span class="dz-ids">Portal hypertension (cirrhosis) → collaterals → dilated submucosal veins; <b>painless hematemesis</b>; band ligation/sclerotherapy.</span></div>
+<div class="dz-card"><span class="dz-name">HSV esophagitis</span><span class="dz-ids"><b>Punched-out ulcers</b>; multinucleated, ground-glass cells; <b>Cowdry A</b> inclusions at the ulcer edge.</span></div>
+<div class="dz-card"><span class="dz-name">CMV esophagitis</span><span class="dz-ids"><b>Linear</b> well-demarcated ulcer; enlarged cells with nuclear <b>and</b> cytoplasmic inclusions.</span></div>
+<div class="dz-card"><span class="dz-name">Candida esophagitis</span><span class="dz-ids">Pseudomembranous plaques; <b>GMS stain</b> black fungi.</span></div>
+<div class="dz-card"><span class="dz-name">Eosinophilic esophagitis</span><span class="dz-ids">Atopy, Th2; <b>superficial intraepithelial eosinophils</b>, basal zone hyperplasia, <b>“feline” rings</b>; dysphagia/food impaction; <b>no Barrett link</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Reflux esophagitis (GERD)</span><span class="dz-ids">LES relaxation; fewer, less superficial eosinophils, elongated papillae; complications: ulcer, <b>stricture</b>, <b>Barrett</b>.</span></div>
+</div></div>
+<div class="subbucket" id="eso-neo"><h3>Barrett Esophagus &amp; Neoplasia</h3><p class="sub-note">Metaplasia → dysplasia → carcinoma</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Barrett esophagus</span><span class="dz-ids"><b>Intestinal metaplasia</b> (columnar + <b>goblet cells</b>) replacing squamous; salmon-colored, Z line pushed up. No dysplasia → low-grade → high-grade (architectural distortion).</span></div>
+<div class="dz-card"><span class="dz-name">Adenocarcinoma</span><span class="dz-ids"><b>Distal/GE junction</b>; GERD → Barrett, obesity, tobacco (<b>not alcohol</b>); males, white; <b>TP53, CDKN2A</b>; glandular. Rising US incidence.</span></div>
+<div class="dz-card"><span class="dz-name">Squamous cell carcinoma</span><span class="dz-ids"><b>Middle</b> esophagus; <b>most common worldwide</b>; tobacco, <b>alcohol</b>, hot tea, caustic injury, achalasia, radiation; keratin pearls; African American males.</span></div>
+<div class="dz-card"><span class="dz-name">Clinical (both)</span><span class="dz-ids">Progressive dysphagia, odynophagia, weight loss; late diagnosis; 5-year survival &lt;20% (75–80% if localized).</span></div>
+</div></div>
+</div></section>
+<section class="bucket c3" id="sto"><div class="bucket-head"><span class="tag">Bucket 3</span><h2>Stomach</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Disease = <b>imbalance of damaging forces (acid, pepsin, NSAIDs, alcohol, tobacco) vs defensive forces (mucin, bicarbonate, prostaglandins, blood flow, somatostatin)</b>. Location of injury (antrum vs body) decides acid output and therefore ulcer vs cancer risk.</div><div class="hy-box"><b class="hy-label">High yield</b><b>H. pylori antrum → ↑ gastrin → ↑ acid → duodenal ulcer; pangastritis → atrophy → ↓ acid → cancer/MALToma.</b> <b>Autoimmune type A</b>: body/fundus, <b>achlorhydria, hypergastrinemia, B12 deficiency, type I NET</b>. <b>Diffuse cancer = CDH1, signet ring, linitis plastica</b>.</div></div>
+<div class="subbucket" id="sto-gast"><h3>Gastritis &amp; Stress Ulcers</h3><p class="sub-note">Cause → pattern → complication</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Acute gastritis / NSAIDs</span><span class="dz-ids">NSAIDs inhibit <b>COX-1</b> (mucus, bicarbonate, blood flow). Erosion = mucosa only; ulcer = beyond mucosa.</span></div>
+<div class="dz-card"><span class="dz-name">Curling ulcer</span><span class="dz-ids"><b>Burns</b>: ↓ blood volume → ↓ mucosal flow; multiple shallow ulcers (stomach/proximal duodenum).</span></div>
+<div class="dz-card"><span class="dz-name">Cushing ulcer</span><span class="dz-ids"><b>CNS injury/↑ intracranial pressure</b> → vagal ↑ acid; single deep ulcer; high perforation risk.</span></div>
+<div class="dz-card"><span class="dz-name">Reactive gastropathy</span><span class="dz-ids">NSAIDs/bile reflux; <b>minimal inflammation, foveolar hyperplasia, corkscrew pits</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Autoimmune atrophic gastritis</span><span class="dz-ids">Body/fundus; anti-parietal cell (H+/K+-ATPase) and intrinsic factor; CD4+ T cells. <b>↓ HCl, ↑↑ gastrin</b>; <b>pernicious anemia</b>, <b>type I neuroendocrine tumor (NET)</b>, adenocarcinoma; <b>low ulcer risk</b>.</span></div>
+<div class="dz-card"><span class="dz-name">H. pylori gastritis</span><span class="dz-ids">Gram-negative spiral; urease, flagella, adhesins, <b>CagA/VacA</b>; Warthin-Starry. Antral-predominant: ↑ gastrin → ↑ acid → <b>PUD</b>. Pangastritis: atrophy → intestinal metaplasia → <b>adenocarcinoma</b>, <b>MALToma</b>.</span></div>
+</div></div>
+<div class="subbucket" id="sto-pud"><h3>Peptic Ulcer Disease &amp; Other Structural Disorders</h3><p class="sub-note">Gastric vs duodenal; Ménétrier vs Zollinger-Ellison</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Gastric ulcer</span><span class="dz-ids">Older adults; <b>normal/low acid</b>; pain may worsen with food; occult bleeding; whole-stomach H. pylori + NSAIDs.</span></div>
+<div class="dz-card"><span class="dz-name">Duodenal ulcer</span><span class="dz-ids">Younger; <b>↑ acid</b>; <b>relieved by food</b>, recurs 2–3 h later; H. pylori ~100%; overt bleeding, more complications.</span></div>
+<div class="dz-card"><span class="dz-name">Ulcer complications</span><span class="dz-ids">Hemorrhage 15–20%, perforation 5%, <b>gastric outlet obstruction</b> 2%.</span></div>
+<div class="dz-card"><span class="dz-name">Pyloric stenosis</span><span class="dz-ids">Male:female 4:1, 3–6 weeks; <b>projectile nonbilious vomiting, olive mass</b>; Turner, trisomy 18.</span></div>
+<div class="dz-card"><span class="dz-name">Bezoar</span><span class="dz-ids">Phyto-, tricho-, pharmaco-; teeth loss, diabetes, gastric surgery.</span></div>
+<div class="dz-card"><span class="dz-name">Ménétrier disease</span><span class="dz-ids"><b>↑ TGF-α/EGFR → foveolar hyperplasia</b>; <b>low albumin</b>, <b>low acid</b>; no ulcers.</span></div>
+<div class="dz-card"><span class="dz-name">Zollinger-Ellison</span><span class="dz-ids"><b>Gastrinoma</b> → <b>parietal hyperplasia</b>, <b>↑ acid</b>, multiple ulcers; sporadic (pancreas, &gt;2 cm) or <b>MEN1</b> (duodenum).</span></div>
+<div class="dz-card"><span class="dz-name">Gastric polyps</span><span class="dz-ids"><b>Hyperplastic</b> (most common, gastritis); <b>fundic gland</b> (<b>PPI use</b>, APC/MUTYH); <b>adenoma</b> (dysplastic, highest cancer risk).</span></div>
+</div></div>
+<div class="subbucket" id="sto-neo"><h3>Gastric Neoplasia</h3><p class="sub-note">Four tissue types: gland, lymphoid, neuroendocrine, mesenchymal</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Intestinal-type adenocarcinoma</span><span class="dz-ids">Males &gt;50; H. pylori/autoimmune → metaplasia → dysplasia; nitrites, salt, smoking; CIN, MSI, EBV subtypes; <b>exophytic, ulcer with rolled borders</b>; tubular/papillary.</span></div>
+<div class="dz-card"><span class="dz-name">Diffuse-type adenocarcinoma</span><span class="dz-ids"><b>CDH1 (E-cadherin) loss</b>; &lt;50, hereditary; <b>signet-ring cells</b>; <b>linitis plastica</b>; worse prognosis.</span></div>
+<div class="dz-card"><span class="dz-name">Metastasis signs</span><span class="dz-ids"><b>Virchow</b> node (left supraclavicular), <b>Krukenberg</b> (ovary), <b>Sister Mary Joseph</b> (periumbilical).</span></div>
+<div class="dz-card"><span class="dz-name">MALToma / DLBCL</span><span class="dz-ids">H. pylori → B-cell lymphoma; NF-κB; <b>CD19/CD20</b>; early MALToma regresses with <b>eradication</b>; stomach = most common extranodal site.</span></div>
+<div class="dz-card"><span class="dz-name">Neuroendocrine tumor</span><span class="dz-ids"><b>Type I</b> autoimmune gastritis; <b>type II</b> Zollinger-Ellison; type III sporadic; chromogranin/synaptophysin; carcinoid syndrome ~10%.</span></div>
+<div class="dz-card"><span class="dz-name">GIST</span><span class="dz-ids">Interstitial cells of Cajal; <b>KIT (~75%)</b>, PDGFRA (~8%); KIT + <b>DOG1</b>; bleeding/anemia; risk by size and mitoses.</span></div>
+</div></div>
+</div></section>
+<section class="bucket c4" id="liv"><div class="bucket-head"><span class="tag">Bucket 4</span><h2>Liver: Failure, Hepatitis, Metabolic &amp; Vascular</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Hepatocyte injury goes one of two ways: <b>massive necrosis (acute failure)</b> or <b>chronic injury → stellate-cell activation → fibrosis → cirrhosis</b>. Etiology buckets: viral, autoimmune, toxic/metabolic, inherited, circulatory.</div><div class="hy-box"><b class="hy-label">High yield</b><b>Acetaminophen → NAPQI → centrilobular necrosis.</b> Cirrhosis = <b>bridging fibrosis + regenerative nodules</b>. <b>HBV is the only DNA hepatitis virus</b>; <b>HCV 80–90% chronic</b>; <b>HDV needs HBV</b>. <b>AST:ALT ~2:1 alcohol</b>; <b>hemochromatosis = cirrhosis + diabetes + skin pigmentation</b>.</div></div>
+<div class="subbucket" id="liv-fail"><h3>Liver Failure &amp; Cirrhosis</h3><p class="sub-note">Acute vs chronic (her table)</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Acute liver failure</span><span class="dz-ids">&lt;26 weeks; <b>acetaminophen</b> (~50% of US cases; <b>CYP2E1 → NAPQI</b>, glutathione depleted → <b>centrilobular necrosis</b>). Gross: <b>shrunken, soft, yellow, not fibrotic</b>. <b>Confluent necrosis</b>. Complications: <b>encephalopathy, coagulopathy, hepatorenal syndrome</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Chronic liver failure / cirrhosis</span><span class="dz-ids">Injury → Kupffer/stellate cells, <b>TGF-β</b> → myofibroblasts → collagen → <b>bridging necrosis/fibrosis</b>, <b>regenerative nodules</b>. <b>Portal hypertension</b>, <b>hepatopulmonary syndrome</b> (V/Q mismatch, hypoxemia), HCC.</span></div>
+<div class="dz-card"><span class="dz-name">Portal hypertension causes</span><span class="dz-ids">Pre: portal/splenic vein thrombosis. Intra: <b>cirrhosis</b>, schistosomiasis. Post: <b>Budd-Chiari</b>, right heart failure. Results: ascites, varices, caput medusae, splenomegaly.</span></div>
+</div></div>
+<div class="subbucket" id="liv-vir"><h3>Viral Hepatitis (A–E)</h3><p class="sub-note">Genome · route · chronicity · HCC · vaccine</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Hepatitis A (HAV)</span><span class="dz-ids">RNA, <b>fecal-oral</b>; acute only; <b>IgM</b> early, <b>IgG</b> later; vaccine. Fulminant 0.1–0.3%.</span></div>
+<div class="dz-card"><span class="dz-name">Hepatitis E (HEV)</span><span class="dz-ids">RNA, fecal-oral, <b>zoonotic</b>; <b>pregnancy = 20% mortality</b>; chronic only if immunocompromised; no US vaccine.</span></div>
+<div class="dz-card"><span class="dz-name">Hepatitis B (HBV)</span><span class="dz-ids"><b>DNA</b>; parenteral/perinatal (~90% of high-incidence cases); <b>chronic 5–10%</b>, higher with perinatal; direct + immune damage; <b>HBsAg = ground-glass hepatocytes</b>; <b>cirrhosis, HCC, glomerulonephritis, polyarteritis nodosa</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Hepatitis C (HCV)</span><span class="dz-ids">RNA, parenteral; <b>silent</b>, <b>80–90% chronic</b> (error-prone polymerase, antigenic variability); ⅓ of US HCC; <b>mixed cryoglobulinemia</b>; no vaccine.</span></div>
+<div class="dz-card"><span class="dz-name">Hepatitis D (HDV)</span><span class="dz-ids">Needs HBV. <b>Co-infection</b> (simultaneous; usually recovers) vs <b>superinfection</b> (on chronic HBV; ~80% chronic, worse).</span></div>
+<div class="dz-card"><span class="dz-name">Acute vs chronic morphology</span><span class="dz-ids">Acute: lobular inflammation, <b>ballooning</b>, <b>Councilman bodies</b>. Chronic: portal inflammation, <b>interface hepatitis</b>, portal/bridging fibrosis.</span></div>
+<div class="dz-card"><span class="dz-name">Outcomes</span><span class="dz-ids">Acute · chronic · <b>carrier</b> (infectious, little injury) · fulminant failure (rare).</span></div>
+</div></div>
+<div class="subbucket" id="liv-met"><h3>Autoimmune, Steatotic &amp; Inherited</h3><p class="sub-note">Pattern + stain</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Autoimmune hepatitis</span><span class="dz-ids">Women (~78%); <b>interface hepatitis</b>, plasma cells, <b>emperipolesis</b>, rosettes; ↑ IgG; <b>type 1: ANA, ASMA</b> (adults); <b>type 2: anti-LKM-1, LC-1</b> (children).</span></div>
+<div class="dz-card"><span class="dz-name">Alcohol-associated disease</span><span class="dz-ids">ADH uses NAD+ → ↑ NADH → ↓ β-oxidation; ↑ triglycerides; CYP2E1 reactive oxygen species. Steatosis → <b>steatohepatitis (ballooned cells, Mallory-Denk bodies, chicken-wire fibrosis)</b> → micronodular cirrhosis. <b>AST &gt; ALT (~2:1)</b>.</span></div>
+<div class="dz-card"><span class="dz-name">MASLD / MASH</span><span class="dz-ids"><b>Insulin resistance</b>, obesity, diabetes; same morphology; <b>AST &lt; ALT early</b>; MASLD → MASH → cirrhosis → HCC.</span></div>
+<div class="dz-card"><span class="dz-name">Hemochromatosis</span><span class="dz-ids">Low hepcidin (HFE, HAMP, TfR2, ferroportin; juvenile HJV); <b>micronodular cirrhosis, diabetes, bronze skin</b>; Prussian blue; <b>200× HCC risk</b>; males 40–50.</span></div>
+<div class="dz-card"><span class="dz-name">Wilson disease</span><span class="dz-ids"><b>ATP7B</b> (↓ ceruloplasmin, ↑ free copper); steatosis → cirrhosis; <b>basal ganglia</b>, <b>Kayser-Fleischer rings</b>.</span></div>
+<div class="dz-card"><span class="dz-name">α1-antitrypsin deficiency</span><span class="dz-ids"><b>PiZZ</b>; misfolded protein in ER; <b>PAS-positive globules</b>; liver disease + <b>emphysema</b>.</span></div>
+</div></div>
+<div class="subbucket" id="liv-circ"><h3>Circulatory Disorders</h3><p class="sub-note">Into · within · out of the liver</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Into</span><span class="dz-ids">Hepatic artery compromise → infarct; <b>portal vein obstruction</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Within</span><span class="dz-ids"><b>Cirrhosis</b>, sickle cell disease, eclampsia, malignancy.</span></div>
+<div class="dz-card"><span class="dz-name">Out</span><span class="dz-ids"><b>Budd-Chiari</b> (hepatic vein thrombosis, ascites, hemorrhagic necrosis); <b>sinusoidal obstruction syndrome</b> (chemotherapy/stem cell transplant); <b>passive congestion</b> (right heart failure, <b>nutmeg liver</b>).</span></div>
+</div></div>
+<div class="subbucket" id="liv-lab"><h3>Lab Pattern Recognition</h3><p class="sub-note">Clinical lectures folded in</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Hepatocellular</span><span class="dz-ids"><b>AST/ALT ↑↑↑</b> (&gt;5–10× upper limit of normal); ALP modest. Viral, drug, ischemia, autoimmune.</span></div>
+<div class="dz-card"><span class="dz-name">Cholestatic</span><span class="dz-ids"><b>ALP ↑↑ (5–10×)</b>, GGT ↑, bilirubin ↑; AST/ALT ~2×. Obstruction, PBC, PSC.</span></div>
+<div class="dz-card"><span class="dz-name">Infiltrative</span><span class="dz-ids">Cholestatic-like pattern: tumor, amyloid, granuloma.</span></div>
+<div class="dz-card"><span class="dz-name">Disease-specific tests</span><span class="dz-ids"><b>AFP</b> (HCC), <b>ceruloplasmin</b> (Wilson), <b>ferritin/transferrin saturation</b> (hemochromatosis), <b>AMA</b> (PBC), <b>ANA/ASMA</b> (autoimmune hepatitis), <b>A1AT level</b>.</span></div>
+</div></div>
+</div></section>
+<section class="bucket c5" id="bil"><div class="bucket-head"><span class="tag">Bucket 5</span><h2>Bile: Bilirubin, Cholestasis, Ducts &amp; Gallbladder</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Follow the <b>bile</b>: heme → unconjugated bilirubin (albumin) → <b>UGT1A1</b> conjugation → bile → gut (urobilinogen/stercobilin). A block anywhere gives <b>jaundice</b>; location of the block points to the disease.</div><div class="hy-box"><b class="hy-label">High yield</b><b>Unconjugated</b> = UGT1A1 problems (Gilbert, Crigler-Najjar, newborn). <b>Conjugated</b> = excretion/obstruction (Dubin-Johnson MRP2, Rotor, duct obstruction). <b>PBC = small ducts, AMA, women; PSC = large ducts, onion-skin, UC, men, cholangiocarcinoma.</b> <b>Charcot triad</b> = fever + jaundice + RUQ pain.</div></div>
+<div class="subbucket" id="bil-bili"><h3>Bilirubin &amp; Jaundice</h3><p class="sub-note">Where is the defect?</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Physiologic neonatal jaundice</span><span class="dz-ids">Low UGT1A1 at birth; rises by 3–4 months; <b>blue light phototherapy</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Crigler-Najjar 1 / 2</span><span class="dz-ids">UGT1A1 <b>complete</b> loss (kernicterus, fatal) / <b>partial</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Gilbert syndrome</span><span class="dz-ids">UGT1A1 <b>mild transient</b> impairment; unconjugated.</span></div>
+<div class="dz-card"><span class="dz-name">Dubin-Johnson / Rotor</span><span class="dz-ids">Conjugated: <b>MRP2</b> defect with dark liver / defective hepatic storage.</span></div>
+<div class="dz-card"><span class="dz-name">Large duct obstruction</span><span class="dz-ids">Adults: <b>choledocholithiasis, pancreatic cancer</b>. Children: <b>biliary atresia</b>, CF, choledochal cyst. Pericholangitis.</span></div>
+<div class="dz-card"><span class="dz-name">Biliary atresia</span><span class="dz-ids">Neonatal cholestasis; bile plugs, bridging fibrosis, <b>cirrhosis by 3–6 months</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Other cholestasis</span><span class="dz-ids">Sepsis (ductal cholestasis), <b>primary hepatolithiasis</b> (East Asia), Alagille, neonatal hepatitis (giant cells).</span></div>
+</div></div>
+<div class="subbucket" id="bil-duct"><h3>Bile Duct Disease</h3><p class="sub-note">Autoimmune cholangiopathies</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Primary biliary cholangitis (PBC)</span><span class="dz-ids"><b>Small–medium intrahepatic</b> ducts; middle-aged women; <b>AMA vs PDC-E2</b>; <b>florid duct lesion</b>; ↑ ALP, IgM, cholesterol; cirrhosis, HCC.</span></div>
+<div class="dz-card"><span class="dz-name">Primary sclerosing cholangitis (PSC)</span><span class="dz-ids"><b>Large intra- + extrahepatic</b> ducts; men; <b>ulcerative colitis</b>; <b>onion-skin</b> fibrosis; <b>“beads on a string”</b>; MPO-ANCA; <b>cholangiocarcinoma (~20%)</b>.</span></div>
+<div class="dz-card"><span class="dz-name">IgG4-related sclerosing cholangitis</span><span class="dz-ids">Multi-organ (pancreas); ↑ IgG4; lymphoplasmacytic.</span></div>
+<div class="dz-card"><span class="dz-name">Ascending cholangitis</span><span class="dz-ids">Obstructed duct + infection; <b>Charcot triad</b>; abscess.</span></div>
+</div></div>
+<div class="subbucket" id="bil-gb"><h3>Gallstones &amp; Gallbladder</h3><p class="sub-note">Stone type → risk → complication</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Cholesterol stones</span><span class="dz-ids">Supersaturation, stasis, nucleation, mucus; pale yellow; <b>radiolucent</b>; risk: female, estrogen, middle age.</span></div>
+<div class="dz-card"><span class="dz-name">Pigment stones</span><span class="dz-ids"><b>Unconjugated bilirubin</b>; hemolysis (<b>sickle cell</b>); brown (infection, radiolucent) vs black (sterile, <b>radiopaque</b>).</span></div>
+<div class="dz-card"><span class="dz-name">Gallstone complications</span><span class="dz-ids"><b>Cystic duct → cholecystitis</b>; <b>ampulla → pancreatitis</b>; <b>CBD → cholangitis</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Acute cholecystitis</span><span class="dz-ids">Calculous 90%; enlarged tense gallbladder; gangrene, empyema, perforation.</span></div>
+<div class="dz-card"><span class="dz-name">Chronic cholecystitis</span><span class="dz-ids"><b>Rokitansky-Aschoff sinuses</b>; <b>porcelain gallbladder</b>; hyalinizing = cancer risk.</span></div>
+</div></div>
+</div></section>
+<section class="bucket c6" id="tum"><div class="bucket-head"><span class="tag">Bucket 6</span><h2>Liver &amp; Biliary Tumors</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Sort by <b>cell of origin</b> and <b>behavior</b>: non-neoplastic nodules → benign tumors → malignant tumors → metastases. Imaging and stains are the tiebreakers.</div><div class="hy-box"><b class="hy-label">High yield</b><b>Most common benign = hemangioma.</b> <b>FNH = central stellate scar.</b> <b>Adenoma = OCP/anabolic steroids; hemorrhage; β-catenin exon 3 = highest HCC risk.</b> <b>HCC: HBV, cirrhosis, venous washout, AFP.</b> <b>Metastases are more common than primary liver cancer; Arginase-1 negative.</b></div></div>
+<div class="subbucket" id="tum-ben"><h3>Non-neoplastic &amp; Benign</h3><p class="sub-note">Know FNH vs adenoma cold</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Focal nodular hyperplasia (FNH)</span><span class="dz-ids">Abnormal blood flow → hyperplasia; women; <b>central stellate scar</b>, fibrotic septa, ductal reaction; <b>glutamine synthetase map-like</b>; inconsequential.</span></div>
+<div class="dz-card"><span class="dz-name">Nodular regenerative hyperplasia</span><span class="dz-ids">Many small nodules, <b>no fibrosis</b>; <b>non-cirrhotic portal hypertension</b>; reticulin stain.</span></div>
+<div class="dz-card"><span class="dz-name">Cavernous hemangioma</span><span class="dz-ids"><b>Most common benign liver tumor</b>; no malignant risk.</span></div>
+<div class="dz-card"><span class="dz-name">Hepatocellular adenoma</span><span class="dz-ids"><b>Young women on oral contraceptives</b>; males on anabolic steroids; <b>rupture/hemorrhage</b>. <b>HNF1α</b> (steatosis, LFABP loss); <b>β-catenin</b> (CTNNB1 exon 3, nuclear β-catenin, <b>highest HCC risk</b>); <b>inflammatory</b> (gp130, SAA/CRP).</span></div>
+</div></div>
+<div class="subbucket" id="tum-mal"><h3>Malignant Tumors</h3><p class="sub-note">Risk factors · drivers · imaging</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Hepatoblastoma</span><span class="dz-ids"><b>Most common pediatric liver cancer</b> (&lt;3 years); FAP, Beckwith-Wiedemann; fetal/embryonal.</span></div>
+<div class="dz-card"><span class="dz-name">Hepatocellular carcinoma (HCC)</span><span class="dz-ids"><b>HBV</b>, cirrhosis (80%), aflatoxin, vinyl chloride; <b>TP53, β-catenin, TERT</b>; <b>vascular invasion</b>; <b>arterial enhancement + venous washout</b>; ↑ AFP; lung metastasis.</span></div>
+<div class="dz-card"><span class="dz-name">Fibrolamellar carcinoma</span><span class="dz-ids"><b>Young adult, no cirrhosis</b>; <b>DNAJB1::PRKACA</b>; oncocytic cells in collagen bundles; central scar (not FNH).</span></div>
+<div class="dz-card"><span class="dz-name">Cholangiocarcinoma</span><span class="dz-ids"><b>PSC</b>, choledochal cysts, <b>liver flukes</b>; cholestasis; desmoplastic adenocarcinoma; perineural invasion.</span></div>
+<div class="dz-card"><span class="dz-name">Gallbladder carcinoma</span><span class="dz-ids">Females; gallstones (95% but only 1–2% of stone patients); late; <b>&lt;10% 5-year survival</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Liver metastasis</span><span class="dz-ids"><b>More common than primary</b>; colon/pancreas (portal), lung/breast (artery); <b>multiple nodules, non-cirrhotic liver</b>; <b>Arginase-1 negative</b>.</span></div>
+</div></div>
+</div></section>
+<section class="bucket c7" id="pan"><div class="bucket-head"><span class="tag">Bucket 7</span><h2>Pancreas</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Exocrine pancreas disease = <b>premature enzyme activation (pancreatitis)</b>, <b>duct/secretion defects (cystic fibrosis, divisum)</b>, <b>cysts</b>, <b>cancer</b>. Zymogens → trypsin → autodigestion is the master mechanism.</div><div class="hy-box"><b class="hy-label">High yield</b><b>Gallstones and alcohol</b> cause acute pancreatitis; <b>cathepsin B / PRSS1 / SPINK1</b>; <b>fat necrosis with saponification → hypocalcemia</b>. <b>Chronic = recurrent acute → fibrosis (triad)</b>. <b>PDAC: KRAS → p16 → TP53/SMAD4</b>, head 60%, <b>painless jaundice, Trousseau, migratory thrombophlebitis</b>, CA 19-9 for prognosis.</div></div>
+<div class="subbucket" id="pan-cong"><h3>Congenital &amp; Cystic Fibrosis</h3><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Pancreas divisum</span><span class="dz-ids"><b>Most common</b> anomaly; dorsal/ventral ducts fail to fuse; ~5% pancreatitis.</span></div>
+<div class="dz-card"><span class="dz-name">Annular pancreas</span><span class="dz-ids">Tissue encircles duodenum → obstruction.</span></div>
+<div class="dz-card"><span class="dz-name">Heterotopic pancreas</span><span class="dz-ids">Rests, most often stomach.</span></div>
+<div class="dz-card"><span class="dz-name">Cystic fibrosis</span><span class="dz-ids"><b>CFTR</b>: viscous secretions block ducts; insufficiency (steatorrhea); <b>most common cause of chronic pancreatitis in children</b>.</span></div>
+</div></div>
+<div class="subbucket" id="pan-itis"><h3>Pancreatitis</h3><p class="sub-note">Acute vs chronic</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Acute pancreatitis</span><span class="dz-ids"><b>Gallstones, alcohol</b>, drugs, hypertriglyceridemia, ischemia. ↑ intracellular Ca2+ → lysosome-zymogen fusion → <b>cathepsin B</b> → trypsin. Elastase, chymotrypsin, lipase (<b>fat necrosis</b>). Hereditary: <b>PRSS1 GOF, SPINK1 LOF, CFTR</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Acute morphology / clinical</span><span class="dz-ids">Interstitial (edema) vs necrotizing (hemorrhage, <b>saponification</b>). Epigastric pain to back; <b>lipase &gt; amylase</b>; <b>hypocalcemia</b>; <b>pseudocyst</b>.</span></div>
+<div class="dz-card"><span class="dz-name">Chronic pancreatitis</span><span class="dz-ids">Irreversible; <b>alcohol (adults)</b>; recurrent acute → TGF-β/PDGF → stellate cells; <b>ductal dilation + fibrosis + acinar atrophy</b>; calcification; <b>insufficiency, diabetes, adenocarcinoma</b>; enzymes normal.</span></div>
+<div class="dz-card"><span class="dz-name">Autoimmune pancreatitis</span><span class="dz-ids"><b>Type 1 = IgG4</b>, multi-organ; <b>type 2</b> = granulocytic epithelial lesion, pancreas only; <b>type 3</b> = checkpoint inhibitor.</span></div>
+</div></div>
+<div class="subbucket" id="pan-neo"><h3>Cysts &amp; Neoplasms</h3><p class="sub-note">Gene + sex + site</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">True cyst vs pseudocyst</span><span class="dz-ids">True: epithelium (polycystic kidney disease, von Hippel-Lindau). <b>Pseudocyst</b>: no epithelium, granulation tissue; after pancreatitis/trauma.</span></div>
+<div class="dz-card"><span class="dz-name">Serous cystic neoplasm (SCN)</span><span class="dz-ids">Elderly women; <b>VHL</b>; <b>honeycomb, central scar</b>; benign.</span></div>
+<div class="dz-card"><span class="dz-name">Mucinous cystic neoplasm (MCN)</span><span class="dz-ids"><b>Middle-aged women, tail</b>; <b>KRAS, RNF43</b>; <b>ovarian-type stroma</b> (ER/PR); premalignant.</span></div>
+<div class="dz-card"><span class="dz-name">Intraductal papillary mucinous neoplasm (IPMN)</span><span class="dz-ids"><b>Head, duct communication</b>; <b>KRAS, GNAS</b>, RNF43; premalignant.</span></div>
+<div class="dz-card"><span class="dz-name">Solid pseudopapillary neoplasm (SPN)</span><span class="dz-ids"><b>Young women</b>; <b>CTNNB1</b>; solid + hemorrhagic cystic; discohesive; low malignant potential.</span></div>
+<div class="dz-card"><span class="dz-name">Pancreatic ductal adenocarcinoma (PDAC)</span><span class="dz-ids">Smoking, chronic pancreatitis, age &gt;60; <b>PanIN → KRAS (~90%) → CDKN2A → TP53 + SMAD4</b>; <b>head 60%</b> (painless jaundice, <b>double-duct sign</b>), body/tail silent; <b>perineural invasion</b>; <b>Trousseau</b>; new diabetes; <b>CA 19-9</b> prognosis; Whipple, 85% unresectable.</span></div>
+<div class="dz-card"><span class="dz-name">Neuroendocrine tumors (pancreas)</span><span class="dz-ids">Gastrinoma (Zollinger-Ellison) can be pancreatic; MEN1.</span></div>
+</div></div>
+</div></section>
+<section class="bucket c8" id="imm"><div class="bucket-head"><span class="tag">Bucket 8</span><h2>Immune-Mediated GI Disorders</h2></div><div class="bucket-body"><div class="bucket-hy"><div class="hy-box"><b class="hy-label">Mechanism</b>Mostly <b>type IV hypersensitivity</b> (Th1, Th17, cytotoxic T lymphocytes (CTL)) with a barrier/tolerance failure; food allergy = <b>type I (IgE)</b>. Match the <b>distribution</b> and the <b>key clue</b>.</div><div class="hy-box"><b class="hy-label">High yield</b><b>Celiac: HLA-DQ2/DQ8, tTG deamidation, anti-tTG IgA, villous flattening.</b> <b>Crohn = skip lesions, transmural, granulomas; UC = continuous, mucosal, crypt abscesses.</b> <b>IgG4</b> lacks effector functions. <b>IgA deficiency</b> = most common primary immunodeficiency.</div></div>
+<div class="subbucket" id="imm-main"><h3>Disease Comparison</h3><p class="sub-note">Nash&#x27;s main points</p><div class="dz-grid">
+<div class="dz-card"><span class="dz-name">Celiac disease</span><span class="dz-ids">Gluten/gliadin; <b>tTG deamidation</b> (QXXF, QXPF); <b>HLA-DQ2/DQ8</b> (necessary, not sufficient); CD4 Th1 + CD8/NK intraepithelial lymphocytes; <b>anti-tTG IgA</b>; biopsy definitive; IgG positive → check IgA deficiency.</span></div>
+<div class="dz-card"><span class="dz-name">Crohn disease</span><span class="dz-ids">Anywhere, <b>terminal ileum</b>, <b>patchy</b>, <b>transmural</b>, cobblestone, deep ulcers, <b>granulomas</b>, strictures; Th17/Th1.</span></div>
+<div class="dz-card"><span class="dz-name">Ulcerative colitis</span><span class="dz-ids"><b>Colon only, continuous, mucosal</b>; shallow ulcers, pseudopolyps; <b>crypt abscesses</b>; rectal bleeding; Paneth defensin defect.</span></div>
+<div class="dz-card"><span class="dz-name">PSC / PBC / IgG4-SC</span><span class="dz-ids">PSC: intra + extrahepatic, <b>beads on a string</b>. PBC: intrahepatic only. IgG4: multi-organ, pancreas.</span></div>
+<div class="dz-card"><span class="dz-name">Food allergy</span><span class="dz-ids"><b>Type I</b>: IgE on mast cells → hives, vomiting/diarrhea, anaphylaxis. Non-IgE: Th2/eosinophilic. Allergy ≠ intolerance.</span></div>
+<div class="dz-card"><span class="dz-name">Selective IgA deficiency</span><span class="dz-ids">Most common primary immunodeficiency; usually asymptomatic; mucosal infections; false-negative anti-tTG IgA.</span></div>
+</div></div>
+</div></section>
+<section class="bucket c1" id="gloss"><div class="bucket-head"><span class="tag">Reference</span><h2>Abbreviations</h2></div><div class="bucket-body"><div class="gloss"><div><b>ACC</b> — adenoid cystic carcinoma</div><div><b>AFP</b> — alpha-fetoprotein</div><div><b>ALP</b> — alkaline phosphatase</div><div><b>ALT / AST</b> — alanine / aspartate aminotransferase</div><div><b>AMA</b> — antimitochondrial antibody</div><div><b>CDH1</b> — E-cadherin gene</div><div><b>CTL</b> — cytotoxic T lymphocyte</div><div><b>DLBCL</b> — diffuse large B-cell lymphoma</div><div><b>EBV</b> — Epstein-Barr virus</div><div><b>FNH</b> — focal nodular hyperplasia</div><div><b>GERD</b> — gastroesophageal reflux disease</div><div><b>GIST</b> — gastrointestinal stromal tumor</div><div><b>HAV / HBV / HCV / HDV / HEV</b> — hepatitis A / B / C / D / E virus</div><div><b>HCC</b> — hepatocellular carcinoma</div><div><b>HPV</b> — human papillomavirus</div><div><b>HSV</b> — herpes simplex virus</div><div><b>IPMN</b> — intraductal papillary mucinous neoplasm</div><div><b>LES</b> — lower esophageal sphincter</div><div><b>MALToma</b> — mucosa-associated lymphoid tissue lymphoma</div><div><b>MASLD / MASH</b> — metabolic dysfunction-associated steatotic liver disease / steatohepatitis</div><div><b>MCN</b> — mucinous cystic neoplasm</div><div><b>NET</b> — neuroendocrine tumor</div><div><b>PanIN</b> — pancreatic intraepithelial neoplasia</div><div><b>PBC / PSC</b> — primary biliary / sclerosing cholangitis</div><div><b>PDAC</b> — pancreatic ductal adenocarcinoma</div><div><b>SCC</b> — squamous cell carcinoma</div><div><b>SCN</b> — serous cystic neoplasm</div><div><b>SPN</b> — solid pseudopapillary neoplasm</div><div><b>tTG</b> — tissue transglutaminase</div><div><b>UGT1A1</b> — UDP-glucuronosyltransferase 1A1</div></div></div></section>
+<footer>GI II · Exam 1 · Pathology Bucket Cheat Sheet</footer></div>
+<script>
+(function(){var b=document.getElementById('sidenavToggle'),p=document.getElementById('sidenavPanel');if(!b||!p)return;
+b.addEventListener('click',function(e){e.stopPropagation();p.classList.toggle('open');});
+p.addEventListener('click',function(e){if(e.target.tagName==='A')p.classList.remove('open');});
+document.addEventListener('click',function(e){if(!p.contains(e.target)&&e.target!==b)p.classList.remove('open');});})();
+</script></body></html>
