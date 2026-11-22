@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biliary Disorders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#faf6ee;--cream-card:#fffdf8;--forest-dark:#1f3d2c;--forest:#2f5540;--sage:#7c9885;--sage-light:#e8efe6;--border:#d9d0bd;--accent:#b5602f;--text-main:#2b2620;--text-soft:#6b6357;--correct:#2f7a4a;--incorrect:#b23a2e;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Lora',serif;background:var(--cream);color:var(--text-main);line-height:1.55;}
+  .back-btn{position:fixed;top:18px;left:18px;z-index:70;background:var(--cream-card);border:1px solid var(--border);color:var(--forest-dark);font-family:'IBM Plex Mono',monospace;font-size:.78rem;text-decoration:none;padding:8px 14px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+  .back-btn:hover{background:var(--sage-light);}
+  .header{background:var(--forest-dark);color:var(--cream);padding:56px 24px 30px;text-align:center;}
+  .header h1{font-size:1.8rem;margin:0 0 8px;font-weight:700;}
+  .header p{margin:0;color:var(--sage-light);font-family:'IBM Plex Mono',monospace;font-size:.82rem;}
+  .top-contents{max-width:820px;margin:26px auto 0;background:var(--cream-card);border:1px solid var(--border);border-radius:10px;padding:18px 26px;}
+  .top-contents b{font-family:'IBM Plex Mono',monospace;font-size:.8rem;text-transform:uppercase;color:var(--forest);}
+  .top-contents ul{columns:2;margin:10px 0 0;padding-left:20px;}
+  .top-contents li{margin-bottom:6px;font-size:.92rem;}
+  .top-contents a{color:var(--text-main);text-decoration:none;}
+  .top-contents a:hover{color:var(--accent);text-decoration:underline;}
+  .sidenav-toggle{position:fixed;right:0;top:140px;z-index:70;background:var(--forest);color:var(--cream);border:none;font-family:'IBM Plex Mono',monospace;font-size:.75rem;padding:10px;writing-mode:vertical-rl;cursor:pointer;border-radius:8px 0 0 8px;}
+  .sidenav-panel{position:fixed;right:-250px;top:0;height:100vh;width:230px;background:var(--cream-card);border-left:1px solid var(--border);box-shadow:-2px 0 8px rgba(0,0,0,.08);z-index:69;padding:80px 18px 18px;transition:right .25s ease;display:flex;flex-direction:column;gap:6px;overflow-y:auto;}
+  .sidenav-panel.open{right:0;}
+  .sidenav-panel a{color:var(--forest-dark);text-decoration:none;font-size:.85rem;padding:6px 8px;border-radius:6px;}
+  .sidenav-panel a:hover,.sidenav-panel a.active{background:var(--sage-light);font-weight:600;}
+  .container{max-width:900px;margin:0 auto;padding:20px 20px 80px;}
+  section.card{background:var(--cream-card);border:1px solid var(--border);border-radius:12px;padding:26px 30px;margin-bottom:22px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  section.card h2{font-family:'IBM Plex Mono',monospace;font-size:1.1rem;color:var(--forest-dark);border-bottom:2px solid var(--sage);padding-bottom:8px;margin-top:0;}
+  section.card h3{font-family:'IBM Plex Mono',monospace;font-size:.86rem;text-transform:uppercase;color:var(--accent);margin:22px 0 8px;letter-spacing:.02em;}
+  section.card p,section.card li{font-size:.94rem;}
+  section.card ul{padding-left:22px;margin:6px 0;}
+  .hi{background:#fdf0d5;padding:1px 4px;border-radius:3px;}
+  .callout{background:var(--sage-light);border:1px solid var(--sage);border-radius:10px;padding:12px 18px;margin:14px 0;font-size:.9rem;}
+  .callout.warn{background:#fbeee4;border-color:#d9a781;}
+  .callout b.lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--forest);margin-bottom:4px;}
+  .callout.warn b.lbl{color:var(--accent);}
+  .tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;background:#f1e3c4;color:#8a5a14;border-radius:4px;padding:1px 6px;vertical-align:middle;margin-left:4px;}
+  table{border-collapse:collapse;width:100%;margin:12px 0 18px;font-size:.85rem;background:var(--cream-card);}
+  table th{background:var(--forest);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;padding:8px 10px;text-align:left;border:1px solid var(--forest-dark);}
+  table td{padding:7px 10px;border:1px solid var(--border);vertical-align:top;}
+  table tr:nth-child(even) td{background:#f5f0e5;}
+  .tw{overflow-x:auto;}
+  .figure{text-align:center;margin:14px 0;}
+  .figure img{cursor:zoom-in;max-width:100%;height:auto;max-height:430px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:6px;}
+  .fig-cap{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-soft);margin-top:6px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;}
+  .formula{font-family:'IBM Plex Mono',monospace;font-size:.85rem;background:#f5f0e5;border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin:8px 0;overflow-x:auto;}
+  .quiz-mini-header{font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;color:var(--forest);margin:0 0 6px;}
+  .quiz-q{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:14px 0;background:#fffefb;}
+  .quiz-q p{margin:0 0 8px;font-weight:600;}
+  .quiz-choice{display:block;width:100%;text-align:left;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin:6px 0;font-family:'Lora',serif;font-size:.9rem;cursor:pointer;color:var(--text-main);}
+  .quiz-choice:hover{background:var(--sage-light);}
+  .quiz-choice.correct{background:#dff0e4;border-color:var(--correct);}
+  .quiz-choice.incorrect{background:#f8e1de;border-color:var(--incorrect);}
+  .quiz-choice:disabled{cursor:default;}
+  .quiz-explain{display:none;margin-top:8px;font-size:.88rem;background:var(--sage-light);border-left:3px solid var(--forest);padding:8px 12px;border-radius:4px;}
+  details.ans{margin:8px 0;border:1px solid var(--border);border-radius:8px;padding:6px 12px;background:#fffefb;}
+  details.ans summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--forest);}
+  .practice{border-top:2px dashed var(--sage);margin-top:24px;padding-top:4px}
+  .score{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--forest-dark);}
+  @media (max-width:700px){.two-col{grid-template-columns:1fr;}.top-contents ul{columns:1;}section.card{padding:20px 16px;}.header{padding-top:64px;}.header h1{font-size:1.45rem;}}
+</style>
+<!--FC1--><style>
+.fc-foot{margin:36px 0 10px;text-align:center}
+.fc-badge{display:inline-flex;align-items:center;gap:10px;background:var(--forest);color:#fff;border:0;border-radius:999px;padding:12px 26px;font-family:'IBM Plex Mono',monospace;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;box-shadow:0 2px 8px rgba(31,61,44,.3)}
+.fc-badge:hover{background:var(--forest-dark)}
+.fc-badge span{background:var(--cream);color:var(--forest-dark);border-radius:999px;padding:1px 9px;font-weight:600}
+.fc-ov{position:fixed;inset:0;background:rgba(31,61,44,.55);z-index:2000;display:none;align-items:center;justify-content:center;padding:14px}
+.fc-ov.on{display:flex}
+.fc-box{background:var(--cream);border:1px solid var(--border);border-radius:14px;width:min(680px,100%);max-height:96vh;overflow:auto;padding:16px 18px;font-family:'Lora',serif;color:var(--text-main)}
+.fc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.fc-top b{font-family:'IBM Plex Mono',monospace;font-size:.78rem;text-transform:uppercase;color:var(--forest)}
+.fc-x{background:none;border:1px solid var(--border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:1rem;color:var(--text-soft)}
+.fc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.fc-chip{border:1px solid var(--border);background:var(--cream-card);border-radius:999px;padding:4px 12px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;cursor:pointer;color:var(--text-main)}
+.fc-chip.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+.fc-card{min-height:230px;border:1px solid var(--border);border-radius:12px;background:var(--cream-card);padding:22px 20px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;font-size:1.05rem;line-height:1.5;text-align:center;user-select:none}
+.fc-card.back{background:var(--sage-light);border-color:var(--sage);font-size:.98rem;text-align:left}
+.fc-lab{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;color:var(--text-soft);margin-bottom:10px;text-align:center}
+.fc-card.back .fc-lab{text-align:left}
+.fc-card b{color:var(--forest-dark)}
+.fc-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.fc-row button{font-family:'IBM Plex Mono',monospace;font-size:.76rem;border:1px solid var(--border);background:var(--cream-card);border-radius:8px;padding:8px 12px;cursor:pointer;color:var(--text-main)}
+.fc-row .fc-ok{background:var(--correct);color:#fff;border-color:var(--correct)}
+.fc-row .fc-no{background:var(--incorrect);color:#fff;border-color:var(--incorrect)}
+.fc-row .sp{flex:1}
+.fc-prog{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--text-soft)}
+</style><!--/FC1-->
+<style>.rd{color:#b3261e}details.pq{margin-top:22px;border:1px dashed var(--sage);border-radius:10px;padding:6px 14px;background:#fffefb}details.pq>summary{cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--forest);padding:6px 0}.score{margin:6px 0}</style><style>details.ans{margin:6px 0;border:1px solid #d9d4c3;border-radius:8px;padding:6px 12px;background:#fffefb}details.ans>summary{cursor:pointer;font-weight:600}</style>
+</head><body>
+<a href="../index.html" class="back-btn">&larr; Back to Study Guides</a>
+<div class="header"><h1>Biliary Disorders</h1><p>Built from the lecture video narration and the slide answer key &middot; GI II Clinical</p></div>
+<div class="top-contents"><b>Contents</b><ul><li><a href="#sec-anat">1. Biliary Anatomy, Bile and Neurohormonal Control</a></li><li><a href="#sec-stone">2. Cholelithiasis (Gallstones)</a></li><li><a href="#sec-chole">3. Acute Cholecystitis</a></li><li><a href="#sec-cbd">4. Choledocholithiasis, Ascending Cholangitis and Gallstone Pancreatitis</a></li><li><a href="#sec-psc">5. Primary Sclerosing Cholangitis vs Primary Biliary Cholangitis</a></li><li><a href="#sec-atr">6. Biliary Atresia</a></li><li><a href="#sec-labs">7. Deriving Labs from Anatomy and Summary Table</a></li></ul></div>
+<button class="sidenav-toggle" id="sidenavToggle">&#9776; Sections</button>
+<div class="sidenav-panel" id="sidenavPanel"><a href="#sec-anat">1. Anatomy &amp; Physiology</a><a href="#sec-stone">2. Cholelithiasis</a><a href="#sec-chole">3. Acute Cholecystitis</a><a href="#sec-cbd">4. Choledocholithiasis, Cholangitis &amp; Pancreatitis</a><a href="#sec-psc">5. PSC vs PBC</a><a href="#sec-atr">6. Biliary Atresia</a><a href="#sec-labs">7. Deriving the Labs &amp; Summary</a></div>
+<div class="container">
+<div class="callout" style="margin-top:0"><b class="lbl">How this guide is built</b>Built from the lecture video and her answer-key slides (her five practice questions appear as collapsed reveals). <b class="rd">Red</b> = items she stresses repeatedly. Practice questions sit at the end of each section, collapsed.</div>
+<section class="card" id="sec-anat"><h2>1. Biliary Anatomy, Bile and Neurohormonal Control</h2>
+<div class="callout"><b class="lbl">How to use this lecture</b>Her message: <b>anatomy is a must</b>. If you know <b>where bile and bilirubin flow, where they get blocked, and which cell or organ is irritated</b>, you can <b>derive the labs, symptoms and complications</b> of every disorder. Her five practice questions (answer slide) are woven in as collapsed reveals.</div>
+<h3>The main track</h3>
+<ul>
+<li><b>Right and left hepatic ducts</b> (intrahepatic ductal system) &rarr; <b>common hepatic duct</b> &rarr; joined by the <b>cystic duct</b> from the <b>gallbladder</b> &rarr; <b>common bile duct</b> (runs through the pancreas) &rarr; empties into the <b>duodenum</b> through the <b>sphincter of Oddi</b>. The <b>pancreatic duct</b> joins at the ampulla, so pancreatic enzymes share the exit.</li>
+<li><b>Sphincter of Oddi</b> is really a <b>collection of sphincters</b>, regulated mainly by <b>CCK</b>.</li>
+</ul>
+<h3>Cells and organs, and what they release when injured</h3>
+<div class="tw"><table><thead><tr><th>Cell / organ</th><th>Role</th><th>Released when injured</th></tr></thead><tbody>
+<tr><td><b>Hepatocytes</b></td><td>Form bile; <b>conjugate bilirubin</b></td><td><b>AST, ALT</b> (AST &gt; ALT in alcoholic liver disease)</td></tr>
+<tr><td><b>Cholangiocytes</b> (epithelial cells lining small intrahepatic and large extrahepatic ducts)</td><td>Regulate bile flow and pH; secrete <b>bicarbonate</b> to protect against bile acid injury</td><td><b>Alkaline phosphatase (ALP)</b> and <b>GGT</b> (ALP sits on their membrane)</td></tr>
+<tr><td><b>Gallbladder</b></td><td>Stores bile</td><td>&mdash;</td></tr>
+<tr><td><b>Pancreas</b></td><td>Releases enzymes through the shared ductal outlet</td><td><b>Amylase, lipase</b> (back up when the outlet is blocked)</td></tr>
+</tbody></table></div>
+<h3>Bile</h3>
+<ul>
+<li>Made in the liver; mostly <b>water</b> plus <b>bile salts, bilirubin, cholesterol, phospholipids, electrolytes</b>. Normally <b>alkaline</b>: neutralizes acidic chyme.</li>
+<li>Functions: <b>fat digestion</b>, neutralizing chyme, and <b>eliminating toxins and bilirubin</b>.</li>
+<li><b>Secretin</b> acts on cholangiocytes to drive <b>CFTR chloride channels</b> and bicarbonate exchange (she names cGMP; secretin signaling is usually taught as cAMP). <b>Cystic fibrosis</b> &rarr; thick bile, stasis, more gallstones.</li>
+</ul>
+<h3>Neurohormonal control of bile flow</h3>
+<div class="tw"><table><thead><tr><th></th><th>Parasympathetic (vagus; rest and digest)</th><th>Sympathetic (stress)</th></tr></thead><tbody>
+<tr><td><b>Mediator / receptor</b></td><td>ACh on <b>M3</b> (cephalic and gastric phases, before food reaches the duodenum)</td><td>Norepinephrine on <b>&beta;2</b></td></tr>
+<tr><td><b>Gallbladder</b></td><td><b>Contracts</b></td><td><b>Relaxes</b></td></tr>
+<tr><td><b>Sphincters</b></td><td>Relax (open)</td><td>Tone <b>increased</b></td></tr>
+<tr><td><b>Result</b></td><td>Bile reaches intestine</td><td><b>Less flow, stasis</b></td></tr>
+</tbody></table></div>
+<ul>
+<li><b>Stasis is a key gallstone risk factor.</b> Causes: <b>vagotomy</b> (no gallbladder contraction), <b>diabetic autonomic neuropathy</b> (hypomotility), <b>high sympathetic tone</b> (critical illness, stress; also <b>acalculous cholecystitis</b>).</li>
+<li><b>Opioids</b> raise sphincter tone &rarr; can cause <b>biliary colic</b>.</li>
+</ul>
+</section>
+<section class="card" id="sec-stone"><h2>2. Cholelithiasis (Gallstones)</h2>
+<ul>
+<li><b>Types:</b> most are <b>cholesterol stones</b> (majority in the US); <b>mixed</b>; <b>pigmented</b> (from <b>breakdown of red blood cells</b>, i.e., hemolysis).</li>
+<li><b>Principle:</b> anything that causes <b>stasis</b> or an <b>imbalance in bile composition</b> raises stone risk. Cholesterol supersaturation: &uarr; cholesterol secretion (obesity, estrogen, rapid weight loss), &darr; bile salts or lecithin, gallbladder hypomotility.</li>
+<li><b>"Five F's":</b> <b>female</b>, <b>fat</b> (obesity), <b>forty</b> (age &gt;40), <b>fertile</b>, <b>family</b> history. Others: <b>hemolysis</b> (pigment stones), <b>diabetes</b> (autonomic neuropathy &rarr; stasis), <b>liver disease</b> / portal hypertension, <b>cystic fibrosis</b>.</li>
+<li><b>Most patients are asymptomatic.</b> Symptoms arise from <b>blockage</b>.</li>
+</ul>
+<h3>Presentation and labs</h3>
+<ul>
+<li>Cholelithiasis itself: <b>no Murphy sign</b>; <b>labs may be entirely normal</b> (bile flows freely).</li>
+<li><b>Biliary colic:</b> <b>transient</b> RUQ pain when a stone briefly blocks the duct then passes, often after a <b>fatty meal</b> (CCK contracts the gallbladder against the stone).</li>
+</ul>
+<h3>Diagnosis and treatment</h3>
+<ul>
+<li><b>RUQ ultrasound:</b> <b>bright echoes with posterior shadowing</b> (keywords). <b>Thickened wall</b> points to something else (cholecystitis).</li>
+<li><b>Asymptomatic:</b> no treatment. <b>Recurrent/problematic symptoms:</b> <b>laparoscopic cholecystectomy</b> (surgery has risks). Jaundice and pain <b>after surgery</b> &rarr; think <b>bile duct injury</b>.</li>
+<li><b>Complications:</b> acute cholecystitis (cystic duct), choledocholithiasis &rarr; cholangitis (common bile duct), gallstone pancreatitis (ampulla).</li>
+</ul>
+<details class="ans"><summary>Q1: 43-year-old woman, RUQ pain to right shoulder after a fatty meal, deep-inspiration tenderness, gallstones without wall thickening or pericholecystic fluid. Mechanism?</summary><b>A. Cholesterol supersaturation of bile &rarr; stone formation</b> (symptomatic cholelithiasis / biliary colic). A stone transiently obstructs the cystic duct, pressure rises, but there is <b>no inflammation or infection</b>. Wrong: B = PBC (chronic, fatigue/pruritus); C = acute cholecystitis (persistent pain, fever, wall thickening); D = cholangitis (Charcot triad); E = cholangiocarcinoma (painless jaundice, weight loss).</details>
+</section>
+<section class="card" id="sec-chole"><h2>3. Acute Cholecystitis</h2>
+<ul>
+<li><b>Most common cause:</b> a <b>gallstone blocking the cystic duct</b> &rarr; trapped bile, &uarr; pressure, venous/lymphatic congestion, wall ischemia, bile salt (lysolecithin) irritation, then possible secondary infection. <b>Acalculous</b> cholecystitis also exists: critically ill or post-operative patients (ischemia, high sympathetic tone, stasis).</li>
+<li><b>Pain:</b> <b>sustained</b> RUQ pain (longer than biliary colic), often radiating to the <b>right shoulder or back</b>. Epigastric pain radiating to the back suggests <b>pancreatitis</b>. Nausea/vomiting, <b>fever</b>.</li>
+<li><b class="rd">Murphy sign</b>: deep palpation under the right costal margin while the patient inhales; <b>inspiration stops (catches)</b>. Highly suggestive of acute cholecystitis.</li>
+<li><b>Ultrasound:</b> <b>thickened gallbladder wall</b> (&plusmn; pericholecystic fluid) plus stones.</li>
+<li><b>Labs:</b> <b>leukocytosis</b>; otherwise often <b>normal LFTs</b>, because only the cystic duct is blocked and the gallbladder is "walled off" (bile still reaches the intestine).</li>
+</ul>
+<h3>Treatment</h3>
+<ul>
+<li><b>NPO</b> (rest the gallbladder, likely surgery), <b>IV fluids</b> (normal saline or lactated Ringer), <b>pain control</b> (opioids such as morphine or hydromorphone; ketorolac mentioned), <b>antibiotics</b>, and <b>cholecystectomy</b>.</li>
+<li><b>First-line antibiotics:</b> <b class="rd">ceftriaxone + metronidazole</b> (ceftriaxone covers gram-negatives and some gram-positives but <b>not anaerobes</b>; metronidazole covers anaerobes; empiric broad coverage). <b>Alternative:</b> piperacillin-tazobactam. <b>Penicillin allergy:</b> a fluoroquinolone (she says "levothyroxine," almost certainly levofloxacin).</li>
+<li><b>Complications:</b> <b>gangrene</b>, <b>perforation</b> (rare) &rarr; peritonitis, abscess, <b>sepsis</b>. <b>Emphysematous cholecystitis</b> (<i>Clostridium perfringens</i>) is dangerous.</li>
+</ul>
+<details class="ans"><summary>Q2: 28-year-old obese woman, acute RUQ pain with nausea and vomiting, wall thickening and pericholecystic fluid, no duct dilation. Initiating event?</summary><b>A. Gallstone obstruction of the cystic duct</b> (acute calculous cholecystitis). Wrong: B = <i>Clostridium</i> is a possible later secondary infection (emphysematous), not the initiating event; C = PBC; D = acalculous cholecystitis (critically ill/post-op); E = pancreatitis.</details>
+</section>
+<section class="card" id="sec-cbd"><h2>4. Choledocholithiasis, Ascending Cholangitis and Gallstone Pancreatitis</h2>
+<div class="callout"><b class="lbl">Her analogy</b>Cholelithiasis is to <b>acute cholecystitis</b> as <b>choledocholithiasis</b> is to <b>ascending cholangitis</b>. Same stones, different location, different labs.</div>
+<h3>Choledocholithiasis (stone in the common bile duct)</h3>
+<ul>
+<li>Stones usually migrate from the gallbladder (occasionally form in the duct). Extra risks: prior stones, <b>prior cholecystectomy</b>, bile duct <b>strictures</b>, prior surgery, infection.</li>
+<li><b>Bile cannot reach the intestine</b> &rarr; <b>conjugated (direct) bilirubin backs up</b> &rarr; <b>jaundice</b> + RUQ/epigastric pain, nausea/vomiting. Pale stools, dark urine.</li>
+<li><b>Labs:</b> &uarr; <b>ALP and GGT</b> (cholangiocyte irritation), &uarr; <b>direct bilirubin</b>; <b>mild &uarr; AST/ALT</b> if prolonged.</li>
+<li><b>Imaging:</b> RUQ ultrasound first (<b>dilated bile ducts</b>, sometimes the stone); <b>MRCP</b> (non-invasive, highly sensitive) if unclear; <b>ERCP</b> = <b>gold standard for treatment</b> (and visualization), then <b>cholecystectomy</b> to prevent recurrence.</li>
+<li><b>Most common ERCP complication: pancreatitis</b>; monitor afterwards.</li>
+</ul>
+<details class="ans"><summary>Q3: 69-year-old man, jaundice, pale stools, dark urine, markedly &uarr; conjugated bilirubin and ALP, dilated intra- and extrahepatic ducts. Mechanism?</summary><b>A. Blockage of bile flow distal to the common hepatic duct</b> (obstructive/post-hepatic jaundice; stone or pancreatic head tumor). Conjugation continues but bile cannot exit; conjugated bilirubin is water-soluble so urine is dark; no bilirubin reaches the gut so stools are pale; &uarr;ALP/GGT from cholangiocyte injury. Wrong: B and E = Crigler-Najjar/severe hepatitis (indirect); C = hemolysis (indirect, normal-colored urine); D = Gilbert (mild indirect).</details>
+<h3>Acute ascending cholangitis (medical emergency)</h3>
+<ul>
+<li><b>Obstruction + stasis &rarr; bacteria ascend from the duodenum</b> &rarr; infection and inflammation of the biliary tree. <b>Most common cause: choledocholithiasis.</b> Others: strictures (prior surgery), tumors, instrumentation (ERCP), <b>PSC</b>. Higher risk: elderly, immunosuppressed.</li>
+<li><b class="rd">Charcot triad</b>: <b>fever + jaundice + RUQ pain</b>. <b class="rd">Reynolds pentad</b> adds <b>hypotension and altered mental status</b> (septic shock, <b>ICU</b> level care). (The audio says "hypertension"; the slide key says hypotension.)</li>
+<li><b>Labs:</b> leukocytosis, &uarr; <b>direct bilirubin</b> (already conjugated), &uarr; ALP/GGT, mild &uarr; AST/ALT; <b>blood cultures</b> (bacteremia).</li>
+<li><b>Imaging:</b> ultrasound (dilated ducts, wall thickening); <b>MRCP for diagnosis</b>; <b>ERCP = gold standard for treatment</b> (drainage).</li>
+<li><b>Organisms:</b> gram-negatives (<i>E. coli</i>, <i>Klebsiella</i>) and enterococci/anaerobes &rarr; broad <b>empiric antibiotics</b> plus <b>fluids</b> (normal saline or lactated Ringer).</li>
+<li><b>Complications:</b> sepsis/septic shock, <b>liver abscess</b>, renal failure, death.</li>
+</ul>
+<details class="ans"><summary>Q4: 55-year-old man, fever, jaundice, RUQ tenderness, &uarr; ALP and direct bilirubin, blood cultures grow <i>E. coli</i>. Pathophysiology?</summary><b>B. Bacterial infection ascending through an obstructed common bile duct</b> (acute ascending cholangitis). Wrong: A = cholecystitis (no jaundice or bacteremia); C = hemolysis (prehepatic); D = PBC (chronic, afebrile); E = cirrhosis (ascites, varices, coagulopathy).</details>
+<h3>Gallstone pancreatitis</h3>
+<ul>
+<li>A stone lodged at the <b>ampulla of Vater</b> (where pancreatic duct and common bile duct join) blocks pancreatic secretions: ductal hypertension, premature trypsinogen &rarr; trypsin activation, <b>autodigestion</b>.</li>
+<li><b>Epigastric pain radiating to the back</b>; &uarr; <b>lipase and amylase</b>; mild &uarr; conjugated bilirubin from partial biliary obstruction.</li>
+<li><b>Ranson criteria:</b> tool for severity and prognosis of acute pancreatitis (criteria not required).</li>
+</ul>
+<details class="ans"><summary>Q5: 46-year-old woman with gallstones, epigastric pain to the back, &uarr; lipase, amylase and conjugated bilirubin. Link between stones and presentation?</summary><b>A. Stone migration into the common bile duct causing reflux/obstruction of pancreatic enzymes</b> (gallstone pancreatitis). Wrong: B = cholecystitis; C = viral (mumps, Coxsackie); D = autoimmune IgG4 (painless jaundice, diffuse enlargement); E = alcohol sphincter spasm (history favors mechanical).</details>
+</section>
+<section class="card" id="sec-psc"><h2>5. Primary Sclerosing Cholangitis vs Primary Biliary Cholangitis</h2>
+<p>Both injure <b>cholangiocytes</b> through an <b>immune-mediated</b> process, release <b>TGF-&beta;</b>, deposit <b>type I and III collagen</b> and end in <b>fibrosis and biliary cirrhosis</b> (like stellate-cell-driven cirrhosis in the liver). They differ in <b>where</b> and <b>why</b>.</p>
+<div class="tw"><table><thead><tr><th></th><th><b class="rd">PSC</b></th><th><b class="rd">PBC</b></th></tr></thead><tbody>
+<tr><td><b>Duct size / site</b></td><td><b>Large and medium ducts</b>, intra- <b>and</b> extrahepatic</td><td><b>Small intrahepatic</b> bile ducts</td></tr>
+<tr><td><b>Mechanism</b></td><td><b>Gut-liver axis</b>: <b>IBD (especially ulcerative colitis)</b>, "leaky gut"; gram-negative LPS reaches ducts via portal system; cholangiocytes bind LPS &rarr; <b>T-cell response</b> &rarr; cytokines, TGF-&beta;</td><td><b>Anti-mitochondrial antibodies</b> mark cholangiocytes as foreign &rarr; <b>T-cell activation</b> &rarr; cytokines, TGF-&beta;</td></tr>
+<tr><td><b>Association</b></td><td>IBD / UC</td><td>Middle-aged women, fatigue and pruritus (from her answer key)</td></tr>
+<tr><td><b>Imaging / pathology</b></td><td><b>Periductal fibrosis</b>, strictures and dilation: <b>"beading"</b> on MRCP</td><td>Small duct destruction</td></tr>
+<tr><td><b>Cancer risk</b></td><td><b>Cholangiocarcinoma</b> (HCC risk is lower)</td><td><b>Hepatocellular carcinoma</b> (via cirrhosis)</td></tr>
+<tr><td><b>Labs</b></td><td colspan="2">Cholestatic pattern: &uarr; ALP and GGT (cholangiocyte injury)</td></tr>
+<tr><td><b>Treatment note</b></td><td colspan="2">UDCA (ursodeoxycholic acid) mentioned as FYI for the board pharmacology questions; not a focus</td></tr>
+</tbody></table></div>
+<ul><li>PSC is a <b>risk factor for cholangitis</b> and <b>cholangiocarcinoma</b>; PBC is a cirrhosis/HCC story.</li></ul>
+</section>
+<section class="card" id="sec-atr"><h2>6. Biliary Atresia</h2>
+<ul>
+<li><b>Neonatal</b> disorder. The ducts <b>form normally</b>, then an <b>immune-mediated or viral</b> insult (cause not agreed) triggers a T-cell response: &uarr; <b>TNF-&alpha; and TGF-&beta;</b> &rarr; <b>collagen deposition, fibrosis, obliteration of the ducts</b> &rarr; cirrhosis.</li>
+<li><b>Presentation:</b> <b>persistent jaundice</b> in the first weeks to months of life; bile has nowhere to go; liver enlarges/becomes cirrhotic; &uarr; <b>ALP and GGT</b> (cholangiocyte irritation), direct hyperbilirubinemia.</li>
+<li><b>Treatment:</b> <b>Kasai procedure</b> (hepatoportoenterostomy; she says "portal enterostomy") bypasses the blocked ducts so bile drains into the intestine; extreme cases need <b>liver transplant</b>. Complication: <b>cirrhosis</b>.</li>
+</ul>
+</section>
+<section class="card" id="sec-labs"><h2>7. Deriving Labs from Anatomy and Summary Table</h2>
+<div class="callout"><b class="lbl">Her bonus slide</b>Ask: <b>(1)</b> Can bile/bilirubin reach the intestine? <b>(2)</b> If not, what backs up into the liver (&rarr; sinusoids &rarr; central vein &rarr; IVC &rarr; blood)? <b>(3)</b> Which cells are irritated (cholangiocytes &rarr; ALP/GGT; hepatocytes &rarr; AST/ALT; pancreas &rarr; amylase/lipase)?</div>
+<div class="tw"><table><thead><tr><th>Condition</th><th>Where</th><th>Key presentation</th><th>Labs</th><th>Imaging / treatment</th></tr></thead><tbody>
+<tr><td>Cholelithiasis / biliary colic</td><td>Gallbladder</td><td>Transient RUQ pain after fatty meal; no Murphy</td><td>Often normal</td><td>US: echoes + shadowing; cholecystectomy if symptomatic</td></tr>
+<tr><td>Acute cholecystitis</td><td>Cystic duct</td><td>Sustained RUQ pain, fever, <b class="rd">Murphy sign</b></td><td>&uarr; WBC; LFTs often normal</td><td>US: wall thickening; NPO, fluids, analgesia, ceftriaxone + metronidazole, cholecystectomy</td></tr>
+<tr><td>Choledocholithiasis</td><td>Common bile duct</td><td>Jaundice + RUQ pain</td><td>&uarr; direct bili, ALP, GGT; mild AST/ALT</td><td>US dilated ducts; MRCP; ERCP</td></tr>
+<tr><td>Ascending cholangitis</td><td>Infected obstructed duct</td><td><b class="rd">Charcot triad</b>; Reynolds pentad = ICU</td><td>&uarr; WBC, direct bili, ALP, GGT; blood cultures</td><td>Antibiotics, fluids, ERCP drainage</td></tr>
+<tr><td>Gallstone pancreatitis</td><td>Ampulla</td><td>Epigastric pain to back</td><td>&uarr; lipase, amylase</td><td>Ranson (severity); ERCP complication</td></tr>
+<tr><td>PSC</td><td>Large/medium ducts</td><td>IBD (UC) association</td><td>&uarr; ALP, GGT</td><td>MRCP beading; cholangiocarcinoma risk</td></tr>
+<tr><td>PBC</td><td>Small intrahepatic ducts</td><td>Anti-mitochondrial antibodies</td><td>&uarr; ALP, GGT</td><td>Cirrhosis, HCC risk</td></tr>
+<tr><td>Biliary atresia</td><td>Neonatal duct obliteration</td><td>Persistent jaundice</td><td>&uarr; direct bili, ALP, GGT</td><td>Kasai; transplant</td></tr>
+</tbody></table></div>
+</section>
+
+<div class="fc-foot"><button class="fc-badge" id="fcOpen">&#127183; Flashcards <span id="fcN"></span></button></div>
+<div class="fc-ov" id="fcOv"><div class="fc-box" role="dialog" aria-label="Flashcards">
+<div class="fc-top"><b>Flashcards &middot; lecture wording</b><button class="fc-x" id="fcX" aria-label="Close">&times;</button></div>
+<div class="fc-chips" id="fcChips"></div>
+<div class="fc-card" id="fcCard"></div>
+<div class="fc-row"><button id="fcPrev">&larr; Prev</button><button id="fcFlip">Flip</button><button id="fcNext">Next &rarr;</button><span class="sp"></span><span class="fc-prog" id="fcProg"></span></div>
+<div class="fc-row"><button class="fc-no" id="fcMiss">Missed</button><button class="fc-ok" id="fcGot">Got it</button><span class="sp"></span><button id="fcShuf">Shuffle</button><button id="fcRev">Review missed</button><button id="fcRst">Reset</button></div>
+</div></div>
+</div>
+<script>
+const QS=[{"s": "sec-anat", "q": "Which enzyme pair rises when cholangiocytes are irritated or injured?", "c": ["AST and ALT", "Amylase and lipase", "Alkaline phosphatase and GGT", "LDH and CK", "Ammonia and albumin"], "a": 2, "e": "ALP sits on the cholangiocyte membrane; AST/ALT come from hepatocytes; amylase/lipase from pancreas."}, {"s": "sec-anat", "q": "Which statement about neurohormonal control of the gallbladder is correct?", "c": ["Sympathetic tone contracts the gallbladder and opens the sphincter", "Vagal ACh relaxes the gallbladder", "CCK relaxes the gallbladder", "Norepinephrine acts on M3 receptors", "Vagal ACh on M3 receptors contracts the gallbladder; sympathetic norepinephrine on beta-2 relaxes it"], "a": 4, "e": "Rest and digest empties bile; stress causes stasis."}, {"s": "sec-anat", "q": "Which condition increases gallstone risk through biliary stasis from loss of gallbladder contraction?", "c": ["Increased vagal tone", "Beta-2 blocker use", "Hypercalcemia only", "Fasting for 2 hours", "Vagotomy or diabetic autonomic neuropathy"], "a": 4, "e": "Anything that increases stasis raises stone risk."}, {"s": "sec-anat", "q": "Why do opioids cause biliary colic?", "c": ["They contract the gallbladder via M3", "They increase CCK", "They destroy cholangiocytes", "They increase sphincter of Oddi tone", "They raise bile cholesterol"], "a": 3, "e": "Higher sphincter tone reduces flow."}, {"s": "sec-anat", "q": "Which best describes what cholangiocytes do?", "c": ["Conjugate bilirubin", "Store bile", "Release amylase", "Line the ducts, regulate flow and pH, and secrete bicarbonate to protect against bile acid injury", "Produce cholesterol stones"], "a": 3, "e": "Hepatocytes conjugate bilirubin."}, {"s": "sec-anat", "q": "Why are patients with cystic fibrosis at higher risk of gallstones?", "c": ["Thickened bile and stasis", "Increased bilirubin conjugation", "Hyperactive gallbladder", "Low cholesterol", "High secretin"], "a": 0, "e": "CFTR dysfunction impairs bicarbonate and bile fluidity."}, {"s": "sec-stone", "q": "Which are components of the \"five F's\" risk factors for cholesterol gallstones?", "c": ["Fever, fat, fatigue, fibrosis, fasting", "Female, fat, forty, fertile, family history", "Male, thin, young, fertile, fasting", "Female, fever, forty, fibrosis, family", "Fat, fatigue, flatulence, fertile, female"], "a": 1, "e": "Pigment stones relate to hemolysis."}, {"s": "sec-stone", "q": "Pigmented gallstones are most associated with which process?", "c": ["Cholesterol supersaturation", "Hemolysis (red blood cell breakdown)", "Estrogen use", "Rapid weight loss", "Vagotomy"], "a": 1, "e": "Increased bilirubin load from RBC breakdown."}, {"s": "sec-stone", "q": "A patient has asymptomatic gallstones found incidentally. What is the best management?", "c": ["Laparoscopic cholecystectomy", "No treatment", "ERCP", "IV ceftriaxone", "Ursodiol only after MRCP"], "a": 1, "e": "Surgery has risks; treat when symptoms recur or become problematic."}, {"s": "sec-stone", "q": "Which ultrasound finding is characteristic of gallstones?", "c": ["Thickened gallbladder wall", "Beaded bile ducts", "Bright echoes with posterior acoustic shadowing", "Dilated pancreatic duct", "Pericholecystic fluid only"], "a": 2, "e": "Thickened wall suggests cholecystitis."}, {"s": "sec-stone", "q": "What labs are expected in uncomplicated cholelithiasis?", "c": ["Often completely normal", "Elevated direct bilirubin", "Elevated lipase", "Marked leukocytosis", "Elevated ALP and GGT"], "a": 0, "e": "Bile flows freely when nothing is blocked or inflamed."}, {"s": "sec-stone", "q": "Biliary colic differs from acute cholecystitis in that colic is:", "c": ["Sustained with fever", "Associated with Murphy sign", "Associated with wall thickening", "Transient pain without inflammation or fever", "Always requires antibiotics"], "a": 3, "e": "The stone passes or falls back; no inflammation."}, {"s": "sec-chole", "q": "What is the most common initiating event of acute cholecystitis?", "c": ["Common bile duct stone", "Autoimmune duct destruction", "Pancreatic reflux", "Gallstone obstruction of the cystic duct", "Viral hepatitis"], "a": 3, "e": "Calculous disease is the majority."}, {"s": "sec-chole", "q": "How is a positive Murphy sign elicited?", "c": ["Deep RUQ palpation during inspiration; the patient stops inhaling", "Pain on release of pressure in the LLQ", "Pain with hip rotation", "Jaundice on palpation", "Pain with expiration only"], "a": 0, "e": "Highly suggestive of acute cholecystitis."}, {"s": "sec-chole", "q": "Which findings best distinguish acute cholecystitis from pancreatitis?", "c": ["Epigastric pain to back", "Elevated lipase only", "RUQ pain radiating to right shoulder, Murphy sign and wall thickening vs epigastric pain radiating to back with raised lipase", "Jaundice only", "Pain relieved by food"], "a": 2, "e": "Location and labs differ."}, {"s": "sec-chole", "q": "Why may LFTs be normal in acute cholecystitis?", "c": ["The liver is not involved in bile production", "Bilirubin is excreted by the kidney", "The common bile duct is occluded but compensated", "Only the cystic duct is blocked; bile still drains from the liver to the intestine", "Antibiotics normalize them"], "a": 3, "e": "Bile and bilirubin continue to the intestine."}, {"s": "sec-chole", "q": "What is first-line antibiotic therapy for acute cholecystitis?", "c": ["Vancomycin alone", "Ceftriaxone plus metronidazole", "Ceftriaxone alone", "Amoxicillin alone", "Doxycycline"], "a": 1, "e": "Ceftriaxone lacks anaerobic coverage; metronidazole adds it. Pip-tazo is an alternative."}, {"s": "sec-chole", "q": "A critically ill ICU patient develops RUQ pain, fever and a thickened gallbladder wall without stones. Which diagnosis is most likely?", "c": ["Acalculous cholecystitis", "Choledocholithiasis", "PSC", "PBC", "Biliary atresia"], "a": 0, "e": "Ischemia, stasis and high sympathetic tone."}, {"s": "sec-chole", "q": "Which is a serious complication of untreated acute cholecystitis?", "c": ["PBC", "Biliary atresia", "Gangrene or perforation leading to peritonitis and sepsis", "Gilbert syndrome", "Hemolysis"], "a": 2, "e": "Treat to prevent these."}, {"s": "sec-cbd", "q": "A patient has RUQ pain and jaundice with elevated direct bilirubin, ALP and GGT. Which is the most likely diagnosis?", "c": ["Choledocholithiasis", "Uncomplicated cholelithiasis", "Acute cholecystitis", "Gilbert syndrome", "Hemolytic anemia"], "a": 0, "e": "Common bile duct blockage backs up conjugated bilirubin."}, {"s": "sec-cbd", "q": "What is the gold standard for treating a common bile duct stone?", "c": ["MRCP", "HIDA scan", "ERCP", "Plain film", "Colonoscopy"], "a": 2, "e": "MRCP is the non-invasive diagnostic test."}, {"s": "sec-cbd", "q": "Which imaging study is non-invasive and highly sensitive for common bile duct stones?", "c": ["ERCP", "Upper endoscopy", "CT without contrast only", "Oral cholecystogram", "MRCP"], "a": 4, "e": "Ultrasound is the first test."}, {"s": "sec-cbd", "q": "Which is the most common complication of ERCP?", "c": ["Cholecystitis", "Gilbert syndrome", "PBC", "Pancreatitis", "Hemolysis"], "a": 3, "e": "Monitor after the procedure."}, {"s": "sec-cbd", "q": "Charcot triad consists of:", "c": ["Fever, hypotension and confusion", "Jaundice, ascites and encephalopathy", "Pain, vomiting and diarrhea", "Fever, rash and arthritis", "Fever, jaundice and RUQ pain"], "a": 4, "e": "Reynolds pentad adds hypotension and altered mental status."}, {"s": "sec-cbd", "q": "Reynolds pentad indicates which level of care?", "c": ["Outpatient", "Routine floor", "Observation", "ICU (septic shock)", "Elective surgery"], "a": 3, "e": "Charcot triad plus hypotension and altered mental status."}, {"s": "sec-cbd", "q": "Which is the most common cause of acute ascending cholangitis?", "c": ["Choledocholithiasis", "PSC", "Biliary stricture", "Tumor", "Hemolysis"], "a": 0, "e": "Obstruction and stasis allow bacteria to ascend."}, {"s": "sec-cbd", "q": "Which is the best initial approach for a septic patient with ascending cholangitis?", "c": ["Elective cholecystectomy next month", "Observation only", "Ursodiol", "Oral antibiotics alone", "Blood cultures, fluids, empiric broad antibiotics and ERCP drainage"], "a": 4, "e": "This is an emergency."}, {"s": "sec-cbd", "q": "Which lab pattern fits gallstone pancreatitis?", "c": ["Isolated elevated ALT", "Elevated indirect bilirubin only", "Elevated lipase and amylase with mild conjugated hyperbilirubinemia", "Normal lipase", "Elevated GGT only without symptoms"], "a": 2, "e": "Stone at the ampulla blocks both ducts."}, {"s": "sec-cbd", "q": "What is the Ranson criteria used for?", "c": ["Severity and prognosis of acute pancreatitis", "Diagnosing cholangitis", "Staging PSC", "Grading biliary atresia", "Predicting stone composition"], "a": 0, "e": "You do not need to know the criteria."}, {"s": "sec-cbd", "q": "Painless jaundice with weight loss and dilated ducts in an older patient should raise concern for:", "c": ["Biliary colic", "Malignant obstruction (cholangiocarcinoma or pancreatic head tumor)", "Acute cholecystitis", "Gilbert syndrome", "Charcot triad"], "a": 1, "e": "Tumors cause obstructive jaundice without pain/fever."}, {"s": "sec-cbd", "q": "Dark urine and pale stools with elevated direct bilirubin indicate which mechanism?", "c": ["Hemolysis", "Post-hepatic obstruction preventing bilirubin from reaching the intestine", "Gilbert syndrome", "Crigler-Najjar", "Decreased uptake"], "a": 1, "e": "Conjugated bilirubin is water-soluble and appears in urine."}, {"s": "sec-psc", "q": "Which disease affects small intrahepatic bile ducts and is marked by anti-mitochondrial antibodies?", "c": ["Primary sclerosing cholangitis", "Biliary atresia", "Choledocholithiasis", "Cholangitis", "Primary biliary cholangitis"], "a": 4, "e": "PSC affects large and medium ducts."}, {"s": "sec-psc", "q": "Which disease is associated with ulcerative colitis and beading on MRCP?", "c": ["PBC", "Acute cholecystitis", "Primary sclerosing cholangitis", "Gallstone pancreatitis", "Biliary atresia"], "a": 2, "e": "LPS/leaky gut model; strictures and dilation."}, {"s": "sec-psc", "q": "Which cancer is the specific increased risk in PSC?", "c": ["Hepatocellular carcinoma only", "Cholangiocarcinoma", "Gastric cancer", "Pancreatic neuroendocrine tumor", "Esophageal cancer"], "a": 1, "e": "HCC risk is higher in PBC cirrhosis."}, {"s": "sec-psc", "q": "Which cytokine released from injured cholangiocytes drives collagen deposition and fibrosis?", "c": ["IL-2", "Insulin", "Gastrin", "Secretin", "TGF-beta"], "a": 4, "e": "Type I and III collagen; also drives biliary atresia fibrosis."}, {"s": "sec-atr", "q": "A 3-week-old has persistent jaundice, elevated direct bilirubin, ALP and GGT. Which diagnosis fits and what is the treatment?", "c": ["Biliary atresia; Kasai portoenterostomy (liver transplant if it fails)", "PBC; ursodiol", "Gilbert syndrome; observation", "Cholecystitis; ceftriaxone", "PSC; ERCP"], "a": 0, "e": "Fibrosis obliterates the ducts; bile cannot drain."}];
+const CARDS=[{"l": "Anatomy", "f": "Main bile track?", "b": "R/L hepatic ducts &rarr; <b>common hepatic</b> &rarr; + <b>cystic duct</b> &rarr; <b>common bile duct</b> &rarr; sphincter of Oddi &rarr; duodenum."}, {"l": "Anatomy", "f": "Sphincter of Oddi regulation?", "b": "A collection of sphincters, mainly regulated by <b>CCK</b>."}, {"l": "Anatomy", "f": "Hepatocyte injury releases?", "b": "<b>AST, ALT</b>."}, {"l": "Anatomy", "f": "Cholangiocyte injury releases?", "b": "<b>ALP and GGT</b>."}, {"l": "Anatomy", "f": "Cholangiocyte function?", "b": "Regulate flow, pH; secrete <b>bicarbonate</b> to prevent bile acid injury."}, {"l": "Anatomy", "f": "Pancreatic enzymes backing up?", "b": "<b>Amylase and lipase</b>."}, {"l": "Anatomy", "f": "Parasympathetic effect on bile?", "b": "<b>ACh/M3</b>: gallbladder contracts, sphincters relax."}, {"l": "Anatomy", "f": "Sympathetic effect on bile?", "b": "<b>NE/&beta;2</b>: gallbladder relaxes, sphincter tone up: stasis."}, {"l": "Anatomy", "f": "Opioids and bile?", "b": "&uarr; sphincter tone: <b>biliary colic</b>."}, {"l": "Gallstones", "f": "Stone types?", "b": "<b>Cholesterol</b> (most), mixed, <b>pigmented</b> (hemolysis)."}, {"l": "Gallstones", "f": "Gallstone risk factors?", "b": "<b>Female, fat, forty, fertile, family</b>; diabetes, liver disease, hemolysis, CF."}, {"l": "Gallstones", "f": "Stasis causes?", "b": "Vagotomy, diabetic neuropathy, high sympathetic tone."}, {"l": "Gallstones", "f": "Cholelithiasis labs?", "b": "Often <b>normal</b>."}, {"l": "Gallstones", "f": "Biliary colic?", "b": "<b>Transient</b> RUQ pain from a transient stone block, often after fatty meal."}, {"l": "Gallstones", "f": "Ultrasound of stones?", "b": "<b>Bright echoes with shadowing</b>."}, {"l": "Gallstones", "f": "Treatment of symptomatic stones?", "b": "<b>Laparoscopic cholecystectomy</b>; none if asymptomatic."}, {"l": "Cholecystitis", "f": "Cause of acute cholecystitis?", "b": "<b>Cystic duct</b> stone obstruction."}, {"l": "Cholecystitis", "f": "Murphy sign?", "b": "Deep RUQ palpation; <b>inspiration stops</b>."}, {"l": "Cholecystitis", "f": "Ultrasound sign?", "b": "<b>Thickened wall</b> &plusmn; pericholecystic fluid."}, {"l": "Cholecystitis", "f": "Labs?", "b": "&uarr; WBC; LFTs often normal (cystic duct only)."}, {"l": "Cholecystitis", "f": "Treatment?", "b": "NPO, fluids, analgesia, <b>ceftriaxone + metronidazole</b>, cholecystectomy."}, {"l": "Cholecystitis", "f": "Why two antibiotics?", "b": "Ceftriaxone lacks anaerobes; metronidazole adds them."}, {"l": "Cholecystitis", "f": "Acalculous cholecystitis?", "b": "No stones; critically ill/post-op (ischemia, stasis)."}, {"l": "Cholecystitis", "f": "Complications?", "b": "Gangrene, perforation, peritonitis, abscess, sepsis."}, {"l": "CBD", "f": "Choledocholithiasis labs?", "b": "&uarr; direct bilirubin, ALP, GGT; mild AST/ALT; jaundice."}, {"l": "CBD", "f": "Imaging ladder for CBD stone?", "b": "US &rarr; <b>MRCP</b> &rarr; <b>ERCP</b> (treatment)."}, {"l": "CBD", "f": "ERCP complication?", "b": "<b>Pancreatitis</b>."}, {"l": "CBD", "f": "Charcot triad?", "b": "<b>Fever, jaundice, RUQ pain</b> = cholangitis."}, {"l": "CBD", "f": "Reynolds pentad?", "b": "Charcot + <b>hypotension + altered mental status</b>: ICU."}, {"l": "CBD", "f": "Cholangitis organisms?", "b": "<i>E. coli</i>, <i>Klebsiella</i>, enterococci, anaerobes."}, {"l": "CBD", "f": "Gallstone pancreatitis?", "b": "Stone at ampulla: epigastric pain to back, &uarr; lipase/amylase."}, {"l": "PSC/PBC", "f": "PSC vs PBC ducts?", "b": "PSC: <b>large/medium</b>; PBC: <b>small intrahepatic</b>."}, {"l": "PSC/PBC", "f": "PSC association?", "b": "<b>Ulcerative colitis</b>; MRCP <b>beading</b>; cholangiocarcinoma."}, {"l": "PSC/PBC", "f": "PBC mechanism?", "b": "<b>Anti-mitochondrial antibodies</b>, T-cell; HCC risk via cirrhosis."}, {"l": "PSC/PBC", "f": "Fibrosis mediator?", "b": "<b>TGF-&beta;</b>: type I/III collagen."}, {"l": "Atresia", "f": "Biliary atresia?", "b": "Neonatal duct fibrosis: persistent jaundice; <b>Kasai</b>, transplant."}];
+
+(function(){
+ const hosts={};
+ QS.forEach((o)=>{
+  const sec=document.getElementById(o.s); if(!sec)return;
+  let host=hosts[o.s];
+  if(!host){host=document.createElement('details');host.className='pq';host.dataset.done=0;host.dataset.ok=0;host.dataset.n=0;
+   host.innerHTML='<summary>Check yourself (<span class="cnt"></span> questions) &mdash; click to open</summary><p class="score">Click an answer to see the explanation.</p>';sec.appendChild(host);hosts[o.s]=host;}
+  host.dataset.n=+host.dataset.n+1;host.querySelector('.cnt').textContent=host.dataset.n;const num=host.dataset.n;
+  const d=document.createElement('div');d.className='quiz-q';
+  d.innerHTML='<div class="quiz-mini-header">Practice '+num+'</div><p>'+o.q+'</p>';
+  const ex=document.createElement('div');ex.className='quiz-explain';ex.innerHTML=o.e;
+  o.c.forEach((t,j)=>{const b=document.createElement('button');b.className='quiz-choice';b.innerHTML=t;
+   b.onclick=()=>{[...d.querySelectorAll('.quiz-choice')].forEach((x,k)=>{x.disabled=true;if(k===o.a)x.classList.add('correct');});
+    if(j!==o.a)b.classList.add('incorrect');host.dataset.done=+host.dataset.done+1;if(j===o.a)host.dataset.ok=+host.dataset.ok+1;ex.style.display='block';
+    host.querySelector('.score').textContent='Score: '+host.dataset.ok+' / '+host.dataset.done+' of '+host.dataset.n;};
+   d.appendChild(b);});
+  d.appendChild(ex);host.appendChild(d);});
+})();
+const tg=document.getElementById('sidenavToggle'),pn=document.getElementById('sidenavPanel');
+tg.onclick=()=>pn.classList.toggle('open');
+pn.querySelectorAll('a').forEach(a=>a.onclick=()=>pn.classList.remove('open'));
+const secs=[...document.querySelectorAll('section.card')],links=[...pn.querySelectorAll('a')];
+function spy(){let cur=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<160)cur=i;});links.forEach((l,i)=>l.classList.toggle('active',i===cur));}
+addEventListener('scroll',spy);spy();
+document.querySelectorAll('.figure img').forEach(im=>{im.title='Click to open full size';im.onclick=()=>{try{const [h,b]=im.src.split(',');const m=h.match(/:(.*?);/)[1];const bin=atob(b);const u=new Uint8Array(bin.length);for(let k=0;k<bin.length;k++)u[k]=bin.charCodeAt(k);window.open(URL.createObjectURL(new Blob([u],{type:m})),'_blank');}catch(e){}};});
+
+(function(){
+const ov=document.getElementById('fcOv'),card=document.getElementById('fcCard'),chips=document.getElementById('fcChips');
+const LECS=['All'].concat(Array.from(new Set(CARDS.map(c=>c.l))));
+document.getElementById('fcN').textContent=CARDS.length;
+let lec='All',deck=[],i=0,back=false,got={},miss={},onlyMiss=false;
+CARDS.forEach((c,k)=>c.id=k);
+function build(){deck=CARDS.filter(c=>(lec==='All'||c.l===lec)&&(!onlyMiss||miss[c.id]));i=0;back=false;draw();}
+function draw(){
+ chips.innerHTML=LECS.map(l=>'<button class="fc-chip'+(l===lec?' on':'')+'" data-l="'+l+'">'+l+'</button>').join('');
+ chips.querySelectorAll('.fc-chip').forEach(b=>b.onclick=()=>{lec=b.dataset.l;onlyMiss=false;build();});
+ if(!deck.length){card.className='fc-card';card.innerHTML='<div class="fc-lab">Nothing here</div>No cards in this view.';document.getElementById('fcProg').textContent='';return;}
+ const c=deck[i];card.className='fc-card'+(back?' back':'');
+ card.innerHTML='<div class="fc-lab">'+c.l+' &middot; '+(back?'answer':'prompt')+'</div><div class="fc-body">'+(back?c.b:c.f)+'</div>';
+ const g=Object.keys(got).length,m=Object.keys(miss).length;
+ document.getElementById('fcProg').textContent=(i+1)+' / '+deck.length+'  ·  got '+g+' · missed '+m;
+}
+function go(d){if(!deck.length)return;i=(i+d+deck.length)%deck.length;back=false;draw();}
+function mark(ok){if(!deck.length)return;const c=deck[i];if(ok){got[c.id]=1;delete miss[c.id];}else{miss[c.id]=1;delete got[c.id];}go(1);}
+document.getElementById('fcOpen').onclick=()=>{ov.classList.add('on');build();};
+document.getElementById('fcX').onclick=()=>ov.classList.remove('on');
+ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('on');});
+card.onclick=()=>{back=!back;draw();};
+document.getElementById('fcFlip').onclick=()=>{back=!back;draw();};
+document.getElementById('fcPrev').onclick=()=>go(-1);
+document.getElementById('fcNext').onclick=()=>go(1);
+document.getElementById('fcGot').onclick=()=>mark(true);
+document.getElementById('fcMiss').onclick=()=>mark(false);
+document.getElementById('fcShuf').onclick=()=>{for(let k=deck.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[deck[k],deck[j]]=[deck[j],deck[k]];}i=0;back=false;draw();};
+document.getElementById('fcRev').onclick=()=>{onlyMiss=true;build();};
+document.getElementById('fcRst').onclick=()=>{got={};miss={};onlyMiss=false;lec='All';build();};
+document.addEventListener('keydown',e=>{if(!ov.classList.contains('on'))return;
+ if(e.key==='Escape')ov.classList.remove('on');
+ else if(e.key===' '||e.key==='Enter'){e.preventDefault();back=!back;draw();}
+ else if(e.key==='ArrowRight')go(1);else if(e.key==='ArrowLeft')go(-1);});
+})();
+</script></body></html>
