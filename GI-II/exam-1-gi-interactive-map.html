@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GI Tract Interactive Map</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f6f1e6;--card:#fffdf8;--fd:#1f3d2e;--f:#2f5d43;--sage:#e4ecdf;--b:#d8cfb8;--red:#c62828;--t:#26291f;--ts:#5a5f4f}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--t);font-family:Lora,Georgia,serif}
+.back-btn{position:fixed;top:14px;left:14px;background:var(--fd);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font:.78rem 'IBM Plex Mono',monospace;z-index:5}
+header{background:linear-gradient(135deg,var(--fd),var(--f));color:#fff;text-align:center;padding:52px 20px 22px}
+header h1{font:600 1.45rem 'IBM Plex Mono',monospace;margin:0 0 6px}header p{margin:0;font-size:.9rem;opacity:.9}
+.wrap{max-width:1280px;margin:0 auto;padding:16px;display:grid;grid-template-columns:minmax(340px,500px) 1fr;gap:16px;align-items:start}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--b);border-radius:12px;padding:12px 14px}
+.left{position:sticky;top:8px}@media(max-width:900px){.left{position:static}}
+svg{width:100%;height:auto;max-height:calc(100vh - 40px);display:block;background:#fff;border-radius:8px}
+.reg{cursor:pointer;outline:none}
+.sh,.tb-i2,.tongue{stroke:#8a6a4f;stroke-width:1.6;transition:filter .2s,stroke .2s}.tb-i{transition:filter .2s}
+.tb-o{stroke:#8a6a4f;transition:stroke .2s}.tb-o2{stroke:#8a6a4f}
+.tongue{fill:#e7908f}.teeth{stroke:#fff;stroke-width:7;stroke-linecap:round}
+.ln{stroke:rgba(110,70,40,.35);stroke-width:1.6}.dot{fill:rgba(150,100,30,.45)}.duct{stroke:#6f9a4a;stroke-linecap:round}
+.haus{stroke:#fff;stroke-opacity:.65;fill:none}
+.reg:hover .sh,.reg:hover .tb-i,.reg:hover .tb-i2,.reg.on .sh,.reg.on .tb-i,.reg.on .tb-i2{filter:brightness(1.08) saturate(1.2)}
+.reg.on .sh,.reg.on .tb-o,.reg.on .tb-o2,.reg:hover .sh,.reg:hover .tb-o{stroke:var(--red);stroke-width:3}.reg.on .tb-o,.reg:hover .tb-o{stroke-width:7}
+.reg.on .tb-i2{stroke:var(--red);stroke-width:3}
+.reg.good .sh,.reg.good .tb-o{stroke:#2e7d32;stroke-width:4}.reg.bad2 .sh,.reg.bad2 .tb-o{stroke:#e0a100;stroke-width:4}.reg.bad .sh,.reg.bad .tb-o{stroke:var(--red);stroke-width:4}
+.ol{font:12.5px 'IBM Plex Mono',monospace;fill:#3b3f33;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:3px}.ol.in{fill:#3b2a1a}
+.ld{stroke:#555;stroke-width:1}.ldd{fill:#555}.chips{display:flex;flex-wrap:wrap;gap:6px}.cls{margin:0 0 8px}.cls h4{font:600 .7rem 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:var(--fd);margin:0 0 5px}
+.chip{font:.76rem 'IBM Plex Mono',monospace;background:#fff;color:var(--fd);border:1px solid var(--f);border-radius:16px;padding:5px 11px;cursor:pointer}.chip:hover{background:var(--sage)}.chip.on{background:var(--f);color:#fff}
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}.btn{font:600 .78rem 'IBM Plex Mono',monospace;background:var(--fd);color:#fff;border:none;border-radius:16px;padding:7px 14px;cursor:pointer}.btn.on{background:var(--red)}
+.tip{font:.72rem 'IBM Plex Mono',monospace;color:var(--ts)}
+.info h2{font:600 1.2rem 'IBM Plex Mono',monospace;margin:0 0 2px;color:var(--fd)}.sub{font:.75rem 'IBM Plex Mono',monospace;color:var(--ts);margin-bottom:8px}
+.info h3{font:600 .72rem 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:var(--f);margin:14px 0 6px;border-bottom:1px solid var(--b);padding-bottom:3px}
+.info ul{margin:0;padding-left:18px;line-height:1.45;font-size:.92rem}.info li{margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}@media(max-width:1100px){.grid2{grid-template-columns:1fr}}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
+.mc{background:var(--sage);border-radius:8px;padding:6px 9px;font-size:.86rem;line-height:1.35}.mc b{display:block;font:600 .74rem 'IBM Plex Mono',monospace;color:var(--fd);margin-bottom:2px}
+.none{color:var(--ts);font-size:.9rem;margin:0}
+.path{display:grid;gap:6px}.pi{border-left:3px solid var(--red);background:#fff;padding:5px 10px;font-size:.88rem;line-height:1.4}.pi b{display:block;font:600 .78rem 'IBM Plex Mono',monospace;color:#8c1d18;margin-bottom:1px}
+.hint{color:var(--ts);font-size:.98rem;line-height:1.55;padding:18px}
+.quiz{padding:10px 6px}.qs{font:.75rem 'IBM Plex Mono',monospace;color:var(--ts)}.qq{font-size:1.2rem;margin:10px 0;color:var(--fd)}.qh{color:var(--ts)}.ok{color:#2e7d32;font-size:1rem}.no{color:var(--red);font-size:1rem}.qd{font-size:.92rem;line-height:1.45}
+.key{margin-top:14px;font-size:.8rem;color:var(--ts)}.key summary{cursor:pointer;font:600 .75rem 'IBM Plex Mono',monospace;color:var(--fd)}
+</style></head><body>
+<a class="back-btn" href="../index.html">&larr; Back to Study Guides</a>
+<header><h1>GI Tract Interactive Map</h1><p>GI II Exam 1 &middot; hover or click a region to see its anatomy, roles, cells, hormones and pathology</p></header>
+<div class="wrap">
+<div class="panel left"><svg id="svg" viewBox="0 0 640 925" role="img" aria-label="Schematic of the gastrointestinal tract with clickable regions"></svg></div>
+<div>
+<div class="panel"><div class="toolbar"><button class="btn" id="qbtn">Quiz me</button><span class="tip">Hover to preview &middot; click to lock &middot; click again to unlock</span></div><div id="chips"></div></div>
+<div class="panel info" id="info" style="margin-top:12px"></div>
+<details class="key panel" style="margin-top:12px"><summary>Abbreviation key</summary><p>GI gastrointestinal · LES / UES lower / upper esophageal sphincter · GERD gastroesophageal reflux disease · HCl hydrochloric acid · ECL enterochromaffin-like · CCK cholecystokinin · GIP gastric inhibitory peptide · GLP-1 glucagon-like peptide 1 · PYY peptide YY · ENaC epithelial sodium channel · SGLT-1 sodium-glucose cotransporter 1 · GLUT glucose transporter · DMT-1 divalent metal transporter 1 · SCC squamous cell carcinoma · HPV human papillomavirus · PSC / PBC primary sclerosing / biliary cholangitis · HCC hepatocellular carcinoma · HBV hepatitis B virus · MASLD metabolic dysfunction-associated steatotic liver disease · ERCP endoscopic retrograde cholangiopancreatography · MRCP magnetic resonance cholangiopancreatography · IPMN intraductal papillary mucinous neoplasm · PanIN pancreatic intraepithelial neoplasia · MALT mucosa-associated lymphoid tissue · GIST gastrointestinal stromal tumor · NET neuroendocrine tumor · PPI proton pump inhibitor · NSAID nonsteroidal anti-inflammatory drug · SMA superior mesenteric artery · TEF tracheoesophageal fistula · VACTERL vertebral, anal, cardiac, tracheoesophageal, renal, limb · RUQ right upper quadrant · WBC white blood cell · IV intravenous · CT computed tomography · tTG tissue transglutaminase · Th T helper · IgA / IgG4 immunoglobulin A / G4 · AST / ALT aspartate / alanine aminotransferase · ALP alkaline phosphatase · GGT gamma-glutamyl transferase · ER endoplasmic reticulum · PAS periodic acid-Schiff · NAPQI N-acetyl-p-benzoquinone imine · KIT KIT receptor tyrosine kinase · CFTR cystic fibrosis transmembrane conductance regulator · FNH focal nodular hyperplasia</p></details>
+</div></div>
+<script>var R={
+mouth:{name:"Oral cavity & salivary glands",sub:"Lips, tongue, teeth, parotid / submandibular / sublingual glands",
+anat:["<b>Lips:</b> red margin (keratinized, no glands, highly vascular), oral mucosa, thin skin with hair follicles","<b>Tongue:</b> stratified squamous epithelium over skeletal muscle running in many directions; papillae: filiform (no taste buds), fungiform, circumvallate (largest, troughs), foliate","<b>Salivary glands:</b> parotid (largest, almost entirely serous), submandibular (mostly serous), sublingual (mostly mucous); ducts run intercalated → striated (basal striations) → excretory","Pharynx and top 1/3 of the esophagus are skeletal muscle (voluntary swallowing)"],
+roles:["Chew and mix food; saliva lubricates and holds the bolus together","Taste; lingual lipase begins fat digestion","Sight, smell and taste start the <b>cephalic phase</b> (medulla → vagus → acid, pepsin, gastrin before food arrives)","Voluntary start of swallowing (deglutition)"],
+cells:[["Taste bud: basal cell","Stem cell with high turnover; gives rise to the other two"],["Taste bud: supporting cell","Darker staining; supports the sensory cells"],["Taste bud: sensory cell","Lighter staining; microvilli at the taste pore detect taste"],["Serous acinar cell","Dark granular acini; enzyme-rich saliva"],["Mucous acinar cell","Pale, hazy; flattened nuclei pushed to the edge; mucin"],["Striated duct cell","Columnar with basal striations (mitochondria)"]],
+horm:[],hnote:"No GI hormones are made here. Salivary output is driven by the parasympathetic nervous system.",
+acts:[],
+path:[["Dental caries","Normal oral bacteria (especially <i>Streptococcus mutans</i>) ferment carbohydrate to acid → focal enamel demineralization → dentin → pulp → abscess. Prevent with hygiene and fluoride."],["Periodontal disease","Biofilm → plaque → tartar → gingivitis → periodontitis (destroys the periodontal ligament, loose teeth; can seed endocarditis or brain abscess)."],["Aphthous ulcers (canker sores)","Painful shallow ulcers of non-keratinized oral mucosa."],["Oral herpes","Herpes simplex virus vesicles that ulcerate; recurs from latency (herpes labialis)."],["Oral candidiasis (thrush)","Pseudomembranous plaque of yeast and pseudohyphae; wipes off; immunosuppression, steroids, antibiotics."],["Leukoplakia / erythroplakia","Premalignant white / red patches that cannot be scraped off; erythroplakia carries the highest risk of dysplasia."],["Oral squamous cell carcinoma (SCC)","Non-HPV: tobacco and alcohol, field cancerization, worse prognosis. HPV-associated: oropharynx (tonsil, tongue base), p16 overexpression, better prognosis."],["Sialadenitis / xerostomia","Salivary gland inflammation (stones with infection, viral e.g. mumps) / dry mouth from reduced saliva."],["Pleomorphic adenoma","Most common salivary tumor (usually parotid); benign mixed epithelial + myoepithelial + stromal; PLAG1; recurs if incompletely excised."],["Warthin tumor","Benign parotid tumor; oncocytes with lymphoid stroma; smoking."],["Mucoepidermoid carcinoma","Most common salivary malignancy; mucinous + epidermoid cells; CRTC1::MAML2 fusion."],["Ankyloglossia (tongue-tie)","Short frenulum; feeding and nipple pain in infants; lactation support first, frenotomy if feeding fails."]]},
+
+esoph:{name:"Esophagus",sub:"Muscular tube from pharynx to stomach",
+anat:["Only GI region lined by <b>stratified squamous</b> epithelium","Mucus-secreting glands in the submucosa","Muscularis externa: skeletal proximally → smooth distally (top 1/3 voluntary, lower 2/3 involuntary)","<b>Upper esophageal sphincter (UES)</b> and <b>lower esophageal sphincter (LES)</b> are thickened muscle","Gastroesophageal junction: abrupt change to simple columnar (stomach cardia)"],
+roles:["Peristalsis carries the bolus to the stomach","UES prevents regurgitation (and swallowed air); LES prevents acid reflux","Mucus lubricates the bolus and protects the lining"],
+cells:[["Stratified squamous epithelial cell","Protective lining, replaced from basal layer"],["Esophageal gland mucous cell","Submucosal glands; lubricate and hold the bolus together"],["Myenteric / submucosal neurons","Intrinsic nerves that run peristalsis"]],
+horm:[],hnote:"No GI hormones are made here. Motility is neural: vagus (parasympathetic) and the enteric plexuses.",acts:[],
+path:[["Achalasia","Incomplete LES relaxation + no peristalsis; loss of inhibitory myenteric neurons. Dysphagia, nocturnal regurgitation, barium swallow bird-beak with dilated esophagus. Secondary form: <b>Chagas disease</b> (<i>Trypanosoma cruzi</i> destroys myenteric neurons). Botulinum toxin temporary; surgery curative."],["Gastroesophageal reflux disease (GERD) / reflux esophagitis","LES incompetent → gastric acid injures the squamous lining. Associated with sliding hiatal hernia."],["Barrett esophagus","Chronic GERD → squamous replaced by columnar epithelium with goblet cells (intestinal metaplasia) → dysplasia → adenocarcinoma."],["Esophageal adenocarcinoma","Distal esophagus, from Barrett; dysphagia and weight loss once the lumen narrows."],["Esophageal SCC","Upper/mid esophagus; tobacco and alcohol; keratin pearls and intercellular bridges."],["Esophageal varices","Portal hypertension (usually cirrhosis) dilates submucosal veins in the lower esophagus; painless hematemesis; emergency (banding, sclerotherapy)."],["Mallory-Weiss tear / Boerhaave","Mallory-Weiss: longitudinal mucosal tear with retching (alcohol), painful hematemesis, usually self-limited. Boerhaave: transmural rupture → mediastinitis, emergency."],["Eosinophilic esophagitis","Th2 / allergen-driven; eosinophils in the squamous epithelium; dysphagia and food impaction."],["Hiatal hernia","Sliding (95%) with GERD; paraesophageal can strangulate."],["Webs / Schatzki rings","Webs: upper, Plummer-Vinson (iron-deficiency anemia + web + dysphagia). Rings: lower, with hiatal hernia."],["Zenker diverticulum","Proximal pouch of all wall layers; elderly; regurgitation and halitosis."],["Esophageal atresia / TEF (peds)","Choking and cyanosis with feeds; type C (blind pouch + distal fistula) is 85%; polyhydramnios; VACTERL association."]]},
+
+body:{name:"Stomach: fundus & body (oxyntic mucosa)",sub:"Upper two-thirds of the stomach",
+anat:["Shallow <b>gastric pits</b> lined by surface mucous cells lead to <b>deep gastric glands</b> that reach the muscularis mucosae","Glands contain parietal (pink), chief (purple at the base), mucous neck, stem and enteroendocrine cells","Cardia (near the esophagus) is mostly mucous; fundus stores food"],
+roles:["Store food, mix into chyme","<b>HCl</b> denatures protein and kills microbes; <b>pepsin</b> and <b>gastric lipase</b> start protein and fat digestion","<b>Intrinsic factor</b> is needed for vitamin B12 absorption","Mucus + bicarbonate barrier protects the lining (defense vs acid, pepsin, NSAIDs)","Vagovagal reflex: stretch → vagus → acetylcholine → acid, pepsinogen, gastrin"],
+cells:[["Parietal cell","HCl and intrinsic factor (apical H⁺/K⁺ ATPase; basolateral Cl⁻/HCO₃⁻ exchanger)"],["Chief cell","Pepsinogen and gastric lipase"],["Enterochromaffin-like (ECL) cell","Histamine → stimulates parietal cells"],["D (delta) cell","Somatostatin: inhibits parietal cells (and G cells)"],["Surface mucous / foveolar cell","Thick bicarbonate-rich mucus (pseudo-goblet cells)"],["Mucous neck cell, stem cell","Mucus; renew the glands"]],
+horm:[["Ghrelin","Made when the stomach is empty → hunger (orexigenic)"],["Histamine (paracrine, ECL)","Stimulates parietal cells to secrete acid"],["Somatostatin (D cells)","Inhibits acid; acid itself triggers its release (negative feedback)"]],
+acts:[["Gastrin (from antrum)","↑ HCl via parietal cells, ↑ pepsin, ↑ motility, mucosal growth"],["Acetylcholine (vagus)","Stimulates parietal, ECL, chief and G cells"],["Secretin, GIP, CCK","Inhibit gastric acid; CCK also slows emptying"],["Sympathetic input","Inhibits motility and secretion"]],
+path:[["Autoimmune atrophic gastritis (type A)","CD4 T cells and antibodies destroy parietal cells (pump and intrinsic factor) in the body and fundus; antrum spared. Achlorhydria, hypergastrinemia, B12 deficiency / pernicious anemia, type I neuroendocrine tumor, intestinal metaplasia → adenocarcinoma."],["Gastric ulcer","H. pylori (whole-stomach gastritis) or NSAIDs; older adults; acid normal or low; pain not relieved by food; silent chronic bleeding."],["Acute gastritis / stress ulcers","Damage outweighs defense (NSAIDs, alcohol, ischemia, critical illness)."],["Fundic gland polyp","Common benign polyp, often with PPI use (acid suppression → gastrin → gland hyperplasia)."],["Ménétrier disease","TGF-α / EGFR overexpression → giant foveolar hyperplasia, protein-losing, low acid."],["Gastric adenocarcinoma","Intestinal type (H. pylori, metaplasia) or diffuse type (CDH1 loss, signet ring cells, linitis plastica)."],["Gastric lymphoma (MALT) / GIST / NET","MALT lymphoma from chronic H. pylori; GIST from KIT-mutant interstitial cells of Cajal; neuroendocrine tumor (type I with hypergastrinemia)."]]},
+
+antrum:{name:"Stomach: antrum & pylorus",sub:"Lower stomach and the pyloric sphincter",
+anat:["Deeper gastric pits with mostly mucous glands plus <b>G cells</b>; no parietal cells","<b>Pyloric sphincter</b>: thickened circular muscle that meters chyme into the duodenum"],
+roles:["Antral grinding mixes food into chyme","Releases <b>gastrin</b> to drive acid secretion","Pylorus controls gastric emptying (slowed by CCK, GIP, secretin)","Bicarbonate-rich mucus protects the antral mucosa"],
+cells:[["G cell","Gastrin (enters the blood; stimulates secretion, motility, mucosal growth)"],["D (delta) cell","Somatostatin: inhibits G cells; acid triggers its release"],["Foveolar / mucous cell","Mucus and bicarbonate"]],
+horm:[["Gastrin (G cells)","↑ gastric acid (via parietal cells), ↑ pepsin, ↑ gastric motility, mucosal growth; protein digestion"],["Somatostatin (D cells)","Inhibits G cells and parietal cells; shuts off acid when pH is low"]],
+acts:[["CCK, secretin, GIP","Slow gastric emptying and reduce acid"],["Acetylcholine (vagus)","Stimulates G cells and motility"]],
+path:[["H. pylori antral gastritis → duodenal ulcer","Antral inflammation damages D cells, so gastrin rises and healthy parietal cells make excess acid that injures the duodenum."],["Zollinger-Ellison syndrome","Gastrin-secreting tumor → massive acid, refractory peptic ulcers."],["Pyloric stenosis (infant)","First-born boy, 3–6 weeks, projectile non-bilious vomiting, olive mass; hypochloremic hypokalemic metabolic alkalosis; ultrasound length ≥18 mm, wall >4 mm."],["Gastric ulcer","Lesser curvature of body/antrum; H. pylori or NSAIDs; punched-out ulcer; heals with fibrosis."],["Gastric outlet obstruction","Scarring from chronic ulcer disease narrows the pylorus; vomiting of undigested food."],["Heterotopic pancreas","Pancreatic rests are most common in the stomach (antrum); usually silent."],["Adenocarcinoma / MALT lymphoma / GIST / NET","See fundus & body; can arise anywhere in the stomach."]]},
+
+liver:{name:"Liver",sub:"Largest solid organ; right upper quadrant",
+anat:["<b>Hepatic lobule</b>: central vein with sinusoids radiating to it; <b>portal triads</b> at the corners","Triad: portal vein (largest; most blood, nutrient-rich), hepatic artery (thick wall; ~¼ of blood), bile duct","Hepatocytes in single plates along sinusoids; Kupffer cells in the sinusoids; space of Disse between hepatocytes and sinusoid"],
+roles:["<b>Bile</b>: made from cholesterol (7α-hydroxylase rate-limiting); bilirubin conjugated by UDP glucuronyl transferase","Detoxification: phase I (cytochrome P450), phase II (conjugation)","Glycogen storage and release (glucose-6-phosphatase), gluconeogenesis, urea cycle, cholesterol synthesis (HMG-CoA reductase)","Makes albumin and clotting factors"],
+cells:[["Hepatocyte","Eosinophilic cuboidal cell: bile, metabolism, detoxification"],["Kupffer cell","Sinusoidal macrophage"],["Hepatic stellate cell","Lays down collagen in cirrhosis"],["Cholangiocyte","Bile duct epithelium; modifies bile"],["Sinusoidal endothelial cell","Fenestrated capillary lining"]],
+horm:[],hnote:"The liver is not a GI-hormone source. It makes bile (stored in the gallbladder).",
+acts:[["Insulin (pancreas)","Glycogen synthesis; inhibits gluconeogenesis"],["Glucagon (pancreas)","Glycogenolysis and gluconeogenesis"],["Aldosterone / others","—"]].slice(0,2),
+path:[["Acute liver failure / acetaminophen toxicity","Overdose depletes glutathione; toxic NAPQI causes centrilobular necrosis."],["Viral hepatitis (A–E)","A and E fecal-oral, self-limited. B: DNA virus with reverse transcriptase; chronic carrier, cirrhosis, HCC. C: RNA virus, chronic. D needs HBV surface antigen."],["Autoimmune hepatitis","Interface hepatitis with plasma cells; women; responds to steroids ± azathioprine."],["Alcohol-associated liver disease","Steatosis → alcoholic hepatitis (Mallory-Denk bodies, AST:ALT ≈2:1) → cirrhosis; ↑ NADH:NAD⁺."],["MASLD","Metabolic dysfunction-associated steatotic liver disease: insulin resistance → lipolysis → steatosis ± steatohepatitis."],["Cirrhosis / chronic liver failure","Stellate cell fibrosis → portal hypertension (varices, ascites), encephalopathy, coagulopathy."],["Hemochromatosis","Low hepcidin → excess iron absorption and deposition."],["Wilson disease","ATP7B defect → copper accumulation; low ceruloplasmin."],["α1-antitrypsin deficiency","Misfolded protein accumulates in the ER (PAS-positive globules)."],["Hepatic tumors","Hemangioma (most common benign), focal nodular hyperplasia (abnormal blood flow), adenoma (rupture), HCC (HBV or cirrhosis; arterial enhancement then venous washout), hepatoblastoma (children)."],["Jaundice / neonatal jaundice","Hemolytic (urine urobilinogen +) vs obstructive (absent); newborn physiologic vs pathologic (conjugated ≥1 mg/dL)."]]},
+
+gb:{name:"Gallbladder & bile ducts",sub:"Cystic duct, common bile duct, ampulla of Vater",
+anat:["Simple columnar epithelium (cholangiocytes); <b>no submucosa and no muscularis mucosae</b>; thick, disorganized muscularis externa","Rokitansky-Aschoff sinuses: epithelial invaginations that can reach the muscle","Cystic duct + common hepatic duct → common bile duct → joins the pancreatic duct at the <b>ampulla of Vater</b> (sphincter of Oddi)"],
+roles:["Store and concentrate bile (removes water)","Contract to release bile when fat arrives","Bile salts emulsify fat; carry fat-soluble vitamins; excrete bilirubin and cholesterol"],
+cells:[["Cholangiocyte","Columnar bile-duct / gallbladder lining; modifies bile"],["Smooth muscle cells","Contract the gallbladder"]],
+horm:[],hnote:"No hormone is made here. The gallbladder is a major hormone target.",
+acts:[["CCK (duodenum / jejunum)","Contracts the gallbladder and relaxes the sphincter of Oddi → bile into the duodenum"],["Vagus (acetylcholine)","Contracts the gallbladder"],["Somatostatin","Inhibits"]],
+path:[["Cholelithiasis (gallstones)","Mostly cholesterol: supersaturated bile + stasis + nucleation; pigment stones with hemolysis. Biliary colic, RUQ pain after fatty meals."],["Acute cholecystitis","~90% calculous: stone obstructs the cystic duct → inflammation, fever, RUQ pain. Acalculous in critically ill (ischemia, stasis)."],["Choledocholithiasis","Stone in the common bile duct: obstructive jaundice, pale stools, dark urine, ↑ conjugated bilirubin, ALP, GGT."],["Ascending cholangitis","Obstruction + infection: fever, jaundice, RUQ pain (Charcot); emergency: antibiotics + ERCP drainage."],["Gallstone pancreatitis","Stone at the ampulla blocks pancreatic secretions."],["Primary sclerosing cholangitis (PSC)","Large and medium ducts, beading on MRCP, periductal fibrosis; ulcerative colitis; cholangiocarcinoma risk."],["Primary biliary cholangitis (PBC)","Small intrahepatic ducts; anti-mitochondrial antibodies; middle-aged women, fatigue and pruritus."],["Biliary atresia","Infant with progressive conjugated hyperbilirubinemia and acholic stools; Kasai (hepatoportoenterostomy) early; may need transplant."],["Gallbladder carcinoma","Adenocarcinoma; usually with gallstones (only 1–2% of stone patients); porcelain gallbladder."]]},
+
+panc:{name:"Pancreas",sub:"Retroperitoneal; head in the duodenal C-loop",
+anat:["<b>Acini</b> (bright pink/purple, exocrine) with pale <b>islets of Langerhans</b> (endocrine)","Head sits in the duodenal C; main duct joins the common bile duct at the ampulla","Enzymes stored as inactive zymogens (protection against autodigestion)"],
+roles:["<b>Exocrine:</b> enzymes (trypsinogen, chymotrypsinogen, α-amylase, lipase, phospholipase A2, nucleases) and aqueous HCO₃⁻ that neutralizes acid","<b>Endocrine:</b> insulin, glucagon, somatostatin, pancreatic polypeptide"],
+cells:[["Acinar cell","Digestive enzymes; stimulated by CCK and acetylcholine"],["Ductal cell","Aqueous HCO₃⁻; stimulated by secretin"],["Beta cell","Insulin (↓ glucose) released 1:1 with C-peptide"],["Alpha cell","Glucagon (↑ glucose)"],["Delta cell","Somatostatin"],["PP cell","Pancreatic polypeptide (satiety)"]],
+horm:[["Insulin (beta)","↓ blood glucose; C-peptide marks insulin production"],["Glucagon (alpha)","↑ blood glucose (glycogenolysis, gluconeogenesis)"],["Somatostatin (delta)","Inhibits GI secretion and hormones"],["Pancreatic polypeptide","Satiety signal to the hypothalamus"]],
+acts:[["CCK","Acinar enzymes (+ some HCO₃⁻); positive feedback with digestion products"],["Secretin","Ductal HCO₃⁻; negative feedback as acid is neutralized"],["Acetylcholine (vagus)","Stimulates acinar cells"]],
+path:[["Acute pancreatitis","Autodigestion by prematurely activated trypsin: gallstones (duct obstruction), alcohol (fatty acid ethyl esters), hereditary. Epigastric pain to the back, ↑ lipase/amylase; fat necrosis (saponification) → hypocalcemia."],["Chronic pancreatitis","Repeated injury → ductal dilation with protein plugs, fibrosis, acinar loss; steatorrhea and diabetes."],["Autoimmune pancreatitis","IgG4-related; lymphoplasmacytic sclerosis; steroid-responsive."],["Cystic fibrosis (pancreas)","CFTR defect → viscous secretions block ducts → insufficiency and fibrosis."],["Exocrine pancreatic insufficiency","Failure of digestive enzymes → maldigestion, steatorrhea, “pseudo-starvation”."],["Pseudocyst vs true cyst","Pseudocyst: no epithelial lining, after pancreatitis. True cysts: epithelial lining; polycystic kidney disease, von Hippel-Lindau."],["Cystic neoplasms","Serous (benign), mucinous cystic and IPMN (premalignant), solid pseudopapillary (young women)."],["Pancreatic ductal adenocarcinoma","PanIN precursors with stepwise genetic progression; “silent” until advanced; head tumors cause painless jaundice; Whipple procedure if resectable."],["Pancreatic neuroendocrine tumor","Islet-cell tumors (e.g., gastrinoma, insulinoma)."],["Diabetes mellitus","Type 1: no insulin; type 2: insulin insensitive."],["Developmental anomalies","Pancreas divisum (most common), annular pancreas (can obstruct the duodenum), heterotopic pancreas."]]},
+
+duod:{name:"Duodenum",sub:"First ~25 cm of the small intestine (C-loop)",
+anat:["Villi with <b>duodenal (Brunner) glands</b> in the submucosa (alkaline mucus)","Bile and pancreatic secretions enter at the ampulla","Crypts hold goblet, enterocyte, M, enteroendocrine and Paneth cells"],
+roles:["Neutralizes gastric acid (Brunner glands, pancreatic HCO₃⁻)","Chemical digestion (pancreatic enzymes + bile); iron absorbed via DMT-1, calcium via calbindin","Source of the key regulatory hormones (secretin, CCK, GIP)"],
+cells:[["Enterocyte","Brush border absorption; Na⁺-coupled transport"],["Goblet cell","Mucus"],["Paneth cell","Antimicrobial peptides and lysozyme at the crypt base"],["Brunner gland cell","Alkaline fluid"],["S cell","Secretin (low pH, fatty acids)"],["I cell","CCK (fatty acids, small peptides)"],["K cell","GIP (inhibitory peptide; ↑ insulin)"]],
+horm:[["Secretin (S cells)","↑ pancreatic ductal HCO₃⁻; ↓ gastric acid. “Acid neutralization”"],["Cholecystokinin (I cells)","↑ pancreatic enzymes, gallbladder contraction; ↓ gastric acid and emptying. “Fat digestion”"],["Gastric inhibitory peptide (K cells)","↓ gastric acid and motility; ↑ insulin release"],["Motilin","↑ motility between meals (migrating motor complex)"]],
+acts:[["Somatostatin","Inhibits secretin, CCK and others"]],
+path:[["Duodenal ulcer","H. pylori (most common) or NSAIDs; ↑ acid; younger adults; pain relieved by food, returns 2–3 h later; acute bleeding and perforation more common."],["Zollinger-Ellison ulcers","Gastrin-secreting tumor → ulcers in unusual places."],["Celiac disease","Gluten (gliadin) type IV hypersensitivity: HLA-DQ2/DQ8, tTG deamidation, intraepithelial lymphocytes → villous flattening. Anti-tTG IgA; biopsy."],["Duodenal atresia","Newborn with bilious vomiting, double bubble sign; trisomy 21."],["Annular pancreas","Pancreatic tissue encircles and narrows the duodenum."],["Malrotation with volvulus","Midgut twists around the SMA; bilious emesis in infants; bird’s-beak or corkscrew; surgical emergency."],["Crohn disease","Can involve any segment."]]},
+
+jej:{name:"Jejunum",sub:"Middle small intestine; main absorptive site",
+anat:["“Vanilla”: villi but <b>no submucosal glands and no Peyer patches</b>","Most prominent <b>plicae circulares</b> (folds of mucosa and submucosa)","Each villus has a central lacteal"],
+roles:["Greatest absorption of nutrients, water and electrolytes","<b>Carbohydrate:</b> glucose/galactose via SGLT-1, fructose via GLUT-5; exit by GLUT-2","<b>Protein:</b> amino acids with Na⁺, di/tripeptides with H⁺","<b>Fat:</b> micelles → chylomicrons → lacteal (lymph) → blood; fat-soluble vitamins follow","Brush-border enzymes (lactase, maltase, sucrase, aminopeptidase, dipeptidase)"],
+cells:[["Enterocyte","Dark microvilli; absorption"],["Goblet cell","Mucus"],["I and K cells","CCK and GIP (duodenum / jejunum)"],["Paneth cell","Innate immunity"],["M cell","Samples luminal antigen"]],
+horm:[["CCK (I cells)","↑ pancreatic enzymes and bile; ↓ gastric emptying"],["GIP (K cells)","↑ insulin; ↓ gastric acid and motility"],["Motilin","Migrating motor complex"]],
+acts:[],
+path:[["Celiac disease","Villous flattening with fewer villi → malabsorption, weight loss, iron-deficiency anemia, diarrhea."],["Lactose intolerance","Lactase (brush border) deficiency → osmotic diarrhea and gas with milk."],["Hartnup disease","Defective neutral amino acid transporter for tryptophan (SLC6A19): pellagra-like rash, ataxia; treat with high-protein diet and nicotinamide."],["Steatorrhea / malabsorption","Lipase, bile salt or micelle failure (e.g., pancreatic insufficiency, bile salt deficiency)."],["Whipple disease","Infection of the small intestine → malabsorption."],["Cholera","↑ Cl⁻ secretion with water following → severe watery diarrhea."],["Crohn disease","Skip lesions, transmural inflammation; malabsorption and weight loss."],["Malrotation / midgut volvulus","Twisting of the midgut around the SMA; ischemia, bilious emesis."]]},
+
+ile:{name:"Ileum",sub:"Distal small intestine",
+anat:["Villi plus <b>Peyer patches</b> (lymphoid nodules from the lamina propria into the submucosa)","More goblet cells distally; ends at the ileocecal valve"],
+roles:["Absorbs <b>bile salts</b> (Na⁺/bile salt symporter) → enterohepatic circulation","Absorbs <b>vitamin B12</b> bound to intrinsic factor","Absorbs remaining nutrients and water","Immune surveillance: M cells sample antigen for Peyer patches; secretory IgA"],
+cells:[["Enterocyte","Absorption (bile salts, B12)"],["M cell","Delivers luminal antigen to Peyer patches"],["Lymphocytes (Peyer patch)","Dark basophilic nodules; immune surveillance"],["Paneth cell","Defensins, lysozyme"],["L cell","GLP-1, PYY (distal gut)"]],
+horm:[["GLP-1, PYY, oxyntomodulin","Satiety signals to the hypothalamus (with insulin, CCK, pancreatic polypeptide)"]],
+acts:[],
+path:[["Crohn disease","Most often terminal ileum; patchy skip lesions through the whole wall; cobblestone mucosa, deep ulcers, granulomas, strictures; Th1/Th17; fever, malabsorption, weight loss."],["Bile acid / B12 malabsorption","Ileal disease or resection → bile salt loss (diarrhea, steatorrhea) and B12 deficiency."],["Selective IgA deficiency","Most common primary immunodeficiency, often asymptomatic; ↑ infections, allergy, celiac."],["Celiac disease","Can extend distally."]]},
+
+app:{name:"Cecum & appendix",sub:"Worm-like lymphoid appendage of the cecum",
+anat:["Flat mucosa like the colon (no villi) with <b>many lymphatic nodules</b>"],
+roles:["Immune surveillance (gut-associated lymphoid tissue)"],
+cells:[["Goblet / columnar cell","Mucus; absorption"],["M cell and lymphocytes","Antigen sampling; lymphoid nodules"]],
+horm:[],hnote:"No major hormone production.",acts:[],
+path:[["Acute appendicitis","Luminal obstruction → inflammation. Visceral periumbilical pain migrates to right lower quadrant (parietal peritoneum); fever; 30–40% have WBC <10,000, so a normal count does not exclude it; CT with IV contrast; psoas sign."]]},
+
+colon:{name:"Colon",sub:"Cecum, ascending, transverse, descending, sigmoid",
+anat:["<b>Flat mucosa</b>: no villi, no plicae circulares; very many goblet cells","<b>Teniae coli</b>: three bands of thickened longitudinal muscle","No gastric-type pits or glands"],
+roles:["Absorb water and electrolytes (dehydrates feces)","Na⁺ enters by <b>ENaC</b>, leaves by the Na⁺/K⁺ ATPase; Cl⁻ and water follow; distal colon actively absorbs K⁺","Bacteria make biotin, B1, B2, B6, B12 and vitamin K","Store feces; mass movements; pelvic nerve parasympathetic input"],
+cells:[["Colonocyte (columnar absorptive)","Na⁺, Cl⁻ and water absorption"],["Goblet cell","Abundant mucus"],["M cell","Antigen sampling"],["Enteroendocrine / L cell","GLP-1, PYY"]],
+horm:[["PYY, GLP-1 (distal gut L cells)","Satiety"]],
+acts:[["Aldosterone","↑ ENaC and Na⁺/K⁺ pump activity → salt and water retention"]],
+path:[["Ulcerative colitis","Large bowel only; continuous from the rectum; mucosa and submucosa only; crypt abscesses, shallow ulcers, pseudopolyps; rectal bleeding; PSC association."],["Crohn colitis","Skip lesions and transmural disease can involve the colon."],["Chagas megacolon","Destruction of myenteric plexus by <i>T. cruzi</i>."],["Hirschsprung megacolon","Dilated colon proximal to the aganglionic segment."]]},
+
+rect:{name:"Rectum & anal canal",sub:"Rectoanal junction and sphincters",
+anat:["Simple columnar (rectum) → intermediate epithelium → <b>keratinized stratified squamous</b> (anus)","Internal and external anal sphincters (thickened muscularis externa)"],
+roles:["Store feces and signal the urge to defecate","Sphincters maintain continence; defecation reflex via pelvic nerve parasympathetics"],
+cells:[["Columnar absorptive / goblet cells","Rectum: mucus"],["Keratinized squamous cells","Anal canal epithelium"],["Enteric ganglion cells","Myenteric and submucosal plexus neurons"]],
+horm:[],hnote:"No major hormone production.",acts:[],
+path:[["Hirschsprung disease","Absent myenteric plexus (aganglionosis) starting at the rectum → newborn fails to pass meconium; megacolon above; rectal biopsy shows no ganglion cells."],["Ulcerative colitis","Begins in the rectum with continuous proximal spread; rectal bleeding."],["Anal atresia (VACTERL)","Part of the VACTERL association (vertebral, anal, cardiac, tracheoesophageal fistula, renal, limb)."]]}
+};
+
+var NS='http://www.w3.org/2000/svg',svg=document.getElementById('svg');
+function E(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e}
+var G={};var COL={mouth:'#f1cfc8',esoph:'#ecc59a',body:'#f3c7a3',antrum:'#eeb98d',liver:'#c98a6b',gb:'#9cbd72',panc:'#f2d68e',duod:'#e9b48a',jej:'#e8a9a0',ile:'#dd9a95',app:'#c9b38a',colon:'#cdb48c',rect:'#b99d7a'};
+function grp(id){var g=E('g',{'class':'reg','data-id':id,tabindex:0,role:'button','aria-label':R[id].name});G[id]=g;return g}
+function tube(g,d,w,fill){E('path',{d:d,fill:'none',stroke:'#000','stroke-opacity':0,'stroke-width':Math.max(w+8,24),'stroke-linecap':'round','stroke-linejoin':'round','pointer-events':'stroke'},g);E('path',{d:d,'class':'tb-o',fill:'none','stroke-width':w+4,'stroke-linecap':'round','stroke-linejoin':'round'},g);E('path',{d:d,'class':'tb-i',fill:'none','style':'stroke:'+fill,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},g)}
+function shape(g,d,fill){return E('path',{d:d,'class':'sh',fill:fill},g)}
+function lbl(t,x,y,a){var e=E('text',{x:x,y:y,'class':'ol','text-anchor':a||'start'});e.textContent=t;return e}
+// ---- draw order: back to front
+var g;
+// pancreas
+g=grp('panc');shape(g,'M285,497 C300,482 340,490 380,488 C430,482 470,475 495,468 C508,474 508,490 494,500 C450,517 380,522 340,525 C310,530 285,520 285,497 Z',COL.panc);
+for(var i=0;i<14;i++){E('circle',{cx:305+i*13,cy:503+(i%3)*4,r:2,'class':'dot'},g)}
+// colon + cecum
+g=grp('colon');var cd='M150,772 L150,598 Q150,583 165,583 L475,583 Q490,583 490,598 L490,742 C490,790 440,806 400,792 C362,778 332,792 324,826';
+tube(g,cd,26,COL.colon);E('path',{d:cd,fill:'none','class':'haus','stroke-width':26,'stroke-dasharray':'2 15'},g);
+E('circle',{cx:150,cy:778,r:21,'class':'tb-i2',fill:COL.colon},g);
+// appendix
+g=grp('app');tube(g,'M150,796 C140,816 152,830 136,846',9,COL.app);
+// rectum
+g=grp('rect');tube(g,'M324,820 L324,882',22,COL.rect);E('circle',{cx:324,cy:898,r:12,'class':'tb-o2',fill:'#8c6f52'},g);E('circle',{cx:324,cy:898,r:5,fill:'#fff'},g);
+// small intestine serpentines
+function serp(x0,x1,y0,rows,dy,startRight){var d='M'+(startRight?x1:x0)+','+y0,right=startRight,r=11;for(var i=0;i<rows;i++){var xe=right?x0:x1,y=y0+i*dy;d+=' L'+xe+','+y;if(i<rows-1){var s=right?-1:1;d+=' C'+(xe+s*r)+','+y+' '+(xe+s*r)+','+(y+dy)+' '+xe+','+(y+dy);}right=!right}return d}
+g=grp('jej');var jd='M420,548 C440,560 446,585 440,606 '+serp(200,440,606,4,19,true).replace(/^M[^L]+/,'');tube(g,jd,14,COL.jej);
+g=grp('ile');var idd='M440,663 '+serp(200,440,682,3,19,true).replace(/^M[^L]+/,'')+' L168,732';tube(g,'M440,663 L440,682 '+serp(200,440,682,3,19,true).replace(/^M[^L]+/,'')+' L170,736',14,COL.ile);
+// duodenum
+g=grp('duod');tube(g,'M312,436 C268,440 252,478 258,516 C264,552 300,562 345,556 L405,548 C425,545 432,532 424,520',17,COL.duod);
+// liver, gallbladder, ducts
+g=grp('liver');shape(g,'M98,332 C124,292 228,280 318,300 L316,352 C300,390 220,414 150,400 C106,390 90,357 98,332 Z',COL.liver);
+E('path',{d:'M150,330 C190,318 240,318 290,330',fill:'none','class':'ln'},g);E('path',{d:'M140,365 C190,372 250,368 300,350',fill:'none','class':'ln'},g);
+g=grp('gb');E('path',{d:'M262,396 C268,425 282,452 300,478',fill:'none','class':'duct','stroke-width':6},g);
+E('path',{d:'M226,452 C245,472 275,474 300,480',fill:'none','class':'duct','stroke-width':6},g);
+E('ellipse',{cx:214,cy:432,rx:15,ry:28,'class':'sh',fill:COL.gb},g);
+// esophagus
+g=grp('esoph');tube(g,'M320,112 L320,182 C320,232 336,262 352,292',24,COL.esoph);
+// stomach
+g=grp('antrum');shape(g,'M376,402 C378,425 390,452 412,450 C380,462 340,458 322,444 L322,414 C340,414 360,410 376,402 Z',COL.antrum);E('rect',{x:307,y:413,width:18,height:32,rx:6,'class':'sh',fill:COL.antrum},g);
+g=grp('body');shape(g,'M350,292 C385,252 480,258 495,322 C505,388 470,444 412,450 C390,452 378,425 376,402 C360,375 350,330 350,292 Z',COL.body);
+for(var i=0;i<6;i++){E('path',{d:'M'+(392+i*14)+',300 C'+(400+i*14)+',340 '+(410+i*14)+',380 '+(400+i*10)+',425',fill:'none','class':'ln'},g)}
+// mouth
+g=grp('mouth');E('ellipse',{cx:320,cy:66,rx:112,ry:48,'class':'sh',fill:COL.mouth},g);E('ellipse',{cx:320,cy:78,rx:56,ry:25,'class':'tongue'},g);
+E('path',{d:'M222,60 C260,22 380,22 418,60',fill:'none','class':'teeth'},g);
+E('ellipse',{cx:176,cy:80,rx:22,ry:26,'class':'sh',fill:'#e6b6a8'},g);E('ellipse',{cx:464,cy:80,rx:22,ry:26,'class':'sh',fill:'#e6b6a8'},g);
+E('ellipse',{cx:252,cy:128,rx:22,ry:11,'class':'sh',fill:'#e6b6a8'},g);E('ellipse',{cx:388,cy:128,rx:22,ry:11,'class':'sh',fill:'#e6b6a8'},g);E('ellipse',{cx:320,cy:112,rx:26,ry:7,'class':'sh',fill:'#e6b6a8'},g);
+// labels
+lbl('Parotid',176,118,'middle');lbl('Parotid',464,118,'middle');lbl('Oral cavity & salivary glands',340,160);
+lbl('Esophagus',372,215);lbl('Fundus & body',436,350,'middle').setAttribute('class','ol in');lbl('Antrum / pylorus',338,477);
+lbl('Liver',200,350,'middle').setAttribute('class','ol in');lbl('Gallbladder',186,476,'end');lbl('Pancreas',470,515,'middle').setAttribute('class','ol');
+lbl('Duodenum',246,566,'end');function lead(x1,y1,x2,y2){E('line',{x1:x1,y1:y1,x2:x2,y2:y2,'class':'ld'});E('circle',{cx:x2,cy:y2,r:2.5,'class':'ldd'})}
+lead(508,626,444,626);lbl('Jejunum',512,630);lead(508,708,444,708);lbl('Ileum',512,712);
+lbl('Colon',512,680);lead(509,676,493,676);lbl('Cecum',112,800,'middle');lbl('Appendix',112,850,'middle');lbl('Rectum',350,846);lbl('Anus',350,903);
+// ------ info panel
+var info=document.getElementById('info'),locked=null,quiz=null;
+function sec(t,h){return h?'<h3>'+t+'</h3>'+h:''}
+function li(a){return a.length?'<ul>'+a.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>':''}
+function cards(a){return a.length?'<div class="cards">'+a.map(function(x){return '<div class="mc"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join('')+'</div>':''}
+function render(id){var r=R[id];var h='<div class="ttl"><h2>'+r.name+'</h2><div class="sub">'+r.sub+'</div></div>';
+ h+='<div class="grid2"><div>'+sec('Anatomy &amp; histology',li(r.anat))+sec('Major roles',li(r.roles))+'</div><div>'+sec('Cells found here',cards(r.cells))+'</div></div>';
+ h+=sec('Hormones secreted here',r.horm.length?cards(r.horm):'<p class="none">'+(r.hnote||'None.')+'</p>');
+ if(r.acts&&r.acts.length)h+=sec('Hormones &amp; signals acting here',cards(r.acts));
+ h+=sec('Pathology associated with this area','<div class="path">'+r.path.map(function(p){return '<div class="pi"><b>'+p[0]+'</b><span>'+p[1]+'</span></div>'}).join('')+'</div>');
+ info.innerHTML=h}
+function hint(){info.innerHTML='<div class="hint"><b>Hover</b> any part of the GI tract to preview it, or <b>click</b> to lock it. You will see the anatomy and histology, major roles, the cells there, the hormones secreted and what they do, and the pathology tied to that area.<br><br>Try <b>Quiz me</b> to test yourself by clicking the right region.</div>'}
+function setOn(id){Object.keys(G).forEach(function(k){G[k].classList.toggle('on',k===id)});document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.id===id)})}
+function show(id){if(quiz)return;setOn(id);render(id)}
+function leave(){if(quiz)return;if(locked){setOn(locked);render(locked)}else{setOn(null);hint()}}
+function pick(id){if(quiz){answer(id);return}locked=(locked===id)?null:id;locked?show(id):leave()}
+Object.keys(G).forEach(function(id){var g=G[id];g.addEventListener('mouseenter',function(){show(id)});g.addEventListener('mouseleave',leave);g.addEventListener('click',function(e){e.stopPropagation();pick(id)});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(id)}});g.addEventListener('focus',function(){show(id)})});
+var ORDER=[['Upper tract',['mouth','esoph','body','antrum']],['Accessory organs',['liver','gb','panc']],['Small intestine',['duod','jej','ile']],['Large intestine',['app','colon','rect']]];
+var side=document.getElementById('chips');ORDER.forEach(function(o){var h=document.createElement('div');h.className='cls';h.innerHTML='<h4>'+o[0]+'</h4>';var c=document.createElement('div');c.className='chips';o[1].forEach(function(id){var b=document.createElement('button');b.className='chip';b.dataset.id=id;b.textContent=R[id].name.replace(/ \(.*\)/,'');b.addEventListener('mouseenter',function(){show(id)});b.addEventListener('mouseleave',leave);b.addEventListener('click',function(){pick(id)});c.appendChild(b)});h.appendChild(c);side.appendChild(h)});
+document.addEventListener('click',function(e){if(!quiz&&locked&&!e.target.closest('.reg,.chip,#info')){locked=null;leave()}});
+// ------ quiz
+var pool=[],score=0,asked=0,cur=null,done=false;
+function norm(s){return s.toLowerCase().replace(/<[^>]+>/g,'').replace(/\s*\(.*?\)/g,'').trim()}
+function buildPool(){var m={};function add(type,txt,detail,id){var k=type+'|'+norm(txt);(m[k]=m[k]||{type:type,txt:txt,detail:detail,ids:[]});if(m[k].ids.indexOf(id)<0)m[k].ids.push(id)}
+ Object.keys(R).forEach(function(id){var r=R[id];r.horm.forEach(function(x){add('h',x[0],x[1],id)});r.cells.forEach(function(x){add('c',x[0],x[1],id)});r.path.forEach(function(x){add('p',x[0],x[1],id)})});
+ return Object.keys(m).map(function(k){return m[k]}).filter(function(q){return q.ids.length<=3&&q.txt.indexOf('See ')<0})}
+function prompt(q){var t=q.type==='h'?'Which part of the GI tract secretes <b>'+q.txt+'</b>?':q.type==='c'?'Which region contains the <b>'+q.txt+'</b>?':'Which region is most associated with <b>'+q.txt+'</b>?';return t}
+function next(){done=false;cur=pool[Math.floor(Math.random()*pool.length)];asked++;setOn(null);info.innerHTML='<div class="quiz"><div class="qs">Score '+score+' / '+(asked-1)+'</div><div class="qq">'+prompt(cur)+'</div><div class="qh">Click a region on the diagram or in the list.</div></div>'}
+function answer(id){if(done)return;done=true;var ok=cur.ids.indexOf(id)>=0;if(ok)score++;setOn(null);cur.ids.forEach(function(i){G[i].classList.add(ok?'good':'bad2')});if(!ok)G[id].classList.add('bad');
+ info.innerHTML='<div class="quiz"><div class="qs">Score '+score+' / '+asked+'</div><div class="qq">'+prompt(cur)+'</div><div class="'+(ok?'ok':'no')+'">'+(ok?'Correct. ':'Not quite. ')+'Answer: <b>'+cur.ids.map(function(i){return R[i].name}).join(' / ')+'</b></div><p class="qd">'+cur.detail+'</p><button class="btn" id="nx">Next question</button></div>';
+ document.getElementById('nx').onclick=function(){clearQ();next()}}
+function clearQ(){Object.keys(G).forEach(function(k){G[k].classList.remove('good','bad','bad2')})}
+document.getElementById('qbtn').addEventListener('click',function(){var b=this;if(!quiz){quiz=true;locked=null;pool=buildPool();score=0;asked=0;b.textContent='Exit quiz';b.classList.add('on');document.body.classList.add('inquiz');next()}else{quiz=null;clearQ();b.textContent='Quiz me';b.classList.remove('on');document.body.classList.remove('inquiz');setOn(null);hint()}});
+hint();
+</script></body></html>
