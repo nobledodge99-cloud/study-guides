@@ -60,6 +60,37 @@
   .practice{border-top:2px dashed var(--sage);margin-top:24px;padding-top:4px}
   .score{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--forest-dark);}
   @media (max-width:700px){.two-col{grid-template-columns:1fr;}.top-contents ul{columns:1;}section.card{padding:20px 16px;}.header{padding-top:64px;}.header h1{font-size:1.45rem;}}
+
+/*gi-add*/
+.gt-note{ font-size:.78rem; color:var(--text-soft); margin:6px 0 14px; line-height:1.5; }
+.gt-info{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:10px 0 12px; }
+.gt-info > div{ background:#dbe5f7; border:1px solid #b6c6e4; border-radius:10px; padding:9px 12px; font-size:.84rem; }
+.gt-info b{ display:block; font-family:'IBM Plex Mono',monospace; font-size:.68rem; text-transform:uppercase; color:#2c4a86; margin-bottom:3px; }
+table.gt td, table.gt th{ vertical-align:middle; }
+table.gt tr.s1 td{ background:#f7ecb5 !important; } table.gt tr.s2 td{ background:#f3c5bd !important; } table.gt tr.s3 td{ background:#ecd3b9 !important; }
+table.gt td{ border-color:#fffdf8; border-width:2px; }
+table.gt td.lab{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.8rem; background:#f1ece0 !important; }
+table.gt th.pbc{ background:#4e7aa3 !important; } table.gt th.psc{ background:#c98a2b !important; }
+table.gt td.pbc{ background:#d7e5f0 !important; } table.gt td.psc{ background:#f8e6bf !important; } table.gt td.both{ background:#ebe5d3 !important; }
+table.gt th.ac{ background:#b8392f !important; } table.gt th.ch{ background:#3d62b8 !important; }
+table.gt td.ac{ background:#f6d2cd !important; } table.gt td.ch{ background:#d5def4 !important; } table.gt td.pl{ background:#f1ece0 !important; text-align:center; font-weight:700; }
+.hb-flow{ display:flex; flex-direction:column; align-items:center; gap:4px; margin:14px 0; font-size:.84rem; }
+.hb-top{ background:#e3a92c; color:#2b2620; font-weight:700; padding:9px 18px; border-radius:6px; }
+.hb-q{ background:#1f3a5f; color:#fff; padding:8px 16px; border-radius:6px; text-align:center; }
+.hb-arr{ color:var(--forest-dark); font-size:1.1rem; line-height:1; }
+.hb-split{ display:grid; grid-template-columns:2.2fr 1fr; gap:18px; width:100%; align-items:start; }
+.hb-branch{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.hb-lab{ font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--forest-dark); }
+.hb-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; width:100%; }
+.hb-col{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.hb-res{ width:100%; border:1px solid #b9bf7a; border-radius:8px; background:#e9ecc4; padding:0 0 8px; }
+.hb-res > b{ display:block; background:#cbd27e; padding:6px 8px; border-radius:7px 7px 0 0; text-align:center; }
+.hb-res ul{ margin:6px 0 0; padding-left:20px; }
+.hb-res .tg{ display:inline-block; font-size:.62rem; font-weight:700; color:#fff; padding:1px 6px; border-radius:3px; margin-left:6px; }
+.hb-res .tg.ex{ background:#d9822b; } .hb-res .tg.in{ background:#2f6db5; }
+.hb-uc{ width:100%; background:#e9ecc4; border:1px solid #b9bf7a; border-radius:8px; padding:8px 12px; }
+.hb-uc ul{ margin:0; padding-left:18px; }
+@media (max-width:800px){ .gt-info{ grid-template-columns:1fr; } .hb-split{ grid-template-columns:1fr; } .hb-cols{ grid-template-columns:1fr; } }
 </style>
 <!--FC1--><style>
 .fc-foot{margin:36px 0 10px;text-align:center}
@@ -206,6 +237,19 @@
 <li><b>Enzyme supplementation</b> (chronic medication) when damage is significant; <b>insulin</b> if diabetes develops.</li>
 <li><b>Surgery:</b> total pancreatic failure/disease needs a <b>Whipple</b> (removes part of the stomach, much of the duodenum/intestine and the pancreas): complex, many complications, so <b>refer to high-volume centers</b>. Selected IPMN/ampullary lesions: endoscopic or open ampullectomy-type removal.</li>
 </ul>
+<!--add-panc-->
+<h3>Pancreatitis: acute vs chronic at a glance</h3>
+<p>Pancreatitis is inflammation of the pancreas, fundamentally caused by <b>autodigestion of its own tissue by prematurely activated enzymes</b>. Both acute and chronic conditions typically present with <b>severe epigastric pain that radiates to the back</b>.</p>
+<div class="tw"><table class="gt"><thead><tr><th style="width:15%"></th><th class="ac" style="width:42.5%">Acute</th><th class="ch" style="width:42.5%">Chronic</th></tr></thead><tbody>
+<tr><td class="lab">Pathophysiology</td><td class="ac"><b>Autodigestion</b> of pancreatic parenchyma by prematurely activated pancreatic enzymes (especially <b>trypsin</b>). Involves <b>liquefactive necrosis</b> of the pancreas and peripancreatic <b>fat necrosis</b></td><td class="ch"><b>Irreversible</b> chronic inflammation, <b>fibrosis, atrophy, and dystrophic calcification</b> of the pancreatic parenchyma. Often secondary to recurrent episodes of acute pancreatitis</td></tr>
+<tr><td class="lab">Major causes</td><td class="ac"><b>Gallstones and alcohol</b> (most common). Mnemonic <b>&ldquo;I GET PP SMASHED&rdquo;</b>*</td><td class="ch"><b>Alcohol</b> (most common in adults); <b>genetic predisposition</b> (e.g., cystic fibrosis, <i>SPINK1</i>/<i>PRSS1</i> mutations); can also be idiopathic</td></tr>
+<tr><td class="lab">Clinical presentation</td><td class="ac"><b>Acute onset of severe epigastric abdominal pain</b> that often radiates to the back</td><td class="ch">May present with epigastric pain radiating to the back; <b>late-stage disease with signs of pancreatic insufficiency</b>**</td></tr>
+<tr><td class="lab">Diagnosis</td><td class="ac"><b>At least 2 of 3:</b> acute epigastric pain radiating to the back; serum amylase or lipase <b>&gt; 3&times; the upper limit of normal</b>; characteristic imaging findings</td><td class="ch">Clinical features and imaging. CT or MRCP shows <b>atrophy, fibrosis, and dystrophic calcification</b>; contrast studies may reveal a <b>&ldquo;chain of lakes&rdquo;</b> pattern from dilated ducts</td></tr>
+<tr><td class="lab">Key serum markers</td><td class="ac">Serum <b>amylase and lipase elevated</b> (&gt; 3&times; normal)</td><td class="ch">Serum amylase and lipase <b>may or may not be elevated</b></td></tr>
+<tr><td class="lab">Complications</td><td class="ac"><b>Systemic:</b> shock, ARDS (acute respiratory distress syndrome), DIC (disseminated intravascular coagulation), renal failure, <b>hypocalcemia</b> (saponification in fat necrosis). <b>Local:</b> pancreatic pseudocyst, walled-off necrosis (formerly abscess), hemorrhage, infection</td><td class="ch"><b>Pancreatic insufficiency</b> (malabsorption, steatorrhea); <b>diabetes mellitus</b> (destruction of islets); pancreatic pseudocysts; <b>increased risk of pancreatic carcinoma</b></td></tr>
+<tr><td class="lab">Pancreatic pseudocyst***</td><td class="ac">Can occur as a complication <b>4&ndash;6 weeks</b> after an acute episode</td><td class="ch">Can also occur as a complication, similar to acute pancreatitis</td></tr>
+</tbody></table></div>
+<p class="gt-note">*I GET PP SMASHED: Idiopathic, Gallstones, Ethanol, Trauma (e.g., seatbelt injury in children), Posterior duodenal ulcer rupture, Pancreas divisum, Steroids, Mumps, Autoimmune disease, Scorpion sting, Hypercalcemia or hypertriglyceridemia, ERCP (endoscopic retrograde cholangiopancreatography), Drugs (sulfa drugs, nucleoside reverse transcriptase inhibitors, protease inhibitors, diuretics). **Steatorrhea, fat-soluble vitamin deficiencies, and diabetes mellitus. ***A collection of enzymes and necrotic tissue surrounded by granulation (fibrous) tissue, not epithelium. MRCP = magnetic resonance cholangiopancreatography.</p>
 </section>
 
 <div class="fc-foot"><button class="fc-badge" id="fcOpen">&#127183; Flashcards <span id="fcN"></span></button></div>
