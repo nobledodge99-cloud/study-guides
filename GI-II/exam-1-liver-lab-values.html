@@ -60,6 +60,37 @@
   .practice{border-top:2px dashed var(--sage);margin-top:24px;padding-top:4px}
   .score{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--forest-dark);}
   @media (max-width:700px){.two-col{grid-template-columns:1fr;}.top-contents ul{columns:1;}section.card{padding:20px 16px;}.header{padding-top:64px;}.header h1{font-size:1.45rem;}}
+
+/*gi-add*/
+.gt-note{ font-size:.78rem; color:var(--text-soft); margin:6px 0 14px; line-height:1.5; }
+.gt-info{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:10px 0 12px; }
+.gt-info > div{ background:#dbe5f7; border:1px solid #b6c6e4; border-radius:10px; padding:9px 12px; font-size:.84rem; }
+.gt-info b{ display:block; font-family:'IBM Plex Mono',monospace; font-size:.68rem; text-transform:uppercase; color:#2c4a86; margin-bottom:3px; }
+table.gt td, table.gt th{ vertical-align:middle; }
+table.gt tr.s1 td{ background:#f7ecb5 !important; } table.gt tr.s2 td{ background:#f3c5bd !important; } table.gt tr.s3 td{ background:#ecd3b9 !important; }
+table.gt td{ border-color:#fffdf8; border-width:2px; }
+table.gt td.lab{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.8rem; background:#f1ece0 !important; }
+table.gt th.pbc{ background:#4e7aa3 !important; } table.gt th.psc{ background:#c98a2b !important; }
+table.gt td.pbc{ background:#d7e5f0 !important; } table.gt td.psc{ background:#f8e6bf !important; } table.gt td.both{ background:#ebe5d3 !important; }
+table.gt th.ac{ background:#b8392f !important; } table.gt th.ch{ background:#3d62b8 !important; }
+table.gt td.ac{ background:#f6d2cd !important; } table.gt td.ch{ background:#d5def4 !important; } table.gt td.pl{ background:#f1ece0 !important; text-align:center; font-weight:700; }
+.hb-flow{ display:flex; flex-direction:column; align-items:center; gap:4px; margin:14px 0; font-size:.84rem; }
+.hb-top{ background:#e3a92c; color:#2b2620; font-weight:700; padding:9px 18px; border-radius:6px; }
+.hb-q{ background:#1f3a5f; color:#fff; padding:8px 16px; border-radius:6px; text-align:center; }
+.hb-arr{ color:var(--forest-dark); font-size:1.1rem; line-height:1; }
+.hb-split{ display:grid; grid-template-columns:2.2fr 1fr; gap:18px; width:100%; align-items:start; }
+.hb-branch{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.hb-lab{ font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--forest-dark); }
+.hb-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; width:100%; }
+.hb-col{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.hb-res{ width:100%; border:1px solid #b9bf7a; border-radius:8px; background:#e9ecc4; padding:0 0 8px; }
+.hb-res > b{ display:block; background:#cbd27e; padding:6px 8px; border-radius:7px 7px 0 0; text-align:center; }
+.hb-res ul{ margin:6px 0 0; padding-left:20px; }
+.hb-res .tg{ display:inline-block; font-size:.62rem; font-weight:700; color:#fff; padding:1px 6px; border-radius:3px; margin-left:6px; }
+.hb-res .tg.ex{ background:#d9822b; } .hb-res .tg.in{ background:#2f6db5; }
+.hb-uc{ width:100%; background:#e9ecc4; border:1px solid #b9bf7a; border-radius:8px; padding:8px 12px; }
+.hb-uc ul{ margin:0; padding-left:18px; }
+@media (max-width:800px){ .gt-info{ grid-template-columns:1fr; } .hb-split{ grid-template-columns:1fr; } .hb-cols{ grid-template-columns:1fr; } }
 </style>
 <!--FC1--><style>
 .fc-foot{margin:36px 0 10px;text-align:center}
@@ -252,6 +283,21 @@
 <li>Acute vs chronic.</li>
 <li>Estimate <b>reserve liver function</b> (albumin, PT).</li>
 <li>Only then think about <b>specific etiologies</b> and the differential, combining tests with other data.</li></ol>
+<!--add-hb-->
+<h3>Approach to hyperbilirubinemia in adults</h3>
+<div class="hb-flow">
+<div class="hb-top">Patient has hyperbilirubinemia?</div><div class="hb-arr">&darr;</div>
+<div class="hb-q">Conjugated or unconjugated bilirubin?</div>
+<div class="hb-split">
+<div class="hb-branch"><div class="hb-lab">Mainly conjugated</div><div class="hb-arr">&darr;</div><div class="hb-q">Evaluate liver enzyme pattern</div><div class="hb-arr">&darr;</div>
+<div class="hb-cols">
+<div class="hb-col"><div class="hb-lab">Normal AST, ALT, ALP</div><div class="hb-arr">&darr;</div><div class="hb-res"><b>Isolated hyperbilirubinemia</b><ul><li>Dubin-Johnson syndrome</li><li>Rotor syndrome</li></ul></div></div>
+<div class="hb-col"><div class="hb-lab">Predominantly &uarr; AST and ALT</div><div class="hb-arr">&darr;</div><div class="hb-res"><b>Hepatocellular pattern</b><ul><li>Viral hepatitis</li><li>Autoimmune hepatitis</li><li>Toxin-related / drug-related</li><li>Hemochromatosis</li><li>Ischemic hepatitis</li><li>Alcoholic hepatitis</li></ul></div></div>
+<div class="hb-col"><div class="hb-lab">Predominantly &uarr; ALP</div><div class="hb-arr">&darr;</div><div class="hb-res"><b>Cholestatic pattern</b><ul><li>Choledocholithiasis <span class="tg ex">Extrahepatic</span></li><li>Acute cholangitis <span class="tg ex">Extrahepatic</span></li><li>Malignancy (e.g., pancreatic, ampullary) <span class="tg ex">Extrahepatic</span></li><li>Cholangiocarcinoma <span class="tg ex">Extrahepatic</span></li><li>Primary sclerosing cholangitis</li><li>Primary biliary cholangitis <span class="tg in">Intrahepatic</span></li><li>Cholestasis of pregnancy <span class="tg in">Intrahepatic</span></li></ul></div></div>
+</div></div>
+<div class="hb-branch"><div class="hb-lab">Mainly unconjugated</div><div class="hb-arr">&darr;</div><div class="hb-uc"><ul><li><b>&uarr; production</b> (e.g., hemolysis)</li><li><b>&darr; uptake</b> (e.g., drug-induced, portosystemic shunt)</li><li><b>Conjugation defect</b> (e.g., Gilbert syndrome)</li></ul></div></div>
+</div></div>
+<p class="gt-note">AST = aspartate aminotransferase; ALT = alanine aminotransferase; ALP = alkaline phosphatase. Primary sclerosing cholangitis involves both intrahepatic and extrahepatic ducts.</p>
 </section>
 
 <div class="fc-foot"><button class="fc-badge" id="fcOpen">&#127183; Flashcards <span id="fcN"></span></button></div>
