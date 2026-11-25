@@ -60,6 +60,37 @@
   .practice{border-top:2px dashed var(--sage);margin-top:24px;padding-top:4px}
   .score{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--forest-dark);}
   @media (max-width:700px){.two-col{grid-template-columns:1fr;}.top-contents ul{columns:1;}section.card{padding:20px 16px;}.header{padding-top:64px;}.header h1{font-size:1.45rem;}}
+
+/*gi-add*/
+.gt-note{ font-size:.78rem; color:var(--text-soft); margin:6px 0 14px; line-height:1.5; }
+.gt-info{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:10px 0 12px; }
+.gt-info > div{ background:#dbe5f7; border:1px solid #b6c6e4; border-radius:10px; padding:9px 12px; font-size:.84rem; }
+.gt-info b{ display:block; font-family:'IBM Plex Mono',monospace; font-size:.68rem; text-transform:uppercase; color:#2c4a86; margin-bottom:3px; }
+table.gt td, table.gt th{ vertical-align:middle; }
+table.gt tr.s1 td{ background:#f7ecb5 !important; } table.gt tr.s2 td{ background:#f3c5bd !important; } table.gt tr.s3 td{ background:#ecd3b9 !important; }
+table.gt td{ border-color:#fffdf8; border-width:2px; }
+table.gt td.lab{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.8rem; background:#f1ece0 !important; }
+table.gt th.pbc{ background:#4e7aa3 !important; } table.gt th.psc{ background:#c98a2b !important; }
+table.gt td.pbc{ background:#d7e5f0 !important; } table.gt td.psc{ background:#f8e6bf !important; } table.gt td.both{ background:#ebe5d3 !important; }
+table.gt th.ac{ background:#b8392f !important; } table.gt th.ch{ background:#3d62b8 !important; }
+table.gt td.ac{ background:#f6d2cd !important; } table.gt td.ch{ background:#d5def4 !important; } table.gt td.pl{ background:#f1ece0 !important; text-align:center; font-weight:700; }
+.hb-flow{ display:flex; flex-direction:column; align-items:center; gap:4px; margin:14px 0; font-size:.84rem; }
+.hb-top{ background:#e3a92c; color:#2b2620; font-weight:700; padding:9px 18px; border-radius:6px; }
+.hb-q{ background:#1f3a5f; color:#fff; padding:8px 16px; border-radius:6px; text-align:center; }
+.hb-arr{ color:var(--forest-dark); font-size:1.1rem; line-height:1; }
+.hb-split{ display:grid; grid-template-columns:2.2fr 1fr; gap:18px; width:100%; align-items:start; }
+.hb-branch{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.hb-lab{ font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--forest-dark); }
+.hb-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; width:100%; }
+.hb-col{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.hb-res{ width:100%; border:1px solid #b9bf7a; border-radius:8px; background:#e9ecc4; padding:0 0 8px; }
+.hb-res > b{ display:block; background:#cbd27e; padding:6px 8px; border-radius:7px 7px 0 0; text-align:center; }
+.hb-res ul{ margin:6px 0 0; padding-left:20px; }
+.hb-res .tg{ display:inline-block; font-size:.62rem; font-weight:700; color:#fff; padding:1px 6px; border-radius:3px; margin-left:6px; }
+.hb-res .tg.ex{ background:#d9822b; } .hb-res .tg.in{ background:#2f6db5; }
+.hb-uc{ width:100%; background:#e9ecc4; border:1px solid #b9bf7a; border-radius:8px; padding:8px 12px; }
+.hb-uc ul{ margin:0; padding-left:18px; }
+@media (max-width:800px){ .gt-info{ grid-template-columns:1fr; } .hb-split{ grid-template-columns:1fr; } .hb-cols{ grid-template-columns:1fr; } }
 </style>
 <!--FC1--><style>
 .fc-foot{margin:36px 0 10px;text-align:center}
@@ -205,6 +236,20 @@
 <tr><td><b>Treatment note</b></td><td colspan="2">UDCA (ursodeoxycholic acid) mentioned as FYI for the board pharmacology questions; not a focus</td></tr>
 </tbody></table></div>
 <ul><li>PSC is a <b>risk factor for cholangitis</b> and <b>cholangiocarcinoma</b>; PBC is a cirrhosis/HCC story.</li></ul>
+<!--add-pbc-->
+<h3>Primary cholangitis: PBC vs PSC at a glance</h3>
+<div class="tw"><table class="gt"><thead><tr><th style="width:14%"></th><th class="pbc" style="width:43%">Primary biliary cholangitis (PBC)</th><th class="psc" style="width:43%">Primary sclerosing cholangitis (PSC)</th></tr></thead><tbody>
+<tr><td class="lab">Gender</td><td class="pbc">More common among middle-aged <b>women</b></td><td class="psc">More common among middle-aged <b>men</b></td></tr>
+<tr><td class="lab">Pathophysiology</td><td class="pbc">Progressive autoimmune destruction of <b>only intrahepatic</b> small and medium-sized bile ducts</td><td class="psc">Progressive chronic inflammation of <b>both intrahepatic and extrahepatic</b> bile ducts</td></tr>
+<tr><td class="lab">Clinical presentation</td><td class="both" colspan="2" style="text-align:center"><b>Fatigue</b>, progressive symptoms of cholestasis (e.g., <b>jaundice, pruritus</b>), <b>hepatosplenomegaly</b>; advanced disease: liver cirrhosis</td></tr>
+<tr><td class="lab"></td><td class="pbc">Potentially dyslipidemias: <b>xanthomas and xanthelasma</b></td><td class="psc">Can present with <b>acute cholangitis</b> (fever, chills, right upper quadrant pain)</td></tr>
+<tr><td class="lab">Antibodies</td><td class="pbc"><b>Anti-mitochondrial antibodies (AMA)</b></td><td class="psc"><b>p-ANCA</b> (perinuclear antineutrophil cytoplasmic antibody)</td></tr>
+<tr><td class="lab">Laboratory tests</td><td class="both" colspan="2" style="text-align:center"><b>&uarr; ALP, &uarr; GGT, and &uarr; conjugated bilirubin</b></td></tr>
+<tr><td class="lab">Associated conditions</td><td class="pbc">Autoimmune conditions (e.g., sicca syndrome); <b>osteoporosis</b></td><td class="psc"><b>Ulcerative colitis</b>; <b>cholangiocarcinoma</b></td></tr>
+<tr><td class="lab">Most accurate diagnostic test</td><td class="pbc"><b>Liver biopsy</b>: lymphocytic infiltration of portal areas and <b>periductal granulomas</b></td><td class="psc"><b>MRCP</b> (magnetic resonance cholangiopancreatography): <b>multifocal bile duct strictures and dilatations</b> (beading)</td></tr>
+<tr><td class="lab">Management</td><td class="pbc">First line: <b>ursodeoxycholic acid</b>; <b>liver transplantation</b> is a must if cirrhosis is advanced</td><td class="psc"><b>Supportive</b>; can give ursodeoxycholic acid; interventional treatment: <b>ERCP</b> (endoscopic retrograde cholangiopancreatography)</td></tr>
+</tbody></table></div>
+<p class="gt-note">ALP = alkaline phosphatase; GGT = gamma-glutamyl transpeptidase.</p>
 </section>
 <section class="card" id="sec-atr"><h2>6. Biliary Atresia</h2>
 <ul>
